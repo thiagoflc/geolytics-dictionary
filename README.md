@@ -2,7 +2,7 @@
 
 Ontologia semântica do domínio de **Exploração & Produção (E&P) de petróleo e gás natural no Brasil**, derivada do módulo Dicionário da plataforma Geolytics. Dados oficiais da **ANP/SEP — SIGEP**, organizados como JSON estático, grafo de entidades e corpus pronto para RAG.
 
-**Visualização interativa:** https://ORG_OR_USER.github.io/geolytics-dictionary
+**Visualização interativa:** https://thiagoflc.github.io/geolytics-dictionary
 
 ---
 
@@ -33,17 +33,17 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 ### Via raw GitHub
 
 ```
-https://raw.githubusercontent.com/ORG_OR_USER/geolytics-dictionary/main/data/glossary.json
-https://raw.githubusercontent.com/ORG_OR_USER/geolytics-dictionary/main/data/entity-graph.json
-https://raw.githubusercontent.com/ORG_OR_USER/geolytics-dictionary/main/ai/rag-corpus.jsonl
+https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data/glossary.json
+https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data/entity-graph.json
+https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/ai/rag-corpus.jsonl
 ```
 
 ### Via GitHub Pages
 
 ```
-https://ORG_OR_USER.github.io/geolytics-dictionary/api/v1/index.json
-https://ORG_OR_USER.github.io/geolytics-dictionary/data/full.json
-https://ORG_OR_USER.github.io/geolytics-dictionary/ai/rag-corpus.jsonl
+https://thiagoflc.github.io/geolytics-dictionary/api/v1/index.json
+https://thiagoflc.github.io/geolytics-dictionary/data/full.json
+https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl
 ```
 
 ### Carregando o RAG corpus em LangChain (Python)
@@ -55,7 +55,7 @@ from langchain_community.vectorstores import FAISS
 from langchain_openai import OpenAIEmbeddings
 import urllib.request, json
 
-URL = "https://ORG_OR_USER.github.io/geolytics-dictionary/ai/rag-corpus.jsonl"
+URL = "https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl"
 docs = []
 with urllib.request.urlopen(URL) as f:
     for line in f:
@@ -75,7 +75,7 @@ vs = FAISS.from_texts(
 from llama_index.core import Document, VectorStoreIndex
 import urllib.request, json
 
-URL = "https://ORG_OR_USER.github.io/geolytics-dictionary/ai/rag-corpus.jsonl"
+URL = "https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl"
 documents = []
 with urllib.request.urlopen(URL) as f:
     for line in f:

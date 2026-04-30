@@ -440,7 +440,7 @@ function buildFull() {
  * API v1
  * ───────────────────────────────────────────────────────────── */
 
-const BASE_URL_PLACEHOLDER = 'https://ORG_OR_USER.github.io/geolytics-dictionary';
+const BASE_URL_PLACEHOLDER = 'https://thiagoflc.github.io/geolytics-dictionary';
 
 function buildApiIndex() {
   return {
