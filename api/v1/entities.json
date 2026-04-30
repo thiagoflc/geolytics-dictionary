@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:02:04.507Z",
-    "count": 79
+    "generated": "2026-04-30T22:32:12.921Z",
+    "count": 80
   },
   "entities": [
     {
@@ -3317,6 +3317,45 @@
             "style": "dashed"
           }
         ]
+      }
+    },
+    {
+      "id": "completacao",
+      "label": "Completação",
+      "label_en": "Well Completion",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura: revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV), perforações (canhoneio) das zonas produtoras e árvore de natal. No OSDU corresponde a master-data--WellboreCompletion, vinculado ao Wellbore. Tipos: completação seca (dry tree, plataforma fixa), molhada (subsea com ANM) ou inteligente (smart well — múltiplas zonas controladas).",
+      "legal_source": "O3PO (UFRGS) / OSDU master-data--WellboreCompletion",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "completação",
+        "acabamento de poço",
+        "completion"
+      ],
+      "synonyms_en": [
+        "well completion",
+        "completion"
+      ],
+      "examples": [
+        "Completação seca (dry tree)",
+        "Completação molhada subsea com ANM",
+        "Completação inteligente (smart well)"
+      ],
+      "glossary_id": null,
+      "extended_id": null,
+      "osdu": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": []
       }
     },
     {

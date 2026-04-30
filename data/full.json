@@ -1,14 +1,14 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:02:04.507Z",
+    "generated": "2026-04-30T22:32:12.921Z",
     "description": "Geolytics Dictionary — complete merged dataset",
     "counts": {
       "glossary_terms": 23,
-      "extended_terms": 8,
-      "total_terms": 31,
+      "extended_terms": 14,
+      "total_terms": 37,
       "datasets": 8,
-      "entity_nodes": 79,
+      "entity_nodes": 80,
       "entity_edges": 87,
       "domains": 4,
       "ontology_layers": 6,
@@ -924,11 +924,195 @@
         "Halocinese (tectônica do sal)",
         "Migração secundária de hidrocarbonetos"
       ]
+    },
+    {
+      "id": "hidrocarboneto",
+      "termo": "Hidrocarboneto",
+      "termo_en": "Hydrocarbon",
+      "categoria": "geologia",
+      "definicao": "Composto orgânico formado essencialmente por carbono e hidrogênio. No domínio E&P designa óleo, gás natural, condensado e seus derivados. Em PetroGold é o tipo NER PRP quando associado a propriedades; FLU quando designa o fluido.",
+      "legal_source": "GeoCore / IUPAC",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Hydrocarbon",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "HC",
+        "hidrocarboneto",
+        "óleo e gás"
+      ],
+      "synonyms_en": [
+        "hydrocarbon",
+        "HC",
+        "oil and gas"
+      ],
+      "examples": [
+        "metano",
+        "etano",
+        "óleo cru",
+        "gás natural úmido",
+        "condensado"
+      ]
+    },
+    {
+      "id": "querogenio",
+      "termo": "Querogênio",
+      "termo_en": "Kerogen",
+      "categoria": "geologia",
+      "definicao": "Fração da matéria orgânica preservada em rochas sedimentares insolúvel em solventes orgânicos. Classificado em quatro tipos com base em origem e potencial gerador: Tipo I (lacustre, óleo), Tipo II (marinho, óleo+gás), Tipo III (terrígeno, gás), Tipo IV (inertinita, sem potencial). Determina o produto da rocha geradora ao atingir maturação termal.",
+      "legal_source": "GeoCore / Tissot & Welte 1984",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Kerogen",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "querogênio",
+        "matéria orgânica insolúvel"
+      ],
+      "synonyms_en": [
+        "kerogen"
+      ],
+      "examples": [
+        "Querogênio Tipo I (lacustre — Lagoa Feia)",
+        "Querogênio Tipo II (marinho — Cretáceo)",
+        "Querogênio Tipo III (deltaico)"
+      ]
+    },
+    {
+      "id": "migracao-hidrocarbonetos",
+      "termo": "Migração de Hidrocarbonetos",
+      "termo_en": "Hydrocarbon Migration",
+      "categoria": "geologia",
+      "definicao": "Processo de deslocamento de hidrocarbonetos da rocha geradora (onde foram formados) até a rocha reservatório, e sua acumulação em armadilha selada por rocha capa. Distingue-se em migração primária (saída do querogênio na rocha geradora) e migração secundária (deslocamento por carrier beds, falhas e descontinuidades estratigráficas). Falhas selantes vs. condutivas controlam fortemente a eficácia da migração.",
+      "legal_source": "GeoCore / PPDM",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonMigration",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "migração de HC",
+        "migração primária",
+        "migração secundária"
+      ],
+      "synonyms_en": [
+        "hydrocarbon migration",
+        "primary migration",
+        "secondary migration"
+      ],
+      "examples": [
+        "Migração através do Sistema Petrolífero Lagoa Feia-Macabu",
+        "Falhas extensionais como conduto de migração no pré-sal"
+      ]
+    },
+    {
+      "id": "discordancia",
+      "termo": "Discordância",
+      "termo_en": "Unconformity",
+      "categoria": "geologia",
+      "definicao": "Superfície estratigráfica que separa rochas mais novas de rochas mais antigas e representa um hiato deposicional ou erosivo significativo. Pode ser angular, paralela (paraconformidade), erosiva ou de não-deposição. Frequentemente atua como armadilha estratigráfica ou marco regional de correlação sísmica.",
+      "legal_source": "GeoCore / ICS GTS",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Unconformity",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "discordância",
+        "discordância angular",
+        "paraconformidade"
+      ],
+      "synonyms_en": [
+        "unconformity",
+        "angular unconformity",
+        "paraconformity",
+        "disconformity"
+      ],
+      "examples": [
+        "Discordância pré-Aptiana (separa pré-sal de rifte)",
+        "Discordância intra-Albiana"
+      ]
+    },
+    {
+      "id": "diagenese",
+      "termo": "Diagênese",
+      "termo_en": "Diagenesis",
+      "categoria": "geologia",
+      "definicao": "Conjunto de processos físicos, químicos e biológicos que afetam os sedimentos após a deposição e antes do metamorfismo. Inclui compactação, cimentação, dissolução, dolomitização, recristalização e formação/preenchimento de porosidade secundária. É determinante na qualidade final do reservatório — a permeabilidade dos carbonatos pré-sal é fortemente controlada por diagênese (especialmente dolomitização e dissolução).",
+      "legal_source": "GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Diagenesis",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "diagênese",
+        "processo diagenético"
+      ],
+      "synonyms_en": [
+        "diagenesis",
+        "diagenetic process"
+      ],
+      "examples": [
+        "Dolomitização nos carbonatos do pré-sal",
+        "Cimentação calcítica",
+        "Dissolução geradora de porosidade vugular"
+      ]
+    },
+    {
+      "id": "evento-tectonico",
+      "termo": "Evento Tectônico",
+      "termo_en": "Tectonic Event",
+      "categoria": "geologia",
+      "definicao": "Episódio geológico de deformação crustal — rifteamento, abertura oceânica, inversão tectônica, halocinese (movimentação do sal) ou compressão — que altera a geometria das bacias e cria/destrói armadilhas estruturais. No Brasil, o rifteamento Mesozoico abriu as bacias da margem leste e a halocinese pós-Aptiana esculpiu as armadilhas do pré-sal.",
+      "legal_source": "GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#TectonicEvent",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "evento tectônico",
+        "fase tectônica",
+        "episódio deformacional"
+      ],
+      "synonyms_en": [
+        "tectonic event",
+        "tectonic phase"
+      ],
+      "examples": [
+        "Rifteamento mesozoico (abertura do Atlântico Sul)",
+        "Halocinese pós-Aptiana (sal de Santos)",
+        "Inversão andina"
+      ]
     }
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:02:04.507Z",
+    "generated": "2026-04-30T22:32:12.921Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -2965,6 +3149,41 @@
         "osdu": true
       },
       {
+        "id": "completacao",
+        "label": "Completação",
+        "label_en": "Well Completion",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 18,
+        "definition": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura: revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV), perforações (canhoneio) das zonas produtoras e árvore de natal. No OSDU corresponde a master-data--WellboreCompletion, vinculado ao Wellbore. Tipos: completação seca (dry tree, plataforma fixa), molhada (subsea com ANM) ou inteligente (smart well — múltiplas zonas controladas).",
+        "legal_source": "O3PO (UFRGS) / OSDU master-data--WellboreCompletion",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+        "geocoverage": [
+          "layer2",
+          "layer3",
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "completação",
+          "acabamento de poço",
+          "completion"
+        ],
+        "synonyms_en": [
+          "well completion",
+          "completion"
+        ],
+        "examples": [
+          "Completação seca (dry tree)",
+          "Completação molhada subsea com ANM",
+          "Completação inteligente (smart well)"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu": true
+      },
+      {
         "id": "unidade-medida",
         "label": "Unidade de Medida",
         "label_en": "Unit of Measure",
@@ -4315,7 +4534,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:02:04.507Z",
+    "generated": "2026-04-30T22:32:12.921Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -4539,7 +4758,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-04-30T22:02:04.507Z",
+      "generated": "2026-04-30T22:32:12.921Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",

@@ -185,6 +185,12 @@ Por isso este dicionário existe — para preencher esta lacuna ontológica.
 
 O **Petro KGraph** é uma ontologia formal de Óleo & Gás em português desenvolvida pela **PUC-Rio / PetroNLP** com **539 conceitos formais** populados com instâncias ANP públicas e relações extraídas de documentos técnicos por NLP. **É construído sobre GeoCore** (UFRGS/BDI). Inclui corpora anotados: PetroGold (NER), PetroNER, PetroRE (extração de relações). É a camada mais adequada para RAG em português. Repositório: https://github.com/Petroles/PetroNLP
 
+## Sobre PPDM e SPE-PRMS
+
+**PPDM (Professional Petroleum Data Management Association)** é o padrão internacional clássico de modelagem de dados de E&P, originário da Society of Petroleum Engineers nos anos 1990. Define entidades canônicas como Well, Wellbore, Field, Reservoir, Trap, Play, Prospect, Resource, Reserve. O ontopetro deste dicionário (`data/ontopetro.json`) usa PPDM como uma das fontes principais (junto com GeoCore) — ver coluna `sources` em cada classe (C001-C020).
+
+**SPE-PRMS (Society of Petroleum Engineers — Petroleum Resources Management System)** é o sistema canônico de classificação de recursos e reservas de hidrocarbonetos. Define a hierarquia Reservas (1P/2P/3P, com graus de certeza) vs. Recursos Contingentes (C1C/C2C/C3C). A taxonomia SPE-PRMS está modelada em `data/taxonomies.json` com alerta RAG explícito de que "Reserva (SPE-PRMS) ≠ Reserva Ambiental (REBIO/RPPN)".
+
 ## Sobre OSDU
 
 **OSDU — Open Subsurface Data Universe** é o padrão global de dados de subsuperfície da indústria petrolífera, mantido pelo The Open Group. Petrobras é membro ativo. Cobre schemas para Well, Wellbore, Field, Basin, SeismicAcquisition, Trajectory, WellLog. Não é ontologia formal — é schema de dados para interoperabilidade IT. Licença Apache 2.0. Os campos `osdu_kind` no dicionário usam o formato `opendes:osdu:master-data--[Type]:1.0.0`.

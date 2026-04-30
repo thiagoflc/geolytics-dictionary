@@ -731,6 +731,17 @@ export const OSDU_NODES = [
     examples: ['Poço horizontal pré-sal: 60° inclinação em 2800m TVD', 'Poço vertical 1-RJS-702-RJ: inclinação < 3°'],
     size: 16 },
 
+  { id: 'completacao', label: 'Completação', label_en: 'Well Completion', type: 'operational',
+    definition: "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura: revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV), perforações (canhoneio) das zonas produtoras e árvore de natal. No OSDU corresponde a master-data--WellboreCompletion, vinculado ao Wellbore. Tipos: completação seca (dry tree, plataforma fixa), molhada (subsea com ANM) ou inteligente (smart well — múltiplas zonas controladas).",
+    fonte: 'O3PO (UFRGS) / OSDU master-data--WellboreCompletion',
+    datasets: [],
+    osdu_kind_override: 'opendes:osdu:master-data--WellboreCompletion:1.0.0',
+    layers_override: ['layer2','layer3','layer4'],
+    synonyms_pt: ['completação', 'acabamento de poço', 'completion'],
+    synonyms_en: ['well completion', 'completion'],
+    examples: ['Completação seca (dry tree)', 'Completação molhada subsea com ANM', 'Completação inteligente (smart well)'],
+    size: 18 },
+
   { id: 'unidade-medida', label: 'Unidade de Medida', label_en: 'Unit of Measure', type: 'instrument',
     definition: "Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados.",
     fonte: 'OSDU reference-data--UnitOfMeasure / BIPM SI / API standards',

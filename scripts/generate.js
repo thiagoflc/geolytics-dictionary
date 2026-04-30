@@ -1185,6 +1185,24 @@ function buildRagCorpus() {
       text,
       metadata: { module: key, label: m.label, system_origin: m.system_origin },
     });
+    /* Chunks individuais por classe — granularidade RAG por C-ID */
+    for (const c of m.classes) {
+      lines.push({
+        id: `class_${key}_${c.id}`,
+        type: `module_class_${key.split('_')[0]}`, /* module_class_M7, module_class_M8, etc. */
+        text: `Classe ${c.id} "${c.name}" do módulo ${m.label} (${m.label_en}, sistema-fonte ${m.system_origin}). Superclasse: ${c.superclass}. ${c.description}`,
+        metadata: { id: c.id, name: c.name, module: key, superclass: c.superclass, system_origin: m.system_origin },
+      });
+    }
+    /* Chunks por propriedade-chave — recall por unidade/sigla técnica */
+    for (const p of (m.key_properties || [])) {
+      lines.push({
+        id: `prop_${key}_${p.id}`,
+        type: `module_property_${key.split('_')[0]}`,
+        text: `Propriedade ${p.id} "${p.name}"${p.name_en ? ` (${p.name_en})` : ''} do módulo ${m.label}. ${p.description}${p.unit ? ` Unidade: ${p.unit}.` : ''} Sistema-fonte: ${m.system_origin}.`,
+        metadata: { id: p.id, name: p.name, unit: p.unit, module: key },
+      });
+    }
   }
 
   /* type=pvt_property — campos PVT com completude real (top 10 por relevância) */
@@ -1263,6 +1281,8 @@ const SYSTEM_PROMPT_PT = `# Contexto de Domínio: Exploração e Produção de P
 
 A Exploração e Produção (E&P) de petróleo e gás natural no Brasil é regulada pela **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)**, autarquia federal vinculada ao Ministério de Minas e Energia, criada pela **Lei nº 9.478/1997** (Lei do Petróleo). A ANP contrata, fiscaliza e regula todas as atividades exploratórias e produtivas do país. Os dados oficiais são publicados pela **Superintendência de Exploração (SEP)** através do **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
 
+Este dicionário cobre 6 camadas semânticas: BFO+GeoCore (UFRGS), O3PO+GeoReservoir (UFRGS), Petro KGraph (PUC-Rio, 539 conceitos PT-BR), OSDU (industry standard), ANP/SIGEP (regulatório brasileiro) e Geolytics/Petrobras Internal (módulos M7-M10).
+
 Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997), o concessionário assume todos os riscos, detém o petróleo produzido e paga tributos (royalties, participação especial). Na **Partilha de Produção** (Lei 12.351/2010, aplicável ao polígono do pré-sal e áreas estratégicas), o petróleo é dividido entre contratado e União, e a **Petrobras é operadora obrigatória** nos blocos do pré-sal.
 
 ## 2. Entidades-chave
@@ -1282,70 +1302,74 @@ Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997),
 
 ## 3. Termos que confundem LLMs — atenção especial
 
-- **PAD ≠ "drilling pad"**: no contexto ANP, PAD significa **Plano de Avaliação de Descobertas** (instrumento contratual), não a base/locação física de perfuração.
-- **UTS ≠ Unidade Territorial**: significa **Unidades de Trabalho** — métrica do PEM (Programa Exploratório Mínimo).
-- **Período Exploratório ≠ "período de exploração genérico"**: é fase contratual específica (1º, 2º, 3º PE ou período único), com prazos e obrigações.
-- **Pré-sal**: definição estritamente geológica (camada abaixo do sal). Atingir o pré-sal é dado oficial registrado por poço e tem consequências contratuais.
-- **Campo ≠ Bloco ≠ Bacia**: três entidades distintas — Campo é unidade de produção (após declaração de comercialidade), Bloco é unidade contratual (concessão), Bacia é unidade geológica (regional).
-- **Concessão ≠ Partilha de Produção**: regimes contratuais distintos definindo quem detém o petróleo produzido. Em Partilha, a Petrobras é operadora obrigatória nos blocos do pré-sal.
-- **Reservatório ≠ Campo**: reservatório é o corpo rochoso geológico; campo é a delimitação econômico-administrativa que pode conter um ou mais reservatórios.
+### 3.1 Regulatório / contratual
+- **PAD ≠ "drilling pad"**: no contexto ANP, PAD = **Plano de Avaliação de Descobertas** (instrumento contratual), não base/locação física de perfuração.
+- **UTS ≠ Unidade Territorial**: = **Unidades de Trabalho** — métrica do PEM (Programa Exploratório Mínimo).
+- **Período Exploratório ≠ "período de exploração genérico"**: fase contratual específica (1º, 2º, 3º PE ou período único).
+- **Concessão ≠ Partilha de Produção**: regimes contratuais distintos. Em Partilha, Petrobras é operadora obrigatória no pré-sal.
+
+### 3.2 Geológico / produtivo
+- **Pré-sal**: estritamente geológica (camada abaixo do sal). Atingir o pré-sal tem consequências contratuais.
+- **Campo ≠ Bloco ≠ Bacia**: três entidades distintas — Campo (produção), Bloco (contrato), Bacia (geologia).
+- **Reservatório ≠ Campo**: reservatório é corpo rochoso; campo é delimitação econômico-administrativa.
+- **Reserva ≠ Reservatório ≠ Reserva Ambiental**: tripla polissemia. Reserva (SPE-PRMS) é volume econômico (1P/2P/3P); reservatório é geológico; reserva ambiental é REBIO/RPPN.
+- **Formação ≠ litologia**: erro NER mais comum em PT-BR. *Formação Barra Velha* (FOR) é nome próprio de unidade litoestratigráfica; *calcário microbialítico* (ROC) é o tipo petrográfico que a compõe.
+- **Campo (polissemia)**: pode ser Campo (ANP — Búzios), campo (atributo de dado), campo (geográfico), Campo Tensional (M9). Sempre desambiguar.
+- **Intervalo ≠ Idade**: NER PetroGold INT (intervalo 2100-2450m) ≠ IDA (Aptiano). Um intervalo *tem* uma idade, mas não é a idade.
+
+### 3.3 Geoquímica (M7) e PVT (M10)
+- **RGO ≡ GOR**: Razão Gás-Óleo (PT) e Gas-Oil Ratio (EN) são SINÔNIMOS. Unidades scf/stb (EN) ou m³/m³ (SI). Base SIRR campo "RGO Tanque".
+- **COT ≡ TOC**: Carbono Orgânico Total (PT) ≡ Total Organic Carbon (EN). COT > 1% = potencial gerador; > 2% = excelente. Rock-Eval.
+- **Janela de Lama ≠ Janela de Geração**: a primeira é intervalo seguro de peso de lama (M9 Geomecânica, limites colapso/fratura); a segunda é faixa de Ro% para geração de HC (M7 Geoquímica, 0.5–2.0%).
+- **API Tanque ≠ API Reservatório**: medido em superfície (após gás sair) vs in situ. SIRR usa "Grau API Tanque".
+
+### 3.4 Geomecânica (M9) e Petrofísica (M8)
+- **UCS estático ≠ UCS dinâmico**: estático = lab (verdadeiro); dinâmico = derivado de DTC/DTS via correlação GDA/Petrobras. Diferença típica 20–40%. Não usar dinâmico para projeto sem calibração.
+- **Sv / Shmin / SHmax**: três tensores distintos do CampoTensionalInSitu. Em regime extensional Sv > SHmax > Shmin (regime normal); compressional inverte a ordem.
+- **Porosidade NMR / Den / Neu / Son**: não é única. NMR é mais precisa em carbonatos pré-sal; Den assume densidade da matriz; Neu é sensível ao hidrogênio total; Son subestima em carbonatos.
+- **kH ≠ kV**: permeabilidade NÃO é escalar. Razão kV/kH varia de 0.001 (folhelhos) a 1.0 (isotrópicas). Crítico em águas profundas.
+- **Breakout** (M9): colapso compressivo das paredes do poço na direção Shmin, identificado por caliper 4 braços ou imagens FMI/UBI. Usado para orientar SHmax.
+- **SGR (Shale Gouge Ratio)**: proxy de potencial selante de falhas (TrapTester). SGR > 18–20% = falha selante; < 18% = condutiva. Não confundir com SAR (saturados/aromáticos/resinas) nem com SGR de gás.
+- **SARA**: fracionamento do óleo — Saturados / Aromáticos / Resinas / Asfaltenos. Asfaltenos altos = risco de deposição operacional.
 
 ## 4. Datasets oficiais (ANP/SEP — SIGEP)
 
 Poços Exploratórios em Blocos · Blocos sob Contrato · PADs em Andamento · PADs Concluídos · Declarações de Comercialidade · Processos Sancionadores · Resolução ANP nº 708/2017 · Resolução ANP nº 815/2020. Todos públicos, formato CSV, atualização mensal, contato: \`sigep_sep@anp.gov.br\`.
 
-## 5. Siglas essenciais do domínio
+## 5. Sistemas corporativos Petrobras (proveniência, NÃO acesso)
 
-ANP, SEP, SIGEP, PEM (Programa Exploratório Mínimo), PE (Período Exploratório), PAD, UTS (Unidades de Trabalho), E&P, O&G, onshore/offshore, pré-sal, FPSO (Unidade Flutuante), UEP (Unidade Estacionária de Produção), ANM (Árvore de Natal Molhada), BOP (Blowout Preventer), DST (Drill Stem Test), TOC (Total Organic Carbon), PVT (Pressão-Volume-Temperatura), GC (Gas Chromatography), MWD/LWD (Measure/Logging While Drilling).
+Os módulos M7-M10 do dicionário referenciam sistemas internos como metadado de origem dos dados — não são endpoints conectáveis pelo agente.
 
-## 6. Cadeia lógica fundamental
+- **GEOQWIN** — banco de dados Geoquímica (cromatografia GC-FID/GC-MS, Rock-Eval, SARA, biomarcadores, isótopos)
+- **SIRR** — Sistema Integrado de Reservatórios; base PVT (35 campos com completude documentada — RGO Tanque 61.2%, Psat 73.9%, Fa Tanque 1.95%)
+- **LIMS Sample Manager** — gerenciamento de amostras laboratoriais
+- **AIDA** — classificação automática de tipo de fluido (API + RGO → black oil / volátil / condensado / gás úmido / gás seco)
+- **GDA — Gerenciamento de Dados e Análises** — plataforma analítica para perfis, módulos elásticos dinâmicos (DTC/DTS → E, ν), Mineral Solver, RockFinder (ML litologia)
+- **GEOMECBR** — software de modelagem geomecânica 1D; gera JanelaDeLama, UCS calibrado, tensões in situ
+- **GERESIM** — modelagem geomecânica 3D volumétrica
+- **TrapTester (Badley Geoscience)** — análise de potencial selante de falhas (SGR, CSP, SSF via método BEM)
+
+## 6. Siglas essenciais do domínio
+
+ANP, SEP, SIGEP, PEM, PE (Período Exploratório), PAD, UTS, E&P, O&G, onshore/offshore, pré-sal · FPSO, UEP, ANM (Árvore de Natal Molhada), BOP, DHSV, ROV, BHA, MWD, LWD · DST (Drill Stem Test), TOC/COT, PVT, GC/GC-MS, Ro (vitrinita), Tmax · Sv/Shmin/SHmax, UCS, SGR, JanelaDeLama, Breakout · API/RGO/Psat/SARA · NMR, Den, Neu, Son.
+
+## 7. Cadeia lógica fundamental
 
 \`\`\`
-Rodada de Licitação → Contrato E&P → Bloco → Poço → [descoberta] →
+Rodada de Licitação → Contrato E&P → Bloco → Poço (Well) → Wellbore → [descoberta] →
 Notificação de Descoberta → PAD → Declaração de Comercialidade →
 Campo (Área de Desenvolvimento) → Reservatório
 \`\`\`
 
-Cada elo é uma entidade do dicionário. Use esta cadeia ao raciocinar sobre questões de "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
+Em paralelo, dado geocientífico:
+\`\`\`
+Bacia → Formação → (Rocha Geradora + Rocha Reservatório + Rocha Capa) →
+Sistema Petrolífero → Trapa → Acumulação → Campo → Reserva (1P/2P/3P)
+\`\`\`
 
----
+Cada elo é uma entidade do dicionário (\`data/entity-graph.json\`). Use ao raciocinar sobre "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
 
-# (Versão curta — referência rápida abaixo) #
-## Contexto de domínio — Petróleo & Gás (Brasil)
-
-Você é um agente conversacional especializado no domínio de Exploração e Produção (E&P) de petróleo e gás natural no Brasil. O setor é regulado pela **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)**, autarquia federal vinculada ao Ministério de Minas e Energia, criada pela **Lei nº 9.478/1997** (Lei do Petróleo). A ANP contrata, fiscaliza e regula todas as atividades exploratórias e produtivas do país.
-
-A relação entre Estado e empresa é mediada por **contratos de E&P** (Concessão ou Partilha de Produção), assinados em **Rodadas de Licitação** públicas. Cada contrato vincula uma empresa **Operadora** (com participação de **Contratados**) a um **Bloco** exploratório dentro de uma **Bacia Sedimentar**. Os dados oficiais são publicados pela **Superintendência de Exploração (SEP)** da ANP através do sistema **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
-
-## Entidades-chave
-
-- **Poço (ANP)**: identificador padronizado de poço de óleo/gás no Brasil.
-- **Bloco**: prisma vertical numa bacia sedimentar onde se realiza E&P; arrematado em rodada de licitação.
-- **Campo**: área produtora resultante de uma Declaração de Comercialidade.
-- **Bacia Sedimentar**: depressão da crosta com rochas sedimentares possivelmente portadoras de hidrocarbonetos.
-- **Contrato de E&P**: instrumento jurídico entre concessionário e ANP; define **Regime Contratual** (Concessão ou Partilha) e **Período Exploratório**.
-- **PAD — Plano de Avaliação de Descobertas**: avalia tecnicamente uma descoberta para determinar viabilidade comercial; pode resultar em Declaração de Comercialidade.
-- **Operador**: empresa designada para conduzir as operações; responde pela execução do contrato.
-- **Rodada de Licitação**: leilão público de áreas de exploração.
-- **Declaração de Comercialidade**: declaração formal de viabilidade econômica de uma descoberta; encerra o PAD com sucesso e origina um Campo.
-
-## Termos que confundem — alertas
-
-- **PAD ≠ "pad exploratório / pad de perfuração"**: no contexto ANP, PAD é o Plano de Avaliação de Descobertas (instrumento contratual), não a base/locação física de perfuração.
-- **UTS ≠ Unidade Territorial**: aqui significa **Unidades de Trabalho** — métrica de conversão para aferir o cumprimento do **PEM (Programa Exploratório Mínimo)**.
-- **Período Exploratório ≠ "período de exploração genérico"**: é uma fase contratual específica (1º, 2º, 3º PE ou período único), com prazos e obrigações exploratórias mínimas.
-- **Pré-sal**: definição estritamente geológica — camada abaixo de uma extensa camada de sal no subsolo. Atingir o pré-sal é dado oficial registrado por poço e tem consequências contratuais.
-- **Concessão vs. Partilha**: regimes contratuais distintos. Em Partilha, a Petrobras é operadora obrigatória nos blocos do pré-sal; o petróleo produzido é dividido com a União.
-
-## Datasets oficiais (ANP/SEP — SIGEP)
-
-Poços Exploratórios em Blocos · Blocos sob Contrato · PADs em Andamento · PADs Concluídos · Declarações de Comercialidade · Processos Sancionadores · Resolução ANP nº 708/2017 · Resolução ANP nº 815/2020. Todos públicos, formato CSV, atualização mensal, contato: \`sigep_sep@anp.gov.br\`.
-
-## Siglas
-
-ANP, SEP, SIGEP, PEM (Programa Exploratório Mínimo), PE (Período Exploratório), PAD (Plano de Avaliação de Descobertas), UTS (Unidades de Trabalho), E&P (Exploração e Produção), DST (Drill Stem Test, teste de formação), TOC (Total Organic Carbon), PVT (Pressão-Volume-Temperatura), GC (Gas Chromatography).
-
-Ao responder, use a terminologia ANP correta, distinga regimes contratuais quando relevante, e cite a fonte legal/regulatória sempre que possível (Lei 9.478/1997, resoluções ANP).
+Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1-L6), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3.
 `;
 
 const SYSTEM_PROMPT_EN = `# Domain context — Brazilian Oil & Gas (E&P)
