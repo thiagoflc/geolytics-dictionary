@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Geolytics Dictionary — ANP Oil & Gas Ontology</title>
+<meta name="description" content="Visualização interativa da ontologia ANP de Exploração & Produção de petróleo no Brasil." />
+<style>
+  :root {
+    --bg: #FAFAF8;
+    --fg: #1B1B19;
+    --fg-soft: #555550;
+    --border: #E2E0D9;
+    --panel: #FFFFFF;
+    --edge: #B4B2A9;
+    --shadow: 0 6px 24px rgba(0,0,0,0.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14140F;
+      --fg: #F2F0E6;
+      --fg-soft: #A8A69A;
+      --border: #2A2A22;
+      --panel: #1C1C16;
+      --edge: #4A4A40;
+      --shadow: 0 6px 24px rgba(0,0,0,0.5);
+    }
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
+    font-size: 14px; line-height: 1.45;
+    overflow: hidden;
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 20px; border-bottom: 1px solid var(--border);
+    background: var(--panel);
+  }
+  header h1 { margin: 0; font-size: 16px; font-weight: 600; }
+  header .sub { color: var(--fg-soft); font-size: 12px; margin-left: 10px; }
+  header .actions a {
+    color: var(--fg); text-decoration: none; padding: 6px 12px;
+    border: 1px solid var(--border); border-radius: 6px; font-size: 12px;
+    margin-left: 8px;
+  }
+  header .actions a:hover { background: var(--bg); }
+
+  .toolbar {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    padding: 10px 20px; border-bottom: 1px solid var(--border);
+    background: var(--panel); font-size: 12px;
+  }
+  .toolbar label {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 10px; border: 1px solid var(--border); border-radius: 14px;
+    cursor: pointer; user-select: none;
+  }
+  .toolbar label input { accent-color: currentColor; }
+  .toolbar .swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  main { position: relative; height: calc(100vh - 110px); display: flex; }
+  #graph { flex: 1; height: 100%; }
+  #graph svg { width: 100%; height: 100%; display: block; }
+
+  aside {
+    width: 320px; border-left: 1px solid var(--border);
+    background: var(--panel); padding: 18px 18px 24px; overflow-y: auto;
+  }
+  aside.empty { display: flex; align-items: center; justify-content: center; color: var(--fg-soft); text-align: center; padding: 30px; }
+  aside h2 { margin: 0 0 4px; font-size: 16px; }
+  aside .label-en { color: var(--fg-soft); font-size: 12px; margin-bottom: 14px; font-style: italic; }
+  aside .row { margin: 12px 0; }
+  aside .row .k { color: var(--fg-soft); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
+  aside .row .v { font-size: 13px; }
+  aside .badge {
+    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    background: var(--bg); border: 1px solid var(--border); margin: 2px 4px 2px 0;
+  }
+  aside .type-pill {
+    display: inline-block; font-size: 11px; padding: 2px 10px; border-radius: 12px;
+    color: white; font-weight: 600; letter-spacing: 0.02em;
+  }
+
+  footer {
+    position: fixed; bottom: 0; left: 0; right: 0;
+    display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
+    padding: 8px 20px; font-size: 11px; color: var(--fg-soft);
+    background: var(--panel); border-top: 1px solid var(--border);
+  }
+  footer .legend { display: inline-flex; align-items: center; gap: 5px; }
+  footer .legend .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  footer .count { margin-left: auto; }
+
+  .node circle { stroke: white; stroke-width: 2px; cursor: pointer; transition: r 120ms ease; }
+  .node text { pointer-events: none; fill: white; font-size: 11px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
+  .node.dim { opacity: 0.1; }
+  .node.dim text { display: none; }
+  .link { fill: none; stroke: var(--edge); stroke-width: 1.5px; }
+  .link.dashed { stroke-dasharray: 5,4; stroke-width: 1.2px; }
+  .link.dim { opacity: 0.05; }
+
+  .tooltip {
+    position: absolute; pointer-events: none;
+    background: var(--panel); color: var(--fg);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 10px; font-size: 12px; box-shadow: var(--shadow);
+    z-index: 100; opacity: 0; transition: opacity 100ms;
+  }
+  .tooltip.show { opacity: 1; }
+  .tooltip .t-type { color: var(--fg-soft); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
+
+  @media (max-width: 720px) {
+    main { flex-direction: column; height: calc(100vh - 110px); }
+    aside { width: 100%; height: 50%; border-left: none; border-top: 1px solid var(--border); }
+  }
+</style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Geolytics Dictionary <span class="sub">ANP oil &amp; gas semantic ontology</span></h1>
+    </div>
+    <div class="actions">
+      <a href="data/full.json" download>Download JSON</a>
+      <a href="https://github.com/ORG_OR_USER/geolytics-dictionary" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </header>
+
+  <div class="toolbar" id="filters">
+    <label><input type="checkbox" data-type="operational" checked /><span class="swatch" style="background:#378ADD"></span>Operacional</label>
+    <label><input type="checkbox" data-type="contractual" checked /><span class="swatch" style="background:#7F77DD"></span>Contratual</label>
+    <label><input type="checkbox" data-type="actor" checked /><span class="swatch" style="background:#D85A30"></span>Atores</label>
+    <label><input type="checkbox" data-type="instrument" checked /><span class="swatch" style="background:#888780"></span>Instrumentos</label>
+    <label><input type="checkbox" data-type="geological" checked /><span class="swatch" style="background:#639922"></span>Geológico</label>
+  </div>
+
+  <main>
+    <div id="graph"></div>
+    <aside id="panel" class="empty">Clique em um nó para ver detalhes.</aside>
+  </main>
+
+  <footer>
+    <span class="legend"><span class="swatch" style="background:#378ADD"></span>Operacional</span>
+    <span class="legend"><span class="swatch" style="background:#7F77DD"></span>Contratual</span>
+    <span class="legend"><span class="swatch" style="background:#D85A30"></span>Ator</span>
+    <span class="legend"><span class="swatch" style="background:#888780"></span>Instrumento</span>
+    <span class="legend"><span class="swatch" style="background:#639922"></span>Geológico</span>
+    <span class="count" id="counts"></span>
+  </footer>
+
+  <div class="tooltip" id="tooltip"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script>
+(async function () {
+  const res = await fetch('data/entity-graph.json');
+  const graph = await res.json();
+
+  const datasetTitles = {
+    'pocos-exploratorios': 'Poços Exploratórios',
+    'blocos-contrato': 'Blocos sob Contrato',
+    'pads-andamento': 'PADs em Andamento',
+    'pads-concluidos': 'PADs Concluídos',
+    'declaracoes-comercialidade': 'Declarações de Comercialidade',
+    'processos-sancionadores': 'Processos Sancionadores',
+    'ranp-708': 'Resolução ANP nº 708/2017',
+    'ranp-815': 'Resolução ANP nº 815/2020',
+  };
+
+  const typeLabel = {
+    operational: 'Operacional',
+    contractual: 'Contratual',
+    actor: 'Ator',
+    instrument: 'Instrumento',
+    geological: 'Geológico',
+  };
+
+  const container = document.getElementById('graph');
+  const tooltip = document.getElementById('tooltip');
+  const panel = document.getElementById('panel');
+  const counts = document.getElementById('counts');
+  counts.textContent = `${graph.nodes.length} entidades · ${graph.edges.length} relações`;
+
+  const W = container.clientWidth || 800;
+  const H = container.clientHeight || 600;
+
+  const svg = d3.select('#graph').append('svg').attr('viewBox', [0, 0, W, H]);
+  const root = svg.append('g');
+
+  let currentZoom = 1;
+  svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', (ev) => {
+    root.attr('transform', ev.transform);
+    currentZoom = ev.transform.k;
+    root.selectAll('.node text')
+      .style('display', (d) => (currentZoom >= 1.2 || d.type === 'operational' || d.type === 'actor') ? null : 'none');
+  }));
+
+  const links = graph.edges.map((e) => ({ ...e }));
+  const nodes = graph.nodes.map((n) => ({ ...n }));
+
+  const sim = d3.forceSimulation(nodes)
+    .force('link', d3.forceLink(links).id((d) => d.id).distance(120).strength(0.6))
+    .force('charge', d3.forceManyBody().strength(-300))
+    .force('center', d3.forceCenter(W / 2, H / 2))
+    .force('collide', d3.forceCollide().radius((d) => d.size + 10));
+
+  const link = root.append('g').attr('class', 'links').selectAll('line')
+    .data(links).join('line')
+    .attr('class', (d) => 'link' + (d.style === 'dashed' ? ' dashed' : ''));
+
+  const node = root.append('g').attr('class', 'nodes').selectAll('g')
+    .data(nodes).join('g')
+    .attr('class', 'node')
+    .call(d3.drag()
+      .on('start', (ev, d) => { if (!ev.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; })
+      .on('drag',  (ev, d) => { d.fx = ev.x; d.fy = ev.y; })
+      .on('end',   (ev, d) => { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
+
+  node.append('circle')
+    .attr('r', (d) => d.size / 2)
+    .attr('fill', (d) => d.color)
+    .on('mouseenter', (ev, d) => {
+      d3.select(ev.currentTarget).transition().duration(120).attr('r', d.size / 2 * 1.2);
+      tooltip.classList.add('show');
+      tooltip.innerHTML = `<div class="t-type">${typeLabel[d.type] || d.type}</div><strong>${d.label}</strong>`;
+    })
+    .on('mousemove', (ev) => {
+      tooltip.style.left = (ev.clientX + 12) + 'px';
+      tooltip.style.top  = (ev.clientY + 12) + 'px';
+    })
+    .on('mouseleave', (ev, d) => {
+      d3.select(ev.currentTarget).transition().duration(120).attr('r', d.size / 2);
+      tooltip.classList.remove('show');
+    })
+    .on('click', (ev, d) => showPanel(d));
+
+  node.append('text')
+    .text((d) => d.label)
+    .style('display', (d) => (d.type === 'operational' || d.type === 'actor') ? null : 'none');
+
+  sim.on('tick', () => {
+    link
+      .attr('x1', (d) => d.source.x)
+      .attr('y1', (d) => d.source.y)
+      .attr('x2', (d) => d.target.x)
+      .attr('y2', (d) => d.target.y);
+    node.attr('transform', (d) => `translate(${d.x},${d.y})`);
+  });
+
+  function showPanel(d) {
+    panel.classList.remove('empty');
+    const datasetBadges = (d.datasets || []).map((id) =>
+      `<span class="badge">${datasetTitles[id] || id}</span>`
+    ).join('');
+    panel.innerHTML = `
+      <span class="type-pill" style="background:${d.color}">${typeLabel[d.type] || d.type}</span>
+      <h2 style="margin-top:10px">${d.label}</h2>
+      <div class="label-en">${d.label_en || ''}</div>
+      <div class="row"><div class="k">Definição</div><div class="v">${d.definition || '—'}</div></div>
+      ${d.legal_source ? `<div class="row"><div class="k">Fonte legal</div><div class="v">${d.legal_source}</div></div>` : ''}
+      ${(d.datasets && d.datasets.length) ? `<div class="row"><div class="k">Aparece nos datasets</div><div class="v">${datasetBadges}</div></div>` : ''}
+      ${d.kgraph_uri ? `<div class="row"><div class="k">Petro KGraph</div><div class="v"><a href="${d.kgraph_uri}" target="_blank" rel="noopener">${d.kgraph_uri}</a></div></div>` : ''}
+    `;
+  }
+
+  /* filtros */
+  document.querySelectorAll('#filters input[type=checkbox]').forEach((cb) => {
+    cb.addEventListener('change', () => {
+      const active = new Set(
+        Array.from(document.querySelectorAll('#filters input:checked')).map((x) => x.dataset.type)
+      );
+      node.classed('dim', (d) => !active.has(d.type));
+      link.classed('dim', (d) => !active.has(d.source.type) || !active.has(d.target.type));
+    });
+  });
+
+  window.addEventListener('resize', () => {
+    const w = container.clientWidth, h = container.clientHeight;
+    svg.attr('viewBox', [0, 0, w, h]);
+    sim.force('center', d3.forceCenter(w / 2, h / 2)).alpha(0.3).restart();
+  });
+})();
+</script>
+</body>
+</html>

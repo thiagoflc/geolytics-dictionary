@@ -1,0 +1,735 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-04-30T11:44:06.317Z",
+    "count": 21
+  },
+  "entities": [
+    {
+      "id": "poco",
+      "label": "Poço",
+      "label_en": "Well",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "poco-anp",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco",
+            "relation": "drilled_in",
+            "label": "perfurado em",
+            "style": "solid"
+          },
+          {
+            "to": "bacia-sedimentar",
+            "relation": "located_in",
+            "label": "localizado em",
+            "style": "solid"
+          },
+          {
+            "to": "operador",
+            "relation": "operated_by",
+            "label": "operado por",
+            "style": "solid"
+          },
+          {
+            "to": "notificacao-descoberta",
+            "relation": "may_register",
+            "label": "pode registrar",
+            "style": "dashed"
+          },
+          {
+            "to": "presal",
+            "relation": "may_reach",
+            "label": "pode atingir",
+            "style": "dashed"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "bloco",
+      "label": "Bloco",
+      "label_en": "Block",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.",
+      "legal_source": "Lei nº 9478, de 06/08/1997",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade",
+        "ranp-708",
+        "ranp-815"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "bloco",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bacia-sedimentar",
+            "relation": "delimited_in",
+            "label": "delimitado em",
+            "style": "solid"
+          },
+          {
+            "to": "contrato-ep",
+            "relation": "governed_by",
+            "label": "regido por",
+            "style": "solid"
+          },
+          {
+            "to": "operador",
+            "relation": "operated_by",
+            "label": "operado por",
+            "style": "solid"
+          },
+          {
+            "to": "pad",
+            "relation": "may_have",
+            "label": "pode ter",
+            "style": "dashed"
+          },
+          {
+            "to": "rodada-licitacao",
+            "relation": "originated_in",
+            "label": "originado em",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "drilled_in",
+            "label": "perfurado em",
+            "style": "solid"
+          },
+          {
+            "from": "pad",
+            "relation": "evaluates",
+            "label": "avalia",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "campo",
+      "label": "Campo",
+      "label_en": "Field",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.",
+      "legal_source": "ANP/SEP",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bacia-sedimentar",
+            "relation": "located_in",
+            "label": "localizado em",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "declaracao-comercialidade",
+            "relation": "originates",
+            "label": "origina",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bacia-sedimentar",
+      "label": "Bacia Sedimentar",
+      "label_en": "Sedimentary Basin",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não.",
+      "legal_source": "Lei nº 9478, de 06/08/1997",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "bacia-sedimentar",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "located_in",
+            "label": "localizado em",
+            "style": "solid"
+          },
+          {
+            "from": "bloco",
+            "relation": "delimited_in",
+            "label": "delimitado em",
+            "style": "solid"
+          },
+          {
+            "from": "campo",
+            "relation": "located_in",
+            "label": "localizado em",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "contrato-ep",
+      "label": "Contrato E&P",
+      "label_en": "E&P Contract",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "blocos-contrato",
+        "ranp-708",
+        "ranp-815"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "contrato-ep",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "anp",
+            "relation": "signed_with",
+            "label": "celebrado com",
+            "style": "solid"
+          },
+          {
+            "to": "regime-contratual",
+            "relation": "defines",
+            "label": "define",
+            "style": "solid"
+          },
+          {
+            "to": "periodo-exploratorio",
+            "relation": "organized_in",
+            "label": "organizado em",
+            "style": "solid"
+          },
+          {
+            "to": "uts",
+            "relation": "measured_via",
+            "label": "mede via",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco",
+            "relation": "governed_by",
+            "label": "regido por",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pad",
+      "label": "PAD",
+      "label_en": "Discovery Evaluation Plan",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso.",
+      "legal_source": "ANP/SEP — SIGEP",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade",
+        "ranp-815"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "pad",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco",
+            "relation": "evaluates",
+            "label": "avalia",
+            "style": "solid"
+          },
+          {
+            "to": "declaracao-comercialidade",
+            "relation": "may_yield",
+            "label": "pode gerar",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco",
+            "relation": "may_have",
+            "label": "pode ter",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rodada-licitacao",
+      "label": "Rodada de Licitação",
+      "label_en": "Bid Round",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.",
+      "legal_source": "Dicionário enciclopédico inglês-português de geofísica e geologia",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "rodada-licitacao",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "bloco",
+            "relation": "originated_in",
+            "label": "originado em",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "declaracao-comercialidade",
+      "label": "Declaração de Comercialidade",
+      "label_en": "Commerciality Declaration",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.",
+      "legal_source": "ANP/SEP — SIGEP",
+      "datasets": [
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "declaracao-comercialidade",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "campo",
+            "relation": "originates",
+            "label": "origina",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "pad",
+            "relation": "may_yield",
+            "label": "pode gerar",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "operador",
+      "label": "Operador",
+      "label_en": "Operator",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade",
+        "ranp-708",
+        "ranp-815"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "operador",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "processo-sancionador",
+            "relation": "may_have",
+            "label": "pode ter",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "operated_by",
+            "label": "operado por",
+            "style": "solid"
+          },
+          {
+            "from": "bloco",
+            "relation": "operated_by",
+            "label": "operado por",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "anp",
+      "label": "ANP",
+      "label_en": "ANP (Brazilian Oil & Gas Regulator)",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.",
+      "legal_source": "Lei nº 9478/1997",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade",
+        "processos-sancionadores",
+        "ranp-708",
+        "ranp-815"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "anp",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "sigep",
+            "relation": "manages_via",
+            "label": "gerencia via",
+            "style": "solid"
+          },
+          {
+            "to": "sep",
+            "relation": "oversees_via",
+            "label": "fiscaliza via",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "contrato-ep",
+            "relation": "signed_with",
+            "label": "celebrado com",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sigep",
+      "label": "SIGEP",
+      "label_en": "SIGEP (E&P Information System)",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "sigep",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "anp",
+            "relation": "manages_via",
+            "label": "gerencia via",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sep",
+      "label": "SEP",
+      "label_en": "SEP (ANP Exploration Office)",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.",
+      "legal_source": "ANP",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade",
+        "processos-sancionadores",
+        "ranp-708",
+        "ranp-815"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "sep",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "anp",
+            "relation": "oversees_via",
+            "label": "fiscaliza via",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "uts",
+      "label": "UTS",
+      "label_en": "Work Units",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "blocos-contrato"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "uts",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "contrato-ep",
+            "relation": "measured_via",
+            "label": "mede via",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "regime-contratual",
+      "label": "Regime Contratual",
+      "label_en": "Contract Regime",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "regime-contratual",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "contrato-ep",
+            "relation": "defines",
+            "label": "define",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "periodo-exploratorio",
+      "label": "Período Exploratório",
+      "label_en": "Exploratory Period",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "blocos-contrato"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "periodo-exploratorio",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "contrato-ep",
+            "relation": "organized_in",
+            "label": "organizado em",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "processo-sancionador",
+      "label": "Processo Sancionador",
+      "label_en": "Sanctioning Proceeding",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "processos-sancionadores"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "processo-sancionador",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "operador",
+            "relation": "may_have",
+            "label": "pode ter",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "notificacao-descoberta",
+      "label": "Notificação Descoberta",
+      "label_en": "Discovery Notification",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.",
+      "legal_source": "ANP/SEP — SIGEP",
+      "datasets": [
+        "pocos-exploratorios"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "notificacao-descoberta",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "may_register",
+            "label": "pode registrar",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "area-desenvolvimento",
+      "label": "Área de Desenvolvimento",
+      "label_en": "Development Area",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "area-desenvolvimento",
+      "relations": {
+        "outgoing": [],
+        "incoming": []
+      }
+    },
+    {
+      "id": "presal",
+      "label": "Pré-sal",
+      "label_en": "Pre-salt",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pocos-exploratorios"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "presal",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "may_reach",
+            "label": "pode atingir",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bacias-agrupadas",
+      "label": "Bacias Agrupadas",
+      "label_en": "Grouped Basins",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "bacias-agrupadas",
+      "relations": {
+        "outgoing": [],
+        "incoming": []
+      }
+    },
+    {
+      "id": "ambiente",
+      "label": "Ambiente",
+      "label_en": "Environment",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.",
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "pocos-exploratorios",
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "kgraph_uri": null,
+      "glossary_id": "ambiente",
+      "relations": {
+        "outgoing": [],
+        "incoming": []
+      }
+    }
+  ]
+}

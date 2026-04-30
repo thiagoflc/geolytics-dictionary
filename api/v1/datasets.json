@@ -1,0 +1,625 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-04-30T11:44:06.317Z",
+    "count": 8
+  },
+  "datasets": [
+    {
+      "id": "pocos-exploratorios",
+      "titulo": "Poços Exploratórios em Blocos",
+      "descricao": "Dados gerais sobre os poços exploratórios que tiveram a perfuração iniciada a partir do ano de 1998.",
+      "fonte": "ANP/SEP — SIGEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "POÇO ANP",
+          "descricao": "Identificador padronizado do poço conforme regras da ANP",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BLOCO",
+          "descricao": "Nome do bloco onde o poço foi perfurado",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIA",
+          "descricao": "Nome da bacia sedimentar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIAS AGRUPADAS",
+          "descricao": "Agrupamento regional das bacias sedimentares",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "ESTADO",
+          "descricao": "Unidade da Federação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "AMBIENTE",
+          "descricao": "Localização por ambiente: terra ou mar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Empresa operadora do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "INÍCIO DA PERFURAÇÃO",
+          "descricao": "Data em que a perfuração do poço teve início",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "CONCLUSÃO DA PERFURAÇÃO",
+          "descricao": "Data em que foi concluída a perfuração",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "PROFUNDIDADE FINAL (m)",
+          "descricao": "Profundidade final alcançada pelo poço, em metros",
+          "tipo": "INTEGER"
+        },
+        {
+          "nome": "ATINGIU PRÉ-SAL?",
+          "descricao": "Identifica se o poço atingiu o pré-sal",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "NOTIFICAÇÃO DE DESCOBERTA?",
+          "descricao": "Identifica se ocorreu indícios de hidrocarbonetos durante a perfuração",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "DATA DA 1ª DESCOBERTA",
+          "descricao": "Data da primeira descoberta de hidrocarbonetos notificada à ANP",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "FLUIDO NOTIFICAÇÃO DE DESCOBERTA",
+          "descricao": "Hidrocarboneto que foi notificada a descoberta à ANP",
+          "tipo": "TEXT"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "bacia-sedimentar",
+        "bacias-agrupadas",
+        "ambiente",
+        "presal",
+        "operador",
+        "poco-anp",
+        "notificacao-descoberta",
+        "anp",
+        "sigep",
+        "sep"
+      ]
+    },
+    {
+      "id": "blocos-contrato",
+      "titulo": "Blocos sob Contrato",
+      "descricao": "Dados gerais sobre os blocos exploratórios sob contrato: operador, contratados, bacia, período exploratório, prazos de vencimento e dados técnicos sobre poços e UTS.",
+      "fonte": "ANP/SEP — SIGEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "BLOCO",
+          "descricao": "Nome do bloco exploratório",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "CONTRATO",
+          "descricao": "Código do contrato de E&P assinado com a ANP",
+          "tipo": "INTEGER"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Concessionário designado para conduzir as operações",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "CONTRATADOS",
+          "descricao": "Empresas contratadas e sua participação percentual",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "AMBIENTE",
+          "descricao": "Localização por ambiente: terra ou mar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIAS AGRUPADAS",
+          "descricao": "Agrupamento regional das bacias sedimentares",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIA",
+          "descricao": "Nome da bacia sedimentar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "ÁREA (MIL km²)",
+          "descricao": "Área do bloco em mil quilômetros quadrados",
+          "tipo": "DECIMAL"
+        },
+        {
+          "nome": "RODADA",
+          "descricao": "Identificação da rodada de licitação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "PERÍODO",
+          "descricao": "Identificação do período exploratório: 1º, 2º, 3º ou único",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "PRESENÇA PAD",
+          "descricao": "Indica se há ou houve Plano de Avaliação de Descobertas",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "DATA DA ASSINATURA CONTRATO",
+          "descricao": "Data de assinatura do contrato de E&P",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "DATA INÍCIO SUSPENSÃO",
+          "descricao": "Data de início da suspensão do contrato",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "1º PE VENCIMENTO",
+          "descricao": "Data de vencimento do 1º período exploratório",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "2º PE VENCIMENTO",
+          "descricao": "Data de vencimento do 2º período exploratório",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "3º PE VENCIMENTO",
+          "descricao": "Data de vencimento do 3º período exploratório",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "ÚLTIMO PAD VENCIMENTO",
+          "descricao": "Data de vencimento do último PAD",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "FASE EXPLORATÓRIA VENCIMENTO",
+          "descricao": "Data de vencimento da fase exploratória do bloco",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "UTS COMPROMISSADAS",
+          "descricao": "Unidades de Trabalho comprometidas no Programa Exploratório Mínimo",
+          "tipo": "DECIMAL"
+        },
+        {
+          "nome": "QTD DE POÇOS PERFURADOS",
+          "descricao": "Número de poços perfurados na área contratada",
+          "tipo": "INTEGER"
+        },
+        {
+          "nome": "POÇOS PERFURADOS",
+          "descricao": "Nome(s) dos poços ANP perfurados na área contratada",
+          "tipo": "TEXT"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "bacia-sedimentar",
+        "bacias-agrupadas",
+        "ambiente",
+        "operador",
+        "contratados",
+        "contrato-ep",
+        "periodo-exploratorio",
+        "uts",
+        "fase-exploratoria",
+        "poco-anp",
+        "anp",
+        "sigep",
+        "sep"
+      ]
+    },
+    {
+      "id": "pads-andamento",
+      "titulo": "PADs em Andamento",
+      "descricao": "Dados gerais sobre os Planos de Avaliação de Descobertas (PADs) atualmente em andamento na fase de exploração.",
+      "fonte": "ANP/SEP — SIGEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "CÓDIGO DO PAD",
+          "descricao": "Nome do PAD — corresponde à acumulação principal da área",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BLOCO",
+          "descricao": "Nome do bloco exploratório",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIA",
+          "descricao": "Nome da bacia sedimentar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIAS AGRUPADAS",
+          "descricao": "Agrupamento regional das bacias sedimentares",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "AMBIENTE",
+          "descricao": "Localização por ambiente: terra ou mar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Empresa operadora do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "CONTRATADOS",
+          "descricao": "Empresas contratadas e sua participação percentual",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "RODADA",
+          "descricao": "Identificação da rodada de licitação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "REGIME CONTRATUAL",
+          "descricao": "Modalidade contratual: Concessão ou Partilha",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "SITUAÇÃO",
+          "descricao": "Situação atual do PAD",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "INÍCIO EFETIVO",
+          "descricao": "Data do início efetivo do PAD",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "TÉRMINO PREVISTO",
+          "descricao": "Data do término previsto do PAD",
+          "tipo": "DATE"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "bacia-sedimentar",
+        "bacias-agrupadas",
+        "ambiente",
+        "operador",
+        "contratados",
+        "regime-contratual",
+        "pad",
+        "rodada-licitacao",
+        "anp",
+        "sigep",
+        "sep"
+      ]
+    },
+    {
+      "id": "pads-concluidos",
+      "titulo": "PADs Concluídos",
+      "descricao": "Dados gerais sobre os Planos de Avaliação de Descobertas (PADs) concluídos na fase de exploração, incluindo resultado de comercialidade e área de desenvolvimento.",
+      "fonte": "ANP/SEP — SIGEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "CÓDIGO DO PAD",
+          "descricao": "Nome do PAD — corresponde à acumulação principal da área",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BLOCO",
+          "descricao": "Nome do bloco exploratório",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIA",
+          "descricao": "Nome da bacia sedimentar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "AMBIENTE",
+          "descricao": "Localização por ambiente: terra ou mar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Empresa operadora do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "RODADA",
+          "descricao": "Identificação da rodada de licitação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "REGIME CONTRATUAL",
+          "descricao": "Modalidade contratual: Concessão ou Partilha",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "INÍCIO EFETIVO",
+          "descricao": "Data do início efetivo do PAD",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "TÉRMINO EFETIVO",
+          "descricao": "Data do término efetivo do PAD",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "DECLAROU COMERCIALIDADE",
+          "descricao": "Identifica se ocorreu declaração de comercialidade: Sim ou Não",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "ÁREA DE DESENVOLVIMENTO",
+          "descricao": "Nome da área de desenvolvimento resultante",
+          "tipo": "TEXT"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "bacia-sedimentar",
+        "bacias-agrupadas",
+        "ambiente",
+        "operador",
+        "regime-contratual",
+        "pad",
+        "declaracao-comercialidade",
+        "area-desenvolvimento",
+        "rodada-licitacao",
+        "anp",
+        "sigep",
+        "sep"
+      ]
+    },
+    {
+      "id": "declaracoes-comercialidade",
+      "titulo": "Declarações de Comercialidade",
+      "descricao": "Dados gerais sobre as Declarações de Comercialidade nos blocos sob contrato na fase de exploração.",
+      "fonte": "ANP/SEP — SIGEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "CÓDIGO DO PAD",
+          "descricao": "Nome do PAD — corresponde à acumulação principal da área",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BLOCO(S)",
+          "descricao": "Nome(s) do(s) bloco(s) relacionado(s) à declaração",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "BACIA",
+          "descricao": "Nome da bacia sedimentar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "AMBIENTE",
+          "descricao": "Localização por ambiente: terra ou mar",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Empresa operadora do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "RODADA",
+          "descricao": "Identificação da rodada de licitação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "REGIME CONTRATUAL",
+          "descricao": "Modalidade contratual: Concessão ou Partilha",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "DATA DA DECLARAÇÃO DE COMERCIALIDADE",
+          "descricao": "Data da declaração de comercialidade",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "ÁREA DE DESENVOLVIMENTO",
+          "descricao": "Nome da área de desenvolvimento resultante",
+          "tipo": "TEXT"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "bacia-sedimentar",
+        "ambiente",
+        "operador",
+        "regime-contratual",
+        "pad",
+        "declaracao-comercialidade",
+        "area-desenvolvimento",
+        "rodada-licitacao",
+        "anp",
+        "sep"
+      ]
+    },
+    {
+      "id": "processos-sancionadores",
+      "titulo": "Processos Sancionadores",
+      "descricao": "Dados gerais referente à situação dos Processos Sancionadores de exploração de petróleo e gás natural em trâmite na SEP.",
+      "fonte": "ANP/SEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "EMPRESA",
+          "descricao": "Nome da empresa autuada",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "CNPJ/CPF",
+          "descricao": "Número do CNPJ ou CPF do contratado",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "Nº PROCESSO",
+          "descricao": "Número do processo administrativo",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "Nº DF",
+          "descricao": "Número do documento de fiscalização",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "DATA DO AUTO",
+          "descricao": "Data do auto de infração",
+          "tipo": "DATE"
+        },
+        {
+          "nome": "MOTIVO",
+          "descricao": "Fundamentação que deu ensejo à autuação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "SITUAÇÃO PROCESSUAL",
+          "descricao": "Situação do andamento do processo administrativo",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "MULTA APLICADA",
+          "descricao": "Valor da multa aplicada como resultado do processo",
+          "tipo": "DECIMAL"
+        },
+        {
+          "nome": "RECURSO",
+          "descricao": "Indica se houve recurso ao processo",
+          "tipo": "TEXT"
+        }
+      ],
+      "terms_referenced": [
+        "processo-sancionador",
+        "anp",
+        "sep"
+      ]
+    },
+    {
+      "id": "ranp-708",
+      "titulo": "Resolução ANP nº 708/2017",
+      "descricao": "Dados sobre blocos exploratórios com período exploratório prorrogado pela Resolução ANP nº 708/2017.",
+      "fonte": "ANP/SEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "BLOCO",
+          "descricao": "Nome do bloco exploratório",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "CONTRATO",
+          "descricao": "Nome fantasia do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Empresa operadora do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "ETAPA PRORROGADA",
+          "descricao": "Etapa prorrogada: período único, 1º e 2º PE, ou 2º PE",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "DATA DE ADESÃO À RESOLUÇÃO",
+          "descricao": "Data na qual se deu a adesão à Resolução nº 708/2017",
+          "tipo": "DATE"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "operador",
+        "contrato-ep",
+        "etapa-prorrogada",
+        "anp",
+        "sep"
+      ]
+    },
+    {
+      "id": "ranp-815",
+      "titulo": "Resolução ANP nº 815/2020",
+      "descricao": "Dados sobre blocos exploratórios com período exploratório prorrogado pela Resolução ANP nº 815/2020.",
+      "fonte": "ANP/SEP",
+      "formato": "CSV",
+      "frequencia": "Mensal",
+      "contato": "sigep_sep@anp.gov.br",
+      "colunas": [
+        {
+          "nome": "BLOCO",
+          "descricao": "Nome do bloco exploratório",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "CONTRATO",
+          "descricao": "Nome fantasia do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "OPERADOR",
+          "descricao": "Empresa operadora do contrato de E&P",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "ETAPA PRORROGADA",
+          "descricao": "Etapa prorrogada: período único, 1º e 2º PE, ou 2º PE",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "PAD",
+          "descricao": "Nome do Plano de Avaliação de Descobertas associado à prorrogação",
+          "tipo": "TEXT"
+        },
+        {
+          "nome": "DATA DE ADESÃO À RESOLUÇÃO",
+          "descricao": "Data na qual se deu a adesão à Resolução nº 815/2020",
+          "tipo": "DATE"
+        }
+      ],
+      "terms_referenced": [
+        "bloco",
+        "operador",
+        "contrato-ep",
+        "etapa-prorrogada",
+        "pad",
+        "anp",
+        "sep"
+      ]
+    }
+  ]
+}
