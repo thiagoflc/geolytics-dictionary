@@ -39,6 +39,10 @@ import {
   ONTOPETRO_EDGES,
   ONTOPETRO_ALIGNMENT,
   AMBIGUITY_ALERTS,
+  OSDU_NODES,
+  OSDU_EDGES,
+  OSDU_ALIGNMENT_ADDITIONS,
+  OSDU_RAG_CHUNKS,
 } from './ontopetro-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -671,9 +675,10 @@ function buildEntityGraph() {
       extended_id: n.extendedId || null,
     };
   });
-  /* Ontopetro/M7-M10 nodes — alignment via ONTOPETRO_ALIGNMENT */
+  /* Ontopetro/M7-M10 nodes — alignment via ONTOPETRO_ALIGNMENT, com merge OSDU */
+  const MERGED_ALIGNMENT = { ...ONTOPETRO_ALIGNMENT, ...OSDU_ALIGNMENT_ADDITIONS };
   const ontopetroNodes = ONTOPETRO_NODES.map((n) => {
-    const align = alignmentFor(ONTOPETRO_ALIGNMENT, n.id);
+    const align = alignmentFor(MERGED_ALIGNMENT, n.id);
     return {
       id: n.id,
       label: n.label,
@@ -695,9 +700,33 @@ function buildEntityGraph() {
       ontopetro: true,
     };
   });
-  const nodes = [...baseNodes, ...ontopetroNodes];
+  /* OSDU layer-4 nodes (4 novos: wellbore, topo-formacional, trajetoria-poco, unidade-medida) */
+  const osduNodes = OSDU_NODES.map((n) => {
+    const align = alignmentFor(MERGED_ALIGNMENT, n.id);
+    return {
+      id: n.id,
+      label: n.label,
+      label_en: n.label_en,
+      type: n.type,
+      color: COLORS[n.type],
+      size: n.size || SIZES[n.type],
+      definition: n.definition,
+      legal_source: n.fonte || null,
+      datasets: n.datasets || [],
+      petrokgraph_uri: align.petrokgraph_uri,
+      osdu_kind: n.osdu_kind_override || align.osdu_kind,
+      geocoverage: n.layers_override || align.geocoverage,
+      synonyms_pt: n.synonyms_pt || [],
+      synonyms_en: n.synonyms_en || [],
+      examples: n.examples || [],
+      glossary_id: null,
+      extended_id: null,
+      osdu: true,
+    };
+  });
+  const nodes = [...baseNodes, ...ontopetroNodes, ...osduNodes];
   /* deriva relation_label_en a partir do snake_case do campo relation */
-  const edges = [...EDGES, ...ONTOPETRO_EDGES].map((e) => ({
+  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES].map((e) => ({
     source: e.source,
     target: e.target,
     relation: e.relation,
@@ -727,8 +756,8 @@ function buildFull() {
         extended_terms: EXTENDED_TERMS.length,
         total_terms: GLOSSARIO.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length,
-        entity_edges: EDGES.length + ONTOPETRO_EDGES.length,
+        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length,
+        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
         ontopetro_classes: ONTOPETRO_CLASSES.length,
@@ -780,6 +809,7 @@ function buildApiIndex() {
       ontology:        `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
       ontology_map:    `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
       ontopetro:       `${BASE_URL_PLACEHOLDER}/data/ontopetro.json`,
+      osdu_mapping:    `${BASE_URL_PLACEHOLDER}/data/osdu-mapping.json`,
       taxonomies:      `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
       modules_extended:`${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
       pvt_dictionary:  `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
@@ -908,9 +938,17 @@ function buildSearchIndex() {
       type: 'entity',
       title: n.label,
       text: `${n.label} (${n.label_en}). ${n.definition}`,
-      tokens: Array.from(new Set(tokenize(`${n.label} ${n.label_en} ${n.definition}`))),
+      tokens: Array.from(new Set(tokenize(`${n.label} ${n.label_en} ${n.definition} ${(n.synonyms_pt || []).join(' ')} ${(n.synonyms_en || []).join(' ')}`))),
     });
   }
+  /* OSDU mapping reference */
+  items.push({
+    id: 'dataset:osdu-mapping',
+    type: 'dataset',
+    title: 'OSDU Kind Mapping Table',
+    text: 'OSDU kind mapping with master/reference/wpc tripartition, Well/Wellbore disambiguation and ANP→OSDU lineage.',
+    tokens: Array.from(new Set(tokenize('OSDU kind mapping master-data reference-data work-product-component Well Wellbore Field Basin tripartição ANP'))),
+  });
   return { meta: { version: VERSION, generated: NOW, count: items.length }, items };
 }
 
@@ -1182,6 +1220,11 @@ function buildRagCorpus() {
     });
   }
 
+  /* type=osdu_tripartition + osdu_kind_mapping — increment v2 */
+  for (const c of OSDU_RAG_CHUNKS) {
+    lines.push({ id: c.id, type: c.type, text: c.text, metadata: c.metadata });
+  }
+
   /* type=acronym — siglas O&G (filtra it_generic) */
   const ac = loadAcronyms();
   if (ac && Array.isArray(ac.acronyms)) {
@@ -1408,8 +1451,8 @@ console.log('\n✓ Done.');
 console.log(`  Glossary terms: ${GLOSSARIO.length}`);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
-console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro)`);
-console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length}`);
+console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU)`);
+console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
 console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);

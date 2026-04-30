@@ -687,4 +687,110 @@ export const AMBIGUITY_ALERTS = [
     text: 'NER PetroGold distingue: FOR (Formação) ≠ ROC (Litologia). FOR = nome formal de unidade litoestratigráfica (Fm. Barra Velha, Fm. Macabu). ROC = tipo petrográfico (arenito, calcário microbialítico, folhelho). A formação tem uma litologia, mas não é a litologia. Erro mais comum em NER de O&G PT-BR.' },
   { id: 'ambig_intervalo_estratigrafico', terms: ['intervalo','idade'],
     text: 'PetroGold tipos INT (Intervalo) ≠ IDA (Idade). INT = seção delimitada por dois marcos (topo/base) — ex.: "intervalo 2100-2450m", "zona produtora BVE-110". IDA = período/época formal — ex.: "Aptiano", "Cretáceo Superior". Um intervalo TEM uma idade, mas não é a idade.' },
+  { id: 'osdu_well_wellbore_disambiguation', terms: ['Well','Wellbore'],
+    text: "ALERTA RAG — Well vs Wellbore (OSDU): São duas entidades distintas no OSDU que a ANP conflate em um registro único. WELL = registro de superfície e legal. O número POCO_NUM da ANP corresponde ao Well.WellID. WELLBORE = o trecho físico perfurado. Um Well pode ter múltiplos Wellbores (sidetrack: ST1, ST2…). Na prática para o Geolytics: 1 poço ANP sem sidetrack = 1 Well + 1 Wellbore. A entidade 'poco' do entity-graph corresponde ao Well OSDU. A entidade 'wellbore' é granularidade adicional para workflows de integração IT. NUNCA use 'poço' e 'wellbore' como sinônimos em contexto OSDU — eles são entidades com IDs diferentes e ciclos de vida diferentes." },
+];
+
+/* ─────────────────────────────────────────────────────────────
+ * OSDU Layer 4 — increment v2
+ *   4 novos nós, 7 edges, 4 chunks RAG (master/reference/wpc/lineage)
+ *   O ambiguity_alert OSDU já está em AMBIGUITY_ALERTS acima.
+ * ───────────────────────────────────────────────────────────── */
+
+export const OSDU_NODES = [
+  { id: 'wellbore', label: 'Trecho Perfurado', label_en: 'Wellbore', type: 'operational',
+    definition: "Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente.",
+    fonte: 'ANP/BDP + OSDU master-data--Wellbore',
+    datasets: ['pocos-exploratorios'],
+    osdu_kind_override: 'opendes:osdu:master-data--Wellbore:1.0.0',
+    layers_override: ['layer2','layer3','layer4'],
+    synonyms_pt: ['trecho perfurado', 'furo', 'wellbore', 'poço físico'],
+    synonyms_en: ['wellbore', 'borehole', 'drilled hole'],
+    examples: ['1-RJS-702-RJ (wellbore único)', '3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)'],
+    size: 22 },
+
+  { id: 'topo-formacional', label: 'Topo Formacional', label_en: 'Formation Top / Wellbore Marker', type: 'analytical',
+    definition: "Pick da profundidade (em MD — Measured Depth — e TVD — True Vertical Depth) em que o wellbore intercepta o topo de uma formação geológica. Dado fundamental em correlações estratigráficas entre poços e na construção de modelos de reservatórios 3D. Exemplo: Topo da Formação Barra Velha no poço 1-RJS-702-RJ a MD=4220m / TVD=4105m.",
+    fonte: 'Relatórios de completação / OSDU WellboreMarker',
+    datasets: ['pocos-exploratorios'],
+    osdu_kind_override: 'opendes:osdu:work-product-component--WellboreMarker:1.0.0',
+    layers_override: ['layer2','layer3','layer4'],
+    synonyms_pt: ['topo de formação', 'marco estratigráfico', 'pick estratigráfico', 'marker'],
+    synonyms_en: ['formation top', 'wellbore marker', 'stratigraphic pick', 'formation pick'],
+    examples: ['Topo Fm. Barra Velha a 4220m MD', 'Topo Fm. Macaé a 2890m MD', 'Base do Sal a 3410m TVD'],
+    size: 18 },
+
+  { id: 'trajetoria-poco', label: 'Trajetória do Poço', label_en: 'Wellbore Trajectory', type: 'analytical',
+    definition: "Survey direcional do wellbore: sequência de medições de profundidade (MD), inclinação e azimute ao longo do trecho perfurado. Permite calcular a posição 3D real do poço (TVD, offsets Norte/Sul/Leste/Oeste). Diferencia poços verticais (inclinação ≈ 0°) de poços direcionais (inclinação > 30°) e poços horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e para o cálculo correto de pressão hidrostática.",
+    fonte: 'Relatórios de completação / OSDU WellboreTrajectory',
+    datasets: ['pocos-exploratorios'],
+    osdu_kind_override: 'opendes:osdu:work-product-component--WellboreTrajectory:1.0.0',
+    layers_override: ['layer3','layer4'],
+    synonyms_pt: ['trajetória direcional', 'survey direcional', 'desvio do poço', 'perfil direcional'],
+    synonyms_en: ['wellbore trajectory', 'directional survey', 'deviation survey', 'trajectory survey'],
+    examples: ['Poço horizontal pré-sal: 60° inclinação em 2800m TVD', 'Poço vertical 1-RJS-702-RJ: inclinação < 3°'],
+    size: 16 },
+
+  { id: 'unidade-medida', label: 'Unidade de Medida', label_en: 'Unit of Measure', type: 'instrument',
+    definition: "Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados.",
+    fonte: 'OSDU reference-data--UnitOfMeasure / BIPM SI / API standards',
+    datasets: [],
+    osdu_kind_override: 'opendes:osdu:reference-data--UnitOfMeasure:1.0.0',
+    layers_override: ['layer2','layer3','layer4'],
+    synonyms_pt: ['unidade', 'unidade SI', 'unidade imperial', 'UOM'],
+    synonyms_en: ['unit of measure', 'UOM', 'unit', 'measurement unit'],
+    examples: ['mD (miliDarcy) — permeabilidade', 'ºAPI (API gravity) — densidade óleo', 'GAPI (Gamma Ray API) — argilosidade'],
+    size: 14 },
+];
+
+export const OSDU_EDGES = [
+  { source: 'poco',         target: 'wellbore',         relation: 'has_wellbore',     relation_label: 'tem wellbore',     style: 'solid' },
+  { source: 'wellbore',     target: 'poco',             relation: 'belongs_to',       relation_label: 'pertence a',       style: 'solid' },
+  { source: 'wellbore',     target: 'formacao',         relation: 'penetrates',       relation_label: 'penetra',          style: 'dashed' },
+  { source: 'wellbore',     target: 'trajetoria-poco',  relation: 'has_trajectory',   relation_label: 'tem trajetória',   style: 'dashed' },
+  { source: 'wellbore',     target: 'topo-formacional', relation: 'has_marker',       relation_label: 'tem marker',       style: 'dashed' },
+  { source: 'formacao',     target: 'topo-formacional', relation: 'has_top_at',       relation_label: 'tem topo em',      style: 'solid' },
+  { source: 'perfil-poco',  target: 'wellbore',         relation: 'measured_in',      relation_label: 'medida em',        style: 'solid' },
+];
+
+/* Alinhamento OSDU para os nós novos + alguns existentes que ainda têm null */
+export const OSDU_ALIGNMENT_ADDITIONS = {
+  'wellbore':         { kg: null, osdu: 'opendes:osdu:master-data--Wellbore:1.0.0',                    layers: ['layer2','layer3','layer4'] },
+  'topo-formacional': { kg: null, osdu: 'opendes:osdu:work-product-component--WellboreMarker:1.0.0',   layers: ['layer2','layer3','layer4'] },
+  'trajetoria-poco':  { kg: null, osdu: 'opendes:osdu:work-product-component--WellboreTrajectory:1.0.0', layers: ['layer3','layer4'] },
+  'unidade-medida':   { kg: null, osdu: 'opendes:osdu:reference-data--UnitOfMeasure:1.0.0',            layers: ['layer2','layer3','layer4'] },
+  /* Atualiza nós analytical existentes que estavam com osdu null */
+  'litologia':        { kg: '#Lithology', osdu: 'opendes:osdu:reference-data--LithologyType:1.0.0',    layers: ['layer1','layer2','layer3','layer4','layer6'] },
+  'classe-fluido':    { kg: null, osdu: 'opendes:osdu:reference-data--FluidType:1.0.0',                layers: ['layer4','layer6'] },
+  'pvt':              { kg: null, osdu: 'opendes:osdu:work-product-component--WellborePressure:1.0.0', layers: ['layer4','layer6'] },
+  'perfil-poco':      { kg: '#WellLog', osdu: 'opendes:osdu:work-product-component--WellLog:1.0.0',    layers: ['layer3','layer4','layer6'] },
+};
+
+/* RAG chunks específicos do increment OSDU v2 (excluindo o ambiguity_alert
+   já incluído em AMBIGUITY_ALERTS acima) */
+export const OSDU_RAG_CHUNKS = [
+  {
+    id: 'osdu_tripartition_master',
+    type: 'osdu_tripartition',
+    text: 'OSDU Master Data — Entidades estáveis de negócio com ciclo de vida longo. No Geolytics, equivalem aos nós tipo "operational" e "actor". Exemplos e mapeamentos: Well (poco) — registro de superfície + legal do poço; Wellbore (wellbore) — trecho físico perfurado; Field (campo) — campo de produção; Basin (bacia) — bacia sedimentar; Organisation (operador) — empresa operadora ou parceira; GeologicalFormation (formacao) — formação geológica formal; Reservoir (reservatorio) — corpo reservatório. Kind format: opendes:osdu:master-data--{Type}:1.0.0. Master Data é o "backbone" da plataforma OSDU — todos os Work Product Components e Reference Data se relacionam a entidades Master Data.',
+    metadata: { category: 'master_data', osdu_platform: 'https://osduforum.org', rag_priority: 'high' },
+  },
+  {
+    id: 'osdu_tripartition_reference',
+    type: 'osdu_tripartition',
+    text: 'OSDU Reference Data — Vocabulários controlados e enumerações. No Geolytics, equivalem às taxonomias. Crítico para interoperabilidade: sistemas diferentes usam termos diferentes para o mesmo conceito. WellStatus: ativo, abandonado, P&A (plug and abandon), suspenso, injetando. WellType / DrillingReasonType: exploratório (1-xxx ANP), appraisal, desenvolvimento (3-xxx), injeção (4-xxx), monitoramento (7-xxx). LithologyType: sandstone/arenito, limestone/calcário, shale/folhelho, salt/sal, evaporite/evaporito. FluidType: black_oil/óleo negro, volatile_oil/óleo volátil, condensate/condensado, wet_gas/gás úmido, dry_gas/gás seco. UnitOfMeasure: m, ft, mD, ºAPI, GAPI, MPa, psi, m³/d, bbl/d. Kind: opendes:osdu:reference-data--{Type}:1.0.0.',
+    metadata: { category: 'reference_data', osdu_platform: 'https://osduforum.org', rag_priority: 'high' },
+  },
+  {
+    id: 'osdu_tripartition_wpc',
+    type: 'osdu_tripartition',
+    text: 'OSDU Work Product Components (WPC) — Dados interpretativos e derivados. Resultado de serviços de campo, análises laboratoriais e interpretações técnicas. No Geolytics, equivalem aos nós tipo "analytical". WellLog (perfilagem): perfil contínuo de propriedades físicas ao longo do wellbore — curvas GR (argilosidade), RHOB (densidade), NPHI (porosidade nêutron), DT (sônico), RT (resistividade). WellboreMarker (topo_formacional): pick de profundidade onde o wellbore intercepta o topo de uma formação. WellboreTrajectory (trajetoria_poco): survey direcional MD/inclinação/azimute/TVD. WellborePressure (pvt): dados de pressão DST/RFT/MDT. Cada WPC tem ancestry.parents[] ligando ao Wellbore pai. Kind: opendes:osdu:work-product-component--{Type}:1.0.0. WPCs são o dado derivado mais valioso — integrar com M7-M10 Geolytics é o próximo passo.',
+    metadata: { category: 'work_product_components', osdu_platform: 'https://osduforum.org', rag_priority: 'high' },
+  },
+  {
+    id: 'osdu_lineage_anp_mapping',
+    type: 'osdu_kind_mapping',
+    text: 'Mapeamento de campos ANP → OSDU para poços: POCO_NUM → Well.WellID (ExternalID); POCO_POCO_NOME → Well.WellName; POCO_OPERADORA_SIGLA → Well.OperatorID → Organisation; POCO_STATUS → Wellbore.StatusID → reference-data--WellStatus; POCO_TIPO → Wellbore.DrillingReasonID → reference-data--WellDrillingReasonType; POCO_CAMPO → Well.FieldID → Field; POCO_BACIA_SIGLA → Well.BasinID → Basin; POCO_LATITUDE_BASE_4C → Well.SpatialLocation.Coordinates.Latitude; POCO_LONGITUDE_BASE_4C → Well.SpatialLocation.Coordinates.Longitude. Cadeia de linhagem: L5 (ANP public registry) → L4 (OSDU master-data--Well) → L6 (Geolytics enrichment). Cada registro OSDU tem ancestry.parents[] rastreando a origem ANP. Legal tags: opendes-ANP-public-data + otherRelevantDataCountries: BR. Arquivo de referência completo: data/osdu-mapping.json.',
+    metadata: { type: 'osdu_kind_mapping', file: 'data/osdu-mapping.json', rag_priority: 'medium' },
+  },
 ];

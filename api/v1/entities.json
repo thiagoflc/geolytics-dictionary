@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T17:15:12.927Z",
-    "count": 75
+    "generated": "2026-04-30T22:02:04.507Z",
+    "count": 79
   },
   "entities": [
     {
@@ -82,6 +82,11 @@
             "to": "intervalo-estratigrafico",
             "relation": "samples",
             "style": "dashed"
+          },
+          {
+            "to": "wellbore",
+            "relation": "has_wellbore",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -144,6 +149,11 @@
             "from": "ocorrencia-geomec",
             "relation": "occurs_in",
             "style": "dashed"
+          },
+          {
+            "from": "wellbore",
+            "relation": "belongs_to",
+            "style": "solid"
           }
         ]
       }
@@ -497,6 +507,11 @@
             "to": "idade-geologica",
             "relation": "has_age",
             "style": "solid"
+          },
+          {
+            "to": "topo-formacional",
+            "relation": "has_top_at",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -514,6 +529,11 @@
             "from": "testemunho",
             "relation": "samples",
             "style": "solid"
+          },
+          {
+            "from": "wellbore",
+            "relation": "penetrates",
+            "style": "dashed"
           }
         ]
       }
@@ -2567,6 +2587,11 @@
             "to": "litologia",
             "relation": "infers",
             "style": "dashed"
+          },
+          {
+            "to": "wellbore",
+            "relation": "measured_in",
+            "style": "solid"
           }
         ],
         "incoming": []
@@ -2719,11 +2744,12 @@
       "legal_source": "GDA / RockFinder",
       "datasets": [],
       "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
-      "osdu_kind": null,
+      "osdu_kind": "opendes:osdu:reference-data--LithologyType:1.0.0",
       "geocoverage": [
         "layer1",
         "layer2",
         "layer3",
+        "layer4",
         "layer6"
       ],
       "synonyms_pt": [],
@@ -2991,8 +3017,9 @@
       "legal_source": "SIRR",
       "datasets": [],
       "petrokgraph_uri": null,
-      "osdu_kind": null,
+      "osdu_kind": "opendes:osdu:work-product-component--WellborePressure:1.0.0",
       "geocoverage": [
+        "layer4",
         "layer6"
       ],
       "synonyms_pt": [],
@@ -3029,8 +3056,9 @@
       "legal_source": "AIDA",
       "datasets": [],
       "petrokgraph_uri": null,
-      "osdu_kind": null,
+      "osdu_kind": "opendes:osdu:reference-data--FluidType:1.0.0",
       "geocoverage": [
+        "layer4",
         "layer6"
       ],
       "synonyms_pt": [],
@@ -3112,6 +3140,225 @@
             "style": "dashed"
           }
         ]
+      }
+    },
+    {
+      "id": "wellbore",
+      "label": "Trecho Perfurado",
+      "label_en": "Wellbore",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 22,
+      "definition": "Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente.",
+      "legal_source": "ANP/BDP + OSDU master-data--Wellbore",
+      "datasets": [
+        "pocos-exploratorios"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:master-data--Wellbore:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "trecho perfurado",
+        "furo",
+        "wellbore",
+        "poço físico"
+      ],
+      "synonyms_en": [
+        "wellbore",
+        "borehole",
+        "drilled hole"
+      ],
+      "examples": [
+        "1-RJS-702-RJ (wellbore único)",
+        "3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)"
+      ],
+      "glossary_id": null,
+      "extended_id": null,
+      "osdu": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "belongs_to",
+            "style": "solid"
+          },
+          {
+            "to": "formacao",
+            "relation": "penetrates",
+            "style": "dashed"
+          },
+          {
+            "to": "trajetoria-poco",
+            "relation": "has_trajectory",
+            "style": "dashed"
+          },
+          {
+            "to": "topo-formacional",
+            "relation": "has_marker",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "has_wellbore",
+            "style": "solid"
+          },
+          {
+            "from": "perfil-poco",
+            "relation": "measured_in",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "topo-formacional",
+      "label": "Topo Formacional",
+      "label_en": "Formation Top / Wellbore Marker",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 18,
+      "definition": "Pick da profundidade (em MD — Measured Depth — e TVD — True Vertical Depth) em que o wellbore intercepta o topo de uma formação geológica. Dado fundamental em correlações estratigráficas entre poços e na construção de modelos de reservatórios 3D. Exemplo: Topo da Formação Barra Velha no poço 1-RJS-702-RJ a MD=4220m / TVD=4105m.",
+      "legal_source": "Relatórios de completação / OSDU WellboreMarker",
+      "datasets": [
+        "pocos-exploratorios"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "topo de formação",
+        "marco estratigráfico",
+        "pick estratigráfico",
+        "marker"
+      ],
+      "synonyms_en": [
+        "formation top",
+        "wellbore marker",
+        "stratigraphic pick",
+        "formation pick"
+      ],
+      "examples": [
+        "Topo Fm. Barra Velha a 4220m MD",
+        "Topo Fm. Macaé a 2890m MD",
+        "Base do Sal a 3410m TVD"
+      ],
+      "glossary_id": null,
+      "extended_id": null,
+      "osdu": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "wellbore",
+            "relation": "has_marker",
+            "style": "dashed"
+          },
+          {
+            "from": "formacao",
+            "relation": "has_top_at",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "trajetoria-poco",
+      "label": "Trajetória do Poço",
+      "label_en": "Wellbore Trajectory",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 16,
+      "definition": "Survey direcional do wellbore: sequência de medições de profundidade (MD), inclinação e azimute ao longo do trecho perfurado. Permite calcular a posição 3D real do poço (TVD, offsets Norte/Sul/Leste/Oeste). Diferencia poços verticais (inclinação ≈ 0°) de poços direcionais (inclinação > 30°) e poços horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e para o cálculo correto de pressão hidrostática.",
+      "legal_source": "Relatórios de completação / OSDU WellboreTrajectory",
+      "datasets": [
+        "pocos-exploratorios"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "trajetória direcional",
+        "survey direcional",
+        "desvio do poço",
+        "perfil direcional"
+      ],
+      "synonyms_en": [
+        "wellbore trajectory",
+        "directional survey",
+        "deviation survey",
+        "trajectory survey"
+      ],
+      "examples": [
+        "Poço horizontal pré-sal: 60° inclinação em 2800m TVD",
+        "Poço vertical 1-RJS-702-RJ: inclinação < 3°"
+      ],
+      "glossary_id": null,
+      "extended_id": null,
+      "osdu": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "wellbore",
+            "relation": "has_trajectory",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "unidade-medida",
+      "label": "Unidade de Medida",
+      "label_en": "Unit of Measure",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 14,
+      "definition": "Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados.",
+      "legal_source": "OSDU reference-data--UnitOfMeasure / BIPM SI / API standards",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "unidade",
+        "unidade SI",
+        "unidade imperial",
+        "UOM"
+      ],
+      "synonyms_en": [
+        "unit of measure",
+        "UOM",
+        "unit",
+        "measurement unit"
+      ],
+      "examples": [
+        "mD (miliDarcy) — permeabilidade",
+        "ºAPI (API gravity) — densidade óleo",
+        "GAPI (Gamma Ray API) — argilosidade"
+      ],
+      "glossary_id": null,
+      "extended_id": null,
+      "osdu": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": []
       }
     }
   ]

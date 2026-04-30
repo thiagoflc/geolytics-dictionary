@@ -1,15 +1,15 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T17:15:12.927Z",
+    "generated": "2026-04-30T22:02:04.507Z",
     "description": "Geolytics Dictionary — complete merged dataset",
     "counts": {
       "glossary_terms": 23,
       "extended_terms": 8,
       "total_terms": 31,
       "datasets": 8,
-      "entity_nodes": 75,
-      "entity_edges": 80,
+      "entity_nodes": 79,
+      "entity_edges": 87,
       "domains": 4,
       "ontology_layers": 6,
       "ontopetro_classes": 20,
@@ -20,7 +20,7 @@
       "pvt_fields": 34,
       "systems": 8,
       "regis_ner_mappings": 10,
-      "ambiguity_alerts": 13,
+      "ambiguity_alerts": 14,
       "acronyms": 1102
     },
     "sources": [
@@ -928,7 +928,7 @@
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-04-30T17:15:12.927Z",
+    "generated": "2026-04-30T22:02:04.507Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -2587,11 +2587,12 @@
         "legal_source": "GDA / RockFinder",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
-        "osdu_kind": null,
+        "osdu_kind": "opendes:osdu:reference-data--LithologyType:1.0.0",
         "geocoverage": [
           "layer1",
           "layer2",
           "layer3",
+          "layer4",
           "layer6"
         ],
         "synonyms_pt": [],
@@ -2768,8 +2769,9 @@
         "legal_source": "SIRR",
         "datasets": [],
         "petrokgraph_uri": null,
-        "osdu_kind": null,
+        "osdu_kind": "opendes:osdu:work-product-component--WellborePressure:1.0.0",
         "geocoverage": [
+          "layer4",
           "layer6"
         ],
         "synonyms_pt": [],
@@ -2790,8 +2792,9 @@
         "legal_source": "AIDA",
         "datasets": [],
         "petrokgraph_uri": null,
-        "osdu_kind": null,
+        "osdu_kind": "opendes:osdu:reference-data--FluidType:1.0.0",
         "geocoverage": [
+          "layer4",
           "layer6"
         ],
         "synonyms_pt": [],
@@ -2844,6 +2847,160 @@
         "glossary_id": null,
         "extended_id": null,
         "ontopetro": true
+      },
+      {
+        "id": "wellbore",
+        "label": "Trecho Perfurado",
+        "label_en": "Wellbore",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente.",
+        "legal_source": "ANP/BDP + OSDU master-data--Wellbore",
+        "datasets": [
+          "pocos-exploratorios"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--Wellbore:1.0.0",
+        "geocoverage": [
+          "layer2",
+          "layer3",
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "trecho perfurado",
+          "furo",
+          "wellbore",
+          "poço físico"
+        ],
+        "synonyms_en": [
+          "wellbore",
+          "borehole",
+          "drilled hole"
+        ],
+        "examples": [
+          "1-RJS-702-RJ (wellbore único)",
+          "3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu": true
+      },
+      {
+        "id": "topo-formacional",
+        "label": "Topo Formacional",
+        "label_en": "Formation Top / Wellbore Marker",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 18,
+        "definition": "Pick da profundidade (em MD — Measured Depth — e TVD — True Vertical Depth) em que o wellbore intercepta o topo de uma formação geológica. Dado fundamental em correlações estratigráficas entre poços e na construção de modelos de reservatórios 3D. Exemplo: Topo da Formação Barra Velha no poço 1-RJS-702-RJ a MD=4220m / TVD=4105m.",
+        "legal_source": "Relatórios de completação / OSDU WellboreMarker",
+        "datasets": [
+          "pocos-exploratorios"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+        "geocoverage": [
+          "layer2",
+          "layer3",
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "topo de formação",
+          "marco estratigráfico",
+          "pick estratigráfico",
+          "marker"
+        ],
+        "synonyms_en": [
+          "formation top",
+          "wellbore marker",
+          "stratigraphic pick",
+          "formation pick"
+        ],
+        "examples": [
+          "Topo Fm. Barra Velha a 4220m MD",
+          "Topo Fm. Macaé a 2890m MD",
+          "Base do Sal a 3410m TVD"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu": true
+      },
+      {
+        "id": "trajetoria-poco",
+        "label": "Trajetória do Poço",
+        "label_en": "Wellbore Trajectory",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 16,
+        "definition": "Survey direcional do wellbore: sequência de medições de profundidade (MD), inclinação e azimute ao longo do trecho perfurado. Permite calcular a posição 3D real do poço (TVD, offsets Norte/Sul/Leste/Oeste). Diferencia poços verticais (inclinação ≈ 0°) de poços direcionais (inclinação > 30°) e poços horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e para o cálculo correto de pressão hidrostática.",
+        "legal_source": "Relatórios de completação / OSDU WellboreTrajectory",
+        "datasets": [
+          "pocos-exploratorios"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+        "geocoverage": [
+          "layer3",
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "trajetória direcional",
+          "survey direcional",
+          "desvio do poço",
+          "perfil direcional"
+        ],
+        "synonyms_en": [
+          "wellbore trajectory",
+          "directional survey",
+          "deviation survey",
+          "trajectory survey"
+        ],
+        "examples": [
+          "Poço horizontal pré-sal: 60° inclinação em 2800m TVD",
+          "Poço vertical 1-RJS-702-RJ: inclinação < 3°"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu": true
+      },
+      {
+        "id": "unidade-medida",
+        "label": "Unidade de Medida",
+        "label_en": "Unit of Measure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 14,
+        "definition": "Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados.",
+        "legal_source": "OSDU reference-data--UnitOfMeasure / BIPM SI / API standards",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+        "geocoverage": [
+          "layer2",
+          "layer3",
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "unidade",
+          "unidade SI",
+          "unidade imperial",
+          "UOM"
+        ],
+        "synonyms_en": [
+          "unit of measure",
+          "UOM",
+          "unit",
+          "measurement unit"
+        ],
+        "examples": [
+          "mD (miliDarcy) — permeabilidade",
+          "ºAPI (API gravity) — densidade óleo",
+          "GAPI (Gamma Ray API) — argilosidade"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu": true
       }
     ],
     "edges": [
@@ -3486,6 +3643,62 @@
         "relation_label_pt": "reporta",
         "relation_label_en": "reports",
         "style": "solid"
+      },
+      {
+        "source": "poco",
+        "target": "wellbore",
+        "relation": "has_wellbore",
+        "relation_label_pt": "tem wellbore",
+        "relation_label_en": "has wellbore",
+        "style": "solid"
+      },
+      {
+        "source": "wellbore",
+        "target": "poco",
+        "relation": "belongs_to",
+        "relation_label_pt": "pertence a",
+        "relation_label_en": "belongs to",
+        "style": "solid"
+      },
+      {
+        "source": "wellbore",
+        "target": "formacao",
+        "relation": "penetrates",
+        "relation_label_pt": "penetra",
+        "relation_label_en": "penetrates",
+        "style": "dashed"
+      },
+      {
+        "source": "wellbore",
+        "target": "trajetoria-poco",
+        "relation": "has_trajectory",
+        "relation_label_pt": "tem trajetória",
+        "relation_label_en": "has trajectory",
+        "style": "dashed"
+      },
+      {
+        "source": "wellbore",
+        "target": "topo-formacional",
+        "relation": "has_marker",
+        "relation_label_pt": "tem marker",
+        "relation_label_en": "has marker",
+        "style": "dashed"
+      },
+      {
+        "source": "formacao",
+        "target": "topo-formacional",
+        "relation": "has_top_at",
+        "relation_label_pt": "tem topo em",
+        "relation_label_en": "has top at",
+        "style": "solid"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "wellbore",
+        "relation": "measured_in",
+        "relation_label_pt": "medida em",
+        "relation_label_en": "measured in",
+        "style": "solid"
       }
     ]
   },
@@ -4102,7 +4315,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-04-30T17:15:12.927Z",
+    "generated": "2026-04-30T22:02:04.507Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -4170,19 +4383,88 @@
       {
         "id": "layer4",
         "name": "OSDU — Open Subsurface Data Universe",
-        "maintainer": "The Open Group (Shell, Equinor, BP, Petrobras membros)",
-        "type": "industry_data_standard",
-        "ontology_url": "https://accenture.github.io/OSDU-Ontology/",
-        "github": "https://github.com/Accenture/OSDU-Ontology",
-        "description": "Padrão de dados de subsuperfície da indústria petrolífera global. Petrobras é membro ativo adotando. Cobre schemas para: Well, Wellbore, Field, Basin, SeismicAcquisition, Trajectory, WellLog. Não é ontologia formal — é schema de dados para interoperabilidade de sistemas IT. Essencial para alinhar o dicionário com os sistemas de dados que a Petrobras está construindo.",
+        "authority": "The Open Group",
+        "namespace": "opendes:osdu:",
+        "kind_format": "{authority}:{source}:{type}:{version} — ex: opendes:osdu:master-data--Well:1.0.0",
+        "url": "https://osduforum.org",
+        "viz_tool": "https://accenture.github.io/OSDU-Ontology",
+        "schema_repo": "https://github.com/Accenture/OSDU-Ontology",
+        "petrobras_membership": "Membro ativo do consórcio OSDU desde a fase inicial (junto com Shell, BP, Chevron, TotalEnergies, Equinor, SLB, Halliburton). Adoção interna em andamento.",
         "license": "Apache 2.0",
+        "type": "industry_data_standard",
+        "description": "Padrão de dados de subsuperfície da indústria petrolífera global. Tripartição Master/Reference/WPC. Não é ontologia formal — é schema de dados para interoperabilidade IT. Essencial para alinhar o dicionário com sistemas de dados que a Petrobras está construindo.",
+        "data_tripartition": {
+          "master_data": {
+            "description": "Entidades estáveis de negócio: Well, Wellbore, Field, Basin, Organisation, GeologicalFormation, Reservoir",
+            "geolytics_node_types": [
+              "operational",
+              "actor"
+            ],
+            "kind_prefix": "opendes:osdu:master-data--"
+          },
+          "reference_data": {
+            "description": "Vocabulários controlados: WellStatus, WellType, LithologyType, FluidType, UnitOfMeasure",
+            "geolytics_node_types": [
+              "instrument",
+              "geological"
+            ],
+            "kind_prefix": "opendes:osdu:reference-data--"
+          },
+          "work_product_components": {
+            "description": "Dados interpretativos: WellLog, WellboreMarker, WellboreTrajectory, WellborePressure",
+            "geolytics_node_types": [
+              "analytical"
+            ],
+            "kind_prefix": "opendes:osdu:work-product-component--"
+          }
+        },
+        "lineage_model": {
+          "description": "Cada registro OSDU tem ancestry.parents[] para rastrear proveniência",
+          "anp_chain": "ANP source-record → OSDU master-data--Well → Geolytics internal-enrichment",
+          "legal_tags": "opendes-ANP-public-data",
+          "country": "BR"
+        },
+        "sosa_convergence": {
+          "description": "OSDU adota W3C SOSA/SSN para medições — mesmo padrão do GloSIS (FAO/ISRIC)",
+          "welllog_as_observation": "WellLog (curva GR/RHOB) = sosa:Observation → observedProperty + hasResult + usedProcedure",
+          "future_roadmap": "Módulos analíticos M7-M10 do Geolytics devem migrar para SOSA para interoperabilidade OSDU"
+        },
+        "well_wellbore_distinction": {
+          "well": "Registro de superfície + legal. ANP POCO_NUM = Well.WellID",
+          "wellbore": "Trecho físico perfurado. 1 Well pode ter N Wellbores (sidetrack)",
+          "anp_mapping_rule": "1 poço ANP (sem sidetrack) = 1 Well + 1 Wellbore OSDU"
+        },
+        "geolytics_node_mapping": {
+          "poco": "opendes:osdu:master-data--Well:1.0.0",
+          "wellbore": "opendes:osdu:master-data--Wellbore:1.0.0",
+          "campo": "opendes:osdu:master-data--Field:1.0.0",
+          "bacia-sedimentar": "opendes:osdu:master-data--Basin:1.0.0",
+          "operador": "opendes:osdu:master-data--Organisation:1.0.0",
+          "formacao": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+          "reservatorio": "opendes:osdu:master-data--Reservoir:1.0.0",
+          "litologia": "opendes:osdu:reference-data--LithologyType:1.0.0",
+          "classe-fluido": "opendes:osdu:reference-data--FluidType:1.0.0",
+          "unidade-medida": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+          "perfil-poco": "opendes:osdu:work-product-component--WellLog:1.0.0",
+          "topo-formacional": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+          "trajetoria-poco": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+          "pvt": "opendes:osdu:work-product-component--WellborePressure:1.0.0"
+        },
         "geolytics_coverage": [
-          "poco-anp",
+          "poco",
+          "wellbore",
+          "campo",
           "bacia-sedimentar",
-          "area-desenvolvimento",
           "operador",
+          "formacao",
           "reservatorio",
-          "completacao"
+          "litologia",
+          "classe-fluido",
+          "unidade-medida",
+          "perfil-poco",
+          "topo-formacional",
+          "trajetoria-poco",
+          "pvt"
         ]
       },
       {
@@ -4257,7 +4539,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-04-30T17:15:12.927Z",
+      "generated": "2026-04-30T22:02:04.507Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
