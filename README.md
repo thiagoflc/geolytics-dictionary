@@ -10,12 +10,14 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 
 | Caminho | Conteúdo |
 |---|---|
-| `data/glossary.json` | 23 termos ANP (definição, fonte legal, categoria, datasets onde aparece) |
+| `data/glossary.json` | 23 termos ANP enriquecidos (alinhamento ontológico, sinônimos PT/EN, exemplos) |
+| `data/extended-terms.json` | 8 termos geológicos derivados de GeoCore/O3PO/GeoReservoir |
 | `data/datasets.json` | 8 datasets ANP/SEP-SIGEP com metadados de colunas |
-| `data/entity-graph.json` | Grafo de 42 entidades + 44 relações (nodes/edges) |
+| `data/entity-graph.json` | Grafo de 45 entidades + 49 relações com `petrokgraph_uri`, `osdu_kind`, `geocoverage` |
 | `data/ontology-types.json` | Tipologia geoquímica (7) + níveis de processamento (3) + 4 domínios |
 | `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas (equipment, regulator, contract, env etc.) |
 | `data/full.json` | Merge de tudo acima |
+| `ai/ontology-map.json` | Mapa das 5 camadas semânticas (BFO+GeoCore, O3PO, Petro KGraph, OSDU, ANP) |
 | `api/v1/index.json` | Manifesto da API com URLs de todos os endpoints |
 | `api/v1/terms.json` | Lista plana de termos |
 | `api/v1/entities.json` | Entidades com relações outgoing/incoming pré-computadas |
@@ -133,9 +135,50 @@ O arquivo `data/acronyms.json` traz 1.102 siglas curadas do domínio óleo e gá
 
 ---
 
+## Arquitetura semântica em 5 camadas
+
+O domínio de O&G brasileiro se organiza em 5 camadas independentes e complementares. Cada termo do dicionário tem o campo `geocoverage` listando em quais camadas ele tem cobertura formal.
+
+| Layer | Nome | Mantenedor | Tipo | Cobertura no dicionário |
+|---|---|---|---|---|
+| **layer1** | BFO + GeoCore | UFRGS/BDI + Geosiris | ontologia formal (OWL/BFO) | Bacia, Pré-sal, Formação, Reservatório, Litologia, Processo Geológico |
+| **layer2** | O3PO + GeoReservoir | UFRGS/BDI | ontologia de domínio | Poço, Reservatório, Sistema Deposicional, Completação, Lâmina d'Água, Acumulação |
+| **layer3** | Petro KGraph | PUC-Rio / Petroles | knowledge graph PT-BR (539 conceitos) | Bacia, Poço, Bloco, Operador, Pré-sal, Reservatório, Formação |
+| **layer4** | OSDU | The Open Group (Petrobras membro) | schema de dados (Apache 2.0) | Poço, Bacia, Campo, Operador, Reservatório, Completação |
+| **layer5** | ANP / SIGEP / Lei 9478/1997 | ANP | marco regulatório brasileiro | Todos os 23 termos do glossário |
+
+**Regra de deduplicação:**
+- **Petro KGraph é construído sobre GeoCore** — não são duplicatas. Use `petrokgraph_uri` como referência primária para RAG em português.
+- **OSDU é schema de dados IT**, não ontologia filosófica. Complementar a todos os outros. Use `osdu_kind` para interoperabilidade com sistemas Petrobras.
+- **Camada ANP é única** e não sobrepõe nenhuma ontologia internacional.
+
+Veja `ai/ontology-map.json` para a documentação completa de cada camada com URLs OWL, GitHub e regras de uso.
+
+## Conceitos exclusivamente brasileiros (camada 5)
+
+Os 11 conceitos abaixo **não existem em nenhuma ontologia internacional** de geologia ou petróleo (GeoCore, Petro KGraph, OSDU, IFC, BFO). São exclusivos do framework regulatório da ANP / Lei nº 9.478/1997 / Lei nº 12.351/2010:
+
+- **Bloco** (não é "lease" ou "license" americano)
+- **PAD — Plano de Avaliação de Descobertas** (não é "appraisal" genérico)
+- **Contrato de E&P** (estrutura jurídica brasileira específica)
+- **Rodada de Licitação** (numeradas desde 1999)
+- **UTS — Unidades de Trabalho** (métrica brasileira para o PEM)
+- **Regime Contratual** (Concessão vs. Partilha de Produção)
+- **Período Exploratório** (1º, 2º, 3º PE — fase contratual com prazo)
+- **Etapa Prorrogada** (resolução ANP específica)
+- **Processo Sancionador** (procedimento ANP/SEP)
+- **Notificação de Descoberta** (registro ANP por poço)
+- **Declaração de Comercialidade** (marco regulatório que origina o Campo)
+
+Por isso este dicionário existe — para preencher esta lacuna ontológica.
+
 ## Sobre o Petro KGraph
 
-Os campos `kgraph_uri`, `kgraph_label_pt`, `kgraph_label_en` referenciam o **Petro KGraph** — ontologia formal do domínio Óleo & Gás em português desenvolvida pela **PUC-Rio / PetroNLP** com **539 conceitos formais**. No estado atual deste repositório esses campos são `null` para todas as entidades; o enriquecimento via Petro KGraph é feito sob demanda no app Geolytics e pode ser portado aqui em release futura.
+O **Petro KGraph** é uma ontologia formal de Óleo & Gás em português desenvolvida pela **PUC-Rio / PetroNLP** com **539 conceitos formais** populados com instâncias ANP públicas e relações extraídas de documentos técnicos por NLP. **É construído sobre GeoCore** (UFRGS/BDI). Inclui corpora anotados: PetroGold (NER), PetroNER, PetroRE (extração de relações). É a camada mais adequada para RAG em português. Repositório: https://github.com/Petroles/PetroNLP
+
+## Sobre OSDU
+
+**OSDU — Open Subsurface Data Universe** é o padrão global de dados de subsuperfície da indústria petrolífera, mantido pelo The Open Group. Petrobras é membro ativo. Cobre schemas para Well, Wellbore, Field, Basin, SeismicAcquisition, Trajectory, WellLog. Não é ontologia formal — é schema de dados para interoperabilidade IT. Licença Apache 2.0. Os campos `osdu_kind` no dicionário usam o formato `opendes:osdu:master-data--[Type]:1.0.0`.
 
 ---
 

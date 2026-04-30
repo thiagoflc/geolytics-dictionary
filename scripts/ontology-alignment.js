@@ -1,0 +1,383 @@
+/**
+ * ontology-alignment.js — Tabelas de alinhamento ontológico em 5 camadas
+ * (BFO+GeoCore, O3PO+GeoReservoir, Petro KGraph, OSDU, ANP).
+ *
+ * Mantido separado de generate.js para deixar essas tabelas auditáveis e
+ * facilmente revisáveis por especialistas de domínio.
+ */
+
+export const PETROKGRAPH_BASE =
+  'https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl';
+
+/* ─────────────────────────────────────────────────────────────
+ * Alinhamento dos 23 termos do glossário ANP às 5 camadas semânticas.
+ * Tabela hardcoded para evitar invenções — null quando não há mapeamento.
+ * ───────────────────────────────────────────────────────────── */
+
+export const TERM_ALIGNMENT = {
+  /* id-glossario: { petrokgraph_fragment, osdu_kind, geocoverage } */
+  'bloco':                     { kg: '#ExplorationBlock',          osdu: 'opendes:osdu:master-data--AcquisitionSurvey:1.0.0', layers: ['layer4','layer5'] },
+  'bacia-sedimentar':          { kg: '#SedimentaryBasin',          osdu: 'opendes:osdu:master-data--Basin:1.0.0',             layers: ['layer1','layer2','layer3','layer4','layer5'] },
+  'bacias-agrupadas':          { kg: '#BasinGroup',                osdu: 'opendes:osdu:master-data--Basin:1.0.0',             layers: ['layer3','layer5'] },
+  'ambiente':                  { kg: '#OperationalEnvironment',    osdu: null,                                                layers: ['layer3','layer5'] },
+  'presal':                    { kg: '#PresaltLayer',              osdu: null,                                                layers: ['layer1','layer2','layer3','layer5'] },
+  'operador':                  { kg: '#PetroleumOperator',         osdu: 'opendes:osdu:master-data--Organisation:1.0.0',      layers: ['layer3','layer4','layer5'] },
+  'contratados':               { kg: '#Contractor',                osdu: 'opendes:osdu:master-data--Organisation:1.0.0',      layers: ['layer4','layer5'] },
+  'contrato-ep':               { kg: '#ExplorationProductionContract', osdu: null,                                            layers: ['layer5'] },
+  'periodo-exploratorio':      { kg: '#ExploratoryPeriod',         osdu: null,                                                layers: ['layer5'] },
+  'uts':                       { kg: '#WorkUnit',                  osdu: null,                                                layers: ['layer5'] },
+  'fase-exploratoria':         { kg: '#ExplorationPhase',          osdu: null,                                                layers: ['layer5'] },
+  'etapa-prorrogada':          { kg: null,                         osdu: null,                                                layers: ['layer5'] },
+  'regime-contratual':         { kg: '#ContractualRegime',         osdu: null,                                                layers: ['layer5'] },
+  'pad':                       { kg: '#DiscoveryEvaluationPlan',   osdu: null,                                                layers: ['layer5'] },
+  'poco-anp':                  { kg: '#Well',                      osdu: 'opendes:osdu:master-data--Well:1.0.0',              layers: ['layer1','layer2','layer3','layer4','layer5'] },
+  'notificacao-descoberta':    { kg: '#DiscoveryNotification',     osdu: null,                                                layers: ['layer4','layer5'] },
+  'declaracao-comercialidade': { kg: '#CommercialityDeclaration',  osdu: null,                                                layers: ['layer5'] },
+  'area-desenvolvimento':      { kg: '#DevelopmentArea',           osdu: 'opendes:osdu:master-data--Field:1.0.0',             layers: ['layer4','layer5'] },
+  'rodada-licitacao':          { kg: '#BiddingRound',              osdu: null,                                                layers: ['layer5'] },
+  'processo-sancionador':      { kg: null,                         osdu: null,                                                layers: ['layer5'] },
+  'anp':                       { kg: '#RegulatoryAgency',          osdu: null,                                                layers: ['layer5'] },
+  'sigep':                     { kg: '#InformationSystem',         osdu: null,                                                layers: ['layer5'] },
+  'sep':                       { kg: '#RegulatoryUnit',            osdu: null,                                                layers: ['layer5'] },
+};
+
+/* ─────────────────────────────────────────────────────────────
+ * Enriquecimento: termo_en, sinônimos PT/EN, exemplos
+ * Apenas os 10 termos de alta ambiguidade têm conteúdo; demais ficam vazios.
+ * ───────────────────────────────────────────────────────────── */
+
+export const TERM_ENRICHMENT = {
+  'bloco': {
+    termo_en: 'Exploration Block',
+    synonyms_pt: ['bloco exploratório', 'área concedida'],
+    synonyms_en: ['block', 'exploration block', 'lease block', 'concession block'],
+    examples: ['BM-S-11 (Lula)', 'BCAM-40 (Búzios)', 'BS-4 (Atlanta)', 'BM-C-33'],
+  },
+  'bacia-sedimentar': {
+    termo_en: 'Sedimentary Basin',
+    synonyms_pt: ['bacia', 'bacia sedimentar'],
+    synonyms_en: ['basin', 'sedimentary basin'],
+    examples: ['Bacia de Campos', 'Bacia de Santos', 'Bacia de Sergipe-Alagoas', 'Bacia Potiguar', 'Bacia do Recôncavo'],
+  },
+  'poco-anp': {
+    termo_en: 'Well (ANP)',
+    synonyms_pt: ['poço', 'poço exploratório', 'poço de petróleo'],
+    synonyms_en: ['well', 'borehole', 'exploratory well', 'oil well'],
+    examples: ['1-RJS-702-RJ (Tupi)', '1-BRSA-1135-RJS', '3-BRSA-944-RJS (Búzios)', '1-ANP-2-AL'],
+  },
+  'operador': {
+    termo_en: 'Operator',
+    synonyms_pt: ['operadora', 'concessionária', 'empresa operadora'],
+    synonyms_en: ['operator', 'operating company', 'lead operator'],
+    examples: ['Petrobras', 'Shell Brasil', 'Equinor', 'TotalEnergies', 'Repsol Sinopec', 'BP Brasil', 'Galp Energia'],
+  },
+  'contrato-ep': {
+    termo_en: 'E&P Contract',
+    synonyms_pt: ['contrato de E&P', 'contrato de concessão', 'contrato de partilha'],
+    synonyms_en: ['E&P contract', 'exploration and production contract', 'upstream contract'],
+    examples: ['Concessão BM-S-11', 'Partilha de Libra', 'Cessão Onerosa de Búzios'],
+  },
+  'pad': {
+    termo_en: 'Discovery Evaluation Plan',
+    synonyms_pt: ['Plano de Avaliação de Descobertas', 'PAD'],
+    synonyms_en: ['Discovery Evaluation Plan', 'Appraisal Plan', 'DEP'],
+    examples: ['PAD Búzios', 'PAD Mero', 'PAD Sépia', 'PAD Atapu'],
+  },
+  'regime-contratual': {
+    termo_en: 'Contract Regime',
+    synonyms_pt: ['regime', 'modalidade contratual', 'regime de exploração'],
+    synonyms_en: ['contract regime', 'contract model', 'fiscal regime'],
+    examples: ['Concessão (Lei 9.478/1997)', 'Partilha de Produção (Lei 12.351/2010)', 'Cessão Onerosa'],
+  },
+  'area-desenvolvimento': {
+    termo_en: 'Development Area',
+    synonyms_pt: ['área de desenvolvimento', 'campo'],
+    synonyms_en: ['development area', 'field', 'producing field'],
+    examples: ['Tupi', 'Búzios', 'Mero', 'Sapinhoá', 'Lula', 'Sépia', 'Atapu'],
+  },
+  'rodada-licitacao': {
+    termo_en: 'Bidding Round',
+    synonyms_pt: ['rodada', 'leilão de blocos', 'rodada da ANP'],
+    synonyms_en: ['bidding round', 'oil auction', 'licensing round'],
+    examples: ['1ª Rodada (1999)', '17ª Rodada (2022)', '1ª Rodada de Partilha (2013, Libra)', 'Cessão Onerosa (2019)'],
+  },
+  'presal': {
+    termo_en: 'Pre-salt',
+    synonyms_pt: ['pré-sal', 'camada do pré-sal', 'reservatórios do pré-sal'],
+    synonyms_en: ['pre-salt', 'sub-salt', 'subsalt'],
+    examples: ['Reservatórios de Tupi', 'Reservatórios de Búzios', 'Polígono do Pré-sal (Lei 12.351/2010)'],
+  },
+};
+
+/* ─────────────────────────────────────────────────────────────
+ * Termos geológicos estendidos (extended-terms.json)
+ * 8 conceitos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa
+ * mas não definia formalmente.
+ * ───────────────────────────────────────────────────────────── */
+
+export const EXTENDED_TERMS = [
+  {
+    id: 'formacao-geologica',
+    termo: 'Formação Geológica',
+    termo_en: 'Geological Formation',
+    categoria: 'geologia',
+    definicao: 'Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.',
+    legal_source: 'GeoCore (UFRGS/Geosiris)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#GeologicalFormation`,
+    osdu_kind: 'opendes:osdu:master-data--GeologicalFormation:1.0.0',
+    geocoverage: ['layer1','layer2','layer3','layer4'],
+    synonyms_pt: ['formação', 'unidade litoestratigráfica', 'unidade geológica'],
+    synonyms_en: ['formation', 'geological formation', 'lithostratigraphic unit'],
+    examples: ['Formação Barra Velha (pré-sal)', 'Formação Quissamã', 'Formação Carapebus', 'Formação Itapema'],
+  },
+  {
+    id: 'reservatorio',
+    termo: 'Reservatório',
+    termo_en: 'Reservoir',
+    categoria: 'geologia',
+    definicao: 'Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.',
+    legal_source: 'GeoCore + GeoReservoir (UFRGS)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#Reservoir`,
+    osdu_kind: 'opendes:osdu:master-data--Reservoir:1.0.0',
+    geocoverage: ['layer1','layer2','layer3','layer4'],
+    synonyms_pt: ['reservatório', 'rocha-reservatório', 'corpo reservatório'],
+    synonyms_en: ['reservoir', 'reservoir rock', 'pay zone'],
+    examples: ['Reservatórios carbonáticos do pré-sal (Coquinas)', 'Reservatórios turbidíticos de Campos', 'Reservatório Barra Velha'],
+  },
+  {
+    id: 'sistema-deposicional',
+    termo: 'Sistema Deposicional',
+    termo_en: 'Depositional System',
+    categoria: 'geologia',
+    definicao: 'Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.',
+    legal_source: 'GeoReservoir (UFRGS)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#DepositionalSystem`,
+    osdu_kind: null,
+    geocoverage: ['layer1','layer2'],
+    synonyms_pt: ['sistema deposicional', 'sistema sedimentar', 'ambiente deposicional'],
+    synonyms_en: ['depositional system', 'sedimentary system'],
+    examples: ['Sistema turbidítico de águas profundas', 'Sistema lacustre carbonático (pré-sal)', 'Sistema deltaico'],
+  },
+  {
+    id: 'litologia',
+    termo: 'Litologia',
+    termo_en: 'Lithology',
+    categoria: 'geologia',
+    definicao: 'Descrição das características físicas de uma rocha, incluindo composição mineralógica, textura, cor, granulometria e estruturas sedimentares. Derivado do RockMaterial do GeoCore. Fundamental na descrição de testemunhos e cuttings.',
+    legal_source: 'GeoCore (UFRGS/Geosiris)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#Lithology`,
+    osdu_kind: null,
+    geocoverage: ['layer1','layer2','layer3'],
+    synonyms_pt: ['litologia', 'tipo de rocha', 'descrição litológica'],
+    synonyms_en: ['lithology', 'rock type', 'lithologic description'],
+    examples: ['Folhelho (shale)', 'Arenito (sandstone)', 'Carbonato (limestone)', 'Coquina', 'Estromatólito'],
+  },
+  {
+    id: 'completacao',
+    termo: 'Completação de Poço',
+    termo_en: 'Well Completion',
+    categoria: 'operacoes',
+    definicao: 'Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura de hidrocarbonetos. Inclui revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV) e canhoneio (perforation) das zonas produtoras.',
+    legal_source: 'O3PO (UFRGS)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#WellCompletion`,
+    osdu_kind: 'opendes:osdu:master-data--WellboreCompletion:1.0.0',
+    geocoverage: ['layer2','layer3','layer4'],
+    synonyms_pt: ['completação', 'acabamento de poço'],
+    synonyms_en: ['well completion', 'completion'],
+    examples: ['Completação seca (dry tree)', 'Completação molhada (subsea com ANM)', 'Completação inteligente (smart well)'],
+  },
+  {
+    id: 'lamina-dagua',
+    termo: "Lâmina d'Água",
+    termo_en: 'Water Depth',
+    categoria: 'geologia',
+    definicao: "Profundidade da coluna de água entre a superfície do mar e o fundo marinho no local do poço. Parâmetro crítico para classificação de poços offshore: águas rasas (< 300 m), águas profundas (300–1500 m), águas ultraprofundas (> 1500 m). Define complexidade tecnológica e custo das operações.",
+    legal_source: 'O3PO (UFRGS)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#WaterDepth`,
+    osdu_kind: null,
+    geocoverage: ['layer2','layer3','layer4'],
+    synonyms_pt: ["lâmina d'água", "profundidade d'água", "LDA"],
+    synonyms_en: ['water depth', 'WD', 'sea depth'],
+    examples: ['Bacia de Campos: ~1.000 m', 'Pré-sal de Santos: 1.900–2.400 m', 'Foz do Amazonas: 2.000–2.880 m'],
+  },
+  {
+    id: 'acumulacao',
+    termo: 'Acumulação de Hidrocarbonetos',
+    termo_en: 'Hydrocarbon Accumulation',
+    categoria: 'geologia',
+    definicao: 'Concentração de petróleo ou gás natural em uma armadilha geológica (estrutural, estratigráfica ou mista) com volume e qualidade suficientes para avaliação técnico-econômica. Precede e fundamenta a Declaração de Comercialidade. Distingue-se de "campo" por ainda não ter sido formalmente declarado comercial.',
+    legal_source: 'O3PO + GeoCore',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#HydrocarbonAccumulation`,
+    osdu_kind: null,
+    geocoverage: ['layer2','layer3','layer4'],
+    synonyms_pt: ['acumulação', 'descoberta de hidrocarbonetos', 'jazida'],
+    synonyms_en: ['hydrocarbon accumulation', 'discovery', 'accumulation'],
+    examples: ['Acumulação de Tupi (descoberta 2006)', 'Acumulação de Búzios', 'Acumulação de Mero'],
+  },
+  {
+    id: 'processo-geologico',
+    termo: 'Processo Geológico',
+    termo_en: 'Geological Process',
+    categoria: 'geologia',
+    definicao: 'Mecanismo natural (sedimentação, diagênese, tectônica, migração de fluidos, evaporação, magmatismo) que gera, modifica ou destrói feições e corpos geológicos ao longo do tempo geológico. Fundamental para entender a formação e preservação de reservatórios e a maturação de hidrocarbonetos.',
+    legal_source: 'GeoCore (UFRGS/Geosiris)',
+    apareceEm: [],
+    petrokgraph_uri: `${PETROKGRAPH_BASE}#GeologicalProcess`,
+    osdu_kind: null,
+    geocoverage: ['layer1','layer2','layer3'],
+    synonyms_pt: ['processo geológico', 'evento geológico'],
+    synonyms_en: ['geological process', 'geologic process'],
+    examples: ['Sedimentação clástica', 'Diagênese', 'Halocinese (tectônica do sal)', 'Migração secundária de hidrocarbonetos'],
+  },
+];
+
+/* ─────────────────────────────────────────────────────────────
+ * Alinhamento dos nós do entity-graph (incluindo equipment/atores extras
+ * que vieram do siglário). Usa as mesmas chaves do TERM_ALIGNMENT quando
+ * o nó coincide com um termo do glossário; entidades novas têm entradas próprias.
+ * ───────────────────────────────────────────────────────────── */
+
+export const ENTITY_ALIGNMENT = {
+  /* operational */
+  'poco':              { kg: '#Well',                  osdu: 'opendes:osdu:master-data--Well:1.0.0',         layers: ['layer1','layer2','layer3','layer4','layer5'] },
+  'bloco':             { kg: '#ExplorationBlock',      osdu: 'opendes:osdu:master-data--AcquisitionSurvey:1.0.0', layers: ['layer4','layer5'] },
+  'campo':             { kg: '#Field',                 osdu: 'opendes:osdu:master-data--Field:1.0.0',        layers: ['layer4','layer5'] },
+  'bacia-sedimentar':  { kg: '#SedimentaryBasin',      osdu: 'opendes:osdu:master-data--Basin:1.0.0',        layers: ['layer1','layer2','layer3','layer4','layer5'] },
+
+  /* geological extension (novos) */
+  'reservatorio':      { kg: '#Reservoir',             osdu: 'opendes:osdu:master-data--Reservoir:1.0.0',    layers: ['layer1','layer2','layer3','layer4'] },
+  'formacao':          { kg: '#GeologicalFormation',   osdu: 'opendes:osdu:master-data--GeologicalFormation:1.0.0', layers: ['layer1','layer2','layer3','layer4'] },
+  'sistema-deposicional': { kg: '#DepositionalSystem', osdu: null,                                           layers: ['layer1','layer2'] },
+
+  /* contractual */
+  'contrato-ep':                { kg: '#ExplorationProductionContract', osdu: null, layers: ['layer5'] },
+  'pad':                        { kg: '#DiscoveryEvaluationPlan',       osdu: null, layers: ['layer5'] },
+  'rodada-licitacao':           { kg: '#BiddingRound',                  osdu: null, layers: ['layer5'] },
+  'declaracao-comercialidade':  { kg: '#CommercialityDeclaration',      osdu: null, layers: ['layer5'] },
+
+  /* actor */
+  'operador':       { kg: '#PetroleumOperator',  osdu: 'opendes:osdu:master-data--Organisation:1.0.0', layers: ['layer3','layer4','layer5'] },
+  'anp':            { kg: '#RegulatoryAgency',   osdu: null, layers: ['layer5'] },
+  'ibama':          { kg: null,                  osdu: null, layers: ['layer5'] },
+  'conama':         { kg: null,                  osdu: null, layers: ['layer5'] },
+  'ana-agencia':    { kg: null,                  osdu: null, layers: ['layer5'] },
+  'ibp':            { kg: null,                  osdu: null, layers: ['layer5'] },
+  'bndes':          { kg: null,                  osdu: null, layers: ['layer5'] },
+
+  /* instrument */
+  'sigep':                  { kg: '#InformationSystem', osdu: null, layers: ['layer5'] },
+  'sep':                    { kg: '#RegulatoryUnit',    osdu: null, layers: ['layer5'] },
+  'uts':                    { kg: '#WorkUnit',          osdu: null, layers: ['layer5'] },
+  'regime-contratual':      { kg: '#ContractualRegime', osdu: null, layers: ['layer5'] },
+  'periodo-exploratorio':   { kg: '#ExploratoryPeriod', osdu: null, layers: ['layer5'] },
+  'processo-sancionador':   { kg: null, osdu: null, layers: ['layer5'] },
+  'notificacao-descoberta': { kg: '#DiscoveryNotification', osdu: null, layers: ['layer4','layer5'] },
+  'area-desenvolvimento':   { kg: '#DevelopmentArea',   osdu: 'opendes:osdu:master-data--Field:1.0.0', layers: ['layer4','layer5'] },
+  'eia':                    { kg: null, osdu: null, layers: ['layer5'] },
+  'rima':                   { kg: null, osdu: null, layers: ['layer5'] },
+  'afe':                    { kg: null, osdu: null, layers: ['layer5'] },
+  'joa':                    { kg: null, osdu: null, layers: ['layer5'] },
+  'epc':                    { kg: null, osdu: null, layers: ['layer5'] },
+
+  /* geological pure */
+  'presal':            { kg: '#PresaltLayer',        osdu: null, layers: ['layer1','layer2','layer3','layer5'] },
+  'bacias-agrupadas':  { kg: '#BasinGroup',          osdu: 'opendes:osdu:master-data--Basin:1.0.0', layers: ['layer3','layer5'] },
+  'ambiente':          { kg: '#OperationalEnvironment', osdu: null, layers: ['layer3','layer5'] },
+
+  /* equipment (não estão em ontologias formais — apenas OSDU em alguns casos) */
+  'bop':                { kg: null, osdu: null, layers: ['layer4'] },
+  'fpso':               { kg: null, osdu: null, layers: ['layer4'] },
+  'anm-eq':             { kg: null, osdu: null, layers: ['layer4'] },
+  'riser':              { kg: null, osdu: null, layers: ['layer4'] },
+  'rov':                { kg: null, osdu: null, layers: ['layer4'] },
+  'dhsv':               { kg: null, osdu: null, layers: ['layer4'] },
+  'bha':                { kg: null, osdu: null, layers: ['layer4'] },
+  'esp-eq':             { kg: null, osdu: null, layers: ['layer4'] },
+  'mwd':                { kg: null, osdu: null, layers: ['layer4'] },
+  'lwd':                { kg: null, osdu: null, layers: ['layer4'] },
+  'manifold-submarino': { kg: null, osdu: null, layers: ['layer4'] },
+};
+
+/* ─────────────────────────────────────────────────────────────
+ * Definição completa das 5 camadas (ontology-map.json)
+ * ───────────────────────────────────────────────────────────── */
+
+export const LAYER_DEFINITIONS = [
+  {
+    id: 'layer1',
+    name: 'BFO + GeoCore',
+    maintainer: 'UFRGS/BDI + Geosiris (França)',
+    type: 'formal_ontology',
+    owl_url: 'https://www.inf.ufrgs.br/bdi/ontologies/geocore.owl',
+    github: 'https://github.com/BDI-UFRGS/GeoCoreOntology',
+    description: 'Ontologia formal de geologia com 11 classes baseadas em BFO (Basic Formal Ontology). Define o que entidades geológicas SÃO em termos ontológicos formais. Cobre: GeologicalObject, GeologicalBody, GeologicalUnit, RockMaterial, GeologicalProcess, GeologicalBoundary, GeologicalStructure, GeologicalQuality, GeologicalAge.',
+    concepts_count: 11,
+    language: 'OWL/RDF',
+    geolytics_coverage: ['bacia-sedimentar', 'presal', 'formacao-geologica', 'reservatorio', 'litologia', 'processo-geologico', 'sistema-deposicional'],
+  },
+  {
+    id: 'layer2',
+    name: 'O3PO + GeoReservoir',
+    maintainer: 'UFRGS/BDI',
+    type: 'domain_ontology',
+    owl_url: 'https://www.inf.ufrgs.br/ontologies/o3po/2.0',
+    github_o3po: 'https://github.com/BDI-UFRGS/O3POntology',
+    github_geores: 'https://github.com/BDI-UFRGS/GeoReservoirOntology',
+    description: 'Ontologias de domínio para produção offshore e reservatórios. O3PO cobre plataformas, poços, tubing, flowlines, manifolds — validado em campo offshore brasileiro real. GeoReservoir cobre sistemas deposicionais de mar profundo. Ambas estendem GeoCore.',
+    language: 'OWL/RDF',
+    geolytics_coverage: ['poco-anp', 'reservatorio', 'sistema-deposicional', 'completacao', 'lamina-dagua', 'acumulacao'],
+  },
+  {
+    id: 'layer3',
+    name: 'Petro KGraph',
+    maintainer: 'PUC-Rio / Petroles',
+    type: 'knowledge_graph',
+    owl_public: 'https://github.com/Petroles/PetroNLP/blob/main/Petro%20KGraph%20public.owl',
+    github: 'https://github.com/Petroles/PetroNLP',
+    description: 'Knowledge graph de O&G em português construído SOBRE GeoCore. Contém 539 conceitos populados com instâncias ANP públicas e relações extraídas de documentos técnicos por NLP. Inclui corpora anotados: PetroGold (NER), PetroNER, PetroRE (extração de relações). É a camada mais adequada para RAG em português — combina formalidade ontológica de GeoCore com praticidade de NLP.',
+    concepts_count: 539,
+    language: 'OWL/PT-BR',
+    relationship_to_geocore: 'BUILT_ON — Petro KGraph extends GeoCore with Brazilian petroleum instances and NLP annotations',
+    geolytics_coverage: ['bacia-sedimentar', 'poco-anp', 'bloco', 'operador', 'presal', 'ambiente', 'bacias-agrupadas', 'reservatorio', 'formacao-geologica'],
+  },
+  {
+    id: 'layer4',
+    name: 'OSDU — Open Subsurface Data Universe',
+    maintainer: 'The Open Group (Shell, Equinor, BP, Petrobras membros)',
+    type: 'industry_data_standard',
+    ontology_url: 'https://accenture.github.io/OSDU-Ontology/',
+    github: 'https://github.com/Accenture/OSDU-Ontology',
+    description: 'Padrão de dados de subsuperfície da indústria petrolífera global. Petrobras é membro ativo adotando. Cobre schemas para: Well, Wellbore, Field, Basin, SeismicAcquisition, Trajectory, WellLog. Não é ontologia formal — é schema de dados para interoperabilidade de sistemas IT. Essencial para alinhar o dicionário com os sistemas de dados que a Petrobras está construindo.',
+    license: 'Apache 2.0',
+    geolytics_coverage: ['poco-anp', 'bacia-sedimentar', 'area-desenvolvimento', 'operador', 'reservatorio', 'completacao'],
+  },
+  {
+    id: 'layer5',
+    name: 'ANP / SIGEP / Lei 9478/1997',
+    maintainer: 'Agência Nacional do Petróleo, Gás Natural e Biocombustíveis',
+    type: 'regulatory_framework',
+    description: 'Marco legal e regulatório brasileiro de E&P. ÚNICA camada com cobertura de conceitos jurídico-contratuais brasileiros: Bloco, PAD, Contrato E&P, Rodada de Licitação, UTS, Regime Contratual, Período Exploratório, Etapa Prorrogada, Processo Sancionador. Estes conceitos NÃO existem em nenhuma outra ontologia internacional.',
+    unique_concepts: ['bloco', 'contrato-ep', 'pad', 'rodada-licitacao', 'uts', 'regime-contratual', 'periodo-exploratorio', 'etapa-prorrogada', 'processo-sancionador', 'notificacao-descoberta', 'declaracao-comercialidade'],
+    geolytics_coverage: 'all_23_glossario_terms',
+  },
+];
+
+export const DEDUP_RULES = {
+  petrokgraph_vs_geocore: 'NÃO são duplicatas. Petro KGraph É CONSTRUÍDO sobre GeoCore. Petro KGraph URIs referenciam GeoCore implicitamente. Use petrokgraph_uri como referência primária para RAG em português.',
+  osdu_vs_others: 'OSDU é schema de dados IT, não ontologia filosófica. Complementar a todos os outros. Use osdu_kind para interoperabilidade com sistemas Petrobras.',
+  anp_vs_all: 'Camada ANP é única e não sobrepõe nenhuma ontologia internacional. Conceitos regulatórios brasileiros não existem fora desta camada.',
+};
+
+export const RECOMMENDED_USAGE = {
+  ai_agent_rag: 'Use rag-corpus.jsonl com todos os chunks. Priorize chunks type=term e type=entity. O campo text já está otimizado para embedding.',
+  ai_agent_grounding: 'Use system-prompt-ptbr.md ou system-prompt-en.md como bloco de contexto no system prompt. ~900 tokens.',
+  it_integration: 'Use osdu_kind para mapear entidades do dicionário a schemas OSDU nos pipelines de dados Petrobras.',
+  ontology_reasoning: 'Use petrokgraph_uri para alinhar com Petro KGraph / GeoCore para reasoners OWL futuros.',
+};

@@ -1,0 +1,119 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-04-30T15:17:12.900Z",
+  "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
+  "layers": [
+    {
+      "id": "layer1",
+      "name": "BFO + GeoCore",
+      "maintainer": "UFRGS/BDI + Geosiris (França)",
+      "type": "formal_ontology",
+      "owl_url": "https://www.inf.ufrgs.br/bdi/ontologies/geocore.owl",
+      "github": "https://github.com/BDI-UFRGS/GeoCoreOntology",
+      "description": "Ontologia formal de geologia com 11 classes baseadas em BFO (Basic Formal Ontology). Define o que entidades geológicas SÃO em termos ontológicos formais. Cobre: GeologicalObject, GeologicalBody, GeologicalUnit, RockMaterial, GeologicalProcess, GeologicalBoundary, GeologicalStructure, GeologicalQuality, GeologicalAge.",
+      "concepts_count": 11,
+      "language": "OWL/RDF",
+      "geolytics_coverage": [
+        "bacia-sedimentar",
+        "presal",
+        "formacao-geologica",
+        "reservatorio",
+        "litologia",
+        "processo-geologico",
+        "sistema-deposicional"
+      ]
+    },
+    {
+      "id": "layer2",
+      "name": "O3PO + GeoReservoir",
+      "maintainer": "UFRGS/BDI",
+      "type": "domain_ontology",
+      "owl_url": "https://www.inf.ufrgs.br/ontologies/o3po/2.0",
+      "github_o3po": "https://github.com/BDI-UFRGS/O3POntology",
+      "github_geores": "https://github.com/BDI-UFRGS/GeoReservoirOntology",
+      "description": "Ontologias de domínio para produção offshore e reservatórios. O3PO cobre plataformas, poços, tubing, flowlines, manifolds — validado em campo offshore brasileiro real. GeoReservoir cobre sistemas deposicionais de mar profundo. Ambas estendem GeoCore.",
+      "language": "OWL/RDF",
+      "geolytics_coverage": [
+        "poco-anp",
+        "reservatorio",
+        "sistema-deposicional",
+        "completacao",
+        "lamina-dagua",
+        "acumulacao"
+      ]
+    },
+    {
+      "id": "layer3",
+      "name": "Petro KGraph",
+      "maintainer": "PUC-Rio / Petroles",
+      "type": "knowledge_graph",
+      "owl_public": "https://github.com/Petroles/PetroNLP/blob/main/Petro%20KGraph%20public.owl",
+      "github": "https://github.com/Petroles/PetroNLP",
+      "description": "Knowledge graph de O&G em português construído SOBRE GeoCore. Contém 539 conceitos populados com instâncias ANP públicas e relações extraídas de documentos técnicos por NLP. Inclui corpora anotados: PetroGold (NER), PetroNER, PetroRE (extração de relações). É a camada mais adequada para RAG em português — combina formalidade ontológica de GeoCore com praticidade de NLP.",
+      "concepts_count": 539,
+      "language": "OWL/PT-BR",
+      "relationship_to_geocore": "BUILT_ON — Petro KGraph extends GeoCore with Brazilian petroleum instances and NLP annotations",
+      "geolytics_coverage": [
+        "bacia-sedimentar",
+        "poco-anp",
+        "bloco",
+        "operador",
+        "presal",
+        "ambiente",
+        "bacias-agrupadas",
+        "reservatorio",
+        "formacao-geologica"
+      ]
+    },
+    {
+      "id": "layer4",
+      "name": "OSDU — Open Subsurface Data Universe",
+      "maintainer": "The Open Group (Shell, Equinor, BP, Petrobras membros)",
+      "type": "industry_data_standard",
+      "ontology_url": "https://accenture.github.io/OSDU-Ontology/",
+      "github": "https://github.com/Accenture/OSDU-Ontology",
+      "description": "Padrão de dados de subsuperfície da indústria petrolífera global. Petrobras é membro ativo adotando. Cobre schemas para: Well, Wellbore, Field, Basin, SeismicAcquisition, Trajectory, WellLog. Não é ontologia formal — é schema de dados para interoperabilidade de sistemas IT. Essencial para alinhar o dicionário com os sistemas de dados que a Petrobras está construindo.",
+      "license": "Apache 2.0",
+      "geolytics_coverage": [
+        "poco-anp",
+        "bacia-sedimentar",
+        "area-desenvolvimento",
+        "operador",
+        "reservatorio",
+        "completacao"
+      ]
+    },
+    {
+      "id": "layer5",
+      "name": "ANP / SIGEP / Lei 9478/1997",
+      "maintainer": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis",
+      "type": "regulatory_framework",
+      "description": "Marco legal e regulatório brasileiro de E&P. ÚNICA camada com cobertura de conceitos jurídico-contratuais brasileiros: Bloco, PAD, Contrato E&P, Rodada de Licitação, UTS, Regime Contratual, Período Exploratório, Etapa Prorrogada, Processo Sancionador. Estes conceitos NÃO existem em nenhuma outra ontologia internacional.",
+      "unique_concepts": [
+        "bloco",
+        "contrato-ep",
+        "pad",
+        "rodada-licitacao",
+        "uts",
+        "regime-contratual",
+        "periodo-exploratorio",
+        "etapa-prorrogada",
+        "processo-sancionador",
+        "notificacao-descoberta",
+        "declaracao-comercialidade"
+      ],
+      "geolytics_coverage": "all_23_glossario_terms"
+    }
+  ],
+  "deduplication_rules": {
+    "petrokgraph_vs_geocore": "NÃO são duplicatas. Petro KGraph É CONSTRUÍDO sobre GeoCore. Petro KGraph URIs referenciam GeoCore implicitamente. Use petrokgraph_uri como referência primária para RAG em português.",
+    "osdu_vs_others": "OSDU é schema de dados IT, não ontologia filosófica. Complementar a todos os outros. Use osdu_kind para interoperabilidade com sistemas Petrobras.",
+    "anp_vs_all": "Camada ANP é única e não sobrepõe nenhuma ontologia internacional. Conceitos regulatórios brasileiros não existem fora desta camada."
+  },
+  "recommended_usage": {
+    "ai_agent_rag": "Use rag-corpus.jsonl com todos os chunks. Priorize chunks type=term e type=entity. O campo text já está otimizado para embedding.",
+    "ai_agent_grounding": "Use system-prompt-ptbr.md ou system-prompt-en.md como bloco de contexto no system prompt. ~900 tokens.",
+    "it_integration": "Use osdu_kind para mapear entidades do dicionário a schemas OSDU nos pipelines de dados Petrobras.",
+    "ontology_reasoning": "Use petrokgraph_uri para alinhar com Petro KGraph / GeoCore para reasoners OWL futuros."
+  }
+}

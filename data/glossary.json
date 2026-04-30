@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T12:33:41.167Z",
+    "generated": "2026-04-30T15:17:12.900Z",
     "count": 23
   },
   "terms": [
@@ -19,6 +19,29 @@
         "declaracoes-comercialidade",
         "ranp-708",
         "ranp-815"
+      ],
+      "termo_en": "Exploration Block",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock",
+      "osdu_kind": "opendes:osdu:master-data--AcquisitionSurvey:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "bloco exploratório",
+        "área concedida"
+      ],
+      "synonyms_en": [
+        "block",
+        "exploration block",
+        "lease block",
+        "concession block"
+      ],
+      "examples": [
+        "BM-S-11 (Lula)",
+        "BCAM-40 (Búzios)",
+        "BS-4 (Atlanta)",
+        "BM-C-33"
       ]
     },
     {
@@ -33,6 +56,31 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
+      ],
+      "termo_en": "Sedimentary Basin",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin",
+      "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "bacia",
+        "bacia sedimentar"
+      ],
+      "synonyms_en": [
+        "basin",
+        "sedimentary basin"
+      ],
+      "examples": [
+        "Bacia de Campos",
+        "Bacia de Santos",
+        "Bacia de Sergipe-Alagoas",
+        "Bacia Potiguar",
+        "Bacia do Recôncavo"
       ]
     },
     {
@@ -46,7 +94,17 @@
         "blocos-contrato",
         "pads-andamento",
         "pads-concluidos"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BasinGroup",
+      "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "ambiente",
@@ -60,7 +118,17 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#OperationalEnvironment",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "presal",
@@ -70,6 +138,30 @@
       "fonte": "ANP/SEP",
       "apareceEm": [
         "pocos-exploratorios"
+      ],
+      "termo_en": "Pre-salt",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "pré-sal",
+        "camada do pré-sal",
+        "reservatórios do pré-sal"
+      ],
+      "synonyms_en": [
+        "pre-salt",
+        "sub-salt",
+        "subsalt"
+      ],
+      "examples": [
+        "Reservatórios de Tupi",
+        "Reservatórios de Búzios",
+        "Polígono do Pré-sal (Lei 12.351/2010)"
       ]
     },
     {
@@ -86,6 +178,33 @@
         "declaracoes-comercialidade",
         "ranp-708",
         "ranp-815"
+      ],
+      "termo_en": "Operator",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumOperator",
+      "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "operadora",
+        "concessionária",
+        "empresa operadora"
+      ],
+      "synonyms_en": [
+        "operator",
+        "operating company",
+        "lead operator"
+      ],
+      "examples": [
+        "Petrobras",
+        "Shell Brasil",
+        "Equinor",
+        "TotalEnergies",
+        "Repsol Sinopec",
+        "BP Brasil",
+        "Galp Energia"
       ]
     },
     {
@@ -97,7 +216,17 @@
       "apareceEm": [
         "blocos-contrato",
         "pads-andamento"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Contractor",
+      "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "contrato-ep",
@@ -109,6 +238,27 @@
         "blocos-contrato",
         "ranp-708",
         "ranp-815"
+      ],
+      "termo_en": "E&P Contract",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "contrato de E&P",
+        "contrato de concessão",
+        "contrato de partilha"
+      ],
+      "synonyms_en": [
+        "E&P contract",
+        "exploration and production contract",
+        "upstream contract"
+      ],
+      "examples": [
+        "Concessão BM-S-11",
+        "Partilha de Libra",
+        "Cessão Onerosa de Búzios"
       ]
     },
     {
@@ -119,7 +269,16 @@
       "fonte": "ANP/SEP",
       "apareceEm": [
         "blocos-contrato"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExploratoryPeriod",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "uts",
@@ -129,7 +288,16 @@
       "fonte": "ANP/SEP",
       "apareceEm": [
         "blocos-contrato"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WorkUnit",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "fase-exploratoria",
@@ -139,7 +307,16 @@
       "fonte": "ANP/SEP",
       "apareceEm": [
         "blocos-contrato"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationPhase",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "etapa-prorrogada",
@@ -150,7 +327,16 @@
       "apareceEm": [
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "regime-contratual",
@@ -162,6 +348,27 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
+      ],
+      "termo_en": "Contract Regime",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ContractualRegime",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "regime",
+        "modalidade contratual",
+        "regime de exploração"
+      ],
+      "synonyms_en": [
+        "contract regime",
+        "contract model",
+        "fiscal regime"
+      ],
+      "examples": [
+        "Concessão (Lei 9.478/1997)",
+        "Partilha de Produção (Lei 12.351/2010)",
+        "Cessão Onerosa"
       ]
     },
     {
@@ -175,6 +382,27 @@
         "pads-concluidos",
         "declaracoes-comercialidade",
         "ranp-815"
+      ],
+      "termo_en": "Discovery Evaluation Plan",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "Plano de Avaliação de Descobertas",
+        "PAD"
+      ],
+      "synonyms_en": [
+        "Discovery Evaluation Plan",
+        "Appraisal Plan",
+        "DEP"
+      ],
+      "examples": [
+        "PAD Búzios",
+        "PAD Mero",
+        "PAD Sépia",
+        "PAD Atapu"
       ]
     },
     {
@@ -186,6 +414,33 @@
       "apareceEm": [
         "pocos-exploratorios",
         "blocos-contrato"
+      ],
+      "termo_en": "Well (ANP)",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well",
+      "osdu_kind": "opendes:osdu:master-data--Well:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "poço",
+        "poço exploratório",
+        "poço de petróleo"
+      ],
+      "synonyms_en": [
+        "well",
+        "borehole",
+        "exploratory well",
+        "oil well"
+      ],
+      "examples": [
+        "1-RJS-702-RJ (Tupi)",
+        "1-BRSA-1135-RJS",
+        "3-BRSA-944-RJS (Búzios)",
+        "1-ANP-2-AL"
       ]
     },
     {
@@ -196,7 +451,17 @@
       "fonte": "ANP/SEP — SIGEP",
       "apareceEm": [
         "pocos-exploratorios"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryNotification",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "declaracao-comercialidade",
@@ -207,7 +472,16 @@
       "apareceEm": [
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CommercialityDeclaration",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "area-desenvolvimento",
@@ -218,6 +492,31 @@
       "apareceEm": [
         "pads-concluidos",
         "declaracoes-comercialidade"
+      ],
+      "termo_en": "Development Area",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea",
+      "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "área de desenvolvimento",
+        "campo"
+      ],
+      "synonyms_en": [
+        "development area",
+        "field",
+        "producing field"
+      ],
+      "examples": [
+        "Tupi",
+        "Búzios",
+        "Mero",
+        "Sapinhoá",
+        "Lula",
+        "Sépia",
+        "Atapu"
       ]
     },
     {
@@ -230,6 +529,28 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
+      ],
+      "termo_en": "Bidding Round",
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BiddingRound",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "rodada",
+        "leilão de blocos",
+        "rodada da ANP"
+      ],
+      "synonyms_en": [
+        "bidding round",
+        "oil auction",
+        "licensing round"
+      ],
+      "examples": [
+        "1ª Rodada (1999)",
+        "17ª Rodada (2022)",
+        "1ª Rodada de Partilha (2013, Libra)",
+        "Cessão Onerosa (2019)"
       ]
     },
     {
@@ -240,7 +561,16 @@
       "fonte": "ANP/SEP",
       "apareceEm": [
         "processos-sancionadores"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "anp",
@@ -257,7 +587,16 @@
         "processos-sancionadores",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryAgency",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "sigep",
@@ -270,7 +609,16 @@
         "blocos-contrato",
         "pads-andamento",
         "pads-concluidos"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#InformationSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "sep",
@@ -287,7 +635,16 @@
         "processos-sancionadores",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryUnit",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     }
   ]
 }

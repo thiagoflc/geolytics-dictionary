@@ -1,0 +1,258 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-04-30T15:17:12.900Z",
+    "count": 8,
+    "description": "Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP."
+  },
+  "terms": [
+    {
+      "id": "formacao-geologica",
+      "termo": "Formação Geológica",
+      "termo_en": "Geological Formation",
+      "categoria": "geologia",
+      "definicao": "Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
+      "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "formação",
+        "unidade litoestratigráfica",
+        "unidade geológica"
+      ],
+      "synonyms_en": [
+        "formation",
+        "geological formation",
+        "lithostratigraphic unit"
+      ],
+      "examples": [
+        "Formação Barra Velha (pré-sal)",
+        "Formação Quissamã",
+        "Formação Carapebus",
+        "Formação Itapema"
+      ]
+    },
+    {
+      "id": "reservatorio",
+      "termo": "Reservatório",
+      "termo_en": "Reservoir",
+      "categoria": "geologia",
+      "definicao": "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.",
+      "legal_source": "GeoCore + GeoReservoir (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir",
+      "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "reservatório",
+        "rocha-reservatório",
+        "corpo reservatório"
+      ],
+      "synonyms_en": [
+        "reservoir",
+        "reservoir rock",
+        "pay zone"
+      ],
+      "examples": [
+        "Reservatórios carbonáticos do pré-sal (Coquinas)",
+        "Reservatórios turbidíticos de Campos",
+        "Reservatório Barra Velha"
+      ]
+    },
+    {
+      "id": "sistema-deposicional",
+      "termo": "Sistema Deposicional",
+      "termo_en": "Depositional System",
+      "categoria": "geologia",
+      "definicao": "Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.",
+      "legal_source": "GeoReservoir (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "sistema deposicional",
+        "sistema sedimentar",
+        "ambiente deposicional"
+      ],
+      "synonyms_en": [
+        "depositional system",
+        "sedimentary system"
+      ],
+      "examples": [
+        "Sistema turbidítico de águas profundas",
+        "Sistema lacustre carbonático (pré-sal)",
+        "Sistema deltaico"
+      ]
+    },
+    {
+      "id": "litologia",
+      "termo": "Litologia",
+      "termo_en": "Lithology",
+      "categoria": "geologia",
+      "definicao": "Descrição das características físicas de uma rocha, incluindo composição mineralógica, textura, cor, granulometria e estruturas sedimentares. Derivado do RockMaterial do GeoCore. Fundamental na descrição de testemunhos e cuttings.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "litologia",
+        "tipo de rocha",
+        "descrição litológica"
+      ],
+      "synonyms_en": [
+        "lithology",
+        "rock type",
+        "lithologic description"
+      ],
+      "examples": [
+        "Folhelho (shale)",
+        "Arenito (sandstone)",
+        "Carbonato (limestone)",
+        "Coquina",
+        "Estromatólito"
+      ]
+    },
+    {
+      "id": "completacao",
+      "termo": "Completação de Poço",
+      "termo_en": "Well Completion",
+      "categoria": "operacoes",
+      "definicao": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura de hidrocarbonetos. Inclui revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV) e canhoneio (perforation) das zonas produtoras.",
+      "legal_source": "O3PO (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellCompletion",
+      "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "completação",
+        "acabamento de poço"
+      ],
+      "synonyms_en": [
+        "well completion",
+        "completion"
+      ],
+      "examples": [
+        "Completação seca (dry tree)",
+        "Completação molhada (subsea com ANM)",
+        "Completação inteligente (smart well)"
+      ]
+    },
+    {
+      "id": "lamina-dagua",
+      "termo": "Lâmina d'Água",
+      "termo_en": "Water Depth",
+      "categoria": "geologia",
+      "definicao": "Profundidade da coluna de água entre a superfície do mar e o fundo marinho no local do poço. Parâmetro crítico para classificação de poços offshore: águas rasas (< 300 m), águas profundas (300–1500 m), águas ultraprofundas (> 1500 m). Define complexidade tecnológica e custo das operações.",
+      "legal_source": "O3PO (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WaterDepth",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "lâmina d'água",
+        "profundidade d'água",
+        "LDA"
+      ],
+      "synonyms_en": [
+        "water depth",
+        "WD",
+        "sea depth"
+      ],
+      "examples": [
+        "Bacia de Campos: ~1.000 m",
+        "Pré-sal de Santos: 1.900–2.400 m",
+        "Foz do Amazonas: 2.000–2.880 m"
+      ]
+    },
+    {
+      "id": "acumulacao",
+      "termo": "Acumulação de Hidrocarbonetos",
+      "termo_en": "Hydrocarbon Accumulation",
+      "categoria": "geologia",
+      "definicao": "Concentração de petróleo ou gás natural em uma armadilha geológica (estrutural, estratigráfica ou mista) com volume e qualidade suficientes para avaliação técnico-econômica. Precede e fundamenta a Declaração de Comercialidade. Distingue-se de \"campo\" por ainda não ter sido formalmente declarado comercial.",
+      "legal_source": "O3PO + GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "acumulação",
+        "descoberta de hidrocarbonetos",
+        "jazida"
+      ],
+      "synonyms_en": [
+        "hydrocarbon accumulation",
+        "discovery",
+        "accumulation"
+      ],
+      "examples": [
+        "Acumulação de Tupi (descoberta 2006)",
+        "Acumulação de Búzios",
+        "Acumulação de Mero"
+      ]
+    },
+    {
+      "id": "processo-geologico",
+      "termo": "Processo Geológico",
+      "termo_en": "Geological Process",
+      "categoria": "geologia",
+      "definicao": "Mecanismo natural (sedimentação, diagênese, tectônica, migração de fluidos, evaporação, magmatismo) que gera, modifica ou destrói feições e corpos geológicos ao longo do tempo geológico. Fundamental para entender a formação e preservação de reservatórios e a maturação de hidrocarbonetos.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalProcess",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "processo geológico",
+        "evento geológico"
+      ],
+      "synonyms_en": [
+        "geological process",
+        "geologic process"
+      ],
+      "examples": [
+        "Sedimentação clástica",
+        "Diagênese",
+        "Halocinese (tectônica do sal)",
+        "Migração secundária de hidrocarbonetos"
+      ]
+    }
+  ]
+}

@@ -14,9 +14,34 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  PETROKGRAPH_BASE,
+  TERM_ALIGNMENT,
+  TERM_ENRICHMENT,
+  EXTENDED_TERMS,
+  ENTITY_ALIGNMENT,
+  LAYER_DEFINITIONS,
+  DEDUP_RULES,
+  RECOMMENDED_USAGE,
+} from './ontology-alignment.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
+const DRY_RUN = process.argv.includes('--dry-run');
+
+function alignmentFor(table, id) {
+  const a = table[id];
+  if (!a) return { petrokgraph_uri: null, osdu_kind: null, geocoverage: [] };
+  return {
+    petrokgraph_uri: a.kg ? `${PETROKGRAPH_BASE}${a.kg}` : null,
+    osdu_kind: a.osdu,
+    geocoverage: a.layers || [],
+  };
+}
+
+function enrichmentFor(id) {
+  return TERM_ENRICHMENT[id] || { termo_en: null, synonyms_pt: [], synonyms_en: [], examples: [] };
+}
 
 /* ─────────────────────────────────────────────────────────────
  * SOURCE DATA — copiado de Geolytics src/config/dicionario.js
@@ -303,6 +328,11 @@ const ENTITY_NODES = [
     fonte: 'ANP/SEP' },
   { id: 'bacia-sedimentar', label: 'Bacia Sedimentar', label_en: 'Sedimentary Basin', type: 'operational', glossId: 'bacia-sedimentar' },
 
+  /* geological extension (extended-terms) */
+  { id: 'reservatorio', label: 'Reservatório', label_en: 'Reservoir', type: 'operational', glossId: null, extendedId: 'reservatorio' },
+  { id: 'formacao',     label: 'Formação',     label_en: 'Geological Formation', type: 'geological', glossId: null, extendedId: 'formacao-geologica' },
+  { id: 'sistema-deposicional', label: 'Sistema Deposicional', label_en: 'Depositional System', type: 'geological', glossId: null, extendedId: 'sistema-deposicional' },
+
   /* contractual */
   { id: 'contrato-ep',              label: 'Contrato E&P',                 label_en: 'E&P Contract',             type: 'contractual', glossId: 'contrato-ep' },
   { id: 'pad',                      label: 'PAD',                          label_en: 'Discovery Evaluation Plan', type: 'contractual', glossId: 'pad' },
@@ -383,6 +413,7 @@ const EDGES = [
   { source: 'poco',  target: 'operador',         relation: 'operated_by',   relation_label: 'operado por',          style: 'solid' },
   { source: 'poco',  target: 'notificacao-descoberta', relation: 'may_register', relation_label: 'pode registrar', style: 'dashed' },
   { source: 'poco',  target: 'presal',           relation: 'may_reach',     relation_label: 'pode atingir',         style: 'dashed' },
+  { source: 'poco',  target: 'formacao',         relation: 'traverses',     relation_label: 'atravessa',            style: 'dashed' },
 
   { source: 'bloco', target: 'bacia-sedimentar', relation: 'delimited_in',  relation_label: 'delimitado em',        style: 'solid' },
   { source: 'bloco', target: 'contrato-ep',      relation: 'governed_by',   relation_label: 'regido por',           style: 'solid' },
@@ -400,6 +431,10 @@ const EDGES = [
 
   { source: 'declaracao-comercialidade', target: 'campo', relation: 'originates', relation_label: 'origina', style: 'solid' },
   { source: 'campo',    target: 'bacia-sedimentar', relation: 'located_in',  relation_label: 'localizado em', style: 'solid' },
+  { source: 'campo',           target: 'reservatorio',         relation: 'sustained_by',       relation_label: 'sustentado por',     style: 'solid' },
+  { source: 'reservatorio',    target: 'bacia-sedimentar',     relation: 'contained_in',       relation_label: 'contido em',         style: 'solid' },
+  { source: 'reservatorio',    target: 'sistema-deposicional', relation: 'characterized_by',   relation_label: 'caracterizado por',  style: 'solid' },
+  { source: 'reservatorio',    target: 'formacao',             relation: 'hosted_in',          relation_label: 'hospedado em',       style: 'solid' },
 
   { source: 'operador', target: 'processo-sancionador', relation: 'may_have', relation_label: 'pode ter', style: 'dashed' },
 
@@ -445,10 +480,48 @@ const VERSION = '1.0.0';
 
 function gloss(id) { return GLOSSARIO.find((t) => t.id === id); }
 
+function enrichTerm(t) {
+  const align = alignmentFor(TERM_ALIGNMENT, t.id);
+  const enrich = enrichmentFor(t.id);
+  return {
+    ...t,
+    termo_en: enrich.termo_en,
+    petrokgraph_uri: align.petrokgraph_uri,
+    osdu_kind: align.osdu_kind,
+    geocoverage: align.geocoverage,
+    synonyms_pt: enrich.synonyms_pt,
+    synonyms_en: enrich.synonyms_en,
+    examples: enrich.examples,
+  };
+}
+
 function buildGlossary() {
   return {
     meta: { version: VERSION, generated: NOW, count: GLOSSARIO.length },
-    terms: GLOSSARIO,
+    terms: GLOSSARIO.map(enrichTerm),
+  };
+}
+
+function buildExtendedTerms() {
+  return {
+    meta: {
+      version: VERSION,
+      generated: NOW,
+      count: EXTENDED_TERMS.length,
+      description: 'Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP.',
+    },
+    terms: EXTENDED_TERMS,
+  };
+}
+
+function buildOntologyMap() {
+  return {
+    version: VERSION,
+    generated: NOW,
+    description: 'Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.',
+    layers: LAYER_DEFINITIONS,
+    deduplication_rules: DEDUP_RULES,
+    recommended_usage: RECOMMENDED_USAGE,
   };
 }
 
@@ -469,8 +542,12 @@ function buildOntologyTypes() {
 }
 
 function buildEntityGraph() {
+  const ext = (id) => EXTENDED_TERMS.find((t) => t.id === id);
   const nodes = ENTITY_NODES.map((n) => {
     const g = n.glossId ? gloss(n.glossId) : null;
+    const e = n.extendedId ? ext(n.extendedId) : null;
+    const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
+    const enrich = n.glossId ? enrichmentFor(n.glossId) : { synonyms_pt: [], synonyms_en: [], examples: [] };
     return {
       id: n.id,
       label: n.label,
@@ -478,41 +555,64 @@ function buildEntityGraph() {
       type: n.type,
       color: COLORS[n.type],
       size: SIZES[n.type],
-      definition: n.definicaoOverride || (g ? g.definicao : ''),
-      legal_source: n.fonte || (g ? g.fonte : null),
+      definition: n.definicaoOverride || (g ? g.definicao : (e ? e.definicao : '')),
+      legal_source: n.fonte || (g ? g.fonte : (e ? e.legal_source : null)),
       datasets: g && Array.isArray(g.apareceEm) ? g.apareceEm : [],
-      kgraph_uri: null,
+      petrokgraph_uri: align.petrokgraph_uri,
+      osdu_kind: align.osdu_kind,
+      geocoverage: align.geocoverage,
+      synonyms_pt: e ? e.synonyms_pt : enrich.synonyms_pt,
+      synonyms_en: e ? e.synonyms_en : enrich.synonyms_en,
+      examples: e ? e.examples : enrich.examples,
       glossary_id: n.glossId || null,
+      extended_id: n.extendedId || null,
     };
   });
+  /* deriva relation_label_en a partir do snake_case do campo relation */
+  const edges = EDGES.map((e) => ({
+    source: e.source,
+    target: e.target,
+    relation: e.relation,
+    relation_label_pt: e.relation_label,
+    relation_label_en: e.relation.replace(/_/g, ' '),
+    style: e.style,
+  }));
   return {
     version: VERSION,
     generated: NOW,
-    source: 'Geolytics / ANP-SEP / SIGEP',
+    source: 'Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU',
     nodes,
-    edges: EDGES,
+    edges,
   };
 }
 
 function buildFull() {
   const ac = loadAcronyms();
+  const graph = buildEntityGraph();
   return {
     meta: {
       version: VERSION,
       generated: NOW,
+      description: 'Geolytics Dictionary — complete merged dataset',
       counts: {
-        terms: GLOSSARIO.length,
+        glossary_terms: GLOSSARIO.length,
+        extended_terms: EXTENDED_TERMS.length,
+        total_terms: GLOSSARIO.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entities: ENTITY_NODES.length,
-        edges: EDGES.length,
+        entity_nodes: ENTITY_NODES.length,
+        entity_edges: EDGES.length,
         domains: DOMAINS.length,
+        ontology_layers: LAYER_DEFINITIONS.length,
         acronyms: ac ? ac.acronyms.length : 0,
       },
+      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU'],
     },
-    glossary: GLOSSARIO,
+    glossary: GLOSSARIO.map(enrichTerm),
+    extended_terms: EXTENDED_TERMS,
+    entity_graph: graph,
     datasets: CONJUNTOS,
-    ontology: { domains: DOMAINS, typology: ONTOLOGY_TYPES.tipologia, processing_levels: ONTOLOGY_TYPES.nivel },
-    entity_graph: { nodes: buildEntityGraph().nodes, edges: EDGES },
+    ontology_types: { domains: DOMAINS, typology: ONTOLOGY_TYPES.tipologia, processing_levels: ONTOLOGY_TYPES.nivel },
+    ontology_map: buildOntologyMap(),
     acronyms: ac ? ac.acronyms : [],
   };
 }
@@ -531,13 +631,15 @@ function buildApiIndex() {
       entities:     `${BASE_URL_PLACEHOLDER}/api/v1/entities.json`,
       datasets:     `${BASE_URL_PLACEHOLDER}/api/v1/datasets.json`,
       search_index: `${BASE_URL_PLACEHOLDER}/api/v1/search-index.json`,
-      glossary:     `${BASE_URL_PLACEHOLDER}/data/glossary.json`,
-      entity_graph: `${BASE_URL_PLACEHOLDER}/data/entity-graph.json`,
-      ontology:     `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
-      acronyms:     `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
-      acronyms_api: `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
-      full:         `${BASE_URL_PLACEHOLDER}/data/full.json`,
-      rag_corpus:   `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
+      glossary:        `${BASE_URL_PLACEHOLDER}/data/glossary.json`,
+      extended_terms:  `${BASE_URL_PLACEHOLDER}/data/extended-terms.json`,
+      entity_graph:    `${BASE_URL_PLACEHOLDER}/data/entity-graph.json`,
+      ontology:        `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
+      ontology_map:    `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
+      acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
+      acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
+      full:            `${BASE_URL_PLACEHOLDER}/data/full.json`,
+      rag_corpus:      `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
       system_prompt_pt: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-ptbr.md`,
       system_prompt_en: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-en.md`,
     },
@@ -560,17 +662,35 @@ function buildApiAcronyms() {
 }
 
 function buildApiTerms() {
-  return {
-    meta: { version: VERSION, generated: NOW, count: GLOSSARIO.length },
-    terms: GLOSSARIO.map((t) => ({
-      id: t.id,
-      termo: t.termo,
-      categoria: t.categoria,
-      definicao: t.definicao,
-      fonte: t.fonte,
+  const all = [
+    ...GLOSSARIO.map((t) => {
+      const enr = enrichmentFor(t.id);
+      const align = alignmentFor(TERM_ALIGNMENT, t.id);
+      return {
+        id: t.id,
+        termo: t.termo,
+        termo_en: enr.termo_en,
+        categoria: t.categoria,
+        definicao: t.definicao,
+        fonte: t.fonte,
+        datasets: t.apareceEm,
+        petrokgraph_uri: align.petrokgraph_uri,
+        osdu_kind: align.osdu_kind,
+        geocoverage: align.geocoverage,
+        synonyms_pt: enr.synonyms_pt,
+        synonyms_en: enr.synonyms_en,
+        examples: enr.examples,
+        source: 'glossary',
+      };
+    }),
+    ...EXTENDED_TERMS.map((t) => ({
+      ...t,
       datasets: t.apareceEm,
+      fonte: t.legal_source,
+      source: 'extended',
     })),
-  };
+  ];
+  return { meta: { version: VERSION, generated: NOW, count: all.length }, terms: all };
 }
 
 function buildApiEntities() {
@@ -663,10 +783,19 @@ function loadAcronyms() {
 function buildRagCorpus() {
   const lines = [];
 
-  /* type=term */
+  /* type=term — glossário ANP enriquecido com sinônimos/exemplos + alinhamento */
   for (const t of GLOSSARIO) {
+    const enrich = enrichmentFor(t.id);
+    const align = alignmentFor(TERM_ALIGNMENT, t.id);
     const datasetTitles = (t.apareceEm || []).map(datasetTitle).join(', ');
-    const text = `${t.termo}: ${t.definicao} Fonte: ${t.fonte}.${datasetTitles ? ` Aparece nos datasets: ${datasetTitles}.` : ''}`;
+    const synLine = enrich.synonyms_pt.length
+      ? ` Sinônimos: ${[...enrich.synonyms_pt, ...enrich.synonyms_en].join(', ')}.`
+      : '';
+    const exLine = enrich.examples.length
+      ? ` Exemplos: ${enrich.examples.join('; ')}.`
+      : '';
+    const enLine = enrich.termo_en ? ` (${enrich.termo_en})` : '';
+    const text = `${t.termo}${enLine}: ${t.definicao}${synLine}${exLine}${datasetTitles ? ` Aparece nos datasets: ${datasetTitles}.` : ''} Fonte: ${t.fonte}.`;
     lines.push({
       id: `term_${t.id}`,
       type: 'term',
@@ -675,7 +804,50 @@ function buildRagCorpus() {
         id: t.id,
         category: t.categoria,
         legal_source: t.fonte,
+        petrokgraph_uri: align.petrokgraph_uri,
+        osdu_kind: align.osdu_kind,
+        geocoverage: align.geocoverage,
         datasets: t.apareceEm || [],
+      },
+    });
+  }
+
+  /* type=term — extended-terms (geologia formal) */
+  for (const t of EXTENDED_TERMS) {
+    const synLine = t.synonyms_pt.length
+      ? ` Sinônimos: ${[...t.synonyms_pt, ...t.synonyms_en].join(', ')}.`
+      : '';
+    const exLine = t.examples.length ? ` Exemplos: ${t.examples.join('; ')}.` : '';
+    const text = `${t.termo} (${t.termo_en}): ${t.definicao}${synLine}${exLine} Fonte: ${t.legal_source}.`;
+    lines.push({
+      id: `term_${t.id}`,
+      type: 'term',
+      text,
+      metadata: {
+        id: t.id,
+        category: t.categoria,
+        legal_source: t.legal_source,
+        petrokgraph_uri: t.petrokgraph_uri,
+        osdu_kind: t.osdu_kind,
+        geocoverage: t.geocoverage,
+        extended: true,
+      },
+    });
+  }
+
+  /* type=ontology_layer — descreve cada uma das 5 camadas semânticas */
+  for (const layer of LAYER_DEFINITIONS) {
+    const coverageList = Array.isArray(layer.geolytics_coverage) ? layer.geolytics_coverage.join(', ') : layer.geolytics_coverage;
+    const text = `${layer.name} (${layer.id}, mantida por ${layer.maintainer}): ${layer.description}${layer.relationship_to_geocore ? ` Relação com GeoCore: ${layer.relationship_to_geocore}.` : ''} Cobertura no Geolytics Dictionary: ${coverageList}.`;
+    lines.push({
+      id: `ontology_layer_${layer.id}`,
+      type: 'ontology_layer',
+      text,
+      metadata: {
+        layer: layer.id,
+        name: layer.name,
+        type: layer.type,
+        maintainer: layer.maintainer,
       },
     });
   }
@@ -778,7 +950,61 @@ function buildRagCorpus() {
  * SYSTEM PROMPTS
  * ───────────────────────────────────────────────────────────── */
 
-const SYSTEM_PROMPT_PT = `# Contexto de domínio — Petróleo & Gás (Brasil)
+const SYSTEM_PROMPT_PT = `# Contexto de Domínio: Exploração e Produção de Petróleo no Brasil
+
+## 1. Contexto regulatório
+
+A Exploração e Produção (E&P) de petróleo e gás natural no Brasil é regulada pela **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)**, autarquia federal vinculada ao Ministério de Minas e Energia, criada pela **Lei nº 9.478/1997** (Lei do Petróleo). A ANP contrata, fiscaliza e regula todas as atividades exploratórias e produtivas do país. Os dados oficiais são publicados pela **Superintendência de Exploração (SEP)** através do **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
+
+Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997), o concessionário assume todos os riscos, detém o petróleo produzido e paga tributos (royalties, participação especial). Na **Partilha de Produção** (Lei 12.351/2010, aplicável ao polígono do pré-sal e áreas estratégicas), o petróleo é dividido entre contratado e União, e a **Petrobras é operadora obrigatória** nos blocos do pré-sal.
+
+## 2. Entidades-chave
+
+- **Poço (ANP)** — identificador padronizado de poço de óleo/gás (ex.: 1-RJS-702-RJ).
+- **Bloco** — prisma vertical numa bacia sedimentar onde se realiza E&P; arrematado em rodada.
+- **Bacia Sedimentar** — depressão crustal com rochas sedimentares (Campos, Santos, Recôncavo).
+- **Campo / Área de Desenvolvimento** — área produtora resultante de Declaração de Comercialidade.
+- **Contrato E&P** — instrumento jurídico entre concessionário e ANP; define regime contratual e período exploratório.
+- **PAD — Plano de Avaliação de Descobertas** — avalia tecnicamente uma descoberta para viabilidade comercial; pode resultar em Declaração de Comercialidade.
+- **Operador** — empresa designada para conduzir as operações; responde pela execução do contrato.
+- **Rodada de Licitação** — leilão público de áreas de exploração.
+- **Declaração de Comercialidade** — declaração formal de viabilidade econômica; encerra PAD com sucesso e origina um Campo.
+- **Regime Contratual** — Concessão ou Partilha de Produção.
+- **Pré-sal** — camada geológica abaixo de extensa camada de sal; reservatórios carbonáticos do pré-sal são o eixo da produção brasileira atual.
+- **Reservatório** — corpo rochoso poroso e permeável que armazena hidrocarbonetos.
+
+## 3. Termos que confundem LLMs — atenção especial
+
+- **PAD ≠ "drilling pad"**: no contexto ANP, PAD significa **Plano de Avaliação de Descobertas** (instrumento contratual), não a base/locação física de perfuração.
+- **UTS ≠ Unidade Territorial**: significa **Unidades de Trabalho** — métrica do PEM (Programa Exploratório Mínimo).
+- **Período Exploratório ≠ "período de exploração genérico"**: é fase contratual específica (1º, 2º, 3º PE ou período único), com prazos e obrigações.
+- **Pré-sal**: definição estritamente geológica (camada abaixo do sal). Atingir o pré-sal é dado oficial registrado por poço e tem consequências contratuais.
+- **Campo ≠ Bloco ≠ Bacia**: três entidades distintas — Campo é unidade de produção (após declaração de comercialidade), Bloco é unidade contratual (concessão), Bacia é unidade geológica (regional).
+- **Concessão ≠ Partilha de Produção**: regimes contratuais distintos definindo quem detém o petróleo produzido. Em Partilha, a Petrobras é operadora obrigatória nos blocos do pré-sal.
+- **Reservatório ≠ Campo**: reservatório é o corpo rochoso geológico; campo é a delimitação econômico-administrativa que pode conter um ou mais reservatórios.
+
+## 4. Datasets oficiais (ANP/SEP — SIGEP)
+
+Poços Exploratórios em Blocos · Blocos sob Contrato · PADs em Andamento · PADs Concluídos · Declarações de Comercialidade · Processos Sancionadores · Resolução ANP nº 708/2017 · Resolução ANP nº 815/2020. Todos públicos, formato CSV, atualização mensal, contato: \`sigep_sep@anp.gov.br\`.
+
+## 5. Siglas essenciais do domínio
+
+ANP, SEP, SIGEP, PEM (Programa Exploratório Mínimo), PE (Período Exploratório), PAD, UTS (Unidades de Trabalho), E&P, O&G, onshore/offshore, pré-sal, FPSO (Unidade Flutuante), UEP (Unidade Estacionária de Produção), ANM (Árvore de Natal Molhada), BOP (Blowout Preventer), DST (Drill Stem Test), TOC (Total Organic Carbon), PVT (Pressão-Volume-Temperatura), GC (Gas Chromatography), MWD/LWD (Measure/Logging While Drilling).
+
+## 6. Cadeia lógica fundamental
+
+\`\`\`
+Rodada de Licitação → Contrato E&P → Bloco → Poço → [descoberta] →
+Notificação de Descoberta → PAD → Declaração de Comercialidade →
+Campo (Área de Desenvolvimento) → Reservatório
+\`\`\`
+
+Cada elo é uma entidade do dicionário. Use esta cadeia ao raciocinar sobre questões de "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
+
+---
+
+# (Versão curta — referência rápida abaixo) #
+## Contexto de domínio — Petróleo & Gás (Brasil)
 
 Você é um agente conversacional especializado no domínio de Exploração e Produção (E&P) de petróleo e gás natural no Brasil. O setor é regulado pela **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)**, autarquia federal vinculada ao Ministério de Minas e Energia, criada pela **Lei nº 9.478/1997** (Lei do Petróleo). A ANP contrata, fiscaliza e regula todas as atividades exploratórias e produtivas do país.
 
@@ -850,6 +1076,19 @@ Exploratory Wells in Blocks · Blocks under Contract · PADs in Progress · Comp
 ANP, SEP, SIGEP, PEM (Minimum Exploratory Program), PE (Exploratory Period), PAD, UTS (Work Units), E&P, DST (Drill Stem Test), TOC (Total Organic Carbon), PVT (Pressure-Volume-Temperature), GC (Gas Chromatography).
 
 When answering, use correct ANP terminology, distinguish contract regimes where relevant, and cite the legal/regulatory source where possible (Law 9,478/1997, ANP resolutions). Brazilian-Portuguese terms are kept in italics on first occurrence and may be used directly in subsequent mentions.
+
+## Brazilian-specific concepts with no international equivalent
+
+The following concepts are **exclusive to the Brazilian regulatory framework** (ANP / Lei 9.478/1997 / Lei 12.351/2010) and **do not exist in international ontologies** of geology or petroleum (GeoCore, Petro KGraph, OSDU, IFC, BFO):
+
+- ***Bloco*** (*Exploration Block*) — vertical prism of indeterminate depth in a sedimentary basin, awarded under an E&P contract. Distinct from "lease" or "license" because it has specific Brazilian polygon-coordinates legal definition.
+- ***PAD — Plano de Avaliação de Descobertas*** (*Discovery Evaluation Plan*) — Brazilian-specific contractual instrument for evaluating discoveries before declaring commerciality. Different from generic "appraisal".
+- ***Contrato de E&P*** (*E&P Contract*) — Brazilian-style upstream contract under either Concession or Production Sharing regime, with PEM (Minimum Exploratory Program) and UTS (Work Units) accounting.
+- ***Rodada de Licitação*** (*Bidding Round*) — public auction of E&P acreage organized by ANP. Numbered sequentially since 1999 (Round 1) — institutional history.
+- ***UTS — Unidades de Trabalho*** (*Work Units*) — Brazilian conversion metric to quantify exploratory work commitment under PEM. Has no equivalent in any other regulatory framework.
+- ***Declaração de Comercialidade*** (*Commerciality Declaration*) — formal Brazilian regulatory milestone that closes a PAD and originates a Field. Different from generic "field development decision".
+
+When users ask about these concepts in any other context (e.g., "is this concept the same as a US lease?"), the answer is **no** — they are Brazilian-specific. Cite ANP/Lei 9.478/1997 explicitly.
 `;
 
 /* ─────────────────────────────────────────────────────────────
@@ -857,6 +1096,7 @@ When answering, use correct ANP terminology, distinguish contract regimes where 
  * ───────────────────────────────────────────────────────────── */
 
 function writeJson(rel, obj) {
+  if (DRY_RUN) { console.log(`  [dry-run] would write ${rel} (${JSON.stringify(obj).length} bytes)`); return; }
   const p = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, JSON.stringify(obj, null, 2) + '\n', 'utf8');
@@ -864,18 +1104,21 @@ function writeJson(rel, obj) {
 }
 
 function writeText(rel, content) {
+  if (DRY_RUN) { console.log(`  [dry-run] would write ${rel} (${content.length} bytes)`); return; }
   const p = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(p), { recursive: true });
   fs.writeFileSync(p, content, 'utf8');
   console.log(`  ✓ ${rel}`);
 }
 
+if (DRY_RUN) console.log('=== DRY RUN — no files will be written ===');
 console.log('Generating data/...');
-writeJson('data/glossary.json',       buildGlossary());
-writeJson('data/datasets.json',       buildDatasets());
-writeJson('data/entity-graph.json',   buildEntityGraph());
-writeJson('data/ontology-types.json', buildOntologyTypes());
-writeJson('data/full.json',           buildFull());
+writeJson('data/glossary.json',        buildGlossary());
+writeJson('data/extended-terms.json',  buildExtendedTerms());
+writeJson('data/datasets.json',        buildDatasets());
+writeJson('data/entity-graph.json',    buildEntityGraph());
+writeJson('data/ontology-types.json',  buildOntologyTypes());
+writeJson('data/full.json',            buildFull());
 
 console.log('Generating api/v1/...');
 writeJson('api/v1/index.json',        buildApiIndex());
@@ -889,9 +1132,12 @@ console.log('Generating ai/...');
 writeText('ai/rag-corpus.jsonl',       buildRagCorpus());
 writeText('ai/system-prompt-ptbr.md',  SYSTEM_PROMPT_PT);
 writeText('ai/system-prompt-en.md',    SYSTEM_PROMPT_EN);
+writeJson('ai/ontology-map.json',      buildOntologyMap());
 
 console.log('\n✓ Done.');
-console.log(`  Terms: ${GLOSSARIO.length}`);
+console.log(`  Glossary terms: ${GLOSSARIO.length}`);
+console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
 console.log(`  Entity nodes: ${ENTITY_NODES.length}`);
 console.log(`  Entity edges: ${EDGES.length}`);
+console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);

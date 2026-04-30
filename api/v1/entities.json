@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T12:33:41.167Z",
-    "count": 42
+    "generated": "2026-04-30T15:17:12.900Z",
+    "count": 45
   },
   "entities": [
     {
@@ -18,38 +18,64 @@
         "pocos-exploratorios",
         "blocos-contrato"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well",
+      "osdu_kind": "opendes:osdu:master-data--Well:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "poço",
+        "poço exploratório",
+        "poço de petróleo"
+      ],
+      "synonyms_en": [
+        "well",
+        "borehole",
+        "exploratory well",
+        "oil well"
+      ],
+      "examples": [
+        "1-RJS-702-RJ (Tupi)",
+        "1-BRSA-1135-RJS",
+        "3-BRSA-944-RJS (Búzios)",
+        "1-ANP-2-AL"
+      ],
       "glossary_id": "poco-anp",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "bloco",
             "relation": "drilled_in",
-            "label": "perfurado em",
             "style": "solid"
           },
           {
             "to": "bacia-sedimentar",
             "relation": "located_in",
-            "label": "localizado em",
             "style": "solid"
           },
           {
             "to": "operador",
             "relation": "operated_by",
-            "label": "operado por",
             "style": "solid"
           },
           {
             "to": "notificacao-descoberta",
             "relation": "may_register",
-            "label": "pode registrar",
             "style": "dashed"
           },
           {
             "to": "presal",
             "relation": "may_reach",
-            "label": "pode atingir",
+            "style": "dashed"
+          },
+          {
+            "to": "formacao",
+            "relation": "traverses",
             "style": "dashed"
           }
         ],
@@ -57,55 +83,46 @@
           {
             "from": "bop",
             "relation": "installed_on",
-            "label": "instalado em",
             "style": "solid"
           },
           {
             "from": "dhsv",
             "relation": "installed_in",
-            "label": "instalado em",
             "style": "solid"
           },
           {
             "from": "anm-eq",
             "relation": "controls",
-            "label": "controla",
             "style": "solid"
           },
           {
             "from": "bha",
             "relation": "composes",
-            "label": "compõe coluna",
             "style": "dashed"
           },
           {
             "from": "esp-eq",
             "relation": "lifts_from",
-            "label": "eleva fluido em",
             "style": "dashed"
           },
           {
             "from": "mwd",
             "relation": "measures",
-            "label": "mede em",
             "style": "dashed"
           },
           {
             "from": "lwd",
             "relation": "logs",
-            "label": "perfila",
             "style": "dashed"
           },
           {
             "from": "manifold-submarino",
             "relation": "gathers_from",
-            "label": "agrega fluxo de",
             "style": "dashed"
           },
           {
             "from": "afe",
             "relation": "authorizes_spending_for",
-            "label": "autoriza gasto em",
             "style": "solid"
           }
         ]
@@ -129,38 +146,55 @@
         "ranp-708",
         "ranp-815"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock",
+      "osdu_kind": "opendes:osdu:master-data--AcquisitionSurvey:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "bloco exploratório",
+        "área concedida"
+      ],
+      "synonyms_en": [
+        "block",
+        "exploration block",
+        "lease block",
+        "concession block"
+      ],
+      "examples": [
+        "BM-S-11 (Lula)",
+        "BCAM-40 (Búzios)",
+        "BS-4 (Atlanta)",
+        "BM-C-33"
+      ],
       "glossary_id": "bloco",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "bacia-sedimentar",
             "relation": "delimited_in",
-            "label": "delimitado em",
             "style": "solid"
           },
           {
             "to": "contrato-ep",
             "relation": "governed_by",
-            "label": "regido por",
             "style": "solid"
           },
           {
             "to": "operador",
             "relation": "operated_by",
-            "label": "operado por",
             "style": "solid"
           },
           {
             "to": "pad",
             "relation": "may_have",
-            "label": "pode ter",
             "style": "dashed"
           },
           {
             "to": "rodada-licitacao",
             "relation": "originated_in",
-            "label": "originado em",
             "style": "solid"
           }
         ],
@@ -168,19 +202,16 @@
           {
             "from": "poco",
             "relation": "drilled_in",
-            "label": "perfurado em",
             "style": "solid"
           },
           {
             "from": "pad",
             "relation": "evaluates",
-            "label": "avalia",
             "style": "solid"
           },
           {
             "from": "bndes",
             "relation": "finances",
-            "label": "financia",
             "style": "dashed"
           }
         ]
@@ -196,14 +227,27 @@
       "definition": "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.",
       "legal_source": "ANP/SEP",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Field",
+      "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "bacia-sedimentar",
             "relation": "located_in",
-            "label": "localizado em",
+            "style": "solid"
+          },
+          {
+            "to": "reservatorio",
+            "relation": "sustained_by",
             "style": "solid"
           }
         ],
@@ -211,13 +255,11 @@
           {
             "from": "declaracao-comercialidade",
             "relation": "originates",
-            "label": "origina",
             "style": "solid"
           },
           {
             "from": "fpso",
             "relation": "produces_at",
-            "label": "produz em",
             "style": "solid"
           }
         ]
@@ -239,27 +281,210 @@
         "pads-concluidos",
         "declaracoes-comercialidade"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin",
+      "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "bacia",
+        "bacia sedimentar"
+      ],
+      "synonyms_en": [
+        "basin",
+        "sedimentary basin"
+      ],
+      "examples": [
+        "Bacia de Campos",
+        "Bacia de Santos",
+        "Bacia de Sergipe-Alagoas",
+        "Bacia Potiguar",
+        "Bacia do Recôncavo"
+      ],
       "glossary_id": "bacia-sedimentar",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "poco",
             "relation": "located_in",
-            "label": "localizado em",
             "style": "solid"
           },
           {
             "from": "bloco",
             "relation": "delimited_in",
-            "label": "delimitado em",
             "style": "solid"
           },
           {
             "from": "campo",
             "relation": "located_in",
-            "label": "localizado em",
+            "style": "solid"
+          },
+          {
+            "from": "reservatorio",
+            "relation": "contained_in",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reservatorio",
+      "label": "Reservatório",
+      "label_en": "Reservoir",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.",
+      "legal_source": "GeoCore + GeoReservoir (UFRGS)",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir",
+      "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "reservatório",
+        "rocha-reservatório",
+        "corpo reservatório"
+      ],
+      "synonyms_en": [
+        "reservoir",
+        "reservoir rock",
+        "pay zone"
+      ],
+      "examples": [
+        "Reservatórios carbonáticos do pré-sal (Coquinas)",
+        "Reservatórios turbidíticos de Campos",
+        "Reservatório Barra Velha"
+      ],
+      "glossary_id": null,
+      "extended_id": "reservatorio",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bacia-sedimentar",
+            "relation": "contained_in",
+            "style": "solid"
+          },
+          {
+            "to": "sistema-deposicional",
+            "relation": "characterized_by",
+            "style": "solid"
+          },
+          {
+            "to": "formacao",
+            "relation": "hosted_in",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "campo",
+            "relation": "sustained_by",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "formacao",
+      "label": "Formação",
+      "label_en": "Geological Formation",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
+      "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "formação",
+        "unidade litoestratigráfica",
+        "unidade geológica"
+      ],
+      "synonyms_en": [
+        "formation",
+        "geological formation",
+        "lithostratigraphic unit"
+      ],
+      "examples": [
+        "Formação Barra Velha (pré-sal)",
+        "Formação Quissamã",
+        "Formação Carapebus",
+        "Formação Itapema"
+      ],
+      "glossary_id": null,
+      "extended_id": "formacao-geologica",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "traverses",
+            "style": "dashed"
+          },
+          {
+            "from": "reservatorio",
+            "relation": "hosted_in",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sistema-deposicional",
+      "label": "Sistema Deposicional",
+      "label_en": "Depositional System",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.",
+      "legal_source": "GeoReservoir (UFRGS)",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "sistema deposicional",
+        "sistema sedimentar",
+        "ambiente deposicional"
+      ],
+      "synonyms_en": [
+        "depositional system",
+        "sedimentary system"
+      ],
+      "examples": [
+        "Sistema turbidítico de águas profundas",
+        "Sistema lacustre carbonático (pré-sal)",
+        "Sistema deltaico"
+      ],
+      "glossary_id": null,
+      "extended_id": "sistema-deposicional",
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "reservatorio",
+            "relation": "characterized_by",
             "style": "solid"
           }
         ]
@@ -279,32 +504,48 @@
         "ranp-708",
         "ranp-815"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "contrato de E&P",
+        "contrato de concessão",
+        "contrato de partilha"
+      ],
+      "synonyms_en": [
+        "E&P contract",
+        "exploration and production contract",
+        "upstream contract"
+      ],
+      "examples": [
+        "Concessão BM-S-11",
+        "Partilha de Libra",
+        "Cessão Onerosa de Búzios"
+      ],
       "glossary_id": "contrato-ep",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "anp",
             "relation": "signed_with",
-            "label": "celebrado com",
             "style": "solid"
           },
           {
             "to": "regime-contratual",
             "relation": "defines",
-            "label": "define",
             "style": "solid"
           },
           {
             "to": "periodo-exploratorio",
             "relation": "organized_in",
-            "label": "organizado em",
             "style": "solid"
           },
           {
             "to": "uts",
             "relation": "measured_via",
-            "label": "mede via",
             "style": "solid"
           }
         ],
@@ -312,13 +553,11 @@
           {
             "from": "bloco",
             "relation": "governed_by",
-            "label": "regido por",
             "style": "solid"
           },
           {
             "from": "joa",
             "relation": "complements",
-            "label": "complementa",
             "style": "solid"
           }
         ]
@@ -339,20 +578,38 @@
         "declaracoes-comercialidade",
         "ranp-815"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "Plano de Avaliação de Descobertas",
+        "PAD"
+      ],
+      "synonyms_en": [
+        "Discovery Evaluation Plan",
+        "Appraisal Plan",
+        "DEP"
+      ],
+      "examples": [
+        "PAD Búzios",
+        "PAD Mero",
+        "PAD Sépia",
+        "PAD Atapu"
+      ],
       "glossary_id": "pad",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "bloco",
             "relation": "evaluates",
-            "label": "avalia",
             "style": "solid"
           },
           {
             "to": "declaracao-comercialidade",
             "relation": "may_yield",
-            "label": "pode gerar",
             "style": "dashed"
           }
         ],
@@ -360,7 +617,6 @@
           {
             "from": "bloco",
             "relation": "may_have",
-            "label": "pode ter",
             "style": "dashed"
           }
         ]
@@ -380,15 +636,35 @@
         "pads-concluidos",
         "declaracoes-comercialidade"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BiddingRound",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "rodada",
+        "leilão de blocos",
+        "rodada da ANP"
+      ],
+      "synonyms_en": [
+        "bidding round",
+        "oil auction",
+        "licensing round"
+      ],
+      "examples": [
+        "1ª Rodada (1999)",
+        "17ª Rodada (2022)",
+        "1ª Rodada de Partilha (2013, Libra)",
+        "Cessão Onerosa (2019)"
+      ],
       "glossary_id": "rodada-licitacao",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "bloco",
             "relation": "originated_in",
-            "label": "originado em",
             "style": "solid"
           }
         ]
@@ -407,14 +683,21 @@
         "pads-concluidos",
         "declaracoes-comercialidade"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CommercialityDeclaration",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "declaracao-comercialidade",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "campo",
             "relation": "originates",
-            "label": "origina",
             "style": "solid"
           }
         ],
@@ -422,7 +705,6 @@
           {
             "from": "pad",
             "relation": "may_yield",
-            "label": "pode gerar",
             "style": "dashed"
           }
         ]
@@ -446,14 +728,39 @@
         "ranp-708",
         "ranp-815"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumOperator",
+      "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "operadora",
+        "concessionária",
+        "empresa operadora"
+      ],
+      "synonyms_en": [
+        "operator",
+        "operating company",
+        "lead operator"
+      ],
+      "examples": [
+        "Petrobras",
+        "Shell Brasil",
+        "Equinor",
+        "TotalEnergies",
+        "Repsol Sinopec",
+        "BP Brasil",
+        "Galp Energia"
+      ],
       "glossary_id": "operador",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "processo-sancionador",
             "relation": "may_have",
-            "label": "pode ter",
             "style": "dashed"
           }
         ],
@@ -461,31 +768,26 @@
           {
             "from": "poco",
             "relation": "operated_by",
-            "label": "operado por",
             "style": "solid"
           },
           {
             "from": "bloco",
             "relation": "operated_by",
-            "label": "operado por",
             "style": "solid"
           },
           {
             "from": "ibama",
             "relation": "oversees_environment_of",
-            "label": "fiscaliza ambientalmente",
             "style": "solid"
           },
           {
             "from": "ana-agencia",
             "relation": "regulates_water_use_of",
-            "label": "regula uso de água",
             "style": "dashed"
           },
           {
             "from": "ibp",
             "relation": "represents",
-            "label": "representa",
             "style": "solid"
           }
         ]
@@ -510,20 +812,26 @@
         "ranp-708",
         "ranp-815"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryAgency",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "anp",
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "sigep",
             "relation": "manages_via",
-            "label": "gerencia via",
             "style": "solid"
           },
           {
             "to": "sep",
             "relation": "oversees_via",
-            "label": "fiscaliza via",
             "style": "solid"
           }
         ],
@@ -531,7 +839,6 @@
           {
             "from": "contrato-ep",
             "relation": "signed_with",
-            "label": "celebrado com",
             "style": "solid"
           }
         ]
@@ -552,15 +859,22 @@
         "pads-andamento",
         "pads-concluidos"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#InformationSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "sigep",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "anp",
             "relation": "manages_via",
-            "label": "gerencia via",
             "style": "solid"
           }
         ]
@@ -585,15 +899,22 @@
         "ranp-708",
         "ranp-815"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryUnit",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "sep",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "anp",
             "relation": "oversees_via",
-            "label": "fiscaliza via",
             "style": "solid"
           }
         ]
@@ -611,15 +932,22 @@
       "datasets": [
         "blocos-contrato"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WorkUnit",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "uts",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "contrato-ep",
             "relation": "measured_via",
-            "label": "mede via",
             "style": "solid"
           }
         ]
@@ -639,15 +967,34 @@
         "pads-concluidos",
         "declaracoes-comercialidade"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ContractualRegime",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "regime",
+        "modalidade contratual",
+        "regime de exploração"
+      ],
+      "synonyms_en": [
+        "contract regime",
+        "contract model",
+        "fiscal regime"
+      ],
+      "examples": [
+        "Concessão (Lei 9.478/1997)",
+        "Partilha de Produção (Lei 12.351/2010)",
+        "Cessão Onerosa"
+      ],
       "glossary_id": "regime-contratual",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "contrato-ep",
             "relation": "defines",
-            "label": "define",
             "style": "solid"
           }
         ]
@@ -665,15 +1012,22 @@
       "datasets": [
         "blocos-contrato"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExploratoryPeriod",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "periodo-exploratorio",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "contrato-ep",
             "relation": "organized_in",
-            "label": "organizado em",
             "style": "solid"
           }
         ]
@@ -691,15 +1045,22 @@
       "datasets": [
         "processos-sancionadores"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "processo-sancionador",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "operador",
             "relation": "may_have",
-            "label": "pode ter",
             "style": "dashed"
           }
         ]
@@ -717,15 +1078,23 @@
       "datasets": [
         "pocos-exploratorios"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryNotification",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "notificacao-descoberta",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "poco",
             "relation": "may_register",
-            "label": "pode registrar",
             "style": "dashed"
           }
         ]
@@ -744,8 +1113,32 @@
         "pads-concluidos",
         "declaracoes-comercialidade"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea",
+      "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "área de desenvolvimento",
+        "campo"
+      ],
+      "synonyms_en": [
+        "development area",
+        "field",
+        "producing field"
+      ],
+      "examples": [
+        "Tupi",
+        "Búzios",
+        "Mero",
+        "Sapinhoá",
+        "Lula",
+        "Sépia",
+        "Atapu"
+      ],
       "glossary_id": "area-desenvolvimento",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": []
@@ -763,15 +1156,37 @@
       "datasets": [
         "pocos-exploratorios"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "pré-sal",
+        "camada do pré-sal",
+        "reservatórios do pré-sal"
+      ],
+      "synonyms_en": [
+        "pre-salt",
+        "sub-salt",
+        "subsalt"
+      ],
+      "examples": [
+        "Reservatórios de Tupi",
+        "Reservatórios de Búzios",
+        "Polígono do Pré-sal (Lei 12.351/2010)"
+      ],
       "glossary_id": "presal",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "poco",
             "relation": "may_reach",
-            "label": "pode atingir",
             "style": "dashed"
           }
         ]
@@ -792,8 +1207,17 @@
         "pads-andamento",
         "pads-concluidos"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BasinGroup",
+      "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "bacias-agrupadas",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": []
@@ -815,8 +1239,17 @@
         "pads-concluidos",
         "declaracoes-comercialidade"
       ],
-      "kgraph_uri": null,
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#OperationalEnvironment",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": "ambiente",
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": []
@@ -832,14 +1265,21 @@
       "definition": "Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.",
       "legal_source": "Siglário O&G / API",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "installed_on",
-            "label": "instalado em",
             "style": "solid"
           }
         ],
@@ -856,14 +1296,21 @@
       "definition": "Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "campo",
             "relation": "produces_at",
-            "label": "produz em",
             "style": "solid"
           }
         ],
@@ -871,19 +1318,16 @@
           {
             "from": "riser",
             "relation": "connects",
-            "label": "conecta",
             "style": "solid"
           },
           {
             "from": "manifold-submarino",
             "relation": "feeds",
-            "label": "alimenta",
             "style": "solid"
           },
           {
             "from": "epc",
             "relation": "delivers",
-            "label": "entrega",
             "style": "dashed"
           }
         ]
@@ -899,14 +1343,21 @@
       "definition": "Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "controls",
-            "label": "controla",
             "style": "solid"
           }
         ],
@@ -914,13 +1365,11 @@
           {
             "from": "riser",
             "relation": "connects",
-            "label": "conecta",
             "style": "solid"
           },
           {
             "from": "rov",
             "relation": "operates",
-            "label": "opera",
             "style": "dashed"
           }
         ]
@@ -936,20 +1385,26 @@
       "definition": "Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "anm-eq",
             "relation": "connects",
-            "label": "conecta",
             "style": "solid"
           },
           {
             "to": "fpso",
             "relation": "connects",
-            "label": "conecta",
             "style": "solid"
           }
         ],
@@ -966,14 +1421,21 @@
       "definition": "Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "anm-eq",
             "relation": "operates",
-            "label": "opera",
             "style": "dashed"
           }
         ],
@@ -990,14 +1452,21 @@
       "definition": "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "installed_in",
-            "label": "instalado em",
             "style": "solid"
           }
         ],
@@ -1014,14 +1483,21 @@
       "definition": "Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "composes",
-            "label": "compõe coluna",
             "style": "dashed"
           }
         ],
@@ -1038,14 +1514,21 @@
       "definition": "Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "lifts_from",
-            "label": "eleva fluido em",
             "style": "dashed"
           }
         ],
@@ -1062,14 +1545,21 @@
       "definition": "Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "measures",
-            "label": "mede em",
             "style": "dashed"
           }
         ],
@@ -1086,14 +1576,21 @@
       "definition": "Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "logs",
-            "label": "perfila",
             "style": "dashed"
           }
         ],
@@ -1110,20 +1607,26 @@
       "definition": "Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "gathers_from",
-            "label": "agrega fluxo de",
             "style": "dashed"
           },
           {
             "to": "fpso",
             "relation": "feeds",
-            "label": "alimenta",
             "style": "solid"
           }
         ],
@@ -1140,26 +1643,31 @@
       "definition": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.",
       "legal_source": "Siglário O&G / Lei 7.735/1989",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "operador",
             "relation": "oversees_environment_of",
-            "label": "fiscaliza ambientalmente",
             "style": "solid"
           },
           {
             "to": "eia",
             "relation": "requires",
-            "label": "exige",
             "style": "solid"
           },
           {
             "to": "rima",
             "relation": "requires",
-            "label": "exige",
             "style": "solid"
           }
         ],
@@ -1167,7 +1675,6 @@
           {
             "from": "conama",
             "relation": "guides",
-            "label": "orienta normativamente",
             "style": "solid"
           }
         ]
@@ -1183,14 +1690,21 @@
       "definition": "Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.",
       "legal_source": "Siglário O&G / Lei 6.938/1981",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "ibama",
             "relation": "guides",
-            "label": "orienta normativamente",
             "style": "solid"
           }
         ],
@@ -1207,14 +1721,21 @@
       "definition": "Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "operador",
             "relation": "regulates_water_use_of",
-            "label": "regula uso de água",
             "style": "dashed"
           }
         ],
@@ -1231,14 +1752,21 @@
       "definition": "Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "operador",
             "relation": "represents",
-            "label": "representa",
             "style": "solid"
           }
         ],
@@ -1255,14 +1783,21 @@
       "definition": "Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "bloco",
             "relation": "finances",
-            "label": "financia",
             "style": "dashed"
           }
         ],
@@ -1279,15 +1814,22 @@
       "definition": "Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).",
       "legal_source": "Siglário O&G / Resolução CONAMA 1/1986",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "ibama",
             "relation": "requires",
-            "label": "exige",
             "style": "solid"
           }
         ]
@@ -1303,15 +1845,22 @@
       "definition": "Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [],
         "incoming": [
           {
             "from": "ibama",
             "relation": "requires",
-            "label": "exige",
             "style": "solid"
           }
         ]
@@ -1327,14 +1876,21 @@
       "definition": "Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "authorizes_spending_for",
-            "label": "autoriza gasto em",
             "style": "solid"
           }
         ],
@@ -1351,14 +1907,21 @@
       "definition": "Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "contrato-ep",
             "relation": "complements",
-            "label": "complementa",
             "style": "solid"
           }
         ],
@@ -1375,14 +1938,21 @@
       "definition": "Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).",
       "legal_source": "Siglário O&G",
       "datasets": [],
-      "kgraph_uri": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
       "glossary_id": null,
+      "extended_id": null,
       "relations": {
         "outgoing": [
           {
             "to": "fpso",
             "relation": "delivers",
-            "label": "entrega",
             "style": "dashed"
           }
         ],

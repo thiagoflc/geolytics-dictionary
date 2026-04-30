@@ -83,6 +83,29 @@
     display: inline-block; font-size: 11px; padding: 2px 10px; border-radius: 12px;
     color: white; font-weight: 600; letter-spacing: 0.02em;
   }
+  aside .layer-badge {
+    display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px;
+    margin: 2px 4px 2px 0; font-weight: 600; letter-spacing: 0.02em;
+  }
+  aside .layer-badge.layer1 { background: #EEEDFE; color: #3C3489; }
+  aside .layer-badge.layer2 { background: #E1F5EE; color: #085041; }
+  aside .layer-badge.layer3 { background: #E6F1FB; color: #042C53; }
+  aside .layer-badge.layer4 { background: #F1EFE8; color: #2C2C2A; }
+  aside .layer-badge.layer5 { background: #EAF3DE; color: #173404; }
+  @media (prefers-color-scheme: dark) {
+    aside .layer-badge.layer1 { background: #2A2848; color: #C5C0F0; }
+    aside .layer-badge.layer2 { background: #173B30; color: #A0E0CC; }
+    aside .layer-badge.layer3 { background: #142B45; color: #B0D0F0; }
+    aside .layer-badge.layer4 { background: #2C2C28; color: #D5D2C5; }
+    aside .layer-badge.layer5 { background: #2A3A18; color: #C0E090; }
+  }
+  aside .ext-link {
+    display: block; font-size: 11px; margin-top: 4px;
+    color: var(--fg-soft); text-decoration: none;
+    border-left: 2px solid var(--border); padding-left: 8px;
+  }
+  aside .ext-link:hover { color: var(--fg); border-left-color: var(--fg); }
+  aside .ext-link::before { content: '↗ '; }
 
   footer {
     position: fixed; bottom: 0; left: 0; right: 0;
@@ -253,19 +276,43 @@
     node.attr('transform', (d) => `translate(${d.x},${d.y})`);
   });
 
+  const layerLabels = {
+    layer1: 'GeoCore', layer2: 'O3PO', layer3: 'PetroKGraph', layer4: 'OSDU', layer5: 'ANP',
+  };
+  const layerTitles = {
+    layer1: 'BFO + GeoCore (UFRGS) — ontologia formal de geologia',
+    layer2: 'O3PO + GeoReservoir (UFRGS) — produção offshore e reservatórios',
+    layer3: 'Petro KGraph (PUC-Rio) — knowledge graph PT-BR de O&G',
+    layer4: 'OSDU — Open Subsurface Data Universe (industry standard)',
+    layer5: 'ANP / SIGEP / Lei 9478/1997 — marco regulatório brasileiro',
+  };
+
   function showPanel(d) {
     panel.classList.remove('empty');
     const datasetBadges = (d.datasets || []).map((id) =>
       `<span class="badge">${datasetTitles[id] || id}</span>`
     ).join('');
+    const layerBadges = (d.geocoverage || []).map((L) =>
+      `<span class="layer-badge ${L}" title="${layerTitles[L] || L}">${layerLabels[L] || L}</span>`
+    ).join('');
+    const synBlock = (d.synonyms_pt && d.synonyms_pt.length) || (d.synonyms_en && d.synonyms_en.length)
+      ? `<div class="row"><div class="k">Sinônimos</div><div class="v">${[...(d.synonyms_pt||[]), ...(d.synonyms_en||[])].map(s=>`<span class="badge">${s}</span>`).join('')}</div></div>`
+      : '';
+    const exBlock = (d.examples && d.examples.length)
+      ? `<div class="row"><div class="k">Exemplos</div><div class="v">${d.examples.map(s=>`<span class="badge">${s}</span>`).join('')}</div></div>`
+      : '';
     panel.innerHTML = `
       <span class="type-pill" style="background:${d.color}">${typeLabel[d.type] || d.type}</span>
       <h2 style="margin-top:10px">${d.label}</h2>
       <div class="label-en">${d.label_en || ''}</div>
+      ${layerBadges ? `<div class="row"><div class="k">Camadas semânticas</div><div class="v">${layerBadges}</div></div>` : ''}
       <div class="row"><div class="k">Definição</div><div class="v">${d.definition || '—'}</div></div>
+      ${synBlock}
+      ${exBlock}
       ${d.legal_source ? `<div class="row"><div class="k">Fonte legal</div><div class="v">${d.legal_source}</div></div>` : ''}
       ${(d.datasets && d.datasets.length) ? `<div class="row"><div class="k">Aparece nos datasets</div><div class="v">${datasetBadges}</div></div>` : ''}
-      ${d.kgraph_uri ? `<div class="row"><div class="k">Petro KGraph</div><div class="v"><a href="${d.kgraph_uri}" target="_blank" rel="noopener">${d.kgraph_uri}</a></div></div>` : ''}
+      ${d.petrokgraph_uri ? `<div class="row"><div class="k">Alinhamento ontológico</div><div class="v"><a class="ext-link" href="${d.petrokgraph_uri}" target="_blank" rel="noopener">Petro KGraph (PUC-Rio)</a></div></div>` : ''}
+      ${d.osdu_kind ? `<div class="row"><div class="k">OSDU schema</div><div class="v"><code style="font-size:11px">${d.osdu_kind}</code></div></div>` : ''}
     `;
   }
 

@@ -1,13 +1,14 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T12:33:41.167Z",
-    "count": 23
+    "generated": "2026-04-30T15:17:12.900Z",
+    "count": 31
   },
   "terms": [
     {
       "id": "bloco",
       "termo": "Bloco",
+      "termo_en": "Exploration Block",
       "categoria": "geologia",
       "definicao": "Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.",
       "fonte": "Lei nº 9478, de 06/08/1997",
@@ -19,11 +20,35 @@
         "declaracoes-comercialidade",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock",
+      "osdu_kind": "opendes:osdu:master-data--AcquisitionSurvey:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "bloco exploratório",
+        "área concedida"
+      ],
+      "synonyms_en": [
+        "block",
+        "exploration block",
+        "lease block",
+        "concession block"
+      ],
+      "examples": [
+        "BM-S-11 (Lula)",
+        "BCAM-40 (Búzios)",
+        "BS-4 (Atlanta)",
+        "BM-C-33"
+      ],
+      "source": "glossary"
     },
     {
       "id": "bacia-sedimentar",
       "termo": "Bacia Sedimentar",
+      "termo_en": "Sedimentary Basin",
       "categoria": "geologia",
       "definicao": "Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não.",
       "fonte": "Lei nº 9478, de 06/08/1997",
@@ -33,11 +58,37 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin",
+      "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "bacia",
+        "bacia sedimentar"
+      ],
+      "synonyms_en": [
+        "basin",
+        "sedimentary basin"
+      ],
+      "examples": [
+        "Bacia de Campos",
+        "Bacia de Santos",
+        "Bacia de Sergipe-Alagoas",
+        "Bacia Potiguar",
+        "Bacia do Recôncavo"
+      ],
+      "source": "glossary"
     },
     {
       "id": "bacias-agrupadas",
       "termo": "Bacias Agrupadas",
+      "termo_en": null,
       "categoria": "geologia",
       "definicao": "Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).",
       "fonte": "ANP/SEP",
@@ -46,11 +97,22 @@
         "blocos-contrato",
         "pads-andamento",
         "pads-concluidos"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BasinGroup",
+      "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "ambiente",
       "termo": "Ambiente",
+      "termo_en": null,
       "categoria": "geologia",
       "definicao": "Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.",
       "fonte": "ANP/SEP",
@@ -60,21 +122,57 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#OperationalEnvironment",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "presal",
       "termo": "Pré-sal",
+      "termo_en": "Pre-salt",
       "categoria": "geologia",
       "definicao": "Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável.",
       "fonte": "ANP/SEP",
       "datasets": [
         "pocos-exploratorios"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "pré-sal",
+        "camada do pré-sal",
+        "reservatórios do pré-sal"
+      ],
+      "synonyms_en": [
+        "pre-salt",
+        "sub-salt",
+        "subsalt"
+      ],
+      "examples": [
+        "Reservatórios de Tupi",
+        "Reservatórios de Búzios",
+        "Polígono do Pré-sal (Lei 12.351/2010)"
+      ],
+      "source": "glossary"
     },
     {
       "id": "operador",
       "termo": "Operador",
+      "termo_en": "Operator",
       "categoria": "contratos",
       "definicao": "Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado.",
       "fonte": "ANP/SEP",
@@ -86,22 +184,61 @@
         "declaracoes-comercialidade",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumOperator",
+      "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "operadora",
+        "concessionária",
+        "empresa operadora"
+      ],
+      "synonyms_en": [
+        "operator",
+        "operating company",
+        "lead operator"
+      ],
+      "examples": [
+        "Petrobras",
+        "Shell Brasil",
+        "Equinor",
+        "TotalEnergies",
+        "Repsol Sinopec",
+        "BP Brasil",
+        "Galp Energia"
+      ],
+      "source": "glossary"
     },
     {
       "id": "contratados",
       "termo": "Contratados",
+      "termo_en": null,
       "categoria": "contratos",
       "definicao": "Empresas contratadas e sua participação, em porcentagem, no contrato de E&P. Inclui o operador e eventuais parceiros do consórcio, com suas respectivas parcelas de participação.",
       "fonte": "ANP/SEP",
       "datasets": [
         "blocos-contrato",
         "pads-andamento"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Contractor",
+      "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "contrato-ep",
       "termo": "Contrato de E&P",
+      "termo_en": "E&P Contract",
       "categoria": "contratos",
       "definicao": "Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção.",
       "fonte": "ANP/SEP",
@@ -109,52 +246,114 @@
         "blocos-contrato",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "contrato de E&P",
+        "contrato de concessão",
+        "contrato de partilha"
+      ],
+      "synonyms_en": [
+        "E&P contract",
+        "exploration and production contract",
+        "upstream contract"
+      ],
+      "examples": [
+        "Concessão BM-S-11",
+        "Partilha de Libra",
+        "Cessão Onerosa de Búzios"
+      ],
+      "source": "glossary"
     },
     {
       "id": "periodo-exploratorio",
       "termo": "Período Exploratório",
+      "termo_en": null,
       "categoria": "contratos",
       "definicao": "Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.",
       "fonte": "ANP/SEP",
       "datasets": [
         "blocos-contrato"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExploratoryPeriod",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "uts",
       "termo": "UTS — Unidades de Trabalho",
+      "termo_en": null,
       "categoria": "contratos",
       "definicao": "Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.",
       "fonte": "ANP/SEP",
       "datasets": [
         "blocos-contrato"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WorkUnit",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "fase-exploratoria",
       "termo": "Fase Exploratória",
+      "termo_en": null,
       "categoria": "contratos",
       "definicao": "Período total da fase de exploração do bloco contratado. O vencimento da fase exploratória pode ser igual ao vencimento do último período exploratório ou ao vencimento do último PAD, quando a fase estiver prorrogada por plano de avaliação de descobertas.",
       "fonte": "ANP/SEP",
       "datasets": [
         "blocos-contrato"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationPhase",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "etapa-prorrogada",
       "termo": "Etapa Prorrogada",
+      "termo_en": null,
       "categoria": "contratos",
       "definicao": "Identifica a etapa do período exploratório que foi prorrogada com base em resolução específica da ANP. Pode ser: período único, 1º e 2º PE conjuntamente, ou apenas o 2º PE.",
       "fonte": "ANP/SEP",
       "datasets": [
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "regime-contratual",
       "termo": "Regime Contratual",
+      "termo_en": "Contract Regime",
       "categoria": "contratos",
       "definicao": "Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal.",
       "fonte": "ANP/SEP",
@@ -162,11 +361,33 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ContractualRegime",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "regime",
+        "modalidade contratual",
+        "regime de exploração"
+      ],
+      "synonyms_en": [
+        "contract regime",
+        "contract model",
+        "fiscal regime"
+      ],
+      "examples": [
+        "Concessão (Lei 9.478/1997)",
+        "Partilha de Produção (Lei 12.351/2010)",
+        "Cessão Onerosa"
+      ],
+      "source": "glossary"
     },
     {
       "id": "pad",
       "termo": "PAD — Plano de Avaliação de Descobertas",
+      "termo_en": "Discovery Evaluation Plan",
       "categoria": "operacoes",
       "definicao": "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso.",
       "fonte": "ANP/SEP — SIGEP",
@@ -175,54 +396,151 @@
         "pads-concluidos",
         "declaracoes-comercialidade",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "Plano de Avaliação de Descobertas",
+        "PAD"
+      ],
+      "synonyms_en": [
+        "Discovery Evaluation Plan",
+        "Appraisal Plan",
+        "DEP"
+      ],
+      "examples": [
+        "PAD Búzios",
+        "PAD Mero",
+        "PAD Sépia",
+        "PAD Atapu"
+      ],
+      "source": "glossary"
     },
     {
       "id": "poco-anp",
       "termo": "Poço ANP",
+      "termo_en": "Well (ANP)",
       "categoria": "operacoes",
       "definicao": "Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.",
       "fonte": "ANP/SEP",
       "datasets": [
         "pocos-exploratorios",
         "blocos-contrato"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well",
+      "osdu_kind": "opendes:osdu:master-data--Well:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "poço",
+        "poço exploratório",
+        "poço de petróleo"
+      ],
+      "synonyms_en": [
+        "well",
+        "borehole",
+        "exploratory well",
+        "oil well"
+      ],
+      "examples": [
+        "1-RJS-702-RJ (Tupi)",
+        "1-BRSA-1135-RJS",
+        "3-BRSA-944-RJS (Búzios)",
+        "1-ANP-2-AL"
+      ],
+      "source": "glossary"
     },
     {
       "id": "notificacao-descoberta",
       "termo": "Notificação de Descoberta",
+      "termo_en": null,
       "categoria": "operacoes",
       "definicao": "Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.",
       "fonte": "ANP/SEP — SIGEP",
       "datasets": [
         "pocos-exploratorios"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryNotification",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "declaracao-comercialidade",
       "termo": "Declaração de Comercialidade",
+      "termo_en": null,
       "categoria": "operacoes",
       "definicao": "Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.",
       "fonte": "ANP/SEP — SIGEP",
       "datasets": [
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CommercialityDeclaration",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "area-desenvolvimento",
       "termo": "Área de Desenvolvimento",
+      "termo_en": "Development Area",
       "categoria": "operacoes",
       "definicao": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
       "fonte": "ANP/SEP",
       "datasets": [
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea",
+      "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "área de desenvolvimento",
+        "campo"
+      ],
+      "synonyms_en": [
+        "development area",
+        "field",
+        "producing field"
+      ],
+      "examples": [
+        "Tupi",
+        "Búzios",
+        "Mero",
+        "Sapinhoá",
+        "Lula",
+        "Sépia",
+        "Atapu"
+      ],
+      "source": "glossary"
     },
     {
       "id": "rodada-licitacao",
       "termo": "Rodada de Licitação",
+      "termo_en": "Bidding Round",
       "categoria": "regulatorio",
       "definicao": "Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.",
       "fonte": "Dicionário enciclopédico inglês-português de geofísica e geologia",
@@ -230,21 +548,54 @@
         "pads-andamento",
         "pads-concluidos",
         "declaracoes-comercialidade"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BiddingRound",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "rodada",
+        "leilão de blocos",
+        "rodada da ANP"
+      ],
+      "synonyms_en": [
+        "bidding round",
+        "oil auction",
+        "licensing round"
+      ],
+      "examples": [
+        "1ª Rodada (1999)",
+        "17ª Rodada (2022)",
+        "1ª Rodada de Partilha (2013, Libra)",
+        "Cessão Onerosa (2019)"
+      ],
+      "source": "glossary"
     },
     {
       "id": "processo-sancionador",
       "termo": "Processo Sancionador",
+      "termo_en": null,
       "categoria": "regulatorio",
       "definicao": "Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.",
       "fonte": "ANP/SEP",
       "datasets": [
         "processos-sancionadores"
-      ]
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "anp",
       "termo": "ANP",
+      "termo_en": null,
       "categoria": "regulatorio",
       "definicao": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.",
       "fonte": "Lei nº 9478/1997",
@@ -257,11 +608,21 @@
         "processos-sancionadores",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryAgency",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "sigep",
       "termo": "SIGEP",
+      "termo_en": null,
       "categoria": "sistemas",
       "definicao": "Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.",
       "fonte": "ANP/SEP",
@@ -270,11 +631,21 @@
         "blocos-contrato",
         "pads-andamento",
         "pads-concluidos"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#InformationSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
     },
     {
       "id": "sep",
       "termo": "SEP",
+      "termo_en": null,
       "categoria": "sistemas",
       "definicao": "Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.",
       "fonte": "ANP",
@@ -287,7 +658,288 @@
         "processos-sancionadores",
         "ranp-708",
         "ranp-815"
-      ]
+      ],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryUnit",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "source": "glossary"
+    },
+    {
+      "id": "formacao-geologica",
+      "termo": "Formação Geológica",
+      "termo_en": "Geological Formation",
+      "categoria": "geologia",
+      "definicao": "Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
+      "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "formação",
+        "unidade litoestratigráfica",
+        "unidade geológica"
+      ],
+      "synonyms_en": [
+        "formation",
+        "geological formation",
+        "lithostratigraphic unit"
+      ],
+      "examples": [
+        "Formação Barra Velha (pré-sal)",
+        "Formação Quissamã",
+        "Formação Carapebus",
+        "Formação Itapema"
+      ],
+      "datasets": [],
+      "fonte": "GeoCore (UFRGS/Geosiris)",
+      "source": "extended"
+    },
+    {
+      "id": "reservatorio",
+      "termo": "Reservatório",
+      "termo_en": "Reservoir",
+      "categoria": "geologia",
+      "definicao": "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.",
+      "legal_source": "GeoCore + GeoReservoir (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir",
+      "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "reservatório",
+        "rocha-reservatório",
+        "corpo reservatório"
+      ],
+      "synonyms_en": [
+        "reservoir",
+        "reservoir rock",
+        "pay zone"
+      ],
+      "examples": [
+        "Reservatórios carbonáticos do pré-sal (Coquinas)",
+        "Reservatórios turbidíticos de Campos",
+        "Reservatório Barra Velha"
+      ],
+      "datasets": [],
+      "fonte": "GeoCore + GeoReservoir (UFRGS)",
+      "source": "extended"
+    },
+    {
+      "id": "sistema-deposicional",
+      "termo": "Sistema Deposicional",
+      "termo_en": "Depositional System",
+      "categoria": "geologia",
+      "definicao": "Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.",
+      "legal_source": "GeoReservoir (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "sistema deposicional",
+        "sistema sedimentar",
+        "ambiente deposicional"
+      ],
+      "synonyms_en": [
+        "depositional system",
+        "sedimentary system"
+      ],
+      "examples": [
+        "Sistema turbidítico de águas profundas",
+        "Sistema lacustre carbonático (pré-sal)",
+        "Sistema deltaico"
+      ],
+      "datasets": [],
+      "fonte": "GeoReservoir (UFRGS)",
+      "source": "extended"
+    },
+    {
+      "id": "litologia",
+      "termo": "Litologia",
+      "termo_en": "Lithology",
+      "categoria": "geologia",
+      "definicao": "Descrição das características físicas de uma rocha, incluindo composição mineralógica, textura, cor, granulometria e estruturas sedimentares. Derivado do RockMaterial do GeoCore. Fundamental na descrição de testemunhos e cuttings.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "litologia",
+        "tipo de rocha",
+        "descrição litológica"
+      ],
+      "synonyms_en": [
+        "lithology",
+        "rock type",
+        "lithologic description"
+      ],
+      "examples": [
+        "Folhelho (shale)",
+        "Arenito (sandstone)",
+        "Carbonato (limestone)",
+        "Coquina",
+        "Estromatólito"
+      ],
+      "datasets": [],
+      "fonte": "GeoCore (UFRGS/Geosiris)",
+      "source": "extended"
+    },
+    {
+      "id": "completacao",
+      "termo": "Completação de Poço",
+      "termo_en": "Well Completion",
+      "categoria": "operacoes",
+      "definicao": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura de hidrocarbonetos. Inclui revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV) e canhoneio (perforation) das zonas produtoras.",
+      "legal_source": "O3PO (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellCompletion",
+      "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "completação",
+        "acabamento de poço"
+      ],
+      "synonyms_en": [
+        "well completion",
+        "completion"
+      ],
+      "examples": [
+        "Completação seca (dry tree)",
+        "Completação molhada (subsea com ANM)",
+        "Completação inteligente (smart well)"
+      ],
+      "datasets": [],
+      "fonte": "O3PO (UFRGS)",
+      "source": "extended"
+    },
+    {
+      "id": "lamina-dagua",
+      "termo": "Lâmina d'Água",
+      "termo_en": "Water Depth",
+      "categoria": "geologia",
+      "definicao": "Profundidade da coluna de água entre a superfície do mar e o fundo marinho no local do poço. Parâmetro crítico para classificação de poços offshore: águas rasas (< 300 m), águas profundas (300–1500 m), águas ultraprofundas (> 1500 m). Define complexidade tecnológica e custo das operações.",
+      "legal_source": "O3PO (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WaterDepth",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "lâmina d'água",
+        "profundidade d'água",
+        "LDA"
+      ],
+      "synonyms_en": [
+        "water depth",
+        "WD",
+        "sea depth"
+      ],
+      "examples": [
+        "Bacia de Campos: ~1.000 m",
+        "Pré-sal de Santos: 1.900–2.400 m",
+        "Foz do Amazonas: 2.000–2.880 m"
+      ],
+      "datasets": [],
+      "fonte": "O3PO (UFRGS)",
+      "source": "extended"
+    },
+    {
+      "id": "acumulacao",
+      "termo": "Acumulação de Hidrocarbonetos",
+      "termo_en": "Hydrocarbon Accumulation",
+      "categoria": "geologia",
+      "definicao": "Concentração de petróleo ou gás natural em uma armadilha geológica (estrutural, estratigráfica ou mista) com volume e qualidade suficientes para avaliação técnico-econômica. Precede e fundamenta a Declaração de Comercialidade. Distingue-se de \"campo\" por ainda não ter sido formalmente declarado comercial.",
+      "legal_source": "O3PO + GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "acumulação",
+        "descoberta de hidrocarbonetos",
+        "jazida"
+      ],
+      "synonyms_en": [
+        "hydrocarbon accumulation",
+        "discovery",
+        "accumulation"
+      ],
+      "examples": [
+        "Acumulação de Tupi (descoberta 2006)",
+        "Acumulação de Búzios",
+        "Acumulação de Mero"
+      ],
+      "datasets": [],
+      "fonte": "O3PO + GeoCore",
+      "source": "extended"
+    },
+    {
+      "id": "processo-geologico",
+      "termo": "Processo Geológico",
+      "termo_en": "Geological Process",
+      "categoria": "geologia",
+      "definicao": "Mecanismo natural (sedimentação, diagênese, tectônica, migração de fluidos, evaporação, magmatismo) que gera, modifica ou destrói feições e corpos geológicos ao longo do tempo geológico. Fundamental para entender a formação e preservação de reservatórios e a maturação de hidrocarbonetos.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalProcess",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "processo geológico",
+        "evento geológico"
+      ],
+      "synonyms_en": [
+        "geological process",
+        "geologic process"
+      ],
+      "examples": [
+        "Sedimentação clástica",
+        "Diagênese",
+        "Halocinese (tectônica do sal)",
+        "Migração secundária de hidrocarbonetos"
+      ],
+      "datasets": [],
+      "fonte": "GeoCore (UFRGS/Geosiris)",
+      "source": "extended"
     }
   ]
 }
