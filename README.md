@@ -12,15 +12,17 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 |---|---|
 | `data/glossary.json` | 23 termos ANP (definição, fonte legal, categoria, datasets onde aparece) |
 | `data/datasets.json` | 8 datasets ANP/SEP-SIGEP com metadados de colunas |
-| `data/entity-graph.json` | Grafo de 21 entidades + 21 relações (nodes/edges) |
+| `data/entity-graph.json` | Grafo de 42 entidades + 44 relações (nodes/edges) |
 | `data/ontology-types.json` | Tipologia geoquímica (7) + níveis de processamento (3) + 4 domínios |
+| `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas (equipment, regulator, contract, env etc.) |
 | `data/full.json` | Merge de tudo acima |
 | `api/v1/index.json` | Manifesto da API com URLs de todos os endpoints |
 | `api/v1/terms.json` | Lista plana de termos |
 | `api/v1/entities.json` | Entidades com relações outgoing/incoming pré-computadas |
 | `api/v1/datasets.json` | Datasets com lista de termos referenciados |
+| `api/v1/acronyms.json` | API de siglas com counts por categoria |
 | `api/v1/search-index.json` | Índice de busca client-side (id, text, type, tokens) |
-| `ai/rag-corpus.jsonl` | 145 chunks para embedding (term, column, entity, domain, type) |
+| `ai/rag-corpus.jsonl` | 1.245 chunks para embedding (term, column, entity, domain, type, acronym) |
 | `ai/system-prompt-ptbr.md` | System prompt PT-BR (~800 tokens) |
 | `ai/system-prompt-en.md` | System prompt EN (~800 tokens) |
 | `index.html` | Visualização D3 interativa (GitHub Pages) |
@@ -97,11 +99,37 @@ Leia o conteúdo de `ai/system-prompt-ptbr.md` (ou `ai/system-prompt-en.md`) e u
 |---|---|---|
 | **operational** | `#378ADD` | Poço, Bloco, Campo, Bacia Sedimentar |
 | **contractual** | `#7F77DD` | Contrato E&P, PAD, Rodada de Licitação, Declaração de Comercialidade |
-| **actor** | `#D85A30` | Operador, ANP |
-| **instrument** | `#888780` | SIGEP, SEP, UTS, Regime Contratual, Período Exploratório, Processo Sancionador, Notificação Descoberta, Área de Desenvolvimento |
+| **actor** | `#D85A30` | Operador, ANP, IBAMA, CONAMA, ANA, IBP, BNDES |
+| **instrument** | `#888780` | SIGEP, SEP, UTS, Regime Contratual, Período Exploratório, Processo Sancionador, Notificação Descoberta, Área de Desenvolvimento, EIA, RIMA, AFE, JOA, EPC |
 | **geological** | `#639922` | Pré-sal, Bacias Agrupadas, Ambiente |
+| **equipment** | `#C77B30` | BOP, FPSO, ANM, Riser, ROV, DHSV, BHA, ESP/BCS, MWD, LWD, Manifold Submarino |
 
 Relações entre entidades são tipadas (`drilled_in`, `governed_by`, `evaluates`, `originates`, etc.) e classificadas como `solid` (sempre presente) ou `dashed` (condicional).
+
+---
+
+## Siglário O&G
+
+O arquivo `data/acronyms.json` traz 1.102 siglas curadas do domínio óleo e gás (PT/EN), parseadas e categorizadas a partir de fonte comunitária. Cada entrada tem:
+
+```json
+{
+  "id": "bop",
+  "sigla": "BOP",
+  "expansion_pt": "Preventor de Erupção, Obturador de Segurança",
+  "expansion_en": "Blowout Preventer",
+  "category": "equipment",
+  "it_generic": false
+}
+```
+
+**Categorias**: `equipment` (180), `measurement` (122), `fluid` (113), `process` (74), `environmental` (53), `standard_body` (51), `contract` (47), `unit` (40), `lithology` (39), `geophysics` (33), `well_state` (14), `regulator` (14), `it_generic` (23), `general` (294), `organization` (5).
+
+**Múltiplos sentidos**: a mesma sigla pode ter várias entradas (ex.: BO = "Barrels of Oil" e "Bottom Oil"; BT = "Total Formation Volume Factor" + "Bathythermograph" + "Build and Transfer"). O campo `id` distingue cada sentido; `sigla` é compartilhada.
+
+**Filtragem para RAG**: siglas com `it_generic: true` (CMOS, RAM, FFT, OSI…) são excluídas do `rag-corpus.jsonl` para não competir com o sinal de domínio, mas continuam no JSON para referência.
+
+**Regenerar**: `node scripts/build-acronyms.js` reprocessa `scripts/acronyms-source.txt` → `data/acronyms.json`.
 
 ---
 

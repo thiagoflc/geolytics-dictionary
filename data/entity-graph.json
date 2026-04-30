@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-04-30T11:54:32.275Z",
+  "generated": "2026-04-30T12:33:41.167Z",
   "source": "Geolytics / ANP-SEP / SIGEP",
   "nodes": [
     {
@@ -367,6 +367,279 @@
       ],
       "kgraph_uri": null,
       "glossary_id": "ambiente"
+    },
+    {
+      "id": "bop",
+      "label": "BOP",
+      "label_en": "Blowout Preventer",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.",
+      "legal_source": "Siglário O&G / API",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "fpso",
+      "label": "FPSO",
+      "label_en": "Floating Production, Storage and Offloading",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "anm-eq",
+      "label": "ANM",
+      "label_en": "Wet Christmas Tree (Árvore de Natal Molhada)",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "riser",
+      "label": "Riser",
+      "label_en": "Riser",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "rov",
+      "label": "ROV",
+      "label_en": "Remotely Operated Vehicle",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "dhsv",
+      "label": "DHSV",
+      "label_en": "Downhole Safety Valve",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "bha",
+      "label": "BHA",
+      "label_en": "Bottom-Hole Assembly",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "esp-eq",
+      "label": "ESP/BCS",
+      "label_en": "Electrical Submersible Pump",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "mwd",
+      "label": "MWD",
+      "label_en": "Measure While Drilling",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "lwd",
+      "label": "LWD",
+      "label_en": "Logging While Drilling",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "manifold-submarino",
+      "label": "Manifold Submarino",
+      "label_en": "Subsea Manifold",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "ibama",
+      "label": "IBAMA",
+      "label_en": "Brazilian Institute of Environment",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.",
+      "legal_source": "Siglário O&G / Lei 7.735/1989",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "conama",
+      "label": "CONAMA",
+      "label_en": "National Environmental Council",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.",
+      "legal_source": "Siglário O&G / Lei 6.938/1981",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "ana-agencia",
+      "label": "ANA",
+      "label_en": "National Water Agency",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "ibp",
+      "label": "IBP",
+      "label_en": "Brazilian Petroleum Institute",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "bndes",
+      "label": "BNDES",
+      "label_en": "National Development Bank",
+      "type": "actor",
+      "color": "#D85A30",
+      "size": 24,
+      "definition": "Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "eia",
+      "label": "EIA",
+      "label_en": "Environmental Impact Study",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).",
+      "legal_source": "Siglário O&G / Resolução CONAMA 1/1986",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "rima",
+      "label": "RIMA",
+      "label_en": "Environmental Impact Report",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "afe",
+      "label": "AFE",
+      "label_en": "Approval for Expenditure",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "joa",
+      "label": "JOA",
+      "label_en": "Joint Operating Agreement",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
+    },
+    {
+      "id": "epc",
+      "label": "EPC",
+      "label_en": "Engineering, Procurement, Construction",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).",
+      "legal_source": "Siglário O&G",
+      "datasets": [],
+      "kgraph_uri": null,
+      "glossary_id": null
     }
   ],
   "edges": [
@@ -516,6 +789,167 @@
       "relation": "oversees_via",
       "relation_label": "fiscaliza via",
       "style": "solid"
+    },
+    {
+      "source": "bop",
+      "target": "poco",
+      "relation": "installed_on",
+      "relation_label": "instalado em",
+      "style": "solid"
+    },
+    {
+      "source": "dhsv",
+      "target": "poco",
+      "relation": "installed_in",
+      "relation_label": "instalado em",
+      "style": "solid"
+    },
+    {
+      "source": "anm-eq",
+      "target": "poco",
+      "relation": "controls",
+      "relation_label": "controla",
+      "style": "solid"
+    },
+    {
+      "source": "bha",
+      "target": "poco",
+      "relation": "composes",
+      "relation_label": "compõe coluna",
+      "style": "dashed"
+    },
+    {
+      "source": "esp-eq",
+      "target": "poco",
+      "relation": "lifts_from",
+      "relation_label": "eleva fluido em",
+      "style": "dashed"
+    },
+    {
+      "source": "mwd",
+      "target": "poco",
+      "relation": "measures",
+      "relation_label": "mede em",
+      "style": "dashed"
+    },
+    {
+      "source": "lwd",
+      "target": "poco",
+      "relation": "logs",
+      "relation_label": "perfila",
+      "style": "dashed"
+    },
+    {
+      "source": "fpso",
+      "target": "campo",
+      "relation": "produces_at",
+      "relation_label": "produz em",
+      "style": "solid"
+    },
+    {
+      "source": "riser",
+      "target": "anm-eq",
+      "relation": "connects",
+      "relation_label": "conecta",
+      "style": "solid"
+    },
+    {
+      "source": "riser",
+      "target": "fpso",
+      "relation": "connects",
+      "relation_label": "conecta",
+      "style": "solid"
+    },
+    {
+      "source": "rov",
+      "target": "anm-eq",
+      "relation": "operates",
+      "relation_label": "opera",
+      "style": "dashed"
+    },
+    {
+      "source": "manifold-submarino",
+      "target": "poco",
+      "relation": "gathers_from",
+      "relation_label": "agrega fluxo de",
+      "style": "dashed"
+    },
+    {
+      "source": "manifold-submarino",
+      "target": "fpso",
+      "relation": "feeds",
+      "relation_label": "alimenta",
+      "style": "solid"
+    },
+    {
+      "source": "ibama",
+      "target": "operador",
+      "relation": "oversees_environment_of",
+      "relation_label": "fiscaliza ambientalmente",
+      "style": "solid"
+    },
+    {
+      "source": "ibama",
+      "target": "eia",
+      "relation": "requires",
+      "relation_label": "exige",
+      "style": "solid"
+    },
+    {
+      "source": "ibama",
+      "target": "rima",
+      "relation": "requires",
+      "relation_label": "exige",
+      "style": "solid"
+    },
+    {
+      "source": "conama",
+      "target": "ibama",
+      "relation": "guides",
+      "relation_label": "orienta normativamente",
+      "style": "solid"
+    },
+    {
+      "source": "ana-agencia",
+      "target": "operador",
+      "relation": "regulates_water_use_of",
+      "relation_label": "regula uso de água",
+      "style": "dashed"
+    },
+    {
+      "source": "ibp",
+      "target": "operador",
+      "relation": "represents",
+      "relation_label": "representa",
+      "style": "solid"
+    },
+    {
+      "source": "bndes",
+      "target": "bloco",
+      "relation": "finances",
+      "relation_label": "financia",
+      "style": "dashed"
+    },
+    {
+      "source": "afe",
+      "target": "poco",
+      "relation": "authorizes_spending_for",
+      "relation_label": "autoriza gasto em",
+      "style": "solid"
+    },
+    {
+      "source": "joa",
+      "target": "contrato-ep",
+      "relation": "complements",
+      "relation_label": "complementa",
+      "style": "solid"
+    },
+    {
+      "source": "epc",
+      "target": "fpso",
+      "relation": "delivers",
+      "relation_label": "entrega",
+      "style": "dashed"
     }
   ]
 }

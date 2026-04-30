@@ -289,8 +289,9 @@ const COLORS = {
   actor:       '#D85A30',
   instrument:  '#888780',
   geological:  '#639922',
+  equipment:   '#C77B30',
 };
-const SIZES = { operational: 28, contractual: 24, actor: 24, instrument: 20, geological: 20 };
+const SIZES = { operational: 28, contractual: 24, actor: 24, instrument: 20, geological: 20, equipment: 22 };
 
 /* Mapa: id-entidade-grafo → glossario_id (quando existe) */
 const ENTITY_NODES = [
@@ -326,6 +327,54 @@ const ENTITY_NODES = [
   { id: 'presal',           label: 'Pré-sal',         label_en: 'Pre-salt',         type: 'geological', glossId: 'presal' },
   { id: 'bacias-agrupadas', label: 'Bacias Agrupadas',label_en: 'Grouped Basins',   type: 'geological', glossId: 'bacias-agrupadas' },
   { id: 'ambiente',         label: 'Ambiente',        label_en: 'Environment',      type: 'geological', glossId: 'ambiente' },
+
+  /* equipment (curado a partir do siglário — siglas tier-1 do domínio) */
+  { id: 'bop',  label: 'BOP',  label_en: 'Blowout Preventer', type: 'equipment', glossId: null,
+    definicaoOverride: 'Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.', fonte: 'Siglário O&G / API' },
+  { id: 'fpso', label: 'FPSO', label_en: 'Floating Production, Storage and Offloading', type: 'equipment', glossId: null,
+    definicaoOverride: 'Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.', fonte: 'Siglário O&G' },
+  { id: 'anm-eq', label: 'ANM', label_en: 'Wet Christmas Tree (Árvore de Natal Molhada)', type: 'equipment', glossId: null,
+    definicaoOverride: 'Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.', fonte: 'Siglário O&G' },
+  { id: 'riser', label: 'Riser', label_en: 'Riser', type: 'equipment', glossId: null,
+    definicaoOverride: 'Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).', fonte: 'Siglário O&G' },
+  { id: 'rov',  label: 'ROV',  label_en: 'Remotely Operated Vehicle', type: 'equipment', glossId: null,
+    definicaoOverride: 'Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.', fonte: 'Siglário O&G' },
+  { id: 'dhsv', label: 'DHSV', label_en: 'Downhole Safety Valve', type: 'equipment', glossId: null,
+    definicaoOverride: 'Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.', fonte: 'Siglário O&G' },
+  { id: 'bha',  label: 'BHA',  label_en: 'Bottom-Hole Assembly', type: 'equipment', glossId: null,
+    definicaoOverride: 'Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).', fonte: 'Siglário O&G' },
+  { id: 'esp-eq', label: 'ESP/BCS', label_en: 'Electrical Submersible Pump', type: 'equipment', glossId: null,
+    definicaoOverride: 'Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.', fonte: 'Siglário O&G' },
+  { id: 'mwd',  label: 'MWD',  label_en: 'Measure While Drilling', type: 'equipment', glossId: null,
+    definicaoOverride: 'Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.', fonte: 'Siglário O&G' },
+  { id: 'lwd',  label: 'LWD',  label_en: 'Logging While Drilling', type: 'equipment', glossId: null,
+    definicaoOverride: 'Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.', fonte: 'Siglário O&G' },
+  { id: 'manifold-submarino', label: 'Manifold Submarino', label_en: 'Subsea Manifold', type: 'equipment', glossId: null,
+    definicaoOverride: 'Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.', fonte: 'Siglário O&G' },
+
+  /* actor (atores adicionais do ecossistema regulatório/financeiro brasileiro) */
+  { id: 'ibama', label: 'IBAMA', label_en: 'Brazilian Institute of Environment', type: 'actor', glossId: null,
+    definicaoOverride: 'Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.', fonte: 'Siglário O&G / Lei 7.735/1989' },
+  { id: 'conama', label: 'CONAMA', label_en: 'National Environmental Council', type: 'actor', glossId: null,
+    definicaoOverride: 'Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.', fonte: 'Siglário O&G / Lei 6.938/1981' },
+  { id: 'ana-agencia', label: 'ANA', label_en: 'National Water Agency', type: 'actor', glossId: null,
+    definicaoOverride: 'Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).', fonte: 'Siglário O&G' },
+  { id: 'ibp', label: 'IBP', label_en: 'Brazilian Petroleum Institute', type: 'actor', glossId: null,
+    definicaoOverride: 'Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.', fonte: 'Siglário O&G' },
+  { id: 'bndes', label: 'BNDES', label_en: 'National Development Bank', type: 'actor', glossId: null,
+    definicaoOverride: 'Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.', fonte: 'Siglário O&G' },
+
+  /* instrument (instrumentos contratuais e ambientais adicionais) */
+  { id: 'eia', label: 'EIA', label_en: 'Environmental Impact Study', type: 'instrument', glossId: null,
+    definicaoOverride: 'Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).', fonte: 'Siglário O&G / Resolução CONAMA 1/1986' },
+  { id: 'rima', label: 'RIMA', label_en: 'Environmental Impact Report', type: 'instrument', glossId: null,
+    definicaoOverride: 'Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.', fonte: 'Siglário O&G' },
+  { id: 'afe', label: 'AFE', label_en: 'Approval for Expenditure', type: 'instrument', glossId: null,
+    definicaoOverride: 'Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.', fonte: 'Siglário O&G' },
+  { id: 'joa', label: 'JOA', label_en: 'Joint Operating Agreement', type: 'instrument', glossId: null,
+    definicaoOverride: 'Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.', fonte: 'Siglário O&G' },
+  { id: 'epc', label: 'EPC', label_en: 'Engineering, Procurement, Construction', type: 'instrument', glossId: null,
+    definicaoOverride: 'Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).', fonte: 'Siglário O&G' },
 ];
 
 const EDGES = [
@@ -356,6 +405,35 @@ const EDGES = [
 
   { source: 'anp', target: 'sigep', relation: 'manages_via',   relation_label: 'gerencia via',  style: 'solid' },
   { source: 'anp', target: 'sep',   relation: 'oversees_via',  relation_label: 'fiscaliza via', style: 'solid' },
+
+  /* equipment → poço/campo */
+  { source: 'bop',                 target: 'poco',  relation: 'installed_on',  relation_label: 'instalado em',         style: 'solid' },
+  { source: 'dhsv',                target: 'poco',  relation: 'installed_in',  relation_label: 'instalado em',         style: 'solid' },
+  { source: 'anm-eq',              target: 'poco',  relation: 'controls',      relation_label: 'controla',             style: 'solid' },
+  { source: 'bha',                 target: 'poco',  relation: 'composes',      relation_label: 'compõe coluna',        style: 'dashed' },
+  { source: 'esp-eq',              target: 'poco',  relation: 'lifts_from',    relation_label: 'eleva fluido em',      style: 'dashed' },
+  { source: 'mwd',                 target: 'poco',  relation: 'measures',      relation_label: 'mede em',              style: 'dashed' },
+  { source: 'lwd',                 target: 'poco',  relation: 'logs',          relation_label: 'perfila',              style: 'dashed' },
+  { source: 'fpso',                target: 'campo', relation: 'produces_at',   relation_label: 'produz em',            style: 'solid' },
+  { source: 'riser',               target: 'anm-eq',relation: 'connects',      relation_label: 'conecta',              style: 'solid' },
+  { source: 'riser',               target: 'fpso',  relation: 'connects',      relation_label: 'conecta',              style: 'solid' },
+  { source: 'rov',                 target: 'anm-eq',relation: 'operates',      relation_label: 'opera',                style: 'dashed' },
+  { source: 'manifold-submarino',  target: 'poco',  relation: 'gathers_from',  relation_label: 'agrega fluxo de',      style: 'dashed' },
+  { source: 'manifold-submarino',  target: 'fpso',  relation: 'feeds',         relation_label: 'alimenta',             style: 'solid' },
+
+  /* atores ambientais e financeiros */
+  { source: 'ibama',               target: 'operador', relation: 'oversees_environment_of', relation_label: 'fiscaliza ambientalmente', style: 'solid' },
+  { source: 'ibama',               target: 'eia',      relation: 'requires',  relation_label: 'exige',                  style: 'solid' },
+  { source: 'ibama',               target: 'rima',     relation: 'requires',  relation_label: 'exige',                  style: 'solid' },
+  { source: 'conama',              target: 'ibama',    relation: 'guides',    relation_label: 'orienta normativamente', style: 'solid' },
+  { source: 'ana-agencia',         target: 'operador', relation: 'regulates_water_use_of', relation_label: 'regula uso de água', style: 'dashed' },
+  { source: 'ibp',                 target: 'operador', relation: 'represents',relation_label: 'representa',             style: 'solid' },
+  { source: 'bndes',               target: 'bloco',    relation: 'finances',  relation_label: 'financia',               style: 'dashed' },
+
+  /* instrumentos contratuais adicionais */
+  { source: 'afe',                 target: 'poco',         relation: 'authorizes_spending_for', relation_label: 'autoriza gasto em', style: 'solid' },
+  { source: 'joa',                 target: 'contrato-ep',  relation: 'complements',             relation_label: 'complementa',       style: 'solid' },
+  { source: 'epc',                 target: 'fpso',         relation: 'delivers',                relation_label: 'entrega',           style: 'dashed' },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -417,6 +495,7 @@ function buildEntityGraph() {
 }
 
 function buildFull() {
+  const ac = loadAcronyms();
   return {
     meta: {
       version: VERSION,
@@ -427,12 +506,14 @@ function buildFull() {
         entities: ENTITY_NODES.length,
         edges: EDGES.length,
         domains: DOMAINS.length,
+        acronyms: ac ? ac.acronyms.length : 0,
       },
     },
     glossary: GLOSSARIO,
     datasets: CONJUNTOS,
     ontology: { domains: DOMAINS, typology: ONTOLOGY_TYPES.tipologia, processing_levels: ONTOLOGY_TYPES.nivel },
     entity_graph: { nodes: buildEntityGraph().nodes, edges: EDGES },
+    acronyms: ac ? ac.acronyms : [],
   };
 }
 
@@ -453,11 +534,28 @@ function buildApiIndex() {
       glossary:     `${BASE_URL_PLACEHOLDER}/data/glossary.json`,
       entity_graph: `${BASE_URL_PLACEHOLDER}/data/entity-graph.json`,
       ontology:     `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
+      acronyms:     `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
+      acronyms_api: `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
       full:         `${BASE_URL_PLACEHOLDER}/data/full.json`,
       rag_corpus:   `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
       system_prompt_pt: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-ptbr.md`,
       system_prompt_en: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-en.md`,
     },
+  };
+}
+
+function buildApiAcronyms() {
+  const ac = loadAcronyms();
+  if (!ac) return { meta: { version: VERSION, generated: NOW, count: 0 }, acronyms: [] };
+  return {
+    meta: {
+      version: VERSION,
+      generated: NOW,
+      count: ac.acronyms.length,
+      by_category: ac.meta.by_category,
+      excluded_from_rag: ac.acronyms.filter((a) => a.it_generic).length,
+    },
+    acronyms: ac.acronyms,
   };
 }
 
@@ -556,6 +654,12 @@ function datasetTitle(id) {
   return c ? c.titulo : id;
 }
 
+function loadAcronyms() {
+  const p = path.join(ROOT, 'data/acronyms.json');
+  if (!fs.existsSync(p)) return null;
+  return JSON.parse(fs.readFileSync(p, 'utf8'));
+}
+
 function buildRagCorpus() {
   const lines = [];
 
@@ -640,6 +744,31 @@ function buildRagCorpus() {
       text: `Nível de processamento "${item.label}": ${item.desc}. Indica o grau de transformação do dado bruto até o produto analítico final.`,
       metadata: { id: item.id, group: 'processing_level', label: item.label },
     });
+  }
+
+  /* type=acronym — siglas O&G (filtra it_generic) */
+  const ac = loadAcronyms();
+  if (ac && Array.isArray(ac.acronyms)) {
+    for (const a of ac.acronyms) {
+      if (a.it_generic) continue;
+      const parts = [
+        `${a.sigla}`,
+        a.expansion_pt ? `(${a.expansion_pt})` : null,
+        a.expansion_en ? `— ${a.expansion_en}` : null,
+      ].filter(Boolean).join(' ');
+      const text = `Sigla "${a.sigla}" do domínio O&G, categoria ${a.category}. ${parts}.`;
+      lines.push({
+        id: `acronym_${a.id}`,
+        type: 'acronym',
+        text,
+        metadata: {
+          sigla: a.sigla,
+          category: a.category,
+          expansion_pt: a.expansion_pt,
+          expansion_en: a.expansion_en,
+        },
+      });
+    }
   }
 
   return lines.map((l) => JSON.stringify(l)).join('\n') + '\n';
@@ -754,6 +883,7 @@ writeJson('api/v1/terms.json',        buildApiTerms());
 writeJson('api/v1/entities.json',     buildApiEntities());
 writeJson('api/v1/datasets.json',     buildApiDatasets());
 writeJson('api/v1/search-index.json', buildSearchIndex());
+writeJson('api/v1/acronyms.json',     buildApiAcronyms());
 
 console.log('Generating ai/...');
 writeText('ai/rag-corpus.jsonl',       buildRagCorpus());
