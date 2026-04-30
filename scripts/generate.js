@@ -24,6 +24,22 @@ import {
   DEDUP_RULES,
   RECOMMENDED_USAGE,
 } from './ontology-alignment.js';
+import {
+  ONTOPETRO_CLASSES,
+  ONTOPETRO_PROPERTIES,
+  ONTOPETRO_RELATIONS,
+  ONTOPETRO_INSTANCES,
+  TAXONOMIES,
+  MODULES_EXTENDED,
+  PVT_FIELDS,
+  SYSTEMS,
+  REGIS_NER_MAPPINGS,
+  REGIS_RELATION_TYPES,
+  ONTOPETRO_NODES,
+  ONTOPETRO_EDGES,
+  ONTOPETRO_ALIGNMENT,
+  AMBIGUITY_ALERTS,
+} from './ontopetro-data.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -315,8 +331,9 @@ const COLORS = {
   instrument:  '#888780',
   geological:  '#639922',
   equipment:   '#C77B30',
+  analytical:  '#E67E22',
 };
-const SIZES = { operational: 28, contractual: 24, actor: 24, instrument: 20, geological: 20, equipment: 22 };
+const SIZES = { operational: 28, contractual: 24, actor: 24, instrument: 20, geological: 20, equipment: 22, analytical: 20 };
 
 /* Mapa: id-entidade-grafo → glossario_id (quando existe) */
 const ENTITY_NODES = [
@@ -514,6 +531,92 @@ function buildExtendedTerms() {
   };
 }
 
+function buildOntopetro() {
+  return {
+    meta: {
+      version: VERSION,
+      generated: NOW,
+      description: 'Ontologia de Geociências de Petróleo — 6 módulos formais',
+      sources: ['GeoCore', 'PPDM', 'GDGEO', 'SPE-PRMS', 'ANP', 'OSDU'],
+    },
+    architecture: {
+      layers: [
+        { id: 'camada1', name: 'Foundational',       desc: 'Upper Ontology — UFO/BFO' },
+        { id: 'camada2', name: 'Domain Ontology',    desc: 'Geociências de Petróleo (Geológico, Geofísico, Reservatório, Poços, Bacia)' },
+        { id: 'camada3', name: 'Application Ontology', desc: 'E&P Operacional — Exploração, Avaliação, Produção' },
+      ],
+    },
+    classes:    ONTOPETRO_CLASSES,
+    properties: ONTOPETRO_PROPERTIES,
+    relations:  ONTOPETRO_RELATIONS,
+    instances:  ONTOPETRO_INSTANCES,
+  };
+}
+
+function buildTaxonomies() {
+  return { meta: { version: VERSION, generated: NOW, count: Object.keys(TAXONOMIES).length }, taxonomies: TAXONOMIES };
+}
+
+function buildModulesExtended() {
+  return {
+    meta: {
+      version: VERSION,
+      generated: NOW,
+      description: 'Módulos analíticos internos Geolytics/Petrobras — apenas conteúdo público/conceitual',
+      petrobras_namespace: 'https://petrobras.com.br/geolytics/ontology/',
+      modules: ['M7_geochem', 'M8_rock', 'M9_geomec', 'M10_fluidos'],
+      publication_policy: 'Apenas definições conceituais. Não inclui dados Sigilo=Interno.',
+    },
+    ...MODULES_EXTENDED,
+  };
+}
+
+function buildPvtDictionary() {
+  const high = PVT_FIELDS.filter((f) => f.completeness_pct >= 90).map((f) => f.name);
+  const medium = PVT_FIELDS.filter((f) => f.completeness_pct >= 50 && f.completeness_pct < 90).map((f) => f.name);
+  const low = PVT_FIELDS.filter((f) => f.completeness_pct < 10).map((f) => f.name);
+  return {
+    meta: {
+      source: 'SIRR — Sistema Integrado de Reservatórios Petrobras',
+      description: 'Dicionário de campos PVT com completude real da base corporativa',
+      total_fields: PVT_FIELDS.length,
+      note: 'Completude medida na base SIRR. Campos com < 10% são raridade analítica, não ausência de definição.',
+    },
+    fields: PVT_FIELDS,
+    completeness_notes: {
+      high_completeness: high,
+      medium_completeness: medium,
+      low_completeness_expected: low,
+      rag_note: 'Campos com baixa completude são dados de ensaios especiais — não indicam lacuna de dado, indicam raridade de análise. Um agente RAG deve interpretar "Fa Tanque disponível" como sinal de análise avançada.',
+    },
+  };
+}
+
+function buildSystems() {
+  return {
+    version: VERSION,
+    generated: NOW,
+    description: 'Sistemas corporativos Petrobras que alimentam o Geolytics Dictionary',
+    note: 'Sistemas = proveniência, não acesso. Estes IDs são metadado de origem dos dados, não endpoints conectáveis.',
+    systems: SYSTEMS,
+  };
+}
+
+function buildRegisNer() {
+  return {
+    meta: {
+      version: VERSION,
+      source_corpus: 'PetroGold',
+      source_repo: 'https://github.com/Petroles/regis-collection',
+      source_paper: 'Petroles / PUC-Rio — gold-standard NER corpus for Portuguese petroleum domain',
+      description: 'Mapeamento de tipos de entidade NER (PetroGold) para nós do entity-graph Geolytics. Use para NLP pipelines, fine-tuning de modelos e enriquecimento automático do dicionário.',
+      relation_types_petro_re: REGIS_RELATION_TYPES,
+      generated: NOW,
+    },
+    entity_mappings: REGIS_NER_MAPPINGS,
+  };
+}
+
 function buildOntologyMap() {
   return {
     version: VERSION,
@@ -543,7 +646,7 @@ function buildOntologyTypes() {
 
 function buildEntityGraph() {
   const ext = (id) => EXTENDED_TERMS.find((t) => t.id === id);
-  const nodes = ENTITY_NODES.map((n) => {
+  const baseNodes = ENTITY_NODES.map((n) => {
     const g = n.glossId ? gloss(n.glossId) : null;
     const e = n.extendedId ? ext(n.extendedId) : null;
     const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
@@ -568,8 +671,33 @@ function buildEntityGraph() {
       extended_id: n.extendedId || null,
     };
   });
+  /* Ontopetro/M7-M10 nodes — alignment via ONTOPETRO_ALIGNMENT */
+  const ontopetroNodes = ONTOPETRO_NODES.map((n) => {
+    const align = alignmentFor(ONTOPETRO_ALIGNMENT, n.id);
+    return {
+      id: n.id,
+      label: n.label,
+      label_en: n.label_en,
+      type: n.type,
+      color: COLORS[n.type],
+      size: SIZES[n.type],
+      definition: n.definition,
+      legal_source: n.fonte || null,
+      datasets: [],
+      petrokgraph_uri: align.petrokgraph_uri,
+      osdu_kind: align.osdu_kind,
+      geocoverage: align.geocoverage,
+      synonyms_pt: [],
+      synonyms_en: [],
+      examples: [],
+      glossary_id: null,
+      extended_id: null,
+      ontopetro: true,
+    };
+  });
+  const nodes = [...baseNodes, ...ontopetroNodes];
   /* deriva relation_label_en a partir do snake_case do campo relation */
-  const edges = EDGES.map((e) => ({
+  const edges = [...EDGES, ...ONTOPETRO_EDGES].map((e) => ({
     source: e.source,
     target: e.target,
     relation: e.relation,
@@ -599,13 +727,22 @@ function buildFull() {
         extended_terms: EXTENDED_TERMS.length,
         total_terms: GLOSSARIO.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entity_nodes: ENTITY_NODES.length,
-        entity_edges: EDGES.length,
+        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length,
+        entity_edges: EDGES.length + ONTOPETRO_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
+        ontopetro_classes: ONTOPETRO_CLASSES.length,
+        ontopetro_properties: ONTOPETRO_PROPERTIES.length,
+        ontopetro_relations: ONTOPETRO_RELATIONS.length,
+        ontopetro_instances: ONTOPETRO_INSTANCES.length,
+        modules_extended: Object.keys(MODULES_EXTENDED).length,
+        pvt_fields: PVT_FIELDS.length,
+        systems: SYSTEMS.length,
+        regis_ner_mappings: REGIS_NER_MAPPINGS.length,
+        ambiguity_alerts: AMBIGUITY_ALERTS.length,
         acronyms: ac ? ac.acronyms.length : 0,
       },
-      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU'],
+      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)'],
     },
     glossary: GLOSSARIO.map(enrichTerm),
     extended_terms: EXTENDED_TERMS,
@@ -613,6 +750,12 @@ function buildFull() {
     datasets: CONJUNTOS,
     ontology_types: { domains: DOMAINS, typology: ONTOLOGY_TYPES.tipologia, processing_levels: ONTOLOGY_TYPES.nivel },
     ontology_map: buildOntologyMap(),
+    ontopetro: buildOntopetro(),
+    taxonomies: TAXONOMIES,
+    modules_extended: MODULES_EXTENDED,
+    pvt_dictionary: { fields: PVT_FIELDS, total: PVT_FIELDS.length },
+    systems: SYSTEMS,
+    regis_ner: { entity_mappings: REGIS_NER_MAPPINGS, relation_types: REGIS_RELATION_TYPES },
     acronyms: ac ? ac.acronyms : [],
   };
 }
@@ -636,6 +779,12 @@ function buildApiIndex() {
       entity_graph:    `${BASE_URL_PLACEHOLDER}/data/entity-graph.json`,
       ontology:        `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
       ontology_map:    `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
+      ontopetro:       `${BASE_URL_PLACEHOLDER}/data/ontopetro.json`,
+      taxonomies:      `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
+      modules_extended:`${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
+      pvt_dictionary:  `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
+      systems:         `${BASE_URL_PLACEHOLDER}/data/systems.json`,
+      regis_ner:       `${BASE_URL_PLACEHOLDER}/data/regis-ner-schema.json`,
       acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
       acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
       full:            `${BASE_URL_PLACEHOLDER}/data/full.json`,
@@ -918,6 +1067,121 @@ function buildRagCorpus() {
     });
   }
 
+  /* type=ontopetro_class — 20 classes do Módulo 1 */
+  for (const c of ONTOPETRO_CLASSES) {
+    const text = `Classe ontopetro "${c.name}" (${c.name_en}, superclasse ${c.superclass}): ${c.description}. Domínio: ${c.domain}. Fontes: ${c.sources.join(', ')}.${c.entity_graph_id ? ` Mapeada ao nó do grafo: ${c.entity_graph_id}.` : ''}`;
+    lines.push({
+      id: `ontopetro_class_${c.id}`,
+      type: 'ontopetro_class',
+      text,
+      metadata: { id: c.id, name: c.name, superclass: c.superclass, sources: c.sources, entity_graph_id: c.entity_graph_id },
+    });
+  }
+  /* type=ontopetro_property — propriedades com unidade (alta prioridade RAG) */
+  for (const p of ONTOPETRO_PROPERTIES.filter((x) => x.rag_priority === 'high')) {
+    const text = `Propriedade ontopetro "${p.name}" (${p.name_en || p.name}): ${p.description}. Domínio: ${p.domain_class}. Range: ${p.range}.${p.unit ? ` Unidade: ${p.unit}.` : ''}`;
+    lines.push({
+      id: `ontopetro_property_${p.id}`,
+      type: 'ontopetro_property',
+      text,
+      metadata: { id: p.id, name: p.name, unit: p.unit, domain_class: p.domain_class },
+    });
+  }
+  /* type=ontopetro_relation */
+  for (const r of ONTOPETRO_RELATIONS) {
+    const text = `Relação ontopetro "${r.name}" (${r.name_en}): ${r.description}. ${r.domain} → ${r.range} (cardinalidade ${r.cardinality}). Inversa: ${r.inverse || 'sem'}.`;
+    lines.push({
+      id: `ontopetro_relation_${r.id}`,
+      type: 'ontopetro_relation',
+      text,
+      metadata: { id: r.id, name: r.name, domain: r.domain, range: r.range, cardinality: r.cardinality },
+    });
+  }
+  /* type=instance_ref — instâncias I001-I010 */
+  for (const i of ONTOPETRO_INSTANCES) {
+    const attrs = Object.entries(i.attributes || {}).map(([k, v]) => `${k}: ${v}`).join('; ');
+    const text = `Instância de referência (${i.id}) "${i.name}" — classe ${i.class}.${attrs ? ` Atributos: ${attrs}.` : ''} Fonte: ${i.source}.`;
+    lines.push({
+      id: `instance_${i.id}`,
+      type: 'instance_ref',
+      text,
+      metadata: { id: i.id, class: i.class, name: i.name, source: i.source },
+    });
+  }
+
+  /* type=taxonomy — 9 enumerações do ontopetro M5 */
+  for (const [key, t] of Object.entries(TAXONOMIES)) {
+    const valuesDesc = Array.isArray(t.values)
+      ? t.values.join(', ')
+      : Object.keys(t.values).join(', ');
+    const alert = t.rag_alert ? ` ALERTA: ${t.rag_alert}` : '';
+    const text = `Taxonomia "${t.label}" (${t.label_en || t.label}): ${t.description || `Enumeração canônica de ${t.label}`}. Valores: ${valuesDesc}.${alert}`;
+    lines.push({
+      id: `taxonomy_${key}`,
+      type: 'taxonomy',
+      text,
+      metadata: { key, label: t.label, has_alert: !!t.rag_alert },
+    });
+  }
+
+  /* type=system_ref — 8 sistemas corporativos Petrobras */
+  for (const s of SYSTEMS) {
+    const text = `Sistema corporativo Petrobras "${s.name}" (${s.id}, tipo ${s.type}, domínio ${s.domain}): ${s.description} Objetos de dados: ${s.data_objects.join(', ')}. NOTA: este é metadado de proveniência, não de acesso — agentes não devem tentar conectar.`;
+    lines.push({
+      id: `system_${s.id}`,
+      type: 'system_ref',
+      text,
+      metadata: { id: s.id, type: s.type, domain: s.domain },
+    });
+  }
+
+  /* type=module_extended — M7/M8/M9/M10 visão geral + classes-chave */
+  for (const [key, m] of Object.entries(MODULES_EXTENDED)) {
+    const classList = m.classes.slice(0, 8).map((c) => `${c.id}=${c.name}`).join('; ');
+    const propList = (m.key_properties || []).slice(0, 6).map((p) => `${p.name}${p.unit ? ` [${p.unit}]` : ''}`).join('; ');
+    const cross = m.cross_module_connections ? ` Conexões cross-módulo: ${m.cross_module_connections.map((c) => `${c.from}→${c.to}: ${c.connection}`).join('. ')}.` : '';
+    const text = `Módulo ${key} — ${m.label} (${m.label_en}). Sistemas-fonte: ${m.system_origin}. Classes principais: ${classList}. Propriedades-chave: ${propList}.${cross}`;
+    lines.push({
+      id: `module_${key}`,
+      type: 'module_extended',
+      text,
+      metadata: { module: key, label: m.label, system_origin: m.system_origin },
+    });
+  }
+
+  /* type=pvt_property — campos PVT com completude real (top 10 por relevância) */
+  const pvtImportant = PVT_FIELDS.filter((f) => /API|RGO|Psat|Press|Bacia|Poço|Campo|Temperatura|Fluido/i.test(f.name)).slice(0, 12);
+  for (const f of pvtImportant) {
+    const text = `Campo PVT do sistema SIRR "${f.name}" (tipo ${f.type}): ${f.description}.${f.unit ? ` Unidade: ${f.unit}.` : ''} Completude na base corporativa: ${f.completeness_pct.toFixed(1)}%.`;
+    lines.push({
+      id: `pvt_${f.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`,
+      type: 'pvt_property',
+      text,
+      metadata: { name: f.name, completeness_pct: f.completeness_pct, source: 'SIRR' },
+    });
+  }
+
+  /* type=ambiguity_alert — 13 chunks críticos para LLMs em O&G PT-BR */
+  for (const a of AMBIGUITY_ALERTS) {
+    lines.push({
+      id: a.id,
+      type: 'ambiguity_alert',
+      text: a.text,
+      metadata: { terms: a.terms, priority: 'high' },
+    });
+  }
+
+  /* type=ner_mapping — schema PetroGold */
+  for (const m of REGIS_NER_MAPPINGS) {
+    const text = `Mapeamento NER PetroGold tipo "${m.petrogold_type}" (${m.petrogold_label}) → nós do Geolytics: ${m.geolytics_nodes.join(', ')}. ${m.disambiguation_note} Exemplos: ${m.example_entities.join('; ')}.`;
+    lines.push({
+      id: `ner_mapping_${m.petrogold_type.toLowerCase()}`,
+      type: 'ner_mapping',
+      text,
+      metadata: { petrogold_type: m.petrogold_type, geolytics_nodes: m.geolytics_nodes },
+    });
+  }
+
   /* type=acronym — siglas O&G (filtra it_generic) */
   const ac = loadAcronyms();
   if (ac && Array.isArray(ac.acronyms)) {
@@ -1118,6 +1382,12 @@ writeJson('data/extended-terms.json',  buildExtendedTerms());
 writeJson('data/datasets.json',        buildDatasets());
 writeJson('data/entity-graph.json',    buildEntityGraph());
 writeJson('data/ontology-types.json',  buildOntologyTypes());
+writeJson('data/ontopetro.json',       buildOntopetro());
+writeJson('data/taxonomies.json',      buildTaxonomies());
+writeJson('data/modules-extended.json', buildModulesExtended());
+writeJson('data/pvt-dictionary.json',  buildPvtDictionary());
+writeJson('data/systems.json',         buildSystems());
+writeJson('data/regis-ner-schema.json', buildRegisNer());
 writeJson('data/full.json',            buildFull());
 
 console.log('Generating api/v1/...');
@@ -1138,6 +1408,12 @@ console.log('\n✓ Done.');
 console.log(`  Glossary terms: ${GLOSSARIO.length}`);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
-console.log(`  Entity nodes: ${ENTITY_NODES.length}`);
-console.log(`  Entity edges: ${EDGES.length}`);
+console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro)`);
+console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
+console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
+console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);
+console.log(`  PVT fields: ${PVT_FIELDS.length}`);
+console.log(`  Systems: ${SYSTEMS.length}`);
+console.log(`  REGIS NER mappings: ${REGIS_NER_MAPPINGS.length}`);
+console.log(`  Ambiguity alerts: ${AMBIGUITY_ALERTS.length}`);

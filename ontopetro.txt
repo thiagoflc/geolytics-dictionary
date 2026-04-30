@@ -1,0 +1,178 @@
+## 📐 Visão Geral: Estrutura da Ontologia (Arquitetura em Camadas)
+```
+CAMADA 1 - Foundational (Core Ontology)
+    └── Entidades Fundamentais / Upper Ontology (ex: UFO, BFO)
+    
+CAMADA 2 - Domain Ontology (Geociências de Petróleo)
+    ├── Domínio Geológico
+    ├── Domínio Geofísico
+    ├── Domínio de Reservatório
+    ├── Domínio de Poços
+    └── Domínio de Bacia Sedimentar
+CAMADA 3 - Application Ontology (E&P Operacional)
+    ├── Exploração
+    ├── Avaliação de Acumulações
+    └── Produção (Desenvolvimento)
+```
+---
+## 📄 Estrutura de Dados — Formato Tabular (para importação em ferramentas de ontologia)
+### **MÓDULO 1 — Classes Principais (Concepts)**
+| ID_Classe | Nome_Classe | Superclasse | Descrição | Referência_Domínio | Fonte |
+|---|---|---|---|---|---|
+| C001 | BaciaSedimentar | GeologicalObject | Depressão crustal onde sedimentos se acumulam ao longo do tempo geológico | Geologia Estrutural | GeoCore Ontology |
+| C002 | FormacaoGeologica | GeologicalObject | Unidade litoestratigráfica nomeada e mapeável | Estratigrafia | PPDM / GeoCore |
+| C003 | RochaReservatorio | FormacaoGeologica | Rocha porosa e permeável capaz de armazenar hidrocarbonetos | Petrologia | GDGEO / GeoCore |
+| C004 | RochaCapacitante | FormacaoGeologica | Rocha de baixa permeabilidade que sela o reservatório | Petrologia | GeoCore |
+| C005 | RochaGeneradora | FormacaoGeologica | Rocha rica em matéria orgânica geradora de hidrocarbonetos | Geoquímica | GeoCore |
+| C006 | TrapaPetrolifera | GeologicalObject | Configuração geológica que permite o acúmulo de HC | Geologia Estrutural | PPDM |
+| C007 | SistemaPetrolifero | GeologicalSystem | Conjunto rocha-geradora, migração, reservatório, capa e trapa | Exploração | PPDM / GeoCore |
+| C008 | Acumulacao | GeologicalObject | Volume de HC contido em armadilha com dimensões e propriedades definidas | Exploração | PPDM |
+| C009 | Campo | GeologicalObject | Área geográfica delimitada contendo uma ou mais acumulações | E&P | ANP / PPDM |
+| C010 | Bloco | AdministrativeObject | Área definida em processo de concessão ou partilha para atividade E&P | Regulatório | ANP |
+| C011 | Poco | WellObject | Perfuração realizada para exploração, avaliação ou produção | Poços | PPDM / OSDU |
+| C012 | Testemunho | SampleObject | Amostra cilíndrica de rocha extraída durante a perfuração | Análise de Poços | GDGEO |
+| C013 | PerfilDePoco | WellLog | Medição contínua de propriedades físicas ao longo do poço | Perfilagem | PPDM |
+| C014 | SismoEstratigrafia | InterpretationObject | Análise estratigráfica baseada em dados sísmicos | Interpretação | Petrolês/GeoCore |
+| C015 | Horizonte | SeismicObject | Superfície refletora identificada em dados sísmicos | Geofísica | PPDM |
+| C016 | FalhaGeologica | StructuralObject | Descontinuidade tectônica com deslocamento relativo das camadas | Geologia Estrutural | GeoCore |
+| C017 | Play | ExplorationObject | Combinação de elementos e processos petrolíferos com potencial exploratório | Exploração | PPDM |
+| C018 | Prospecto | ExplorationObject | Área estrutural ou estratigráfica com potencial definido para acumulação | Exploração | PPDM |
+| C019 | Recurso | EconomicObject | Volume de HC identificado com grau variável de certeza geológica | Avaliação | ANP / SPE-PRMS |
+| C020 | Reserva | EconomicObject | Volume de HC tecnicamente recuperável e economicamente viável | Avaliação | ANP / SPE-PRMS |
+---
+### **MÓDULO 2 — Propriedades / Atributos das Classes**
+| ID_Prop | Nome_Propriedade | Tipo | Classe_Domínio | Classe_Alvo_ou_Tipo | Unidade | Descrição |
+|---|---|---|---|---|---|---|
+| P001 | nomeFormacao | DatatypeProperty | FormacaoGeologica | xsd:string | — | Nome oficial da formação litoestratigráfica |
+| P002 | idadeCronoestratigrafica | DatatypeProperty | FormacaoGeologica | xsd:string | Ma (Milhões de anos) | Período geológico da formação |
+| P003 | litologia | DatatypeProperty | FormacaoGeologica | xsd:string | — | Tipo de rocha predominante (arenito, carbonato, folhelho...) |
+| P004 | porosidade | DatatypeProperty | RochaReservatorio | xsd:float | % | Fração do volume total ocupado por poros |
+| P005 | permeabilidade | DatatypeProperty | RochaReservatorio | xsd:float | mD (miliDarcy) | Capacidade da rocha de transmitir fluidos |
+| P006 | saturacaoDeOleo | DatatypeProperty | RochaReservatorio | xsd:float | % | Fração do espaço poroso ocupado por óleo |
+| P007 | profundidadeTopReservatorio | DatatypeProperty | RochaReservatorio | xsd:float | m (metros) | Profundidade do topo do reservatório |
+| P008 | contatoOleaAgua | DatatypeProperty | Acumulacao | xsd:float | m (metros) | Profundidade do contato óleo-água (OWC) |
+| P009 | volumeOriginalOleo | DatatypeProperty | Acumulacao | xsd:float | Mm³ ou MMbbl | Volume de óleo original no reservatório (VOIP/STOIIP) |
+| P010 | fatorDeRecuperacao | DatatypeProperty | Acumulacao | xsd:float | % | Estimativa de recuperação dos HC originais |
+| P011 | coordenadaX | DatatypeProperty | GeospatialObject | xsd:float | graus decimais | Longitude (datum WGS84 ou SIRGAS2000) |
+| P012 | coordenadaY | DatatypeProperty | GeospatialObject | xsd:float | graus decimais | Latitude (datum WGS84 ou SIRGAS2000) |
+| P013 | datumGeodetico | DatatypeProperty | GeospatialObject | xsd:string | — | Sistema geodésico de referência (ex: SIRGAS2000) |
+| P014 | grauAPI | DatatypeProperty | Hidrocarboneto | xsd:float | ºAPI | Densidade do óleo em graus API |
+| P015 | teorDeCarbono | DatatypeProperty | RochaGeneradora | xsd:float | % em peso | Carbono Orgânico Total (COT/TOC) |
+| P016 | janelaDeOleo | DatatypeProperty | SistemaPetrolifero | xsd:string | — | Faixa de maturidade termal em que há geração de óleo |
+| P017 | tipoDeTrapa | DatatypeProperty | TrapaPetrolifera | xsd:string | — | Classificação: estrutural, estratigráfica, combinada |
+| P018 | amplitudeSismica | DatatypeProperty | Horizonte | xsd:float | ms (milissegundos) | Tempo de reflexão sísmica em milissegundos |
+| P019 | nomePoco | DatatypeProperty | Poco | xsd:string | — | Denominação oficial do poço conforme registro ANP |
+| P020 | tipoPoco | DatatypeProperty | Poco | xsd:string | — | Exploratório, avaliação, desenvolvimento, injetor... |
+---
+### **MÓDULO 3 — Relacionamentos (Object Properties)**
+| ID_Rel | Nome_Relacao | Domínio | Alvo | Inversa | Cardinalidade | Descrição |
+|---|---|---|---|---|---|---|
+| R001 | pertenceA | FormacaoGeologica | BaciaSedimentar | contemFormacao | N:1 | Formação pertence a uma bacia sedimentar |
+| R002 | compostoPor | BaciaSedimentar | FormacaoGeologica | pertenceA | 1:N | Bacia é composta por múltiplas formações |
+| R003 | constitui | RochaReservatorio | TrapaPetrolifera | eConstituidaPor | N:M | Rocha reservatório constitui uma trapa |
+| R004 | selaReservatorio | RochaCapacitante | RochaReservatorio | eSeladaPor | N:M | Rocha selante sela o reservatório |
+| R005 | geraHidrocarbonetos | RochaGeneradora | Hidrocarboneto | eGeradoPor | 1:N | Rocha geradora é fonte de HC |
+| R006 | contem | TrapaPetrolifera | Acumulacao | eContidaEm | 1:N | Trapa contém acumulação de HC |
+| R007 | fazParteDe | Acumulacao | Campo | contemAcumulacao | N:1 | Acumulação faz parte de um campo |
+| R008 | localizadoEm | Campo | BaciaSedimentar | contemCampo | N:1 | Campo está localizado em uma bacia |
+| R009 | associadoA | Prospecto | Play | contem | N:1 | Prospecto está associado a um play exploratório |
+| R010 | perfuradoEm | Poco | Campo | contemPoco | N:1 | Poço foi perfurado no campo |
+| R011 | intercepta | Poco | FormacaoGeologica | eInterceptadaPor | N:M | Poço intercepta formações geológicas |
+| R012 | amostradoPor | FormacaoGeologica | Testemunho | amostrou | 1:N | Formação é amostrada por testemunho de sondagem |
+| R013 | medidoPor | FormacaoGeologica | PerfilDePoco | mediu | 1:N | Formação é caracterizada por perfilagem |
+| R014 | integraA | SistemaPetrolifero | BaciaSedimentar | possui | N:1 | Sistema petrolífero integra uma bacia |
+| R015 | localizadoEm (geo) | Poco | Bloco | contemPoco | N:1 | Poço está localizado em um bloco exploratório |
+| R016 | categorizadoEm | Recurso | SPE_PRMS_Categoria | — | N:1 | Recurso classificado segundo SPE-PRMS |
+| R017 | derivaDe | Reserva | Recurso | originaReserva | 1:1 | Reserva é derivada de recurso com certeza econômica |
+| R018 | imageadoPor | Horizonte | LevantamentoSismico | imageia | N:1 | Horizonte identificado por levantamento sísmico |
+| R019 | caracterizadoPor | Acumulacao | FluidoDeReservatorio | caracteriza | 1:N | Acumulação caracterizada por tipo de fluido |
+| R020 | reguladoPor | Bloco | ANP | regula | N:1 | Bloco regulado pela ANP sob contrato específico |
+---
+### **MÓDULO 4 — Instâncias/Indivíduos de Referência (Exemplos)**
+| ID_Instancia | Classe | Nome | Atributo_Principal | Valor | Referência |
+|---|---|---|---|---|---|
+| I001 | BaciaSedimentar | Bacia de Santos | area_km2 | 352.000 | ANP |
+| I002 | BaciaSedimentar | Bacia de Campos | area_km2 | 115.000 | ANP |
+| I003 | BaciaSedimentar | Bacia do Solimões | area_km2 | 590.000 | ANP |
+| I004 | FormacaoGeologica | Formação Barra Velha | bacia | Bacia de Santos | Petrobras |
+| I005 | FormacaoGeologica | Formação Macabu | bacia | Bacia de Campos | Petrobras |
+| I006 | Campo | Campo de Búzios | bacia | Bacia de Santos | ANP |
+| I007 | Campo | Campo de Tupi | bacia | Bacia de Santos | ANP |
+| I008 | TrapaPetrolifera | Pré-sal da Bacia de Santos | tipo | Estratigráfico-Estrutural | Petrobras |
+| I009 | Play | Play Carbonatos Pré-sal | tipo | Estratigráfico | SINTEX/Petrobras |
+| I010 | SistemaPetrolifero | SP Lagoa Feia-Macabu | bacia | Bacia de Campos | GDGEO |
+---
+### **MÓDULO 5 — Taxonomia de Tipos e Enumerações**
+```
+TipoDeLitologia:
+  ├── Siliciclástico
+  │   ├── Arenito
+  │   ├── Conglomerado
+  │   └── Folhelho / Argilito
+  └── Carbonático
+      ├── Calcário
+      ├── Dolomito
+      └── Marga
+TipoDeTrapa:
+  ├── Estrutural
+  │   ├── Anticlinal
+  │   ├── Falha
+  │   └── Domo de Sal
+  ├── Estratigráfico
+  │   ├── Pinch-out
+  │   └── Discordância
+  └── Combinado
+TipoDePoço:
+  ├── Exploratório (1-xxx)
+  ├── Avaliação (2-xxx)
+  ├── Desenvolvimento (3-xxx / 7-xxx)
+  └── Especial (4-xxx / 6-xxx)
+CategoriaRecurso (SPE-PRMS):
+  ├── Reservas
+  │   ├── Provadas (1P)
+  │   ├── Prováveis (2P)
+  │   └── Possíveis (3P)
+  └── Recursos Contingentes
+      ├── C1C
+      ├── C2C
+      └── C3C
+TipoDeFluidoDeReservatorio:
+  ├── Óleo Volátil
+  ├── Óleo Negro
+  ├── Gás Condensado
+  ├── Gás Úmido
+  └── Gás Seco
+```
+---
+### **MÓDULO 6 — Metadados e Proveniência (Data Governance)**
+| Atributo_Metadado | Tipo | Obrigatório | Descrição |
+|---|---|---|---|
+| id_entidade | UUID | Sim | Identificador único global da entidade |
+| versao | xsd:string | Sim | Versão do registro (ex: 1.0, 2.3) |
+| data_criacao | xsd:dateTime | Sim | Data/hora de criação do registro |
+| data_atualizacao | xsd:dateTime | Sim | Data/hora da última atualização |
+| responsavel_dados | xsd:string | Sim | Gestor de dados responsável (gerência/colaborador) |
+| fonte_dado | xsd:string | Sim | Sistema de origem (ex: SDGEO, BDIEP, OpenWells) |
+| status_qualidade | Enum | Sim | Raso / Verificado / Certificado |
+| confidencialidade | Enum | Sim | Público / Restrito / Confidencial / Secreto |
+| CRS_referencia | xsd:string | Sim | Sistema de coordenadas (ex: SIRGAS2000 / WGS84) |
+| comentario | xsd:string | Não | Observações livres sobre o dado |
+
+TipoQuerogeno:
+  ├── Tipo I    → Lacustre / algas (fácies óleo)
+  ├── Tipo II   → Marinho (óleo + gás)
+  ├── Tipo IIS  → Marinho com enxofre (Carbono Rico em S)
+  ├── Tipo III  → Terrígeno / vegetal superior (gás)
+  └── Tipo IV   → Inertinita (sem potencial gerador)
+
+JanelaDeGeracao:
+  ├── Imaturo       → Ro < 0.5%
+  ├── Janela de Óleo → 0.5% < Ro < 1.0%
+  ├── Janela de Gás Úmido → 1.0% < Ro < 1.3%
+  ├── Janela de Gás Seco  → 1.3% < Ro < 2.0%
+  └── Sobrematuro   → Ro > 2.0%
+
+
+
+
+

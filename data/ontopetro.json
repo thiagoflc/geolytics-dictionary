@@ -1,0 +1,802 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-04-30T17:15:12.927Z",
+    "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
+    "sources": [
+      "GeoCore",
+      "PPDM",
+      "GDGEO",
+      "SPE-PRMS",
+      "ANP",
+      "OSDU"
+    ]
+  },
+  "architecture": {
+    "layers": [
+      {
+        "id": "camada1",
+        "name": "Foundational",
+        "desc": "Upper Ontology — UFO/BFO"
+      },
+      {
+        "id": "camada2",
+        "name": "Domain Ontology",
+        "desc": "Geociências de Petróleo (Geológico, Geofísico, Reservatório, Poços, Bacia)"
+      },
+      {
+        "id": "camada3",
+        "name": "Application Ontology",
+        "desc": "E&P Operacional — Exploração, Avaliação, Produção"
+      }
+    ]
+  },
+  "classes": [
+    {
+      "id": "C001",
+      "name": "BaciaSedimentar",
+      "name_en": "Sedimentary Basin",
+      "superclass": "GeologicalObject",
+      "description": "Depressão crustal onde sedimentos se acumulam ao longo do tempo geológico",
+      "domain": "Geologia Estrutural",
+      "sources": [
+        "GeoCore"
+      ],
+      "entity_graph_id": "bacia-sedimentar"
+    },
+    {
+      "id": "C002",
+      "name": "FormacaoGeologica",
+      "name_en": "Geological Formation",
+      "superclass": "GeologicalObject",
+      "description": "Unidade litoestratigráfica nomeada e mapeável",
+      "domain": "Estratigrafia",
+      "sources": [
+        "PPDM",
+        "GeoCore"
+      ],
+      "entity_graph_id": "formacao"
+    },
+    {
+      "id": "C003",
+      "name": "RochaReservatorio",
+      "name_en": "Reservoir Rock",
+      "superclass": "FormacaoGeologica",
+      "description": "Rocha porosa e permeável capaz de armazenar hidrocarbonetos",
+      "domain": "Reservatório",
+      "sources": [
+        "GDGEO",
+        "GeoCore"
+      ],
+      "entity_graph_id": "reservatorio"
+    },
+    {
+      "id": "C004",
+      "name": "RochaCapacitante",
+      "name_en": "Cap Rock",
+      "superclass": "FormacaoGeologica",
+      "description": "Rocha de baixa permeabilidade que sela o reservatório (cap rock)",
+      "domain": "Reservatório",
+      "sources": [
+        "GeoCore"
+      ],
+      "entity_graph_id": "rocha-capacitante"
+    },
+    {
+      "id": "C005",
+      "name": "RochaGeneradora",
+      "name_en": "Source Rock",
+      "superclass": "FormacaoGeologica",
+      "description": "Rocha rica em matéria orgânica geradora de HC (source rock)",
+      "domain": "Geoquímica",
+      "sources": [
+        "GeoCore"
+      ],
+      "entity_graph_id": "rocha-geradora"
+    },
+    {
+      "id": "C006",
+      "name": "TrapaPetrolifera",
+      "name_en": "Petroleum Trap",
+      "superclass": "GeologicalObject",
+      "description": "Configuração geológica que permite acúmulo de HC",
+      "domain": "Sistemas Petrolíferos",
+      "sources": [
+        "PPDM"
+      ],
+      "entity_graph_id": "trapa"
+    },
+    {
+      "id": "C007",
+      "name": "SistemaPetrolifero",
+      "name_en": "Petroleum System",
+      "superclass": "GeologicalSystem",
+      "description": "Conjunto rocha-geradora, migração, reservatório, capa e trapa",
+      "domain": "Sistemas Petrolíferos",
+      "sources": [
+        "PPDM",
+        "GeoCore"
+      ],
+      "entity_graph_id": "sistema-petrolifero"
+    },
+    {
+      "id": "C008",
+      "name": "Acumulacao",
+      "name_en": "Hydrocarbon Accumulation",
+      "superclass": "GeologicalObject",
+      "description": "Volume de HC contido em armadilha com dimensões definidas",
+      "domain": "Reservatório",
+      "sources": [
+        "PPDM"
+      ],
+      "entity_graph_id": "acumulacao"
+    },
+    {
+      "id": "C009",
+      "name": "Campo",
+      "name_en": "Field",
+      "superclass": "GeologicalObject",
+      "description": "Área geográfica delimitada contendo uma ou mais acumulações",
+      "domain": "Produção",
+      "sources": [
+        "ANP",
+        "PPDM"
+      ],
+      "entity_graph_id": "campo"
+    },
+    {
+      "id": "C010",
+      "name": "Bloco",
+      "name_en": "Exploration Block",
+      "superclass": "AdministrativeObject",
+      "description": "Área definida em concessão ou partilha para atividade E&P",
+      "domain": "Regulatório",
+      "sources": [
+        "ANP"
+      ],
+      "entity_graph_id": "bloco"
+    },
+    {
+      "id": "C011",
+      "name": "Poco",
+      "name_en": "Well",
+      "superclass": "WellObject",
+      "description": "Perfuração realizada para exploração, avaliação ou produção",
+      "domain": "Poços",
+      "sources": [
+        "PPDM",
+        "OSDU"
+      ],
+      "entity_graph_id": "poco"
+    },
+    {
+      "id": "C012",
+      "name": "Testemunho",
+      "name_en": "Core Sample",
+      "superclass": "SampleObject",
+      "description": "Amostra cilíndrica de rocha extraída durante perfuração",
+      "domain": "Amostragem",
+      "sources": [
+        "GDGEO"
+      ],
+      "entity_graph_id": "testemunho"
+    },
+    {
+      "id": "C013",
+      "name": "PerfilDePoco",
+      "name_en": "Well Log",
+      "superclass": "WellLog",
+      "description": "Medição contínua de propriedades físicas ao longo do poço",
+      "domain": "Petrofísica",
+      "sources": [
+        "PPDM"
+      ],
+      "entity_graph_id": "perfil-poco"
+    },
+    {
+      "id": "C014",
+      "name": "SismoEstratigrafia",
+      "name_en": "Seismic Stratigraphy",
+      "superclass": "InterpretationObject",
+      "description": "Análise estratigráfica baseada em dados sísmicos",
+      "domain": "Geofísica",
+      "sources": [
+        "Petrolês",
+        "GeoCore"
+      ],
+      "entity_graph_id": null
+    },
+    {
+      "id": "C015",
+      "name": "Horizonte",
+      "name_en": "Seismic Horizon",
+      "superclass": "SeismicObject",
+      "description": "Superfície refletora identificada em dados sísmicos",
+      "domain": "Geofísica",
+      "sources": [
+        "PPDM"
+      ],
+      "entity_graph_id": null
+    },
+    {
+      "id": "C016",
+      "name": "FalhaGeologica",
+      "name_en": "Geological Fault",
+      "superclass": "StructuralObject",
+      "description": "Descontinuidade tectônica com deslocamento relativo das camadas",
+      "domain": "Geologia Estrutural",
+      "sources": [
+        "GeoCore"
+      ],
+      "entity_graph_id": "falha"
+    },
+    {
+      "id": "C017",
+      "name": "Play",
+      "name_en": "Play",
+      "superclass": "ExplorationObject",
+      "description": "Combinação de elementos petrolíferos com potencial exploratório",
+      "domain": "Exploração",
+      "sources": [
+        "PPDM"
+      ],
+      "entity_graph_id": "play"
+    },
+    {
+      "id": "C018",
+      "name": "Prospecto",
+      "name_en": "Prospect",
+      "superclass": "ExplorationObject",
+      "description": "Área estrutural/estratigráfica com potencial para acumulação",
+      "domain": "Exploração",
+      "sources": [
+        "PPDM"
+      ],
+      "entity_graph_id": "prospecto"
+    },
+    {
+      "id": "C019",
+      "name": "Recurso",
+      "name_en": "Resource",
+      "superclass": "EconomicObject",
+      "description": "Volume de HC com grau variável de certeza geológica",
+      "domain": "Reservas/Recursos",
+      "sources": [
+        "ANP",
+        "SPE-PRMS"
+      ],
+      "entity_graph_id": "recurso"
+    },
+    {
+      "id": "C020",
+      "name": "Reserva",
+      "name_en": "Reserve",
+      "superclass": "EconomicObject",
+      "description": "Volume de HC tecnicamente recuperável e economicamente viável",
+      "domain": "Reservas/Recursos",
+      "sources": [
+        "ANP",
+        "SPE-PRMS"
+      ],
+      "entity_graph_id": "reserva"
+    }
+  ],
+  "properties": [
+    {
+      "id": "P001",
+      "name": "nomeFormacao",
+      "name_en": "formationName",
+      "type": "DatatypeProperty",
+      "domain_class": "FormacaoGeologica",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "Nome oficial da formação",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P002",
+      "name": "idadeCronoestratigrafica",
+      "name_en": "chronostratigraphicAge",
+      "type": "DatatypeProperty",
+      "domain_class": "FormacaoGeologica",
+      "range": "xsd:string",
+      "unit": "Ma",
+      "description": "Período geológico (Cretáceo, Aptiano, Albiano…)",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P003",
+      "name": "litologia",
+      "name_en": "lithology",
+      "type": "DatatypeProperty",
+      "domain_class": "FormacaoGeologica",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "Tipo de rocha predominante",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P004",
+      "name": "porosidade",
+      "name_en": "porosity",
+      "type": "DatatypeProperty",
+      "domain_class": "RochaReservatorio",
+      "range": "xsd:float",
+      "unit": "%",
+      "description": "Fração do volume total da rocha ocupado por poros",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P005",
+      "name": "permeabilidade",
+      "name_en": "permeability",
+      "type": "DatatypeProperty",
+      "domain_class": "RochaReservatorio",
+      "range": "xsd:float",
+      "unit": "mD",
+      "description": "Capacidade de transmitir fluidos",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P006",
+      "name": "saturacaoDeOleo",
+      "name_en": "oilSaturation",
+      "type": "DatatypeProperty",
+      "domain_class": "RochaReservatorio",
+      "range": "xsd:float",
+      "unit": "%",
+      "description": "Fração do espaço poroso ocupado por óleo",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P007",
+      "name": "profundidadeTopReservatorio",
+      "name_en": "reservoirTopDepth",
+      "type": "DatatypeProperty",
+      "domain_class": "RochaReservatorio",
+      "range": "xsd:float",
+      "unit": "m",
+      "description": "Profundidade do topo do reservatório",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P008",
+      "name": "contatoOleoAgua",
+      "name_en": "oilWaterContact",
+      "type": "DatatypeProperty",
+      "domain_class": "Acumulacao",
+      "range": "xsd:float",
+      "unit": "m",
+      "description": "Profundidade do contato óleo-água (OWC)",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P009",
+      "name": "volumeOriginalOleo",
+      "name_en": "originalOilInPlace",
+      "type": "DatatypeProperty",
+      "domain_class": "Acumulacao",
+      "range": "xsd:float",
+      "unit": "Mm³/MMbbl",
+      "description": "VOIP/STOIIP — volume original de óleo in place",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P010",
+      "name": "fatorDeRecuperacao",
+      "name_en": "recoveryFactor",
+      "type": "DatatypeProperty",
+      "domain_class": "Acumulacao",
+      "range": "xsd:float",
+      "unit": "%",
+      "description": "Estimativa de recuperação de HC",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P011",
+      "name": "coordenadaX",
+      "name_en": "longitude",
+      "type": "DatatypeProperty",
+      "domain_class": "GeospatialObject",
+      "range": "xsd:float",
+      "unit": "graus",
+      "description": "Longitude WGS84/SIRGAS2000",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P012",
+      "name": "coordenadaY",
+      "name_en": "latitude",
+      "type": "DatatypeProperty",
+      "domain_class": "GeospatialObject",
+      "range": "xsd:float",
+      "unit": "graus",
+      "description": "Latitude WGS84/SIRGAS2000",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P013",
+      "name": "datumGeodetico",
+      "name_en": "geodeticDatum",
+      "type": "DatatypeProperty",
+      "domain_class": "GeospatialObject",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "CRS de referência: SIRGAS2000 ou WGS84",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P014",
+      "name": "grauAPI",
+      "name_en": "apiGravity",
+      "type": "DatatypeProperty",
+      "domain_class": "Hidrocarboneto",
+      "range": "xsd:float",
+      "unit": "°API",
+      "description": "Densidade do óleo em graus API",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P015",
+      "name": "teorDeCarbono",
+      "name_en": "totalOrganicCarbon",
+      "type": "DatatypeProperty",
+      "domain_class": "RochaGeneradora",
+      "range": "xsd:float",
+      "unit": "% peso",
+      "description": "COT/TOC — teor de carbono orgânico total",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P016",
+      "name": "janelaDeOleo",
+      "name_en": "oilWindow",
+      "type": "DatatypeProperty",
+      "domain_class": "SistemaPetrolifero",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "Faixa de maturidade termal",
+      "rag_priority": "high"
+    },
+    {
+      "id": "P017",
+      "name": "tipoDeTrapa",
+      "name_en": "trapType",
+      "type": "DatatypeProperty",
+      "domain_class": "TrapaPetrolifera",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "Estrutural / Estratigráfica / Combinada",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P018",
+      "name": "amplitudeSismica",
+      "name_en": "seismicAmplitude",
+      "type": "DatatypeProperty",
+      "domain_class": "Horizonte",
+      "range": "xsd:float",
+      "unit": "ms",
+      "description": "Tempo de reflexão sísmica",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P019",
+      "name": "nomePoco",
+      "name_en": "wellName",
+      "type": "DatatypeProperty",
+      "domain_class": "Poco",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "Nome oficial ANP do poço",
+      "rag_priority": "medium"
+    },
+    {
+      "id": "P020",
+      "name": "tipoPoco",
+      "name_en": "wellType",
+      "type": "DatatypeProperty",
+      "domain_class": "Poco",
+      "range": "xsd:string",
+      "unit": null,
+      "description": "Exploratório / Avaliação / Desenvolvimento / Injetor",
+      "rag_priority": "medium"
+    }
+  ],
+  "relations": [
+    {
+      "id": "R001",
+      "name": "pertenceA",
+      "name_en": "belongsTo",
+      "domain": "FormacaoGeologica",
+      "range": "BaciaSedimentar",
+      "inverse": "contemFormacao",
+      "cardinality": "N:1",
+      "description": "Formação pertence a uma bacia sedimentar"
+    },
+    {
+      "id": "R002",
+      "name": "compostoPor",
+      "name_en": "composedOf",
+      "domain": "BaciaSedimentar",
+      "range": "FormacaoGeologica",
+      "inverse": "pertenceA",
+      "cardinality": "1:N",
+      "description": "Bacia é composta por múltiplas formações"
+    },
+    {
+      "id": "R003",
+      "name": "constitui",
+      "name_en": "constitutes",
+      "domain": "RochaReservatorio",
+      "range": "TrapaPetrolifera",
+      "inverse": "eConstituidaPor",
+      "cardinality": "N:M",
+      "description": "Rocha reservatório constitui parte da trapa"
+    },
+    {
+      "id": "R004",
+      "name": "selaReservatorio",
+      "name_en": "sealsReservoir",
+      "domain": "RochaCapacitante",
+      "range": "RochaReservatorio",
+      "inverse": "eSeladaPor",
+      "cardinality": "N:M",
+      "description": "Rocha capacitante sela o reservatório"
+    },
+    {
+      "id": "R005",
+      "name": "geraHidrocarbonetos",
+      "name_en": "generatesHydrocarbons",
+      "domain": "RochaGeneradora",
+      "range": "Hidrocarboneto",
+      "inverse": "eGeradoPor",
+      "cardinality": "1:N",
+      "description": "Rocha geradora gera hidrocarbonetos"
+    },
+    {
+      "id": "R006",
+      "name": "contem",
+      "name_en": "contains",
+      "domain": "TrapaPetrolifera",
+      "range": "Acumulacao",
+      "inverse": "eContidaEm",
+      "cardinality": "1:N",
+      "description": "Trapa contém acumulações"
+    },
+    {
+      "id": "R007",
+      "name": "fazParteDe",
+      "name_en": "isPartOf",
+      "domain": "Acumulacao",
+      "range": "Campo",
+      "inverse": "contemAcumulacao",
+      "cardinality": "N:1",
+      "description": "Acumulação faz parte de um campo"
+    },
+    {
+      "id": "R008",
+      "name": "localizadoEm",
+      "name_en": "locatedIn",
+      "domain": "Campo",
+      "range": "BaciaSedimentar",
+      "inverse": "contemCampo",
+      "cardinality": "N:1",
+      "description": "Campo localizado em bacia"
+    },
+    {
+      "id": "R009",
+      "name": "associadoA",
+      "name_en": "associatedWith",
+      "domain": "Prospecto",
+      "range": "Play",
+      "inverse": "contemProspecto",
+      "cardinality": "N:1",
+      "description": "Prospecto associado a play"
+    },
+    {
+      "id": "R010",
+      "name": "perfuradoEm",
+      "name_en": "drilledIn",
+      "domain": "Poco",
+      "range": "Campo",
+      "inverse": "contemPoco",
+      "cardinality": "N:1",
+      "description": "Poço perfurado em campo"
+    },
+    {
+      "id": "R011",
+      "name": "intercepta",
+      "name_en": "intersects",
+      "domain": "Poco",
+      "range": "FormacaoGeologica",
+      "inverse": "eInterceptadaPor",
+      "cardinality": "N:M",
+      "description": "Poço intercepta formações"
+    },
+    {
+      "id": "R012",
+      "name": "amostradoPor",
+      "name_en": "sampledBy",
+      "domain": "FormacaoGeologica",
+      "range": "Testemunho",
+      "inverse": "amostrou",
+      "cardinality": "1:N",
+      "description": "Formação amostrada por testemunhos"
+    },
+    {
+      "id": "R013",
+      "name": "medidoPor",
+      "name_en": "measuredBy",
+      "domain": "FormacaoGeologica",
+      "range": "PerfilDePoco",
+      "inverse": "mediu",
+      "cardinality": "1:N",
+      "description": "Formação medida por perfis de poço"
+    },
+    {
+      "id": "R014",
+      "name": "integraA",
+      "name_en": "integratesTo",
+      "domain": "SistemaPetrolifero",
+      "range": "BaciaSedimentar",
+      "inverse": "possui",
+      "cardinality": "N:1",
+      "description": "Sistema petrolífero integra-se à bacia"
+    },
+    {
+      "id": "R015",
+      "name": "localizadoEmGeo",
+      "name_en": "locatedInGeo",
+      "domain": "Poco",
+      "range": "Bloco",
+      "inverse": "contemPoco",
+      "cardinality": "N:1",
+      "description": "Poço localizado geograficamente em bloco"
+    },
+    {
+      "id": "R016",
+      "name": "categorizadoEm",
+      "name_en": "categorizedAs",
+      "domain": "Recurso",
+      "range": "SPE_PRMS_Categoria",
+      "inverse": null,
+      "cardinality": "N:1",
+      "description": "Recurso categorizado por SPE-PRMS"
+    },
+    {
+      "id": "R017",
+      "name": "derivaDe",
+      "name_en": "derivedFrom",
+      "domain": "Reserva",
+      "range": "Recurso",
+      "inverse": "originaReserva",
+      "cardinality": "1:1",
+      "description": "Reserva deriva de recurso"
+    },
+    {
+      "id": "R018",
+      "name": "imageadoPor",
+      "name_en": "imagedBy",
+      "domain": "Horizonte",
+      "range": "LevantamentoSismico",
+      "inverse": "imageia",
+      "cardinality": "N:1",
+      "description": "Horizonte imageado por levantamento sísmico"
+    },
+    {
+      "id": "R019",
+      "name": "caracterizadoPor",
+      "name_en": "characterizedBy",
+      "domain": "Acumulacao",
+      "range": "FluidoDeReservatorio",
+      "inverse": "caracteriza",
+      "cardinality": "1:N",
+      "description": "Acumulação caracterizada por fluido"
+    },
+    {
+      "id": "R020",
+      "name": "reguladoPor",
+      "name_en": "regulatedBy",
+      "domain": "Bloco",
+      "range": "ANP",
+      "inverse": "regula",
+      "cardinality": "N:1",
+      "description": "Bloco regulado pela ANP"
+    }
+  ],
+  "instances": [
+    {
+      "id": "I001",
+      "class": "BaciaSedimentar",
+      "name": "Bacia de Santos",
+      "attributes": {
+        "area_km2": 352000
+      },
+      "source": "ANP"
+    },
+    {
+      "id": "I002",
+      "class": "BaciaSedimentar",
+      "name": "Bacia de Campos",
+      "attributes": {
+        "area_km2": 115000
+      },
+      "source": "ANP"
+    },
+    {
+      "id": "I003",
+      "class": "BaciaSedimentar",
+      "name": "Bacia do Solimões",
+      "attributes": {
+        "area_km2": 590000
+      },
+      "source": "ANP"
+    },
+    {
+      "id": "I004",
+      "class": "FormacaoGeologica",
+      "name": "Formação Barra Velha",
+      "attributes": {
+        "bacia": "Bacia de Santos",
+        "age": "Aptiano"
+      },
+      "source": "Petrobras"
+    },
+    {
+      "id": "I005",
+      "class": "FormacaoGeologica",
+      "name": "Formação Macabu",
+      "attributes": {
+        "bacia": "Bacia de Campos",
+        "age": "Aptiano"
+      },
+      "source": "Petrobras"
+    },
+    {
+      "id": "I006",
+      "class": "Campo",
+      "name": "Campo de Búzios",
+      "attributes": {
+        "bacia": "Bacia de Santos"
+      },
+      "source": "ANP"
+    },
+    {
+      "id": "I007",
+      "class": "Campo",
+      "name": "Campo de Tupi",
+      "attributes": {
+        "bacia": "Bacia de Santos"
+      },
+      "source": "ANP"
+    },
+    {
+      "id": "I008",
+      "class": "TrapaPetrolifera",
+      "name": "Pré-sal da Bacia de Santos",
+      "attributes": {
+        "tipo": "Estratigráfico-Estrutural"
+      },
+      "source": "Petrobras"
+    },
+    {
+      "id": "I009",
+      "class": "Play",
+      "name": "Play Carbonatos Pré-sal",
+      "attributes": {
+        "tipo": "Estratigráfico"
+      },
+      "source": "SINTEX/Petrobras"
+    },
+    {
+      "id": "I010",
+      "class": "SistemaPetrolifero",
+      "name": "SP Lagoa Feia-Macabu",
+      "attributes": {
+        "bacia": "Bacia de Campos"
+      },
+      "source": "GDGEO"
+    }
+  ]
+}

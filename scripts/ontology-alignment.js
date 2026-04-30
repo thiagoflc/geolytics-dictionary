@@ -367,12 +367,28 @@ export const LAYER_DEFINITIONS = [
     unique_concepts: ['bloco', 'contrato-ep', 'pad', 'rodada-licitacao', 'uts', 'regime-contratual', 'periodo-exploratorio', 'etapa-prorrogada', 'processo-sancionador', 'notificacao-descoberta', 'declaracao-comercialidade'],
     geolytics_coverage: 'all_23_glossario_terms',
   },
+  {
+    id: 'layer6',
+    name: 'Geolytics / Petrobras Internal',
+    maintainer: 'Petrobras / Geolytics',
+    type: 'corporate_internal_ontology',
+    namespace: 'https://petrobras.com.br/geolytics/ontology/',
+    prefix: 'geo:',
+    modules: ['M7 Geoquímica','M8 Rocha','M9 Geomecânica','M10 Fluidos'],
+    systems: ['GEOQWIN','SIRR','LIMS','BDIEP','AIDA','GDA','GEOMECBR','GERESIM','TrapTester'],
+    internal_standards: ['PE-2E&P-00531','PE-2E&P-00463','PE-2P&D-00189'],
+    description: 'Ontologia operacional interna da Petrobras para o Geolytics. Namespace próprio + ligação a sistemas corporativos. Inclui APENAS definições conceituais públicas — dados Sigilo=Interno NÃO são publicados aqui.',
+    status: 'v0.1 Preliminar/Interno',
+    publication_policy: 'Apenas definições conceituais + estrutura de classes/propriedades. NÃO incluir dados operacionais reais nem configurações de sistemas.',
+    geolytics_coverage: 'all_modules_extended (M7+M8+M9+M10)',
+  },
 ];
 
 export const DEDUP_RULES = {
   petrokgraph_vs_geocore: 'NÃO são duplicatas. Petro KGraph É CONSTRUÍDO sobre GeoCore. Petro KGraph URIs referenciam GeoCore implicitamente. Use petrokgraph_uri como referência primária para RAG em português.',
   osdu_vs_others: 'OSDU é schema de dados IT, não ontologia filosófica. Complementar a todos os outros. Use osdu_kind para interoperabilidade com sistemas Petrobras.',
   anp_vs_all: 'Camada ANP é única e não sobrepõe nenhuma ontologia internacional. Conceitos regulatórios brasileiros não existem fora desta camada.',
+  layer6_vs_all: 'Camada 6 (Geolytics/Petrobras Internal) é o ATIVO TÉCNICO mais valioso — representa anos de ontologização interna (M7/M8/M9/M10). Não duplica camadas externas; estende com namespace próprio (geo:) e ligação a sistemas corporativos (GEOQWIN, SIRR, GDA, etc.). Apenas definições conceituais são publicadas; dados Sigilo=Interno NUNCA.',
 };
 
 export const RECOMMENDED_USAGE = {

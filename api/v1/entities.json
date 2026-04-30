@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T15:17:12.900Z",
-    "count": 45
+    "generated": "2026-04-30T17:15:12.927Z",
+    "count": 75
   },
   "entities": [
     {
@@ -77,6 +77,11 @@
             "to": "formacao",
             "relation": "traverses",
             "style": "dashed"
+          },
+          {
+            "to": "intervalo-estratigrafico",
+            "relation": "samples",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -124,6 +129,21 @@
             "from": "afe",
             "relation": "authorizes_spending_for",
             "style": "solid"
+          },
+          {
+            "from": "perfil-poco",
+            "relation": "measures",
+            "style": "solid"
+          },
+          {
+            "from": "janela-lama",
+            "relation": "guides_drilling_of",
+            "style": "solid"
+          },
+          {
+            "from": "ocorrencia-geomec",
+            "relation": "occurs_in",
+            "style": "dashed"
           }
         ]
       }
@@ -213,6 +233,11 @@
             "from": "bndes",
             "relation": "finances",
             "style": "dashed"
+          },
+          {
+            "from": "recurso",
+            "relation": "allocated_to",
+            "style": "dashed"
           }
         ]
       }
@@ -249,6 +274,11 @@
             "to": "reservatorio",
             "relation": "sustained_by",
             "style": "solid"
+          },
+          {
+            "to": "reserva",
+            "relation": "declares",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -260,6 +290,11 @@
           {
             "from": "fpso",
             "relation": "produces_at",
+            "style": "solid"
+          },
+          {
+            "from": "acumulacao",
+            "relation": "becomes",
             "style": "solid"
           }
         ]
@@ -329,6 +364,11 @@
             "from": "reservatorio",
             "relation": "contained_in",
             "style": "solid"
+          },
+          {
+            "from": "sistema-petrolifero",
+            "relation": "integrates_to",
+            "style": "solid"
           }
         ]
       }
@@ -391,6 +431,26 @@
             "from": "campo",
             "relation": "sustained_by",
             "style": "solid"
+          },
+          {
+            "from": "rocha-capacitante",
+            "relation": "seals",
+            "style": "solid"
+          },
+          {
+            "from": "trapa",
+            "relation": "comprises",
+            "style": "solid"
+          },
+          {
+            "from": "modelo-petrofisico",
+            "relation": "characterizes",
+            "style": "solid"
+          },
+          {
+            "from": "facies-sedimentar",
+            "relation": "composes",
+            "style": "solid"
           }
         ]
       }
@@ -432,7 +492,13 @@
       "glossary_id": null,
       "extended_id": "formacao-geologica",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "idade-geologica",
+            "relation": "has_age",
+            "style": "solid"
+          }
+        ],
         "incoming": [
           {
             "from": "poco",
@@ -442,6 +508,11 @@
           {
             "from": "reservatorio",
             "relation": "hosted_in",
+            "style": "solid"
+          },
+          {
+            "from": "testemunho",
+            "relation": "samples",
             "style": "solid"
           }
         ]
@@ -762,6 +833,11 @@
             "to": "processo-sancionador",
             "relation": "may_have",
             "style": "dashed"
+          },
+          {
+            "to": "recurso",
+            "relation": "reports",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -1957,6 +2033,1085 @@
           }
         ],
         "incoming": []
+      }
+    },
+    {
+      "id": "rocha-geradora",
+      "label": "Rocha Geradora",
+      "label_en": "Source Rock",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Rocha rica em matéria orgânica (COT > 1%) capaz de gerar HC quando submetida à temperatura adequada. Equivale a C005 em ontopetro.",
+      "legal_source": "GeoCore / ontopetro C005",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SourceRock",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "materia-organica",
+            "relation": "contains",
+            "style": "solid"
+          },
+          {
+            "to": "sistema-petrolifero",
+            "relation": "feeds",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "maturidade-termal",
+            "relation": "characterizes",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rocha-capacitante",
+      "label": "Rocha Capacitante",
+      "label_en": "Cap Rock",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Rocha de baixa permeabilidade que sela o reservatório, impedindo migração de HC para fora da trapa. Equivale a C004 em ontopetro.",
+      "legal_source": "GeoCore / ontopetro C004",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CapRock",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "reservatorio",
+            "relation": "seals",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "trapa",
+      "label": "Trapa",
+      "label_en": "Petroleum Trap",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Configuração geológica (estrutural, estratigráfica ou combinada) que permite acúmulo de HC. C006 em ontopetro.",
+      "legal_source": "PPDM / ontopetro C006",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumTrap",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "reservatorio",
+            "relation": "comprises",
+            "style": "solid"
+          },
+          {
+            "to": "acumulacao",
+            "relation": "contains",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "falha",
+            "relation": "forms",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sistema-petrolifero",
+      "label": "Sistema Petrolífero",
+      "label_en": "Petroleum System",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Conjunto integrado de rocha geradora, migração, reservatório, capa e trapa. C007 em ontopetro.",
+      "legal_source": "PPDM / GeoCore",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bacia-sedimentar",
+            "relation": "integrates_to",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "rocha-geradora",
+            "relation": "feeds",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "acumulacao",
+      "label": "Acumulação",
+      "label_en": "Hydrocarbon Accumulation",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro.",
+      "legal_source": "PPDM / ontopetro C008",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "campo",
+            "relation": "becomes",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "trapa",
+            "relation": "contains",
+            "style": "solid"
+          },
+          {
+            "from": "prospecto",
+            "relation": "becomes",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "play",
+      "label": "Play",
+      "label_en": "Play",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Combinação de elementos petrolíferos com potencial exploratório regional. C017 em ontopetro.",
+      "legal_source": "PPDM / ontopetro C017",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Play",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "prospecto",
+            "relation": "spawns",
+            "style": "dashed"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "prospecto",
+      "label": "Prospecto",
+      "label_en": "Prospect",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Área específica com potencial para acumulação, dentro de um play. C018 em ontopetro.",
+      "legal_source": "PPDM / ontopetro C018",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Prospect",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "acumulacao",
+            "relation": "becomes",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "play",
+            "relation": "spawns",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "recurso",
+      "label": "Recurso",
+      "label_en": "Resource",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Volume de HC com grau variável de certeza geológica. Categorizado por SPE-PRMS. C019 em ontopetro.",
+      "legal_source": "ANP / SPE-PRMS / ontopetro C019",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Resource",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco",
+            "relation": "allocated_to",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "reserva",
+            "relation": "derived_from",
+            "style": "solid"
+          },
+          {
+            "from": "operador",
+            "relation": "reports",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "reserva",
+      "label": "Reserva",
+      "label_en": "Reserve",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Volume de HC tecnicamente recuperável e economicamente viável. Categorias 1P/2P/3P. C020 em ontopetro. NÃO confundir com Reserva Ambiental.",
+      "legal_source": "ANP / SPE-PRMS / ontopetro C020",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reserve",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "recurso",
+            "relation": "derived_from",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "campo",
+            "relation": "declares",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "falha",
+      "label": "Falha Geológica",
+      "label_en": "Geological Fault",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Descontinuidade tectônica com deslocamento relativo das camadas. C016 em ontopetro.",
+      "legal_source": "GeoCore / ontopetro C016",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFault",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "trapa",
+            "relation": "forms",
+            "style": "dashed"
+          },
+          {
+            "to": "potencial-selante",
+            "relation": "has_property",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "idade-geologica",
+      "label": "Idade Geológica",
+      "label_en": "Geological Age",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Período/época formal segundo ICS GTS2020. Ex.: Aptiano, Albiano, Cretáceo Superior. Tipo NER PetroGold IDA.",
+      "legal_source": "ICS GTS2020 / PetroGold",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer3"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "formacao",
+            "relation": "has_age",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "intervalo-estratigrafico",
+      "label": "Intervalo Estratigráfico",
+      "label_en": "Stratigraphic Interval",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Seção de poço delimitada por dois marcos (topo/base). Usado em testagem, completação e avaliação. NÃO confundir com Idade. Tipo NER PetroGold INT.",
+      "legal_source": "PetroGold / Petrobras",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "samples",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "testemunho",
+      "label": "Testemunho",
+      "label_en": "Core Sample",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Amostra cilíndrica de rocha extraída durante perfuração. C012 em ontopetro.",
+      "legal_source": "GDGEO / ontopetro C012",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Core",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "formacao",
+            "relation": "samples",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "perfil-poco",
+      "label": "Perfil de Poço",
+      "label_en": "Well Log",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Medição contínua de propriedades físicas ao longo do poço (gamma, densidade, sônico, neutron, NMR). C013 em ontopetro.",
+      "legal_source": "PPDM / ontopetro C013",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellLog",
+      "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+      "geocoverage": [
+        "layer3",
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "measures",
+            "style": "solid"
+          },
+          {
+            "to": "litologia",
+            "relation": "infers",
+            "style": "dashed"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "materia-organica",
+      "label": "Matéria Orgânica",
+      "label_en": "Organic Matter",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Substância orgânica preservada na rocha geradora com potencial de gerar HC. Caracterizada por Rock-Eval e tipo de querogênio (I/II/IIS/III/IV). M7 C103.",
+      "legal_source": "GEOQWIN / Rock-Eval",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "rocha-geradora",
+            "relation": "contains",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "maturidade-termal",
+      "label": "Maturidade Termal",
+      "label_en": "Thermal Maturity",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Estado de evolução termal medido por Ro% (vitrinita) e Tmax (Rock-Eval). Janela óleo: Ro 0.5–1.0%, Tmax ~435°C. M7 C104.",
+      "legal_source": "GEOQWIN",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "rocha-geradora",
+            "relation": "characterizes",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "biomarcador",
+      "label": "Biomarcador",
+      "label_en": "Biomarker",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Composto orgânico preservado (hopanos, esteranos, pristano, fitano) usado para correlação óleo-rocha via GC-MS. M7 C106.",
+      "legal_source": "GEOQWIN / GC-MS SIM",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "correlacao-oleo-rocha",
+            "relation": "enables",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "gc-ms",
+            "relation": "detects",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "correlacao-oleo-rocha",
+      "label": "Correlação Óleo-Rocha",
+      "label_en": "Oil-Source Correlation",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Análise que associa hidrocarbonetos produzidos à rocha geradora de origem via assinatura de biomarcadores e isótopos. M7 C107.",
+      "legal_source": "GEOQWIN",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "biomarcador",
+            "relation": "enables",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "litologia",
+      "label": "Litologia",
+      "label_en": "Lithology",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201.",
+      "legal_source": "GDA / RockFinder",
+      "datasets": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "perfil-poco",
+            "relation": "infers",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "facies-sedimentar",
+      "label": "Fácies Sedimentar",
+      "label_en": "Sedimentary Facies",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Unidade rochosa com características físicas e biológicas distintas — base de classificação de reservatório. M8 C203.",
+      "legal_source": "Petrobras / GeoCore",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "reservatorio",
+            "relation": "composes",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "modelo-petrofisico",
+      "label": "Modelo Petrofísico",
+      "label_en": "Petrophysical Model",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw via equação de Archie. M8 C208.",
+      "legal_source": "GDA",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "reservatorio",
+            "relation": "characterizes",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "campo-tensional",
+      "label": "Campo Tensional",
+      "label_en": "In-Situ Stress Field",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Conjunto Sv (vertical), SHmax (horizontal máximo), Shmin (horizontal mínimo). Base do modelo geomecânico. M9 C303.",
+      "legal_source": "GEOMECBR / GERESIM",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "janela-lama",
+            "relation": "defines",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "janela-lama",
+      "label": "Janela de Lama",
+      "label_en": "Mud Weight Window",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Intervalo seguro de peso de lama: limite inferior=colapso (breakout), limite superior=fratura (perda circulação). NÃO confundir com Janela de Geração (Ro%). M9 C309.",
+      "legal_source": "GEOMECBR",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "guides_drilling_of",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "campo-tensional",
+            "relation": "defines",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "ocorrencia-geomec",
+      "label": "Ocorrência Geomecânica",
+      "label_en": "Geomechanical Event",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Eventos: breakouts, kick zones, lost circulation, stuck pipe. Indicadores de problemas operacionais. M9 C317.",
+      "legal_source": "GEOMECBR / Petrobras",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "dashed"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "potencial-selante",
+      "label": "Potencial Selante",
+      "label_en": "Fault Sealing Potential",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Capacidade de falha reter HC — calculado por SGR (Shale Gouge Ratio), CSP e SSF no TrapTester. SGR > 18–20% = potencial selante. M9 C313.",
+      "legal_source": "TrapTester / Badley",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "falha",
+            "relation": "has_property",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "amostra-fluido",
+      "label": "Amostra de Fluido",
+      "label_en": "Fluid Sample",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
+      "legal_source": "LIMS Sample Manager",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:master-data--Sample:1.0.0",
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "pvt",
+            "relation": "undergoes",
+            "style": "dashed"
+          },
+          {
+            "to": "sara",
+            "relation": "undergoes",
+            "style": "dashed"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "pvt",
+      "label": "PVT",
+      "label_en": "PVT Analysis",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Ensaios pressão-volume-temperatura: Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR (35 campos com completude documentada). M10 CL_PVT.",
+      "legal_source": "SIRR",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "classe-fluido",
+            "relation": "classifies",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "amostra-fluido",
+            "relation": "undergoes",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "classe-fluido",
+      "label": "Classe de Fluido",
+      "label_en": "Fluid Class",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO. Sistema AIDA. M10 CL_CLASS_FLUIDO.",
+      "legal_source": "AIDA",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "pvt",
+            "relation": "classifies",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "gc-ms",
+      "label": "GC-MS",
+      "label_en": "GC-MS SIM",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Cromatografia gasosa com espectrometria de massas para biomarcadores (Pr/Ph, hopanos, esteranos). M10 CL_GC_MS.",
+      "legal_source": "GEOQWIN",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [
+          {
+            "to": "biomarcador",
+            "relation": "detects",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "sara",
+      "label": "SARA",
+      "label_en": "SARA",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Saturados/Aromáticos/Resinas/Asfaltenos — fracionamento do óleo bruto. Correlaciona com viscosidade e risco de deposição. M10 CL_SARA.",
+      "legal_source": "GEOQWIN",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "ontopetro": true,
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "amostra-fluido",
+            "relation": "undergoes",
+            "style": "dashed"
+          }
+        ]
       }
     }
   ]

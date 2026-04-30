@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "source_corpus": "PetroGold",
+    "source_repo": "https://github.com/Petroles/regis-collection",
+    "source_paper": "Petroles / PUC-Rio — gold-standard NER corpus for Portuguese petroleum domain",
+    "description": "Mapeamento de tipos de entidade NER (PetroGold) para nós do entity-graph Geolytics. Use para NLP pipelines, fine-tuning de modelos e enriquecimento automático do dicionário.",
+    "relation_types_petro_re": [
+      "has_age",
+      "deposited_in",
+      "found_in",
+      "prod_from",
+      "correlates_with",
+      "identified_by",
+      "has_property"
+    ],
+    "generated": "2026-04-30T17:15:12.927Z"
+  },
+  "entity_mappings": [
+    {
+      "petrogold_type": "ROC",
+      "petrogold_label": "Rocha",
+      "geolytics_nodes": [
+        "litologia",
+        "facies-sedimentar",
+        "rocha-geradora",
+        "rocha-capacitante",
+        "reservatorio"
+      ],
+      "disambiguation_note": "ROC = tipo petrográfico (arenito, calcário). Distinguir de FOR (formação = nome de unidade litoestratigráfica). Erro mais comum em NER de O&G PT-BR.",
+      "example_entities": [
+        "arenito turbidítico",
+        "calcário microbialítico",
+        "folhelho preto",
+        "dolomita"
+      ]
+    },
+    {
+      "petrogold_type": "FOR",
+      "petrogold_label": "Formação",
+      "geolytics_nodes": [
+        "formacao"
+      ],
+      "disambiguation_note": "FOR = nome formal de unidade estratigráfica (Fm. Barra Velha). ≠ ROC (litologia da formação).",
+      "example_entities": [
+        "Formação Barra Velha",
+        "Formação Macabu",
+        "Formação Itajaí-Açu",
+        "Grupo Lagoa Feia"
+      ]
+    },
+    {
+      "petrogold_type": "BAC",
+      "petrogold_label": "Bacia Sedimentar",
+      "geolytics_nodes": [
+        "bacia-sedimentar"
+      ],
+      "disambiguation_note": "Bacias brasileiras: Santos, Campos, Espírito Santo, Potiguar, Solimões.",
+      "example_entities": [
+        "Bacia de Santos",
+        "Bacia de Campos",
+        "Bacia do Espírito Santo"
+      ]
+    },
+    {
+      "petrogold_type": "CAM",
+      "petrogold_label": "Campo Produtor",
+      "geolytics_nodes": [
+        "campo"
+      ],
+      "disambiguation_note": "Campo = área declarada pela ANP. ≠ campo (geográfico) ≠ campo (atributo de dado). Polissemia crítica.",
+      "example_entities": [
+        "Campo de Búzios",
+        "Campo de Tupi",
+        "Campo de Libra"
+      ]
+    },
+    {
+      "petrogold_type": "POC",
+      "petrogold_label": "Poço",
+      "geolytics_nodes": [
+        "poco"
+      ],
+      "disambiguation_note": "Identificador ANP. Formato: 1-XXXXX-XX. Tipos por prefixo: 1=exploratório, 3=desenvolvimento, 4=injeção, 7=monitoramento.",
+      "example_entities": [
+        "1-RJS-0646-RJ",
+        "3-NA-0001-RN",
+        "7-AG-0001-AM"
+      ]
+    },
+    {
+      "petrogold_type": "FLU",
+      "petrogold_label": "Fluido de Reservatório",
+      "geolytics_nodes": [
+        "classe-fluido",
+        "amostra-fluido",
+        "pvt"
+      ],
+      "disambiguation_note": "FLU = tipo de fluido (óleo, gás, condensado, água) ou análise. Distinguir de FLU(químico) = fluido de completação.",
+      "example_entities": [
+        "óleo negro",
+        "condensado de gás",
+        "gás úmido",
+        "água de formação"
+      ]
+    },
+    {
+      "petrogold_type": "PRP",
+      "petrogold_label": "Propriedade Petrofísica/Geoquímica",
+      "geolytics_nodes": [
+        "permeabilidade",
+        "porosidade",
+        "pvt",
+        "sara",
+        "maturidade-termal"
+      ],
+      "disambiguation_note": "PRP = atributo numérico com unidade. Inclui: porosidade (%), permeabilidade (mD), COT (%), API (°API), Psat (psi), Tmax (°C), Ro (%).",
+      "example_entities": [
+        "porosidade de 18%",
+        "permeabilidade de 50 mD",
+        "COT de 3.2%",
+        "Ro = 0.8%"
+      ]
+    },
+    {
+      "petrogold_type": "IDA",
+      "petrogold_label": "Idade Geológica",
+      "geolytics_nodes": [
+        "idade-geologica"
+      ],
+      "disambiguation_note": "IDA = período/época formal (ICS GTS2020). ≠ INT (intervalo estratigráfico).",
+      "example_entities": [
+        "Aptiano",
+        "Albiano",
+        "Cretáceo Superior",
+        "Paleoceno",
+        "Eoceno"
+      ]
+    },
+    {
+      "petrogold_type": "INT",
+      "petrogold_label": "Intervalo Estratigráfico",
+      "geolytics_nodes": [
+        "intervalo-estratigrafico"
+      ],
+      "disambiguation_note": "INT = seção delimitada por dois marcos (topo/base). ≠ IDA (idade). Usado em testagem, completação, avaliação.",
+      "example_entities": [
+        "intervalo 2100-2450m",
+        "zona produtora BVE-110",
+        "intervalo de testagem RJS-646"
+      ]
+    },
+    {
+      "petrogold_type": "ORG",
+      "petrogold_label": "Organização",
+      "geolytics_nodes": [
+        "operador",
+        "anp"
+      ],
+      "disambiguation_note": "ORG = empresa operadora, parceiro de consórcio, agência reguladora. Mapeado a operador (privado) ou anp (regulador).",
+      "example_entities": [
+        "Petrobras",
+        "Shell",
+        "TotalEnergies",
+        "ANP",
+        "PPSA"
+      ]
+    }
+  ]
+}

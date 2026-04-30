@@ -1,0 +1,641 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-04-30T17:15:12.927Z",
+    "description": "Módulos analíticos internos Geolytics/Petrobras — apenas conteúdo público/conceitual",
+    "petrobras_namespace": "https://petrobras.com.br/geolytics/ontology/",
+    "modules": [
+      "M7_geochem",
+      "M8_rock",
+      "M9_geomec",
+      "M10_fluidos"
+    ],
+    "publication_policy": "Apenas definições conceituais. Não inclui dados Sigilo=Interno."
+  },
+  "M7_geochem": {
+    "label": "Geoquímica Orgânica e Inorgânica",
+    "label_en": "Organic & Inorganic Geochemistry",
+    "system_origin": "GEOQWIN, Rock-Eval, GC",
+    "classes": [
+      {
+        "id": "C101",
+        "name": "AnaliseGeoquimica",
+        "superclass": "AnalyticalObject",
+        "description": "Conjunto de análises sobre amostras para caracterização geoquímica"
+      },
+      {
+        "id": "C102",
+        "name": "RochaGeneradora",
+        "superclass": "FormacaoGeologica",
+        "description": "Rocha rica em matéria orgânica capaz de gerar HC (source rock)"
+      },
+      {
+        "id": "C103",
+        "name": "MateriaOrganica",
+        "superclass": "GeochemicalObject",
+        "description": "Substância orgânica preservada na rocha com potencial gerador"
+      },
+      {
+        "id": "C104",
+        "name": "MaturidadeTermal",
+        "superclass": "GeochemicalProperty",
+        "description": "Estado de evolução termal da matéria orgânica (Ro% e Tmax)"
+      },
+      {
+        "id": "C105",
+        "name": "CromatografiaDeGas",
+        "superclass": "AnalyticalMethod",
+        "description": "GC-FID, GC-TCD, GC-MS — análise da composição dos gases"
+      },
+      {
+        "id": "C106",
+        "name": "BioMarcador",
+        "superclass": "GeochemicalObject",
+        "description": "Hopanos, esteranos, pristano, fitano para correlação óleo-rocha"
+      },
+      {
+        "id": "C107",
+        "name": "CorrelacaoOleoRocha",
+        "superclass": "InterpretationObject",
+        "description": "Análise que associa óleo produzido à rocha geradora via biomarcadores"
+      },
+      {
+        "id": "C108",
+        "name": "JanelaDeGeracao",
+        "superclass": "GeochemicalProperty",
+        "description": "Faixa de Ro% em que ocorre geração de HC (0.5–2.0%)"
+      }
+    ],
+    "key_properties": [
+      {
+        "id": "PG01",
+        "name": "COT",
+        "name_en": "TOC",
+        "unit": "% peso",
+        "description": "Carbono Orgânico Total — fundamental para potencial gerador. COT > 2% = excelente"
+      },
+      {
+        "id": "PG02",
+        "name": "S1",
+        "unit": "mg HC/g rocha",
+        "description": "HC livres — Rock-Eval, primeiro pico"
+      },
+      {
+        "id": "PG03",
+        "name": "S2",
+        "unit": "mg HC/g rocha",
+        "description": "Potencial gerador residual (Rock-Eval) — HC ainda gerável"
+      },
+      {
+        "id": "PG04",
+        "name": "S3",
+        "unit": "mg CO2/g rocha",
+        "description": "CO2 liberado durante craqueamento (Rock-Eval)"
+      },
+      {
+        "id": "PG05",
+        "name": "IH",
+        "name_en": "HI",
+        "unit": "mg HC/g COT",
+        "description": "Índice de Hidrogênio (S2/COT×100) — tipo de querogênio e qualidade do óleo"
+      },
+      {
+        "id": "PG06",
+        "name": "IO",
+        "name_en": "OI",
+        "unit": "mg CO2/g COT",
+        "description": "Índice de Oxigênio (S3/COT×100)"
+      },
+      {
+        "id": "PG07",
+        "name": "Tmax",
+        "unit": "°C",
+        "description": "Temperatura máxima de craqueamento — proxy de maturidade. Tmax~435°C = janela óleo"
+      },
+      {
+        "id": "PG08",
+        "name": "Ro",
+        "unit": "%",
+        "description": "Reflectância da Vitrinita — indicador direto de maturidade. Janela óleo: 0.5–1.0%"
+      },
+      {
+        "id": "PG09",
+        "name": "tipoQuerogeno",
+        "description": "Tipo I/II/IIS/III/IV (ver taxonomia tipo_querogeno)"
+      },
+      {
+        "id": "PG10",
+        "name": "razaoC1_C5",
+        "unit": "—",
+        "description": "Razão metano/pentanos — separa gases secos de úmidos"
+      }
+    ]
+  },
+  "M8_rock": {
+    "label": "Rocha e Petrofísica",
+    "label_en": "Rock & Petrophysics",
+    "system_origin": "GDA, Mineral Solver, RockFinder",
+    "classes": [
+      {
+        "id": "C201",
+        "name": "Litologia",
+        "superclass": "RockProperty",
+        "description": "Classificação composicional da rocha (mineralógica e textural)"
+      },
+      {
+        "id": "C202",
+        "name": "Mineralogia",
+        "superclass": "RockProperty",
+        "description": "Composição mineral identificada (FRX, XRD, Mineral Solver)"
+      },
+      {
+        "id": "C203",
+        "name": "FaciesSedimentar",
+        "superclass": "GeologicalObject",
+        "description": "Unidade rochosa com características distintas — base de classificação de reservatório"
+      },
+      {
+        "id": "C204",
+        "name": "TipoPorosidade",
+        "superclass": "ReservoirProperty",
+        "description": "Primária (intergranular), secundária (dissolução/fratura), vugular"
+      },
+      {
+        "id": "C205",
+        "name": "SistemaFratura",
+        "superclass": "RockStructure",
+        "description": "Conjunto de fraturas naturais que afetam permeabilidade"
+      },
+      {
+        "id": "C206",
+        "name": "AnaliseRocha",
+        "superclass": "AnalyticalObject",
+        "description": "Análises laboratoriais de rocha (porosimetria, permeametria, MICP)"
+      },
+      {
+        "id": "C207",
+        "name": "Dolomitizacao",
+        "superclass": "DiageneticProcess",
+        "description": "Substituição de calcita por dolomita — afeta permeabilidade no pré-sal (Castagna)"
+      },
+      {
+        "id": "C208",
+        "name": "ModeloPetrofisico",
+        "superclass": "InterpretationObject",
+        "description": "Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw"
+      },
+      {
+        "id": "C209",
+        "name": "FaciesDePerfuracao",
+        "superclass": "OperationalObject",
+        "description": "Classificação litológica em tempo real durante perfuração"
+      },
+      {
+        "id": "C210",
+        "name": "RockFinder",
+        "superclass": "AIObject",
+        "description": "IA Petrobras (GDA/ML) para sugestão automática de litologia a partir de perfis"
+      }
+    ],
+    "key_properties": [
+      {
+        "id": "PR01",
+        "name": "porosidadeTotal_NMR",
+        "unit": "%",
+        "description": "Porosidade por Ressonância Magnética Nuclear — mais precisa para carbonatos pré-sal"
+      },
+      {
+        "id": "PR02",
+        "name": "porosidadeTotal_Den",
+        "unit": "%",
+        "description": "Porosidade derivada do perfil de densidade (Den)"
+      },
+      {
+        "id": "PR03",
+        "name": "porosidadeTotal_Neu",
+        "unit": "%",
+        "description": "Porosidade derivada do perfil de neutron (Neu)"
+      },
+      {
+        "id": "PR04",
+        "name": "porosidadeTotal_Son",
+        "unit": "%",
+        "description": "Porosidade derivada do perfil sônico (Son)"
+      },
+      {
+        "id": "PR05",
+        "name": "permeabilidadeHorizontal",
+        "unit": "mD",
+        "description": "kH — fluxo lateral (direção do acamamento)"
+      },
+      {
+        "id": "PR06",
+        "name": "permeabilidadeVertical",
+        "unit": "mD",
+        "description": "kV — fluxo cruzando camadas. Razão kV/kH crítica para avaliação"
+      },
+      {
+        "id": "PR07",
+        "name": "saturacaoAgua_Sw",
+        "unit": "%",
+        "description": "Saturação de água — equação de Archie (parâmetros m e n)"
+      },
+      {
+        "id": "PR08",
+        "name": "fatorArchie_m",
+        "unit": "—",
+        "description": "Expoente de cementação na equação de Archie"
+      },
+      {
+        "id": "PR09",
+        "name": "fatorArchie_n",
+        "unit": "—",
+        "description": "Expoente de saturação na equação de Archie"
+      },
+      {
+        "id": "PR10",
+        "name": "densidadeMatriz",
+        "unit": "g/cm³",
+        "description": "Densidade da matriz mineral (calcita=2.71, dolomita=2.87, quartzo=2.65)"
+      },
+      {
+        "id": "PR15",
+        "name": "classificacaoLitol_IA",
+        "unit": "—",
+        "description": "Litologia inferida por ML (RockFinder/GDA) — Petrobras"
+      }
+    ]
+  },
+  "M9_geomec": {
+    "label": "Geomecânica de Reservatório",
+    "label_en": "Reservoir Geomechanics",
+    "system_origin": "GEOMECBR, GERESIM, TrapTester, GDA",
+    "hierarchy_ref": "GeomechanicsObject.md (arquivo na pasta /dados)",
+    "classes": [
+      {
+        "id": "C301",
+        "name": "ModeloGeomecanico1D",
+        "superclass": "GeomechanicsObject",
+        "description": "Modelo geomecânico ao longo de um poço (GEOMECBR)"
+      },
+      {
+        "id": "C302",
+        "name": "ModeloGeomecanico3D",
+        "superclass": "GeomechanicsObject",
+        "description": "Modelo volumétrico integrado ao modelo geológico (GERESIM)"
+      },
+      {
+        "id": "C303",
+        "name": "CampoTensionalInSitu",
+        "superclass": "GeomechanicsObject",
+        "description": "Tensores Sv (vertical), SHmax (horiz. max), Shmin (horiz. min)"
+      },
+      {
+        "id": "C304",
+        "name": "TensaoVertical",
+        "superclass": "CampoTensionalInSitu",
+        "description": "Sv — sobrecarga calculada por integração da densidade"
+      },
+      {
+        "id": "C305",
+        "name": "TensaoHorizontalMinima",
+        "superclass": "CampoTensionalInSitu",
+        "description": "Shmin — calibrada por LOT/XLOT/Mini-frac"
+      },
+      {
+        "id": "C306",
+        "name": "TensaoHorizontalMaxima",
+        "superclass": "CampoTensionalInSitu",
+        "description": "SHmax — orientada por breakouts e fraturas induzidas"
+      },
+      {
+        "id": "C307",
+        "name": "PressaoDePoros",
+        "superclass": "GeomechanicsObject",
+        "description": "Pp — fundamental para tensão efetiva e janela de lama"
+      },
+      {
+        "id": "C308",
+        "name": "PropriedadeMecanicaRocha",
+        "superclass": "RockMechanicalProperty",
+        "description": "UCS, E (Young), ν (Poisson), K (bulk), G (shear)"
+      },
+      {
+        "id": "C309",
+        "name": "JanelaDeLama",
+        "superclass": "DrillingObject",
+        "description": "Intervalo seguro: limInf=colapso, limSup=fratura/perda circulação"
+      },
+      {
+        "id": "C310",
+        "name": "Breakout",
+        "superclass": "OcorrenciaGeomecanica",
+        "description": "Colapso compressivo na direção Shmin — caliper 4 braços ou FMI/UBI"
+      },
+      {
+        "id": "C311",
+        "name": "FraturaInduzida",
+        "superclass": "OcorrenciaGeomecanica",
+        "description": "Fratura criada por perfuração — orientada por SHmax"
+      },
+      {
+        "id": "C312",
+        "name": "FraturaNatural",
+        "superclass": "RockStructure",
+        "description": "Aberta, mineralizada ou induzida"
+      },
+      {
+        "id": "C313",
+        "name": "PotencialSelanteFalha",
+        "superclass": "FaultProperty",
+        "description": "Capacidade de selo — SGR, CSP, SSF (TrapTester/BEM)"
+      },
+      {
+        "id": "C314",
+        "name": "ZonaDeDanoDeFalha",
+        "superclass": "FaultProperty",
+        "description": "Volume rochoso adjacente à falha com permeabilidade alterada"
+      },
+      {
+        "id": "C315",
+        "name": "CompactacaoReservatorio",
+        "superclass": "DeformationModel",
+        "description": "Compactação por queda de Pp durante produção — afeta φ/k"
+      },
+      {
+        "id": "C316",
+        "name": "SubsidenciaSuperficial",
+        "superclass": "DeformationModel",
+        "description": "Afundamento superficial por compactação subterrânea"
+      },
+      {
+        "id": "C317",
+        "name": "OcorrenciaGeomecanica",
+        "superclass": "OperationalEvent",
+        "description": "Breakouts, kick zones, lost circulation, stuck pipe"
+      },
+      {
+        "id": "C318",
+        "name": "AnaliseImagemPocoGeomec",
+        "superclass": "AnalyticalObject",
+        "description": "Análise de imagens FMI/UBI para identificar breakouts e fraturas"
+      }
+    ],
+    "key_properties": [
+      {
+        "id": "PGM01",
+        "name": "gradienteSv",
+        "unit": "g/cm³ ou ppg",
+        "description": "Gradiente de tensão vertical"
+      },
+      {
+        "id": "PGM02",
+        "name": "gradienteShmin",
+        "unit": "g/cm³ ou ppg",
+        "description": "Gradiente de Shmin — calibrado por LOT/XLOT"
+      },
+      {
+        "id": "PGM03",
+        "name": "gradienteSHmax",
+        "unit": "g/cm³ ou ppg",
+        "description": "Gradiente de SHmax — calibrado por breakout/fratura induzida"
+      },
+      {
+        "id": "PGM04",
+        "name": "orientacaoSHmax",
+        "unit": "°",
+        "description": "Azimute de SHmax (regional ou local)"
+      },
+      {
+        "id": "PGM05",
+        "name": "gradientePressaoPoros",
+        "unit": "g/cm³ ou ppg",
+        "description": "Gradiente de Pp — Eaton, RFT/MDT, sísmica ou Bowers"
+      },
+      {
+        "id": "PGM06",
+        "name": "metodoPP",
+        "unit": "—",
+        "description": "Eaton / RFT / MDT / sísmica / Bowers"
+      },
+      {
+        "id": "PGM07",
+        "name": "UCS_estat",
+        "unit": "MPa",
+        "description": "UCS estático (lab) — verdadeiro"
+      },
+      {
+        "id": "PGM08",
+        "name": "UCS_dinam",
+        "unit": "MPa",
+        "description": "UCS dinâmico (DTC/DTS) — correlação interna GDA. Diferença 20–40%"
+      },
+      {
+        "id": "PGM10",
+        "name": "E_estat",
+        "unit": "GPa",
+        "description": "Módulo de Young estático"
+      },
+      {
+        "id": "PGM11",
+        "name": "E_dinam",
+        "unit": "GPa",
+        "description": "Módulo de Young dinâmico (DTC/DTS)"
+      },
+      {
+        "id": "PGM17",
+        "name": "limiteInferiorLama",
+        "unit": "g/cm³ ou ppg",
+        "description": "Peso mínimo de lama para evitar colapso (piso da JanelaDeLama)"
+      },
+      {
+        "id": "PGM18",
+        "name": "limiteSuperiorLama",
+        "unit": "g/cm³ ou ppg",
+        "description": "Peso máximo de lama para evitar fratura (teto da JanelaDeLama)"
+      },
+      {
+        "id": "PGM22",
+        "name": "SGR",
+        "unit": "%",
+        "description": "Shale Gouge Ratio — proxy selante. SGR > 18–20% = potencial selante"
+      },
+      {
+        "id": "PGM23",
+        "name": "CSP",
+        "unit": "—",
+        "description": "Column Sealing Potential (TrapTester)"
+      },
+      {
+        "id": "PGM24",
+        "name": "SSF",
+        "unit": "—",
+        "description": "Shale Smear Factor (TrapTester)"
+      }
+    ],
+    "cross_module_connections": [
+      {
+        "from": "M9",
+        "to": "Poços",
+        "connection": "JanelaDeLama guia o peso de lama durante a perfuração"
+      },
+      {
+        "from": "M9",
+        "to": "M8_rock",
+        "connection": "DTC/DTS → módulos dinâmicos (E, ν); porosidade → compressibilidade"
+      },
+      {
+        "from": "M9",
+        "to": "Reservatório",
+        "connection": "CompactacaoReservatorio impacta φ/k; PressaoDePoros = input de avaliação"
+      },
+      {
+        "from": "M9",
+        "to": "M7_geochem",
+        "connection": "Falhas extensionais controlam migração de HC e composição das águas de formação"
+      }
+    ]
+  },
+  "M10_fluidos": {
+    "label": "Fluidos — Geoquímica e PVT",
+    "label_en": "Fluids — Geochemistry & PVT",
+    "version": "v0.1",
+    "namespace": "https://petrobras.com.br/geolytics/ontology/",
+    "system_origin": "GEOQWIN, SIRR, LIMS Sample Manager, AIDA",
+    "classes": [
+      {
+        "id": "CL_AMOSTRA",
+        "name": "Amostra",
+        "description": "Amostra de fluido/óleo/gás/água coletada para análise"
+      },
+      {
+        "id": "CL_OLEO",
+        "name": "Amostra de Óleo",
+        "description": "Subclasse de Amostra — fluido oleoso"
+      },
+      {
+        "id": "CL_GAS",
+        "name": "Amostra de Gás",
+        "description": "Subclasse de Amostra — fluido gasoso"
+      },
+      {
+        "id": "CL_AGUA",
+        "name": "Amostra de Água",
+        "description": "Subclasse de Amostra — água de formação"
+      },
+      {
+        "id": "CL_GC_FID",
+        "name": "Cromatografia Gasosa GC-FID",
+        "description": "Whole Oil quantitativo C6–C35 — base da fingerprint geoquímica"
+      },
+      {
+        "id": "CL_GC_MS",
+        "name": "GC-MS SIM",
+        "description": "GC + espectrometria de massas — biomarcadores (Pr/Ph, hopanos, esteranos)"
+      },
+      {
+        "id": "CL_SARA",
+        "name": "SARA",
+        "description": "Saturados/Aromáticos/Resinas/Asfaltenos — viscosidade e risco de deposição"
+      },
+      {
+        "id": "CL_PVT",
+        "name": "PVT",
+        "description": "Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR"
+      },
+      {
+        "id": "CL_CARBURANE",
+        "name": "Carburane",
+        "description": "Análise de carbon-isotope individual em compostos (CSIA)"
+      },
+      {
+        "id": "CL_CLASS_FLUIDO",
+        "name": "Classe de Fluido",
+        "description": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO"
+      },
+      {
+        "id": "CL_ANALISE",
+        "name": "Análise de Fluido",
+        "description": "Conjunto genérico de análises sobre uma amostra"
+      },
+      {
+        "id": "CL_ARTEFATO",
+        "name": "Artefato Analítico",
+        "description": "Documento, relatório ou dataset gerado pelas análises"
+      }
+    ],
+    "key_properties": [
+      {
+        "id": "PR_API",
+        "name": "°API",
+        "name_en": "API gravity",
+        "unit": "°API",
+        "description": "Densidade do óleo. >40=leve, 20–40=médio, <20=pesado. SIRR: Grau API Tanque"
+      },
+      {
+        "id": "PR_RGO",
+        "name": "RGO",
+        "name_en": "GOR",
+        "unit": "scf/stb ou m³/m³",
+        "description": "Razão Gás-Óleo. <2000 scf/stb=óleo; >2000=condensado. Completude SIRR: 61.2%"
+      },
+      {
+        "id": "PR_PSAT",
+        "name": "Psat",
+        "name_en": "Saturation Pressure",
+        "unit": "psi",
+        "description": "Pressão de saturação (bolha p/ óleo, orvalho p/ gás). Completude SIRR: 73.9%"
+      },
+      {
+        "id": "PR_PRPH",
+        "name": "Pr/Ph",
+        "unit": "—",
+        "description": "Razão Pristano/Fitano — ambiente deposicional. >3=terrígeno; <1=marinho anóxico"
+      },
+      {
+        "id": "PR_TSTM",
+        "name": "Ts/(Ts+Tm)",
+        "unit": "—",
+        "description": "Razão de hopanos — proxy de maturidade"
+      },
+      {
+        "id": "PR_SAT",
+        "name": "Saturados SARA",
+        "unit": "%",
+        "description": "Fração de saturados em SARA — alta = óleo leve"
+      },
+      {
+        "id": "PR_ASF",
+        "name": "Asfaltenos SARA",
+        "unit": "%",
+        "description": "Fração de asfaltenos — risco de deposição/floculação"
+      },
+      {
+        "id": "PR_d13C",
+        "name": "δ13C",
+        "unit": "‰ (IRMS/CSIA)",
+        "description": "Isótopo de carbono — correlação óleo-óleo e óleo-rocha"
+      }
+    ],
+    "business_rules_public": [
+      {
+        "id": "RN_GQ03",
+        "description": "RGO e API são obrigatórios para classificar tipo de fluido. Se ausentes, marcar como \"Não classificado\"."
+      }
+    ],
+    "lens_mappings_public": [
+      {
+        "journey": "Descobrir",
+        "question": "O que existe aqui, onde está e qual a cobertura/qualidade?"
+      },
+      {
+        "journey": "Classificar",
+        "question": "Que tipo de fluido é este?"
+      },
+      {
+        "journey": "Correlacionar",
+        "question": "O que se relaciona com o quê (óleo-óleo, óleo-rocha)?"
+      }
+    ]
+  }
+}

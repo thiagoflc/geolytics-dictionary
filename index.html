@@ -92,12 +92,14 @@
   aside .layer-badge.layer3 { background: #E6F1FB; color: #042C53; }
   aside .layer-badge.layer4 { background: #F1EFE8; color: #2C2C2A; }
   aside .layer-badge.layer5 { background: #EAF3DE; color: #173404; }
+  aside .layer-badge.layer6 { background: #FCEBDA; color: #6B3208; }
   @media (prefers-color-scheme: dark) {
     aside .layer-badge.layer1 { background: #2A2848; color: #C5C0F0; }
     aside .layer-badge.layer2 { background: #173B30; color: #A0E0CC; }
     aside .layer-badge.layer3 { background: #142B45; color: #B0D0F0; }
     aside .layer-badge.layer4 { background: #2C2C28; color: #D5D2C5; }
     aside .layer-badge.layer5 { background: #2A3A18; color: #C0E090; }
+    aside .layer-badge.layer6 { background: #3D2410; color: #F0C896; }
   }
   aside .ext-link {
     display: block; font-size: 11px; margin-top: 4px;
@@ -159,6 +161,7 @@
     <label><input type="checkbox" data-type="instrument" checked /><span class="swatch" style="background:#888780"></span>Instrumentos</label>
     <label><input type="checkbox" data-type="geological" checked /><span class="swatch" style="background:#639922"></span>Geológico</label>
     <label><input type="checkbox" data-type="equipment" checked /><span class="swatch" style="background:#C77B30"></span>Equipamento</label>
+    <label><input type="checkbox" data-type="analytical" checked /><span class="swatch" style="background:#E67E22"></span>Analítico</label>
   </div>
 
   <main>
@@ -173,6 +176,7 @@
     <span class="legend"><span class="swatch" style="background:#888780"></span>Instrumento</span>
     <span class="legend"><span class="swatch" style="background:#639922"></span>Geológico</span>
     <span class="legend"><span class="swatch" style="background:#C77B30"></span>Equipamento</span>
+    <span class="legend"><span class="swatch" style="background:#E67E22"></span>Analítico</span>
     <span class="count" id="counts"></span>
   </footer>
 
@@ -202,7 +206,9 @@
     instrument: 'Instrumento',
     geological: 'Geológico',
     equipment: 'Equipamento',
+    analytical: 'Analítico',
   };
+  const layerLabelsExt = { layer6: 'Petrobras' };
 
   const container = document.getElementById('graph');
   const tooltip = document.getElementById('tooltip');
@@ -277,7 +283,7 @@
   });
 
   const layerLabels = {
-    layer1: 'GeoCore', layer2: 'O3PO', layer3: 'PetroKGraph', layer4: 'OSDU', layer5: 'ANP',
+    layer1: 'GeoCore', layer2: 'O3PO', layer3: 'PetroKGraph', layer4: 'OSDU', layer5: 'ANP', layer6: 'Petrobras',
   };
   const layerTitles = {
     layer1: 'BFO + GeoCore (UFRGS) — ontologia formal de geologia',
@@ -285,6 +291,7 @@
     layer3: 'Petro KGraph (PUC-Rio) — knowledge graph PT-BR de O&G',
     layer4: 'OSDU — Open Subsurface Data Universe (industry standard)',
     layer5: 'ANP / SIGEP / Lei 9478/1997 — marco regulatório brasileiro',
+    layer6: 'Geolytics / Petrobras Internal — namespace corporativo (M7/M8/M9/M10)',
   };
 
   function showPanel(d) {

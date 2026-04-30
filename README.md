@@ -13,11 +13,18 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 | `data/glossary.json` | 23 termos ANP enriquecidos (alinhamento ontológico, sinônimos PT/EN, exemplos) |
 | `data/extended-terms.json` | 8 termos geológicos derivados de GeoCore/O3PO/GeoReservoir |
 | `data/datasets.json` | 8 datasets ANP/SEP-SIGEP com metadados de colunas |
-| `data/entity-graph.json` | Grafo de 45 entidades + 49 relações com `petrokgraph_uri`, `osdu_kind`, `geocoverage` |
+| `data/entity-graph.json` | Grafo de 75 entidades + 80 relações com `petrokgraph_uri`, `osdu_kind`, `geocoverage` |
 | `data/ontology-types.json` | Tipologia geoquímica (7) + níveis de processamento (3) + 4 domínios |
+| `data/ontopetro.json` | Ontologia de domínio formal — 6 módulos (20 classes, 20 properties, 20 relations, 10 instances) |
+| `data/taxonomies.json` | 9 enumerações canônicas (litologia, trapa, tipo poço ANP, SPE-PRMS, querogênio, janela de geração…) |
+| `data/modules-extended.json` | Módulos M7 Geoquímica, M8 Rocha, M9 Geomecânica, M10 Fluidos (camada 6 — Petrobras) |
+| `data/pvt-dictionary.json` | 34 campos PVT do sistema SIRR Petrobras com completude real |
+| `data/systems.json` | 8 sistemas corporativos (GEOQWIN, SIRR, LIMS, AIDA, GDA, GEOMECBR, GERESIM, TrapTester) |
+| `data/regis-ner-schema.json` | Mapeamento PetroGold (PUC-Rio) ↔ entity-graph para pipelines NER |
 | `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas (equipment, regulator, contract, env etc.) |
 | `data/full.json` | Merge de tudo acima |
-| `ai/ontology-map.json` | Mapa das 5 camadas semânticas (BFO+GeoCore, O3PO, Petro KGraph, OSDU, ANP) |
+| `ai/ontology-map.json` | Mapa das **6 camadas** semânticas (BFO+GeoCore, O3PO, Petro KGraph, OSDU, ANP, Petrobras Internal) |
+| `ontopetro.txt` | Ontologia de Geociências de Petróleo (fonte primária — não modificar) |
 | `api/v1/index.json` | Manifesto da API com URLs de todos os endpoints |
 | `api/v1/terms.json` | Lista plana de termos |
 | `api/v1/entities.json` | Entidades com relações outgoing/incoming pré-computadas |
@@ -135,9 +142,9 @@ O arquivo `data/acronyms.json` traz 1.102 siglas curadas do domínio óleo e gá
 
 ---
 
-## Arquitetura semântica em 5 camadas
+## Arquitetura semântica em 6 camadas
 
-O domínio de O&G brasileiro se organiza em 5 camadas independentes e complementares. Cada termo do dicionário tem o campo `geocoverage` listando em quais camadas ele tem cobertura formal.
+O domínio de O&G brasileiro se organiza em 6 camadas independentes e complementares. Cada termo do dicionário tem o campo `geocoverage` listando em quais camadas ele tem cobertura formal.
 
 | Layer | Nome | Mantenedor | Tipo | Cobertura no dicionário |
 |---|---|---|---|---|
@@ -146,11 +153,13 @@ O domínio de O&G brasileiro se organiza em 5 camadas independentes e complement
 | **layer3** | Petro KGraph | PUC-Rio / Petroles | knowledge graph PT-BR (539 conceitos) | Bacia, Poço, Bloco, Operador, Pré-sal, Reservatório, Formação |
 | **layer4** | OSDU | The Open Group (Petrobras membro) | schema de dados (Apache 2.0) | Poço, Bacia, Campo, Operador, Reservatório, Completação |
 | **layer5** | ANP / SIGEP / Lei 9478/1997 | ANP | marco regulatório brasileiro | Todos os 23 termos do glossário |
+| **layer6** | Geolytics / Petrobras Internal | Petrobras / Geolytics | ontologia corporativa interna | Módulos M7/M8/M9/M10 — sistemas corporativos (GEOQWIN, SIRR, GDA, GEOMECBR…) |
 
 **Regra de deduplicação:**
 - **Petro KGraph é construído sobre GeoCore** — não são duplicatas. Use `petrokgraph_uri` como referência primária para RAG em português.
 - **OSDU é schema de dados IT**, não ontologia filosófica. Complementar a todos os outros. Use `osdu_kind` para interoperabilidade com sistemas Petrobras.
 - **Camada ANP é única** e não sobrepõe nenhuma ontologia internacional.
+- **Camada 6 (Petrobras Internal) é o ativo técnico mais valioso** — namespace `https://petrobras.com.br/geolytics/ontology/`. Apenas definições conceituais públicas; dados Sigilo=Interno NÃO são publicados.
 
 Veja `ai/ontology-map.json` para a documentação completa de cada camada com URLs OWL, GitHub e regras de uso.
 
