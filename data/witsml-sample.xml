@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  WITSML 2.0 sample — Well, Wellbore, Trajectory (5 stations), WellboreMarker
+  Namespace: http://www.energistics.org/energyml/data/witsmlv2/2.0
+  This file is a representative sample for testing the witsml-to-rdf.js converter.
+  Field values are realistic but synthetic (Bacia de Santos area).
+-->
+<WitsmlObjects xmlns="http://www.energistics.org/energyml/data/witsmlv2/2.0"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <!-- ════════════════════════════════════════════════════════
+       Well: BUZ-1-RJS (Buzios exploratory discovery)
+       ════════════════════════════════════════════════════════ -->
+  <Well uid="well-buz-1-rjs">
+    <name>BUZ-1-RJS</name>
+    <nameLegal>1-BUZ-1-RJS</nameLegal>
+    <country>BR</country>
+    <state>RJ</state>
+    <county>Campos dos Goytacazes</county>
+    <statusWell>producing</statusWell>
+    <purposeWell>production</purposeWell>
+    <dTimSpud>2010-08-15T06:00:00Z</dTimSpud>
+    <waterDepth uom="m">2100.5</waterDepth>
+    <groundElevation uom="m">0.0</groundElevation>
+    <operator>Petrobras</operator>
+    <field>Buzios</field>
+    <basin>Santos</basin>
+  </Well>
+
+  <!-- ════════════════════════════════════════════════════════
+       Wellbore: BUZ-1-RJS (main borehole, vertical + deviated)
+       ════════════════════════════════════════════════════════ -->
+  <Wellbore uid="wb-buz-1-rjs-main">
+    <name>BUZ-1-RJS main</name>
+    <number>1</number>
+    <uidWell>well-buz-1-rjs</uidWell>
+    <statusWellbore>active</statusWellbore>
+    <purposeWellbore>appraisal</purposeWellbore>
+    <isActive>true</isActive>
+    <mdCurrent uom="m">6420.0</mdCurrent>
+    <tvdCurrent uom="m">4980.0</tvdCurrent>
+    <shape>deviated</shape>
+    <dTimKickoff>2010-09-20T08:00:00Z</dTimKickoff>
+  </Wellbore>
+
+  <!-- ════════════════════════════════════════════════════════
+       Trajectory: final directional survey with 5 stations
+       ════════════════════════════════════════════════════════ -->
+  <Trajectory uid="traj-buz-1-rjs-final">
+    <name>BUZ-1-RJS Final Survey</name>
+    <uidWell>well-buz-1-rjs</uidWell>
+    <uidWellbore>wb-buz-1-rjs-main</uidWellbore>
+    <dTimTrajStart>2010-12-01T00:00:00Z</dTimTrajStart>
+    <dTimTrajEnd>2011-02-15T00:00:00Z</dTimTrajEnd>
+    <mdMn uom="m">0.0</mdMn>
+    <mdMx uom="m">6420.0</mdMx>
+    <serviceCompany>Halliburton Sperry Drilling</serviceCompany>
+    <finalTraj>true</finalTraj>
+    <dispNsEnd uom="m">-312.4</dispNsEnd>
+    <dispEwEnd uom="m">148.7</dispEwEnd>
+
+    <!-- Station 1: surface / conductor -->
+    <trajectoryStation uid="stn-001">
+      <dTimStn>2010-12-01T06:00:00Z</dTimStn>
+      <typeSurveyTool>MWD</typeSurveyTool>
+      <md uom="m">0.0</md>
+      <incl uom="deg">0.0</incl>
+      <azi uom="deg">0.0</azi>
+      <tvd uom="m">0.0</tvd>
+      <dispNs uom="m">0.0</dispNs>
+      <dispEw uom="m">0.0</dispEw>
+      <vertSect uom="m">0.0</vertSect>
+      <dls uom="deg/30m">0.0</dls>
+    </trajectoryStation>
+
+    <!-- Station 2: 1500 m (pre-salt salt entry) -->
+    <trajectoryStation uid="stn-002">
+      <dTimStn>2010-12-15T14:30:00Z</dTimStn>
+      <typeSurveyTool>MWD</typeSurveyTool>
+      <md uom="m">1500.0</md>
+      <incl uom="deg">2.5</incl>
+      <azi uom="deg">185.3</azi>
+      <tvd uom="m">1498.9</tvd>
+      <dispNs uom="m">-18.4</dispNs>
+      <dispEw uom="m">5.2</dispEw>
+      <vertSect uom="m">19.1</vertSect>
+      <dls uom="deg/30m">0.05</dls>
+    </trajectoryStation>
+
+    <!-- Station 3: 3000 m (within salt section) -->
+    <trajectoryStation uid="stn-003">
+      <dTimStn>2011-01-10T09:15:00Z</dTimStn>
+      <typeSurveyTool>gyro</typeSurveyTool>
+      <md uom="m">3000.0</md>
+      <incl uom="deg">18.7</incl>
+      <azi uom="deg">196.4</azi>
+      <tvd uom="m">2881.5</tvd>
+      <dispNs uom="m">-124.6</dispNs>
+      <dispEw uom="m">52.1</dispEw>
+      <vertSect uom="m">135.9</vertSect>
+      <dls uom="deg/30m">1.15</dls>
+    </trajectoryStation>
+
+    <!-- Station 4: 5000 m (sub-salt, carbonate reservoir) -->
+    <trajectoryStation uid="stn-004">
+      <dTimStn>2011-01-28T17:45:00Z</dTimStn>
+      <typeSurveyTool>MWD</typeSurveyTool>
+      <md uom="m">5000.0</md>
+      <incl uom="deg">32.1</incl>
+      <azi uom="deg">200.8</azi>
+      <tvd uom="m">4480.2</tvd>
+      <dispNs uom="m">-248.9</dispNs>
+      <dispEw uom="m">112.4</dispEw>
+      <vertSect uom="m">275.3</vertSect>
+      <dls uom="deg/30m">2.08</dls>
+    </trajectoryStation>
+
+    <!-- Station 5: TD at 6420 m -->
+    <trajectoryStation uid="stn-005">
+      <dTimStn>2011-02-15T23:00:00Z</dTimStn>
+      <typeSurveyTool>MWD</typeSurveyTool>
+      <md uom="m">6420.0</md>
+      <incl uom="deg">41.5</incl>
+      <azi uom="deg">204.1</azi>
+      <tvd uom="m">4980.0</tvd>
+      <dispNs uom="m">-312.4</dispNs>
+      <dispEw uom="m">148.7</dispEw>
+      <vertSect uom="m">347.6</vertSect>
+      <dls uom="deg/30m">1.44</dls>
+    </trajectoryStation>
+  </Trajectory>
+
+  <!-- ════════════════════════════════════════════════════════
+       WellboreMarker 1: Top of Salt (Aptian)
+       ════════════════════════════════════════════════════════ -->
+  <WellboreMarker uid="mrkr-top-salt">
+    <name>Topo do Sal Aptiano</name>
+    <uidWell>well-buz-1-rjs</uidWell>
+    <uidWellbore>wb-buz-1-rjs-main</uidWellbore>
+    <md uom="m">1850.0</md>
+    <tvd uom="m">1847.2</tvd>
+    <tvdss uom="m">3947.2</tvdss>
+    <dipAngle uom="deg">2.1</dipAngle>
+    <dipDirection uom="deg">112.0</dipDirection>
+    <chrono>Aptian</chrono>
+    <litho>salt</litho>
+    <showRating>none</showRating>
+  </WellboreMarker>
+
+  <!-- ════════════════════════════════════════════════════════
+       WellboreMarker 2: Base of Salt / Top Pre-Salt
+       ════════════════════════════════════════════════════════ -->
+  <WellboreMarker uid="mrkr-base-salt">
+    <name>Base do Sal / Topo Pre-Sal</name>
+    <uidWell>well-buz-1-rjs</uidWell>
+    <uidWellbore>wb-buz-1-rjs-main</uidWellbore>
+    <md uom="m">3180.0</md>
+    <tvd uom="m">3041.4</tvd>
+    <tvdss uom="m">5141.4</tvdss>
+    <dipAngle uom="deg">5.3</dipAngle>
+    <dipDirection uom="deg">108.5</dipDirection>
+    <chrono>Aptian</chrono>
+    <litho>carbonate</litho>
+    <showRating>traces</showRating>
+  </WellboreMarker>
+
+  <!-- ════════════════════════════════════════════════════════
+       WellboreMarker 3: Top of Barra Velha Fm (pre-salt reservoir)
+       ════════════════════════════════════════════════════════ -->
+  <WellboreMarker uid="mrkr-top-bv">
+    <name>Topo da Formacao Barra Velha</name>
+    <uidWell>well-buz-1-rjs</uidWell>
+    <uidWellbore>wb-buz-1-rjs-main</uidWellbore>
+    <md uom="m">5240.0</md>
+    <tvd uom="m">4620.8</tvd>
+    <tvdss uom="m">6720.8</tvdss>
+    <dipAngle uom="deg">8.7</dipAngle>
+    <dipDirection uom="deg">95.0</dipDirection>
+    <chrono>Barremian</chrono>
+    <litho>carbonate</litho>
+    <showRating>good</showRating>
+  </WellboreMarker>
+
+</WitsmlObjects>

@@ -1,0 +1,345 @@
+# geolytics-vocab.ttl — Minimal explicit OWL vocabulary
+# Declares the canonical classes and properties used by geolytics-shapes.ttl
+# so the SHACL file is self-contained for tooling like pyshacl.
+#
+# Includes:
+#   - rdfs:label in PT and EN for every term
+#   - owl:sameAs links to external layer URIs when known
+#   - owl:disjointWith for Reserva / ReservaAmbiental
+#
+# This file is NOT auto-generated. Edit manually when adding new terms.
+
+@prefix geo:  <https://geolytics.petrobras.com.br/dict/> .
+@prefix osdu: <https://w3id.org/osdu#> .
+@prefix kg:   <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ontology header
+# ─────────────────────────────────────────────────────────────────────────────
+
+<https://geolytics.petrobras.com.br/dict/vocab>
+    a owl:Ontology ;
+    rdfs:label "Geolytics Vocabulary"@en ;
+    rdfs:label "Vocabulário Geolytics"@pt ;
+    rdfs:comment "Vocabulário OWL mínimo que declara as classes e propriedades usadas pelos shapes SHACL do Geolytics Dictionary."@pt ;
+    owl:versionInfo "1.0.0" .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Core domain classes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:Poco a owl:Class ;
+    rdfs:label "Poço"@pt ;
+    rdfs:label "Well"@en ;
+    rdfs:comment "Poço de petróleo ou gás natural identificado pela ANP (prefixo numérico 1-, 2-, 3- etc.)."@pt ;
+    owl:sameAs osdu:Well ;
+    owl:sameAs kg:Well ;
+    rdfs:seeAlso <http://geosciml.org/def/gsmlbh#Borehole> .
+
+geo:Bloco a owl:Class ;
+    rdfs:label "Bloco Exploratório"@pt ;
+    rdfs:label "Exploration Block"@en ;
+    rdfs:comment "Parte de uma bacia sedimentar onde são desenvolvidas atividades de E&P, delimitada por coordenadas geográficas (Lei 9.478/1997)."@pt ;
+    rdfs:seeAlso kg:ExplorationBlock .
+
+geo:BaciaSedimentar a owl:Class ;
+    rdfs:label "Bacia Sedimentar"@pt ;
+    rdfs:label "Sedimentary Basin"@en ;
+    rdfs:comment "Depressão crustal onde sedimentos se acumulam ao longo do tempo geológico."@pt ;
+    owl:sameAs osdu:Basin ;
+    owl:sameAs kg:SedimentaryBasin .
+
+geo:Campo a owl:Class ;
+    rdfs:label "Campo de Petróleo"@pt ;
+    rdfs:label "Oil Field"@en ;
+    rdfs:comment "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios."@pt ;
+    owl:sameAs osdu:Field ;
+    owl:sameAs kg:Field .
+
+geo:Reservatorio a owl:Class ;
+    rdfs:label "Reservatório"@pt ;
+    rdfs:label "Reservoir"@en ;
+    rdfs:comment "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos."@pt ;
+    owl:sameAs osdu:Reservoir ;
+    owl:sameAs kg:Reservoir .
+
+geo:Operador a owl:Class ;
+    rdfs:label "Operador"@pt ;
+    rdfs:label "Operator"@en ;
+    rdfs:comment "Empresa designada para conduzir operações E&P no bloco."@pt ;
+    owl:sameAs osdu:Organisation ;
+    owl:sameAs kg:PetroleumOperator .
+
+geo:ContratoEP a owl:Class ;
+    rdfs:label "Contrato E&P"@pt ;
+    rdfs:label "E&P Contract"@en ;
+    rdfs:comment "Contrato de Exploração e Produção celebrado entre o agente econômico e a ANP."@pt ;
+    rdfs:seeAlso kg:ExplorationProductionContract .
+
+geo:Reserva a owl:Class ;
+    rdfs:label "Reserva SPE-PRMS"@pt ;
+    rdfs:label "Reserve (SPE-PRMS)"@en ;
+    rdfs:comment "Volume de HC tecnicamente recuperável e economicamente viável — categorias 1P/2P/3P (SPE-PRMS). NAO confundir com Reserva Ambiental."@pt ;
+    owl:disjointWith geo:ReservaAmbiental ;
+    rdfs:seeAlso kg:Reserve .
+
+geo:ReservaAmbiental a owl:Class ;
+    rdfs:label "Reserva Ambiental"@pt ;
+    rdfs:label "Environmental Reserve"@en ;
+    rdfs:comment "Unidade de conservação ambiental (REBIO, RPPN, etc.) — conceitualmente DISJUNTA de geo:Reserva (SPE-PRMS)."@pt ;
+    owl:disjointWith geo:Reserva .
+
+geo:Acronym a owl:Class ;
+    rdfs:label "Sigla O&G"@pt ;
+    rdfs:label "O&G Acronym"@en ;
+    rdfs:comment "Entrada do siglário O&G com expansão PT e/ou EN e categoria temática."@pt .
+
+geo:GSOClass a owl:Class ;
+    rdfs:label "Classe GSO/Loop3D"@pt ;
+    rdfs:label "GSO/Loop3D Class"@en ;
+    rdfs:comment "Classe da ontologia GSO (Geoscience Ontology) do projeto Loop3D — camada 7 estrutural."@pt ;
+    rdfs:seeAlso <https://loop3d.org/GSO/ontology/2020/1/master/LoopStructural.owl> .
+
+geo:OntopetroClass a owl:Class ;
+    rdfs:label "Classe Ontopetro"@pt ;
+    rdfs:label "Ontopetro Class"@en ;
+    rdfs:comment "Classe da ontologia formal de Geociências de Petróleo Ontopetro (C001-C999)."@pt .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Data properties used by shapes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:entityType a owl:DatatypeProperty ;
+    rdfs:label "tipo de entidade"@pt ;
+    rdfs:label "entity type"@en ;
+    rdfs:comment "Categoria da entidade no modelo Geolytics: operational, contractual, actor, instrument, geological, equipment, analytical."@pt ;
+    rdfs:range xsd:string .
+
+geo:tipoPoco a owl:DatatypeProperty ;
+    rdfs:label "tipo de poço ANP"@pt ;
+    rdfs:label "ANP well type"@en ;
+    rdfs:comment "Categoria ANP do poço: exploratorio, avaliacao, desenvolvimento, especial, injetor, produtor."@pt ;
+    rdfs:domain geo:Poco ;
+    rdfs:range xsd:string .
+
+geo:regimeContratual a owl:DatatypeProperty ;
+    rdfs:label "regime contratual"@pt ;
+    rdfs:label "contract regime"@en ;
+    rdfs:comment "Modalidade contratual do bloco: Concessao, Partilha ou CessaoOnerosa."@pt ;
+    rdfs:domain geo:Bloco ;
+    rdfs:range xsd:string .
+
+geo:categoriaSPEPRMS a owl:DatatypeProperty ;
+    rdfs:label "categoria SPE-PRMS"@pt ;
+    rdfs:label "SPE-PRMS category"@en ;
+    rdfs:comment "Categoria de reserva ou recurso segundo o SPE-PRMS: 1P, 2P, 3P, C1C, C2C, C3C."@pt ;
+    rdfs:domain geo:Reserva ;
+    rdfs:range xsd:string .
+
+geo:osduKind a owl:DatatypeProperty ;
+    rdfs:label "kind OSDU"@pt ;
+    rdfs:label "OSDU kind"@en ;
+    rdfs:comment "Identificador canônico OSDU no formato opendes:osdu:master-data--TypeName:major.minor.patch."@pt ;
+    rdfs:range xsd:string .
+
+geo:geocoverage a owl:DatatypeProperty ;
+    rdfs:label "cobertura semântica"@pt ;
+    rdfs:label "semantic coverage"@en ;
+    rdfs:comment "Camadas ontológicas em que o conceito tem cobertura formal: layer1, layer1b, layer2, ..., layer7."@pt ;
+    rdfs:range xsd:string .
+
+geo:sigla a owl:DatatypeProperty ;
+    rdfs:label "sigla"@pt ;
+    rdfs:label "acronym"@en ;
+    rdfs:comment "Sigla em letras maiúsculas, sem espaços."@pt ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:expansion_pt a owl:DatatypeProperty ;
+    rdfs:label "expansão em português"@pt ;
+    rdfs:label "Portuguese expansion"@en ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:expansion_en a owl:DatatypeProperty ;
+    rdfs:label "expansão em inglês"@pt ;
+    rdfs:label "English expansion"@en ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:category a owl:DatatypeProperty ;
+    rdfs:label "categoria temática"@pt ;
+    rdfs:label "thematic category"@en ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:owlUri a owl:DatatypeProperty ;
+    rdfs:label "URI OWL"@pt ;
+    rdfs:label "OWL URI"@en ;
+    rdfs:comment "URI canônica da classe na ontologia de origem (ex: loop3d.org para GSO)."@pt ;
+    rdfs:range xsd:anyURI .
+
+geo:classId a owl:DatatypeProperty ;
+    rdfs:label "identificador de classe"@pt ;
+    rdfs:label "class identifier"@en ;
+    rdfs:comment "Identificador canônico da classe no formato C000-C999."@pt ;
+    rdfs:domain geo:OntopetroClass ;
+    rdfs:range xsd:string .
+
+geo:source a owl:DatatypeProperty ;
+    rdfs:label "fonte ontológica"@pt ;
+    rdfs:label "ontological source"@en ;
+    rdfs:comment "Fonte primária da classe: GeoCore, PPDM, GDGEO, SPE-PRMS, ANP, OSDU."@pt ;
+    rdfs:domain geo:OntopetroClass ;
+    rdfs:range xsd:string .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Object properties used by shapes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:operador a owl:ObjectProperty ;
+    rdfs:label "operado por"@pt ;
+    rdfs:label "operated by"@en ;
+    rdfs:domain geo:Poco ;
+    rdfs:range geo:Operador .
+
+geo:bloco a owl:ObjectProperty ;
+    rdfs:label "perfurado em bloco"@pt ;
+    rdfs:label "drilled in block"@en ;
+    rdfs:domain geo:Poco ;
+    rdfs:range geo:Bloco .
+
+geo:bacia a owl:ObjectProperty ;
+    rdfs:label "delimitado em bacia"@pt ;
+    rdfs:label "delimited in basin"@en ;
+    rdfs:domain geo:Bloco ;
+    rdfs:range geo:BaciaSedimentar .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WITSML 2.0 / Energistics drilling and subsurface classes (P2.9)
+# owl:sameAs links to Energistics WITSML 2.0 URIs
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:Well a owl:Class ;
+    rdfs:label "Poco WITSML"@pt ;
+    rdfs:label "Well (WITSML)"@en ;
+    rdfs:comment "Poco de petroleo ou gas como entidade raiz WITSML 2.0 — agrupa todos os wellbores de uma locacao."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#Well> ;
+    owl:sameAs osdu:Well ;
+    rdfs:subClassOf geo:Poco ;
+    rdfs:seeAlso <http://geosciml.org/def/gsmlbh#Borehole> .
+
+geo:Wellbore a owl:Class ;
+    rdfs:label "Wellbore (WITSML)"@pt ;
+    rdfs:label "Wellbore (WITSML)"@en ;
+    rdfs:comment "Furo de sondagem individual dentro de um poco — cada sidetrack ou desvio cria um novo Wellbore."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#Wellbore> ;
+    owl:sameAs osdu:Wellbore ;
+    rdfs:seeAlso <http://www.opengis.net/ont/geosciml/4.1/gsmlbh#Borehole> .
+
+geo:WellboreMarker a owl:Class ;
+    rdfs:label "Marcador de Wellbore"@pt ;
+    rdfs:label "Wellbore Marker"@en ;
+    rdfs:comment "Topo ou base de unidade estratigrafica identificada no wellbore — inclui profundidade medida e inclinacao."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#WellboreMarker> ;
+    rdfs:seeAlso <http://www.opengis.net/ont/geosciml/4.1/gsmlbh#BoreholeInterval> .
+
+geo:Trajectory a owl:Class ;
+    rdfs:label "Trajetoria Direcional"@pt ;
+    rdfs:label "Directional Trajectory"@en ;
+    rdfs:comment "Trajetoria direcional do wellbore — conjunto de estacoes de survey que descrevem o caminho 3D do furo."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#Trajectory> ;
+    owl:sameAs osdu:Trajectory ;
+    rdfs:seeAlso <http://www.opengis.net/ont/sf#Curve> .
+
+geo:TrajectoryStation a owl:Class ;
+    rdfs:label "Estacao de Survey"@pt ;
+    rdfs:label "Trajectory Station"@en ;
+    rdfs:comment "Ponto de medicao da trajetoria direcional: MD, inclinacao e azimute."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#TrajectoryStation> ;
+    rdfs:seeAlso <http://www.opengis.net/ont/sf#Point> .
+
+geo:LogCurve a owl:Class ;
+    rdfs:label "Curva de Perfil"@pt ;
+    rdfs:label "Well Log Curve"@en ;
+    rdfs:comment "Curva de perfil geofisico — sequencia de valores de uma propriedade fisica em funcao da profundidade medida."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#LogCurve> ;
+    owl:sameAs osdu:WellLog ;
+    rdfs:seeAlso <http://www.w3.org/ns/ssn/Observation> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WITSML data and object properties (P2.9)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:md a owl:DatatypeProperty ;
+    rdfs:label "profundidade medida"@pt ;
+    rdfs:label "measured depth"@en ;
+    rdfs:comment "Profundidade Medida (MD) ao longo da trajetoria do furo, em metros."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:tvd a owl:DatatypeProperty ;
+    rdfs:label "profundidade vertical verdadeira"@pt ;
+    rdfs:label "true vertical depth"@en ;
+    rdfs:comment "Profundidade Vertical Verdadeira (TVD), em metros. Para pocos verticais, TVD = MD."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:incl a owl:DatatypeProperty ;
+    rdfs:label "inclinacao"@pt ;
+    rdfs:label "inclination"@en ;
+    rdfs:comment "Inclinacao do furo em relacao a vertical, em graus [0..180]."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:azi a owl:DatatypeProperty ;
+    rdfs:label "azimute"@pt ;
+    rdfs:label "azimuth"@en ;
+    rdfs:comment "Azimute magnetico ou verdadeiro do furo, em graus [0..360]."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:dipAngle a owl:DatatypeProperty ;
+    rdfs:label "angulo de mergulho"@pt ;
+    rdfs:label "dip angle"@en ;
+    rdfs:comment "Angulo de mergulho da unidade estratigrafica no marcador, em graus."@pt ;
+    rdfs:domain geo:WellboreMarker ;
+    rdfs:range xsd:decimal .
+
+geo:dipDirection a owl:DatatypeProperty ;
+    rdfs:label "direcao do mergulho"@pt ;
+    rdfs:label "dip direction"@en ;
+    rdfs:comment "Direcao do mergulho (azimute 0-360 graus) da unidade estratigrafica no marcador."@pt ;
+    rdfs:domain geo:WellboreMarker ;
+    rdfs:range xsd:decimal .
+
+geo:hasWellbore a owl:ObjectProperty ;
+    rdfs:label "possui wellbore"@pt ;
+    rdfs:label "has wellbore"@en ;
+    rdfs:domain geo:Well ;
+    rdfs:range geo:Wellbore .
+
+geo:partOfWell a owl:ObjectProperty ;
+    rdfs:label "pertence ao poco"@pt ;
+    rdfs:label "part of well"@en ;
+    rdfs:domain geo:Wellbore ;
+    rdfs:range geo:Well .
+
+geo:hasTrajectory a owl:ObjectProperty ;
+    rdfs:label "possui trajetoria"@pt ;
+    rdfs:label "has trajectory"@en ;
+    rdfs:domain geo:Wellbore ;
+    rdfs:range geo:Trajectory .
+
+geo:partOfWellbore a owl:ObjectProperty ;
+    rdfs:label "pertence ao wellbore"@pt ;
+    rdfs:label "part of wellbore"@en ;
+    rdfs:domain geo:WellboreMarker ;
+    rdfs:range geo:Wellbore .
+
+geo:inTrajectory a owl:ObjectProperty ;
+    rdfs:label "pertence a trajetoria"@pt ;
+    rdfs:label "in trajectory"@en ;
+    rdfs:domain geo:TrajectoryStation ;
+    rdfs:range geo:Trajectory .

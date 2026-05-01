@@ -1,228 +1,180 @@
 # Geolytics Dictionary
 
-Ontologia semântica do domínio de **Exploração & Produção (E&P) de petróleo e gás natural no Brasil**, derivada do módulo Dicionário da plataforma Geolytics. Dados oficiais da **ANP/SEP — SIGEP**, organizados como JSON estático, grafo de entidades e corpus pronto para RAG.
+Ontologia semantica do dominio de **Exploracao & Producao (E&P) de petroleo e gas natural no Brasil**, derivada do modulo Dicionario da plataforma Geolytics. Dados oficiais da **ANP/SEP — SIGEP**, organizados como JSON estatico, grafo de entidades e corpus pronto para RAG.
 
-**Visualização interativa:** https://thiagoflc.github.io/geolytics-dictionary
+A motivacao central e que RAG vetorial puro falha em perguntas multi-hop de O&G (quatro saltos entre poco → bloco → bacia → regime contratual), em disambiguacoes estruturais (PAD como contrato ANP vs. drilling pad) e em verificacao de consistencia regulatoria (SPE-PRMS nao reconhece "4P"). Este repositorio prove a base semantica — ontologia em camadas, grafo tipado, SHACL shapes e agente LangGraph com validador deterministico — para superar essas limitacoes. Ver [docs/GRAPHRAG.md](docs/GRAPHRAG.md) para a receita completa.
+
+**Visualizacao interativa:** https://thiagoflc.github.io/geolytics-dictionary
+
+**Documentacao completa:** [docs/INDEX.md](docs/INDEX.md)
 
 ---
 
-## Estrutura
+## Arquitetura
 
-| Caminho | Conteúdo |
+```mermaid
+graph TD
+    subgraph Fontes["7+ Camadas Semanticas"]
+        L1["BFO + GeoCore (L1)"]
+        L2["O3PO + GeoReservoir (L2)"]
+        L3["Petro KGraph (L3)"]
+        L4["OSDU (L4)"]
+        L5["ANP / SIGEP (L5)"]
+        L6["Geolytics / Petrobras (L6)"]
+        L7["GSO / Loop3D (L7)"]
+    end
+
+    Fontes --> KG["Knowledge Graph<br/>75 nos + 80 relacoes"]
+
+    KG --> API["API REST estatica<br/>api/v1/"]
+    KG --> RAG["RAG Corpus<br/>1.245 chunks"]
+    KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
+    KG --> TTL["RDF / SHACL<br/>22 NodeShapes"]
+
+    API --> MCP["MCP Server<br/>9 ferramentas AI"]
+    RAG --> AGENT["LangGraph Agent<br/>Router-Decomposer-GraphQuery-RAG-Validator-Synthesizer"]
+    NEO --> AGENT
+    TTL --> SHACL["Validador SHACL"]
+    SHACL --> AGENT
+    AGENT --> MCP
+```
+
+A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente estao documentados em [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
+
+---
+
+## Estrutura do repositorio
+
+| Caminho | Conteudo |
 |---|---|
-| `data/glossary.json` | 23 termos ANP enriquecidos (alinhamento ontológico, sinônimos PT/EN, exemplos) |
-| `data/extended-terms.json` | 8 termos geológicos derivados de GeoCore/O3PO/GeoReservoir |
-| `data/datasets.json` | 8 datasets ANP/SEP-SIGEP com metadados de colunas |
-| `data/entity-graph.json` | Grafo de 75 entidades + 80 relações com `petrokgraph_uri`, `osdu_kind`, `geocoverage` |
-| `data/ontology-types.json` | Tipologia geoquímica (7) + níveis de processamento (3) + 4 domínios |
-| `data/ontopetro.json` | Ontologia de domínio formal — 6 módulos (20 classes, 20 properties, 20 relations, 10 instances) |
-| `data/taxonomies.json` | 9 enumerações canônicas (litologia, trapa, tipo poço ANP, SPE-PRMS, querogênio, janela de geração…) |
-| `data/modules-extended.json` | Módulos M7 Geoquímica, M8 Rocha, M9 Geomecânica, M10 Fluidos (camada 6 — Petrobras) |
-| `data/pvt-dictionary.json` | 34 campos PVT do sistema SIRR Petrobras com completude real |
-| `data/systems.json` | 8 sistemas corporativos (GEOQWIN, SIRR, LIMS, AIDA, GDA, GEOMECBR, GERESIM, TrapTester) |
-| `data/regis-ner-schema.json` | Mapeamento PetroGold (PUC-Rio) ↔ entity-graph para pipelines NER |
-| `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas (equipment, regulator, contract, env etc.) |
-| `data/full.json` | Merge de tudo acima |
-| `ai/ontology-map.json` | Mapa das **6 camadas** semânticas (BFO+GeoCore, O3PO, Petro KGraph, OSDU, ANP, Petrobras Internal) |
-| `ontopetro.txt` | Ontologia de Geociências de Petróleo (fonte primária — não modificar) |
-| `api/v1/index.json` | Manifesto da API com URLs de todos os endpoints |
-| `api/v1/terms.json` | Lista plana de termos |
-| `api/v1/entities.json` | Entidades com relações outgoing/incoming pré-computadas |
-| `api/v1/datasets.json` | Datasets com lista de termos referenciados |
-| `api/v1/acronyms.json` | API de siglas com counts por categoria |
-| `api/v1/search-index.json` | Índice de busca client-side (id, text, type, tokens) |
-| `ai/rag-corpus.jsonl` | 1.245 chunks para embedding (term, column, entity, domain, type, acronym) |
+| `data/glossary.json` | 23 termos ANP enriquecidos |
+| `data/entity-graph.json` | Grafo de 75 entidades + 80 relacoes |
+| `data/ontopetro.json` | Ontologia formal — 6 modulos |
+| `data/taxonomies.json` | 13 enumeracoes canonicas (litologia, SPE-PRMS, AVO...) |
+| `data/full.json` | Merge de todos os modulos |
+| `data/geomechanics*.json` | Modulo MEM P2.7 + fraturas |
+| `data/seismic-*.json` | Modulo sismico P2.8 — aquisicao, processamento, inversao |
+| `data/witsml-rdf-crosswalk.json` | 25 classes WITSML 2.0 mapeadas para `geo:` |
+| `data/prodml-rdf-crosswalk.json` | 15 classes PRODML 2.x mapeadas para `geo:` |
+| `data/geolytics-shapes.ttl` | 22 NodeShapes SHACL |
+| `data/sweet-alignment.json` | 66 alinhamentos SKOS com SWEET (NASA/ESIPFed) |
+| `data/gso-*.json` | 213 classes GSO/Loop3D (Layer 7) |
+| `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas |
+| `data/systems.json` | 8 sistemas corporativos Petrobras |
+| `api/v1/` | Endpoints publicos (GitHub Pages) |
+| `ai/rag-corpus.jsonl` | 1.245 chunks para embedding |
 | `ai/system-prompt-ptbr.md` | System prompt PT-BR (~800 tokens) |
-| `ai/system-prompt-en.md` | System prompt EN (~800 tokens) |
-| `index.html` | Visualização D3 interativa (GitHub Pages) |
-| `gso-cards.html` | Cards pyLODE-style das 213 classes GSO/Loop3D (camada 7, CC BY 4.0) |
-| `data/gso-{faults,folds,foliations,lineations,contacts}.json` | 213 classes GSO L7 com `owl_uri`, parents, sources |
-| `data/osdu-gso-crosswalk.json` | 14 mapeamentos SKOS OSDU↔GSO |
-| `scripts/gso-extract.js` | Parser Turtle minimal para módulos GSO (sem rdflib) |
-| `scripts/generate.js` | Regenera `/data`, `/api` e `/ai` |
+| `ai/text2cypher-fewshot.jsonl` | 45 exemplos few-shot Text2Cypher |
+| `scripts/generate.js` | Pipeline ETL: regenera `data/`, `api/`, `ai/` |
+| `scripts/semantic-validator.js` | Validador semantico deterministico |
+| `mcp/geolytics-mcp/` | MCP Server TypeScript (9 ferramentas) |
+| `examples/langgraph-agent/` | Agente LangGraph multi-no |
+| `notebooks/` | 4 notebooks Jupyter didaticos |
+| `python/` | Pacote Python `geolytics-dictionary` |
+| `docs/` | Documentacao completa — ver [docs/INDEX.md](docs/INDEX.md) |
 
 ---
 
-## Como usar os dados
+## Python Package
 
-### Via raw GitHub
-
+```bash
+pip install geolytics-dictionary
 ```
-https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data/glossary.json
-https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data/entity-graph.json
-https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/ai/rag-corpus.jsonl
-```
-
-### Via GitHub Pages
-
-```
-https://thiagoflc.github.io/geolytics-dictionary/api/v1/index.json
-https://thiagoflc.github.io/geolytics-dictionary/data/full.json
-https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl
-```
-
-### Carregando o RAG corpus em LangChain (Python)
 
 ```python
-from langchain_community.document_loaders import JSONLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.vectorstores import FAISS
-from langchain_openai import OpenAIEmbeddings
-import urllib.request, json
+from geolytics_dictionary import Dictionary, KnowledgeGraph, Validator, SweetExpander
 
-URL = "https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl"
-docs = []
-with urllib.request.urlopen(URL) as f:
-    for line in f:
-        rec = json.loads(line)
-        docs.append({"page_content": rec["text"], "metadata": rec["metadata"] | {"id": rec["id"], "type": rec["type"]}})
+d = Dictionary()
+d.lookup("Pre-sal")          # list[Term]
+d.acronym("BOP")             # list[Acronym]
 
-vs = FAISS.from_texts(
-    [d["page_content"] for d in docs],
-    OpenAIEmbeddings(),
-    metadatas=[d["metadata"] for d in docs],
-)
+kg = KnowledgeGraph.from_local()
+kg.entity("poco")
+kg.shortest_path("poco", "reservatorio")
+
+v = Validator()
+v.validate("Reserva 4P do Campo de Buzios")  # SPE_PRMS_INVALID_CATEGORY
 ```
 
-### Carregando em LlamaIndex (Python)
+Ver `python/README.md` para documentacao completa.
 
-```python
-from llama_index.core import Document, VectorStoreIndex
-import urllib.request, json
+---
 
-URL = "https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl"
-documents = []
-with urllib.request.urlopen(URL) as f:
-    for line in f:
-        rec = json.loads(line)
-        documents.append(Document(text=rec["text"], metadata={**rec["metadata"], "id": rec["id"], "type": rec["type"]}))
+## Graph database (Neo4j)
 
-index = VectorStoreIndex.from_documents(documents)
+```bash
+node scripts/build-neo4j.js
+docker compose up
 ```
 
-### Usando o system prompt
+Browser: http://localhost:7474 — login `neo4j` / senha `geolytics123`.
 
-Leia o conteúdo de `ai/system-prompt-ptbr.md` (ou `ai/system-prompt-en.md`) e use-o como mensagem de sistema do seu agente conversacional. Ele estabelece o contexto de domínio, define as entidades-chave e explicita os termos que tipicamente confundem modelos genéricos (PAD, UTS, Período Exploratório, Pré-sal, Concessão vs. Partilha).
-
----
-
-## Modelo de entidades
-
-| Tipo | Cor | Entidades |
-|---|---|---|
-| **operational** | `#378ADD` | Poço, Bloco, Campo, Bacia Sedimentar |
-| **contractual** | `#7F77DD` | Contrato E&P, PAD, Rodada de Licitação, Declaração de Comercialidade |
-| **actor** | `#D85A30` | Operador, ANP, IBAMA, CONAMA, ANA, IBP, BNDES |
-| **instrument** | `#888780` | SIGEP, SEP, UTS, Regime Contratual, Período Exploratório, Processo Sancionador, Notificação Descoberta, Área de Desenvolvimento, EIA, RIMA, AFE, JOA, EPC |
-| **geological** | `#639922` | Pré-sal, Bacias Agrupadas, Ambiente |
-| **equipment** | `#C77B30` | BOP, FPSO, ANM, Riser, ROV, DHSV, BHA, ESP/BCS, MWD, LWD, Manifold Submarino |
-
-Relações entre entidades são tipadas (`drilled_in`, `governed_by`, `evaluates`, `originates`, etc.) e classificadas como `solid` (sempre presente) ou `dashed` (condicional).
-
----
-
-## Siglário O&G
-
-O arquivo `data/acronyms.json` traz 1.102 siglas curadas do domínio óleo e gás (PT/EN), parseadas e categorizadas a partir de fonte comunitária. Cada entrada tem:
-
-```json
-{
-  "id": "bop",
-  "sigla": "BOP",
-  "expansion_pt": "Preventor de Erupção, Obturador de Segurança",
-  "expansion_en": "Blowout Preventer",
-  "category": "equipment",
-  "it_generic": false
-}
+```cypher
+MATCH (e:Operational) WHERE e.petrokgraph_uri IS NULL
+RETURN e.id, e.label, e.geocoverage ORDER BY e.label
 ```
 
-**Categorias**: `equipment` (180), `measurement` (122), `fluid` (113), `process` (74), `environmental` (53), `standard_body` (51), `contract` (47), `unit` (40), `lithology` (39), `geophysics` (33), `well_state` (14), `regulator` (14), `it_generic` (23), `general` (294), `organization` (5).
-
-**Múltiplos sentidos**: a mesma sigla pode ter várias entradas (ex.: BO = "Barrels of Oil" e "Bottom Oil"; BT = "Total Formation Volume Factor" + "Bathythermograph" + "Build and Transfer"). O campo `id` distingue cada sentido; `sigla` é compartilhada.
-
-**Filtragem para RAG**: siglas com `it_generic: true` (CMOS, RAM, FFT, OSI…) são excluídas do `rag-corpus.jsonl` para não competir com o sinal de domínio, mas continuam no JSON para referência.
-
-**Regenerar**: `node scripts/build-acronyms.js` reprocessa `scripts/acronyms-source.txt` → `data/acronyms.json`.
+O modelo de entidades completo esta em [docs/ENTITIES.md](docs/ENTITIES.md).
 
 ---
 
-## Arquitetura semântica em 6 camadas
+## MCP Server
 
-O domínio de O&G brasileiro se organiza em 6 camadas independentes e complementares. Cada termo do dicionário tem o campo `geocoverage` listando em quais camadas ele tem cobertura formal.
+```bash
+cd mcp/geolytics-mcp && npm install && npm run build
+```
 
-| Layer | Nome | Mantenedor | Tipo | Cobertura no dicionário |
-|---|---|---|---|---|
-| **layer1** | BFO + GeoCore | UFRGS/BDI + Geosiris | ontologia formal (OWL/BFO) | Bacia, Pré-sal, Formação, Reservatório, Litologia, Processo Geológico |
-| **layer2** | O3PO + GeoReservoir | UFRGS/BDI | ontologia de domínio | Poço, Reservatório, Sistema Deposicional, Completação, Lâmina d'Água, Acumulação |
-| **layer3** | Petro KGraph | PUC-Rio / Petroles | knowledge graph PT-BR (539 conceitos) | Bacia, Poço, Bloco, Operador, Pré-sal, Reservatório, Formação |
-| **layer4** | OSDU | The Open Group (Petrobras membro) | schema de dados (Apache 2.0) | Poço, Bacia, Campo, Operador, Reservatório, Completação |
-| **layer5** | ANP / SIGEP / Lei 9478/1997 | ANP | marco regulatório brasileiro | Todos os 23 termos do glossário |
-| **layer6** | Geolytics / Petrobras Internal | Petrobras / Geolytics | ontologia corporativa interna | Módulos M7/M8/M9/M10 — sistemas corporativos (GEOQWIN, SIRR, GDA, GEOMECBR…) |
-
-**Regra de deduplicação:**
-- **Petro KGraph é construído sobre GeoCore** — não são duplicatas. Use `petrokgraph_uri` como referência primária para RAG em português.
-- **OSDU é schema de dados IT**, não ontologia filosófica. Complementar a todos os outros. Use `osdu_kind` para interoperabilidade com sistemas Petrobras.
-- **Camada ANP é única** e não sobrepõe nenhuma ontologia internacional.
-- **Camada 6 (Petrobras Internal) é o ativo técnico mais valioso** — namespace `https://petrobras.com.br/geolytics/ontology/`. Apenas definições conceituais públicas; dados Sigilo=Interno NÃO são publicados.
-
-Veja `ai/ontology-map.json` para a documentação completa de cada camada com URLs OWL, GitHub e regras de uso.
-
-## Conceitos exclusivamente brasileiros (camada 5)
-
-Os 11 conceitos abaixo **não existem em nenhuma ontologia internacional** de geologia ou petróleo (GeoCore, Petro KGraph, OSDU, IFC, BFO). São exclusivos do framework regulatório da ANP / Lei nº 9.478/1997 / Lei nº 12.351/2010:
-
-- **Bloco** (não é "lease" ou "license" americano)
-- **PAD — Plano de Avaliação de Descobertas** (não é "appraisal" genérico)
-- **Contrato de E&P** (estrutura jurídica brasileira específica)
-- **Rodada de Licitação** (numeradas desde 1999)
-- **UTS — Unidades de Trabalho** (métrica brasileira para o PEM)
-- **Regime Contratual** (Concessão vs. Partilha de Produção)
-- **Período Exploratório** (1º, 2º, 3º PE — fase contratual com prazo)
-- **Etapa Prorrogada** (resolução ANP específica)
-- **Processo Sancionador** (procedimento ANP/SEP)
-- **Notificação de Descoberta** (registro ANP por poço)
-- **Declaração de Comercialidade** (marco regulatório que origina o Campo)
-
-Por isso este dicionário existe — para preencher esta lacuna ontológica.
-
-## Sobre o Petro KGraph
-
-O **Petro KGraph** é uma ontologia formal de Óleo & Gás em português desenvolvida pela **PUC-Rio / PetroNLP** com **539 conceitos formais** populados com instâncias ANP públicas e relações extraídas de documentos técnicos por NLP. **É construído sobre GeoCore** (UFRGS/BDI). Inclui corpora anotados: PetroGold (NER), PetroNER, PetroRE (extração de relações). É a camada mais adequada para RAG em português. Repositório: https://github.com/Petroles/PetroNLP
-
-## Sobre PPDM e SPE-PRMS
-
-**PPDM (Professional Petroleum Data Management Association)** é o padrão internacional clássico de modelagem de dados de E&P, originário da Society of Petroleum Engineers nos anos 1990. Define entidades canônicas como Well, Wellbore, Field, Reservoir, Trap, Play, Prospect, Resource, Reserve. O ontopetro deste dicionário (`data/ontopetro.json`) usa PPDM como uma das fontes principais (junto com GeoCore) — ver coluna `sources` em cada classe (C001-C020).
-
-**SPE-PRMS (Society of Petroleum Engineers — Petroleum Resources Management System)** é o sistema canônico de classificação de recursos e reservas de hidrocarbonetos. Define a hierarquia Reservas (1P/2P/3P, com graus de certeza) vs. Recursos Contingentes (C1C/C2C/C3C). A taxonomia SPE-PRMS está modelada em `data/taxonomies.json` com alerta RAG explícito de que "Reserva (SPE-PRMS) ≠ Reserva Ambiental (REBIO/RPPN)".
-
-## Sobre OSDU
-
-**OSDU — Open Subsurface Data Universe** é o padrão global de dados de subsuperfície da indústria petrolífera, mantido pelo The Open Group. Petrobras é membro ativo. Cobre schemas para Well, Wellbore, Field, Basin, SeismicAcquisition, Trajectory, WellLog. Não é ontologia formal — é schema de dados para interoperabilidade IT. Licença Apache 2.0. Os campos `osdu_kind` no dicionário usam o formato `opendes:osdu:master-data--[Type]:1.0.0`.
+9 ferramentas AI: `lookup_term`, `expand_acronym`, `get_entity`, `get_entity_neighbors`, `validate_claim`, `cypher_query`, `search_rag`, `list_layers`, `crosswalk_lookup`. Ver `mcp/geolytics-mcp/README.md`.
 
 ---
 
-## Fontes
+## Validacao semantica
 
-- **Lei nº 9.478/1997** (Lei do Petróleo) — instituiu a ANP e o atual marco regulatório de E&P no Brasil.
-- **ANP — Agência Nacional do Petróleo, Gás Natural e Biocombustíveis** — autarquia federal regulatória.
-- **SEP — Superintendência de Exploração** da ANP.
-- **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
-- Resoluções ANP nº 708/2017 e nº 815/2020.
-- Contato dos datasets: `sigep_sep@anp.gov.br`.
+```bash
+# Validador deterministico (JavaScript)
+node scripts/validate-cli.js "Reserva 4P do Campo de Buzios"
+
+# SHACL formal (Python + pyshacl)
+pip install -r scripts/requirements.txt
+python scripts/validate-shacl.py
+
+# Testes
+node --test tests/validator.test.js
+```
+
+Ver [docs/SHACL.md](docs/SHACL.md) para as 22 NodeShapes e como adicionar novas.
 
 ---
 
 ## Regenerando os dados
 
 ```bash
-node scripts/generate.js
+node scripts/generate.js           # regenera data/, api/v1/, ai/
+node scripts/build-ontology-doc.js # regenera docs/ONTOLOGY.md
+bash scripts/check-regen.sh        # verifica se ha diff apos regen
 ```
-
-O script regrava todos os arquivos em `/data`, `/api/v1` e `/ai`. Os dados-fonte (GLOSSARIO, CONJUNTOS, ONTOLOGY, DOMAINS, ENTITY_NODES, EDGES) ficam embedados no próprio script — para sincronizar com o Geolytics, copie os exports de `src/config/dicionario.js` e `src/config/ontology.js`.
 
 ---
 
-## Licença
+## Como usar os dados
 
-- **Código** (`scripts/`, `index.html`): MIT.
-- **Dados** (`data/`, `api/`, `ai/`): derivados de informações públicas da ANP/SEP. Uso livre para fins educacionais, de pesquisa e desenvolvimento, mantendo a atribuição à fonte original.
+Via raw GitHub:
+```
+https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data/glossary.json
+https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/ai/rag-corpus.jsonl
+```
+
+Via GitHub Pages:
+```
+https://thiagoflc.github.io/geolytics-dictionary/api/v1/index.json
+https://thiagoflc.github.io/geolytics-dictionary/data/full.json
+```
+
+Para carregar o corpus RAG em LangChain, LlamaIndex ou usar o system prompt, ver a secao "Como usar os dados" em [docs/GRAPHRAG.md](docs/GRAPHRAG.md).
+
+---
+
+## Licenca
+
+- **Codigo** (`scripts/`, `index.html`): MIT.
+- **Dados** (`data/`, `api/`, `ai/`): derivados de informacoes publicas da ANP/SEP. Uso livre para fins educacionais, de pesquisa e desenvolvimento, mantendo a atribuicao a fonte original.

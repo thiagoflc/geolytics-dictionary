@@ -1,0 +1,326 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-05-01T16:05:20.772Z",
+  "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
+  "layers": [
+    {
+      "id": "layer1",
+      "name": "BFO + GeoCore",
+      "maintainer": "UFRGS/BDI + Geosiris (França)",
+      "type": "formal_ontology",
+      "owl_url": "https://www.inf.ufrgs.br/bdi/ontologies/geocore.owl",
+      "github": "https://github.com/BDI-UFRGS/GeoCoreOntology",
+      "description": "Ontologia formal de geologia com 11 classes baseadas em BFO (Basic Formal Ontology). Define o que entidades geológicas SÃO em termos ontológicos formais. Cobre: GeologicalObject, GeologicalBody, GeologicalUnit, RockMaterial, GeologicalProcess, GeologicalBoundary, GeologicalStructure, GeologicalQuality, GeologicalAge.",
+      "concepts_count": 11,
+      "language": "OWL/RDF",
+      "geolytics_coverage": [
+        "bacia-sedimentar",
+        "presal",
+        "formacao-geologica",
+        "reservatorio",
+        "litologia",
+        "processo-geologico",
+        "sistema-deposicional"
+      ]
+    },
+    {
+      "id": "layer1b",
+      "name": "GeoSciML + CGI Simple Lithology",
+      "maintainer": "OGC + CGI/IUGS (Commission for the Management and Application of Geoscience Information)",
+      "type": "international_standard",
+      "github": "https://github.com/opengeospatial/GeoSciML",
+      "modules": {
+        "gsmlb": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmlb.ttl",
+          "namespace": "http://geosciml.org/def/gsmlb#",
+          "classes": 33,
+          "properties": 56,
+          "scope": "Geologia básica — GeologicUnit, GeologicStructure, GeologicEvent, EarthMaterial, MappedFeature, Fold, Foliation, ShearDisplacementStructure"
+        },
+        "gsmlbh": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmlbh.ttl",
+          "namespace": "http://geosciml.org/def/gsmlbh#",
+          "classes": 6,
+          "properties": 18,
+          "scope": "Boreholes — Borehole, BoreholeInterval, MappedInterval, OriginPosition, DrillingDetails"
+        },
+        "gsmll": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmll.ttl",
+          "namespace": "http://geosciml.org/def/gsmll#",
+          "classes": 7,
+          "scope": "Logical views para serialização de dados (BoreholeView, GeologicUnitView, ContactView, etc.)"
+        },
+        "gwml2": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/minimal/gwml2_minimal.ttl",
+          "namespace": "http://gwml2.org/def/gwml2#",
+          "classes": 29,
+          "scope": "Águas subterrâneas — Casing, Screen, Sealing, Filtration, WellConstruction (componentes transferíveis para poços de petróleo)"
+        },
+        "cgi_lithology": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/CGI-SimpleLithology201211.ttl",
+          "namespace": "http://resource.geosciml.org/classifier/cgi/lithOntology/",
+          "concepts": 437,
+          "scope": "Vocabulário canônico de litologias — limestone, dolostone, arenite, sandstone, mudstone, basalt, granite, rock_salt, anhydrite, anthracite_coal, etc."
+        }
+      },
+      "description": "Padrão internacional OGC para troca de dados geológicos. Complementa GeoCore com modelo detalhado de Borehole (gsmlbh) e vocabulário canônico de litologias (CGI Simple Lithology, ~437 conceitos). Usado como referência por serviços geológicos nacionais (USGS, BGS, Geoscience Australia, CPRM-BR). Adotado como vocabulário-base por OSDU para LithologyType.",
+      "concepts_count": 512,
+      "language": "OWL/RDF/SKOS",
+      "license": "OGC public spec / Apache 2.0",
+      "relationship": "EXTENDS_GEOCORE — GeoSciML detalha estruturas (Fold, Foliation, ShearDisplacement) e fornece vocabulário litológico canônico que GeoCore referencia mas não enumera.",
+      "osdu_convergence": "CGI Simple Lithology é vocabulário recomendado para popular opendes:osdu:reference-data--LithologyType. Equivalência classe-a-classe pode ser estabelecida via owl:equivalentClass.",
+      "geolytics_coverage": [
+        "poco",
+        "wellbore",
+        "bacia-sedimentar",
+        "formacao-geologica",
+        "reservatorio",
+        "litologia",
+        "contato-geologico",
+        "dobra",
+        "foliacao",
+        "falha-cisalhante",
+        "feature-mapeada"
+      ]
+    },
+    {
+      "id": "layer2",
+      "name": "O3PO + GeoReservoir",
+      "maintainer": "UFRGS/BDI",
+      "type": "domain_ontology",
+      "owl_url": "https://www.inf.ufrgs.br/ontologies/o3po/2.0",
+      "github_o3po": "https://github.com/BDI-UFRGS/O3POntology",
+      "github_geores": "https://github.com/BDI-UFRGS/GeoReservoirOntology",
+      "description": "Ontologias de domínio para produção offshore e reservatórios. O3PO cobre plataformas, poços, tubing, flowlines, manifolds — validado em campo offshore brasileiro real. GeoReservoir cobre sistemas deposicionais de mar profundo. Ambas estendem GeoCore.",
+      "language": "OWL/RDF",
+      "geolytics_coverage": [
+        "poco-anp",
+        "reservatorio",
+        "sistema-deposicional",
+        "completacao",
+        "lamina-dagua",
+        "acumulacao"
+      ]
+    },
+    {
+      "id": "layer3",
+      "name": "Petro KGraph",
+      "maintainer": "PUC-Rio / Petroles",
+      "type": "knowledge_graph",
+      "owl_public": "https://github.com/Petroles/PetroNLP/blob/main/Petro%20KGraph%20public.owl",
+      "github": "https://github.com/Petroles/PetroNLP",
+      "description": "Knowledge graph de O&G em português construído SOBRE GeoCore. Contém 539 conceitos populados com instâncias ANP públicas e relações extraídas de documentos técnicos por NLP. Inclui corpora anotados: PetroGold (NER), PetroNER, PetroRE (extração de relações). É a camada mais adequada para RAG em português — combina formalidade ontológica de GeoCore com praticidade de NLP.",
+      "concepts_count": 539,
+      "language": "OWL/PT-BR",
+      "relationship_to_geocore": "BUILT_ON — Petro KGraph extends GeoCore with Brazilian petroleum instances and NLP annotations",
+      "geolytics_coverage": [
+        "bacia-sedimentar",
+        "poco-anp",
+        "bloco",
+        "operador",
+        "presal",
+        "ambiente",
+        "bacias-agrupadas",
+        "reservatorio",
+        "formacao-geologica"
+      ]
+    },
+    {
+      "id": "layer4",
+      "name": "OSDU — Open Subsurface Data Universe",
+      "authority": "The Open Group",
+      "namespace": "opendes:osdu:",
+      "kind_format": "{authority}:{source}:{type}:{version} — ex: opendes:osdu:master-data--Well:1.0.0",
+      "url": "https://osduforum.org",
+      "viz_tool": "https://accenture.github.io/OSDU-Ontology",
+      "schema_repo": "https://github.com/Accenture/OSDU-Ontology",
+      "petrobras_membership": "Membro ativo do consórcio OSDU desde a fase inicial (junto com Shell, BP, Chevron, TotalEnergies, Equinor, SLB, Halliburton). Adoção interna em andamento.",
+      "license": "Apache 2.0",
+      "type": "industry_data_standard",
+      "description": "Padrão de dados de subsuperfície da indústria petrolífera global. Tripartição Master/Reference/WPC. Não é ontologia formal — é schema de dados para interoperabilidade IT. Essencial para alinhar o dicionário com sistemas de dados que a Petrobras está construindo.",
+      "data_tripartition": {
+        "master_data": {
+          "description": "Entidades estáveis de negócio: Well, Wellbore, Field, Basin, Organisation, GeologicalFormation, Reservoir",
+          "geolytics_node_types": [
+            "operational",
+            "actor"
+          ],
+          "kind_prefix": "opendes:osdu:master-data--"
+        },
+        "reference_data": {
+          "description": "Vocabulários controlados: WellStatus, WellType, LithologyType, FluidType, UnitOfMeasure",
+          "geolytics_node_types": [
+            "instrument",
+            "geological"
+          ],
+          "kind_prefix": "opendes:osdu:reference-data--"
+        },
+        "work_product_components": {
+          "description": "Dados interpretativos: WellLog, WellboreMarker, WellboreTrajectory, WellborePressure",
+          "geolytics_node_types": [
+            "analytical"
+          ],
+          "kind_prefix": "opendes:osdu:work-product-component--"
+        }
+      },
+      "lineage_model": {
+        "description": "Cada registro OSDU tem ancestry.parents[] para rastrear proveniência",
+        "anp_chain": "ANP source-record → OSDU master-data--Well → Geolytics internal-enrichment",
+        "legal_tags": "opendes-ANP-public-data",
+        "country": "BR"
+      },
+      "sosa_convergence": {
+        "description": "OSDU adota W3C SOSA/SSN para medições — mesmo padrão do GloSIS (FAO/ISRIC)",
+        "welllog_as_observation": "WellLog (curva GR/RHOB) = sosa:Observation → observedProperty + hasResult + usedProcedure",
+        "future_roadmap": "Módulos analíticos M7-M10 do Geolytics devem migrar para SOSA para interoperabilidade OSDU"
+      },
+      "well_wellbore_distinction": {
+        "well": "Registro de superfície + legal. ANP POCO_NUM = Well.WellID",
+        "wellbore": "Trecho físico perfurado. 1 Well pode ter N Wellbores (sidetrack)",
+        "anp_mapping_rule": "1 poço ANP (sem sidetrack) = 1 Well + 1 Wellbore OSDU"
+      },
+      "geolytics_node_mapping": {
+        "poco": "opendes:osdu:master-data--Well:1.0.0",
+        "wellbore": "opendes:osdu:master-data--Wellbore:1.0.0",
+        "campo": "opendes:osdu:master-data--Field:1.0.0",
+        "bacia-sedimentar": "opendes:osdu:master-data--Basin:1.0.0",
+        "operador": "opendes:osdu:master-data--Organisation:1.0.0",
+        "formacao": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+        "reservatorio": "opendes:osdu:master-data--Reservoir:1.0.0",
+        "litologia": "opendes:osdu:reference-data--LithologyType:1.0.0",
+        "classe-fluido": "opendes:osdu:reference-data--FluidType:1.0.0",
+        "unidade-medida": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+        "perfil-poco": "opendes:osdu:work-product-component--WellLog:1.0.0",
+        "topo-formacional": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+        "trajetoria-poco": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+        "pvt": "opendes:osdu:work-product-component--WellborePressure:1.0.0"
+      },
+      "geolytics_coverage": [
+        "poco",
+        "wellbore",
+        "campo",
+        "bacia-sedimentar",
+        "operador",
+        "formacao",
+        "reservatorio",
+        "litologia",
+        "classe-fluido",
+        "unidade-medida",
+        "perfil-poco",
+        "topo-formacional",
+        "trajetoria-poco",
+        "pvt"
+      ]
+    },
+    {
+      "id": "layer5",
+      "name": "ANP / SIGEP / Lei 9478/1997",
+      "maintainer": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis",
+      "type": "regulatory_framework",
+      "description": "Marco legal e regulatório brasileiro de E&P. ÚNICA camada com cobertura de conceitos jurídico-contratuais brasileiros: Bloco, PAD, Contrato E&P, Rodada de Licitação, UTS, Regime Contratual, Período Exploratório, Etapa Prorrogada, Processo Sancionador. Estes conceitos NÃO existem em nenhuma outra ontologia internacional.",
+      "unique_concepts": [
+        "bloco",
+        "contrato-ep",
+        "pad",
+        "rodada-licitacao",
+        "uts",
+        "regime-contratual",
+        "periodo-exploratorio",
+        "etapa-prorrogada",
+        "processo-sancionador",
+        "notificacao-descoberta",
+        "declaracao-comercialidade"
+      ],
+      "geolytics_coverage": "all_23_glossario_terms"
+    },
+    {
+      "id": "layer6",
+      "name": "Geolytics / Petrobras Internal",
+      "maintainer": "Petrobras / Geolytics",
+      "type": "corporate_internal_ontology",
+      "namespace": "https://petrobras.com.br/geolytics/ontology/",
+      "prefix": "geo:",
+      "modules": [
+        "M7 Geoquímica",
+        "M8 Rocha",
+        "M9 Geomecânica",
+        "M10 Fluidos"
+      ],
+      "systems": [
+        "GEOQWIN",
+        "SIRR",
+        "LIMS",
+        "BDIEP",
+        "AIDA",
+        "GDA",
+        "GEOMECBR",
+        "GERESIM",
+        "TrapTester"
+      ],
+      "internal_standards": [
+        "PE-2E&P-00531",
+        "PE-2E&P-00463",
+        "PE-2P&D-00189"
+      ],
+      "description": "Ontologia operacional interna da Petrobras para o Geolytics. Namespace próprio + ligação a sistemas corporativos. Inclui APENAS definições conceituais públicas — dados Sigilo=Interno NÃO são publicados aqui.",
+      "status": "v0.1 Preliminar/Interno",
+      "publication_policy": "Apenas definições conceituais + estrutura de classes/propriedades. NÃO incluir dados operacionais reais nem configurações de sistemas.",
+      "geolytics_coverage": "all_modules_extended (M7+M8+M9+M10)"
+    },
+    {
+      "id": "layer7",
+      "name": "GSO — Geoscience Ontology (Loop3D)",
+      "maintainer": "Brodaric & Richard — Natural Resources Canada / Geological Survey of Canada",
+      "type": "domain_ontology",
+      "version": "1.0.2",
+      "namespace": "https://w3id.org/gso/1.0/",
+      "prefix": "gso:",
+      "github": "https://github.com/Loop3D/GKM",
+      "doi": "10.4095/328296",
+      "zenodo": "https://zenodo.org/record/4743221",
+      "license": "CC BY 4.0",
+      "attribution": "Brodaric & Richard 2021, GSC Open File 8796, DOI 10.4095/328296",
+      "language": "OWL 2 DL + SKOS / Turtle",
+      "modules_imported": [
+        "geologicfault (52 classes)",
+        "geologicfold (27)",
+        "geologicfoliation (73)",
+        "geologiclineation (21)",
+        "geologiccontact (40)"
+      ],
+      "vocabularies_reused": [
+        "QUDT",
+        "W3C SOSA/SSN",
+        "W3C Time + Allen",
+        "OGC GeoSPARQL",
+        "CGI Geoscience Terms",
+        "ICC chart",
+        "schema.org",
+        "DCT"
+      ],
+      "description": "Ontologia de geociência estrutural e materiais rochosos do projeto Loop3D (GSC, Canadá). Cobre falhas, dobras, foliação, lineação, contatos, tempo geológico ICC, e padrão GSOC quality/role/value alinhado a BFO. Domínio adjacente a E&P: complementa OSDU/ontopetro com geologia estrutural rigorosa que era gap no geolytics. 213 classes importadas via scripts/gso-extract.js.",
+      "extractor": "scripts/gso-extract.js",
+      "crosswalk": "data/osdu-gso-crosswalk.json",
+      "data_files": [
+        "data/gso-faults.json",
+        "data/gso-folds.json",
+        "data/gso-foliations.json",
+        "data/gso-lineations.json",
+        "data/gso-contacts.json"
+      ],
+      "geolytics_coverage": "estrutural completo (213 classes); materiais/tempo/processo pendentes"
+    }
+  ],
+  "deduplication_rules": {
+    "petrokgraph_vs_geocore": "NÃO são duplicatas. Petro KGraph É CONSTRUÍDO sobre GeoCore. Petro KGraph URIs referenciam GeoCore implicitamente. Use petrokgraph_uri como referência primária para RAG em português.",
+    "osdu_vs_others": "OSDU é schema de dados IT, não ontologia filosófica. Complementar a todos os outros. Use osdu_kind para interoperabilidade com sistemas Petrobras.",
+    "anp_vs_all": "Camada ANP é única e não sobrepõe nenhuma ontologia internacional. Conceitos regulatórios brasileiros não existem fora desta camada.",
+    "layer6_vs_all": "Camada 6 (Geolytics/Petrobras Internal) é o ATIVO TÉCNICO mais valioso — representa anos de ontologização interna (M7/M8/M9/M10). Não duplica camadas externas; estende com namespace próprio (geo:) e ligação a sistemas corporativos (GEOQWIN, SIRR, GDA, etc.). Apenas definições conceituais são publicadas; dados Sigilo=Interno NUNCA."
+  },
+  "recommended_usage": {
+    "ai_agent_rag": "Use rag-corpus.jsonl com todos os chunks. Priorize chunks type=term e type=entity. O campo text já está otimizado para embedding.",
+    "ai_agent_grounding": "Use system-prompt-ptbr.md ou system-prompt-en.md como bloco de contexto no system prompt. ~900 tokens.",
+    "it_integration": "Use osdu_kind para mapear entidades do dicionário a schemas OSDU nos pipelines de dados Petrobras.",
+    "ontology_reasoning": "Use petrokgraph_uri para alinhar com Petro KGraph / GeoCore para reasoners OWL futuros."
+  }
+}

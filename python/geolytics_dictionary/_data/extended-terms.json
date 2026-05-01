@@ -1,0 +1,691 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T16:05:20.772Z",
+    "count": 20,
+    "description": "Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP."
+  },
+  "terms": [
+    {
+      "id": "formacao-geologica",
+      "termo": "Formação Geológica",
+      "termo_en": "Geological Formation",
+      "categoria": "geologia",
+      "definicao": "Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
+      "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "formação",
+        "unidade litoestratigráfica",
+        "unidade geológica"
+      ],
+      "synonyms_en": [
+        "formation",
+        "geological formation",
+        "lithostratigraphic unit"
+      ],
+      "examples": [
+        "Formação Barra Velha (pré-sal)",
+        "Formação Quissamã",
+        "Formação Carapebus",
+        "Formação Itapema"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/GeologicFeature",
+      "sweet_alignment_type": "skos:broadMatch",
+      "sweet_module": "realmGeol"
+    },
+    {
+      "id": "reservatorio",
+      "termo": "Reservatório",
+      "termo_en": "Reservoir",
+      "categoria": "geologia",
+      "definicao": "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.",
+      "legal_source": "GeoCore + GeoReservoir (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir",
+      "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "reservatório",
+        "rocha-reservatório",
+        "corpo reservatório"
+      ],
+      "synonyms_en": [
+        "reservoir",
+        "reservoir rock",
+        "pay zone"
+      ],
+      "examples": [
+        "Reservatórios carbonáticos do pré-sal (Coquinas)",
+        "Reservatórios turbidíticos de Campos",
+        "Reservatório Barra Velha"
+      ],
+      "sweet_uri": "http://sweetontology.net/matrRock/Rock",
+      "sweet_alignment_type": "skos:relatedMatch",
+      "sweet_module": "matrRock"
+    },
+    {
+      "id": "sistema-deposicional",
+      "termo": "Sistema Deposicional",
+      "termo_en": "Depositional System",
+      "categoria": "geologia",
+      "definicao": "Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.",
+      "legal_source": "GeoReservoir (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "sistema deposicional",
+        "sistema sedimentar",
+        "ambiente deposicional"
+      ],
+      "synonyms_en": [
+        "depositional system",
+        "sedimentary system"
+      ],
+      "examples": [
+        "Sistema turbidítico de águas profundas",
+        "Sistema lacustre carbonático (pré-sal)",
+        "Sistema deltaico"
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/Sedimentation",
+      "sweet_alignment_type": "skos:relatedMatch",
+      "sweet_module": "procGeo"
+    },
+    {
+      "id": "litologia",
+      "termo": "Litologia",
+      "termo_en": "Lithology",
+      "categoria": "geologia",
+      "definicao": "Descrição das características físicas de uma rocha, incluindo composição mineralógica, textura, cor, granulometria e estruturas sedimentares. Derivado do RockMaterial do GeoCore. Fundamental na descrição de testemunhos e cuttings.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "litologia",
+        "tipo de rocha",
+        "descrição litológica"
+      ],
+      "synonyms_en": [
+        "lithology",
+        "rock type",
+        "lithologic description"
+      ],
+      "examples": [
+        "Folhelho (shale)",
+        "Arenito (sandstone)",
+        "Carbonato (limestone)",
+        "Coquina",
+        "Estromatólito"
+      ],
+      "sweet_uri": "http://sweetontology.net/matrRock/Rock",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "matrRock"
+    },
+    {
+      "id": "completacao",
+      "termo": "Completação de Poço",
+      "termo_en": "Well Completion",
+      "categoria": "operacoes",
+      "definicao": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura de hidrocarbonetos. Inclui revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV) e canhoneio (perforation) das zonas produtoras.",
+      "legal_source": "O3PO (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellCompletion",
+      "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "completação",
+        "acabamento de poço"
+      ],
+      "synonyms_en": [
+        "well completion",
+        "completion"
+      ],
+      "examples": [
+        "Completação seca (dry tree)",
+        "Completação molhada (subsea com ANM)",
+        "Completação inteligente (smart well)"
+      ],
+      "sweet_uri": null,
+      "sweet_alignment_type": null,
+      "sweet_module": null
+    },
+    {
+      "id": "lamina-dagua",
+      "termo": "Lâmina d'Água",
+      "termo_en": "Water Depth",
+      "categoria": "geologia",
+      "definicao": "Profundidade da coluna de água entre a superfície do mar e o fundo marinho no local do poço. Parâmetro crítico para classificação de poços offshore: águas rasas (< 300 m), águas profundas (300–1500 m), águas ultraprofundas (> 1500 m). Define complexidade tecnológica e custo das operações.",
+      "legal_source": "O3PO (UFRGS)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WaterDepth",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "lâmina d'água",
+        "profundidade d'água",
+        "LDA"
+      ],
+      "synonyms_en": [
+        "water depth",
+        "WD",
+        "sea depth"
+      ],
+      "examples": [
+        "Bacia de Campos: ~1.000 m",
+        "Pré-sal de Santos: 1.900–2.400 m",
+        "Foz do Amazonas: 2.000–2.880 m"
+      ],
+      "sweet_uri": "http://sweetontology.net/propSpaceDistance/Depth",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "propSpaceDistance"
+    },
+    {
+      "id": "acumulacao",
+      "termo": "Acumulação de Hidrocarbonetos",
+      "termo_en": "Hydrocarbon Accumulation",
+      "categoria": "geologia",
+      "definicao": "Concentração de petróleo ou gás natural em uma armadilha geológica (estrutural, estratigráfica ou mista) com volume e qualidade suficientes para avaliação técnico-econômica. Precede e fundamenta a Declaração de Comercialidade. Distingue-se de \"campo\" por ainda não ter sido formalmente declarado comercial.",
+      "legal_source": "O3PO + GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "acumulação",
+        "descoberta de hidrocarbonetos",
+        "jazida"
+      ],
+      "synonyms_en": [
+        "hydrocarbon accumulation",
+        "discovery",
+        "accumulation"
+      ],
+      "examples": [
+        "Acumulação de Tupi (descoberta 2006)",
+        "Acumulação de Búzios",
+        "Acumulação de Mero"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/GeologicFeature",
+      "sweet_alignment_type": "skos:relatedMatch",
+      "sweet_module": "realmGeol"
+    },
+    {
+      "id": "processo-geologico",
+      "termo": "Processo Geológico",
+      "termo_en": "Geological Process",
+      "categoria": "geologia",
+      "definicao": "Mecanismo natural (sedimentação, diagênese, tectônica, migração de fluidos, evaporação, magmatismo) que gera, modifica ou destrói feições e corpos geológicos ao longo do tempo geológico. Fundamental para entender a formação e preservação de reservatórios e a maturação de hidrocarbonetos.",
+      "legal_source": "GeoCore (UFRGS/Geosiris)",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalProcess",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "processo geológico",
+        "evento geológico"
+      ],
+      "synonyms_en": [
+        "geological process",
+        "geologic process"
+      ],
+      "examples": [
+        "Sedimentação clástica",
+        "Diagênese",
+        "Halocinese (tectônica do sal)",
+        "Migração secundária de hidrocarbonetos"
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/GeologicProcess",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo"
+    },
+    {
+      "id": "hidrocarboneto",
+      "termo": "Hidrocarboneto",
+      "termo_en": "Hydrocarbon",
+      "categoria": "geologia",
+      "definicao": "Composto orgânico formado essencialmente por carbono e hidrogênio. No domínio E&P designa óleo, gás natural, condensado e seus derivados. Em PetroGold é o tipo NER PRP quando associado a propriedades; FLU quando designa o fluido.",
+      "legal_source": "GeoCore / IUPAC",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Hydrocarbon",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "HC",
+        "hidrocarboneto",
+        "óleo e gás"
+      ],
+      "synonyms_en": [
+        "hydrocarbon",
+        "HC",
+        "oil and gas"
+      ],
+      "examples": [
+        "metano",
+        "etano",
+        "óleo cru",
+        "gás natural úmido",
+        "condensado"
+      ],
+      "sweet_uri": "http://sweetontology.net/matrOrganics/Hydrocarbon",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics"
+    },
+    {
+      "id": "querogenio",
+      "termo": "Querogênio",
+      "termo_en": "Kerogen",
+      "categoria": "geologia",
+      "definicao": "Fração da matéria orgânica preservada em rochas sedimentares insolúvel em solventes orgânicos. Classificado em quatro tipos com base em origem e potencial gerador: Tipo I (lacustre, óleo), Tipo II (marinho, óleo+gás), Tipo III (terrígeno, gás), Tipo IV (inertinita, sem potencial). Determina o produto da rocha geradora ao atingir maturação termal.",
+      "legal_source": "GeoCore / Tissot & Welte 1984",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Kerogen",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "querogênio",
+        "matéria orgânica insolúvel"
+      ],
+      "synonyms_en": [
+        "kerogen"
+      ],
+      "examples": [
+        "Querogênio Tipo I (lacustre — Lagoa Feia)",
+        "Querogênio Tipo II (marinho — Cretáceo)",
+        "Querogênio Tipo III (deltaico)"
+      ],
+      "sweet_uri": "http://sweetontology.net/matrOrganics/Kerogen",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics"
+    },
+    {
+      "id": "migracao-hidrocarbonetos",
+      "termo": "Migração de Hidrocarbonetos",
+      "termo_en": "Hydrocarbon Migration",
+      "categoria": "geologia",
+      "definicao": "Processo de deslocamento de hidrocarbonetos da rocha geradora (onde foram formados) até a rocha reservatório, e sua acumulação em armadilha selada por rocha capa. Distingue-se em migração primária (saída do querogênio na rocha geradora) e migração secundária (deslocamento por carrier beds, falhas e descontinuidades estratigráficas). Falhas selantes vs. condutivas controlam fortemente a eficácia da migração.",
+      "legal_source": "GeoCore / PPDM",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonMigration",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "migração de HC",
+        "migração primária",
+        "migração secundária"
+      ],
+      "synonyms_en": [
+        "hydrocarbon migration",
+        "primary migration",
+        "secondary migration"
+      ],
+      "examples": [
+        "Migração através do Sistema Petrolífero Lagoa Feia-Macabu",
+        "Falhas extensionais como conduto de migração no pré-sal"
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/FluidMigration",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo"
+    },
+    {
+      "id": "discordancia",
+      "termo": "Discordância",
+      "termo_en": "Unconformity",
+      "categoria": "geologia",
+      "definicao": "Superfície estratigráfica que separa rochas mais novas de rochas mais antigas e representa um hiato deposicional ou erosivo significativo. Pode ser angular, paralela (paraconformidade), erosiva ou de não-deposição. Frequentemente atua como armadilha estratigráfica ou marco regional de correlação sísmica.",
+      "legal_source": "GeoCore / ICS GTS",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Unconformity",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "discordância",
+        "discordância angular",
+        "paraconformidade"
+      ],
+      "synonyms_en": [
+        "unconformity",
+        "angular unconformity",
+        "paraconformity",
+        "disconformity"
+      ],
+      "examples": [
+        "Discordância pré-Aptiana (separa pré-sal de rifte)",
+        "Discordância intra-Albiana"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/Unconformity",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol"
+    },
+    {
+      "id": "diagenese",
+      "termo": "Diagênese",
+      "termo_en": "Diagenesis",
+      "categoria": "geologia",
+      "definicao": "Conjunto de processos físicos, químicos e biológicos que afetam os sedimentos após a deposição e antes do metamorfismo. Inclui compactação, cimentação, dissolução, dolomitização, recristalização e formação/preenchimento de porosidade secundária. É determinante na qualidade final do reservatório — a permeabilidade dos carbonatos pré-sal é fortemente controlada por diagênese (especialmente dolomitização e dissolução).",
+      "legal_source": "GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Diagenesis",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "diagênese",
+        "processo diagenético"
+      ],
+      "synonyms_en": [
+        "diagenesis",
+        "diagenetic process"
+      ],
+      "examples": [
+        "Dolomitização nos carbonatos do pré-sal",
+        "Cimentação calcítica",
+        "Dissolução geradora de porosidade vugular"
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/Diagenesis",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo"
+    },
+    {
+      "id": "evento-tectonico",
+      "termo": "Evento Tectônico",
+      "termo_en": "Tectonic Event",
+      "categoria": "geologia",
+      "definicao": "Episódio geológico de deformação crustal — rifteamento, abertura oceânica, inversão tectônica, halocinese (movimentação do sal) ou compressão — que altera a geometria das bacias e cria/destrói armadilhas estruturais. No Brasil, o rifteamento Mesozoico abriu as bacias da margem leste e a halocinese pós-Aptiana esculpiu as armadilhas do pré-sal.",
+      "legal_source": "GeoCore",
+      "apareceEm": [],
+      "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#TectonicEvent",
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer3"
+      ],
+      "synonyms_pt": [
+        "evento tectônico",
+        "fase tectônica",
+        "episódio deformacional"
+      ],
+      "synonyms_en": [
+        "tectonic event",
+        "tectonic phase"
+      ],
+      "examples": [
+        "Rifteamento mesozoico (abertura do Atlântico Sul)",
+        "Halocinese pós-Aptiana (sal de Santos)",
+        "Inversão andina"
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/TectonicProcess",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo"
+    },
+    {
+      "id": "contato-geologico",
+      "termo": "Contato Geológico",
+      "termo_en": "Geological Contact",
+      "categoria": "geologia",
+      "definicao": "Superfície ou zona estreita que separa duas unidades geológicas distintas. Pode ser deposicional (concordante), erosivo (discordância), intrusivo ou tectônico (falha). Contatos são o esqueleto de mapas geológicos e de modelos 3D de subsuperfície usados em E&P.",
+      "legal_source": "GeoSciML Basic (gsmlb:Contact)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Contact",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "contato geológico",
+        "limite estratigráfico",
+        "superfície de contato"
+      ],
+      "synonyms_en": [
+        "geological contact",
+        "geologic contact",
+        "stratigraphic boundary"
+      ],
+      "examples": [
+        "Contato Aptiano/Albiano (sal sobre carbonatos do pré-sal)",
+        "Discordância pré-rifte",
+        "Contato intrusivo entre soleira de diabásio e folhelho"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/GeologicContact",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol"
+    },
+    {
+      "id": "dobra",
+      "termo": "Dobra",
+      "termo_en": "Fold",
+      "categoria": "geologia",
+      "definicao": "Estrutura geológica formada pela deformação dúctil de camadas rochosas, gerando flexuras (anticlinais e sinclinais). Dobras anticlinais são armadilhas estruturais clássicas em E&P — concentram hidrocarbonetos no topo da flexura.",
+      "legal_source": "GeoSciML Basic (gsmlb:Fold)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Fold",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "dobra",
+        "flexura",
+        "anticlinal",
+        "sinclinal"
+      ],
+      "synonyms_en": [
+        "fold",
+        "anticline",
+        "syncline",
+        "flexure"
+      ],
+      "examples": [
+        "Anticlinal de Carmópolis (Bacia Sergipe-Alagoas)",
+        "Estrutura dobrada de Quiriri",
+        "Dobras sinrifte na Bacia do Recôncavo"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeolTectonic/Fold",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic"
+    },
+    {
+      "id": "foliacao",
+      "termo": "Foliação",
+      "termo_en": "Foliation",
+      "categoria": "geologia",
+      "definicao": "Estrutura planar penetrativa em rochas — bandamento, xistosidade, clivagem ardosiana, estratificação. Define anisotropia mecânica e hidráulica em reservatórios fraturados e em rochas-selante.",
+      "legal_source": "GeoSciML Basic (gsmlb:Foliation)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Foliation",
+      "geocoverage": [
+        "layer1",
+        "layer1b"
+      ],
+      "synonyms_pt": [
+        "foliação",
+        "xistosidade",
+        "clivagem",
+        "bandamento"
+      ],
+      "synonyms_en": [
+        "foliation",
+        "schistosity",
+        "cleavage",
+        "banding"
+      ],
+      "examples": [
+        "Xistosidade nos embasamentos cristalinos",
+        "Bandamento gnáissico",
+        "Estratificação cruzada em arenitos eólicos"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeolTectonic/Foliation",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic"
+    },
+    {
+      "id": "falha-cisalhante",
+      "termo": "Falha de Cisalhamento",
+      "termo_en": "Shear Displacement Structure",
+      "categoria": "geologia",
+      "definicao": "Estrutura de fratura com deslocamento relativo entre blocos — falhas normais, inversas, transcorrentes. No pré-sal e em Campos, falhas controlam compartimentação de reservatórios e atuam como caminhos ou barreiras para migração de hidrocarbonetos.",
+      "legal_source": "GeoSciML Basic (gsmlb:ShearDisplacementStructure)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "falha",
+        "estrutura de cisalhamento",
+        "falha geológica",
+        "plano de falha"
+      ],
+      "synonyms_en": [
+        "fault",
+        "shear displacement structure",
+        "fault zone"
+      ],
+      "examples": [
+        "Falhas de borda do rifte de Campos",
+        "Falhas transcorrentes da Bacia Potiguar",
+        "Falhamentos lístricos sinrifte"
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeolTectonic/Fault",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic"
+    },
+    {
+      "id": "feature-mapeada",
+      "termo": "Feição Mapeada",
+      "termo_en": "Mapped Feature",
+      "categoria": "geologia",
+      "definicao": "Representação espacial concreta (polígono, linha ou ponto) de uma feição geológica em um mapa ou modelo. Distingue a entidade geológica conceitual (ex: Formação Barra Velha) de sua manifestação cartográfica em uma escala/projeção específica.",
+      "legal_source": "GeoSciML Basic (gsmlb:MappedFeature)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#MappedFeature",
+      "geocoverage": [
+        "layer1b"
+      ],
+      "synonyms_pt": [
+        "feição mapeada",
+        "feature cartográfica",
+        "ocorrência mapeada"
+      ],
+      "synonyms_en": [
+        "mapped feature",
+        "cartographic occurrence"
+      ],
+      "examples": [
+        "Polígono da Formação Quissamã no mapa geológico 1:250.000",
+        "Traço de falha em mapa estrutural"
+      ],
+      "sweet_uri": null,
+      "sweet_alignment_type": null,
+      "sweet_module": null
+    },
+    {
+      "id": "metodo-perfuracao",
+      "termo": "Método de Perfuração",
+      "termo_en": "Drilling Method",
+      "categoria": "operacional",
+      "definicao": "Técnica empregada para perfuração de poço — rotativa convencional, rotativa direcional, percussão, sondagem por testemunho, hidráulica. Determina diâmetro, taxa de avanço e qualidade do testemunho recuperado.",
+      "legal_source": "GeoSciML Borehole (gsmlbh:drillingMethod)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:reference-data--DrillingMethodType:1.0.0",
+      "geosciml_uri": "http://geosciml.org/def/gsmlbh#drillingMethod",
+      "geocoverage": [
+        "layer1b",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "método de perfuração",
+        "técnica de perfuração"
+      ],
+      "synonyms_en": [
+        "drilling method",
+        "drilling technique"
+      ],
+      "examples": [
+        "Perfuração rotativa direcional (poços horizontais do pré-sal)",
+        "Sondagem com testemunho contínuo",
+        "Slimhole drilling"
+      ],
+      "sweet_uri": null,
+      "sweet_alignment_type": null,
+      "sweet_module": null
+    }
+  ]
+}

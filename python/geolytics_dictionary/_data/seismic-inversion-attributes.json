@@ -1,0 +1,565 @@
+{
+  "meta": {
+    "module": "seismic_inversion_attributes",
+    "label": "Seismic Inversion and Attributes",
+    "label_pt": "Inversao Sismica e Atributos",
+    "version": "1.0.0",
+    "description": "Classes, properties, relations and instances for seismic inversion (post-stack, pre-stack, AVO, FWI), rock properties derived from inversion, seismic attributes, DHI classification, AVO anomaly classes, machine-learning facies interpretation (SOM, PCA) and sweet-spot mapping.",
+    "sources": [
+      "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+      "Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.",
+      "Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.",
+      "Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes for Stratigraphic and Structural Interpretation. SEG.",
+      "Coleou, T., Poupon, M. & Azbel, K. (2003). Unsupervised seismic facies classification. The Leading Edge, 22(10), 942-953.",
+      "OSDU SeismicTraceData schema v1.0.0"
+    ],
+    "class_count": 25,
+    "property_count": 15,
+    "relation_count": 9,
+    "instance_count": 4
+  },
+  "classes": {
+    "SeismicInversion": {
+      "id": "SeismicInversion",
+      "name": "SeismicInversion",
+      "name_pt": "Inversao Sismica",
+      "superclass": "owl:Thing",
+      "description": "Process of transforming seismic reflection data into quantitative rock property models (impedance, velocity, density) by solving the forward convolution model in reverse. Requires wavelet estimation and low-frequency model from wells. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "abstract": true,
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicTraceData:1.0.0",
+      "sources": ["Russell 1988", "Yilmaz 2001"]
+    },
+    "PostStackInversion": {
+      "id": "PostStackInversion",
+      "name": "PostStackInversion",
+      "name_pt": "Inversao Pos-Empilhamento",
+      "superclass": "SeismicInversion",
+      "description": "Inversion applied to stacked (zero-offset equivalent) seismic data to estimate acoustic impedance Ip = Vp * rho. Most mature and widely applied inversion method. Methods: band-limited, model-based, sparse-spike. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "sources": ["Russell 1988"]
+    },
+    "PreStackInversion": {
+      "id": "PreStackInversion",
+      "name": "PreStackInversion",
+      "name_pt": "Inversao Pre-Empilhamento",
+      "superclass": "SeismicInversion",
+      "description": "Simultaneous inversion of partial-angle stacks to estimate Vp, Vs and density using the Zoeppritz equations or Aki-Richards linearisation. Enables direct Vp/Vs and elastic impedance extraction. Ref: Russell 1988; Connolly 1999.",
+      "domain": "seismic_inversion",
+      "sources": ["Russell 1988", "Connolly 1999"]
+    },
+    "AVOInversion": {
+      "id": "AVOInversion",
+      "name": "AVOInversion",
+      "name_pt": "Inversao AVO",
+      "superclass": "SeismicInversion",
+      "description": "Amplitude Versus Offset inversion that extracts AVO intercept (A) and gradient (B) from CDP gathers using the Shuey two-term approximation, enabling fluid and lithology discrimination. Ref: Yilmaz 2001, ch. 11.",
+      "domain": "seismic_inversion",
+      "sources": ["Yilmaz 2001"]
+    },
+    "ElasticImpedanceInversion": {
+      "id": "ElasticImpedanceInversion",
+      "name": "ElasticImpedanceInversion",
+      "name_pt": "Inversao de Impedancia Elastica",
+      "superclass": "PreStackInversion",
+      "description": "Inversion of angle-dependent seismic data to Elastic Impedance (EI), the far-offset analogue of acoustic impedance. Defined as EI(theta) = Vp^(1+tan^2θ) * Vs^(-8*K*sin^2θ) * rho^(1-4*K*sin^2θ) where K=Vs^2/Vp^2. Ref: Connolly 1999.",
+      "domain": "seismic_inversion",
+      "sources": ["Connolly 1999"]
+    },
+    "FullWaveformInversion": {
+      "id": "FullWaveformInversion",
+      "name": "FullWaveformInversion",
+      "name_pt": "Inversao de Forma de Onda Completa (FWI)",
+      "superclass": "SeismicInversion",
+      "description": "Iterative inversion that minimises the misfit between observed and modelled waveforms to build high-resolution velocity and density models. Computationally intensive; requires low-frequency data (2-5 Hz). Ref: Yilmaz 2001.",
+      "domain": "seismic_inversion",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
+      "sources": ["Yilmaz 2001"]
+    },
+    "AcousticImpedance": {
+      "id": "AcousticImpedance",
+      "name": "AcousticImpedance",
+      "name_pt": "Impedancia Acustica",
+      "superclass": "owl:Thing",
+      "description": "Product of P-wave velocity and bulk density: Ip = Vp * rho. Primary output of post-stack inversion. Units: g/cm3 * m/s. Used to calibrate well logs and identify lithology/fluid changes. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "properties": {
+        "unit": "g/cm3 * m/s",
+        "typical_range": "3000-20000"
+      },
+      "sources": ["Russell 1988"]
+    },
+    "ElasticImpedance": {
+      "id": "ElasticImpedance",
+      "name": "ElasticImpedance",
+      "name_pt": "Impedancia Elastica",
+      "superclass": "owl:Thing",
+      "description": "Angle-dependent impedance generalisation of acoustic impedance for non-zero incidence angle, enabling pre-stack seismic calibration. Defined by Connolly (1999). Units: varies with normalisation convention.",
+      "domain": "seismic_inversion",
+      "sources": ["Connolly 1999"]
+    },
+    "RockProperty": {
+      "id": "RockProperty",
+      "name": "RockProperty",
+      "name_pt": "Propriedade de Rocha",
+      "superclass": "owl:Thing",
+      "description": "Quantitative petrophysical or rock-physics parameter derived from seismic inversion or well logs. Includes Vp/Vs ratio, lambda-rho and mu-rho for fluid and lithology discrimination. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "abstract": true,
+      "sources": ["Russell 1988"]
+    },
+    "VpVsRatio": {
+      "id": "VpVsRatio",
+      "name": "VpVsRatio",
+      "name_pt": "Razao Vp/Vs",
+      "superclass": "RockProperty",
+      "description": "Ratio of P-wave to S-wave velocity. Sensitive to fluid saturation: brine-saturated rock Vp/Vs ~1.9-2.1; gas-saturated Vp/Vs ~1.4-1.7 (Gassmann fluid substitution). Derived from PreStackInversion. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "properties": {
+        "typical_brine": "1.9-2.1",
+        "typical_gas": "1.4-1.7"
+      },
+      "sources": ["Russell 1988"]
+    },
+    "LambdaRho": {
+      "id": "LambdaRho",
+      "name": "LambdaRho",
+      "name_pt": "Lambda-Rho",
+      "superclass": "RockProperty",
+      "description": "Product of Lame parameter lambda and density: lambda*rho. Highly sensitive to pore fluid: gas decreases lambda-rho significantly relative to brine. Part of the lambda-mu-rho (LMR) rock-physics domain. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "sources": ["Russell 1988"]
+    },
+    "MuRho": {
+      "id": "MuRho",
+      "name": "MuRho",
+      "name_pt": "Mu-Rho",
+      "superclass": "RockProperty",
+      "description": "Product of shear modulus mu and density. Relatively insensitive to pore fluid but sensitive to lithology (shale vs sand). Pair with LambdaRho for fluid-lithology crossplot. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "sources": ["Russell 1988"]
+    },
+    "SeismicAttribute": {
+      "id": "SeismicAttribute",
+      "name": "SeismicAttribute",
+      "name_pt": "Atributo Sismico",
+      "superclass": "owl:Thing",
+      "description": "Quantitative measure derived from seismic data through mathematical transformation. Extracts information about structure, stratigraphy, fluid content or lithology not directly visible in the amplitude display. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "abstract": true,
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "Coherence": {
+      "id": "Coherence",
+      "name": "Coherence",
+      "name_pt": "Coerencia",
+      "superclass": "SeismicAttribute",
+      "description": "Measure of lateral similarity of seismic traces. Low coherence indicates faults, fractures or stratigraphic discontinuities. Original algorithm by Bahorich & Farmer (1995); enhanced by semblance (Marfurt et al. 1998). Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "properties": {
+        "value_range": "0-1",
+        "sensitivity": "faults, fractures, channels"
+      },
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "Curvature": {
+      "id": "Curvature",
+      "name": "Curvature",
+      "name_pt": "Curvatura",
+      "superclass": "SeismicAttribute",
+      "description": "Second spatial derivative of the seismic horizon. Most-positive and most-negative curvature highlight flexures, collapse features and subtle faults. Sensitive to fracture corridors. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "RMS": {
+      "id": "RMS",
+      "name": "RMS",
+      "name_pt": "Amplitude RMS",
+      "superclass": "SeismicAttribute",
+      "description": "Root Mean Square amplitude computed over a time window. Sensitive to reflectivity strength; often brightens over hydrocarbons (Class III AVO). Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "SpectralDecomposition": {
+      "id": "SpectralDecomposition",
+      "name": "SpectralDecomposition",
+      "name_pt": "Decomposicao Espectral",
+      "superclass": "SeismicAttribute",
+      "description": "Time-frequency analysis (short-window DFT, CWT or MP) that extracts amplitude and phase at discrete frequencies. Each frequency is sensitive to a specific bed thickness (tuning). Effective for stratigraphic thickness mapping. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "InstantaneousPhase": {
+      "id": "InstantaneousPhase",
+      "name": "InstantaneousPhase",
+      "name_pt": "Fase Instantanea",
+      "superclass": "SeismicAttribute",
+      "description": "Phase of the analytic signal derived via Hilbert transform. Highlights reflector continuity independent of amplitude strength. Useful for stratigraphic correlation. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "Dip": {
+      "id": "Dip",
+      "name": "Dip",
+      "name_pt": "Mergulho Sismico",
+      "superclass": "SeismicAttribute",
+      "description": "Inline and crossline apparent dip of the seismic event derived from the gradient of the instantaneous phase or coherence scan. Input for dip-steered attribute computation. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "unit": "ms/m or degrees",
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "Azimuth": {
+      "id": "Azimuth",
+      "name": "Azimuth",
+      "name_pt": "Azimute Sismico",
+      "superclass": "SeismicAttribute",
+      "description": "Compass direction of the steepest dip of a reflector, derived jointly with the Dip attribute. Used to detect structural and fracture orientation. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "unit": "degrees",
+      "sources": ["Chopra & Marfurt 2007"]
+    },
+    "DHI": {
+      "id": "DHI",
+      "name": "DHI",
+      "name_pt": "DHI — Indicador Direto de Hidrocarboneto",
+      "superclass": "SeismicAttribute",
+      "description": "Direct Hydrocarbon Indicator: seismic anomaly whose character is directly controlled by the presence of gas or oil in the reservoir. Includes bright spots, flat spots, phase reversals and AVO anomalies. Ref: Yilmaz 2001, ch. 11.",
+      "domain": "seismic_attributes",
+      "sources": ["Yilmaz 2001"]
+    },
+    "AVOAnomaly": {
+      "id": "AVOAnomaly",
+      "name": "AVOAnomaly",
+      "name_pt": "Anomalia AVO",
+      "superclass": "DHI",
+      "description": "Offset-dependent amplitude anomaly at a reservoir interface classified into four Rutherford-Williams classes (I-IV) based on normal-incidence impedance contrast and gradient sign. Class III (negative intercept, negative gradient) is the classic gas sand anomaly. Ref: Yilmaz 2001, ch. 11.",
+      "domain": "seismic_attributes",
+      "sources": ["Yilmaz 2001"]
+    },
+    "SOM": {
+      "id": "SOM",
+      "name": "SOM",
+      "name_pt": "SOM — Mapa Auto-Organizavel",
+      "superclass": "owl:Thing",
+      "description": "Self-Organising Map: unsupervised neural network that projects a multi-attribute seismic volume onto a 2D topology-preserving map for facies classification without prior labels. Ref: Coleou et al. 2003, The Leading Edge.",
+      "domain": "seismic_ml",
+      "sources": ["Coleou et al. 2003"]
+    },
+    "PCA": {
+      "id": "PCA",
+      "name": "PCA",
+      "name_pt": "PCA — Analise de Componentes Principais",
+      "superclass": "owl:Thing",
+      "description": "Principal Component Analysis applied to a multi-attribute seismic dataset to reduce dimensionality, decorrelate attributes and identify dominant seismic facies components before SOM or supervised classification. Ref: Coleou et al. 2003.",
+      "domain": "seismic_ml",
+      "sources": ["Coleou et al. 2003"]
+    },
+    "FaciesClassification": {
+      "id": "FaciesClassification",
+      "name": "FaciesClassification",
+      "name_pt": "Classificacao de Facies Sismicas",
+      "superclass": "owl:Thing",
+      "description": "Assignment of seismic volumes or attribute maps to discrete facies classes that correlate with depositional environment or rock type. Can be supervised (with well labels) or unsupervised (SOM/PCA). Ref: Coleou et al. 2003; Chopra & Marfurt 2007.",
+      "domain": "seismic_ml",
+      "sources": ["Coleou et al. 2003", "Chopra & Marfurt 2007"]
+    },
+    "SweetSpot": {
+      "id": "SweetSpot",
+      "name": "SweetSpot",
+      "name_pt": "Sweet Spot",
+      "superclass": "owl:Thing",
+      "description": "Geospatially bounded zone identified by the intersection of favourable seismic attributes (DHI, AVO anomaly, high porosity inversion) indicating an exploration or production target with elevated hydrocarbon potential. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": ["Chopra & Marfurt 2007"]
+    }
+  },
+  "properties": {
+    "acousticImpedance_value": {
+      "id": "acousticImpedance_value",
+      "name": "acousticImpedance_value",
+      "name_pt": "Valor de Impedancia Acustica",
+      "description": "Numerical value of acoustic impedance in g/cm3 * m/s. Typical sand: 6000-10000; shale: 7000-12000; carbonates: 12000-20000.",
+      "unit": "g/cm3 * m/s",
+      "domain_class": "AcousticImpedance",
+      "range": "xsd:decimal",
+      "typical_values": "3000-20000",
+      "rag_priority": "high"
+    },
+    "elasticImpedance_angle": {
+      "id": "elasticImpedance_angle",
+      "name": "elasticImpedance_angle",
+      "name_pt": "Angulo de Incidencia (EI)",
+      "description": "Angle of incidence at which the elastic impedance is computed, typically 15, 30 or 45 degrees.",
+      "unit": "degrees",
+      "domain_class": "ElasticImpedance",
+      "range": "xsd:decimal"
+    },
+    "vpVsRatio_value": {
+      "id": "vpVsRatio_value",
+      "name": "vpVsRatio_value",
+      "name_pt": "Valor da Razao Vp/Vs",
+      "description": "Numerical value of the Vp/Vs ratio. Gas: 1.4-1.7; brine: 1.9-2.1; carbonates: 1.7-2.0.",
+      "unit": "dimensionless",
+      "domain_class": "VpVsRatio",
+      "range": "xsd:decimal",
+      "rag_priority": "high"
+    },
+    "lambdaRho_value": {
+      "id": "lambdaRho_value",
+      "name": "lambdaRho_value",
+      "name_pt": "Valor Lambda-Rho",
+      "description": "lambda*rho in GPa*g/cm3. Decreases significantly in gas-saturated intervals.",
+      "unit": "GPa * g/cm3",
+      "domain_class": "LambdaRho",
+      "range": "xsd:decimal"
+    },
+    "muRho_value": {
+      "id": "muRho_value",
+      "name": "muRho_value",
+      "name_pt": "Valor Mu-Rho",
+      "description": "mu*rho in GPa*g/cm3. Sensitive to rock framework; not to pore fluid.",
+      "unit": "GPa * g/cm3",
+      "domain_class": "MuRho",
+      "range": "xsd:decimal"
+    },
+    "avoIntercept": {
+      "id": "avoIntercept",
+      "name": "avoIntercept",
+      "name_pt": "Intercepto AVO (A)",
+      "description": "Zero-offset reflectivity coefficient A in the Shuey two-term AVO approximation R(theta) = A + B*sin^2(theta). Positive for hard kick, negative for soft kick.",
+      "unit": "dimensionless",
+      "domain_class": "AVOAnomaly",
+      "range": "xsd:decimal"
+    },
+    "avoGradient": {
+      "id": "avoGradient",
+      "name": "avoGradient",
+      "name_pt": "Gradiente AVO (B)",
+      "description": "AVO gradient B in the Shuey two-term approximation. Negative for Class III gas sands (bright spot). Ref: Yilmaz 2001.",
+      "unit": "dimensionless",
+      "domain_class": "AVOAnomaly",
+      "range": "xsd:decimal",
+      "rag_priority": "high"
+    },
+    "avoClass": {
+      "id": "avoClass",
+      "name": "avoClass",
+      "name_pt": "Classe AVO",
+      "description": "Rutherford-Williams AVO classification: I (+A, -B), II (-A or 0A, -B), IIp (+A, +B), III (-A, -B), IV (-A, +B). Ref: Yilmaz 2001.",
+      "unit": "enum",
+      "domain_class": "AVOAnomaly",
+      "range": "xsd:string",
+      "allowed_values": ["I", "II", "IIp", "III", "IV"]
+    },
+    "coherenceValue": {
+      "id": "coherenceValue",
+      "name": "coherenceValue",
+      "name_pt": "Valor de Coerencia",
+      "description": "Numerical coherence or similarity value between 0 (discontinuous) and 1 (perfectly coherent).",
+      "unit": "dimensionless",
+      "domain_class": "Coherence",
+      "range": "xsd:decimal"
+    },
+    "curvatureType": {
+      "id": "curvatureType",
+      "name": "curvatureType",
+      "name_pt": "Tipo de Curvatura",
+      "description": "Most-positive (k1), most-negative (k2), mean (km) or shape index curvature.",
+      "unit": "enum",
+      "domain_class": "Curvature",
+      "range": "xsd:string"
+    },
+    "spectralFrequency": {
+      "id": "spectralFrequency",
+      "name": "spectralFrequency",
+      "name_pt": "Frequencia Espectral",
+      "description": "Frequency component extracted in spectral decomposition, corresponding to a specific tuning thickness.",
+      "unit": "Hz",
+      "domain_class": "SpectralDecomposition",
+      "range": "xsd:decimal"
+    },
+    "somNeuronCount": {
+      "id": "somNeuronCount",
+      "name": "somNeuronCount",
+      "name_pt": "Numero de Neuronios SOM",
+      "description": "Total number of neurons in the SOM grid (rows x cols). Controls classification resolution.",
+      "unit": "dimensionless",
+      "domain_class": "SOM",
+      "range": "xsd:integer"
+    },
+    "pcaVarianceExplained": {
+      "id": "pcaVarianceExplained",
+      "name": "pcaVarianceExplained",
+      "name_pt": "Variancia Explicada (PCA)",
+      "description": "Cumulative variance explained by the retained principal components, expressed as percentage. Typically 80-95% retained.",
+      "unit": "percent",
+      "domain_class": "PCA",
+      "range": "xsd:decimal"
+    },
+    "inversionMethod": {
+      "id": "inversionMethod",
+      "name": "inversionMethod",
+      "name_pt": "Metodo de Inversao",
+      "description": "Algorithm used in the inversion: band-limited, model-based, sparse-spike, simultaneous, FWI.",
+      "unit": "enum",
+      "domain_class": "SeismicInversion",
+      "range": "xsd:string"
+    },
+    "wellCount": {
+      "id": "wellCount",
+      "name": "wellCount",
+      "name_pt": "Numero de Pocos de Controle",
+      "description": "Number of wells used to constrain the low-frequency model and wavelet extraction in the inversion.",
+      "unit": "dimensionless",
+      "domain_class": "SeismicInversion",
+      "range": "xsd:integer"
+    }
+  },
+  "relations": {
+    "derived_from": {
+      "id": "derived_from",
+      "name": "derived_from",
+      "name_pt": "derivado_de",
+      "description": "A RockProperty or SeismicAttribute is mathematically derived from SeismicInversion output or another attribute.",
+      "domain": "RockProperty",
+      "range": "SeismicInversion",
+      "cardinality": "1..n",
+      "inverse": "yields"
+    },
+    "correlates_with": {
+      "id": "correlates_with",
+      "name": "correlates_with",
+      "name_pt": "correlaciona_com",
+      "description": "A SeismicAttribute correlates with a RockProperty or another SeismicAttribute in a statistical or physical sense.",
+      "domain": "SeismicAttribute",
+      "range": "RockProperty",
+      "cardinality": "0..n"
+    },
+    "indicates": {
+      "id": "indicates",
+      "name": "indicates",
+      "name_pt": "indica",
+      "description": "A DHI or AVOAnomaly indicates the potential presence of a hydrocarbon accumulation or specific lithofacies.",
+      "domain": "DHI",
+      "range": "SweetSpot",
+      "cardinality": "0..n"
+    },
+    "classified_by": {
+      "id": "classified_by",
+      "name": "classified_by",
+      "name_pt": "classificado_por",
+      "description": "A seismic facies volume is classified by FaciesClassification using SOM or PCA.",
+      "domain": "FaciesClassification",
+      "range": "SOM",
+      "cardinality": "0..1"
+    },
+    "uses_pca": {
+      "id": "uses_pca",
+      "name": "uses_pca",
+      "name_pt": "usa_pca",
+      "description": "A FaciesClassification or SOM uses PCA for dimensionality reduction of seismic attributes.",
+      "domain": "FaciesClassification",
+      "range": "PCA",
+      "cardinality": "0..1"
+    },
+    "input_to_inversion": {
+      "id": "input_to_inversion",
+      "name": "input_to_inversion",
+      "name_pt": "entrada_para_inversao",
+      "description": "Processed seismic data or partial stack is input to a SeismicInversion.",
+      "domain": "owl:Thing",
+      "range": "SeismicInversion",
+      "cardinality": "1..n"
+    },
+    "yields": {
+      "id": "yields",
+      "name": "yields",
+      "name_pt": "produz",
+      "description": "A SeismicInversion yields a RockProperty volume as output.",
+      "domain": "SeismicInversion",
+      "range": "RockProperty",
+      "cardinality": "1..n",
+      "inverse": "derived_from"
+    },
+    "combined_in": {
+      "id": "combined_in",
+      "name": "combined_in",
+      "name_pt": "combinado_em",
+      "description": "Multiple SeismicAttributes are combined in a FaciesClassification or SweetSpot delineation.",
+      "domain": "SeismicAttribute",
+      "range": "SweetSpot",
+      "cardinality": "0..n"
+    },
+    "constrained_by_well": {
+      "id": "constrained_by_well",
+      "name": "constrained_by_well",
+      "name_pt": "restringido_por_poco",
+      "description": "SeismicInversion is constrained by well log data for low-frequency model and wavelet extraction.",
+      "domain": "SeismicInversion",
+      "range": "geo:Poco",
+      "cardinality": "1..n"
+    }
+  },
+  "instances": {
+    "INV_BUZ_POSTSTACK": {
+      "id": "INV_BUZ_POSTSTACK",
+      "name": "Buzios Pre-Salt Post-Stack Acoustic Impedance Inversion",
+      "name_pt": "Inversao Acustica Pos-Empilhamento Pre-Sal Buzios",
+      "class": "PostStackInversion",
+      "description": "Model-based post-stack inversion of the Buzios 3D seismic volume to acoustic impedance, constrained by 12 wells with full-waveform sonic and density logs. Low-frequency model from well interpolation; wavelet extracted from 10 wells using statistical method.",
+      "attributes": {
+        "inversionMethod": "model-based",
+        "wellCount": "12",
+        "outputProduct": "AcousticImpedance",
+        "frequencyBand_Hz": "4-80",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicTraceData:1.0.0"
+      },
+      "source": "Representative of pre-salt carbonate inversion programs in Santos Basin; Russell 1988"
+    },
+    "INV_LULA_PRESTACK": {
+      "id": "INV_LULA_PRESTACK",
+      "name": "Lula Simultaneous Pre-Stack Elastic Inversion",
+      "name_pt": "Inversao Elastica Simultanea Pre-Empilhamento Lula",
+      "class": "PreStackInversion",
+      "description": "Simultaneous pre-stack inversion of near, mid and far angle stacks to extract Ip, Is and density, enabling Vp/Vs, lambda-rho and mu-rho volumes for fluid discrimination in the Lula BVE carbonate reservoir.",
+      "attributes": {
+        "inversionMethod": "simultaneous",
+        "wellCount": "8",
+        "outputProducts": ["AcousticImpedance", "ElasticImpedance", "VpVsRatio", "LambdaRho", "MuRho"],
+        "nearStackAngle_deg": "5-15",
+        "midStackAngle_deg": "15-30",
+        "farStackAngle_deg": "30-45"
+      },
+      "source": "Russell 1988; Connolly 1999; representative Santos Basin pre-stack program"
+    },
+    "ATTR_COHERENCE_BUZ": {
+      "id": "ATTR_COHERENCE_BUZ",
+      "name": "Buzios Coherence Fault/Fracture Volume",
+      "name_pt": "Volume de Coerencia Falhas/Fracturas Buzios",
+      "class": "Coherence",
+      "description": "Semblance-based coherence attribute extracted from the Buzios RTM migrated volume to delineate fault and fracture networks in the BVE carbonate reservoir. Computed on a 9-trace moving window with 20ms temporal gate.",
+      "attributes": {
+        "algorithm": "semblance",
+        "windowSize_traces": "9",
+        "temporalGate_ms": "20",
+        "sensitivity": "faults, fractures, karst"
+      },
+      "source": "Chopra & Marfurt 2007, ch. 2"
+    },
+    "INST_AVO_CLASS3": {
+      "id": "INST_AVO_CLASS3",
+      "name": "Parnaiba Basin Class III AVO Gas Sand Anomaly",
+      "name_pt": "Anomalia AVO Classe III Areia Gasosa Bacia do Parnaiba",
+      "class": "AVOAnomaly",
+      "description": "Class III AVO anomaly at the Devonian Cabecas Formation top: negative intercept (A=-0.08), strong negative gradient (B=-0.14), consistent with gas-saturated low-impedance sand encased in higher-impedance shale. Produces bright spot and phase reversal at the base.",
+      "attributes": {
+        "avoClass": "III",
+        "avoIntercept": "-0.08",
+        "avoGradient": "-0.14",
+        "productAtAngle30_deg": "-0.082",
+        "interpretation": "gas sand, DHI confirmed"
+      },
+      "source": "Representative of Devonian gas play in Parnaiba Basin; Yilmaz 2001 AVO classification"
+    }
+  }
+}

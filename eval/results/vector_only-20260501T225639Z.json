@@ -1,0 +1,623 @@
+{
+  "runner": "vector_only",
+  "timestamp": "20260501T225639Z",
+  "n_questions": 30,
+  "scores": {
+    "entity_recall": 0.16499999999999998,
+    "fact_coverage": 0.4188888888888889,
+    "must_not_say_violations": 0.027777777777777776,
+    "validation_pass_rate": 1.0,
+    "composite_score": 0.4988055555555558
+  },
+  "per_question": [
+    {
+      "id": "Q001",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e um Poco ANP e qual e o formato padrao do seu identificador?",
+      "answer_text": "Entidade \"Rodada de Licitação\" (Bid Round), tipo contractual. Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil. Fonte: Dicionário enciclopédico inglês-português de geofísica e geologia.\n\nPrimeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase",
+      "entities_cited": [
+        "rodada-licitacao",
+        "primeiro-oleo",
+        "ner_mapping_poc",
+        "osdu_well_wellbore_disambiguation"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.4,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.43999999999999995
+    },
+    {
+      "id": "Q002",
+      "category": "disambiguation",
+      "difficulty": "medium",
+      "question_pt": "Qual a diferenca entre Concessao e Partilha de Producao no regime contratual brasileiro?",
+      "answer_text": "Regime Contratual (Contract Regime): Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal. Sinônimos: regime, modalidade contratual, regime de exploração, contract regime, contract model, fiscal regime. Exemplos: Concessão (Lei 9.478/1997); Partilha ",
+      "entities_cited": [
+        "regime-contratual",
+        "column_declaracoes-comercialidade_regime_contratual",
+        "column_pads-concluidos_regime_contratual",
+        "column_pads-andamento_regime_contratual"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.25,
+      "fact_coverage": 0.3333333333333333,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.5041666666666667
+    },
+    {
+      "id": "Q003",
+      "category": "disambiguation",
+      "difficulty": "medium",
+      "question_pt": "O que significa PAD no contexto da ANP e qual e a diferenca entre PAD e appraisal?",
+      "answer_text": "PAD — Plano de Avaliação de Descobertas (Discovery Evaluation Plan): Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso. Sinônimos: Plano de Avaliação de Descobertas, PAD, Discovery Evaluation Plan, Appraisal Plan, DEP. Exemplos: PAD Búzios; PAD",
+      "entities_cited": [
+        "pad",
+        "declaracao-comercialidade",
+        "primeiro-oleo"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.6666666666666666,
+      "fact_coverage": 1.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.8833333333333332
+    },
+    {
+      "id": "Q004",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e UTS e para que serve no contexto de contratos de E&P?",
+      "answer_text": "Entidade \"SIGEP\" (SIGEP (E&P Information System)), tipo instrument. Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil. Fonte: ANP/SEP.\n\nSIGEP: Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petr",
+      "entities_cited": [
+        "sigep",
+        "joa",
+        "contrato-ep",
+        "primeiro-oleo"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.3333333333333333,
+      "fact_coverage": 0.6,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.6266666666666666
+    },
+    {
+      "id": "Q005",
+      "category": "validation",
+      "difficulty": "medium",
+      "question_pt": "Quais sao as categorias de reserva segundo o SPE-PRMS e qual a diferenca entre Reserva e Reservatorio?",
+      "answer_text": "Entidade \"Reserva\" (Reserve), tipo contractual. Volume de HC tecnicamente recuperável e economicamente viável. Categorias 1P/2P/3P. C020 em ontopetro. NÃO confundir com Reserva Ambiental. Fonte: ANP / SPE-PRMS / ontopetro C020.\n\nTaxonomia \"Categoria de Recurso (SPE-PRMS)\" (SPE-PRMS Resource Category): Society of Petroleum Engineers — Petroleum Resources Management System. Valores: reservas, contingentes. ALERTA: Reserva (SPE-PRMS) ≠ Reserva Ambiental (REBIO/RPPN). Sempre desambiguar.\n\nClasse ont",
+      "entities_cited": [
+        "reserva",
+        "taxonomy_categoria_recurso_spe_prms",
+        "C020",
+        "ambig_reserva_polissemia",
+        "R017"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.3333333333333333,
+      "fact_coverage": 0.3333333333333333,
+      "must_not_say_violations": 0.3333333333333333,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.4666666666666667
+    },
+    {
+      "id": "Q006",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e a Declaracao de Comercialidade e quando ela e exigida?",
+      "answer_text": "Plano de Desenvolvimento: Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção. Aparece nos datasets: Declarações de Comercialidade. Fonte: RANP 810/2020.\n\nPrimeiro Óleo: Marco qu",
+      "entities_cited": [
+        "plano-desenvolvimento",
+        "primeiro-oleo",
+        "hidrocarboneto"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.2,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.37
+    },
+    {
+      "id": "Q007",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e um FPSO e quais seus principais sistemas?",
+      "answer_text": "Entidade \"EPC\" (Engineering, Procurement, Construction), tipo instrument. Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto). Relações: entrega FPSO. Fonte: Siglário O&G.\n\nEntidade \"Plano de Desenvolvimento\" (Development Plan), tipo contractual. Documento técnico-econômico obrigatório que o concessionário deve",
+      "entities_cited": [
+        "epc",
+        "plano-desenvolvimento",
+        "acronym_fpso",
+        "riser"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.3333333333333333,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.41666666666666663
+    },
+    {
+      "id": "Q008",
+      "category": "multi-hop",
+      "difficulty": "medium",
+      "question_pt": "Explique a diferenca entre rocha geradora, reservatorio e rocha capacitante no sistema petrolifero.",
+      "answer_text": "Classe ontopetro \"SistemaPetrolifero\" (Petroleum System, superclasse GeologicalSystem): Conjunto rocha-geradora, migração, reservatório, capa e trapa. Domínio: Sistemas Petrolíferos. Fontes: PPDM, GeoCore. Mapeada ao nó do grafo: sistema-petrolifero.\n\nMapeamento NER PetroGold tipo \"ROC\" (Rocha) → nós do Geolytics: litologia, facies-sedimentar, rocha-geradora, rocha-capacitante, reservatorio. ROC = tipo petrográfico (arenito, calcário). Distinguir de FOR (formação = nome de unidade litoestratigrá",
+      "entities_cited": [
+        "C007",
+        "ner_mapping_roc",
+        "migracao-hidrocarbonetos",
+        "sistema-petrolifero",
+        "C005"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.2,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.37
+    },
+    {
+      "id": "Q009",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e o periodo exploratorio e quais suas fases?",
+      "answer_text": "Contratados: Empresas contratadas e sua participação, em porcentagem, no contrato de E&P. Inclui o operador e eventuais parceiros do consórcio, com suas respectivas parcelas de participação. Aparece nos datasets: Blocos sob Contrato, PADs em Andamento. Fonte: ANP/SEP.\n\nPrimeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador pa",
+      "entities_cited": [
+        "contratados",
+        "primeiro-oleo",
+        "taxonomy_tipo_poco",
+        "ibp"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.4,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.43999999999999995
+    },
+    {
+      "id": "Q010",
+      "category": "disambiguation",
+      "difficulty": "hard",
+      "question_pt": "Qual a diferenca entre Janela de Lama e Janela de Geracao de HC?",
+      "answer_text": "Taxonomia \"Zonas da Janela de Lama\" (Mud Weight Window Zones): Limites operacionais da janela de peso de lama na perfuração de poços. Valores: pore_pressure, collapse, fracture, overburden. ALERTA: Janela de Lama (M9 Geomecanica) != Janela de Geracao (M7 Geoquimica/Ro%). Sao conceitos completamente distintos.\n\nTaxonomia \"Janela de Geração de Hidrocarbonetos\" (Hydrocarbon Generation Window): Baseada na reflectância da vitrinita (Ro%). Valores: [object Object], [object Object], [object Object], [o",
+      "entities_cited": [
+        "taxonomy_mud_window_zones",
+        "taxonomy_janela_geracao",
+        "ambig_janela_lama_geracao",
+        "janela-lama",
+        "C307"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 1.0,
+      "fact_coverage": 1.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.9999999999999999
+    },
+    {
+      "id": "Q011",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e o BOP e qual sua funcao na perfuracao de pocos?",
+      "answer_text": "Entidade \"Rodada de Licitação\" (Bid Round), tipo contractual. Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil. Fonte: Dicionário enciclopédico inglês-português de geofísica e geologia.\n\nSigla \"BOP WO\" do domínio O&G, categoria equipment. BOP WO (BOP de Workover) — Workover Blowout Preventer.\n\nSigla \"BOP\" do domínio ",
+      "entities_cited": [
+        "rodada-licitacao",
+        "acronym_bop_wo",
+        "acronym_bop",
+        "acronym_mux",
+        "plano-desenvolvimento"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.3333333333333333,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.41666666666666663
+    },
+    {
+      "id": "Q012",
+      "category": "multi-hop",
+      "difficulty": "hard",
+      "question_pt": "Explique o processo desde a Notificacao de Descoberta ate o Primeiro Oleo.",
+      "answer_text": "Primeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção. Fonte: ANP/SEP.\n\nProcesso Sancionador: Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendênci",
+      "entities_cited": [
+        "primeiro-oleo",
+        "processo-sancionador",
+        "area-desenvolvimento"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.16666666666666666,
+      "fact_coverage": 0.6666666666666666,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.5916666666666667
+    },
+    {
+      "id": "Q013",
+      "category": "disambiguation",
+      "difficulty": "medium",
+      "question_pt": "O que e RGO e qual a diferenca entre RGO e GOR?",
+      "answer_text": "Sigla \"RGO\" do domínio O&G, categoria fluid. RGO (Razão Gás-Óleo) — Gas-Oil Ratio.\n\nPropriedade PR_RGO \"RGO\" (GOR) do módulo Fluidos — Geoquímica e PVT. Razão Gás-Óleo. <2000 scf/stb=óleo; >2000=condensado. Completude SIRR: 61.2% Unidade: scf/stb ou m³/m³. Sistema-fonte: GEOQWIN, SIRR, LIMS Sample Manager, AIDA.\n\nRGO (Razão Gás-Óleo, em PT-BR) ≡ GOR (Gas-Oil Ratio, em EN). São SINÔNIMOS, não conceitos diferentes. Unidade típica: scf/stb (EN) ou m³/m³ (PT/SI). Nas bases corporativas Petrobras (SI",
+      "entities_cited": [
+        "acronym_rgo",
+        "PR_RGO",
+        "ambig_rgo_gor",
+        "classe-fluido",
+        "CL_CLASS_FLUIDO"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.5,
+      "fact_coverage": 0.5,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.65
+    },
+    {
+      "id": "Q014",
+      "category": "lookup",
+      "difficulty": "easy",
+      "question_pt": "O que e o SIGEP e qual seu papel no contexto da ANP?",
+      "answer_text": "Entidade \"Rodada de Licitação\" (Bid Round), tipo contractual. Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil. Fonte: Dicionário enciclopédico inglês-português de geofísica e geologia.\n\nEntidade \"SIGEP\" (SIGEP (E&P Information System)), tipo instrument. Sistema de Informações Gerenciais de Exploração e Produção. Sis",
+      "entities_cited": [
+        "rodada-licitacao",
+        "sigep",
+        "primeiro-oleo"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.5,
+      "fact_coverage": 0.8,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.755
+    },
+    {
+      "id": "Q015",
+      "category": "lookup",
+      "difficulty": "medium",
+      "question_pt": "Quais sao os tipos de poco segundo a convencao ANP e o que significa o prefixo numerico?",
+      "answer_text": "Taxonomia \"Tipo de Poço ANP\" (ANP Well Type): Convenção de nomenclatura ANP: o prefixo numérico indica a categoria. Valores: exploratorio, avaliacao, desenvolvimento, especial.\n\nPrimeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção. Font",
+      "entities_cited": [
+        "taxonomy_tipo_poco",
+        "primeiro-oleo",
+        "ner_mapping_poc",
+        "regime-contratual"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 1.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.65
+    },
+    {
+      "id": "Q016",
+      "category": "geomec",
+      "difficulty": "medium",
+      "question_pt": "O que e a Janela de Lama (Mud Weight Window) e quais sao seus limites operacionais?",
+      "answer_text": "Taxonomia \"Zonas da Janela de Lama\" (Mud Weight Window Zones): Limites operacionais da janela de peso de lama na perfuração de poços. Valores: pore_pressure, collapse, fracture, overburden. ALERTA: Janela de Lama (M9 Geomecanica) != Janela de Geracao (M7 Geoquimica/Ro%). Sao conceitos completamente distintos.\n\nEntidade \"Janela de Lama\" (Mud Weight Window), tipo analytical. Intervalo seguro de peso de lama: limite inferior=colapso (breakout), limite superior=fratura (perda circulação). NÃO confun",
+      "entities_cited": [
+        "taxonomy_mud_window_zones",
+        "janela-lama",
+        "ambig_janela_lama_geracao",
+        "taxonomy_janela_geracao",
+        "acronym_c_cm"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.5,
+      "fact_coverage": 1.0,
+      "must_not_say_violations": 0.5,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.7249999999999999
+    },
+    {
+      "id": "Q017",
+      "category": "geomec",
+      "difficulty": "hard",
+      "question_pt": "O que e UCS e qual a diferenca entre UCS estatico e UCS dinamico?",
+      "answer_text": "UCS estático ≠ UCS dinâmico. (a) UCS estático: medido em laboratório (lab) — valor verdadeiro de resistência compressiva uniaxial. (b) UCS dinâmico: calculado a partir de perfis sônicos (DTC/DTS) por correlação interna GDA/Petrobras. Diferença típica entre os dois: 20–40%. Não usar dinâmico para projeto sem calibração com estático.\n\nSigla \"UCS\" do domínio O&G, categoria general. UCS (Resistência à Compressão Não Confinada) — Unconfined Compressive Strength.\n\nClasse geomecânica GM014 \"UCS\" (UCS):",
+      "entities_cited": [
+        "ambig_ucs_estatico_dinamico",
+        "acronym_ucs",
+        "GM014",
+        "GP002",
+        "C308"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.8333333333333334,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.5916666666666667
+    },
+    {
+      "id": "Q018",
+      "category": "geomec",
+      "difficulty": "hard",
+      "question_pt": "Explique os tres regimes tectonicos de Anderson e como identificar cada um pelo tensor de tensoes.",
+      "answer_text": "Taxonomia \"Regimes Tectônicos de Anderson\" (Anderson Tectonic Stress Regimes): Classificação de Anderson (1951) dos regimes de tensão in situ baseado na magnitude relativa dos três tensores principais. Valores: normal_faulting, strike_slip, reverse_faulting.\n\nEntidade \"Sistema Deposicional\" (Depositional System), tipo geological. Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatóri",
+      "entities_cited": [
+        "taxonomy_stress_regimes",
+        "sistema-deposicional",
+        "uts",
+        "joa"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q019",
+      "category": "geomec",
+      "difficulty": "medium",
+      "question_pt": "O que e o Modulo de Young e qual a diferenca entre modulo estatico e dinamico?",
+      "answer_text": "Primeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção. Fonte: ANP/SEP.\n\nEntidade \"Rodada de Licitação\" (Bid Round), tipo contractual. Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Ide",
+      "entities_cited": [
+        "primeiro-oleo",
+        "rodada-licitacao",
+        "joa",
+        "operador"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q020",
+      "category": "geomec",
+      "difficulty": "hard",
+      "question_pt": "O que e um MEM 1D (Mechanical Earth Model) e quais seus principais componentes?",
+      "answer_text": "Instância geomecânica \"mem-buzios-1d\" — classe undefined (undefined). Fonte: undefined.\n\nPrimeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção. Fonte: ANP/SEP.\n\nEntidade \"JOA\" (Joint Operating Agreement), tipo instrument. Joint Operating",
+      "entities_cited": [
+        "mem-buzios-1d",
+        "primeiro-oleo",
+        "joa",
+        "epc"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q021",
+      "category": "seismic",
+      "difficulty": "medium",
+      "question_pt": "Quais sao os principais parametros de aquisicao sismica 3D?",
+      "answer_text": "Sigla \"SAO\" do domínio O&G, categoria equipment. SAO (Separador Água-Óleo) — Water-Oil Separator.\n\nSigla \"OS\" do domínio O&G, categoria fluid. OS (Indício de Óleo) — Oil Show.\n\nSistema corporativo Petrobras \"GERESIM\" (GERESIM, tipo Software de simulação, domínio M9 Geomecânica): Solução Petrobras para modelagem geomecânica 3D volumétrica, integrada ao modelo geológico. Objetos de dados: Modelo geomecânico 3D, Subsidência, Compactação de reservatório. NOTA: este é metadado de proveniência, não de",
+      "entities_cited": [
+        "acronym_sao",
+        "acronym_os",
+        "GERESIM",
+        "taxonomy_mud_window_zones",
+        "taxonomy_stress_regimes"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q022",
+      "category": "seismic",
+      "difficulty": "medium",
+      "question_pt": "O que e NMO (Normal Moveout) e por que e aplicado no processamento sismico?",
+      "answer_text": "Sigla \"NMO\" do domínio O&G, categoria geophysics. NMO (Sobretempo Normal) — Normal Moveout.\n\nSeismic class \"NMO\" (NMO — Correcao Normal Moveout, superclass owl:Thing): Normal Moveout correction: time-shift applied to each trace to remove the hyperbolic offset-dependent arrival time difference and align reflections before stacking. Requires RMS velocity model. Introduces NMO stretch at far offsets. Ref: Yilmaz 2001, ch. 3. Sources: Yilmaz 2001.\n\nEntidade \"SIGEP\" (SIGEP (E&P Information System)), ",
+      "entities_cited": [
+        "acronym_nmo",
+        "NMO",
+        "sigep",
+        "ibp"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.6,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.51
+    },
+    {
+      "id": "Q023",
+      "category": "seismic",
+      "difficulty": "medium",
+      "question_pt": "Qual a diferenca entre fonte sismica Airgun e Vibroseis?",
+      "answer_text": "Entidade \"Rodada de Licitação\" (Bid Round), tipo contractual. Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil. Fonte: Dicionário enciclopédico inglês-português de geofísica e geologia.\n\nEntidade \"Operador\" (Operator), tipo actor. Empresa legalmente designada pelos consorciados para conduzir e executar todas as opera",
+      "entities_cited": [
+        "rodada-licitacao",
+        "operador",
+        "column_ranp-708_data_de_ades_o_resolu_o",
+        "column_ranp-815_data_de_ades_o_resolu_o",
+        "regime-contratual"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q024",
+      "category": "seismic",
+      "difficulty": "hard",
+      "question_pt": "O que e deconvolucao no processamento sismico e quais seus tipos?",
+      "answer_text": "Hidrocarboneto (Hydrocarbon): Composto orgânico formado essencialmente por carbono e hidrogênio. No domínio E&P designa óleo, gás natural, condensado e seus derivados. Em PetroGold é o tipo NER PRP quando associado a propriedades; FLU quando designa o fluido. Sinônimos: HC, hidrocarboneto, óleo e gás, hydrocarbon, HC, oil and gas. Exemplos: metano; etano; óleo cru; gás natural úmido; condensado. Fonte: GeoCore / IUPAC.\n\nNível de processamento \"Produto Curado\": Dataset validado, harmonizado e ver",
+      "entities_cited": [
+        "hidrocarboneto",
+        "curado",
+        "sigep",
+        "fpso"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q025",
+      "category": "seismic",
+      "difficulty": "hard",
+      "question_pt": "O que e OBN (Ocean Bottom Node) e qual vantagem sobre aquisicao convencional com cabo de fundo?",
+      "answer_text": "Sigla \"OBN\" do domínio O&G, categoria geophysics. OBN (Nó de Fundo Oceânico — sísmica marinha) — Ocean Bottom Node.\n\nSigla \"OBC\" do domínio O&G, categoria geophysics. OBC (Cabo de Fundo do Mar) — Ocean Bottom Cable.\n\nEntidade \"BHA\" (Bottom-Hole Assembly), tipo equipment. Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD). Relações: compõe coluna Poço. Fonte: Siglário O&G.\n\nSeismic cl",
+      "entities_cited": [
+        "acronym_obn",
+        "acronym_obc",
+        "bha",
+        "OBSSurvey",
+        "OBC"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.4,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.43999999999999995
+    },
+    {
+      "id": "Q026",
+      "category": "witsml",
+      "difficulty": "hard",
+      "question_pt": "O que e um WITSML Well e qual a diferenca em relacao ao Wellbore no padrao OSDU/ANP?",
+      "answer_text": "ALERTA RAG — Well vs Wellbore (OSDU): São duas entidades distintas no OSDU que a ANP conflate em um registro único. WELL = registro de superfície e legal. O número POCO_NUM da ANP corresponde ao Well.WellID. WELLBORE = o trecho físico perfurado. Um Well pode ter múltiplos Wellbores (sidetrack: ST1, ST2…). Na prática para o Geolytics: 1 poço ANP sem sidetrack = 1 Well + 1 Wellbore. A entidade 'poco' do entity-graph corresponde ao Well OSDU. A entidade 'wellbore' é granularidade adicional para wor",
+      "entities_cited": [
+        "osdu_well_wellbore_disambiguation",
+        "wellbore",
+        "primeiro-oleo",
+        "well-activity-program"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.5,
+      "fact_coverage": 0.8333333333333334,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.7666666666666667
+    },
+    {
+      "id": "Q027",
+      "category": "witsml",
+      "difficulty": "medium",
+      "question_pt": "O que e um WellboreMarker no WITSML e como se relaciona com formacoes geologicas?",
+      "answer_text": "Entidade \"Pré-sal\" (Pre-salt), tipo geological. Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável. Fonte: ANP/SEP.\n\nALERTA RAG — Well vs Wellbore (OSDU): São duas entidades distintas no OSDU que a ANP conflate em um registro único. WELL = registro de superfície e legal. O número POCO_NUM da ANP corresponde",
+      "entities_cited": [
+        "presal",
+        "osdu_well_wellbore_disambiguation",
+        "primeiro-oleo",
+        "topo-formacional",
+        "joa"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.6666666666666666,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.5333333333333333
+    },
+    {
+      "id": "Q028",
+      "category": "witsml",
+      "difficulty": "medium",
+      "question_pt": "O que e um MudLog no WITSML e quais dados ele contem?",
+      "answer_text": "Entidade \"SIGEP\" (SIGEP (E&P Information System)), tipo instrument. Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil. Fonte: ANP/SEP.\n\nEntidade \"MWD\" (Measure While Drilling), tipo equipment. Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros",
+      "entities_cited": [
+        "sigep",
+        "mwd",
+        "primeiro-oleo",
+        "crosswalk_witsml_2_0_energistics__MudLog"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.3333333333333333,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.41666666666666663
+    },
+    {
+      "id": "Q029",
+      "category": "witsml",
+      "difficulty": "hard",
+      "question_pt": "O que e um LogCurve no WITSML e qual a diferenca entre LogCurveInfo e Channel?",
+      "answer_text": "Entidade \"JOA\" (Joint Operating Agreement), tipo instrument. Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco. Relações: complementa Contrato E&P. Fonte: Siglário O&G.\n\nLogCurveInfo (WITSML 2.0 (Energistics)): Metadata for a well log curve: mnemonic, unit, source, acquisition company. WITSML URI: http://www.energistics.org/energyml/data/witsmlv2/2.0#LogC",
+      "entities_cited": [
+        "joa",
+        "crosswalk_witsml_2_0_energistics__LogCurveInfo",
+        "primeiro-oleo",
+        "operador",
+        "rodada-licitacao"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    },
+    {
+      "id": "Q030",
+      "category": "witsml",
+      "difficulty": "medium",
+      "question_pt": "O que e uma Trajetoria Direcional e o que sao estacoes de survey?",
+      "answer_text": "Primeiro Óleo: Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção. Fonte: ANP/SEP.\n\nEntidade \"Manifold Submarino\" (Subsea Manifold), tipo equipment. Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única li",
+      "entities_cited": [
+        "primeiro-oleo",
+        "manifold-submarino",
+        "epc",
+        "geo_hidro",
+        "teste"
+      ],
+      "n_validations_violated": 0,
+      "error": null,
+      "entity_recall": 0.0,
+      "fact_coverage": 0.0,
+      "must_not_say_violations": 0.0,
+      "validation_pass_rate": 1.0,
+      "composite_score": 0.30000000000000004
+    }
+  ]
+}

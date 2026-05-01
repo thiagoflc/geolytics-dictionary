@@ -1,0 +1,27 @@
+# Geolytics Notebooks — dependencias minimas
+# Instale com: pip install -r notebooks/requirements.txt
+
+# Notebook 01 — Exploracao do Grafo
+networkx>=3.2
+matplotlib>=3.7
+requests>=2.28
+
+# Notebook 02 — RAG com Validacao Semantica
+rank-bm25>=0.2.2
+
+# Notebook 04 — Geomecanica QA
+# numpy ja e dependencia transitiva do matplotlib
+
+# Opcionais — Notebook 02 (indice vetorial)
+# faiss-cpu>=1.7
+# sentence-transformers>=2.2
+
+# Opcionais — Notebook 02 (validacao SHACL completa)
+# pyshacl>=0.23
+# rdflib>=7.0
+
+# Opcionais — Notebook 03 (agente LangGraph com LLM real)
+# langgraph>=0.1
+# langchain-anthropic>=0.1
+# langchain-core>=0.1
+# langchain-openai>=0.1  # alternativa ao Anthropic

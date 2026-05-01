@@ -1,0 +1,456 @@
+{
+  "meta": {
+    "module": "seismic_processing",
+    "label": "Seismic Processing",
+    "label_pt": "Processamento Sismico",
+    "version": "1.0.0",
+    "description": "Classes, properties, relations and instances for the seismic processing workflow: noise suppression, deconvolution, velocity analysis, statics, NMO, DMO, migration, stacking and amplitude compensation.",
+    "sources": [
+      "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+      "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology (2nd ed.). Cambridge University Press.",
+      "OSDU SeismicProcessingProject schema v1.0.0"
+    ],
+    "class_count": 18,
+    "property_count": 13,
+    "relation_count": 7,
+    "instance_count": 3
+  },
+  "classes": {
+    "ProcessingFlow": {
+      "id": "ProcessingFlow",
+      "name": "ProcessingFlow",
+      "name_pt": "Fluxo de Processamento",
+      "superclass": "owl:Thing",
+      "description": "Ordered sequence of processing steps applied to raw seismic data to produce an imaged, interpretable seismic volume. Each step transforms the data in a specific way. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_processing",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "NoiseSuppressionFilter": {
+      "id": "NoiseSuppressionFilter",
+      "name": "NoiseSuppressionFilter",
+      "name_pt": "Filtro de Supressao de Ruido",
+      "superclass": "owl:Thing",
+      "description": "Generic category of operations that attenuate coherent or incoherent noise in seismic data while preserving signal fidelity. Sub-types include DATVF, FXEdit and DenoiseFK. Ref: Yilmaz 2001, ch. 6.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": ["Yilmaz 2001"]
+    },
+    "DATVF": {
+      "id": "DATVF",
+      "name": "DATVF",
+      "name_pt": "DATVF — Denoising Adaptativo no Dominio T-V-F",
+      "superclass": "NoiseSuppressionFilter",
+      "description": "Data-Adaptive Time-Variant Frequency filter that applies a spatially and temporally varying bandpass to track signal frequency content changes with depth/time, suppressing noise outside the signal band without over-smoothing. Ref: Yilmaz 2001.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "FXEdit": {
+      "id": "FXEdit",
+      "name": "FXEdit",
+      "name_pt": "FX Edit — Edicao no Dominio F-X",
+      "superclass": "NoiseSuppressionFilter",
+      "description": "Coherent noise attenuation in the frequency-wavenumber (f-x) domain. Random noise appears as spatially uncorrelated; linear coherent noise is predicted and subtracted via Wiener prediction. Ref: Yilmaz 2001, ch. 6.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "DenoiseFK": {
+      "id": "DenoiseFK",
+      "name": "DenoiseFK",
+      "name_pt": "Denoising FK — Filtragem F-K",
+      "superclass": "NoiseSuppressionFilter",
+      "description": "Frequency-wavenumber (f-k) fan filter that attenuates noise with apparent velocity outside the signal fan. Effective for ground-roll (slow, low-frequency) suppression in land data. Ref: Yilmaz 2001, ch. 6.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "Deconvolution": {
+      "id": "Deconvolution",
+      "name": "Deconvolution",
+      "name_pt": "Deconvolucao",
+      "superclass": "owl:Thing",
+      "description": "Inverse filtering operation that compresses the source wavelet toward a spike (spiking) or reduces its length (predictive), thereby improving temporal resolution and attenuating multiples. Assumes convolutional model: x(t) = w(t)*r(t)+n(t). Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "PredictiveDeconvolution": {
+      "id": "PredictiveDeconvolution",
+      "name": "PredictiveDeconvolution",
+      "name_pt": "Deconvolucao Preditiva",
+      "superclass": "Deconvolution",
+      "description": "Deconvolution in which a prediction distance (lag) greater than one sample is used, concentrating the operation on multiple attenuation at a specified prediction lag (equal to the two-way travel time of the peg-leg multiple). Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_processing",
+      "properties": {
+        "predictionLag_ms": "typical multiple TWTT",
+        "operatorLength_ms": "200-400"
+      },
+      "sources": ["Yilmaz 2001"]
+    },
+    "SpikingDeconvolution": {
+      "id": "SpikingDeconvolution",
+      "name": "SpikingDeconvolution",
+      "name_pt": "Deconvolucao por Espicamento",
+      "superclass": "Deconvolution",
+      "description": "Wiener least-squares deconvolution with prediction lag=1 sample, aiming to collapse the wavelet to a spike and maximise temporal resolution. Assumes minimum-phase source wavelet and white reflectivity. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "NMO": {
+      "id": "NMO",
+      "name": "NMO",
+      "name_pt": "NMO — Correcao Normal Moveout",
+      "superclass": "owl:Thing",
+      "description": "Normal Moveout correction: time-shift applied to each trace to remove the hyperbolic offset-dependent arrival time difference and align reflections before stacking. Requires RMS velocity model. Introduces NMO stretch at far offsets. Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_processing",
+      "properties": {
+        "velocityField": "RMS velocity",
+        "stretchMute_percent": "typical 25-40"
+      },
+      "sources": ["Yilmaz 2001"]
+    },
+    "DMO": {
+      "id": "DMO",
+      "name": "DMO",
+      "name_pt": "DMO — Correcao Dip Moveout",
+      "superclass": "owl:Thing",
+      "description": "Dip Moveout correction applied after NMO to remove the dip-dependent component of moveout, transforming the data to zero-offset equivalent before stack. Precedes post-stack migration in conventional processing. Ref: Yilmaz 2001, ch. 4.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "Stacking": {
+      "id": "Stacking",
+      "name": "Stacking",
+      "name_pt": "Empilhamento",
+      "superclass": "owl:Thing",
+      "description": "Summation of NMO-corrected CMP traces to produce a single stacked trace with improved signal-to-noise ratio proportional to sqrt(fold). Pre-stack data are retained for AVO and inversion. Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "StaticCorrection": {
+      "id": "StaticCorrection",
+      "name": "StaticCorrection",
+      "name_pt": "Correcao Estatica",
+      "superclass": "owl:Thing",
+      "description": "Time-shift applied to land seismic traces to compensate for near-surface weathering layer thickness and velocity variations, and for surface topography. Comprises elevation statics (field) and residual statics (processing). Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "AmplitudeCompensation": {
+      "id": "AmplitudeCompensation",
+      "name": "AmplitudeCompensation",
+      "name_pt": "Compensacao de Amplitude",
+      "superclass": "owl:Thing",
+      "description": "Amplitude restoration to compensate for geometrical spreading loss and anelastic (Q) attenuation with depth, making amplitude proportional to reflectivity for AVO/DHI analysis. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": ["Yilmaz 2001"]
+    },
+    "SphericalDivergenceCorrection": {
+      "id": "SphericalDivergenceCorrection",
+      "name": "SphericalDivergenceCorrection",
+      "name_pt": "Correcao de Divergencia Esferica",
+      "superclass": "AmplitudeCompensation",
+      "description": "Gain function proportional to t^2 * v^2(t) that compensates for amplitude decay due to spherical divergence of the wavefront. Applied early in the flow before deconvolution. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "QCompensation": {
+      "id": "QCompensation",
+      "name": "QCompensation",
+      "name_pt": "Compensacao-Q (Atenuacao Anelastica)",
+      "superclass": "AmplitudeCompensation",
+      "description": "Inverse-Q filter that restores high-frequency amplitude and phase loss caused by anelastic attenuation (Q factor) during wave propagation. Critical in gas-saturated intervals. Ref: Yilmaz 2001, ch. 7.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "Migration": {
+      "id": "Migration",
+      "name": "Migration",
+      "name_pt": "Migracao Sismica",
+      "superclass": "owl:Thing",
+      "description": "Wave-equation-based imaging operator that collapses diffractions and repositions dipping reflectors to their true subsurface positions. Can be applied pre- or post-stack, in time or depth domain. Ref: Yilmaz 2001, ch. 4-5.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "KirchhoffMigration": {
+      "id": "KirchhoffMigration",
+      "name": "KirchhoffMigration",
+      "name_pt": "Migracao de Kirchhoff",
+      "superclass": "Migration",
+      "description": "Asymptotic migration based on the Kirchhoff integral of the scalar wave equation. Computationally efficient for 3D pre-stack time and depth migration; less accurate than RTM in complex velocity structures. Ref: Yilmaz 2001, ch. 4.",
+      "domain": "seismic_processing",
+      "sources": ["Yilmaz 2001"]
+    },
+    "RTM": {
+      "id": "RTM",
+      "name": "RTM",
+      "name_pt": "RTM — Migracao Reversa no Tempo",
+      "superclass": "Migration",
+      "description": "Reverse Time Migration: two-way wave equation migration that propagates the source wavefield forward and receiver wavefield backward in time, applying an imaging condition. Handles complex velocity models (salt bodies) accurately. Computationally intensive. Ref: Yilmaz 2001, ch. 5.",
+      "domain": "seismic_processing",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
+      "sources": ["Yilmaz 2001"]
+    }
+  },
+  "properties": {
+    "processingStep": {
+      "id": "processingStep",
+      "name": "processingStep",
+      "name_pt": "Passo de Processamento",
+      "description": "Ordered step in the processing flow, referencing the class of the operation applied.",
+      "unit": "dimensionless",
+      "domain_class": "ProcessingFlow",
+      "range": "xsd:string"
+    },
+    "stepOrder": {
+      "id": "stepOrder",
+      "name": "stepOrder",
+      "name_pt": "Ordem do Passo",
+      "description": "Integer index of the processing step within the flow (1 = first).",
+      "unit": "dimensionless",
+      "domain_class": "ProcessingFlow",
+      "range": "xsd:integer"
+    },
+    "operatorLength": {
+      "id": "operatorLength",
+      "name": "operatorLength",
+      "name_pt": "Comprimento do Operador",
+      "description": "Length of the deconvolution Wiener filter operator.",
+      "unit": "ms",
+      "domain_class": "Deconvolution",
+      "range": "xsd:integer"
+    },
+    "predictionLag": {
+      "id": "predictionLag",
+      "name": "predictionLag",
+      "name_pt": "Lag de Predicao",
+      "description": "Prediction distance in predictive deconvolution, set to the expected peg-leg multiple TWTT.",
+      "unit": "ms",
+      "domain_class": "PredictiveDeconvolution",
+      "range": "xsd:integer"
+    },
+    "velocityFieldType": {
+      "id": "velocityFieldType",
+      "name": "velocityFieldType",
+      "name_pt": "Tipo de Campo de Velocidade",
+      "description": "Type of velocity model used in NMO or migration: RMS, interval, tomographic.",
+      "unit": "enum",
+      "domain_class": "NMO",
+      "range": "xsd:string"
+    },
+    "stretchMute": {
+      "id": "stretchMute",
+      "name": "stretchMute",
+      "name_pt": "Mute de Estiramento",
+      "description": "Maximum tolerable NMO stretch in percent; traces beyond this limit are muted to prevent low-frequency noise contamination of the stack.",
+      "unit": "percent",
+      "domain_class": "NMO",
+      "range": "xsd:decimal"
+    },
+    "qFactor": {
+      "id": "qFactor",
+      "name": "qFactor",
+      "name_pt": "Fator Q",
+      "description": "Quality factor: ratio of elastic energy stored to energy dissipated per cycle. Low Q (20-100) = high attenuation; high Q (200-1000) = low attenuation. Used in Q-compensation filter design.",
+      "unit": "dimensionless",
+      "domain_class": "QCompensation",
+      "range": "xsd:decimal",
+      "typical_values": "20-1000",
+      "rag_priority": "high"
+    },
+    "migrationAlgorithm": {
+      "id": "migrationAlgorithm",
+      "name": "migrationAlgorithm",
+      "name_pt": "Algoritmo de Migracao",
+      "description": "Algorithm used in the migration step: Kirchhoff, RTM, FWI, Phase-Shift.",
+      "unit": "enum",
+      "domain_class": "Migration",
+      "range": "xsd:string"
+    },
+    "migrationDomain": {
+      "id": "migrationDomain",
+      "name": "migrationDomain",
+      "name_pt": "Dominio de Migracao",
+      "description": "Whether migration is performed in time or depth domain.",
+      "unit": "enum",
+      "domain_class": "Migration",
+      "range": "xsd:string"
+    },
+    "bandpassFilterLow": {
+      "id": "bandpassFilterLow",
+      "name": "bandpassFilterLow",
+      "name_pt": "Frequencia de Corte Inferior",
+      "description": "Low-frequency cut of a bandpass filter applied during processing.",
+      "unit": "Hz",
+      "domain_class": "NoiseSuppressionFilter",
+      "range": "xsd:decimal"
+    },
+    "bandpassFilterHigh": {
+      "id": "bandpassFilterHigh",
+      "name": "bandpassFilterHigh",
+      "name_pt": "Frequencia de Corte Superior",
+      "description": "High-frequency cut of a bandpass filter applied during processing.",
+      "unit": "Hz",
+      "domain_class": "NoiseSuppressionFilter",
+      "range": "xsd:decimal"
+    },
+    "gainFunction": {
+      "id": "gainFunction",
+      "name": "gainFunction",
+      "name_pt": "Funcao de Ganho",
+      "description": "Mathematical form of the amplitude correction applied: t2v2, AGC, balance.",
+      "unit": "enum",
+      "domain_class": "AmplitudeCompensation",
+      "range": "xsd:string"
+    },
+    "staticShift": {
+      "id": "staticShift",
+      "name": "staticShift",
+      "name_pt": "Deslocamento Estatico",
+      "description": "Time shift in milliseconds applied to a trace by static correction.",
+      "unit": "ms",
+      "domain_class": "StaticCorrection",
+      "range": "xsd:decimal"
+    }
+  },
+  "relations": {
+    "precedes": {
+      "id": "precedes",
+      "name": "precedes",
+      "name_pt": "precede",
+      "description": "One processing step temporally precedes another in the processing flow.",
+      "domain": "owl:Thing",
+      "range": "owl:Thing",
+      "cardinality": "0..n",
+      "inverse": "follows"
+    },
+    "follows": {
+      "id": "follows",
+      "name": "follows",
+      "name_pt": "segue",
+      "description": "One processing step follows another.",
+      "domain": "owl:Thing",
+      "range": "owl:Thing",
+      "cardinality": "0..n",
+      "inverse": "precedes"
+    },
+    "part_of_flow": {
+      "id": "part_of_flow",
+      "name": "part_of_flow",
+      "name_pt": "parte_do_fluxo",
+      "description": "A processing step is part of a ProcessingFlow.",
+      "domain": "owl:Thing",
+      "range": "ProcessingFlow",
+      "cardinality": "1..1"
+    },
+    "applies_filter": {
+      "id": "applies_filter",
+      "name": "applies_filter",
+      "name_pt": "aplica_filtro",
+      "description": "A ProcessingFlow applies a NoiseSuppressionFilter.",
+      "domain": "ProcessingFlow",
+      "range": "NoiseSuppressionFilter",
+      "cardinality": "0..n"
+    },
+    "uses_deconvolution": {
+      "id": "uses_deconvolution",
+      "name": "uses_deconvolution",
+      "name_pt": "usa_deconvolucao",
+      "description": "A ProcessingFlow applies a Deconvolution step.",
+      "domain": "ProcessingFlow",
+      "range": "Deconvolution",
+      "cardinality": "0..1"
+    },
+    "uses_migration": {
+      "id": "uses_migration",
+      "name": "uses_migration",
+      "name_pt": "usa_migracao",
+      "description": "A ProcessingFlow applies a Migration algorithm.",
+      "domain": "ProcessingFlow",
+      "range": "Migration",
+      "cardinality": "1..1"
+    },
+    "compensates_amplitude": {
+      "id": "compensates_amplitude",
+      "name": "compensates_amplitude",
+      "name_pt": "compensa_amplitude",
+      "description": "A ProcessingFlow applies an AmplitudeCompensation step.",
+      "domain": "ProcessingFlow",
+      "range": "AmplitudeCompensation",
+      "cardinality": "1..1"
+    }
+  },
+  "instances": {
+    "PF_MARINE_RTM": {
+      "id": "PF_MARINE_RTM",
+      "name": "Deep-Water Pre-Stack RTM Processing Flow",
+      "name_pt": "Fluxo RTM Pre-Empilhamento Aguas Profundas",
+      "class": "ProcessingFlow",
+      "description": "Typical pre-stack depth migration processing flow for deep-water broadband 3D marine data: demultiple, deconvolution, NMO/velocity analysis, SRME, RTM.",
+      "steps": [
+        {"order": 1, "step": "SphericalDivergenceCorrection"},
+        {"order": 2, "step": "DATVF"},
+        {"order": 3, "step": "DenoiseFK"},
+        {"order": 4, "step": "FXEdit"},
+        {"order": 5, "step": "SpikingDeconvolution"},
+        {"order": 6, "step": "NMO"},
+        {"order": 7, "step": "Stacking"},
+        {"order": 8, "step": "QCompensation"},
+        {"order": 9, "step": "RTM"}
+      ],
+      "attributes": {
+        "migrationDomain": "depth",
+        "migrationAlgorithm": "RTM",
+        "qFactor": "80-150",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0"
+      },
+      "source": "Representative of Santos Basin pre-salt processing workflows (Yilmaz 2001)"
+    },
+    "PF_LAND_KIRCHHOFF": {
+      "id": "PF_LAND_KIRCHHOFF",
+      "name": "Land Vibroseis Kirchhoff Time Migration Flow",
+      "name_pt": "Fluxo de Migracao de Kirchhoff em Tempo — Vibrosseis Terrestre",
+      "class": "ProcessingFlow",
+      "description": "Standard processing flow for land vibroseis 3D: cross-correlation, statics, bandpass filter, decon, NMO, DMO, Kirchhoff time migration.",
+      "steps": [
+        {"order": 1, "step": "StaticCorrection"},
+        {"order": 2, "step": "SphericalDivergenceCorrection"},
+        {"order": 3, "step": "DenoiseFK"},
+        {"order": 4, "step": "PredictiveDeconvolution"},
+        {"order": 5, "step": "NMO"},
+        {"order": 6, "step": "DMO"},
+        {"order": 7, "step": "Stacking"},
+        {"order": 8, "step": "KirchhoffMigration"}
+      ],
+      "attributes": {
+        "migrationDomain": "time",
+        "migrationAlgorithm": "Kirchhoff",
+        "predictionLag_ms": "120",
+        "stretchMute_percent": "30"
+      },
+      "source": "Yilmaz 2001, standard land processing sequence"
+    },
+    "PF_OBN_PS": {
+      "id": "PF_OBN_PS",
+      "name": "OBN 4C PP/PS Joint Processing Flow",
+      "name_pt": "Fluxo de Processamento Conjunto PP/PS OBN 4C",
+      "class": "ProcessingFlow",
+      "description": "Processing flow for OBN 4C ocean-bottom data including dual-sensor summation, P- and S-wave separation, PP/PS registration, NMO for both modes and joint inversion preparation.",
+      "steps": [
+        {"order": 1, "step": "NoiseSuppressionFilter"},
+        {"order": 2, "step": "SpikingDeconvolution"},
+        {"order": 3, "step": "NMO"},
+        {"order": 4, "step": "AmplitudeCompensation"},
+        {"order": 5, "step": "Stacking"},
+        {"order": 6, "step": "RTM"}
+      ],
+      "attributes": {
+        "migrationDomain": "depth",
+        "migrationAlgorithm": "RTM",
+        "note": "PS mode requires Vp/Vs ratio for NMO and registration"
+      },
+      "source": "Sheriff & Geldart 1995; representative OBN workflow"
+    }
+  }
+}

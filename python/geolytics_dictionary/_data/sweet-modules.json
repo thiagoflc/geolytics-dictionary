@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T00:00:00.000Z",
+    "description": "Catalog of SWEET (Semantic Web for Earth and Environmental Terminology) modules used in Geolytics SWEET alignments. SWEET v3.6 — ESIPFed, NASA/JPL.",
+    "sweet_base_uri": "http://sweetontology.net/",
+    "sweet_repo": "https://github.com/ESIPFed/sweet",
+    "sweet_license": "Apache 2.0",
+    "note": "Module URIs follow the pattern http://sweetontology.net/<module>/<ClassName>. Each module is a separate Turtle file in the ESIPFed GitHub repository."
+  },
+  "modules": [
+    {
+      "id": "matrRock",
+      "full_uri": "http://sweetontology.net/matrRock",
+      "turtle_file": "matrRock.ttl",
+      "description": "Base rock material classes. Root class Rock with subtypes organized by genesis. Parent module for matrRockIgneous, matrRockSedimentary, and matrRockMetamorphic.",
+      "key_classes": ["Rock", "RockMaterial"],
+      "geolytics_terms_count": 3,
+      "geolytics_term_ids": ["reservatorio", "litologia", "rocha-ignea"]
+    },
+    {
+      "id": "matrRockIgneous",
+      "full_uri": "http://sweetontology.net/matrRockIgneous",
+      "turtle_file": "matrRockIgneous.ttl",
+      "description": "Igneous rock material classes — rocks formed by solidification of magma. Includes intrusive (plutonic) and extrusive (volcanic) subtypes.",
+      "key_classes": ["IgneousRock", "IntrusiveRock", "ExtrusiveRock", "Granite", "Basalt", "Rhyolite", "Gabbro"],
+      "geolytics_terms_count": 3,
+      "geolytics_term_ids": ["rocha-ignea", "granito", "basalto"]
+    },
+    {
+      "id": "matrRockSedimentary",
+      "full_uri": "http://sweetontology.net/matrRockSedimentary",
+      "turtle_file": "matrRockSedimentary.ttl",
+      "description": "Sedimentary rock material classes — rocks formed by deposition and lithification of sediments or chemical precipitation. Primary module for reservoir rock types in E&P.",
+      "key_classes": ["SedimentaryRock", "Sandstone", "Limestone", "Shale", "Mudstone", "Siltstone", "EvaporiteRock", "SaltRock", "Dolostone", "CarbonatiteRock"],
+      "geolytics_terms_count": 6,
+      "geolytics_term_ids": ["rocha-sedimentar", "arenito", "calcario", "folhelho", "evaporito", "dolomita"]
+    },
+    {
+      "id": "matrRockMetamorphic",
+      "full_uri": "http://sweetontology.net/matrRockMetamorphic",
+      "turtle_file": "matrRockMetamorphic.ttl",
+      "description": "Metamorphic rock material classes — rocks transformed by heat, pressure, or chemically active fluids without melting.",
+      "key_classes": ["MetamorphicRock", "Schist", "Gneiss", "Marble", "Quartzite", "Phyllite"],
+      "geolytics_terms_count": 1,
+      "geolytics_term_ids": ["rocha-metamorfica"]
+    },
+    {
+      "id": "matrOrganics",
+      "full_uri": "http://sweetontology.net/matrOrganics",
+      "turtle_file": "matrOrganics.ttl",
+      "description": "Organic material classes — carbon-based compounds of biological origin. Most directly relevant module for petroleum geochemistry: hydrocarbons, kerogen, oil, gas, condensate.",
+      "key_classes": ["Hydrocarbon", "OrganicCompound", "Kerogen", "Oil", "NaturalGas", "Condensate", "CoalMaterial", "Peat", "Bitumen", "Methane", "Ethane", "Propane"],
+      "geolytics_terms_count": 5,
+      "geolytics_term_ids": ["hidrocarboneto", "querogenio", "gas-natural", "oleo-cru", "condensado"]
+    },
+    {
+      "id": "matrMineral",
+      "full_uri": "http://sweetontology.net/matrMineral",
+      "turtle_file": "matrMineral.ttl",
+      "description": "Mineral material classes — naturally occurring inorganic crystalline substances. Covers rock-forming and accessory minerals relevant to lithologic description and diagenesis.",
+      "key_classes": ["Mineral", "Quartz", "Calcite", "Dolomite", "Feldspar", "Pyrite", "Magnetite", "Halite", "Gypsum", "Anhydrite", "Kaolinite", "Illite", "Chlorite"],
+      "geolytics_terms_count": 4,
+      "geolytics_term_ids": ["quartzo", "calcita", "pirita", "magnetita"]
+    },
+    {
+      "id": "matr",
+      "full_uri": "http://sweetontology.net/matr",
+      "turtle_file": "matr.ttl",
+      "description": "Base material classes — root module for all SWEET material types. Contains fundamental substances: Water, Brine, SalineWater, Gas, Liquid, Solid.",
+      "key_classes": ["Matter", "Substance", "Water", "Brine", "SalineWater", "Gas", "Liquid", "Solid", "Mixture"],
+      "geolytics_terms_count": 2,
+      "geolytics_term_ids": ["agua", "salmoura"]
+    },
+    {
+      "id": "procGeo",
+      "full_uri": "http://sweetontology.net/procGeo",
+      "turtle_file": "procGeo.ttl",
+      "description": "Geological process classes — natural mechanisms that form, modify, or destroy geologic bodies and features. The most used SWEET module for petroleum systems processes.",
+      "key_classes": ["GeologicProcess", "Sedimentation", "Diagenesis", "Erosion", "Faulting", "Folding", "Rifting", "Metamorphism", "Magmatism", "TectonicProcess", "FluidMigration", "Volcanism", "Deformation"],
+      "geolytics_terms_count": 10,
+      "geolytics_term_ids": ["processo-geologico", "diagenese", "evento-tectonico", "sedimentacao", "erosao", "falhamento", "dobramento", "magmatismo", "metamorfismo", "rifteamento"]
+    },
+    {
+      "id": "realmGeol",
+      "full_uri": "http://sweetontology.net/realmGeol",
+      "turtle_file": "realmGeol.ttl",
+      "description": "Geological realm classes — physical domains and features of the solid Earth. Covers the lithosphere, crust, mantle, and major geologic features like unconformities, boreholes, and contacts.",
+      "key_classes": ["GeologicFeature", "Lithosphere", "Crust", "Mantle", "Unconformity", "GeologicContact", "Borehole", "GeologicFormation"],
+      "geolytics_terms_count": 9,
+      "geolytics_term_ids": ["formacao-geologica", "discordancia", "contato-geologico", "litosfera", "poco-anp", "campo", "crosta", "manto", "feicao-mapeada"]
+    },
+    {
+      "id": "realmGeolTectonic",
+      "full_uri": "http://sweetontology.net/realmGeolTectonic",
+      "turtle_file": "realmGeolTectonic.ttl",
+      "description": "Tectonic realm classes — structural geology features formed by deformation: faults, folds, foliation, shear zones, and other tectonic structures.",
+      "key_classes": ["Fault", "FaultZone", "Fold", "Anticline", "Syncline", "Foliation", "ShearZone", "Thrust", "NormalFault", "StrikeslipFault"],
+      "geolytics_terms_count": 3,
+      "geolytics_term_ids": ["falha-cisalhante", "dobra", "foliacao"]
+    },
+    {
+      "id": "realmGeolBasin",
+      "full_uri": "http://sweetontology.net/realmGeolBasin",
+      "turtle_file": "realmGeolBasin.ttl",
+      "description": "Geologic basin realm classes — basins and their components. Covers sedimentary basins, rift basins, foreland basins, and related depositional environments.",
+      "key_classes": ["SedimentaryBasin", "RiftBasin", "ForelandBasin", "Basin", "DepositionalEnvironment"],
+      "geolytics_terms_count": 4,
+      "geolytics_term_ids": ["bacia-sedimentar", "sistema-deposicional", "bloco", "presal"]
+    },
+    {
+      "id": "realmHydro",
+      "full_uri": "http://sweetontology.net/realmHydro",
+      "turtle_file": "realmHydro.ttl",
+      "description": "Hydrosphere realm classes — water bodies and hydrologic features. Relevant for offshore E&P context, water flooding, and aquifer management.",
+      "key_classes": ["Hydrosphere", "HydrospherePart", "Ocean", "Sea", "Lake", "River", "Aquifer", "GroundWater"],
+      "geolytics_terms_count": 3,
+      "geolytics_term_ids": ["hidrosfera", "lamina-dagua", "oceano"]
+    },
+    {
+      "id": "propPressure",
+      "full_uri": "http://sweetontology.net/propPressure",
+      "turtle_file": "propPressure.ttl",
+      "description": "Pressure property classes — force per unit area. Critical for pore pressure, reservoir pressure, fracture pressure, and wellbore stability in E&P.",
+      "key_classes": ["Pressure", "AtmosphericPressure", "HydrostaticPressure", "LithoPressure", "OverPressure"],
+      "geolytics_terms_count": 1,
+      "geolytics_term_ids": ["pressao"]
+    },
+    {
+      "id": "propTemperature",
+      "full_uri": "http://sweetontology.net/propTemperature",
+      "turtle_file": "propTemperature.ttl",
+      "description": "Temperature property classes — thermal state. Governs kerogen maturation windows (oil window, gas window) and PVT behavior of reservoir fluids.",
+      "key_classes": ["Temperature", "FreezingPoint", "BoilingPoint", "AmbientTemperature"],
+      "geolytics_terms_count": 1,
+      "geolytics_term_ids": ["temperatura"]
+    },
+    {
+      "id": "propMass",
+      "full_uri": "http://sweetontology.net/propMass",
+      "turtle_file": "propMass.ttl",
+      "description": "Mass and density property classes. Density is used in wireline logging (density log) and fluid characterization (API gravity).",
+      "key_classes": ["Mass", "Density", "SpecificGravity", "Weight"],
+      "geolytics_terms_count": 1,
+      "geolytics_term_ids": ["densidade"]
+    },
+    {
+      "id": "propFluidTransport",
+      "full_uri": "http://sweetontology.net/propFluidTransport",
+      "turtle_file": "propFluidTransport.ttl",
+      "description": "Fluid transport property classes — viscosity, permeability, and flow-related properties. Directly relevant to reservoir characterization and production engineering.",
+      "key_classes": ["Viscosity", "Permeability", "FlowRate", "Diffusivity", "Transmissivity"],
+      "geolytics_terms_count": 2,
+      "geolytics_term_ids": ["viscosidade", "permeabilidade"]
+    },
+    {
+      "id": "propSpaceMultidimensional",
+      "full_uri": "http://sweetontology.net/propSpaceMultidimensional",
+      "turtle_file": "propSpaceMultidimensional.ttl",
+      "description": "Multidimensional space property classes — including porosity (volumetric ratio), saturation, and other fraction-based properties of porous media.",
+      "key_classes": ["Porosity", "Saturation", "VolumeFraction", "AreaFraction"],
+      "geolytics_terms_count": 1,
+      "geolytics_term_ids": ["porosidade"]
+    },
+    {
+      "id": "propSpaceDistance",
+      "full_uri": "http://sweetontology.net/propSpaceDistance",
+      "turtle_file": "propSpaceDistance.ttl",
+      "description": "Spatial distance property classes — length, depth, height, and related geometric properties. Depth is essential for well depth, water depth, and reservoir depth reporting.",
+      "key_classes": ["Depth", "Length", "Height", "Width", "Distance", "Thickness"],
+      "geolytics_terms_count": 1,
+      "geolytics_term_ids": ["lamina-dagua"]
+    },
+    {
+      "id": "reprSciUnits",
+      "full_uri": "http://sweetontology.net/reprSciUnits",
+      "turtle_file": "reprSciUnits.ttl",
+      "description": "Scientific measurement unit classes — SI and derived units. Covers Pascal, Kelvin, Meter, Darcy, and other units used in geoscience measurements.",
+      "key_classes": ["Pascal", "Kelvin", "Meter", "Darcy", "Bar", "Celsius", "Feet", "Kilogram", "Second"],
+      "geolytics_terms_count": 4,
+      "geolytics_term_ids": ["unidade-pa", "unidade-kelvin", "unidade-metro", "unidade-darcy"]
+    },
+    {
+      "id": "reprTimeGeologic",
+      "full_uri": "http://sweetontology.net/reprTimeGeologic",
+      "turtle_file": "reprTimeGeologic.ttl",
+      "description": "Geologic time representation classes — eons, eras, periods, epochs, and ages of the geologic time scale (ICS). Covers Mesozoic, Cretaceous, Aptian, and other intervals relevant to Brazilian petroleum systems.",
+      "key_classes": ["GeochronologicEra", "Mesozoic", "Cretaceous", "Aptian", "Albian", "Paleozoic", "Cenozoic", "Jurassic", "Triassic", "Permian"],
+      "geolytics_terms_count": 3,
+      "geolytics_term_ids": ["cretaceo", "aptiano", "mesozoico"]
+    }
+  ]
+}
