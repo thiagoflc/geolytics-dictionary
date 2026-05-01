@@ -1,0 +1,130 @@
+# ============================================================================
+# Geolytics PVT analysis procedures — SOSA Procedure codelists
+# ============================================================================
+# Pattern: GLOSIS glosis_proc:* — each procedure is simultaneously
+#   skos:Concept (for SKOS hierarchy/queries) AND sosa:Procedure (for
+#   SOSA observation linkage).
+#
+# Source: SPE Standard PVT analysis procedures + Petrobras SIRR catalog.
+# ============================================================================
+
+@prefix pvt:    <https://geolytics.petrobras.com.br/dict/pvt-procedure/> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+
+<https://geolytics.petrobras.com.br/dict/pvt-procedure>
+    a              owl:Ontology ;
+    owl:versionIRI <https://geolytics.petrobras.com.br/dict/pvt-procedure/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    dct:title "Geolytics PVT analysis procedures"@en ;
+    dct:description "SOSA-aware codelists for laboratory PVT (Pressure-Volume-Temperature) analysis procedures used in upstream oil & gas reservoir characterization. Replicates the GLOSIS glosis_proc pattern."@en ;
+    rdfs:seeAlso <http://w3id.org/glosis/model/procedure/> .
+
+# ── Top-level scheme ─────────────────────────────────────────────────────────
+
+pvt:PVTProcedure a skos:ConceptScheme ;
+    rdfs:label "PVT analysis procedures — codelist scheme"@en ;
+    skos:prefLabel "PVT analysis procedures"@en ;
+    skos:definition "Standard laboratory procedures for measuring pressure-volume-temperature (PVT) properties of reservoir fluids."@en ;
+    skos:hasTopConcept pvt:flashLiberation ,
+                       pvt:differentialLiberation ,
+                       pvt:constantCompositionExpansion ,
+                       pvt:swellingTest ,
+                       pvt:separatorTest ,
+                       pvt:viscosityMeasurement ,
+                       pvt:slimtubeTest ,
+                       pvt:multipleContactTest .
+
+# ── Concepts (skos:Concept ∧ sosa:Procedure) ─────────────────────────────────
+
+pvt:flashLiberation a skos:Concept , sosa:Procedure ;
+    rdfs:label "Flash Liberation"@en ;
+    skos:prefLabel "Flash liberation"@en , "Liberação flash"@pt ;
+    skos:altLabel "flash vaporization"@en , "single-stage flash"@en ;
+    skos:notation "FL" ;
+    skos:definition """Single-stage equilibrium flash from reservoir P,T to atmospheric (or specified) conditions. Determines bubble-point pressure, GOR, FVF and stock-tank API gravity in one step. Provides reference single-stage values; differs from staged separator path used in production."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure ;
+    rdfs:seeAlso <https://en.wikipedia.org/wiki/Flash_vaporization> .
+
+pvt:differentialLiberation a skos:Concept , sosa:Procedure ;
+    rdfs:label "Differential Liberation"@en ;
+    skos:prefLabel "Differential liberation"@en , "Liberação diferencial"@pt ;
+    skos:altLabel "differential vaporization"@en , "DL"@en ;
+    skos:notation "DL" ;
+    skos:definition """Stepwise pressure depletion at reservoir temperature, with gas removed (vented) at each pressure stage. Simulates fluid behavior in the reservoir as pressure declines and gas escapes upward, leaving heavier oil behind. Generates Bod, Rsd, Bgd curves vs. pressure."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure ;
+    skos:related pvt:flashLiberation .
+
+pvt:constantCompositionExpansion a skos:Concept , sosa:Procedure ;
+    rdfs:label "Constant Composition Expansion (CCE)"@en ;
+    skos:prefLabel "Constant composition expansion"@en , "Expansão a composição constante"@pt ;
+    skos:altLabel "CCE"@en , "PV relation test"@en , "flash expansion"@en ;
+    skos:notation "CCE" ;
+    skos:definition """Closed-cell pressure-volume measurement at reservoir temperature, with mass kept constant (no fluid removed). Produces total relative volume vs. pressure, bubble-point and undersaturated compressibility. The 'constant composition' contrasts with differential liberation which removes gas."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure .
+
+pvt:swellingTest a skos:Concept , sosa:Procedure ;
+    rdfs:label "Swelling Test"@en ;
+    skos:prefLabel "Swelling test"@en , "Teste de inchamento"@pt ;
+    skos:altLabel "swell test"@en , "miscibility study"@en ;
+    skos:notation "ST" ;
+    skos:definition """Measures saturation pressure and volume change as injection gas (CO₂, N₂, lean gas) is progressively added to a reservoir oil sample. Critical for designing miscible/immiscible gas-injection EOR projects."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure ;
+    skos:related pvt:slimtubeTest , pvt:multipleContactTest .
+
+pvt:separatorTest a skos:Concept , sosa:Procedure ;
+    rdfs:label "Separator Test"@en ;
+    skos:prefLabel "Separator test"@en , "Teste de separador"@pt ;
+    skos:altLabel "multistage separator test"@en , "stage separation"@en ;
+    skos:notation "SEP" ;
+    skos:definition """Multistage flash simulating actual production-train separator(s) (typically 2–4 stages: HP separator → LP separator → stock tank). Optimizes separator pressures to maximize stock-tank oil; provides shrinkage factor and surface GOR per stage."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure ;
+    skos:related pvt:flashLiberation .
+
+pvt:viscosityMeasurement a skos:Concept , sosa:Procedure ;
+    rdfs:label "Viscosity measurement"@en ;
+    skos:prefLabel "Viscosity measurement"@en , "Medição de viscosidade"@pt ;
+    skos:altLabel "rolling-ball viscometer"@en , "capillary viscometer"@en ;
+    skos:notation "VIS" ;
+    skos:definition """Direct measurement of oil dynamic viscosity (μo) at reservoir T as a function of pressure. Common methods: rolling-ball viscometer (Hoeppler), capillary tube, electromagnetic falling-needle. Output is viscosity vs. pressure with characteristic minimum at Pb."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure .
+
+pvt:slimtubeTest a skos:Concept , sosa:Procedure ;
+    rdfs:label "Slim-tube Test"@en ;
+    skos:prefLabel "Slim-tube test"@en , "Teste de slim-tube"@pt ;
+    skos:altLabel "MMP determination"@en , "minimum miscibility pressure test"@en ;
+    skos:notation "STT" ;
+    skos:definition """Long, narrow sand-packed tube experiment to determine minimum miscibility pressure (MMP) between reservoir oil and injection gas. Recovery vs. pressure plot; MMP at the inflection where recovery exceeds 90%. Industry standard for miscible flood design."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure ;
+    skos:related pvt:swellingTest , pvt:multipleContactTest .
+
+pvt:multipleContactTest a skos:Concept , sosa:Procedure ;
+    rdfs:label "Multiple-Contact Test"@en ;
+    skos:prefLabel "Multiple-contact test"@en , "Teste de múltiplo contato"@pt ;
+    skos:altLabel "MCT"@en , "vaporizing/condensing gas drive test"@en ;
+    skos:notation "MCT" ;
+    skos:definition """Sequential PVT cell experiment that contacts oil with fresh gas (forward) or gas with fresh oil (backward) multiple times to determine miscibility mechanism (vaporizing vs. condensing) and MMP. Alternative to slim-tube for screening."""@en ;
+    skos:inScheme pvt:PVTProcedure ;
+    skos:topConceptOf pvt:PVTProcedure ;
+    skos:related pvt:slimtubeTest , pvt:swellingTest .
+
+# ── Cross-references with Geolytics PVT field properties ─────────────────────
+# (informational — full SOSA observation graph kept at instance level)
+
+# pvt:flashLiberation produces results matching geo:RGO_TanqueProperty,
+#   geo:Grau_API_TanqueProperty, geo:Dens_Liq_TanqueProperty
+# pvt:differentialLiberation produces Bod, Rsd, Bgd, viscosity-at-P curves
+# pvt:constantCompositionExpansion produces Pb, total-relative-volume curve
+# pvt:viscosityMeasurement populates viscosity field
+
+# === EOF ===
