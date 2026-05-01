@@ -5,158 +5,331 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Geolytics Dictionary — ANP Oil & Gas Ontology</title>
 <meta name="description" content="Visualização interativa da ontologia ANP de Exploração & Produção de petróleo no Brasil." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #FAFAF8;
-    --fg: #1B1B19;
-    --fg-soft: #555550;
-    --border: #E2E0D9;
-    --panel: #FFFFFF;
-    --edge: #B4B2A9;
-    --shadow: 0 6px 24px rgba(0,0,0,0.08);
-  }
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --bg: #14140F;
-      --fg: #F2F0E6;
-      --fg-soft: #A8A69A;
-      --border: #2A2A22;
-      --panel: #1C1C16;
-      --edge: #4A4A40;
-      --shadow: 0 6px 24px rgba(0,0,0,0.5);
-    }
+    color-scheme: dark;
+    --bg:        #000000;
+    --panel:     #0A0A0A;
+    --panel-2:   #141414;
+    --fg:        #F5F2EA;
+    --fg-soft:   #8A877F;
+    --hairline:  #1F1F1B;
+    --hairline-2:#2C2C25;
+    --shadow:    0 24px 60px rgba(0,0,0,0.85), 0 0 0 1px var(--hairline);
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --t-operational: #378ADD;
+    --t-contractual: #7F77DD;
+    --t-actor:       #D85A30;
+    --t-instrument:  #888780;
+    --t-geological:  #639922;
+    --t-equipment:   #C77B30;
+    --t-analytical:  #E67E22;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; height: 100%; }
   body {
     background: var(--bg); color: var(--fg);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, system-ui, sans-serif;
-    font-size: 14px; line-height: 1.45;
+    font-family: var(--sans);
+    font-size: 14px; line-height: 1.5;
     overflow: hidden;
+    -webkit-font-smoothing: antialiased;
   }
-  header {
-    display: flex; align-items: center; justify-content: space-between;
-    padding: 14px 20px; border-bottom: 1px solid var(--border);
-    background: var(--panel);
-  }
-  header h1 { margin: 0; font-size: 16px; font-weight: 600; }
-  header .sub { color: var(--fg-soft); font-size: 12px; margin-left: 10px; }
-  header .actions a {
-    color: var(--fg); text-decoration: none; padding: 6px 12px;
-    border: 1px solid var(--border); border-radius: 6px; font-size: 12px;
-    margin-left: 8px;
-  }
-  header .actions a:hover { background: var(--bg); }
 
+  /* ── HEADER ─────────────────────────────────────────────── */
+  header {
+    display: flex; align-items: stretch; justify-content: space-between;
+    padding: 18px 28px 16px; background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
+    position: relative;
+  }
+  header .brand .eyebrow {
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+    color: var(--fg-soft); text-transform: uppercase; margin-bottom: 4px;
+  }
+  header .brand h1 {
+    font-family: var(--mono); font-weight: 700;
+    margin: 0; font-size: 17px; letter-spacing: -0.005em;
+    color: var(--fg);
+  }
+  header .brand h1 .accent { color: var(--t-actor); }
+  header .actions { display: flex; gap: 8px; align-items: center; }
+  header .actions a {
+    font-family: var(--mono); font-size: 11px; font-weight: 500;
+    color: var(--fg); text-decoration: none;
+    padding: 8px 14px; border: 1px solid var(--hairline-2);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
+  }
+  header .actions a:hover { border-color: var(--fg); background: var(--panel-2); }
+  header .actions a.primary { background: var(--t-actor); border-color: var(--t-actor); color: #000; }
+  header .actions a.primary:hover { background: #FF7A4A; border-color: #FF7A4A; }
+
+  /* The signature ribbon — 7 colored bands, one per node type. Doubles as legend. */
+  .ribbon {
+    display: grid; grid-template-columns: repeat(7, 1fr);
+    height: 3px; width: 100%;
+  }
+  .ribbon .band { transition: height 200ms ease, opacity 200ms ease; }
+  .ribbon .band[data-type="operational"] { background: var(--t-operational); }
+  .ribbon .band[data-type="contractual"] { background: var(--t-contractual); }
+  .ribbon .band[data-type="actor"]       { background: var(--t-actor); }
+  .ribbon .band[data-type="instrument"]  { background: var(--t-instrument); }
+  .ribbon .band[data-type="geological"]  { background: var(--t-geological); }
+  .ribbon .band[data-type="equipment"]   { background: var(--t-equipment); }
+  .ribbon .band[data-type="analytical"]  { background: var(--t-analytical); }
+
+  /* ── TOOLBAR (filters) ──────────────────────────────────── */
   .toolbar {
-    display: flex; gap: 12px; flex-wrap: wrap;
-    padding: 10px 20px; border-bottom: 1px solid var(--border);
-    background: var(--panel); font-size: 12px;
+    display: flex; gap: 0; flex-wrap: wrap;
+    padding: 14px 28px; background: var(--bg);
+    border-bottom: 1px solid var(--hairline);
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.12em;
+  }
+  .toolbar > .toolbar-label {
+    color: var(--fg-soft); padding: 6px 14px 6px 0; text-transform: uppercase;
+    align-self: center; border-right: 1px solid var(--hairline);
+    margin-right: 14px;
   }
   .toolbar label {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 10px; border: 1px solid var(--border); border-radius: 14px;
-    cursor: pointer; user-select: none;
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 12px; cursor: pointer; user-select: none;
+    text-transform: uppercase; color: var(--fg-soft);
+    transition: color 120ms ease;
   }
-  .toolbar label input { accent-color: currentColor; }
-  .toolbar .swatch { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+  .toolbar label:hover { color: var(--fg); }
+  .toolbar label input { display: none; }
+  .toolbar label:has(input:checked) { color: var(--fg); }
+  .toolbar label:has(input:not(:checked)) .swatch { opacity: 0.25; }
+  .toolbar .swatch { width: 8px; height: 8px; display: inline-block; transition: opacity 120ms ease; }
 
-  main { position: relative; height: calc(100vh - 110px); display: flex; }
-  #graph { flex: 1; height: 100%; }
-  #graph svg { width: 100%; height: 100%; display: block; }
+  /* ── MAIN ────────────────────────────────────────────────── */
+  main { position: relative; height: calc(100vh - 132px); display: flex; background: var(--bg); }
+  #graph { flex: 1; height: 100%; background: var(--bg); position: relative; }
+  #graph svg { width: 100%; height: 100%; display: block; background: var(--bg); }
 
+  /* Subtle scan-line / grid backdrop on the graph for "instrument" feel */
+  #graph::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background-image:
+      radial-gradient(circle at 50% 50%, rgba(255,255,255,0.025) 0%, transparent 60%),
+      linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+    background-size: auto, 80px 80px, 80px 80px;
+  }
+
+  /* Coordinate axis label — far corner */
+  #graph .axis-label {
+    position: absolute; bottom: 14px; left: 18px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.18em;
+    color: rgba(245,242,234,0.28); text-transform: uppercase;
+    pointer-events: none; user-select: none;
+  }
+
+  /* ── ASIDE (side panel) ─────────────────────────────────── */
   aside {
-    width: 320px; border-left: 1px solid var(--border);
-    background: var(--panel); padding: 18px 18px 24px; overflow-y: auto;
+    width: 380px; flex-shrink: 0;
+    background: var(--panel); padding: 0; overflow-y: auto;
+    border-left: 1px solid var(--hairline);
+    position: relative;
   }
-  aside.empty { display: flex; align-items: center; justify-content: center; color: var(--fg-soft); text-align: center; padding: 30px; }
-  aside h2 { margin: 0 0 4px; font-size: 16px; }
-  aside .label-en { color: var(--fg-soft); font-size: 12px; margin-bottom: 14px; font-style: italic; }
-  aside .row { margin: 12px 0; }
-  aside .row .k { color: var(--fg-soft); font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 4px; }
-  aside .row .v { font-size: 13px; }
+  aside.empty {
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fg-soft); text-align: center; padding: 60px 30px;
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  aside.empty::before {
+    content: '◉'; display: block; font-size: 24px; margin-bottom: 12px;
+    color: var(--fg-soft); opacity: 0.3;
+  }
+  aside .panel-head {
+    padding: 24px 28px 20px; position: relative;
+    border-bottom: 1px solid var(--hairline);
+  }
+  aside .panel-head::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: var(--type-color, var(--fg-soft));
+  }
+  aside .type-tag {
+    font-family: var(--mono); font-size: 10px; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--type-color, var(--fg-soft)); margin-bottom: 10px;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  aside .type-tag::before {
+    content: ''; width: 6px; height: 6px; background: currentColor;
+    display: inline-block;
+  }
+  aside h2 {
+    font-family: var(--sans); font-weight: 700;
+    margin: 0; font-size: 22px; line-height: 1.2;
+    color: var(--fg); letter-spacing: -0.01em;
+  }
+  aside .label-en {
+    color: var(--fg-soft); font-size: 13px; margin-top: 6px;
+    font-family: var(--mono); font-weight: 400; font-style: normal;
+  }
+
+  aside .body { padding: 4px 28px 32px; }
+  aside .row { padding: 18px 0; border-bottom: 1px solid var(--hairline); }
+  aside .row:last-child { border-bottom: none; }
+  aside .row .k {
+    color: var(--fg-soft); font-family: var(--mono);
+    font-size: 9px; text-transform: uppercase; letter-spacing: 0.18em;
+    margin-bottom: 10px; font-weight: 500;
+  }
+  aside .row .v { font-size: 13.5px; line-height: 1.55; color: var(--fg); }
+  aside .row .v.italic { font-style: italic; color: var(--fg-soft); font-size: 13px; }
+
   aside .badge {
-    display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px;
-    background: var(--bg); border: 1px solid var(--border); margin: 2px 4px 2px 0;
-  }
-  aside .type-pill {
-    display: inline-block; font-size: 11px; padding: 2px 10px; border-radius: 12px;
-    color: white; font-weight: 600; letter-spacing: 0.02em;
+    display: inline-block; font-family: var(--mono);
+    font-size: 10px; padding: 4px 9px; margin: 2px 4px 2px 0;
+    background: var(--panel-2); border: 1px solid var(--hairline-2);
+    color: var(--fg); letter-spacing: 0.04em;
   }
   aside .layer-badge {
-    display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 4px;
-    margin: 2px 4px 2px 0; font-weight: 600; letter-spacing: 0.02em;
+    display: inline-block; font-family: var(--mono);
+    font-size: 9px; padding: 4px 9px; margin: 2px 4px 2px 0;
+    font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
   }
-  aside .layer-badge.layer1 { background: #EEEDFE; color: #3C3489; }
-  aside .layer-badge.layer2 { background: #E1F5EE; color: #085041; }
-  aside .layer-badge.layer3 { background: #E6F1FB; color: #042C53; }
-  aside .layer-badge.layer4 { background: #F1EFE8; color: #2C2C2A; }
-  aside .layer-badge.layer5 { background: #EAF3DE; color: #173404; }
-  aside .layer-badge.layer6 { background: #FCEBDA; color: #6B3208; }
-  @media (prefers-color-scheme: dark) {
-    aside .layer-badge.layer1 { background: #2A2848; color: #C5C0F0; }
-    aside .layer-badge.layer2 { background: #173B30; color: #A0E0CC; }
-    aside .layer-badge.layer3 { background: #142B45; color: #B0D0F0; }
-    aside .layer-badge.layer4 { background: #2C2C28; color: #D5D2C5; }
-    aside .layer-badge.layer5 { background: #2A3A18; color: #C0E090; }
-    aside .layer-badge.layer6 { background: #3D2410; color: #F0C896; }
-  }
+  aside .layer-badge.layer1 { background: #2A2848; color: #C5C0F0; }
+  aside .layer-badge.layer2 { background: #173B30; color: #A0E0CC; }
+  aside .layer-badge.layer3 { background: #142B45; color: #B0D0F0; }
+  aside .layer-badge.layer4 { background: #2C2C28; color: #D5D2C5; }
+  aside .layer-badge.layer5 { background: #2A3A18; color: #C0E090; }
+  aside .layer-badge.layer6 { background: #3D2410; color: #F0C896; }
   aside .ext-link {
-    display: block; font-size: 11px; margin-top: 4px;
+    display: block; font-family: var(--mono);
+    font-size: 11px; margin-top: 6px; padding: 8px 10px;
     color: var(--fg-soft); text-decoration: none;
-    border-left: 2px solid var(--border); padding-left: 8px;
+    border: 1px solid var(--hairline-2);
+    transition: border-color 120ms ease, color 120ms ease, background 120ms ease;
   }
-  aside .ext-link:hover { color: var(--fg); border-left-color: var(--fg); }
-  aside .ext-link::before { content: '↗ '; }
+  aside .ext-link:hover {
+    color: var(--fg); border-color: var(--fg-soft); background: var(--panel-2);
+  }
+  aside .ext-link::after { content: ' →'; opacity: 0.5; }
 
+  /* ── FOOTER ─────────────────────────────────────────────── */
   footer {
     position: fixed; bottom: 0; left: 0; right: 0;
-    display: flex; gap: 14px; flex-wrap: wrap; align-items: center;
-    padding: 8px 20px; font-size: 11px; color: var(--fg-soft);
-    background: var(--panel); border-top: 1px solid var(--border);
+    display: flex; gap: 16px; flex-wrap: wrap; align-items: center;
+    padding: 10px 28px; background: var(--bg);
+    border-top: 1px solid var(--hairline);
+    font-family: var(--mono); font-size: 10px;
+    color: var(--fg-soft); letter-spacing: 0.08em;
+    z-index: 50;
   }
-  footer .legend { display: inline-flex; align-items: center; gap: 5px; }
-  footer .legend .swatch { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-  footer .count { margin-left: auto; }
+  footer .count {
+    margin-left: auto; color: var(--fg);
+    text-transform: uppercase; font-weight: 700;
+  }
+  footer .count strong { color: var(--t-actor); font-weight: 700; }
 
-  .node circle { stroke: white; stroke-width: 2px; cursor: pointer; transition: r 120ms ease; }
-  .node text { pointer-events: none; fill: white; font-size: 11px; font-weight: 600; text-anchor: middle; dominant-baseline: middle; }
-  .node.dim { opacity: 0.1; }
-  .node.dim text { display: none; }
-  .link { fill: none; stroke: var(--edge); stroke-width: 1.5px; }
-  .link.dashed { stroke-dasharray: 5,4; stroke-width: 1.2px; }
-  .link.dim { opacity: 0.05; }
+  /* ── GRAPH NODES & EDGES ────────────────────────────────── */
+  .node circle {
+    cursor: pointer;
+    transition: r 180ms cubic-bezier(0.16, 1, 0.3, 1),
+                stroke-width 180ms ease,
+                opacity 180ms ease;
+    stroke: rgba(0,0,0,0.5); stroke-width: 1.5px;
+  }
+  .node circle.has-glow { filter: url(#node-glow); }
+  .node text {
+    pointer-events: none; fill: var(--fg);
+    font-family: var(--mono); font-size: 9.5px; font-weight: 700;
+    text-anchor: middle; dominant-baseline: middle;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.95), 0 0 8px rgba(0,0,0,0.85);
+    transition: opacity 180ms ease;
+  }
+  .node.dim { opacity: 0.15; }
+  .node.dim text { opacity: 0; }
+  .node.focus circle { stroke: var(--fg); stroke-width: 2px; }
+  .node:hover circle { stroke: var(--fg); stroke-width: 2px; }
 
+  .link {
+    fill: none; stroke: rgba(245,242,234,0.22); stroke-width: 1px;
+    transition: opacity 180ms ease, stroke 180ms ease;
+  }
+  .link.dashed {
+    stroke: rgba(245,242,234,0.14); stroke-dasharray: 4,4; stroke-width: 1px;
+  }
+  .link.dim { opacity: 0.04; }
+  .link.active { stroke: var(--fg); stroke-width: 1.5px; opacity: 0.9; }
+
+  /* ── TOOLTIP ───────────────────────────────────────────── */
   .tooltip {
     position: absolute; pointer-events: none;
-    background: var(--panel); color: var(--fg);
-    border: 1px solid var(--border); border-radius: 6px;
-    padding: 6px 10px; font-size: 12px; box-shadow: var(--shadow);
-    z-index: 100; opacity: 0; transition: opacity 100ms;
+    background: #000; color: var(--fg); padding: 0;
+    border: 1px solid var(--hairline-2);
+    box-shadow: var(--shadow);
+    z-index: 100; opacity: 0; transition: opacity 120ms ease;
+    font-family: var(--mono); font-size: 11px;
+    min-width: 160px;
   }
   .tooltip.show { opacity: 1; }
-  .tooltip .t-type { color: var(--fg-soft); font-size: 10px; text-transform: uppercase; letter-spacing: 0.04em; }
-
-  @media (max-width: 720px) {
-    main { flex-direction: column; height: calc(100vh - 110px); }
-    aside { width: 100%; height: 50%; border-left: none; border-top: 1px solid var(--border); }
+  .tooltip .strip {
+    height: 2px; background: var(--type-color, var(--fg-soft));
   }
+  .tooltip .body { padding: 8px 12px 10px; }
+  .tooltip .t-type {
+    color: var(--type-color, var(--fg-soft)); font-size: 9px;
+    text-transform: uppercase; letter-spacing: 0.18em;
+    margin-bottom: 4px; font-weight: 700;
+  }
+  .tooltip strong { font-size: 13px; font-weight: 700; font-family: var(--sans); }
+  .tooltip .t-en {
+    display: block; color: var(--fg-soft); font-size: 10px;
+    margin-top: 2px; font-weight: 400;
+  }
+
+  /* ── RESPONSIVE ────────────────────────────────────────── */
+  @media (max-width: 860px) {
+    main { flex-direction: column; height: calc(100vh - 132px); }
+    aside { width: 100%; height: 50%; border-left: none; border-top: 1px solid var(--hairline); }
+    header { padding: 14px 18px; }
+    .toolbar { padding: 10px 18px; }
+    header .brand h1 { font-size: 14px; }
+  }
+
+  /* Custom scrollbar for the panel */
+  aside::-webkit-scrollbar { width: 8px; }
+  aside::-webkit-scrollbar-track { background: var(--panel); }
+  aside::-webkit-scrollbar-thumb { background: var(--hairline-2); }
+  aside::-webkit-scrollbar-thumb:hover { background: var(--fg-soft); }
 </style>
 </head>
 <body>
   <header>
-    <div>
-      <h1>Geolytics Dictionary <span class="sub">ANP oil &amp; gas semantic ontology</span></h1>
+    <div class="brand">
+      <div class="eyebrow">Geolytics · Petrobras · Semantic Layer 1–7</div>
+      <h1>ANP Oil &amp; Gas <span class="accent">Ontology</span></h1>
     </div>
     <div class="actions">
-      <a href="index-cards.html">Cards view</a>
+      <a href="index-cards.html">Cards</a>
       <a href="gso-cards.html">GSO L7</a>
-      <a href="data/full.json" download>Download JSON</a>
+      <a href="data/geolytics.ttl">TTL</a>
+      <a href="data/full.json" download>JSON</a>
       <a href="https://github.com/thiagoflc/geolytics-dictionary" target="_blank" rel="noopener">GitHub</a>
     </div>
   </header>
+  <div class="ribbon" aria-hidden="true">
+    <span class="band" data-type="operational"></span>
+    <span class="band" data-type="contractual"></span>
+    <span class="band" data-type="actor"></span>
+    <span class="band" data-type="instrument"></span>
+    <span class="band" data-type="geological"></span>
+    <span class="band" data-type="equipment"></span>
+    <span class="band" data-type="analytical"></span>
+  </div>
 
   <div class="toolbar" id="filters">
+    <span class="toolbar-label">Filter</span>
     <label><input type="checkbox" data-type="operational" checked /><span class="swatch" style="background:#378ADD"></span>Operacional</label>
     <label><input type="checkbox" data-type="contractual" checked /><span class="swatch" style="background:#7F77DD"></span>Contratual</label>
     <label><input type="checkbox" data-type="actor" checked /><span class="swatch" style="background:#D85A30"></span>Atores</label>
@@ -167,18 +340,14 @@
   </div>
 
   <main>
-    <div id="graph"></div>
-    <aside id="panel" class="empty">Clique em um nó para ver detalhes.</aside>
+    <div id="graph">
+      <div class="axis-label">Force-Directed Graph · D3 v7</div>
+    </div>
+    <aside id="panel" class="empty">Selecione uma entidade</aside>
   </main>
 
   <footer>
-    <span class="legend"><span class="swatch" style="background:#378ADD"></span>Operacional</span>
-    <span class="legend"><span class="swatch" style="background:#7F77DD"></span>Contratual</span>
-    <span class="legend"><span class="swatch" style="background:#D85A30"></span>Ator</span>
-    <span class="legend"><span class="swatch" style="background:#888780"></span>Instrumento</span>
-    <span class="legend"><span class="swatch" style="background:#639922"></span>Geológico</span>
-    <span class="legend"><span class="swatch" style="background:#C77B30"></span>Equipamento</span>
-    <span class="legend"><span class="swatch" style="background:#E67E22"></span>Analítico</span>
+    <span>Layers L1 GeoCore · L2 O3PO · L3 PetroKGraph · L4 OSDU · L5 ANP · L6 Petrobras</span>
     <span class="count" id="counts"></span>
   </footer>
 
@@ -212,34 +381,74 @@
   };
   const layerLabelsExt = { layer6: 'Petrobras' };
 
+  const TYPE_COLOR = {
+    operational: '#378ADD', contractual: '#7F77DD', actor: '#D85A30',
+    instrument: '#888780', geological: '#639922', equipment: '#C77B30',
+    analytical: '#E67E22',
+  };
+  /* Types that get a soft glow halo — the "hero" entities */
+  const GLOW_TYPES = new Set(['operational', 'actor']);
+
   const container = document.getElementById('graph');
   const tooltip = document.getElementById('tooltip');
   const panel = document.getElementById('panel');
   const counts = document.getElementById('counts');
-  counts.textContent = `${graph.nodes.length} entidades · ${graph.edges.length} relações`;
+  counts.innerHTML = `<strong>${graph.nodes.length}</strong> nós · <strong>${graph.edges.length}</strong> relações`;
 
   const W = container.clientWidth || 800;
   const H = container.clientHeight || 600;
 
   const svg = d3.select('#graph').append('svg').attr('viewBox', [0, 0, W, H]);
+
+  /* SVG defs — glow filter for primary nodes + per-type radial gradients */
+  const defs = svg.append('defs');
+  const glow = defs.append('filter')
+    .attr('id', 'node-glow')
+    .attr('x', '-60%').attr('y', '-60%')
+    .attr('width', '220%').attr('height', '220%');
+  glow.append('feGaussianBlur').attr('stdDeviation', '4').attr('result', 'blur');
+  const merge = glow.append('feMerge');
+  merge.append('feMergeNode').attr('in', 'blur');
+  merge.append('feMergeNode').attr('in', 'SourceGraphic');
+
   const root = svg.append('g');
 
   let currentZoom = 1;
   svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', (ev) => {
     root.attr('transform', ev.transform);
     currentZoom = ev.transform.k;
-    root.selectAll('.node text')
-      .style('display', (d) => (currentZoom >= 1.2 || d.type === 'operational' || d.type === 'actor') ? null : 'none');
+    updateLabels();
   }));
 
   const links = graph.edges.map((e) => ({ ...e }));
   const nodes = graph.nodes.map((n) => ({ ...n }));
 
+  /* Degree centrality — give the most-connected nodes extra visual weight. */
+  const degree = new Map();
+  links.forEach((l) => {
+    degree.set(l.source, (degree.get(l.source) || 0) + 1);
+    degree.set(l.target, (degree.get(l.target) || 0) + 1);
+  });
+  const maxDeg = Math.max(...degree.values(), 1);
+  nodes.forEach((n) => {
+    n.degree = degree.get(n.id) || 0;
+    n.computedSize = (n.size || 18) + Math.round((n.degree / maxDeg) * 14);
+  });
+
+  /* Adjacency map for hover-focus */
+  const adj = new Map();
+  links.forEach((l) => {
+    if (!adj.has(l.source)) adj.set(l.source, new Set());
+    if (!adj.has(l.target)) adj.set(l.target, new Set());
+    adj.get(l.source).add(l.target);
+    adj.get(l.target).add(l.source);
+  });
+
   const sim = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id((d) => d.id).distance(120).strength(0.6))
-    .force('charge', d3.forceManyBody().strength(-300))
+    .force('link', d3.forceLink(links).id((d) => d.id).distance(130).strength(0.7))
+    .force('charge', d3.forceManyBody().strength(-340))
     .force('center', d3.forceCenter(W / 2, H / 2))
-    .force('collide', d3.forceCollide().radius((d) => d.size + 10));
+    .force('collide', d3.forceCollide().radius((d) => d.computedSize / 2 + 10));
 
   const link = root.append('g').attr('class', 'links').selectAll('line')
     .data(links).join('line')
@@ -254,26 +463,67 @@
       .on('end',   (ev, d) => { if (!ev.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
 
   node.append('circle')
-    .attr('r', (d) => d.size / 2)
+    .attr('r', (d) => d.computedSize / 2)
     .attr('fill', (d) => d.color)
+    .attr('class', (d) => GLOW_TYPES.has(d.type) ? 'has-glow' : '')
     .on('mouseenter', (ev, d) => {
-      d3.select(ev.currentTarget).transition().duration(120).attr('r', d.size / 2 * 1.2);
+      const targetR = (d.computedSize / 2) * 1.25;
+      d3.select(ev.currentTarget).transition().duration(140).attr('r', targetR);
+      focusOn(d);
+      const c = TYPE_COLOR[d.type] || '#888';
+      tooltip.style.setProperty('--type-color', c);
       tooltip.classList.add('show');
-      tooltip.innerHTML = `<div class="t-type">${typeLabel[d.type] || d.type}</div><strong>${d.label}</strong>`;
+      tooltip.innerHTML =
+        `<div class="strip"></div>
+         <div class="body">
+           <div class="t-type">${(typeLabel[d.type] || d.type).toUpperCase()}</div>
+           <strong>${d.label}</strong>
+           ${d.label_en ? `<span class="t-en">${d.label_en}</span>` : ''}
+         </div>`;
     })
     .on('mousemove', (ev) => {
-      tooltip.style.left = (ev.clientX + 12) + 'px';
-      tooltip.style.top  = (ev.clientY + 12) + 'px';
+      tooltip.style.left = (ev.clientX + 16) + 'px';
+      tooltip.style.top  = (ev.clientY + 16) + 'px';
     })
     .on('mouseleave', (ev, d) => {
-      d3.select(ev.currentTarget).transition().duration(120).attr('r', d.size / 2);
+      d3.select(ev.currentTarget).transition().duration(140).attr('r', d.computedSize / 2);
+      clearFocus();
       tooltip.classList.remove('show');
     })
     .on('click', (ev, d) => showPanel(d));
 
   node.append('text')
-    .text((d) => d.label)
-    .style('display', (d) => (d.type === 'operational' || d.type === 'actor') ? null : 'none');
+    .text((d) => d.label);
+
+  function updateLabels() {
+    /* Always-on labels for the heaviest nodes; zoom-gated for the rest */
+    node.select('text').style('opacity', (d) =>
+      currentZoom >= 1.3 || d.degree >= 4 || GLOW_TYPES.has(d.type) ? 1 : 0
+    );
+  }
+  updateLabels();
+
+  function focusOn(target) {
+    const neighbors = adj.get(target.id) || new Set();
+    node.classed('dim', (n) => n.id !== target.id && !neighbors.has(n.id));
+    node.classed('focus', (n) => n.id === target.id);
+    link.classed('dim', (l) => {
+      const s = typeof l.source === 'object' ? l.source.id : l.source;
+      const t = typeof l.target === 'object' ? l.target.id : l.target;
+      return s !== target.id && t !== target.id;
+    });
+    link.classed('active', (l) => {
+      const s = typeof l.source === 'object' ? l.source.id : l.source;
+      const t = typeof l.target === 'object' ? l.target.id : l.target;
+      return s === target.id || t === target.id;
+    });
+  }
+  function clearFocus() {
+    node.classed('dim', false).classed('focus', false);
+    link.classed('dim', false).classed('active', false);
+    /* Re-apply type filters */
+    applyFilters();
+  }
 
   sim.on('tick', () => {
     link
@@ -298,6 +548,8 @@
 
   function showPanel(d) {
     panel.classList.remove('empty');
+    const c = TYPE_COLOR[d.type] || '#888';
+    panel.style.setProperty('--type-color', c);
     const datasetBadges = (d.datasets || []).map((id) =>
       `<span class="badge">${datasetTitles[id] || id}</span>`
     ).join('');
@@ -310,35 +562,45 @@
     const exBlock = (d.examples && d.examples.length)
       ? `<div class="row"><div class="k">Exemplos</div><div class="v">${d.examples.map(s=>`<span class="badge">${s}</span>`).join('')}</div></div>`
       : '';
-    panel.innerHTML = `
-      <span class="type-pill" style="background:${d.color}">${typeLabel[d.type] || d.type}</span>
-      <h2 style="margin-top:10px">${d.label}</h2>
-      <div class="label-en">${d.label_en || ''}</div>
-      ${layerBadges ? `<div class="row"><div class="k">Camadas semânticas</div><div class="v">${layerBadges}</div></div>` : ''}
-      <div class="row"><div class="k">Definição</div><div class="v">${d.definition || '—'}</div></div>
-      ${synBlock}
-      ${exBlock}
-      ${d.legal_source ? `<div class="row"><div class="k">Fonte legal</div><div class="v">${d.legal_source}</div></div>` : ''}
-      ${(d.datasets && d.datasets.length) ? `<div class="row"><div class="k">Aparece nos datasets</div><div class="v">${datasetBadges}</div></div>` : ''}
-      ${d.definition_en_canonical ? `<div class="row"><div class="k">Definition (OSDU canonical)</div><div class="v" style="font-style:italic">${d.definition_en_canonical}</div></div>` : ''}
-      ${d.petrokgraph_uri || d.owl_uri ? `<div class="row"><div class="k">Alinhamento ontológico</div><div class="v">
-        ${d.petrokgraph_uri ? `<a class="ext-link" href="${d.petrokgraph_uri}" target="_blank" rel="noopener">Petro KGraph (PUC-Rio)</a>` : ''}
-        ${d.owl_uri ? `<a class="ext-link" href="${d.owl_uri}" target="_blank" rel="noopener">OSDU OWL class (W3ID)</a>` : ''}
-        ${d.owl_uri ? `<a class="ext-link" href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geolytics-dictionary/data/geolytics.ttl" target="_blank" rel="noopener">View graph in WebVOWL</a>` : ''}
-      </div></div>` : ''}
-      ${d.osdu_kind ? `<div class="row"><div class="k">OSDU kind</div><div class="v"><code style="font-size:11px">${d.osdu_kind}</code></div></div>` : ''}
-    `;
+    const headHtml = `
+      <div class="panel-head">
+        <div class="type-tag">${(typeLabel[d.type] || d.type).toUpperCase()}${d.degree ? ` · ${d.degree} relações` : ''}</div>
+        <h2>${d.label}</h2>
+        ${d.label_en ? `<div class="label-en">${d.label_en}</div>` : ''}
+      </div>`;
+    const bodyHtml = `
+      <div class="body">
+        ${layerBadges ? `<div class="row"><div class="k">Camadas semânticas</div><div class="v">${layerBadges}</div></div>` : ''}
+        <div class="row"><div class="k">Definição</div><div class="v">${d.definition || '—'}</div></div>
+        ${d.definition_en_canonical ? `<div class="row"><div class="k">OSDU canonical (EN)</div><div class="v italic">${d.definition_en_canonical}</div></div>` : ''}
+        ${synBlock}
+        ${exBlock}
+        ${d.legal_source ? `<div class="row"><div class="k">Fonte legal</div><div class="v">${d.legal_source}</div></div>` : ''}
+        ${(d.datasets && d.datasets.length) ? `<div class="row"><div class="k">Aparece nos datasets</div><div class="v">${datasetBadges}</div></div>` : ''}
+        ${d.osdu_kind ? `<div class="row"><div class="k">OSDU kind</div><div class="v"><span class="badge">${d.osdu_kind}</span></div></div>` : ''}
+        ${d.petrokgraph_uri || d.owl_uri ? `<div class="row"><div class="k">Alinhamento ontológico</div><div class="v">
+          ${d.petrokgraph_uri ? `<a class="ext-link" href="${d.petrokgraph_uri}" target="_blank" rel="noopener">Petro KGraph (PUC-Rio)</a>` : ''}
+          ${d.owl_uri ? `<a class="ext-link" href="${d.owl_uri}" target="_blank" rel="noopener">OSDU OWL class (W3ID)</a>` : ''}
+          ${d.owl_uri ? `<a class="ext-link" href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geolytics-dictionary/data/geolytics.ttl" target="_blank" rel="noopener">Open in WebVOWL</a>` : ''}
+        </div></div>` : ''}
+      </div>`;
+    panel.innerHTML = headHtml + bodyHtml;
   }
 
   /* filtros */
-  document.querySelectorAll('#filters input[type=checkbox]').forEach((cb) => {
-    cb.addEventListener('change', () => {
-      const active = new Set(
-        Array.from(document.querySelectorAll('#filters input:checked')).map((x) => x.dataset.type)
-      );
-      node.classed('dim', (d) => !active.has(d.type));
-      link.classed('dim', (d) => !active.has(d.source.type) || !active.has(d.target.type));
+  function applyFilters() {
+    const active = new Set(
+      Array.from(document.querySelectorAll('#filters input:checked')).map((x) => x.dataset.type)
+    );
+    node.classed('dim', (d) => !active.has(d.type));
+    link.classed('dim', (l) => {
+      const s = typeof l.source === 'object' ? l.source : nodes.find(n => n.id === l.source);
+      const t = typeof l.target === 'object' ? l.target : nodes.find(n => n.id === l.target);
+      return !s || !t || !active.has(s.type) || !active.has(t.type);
     });
+  }
+  document.querySelectorAll('#filters input[type=checkbox]').forEach((cb) => {
+    cb.addEventListener('change', applyFilters);
   });
 
   window.addEventListener('resize', () => {
