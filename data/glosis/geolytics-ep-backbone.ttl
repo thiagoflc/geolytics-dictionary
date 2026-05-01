@@ -110,6 +110,19 @@ geox:order a owl:DatatypeProperty ;
 
 # ── 5. Intervalo ↔ Camada/Horizonte ─────────────────────────────────────────
 
+geox:hasLayer a owl:ObjectProperty ;
+    skos:prefLabel "tem camada"@pt , "has layer"@en ;
+    rdfs:domain geox:Intervalo ;
+    rdfs:range geox:CamadaSedimentar ;
+    rdfs:comment "Liga o intervalo (ProfileElement) à camada sedimentar que o constitui. Completa a cadeia Poço→Intervalo→Camada→Diagênese."@pt ;
+    owl:inverseOf geox:layerOfInterval .
+
+geox:layerOfInterval a owl:ObjectProperty ;
+    skos:prefLabel "camada do intervalo"@pt , "layer of interval"@en ;
+    rdfs:domain geox:CamadaSedimentar ;
+    rdfs:range geox:Intervalo ;
+    owl:inverseOf geox:hasLayer .
+
 geox:layerInInterval a owl:ObjectProperty ;
     rdfs:subPropertyOf iso28258:Layer.developedHorizon ;
     skos:prefLabel "camada no intervalo"@pt , "layer in interval"@en ;

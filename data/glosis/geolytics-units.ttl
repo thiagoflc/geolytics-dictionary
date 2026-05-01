@@ -9,6 +9,11 @@
 #   - qudt:plainTextDescription human-readable
 #
 # Licença: CC BY 4.0 (compatível com QUDT upstream).
+# Espelha o padrão GLOSIS upstream, em que `glosis_unit.ttl` é CC BY 4.0
+# enquanto `glosis_main` carrega CC BY-NC-SA 3.0 IGO. Este módulo de
+# unidades é independente e não é considerado obra derivada do GLOSIS
+# (não importa nem reusa termos GLOSIS), pelo que pode ser distribuído
+# sob licença mais permissiva.
 # ============================================================================
 
 @prefix geolytics_u:    <https://geolytics.petrobras.com.br/dict/unit/> .
@@ -48,19 +53,19 @@ geolytics_qk:VolumetricFlowRateOfOil a qudt:QuantityKind ;
     rdfs:label "Volumetric flow rate (oil)"@en ;
     skos:definition "Volume of stock-tank oil produced per unit time. SI: m³/s; field: bbl/day (BOPD)."@en ;
     qudt:applicableUnit geolytics_u:BBL-PER-D , unit:M3-PER-SEC ;
-    rdfs:subClassOf quantitykind:VolumeFlowRate .
+    qudt:broader quantitykind:VolumeFlowRate .
 
 geolytics_qk:VolumetricFlowRateOfGas a qudt:QuantityKind ;
     rdfs:label "Volumetric flow rate (gas)"@en ;
     skos:definition "Volume of gas produced per unit time at standard conditions. Field: Mcf/day or MMscf/day."@en ;
     qudt:applicableUnit geolytics_u:MCF-PER-D , geolytics_u:MMSCF-PER-D ;
-    rdfs:subClassOf quantitykind:VolumeFlowRate .
+    qudt:broader quantitykind:VolumeFlowRate .
 
 geolytics_qk:APIGravity a qudt:QuantityKind ;
     rdfs:label "API gravity"@en ;
     skos:definition "Specific-gravity scale developed by the American Petroleum Institute. °API = (141.5/SG) − 131.5, where SG is specific gravity at 60°F. Inversely proportional to density."@en ;
     qudt:applicableUnit geolytics_u:DEG-API ;
-    rdfs:subClassOf quantitykind:Density .
+    qudt:broader quantitykind:Density .
 
 # ── Units ───────────────────────────────────────────────────────────────────
 

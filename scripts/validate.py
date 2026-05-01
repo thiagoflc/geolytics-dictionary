@@ -131,12 +131,20 @@ def crosswalk_audit() -> int:
             if t["id"] not in cgi_ids:
                 issues.append(f"  {m['glosis_id']}: cgi_targets.id '{t['id']}' not in cgi-lithology.json")
 
-    # 3. INSPIRE crosswalk must only reference codes that were noMatch in CGI
+    # 3. Every code in the INSPIRE crosswalk must be noMatch in CGI OR have
+    #    been explicitly promoted (its INSPIRE entry has match='noMatch'
+    #    with empty inspire_targets — meaning it stays in the file for
+    #    historical/auditing reasons but no longer claims a mapping).
     cgi_no_match = {m["glosis_id"] for m in cw_cgi["mappings"] if m["match"] == "noMatch"}
-    insp_codes = {m["glosis_id"] for m in cw_insp["mappings"]}
-    overlap = insp_codes - cgi_no_match - {f"lithologyValueCode-{c}" for c in ["IB3"]}  # IB3 was promoted
-    if overlap:
-        issues.append(f"INSPIRE crosswalk references non-noMatch GLOSIS codes (after IB3 promotion): {sorted(overlap)}")
+    for m in cw_insp["mappings"]:
+        if m["glosis_id"] in cgi_no_match:
+            continue
+        if m["match"] == "noMatch" and not m.get("inspire_targets"):
+            continue  # promoted in CGI; INSPIRE entry is now a tombstone
+        issues.append(
+            f"  {m['glosis_id']}: claims INSPIRE target but CGI match is "
+            f"'{next((x['match'] for x in cw_cgi['mappings'] if x['glosis_id']==m['glosis_id']), '?')}' (not noMatch)"
+        )
 
     # 4. Match-kind enum integrity
     valid_kinds = {"exactMatch", "closeMatch", "broadMatch", "narrowMatch", "relatedMatch", "noMatch"}

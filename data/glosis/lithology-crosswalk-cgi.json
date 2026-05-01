@@ -22,9 +22,9 @@
         "relatedMatch": 1,
         "noMatch": 18
       },
-      "total_target_links": 81
+      "total_target_links": 83
     },
-    "last_revised": "2026-05-01T15:26:26.467Z",
+    "last_revised": "2026-05-01T15:38:22.612Z",
     "no_match_continuation": {
       "description": "Os 19 conceitos com match=noMatch contra CGI Simple Lithology foram remapeados em arquivo separado — INSPIRE Geomorphology é o vocabulário-alvo correto para classes de gênese (U*).",
       "see": "data/glosis/lithology-crosswalk-inspire-geomorph.json",
@@ -32,8 +32,8 @@
     },
     "one_to_n_aggregators": {
       "description": "13 GLOSIS conceitos que agregam múltiplos litotipos receberam campo cgi_targets[] (mapeamento 1:N). cgi_id/cgi_label/cgi_iri apontam para o target canônico (primeiro) por compatibilidade retroativa.",
-      "count": 13,
-      "total_target_links": 81,
+      "count": 14,
+      "total_target_links": 83,
       "glosis_codes": [
         "II1",
         "MA2",
@@ -47,7 +47,8 @@
         "UF2",
         "UR1",
         "UU5",
-        "IU"
+        "IU",
+        "IP1"
       ]
     }
   },
@@ -275,8 +276,20 @@
       "cgi_label": "tuffite",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/tuffite",
       "match": "closeMatch",
-      "note": "GLOSIS aglutina \"tuff, tuffite\"; CGI separa.",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"tuff, tuffite\": tuffite; ash, tuff-lapillistone, and lapilli-tuff.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "tuffite",
+          "label": "tuffite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/tuffite"
+        },
+        {
+          "id": "ash_tuff_lapillistone_and_lapilli_tuff",
+          "label": "ash, tuff-lapillistone, and lapilli-tuff",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/ash_tuff_lapillistone_and_lapilli_tuff"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-IP2",

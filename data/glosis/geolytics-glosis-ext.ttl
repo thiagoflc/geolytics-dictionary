@@ -540,13 +540,13 @@ geo:Dens_Liq_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
 # RGL Tanque — Razão Gás-Líquido em tanque
 geo:RGL_TanqueProperty a sosa:ObservableProperty ;
     skos:prefLabel "RGL Tanque"@pt ;
-    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/GasOilRatio> ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 geo:RGL_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
     skos:prefLabel "RGL Tanque value"@en ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/GasOilRatio> ] ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/SCF-PER-BBL> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB> ] ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 # Dg liberado Tanque — Densidade do gás liberado em tanque
@@ -564,26 +564,26 @@ geo:Dg_liberado_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
 geo:Grau_API_TanqueProperty a sosa:ObservableProperty ;
     skos:prefLabel "Grau API Tanque"@pt ;
     geox:displayUnit "°API" ;
-    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity> ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 geo:Grau_API_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
     skos:prefLabel "Grau API Tanque value"@en ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/API_GRAV> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/DEG-API> ] ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 # RGO Tanque — Razão Gás-Óleo em condições de tanque
 geo:RGO_TanqueProperty a sosa:ObservableProperty ;
     skos:prefLabel "RGO Tanque"@pt ;
     geox:displayUnit "scf/stb" ;
-    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/GasOilRatio> ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 geo:RGO_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
     skos:prefLabel "RGO Tanque value"@en ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/GasOilRatio> ] ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/SCF-PER-BBL> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB> ] ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 # Coef Exp Term Tanque — Coeficiente de expansão térmica do tanque
@@ -622,13 +622,13 @@ geo:Z_LabValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
 # RGL Lab — Razão Gás-Líquido em laboratório — raríssimo
 geo:RGL_LabProperty a sosa:ObservableProperty ;
     skos:prefLabel "RGL Lab"@pt ;
-    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/GasOilRatio> ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 geo:RGL_LabValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
     skos:prefLabel "RGL Lab value"@en ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/GasOilRatio> ] ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/SCF-PER-BBL> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB> ] ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 # Dg Média Lib. Dif — Densidade do gás média na liberação diferencial
@@ -652,7 +652,7 @@ geo:Grau_API_Óleo_Lib_DifProperty a sosa:ObservableProperty ;
 geo:Grau_API_Óleo_Lib_DifValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
     skos:prefLabel "Grau API Óleo Lib. Dif value"@en ;
     rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
-    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/API_GRAV> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/DEG-API> ] ;
     rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
 
 # Temperatura ºC Lib. Dif — Temperatura da liberação diferencial
