@@ -1,0 +1,143 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Crosswalk entre OSDU (energy data standard) e GSO (Loop3D Geoscience Ontology, Brodaric & Richard 2021). Prevê mapeamentos skos:exactMatch, skos:closeMatch e skos:broadMatch para alinhamento semântico entre L4 (OSDU) e L7 (GSO).",
+    "sources": [
+      "OSDU OWL ontology — https://w3id.org/osdu",
+      "GSO v1.0.2 — https://w3id.org/gso/1.0/ — https://github.com/Loop3D/GKM"
+    ],
+    "license_note": "Use respeita CC BY 4.0 do GSO; cite Brodaric & Richard 2021, GSC OF 8796, DOI 10.4095/328296.",
+    "match_kinds": {
+      "exactMatch": "Conceitos semanticamente equivalentes — interoperáveis 1:1.",
+      "closeMatch": "Conceitos próximos mas com nuances de definição/escopo — usar com cautela em queries cruzadas.",
+      "broadMatch": "OSDU é mais geral; GSO é mais específico (OSDU contém GSO).",
+      "narrowMatch": "OSDU é mais específico; GSO é mais geral (OSDU está dentro de GSO)."
+    }
+  },
+  "mappings": [
+    {
+      "osdu": "https://w3id.org/osdu#Fault",
+      "osdu_class": "Fault",
+      "gso": "https://w3id.org/gso/1.0/geologicfault/Fault",
+      "gso_class": "Fault",
+      "match": "exactMatch",
+      "note": "OSDU define Fault como 'A discrete surface separating two rock masses'; GSO usa definição idêntica (Brodaric & Richard 2021). Interoperáveis em queries estruturais."
+    },
+    {
+      "osdu": "https://w3id.org/osdu#GeologicalFormation",
+      "osdu_class": "GeologicalFormation",
+      "gso": "https://w3id.org/gso/1.0/geology/Geologic_Unit",
+      "gso_class": "Geologic_Unit",
+      "match": "closeMatch",
+      "note": "OSDU GeologicalFormation é unidade litoestratigráfica nomeada; GSO Geologic_Unit é abstração mais ampla (inclui chrono-, bio-, lito-stratigráfico). Use closeMatch — não substituir 1:1."
+    },
+    {
+      "osdu": "https://w3id.org/osdu#Basin",
+      "osdu_class": "Basin",
+      "gso": "https://w3id.org/gso/1.0/geology/Geologic_Setting",
+      "gso_class": "Geologic_Setting",
+      "match": "broadMatch",
+      "note": "OSDU Basin (área geográfica de sistema deposicional) é caso particular do conceito mais amplo GSO Geologic_Setting (ambientes geológicos)."
+    },
+    {
+      "osdu": "https://w3id.org/osdu#RockSample",
+      "osdu_class": "RockSample",
+      "gso": "https://w3id.org/gso/1.0/common/Material_Feature",
+      "gso_class": "Material_Feature",
+      "match": "narrowMatch",
+      "note": "RockSample é instância específica de feature material; usar GSOC quality/role/value para descrição de propriedades petrofísicas."
+    },
+    {
+      "osdu": "https://w3id.org/osdu#LithologyType",
+      "osdu_class": "LithologyType",
+      "gso": "https://w3id.org/gso/1.0/geology/Geologic_Rock_Material",
+      "gso_class": "Geologic_Rock_Material",
+      "match": "closeMatch",
+      "note": "OSDU LithologyType é taxonomia enumerativa de litologias; GSO Geologic_Rock_Material é classe formal de materiais rochosos com sub-classes detalhadas."
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologicfold/Anticline",
+      "gso_class": "Anticline",
+      "match": "gso_only",
+      "note": "Anticline não tem classe equivalente em OSDU — gap preenchido por GSO. Use gso:Anticline em queries de trapas estruturais."
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologicfold/Syncline",
+      "gso_class": "Syncline",
+      "match": "gso_only",
+      "note": "Syncline ausente em OSDU."
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologicfault/Normal_Fault",
+      "gso_class": "Normal_Fault",
+      "match": "gso_only",
+      "note": "OSDU tem só 'Fault' genérico; GSO especializa em Normal/Reverse/Strike-Slip/Detachment etc. Use sub-classes GSO para taxonomia estrutural."
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologicfault/Strike_Slip_Fault",
+      "gso_class": "Strike_Slip_Fault",
+      "match": "gso_only"
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologicfault/Reverse_Fault",
+      "gso_class": "Reverse_Fault",
+      "match": "gso_only"
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologiccontact/Unconformity",
+      "gso_class": "Unconformity",
+      "match": "gso_only",
+      "note": "Discordância (Unconformity) ausente em OSDU; crítica para sequence stratigraphy."
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologiccontact/Conformable_Contact",
+      "gso_class": "Conformable_Contact",
+      "match": "gso_only"
+    },
+    {
+      "osdu_class": null,
+      "osdu": null,
+      "gso": "https://w3id.org/gso/1.0/geologicfoliation/bedding_fabric",
+      "gso_class": "bedding_fabric",
+      "match": "gso_only",
+      "note": "Bedding (acamamento) — fundamental em sedimentologia, ausente em OSDU."
+    }
+  ],
+  "ontopetro_to_gso": [
+    {
+      "ontopetro": "FormacaoGeologica",
+      "ontopetro_id": "C002",
+      "gso": "https://w3id.org/gso/1.0/geology/Geologic_Unit",
+      "match": "closeMatch"
+    },
+    {
+      "ontopetro": "BaciaSedimentar",
+      "ontopetro_id": "C001",
+      "gso": "https://w3id.org/gso/1.0/geology/Geologic_Setting",
+      "match": "broadMatch"
+    }
+  ],
+  "summary": {
+    "exact_matches": 1,
+    "close_matches": 3,
+    "broad_matches": 1,
+    "narrow_matches": 1,
+    "gso_only_concepts": 8,
+    "total": 14,
+    "interpretation": "OSDU e GSO se complementam — OSDU tem cobertura operacional E&P (Well, Wellbore, Reservoir) que GSO não cobre; GSO tem cobertura estrutural detalhada (faults, folds, foliation, contacts) que OSDU trata superficialmente. Importação L7 GSO preenche gaps estruturais sem conflitar com L4 OSDU."
+  }
+}

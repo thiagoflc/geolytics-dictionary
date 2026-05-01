@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-01T10:30:20.192Z",
+  "generated": "2026-05-01T10:53:28.533Z",
   "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
   "layers": [
     {
@@ -206,6 +206,49 @@
       "status": "v0.1 Preliminar/Interno",
       "publication_policy": "Apenas definições conceituais + estrutura de classes/propriedades. NÃO incluir dados operacionais reais nem configurações de sistemas.",
       "geolytics_coverage": "all_modules_extended (M7+M8+M9+M10)"
+    },
+    {
+      "id": "layer7",
+      "name": "GSO — Geoscience Ontology (Loop3D)",
+      "maintainer": "Brodaric & Richard — Natural Resources Canada / Geological Survey of Canada",
+      "type": "domain_ontology",
+      "version": "1.0.2",
+      "namespace": "https://w3id.org/gso/1.0/",
+      "prefix": "gso:",
+      "github": "https://github.com/Loop3D/GKM",
+      "doi": "10.4095/328296",
+      "zenodo": "https://zenodo.org/record/4743221",
+      "license": "CC BY 4.0",
+      "attribution": "Brodaric & Richard 2021, GSC Open File 8796, DOI 10.4095/328296",
+      "language": "OWL 2 DL + SKOS / Turtle",
+      "modules_imported": [
+        "geologicfault (52 classes)",
+        "geologicfold (27)",
+        "geologicfoliation (73)",
+        "geologiclineation (21)",
+        "geologiccontact (40)"
+      ],
+      "vocabularies_reused": [
+        "QUDT",
+        "W3C SOSA/SSN",
+        "W3C Time + Allen",
+        "OGC GeoSPARQL",
+        "CGI Geoscience Terms",
+        "ICC chart",
+        "schema.org",
+        "DCT"
+      ],
+      "description": "Ontologia de geociência estrutural e materiais rochosos do projeto Loop3D (GSC, Canadá). Cobre falhas, dobras, foliação, lineação, contatos, tempo geológico ICC, e padrão GSOC quality/role/value alinhado a BFO. Domínio adjacente a E&P: complementa OSDU/ontopetro com geologia estrutural rigorosa que era gap no geolytics. 213 classes importadas via scripts/gso-extract.js.",
+      "extractor": "scripts/gso-extract.js",
+      "crosswalk": "data/osdu-gso-crosswalk.json",
+      "data_files": [
+        "data/gso-faults.json",
+        "data/gso-folds.json",
+        "data/gso-foliations.json",
+        "data/gso-lineations.json",
+        "data/gso-contacts.json"
+      ],
+      "geolytics_coverage": "estrutural completo (213 classes); materiais/tempo/processo pendentes"
     }
   ],
   "deduplication_rules": {

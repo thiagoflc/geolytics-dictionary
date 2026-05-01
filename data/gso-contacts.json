@@ -1,0 +1,576 @@
+{
+  "meta": {
+    "generated": "2026-05-01T10:46:51.718Z",
+    "source": "https://raw.githubusercontent.com/Loop3D/GKM/master/Loop3D-GSO/Modules/GSO-Geologic_Structure_Contact.ttl",
+    "module": "GSO-Geologic_Structure_Contact",
+    "base_uri": "https://w3id.org/gso/1.0/geologiccontact/ontology",
+    "prefixes": {
+      "dct": "http://purl.org/dc/terms/",
+      "gscn": "https://w3id.org/gso/1.0/geologiccontact/",
+      "gsgf": "https://w3id.org/gso/1.0/geologicfeature/",
+      "gsoc": "https://w3id.org/gso/1.0/common/",
+      "gsog": "https://w3id.org/gso/1.0/geology/",
+      "gsoq": "https://w3id.org/gso/1.0/quality/",
+      "owl": "http://www.w3.org/2002/07/owl#",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "https://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "license": "CC BY 4.0",
+    "attribution": "Brodaric & Richard 2021, GSC Open File 8796, DOI 10.4095/328296",
+    "class_count": 40
+  },
+  "classes": {
+    "gso:Alteration_Facies_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Alteration_Facies_Contact",
+      "gso_class": "Alteration_Facies_Contact",
+      "pref_label_en": "alteration facies contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A metasomatic facies contact separating rocks that have undergone alteration of a particular facies from those that have undergone metasomatism of another facies. Alteration is a kind of metasomatism that does not introduce economically important minerals.",
+      "parents": [
+        "gscn:Metamorphic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Angular_Unconformable_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Angular_Unconformable_Contact",
+      "gso_class": "Angular_Unconformable_Contact",
+      "pref_label_en": "angular unconformable contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An unconformable contact between two geological units in which the older, underlying rocks dip at an angle different from the younger, overlying strata, usually in which younger sediments rest upon the eroded surface of tilted or folded older rocks.",
+      "parents": [
+        "gscn:Unconformable_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Buttress_Unconformity": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Buttress_Unconformity",
+      "gso_class": "Buttress_Unconformity",
+      "pref_label_en": "buttress unconformity",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An unconformity in which onlapping strata are truncated against a steep topographic scarp.",
+      "parents": [
+        "gscn:Unconformable_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Chronostratigraphic_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Chronostratigraphic_Contact",
+      "gso_class": "Chronostratigraphic_Contact",
+      "pref_label_en": "Chronostratigraphic-zone contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A contact between bodies of material having different ages of origin. The temporal boundary represented by the zone contact is typically associated with some 'guide' event, such as a magnetic field reversal or fossil first appearance datum. If the event instance is implemented, link with Chronostratigraphic_Contact gsoc:isOutputOf ..event....",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [
+        "Federal Geographic Data Committee, 2006, FGDC Digital Cartographic Standard for Geologic Map Symbolization: Reston, Va., Federal Geographic Data Committee Document Number FGDC-STD-013-2006, 290 p., 2 plates;  p. A-31-1, ref. 31.23."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Conductivity_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Conductivity_Contact",
+      "gso_class": "Conductivity_Contact",
+      "pref_label_en": "conductivity contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A geophysical contact between bodies of material distinguished based on electrical conductivity characteristics",
+      "parents": [
+        "gscn:Geophysical_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Conformable_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Conformable_Contact",
+      "gso_class": "Conformable_Contact",
+      "pref_label_en": "conformable contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A contact separating two geological units in which the layers are formed one above the other in order by regular, uninterrupted deposition under the same general conditions.",
+      "parents": [
+        "gscn:Depositional_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Contact",
+      "gso_class": "Contact",
+      "pref_label_en": "Contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A surface that separates geologic units. Very general concept representing any kind of surface separating two geologic units, including primary boundaries such as depositional contacts, all kinds of unconformities, intrusive contacts, and gradational contacts, as well as faults that separate geologic units. (CGI ContactType vocabulary, adapted from Jackson, 1997, page 137, NADM C1 2004)",
+      "parents": [
+        "gsoc:Low_Dimension_Feature",
+        "gsog:Geologic_Structure"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Deformation_Zone_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Deformation_Zone_Contact",
+      "gso_class": "Deformation_Zone_Contact",
+      "pref_label_en": "deformation zone contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A lithogenetic bundary separating rock masses that have different deformation structure, e.g. sheared rock against non sheared rock, brecciated rock against non-brecciated rock.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Density_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Density_Contact",
+      "gso_class": "Density_Contact",
+      "pref_label_en": "density contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A geophysical contact separating bodies of material with different density characteristics, generally determined through measurement and modelling of gravity variations.",
+      "parents": [
+        "gscn:Geophysical_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Depositional_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Depositional_Contact",
+      "gso_class": "Depositional_Contact",
+      "pref_label_en": "depositional contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Lithogenetic contact at which a sedimentary or volcanic rock has been deposited on (or against) another rock body. The relationship between the older underlying rocks and younger overlying rocks is unknown or not specfied.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Disconformable_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Disconformable_Contact",
+      "gso_class": "Disconformable_Contact",
+      "pref_label_en": "disconformable contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An unconformable contact between two geological units in which the bedding of the older, underlying unit is parallel to the bedding of the younger, overlying unit, but in which the contact between the two units is marked by an irregular or uneven surface of appreciable relief.",
+      "parents": [
+        "gscn:Unconformable_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Faulted_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Faulted_Contact",
+      "gso_class": "Faulted_Contact",
+      "pref_label_en": "faulted contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A contact separating two bodies of material across which one body has slid past the other.",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:GSSP": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/GSSP",
+      "gso_class": "GSSP",
+      "pref_label_en": "GSSP ",
+      "pref_label_fr": null,
+      "definition_en_canonical": "GSSP is dependent on some particular geologic event that is manifested globally in the stratigraphic record.  At least one of the host Rock_Body_Boundary objects must be a participant in the host Geologic_Event",
+      "parents": [
+        "gscn:Stratigraphic_Point"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Geologic_Province_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Geologic_Province_Contact",
+      "gso_class": "Geologic_Province_Contact",
+      "pref_label_en": "geologic province contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A contact between regions characterised by their geological history or by similar structural, petrographic or stratigraphic features",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Geophysical_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Geophysical_Contact",
+      "gso_class": "Geophysical_Contact",
+      "pref_label_en": "geophysical contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A contact separating bodies of material in the earth that have different geophysical properties. Use for boundaries that are detected by geophysical sensor techniques as opposed to direct lithologic observation.",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Glacial_Stationary_Line": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Glacial_Stationary_Line",
+      "gso_class": "Glacial_Stationary_Line",
+      "pref_label_en": "glacial stationary line",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A boundary between a subglacial geomorphic unit and a periglacial geomorphic unit, marking the maximum extent of glacial cover. This can be thought of as the outcrop of the contact between a glacier and its substrate at some time at each point along the boundary. This contact type is included as an interim concept, assuming that in the future, there will be extensions to account better for geomorphic units and line types.",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Gradational_Contact_Zone": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Gradational_Contact_Zone",
+      "gso_class": "Gradational_Contact_Zone",
+      "pref_label_en": "Gradational Contact Zone",
+      "pref_label_fr": null,
+      "definition_en_canonical": null,
+      "parents": [
+        "gsoc:Material_Feature"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Igneous_Intrusive_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Igneous_Intrusive_Contact",
+      "gso_class": "Igneous_Intrusive_Contact",
+      "pref_label_en": "igneous intrusive contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An intrusive contact between a younger igneous rock and an older, pre-existing geological unit into which it has been intruded.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Igneous_Phase_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Igneous_Phase_Contact",
+      "gso_class": "Igneous_Phase_Contact",
+      "pref_label_en": "igneous phase contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A lithogenetic contact separating lithologically distinct phases of a single intrusive body. Does not denote nature of contact (intrusive or gradation).",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Impact_Structure_Boundary": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Impact_Structure_Boundary",
+      "gso_class": "Impact_Structure_Boundary",
+      "pref_label_en": "impact structure boundary",
+      "pref_label_fr": null,
+      "definition_en_canonical": "surface that bounds a body of rock affected by an extraterrestrial impact event",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Lithogenetic_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Lithogenetic_Contact",
+      "gso_class": "Lithogenetic_Contact",
+      "pref_label_en": "lithogenetic contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A non-faulted contact separating bodies of material in the earth that have different lithologic character or geologic history.",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Magnetic_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Magnetic_Contact",
+      "gso_class": "Magnetic_Contact",
+      "pref_label_en": "magnetic contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A geophysical contact separating bodies of material distinguished based on properties related to magnetic fields.",
+      "parents": [
+        "gscn:Geophysical_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Magnetic_Polarity_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Magnetic_Polarity_Contact",
+      "gso_class": "Magnetic_Polarity_Contact",
+      "pref_label_en": "magnetic polarity contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A magentic contact between bodies of material with different polarity of remnant magnetization, e.g. between sections of ocean floor with different polarity.",
+      "parents": [
+        "gscn:Magnetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Magnetic_Susceptiblity_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Magnetic_Susceptiblity_Contact",
+      "gso_class": "Magnetic_Susceptiblity_Contact",
+      "pref_label_en": "magnetic susceptiblity contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A magnetic contact between bodies of material distinguished based on magnetic susceptibility characteristics.",
+      "parents": [
+        "gscn:Magnetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Magnetization_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Magnetization_Contact",
+      "gso_class": "Magnetization_Contact",
+      "pref_label_en": "magnetization contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A magnetic contact between bodies of material distinguished based on any aspect of magnetization of material in the units.",
+      "parents": [
+        "gscn:Magnetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Metamorphic_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Metamorphic_Contact",
+      "gso_class": "Metamorphic_Contact",
+      "pref_label_en": "metamorphic contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Lithogenetic contact separating rocks that have different lithologic properties related to metamorphism, metasomatism, alteration, or mineralization. Generally separates metamorphic rock bodies, but may separate metamorphosed (broadly speaking) and non-metamorphosed rock.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Metamorphic_Facies_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Metamorphic_Facies_Contact",
+      "gso_class": "Metamorphic_Facies_Contact",
+      "pref_label_en": "metamorphic facies contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A metamorphic contact separating rocks that have undergone metamorphism of a particular facies from those that have undergone metamorphism of another facies.",
+      "parents": [
+        "gscn:Metamorphic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Metasomatic_Facies_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Metasomatic_Facies_Contact",
+      "gso_class": "Metasomatic_Facies_Contact",
+      "pref_label_en": "metasomatic facies contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A metamorphic contact separating rocks that have undergone metasomatism of a particular facies from those that have undergone metasomatism of another facies. Metasomatism is distinguished from metamorphism by significant changes in bulk chemistry of the affected rock.",
+      "parents": [
+        "gscn:Metamorphic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Mineralisation_Assemblage_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Mineralisation_Assemblage_Contact",
+      "gso_class": "Mineralisation_Assemblage_Contact",
+      "pref_label_en": "mineralisation assemblage contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A metasomatic facies contact separating rocks which have been mineralised and contain a particular mineral assemblage from those which contain a different assemblage. Mineralization is a kind of metasomatism that introduces ecomomically important minerals.",
+      "parents": [
+        "gscn:Metamorphic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Nonconformable_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Nonconformable_Contact",
+      "gso_class": "Nonconformable_Contact",
+      "pref_label_en": "nonconformable contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An unconformable contact between an underlying, older nonstratified geological unit (usually intrusive igneous rocks or metamorphics) and an overlying, younger stratified geological unit.",
+      "parents": [
+        "gscn:Unconformable_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Paraconformable_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Paraconformable_Contact",
+      "gso_class": "Paraconformable_Contact",
+      "pref_label_en": "paraconformable contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An unconformable contact between two geological units in which the bedding of the older, underlying unit is parallel to the bedding of the younger, overlying unit, in which the contact between the two units is planar, and may be coincident with a bedding plane.",
+      "parents": [
+        "gscn:Unconformable_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Radiometric_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Radiometric_Contact",
+      "gso_class": "Radiometric_Contact",
+      "pref_label_en": "radiometric contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A geophysical contact separating bodies of material distinguished based on the characteristics of emitted of radiant energy related to radioactivity (e.g. gamma rays).",
+      "parents": [
+        "gscn:Geophysical_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Sedimentary_Facies_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Sedimentary_Facies_Contact",
+      "gso_class": "Sedimentary_Facies_Contact",
+      "pref_label_en": "sedimentary facies contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A lithogenetic contact separating essentially coeval sedimentary material bodies distinguished by characteristics reflecting different physical or chemical processes active at the time of deposition of the sediment.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "base on Nichols, Gary, 1999, Sedimentology and stratigraphy, Blackwell, p. 62-63."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Sedimentary_Intrusive_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Sedimentary_Intrusive_Contact",
+      "gso_class": "Sedimentary_Intrusive_Contact",
+      "pref_label_en": "sedimentary intrusive contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An intrusive contact between a sedimentary rock unit and plastic sediment (e.g., clay, chalk, salt, gypsum, etc.), forced upward into it from underlying sediment",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Seismic_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Seismic_Contact",
+      "gso_class": "Seismic_Contact",
+      "pref_label_en": "seismic contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A geophysical contact separating bodies of material defined based on their seismic character. Seismic character is based on transmission of vibrations (seismic waves) through a rock body, and relates to the velocity of transmission, and the nature of reflection, refraction, or transformation of seismic waves by inhomogeneities in the rock body.",
+      "parents": [
+        "gscn:Geophysical_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Stratigraphic_Point": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Stratigraphic_Point",
+      "gso_class": "Stratigraphic_Point",
+      "pref_label_en": "Stratigraphic Point",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A spatially restricted part of a Contact feature in a particular stratigraphic section, typically located by a point location.",
+      "parents": [
+        "gscn:Contact"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Unconformable_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Unconformable_Contact",
+      "gso_class": "Unconformable_Contact",
+      "pref_label_en": "unconformable contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A contact separating two geological units in which the younger unit succeeds the older after a substantial hiatus in deposition.",
+      "parents": [
+        "gscn:Depositional_Contact"
+      ],
+      "sources": [
+        "Neuendorf, K.K.E, Mehl, J.P. & Jackson, J.A. (eds), 2005. Glossary of geology, 5th Edition. American Geological Institute, Alexandria, 779 p."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Volcanic_Subsidence_Zone_Boundary": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Volcanic_Subsidence_Zone_Boundary",
+      "gso_class": "Volcanic_Subsidence_Zone_Boundary",
+      "pref_label_en": "volcanic subsidence zone boundary",
+      "pref_label_fr": null,
+      "definition_en_canonical": "boundary around a body of rock that is within a zone of subsidence or cratering produced by volcanic activity.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "this vocabulary, concept to encompass boundary of caldron, caldera, or crater."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Weathering_Contact": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologiccontact/Weathering_Contact",
+      "gso_class": "Weathering_Contact",
+      "pref_label_en": "weathering contact",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A lithogenetic contact separating bodies of material differentiated based on lithologic properties related to weathering.",
+      "parents": [
+        "gscn:Lithogenetic_Contact"
+      ],
+      "sources": [
+        "CGI contacttype SKOS vocabulary 2012-11-24"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Boundary_Stratotype": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfeature/Boundary_Stratotype",
+      "gso_class": "Boundary_Stratotype",
+      "pref_label_en": null,
+      "pref_label_fr": null,
+      "definition_en_canonical": null,
+      "parents": [],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    }
+  }
+}

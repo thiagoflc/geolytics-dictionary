@@ -93,6 +93,20 @@ function enrichmentFor(id) {
   return TERM_ENRICHMENT[id] || { termo_en: null, synonyms_pt: [], synonyms_en: [], examples: [] };
 }
 
+/* GSO (Loop3D Geoscience Ontology) — Layer 7. Loaded from data/gso-*.json,
+   produced by scripts/gso-extract.js. CC BY 4.0; cite Brodaric & Richard 2021. */
+function loadGsoModules() {
+  const dataDir = path.resolve(__dirname, '..', 'data');
+  if (!fs.existsSync(dataDir)) return [];
+  return fs
+    .readdirSync(dataDir)
+    .filter((f) => /^gso-[a-z]+\.json$/.test(f))
+    .map((f) => {
+      const json = JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
+      return { file: f, ...json };
+    });
+}
+
 /* ─────────────────────────────────────────────────────────────
  * SOURCE DATA — copiado de Geolytics src/config/dicionario.js
  * ───────────────────────────────────────────────────────────── */
@@ -816,6 +830,8 @@ function buildEntityGraph() {
 function buildFull() {
   const ac = loadAcronyms();
   const graph = buildEntityGraph();
+  const gso = loadGsoModules();
+  const gsoTotal = gso.reduce((n, m) => n + (m.meta?.class_count || 0), 0);
   return {
     meta: {
       version: VERSION,
@@ -840,8 +856,10 @@ function buildFull() {
         regis_ner_mappings: REGIS_NER_MAPPINGS.length,
         ambiguity_alerts: AMBIGUITY_ALERTS.length,
         acronyms: ac ? ac.acronyms.length : 0,
+        gso_modules: gso.length,
+        gso_classes: gsoTotal,
       },
-      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)'],
+      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)'],
     },
     glossary: GLOSSARIO.map(enrichTerm),
     extended_terms: EXTENDED_TERMS,
@@ -856,6 +874,14 @@ function buildFull() {
     systems: SYSTEMS,
     regis_ner: { entity_mappings: REGIS_NER_MAPPINGS, relation_types: REGIS_RELATION_TYPES },
     acronyms: ac ? ac.acronyms : [],
+    gso: gso.map((m) => ({
+      module: m.meta.module,
+      base_uri: m.meta.base_uri,
+      class_count: m.meta.class_count,
+      license: m.meta.license,
+      attribution: m.meta.attribution,
+      classes: m.classes,
+    })),
   };
 }
 
@@ -1336,6 +1362,31 @@ function buildRagCorpus() {
           category: a.category,
           expansion_pt: a.expansion_pt,
           expansion_en: a.expansion_en,
+        },
+      });
+    }
+  }
+
+  /* type=ontology_class — GSO (Layer 7, Loop3D Geoscience Ontology) */
+  for (const mod of loadGsoModules()) {
+    for (const [key, c] of Object.entries(mod.classes)) {
+      const labels = [c.pref_label_en, c.pref_label_fr].filter(Boolean).join(' / ');
+      const parents = (c.parents || []).join(', ');
+      const sources = (c.sources || []).join('; ');
+      const text = `${labels || c.gso_class} (GSO ${c.gso_class}): ${c.definition_en_canonical || '(no definition)'}${parents ? ` Subclasse de: ${parents}.` : ''}${sources ? ` Fonte: ${sources}.` : ''} Camada 7 (GSO/Loop3D, CC BY 4.0).`;
+      lines.push({
+        id: `gso_${mod.meta.module.replace(/^GSO-/, '').toLowerCase()}_${c.gso_class}`,
+        type: 'ontology_class',
+        text,
+        metadata: {
+          gso_class: c.gso_class,
+          owl_uri: c.owl_uri,
+          parents: c.parents,
+          sources: c.sources,
+          layer: 'layer7',
+          module: mod.meta.module,
+          license: 'CC BY 4.0',
+          attribution: mod.meta.attribution,
         },
       });
     }

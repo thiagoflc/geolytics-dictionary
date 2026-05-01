@@ -1,0 +1,1063 @@
+{
+  "meta": {
+    "generated": "2026-05-01T10:46:51.031Z",
+    "source": "https://raw.githubusercontent.com/Loop3D/GKM/master/Loop3D-GSO/Modules/GSO-Geologic_Structure_Foliation.ttl",
+    "module": "GSO-Geologic_Structure_Foliation",
+    "base_uri": "https://w3id.org/gso/1.0/geologicfoliation/ontology",
+    "prefixes": {
+      "gsfo": "https://w3id.org/gso/1.0/geologicfoliation/",
+      "gsoc": "https://w3id.org/gso/1.0/common/",
+      "gsog": "https://w3id.org/gso/1.0/geology/",
+      "gsos": "https://w3id.org/gso/1.0/geologicstructure/",
+      "owl": "http://www.w3.org/2002/07/owl#",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "dct": "http://purl.org/dc/terms/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "schema": "https://schema.org/",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "license": "CC BY 4.0",
+    "attribution": "Brodaric & Richard 2021, GSC Open File 8796, DOI 10.4095/328296",
+    "class_count": 73
+  },
+  "classes": {
+    "gso:anastomosing_spaced_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/anastomosing_spaced_cleavage",
+      "gso_class": "anastomosing_spaced_cleavage",
+      "pref_label_en": "anastomosing spaced cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "spaced cleavage domains branch and rejoin, creating lens-shaped microlithons.",
+      "parents": [
+        "gsfo:spaced_cleavage"
+      ],
+      "sources": [
+        "Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:bedding_fabric": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/bedding_fabric",
+      "gso_class": "bedding_fabric",
+      "pref_label_en": "bedding",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fabric defined by textural or mineralogic variations in sediment produced by depositional processes. May be manifested by lamination structure within the sediment, or by layering in which the individual layers (beds) are bounded by discontinuities related to events in the depositional history.",
+      "parents": [
+        "gsfo:primary_foliation"
+      ],
+      "sources": [
+        "NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:bedding_lamination_structure": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/bedding_lamination_structure",
+      "gso_class": "bedding_lamination_structure",
+      "pref_label_en": "bedding lamination structure",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A surface internal to the containing sediment mass defined by textural or mineralogical variation, produced by sediment deposition process, and reflecting the orientation of the original depositional surface. Syn Laminated structure (NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004).",
+      "parents": [
+        "gsfo:bedding_fabric"
+      ],
+      "sources": [
+        "NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:c_fabric": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/c_fabric",
+      "gso_class": "c_fabric",
+      "pref_label_en": "c fabric",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Ductile shear banding foliation defined by spaced, discrete planar zones of high strain less than 1mm thick. Commonly associated with a particle flattening ('S') fabric to form a mylonitic foliation.",
+      "parents": [
+        "gsfo:ductile_shear_banding_foliation"
+      ],
+      "sources": [
+        "Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/cleavage",
+      "gso_class": "cleavage",
+      "pref_label_en": "cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A tectonic foliation in a rock characterized by a tendency for the rock to split along a regular set of parallel or sub-parallel closely spaced surfaces. Cleavage is a more general term than schistosity because schistosity need not be present in order for a rock to display cleavage. Cleavage domains or parting surfaces are not spaced more than 5 cm apart on average (Borradaille et al., 1982)",
+      "parents": [
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "Brodie, Kate, Fettes, Douglas, and Harte, Ben, 2007, Structural terms including fault rock terms, in Fettes, D., and Desmons, J., Metamorphic rocks-A classification and Glossary of Terms: Cambridge, UK, Cambridge University Press, p. 24-31."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:cleavage_parallel_to_bedding": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/cleavage_parallel_to_bedding",
+      "gso_class": "cleavage_parallel_to_bedding",
+      "pref_label_en": "cleavage parallel to bedding",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Composite fabric in which a cleavage is developed parallel to bedding.",
+      "parents": [
+        "gsfo:cleavage",
+        "gsfo:compound_foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:close_joints": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/close_joints",
+      "gso_class": "close_joints",
+      "pref_label_en": "close joints",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by parting surfaces (cleavage domains) that have no apparent thickness, are spaced between 5 cm and 25 cm, and do not crenulate an older foliation. Fabric intermediate between typical cleavage and joints. Parting surfaces are regularly spaced, and penetrative on a 1-10 m scale. 5 cm upper limit on spacing of 'cleavage domains' in a 'cleavage 'fabric is suggested by Borradaile et al. [1982].",
+      "parents": [
+        "gsfo:cleavage",
+        "gsfo:joint_fabric"
+      ],
+      "sources": [
+        "Borradaile et al. 1982, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:comb_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/comb_layering",
+      "gso_class": "comb_layering",
+      "pref_label_en": "comb layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering fabric defined by layers that have internal comb structure. Layer boundaries are the termination surfaces for the constituent crystals.",
+      "parents": [
+        "gsfo:layering"
+      ],
+      "sources": [
+        "Neuendorf et al. 2005, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:compositional_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/compositional_layering",
+      "gso_class": "compositional_layering",
+      "pref_label_en": "compositional layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering fabric defined by layers that have different mineralogic composition.",
+      "parents": [
+        "gsfo:layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03, submitted by British Antarctic Survey"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:compound_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/compound_foliation",
+      "gso_class": "compound_foliation",
+      "pref_label_en": "compound foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation that includes fabric elements indicating classification with foliation types of different genetic origin, e.g. cleavage parallel to bedding is a compound fabric with a sedimentary foliation and a tectonic foliation. No connotation of genetic origin of fabric elements.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:compound_metamorphic_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/compound_metamorphic_foliation",
+      "gso_class": "compound_metamorphic_foliation",
+      "pref_label_en": "compound metamorphic foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A compound foliation in which the constituent fabric elements are of metamorphic origin.",
+      "parents": [
+        "gsfo:compound_foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:continuous_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/continuous_cleavage",
+      "gso_class": "continuous_cleavage",
+      "pref_label_en": "continuous cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A cleavage that is statistically homogeneous down to the scale of individual mineral grains.",
+      "parents": [
+        "gsfo:cleavage"
+      ],
+      "sources": [
+        "Borradaile et al 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:continuous_crenulation_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/continuous_crenulation_cleavage",
+      "gso_class": "continuous_crenulation_cleavage",
+      "pref_label_en": "continuous crenulation cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Cleavage defined by long, thin limbs of crenulation folds of pre-existing foliation, in which the boundaries between cleavage domains and lithons are gradational. Both the crenulation foliation and the crenulated (older) foliation are easily visible. Grades to spaced crenulation cleavage as boundaries of cleavage domains become sharp, and to schistosity or compositional layering as the crenulation foliation obscures the crenulated foliation to become the dominant fabric in the rock. In many rocks with continuous crenulation cleavage, the tendency to part along the cleavage may be weak, thus the rock may not technically meet the definition of 'cleavage as used in CGI foliationtype SKOS vocabulary 2018-08-03.",
+      "parents": [
+        "gsfo:continuous_cleavage",
+        "gsfo:crenulation_cleavage"
+      ],
+      "sources": [
+        "Borradaile et al 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:crenulation_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/crenulation_cleavage",
+      "gso_class": "crenulation_cleavage",
+      "pref_label_en": "crenulation cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Cleavage that is overprinted on an older foliation that is folded to some degree in association with development of the younger cleavage. Cleavage domains commonly associated with long limbs of crenulation folds, and hinge surfaces of folds are roughly parallel. Wavelength of crenulation folds is less than or equal to 1 cm. Cleavage defined by limbs of microfolds coincident with zones of mineral differentiation",
+      "parents": [
+        "gsfo:cleavage"
+      ],
+      "sources": [
+        "Brodie, Kate, Fettes, Douglas, and Harte, Ben, 2007, Structural terms including fault rock terms, in Fettes, D., and Desmons, J., Metamorphic rocks-A classification and Glossary of Terms: Cambridge, UK, Cambridge University Press, p. 24-31."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:crude_or_indistinct_bedding": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/crude_or_indistinct_bedding",
+      "gso_class": "crude_or_indistinct_bedding",
+      "pref_label_en": "crude or indistinct bedding",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Bedding defined by surfaces that are not distinct, e.g. by gradational grain size variations.",
+      "parents": [
+        "gsfo:bedding_fabric"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:cryptomicrobial_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/cryptomicrobial_lamination",
+      "gso_class": "cryptomicrobial_lamination",
+      "pref_label_en": "cryptomicrobial lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fabric defined by fine laminae formed by the trapping of grains and lime precipitation in a microbial mat.",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "GGIPAC"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:cumulate_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/cumulate_layering",
+      "gso_class": "cumulate_layering",
+      "pref_label_en": "cumulate layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering in igneous rocks in which layers are characterized by variation in relative proportion of magmatically crystallized minerals. Typically a pattern of mineralogical variation will be repeated many times in a vertical section with layers of relatively consistent thickness. See photos in Best [1982] p. 176-177. Gravity-stratified layers typically have mafic minerals at the base and plagioclase at the top and are interpreted to form by crystal settling in magma.",
+      "parents": [
+        "gsfo:igneous_layering"
+      ],
+      "sources": [
+        "Carmichael et al 1974, Best 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:discrete_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/discrete_cleavage",
+      "gso_class": "discrete_cleavage",
+      "pref_label_en": "discrete cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Spaced cleavage in which cleavage domains have sharply defined edges.",
+      "parents": [
+        "gsfo:spaced_cleavage"
+      ],
+      "sources": [
+        "Borradaile et al., 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:discrete_crenulation_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/discrete_crenulation_cleavage",
+      "gso_class": "discrete_crenulation_cleavage",
+      "pref_label_en": "discrete crenulation cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Crenulation cleavage in which the cleavage domains have discrete boundaries. Amplitude of crenulation folds tends to be small.",
+      "parents": [
+        "gsfo:crenulation_cleavage",
+        "gsfo:spaced_cleavage"
+      ],
+      "sources": [
+        "Borradaile et al 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:discrete_disjunct_spaced_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/discrete_disjunct_spaced_cleavage",
+      "gso_class": "discrete_disjunct_spaced_cleavage",
+      "pref_label_en": "discrete disjunct spaced cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Disjunct spaced cleavage defined by discrete cleavage surfaces, typically in low-grade clastic rocks. Syn. Fracture cleavage.",
+      "parents": [
+        "gsfo:spaced_cleavage"
+      ],
+      "sources": [
+        "Neuendorf et al. 2005, Borradaile et al. 1982."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:disjunctive_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/disjunctive_cleavage",
+      "gso_class": "disjunctive_cleavage",
+      "pref_label_en": "disjunctive cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A spaced cleavage independent of any pre-existing mineral orientation, cleavage in which there is no systematic relationship between a pre-existing preferred orientation and the superimposed cleavage. (Borradaile et al., 1982)",
+      "parents": [
+        "gsfo:cleavage"
+      ],
+      "sources": [
+        "Borradaile et al. 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:domainal_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/domainal_cleavage",
+      "gso_class": "domainal_cleavage",
+      "pref_label_en": "domainal cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fabric in which domains of more strongly developed (closely spaced) cleavage are separated by lenses of weakly or non-cleaved rock. Typically observed on outcrop scale and used for geologic unit description",
+      "parents": [
+        "gsfo:cleavage"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:ductile_shear_banding_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/ductile_shear_banding_foliation",
+      "gso_class": "ductile_shear_banding_foliation",
+      "pref_label_en": "ductile shear banding foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by regularly spaced ductile shear bands at the scale of descripiton.",
+      "parents": [
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:eutaxitic_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/eutaxitic_foliation",
+      "gso_class": "eutaxitic_foliation",
+      "pref_label_en": "eutaxitic foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by flattened pumice clasts or glass shards, aligned elongate lithic fragments, variations in composition, vesicularity, crystallinity, grain size, spherulite and lithophysae abundance, or the degree of devitrification in a welded tuff. This term denotes interpretation that foliation formed during compaction and welding of tuff.",
+      "parents": [
+        "gsfo:primary_igneous_foliation"
+      ],
+      "sources": [
+        "Neuendorf et al. 2005, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:fissile_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/fissile_lamination",
+      "gso_class": "fissile_lamination",
+      "pref_label_en": "fissile lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Diffuse to distinct lamination in mudstones and mud, defined by the alignment of clay minerals. Lacks distinct very-fine scale layering and repetition of couplets that characterize varves. Essentially a continuous cleavage parallel to bedding, but considered a sedimentary structure related to sediment compaction during diagenesis.",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:flaser_structure": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/flaser_structure",
+      "gso_class": "flaser_structure",
+      "pref_label_en": "flaser structure",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Tectonic foliation defined by lenses and layers of original or relatively unaltered granular minerals surrounded by a matrix of highly sheared and crushed material. No connotation of metamorphic grade.",
+      "parents": [
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "Neuendorf et al. 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:flow_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/flow_layering",
+      "gso_class": "flow_layering",
+      "pref_label_en": "flow layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering produced by flow of magma, lava, or diapiric flow of sedimentary rock. Distinction from eutaxitic foliation may be difficult.",
+      "parents": [
+        "gsfo:layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:generic_mylonitic_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/generic_mylonitic_foliation",
+      "gso_class": "generic_mylonitic_foliation",
+      "pref_label_en": "generic mylonitic foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by the shapes of deformed mineral grains or grain aggregates having aspect ratios greater than 1.5:1, greater than 10 percent of the rock is composed of 'matrix' showing evidence of tectonic reduction in grain size, and the foliation and matrix are interpreted to be the product of continuous, crystal-plastic deformation processes. Generic class is used when data are insufficient to determine classification to protomylontic, mylonite, or ultramylonitc foliation, or to specify that any sort of mylontic foliation may be present.",
+      "parents": [
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "NADM metamorphic rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixB/appendixB.pdf) SLTTm1.0 2004"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:gneissic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/gneissic_layering",
+      "gso_class": "gneissic_layering",
+      "pref_label_en": "gneissic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Compositional layering in a metamorphic rock, syn. gneissic banding",
+      "parents": [
+        "gsfo:metamorphic_layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:grain_shape_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/grain_shape_foliation",
+      "gso_class": "grain_shape_foliation",
+      "pref_label_en": "grain shape foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by the alignment of oblate particles, which may be detrital grains, crystals, or crystalline grain aggregates.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:igneous_flow_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/igneous_flow_foliation",
+      "gso_class": "igneous_flow_foliation",
+      "pref_label_en": "igneous flow foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation interpreted to be due to flow in a body of magma or lava. Includes flow banding in lava, and foliation defined by aligned crystals in a phaneritic igneous rock..",
+      "parents": [
+        "gsfo:primary_igneous_foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:igneous_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/igneous_lamination",
+      "gso_class": "igneous_lamination",
+      "pref_label_en": "igneous lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by surfaces of textural or mineralogical variation formed by igneous processes. If the lamination surfaces are regularly spaced, they may be used to define layers.",
+      "parents": [
+        "gsfo:igneous_layering",
+        "gsfo:primary_igneous_foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:igneous_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/igneous_layering",
+      "gso_class": "igneous_layering",
+      "pref_label_en": "igneous layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering that is the product of processes operating in magma or lava. syn. magmatic layering",
+      "parents": [
+        "gsfo:layering",
+        "gsfo:primary_igneous_foliation"
+      ],
+      "sources": [
+        "Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:igneous_textural_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/igneous_textural_layering",
+      "gso_class": "igneous_textural_layering",
+      "pref_label_en": "igneous textural layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering defined by grain size/ grain shape variations resulting from crystallization processes in igneous rock, most commonly observed in pegmatite/aplite dikes or bodies, and in Laramide leucogranites of Wilderness suite in Arizona.",
+      "parents": [
+        "gsfo:igneous_layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:imbricated_clast_fabric": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/imbricated_clast_fabric",
+      "gso_class": "imbricated_clast_fabric",
+      "pref_label_en": "imbricated clast fabric",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fabric defined by long axis of tabular clasts stacked like shingles to define a surface that makes a small angle with the bedding surface. A depositional fabric formed by disk-shaped or elongate pebbles all tilted in the same direction, flat sides commonly dip upstream",
+      "parents": [
+        "gsfo:grain_shape_foliation",
+        "gsfo:primary_foliation"
+      ],
+      "sources": [
+        "based on Neuendorf et al 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:impersistent_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/impersistent_lamination",
+      "gso_class": "impersistent_lamination",
+      "pref_label_en": "impersistent lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Lamination defined by discontinuous surfaces",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:irregular_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/irregular_lamination",
+      "gso_class": "irregular_lamination",
+      "pref_label_en": "irregular lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Lamination fabric in which individual lamina or groups of lamina are warped in an irregular fashion, like a flattened peice of crumpled paper. A crude planar orientation is discernible.",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:joint_fabric": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/joint_fabric",
+      "gso_class": "joint_fabric",
+      "pref_label_en": "joint fabric",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fabric defined by parting surfaces in rock that occur in crudely parallel orientation, spaced greater than 5 cm on average if in a very regular joint set. Spacing is more variable and alignment of surfaces is cruder that cleavage. Typically applies to geologic unit description.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "Borradaile et al 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:laminated_metamorphic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/laminated_metamorphic_layering",
+      "gso_class": "laminated_metamorphic_layering",
+      "pref_label_en": "laminated metamorphic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Metamorphic layering in which the layers are less than 1 cm thick. See Weiss, L.E. [1972] plate 36 or Borraidaile et al [1982] plate 137A B (page 331), plate140A (page 337) for examples.",
+      "parents": [
+        "gsfo:metamorphic_layering"
+      ],
+      "sources": [
+        "Weiss 1972, Borradaile et al 1982, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:lava_flow_banding": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/lava_flow_banding",
+      "gso_class": "lava_flow_banding",
+      "pref_label_en": "lava flow banding",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering formed by laminar lava flow, defined by variations in composition, vesicularity, crystallinity, grainsize, spherulite and lithophysae abundance, degree of devitrification, colour, and/or parting surfaces, syn. flow lamination, flow banding",
+      "parents": [
+        "gsfo:flow_layering",
+        "gsfo:igneous_layering"
+      ],
+      "sources": [
+        "GGIPAC, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:layered_mylonitic_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/layered_mylonitic_foliation",
+      "gso_class": "layered_mylonitic_foliation",
+      "pref_label_en": "layered mylonitic foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Compound foliation in which mylonitic foliation is present in rock that has continuous compositional layering. Continuous means individual layers can be traced more than 1 m.",
+      "parents": [
+        "gsfo:compound_foliation",
+        "gsfo:generic_mylonitic_foliation",
+        "gsfo:layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/layering",
+      "gso_class": "layering",
+      "pref_label_en": "layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation defined by stacked, differentiable, sheet-like masses of material (layers), with no denotation of the nature (composition, grain size, grain shape...) or origin (igneous, sedimentary, metamorphic) of the layers.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:low_temperature_flow_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/low_temperature_flow_foliation",
+      "gso_class": "low_temperature_flow_foliation",
+      "pref_label_en": "low temperature flow foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation interpreted to be due to flow in a body of rock (typically mudrock, salt, or anhydrite) under low-temperature (non-metamorphic) conditions, typically related to diapirism.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:metamorphic_differentiation_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/metamorphic_differentiation_layering",
+      "gso_class": "metamorphic_differentiation_layering",
+      "pref_label_en": "metamorphic differentiation layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering defined by mineralogical variations in a rock body interpreted to be result of solid-state reactions in rock body (metamorphic segregation).",
+      "parents": [
+        "gsfo:compositional_layering",
+        "gsfo:metamorphic_layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:metamorphic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/metamorphic_layering",
+      "gso_class": "metamorphic_layering",
+      "pref_label_en": "metamorphic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering of unspecified origin in a metamorphic rock. Compositional or textural variations may be inherited from protolith, or result from metamorphic processes.",
+      "parents": [
+        "gsfo:layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:metamorphic_layering_inherited_from_protolith": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/metamorphic_layering_inherited_from_protolith",
+      "gso_class": "metamorphic_layering_inherited_from_protolith",
+      "pref_label_en": "metamorphic layering inherited from protolith",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Metamorphic layering in which layer differntiation is relict of compositional variations in the protolith, typically heterogeneous sedimentary or volcanic rock.",
+      "parents": [
+        "gsfo:compositional_layering",
+        "gsfo:metamorphic_layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:mineralogical_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/mineralogical_layering",
+      "gso_class": "mineralogical_layering",
+      "pref_label_en": "mineralogical layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Generic layering defined by variations in mineralogy between individual sheets of material",
+      "parents": [
+        "gsfo:compositional_layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:mylonite_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/mylonite_foliation",
+      "gso_class": "mylonite_foliation",
+      "pref_label_en": "mylonite foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Generic mylonitic foliation in which 50-90 percent of rock is matrix due to tectonic grain size reduction processes. Planar fabric is very apparent due to flattening of mineral grains, development of shear surfaces, and alignment of tabular mineral grains. Lineation is typically present and easily observed.",
+      "parents": [
+        "gsfo:generic_mylonitic_foliation"
+      ],
+      "sources": [
+        "NADM metamorphic rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixB/appendixB.pdf) SLTTm1.0 2004,  Sibson 1977"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:parallel_bedding": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/parallel_bedding",
+      "gso_class": "parallel_bedding",
+      "pref_label_en": "parallel bedding",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Bedding defined by parallel surfaces. Bedding structure may be lamination or layering.",
+      "parents": [
+        "gsfo:bedding_fabric"
+      ],
+      "sources": [
+        "NADM sedimentary rock vocabulary NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:parallel_bedding_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/parallel_bedding_lamination",
+      "gso_class": "parallel_bedding_lamination",
+      "pref_label_en": "parallel bedding lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Bedding lamination structure in which all visible bedding surfaces are parallel.",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:phyllitic_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/phyllitic_cleavage",
+      "gso_class": "phyllitic_cleavage",
+      "pref_label_en": "phyllitic cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Continuous cleavage in phyllitic rock, phyllosilicate mineral grains just barely visible, grain size midway between slaty cleavage and schist, typically has a satiny lustre.",
+      "parents": [
+        "gsfo:continuous_cleavage"
+      ],
+      "sources": [
+        "NADM metamorphic rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixB/appendixB.pdf) SLTTm1.0 2004,  Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:planar_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/planar_lamination",
+      "gso_class": "planar_lamination",
+      "pref_label_en": "planar lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Lamination that is defined by planar bedding surfaces at the scale of description.",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:primary_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/primary_foliation",
+      "gso_class": "primary_foliation",
+      "pref_label_en": "primary foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation formed during original process of deposition or crystallization of an igneous or sedimentary material.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:primary_igneous_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/primary_igneous_foliation",
+      "gso_class": "primary_igneous_foliation",
+      "pref_label_en": "primary igneous foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation interpreted to be the product of igneous processes, formed in the rock while melt was still present..",
+      "parents": [
+        "gsfo:primary_foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:protomylonite_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/protomylonite_foliation",
+      "gso_class": "protomylonite_foliation",
+      "pref_label_en": "protomylonite foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Generic mylonitic foliation in which 10-50 percent of rock is matrix due to tectonic grain size reduction processes. Planar aspect of fabric may be quite subtle in weakly deformed rocks.",
+      "parents": [
+        "gsfo:generic_mylonitic_foliation"
+      ],
+      "sources": [
+        "NADM metamorphic rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixB/appendixB.pdf) SLTTm1.0 2004,  Sibson 1977"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:rhythmic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/rhythmic_layering",
+      "gso_class": "rhythmic_layering",
+      "pref_label_en": "rhythmic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering in igneous rock defined by repeated gravity-stratified layers of typically mafic minerals at the base and plagioclase at the top, formed by crystal settling",
+      "parents": [
+        "gsfo:igneous_layering"
+      ],
+      "sources": [
+        "Jackson 1997"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:rough_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/rough_cleavage",
+      "gso_class": "rough_cleavage",
+      "pref_label_en": "rough cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Disjunct (Borradaile et al, 1990) cleavage characterized by short, discontinuous clavage surfaces, typically with concentrations of phyllosilicate minerals. Common in micaceous sandstone.",
+      "parents": [
+        "gsfo:cleavage"
+      ],
+      "sources": [
+        "Neuendorf et al. 2005, Borradaile et al, 1990"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:s_fabric": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/s_fabric",
+      "gso_class": "s_fabric",
+      "pref_label_en": "s fabric",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation in mylonite defined by alignment of tabular crystals or deformed mineral grains, often with sigmoid shape, typically curving into an associated ductile shear banding foliation (C fabric) with a consistent sense.",
+      "parents": [
+        "gsfo:grain_shape_foliation",
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:scaly_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/scaly_cleavage",
+      "gso_class": "scaly_cleavage",
+      "pref_label_en": "scaly cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Discrete, anastomosing spaced cleavage characterized by smooth and highly polished/slickensided cleavage surfaces that intersect with one another to form lensoid flakes, scales or chips. Common in pelitic rocks in shear zones, melange, or deformed accretionary complexes.",
+      "parents": [
+        "gsfo:spaced_cleavage"
+      ],
+      "sources": [
+        "Based on Jackson 1997"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:schistosity": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/schistosity",
+      "gso_class": "schistosity",
+      "pref_label_en": "schistosity",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A fabric defined the parallel, planar arrangement of mineral grains having a platy, lamellar, or tabular crystallographic habit that are oriented in a continuous planar or rarely a linear fabric. Schistosity is commonly, but not necessarily, a crystalloblastic foliation. Platy mineral grains typically 1 to 10 mm across (Jackson, 1997), at smaller grain size grades into phyllitic cleavage. Schistosity is typically associated with a continuous cleavage due to the tendency to part parallel to the aligned mineral grains.",
+      "parents": [
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "NADM metamorphic rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixB/appendixB.pdf) SLTTm1.0 2004"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:sedimentary_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/sedimentary_layering",
+      "gso_class": "sedimentary_layering",
+      "pref_label_en": "sedimentary layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering resulting from primary sedimentary processes, in which the individual layers (beds) are bounded by discontinuities related to events in the depositional history.",
+      "parents": [
+        "gsfo:bedding_fabric",
+        "gsfo:layering"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:slaty_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/slaty_cleavage",
+      "gso_class": "slaty_cleavage",
+      "pref_label_en": "slaty cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Continuous cleavage defined by aligned fine to very-fine grained phylosilicate mineral grains. The individual grains defining the fabric are too small to be seen by the unaided eye. Grades into phyllitic cleavage as grain size increases. Cleavage domains typically less than 100 micrometres wide, rock easily splits into slabs and thin plates.",
+      "parents": [
+        "gsfo:continuous_cleavage"
+      ],
+      "sources": [
+        "Brodie, Kate, Fettes, Douglas, and Harte, Ben, 2007, Structural terms including fault rock terms, in Fettes, D., and Desmons, J., Metamorphic rocks-A classification and Glossary of Terms: Cambridge, UK, Cambridge University Press, p. 24-31., Jackson 1997"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:solution_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/solution_cleavage",
+      "gso_class": "solution_cleavage",
+      "pref_label_en": "solution cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Spaced cleavage forming an array of parallel to anastomosing, stylolitic to smooth, fracture-like partings formed by rock dissolution. Dissolution is indicated by discontinuity and offset of primary features that intersect cleavage surfaces, and typically by accumulation of insoluble residue along cleavage surface. Syn. stylolitic cleavage, pressure solution cleavage",
+      "parents": [
+        "gsfo:spaced_cleavage"
+      ],
+      "sources": [
+        "Geoscience Victoria, Australia"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:spaced_cleavage": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/spaced_cleavage",
+      "gso_class": "spaced_cleavage",
+      "pref_label_en": "spaced cleavage",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Cleavage in which cleavage domains are spaced at finite intervals as the scale of description. Microlithons of uncleaved rock separate cleavage domains.",
+      "parents": [
+        "gsfo:cleavage"
+      ],
+      "sources": [
+        "Borradaile et al. 1982"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:stromatic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/stromatic_layering",
+      "gso_class": "stromatic_layering",
+      "pref_label_en": "stromatic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Tectonic layering in which variations that distinguish the layers are the result of melt segregation during high-grade metamorphism, some layers have magmatic/igneous mineralogy. Plates 143 and 144, Borradaile et al [1982] (page 344-347) Syn. Migmatitic layering, lit-par-lit layering",
+      "parents": [
+        "gsfo:metamorphic_layering"
+      ],
+      "sources": [
+        "Weiss 1972, Borradaile et al 1982, Neuendorf et al. 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:stromatolitic_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/stromatolitic_lamination",
+      "gso_class": "stromatolitic_lamination",
+      "pref_label_en": "stromatolitic lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Lamination produced by sediment trapping, binding and or precipitation by cyanophytes (blue-green algae)",
+      "parents": [
+        "gsfo:cryptomicrobial_lamination"
+      ],
+      "sources": [
+        "Based on Neuendorf et al 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:tectonic_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/tectonic_foliation",
+      "gso_class": "tectonic_foliation",
+      "pref_label_en": "tectonic foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Foliation in a rock body defined by physical components related to deformation subsequent to solidification of the rock.",
+      "parents": [
+        "gsos:Foliation"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:tectonic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/tectonic_layering",
+      "gso_class": "tectonic_layering",
+      "pref_label_en": "tectonic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering defined by mineralogical or textural variations in a rock body that are interpreted to be related to deformation or metamorphism, commonly associated with layers that have sharp boundaries. Also known as gneissic foliation. See plates 142-145 (p. 342-349) in Borradaile et al [1982] and plate 46A to 49A in Weiss [1972].",
+      "parents": [
+        "gsfo:layering",
+        "gsfo:tectonic_foliation"
+      ],
+      "sources": [
+        "Weiss 1972, Borradaile et al 1982, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:transposed_bedding_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/transposed_bedding_layering",
+      "gso_class": "transposed_bedding_layering",
+      "pref_label_en": "transposed bedding layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Layering interpreted to have originated as sedimentary bedding that has been transposed as a result of metamorphism and deformation.",
+      "parents": [
+        "gsfo:metamorphic_layering_inherited_from_protolith"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:ultramylonite_foliation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/ultramylonite_foliation",
+      "gso_class": "ultramylonite_foliation",
+      "pref_label_en": "ultramylonite foliation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Mylonitic foliation in which greater than 90 percent of rock is matrix due to tectonic grain size reduction processes. Typically rock is very-fine grained to aphanitic, with sparse porphyroclasts, and vague to prominent lamination on a mm scale.",
+      "parents": [
+        "gsfo:generic_mylonitic_foliation"
+      ],
+      "sources": [
+        "NADM metamorphic rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixB/appendixB.pdf) SLTTm1.0 2004,  Sibson 1977"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:undulating_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/undulating_lamination",
+      "gso_class": "undulating_lamination",
+      "pref_label_en": "undulating lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Gently curviplanar or wavy bedding lamination structure",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:vague_metamorphic_layering": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/vague_metamorphic_layering",
+      "gso_class": "vague_metamorphic_layering",
+      "pref_label_en": "vague metamorphic layering",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Metamorphic layering of uncertain origin, defined by subtle mineralogical or textural variations, with gradational layer boundaries. See plate 142 in Borradaile et al [1982].",
+      "parents": [
+        "gsfo:metamorphic_layering"
+      ],
+      "sources": [
+        "Weiss 1972,Borradaile et al 1982, CGI foliationtype SKOS vocabulary 2018-08-03"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:varve_lamination": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfoliation/varve_lamination",
+      "gso_class": "varve_lamination",
+      "pref_label_en": "varve lamination",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Bedding defined by distinct, parallel laminae (layers less than 1 cm thick), typically occurring in sequences of distinct couplets (e.g. dark and light color). Generally interpreted as deposited from suspension in still water, with each lamina thought to be an annual sedimentation unit. Typically consists of mud-size sediment.",
+      "parents": [
+        "gsfo:bedding_lamination_structure"
+      ],
+      "sources": [
+        "NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  NADM sedimentary rock vocabulary (https://pubs.usgs.gov/of/2004/1451/sltt/appendixC/appendixC_pdf.zip)  SLTTs 2004, Jackson 1997"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    }
+  }
+}
