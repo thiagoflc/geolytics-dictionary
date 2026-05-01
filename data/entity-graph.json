@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-01T13:43:36.368Z",
+  "generated": "2026-05-01T13:47:18.033Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
   "nodes": [
     {
@@ -6091,6 +6091,46 @@
       "relation_label_pt": "medida em",
       "relation_label_en": "measured in",
       "style": "solid"
+    },
+    {
+      "source": "amostra-fluido",
+      "target": "unidade-medida",
+      "relation": "qualified_by",
+      "relation_label_pt": "qualificada por",
+      "relation_label_en": "qualified by",
+      "style": "solid"
+    },
+    {
+      "source": "pvt",
+      "target": "unidade-medida",
+      "relation": "expressed_in",
+      "relation_label_pt": "expresso em",
+      "relation_label_en": "expressed in",
+      "style": "solid"
+    },
+    {
+      "source": "i-engine",
+      "target": "unidade-medida",
+      "relation": "enforces",
+      "relation_label_pt": "valida e impõe",
+      "relation_label_en": "enforces",
+      "style": "solid"
+    },
+    {
+      "source": "bmp",
+      "target": "unidade-medida",
+      "relation": "standardized_by",
+      "relation_label_pt": "padronizado em",
+      "relation_label_en": "standardized by",
+      "style": "dashed"
+    },
+    {
+      "source": "reservatorio",
+      "target": "unidade-medida",
+      "relation": "characterized_with",
+      "relation_label_pt": "caracterizado em",
+      "relation_label_en": "characterized with",
+      "style": "dashed"
     },
     {
       "source": "activity-plan",

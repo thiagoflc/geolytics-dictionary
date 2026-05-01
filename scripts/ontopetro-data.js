@@ -769,6 +769,13 @@ export const OSDU_EDGES = [
   { source: 'wellbore',     target: 'topo-formacional', relation: 'has_marker',       relation_label: 'tem marker',       style: 'dashed' },
   { source: 'formacao',     target: 'topo-formacional', relation: 'has_top_at',       relation_label: 'tem topo em',      style: 'solid' },
   { source: 'perfil-poco',  target: 'wellbore',         relation: 'measured_in',      relation_label: 'medida em',        style: 'solid' },
+
+  /* unidade-medida — metadado mandatório ANP (Res. 880/2022 / i-Engine XML) */
+  { source: 'amostra-fluido', target: 'unidade-medida', relation: 'qualified_by',     relation_label: 'qualificada por',  style: 'solid' },
+  { source: 'pvt',            target: 'unidade-medida', relation: 'expressed_in',     relation_label: 'expresso em',      style: 'solid' },
+  { source: 'i-engine',       target: 'unidade-medida', relation: 'enforces',         relation_label: 'valida e impõe',   style: 'solid' },
+  { source: 'bmp',            target: 'unidade-medida', relation: 'standardized_by',  relation_label: 'padronizado em',   style: 'dashed' },
+  { source: 'reservatorio',   target: 'unidade-medida', relation: 'characterized_with', relation_label: 'caracterizado em', style: 'dashed' },
 ];
 
 /* Alinhamento OSDU para os nós novos + alguns existentes que ainda têm null */

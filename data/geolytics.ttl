@@ -7,8 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T13:43:36.472Z
-# Nodes: 113  Edges: 144
+# Generated: 2026-05-01T13:47:18.061Z
+# Nodes: 113  Edges: 149
 
 #
 # Classes
@@ -1746,6 +1746,36 @@ geo:measured_in a owl:ObjectProperty ;
     rdfs:domain geo:perfil-poco ;
     rdfs:range geo:wellbore .
 
+geo:qualified_by a owl:ObjectProperty ;
+    rdfs:label "qualificada por"@pt ;
+    rdfs:label "qualified by"@en ;
+    rdfs:domain geo:amostra-fluido ;
+    rdfs:range geo:unidade-medida .
+
+geo:expressed_in a owl:ObjectProperty ;
+    rdfs:label "expresso em"@pt ;
+    rdfs:label "expressed in"@en ;
+    rdfs:domain geo:pvt ;
+    rdfs:range geo:unidade-medida .
+
+geo:enforces a owl:ObjectProperty ;
+    rdfs:label "valida e impõe"@pt ;
+    rdfs:label "enforces"@en ;
+    rdfs:domain geo:i-engine ;
+    rdfs:range geo:unidade-medida .
+
+geo:standardized_by a owl:ObjectProperty ;
+    rdfs:label "padronizado em"@pt ;
+    rdfs:label "standardized by"@en ;
+    rdfs:domain geo:bmp ;
+    rdfs:range geo:unidade-medida .
+
+geo:characterized_with a owl:ObjectProperty ;
+    rdfs:label "caracterizado em"@pt ;
+    rdfs:label "characterized with"@en ;
+    rdfs:domain geo:reservatorio ;
+    rdfs:range geo:unidade-medida .
+
 geo:plans_activity_for a owl:ObjectProperty ;
     rdfs:label "planeja atividade em"@pt ;
     rdfs:label "plans activity for"@en ;
@@ -2009,6 +2039,11 @@ geo:wellbore geo:has_trajectory geo:trajetoria-poco .
 geo:wellbore geo:has_marker geo:topo-formacional .
 geo:formacao geo:has_top_at geo:topo-formacional .
 geo:perfil-poco geo:measured_in geo:wellbore .
+geo:amostra-fluido geo:qualified_by geo:unidade-medida .
+geo:pvt geo:expressed_in geo:unidade-medida .
+geo:i-engine geo:enforces geo:unidade-medida .
+geo:bmp geo:standardized_by geo:unidade-medida .
+geo:reservatorio geo:characterized_with geo:unidade-medida .
 geo:activity-plan geo:plans_activity_for geo:poco .
 geo:activity-plan geo:composed_of geo:activity-template .
 geo:well-activity-program geo:governs geo:poco .

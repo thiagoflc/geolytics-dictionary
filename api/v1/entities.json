@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T13:43:36.368Z",
+    "generated": "2026-05-01T13:47:18.033Z",
     "count": 113
   },
   "entities": [
@@ -633,6 +633,11 @@
             "to": "formacao",
             "relation": "hosted_in",
             "style": "solid"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "characterized_with",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -2193,7 +2198,13 @@
       },
       "skos_example": [],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "unidade-medida",
+            "relation": "enforces",
+            "style": "solid"
+          }
+        ],
         "incoming": [
           {
             "from": "tld",
@@ -2295,6 +2306,11 @@
             "to": "anp",
             "relation": "submitted_to",
             "style": "solid"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "standardized_by",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -4961,6 +4977,11 @@
             "to": "sara",
             "relation": "undergoes",
             "style": "dashed"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "qualified_by",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -5030,6 +5051,11 @@
           {
             "to": "reservatorio",
             "relation": "characterizes",
+            "style": "solid"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "expressed_in",
             "style": "solid"
           }
         ],
@@ -5644,7 +5670,33 @@
       ],
       "relations": {
         "outgoing": [],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "amostra-fluido",
+            "relation": "qualified_by",
+            "style": "solid"
+          },
+          {
+            "from": "pvt",
+            "relation": "expressed_in",
+            "style": "solid"
+          },
+          {
+            "from": "i-engine",
+            "relation": "enforces",
+            "style": "solid"
+          },
+          {
+            "from": "bmp",
+            "relation": "standardized_by",
+            "style": "dashed"
+          },
+          {
+            "from": "reservatorio",
+            "relation": "characterized_with",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {
