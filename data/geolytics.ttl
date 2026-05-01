@@ -7,7 +7,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T10:56:48.647Z
+# Generated: 2026-05-01T11:19:49.830Z
 # Nodes: 105  Edges: 116
 
 #
@@ -33,6 +33,7 @@ geo:poco a owl:Class ;
     owl:sameAs <https://w3id.org/osdu#Well> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" ;
@@ -85,6 +86,7 @@ geo:bacia-sedimentar a owl:Class ;
     owl:sameAs <https://w3id.org/osdu#Basin> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" ;
@@ -107,6 +109,7 @@ geo:reservatorio a owl:Class ;
     owl:sameAs <https://w3id.org/osdu#Reservoir> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
@@ -129,6 +132,7 @@ geo:formacao a owl:Class ;
     owl:sameAs <https://w3id.org/osdu#GeologicalFormation> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .

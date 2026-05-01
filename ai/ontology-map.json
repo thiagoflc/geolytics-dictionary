@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-01T10:56:48.603Z",
+  "generated": "2026-05-01T11:19:49.788Z",
   "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
   "layers": [
     {
@@ -21,6 +21,66 @@
         "litologia",
         "processo-geologico",
         "sistema-deposicional"
+      ]
+    },
+    {
+      "id": "layer1b",
+      "name": "GeoSciML + CGI Simple Lithology",
+      "maintainer": "OGC + CGI/IUGS (Commission for the Management and Application of Geoscience Information)",
+      "type": "international_standard",
+      "github": "https://github.com/opengeospatial/GeoSciML",
+      "modules": {
+        "gsmlb": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmlb.ttl",
+          "namespace": "http://geosciml.org/def/gsmlb#",
+          "classes": 33,
+          "properties": 56,
+          "scope": "Geologia básica — GeologicUnit, GeologicStructure, GeologicEvent, EarthMaterial, MappedFeature, Fold, Foliation, ShearDisplacementStructure"
+        },
+        "gsmlbh": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmlbh.ttl",
+          "namespace": "http://geosciml.org/def/gsmlbh#",
+          "classes": 6,
+          "properties": 18,
+          "scope": "Boreholes — Borehole, BoreholeInterval, MappedInterval, OriginPosition, DrillingDetails"
+        },
+        "gsmll": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmll.ttl",
+          "namespace": "http://geosciml.org/def/gsmll#",
+          "classes": 7,
+          "scope": "Logical views para serialização de dados (BoreholeView, GeologicUnitView, ContactView, etc.)"
+        },
+        "gwml2": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/minimal/gwml2_minimal.ttl",
+          "namespace": "http://gwml2.org/def/gwml2#",
+          "classes": 29,
+          "scope": "Águas subterrâneas — Casing, Screen, Sealing, Filtration, WellConstruction (componentes transferíveis para poços de petróleo)"
+        },
+        "cgi_lithology": {
+          "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/CGI-SimpleLithology201211.ttl",
+          "namespace": "http://resource.geosciml.org/classifier/cgi/lithOntology/",
+          "concepts": 437,
+          "scope": "Vocabulário canônico de litologias — limestone, dolostone, arenite, sandstone, mudstone, basalt, granite, rock_salt, anhydrite, anthracite_coal, etc."
+        }
+      },
+      "description": "Padrão internacional OGC para troca de dados geológicos. Complementa GeoCore com modelo detalhado de Borehole (gsmlbh) e vocabulário canônico de litologias (CGI Simple Lithology, ~437 conceitos). Usado como referência por serviços geológicos nacionais (USGS, BGS, Geoscience Australia, CPRM-BR). Adotado como vocabulário-base por OSDU para LithologyType.",
+      "concepts_count": 512,
+      "language": "OWL/RDF/SKOS",
+      "license": "OGC public spec / Apache 2.0",
+      "relationship": "EXTENDS_GEOCORE — GeoSciML detalha estruturas (Fold, Foliation, ShearDisplacement) e fornece vocabulário litológico canônico que GeoCore referencia mas não enumera.",
+      "osdu_convergence": "CGI Simple Lithology é vocabulário recomendado para popular opendes:osdu:reference-data--LithologyType. Equivalência classe-a-classe pode ser estabelecida via owl:equivalentClass.",
+      "geolytics_coverage": [
+        "poco",
+        "wellbore",
+        "bacia-sedimentar",
+        "formacao-geologica",
+        "reservatorio",
+        "litologia",
+        "contato-geologico",
+        "dobra",
+        "foliacao",
+        "falha-cisalhante",
+        "feature-mapeada"
       ]
     },
     {
