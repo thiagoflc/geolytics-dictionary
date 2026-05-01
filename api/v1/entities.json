@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T23:09:15.413Z",
-    "count": 107
+    "generated": "2026-05-01T13:47:18.033Z",
+    "count": 113
   },
   "entities": [
     {
@@ -88,6 +88,16 @@
             "to": "ambiente",
             "relation": "classified_by",
             "style": "dashed"
+          },
+          {
+            "to": "teste-formacao",
+            "relation": "undergoes",
+            "style": "solid"
+          },
+          {
+            "to": "tld",
+            "relation": "undergoes",
+            "style": "solid"
           },
           {
             "to": "bacia-sedimentar",
@@ -623,6 +633,11 @@
             "to": "formacao",
             "relation": "hosted_in",
             "style": "solid"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "characterized_with",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -640,6 +655,16 @@
             "from": "trapa",
             "relation": "comprises",
             "style": "solid"
+          },
+          {
+            "from": "pvt",
+            "relation": "characterizes",
+            "style": "solid"
+          },
+          {
+            "from": "classe-fluido",
+            "relation": "characterizes",
+            "style": "dashed"
           },
           {
             "from": "modelo-petrofisico",
@@ -1004,6 +1029,16 @@
             "to": "declaracao-comercialidade",
             "relation": "may_yield",
             "style": "dashed"
+          },
+          {
+            "to": "teste-formacao",
+            "relation": "may_include",
+            "style": "dashed"
+          },
+          {
+            "to": "tld",
+            "relation": "includes",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -1326,6 +1361,11 @@
       "relations": {
         "outgoing": [
           {
+            "to": "i-engine",
+            "relation": "manages_via",
+            "style": "solid"
+          },
+          {
             "to": "sigep",
             "relation": "manages_via",
             "style": "solid"
@@ -1340,6 +1380,11 @@
           {
             "from": "contrato-ep",
             "relation": "signed_with",
+            "style": "solid"
+          },
+          {
+            "from": "bmp",
+            "relation": "submitted_to",
             "style": "solid"
           },
           {
@@ -1916,6 +1961,363 @@
             "from": "area-desenvolvimento",
             "relation": "ends_with",
             "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "teste-formacao",
+      "label": "Teste de Formação",
+      "label_en": "Formation Test (TF/TFR/TFRE)",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "teste-formacao",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Teste de Formação",
+        "@en": "Formation Test (TF/TFR/TFRE)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "amostra-fluido",
+            "relation": "yields",
+            "style": "solid"
+          },
+          {
+            "to": "rftp",
+            "relation": "requires_report",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "undergoes",
+            "style": "solid"
+          },
+          {
+            "from": "pad",
+            "relation": "may_include",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "id": "tld",
+      "label": "TLD",
+      "label_en": "Extended Well Test (EWT)",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Norma de Testes de Poço (TLD)",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "tld",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "TLD",
+        "@en": "Extended Well Test (EWT)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "amostra-fluido",
+            "relation": "yields",
+            "style": "solid"
+          },
+          {
+            "to": "rftp",
+            "relation": "requires_report",
+            "style": "solid"
+          },
+          {
+            "to": "i-engine",
+            "relation": "reported_via",
+            "style": "solid"
+          },
+          {
+            "to": "bmp",
+            "relation": "generates",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "undergoes",
+            "style": "solid"
+          },
+          {
+            "from": "pad",
+            "relation": "includes",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rftp",
+      "label": "RFTP",
+      "label_en": "Well Test Final Report",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Norma de Testes de Poço",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "rftp",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "RFTP",
+        "@en": "Well Test Final Report"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "dpp",
+            "relation": "submitted_via",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "teste-formacao",
+            "relation": "requires_report",
+            "style": "solid"
+          },
+          {
+            "from": "tld",
+            "relation": "requires_report",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i-engine",
+      "label": "i-Engine",
+      "label_en": "ANP i-Engine System",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP — Resolução nº 880/2022",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "i-engine",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "i-Engine",
+        "@en": "ANP i-Engine System"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "unidade-medida",
+            "relation": "enforces",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "tld",
+            "relation": "reported_via",
+            "style": "solid"
+          },
+          {
+            "from": "anp",
+            "relation": "manages_via",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "dpp",
+      "label": "DPP",
+      "label_en": "ANP Data Portal (DPP)",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "dpp",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "DPP",
+        "@en": "ANP Data Portal (DPP)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "rftp",
+            "relation": "submitted_via",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "id": "bmp",
+      "label": "BMP",
+      "label_en": "Monthly Production Report",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "declaracoes-comercialidade"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "bmp",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "BMP",
+        "@en": "Monthly Production Report"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "anp",
+            "relation": "submitted_to",
+            "style": "solid"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "standardized_by",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "tld",
+            "relation": "generates",
+            "style": "solid"
           }
         ]
       }
@@ -3233,6 +3635,11 @@
             "from": "maturidade-termal",
             "relation": "characterizes",
             "style": "solid"
+          },
+          {
+            "from": "correlacao-oleo-rocha",
+            "relation": "links_to",
+            "style": "solid"
           }
         ]
       }
@@ -4099,6 +4506,11 @@
             "to": "correlacao-oleo-rocha",
             "relation": "enables",
             "style": "solid"
+          },
+          {
+            "to": "amostra-fluido",
+            "relation": "derived_from",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -4148,7 +4560,13 @@
       },
       "skos_example": [],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "rocha-geradora",
+            "relation": "links_to",
+            "style": "solid"
+          }
+        ],
         "incoming": [
           {
             "from": "biomarcador",
@@ -4559,9 +4977,30 @@
             "to": "sara",
             "relation": "undergoes",
             "style": "dashed"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "qualified_by",
+            "style": "solid"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "teste-formacao",
+            "relation": "yields",
+            "style": "solid"
+          },
+          {
+            "from": "tld",
+            "relation": "yields",
+            "style": "solid"
+          },
+          {
+            "from": "biomarcador",
+            "relation": "derived_from",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {
@@ -4607,6 +5046,16 @@
           {
             "to": "classe-fluido",
             "relation": "classifies",
+            "style": "solid"
+          },
+          {
+            "to": "reservatorio",
+            "relation": "characterizes",
+            "style": "solid"
+          },
+          {
+            "to": "unidade-medida",
+            "relation": "expressed_in",
             "style": "solid"
           }
         ],
@@ -4663,7 +5112,13 @@
       },
       "skos_example": [],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "reservatorio",
+            "relation": "characterizes",
+            "style": "dashed"
+          }
+        ],
         "incoming": [
           {
             "from": "pvt",
@@ -5215,7 +5670,33 @@
       ],
       "relations": {
         "outgoing": [],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "amostra-fluido",
+            "relation": "qualified_by",
+            "style": "solid"
+          },
+          {
+            "from": "pvt",
+            "relation": "expressed_in",
+            "style": "solid"
+          },
+          {
+            "from": "i-engine",
+            "relation": "enforces",
+            "style": "solid"
+          },
+          {
+            "from": "bmp",
+            "relation": "standardized_by",
+            "style": "dashed"
+          },
+          {
+            "from": "reservatorio",
+            "relation": "characterized_with",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {

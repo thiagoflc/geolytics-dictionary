@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-01T23:09:15.413Z",
+  "generated": "2026-05-01T14:52:36.000Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
   "nodes": [
     {
@@ -1262,6 +1262,228 @@
       },
       "skos_definition": {
         "@pt": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "teste-formacao",
+      "label": "Teste de Formação",
+      "label_en": "Formation Test (TF/TFR/TFRE)",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "teste-formacao",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Teste de Formação",
+        "@en": "Formation Test (TF/TFR/TFRE)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "tld",
+      "label": "TLD",
+      "label_en": "Extended Well Test (EWT)",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Norma de Testes de Poço (TLD)",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "tld",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "TLD",
+        "@en": "Extended Well Test (EWT)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "rftp",
+      "label": "RFTP",
+      "label_en": "Well Test Final Report",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Norma de Testes de Poço",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "rftp",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "RFTP",
+        "@en": "Well Test Final Report"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "i-engine",
+      "label": "i-Engine",
+      "label_en": "ANP i-Engine System",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP — Resolução nº 880/2022",
+      "datasets": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "i-engine",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "i-Engine",
+        "@en": "ANP i-Engine System"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "dpp",
+      "label": "DPP",
+      "label_en": "ANP Data Portal (DPP)",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "dpp",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "DPP",
+        "@en": "ANP Data Portal (DPP)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "bmp",
+      "label": "BMP",
+      "label_en": "Monthly Production Report",
+      "type": "instrument",
+      "color": "#888780",
+      "size": 20,
+      "definition": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP",
+      "datasets": [
+        "declaracoes-comercialidade"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "bmp",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "BMP",
+        "@en": "Monthly Production Report"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
         "@en": null
       },
       "skos_example": []
@@ -4947,6 +5169,1243 @@
         "@en": null
       },
       "skos_example": []
+    },
+    {
+      "id": "engenharia-poco",
+      "label": "Engenharia de Poço",
+      "label_en": "Well Engineering",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 26,
+      "definition": "Disciplina que cobre o ciclo de vida do poço — projeto, perfuração, completação, intervenção e abandono. Agrupa as quatro fases pilares e conecta o objeto Poço aos processos, equipamentos e relatórios que o materializam.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP — Res. 46/2016 (SGIP)",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "disciplina de poço"
+      ],
+      "synonyms_en": [
+        "well engineering"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Engenharia de Poço",
+        "@en": "Well Engineering"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "disciplina de poço"
+        ],
+        "@en": [
+          "well engineering"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Disciplina que cobre o ciclo de vida do poço — projeto, perfuração, completação, intervenção e abandono. Agrupa as quatro fases pilares e conecta o objeto Poço aos processos, equipamentos e relatórios que o materializam.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "well-design",
+      "label": "Projeto e Planejamento de Poço",
+      "label_en": "Well Design & Planning",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 24,
+      "definition": "Fase intelectual da engenharia de poço: definição de locação, trajetória, programa de revestimento, projeto de fluidos e cimentação a partir dos dados geológicos e geomecânicos.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 06, PG 07",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Projeto e Planejamento de Poço",
+        "@en": "Well Design & Planning"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Fase intelectual da engenharia de poço: definição de locação, trajetória, programa de revestimento, projeto de fluidos e cimentação a partir dos dados geológicos e geomecânicos.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "drilling-ops",
+      "label": "Operações de Perfuração",
+      "label_en": "Drilling Operations",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 24,
+      "definition": "Execução física do projeto de poço: seleção de sonda, configuração de BHA, controle de poço, geonavegação e registro diário das atividades em BDP.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 09; Res. 43/2007 (SGSO)",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Operações de Perfuração",
+        "@en": "Drilling Operations"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Execução física do projeto de poço: seleção de sonda, configuração de BHA, controle de poço, geonavegação e registro diário das atividades em BDP.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "completion-intervention",
+      "label": "Completação e Intervenção",
+      "label_en": "Completion & Intervention",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 24,
+      "definition": "Transformação do poço perfurado em unidade produtiva: instalação de coluna, packers e ANM; avaliação de formação; estimulação e workover.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 12; Res. 21/2014; Res. 41/2015",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Completação e Intervenção",
+        "@en": "Completion & Intervention"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Transformação do poço perfurado em unidade produtiva: instalação de coluna, packers e ANM; avaliação de formação; estimulação e workover.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "p-and-a",
+      "label": "Abandono e Descomissionamento",
+      "label_en": "Plug & Abandonment",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 24,
+      "definition": "Encerramento seguro do ciclo de vida do poço: isolamento definitivo de zonas de fluxo via tampões de cimento para prevenção de contaminação e garantia de integridade permanente.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 14; Portaria 176/1999; Portaria 25/2002",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "P&A"
+      ],
+      "synonyms_en": [
+        "plug and abandonment",
+        "P&A"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Abandono e Descomissionamento",
+        "@en": "Plug & Abandonment"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "P&A"
+        ],
+        "@en": [
+          "plug and abandonment",
+          "P&A"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Encerramento seguro do ciclo de vida do poço: isolamento definitivo de zonas de fluxo via tampões de cimento para prevenção de contaminação e garantia de integridade permanente.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "sgip",
+      "label": "SGIP — Sistema de Gerenciamento da Integridade de Poços",
+      "label_en": "Well Integrity Management System",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 22,
+      "definition": "Sistema regulatório central da engenharia de poços no Brasil, instituído pela Resolução ANP nº 46/2016. Estabelece os padrões mínimos de segurança para projeto, construção, operação, manutenção e abandono, organizados em 17 Práticas de Gestão (PG).",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 46/2016",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "Resolução ANP 46/2016"
+      ],
+      "synonyms_en": [
+        "WIMS",
+        "Resolution ANP 46/2016"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "SGIP — Sistema de Gerenciamento da Integridade de Poços",
+        "@en": "Well Integrity Management System"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "Resolução ANP 46/2016"
+        ],
+        "@en": [
+          "WIMS",
+          "Resolution ANP 46/2016"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Sistema regulatório central da engenharia de poços no Brasil, instituído pela Resolução ANP nº 46/2016. Estabelece os padrões mínimos de segurança para projeto, construção, operação, manutenção e abandono, organizados em 17 Práticas de Gestão (PG).",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "pratica-gestao",
+      "label": "Prática de Gestão (PG-SGIP)",
+      "label_en": "Management Practice (WIMS)",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 20,
+      "definition": "Cada uma das 17 Práticas de Gestão definidas pelo SGIP. Funcionam como checklist de conformidade que as operadoras devem seguir. Destaques: PG 06 (Projeto do Poço), PG 07 (Materiais), PG 09 (Barreiras e Controle de Poço), PG 12 (Integridade em Operação), PG 14 (Suspensão e Abandono), PG 17 (Investigação de Incidentes).",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 46/2016",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "PG",
+        "PG-SGIP"
+      ],
+      "synonyms_en": [
+        "management practice"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Prática de Gestão (PG-SGIP)",
+        "@en": "Management Practice (WIMS)"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "PG",
+          "PG-SGIP"
+        ],
+        "@en": [
+          "management practice"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Cada uma das 17 Práticas de Gestão definidas pelo SGIP. Funcionam como checklist de conformidade que as operadoras devem seguir. Destaques: PG 06 (Projeto do Poço), PG 07 (Materiais), PG 09 (Barreiras e Controle de Poço), PG 12 (Integridade em Operação), PG 14 (Suspensão e Abandono), PG 17 (Investigação de Incidentes).",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "sgso",
+      "label": "SGSO — Gerenciamento de Segurança Operacional",
+      "label_en": "Operational Safety Management System",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 20,
+      "definition": "Regime de segurança para instalações marítimas de perfuração e produção, instituído pela Resolução ANP nº 43/2007. Foca no sistema de gestão da sonda e da plataforma para proteção humana e ambiental.",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 43/2007",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "OSMS"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "SGSO — Gerenciamento de Segurança Operacional",
+        "@en": "Operational Safety Management System"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "OSMS"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Regime de segurança para instalações marítimas de perfuração e produção, instituído pela Resolução ANP nº 43/2007. Foca no sistema de gestão da sonda e da plataforma para proteção humana e ambiental.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "res-anp-699-2017",
+      "label": "Resolução ANP nº 699/2017",
+      "label_en": "ANP Resolution 699/2017",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 20,
+      "definition": "Padroniza a comunicação de dados técnicos de poço à ANP. Estabelece codificação oficial dos poços, definição de status (produtor, injetor, seco) e obrigatoriedade de relatórios de acompanhamento, incluindo o BDP/RDP.",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 699/2017",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Resolução ANP nº 699/2017",
+        "@en": "ANP Resolution 699/2017"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Padroniza a comunicação de dados técnicos de poço à ANP. Estabelece codificação oficial dos poços, definição de status (produtor, injetor, seco) e obrigatoriedade de relatórios de acompanhamento, incluindo o BDP/RDP.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "portaria-176-1999",
+      "label": "Portaria Técnica ANP nº 176/1999",
+      "label_en": "ANP Technical Ordinance 176/1999",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 18,
+      "definition": "Regulamenta os procedimentos de isolamento permanente das zonas de óleo e gás durante o abandono definitivo de poços, visando evitar contaminação ambiental.",
+      "definition_en_canonical": null,
+      "legal_source": "Portaria ANP nº 176/1999",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Portaria Técnica ANP nº 176/1999",
+        "@en": "ANP Technical Ordinance 176/1999"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Regulamenta os procedimentos de isolamento permanente das zonas de óleo e gás durante o abandono definitivo de poços, visando evitar contaminação ambiental.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "portaria-25-2002",
+      "label": "Portaria ANP nº 25/2002",
+      "label_en": "ANP Ordinance 25/2002",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 18,
+      "definition": "Detalha os requisitos técnicos para abandono temporário de poços, incluindo uso de barreiras sólidas e tampões de cimento.",
+      "definition_en_canonical": null,
+      "legal_source": "Portaria ANP nº 25/2002",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Portaria ANP nº 25/2002",
+        "@en": "ANP Ordinance 25/2002"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Detalha os requisitos técnicos para abandono temporário de poços, incluindo uso de barreiras sólidas e tampões de cimento.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "res-anp-21-2014",
+      "label": "Resolução ANP nº 21/2014",
+      "label_en": "ANP Resolution 21/2014",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 18,
+      "definition": "Rege as operações de fraturamento hidráulico e estimulação em reservatórios não convencionais.",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 21/2014",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Resolução ANP nº 21/2014",
+        "@en": "ANP Resolution 21/2014"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Rege as operações de fraturamento hidráulico e estimulação em reservatórios não convencionais.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "res-anp-41-2015",
+      "label": "Resolução ANP nº 41/2015",
+      "label_en": "ANP Resolution 41/2015",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 18,
+      "definition": "Foca na integridade de sistemas submarinos — árvores de natal molhadas, linhas de fluxo e risers — ligados aos poços marítimos.",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 41/2015",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Resolução ANP nº 41/2015",
+        "@en": "ANP Resolution 41/2015"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Foca na integridade de sistemas submarinos — árvores de natal molhadas, linhas de fluxo e risers — ligados aos poços marítimos.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "bdp",
+      "label": "BDP — Boletim Diário de Perfuração",
+      "label_en": "Daily Drilling Report (DDR)",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Documento oficial que registra cronologicamente todas as operações realizadas em um poço durante 24 horas: identificação, cronograma de atividades, parâmetros de fluido e perfuração, configuração de BHA, testes de BOP, ocorrências de kick/perda de circulação e descrição geológica sumária. Alimenta o BDEP e é peça-chave em fiscalizações.",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 699/2017",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "DDR",
+        "RDP — Relatório Diário de Perfuração"
+      ],
+      "synonyms_en": [
+        "DDR",
+        "daily drilling report"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "BDP — Boletim Diário de Perfuração",
+        "@en": "Daily Drilling Report (DDR)"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "DDR",
+          "RDP — Relatório Diário de Perfuração"
+        ],
+        "@en": [
+          "DDR",
+          "daily drilling report"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Documento oficial que registra cronologicamente todas as operações realizadas em um poço durante 24 horas: identificação, cronograma de atividades, parâmetros de fluido e perfuração, configuração de BHA, testes de BOP, ocorrências de kick/perda de circulação e descrição geológica sumária. Alimenta o BDEP e é peça-chave em fiscalizações.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "bdep",
+      "label": "BDEP — Banco de Dados de Exploração e Produção",
+      "label_en": "E&P Database",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Banco de dados oficial da ANP que consolida informações técnicas de E&P recebidas via BDP, RFTP e demais relatórios. Torna-se público após o período de confidencialidade contratual.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "banco de dados E&P"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "BDEP — Banco de Dados de Exploração e Produção",
+        "@en": "E&P Database"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "banco de dados E&P"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Banco de dados oficial da ANP que consolida informações técnicas de E&P recebidas via BDP, RFTP e demais relatórios. Torna-se público após o período de confidencialidade contratual.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "controle-poco",
+      "label": "Controle de Poço",
+      "label_en": "Well Control",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Conjunto de procedimentos e equipamentos para gestão das pressões durante a perfuração, prevenindo influxos descontrolados (kicks) e blowouts. Inclui o uso de BOP, monitoramento de janela de lama e testes periódicos de barreiras.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 09",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "well control"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Controle de Poço",
+        "@en": "Well Control"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "well control"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Conjunto de procedimentos e equipamentos para gestão das pressões durante a perfuração, prevenindo influxos descontrolados (kicks) e blowouts. Inclui o uso de BOP, monitoramento de janela de lama e testes periódicos de barreiras.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "sonda-perfuracao",
+      "label": "Sonda de Perfuração",
+      "label_en": "Drilling Rig",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Unidade de perfuração utilizada para construir o poço. Tipos principais: terrestre (onshore), autoelevável (jack-up), semissubmersível (semisub) e navio-sonda (drillship). A seleção depende da lâmina d'água, condições ambientais e profundidade-alvo.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 43/2007 (SGSO)",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "sonda",
+        "rig"
+      ],
+      "synonyms_en": [
+        "drilling rig",
+        "rig",
+        "jack-up",
+        "semisub",
+        "drillship"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Sonda de Perfuração",
+        "@en": "Drilling Rig"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "sonda",
+          "rig"
+        ],
+        "@en": [
+          "drilling rig",
+          "rig",
+          "jack-up",
+          "semisub",
+          "drillship"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Unidade de perfuração utilizada para construir o poço. Tipos principais: terrestre (onshore), autoelevável (jack-up), semissubmersível (semisub) e navio-sonda (drillship). A seleção depende da lâmina d'água, condições ambientais e profundidade-alvo.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "geonavegacao",
+      "label": "Geonavegação",
+      "label_en": "Geosteering",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Técnica operacional de ajuste em tempo real da trajetória do poço durante a perfuração, com base em dados LWD/MWD, para mantê-lo dentro da zona de interesse do reservatório.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "geosteering"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Geonavegação",
+        "@en": "Geosteering"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "geosteering"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Técnica operacional de ajuste em tempo real da trajetória do poço durante a perfuração, com base em dados LWD/MWD, para mantê-lo dentro da zona de interesse do reservatório.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "programa-fluidos",
+      "label": "Programa de Fluidos de Perfuração",
+      "label_en": "Drilling Fluids Program",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Especificação da lama de perfuração para cada fase do poço — densidade, viscosidade, composição química — para controle de pressão, limpeza, lubrificação e estabilidade do poço. Deve respeitar a janela de lama definida pelo campo tensional.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 06",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "programa de lama"
+      ],
+      "synonyms_en": [
+        "mud program",
+        "drilling fluids program"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Programa de Fluidos de Perfuração",
+        "@en": "Drilling Fluids Program"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "programa de lama"
+        ],
+        "@en": [
+          "mud program",
+          "drilling fluids program"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Especificação da lama de perfuração para cada fase do poço — densidade, viscosidade, composição química — para controle de pressão, limpeza, lubrificação e estabilidade do poço. Deve respeitar a janela de lama definida pelo campo tensional.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "locacao-trajetoria",
+      "label": "Locação e Projeto de Trajetória",
+      "label_en": "Well Location & Trajectory Design",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Definição da locação geográfica e da trajetória planejada do poço: vertical, direcional, horizontal ou ERW (Extended Reach Well). Baseada em alvos geológicos, restrições superficiais e obstáculos do subsolo.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 06",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "well location",
+        "trajectory design",
+        "ERW"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Locação e Projeto de Trajetória",
+        "@en": "Well Location & Trajectory Design"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "well location",
+          "trajectory design",
+          "ERW"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Definição da locação geográfica e da trajetória planejada do poço: vertical, direcional, horizontal ou ERW (Extended Reach Well). Baseada em alvos geológicos, restrições superficiais e obstáculos do subsolo.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "estimulacao",
+      "label": "Estimulação de Poço",
+      "label_en": "Well Stimulation",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Conjunto de técnicas para aumentar a produtividade de um poço — acidificação matricial, fraturamento ácido e fraturamento hidráulico. Em reservatórios não convencionais é regida por norma específica.",
+      "definition_en_canonical": null,
+      "legal_source": "Resolução ANP nº 21/2014",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "fraturamento hidráulico",
+        "acidificação"
+      ],
+      "synonyms_en": [
+        "stimulation",
+        "hydraulic fracturing",
+        "acidizing"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Estimulação de Poço",
+        "@en": "Well Stimulation"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "fraturamento hidráulico",
+          "acidificação"
+        ],
+        "@en": [
+          "stimulation",
+          "hydraulic fracturing",
+          "acidizing"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Conjunto de técnicas para aumentar a produtividade de um poço — acidificação matricial, fraturamento ácido e fraturamento hidráulico. Em reservatórios não convencionais é regida por norma específica.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "workover",
+      "label": "Workover (Intervenção)",
+      "label_en": "Workover",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Operação posterior à completação para manutenção, troca de equipamentos de subsuperfície, recompletação ou restauração da produção. Pode incluir reentrada (sidetrack) e recompletação para zona diferente.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "intervenção",
+        "recompletação"
+      ],
+      "synonyms_en": [
+        "workover",
+        "well intervention"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Workover (Intervenção)",
+        "@en": "Workover"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "intervenção",
+          "recompletação"
+        ],
+        "@en": [
+          "workover",
+          "well intervention"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Operação posterior à completação para manutenção, troca de equipamentos de subsuperfície, recompletação ou restauração da produção. Pode incluir reentrada (sidetrack) e recompletação para zona diferente.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "plug-and-abandon",
+      "label": "Plug & Abandon (P&A)",
+      "label_en": "Plug & Abandon",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Operação de abandono permanente do poço: isolamento definitivo de todas as zonas de fluxo (óleo, gás e aquíferos) via tampões de cimento e remoção de equipamentos de superfície/subsuperfície. Exige verificação por teste de peso ou de pressão.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 14; Portaria 176/1999",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "P&A",
+        "abandono"
+      ],
+      "synonyms_en": [
+        "P&A",
+        "plug and abandon"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Plug & Abandon (P&A)",
+        "@en": "Plug & Abandon"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "P&A",
+          "abandono"
+        ],
+        "@en": [
+          "P&A",
+          "plug and abandon"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Operação de abandono permanente do poço: isolamento definitivo de todas as zonas de fluxo (óleo, gás e aquíferos) via tampões de cimento e remoção de equipamentos de superfície/subsuperfície. Exige verificação por teste de peso ou de pressão.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "tampao-cimento",
+      "label": "Tampão de Cimento",
+      "label_en": "Cement Plug",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Plugue de cimento posicionado no interior do poço para isolar zonas com potencial de fluxo. Sua extensão, posição e qualidade são especificadas pela PG 14 do SGIP e devem ser verificadas por teste.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 14",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "cement plug"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Tampão de Cimento",
+        "@en": "Cement Plug"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "cement plug"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Plugue de cimento posicionado no interior do poço para isolar zonas com potencial de fluxo. Sua extensão, posição e qualidade são especificadas pela PG 14 do SGIP e devem ser verificadas por teste.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "abandono-temporario",
+      "label": "Abandono Temporário",
+      "label_en": "Temporary Abandonment",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Suspensão temporária do poço com instalação de barreiras sólidas e tampões reversíveis, mantendo a possibilidade de reentrada futura.",
+      "definition_en_canonical": null,
+      "legal_source": "Portaria ANP nº 25/2002",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "temporary abandonment"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Abandono Temporário",
+        "@en": "Temporary Abandonment"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "temporary abandonment"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Suspensão temporária do poço com instalação de barreiras sólidas e tampões reversíveis, mantendo a possibilidade de reentrada futura.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "abandono-permanente",
+      "label": "Abandono Permanente",
+      "label_en": "Permanent Abandonment",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Encerramento definitivo do poço com isolamento irreversível das zonas de fluxo, garantindo segurança ambiental de longo prazo.",
+      "definition_en_canonical": null,
+      "legal_source": "Portaria Técnica ANP nº 176/1999",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "permanent abandonment"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Abandono Permanente",
+        "@en": "Permanent Abandonment"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "permanent abandonment"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Encerramento definitivo do poço com isolamento irreversível das zonas de fluxo, garantindo segurança ambiental de longo prazo.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "barreira-poco",
+      "label": "Barreira de Poço",
+      "label_en": "Well Barrier",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 20,
+      "definition": "Elemento (cimento, fluido, válvula, revestimento) que impede o fluxo descontrolado de fluidos de uma zona com potencial de pressão. PG 09 do SGIP exige pelo menos duas barreiras independentes para qualquer zona de fluxo.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 09",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "well barrier"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Barreira de Poço",
+        "@en": "Well Barrier"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "well barrier"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Elemento (cimento, fluido, válvula, revestimento) que impede o fluxo descontrolado de fluidos de uma zona com potencial de pressão. PG 09 do SGIP exige pelo menos duas barreiras independentes para qualquer zona de fluxo.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "teste-bop",
+      "label": "Teste de BOP",
+      "label_en": "BOP Test",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Teste periódico de pressão e funcionamento do Blowout Preventer, conforme periodicidade exigida pela PG 09 do SGIP.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 09",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "BOP test"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Teste de BOP",
+        "@en": "BOP Test"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "BOP test"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Teste periódico de pressão e funcionamento do Blowout Preventer, conforme periodicidade exigida pela PG 09 do SGIP.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "maasp",
+      "label": "MAASP — Pressão Máxima Admissível em Anular",
+      "label_en": "Maximum Allowable Annular Surface Pressure",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 18,
+      "definition": "Pressão máxima permitida em cada anular do poço, calculada para não romper a formação ou o revestimento. A operadora deve calcular e respeitar o MAASP em todas as fases operacionais.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP Res. 46/2016 — PG 12",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [
+        "MAASP"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "MAASP — Pressão Máxima Admissível em Anular",
+        "@en": "Maximum Allowable Annular Surface Pressure"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": [
+          "MAASP"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Pressão máxima permitida em cada anular do poço, calculada para não romper a formação ou o revestimento. A operadora deve calcular e respeitar o MAASP em todas as fases operacionais.",
+        "@en": null
+      },
+      "skos_example": []
     }
   ],
   "edges": [
@@ -4991,19 +6450,11 @@
       "style": "dashed"
     },
     {
-      "source": "poco",
+      "source": "wellbore",
       "target": "presal",
       "relation": "may_reach",
       "relation_label_pt": "pode atingir",
       "relation_label_en": "may reach",
-      "style": "dashed"
-    },
-    {
-      "source": "poco",
-      "target": "formacao",
-      "relation": "traverses",
-      "relation_label_pt": "atravessa",
-      "relation_label_en": "traverses",
       "style": "dashed"
     },
     {
@@ -5087,6 +6538,78 @@
       "style": "solid"
     },
     {
+      "source": "teste-formacao",
+      "target": "amostra-fluido",
+      "relation": "yields",
+      "relation_label_pt": "gera amostra de",
+      "relation_label_en": "yields",
+      "style": "solid"
+    },
+    {
+      "source": "tld",
+      "target": "amostra-fluido",
+      "relation": "yields",
+      "relation_label_pt": "gera amostra de",
+      "relation_label_en": "yields",
+      "style": "solid"
+    },
+    {
+      "source": "teste-formacao",
+      "target": "rftp",
+      "relation": "requires_report",
+      "relation_label_pt": "exige relatório",
+      "relation_label_en": "requires report",
+      "style": "solid"
+    },
+    {
+      "source": "tld",
+      "target": "rftp",
+      "relation": "requires_report",
+      "relation_label_pt": "exige relatório",
+      "relation_label_en": "requires report",
+      "style": "solid"
+    },
+    {
+      "source": "tld",
+      "target": "i-engine",
+      "relation": "reported_via",
+      "relation_label_pt": "reportado via",
+      "relation_label_en": "reported via",
+      "style": "solid"
+    },
+    {
+      "source": "tld",
+      "target": "bmp",
+      "relation": "generates",
+      "relation_label_pt": "gera",
+      "relation_label_en": "generates",
+      "style": "solid"
+    },
+    {
+      "source": "rftp",
+      "target": "dpp",
+      "relation": "submitted_via",
+      "relation_label_pt": "enviado via",
+      "relation_label_en": "submitted via",
+      "style": "solid"
+    },
+    {
+      "source": "anp",
+      "target": "i-engine",
+      "relation": "manages_via",
+      "relation_label_pt": "gerencia via",
+      "relation_label_en": "manages via",
+      "style": "solid"
+    },
+    {
+      "source": "bmp",
+      "target": "anp",
+      "relation": "submitted_to",
+      "relation_label_pt": "enviado à",
+      "relation_label_en": "submitted to",
+      "style": "solid"
+    },
+    {
       "source": "pad",
       "target": "bloco",
       "relation": "evaluates",
@@ -5101,6 +6624,22 @@
       "relation_label_pt": "pode gerar",
       "relation_label_en": "may yield",
       "style": "dashed"
+    },
+    {
+      "source": "pad",
+      "target": "teste-formacao",
+      "relation": "may_include",
+      "relation_label_pt": "pode incluir",
+      "relation_label_en": "may include",
+      "style": "dashed"
+    },
+    {
+      "source": "pad",
+      "target": "tld",
+      "relation": "includes",
+      "relation_label_pt": "inclui",
+      "relation_label_en": "includes",
+      "style": "solid"
     },
     {
       "source": "declaracao-comercialidade",
@@ -5224,7 +6763,7 @@
     },
     {
       "source": "bop",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "installed_on",
       "relation_label_pt": "instalado em",
       "relation_label_en": "installed on",
@@ -5232,7 +6771,7 @@
     },
     {
       "source": "dhsv",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "installed_in",
       "relation_label_pt": "instalado em",
       "relation_label_en": "installed in",
@@ -5240,23 +6779,15 @@
     },
     {
       "source": "anm-eq",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "controls",
       "relation_label_pt": "controla",
       "relation_label_en": "controls",
       "style": "solid"
     },
     {
-      "source": "bha",
-      "target": "poco",
-      "relation": "composes",
-      "relation_label_pt": "compõe coluna",
-      "relation_label_en": "composes",
-      "style": "dashed"
-    },
-    {
       "source": "esp-eq",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "lifts_from",
       "relation_label_pt": "eleva fluido em",
       "relation_label_en": "lifts from",
@@ -5264,7 +6795,7 @@
     },
     {
       "source": "mwd",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "measures",
       "relation_label_pt": "mede em",
       "relation_label_en": "measures",
@@ -5272,7 +6803,7 @@
     },
     {
       "source": "lwd",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "logs",
       "relation_label_pt": "perfila",
       "relation_label_en": "logs",
@@ -5527,7 +7058,7 @@
       "style": "solid"
     },
     {
-      "source": "poco",
+      "source": "wellbore",
       "target": "intervalo-estratigrafico",
       "relation": "samples",
       "relation_label_pt": "amostra",
@@ -5540,14 +7071,6 @@
       "relation": "samples",
       "relation_label_pt": "amostra",
       "relation_label_en": "samples",
-      "style": "solid"
-    },
-    {
-      "source": "perfil-poco",
-      "target": "poco",
-      "relation": "measures",
-      "relation_label_pt": "mede",
-      "relation_label_en": "measures",
       "style": "solid"
     },
     {
@@ -5565,6 +7088,14 @@
       "relation_label_pt": "permite",
       "relation_label_en": "enables",
       "style": "solid"
+    },
+    {
+      "source": "biomarcador",
+      "target": "amostra-fluido",
+      "relation": "derived_from",
+      "relation_label_pt": "extraído de",
+      "relation_label_en": "derived from",
+      "style": "dashed"
     },
     {
       "source": "gc-ms",
@@ -5599,6 +7130,30 @@
       "style": "solid"
     },
     {
+      "source": "pvt",
+      "target": "reservatorio",
+      "relation": "characterizes",
+      "relation_label_pt": "caracteriza fluido de",
+      "relation_label_en": "characterizes",
+      "style": "solid"
+    },
+    {
+      "source": "correlacao-oleo-rocha",
+      "target": "rocha-geradora",
+      "relation": "links_to",
+      "relation_label_pt": "traça origem em",
+      "relation_label_en": "links to",
+      "style": "solid"
+    },
+    {
+      "source": "classe-fluido",
+      "target": "reservatorio",
+      "relation": "characterizes",
+      "relation_label_pt": "caracteriza",
+      "relation_label_en": "characterizes",
+      "style": "dashed"
+    },
+    {
       "source": "modelo-petrofisico",
       "target": "reservatorio",
       "relation": "characterizes",
@@ -5624,7 +7179,7 @@
     },
     {
       "source": "janela-lama",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "guides_drilling_of",
       "relation_label_pt": "guia perfuração de",
       "relation_label_en": "guides drilling of",
@@ -5632,7 +7187,7 @@
     },
     {
       "source": "ocorrencia-geomec",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "occurs_in",
       "relation_label_pt": "ocorre em",
       "relation_label_en": "occurs in",
@@ -5735,11 +7290,43 @@
       "style": "solid"
     },
     {
-      "source": "activity-plan",
-      "target": "poco",
-      "relation": "plans_activity_for",
-      "relation_label_pt": "planeja atividade em",
-      "relation_label_en": "plans activity for",
+      "source": "amostra-fluido",
+      "target": "unidade-medida",
+      "relation": "qualified_by",
+      "relation_label_pt": "qualificada por",
+      "relation_label_en": "qualified by",
+      "style": "solid"
+    },
+    {
+      "source": "pvt",
+      "target": "unidade-medida",
+      "relation": "expressed_in",
+      "relation_label_pt": "expresso em",
+      "relation_label_en": "expressed in",
+      "style": "solid"
+    },
+    {
+      "source": "i-engine",
+      "target": "unidade-medida",
+      "relation": "enforces",
+      "relation_label_pt": "valida e impõe",
+      "relation_label_en": "enforces",
+      "style": "solid"
+    },
+    {
+      "source": "bmp",
+      "target": "unidade-medida",
+      "relation": "standardized_by",
+      "relation_label_pt": "padronizado em",
+      "relation_label_en": "standardized by",
+      "style": "dashed"
+    },
+    {
+      "source": "reservatorio",
+      "target": "unidade-medida",
+      "relation": "characterized_with",
+      "relation_label_pt": "caracterizado em",
+      "relation_label_en": "characterized with",
       "style": "dashed"
     },
     {
@@ -5748,14 +7335,6 @@
       "relation": "composed_of",
       "relation_label_pt": "composto por",
       "relation_label_en": "composed of",
-      "style": "solid"
-    },
-    {
-      "source": "well-activity-program",
-      "target": "poco",
-      "relation": "governs",
-      "relation_label_pt": "governa programa de",
-      "relation_label_en": "governs",
       "style": "solid"
     },
     {
@@ -5776,7 +7355,7 @@
     },
     {
       "source": "drilling-activity",
-      "target": "poco",
+      "target": "wellbore",
       "relation": "performed_on",
       "relation_label_pt": "executada em",
       "relation_label_en": "performed on",
@@ -5964,6 +7543,622 @@
       "relation": "restricts_access_for",
       "relation_label_pt": "restringe acesso para",
       "relation_label_en": "restricts access for",
+      "style": "dashed"
+    },
+    {
+      "source": "poco",
+      "target": "engenharia-poco",
+      "relation": "realized_through",
+      "relation_label_pt": "executado por engenharia de",
+      "relation_label_en": "realized through",
+      "style": "solid"
+    },
+    {
+      "source": "engenharia-poco",
+      "target": "well-design",
+      "relation": "has_phase",
+      "relation_label_pt": "tem fase",
+      "relation_label_en": "has phase",
+      "style": "solid"
+    },
+    {
+      "source": "engenharia-poco",
+      "target": "drilling-ops",
+      "relation": "has_phase",
+      "relation_label_pt": "tem fase",
+      "relation_label_en": "has phase",
+      "style": "solid"
+    },
+    {
+      "source": "engenharia-poco",
+      "target": "completion-intervention",
+      "relation": "has_phase",
+      "relation_label_pt": "tem fase",
+      "relation_label_en": "has phase",
+      "style": "solid"
+    },
+    {
+      "source": "engenharia-poco",
+      "target": "p-and-a",
+      "relation": "has_phase",
+      "relation_label_pt": "tem fase",
+      "relation_label_en": "has phase",
+      "style": "solid"
+    },
+    {
+      "source": "casing-design",
+      "target": "well-design",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "cementing-fluid",
+      "target": "well-design",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "wellbore-architecture",
+      "target": "well-design",
+      "relation": "designed_in",
+      "relation_label_pt": "projetado em",
+      "relation_label_en": "designed in",
+      "style": "solid"
+    },
+    {
+      "source": "wellbore-trajectory",
+      "target": "well-design",
+      "relation": "designed_in",
+      "relation_label_pt": "projetado em",
+      "relation_label_en": "designed in",
+      "style": "solid"
+    },
+    {
+      "source": "trajetoria-poco",
+      "target": "well-design",
+      "relation": "designed_in",
+      "relation_label_pt": "projetado em",
+      "relation_label_en": "designed in",
+      "style": "dashed"
+    },
+    {
+      "source": "janela-lama",
+      "target": "well-design",
+      "relation": "informs",
+      "relation_label_pt": "informa",
+      "relation_label_en": "informs",
+      "style": "dashed"
+    },
+    {
+      "source": "activity-plan",
+      "target": "well-design",
+      "relation": "produced_in",
+      "relation_label_pt": "produzido em",
+      "relation_label_en": "produced in",
+      "style": "solid"
+    },
+    {
+      "source": "well-activity-program",
+      "target": "well-design",
+      "relation": "produced_in",
+      "relation_label_pt": "produzido em",
+      "relation_label_en": "produced in",
+      "style": "solid"
+    },
+    {
+      "source": "programa-fluidos",
+      "target": "well-design",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "locacao-trajetoria",
+      "target": "well-design",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "programa-fluidos",
+      "target": "janela-lama",
+      "relation": "respects",
+      "relation_label_pt": "respeita",
+      "relation_label_en": "respects",
+      "style": "dashed"
+    },
+    {
+      "source": "locacao-trajetoria",
+      "target": "wellbore-trajectory",
+      "relation": "specifies",
+      "relation_label_pt": "especifica",
+      "relation_label_en": "specifies",
+      "style": "solid"
+    },
+    {
+      "source": "drilling-activity",
+      "target": "drilling-ops",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "drilling-parameters",
+      "target": "drilling-ops",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "bha",
+      "target": "drilling-ops",
+      "relation": "used_in",
+      "relation_label_pt": "usado em",
+      "relation_label_en": "used in",
+      "style": "solid"
+    },
+    {
+      "source": "mwd",
+      "target": "drilling-ops",
+      "relation": "used_in",
+      "relation_label_pt": "usado em",
+      "relation_label_en": "used in",
+      "style": "dashed"
+    },
+    {
+      "source": "lwd",
+      "target": "drilling-ops",
+      "relation": "used_in",
+      "relation_label_pt": "usado em",
+      "relation_label_en": "used in",
+      "style": "dashed"
+    },
+    {
+      "source": "mud-pump",
+      "target": "drilling-ops",
+      "relation": "used_in",
+      "relation_label_pt": "usado em",
+      "relation_label_en": "used in",
+      "style": "dashed"
+    },
+    {
+      "source": "bop",
+      "target": "drilling-ops",
+      "relation": "used_in",
+      "relation_label_pt": "usado em",
+      "relation_label_en": "used in",
+      "style": "solid"
+    },
+    {
+      "source": "ocorrencia-geomec",
+      "target": "drilling-ops",
+      "relation": "occurs_during",
+      "relation_label_pt": "ocorre durante",
+      "relation_label_en": "occurs during",
+      "style": "dashed"
+    },
+    {
+      "source": "controle-poco",
+      "target": "drilling-ops",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "sonda-perfuracao",
+      "target": "drilling-ops",
+      "relation": "executes",
+      "relation_label_pt": "executa",
+      "relation_label_en": "executes",
+      "style": "solid"
+    },
+    {
+      "source": "geonavegacao",
+      "target": "drilling-ops",
+      "relation": "technique_in",
+      "relation_label_pt": "técnica em",
+      "relation_label_en": "technique in",
+      "style": "dashed"
+    },
+    {
+      "source": "bdp",
+      "target": "drilling-ops",
+      "relation": "records",
+      "relation_label_pt": "registra",
+      "relation_label_en": "records",
+      "style": "solid"
+    },
+    {
+      "source": "controle-poco",
+      "target": "bop",
+      "relation": "uses",
+      "relation_label_pt": "usa",
+      "relation_label_en": "uses",
+      "style": "solid"
+    },
+    {
+      "source": "sonda-perfuracao",
+      "target": "facility-type",
+      "relation": "classified_by",
+      "relation_label_pt": "classificado por",
+      "relation_label_en": "classified by",
+      "style": "dashed"
+    },
+    {
+      "source": "geonavegacao",
+      "target": "lwd",
+      "relation": "uses_data_from",
+      "relation_label_pt": "usa dados de",
+      "relation_label_en": "uses data from",
+      "style": "dashed"
+    },
+    {
+      "source": "completacao",
+      "target": "completion-intervention",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "dhsv",
+      "target": "completion-intervention",
+      "relation": "deployed_in",
+      "relation_label_pt": "instalado em",
+      "relation_label_en": "deployed in",
+      "style": "dashed"
+    },
+    {
+      "source": "anm-eq",
+      "target": "completion-intervention",
+      "relation": "deployed_in",
+      "relation_label_pt": "instalado em",
+      "relation_label_en": "deployed in",
+      "style": "dashed"
+    },
+    {
+      "source": "esp-eq",
+      "target": "completion-intervention",
+      "relation": "deployed_in",
+      "relation_label_pt": "instalado em",
+      "relation_label_en": "deployed in",
+      "style": "dashed"
+    },
+    {
+      "source": "teste-formacao",
+      "target": "completion-intervention",
+      "relation": "executed_in",
+      "relation_label_pt": "executado em",
+      "relation_label_en": "executed in",
+      "style": "solid"
+    },
+    {
+      "source": "tld",
+      "target": "completion-intervention",
+      "relation": "executed_in",
+      "relation_label_pt": "executado em",
+      "relation_label_en": "executed in",
+      "style": "solid"
+    },
+    {
+      "source": "perfil-poco",
+      "target": "completion-intervention",
+      "relation": "acquired_in",
+      "relation_label_pt": "adquirido em",
+      "relation_label_en": "acquired in",
+      "style": "dashed"
+    },
+    {
+      "source": "estimulacao",
+      "target": "completion-intervention",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "workover",
+      "target": "completion-intervention",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "estimulacao",
+      "target": "reservatorio",
+      "relation": "stimulates",
+      "relation_label_pt": "estimula",
+      "relation_label_en": "stimulates",
+      "style": "dashed"
+    },
+    {
+      "source": "workover",
+      "target": "wellbore",
+      "relation": "intervenes_in",
+      "relation_label_pt": "intervém em",
+      "relation_label_en": "intervenes in",
+      "style": "dashed"
+    },
+    {
+      "source": "plug-and-abandon",
+      "target": "p-and-a",
+      "relation": "part_of",
+      "relation_label_pt": "parte de",
+      "relation_label_en": "part of",
+      "style": "solid"
+    },
+    {
+      "source": "tampao-cimento",
+      "target": "p-and-a",
+      "relation": "used_in",
+      "relation_label_pt": "usado em",
+      "relation_label_en": "used in",
+      "style": "solid"
+    },
+    {
+      "source": "abandono-temporario",
+      "target": "p-and-a",
+      "relation": "mode_of",
+      "relation_label_pt": "modo de",
+      "relation_label_en": "mode of",
+      "style": "solid"
+    },
+    {
+      "source": "abandono-permanente",
+      "target": "p-and-a",
+      "relation": "mode_of",
+      "relation_label_pt": "modo de",
+      "relation_label_en": "mode of",
+      "style": "solid"
+    },
+    {
+      "source": "plug-and-abandon",
+      "target": "tampao-cimento",
+      "relation": "uses",
+      "relation_label_pt": "usa",
+      "relation_label_en": "uses",
+      "style": "solid"
+    },
+    {
+      "source": "abandono-permanente",
+      "target": "tampao-cimento",
+      "relation": "requires",
+      "relation_label_pt": "exige",
+      "relation_label_en": "requires",
+      "style": "solid"
+    },
+    {
+      "source": "abandono-temporario",
+      "target": "tampao-cimento",
+      "relation": "uses",
+      "relation_label_pt": "usa",
+      "relation_label_en": "uses",
+      "style": "dashed"
+    },
+    {
+      "source": "tampao-cimento",
+      "target": "wellbore",
+      "relation": "isolates",
+      "relation_label_pt": "isola",
+      "relation_label_en": "isolates",
+      "style": "dashed"
+    },
+    {
+      "source": "sgip",
+      "target": "engenharia-poco",
+      "relation": "governs_lifecycle_of",
+      "relation_label_pt": "governa ciclo de vida de",
+      "relation_label_en": "governs lifecycle of",
+      "style": "solid"
+    },
+    {
+      "source": "sgip",
+      "target": "pratica-gestao",
+      "relation": "composed_of",
+      "relation_label_pt": "composto por",
+      "relation_label_en": "composed of",
+      "style": "solid"
+    },
+    {
+      "source": "pratica-gestao",
+      "target": "well-design",
+      "relation": "mandates",
+      "relation_label_pt": "exige requisitos em",
+      "relation_label_en": "mandates",
+      "style": "dashed"
+    },
+    {
+      "source": "pratica-gestao",
+      "target": "controle-poco",
+      "relation": "mandates",
+      "relation_label_pt": "exige",
+      "relation_label_en": "mandates",
+      "style": "solid"
+    },
+    {
+      "source": "pratica-gestao",
+      "target": "barreira-poco",
+      "relation": "mandates",
+      "relation_label_pt": "exige",
+      "relation_label_en": "mandates",
+      "style": "solid"
+    },
+    {
+      "source": "pratica-gestao",
+      "target": "maasp",
+      "relation": "mandates",
+      "relation_label_pt": "exige",
+      "relation_label_en": "mandates",
+      "style": "solid"
+    },
+    {
+      "source": "pratica-gestao",
+      "target": "teste-bop",
+      "relation": "mandates",
+      "relation_label_pt": "exige",
+      "relation_label_en": "mandates",
+      "style": "solid"
+    },
+    {
+      "source": "pratica-gestao",
+      "target": "plug-and-abandon",
+      "relation": "mandates",
+      "relation_label_pt": "exige",
+      "relation_label_en": "mandates",
+      "style": "solid"
+    },
+    {
+      "source": "anp",
+      "target": "sgip",
+      "relation": "issued",
+      "relation_label_pt": "publicou",
+      "relation_label_en": "issued",
+      "style": "solid"
+    },
+    {
+      "source": "sgso",
+      "target": "sonda-perfuracao",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "solid"
+    },
+    {
+      "source": "sgso",
+      "target": "fpso",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "dashed"
+    },
+    {
+      "source": "anp",
+      "target": "sgso",
+      "relation": "issued",
+      "relation_label_pt": "publicou",
+      "relation_label_en": "issued",
+      "style": "solid"
+    },
+    {
+      "source": "res-anp-699-2017",
+      "target": "bdp",
+      "relation": "standardizes",
+      "relation_label_pt": "padroniza",
+      "relation_label_en": "standardizes",
+      "style": "solid"
+    },
+    {
+      "source": "res-anp-699-2017",
+      "target": "poco",
+      "relation": "codifies",
+      "relation_label_pt": "codifica",
+      "relation_label_en": "codifies",
+      "style": "solid"
+    },
+    {
+      "source": "anp",
+      "target": "res-anp-699-2017",
+      "relation": "issued",
+      "relation_label_pt": "publicou",
+      "relation_label_en": "issued",
+      "style": "dashed"
+    },
+    {
+      "source": "portaria-176-1999",
+      "target": "abandono-permanente",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "solid"
+    },
+    {
+      "source": "portaria-25-2002",
+      "target": "abandono-temporario",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "solid"
+    },
+    {
+      "source": "res-anp-21-2014",
+      "target": "estimulacao",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "solid"
+    },
+    {
+      "source": "res-anp-41-2015",
+      "target": "anm-eq",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "solid"
+    },
+    {
+      "source": "res-anp-41-2015",
+      "target": "riser",
+      "relation": "regulates",
+      "relation_label_pt": "regula",
+      "relation_label_en": "regulates",
+      "style": "dashed"
+    },
+    {
+      "source": "bdp",
+      "target": "anp",
+      "relation": "submitted_to",
+      "relation_label_pt": "enviado à",
+      "relation_label_en": "submitted to",
+      "style": "solid"
+    },
+    {
+      "source": "bdp",
+      "target": "bdep",
+      "relation": "feeds",
+      "relation_label_pt": "alimenta",
+      "relation_label_en": "feeds",
+      "style": "solid"
+    },
+    {
+      "source": "anp",
+      "target": "bdep",
+      "relation": "manages",
+      "relation_label_pt": "gerencia",
+      "relation_label_en": "manages",
+      "style": "solid"
+    },
+    {
+      "source": "maasp",
+      "target": "barreira-poco",
+      "relation": "constrains",
+      "relation_label_pt": "restringe",
+      "relation_label_en": "constrains",
+      "style": "dashed"
+    },
+    {
+      "source": "teste-bop",
+      "target": "bop",
+      "relation": "verifies",
+      "relation_label_pt": "verifica",
+      "relation_label_en": "verifies",
+      "style": "solid"
+    },
+    {
+      "source": "barreira-poco",
+      "target": "wellbore",
+      "relation": "protects",
+      "relation_label_pt": "protege",
+      "relation_label_en": "protects",
       "style": "dashed"
     }
   ]

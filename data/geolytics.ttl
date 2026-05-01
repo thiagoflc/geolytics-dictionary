@@ -5,11 +5,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-@prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T23:09:15.434Z
-# Nodes: 107  Edges: 127
+# Generated: 2026-05-01T13:47:18.061Z
+# Nodes: 113  Edges: 149
 
 #
 # Classes
@@ -57,8 +56,6 @@ geo:bloco a owl:Class ;
     skos:example "BM-C-33" ;
     owl:sameAs <https://w3id.org/osdu#AcquisitionSurvey> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer5" .
 
@@ -69,8 +66,6 @@ geo:campo a owl:Class ;
     skos:definition """Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta."""@pt ;
     owl:sameAs <https://w3id.org/osdu#Field> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Field> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer5" .
 
@@ -90,8 +85,6 @@ geo:bacia-sedimentar a owl:Class ;
     skos:example "Bacia do Recôncavo" ;
     owl:sameAs <https://w3id.org/osdu#Basin> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin> ;
-    skos:exactMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
-    skos:exactMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
@@ -115,8 +108,6 @@ geo:reservatorio a owl:Class ;
     skos:example "Reservatório Barra Velha" ;
     owl:sameAs <https://w3id.org/osdu#Reservoir> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir> ;
-    skos:relatedMatch <http://sweetontology.net/matrRock/Rock> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
@@ -160,8 +151,6 @@ geo:sistema-deposicional a owl:Class ;
     skos:example "Sistema lacustre carbonático (pré-sal)" ;
     skos:example "Sistema deltaico" ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem> ;
-    skos:relatedMatch <http://sweetontology.net/procGeo/Sedimentation> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer2" .
 
@@ -356,6 +345,42 @@ geo:primeiro-oleo a owl:Class ;
     geo:entityType "operational" ;
     skos:definition """Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção."""@pt .
 
+geo:teste-formacao a owl:Class ;
+    skos:prefLabel "Teste de Formação"@pt ;
+    skos:prefLabel "Formation Test (TF/TFR/TFRE)"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine."""@pt .
+
+geo:tld a owl:Class ;
+    skos:prefLabel "TLD"@pt ;
+    skos:prefLabel "Extended Well Test (EWT)"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT)."""@pt .
+
+geo:rftp a owl:Class ;
+    skos:prefLabel "RFTP"@pt ;
+    skos:prefLabel "Well Test Final Report"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo."""@pt .
+
+geo:i-engine a owl:Class ;
+    skos:prefLabel "i-Engine"@pt ;
+    skos:prefLabel "ANP i-Engine System"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022."""@pt .
+
+geo:dpp a owl:Class ;
+    skos:prefLabel "DPP"@pt ;
+    skos:prefLabel "ANP Data Portal (DPP)"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço."""@pt .
+
+geo:bmp a owl:Class ;
+    skos:prefLabel "BMP"@pt ;
+    skos:prefLabel "Monthly Production Report"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais."""@pt .
+
 geo:presal a owl:Class ;
     skos:prefLabel "Pré-sal"@pt ;
     skos:prefLabel "Pre-salt"@en ;
@@ -371,8 +396,6 @@ geo:presal a owl:Class ;
     skos:example "Reservatórios de Búzios" ;
     skos:example "Polígono do Pré-sal (Lei 12.351/2010)" ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
-    skos:relatedMatch <http://sweetontology.net/matrRockSedimentary/SaltRock> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
@@ -589,8 +612,6 @@ geo:acumulacao a owl:Class ;
     geo:entityType "operational" ;
     skos:definition "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation> ;
-    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
-    skos:relatedMatch <http://sweetontology.net/matrOrganics/Hydrocarbon> ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
@@ -711,8 +732,6 @@ geo:litologia a owl:Class ;
     skos:definition """Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201."""@pt ;
     owl:sameAs <https://w3id.org/osdu#LithologyType> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology> ;
-    skos:closeMatch <http://sweetontology.net/matrRock/Rock> ;
-    skos:closeMatch <http://sweetontology.net/matrMineral/Mineral> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
@@ -1217,6 +1236,12 @@ geo:classified_by a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:bloco geo:campo geo:drilling-activity ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:ambiente geo:drilling-reason-type ) ] .
 
+geo:undergoes a owl:ObjectProperty ;
+    rdfs:label "realiza"@pt ;
+    rdfs:label "undergoes"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:amostra-fluido ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:teste-formacao geo:tld geo:pvt geo:sara ) ] .
+
 geo:located_in a owl:ObjectProperty ;
     rdfs:label "localizado em"@pt ;
     rdfs:label "located in"@en ;
@@ -1295,6 +1320,48 @@ geo:measured_via a owl:ObjectProperty ;
     rdfs:domain geo:contrato-ep ;
     rdfs:range geo:uts .
 
+geo:yields a owl:ObjectProperty ;
+    rdfs:label "gera amostra de"@pt ;
+    rdfs:label "yields"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:teste-formacao geo:tld ) ] ;
+    rdfs:range geo:amostra-fluido .
+
+geo:requires_report a owl:ObjectProperty ;
+    rdfs:label "exige relatório"@pt ;
+    rdfs:label "requires report"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:teste-formacao geo:tld ) ] ;
+    rdfs:range geo:rftp .
+
+geo:reported_via a owl:ObjectProperty ;
+    rdfs:label "reportado via"@pt ;
+    rdfs:label "reported via"@en ;
+    rdfs:domain geo:tld ;
+    rdfs:range geo:i-engine .
+
+geo:generates a owl:ObjectProperty ;
+    rdfs:label "gera"@pt ;
+    rdfs:label "generates"@en ;
+    rdfs:domain geo:tld ;
+    rdfs:range geo:bmp .
+
+geo:submitted_via a owl:ObjectProperty ;
+    rdfs:label "enviado via"@pt ;
+    rdfs:label "submitted via"@en ;
+    rdfs:domain geo:rftp ;
+    rdfs:range geo:dpp .
+
+geo:manages_via a owl:ObjectProperty ;
+    rdfs:label "gerencia via"@pt ;
+    rdfs:label "manages via"@en ;
+    rdfs:domain geo:anp ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:i-engine geo:sigep ) ] .
+
+geo:submitted_to a owl:ObjectProperty ;
+    rdfs:label "enviado à"@pt ;
+    rdfs:label "submitted to"@en ;
+    rdfs:domain geo:bmp ;
+    rdfs:range geo:anp .
+
 geo:evaluates a owl:ObjectProperty ;
     rdfs:label "avalia"@pt ;
     rdfs:label "evaluates"@en ;
@@ -1306,6 +1373,18 @@ geo:may_yield a owl:ObjectProperty ;
     rdfs:label "may yield"@en ;
     rdfs:domain geo:pad ;
     rdfs:range geo:declaracao-comercialidade .
+
+geo:may_include a owl:ObjectProperty ;
+    rdfs:label "pode incluir"@pt ;
+    rdfs:label "may include"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:teste-formacao .
+
+geo:includes a owl:ObjectProperty ;
+    rdfs:label "inclui"@pt ;
+    rdfs:label "includes"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:tld .
 
 geo:initiates a owl:ObjectProperty ;
     rdfs:label "dá início a"@pt ;
@@ -1360,12 +1439,6 @@ geo:hosted_in a owl:ObjectProperty ;
     rdfs:label "hosted in"@en ;
     rdfs:domain geo:reservatorio ;
     rdfs:range geo:formacao .
-
-geo:manages_via a owl:ObjectProperty ;
-    rdfs:label "gerencia via"@pt ;
-    rdfs:label "manages via"@en ;
-    rdfs:domain geo:anp ;
-    rdfs:range geo:sigep .
 
 geo:oversees_via a owl:ObjectProperty ;
     rdfs:label "fiscaliza via"@pt ;
@@ -1508,7 +1581,7 @@ geo:contains a owl:ObjectProperty ;
 geo:characterizes a owl:ObjectProperty ;
     rdfs:label "caracteriza"@pt ;
     rdfs:label "characterizes"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:maturidade-termal geo:modelo-petrofisico ) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:maturidade-termal geo:pvt geo:classe-fluido geo:modelo-petrofisico ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:reservatorio ) ] .
 
 geo:seals a owl:ObjectProperty ;
@@ -1544,8 +1617,8 @@ geo:declares a owl:ObjectProperty ;
 geo:derived_from a owl:ObjectProperty ;
     rdfs:label "deriva de"@pt ;
     rdfs:label "derived from"@en ;
-    rdfs:domain geo:reserva ;
-    rdfs:range geo:recurso .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido ) ] .
 
 geo:spawns a owl:ObjectProperty ;
     rdfs:label "gera"@pt ;
@@ -1595,11 +1668,11 @@ geo:detects a owl:ObjectProperty ;
     rdfs:domain geo:gc-ms ;
     rdfs:range geo:biomarcador .
 
-geo:undergoes a owl:ObjectProperty ;
-    rdfs:label "submetida a"@pt ;
-    rdfs:label "undergoes"@en ;
-    rdfs:domain geo:amostra-fluido ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pvt geo:sara ) ] .
+geo:links_to a owl:ObjectProperty ;
+    rdfs:label "traça origem em"@pt ;
+    rdfs:label "links to"@en ;
+    rdfs:domain geo:correlacao-oleo-rocha ;
+    rdfs:range geo:rocha-geradora .
 
 geo:guides_drilling_of a owl:ObjectProperty ;
     rdfs:label "guia perfuração de"@pt ;
@@ -1672,6 +1745,36 @@ geo:measured_in a owl:ObjectProperty ;
     rdfs:label "measured in"@en ;
     rdfs:domain geo:perfil-poco ;
     rdfs:range geo:wellbore .
+
+geo:qualified_by a owl:ObjectProperty ;
+    rdfs:label "qualificada por"@pt ;
+    rdfs:label "qualified by"@en ;
+    rdfs:domain geo:amostra-fluido ;
+    rdfs:range geo:unidade-medida .
+
+geo:expressed_in a owl:ObjectProperty ;
+    rdfs:label "expresso em"@pt ;
+    rdfs:label "expressed in"@en ;
+    rdfs:domain geo:pvt ;
+    rdfs:range geo:unidade-medida .
+
+geo:enforces a owl:ObjectProperty ;
+    rdfs:label "valida e impõe"@pt ;
+    rdfs:label "enforces"@en ;
+    rdfs:domain geo:i-engine ;
+    rdfs:range geo:unidade-medida .
+
+geo:standardized_by a owl:ObjectProperty ;
+    rdfs:label "padronizado em"@pt ;
+    rdfs:label "standardized by"@en ;
+    rdfs:domain geo:bmp ;
+    rdfs:range geo:unidade-medida .
+
+geo:characterized_with a owl:ObjectProperty ;
+    rdfs:label "caracterizado em"@pt ;
+    rdfs:label "characterized with"@en ;
+    rdfs:domain geo:reservatorio ;
+    rdfs:range geo:unidade-medida .
 
 geo:plans_activity_for a owl:ObjectProperty ;
     rdfs:label "planeja atividade em"@pt ;
@@ -1823,6 +1926,8 @@ geo:restricts_access_for a owl:ObjectProperty ;
 
 geo:poco geo:drilled_in geo:bloco .
 geo:poco geo:classified_by geo:ambiente .
+geo:poco geo:undergoes geo:teste-formacao .
+geo:poco geo:undergoes geo:tld .
 geo:poco geo:located_in geo:bacia-sedimentar .
 geo:poco geo:operated_by geo:operador .
 geo:poco geo:may_register geo:notificacao-descoberta .
@@ -1838,8 +1943,19 @@ geo:contrato-ep geo:signed_with geo:anp .
 geo:contrato-ep geo:defines geo:regime-contratual .
 geo:contrato-ep geo:organized_in geo:periodo-exploratorio .
 geo:contrato-ep geo:measured_via geo:uts .
+geo:teste-formacao geo:yields geo:amostra-fluido .
+geo:tld geo:yields geo:amostra-fluido .
+geo:teste-formacao geo:requires_report geo:rftp .
+geo:tld geo:requires_report geo:rftp .
+geo:tld geo:reported_via geo:i-engine .
+geo:tld geo:generates geo:bmp .
+geo:rftp geo:submitted_via geo:dpp .
+geo:anp geo:manages_via geo:i-engine .
+geo:bmp geo:submitted_to geo:anp .
 geo:pad geo:evaluates geo:bloco .
 geo:pad geo:may_yield geo:declaracao-comercialidade .
+geo:pad geo:may_include geo:teste-formacao .
+geo:pad geo:includes geo:tld .
 geo:declaracao-comercialidade geo:initiates geo:area-desenvolvimento .
 geo:area-desenvolvimento geo:requires geo:plano-desenvolvimento .
 geo:area-desenvolvimento geo:ends_with geo:primeiro-oleo .
@@ -1898,10 +2014,14 @@ geo:testemunho geo:samples geo:formacao .
 geo:perfil-poco geo:measures geo:poco .
 geo:perfil-poco geo:infers geo:litologia .
 geo:biomarcador geo:enables geo:correlacao-oleo-rocha .
+geo:biomarcador geo:derived_from geo:amostra-fluido .
 geo:gc-ms geo:detects geo:biomarcador .
 geo:amostra-fluido geo:undergoes geo:pvt .
 geo:amostra-fluido geo:undergoes geo:sara .
 geo:pvt geo:classifies geo:classe-fluido .
+geo:pvt geo:characterizes geo:reservatorio .
+geo:correlacao-oleo-rocha geo:links_to geo:rocha-geradora .
+geo:classe-fluido geo:characterizes geo:reservatorio .
 geo:modelo-petrofisico geo:characterizes geo:reservatorio .
 geo:facies-sedimentar geo:composes geo:reservatorio .
 geo:campo-tensional geo:defines geo:janela-lama .
@@ -1919,6 +2039,11 @@ geo:wellbore geo:has_trajectory geo:trajetoria-poco .
 geo:wellbore geo:has_marker geo:topo-formacional .
 geo:formacao geo:has_top_at geo:topo-formacional .
 geo:perfil-poco geo:measured_in geo:wellbore .
+geo:amostra-fluido geo:qualified_by geo:unidade-medida .
+geo:pvt geo:expressed_in geo:unidade-medida .
+geo:i-engine geo:enforces geo:unidade-medida .
+geo:bmp geo:standardized_by geo:unidade-medida .
+geo:reservatorio geo:characterized_with geo:unidade-medida .
 geo:activity-plan geo:plans_activity_for geo:poco .
 geo:activity-plan geo:composed_of geo:activity-template .
 geo:well-activity-program geo:governs geo:poco .

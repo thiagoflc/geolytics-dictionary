@@ -1,0 +1,477 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T11:47:34.111Z",
+    "description": "Crosswalk dos 19 conceitos GLOSIS lithologyValueCode classificados como noMatch contra CGI Simple Lithology (data/glosis/lithology-crosswalk-cgi.json) — agora mapeados contra INSPIRE Geomorphology codelists, que é o vocabulário-alvo correto para classes de material parental por gênese (U* da GLOSIS).",
+    "rationale": "Os códigos U* da GLOSIS (colluvial, eolian, fluvial, glacial, kryogenic, lacustrine, marine, organic) são classes geomorfológicas de gênese de sedimentos não-consolidados, não litologias propriamente ditas. INSPIRE Natural/AnthropogenicGeomorphologicFeatureTypeValue + CGI/INSPIRE EventEnvironmentValue cobrem precisamente esse domínio.",
+    "sources": [
+      "INSPIRE NaturalGeomorphologicFeatureTypeValue v1 — http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+      "INSPIRE AnthropogenicGeomorphologicFeatureTypeValue v1 — http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue",
+      "INSPIRE EventEnvironmentValue v1 (republicação CGI/IUGS) — http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+      "INSPIRE CompositionPartRoleValue v1 — http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue"
+    ],
+    "license_note": "INSPIRE Registry é EU Public Domain (decisão da Comissão Europeia 2019). Atribuição recomendada.",
+    "summary": {
+      "total_processed": 19,
+      "with_targets": 16,
+      "no_match": 3,
+      "by_top_match": {
+        "noMatch": 3,
+        "closeMatch": 9,
+        "broadMatch": 5,
+        "exactMatch": 2
+      },
+      "total_target_links": 29
+    }
+  },
+  "mappings": [
+    {
+      "glosis_id": "lithologyValueCode-IB3",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB3",
+      "glosis_label": "dolerite",
+      "glosis_broader": "lithologyValueCode-IB",
+      "inspire_targets": [],
+      "match": "noMatch",
+      "note": "GLOSIS \"dolerite\" é litotipo (rocha), não material parental por gênese — vocabulário-alvo correto seria CGI Geologic Unit Type ou OneGeology Lithology, não Geomorphology."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UC",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC",
+      "glosis_label": "colluvial",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "slopeGravitational",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/slopeGravitational",
+          "label": "slope and gravitational features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"colluvial\" ↔ INSPIRE \"slope and gravitational features\" (incluem coluviões e leques de detritos)."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UC1",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC1",
+      "glosis_label": "slope deposits",
+      "glosis_broader": "lithologyValueCode-UC",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "slopeGravitational",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/slopeGravitational",
+          "label": "slope and gravitational features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"slope deposits\" ⊂ INSPIRE slope and gravitational features."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "hillslopeSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/hillslopeSetting",
+          "label": "hillslope setting",
+          "match": "relatedMatch",
+          "note": "EventEnvironment hillslopeSetting representa o ambiente deposicional."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UC2",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC2",
+      "glosis_label": "lahar",
+      "glosis_broader": "lithologyValueCode-UC",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "volcanic",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/volcanic",
+          "label": "volcanic features",
+          "match": "broadMatch",
+          "note": "GLOSIS \"lahar\" — INSPIRE não tem termo individual; lahars são eventos de \"volcanic features\" (broadMatch)."
+        }
+      ],
+      "match": "broadMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UE",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE",
+      "glosis_label": "eolian",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "eolian",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/eolian",
+          "label": "eolian features",
+          "match": "exactMatch",
+          "note": "GLOSIS \"eolian\" ↔ INSPIRE \"eolian features\" — equivalência semântica direta."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "aeolianProcessSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/aeolianProcessSetting",
+          "label": "aeolian process setting",
+          "match": "closeMatch",
+          "note": "EventEnvironment \"aeolian process setting\" para o ambiente de processo."
+        }
+      ],
+      "match": "exactMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UE1",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE1",
+      "glosis_label": "loess",
+      "glosis_broader": "lithologyValueCode-UE",
+      "inspire_targets": [
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "dustAccumulationSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/dustAccumulationSetting",
+          "label": "dust accumulation setting",
+          "match": "closeMatch",
+          "note": "GLOSIS \"loess\" — INSPIRE EventEnvironment \"dust accumulation setting\" descreve precisamente o ambiente de deposição eólica de silte."
+        },
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "eolian",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/eolian",
+          "label": "eolian features",
+          "match": "broadMatch",
+          "note": "Alternativa: INSPIRE NaturalGeomorph \"eolian features\" (broader)."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UF",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF",
+      "glosis_label": "fluvial",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "alluvialFluvial",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/alluvialFluvial",
+          "label": "alluvial and fluvial features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"fluvial\" ↔ INSPIRE \"alluvial and fluvial features\" (combina os dois)."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "riverChannelSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/riverChannelSetting",
+          "label": "river channel setting",
+          "match": "closeMatch",
+          "note": "EventEnvironment \"river channel setting\" para canal fluvial; floodplainSetting para planície de inundação."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UG",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG",
+      "glosis_label": "glacial",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "glacial",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/glacial",
+          "label": "glacial, glaciofluvial, glaciolacustrine and glaciomarine features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"glacial\" ↔ INSPIRE \"glacial, glaciofluvial, glaciolacustrine and glaciomarine features\"."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UG1",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG1",
+      "glosis_label": "moraine",
+      "glosis_broader": "lithologyValueCode-UG",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "glacial",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/glacial",
+          "label": "glacial, glaciofluvial, glaciolacustrine and glaciomarine features",
+          "match": "broadMatch",
+          "note": "GLOSIS \"moraine\" ⊂ INSPIRE glacial features (moraines são landforms-scale glaciais)."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "glacierLateralSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glacierLateralSetting",
+          "label": "glacier lateral setting",
+          "match": "relatedMatch",
+          "note": "EventEnvironment para morainas laterais; também glacierTerminusSetting para morainas frontais."
+        }
+      ],
+      "match": "broadMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UK",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK",
+      "glosis_label": "kryogenic",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "nivalPeriglacialPermafrost",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/nivalPeriglacialPermafrost",
+          "label": "nival, periglacial and permafrost features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"kryogenic\" ↔ INSPIRE \"nival, periglacial and permafrost features\" (mesmo escopo conceitual)."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UK1",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK1",
+      "glosis_label": "periglacial rock debris",
+      "glosis_broader": "lithologyValueCode-UK",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "nivalPeriglacialPermafrost",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/nivalPeriglacialPermafrost",
+          "label": "nival, periglacial and permafrost features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"periglacial rock debris\" ⊂ INSPIRE nivalPeriglacialPermafrost."
+        },
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "slopeGravitational",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/slopeGravitational",
+          "label": "slope and gravitational features",
+          "match": "relatedMatch",
+          "note": "Detritos rochosos periglaciais também são gerados por processos gravitacionais."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UK2",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK2",
+      "glosis_label": "periglacial solifluction layer",
+      "glosis_broader": "lithologyValueCode-UK",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "nivalPeriglacialPermafrost",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/nivalPeriglacialPermafrost",
+          "label": "nival, periglacial and permafrost features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"periglacial solifluction layer\" — solifluxão é processo periglacial clássico."
+        },
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "slopeGravitational",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/slopeGravitational",
+          "label": "slope and gravitational features",
+          "match": "relatedMatch",
+          "note": "Solifluxão é também movimento de massa em encosta."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UL",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL",
+      "glosis_label": "lacustrine",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "lacustrine",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/lacustrine",
+          "label": "lacustrine features",
+          "match": "exactMatch",
+          "note": "GLOSIS \"lacustrine\" ↔ INSPIRE \"lacustrine features\" — equivalência direta."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "lacustrineSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lacustrineSetting",
+          "label": "lacustrine setting",
+          "match": "exactMatch",
+          "note": "EventEnvironment \"lacustrine setting\" para o ambiente deposicional lacustre."
+        }
+      ],
+      "match": "exactMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UL2",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL2",
+      "glosis_label": "silt and clay",
+      "glosis_broader": "lithologyValueCode-UL",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "lacustrine",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/lacustrine",
+          "label": "lacustrine features",
+          "match": "broadMatch",
+          "note": "GLOSIS \"silt and clay\" (lacustrine) ⊂ INSPIRE lacustrine features."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "lacustrineSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lacustrineSetting",
+          "label": "lacustrine setting",
+          "match": "broadMatch",
+          "note": "Sedimentos finos do ambiente lacustre."
+        }
+      ],
+      "match": "broadMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UM",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM",
+      "glosis_label": "marine, estuarine",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "marineLittoralCoastalWetland",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/marineLittoralCoastalWetland",
+          "label": "marine, littoral and coastal wetlands features",
+          "match": "closeMatch",
+          "note": "GLOSIS \"marine, estuarine\" ⊂ INSPIRE \"marine, littoral and coastal wetlands features\"."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "marineSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/marineSetting",
+          "label": "marine setting",
+          "match": "closeMatch",
+          "note": "EventEnvironment marineSetting para ambiente marinho."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "estuarySetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/estuarySetting",
+          "label": "estuary setting",
+          "match": "closeMatch",
+          "note": "EventEnvironment estuarySetting para componente estuarino."
+        }
+      ],
+      "match": "closeMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UM2",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM2",
+      "glosis_label": "clay and silt",
+      "glosis_broader": "lithologyValueCode-UM",
+      "inspire_targets": [
+        {
+          "scheme": "natural",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue",
+          "id": "marineLittoralCoastalWetland",
+          "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/marineLittoralCoastalWetland",
+          "label": "marine, littoral and coastal wetlands features",
+          "match": "broadMatch",
+          "note": "GLOSIS \"clay and silt\" (marine) ⊂ INSPIRE marine features."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "marineSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/marineSetting",
+          "label": "marine setting",
+          "match": "broadMatch",
+          "note": "Sedimentos finos do ambiente marinho."
+        }
+      ],
+      "match": "broadMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UO",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO",
+      "glosis_label": "organic",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "bogSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/bogSetting",
+          "label": "bog setting",
+          "match": "broadMatch",
+          "note": "GLOSIS \"organic\" (parent material) — INSPIRE EventEnvironment \"bog setting\" cobre turfeiras (ombrotróficas e minerotróficas)."
+        },
+        {
+          "scheme": "events",
+          "scheme_iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue",
+          "id": "swampOrMarshSetting",
+          "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/swampOrMarshSetting",
+          "label": "swamp or marsh setting",
+          "match": "relatedMatch",
+          "note": "Pântanos/brejos também produzem sedimentos orgânicos."
+        }
+      ],
+      "match": "broadMatch",
+      "note": "Mapeamento 1:N — múltiplos alvos INSPIRE Geomorph cobrem o conceito GLOSIS."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UU",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU",
+      "glosis_label": "unspecified deposits",
+      "glosis_broader": "lithologyValueCode-U",
+      "inspire_targets": [],
+      "match": "noMatch",
+      "note": "GLOSIS agrupador genérico/heterogêneo — sem equivalente em INSPIRE Geomorphology/EventEnvironment."
+    },
+    {
+      "glosis_id": "lithologyValueCode-UU2",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU2",
+      "glosis_label": "loam and silt",
+      "glosis_broader": "lithologyValueCode-UU",
+      "inspire_targets": [],
+      "match": "noMatch",
+      "note": "GLOSIS agrupador genérico/heterogêneo — sem equivalente em INSPIRE Geomorphology/EventEnvironment."
+    }
+  ]
+}

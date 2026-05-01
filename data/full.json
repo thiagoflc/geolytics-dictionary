@@ -1,15 +1,15 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T23:09:15.413Z",
+    "generated": "2026-05-01T13:47:18.033Z",
     "description": "Geolytics Dictionary — complete merged dataset",
     "counts": {
-      "glossary_terms": 25,
+      "glossary_terms": 31,
       "extended_terms": 20,
-      "total_terms": 45,
+      "total_terms": 51,
       "datasets": 8,
-      "entity_nodes": 107,
-      "entity_edges": 127,
+      "entity_nodes": 113,
+      "entity_edges": 149,
       "domains": 4,
       "ontology_layers": 8,
       "ontopetro_classes": 20,
@@ -23,17 +23,7 @@
       "ambiguity_alerts": 14,
       "acronyms": 1102,
       "gso_modules": 5,
-      "gso_classes": 213,
-      "seismic_classes": 64,
-      "seismic_properties": 45,
-      "seismic_relations": 25,
-      "seismic_instances": 10,
-      "geomechanics_classes": 26,
-      "geomechanics_properties": 22,
-      "geomechanics_relations": 12,
-      "geomechanics_instances": 6,
-      "fracture_classes": 17,
-      "fracture_to_gso_mappings": 8
+      "gso_classes": 213
     },
     "sources": [
       "ANP/SEP",
@@ -43,9 +33,7 @@
       "O3PO (UFRGS)",
       "OSDU",
       "Petrobras/Geolytics internal (Layer 6)",
-      "GSO/Loop3D (Layer 7, CC BY 4.0)",
-      "Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)",
-      "Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)"
+      "GSO/Loop3D (Layer 7, CC BY 4.0)"
     ]
   },
   "glossary": [
@@ -587,6 +575,108 @@
       "definicao": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
       "fonte": "ANP/SEP",
       "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "teste-formacao",
+      "termo": "Teste de Formação",
+      "categoria": "operacoes",
+      "definicao": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+      "fonte": "ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "tld",
+      "termo": "TLD",
+      "categoria": "operacoes",
+      "definicao": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+      "fonte": "ANP — Norma de Testes de Poço (TLD)",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "rftp",
+      "termo": "RFTP",
+      "categoria": "regulatorio",
+      "definicao": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+      "fonte": "ANP — Norma de Testes de Poço",
+      "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "i-engine",
+      "termo": "i-Engine",
+      "categoria": "sistemas",
+      "definicao": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+      "fonte": "ANP/SEP — Resolução nº 880/2022",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "dpp",
+      "termo": "DPP",
+      "categoria": "sistemas",
+      "definicao": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+      "fonte": "ANP/SEP",
+      "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "bmp",
+      "termo": "BMP",
+      "categoria": "regulatorio",
+      "definicao": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+      "fonte": "ANP/SEP",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ],
       "termo_en": null,
       "petrokgraph_uri": null,
       "osdu_kind": null,
@@ -1348,7 +1438,7 @@
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-05-01T23:09:15.413Z",
+    "generated": "2026-05-01T13:47:18.033Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -2610,6 +2700,228 @@
         },
         "skos_definition": {
           "@pt": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "teste-formacao",
+        "label": "Teste de Formação",
+        "label_en": "Formation Test (TF/TFR/TFRE)",
+        "type": "contractual",
+        "color": "#7F77DD",
+        "size": 24,
+        "definition": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+        "definition_en_canonical": null,
+        "legal_source": "ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014",
+        "datasets": [
+          "pads-andamento",
+          "pads-concluidos"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": "teste-formacao",
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Teste de Formação",
+          "@en": "Formation Test (TF/TFR/TFRE)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "tld",
+        "label": "TLD",
+        "label_en": "Extended Well Test (EWT)",
+        "type": "contractual",
+        "color": "#7F77DD",
+        "size": 24,
+        "definition": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+        "definition_en_canonical": null,
+        "legal_source": "ANP — Norma de Testes de Poço (TLD)",
+        "datasets": [
+          "pads-andamento",
+          "pads-concluidos"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": "tld",
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "TLD",
+          "@en": "Extended Well Test (EWT)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "rftp",
+        "label": "RFTP",
+        "label_en": "Well Test Final Report",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 20,
+        "definition": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+        "definition_en_canonical": null,
+        "legal_source": "ANP — Norma de Testes de Poço",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": "rftp",
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "RFTP",
+          "@en": "Well Test Final Report"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "i-engine",
+        "label": "i-Engine",
+        "label_en": "ANP i-Engine System",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 20,
+        "definition": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+        "definition_en_canonical": null,
+        "legal_source": "ANP/SEP — Resolução nº 880/2022",
+        "datasets": [
+          "pads-andamento",
+          "pads-concluidos",
+          "declaracoes-comercialidade"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": "i-engine",
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "i-Engine",
+          "@en": "ANP i-Engine System"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "dpp",
+        "label": "DPP",
+        "label_en": "ANP Data Portal (DPP)",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 20,
+        "definition": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+        "definition_en_canonical": null,
+        "legal_source": "ANP/SEP",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": "dpp",
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "DPP",
+          "@en": "ANP Data Portal (DPP)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "bmp",
+        "label": "BMP",
+        "label_en": "Monthly Production Report",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 20,
+        "definition": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+        "definition_en_canonical": null,
+        "legal_source": "ANP/SEP",
+        "datasets": [
+          "declaracoes-comercialidade"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": "bmp",
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "BMP",
+          "@en": "Monthly Production Report"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
           "@en": null
         },
         "skos_example": []
@@ -6316,6 +6628,22 @@
       },
       {
         "source": "poco",
+        "target": "teste-formacao",
+        "relation": "undergoes",
+        "relation_label_pt": "realiza",
+        "relation_label_en": "undergoes",
+        "style": "solid"
+      },
+      {
+        "source": "poco",
+        "target": "tld",
+        "relation": "undergoes",
+        "relation_label_pt": "realiza",
+        "relation_label_en": "undergoes",
+        "style": "solid"
+      },
+      {
+        "source": "poco",
         "target": "bacia-sedimentar",
         "relation": "located_in",
         "relation_label_pt": "localizado em",
@@ -6435,6 +6763,78 @@
         "style": "solid"
       },
       {
+        "source": "teste-formacao",
+        "target": "amostra-fluido",
+        "relation": "yields",
+        "relation_label_pt": "gera amostra de",
+        "relation_label_en": "yields",
+        "style": "solid"
+      },
+      {
+        "source": "tld",
+        "target": "amostra-fluido",
+        "relation": "yields",
+        "relation_label_pt": "gera amostra de",
+        "relation_label_en": "yields",
+        "style": "solid"
+      },
+      {
+        "source": "teste-formacao",
+        "target": "rftp",
+        "relation": "requires_report",
+        "relation_label_pt": "exige relatório",
+        "relation_label_en": "requires report",
+        "style": "solid"
+      },
+      {
+        "source": "tld",
+        "target": "rftp",
+        "relation": "requires_report",
+        "relation_label_pt": "exige relatório",
+        "relation_label_en": "requires report",
+        "style": "solid"
+      },
+      {
+        "source": "tld",
+        "target": "i-engine",
+        "relation": "reported_via",
+        "relation_label_pt": "reportado via",
+        "relation_label_en": "reported via",
+        "style": "solid"
+      },
+      {
+        "source": "tld",
+        "target": "bmp",
+        "relation": "generates",
+        "relation_label_pt": "gera",
+        "relation_label_en": "generates",
+        "style": "solid"
+      },
+      {
+        "source": "rftp",
+        "target": "dpp",
+        "relation": "submitted_via",
+        "relation_label_pt": "enviado via",
+        "relation_label_en": "submitted via",
+        "style": "solid"
+      },
+      {
+        "source": "anp",
+        "target": "i-engine",
+        "relation": "manages_via",
+        "relation_label_pt": "gerencia via",
+        "relation_label_en": "manages via",
+        "style": "solid"
+      },
+      {
+        "source": "bmp",
+        "target": "anp",
+        "relation": "submitted_to",
+        "relation_label_pt": "enviado à",
+        "relation_label_en": "submitted to",
+        "style": "solid"
+      },
+      {
         "source": "pad",
         "target": "bloco",
         "relation": "evaluates",
@@ -6449,6 +6849,22 @@
         "relation_label_pt": "pode gerar",
         "relation_label_en": "may yield",
         "style": "dashed"
+      },
+      {
+        "source": "pad",
+        "target": "teste-formacao",
+        "relation": "may_include",
+        "relation_label_pt": "pode incluir",
+        "relation_label_en": "may include",
+        "style": "dashed"
+      },
+      {
+        "source": "pad",
+        "target": "tld",
+        "relation": "includes",
+        "relation_label_pt": "inclui",
+        "relation_label_en": "includes",
+        "style": "solid"
       },
       {
         "source": "declaracao-comercialidade",
@@ -6915,6 +7331,14 @@
         "style": "solid"
       },
       {
+        "source": "biomarcador",
+        "target": "amostra-fluido",
+        "relation": "derived_from",
+        "relation_label_pt": "extraído de",
+        "relation_label_en": "derived from",
+        "style": "dashed"
+      },
+      {
         "source": "gc-ms",
         "target": "biomarcador",
         "relation": "detects",
@@ -6945,6 +7369,30 @@
         "relation_label_pt": "classifica",
         "relation_label_en": "classifies",
         "style": "solid"
+      },
+      {
+        "source": "pvt",
+        "target": "reservatorio",
+        "relation": "characterizes",
+        "relation_label_pt": "caracteriza fluido de",
+        "relation_label_en": "characterizes",
+        "style": "solid"
+      },
+      {
+        "source": "correlacao-oleo-rocha",
+        "target": "rocha-geradora",
+        "relation": "links_to",
+        "relation_label_pt": "traça origem em",
+        "relation_label_en": "links to",
+        "style": "solid"
+      },
+      {
+        "source": "classe-fluido",
+        "target": "reservatorio",
+        "relation": "characterizes",
+        "relation_label_pt": "caracteriza",
+        "relation_label_en": "characterizes",
+        "style": "dashed"
       },
       {
         "source": "modelo-petrofisico",
@@ -7081,6 +7529,46 @@
         "relation_label_pt": "medida em",
         "relation_label_en": "measured in",
         "style": "solid"
+      },
+      {
+        "source": "amostra-fluido",
+        "target": "unidade-medida",
+        "relation": "qualified_by",
+        "relation_label_pt": "qualificada por",
+        "relation_label_en": "qualified by",
+        "style": "solid"
+      },
+      {
+        "source": "pvt",
+        "target": "unidade-medida",
+        "relation": "expressed_in",
+        "relation_label_pt": "expresso em",
+        "relation_label_en": "expressed in",
+        "style": "solid"
+      },
+      {
+        "source": "i-engine",
+        "target": "unidade-medida",
+        "relation": "enforces",
+        "relation_label_pt": "valida e impõe",
+        "relation_label_en": "enforces",
+        "style": "solid"
+      },
+      {
+        "source": "bmp",
+        "target": "unidade-medida",
+        "relation": "standardized_by",
+        "relation_label_pt": "padronizado em",
+        "relation_label_en": "standardized by",
+        "style": "dashed"
+      },
+      {
+        "source": "reservatorio",
+        "target": "unidade-medida",
+        "relation": "characterized_with",
+        "relation_label_pt": "caracterizado em",
+        "relation_label_en": "characterized with",
+        "style": "dashed"
       },
       {
         "source": "activity-plan",
@@ -7929,7 +8417,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-05-01T23:09:15.413Z",
+    "generated": "2026-05-01T13:47:18.033Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -8256,7 +8744,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-01T23:09:15.413Z",
+      "generated": "2026-05-01T13:47:18.033Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -9282,40 +9770,6 @@
         "Confidencial",
         "Secreto"
       ]
-    },
-    "failure_modes": {
-      "label": "Modos de Ruptura de Rocha",
-      "label_en": "Rock Failure Modes",
-      "description": "Mecanismos de ruptura de rocha usados em análise geomecânica e design de poços",
-      "values": [
-        "tensile",
-        "shear",
-        "compaction",
-        "ductile",
-        "brittle"
-      ]
-    },
-    "stress_regimes": {
-      "label": "Regimes Tectônicos de Anderson",
-      "label_en": "Anderson Tectonic Stress Regimes",
-      "description": "Classificação de Anderson (1951) dos regimes de tensão in situ baseado na magnitude relativa dos três tensores principais",
-      "values": [
-        "normal_faulting",
-        "strike_slip",
-        "reverse_faulting"
-      ]
-    },
-    "mud_window_zones": {
-      "label": "Zonas da Janela de Lama",
-      "label_en": "Mud Weight Window Zones",
-      "description": "Limites operacionais da janela de peso de lama na perfuração de poços",
-      "rag_alert": "Janela de Lama (M9 Geomecanica) != Janela de Geracao (M7 Geoquimica/Ro%). Sao conceitos completamente distintos.",
-      "values": [
-        "pore_pressure",
-        "collapse",
-        "fracture",
-        "overburden"
-      ]
     }
   },
   "modules_extended": {
@@ -9578,11 +10032,6 @@
       "label_en": "Reservoir Geomechanics",
       "system_origin": "GEOMECBR, GERESIM, TrapTester, GDA",
       "hierarchy_ref": "GeomechanicsObject.md (arquivo na pasta /dados)",
-      "linked_files": [
-        "data/geomechanics.json",
-        "data/geomechanics-fractures.json",
-        "data/fracture_to_gso.json"
-      ],
       "classes": [
         {
           "id": "C301",
@@ -22264,3563 +22713,5 @@
         }
       }
     }
-  ],
-  "seismic": {
-    "meta": {
-      "version": "1.0.0",
-      "generated": "2026-05-01T23:09:15.413Z",
-      "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
-      "module_count": 3,
-      "class_count": 64,
-      "property_count": 45,
-      "relation_count": 25,
-      "instance_count": 10,
-      "sources": [
-        "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
-        "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology. Cambridge University Press.",
-        "Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.",
-        "Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.",
-        "Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes. SEG.",
-        "Coleou, T. et al. (2003). Unsupervised seismic facies classification. The Leading Edge.",
-        "OSDU SeismicAcquisitionSurvey / SeismicProcessingProject / SeismicTraceData schemas v1.0.0"
-      ]
-    },
-    "modules": [
-      {
-        "module": "seismic_acquisition",
-        "label": "Seismic Acquisition",
-        "label_pt": "Aquisicao Sismica",
-        "version": "1.0.0",
-        "description": "Classes, properties, relations and instances covering seismic survey acquisition: survey types, sources, receivers, geometry and sampling parameters.",
-        "sources": [
-          "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
-          "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology (2nd ed.). Cambridge University Press.",
-          "OSDU SeismicAcquisition schema v1.0.0"
-        ],
-        "class_count": 20,
-        "property_count": 17,
-        "relation_count": 9,
-        "instance_count": 3
-      },
-      {
-        "module": "seismic_processing",
-        "label": "Seismic Processing",
-        "label_pt": "Processamento Sismico",
-        "version": "1.0.0",
-        "description": "Classes, properties, relations and instances for the seismic processing workflow: noise suppression, deconvolution, velocity analysis, statics, NMO, DMO, migration, stacking and amplitude compensation.",
-        "sources": [
-          "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
-          "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology (2nd ed.). Cambridge University Press.",
-          "OSDU SeismicProcessingProject schema v1.0.0"
-        ],
-        "class_count": 18,
-        "property_count": 13,
-        "relation_count": 7,
-        "instance_count": 3
-      },
-      {
-        "module": "seismic_inversion_attributes",
-        "label": "Seismic Inversion and Attributes",
-        "label_pt": "Inversao Sismica e Atributos",
-        "version": "1.0.0",
-        "description": "Classes, properties, relations and instances for seismic inversion (post-stack, pre-stack, AVO, FWI), rock properties derived from inversion, seismic attributes, DHI classification, AVO anomaly classes, machine-learning facies interpretation (SOM, PCA) and sweet-spot mapping.",
-        "sources": [
-          "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
-          "Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.",
-          "Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.",
-          "Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes for Stratigraphic and Structural Interpretation. SEG.",
-          "Coleou, T., Poupon, M. & Azbel, K. (2003). Unsupervised seismic facies classification. The Leading Edge, 22(10), 942-953.",
-          "OSDU SeismicTraceData schema v1.0.0"
-        ],
-        "class_count": 25,
-        "property_count": 15,
-        "relation_count": 9,
-        "instance_count": 4
-      }
-    ],
-    "classes": {
-      "SeismicSurvey": {
-        "id": "SeismicSurvey",
-        "name": "SeismicSurvey",
-        "name_pt": "Levantamento Sismico",
-        "superclass": "owl:Thing",
-        "description": "A controlled experiment in which seismic energy is injected into the Earth and the returning wavefield is recorded to image subsurface structure. Encompasses geometry definition, source specification and receiver deployment. Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_acquisition",
-        "abstract": true,
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995",
-          "OSDU"
-        ]
-      },
-      "LandSurvey": {
-        "id": "LandSurvey",
-        "name": "LandSurvey",
-        "name_pt": "Levantamento Terrestre",
-        "superclass": "SeismicSurvey",
-        "description": "Onshore seismic survey in which sources (vibroseis, dynamite) and receivers (geophones) are deployed on land. Near-surface weathering layer and statics corrections are dominant challenges. Ref: Yilmaz 2001, ch. 3.",
-        "domain": "seismic_acquisition",
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "MarineSurvey": {
-        "id": "MarineSurvey",
-        "name": "MarineSurvey",
-        "name_pt": "Levantamento Marinho",
-        "superclass": "SeismicSurvey",
-        "description": "Offshore towed-streamer survey in which a vessel tows one or more hydrophone cables. Dominant configuration for deep-water exploration. Ref: Yilmaz 2001, ch. 1; Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "OBNSurvey": {
-        "id": "OBNSurvey",
-        "name": "OBNSurvey",
-        "name_pt": "Levantamento Sismico de Fundo Oceanico (No)",
-        "superclass": "SeismicSurvey",
-        "description": "Ocean-Bottom Node survey: autonomous 4C (Vx, Vy, Vz + hydrophone) sensor packages placed on the seabed. Enables full-azimuth illumination and longer offsets than towed streamers. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "OBSSurvey": {
-        "id": "OBSSurvey",
-        "name": "OBSSurvey",
-        "name_pt": "Levantamento Sismica de Fundo Oceanico (cabo)",
-        "superclass": "SeismicSurvey",
-        "description": "Ocean-Bottom Seismometer/Cable survey: 4C sensors deployed on cables laid on the sea floor, offering P- and S-wave recording for joint PP/PS inversion.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "Source": {
-        "id": "Source",
-        "name": "Source",
-        "name_pt": "Fonte Sismica",
-        "superclass": "owl:Thing",
-        "description": "Device or process that generates seismic energy and injects it into the ground or water. Characterised by peak frequency, dominant frequency band and energy output. Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_acquisition",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "Airgun": {
-        "id": "Airgun",
-        "name": "Airgun",
-        "name_pt": "Pistola de Ar",
-        "superclass": "Source",
-        "description": "Marine seismic source that releases compressed air (typically 2000 psi) into the water to generate an impulsive pressure wavelet. Standard deep-water acquisition source. Peak frequency range 10-100 Hz. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "properties": {
-          "operatingPressure_Pa": "1.38e7",
-          "peakFrequency_Hz": "50-80",
-          "volumeRange_cui": "40-2000"
-        },
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "Vibroseis": {
-        "id": "Vibroseis",
-        "name": "Vibroseis",
-        "name_pt": "Vibrosseis",
-        "superclass": "Source",
-        "description": "Land seismic source that emits a swept-frequency (chirp) signal via a vibrating baseplate hydraulically coupled to the ground. Allows controlled bandwidth 6-120 Hz. Requires cross-correlation with pilot sweep to produce zero-phase wavelet. Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_acquisition",
-        "properties": {
-          "sweepFrequencyMin_Hz": "6",
-          "sweepFrequencyMax_Hz": "120",
-          "sweepLength_s": "4-20",
-          "peakForce_N": "267000"
-        },
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "Dynamite": {
-        "id": "Dynamite",
-        "name": "Dynamite",
-        "name_pt": "Explosivo",
-        "superclass": "Source",
-        "description": "Explosive seismic source detonated in a shallow drill hole to generate a broad-band (5-200 Hz) near-impulsive wavelet. Preferred in areas of complex near-surface topography where vibroseis coupling is poor. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "SparkerArray": {
-        "id": "SparkerArray",
-        "name": "SparkerArray",
-        "name_pt": "Array de Sparker",
-        "superclass": "Source",
-        "description": "High-resolution marine source using electrical discharge to vaporise water and generate a broadband (50-1000 Hz) pressure pulse. Used in ultra-high-resolution shallow surveys. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "Receiver": {
-        "id": "Receiver",
-        "name": "Receiver",
-        "name_pt": "Receptor Sismico",
-        "superclass": "owl:Thing",
-        "description": "Sensor that converts mechanical ground or water motion into an electrical signal. Sensitivity, natural frequency and dynamic range determine the recordable bandwidth. Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_acquisition",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "Hydrophone": {
-        "id": "Hydrophone",
-        "name": "Hydrophone",
-        "name_pt": "Hidrofone",
-        "superclass": "Receiver",
-        "description": "Pressure-sensitive piezoelectric sensor towed in marine streamers. Records scalar pressure wavefield (P-wave only). Sensitivity ~10 mV/Pa. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "properties": {
-          "sensitivity_mV_per_Pa": "10",
-          "naturalFrequency_Hz": "2-5",
-          "measuredQuantity": "pressure"
-        },
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "Geophone": {
-        "id": "Geophone",
-        "name": "Geophone",
-        "name_pt": "Geofone",
-        "superclass": "Receiver",
-        "description": "Velocity-sensitive electromagnetic sensor planted on the ground surface. Natural frequency typically 10 Hz (land) or 4.5 Hz (OBC). Records particle velocity. Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_acquisition",
-        "properties": {
-          "naturalFrequency_Hz": "4.5-14",
-          "damping": "0.707",
-          "measuredQuantity": "particle_velocity"
-        },
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "AccelerometerMEMS": {
-        "id": "AccelerometerMEMS",
-        "name": "AccelerometerMEMS",
-        "name_pt": "Acelerometro MEMS",
-        "superclass": "Receiver",
-        "description": "Micro-Electro-Mechanical System accelerometer used in nodal acquisition systems. Flat response from DC to several hundred Hz; measures particle acceleration. Superior low-frequency response compared to geophone. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "properties": {
-          "flatBandMin_Hz": "0",
-          "flatBandMax_Hz": "800",
-          "measuredQuantity": "particle_acceleration"
-        },
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "OBC": {
-        "id": "OBC",
-        "name": "OBC",
-        "name_pt": "Cabo de Fundo Oceanico",
-        "superclass": "Receiver",
-        "description": "Ocean-Bottom Cable: multi-component cable laid on the sea floor carrying collocated hydrophones and geophones (4C). Enables dual-sensor summation and S-wave recording. Ref: Sheriff & Geldart 1995.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "AcquisitionGeometry": {
-        "id": "AcquisitionGeometry",
-        "name": "AcquisitionGeometry",
-        "name_pt": "Geometria de Aquisicao",
-        "superclass": "owl:Thing",
-        "description": "Spatial arrangement of sources and receivers defining illumination, fold, offset distribution and azimuth coverage. Critical for migration operator accuracy. Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_acquisition",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "StreamerLayout": {
-        "id": "StreamerLayout",
-        "name": "StreamerLayout",
-        "name_pt": "Configuracao de Streamer",
-        "superclass": "AcquisitionGeometry",
-        "description": "Marine geometry in which one or more hydrophone cables (streamers) are towed behind a vessel. Characterised by streamer length, cable separation, tow depth and number of streamers.",
-        "domain": "seismic_acquisition",
-        "properties": {
-          "streamerLength_m": "4000-12000",
-          "numberOfStreamers": "1-24",
-          "streamerDepth_m": "5-12",
-          "cableSeparation_m": "25-200"
-        },
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "NodalLayout": {
-        "id": "NodalLayout",
-        "name": "NodalLayout",
-        "name_pt": "Configuracao Nodal",
-        "superclass": "AcquisitionGeometry",
-        "description": "Land or OBN geometry employing autonomous wireless nodes deployed in a regular or irregular grid. Enables full-azimuth illumination.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "SamplingParameters": {
-        "id": "SamplingParameters",
-        "name": "SamplingParameters",
-        "name_pt": "Parametros de Amostragem",
-        "superclass": "owl:Thing",
-        "description": "Temporal and spatial sampling parameters that define the recorded wavefield fidelity and alias constraints. Must satisfy the Nyquist theorem in both time and space. Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "Aliasing": {
-        "id": "Aliasing",
-        "name": "Aliasing",
-        "name_pt": "Aliasing / Dobramento Espectral",
-        "superclass": "owl:Thing",
-        "description": "Artifact arising when the sampling interval violates the Nyquist criterion, causing high-frequency energy to fold back into the recorded spectrum. Temporal aliasing: dt > 1/(2*fmax). Spatial aliasing: dx > v/(2*fmax). Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_acquisition",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "ProcessingFlow": {
-        "id": "ProcessingFlow",
-        "name": "ProcessingFlow",
-        "name_pt": "Fluxo de Processamento",
-        "superclass": "owl:Thing",
-        "description": "Ordered sequence of processing steps applied to raw seismic data to produce an imaged, interpretable seismic volume. Each step transforms the data in a specific way. Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_processing",
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "NoiseSuppressionFilter": {
-        "id": "NoiseSuppressionFilter",
-        "name": "NoiseSuppressionFilter",
-        "name_pt": "Filtro de Supressao de Ruido",
-        "superclass": "owl:Thing",
-        "description": "Generic category of operations that attenuate coherent or incoherent noise in seismic data while preserving signal fidelity. Sub-types include DATVF, FXEdit and DenoiseFK. Ref: Yilmaz 2001, ch. 6.",
-        "domain": "seismic_processing",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "DATVF": {
-        "id": "DATVF",
-        "name": "DATVF",
-        "name_pt": "DATVF — Denoising Adaptativo no Dominio T-V-F",
-        "superclass": "NoiseSuppressionFilter",
-        "description": "Data-Adaptive Time-Variant Frequency filter that applies a spatially and temporally varying bandpass to track signal frequency content changes with depth/time, suppressing noise outside the signal band without over-smoothing. Ref: Yilmaz 2001.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "FXEdit": {
-        "id": "FXEdit",
-        "name": "FXEdit",
-        "name_pt": "FX Edit — Edicao no Dominio F-X",
-        "superclass": "NoiseSuppressionFilter",
-        "description": "Coherent noise attenuation in the frequency-wavenumber (f-x) domain. Random noise appears as spatially uncorrelated; linear coherent noise is predicted and subtracted via Wiener prediction. Ref: Yilmaz 2001, ch. 6.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "DenoiseFK": {
-        "id": "DenoiseFK",
-        "name": "DenoiseFK",
-        "name_pt": "Denoising FK — Filtragem F-K",
-        "superclass": "NoiseSuppressionFilter",
-        "description": "Frequency-wavenumber (f-k) fan filter that attenuates noise with apparent velocity outside the signal fan. Effective for ground-roll (slow, low-frequency) suppression in land data. Ref: Yilmaz 2001, ch. 6.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "Deconvolution": {
-        "id": "Deconvolution",
-        "name": "Deconvolution",
-        "name_pt": "Deconvolucao",
-        "superclass": "owl:Thing",
-        "description": "Inverse filtering operation that compresses the source wavelet toward a spike (spiking) or reduces its length (predictive), thereby improving temporal resolution and attenuating multiples. Assumes convolutional model: x(t) = w(t)*r(t)+n(t). Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_processing",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "PredictiveDeconvolution": {
-        "id": "PredictiveDeconvolution",
-        "name": "PredictiveDeconvolution",
-        "name_pt": "Deconvolucao Preditiva",
-        "superclass": "Deconvolution",
-        "description": "Deconvolution in which a prediction distance (lag) greater than one sample is used, concentrating the operation on multiple attenuation at a specified prediction lag (equal to the two-way travel time of the peg-leg multiple). Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_processing",
-        "properties": {
-          "predictionLag_ms": "typical multiple TWTT",
-          "operatorLength_ms": "200-400"
-        },
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "SpikingDeconvolution": {
-        "id": "SpikingDeconvolution",
-        "name": "SpikingDeconvolution",
-        "name_pt": "Deconvolucao por Espicamento",
-        "superclass": "Deconvolution",
-        "description": "Wiener least-squares deconvolution with prediction lag=1 sample, aiming to collapse the wavelet to a spike and maximise temporal resolution. Assumes minimum-phase source wavelet and white reflectivity. Ref: Yilmaz 2001, ch. 2.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "NMO": {
-        "id": "NMO",
-        "name": "NMO",
-        "name_pt": "NMO — Correcao Normal Moveout",
-        "superclass": "owl:Thing",
-        "description": "Normal Moveout correction: time-shift applied to each trace to remove the hyperbolic offset-dependent arrival time difference and align reflections before stacking. Requires RMS velocity model. Introduces NMO stretch at far offsets. Ref: Yilmaz 2001, ch. 3.",
-        "domain": "seismic_processing",
-        "properties": {
-          "velocityField": "RMS velocity",
-          "stretchMute_percent": "typical 25-40"
-        },
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "DMO": {
-        "id": "DMO",
-        "name": "DMO",
-        "name_pt": "DMO — Correcao Dip Moveout",
-        "superclass": "owl:Thing",
-        "description": "Dip Moveout correction applied after NMO to remove the dip-dependent component of moveout, transforming the data to zero-offset equivalent before stack. Precedes post-stack migration in conventional processing. Ref: Yilmaz 2001, ch. 4.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "Stacking": {
-        "id": "Stacking",
-        "name": "Stacking",
-        "name_pt": "Empilhamento",
-        "superclass": "owl:Thing",
-        "description": "Summation of NMO-corrected CMP traces to produce a single stacked trace with improved signal-to-noise ratio proportional to sqrt(fold). Pre-stack data are retained for AVO and inversion. Ref: Yilmaz 2001, ch. 3.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "StaticCorrection": {
-        "id": "StaticCorrection",
-        "name": "StaticCorrection",
-        "name_pt": "Correcao Estatica",
-        "superclass": "owl:Thing",
-        "description": "Time-shift applied to land seismic traces to compensate for near-surface weathering layer thickness and velocity variations, and for surface topography. Comprises elevation statics (field) and residual statics (processing). Ref: Yilmaz 2001, ch. 3.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "AmplitudeCompensation": {
-        "id": "AmplitudeCompensation",
-        "name": "AmplitudeCompensation",
-        "name_pt": "Compensacao de Amplitude",
-        "superclass": "owl:Thing",
-        "description": "Amplitude restoration to compensate for geometrical spreading loss and anelastic (Q) attenuation with depth, making amplitude proportional to reflectivity for AVO/DHI analysis. Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_processing",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "SphericalDivergenceCorrection": {
-        "id": "SphericalDivergenceCorrection",
-        "name": "SphericalDivergenceCorrection",
-        "name_pt": "Correcao de Divergencia Esferica",
-        "superclass": "AmplitudeCompensation",
-        "description": "Gain function proportional to t^2 * v^2(t) that compensates for amplitude decay due to spherical divergence of the wavefront. Applied early in the flow before deconvolution. Ref: Yilmaz 2001, ch. 1.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "QCompensation": {
-        "id": "QCompensation",
-        "name": "QCompensation",
-        "name_pt": "Compensacao-Q (Atenuacao Anelastica)",
-        "superclass": "AmplitudeCompensation",
-        "description": "Inverse-Q filter that restores high-frequency amplitude and phase loss caused by anelastic attenuation (Q factor) during wave propagation. Critical in gas-saturated intervals. Ref: Yilmaz 2001, ch. 7.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "Migration": {
-        "id": "Migration",
-        "name": "Migration",
-        "name_pt": "Migracao Sismica",
-        "superclass": "owl:Thing",
-        "description": "Wave-equation-based imaging operator that collapses diffractions and repositions dipping reflectors to their true subsurface positions. Can be applied pre- or post-stack, in time or depth domain. Ref: Yilmaz 2001, ch. 4-5.",
-        "domain": "seismic_processing",
-        "abstract": true,
-        "sources": [
-          "Yilmaz 2001",
-          "Sheriff & Geldart 1995"
-        ]
-      },
-      "KirchhoffMigration": {
-        "id": "KirchhoffMigration",
-        "name": "KirchhoffMigration",
-        "name_pt": "Migracao de Kirchhoff",
-        "superclass": "Migration",
-        "description": "Asymptotic migration based on the Kirchhoff integral of the scalar wave equation. Computationally efficient for 3D pre-stack time and depth migration; less accurate than RTM in complex velocity structures. Ref: Yilmaz 2001, ch. 4.",
-        "domain": "seismic_processing",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "RTM": {
-        "id": "RTM",
-        "name": "RTM",
-        "name_pt": "RTM — Migracao Reversa no Tempo",
-        "superclass": "Migration",
-        "description": "Reverse Time Migration: two-way wave equation migration that propagates the source wavefield forward and receiver wavefield backward in time, applying an imaging condition. Handles complex velocity models (salt bodies) accurately. Computationally intensive. Ref: Yilmaz 2001, ch. 5.",
-        "domain": "seismic_processing",
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "SeismicInversion": {
-        "id": "SeismicInversion",
-        "name": "SeismicInversion",
-        "name_pt": "Inversao Sismica",
-        "superclass": "owl:Thing",
-        "description": "Process of transforming seismic reflection data into quantitative rock property models (impedance, velocity, density) by solving the forward convolution model in reverse. Requires wavelet estimation and low-frequency model from wells. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "abstract": true,
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicTraceData:1.0.0",
-        "sources": [
-          "Russell 1988",
-          "Yilmaz 2001"
-        ]
-      },
-      "PostStackInversion": {
-        "id": "PostStackInversion",
-        "name": "PostStackInversion",
-        "name_pt": "Inversao Pos-Empilhamento",
-        "superclass": "SeismicInversion",
-        "description": "Inversion applied to stacked (zero-offset equivalent) seismic data to estimate acoustic impedance Ip = Vp * rho. Most mature and widely applied inversion method. Methods: band-limited, model-based, sparse-spike. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Russell 1988"
-        ]
-      },
-      "PreStackInversion": {
-        "id": "PreStackInversion",
-        "name": "PreStackInversion",
-        "name_pt": "Inversao Pre-Empilhamento",
-        "superclass": "SeismicInversion",
-        "description": "Simultaneous inversion of partial-angle stacks to estimate Vp, Vs and density using the Zoeppritz equations or Aki-Richards linearisation. Enables direct Vp/Vs and elastic impedance extraction. Ref: Russell 1988; Connolly 1999.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Russell 1988",
-          "Connolly 1999"
-        ]
-      },
-      "AVOInversion": {
-        "id": "AVOInversion",
-        "name": "AVOInversion",
-        "name_pt": "Inversao AVO",
-        "superclass": "SeismicInversion",
-        "description": "Amplitude Versus Offset inversion that extracts AVO intercept (A) and gradient (B) from CDP gathers using the Shuey two-term approximation, enabling fluid and lithology discrimination. Ref: Yilmaz 2001, ch. 11.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "ElasticImpedanceInversion": {
-        "id": "ElasticImpedanceInversion",
-        "name": "ElasticImpedanceInversion",
-        "name_pt": "Inversao de Impedancia Elastica",
-        "superclass": "PreStackInversion",
-        "description": "Inversion of angle-dependent seismic data to Elastic Impedance (EI), the far-offset analogue of acoustic impedance. Defined as EI(theta) = Vp^(1+tan^2θ) * Vs^(-8*K*sin^2θ) * rho^(1-4*K*sin^2θ) where K=Vs^2/Vp^2. Ref: Connolly 1999.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Connolly 1999"
-        ]
-      },
-      "FullWaveformInversion": {
-        "id": "FullWaveformInversion",
-        "name": "FullWaveformInversion",
-        "name_pt": "Inversao de Forma de Onda Completa (FWI)",
-        "superclass": "SeismicInversion",
-        "description": "Iterative inversion that minimises the misfit between observed and modelled waveforms to build high-resolution velocity and density models. Computationally intensive; requires low-frequency data (2-5 Hz). Ref: Yilmaz 2001.",
-        "domain": "seismic_inversion",
-        "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "AcousticImpedance": {
-        "id": "AcousticImpedance",
-        "name": "AcousticImpedance",
-        "name_pt": "Impedancia Acustica",
-        "superclass": "owl:Thing",
-        "description": "Product of P-wave velocity and bulk density: Ip = Vp * rho. Primary output of post-stack inversion. Units: g/cm3 * m/s. Used to calibrate well logs and identify lithology/fluid changes. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "properties": {
-          "unit": "g/cm3 * m/s",
-          "typical_range": "3000-20000"
-        },
-        "sources": [
-          "Russell 1988"
-        ]
-      },
-      "ElasticImpedance": {
-        "id": "ElasticImpedance",
-        "name": "ElasticImpedance",
-        "name_pt": "Impedancia Elastica",
-        "superclass": "owl:Thing",
-        "description": "Angle-dependent impedance generalisation of acoustic impedance for non-zero incidence angle, enabling pre-stack seismic calibration. Defined by Connolly (1999). Units: varies with normalisation convention.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Connolly 1999"
-        ]
-      },
-      "RockProperty": {
-        "id": "RockProperty",
-        "name": "RockProperty",
-        "name_pt": "Propriedade de Rocha",
-        "superclass": "owl:Thing",
-        "description": "Quantitative petrophysical or rock-physics parameter derived from seismic inversion or well logs. Includes Vp/Vs ratio, lambda-rho and mu-rho for fluid and lithology discrimination. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "abstract": true,
-        "sources": [
-          "Russell 1988"
-        ]
-      },
-      "VpVsRatio": {
-        "id": "VpVsRatio",
-        "name": "VpVsRatio",
-        "name_pt": "Razao Vp/Vs",
-        "superclass": "RockProperty",
-        "description": "Ratio of P-wave to S-wave velocity. Sensitive to fluid saturation: brine-saturated rock Vp/Vs ~1.9-2.1; gas-saturated Vp/Vs ~1.4-1.7 (Gassmann fluid substitution). Derived from PreStackInversion. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "properties": {
-          "typical_brine": "1.9-2.1",
-          "typical_gas": "1.4-1.7"
-        },
-        "sources": [
-          "Russell 1988"
-        ]
-      },
-      "LambdaRho": {
-        "id": "LambdaRho",
-        "name": "LambdaRho",
-        "name_pt": "Lambda-Rho",
-        "superclass": "RockProperty",
-        "description": "Product of Lame parameter lambda and density: lambda*rho. Highly sensitive to pore fluid: gas decreases lambda-rho significantly relative to brine. Part of the lambda-mu-rho (LMR) rock-physics domain. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Russell 1988"
-        ]
-      },
-      "MuRho": {
-        "id": "MuRho",
-        "name": "MuRho",
-        "name_pt": "Mu-Rho",
-        "superclass": "RockProperty",
-        "description": "Product of shear modulus mu and density. Relatively insensitive to pore fluid but sensitive to lithology (shale vs sand). Pair with LambdaRho for fluid-lithology crossplot. Ref: Russell 1988.",
-        "domain": "seismic_inversion",
-        "sources": [
-          "Russell 1988"
-        ]
-      },
-      "SeismicAttribute": {
-        "id": "SeismicAttribute",
-        "name": "SeismicAttribute",
-        "name_pt": "Atributo Sismico",
-        "superclass": "owl:Thing",
-        "description": "Quantitative measure derived from seismic data through mathematical transformation. Extracts information about structure, stratigraphy, fluid content or lithology not directly visible in the amplitude display. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "abstract": true,
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "Coherence": {
-        "id": "Coherence",
-        "name": "Coherence",
-        "name_pt": "Coerencia",
-        "superclass": "SeismicAttribute",
-        "description": "Measure of lateral similarity of seismic traces. Low coherence indicates faults, fractures or stratigraphic discontinuities. Original algorithm by Bahorich & Farmer (1995); enhanced by semblance (Marfurt et al. 1998). Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "properties": {
-          "value_range": "0-1",
-          "sensitivity": "faults, fractures, channels"
-        },
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "Curvature": {
-        "id": "Curvature",
-        "name": "Curvature",
-        "name_pt": "Curvatura",
-        "superclass": "SeismicAttribute",
-        "description": "Second spatial derivative of the seismic horizon. Most-positive and most-negative curvature highlight flexures, collapse features and subtle faults. Sensitive to fracture corridors. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "RMS": {
-        "id": "RMS",
-        "name": "RMS",
-        "name_pt": "Amplitude RMS",
-        "superclass": "SeismicAttribute",
-        "description": "Root Mean Square amplitude computed over a time window. Sensitive to reflectivity strength; often brightens over hydrocarbons (Class III AVO). Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "SpectralDecomposition": {
-        "id": "SpectralDecomposition",
-        "name": "SpectralDecomposition",
-        "name_pt": "Decomposicao Espectral",
-        "superclass": "SeismicAttribute",
-        "description": "Time-frequency analysis (short-window DFT, CWT or MP) that extracts amplitude and phase at discrete frequencies. Each frequency is sensitive to a specific bed thickness (tuning). Effective for stratigraphic thickness mapping. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "InstantaneousPhase": {
-        "id": "InstantaneousPhase",
-        "name": "InstantaneousPhase",
-        "name_pt": "Fase Instantanea",
-        "superclass": "SeismicAttribute",
-        "description": "Phase of the analytic signal derived via Hilbert transform. Highlights reflector continuity independent of amplitude strength. Useful for stratigraphic correlation. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "Dip": {
-        "id": "Dip",
-        "name": "Dip",
-        "name_pt": "Mergulho Sismico",
-        "superclass": "SeismicAttribute",
-        "description": "Inline and crossline apparent dip of the seismic event derived from the gradient of the instantaneous phase or coherence scan. Input for dip-steered attribute computation. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "unit": "ms/m or degrees",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "Azimuth": {
-        "id": "Azimuth",
-        "name": "Azimuth",
-        "name_pt": "Azimute Sismico",
-        "superclass": "SeismicAttribute",
-        "description": "Compass direction of the steepest dip of a reflector, derived jointly with the Dip attribute. Used to detect structural and fracture orientation. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "unit": "degrees",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "DHI": {
-        "id": "DHI",
-        "name": "DHI",
-        "name_pt": "DHI — Indicador Direto de Hidrocarboneto",
-        "superclass": "SeismicAttribute",
-        "description": "Direct Hydrocarbon Indicator: seismic anomaly whose character is directly controlled by the presence of gas or oil in the reservoir. Includes bright spots, flat spots, phase reversals and AVO anomalies. Ref: Yilmaz 2001, ch. 11.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "AVOAnomaly": {
-        "id": "AVOAnomaly",
-        "name": "AVOAnomaly",
-        "name_pt": "Anomalia AVO",
-        "superclass": "DHI",
-        "description": "Offset-dependent amplitude anomaly at a reservoir interface classified into four Rutherford-Williams classes (I-IV) based on normal-incidence impedance contrast and gradient sign. Class III (negative intercept, negative gradient) is the classic gas sand anomaly. Ref: Yilmaz 2001, ch. 11.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Yilmaz 2001"
-        ]
-      },
-      "SOM": {
-        "id": "SOM",
-        "name": "SOM",
-        "name_pt": "SOM — Mapa Auto-Organizavel",
-        "superclass": "owl:Thing",
-        "description": "Self-Organising Map: unsupervised neural network that projects a multi-attribute seismic volume onto a 2D topology-preserving map for facies classification without prior labels. Ref: Coleou et al. 2003, The Leading Edge.",
-        "domain": "seismic_ml",
-        "sources": [
-          "Coleou et al. 2003"
-        ]
-      },
-      "PCA": {
-        "id": "PCA",
-        "name": "PCA",
-        "name_pt": "PCA — Analise de Componentes Principais",
-        "superclass": "owl:Thing",
-        "description": "Principal Component Analysis applied to a multi-attribute seismic dataset to reduce dimensionality, decorrelate attributes and identify dominant seismic facies components before SOM or supervised classification. Ref: Coleou et al. 2003.",
-        "domain": "seismic_ml",
-        "sources": [
-          "Coleou et al. 2003"
-        ]
-      },
-      "FaciesClassification": {
-        "id": "FaciesClassification",
-        "name": "FaciesClassification",
-        "name_pt": "Classificacao de Facies Sismicas",
-        "superclass": "owl:Thing",
-        "description": "Assignment of seismic volumes or attribute maps to discrete facies classes that correlate with depositional environment or rock type. Can be supervised (with well labels) or unsupervised (SOM/PCA). Ref: Coleou et al. 2003; Chopra & Marfurt 2007.",
-        "domain": "seismic_ml",
-        "sources": [
-          "Coleou et al. 2003",
-          "Chopra & Marfurt 2007"
-        ]
-      },
-      "SweetSpot": {
-        "id": "SweetSpot",
-        "name": "SweetSpot",
-        "name_pt": "Sweet Spot",
-        "superclass": "owl:Thing",
-        "description": "Geospatially bounded zone identified by the intersection of favourable seismic attributes (DHI, AVO anomaly, high porosity inversion) indicating an exploration or production target with elevated hydrocarbon potential. Ref: Chopra & Marfurt 2007.",
-        "domain": "seismic_attributes",
-        "sources": [
-          "Chopra & Marfurt 2007"
-        ]
-      }
-    },
-    "properties": {
-      "samplingInterval": {
-        "id": "samplingInterval",
-        "name": "samplingInterval",
-        "name_pt": "Intervalo de Amostragem",
-        "description": "Time interval between consecutive recorded samples. Standard values: 1 ms (high-resolution), 2 ms (conventional), 4 ms (low-frequency). Must be dt <= 1/(2*fNyquist). Ref: Yilmaz 2001.",
-        "unit": "ms",
-        "domain_class": "SamplingParameters",
-        "range": "xsd:decimal",
-        "typical_values": "1-4",
-        "rag_priority": "high"
-      },
-      "recordLength": {
-        "id": "recordLength",
-        "name": "recordLength",
-        "name_pt": "Comprimento do Registro",
-        "description": "Total duration of each recorded seismic trace, from shot instant to end of recording. Typical 6-10 s for deep targets.",
-        "unit": "s",
-        "domain_class": "SamplingParameters",
-        "range": "xsd:decimal",
-        "typical_values": "4-12"
-      },
-      "fold": {
-        "id": "fold",
-        "name": "fold",
-        "name_pt": "Multiplicidade / Fold",
-        "description": "Number of independent seismic traces that contribute to a single stacked trace after CMP sorting. Higher fold improves signal-to-noise ratio. Standard 3D: 60-120x. Ref: Yilmaz 2001.",
-        "unit": "dimensionless",
-        "domain_class": "SamplingParameters",
-        "range": "xsd:integer",
-        "typical_values": "30-180",
-        "rag_priority": "high"
-      },
-      "offset": {
-        "id": "offset",
-        "name": "offset",
-        "name_pt": "Afastamento",
-        "description": "Distance between source and receiver. Minimum offset determines shallow resolution; maximum offset determines depth penetration and NMO velocity resolution. Must be non-negative. Ref: Yilmaz 2001.",
-        "unit": "m",
-        "domain_class": "SamplingParameters",
-        "range": "xsd:decimal",
-        "typical_values": "0-8000"
-      },
-      "NyquistFrequency": {
-        "id": "NyquistFrequency",
-        "name": "NyquistFrequency",
-        "name_pt": "Frequencia de Nyquist",
-        "description": "Maximum alias-free frequency: fN = 1/(2*dt). For dt=2ms, fN=250Hz. Ref: Yilmaz 2001, eq. 1-1.",
-        "unit": "Hz",
-        "domain_class": "SamplingParameters",
-        "range": "xsd:decimal",
-        "formula": "1 / (2 * samplingInterval_s)",
-        "rag_priority": "high"
-      },
-      "signalBandwidth": {
-        "id": "signalBandwidth",
-        "name": "signalBandwidth",
-        "name_pt": "Banda do Sinal",
-        "description": "Frequency range of meaningful signal energy after instrument and earth filtering. Typical 8-80 Hz for conventional reflection seismics.",
-        "unit": "Hz",
-        "domain_class": "SamplingParameters",
-        "range": "xsd:string"
-      },
-      "peakFrequency": {
-        "id": "peakFrequency",
-        "name": "peakFrequency",
-        "name_pt": "Frequencia de Pico",
-        "description": "Dominant frequency of the source wavelet or Ricker wavelet. Determines vertical resolution: lambda/4 = v/(4*fPeak). Ref: Yilmaz 2001.",
-        "unit": "Hz",
-        "domain_class": "Source",
-        "range": "xsd:decimal",
-        "typical_values": "20-80"
-      },
-      "operatingPressure": {
-        "id": "operatingPressure",
-        "name": "operatingPressure",
-        "name_pt": "Pressao de Operacao",
-        "description": "Working pressure of an airgun array at fire time. Typical value 138 bar (2000 psi). Controls peak-to-bubble ratio.",
-        "unit": "Pa",
-        "domain_class": "Airgun",
-        "range": "xsd:decimal"
-      },
-      "sweepFrequencyMin": {
-        "id": "sweepFrequencyMin",
-        "name": "sweepFrequencyMin",
-        "name_pt": "Frequencia Minima do Sweep",
-        "description": "Lowest frequency in the vibroseis pilot sweep.",
-        "unit": "Hz",
-        "domain_class": "Vibroseis",
-        "range": "xsd:decimal"
-      },
-      "sweepFrequencyMax": {
-        "id": "sweepFrequencyMax",
-        "name": "sweepFrequencyMax",
-        "name_pt": "Frequencia Maxima do Sweep",
-        "description": "Highest frequency in the vibroseis pilot sweep.",
-        "unit": "Hz",
-        "domain_class": "Vibroseis",
-        "range": "xsd:decimal"
-      },
-      "sweepLength": {
-        "id": "sweepLength",
-        "name": "sweepLength",
-        "name_pt": "Duracao do Sweep",
-        "description": "Duration of the vibroseis sweep signal in seconds. Longer sweeps improve signal-to-noise ratio after correlation.",
-        "unit": "s",
-        "domain_class": "Vibroseis",
-        "range": "xsd:decimal"
-      },
-      "streamerLength": {
-        "id": "streamerLength",
-        "name": "streamerLength",
-        "name_pt": "Comprimento do Streamer",
-        "description": "Total active length of a towed hydrophone cable. Controls maximum offset and hence depth penetration.",
-        "unit": "m",
-        "domain_class": "StreamerLayout",
-        "range": "xsd:decimal",
-        "typical_values": "4000-12000"
-      },
-      "numberOfStreamers": {
-        "id": "numberOfStreamers",
-        "name": "numberOfStreamers",
-        "name_pt": "Numero de Streamers",
-        "description": "Count of towed hydrophone cables. Increases cross-line coverage and survey efficiency.",
-        "unit": "dimensionless",
-        "domain_class": "StreamerLayout",
-        "range": "xsd:integer"
-      },
-      "gridSpacing": {
-        "id": "gridSpacing",
-        "name": "gridSpacing",
-        "name_pt": "Espacamento de Grade",
-        "description": "In-line and cross-line CMP bin dimensions. Determines lateral spatial aliasing limit: dx <= v/(2*fmax). Typical 12.5x12.5m to 25x25m in 3D surveys.",
-        "unit": "m",
-        "domain_class": "AcquisitionGeometry",
-        "range": "xsd:string"
-      },
-      "waterDepth": {
-        "id": "waterDepth",
-        "name": "waterDepth",
-        "name_pt": "Lamina d'Agua",
-        "description": "Water depth at survey location. Determines ghost frequency, node deployment logistics and cable operation window.",
-        "unit": "m",
-        "domain_class": "MarineSurvey",
-        "range": "xsd:decimal"
-      },
-      "receiverSensitivity": {
-        "id": "receiverSensitivity",
-        "name": "receiverSensitivity",
-        "name_pt": "Sensibilidade do Receptor",
-        "description": "Transduction efficiency of a receiver. For hydrophones: mV/Pa; for geophones: V/(m/s).",
-        "unit": "V/(m/s) or mV/Pa",
-        "domain_class": "Receiver",
-        "range": "xsd:decimal"
-      },
-      "surveyArea": {
-        "id": "surveyArea",
-        "name": "surveyArea",
-        "name_pt": "Area do Levantamento",
-        "description": "Total area covered by the seismic survey polygon.",
-        "unit": "km2",
-        "domain_class": "SeismicSurvey",
-        "range": "xsd:decimal"
-      },
-      "processingStep": {
-        "id": "processingStep",
-        "name": "processingStep",
-        "name_pt": "Passo de Processamento",
-        "description": "Ordered step in the processing flow, referencing the class of the operation applied.",
-        "unit": "dimensionless",
-        "domain_class": "ProcessingFlow",
-        "range": "xsd:string"
-      },
-      "stepOrder": {
-        "id": "stepOrder",
-        "name": "stepOrder",
-        "name_pt": "Ordem do Passo",
-        "description": "Integer index of the processing step within the flow (1 = first).",
-        "unit": "dimensionless",
-        "domain_class": "ProcessingFlow",
-        "range": "xsd:integer"
-      },
-      "operatorLength": {
-        "id": "operatorLength",
-        "name": "operatorLength",
-        "name_pt": "Comprimento do Operador",
-        "description": "Length of the deconvolution Wiener filter operator.",
-        "unit": "ms",
-        "domain_class": "Deconvolution",
-        "range": "xsd:integer"
-      },
-      "predictionLag": {
-        "id": "predictionLag",
-        "name": "predictionLag",
-        "name_pt": "Lag de Predicao",
-        "description": "Prediction distance in predictive deconvolution, set to the expected peg-leg multiple TWTT.",
-        "unit": "ms",
-        "domain_class": "PredictiveDeconvolution",
-        "range": "xsd:integer"
-      },
-      "velocityFieldType": {
-        "id": "velocityFieldType",
-        "name": "velocityFieldType",
-        "name_pt": "Tipo de Campo de Velocidade",
-        "description": "Type of velocity model used in NMO or migration: RMS, interval, tomographic.",
-        "unit": "enum",
-        "domain_class": "NMO",
-        "range": "xsd:string"
-      },
-      "stretchMute": {
-        "id": "stretchMute",
-        "name": "stretchMute",
-        "name_pt": "Mute de Estiramento",
-        "description": "Maximum tolerable NMO stretch in percent; traces beyond this limit are muted to prevent low-frequency noise contamination of the stack.",
-        "unit": "percent",
-        "domain_class": "NMO",
-        "range": "xsd:decimal"
-      },
-      "qFactor": {
-        "id": "qFactor",
-        "name": "qFactor",
-        "name_pt": "Fator Q",
-        "description": "Quality factor: ratio of elastic energy stored to energy dissipated per cycle. Low Q (20-100) = high attenuation; high Q (200-1000) = low attenuation. Used in Q-compensation filter design.",
-        "unit": "dimensionless",
-        "domain_class": "QCompensation",
-        "range": "xsd:decimal",
-        "typical_values": "20-1000",
-        "rag_priority": "high"
-      },
-      "migrationAlgorithm": {
-        "id": "migrationAlgorithm",
-        "name": "migrationAlgorithm",
-        "name_pt": "Algoritmo de Migracao",
-        "description": "Algorithm used in the migration step: Kirchhoff, RTM, FWI, Phase-Shift.",
-        "unit": "enum",
-        "domain_class": "Migration",
-        "range": "xsd:string"
-      },
-      "migrationDomain": {
-        "id": "migrationDomain",
-        "name": "migrationDomain",
-        "name_pt": "Dominio de Migracao",
-        "description": "Whether migration is performed in time or depth domain.",
-        "unit": "enum",
-        "domain_class": "Migration",
-        "range": "xsd:string"
-      },
-      "bandpassFilterLow": {
-        "id": "bandpassFilterLow",
-        "name": "bandpassFilterLow",
-        "name_pt": "Frequencia de Corte Inferior",
-        "description": "Low-frequency cut of a bandpass filter applied during processing.",
-        "unit": "Hz",
-        "domain_class": "NoiseSuppressionFilter",
-        "range": "xsd:decimal"
-      },
-      "bandpassFilterHigh": {
-        "id": "bandpassFilterHigh",
-        "name": "bandpassFilterHigh",
-        "name_pt": "Frequencia de Corte Superior",
-        "description": "High-frequency cut of a bandpass filter applied during processing.",
-        "unit": "Hz",
-        "domain_class": "NoiseSuppressionFilter",
-        "range": "xsd:decimal"
-      },
-      "gainFunction": {
-        "id": "gainFunction",
-        "name": "gainFunction",
-        "name_pt": "Funcao de Ganho",
-        "description": "Mathematical form of the amplitude correction applied: t2v2, AGC, balance.",
-        "unit": "enum",
-        "domain_class": "AmplitudeCompensation",
-        "range": "xsd:string"
-      },
-      "staticShift": {
-        "id": "staticShift",
-        "name": "staticShift",
-        "name_pt": "Deslocamento Estatico",
-        "description": "Time shift in milliseconds applied to a trace by static correction.",
-        "unit": "ms",
-        "domain_class": "StaticCorrection",
-        "range": "xsd:decimal"
-      },
-      "acousticImpedance_value": {
-        "id": "acousticImpedance_value",
-        "name": "acousticImpedance_value",
-        "name_pt": "Valor de Impedancia Acustica",
-        "description": "Numerical value of acoustic impedance in g/cm3 * m/s. Typical sand: 6000-10000; shale: 7000-12000; carbonates: 12000-20000.",
-        "unit": "g/cm3 * m/s",
-        "domain_class": "AcousticImpedance",
-        "range": "xsd:decimal",
-        "typical_values": "3000-20000",
-        "rag_priority": "high"
-      },
-      "elasticImpedance_angle": {
-        "id": "elasticImpedance_angle",
-        "name": "elasticImpedance_angle",
-        "name_pt": "Angulo de Incidencia (EI)",
-        "description": "Angle of incidence at which the elastic impedance is computed, typically 15, 30 or 45 degrees.",
-        "unit": "degrees",
-        "domain_class": "ElasticImpedance",
-        "range": "xsd:decimal"
-      },
-      "vpVsRatio_value": {
-        "id": "vpVsRatio_value",
-        "name": "vpVsRatio_value",
-        "name_pt": "Valor da Razao Vp/Vs",
-        "description": "Numerical value of the Vp/Vs ratio. Gas: 1.4-1.7; brine: 1.9-2.1; carbonates: 1.7-2.0.",
-        "unit": "dimensionless",
-        "domain_class": "VpVsRatio",
-        "range": "xsd:decimal",
-        "rag_priority": "high"
-      },
-      "lambdaRho_value": {
-        "id": "lambdaRho_value",
-        "name": "lambdaRho_value",
-        "name_pt": "Valor Lambda-Rho",
-        "description": "lambda*rho in GPa*g/cm3. Decreases significantly in gas-saturated intervals.",
-        "unit": "GPa * g/cm3",
-        "domain_class": "LambdaRho",
-        "range": "xsd:decimal"
-      },
-      "muRho_value": {
-        "id": "muRho_value",
-        "name": "muRho_value",
-        "name_pt": "Valor Mu-Rho",
-        "description": "mu*rho in GPa*g/cm3. Sensitive to rock framework; not to pore fluid.",
-        "unit": "GPa * g/cm3",
-        "domain_class": "MuRho",
-        "range": "xsd:decimal"
-      },
-      "avoIntercept": {
-        "id": "avoIntercept",
-        "name": "avoIntercept",
-        "name_pt": "Intercepto AVO (A)",
-        "description": "Zero-offset reflectivity coefficient A in the Shuey two-term AVO approximation R(theta) = A + B*sin^2(theta). Positive for hard kick, negative for soft kick.",
-        "unit": "dimensionless",
-        "domain_class": "AVOAnomaly",
-        "range": "xsd:decimal"
-      },
-      "avoGradient": {
-        "id": "avoGradient",
-        "name": "avoGradient",
-        "name_pt": "Gradiente AVO (B)",
-        "description": "AVO gradient B in the Shuey two-term approximation. Negative for Class III gas sands (bright spot). Ref: Yilmaz 2001.",
-        "unit": "dimensionless",
-        "domain_class": "AVOAnomaly",
-        "range": "xsd:decimal",
-        "rag_priority": "high"
-      },
-      "avoClass": {
-        "id": "avoClass",
-        "name": "avoClass",
-        "name_pt": "Classe AVO",
-        "description": "Rutherford-Williams AVO classification: I (+A, -B), II (-A or 0A, -B), IIp (+A, +B), III (-A, -B), IV (-A, +B). Ref: Yilmaz 2001.",
-        "unit": "enum",
-        "domain_class": "AVOAnomaly",
-        "range": "xsd:string",
-        "allowed_values": [
-          "I",
-          "II",
-          "IIp",
-          "III",
-          "IV"
-        ]
-      },
-      "coherenceValue": {
-        "id": "coherenceValue",
-        "name": "coherenceValue",
-        "name_pt": "Valor de Coerencia",
-        "description": "Numerical coherence or similarity value between 0 (discontinuous) and 1 (perfectly coherent).",
-        "unit": "dimensionless",
-        "domain_class": "Coherence",
-        "range": "xsd:decimal"
-      },
-      "curvatureType": {
-        "id": "curvatureType",
-        "name": "curvatureType",
-        "name_pt": "Tipo de Curvatura",
-        "description": "Most-positive (k1), most-negative (k2), mean (km) or shape index curvature.",
-        "unit": "enum",
-        "domain_class": "Curvature",
-        "range": "xsd:string"
-      },
-      "spectralFrequency": {
-        "id": "spectralFrequency",
-        "name": "spectralFrequency",
-        "name_pt": "Frequencia Espectral",
-        "description": "Frequency component extracted in spectral decomposition, corresponding to a specific tuning thickness.",
-        "unit": "Hz",
-        "domain_class": "SpectralDecomposition",
-        "range": "xsd:decimal"
-      },
-      "somNeuronCount": {
-        "id": "somNeuronCount",
-        "name": "somNeuronCount",
-        "name_pt": "Numero de Neuronios SOM",
-        "description": "Total number of neurons in the SOM grid (rows x cols). Controls classification resolution.",
-        "unit": "dimensionless",
-        "domain_class": "SOM",
-        "range": "xsd:integer"
-      },
-      "pcaVarianceExplained": {
-        "id": "pcaVarianceExplained",
-        "name": "pcaVarianceExplained",
-        "name_pt": "Variancia Explicada (PCA)",
-        "description": "Cumulative variance explained by the retained principal components, expressed as percentage. Typically 80-95% retained.",
-        "unit": "percent",
-        "domain_class": "PCA",
-        "range": "xsd:decimal"
-      },
-      "inversionMethod": {
-        "id": "inversionMethod",
-        "name": "inversionMethod",
-        "name_pt": "Metodo de Inversao",
-        "description": "Algorithm used in the inversion: band-limited, model-based, sparse-spike, simultaneous, FWI.",
-        "unit": "enum",
-        "domain_class": "SeismicInversion",
-        "range": "xsd:string"
-      },
-      "wellCount": {
-        "id": "wellCount",
-        "name": "wellCount",
-        "name_pt": "Numero de Pocos de Controle",
-        "description": "Number of wells used to constrain the low-frequency model and wavelet extraction in the inversion.",
-        "unit": "dimensionless",
-        "domain_class": "SeismicInversion",
-        "range": "xsd:integer"
-      }
-    },
-    "relations": {
-      "uses_source": {
-        "id": "uses_source",
-        "name": "uses_source",
-        "name_pt": "usa_fonte",
-        "description": "A SeismicSurvey uses one or more Source devices to generate seismic energy.",
-        "domain": "SeismicSurvey",
-        "range": "Source",
-        "cardinality": "1..n",
-        "inverse": "is_source_for"
-      },
-      "deploys_receiver": {
-        "id": "deploys_receiver",
-        "name": "deploys_receiver",
-        "name_pt": "implanta_receptor",
-        "description": "A SeismicSurvey deploys one or more Receiver types.",
-        "domain": "SeismicSurvey",
-        "range": "Receiver",
-        "cardinality": "1..n",
-        "inverse": "is_receiver_for"
-      },
-      "applies_geometry": {
-        "id": "applies_geometry",
-        "name": "applies_geometry",
-        "name_pt": "aplica_geometria",
-        "description": "A SeismicSurvey is characterised by an AcquisitionGeometry.",
-        "domain": "SeismicSurvey",
-        "range": "AcquisitionGeometry",
-        "cardinality": "1..1"
-      },
-      "respects_nyquist": {
-        "id": "respects_nyquist",
-        "name": "respects_nyquist",
-        "name_pt": "respeita_nyquist",
-        "description": "SamplingParameters respects the Nyquist criterion with respect to the signal bandwidth: samplingInterval <= 1/(2*signalBandwidthMax). Violation produces Aliasing.",
-        "domain": "SamplingParameters",
-        "range": "Aliasing",
-        "cardinality": "0..1",
-        "constraint_note": "samplingInterval_s <= 1 / (2 * signalBandwidthMax_Hz)"
-      },
-      "characterised_by": {
-        "id": "characterised_by",
-        "name": "characterised_by",
-        "name_pt": "caracterizado_por",
-        "description": "A SeismicSurvey is characterised by SamplingParameters.",
-        "domain": "SeismicSurvey",
-        "range": "SamplingParameters",
-        "cardinality": "1..1"
-      },
-      "has_subclass": {
-        "id": "has_subclass",
-        "name": "has_subclass",
-        "name_pt": "tem_subclasse",
-        "description": "rdfs:subClassOf relationship within SeismicSurvey hierarchy.",
-        "domain": "SeismicSurvey",
-        "range": "SeismicSurvey",
-        "cardinality": "0..n"
-      },
-      "produces_aliasing": {
-        "id": "produces_aliasing",
-        "name": "produces_aliasing",
-        "name_pt": "produz_aliasing",
-        "description": "Violation of Nyquist constraint produces Aliasing artifact.",
-        "domain": "SamplingParameters",
-        "range": "Aliasing",
-        "cardinality": "0..1"
-      },
-      "is_part_of_survey": {
-        "id": "is_part_of_survey",
-        "name": "is_part_of_survey",
-        "name_pt": "e_parte_de_levantamento",
-        "description": "AcquisitionGeometry or SamplingParameters is defined as part of a SeismicSurvey.",
-        "domain": "AcquisitionGeometry",
-        "range": "SeismicSurvey",
-        "cardinality": "1..1"
-      },
-      "collocated_with": {
-        "id": "collocated_with",
-        "name": "collocated_with",
-        "name_pt": "colocalizado_com",
-        "description": "In OBC/OBN deployments a Hydrophone is collocated with a Geophone or AccelerometerMEMS at the same spatial position.",
-        "domain": "Hydrophone",
-        "range": "Geophone",
-        "cardinality": "0..1"
-      },
-      "precedes": {
-        "id": "precedes",
-        "name": "precedes",
-        "name_pt": "precede",
-        "description": "One processing step temporally precedes another in the processing flow.",
-        "domain": "owl:Thing",
-        "range": "owl:Thing",
-        "cardinality": "0..n",
-        "inverse": "follows"
-      },
-      "follows": {
-        "id": "follows",
-        "name": "follows",
-        "name_pt": "segue",
-        "description": "One processing step follows another.",
-        "domain": "owl:Thing",
-        "range": "owl:Thing",
-        "cardinality": "0..n",
-        "inverse": "precedes"
-      },
-      "part_of_flow": {
-        "id": "part_of_flow",
-        "name": "part_of_flow",
-        "name_pt": "parte_do_fluxo",
-        "description": "A processing step is part of a ProcessingFlow.",
-        "domain": "owl:Thing",
-        "range": "ProcessingFlow",
-        "cardinality": "1..1"
-      },
-      "applies_filter": {
-        "id": "applies_filter",
-        "name": "applies_filter",
-        "name_pt": "aplica_filtro",
-        "description": "A ProcessingFlow applies a NoiseSuppressionFilter.",
-        "domain": "ProcessingFlow",
-        "range": "NoiseSuppressionFilter",
-        "cardinality": "0..n"
-      },
-      "uses_deconvolution": {
-        "id": "uses_deconvolution",
-        "name": "uses_deconvolution",
-        "name_pt": "usa_deconvolucao",
-        "description": "A ProcessingFlow applies a Deconvolution step.",
-        "domain": "ProcessingFlow",
-        "range": "Deconvolution",
-        "cardinality": "0..1"
-      },
-      "uses_migration": {
-        "id": "uses_migration",
-        "name": "uses_migration",
-        "name_pt": "usa_migracao",
-        "description": "A ProcessingFlow applies a Migration algorithm.",
-        "domain": "ProcessingFlow",
-        "range": "Migration",
-        "cardinality": "1..1"
-      },
-      "compensates_amplitude": {
-        "id": "compensates_amplitude",
-        "name": "compensates_amplitude",
-        "name_pt": "compensa_amplitude",
-        "description": "A ProcessingFlow applies an AmplitudeCompensation step.",
-        "domain": "ProcessingFlow",
-        "range": "AmplitudeCompensation",
-        "cardinality": "1..1"
-      },
-      "derived_from": {
-        "id": "derived_from",
-        "name": "derived_from",
-        "name_pt": "derivado_de",
-        "description": "A RockProperty or SeismicAttribute is mathematically derived from SeismicInversion output or another attribute.",
-        "domain": "RockProperty",
-        "range": "SeismicInversion",
-        "cardinality": "1..n",
-        "inverse": "yields"
-      },
-      "correlates_with": {
-        "id": "correlates_with",
-        "name": "correlates_with",
-        "name_pt": "correlaciona_com",
-        "description": "A SeismicAttribute correlates with a RockProperty or another SeismicAttribute in a statistical or physical sense.",
-        "domain": "SeismicAttribute",
-        "range": "RockProperty",
-        "cardinality": "0..n"
-      },
-      "indicates": {
-        "id": "indicates",
-        "name": "indicates",
-        "name_pt": "indica",
-        "description": "A DHI or AVOAnomaly indicates the potential presence of a hydrocarbon accumulation or specific lithofacies.",
-        "domain": "DHI",
-        "range": "SweetSpot",
-        "cardinality": "0..n"
-      },
-      "classified_by": {
-        "id": "classified_by",
-        "name": "classified_by",
-        "name_pt": "classificado_por",
-        "description": "A seismic facies volume is classified by FaciesClassification using SOM or PCA.",
-        "domain": "FaciesClassification",
-        "range": "SOM",
-        "cardinality": "0..1"
-      },
-      "uses_pca": {
-        "id": "uses_pca",
-        "name": "uses_pca",
-        "name_pt": "usa_pca",
-        "description": "A FaciesClassification or SOM uses PCA for dimensionality reduction of seismic attributes.",
-        "domain": "FaciesClassification",
-        "range": "PCA",
-        "cardinality": "0..1"
-      },
-      "input_to_inversion": {
-        "id": "input_to_inversion",
-        "name": "input_to_inversion",
-        "name_pt": "entrada_para_inversao",
-        "description": "Processed seismic data or partial stack is input to a SeismicInversion.",
-        "domain": "owl:Thing",
-        "range": "SeismicInversion",
-        "cardinality": "1..n"
-      },
-      "yields": {
-        "id": "yields",
-        "name": "yields",
-        "name_pt": "produz",
-        "description": "A SeismicInversion yields a RockProperty volume as output.",
-        "domain": "SeismicInversion",
-        "range": "RockProperty",
-        "cardinality": "1..n",
-        "inverse": "derived_from"
-      },
-      "combined_in": {
-        "id": "combined_in",
-        "name": "combined_in",
-        "name_pt": "combinado_em",
-        "description": "Multiple SeismicAttributes are combined in a FaciesClassification or SweetSpot delineation.",
-        "domain": "SeismicAttribute",
-        "range": "SweetSpot",
-        "cardinality": "0..n"
-      },
-      "constrained_by_well": {
-        "id": "constrained_by_well",
-        "name": "constrained_by_well",
-        "name_pt": "restringido_por_poco",
-        "description": "SeismicInversion is constrained by well log data for low-frequency model and wavelet extraction.",
-        "domain": "SeismicInversion",
-        "range": "geo:Poco",
-        "cardinality": "1..n"
-      }
-    },
-    "instances": {
-      "I_BUZ3D_2022": {
-        "id": "I_BUZ3D_2022",
-        "name": "Buzios 3D Wide-Azimuth Streamer Survey 2022",
-        "name_pt": "Levantamento 3D Buzios WA Streamer 2022",
-        "class": "MarineSurvey",
-        "description": "Broadband wide-azimuth 3D towed-streamer survey over the Buzios carbonate pre-salt field, Santos Basin, offshore Brazil. 14 streamers x 8 km, 100 m cable separation, 6.25 m group interval, 2 ms sample interval.",
-        "attributes": {
-          "surveyArea_km2": "2400",
-          "waterDepth_m": "1800-2200",
-          "samplingInterval_ms": "2",
-          "recordLength_s": "10",
-          "fold": "120",
-          "streamerLength_m": "8000",
-          "numberOfStreamers": "14",
-          "gridSpacing_m": "6.25x6.25",
-          "source": "Airgun",
-          "receiver": "Hydrophone",
-          "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0"
-        },
-        "source": "Analogous to Buzios-field 3D acquisition programs described in Petrobras technical literature"
-      },
-      "I_LAND_VIB_2021": {
-        "id": "I_LAND_VIB_2021",
-        "name": "Parnaiba Basin Vibroseis Land Survey 2021",
-        "name_pt": "Levantamento Terrestre Vibrosseis Bacia do Parnaiba 2021",
-        "class": "LandSurvey",
-        "description": "Orthogonal-template 3D vibroseis survey in the Parnaiba Basin, northeastern Brazil. Four vibrator fleet, 4-8 Hz linear sweep, 16 s sweep length, 2 ms sample interval, maximum offset 6000 m.",
-        "attributes": {
-          "surveyArea_km2": "800",
-          "samplingInterval_ms": "2",
-          "recordLength_s": "6",
-          "fold": "80",
-          "sweepFrequencyMin_Hz": "4",
-          "sweepFrequencyMax_Hz": "80",
-          "sweepLength_s": "16",
-          "gridSpacing_m": "25x25",
-          "source": "Vibroseis",
-          "receiver": "Geophone"
-        },
-        "source": "Representative of ANP-regulated onshore 3D programs in Brazilian interior basins"
-      },
-      "I_OBN_LULA_2023": {
-        "id": "I_OBN_LULA_2023",
-        "name": "Lula OBN 4C Full-Azimuth Survey 2023",
-        "name_pt": "Levantamento OBN 4C Azimute Pleno Lula 2023",
-        "class": "OBNSurvey",
-        "description": "Ocean-Bottom Node full-azimuth 4C survey over the Lula giant pre-salt field, Santos Basin. Nodes deployed at 2100 m water depth on 400 x 400 m grid; P- and S-wave data recorded for joint PP/PS inversion and imaging through the salt canopy.",
-        "attributes": {
-          "surveyArea_km2": "1200",
-          "waterDepth_m": "2100",
-          "samplingInterval_ms": "2",
-          "recordLength_s": "12",
-          "fold_PP": "240",
-          "fold_PS": "120",
-          "gridSpacing_m": "400x400",
-          "source": "Airgun",
-          "receiver": "OBC+AccelerometerMEMS",
-          "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0"
-        },
-        "source": "Analogous to Petrobras OBN programs in Santos Basin ultra-deep water"
-      },
-      "PF_MARINE_RTM": {
-        "id": "PF_MARINE_RTM",
-        "name": "Deep-Water Pre-Stack RTM Processing Flow",
-        "name_pt": "Fluxo RTM Pre-Empilhamento Aguas Profundas",
-        "class": "ProcessingFlow",
-        "description": "Typical pre-stack depth migration processing flow for deep-water broadband 3D marine data: demultiple, deconvolution, NMO/velocity analysis, SRME, RTM.",
-        "steps": [
-          {
-            "order": 1,
-            "step": "SphericalDivergenceCorrection"
-          },
-          {
-            "order": 2,
-            "step": "DATVF"
-          },
-          {
-            "order": 3,
-            "step": "DenoiseFK"
-          },
-          {
-            "order": 4,
-            "step": "FXEdit"
-          },
-          {
-            "order": 5,
-            "step": "SpikingDeconvolution"
-          },
-          {
-            "order": 6,
-            "step": "NMO"
-          },
-          {
-            "order": 7,
-            "step": "Stacking"
-          },
-          {
-            "order": 8,
-            "step": "QCompensation"
-          },
-          {
-            "order": 9,
-            "step": "RTM"
-          }
-        ],
-        "attributes": {
-          "migrationDomain": "depth",
-          "migrationAlgorithm": "RTM",
-          "qFactor": "80-150",
-          "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0"
-        },
-        "source": "Representative of Santos Basin pre-salt processing workflows (Yilmaz 2001)"
-      },
-      "PF_LAND_KIRCHHOFF": {
-        "id": "PF_LAND_KIRCHHOFF",
-        "name": "Land Vibroseis Kirchhoff Time Migration Flow",
-        "name_pt": "Fluxo de Migracao de Kirchhoff em Tempo — Vibrosseis Terrestre",
-        "class": "ProcessingFlow",
-        "description": "Standard processing flow for land vibroseis 3D: cross-correlation, statics, bandpass filter, decon, NMO, DMO, Kirchhoff time migration.",
-        "steps": [
-          {
-            "order": 1,
-            "step": "StaticCorrection"
-          },
-          {
-            "order": 2,
-            "step": "SphericalDivergenceCorrection"
-          },
-          {
-            "order": 3,
-            "step": "DenoiseFK"
-          },
-          {
-            "order": 4,
-            "step": "PredictiveDeconvolution"
-          },
-          {
-            "order": 5,
-            "step": "NMO"
-          },
-          {
-            "order": 6,
-            "step": "DMO"
-          },
-          {
-            "order": 7,
-            "step": "Stacking"
-          },
-          {
-            "order": 8,
-            "step": "KirchhoffMigration"
-          }
-        ],
-        "attributes": {
-          "migrationDomain": "time",
-          "migrationAlgorithm": "Kirchhoff",
-          "predictionLag_ms": "120",
-          "stretchMute_percent": "30"
-        },
-        "source": "Yilmaz 2001, standard land processing sequence"
-      },
-      "PF_OBN_PS": {
-        "id": "PF_OBN_PS",
-        "name": "OBN 4C PP/PS Joint Processing Flow",
-        "name_pt": "Fluxo de Processamento Conjunto PP/PS OBN 4C",
-        "class": "ProcessingFlow",
-        "description": "Processing flow for OBN 4C ocean-bottom data including dual-sensor summation, P- and S-wave separation, PP/PS registration, NMO for both modes and joint inversion preparation.",
-        "steps": [
-          {
-            "order": 1,
-            "step": "NoiseSuppressionFilter"
-          },
-          {
-            "order": 2,
-            "step": "SpikingDeconvolution"
-          },
-          {
-            "order": 3,
-            "step": "NMO"
-          },
-          {
-            "order": 4,
-            "step": "AmplitudeCompensation"
-          },
-          {
-            "order": 5,
-            "step": "Stacking"
-          },
-          {
-            "order": 6,
-            "step": "RTM"
-          }
-        ],
-        "attributes": {
-          "migrationDomain": "depth",
-          "migrationAlgorithm": "RTM",
-          "note": "PS mode requires Vp/Vs ratio for NMO and registration"
-        },
-        "source": "Sheriff & Geldart 1995; representative OBN workflow"
-      },
-      "INV_BUZ_POSTSTACK": {
-        "id": "INV_BUZ_POSTSTACK",
-        "name": "Buzios Pre-Salt Post-Stack Acoustic Impedance Inversion",
-        "name_pt": "Inversao Acustica Pos-Empilhamento Pre-Sal Buzios",
-        "class": "PostStackInversion",
-        "description": "Model-based post-stack inversion of the Buzios 3D seismic volume to acoustic impedance, constrained by 12 wells with full-waveform sonic and density logs. Low-frequency model from well interpolation; wavelet extracted from 10 wells using statistical method.",
-        "attributes": {
-          "inversionMethod": "model-based",
-          "wellCount": "12",
-          "outputProduct": "AcousticImpedance",
-          "frequencyBand_Hz": "4-80",
-          "osdu_kind": "opendes:osdu:work-product-component--SeismicTraceData:1.0.0"
-        },
-        "source": "Representative of pre-salt carbonate inversion programs in Santos Basin; Russell 1988"
-      },
-      "INV_LULA_PRESTACK": {
-        "id": "INV_LULA_PRESTACK",
-        "name": "Lula Simultaneous Pre-Stack Elastic Inversion",
-        "name_pt": "Inversao Elastica Simultanea Pre-Empilhamento Lula",
-        "class": "PreStackInversion",
-        "description": "Simultaneous pre-stack inversion of near, mid and far angle stacks to extract Ip, Is and density, enabling Vp/Vs, lambda-rho and mu-rho volumes for fluid discrimination in the Lula BVE carbonate reservoir.",
-        "attributes": {
-          "inversionMethod": "simultaneous",
-          "wellCount": "8",
-          "outputProducts": [
-            "AcousticImpedance",
-            "ElasticImpedance",
-            "VpVsRatio",
-            "LambdaRho",
-            "MuRho"
-          ],
-          "nearStackAngle_deg": "5-15",
-          "midStackAngle_deg": "15-30",
-          "farStackAngle_deg": "30-45"
-        },
-        "source": "Russell 1988; Connolly 1999; representative Santos Basin pre-stack program"
-      },
-      "ATTR_COHERENCE_BUZ": {
-        "id": "ATTR_COHERENCE_BUZ",
-        "name": "Buzios Coherence Fault/Fracture Volume",
-        "name_pt": "Volume de Coerencia Falhas/Fracturas Buzios",
-        "class": "Coherence",
-        "description": "Semblance-based coherence attribute extracted from the Buzios RTM migrated volume to delineate fault and fracture networks in the BVE carbonate reservoir. Computed on a 9-trace moving window with 20ms temporal gate.",
-        "attributes": {
-          "algorithm": "semblance",
-          "windowSize_traces": "9",
-          "temporalGate_ms": "20",
-          "sensitivity": "faults, fractures, karst"
-        },
-        "source": "Chopra & Marfurt 2007, ch. 2"
-      },
-      "INST_AVO_CLASS3": {
-        "id": "INST_AVO_CLASS3",
-        "name": "Parnaiba Basin Class III AVO Gas Sand Anomaly",
-        "name_pt": "Anomalia AVO Classe III Areia Gasosa Bacia do Parnaiba",
-        "class": "AVOAnomaly",
-        "description": "Class III AVO anomaly at the Devonian Cabecas Formation top: negative intercept (A=-0.08), strong negative gradient (B=-0.14), consistent with gas-saturated low-impedance sand encased in higher-impedance shale. Produces bright spot and phase reversal at the base.",
-        "attributes": {
-          "avoClass": "III",
-          "avoIntercept": "-0.08",
-          "avoGradient": "-0.14",
-          "productAtAngle30_deg": "-0.082",
-          "interpretation": "gas sand, DHI confirmed"
-        },
-        "source": "Representative of Devonian gas play in Parnaiba Basin; Yilmaz 2001 AVO classification"
-      }
-    }
-  },
-  "geomechanics": {
-    "meta": {
-      "id": "geomechanics",
-      "label": "Geomechanics / MEM Ontology",
-      "label_pt": "Ontologia de Geomecânica / MEM",
-      "version": "1.0.0",
-      "description": "Formal ontology for Mechanical Earth Model (MEM), in situ stress, pore pressure, elastic moduli, rock mechanics properties, failure criteria, and wellbore stability. Covers the four MEM pillars: in situ stress, pore pressure, elastic moduli, and containment geometry.",
-      "geocoverage": [
-        "layer1",
-        "layer2",
-        "layer6",
-        "sweet"
-      ],
-      "sources": [
-        "Fjaer E., Holt R.M., Horsrud P., Raaen A.M., Risnes R. — Petroleum Related Rock Mechanics, 2nd ed. Elsevier 2008 (ISBN 978-0-444-50260-5)",
-        "Zoback M.D. — Reservoir Geomechanics, Cambridge University Press 2010 (ISBN 978-0-521-14619-7)",
-        "Hoek E., Brown E.T. — The Hoek-Brown Failure Criterion and GSI — 2018 Edition. Journal of Rock Mechanics and Geotechnical Engineering 2019",
-        "ISRM — The Complete ISRM Suggested Methods for Rock Characterization, Testing and Monitoring 1974-2006",
-        "Anderson E.M. — The Dynamics of Faulting, Oliver & Boyd 1951",
-        "Bieniawski Z.T. — Engineering Rock Mass Classifications, Wiley 1989"
-      ],
-      "sweet_alignments": [
-        "http://sweetontology.net/reprMathOperation#Tensor",
-        "http://sweetontology.net/propPressure#Pressure",
-        "http://sweetontology.net/reprSciUnits#Stress",
-        "http://sweetontology.net/matrRock#RockPhysicalProperty",
-        "http://sweetontology.net/phenGeolDeformation#Deformation"
-      ],
-      "class_count": 26,
-      "property_count": 22,
-      "relation_count": 12,
-      "instance_count": 6
-    },
-    "classes": [
-      {
-        "id": "GM001",
-        "name": "StressTensor",
-        "name_pt": "TensorDeTensao",
-        "superclass": "MathematicalObject",
-        "description": "Symmetric 3x3 second-rank tensor describing the state of stress at a point in a rock mass. Components sigma_1 (maximum principal), sigma_2 (intermediate principal), sigma_3 (minimum principal). By convention sigma_1 >= sigma_2 >= sigma_3.",
-        "description_pt": "Tensor simétrico 3x3 que descreve o estado de tensão em um ponto da rocha. Componentes sigma_1 (máxima principal), sigma_2 (intermediária), sigma_3 (mínima). Convenção: sigma_1 >= sigma_2 >= sigma_3.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "sweet"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 Ch.2",
-          "Zoback 2010 Ch.1"
-        ],
-        "sweet_alignment": "http://sweetontology.net/reprMathOperation#Tensor"
-      },
-      {
-        "id": "GM002",
-        "name": "PrincipalStress",
-        "name_pt": "TensaoPrincipal",
-        "superclass": "StressTensor",
-        "description": "One of the three principal (normal) stresses acting on planes where shear stress vanishes. In the subsurface: Sv (vertical overburden), SHmax (maximum horizontal), Shmin (minimum horizontal). Anderson regime determines their relative magnitudes.",
-        "description_pt": "Uma das três tensões principais (normais) agindo em planos onde a tensão de cisalhamento é zero. No subsolo: Sv (sobrecarga vertical), SHmax (horizontal máxima), Shmin (horizontal mínima).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "sweet"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.1",
-          "Zoback 2010 §1.2"
-        ],
-        "sweet_alignment": "http://sweetontology.net/reprSciUnits#Stress"
-      },
-      {
-        "id": "GM003",
-        "name": "ShearStress",
-        "name_pt": "TensaoDeCisalhamento",
-        "superclass": "StressTensor",
-        "description": "Stress component acting parallel to a plane. In the Mohr circle representation, shear stress tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controls shear failure when tau exceeds the Coulomb criterion.",
-        "description_pt": "Componente de tensão atuando paralelamente a um plano. No círculo de Mohr: tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controla ruptura cisalhante quando supera o critério de Coulomb.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "sweet"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.3",
-          "Zoback 2010 §4.1"
-        ]
-      },
-      {
-        "id": "GM004",
-        "name": "PorePressure",
-        "name_pt": "PressaoDePoros",
-        "superclass": "FluidPressure",
-        "description": "Pressure of pore fluid in connected pore space. Controls effective stress via Terzaghi-Biot principle: sigma_eff = sigma_total - alpha * Pp. Calibrated from RFT/MDT measurements, drilling events, seismic velocity inversion (Eaton method).",
-        "description_pt": "Pressão do fluido no espaço poroso conectado. Controla a tensão efetiva via princípio de Terzaghi-Biot: sigma_eff = sigma_total - alpha * Pp. Calibrada por RFT/MDT, eventos de perfuração, inversão de velocidade sísmica (método Eaton).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "sweet"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.5",
-          "Zoback 2010 §2.1",
-          "Eaton B.A. JPT 1975"
-        ],
-        "sweet_alignment": "http://sweetontology.net/propPressure#Pressure"
-      },
-      {
-        "id": "GM005",
-        "name": "MudWindow",
-        "name_pt": "JanelaDeLama",
-        "superclass": "DrillingConstraint",
-        "description": "Safe drilling mud weight window bounded below by pore pressure (collapse/kick risk) and above by fracture gradient (lost circulation risk). In high-pressure, high-temperature or depleted reservoirs the window can be very narrow. Distinct from 'janela de geracao' (kerogen maturation window).",
-        "description_pt": "Janela de peso de lama segura para perfuração. Limite inferior: pressão de poros (risco de colapso/influxo); limite superior: gradiente de fratura (risco de perda de circulação). NOTA: 'Janela de Lama' (M9) NÃO é a mesma coisa que 'Janela de Geração' (M7 geoquímica, faixa de Ro%).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §10.1",
-          "Zoback 2010 §9.1"
-        ],
-        "rag_alert": "JanelaDeLama (M9 Geomecânica) NÃO é Janela de Geração (M7 Geoquímica). A primeira é intervalo de peso de lama; a segunda é faixa de maturidade Ro%."
-      },
-      {
-        "id": "GM006",
-        "name": "MohrCircle",
-        "name_pt": "CirculoDeMohr",
-        "superclass": "GraphicalRepresentation",
-        "description": "Graphical representation of the stress state on a plane at a given orientation. Circle diameter equals (sigma_1 - sigma_3); center at (sigma_1 + sigma_3)/2. Failure occurs when the circle touches the failure envelope (Mohr-Coulomb, Hoek-Brown).",
-        "description_pt": "Representação gráfica do estado de tensão em um plano. Diâmetro igual a (sigma_1 - sigma_3); centro em (sigma_1 + sigma_3)/2. Ruptura ocorre quando o círculo toca o envelope de ruptura.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §3.1",
-          "ISRM Suggested Methods 1978"
-        ]
-      },
-      {
-        "id": "GM007",
-        "name": "FailureCriterion",
-        "name_pt": "CriterioDeRuptura",
-        "superclass": "RockMechanicsModel",
-        "description": "Mathematical condition defining the stress state at which rock fails. Two principal criteria in petroleum geomechanics: Mohr-Coulomb (linear envelope, suitable for most sedimentary rocks) and Hoek-Brown (curved envelope, better for fractured rock masses).",
-        "description_pt": "Condição matemática que define o estado de tensão em que a rocha rompe. Dois critérios principais: Mohr-Coulomb (envelope linear, adequado para rochas sedimentares) e Hoek-Brown (envelope curvo, melhor para maciços fraturados).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §3.3",
-          "Hoek & Brown 2019"
-        ]
-      },
-      {
-        "id": "GM008",
-        "name": "MohrCoulombCriterion",
-        "name_pt": "CriterioMohrCoulomb",
-        "superclass": "FailureCriterion",
-        "description": "Linear shear failure criterion: tau_f = c + sigma_n * tan(phi), where c is cohesion (MPa) and phi is the angle of internal friction (degrees). Parameters derived from triaxial tests. Standard for wellbore stability analysis in sandstones and shales.",
-        "description_pt": "Critério de ruptura cisalhante linear: tau_f = c + sigma_n * tan(phi), onde c é a coesão (MPa) e phi é o ângulo de atrito interno (graus). Parâmetros obtidos de ensaios triaxiais.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §3.3",
-          "Zoback 2010 §4.2"
-        ]
-      },
-      {
-        "id": "GM009",
-        "name": "HoekBrownCriterion",
-        "name_pt": "CriterioHoekBrown",
-        "superclass": "FailureCriterion",
-        "description": "Curved empirical criterion for rock masses: sigma_1 = sigma_3 + sigma_ci * (m_b * sigma_3/sigma_ci + s)^a, where sigma_ci is intact rock UCS, m_b is reduced Hoek-Brown constant, s and a are GSI-dependent parameters. Uses GSI for rock mass characterization. Hoek-Brown 2018 edition is current standard.",
-        "description_pt": "Critério empírico curvo para maciços rochosos. Usa GSI para caracterizar o grau de fraturamento e resistência do maciço. Edição 2018 de Hoek & Brown é o padrão atual.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Hoek & Brown 2019",
-          "Hoek E. et al. Rock Mechanics and Rock Engineering 2002"
-        ]
-      },
-      {
-        "id": "GM010",
-        "name": "MechanicalEarthModel",
-        "name_pt": "ModeloMecanicoTerra",
-        "superclass": "GeomechanicsModel",
-        "description": "Integrated quantitative description of the mechanical state of a reservoir and surrounding rock, comprising: (1) in situ stress magnitudes and orientations, (2) pore pressure, (3) elastic and strength properties of rock, (4) structural and stratigraphic geometry. The four-pillar MEM is the foundation for wellbore stability, sand production, hydraulic fracturing, and compaction predictions.",
-        "description_pt": "Descrição quantitativa integrada do estado mecânico do reservatório e rochas vizinhas. Quatro pilares: (1) tensões in situ, (2) pressão de poros, (3) módulos elásticos e de resistência, (4) geometria estrutural-estratigráfica.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "sweet"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §10.1",
-          "Zoback 2010 §9.1",
-          "Plumb R. et al. SPE 65118 2000"
-        ]
-      },
-      {
-        "id": "GM011",
-        "name": "MechanicalEarthModel1D",
-        "name_pt": "ModeloMecanicoTerra1D",
-        "superclass": "MechanicalEarthModel",
-        "description": "One-dimensional MEM built along a wellbore path. Depth functions of pore pressure gradient, fracture gradient, Sv, SHmax, Shmin, UCS, Young's modulus, Poisson's ratio, and Biot coefficient. Output of GEOMECBR software at Petrobras. Calibrated against LOT, MDT, caliper, image logs.",
-        "description_pt": "MEM unidimensional construído ao longo do poço. Funções de profundidade: gradiente Pp, gradiente de fratura, Sv, SHmax, Shmin, UCS, E, nu, alfa. Output do software GEOMECBR.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §10.2",
-          "Zoback 2010 §9.2"
-        ]
-      },
-      {
-        "id": "GM012",
-        "name": "MechanicalEarthModel3D",
-        "name_pt": "ModeloMecanicoTerra3D",
-        "superclass": "MechanicalEarthModel",
-        "description": "Three-dimensional MEM integrating seismic, well log, and production data into a volumetric grid. Allows spatial prediction of stress, pore pressure, and rock properties away from wells. Required for field development planning, infill drilling, and stimulation design. Output of GERESIM at Petrobras.",
-        "description_pt": "MEM tridimensional que integra dados sísmicos, perfilagem e produção em grade volumétrica. Permite predição espacial de tensões e propriedades de rocha. Output do software GERESIM.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Zoback 2010 §12.1",
-          "Fjaer et al. 2008 §10.4"
-        ]
-      },
-      {
-        "id": "GM013",
-        "name": "RockMechProperty",
-        "name_pt": "PropriedadeMecanicaRocha",
-        "superclass": "PhysicalProperty",
-        "description": "Mechanical property of intact rock or rock mass used in geomechanical modelling. Includes elastic properties (Young's modulus, Poisson's ratio, bulk modulus, shear modulus) and strength properties (UCS, tensile strength, cohesion, friction angle). Differentiated as static (laboratory) vs dynamic (sonic log).",
-        "description_pt": "Propriedade mecânica da rocha intacta ou maciço rochoso usada em modelagem geomecânica. Inclui propriedades elásticas e de resistência. Distinguida como estática (laboratório) vs dinâmica (perfil sônico).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "sweet"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.1",
-          "Zoback 2010 §1.3",
-          "ISRM Suggested Methods"
-        ],
-        "sweet_alignment": "http://sweetontology.net/matrRock#RockPhysicalProperty"
-      },
-      {
-        "id": "GM014",
-        "name": "UCS",
-        "name_pt": "ResistenciaCompressaoUniaxial",
-        "superclass": "RockMechProperty",
-        "description": "Uniaxial Compressive Strength (UCS) — the maximum axial stress a cylindrical rock specimen can sustain under zero confining pressure. Unit: MPa. Typical range: sandstone 10-200 MPa, limestone 30-250 MPa, salt 20-30 MPa. Static UCS (laboratory) differs from dynamic UCS (sonic-derived) by 20-40%; do not substitute without calibration.",
-        "description_pt": "Resistência à Compressão Uniaxial. Máxima tensão axial que um corpo cilíndrico de rocha suporta com pressão de confinamento zero. Unidade: MPa. UCS estático (laboratório) difere do dinâmico (sônico) em 20-40%.",
-        "unit": "MPa",
-        "typical_range": {
-          "min_MPa": 5,
-          "max_MPa": 600
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §4.1",
-          "ISRM Suggested Methods 1978",
-          "Zoback 2010 §5.1"
-        ],
-        "rag_alert": "UCS estático (laboratório) NÃO é igual ao UCS dinâmico (derivado de DTC/DTS via correlação). Diferença típica 20-40%. Não usar dinâmico para projeto sem calibração laboratorial."
-      },
-      {
-        "id": "GM015",
-        "name": "YoungModulus",
-        "name_pt": "ModuloDeYoung",
-        "superclass": "RockMechProperty",
-        "description": "Young's modulus (E) — ratio of axial stress to axial strain in the elastic regime. Governs reservoir compaction and surface subsidence. Static E from uniaxial/triaxial tests; dynamic E from sonic velocities (Vp, Vs). Unit: GPa. Typical range: 5-90 GPa for sedimentary rocks.",
-        "description_pt": "Módulo de Young (E) — razão entre tensão axial e deformação axial no regime elástico. Governa compactação do reservatório e subsidência. Estático: ensaio triaxial; dinâmico: velocidades sônicas Vp, Vs.",
-        "unit": "GPa",
-        "typical_range": {
-          "min_GPa": 1,
-          "max_GPa": 100
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.2",
-          "Zoback 2010 §1.3"
-        ]
-      },
-      {
-        "id": "GM016",
-        "name": "PoissonRatio",
-        "name_pt": "RazaoDePoisson",
-        "superclass": "RockMechProperty",
-        "description": "Poisson's ratio (nu) — ratio of lateral strain to axial strain under axial loading. Dimensionless, physically constrained to [0, 0.5] for isotropic elastic materials (incompressible limit = 0.5). Typical range: 0.1-0.35 for sedimentary rocks. Controls horizontal stress magnitude from vertical load.",
-        "description_pt": "Razão de Poisson (nu) — razão entre deformação lateral e axial sob carregamento axial. Adimensional, fisicamente limitado a [0, 0.5] para materiais elásticos isotrópicos. Controla magnitude das tensões horizontais.",
-        "unit": "dimensionless",
-        "typical_range": {
-          "min": 0,
-          "max": 0.5
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.2",
-          "Zoback 2010 §1.3"
-        ]
-      },
-      {
-        "id": "GM017",
-        "name": "BiotCoefficient",
-        "name_pt": "CoeficienteDeBiot",
-        "superclass": "RockMechProperty",
-        "description": "Biot coefficient (alpha) — poroelastic coupling parameter relating pore pressure to total stress in Biot's effective stress principle: sigma_eff = sigma_total - alpha * Pp. Range: 0 (undeformable skeleton) to 1 (unconsolidated sediment). Defined as alpha = 1 - K_dry / K_grain.",
-        "description_pt": "Coeficiente de Biot (alfa) — parâmetro de acoplamento poroelástico. Tensão efetiva = tensão total - alfa * Pp. Varia de 0 (esqueleto rígido) a 1 (sedimento não consolidado). alfa = 1 - K_dry / K_grain.",
-        "unit": "dimensionless",
-        "typical_range": {
-          "min": 0.5,
-          "max": 1
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Biot M.A. Journal of Applied Physics 1941",
-          "Fjaer et al. 2008 §2.7"
-        ]
-      },
-      {
-        "id": "GM018",
-        "name": "BulkModulus",
-        "name_pt": "ModuloVolumetrico",
-        "superclass": "RockMechProperty",
-        "description": "Bulk modulus (K) — resistance of rock to volumetric compression. K = E / (3*(1 - 2*nu)). Used in compaction modelling and fluid substitution (Gassmann equations). Unit: GPa.",
-        "description_pt": "Módulo volumétrico (K) — resistência da rocha à compressão volumétrica. K = E / (3*(1 - 2*nu)). Usado em modelagem de compactação e substituição de fluido (equações de Gassmann).",
-        "unit": "GPa",
-        "typical_range": {
-          "min_GPa": 2,
-          "max_GPa": 80
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.2",
-          "Zoback 2010 §1.3"
-        ]
-      },
-      {
-        "id": "GM019",
-        "name": "ShearModulus",
-        "name_pt": "ModuloDeCisalhamento",
-        "superclass": "RockMechProperty",
-        "description": "Shear modulus (G) — resistance of rock to shear deformation. G = E / (2*(1 + nu)). Directly measured from shear sonic velocity (Vs): G = rho * Vs^2. Unit: GPa. Unaffected by pore fluid (insensitive to fluid type in Gassmann).",
-        "description_pt": "Módulo de cisalhamento (G) — resistência da rocha à deformação cisalhante. G = E / (2*(1 + nu)). Medido pela velocidade sônica de cisalhamento Vs: G = rho * Vs^2. Insensível ao fluido nos poros (Gassmann).",
-        "unit": "GPa",
-        "typical_range": {
-          "min_GPa": 1,
-          "max_GPa": 40
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §2.2",
-          "Zoback 2010 §1.3"
-        ]
-      },
-      {
-        "id": "GM020",
-        "name": "RockMassRating",
-        "name_pt": "ClassificacaoMacicoRochoso",
-        "superclass": "RockClassificationScheme",
-        "description": "Bieniawski (1989) RMR system classifying rock masses on a scale 0-100 based on six parameters: UCS, RQD, spacing, condition of discontinuities, groundwater, and orientation adjustment. RMR I (81-100): very good; RMR V (0-20): very poor rock mass.",
-        "description_pt": "Sistema RMR de Bieniawski (1989) que classifica maciços rochosos de 0 a 100 com base em seis parâmetros. RMR I (81-100): muito boa; RMR V (0-20): rocha muito ruim.",
-        "unit": "score 0-100",
-        "typical_range": {
-          "min": 0,
-          "max": 100
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Bieniawski Z.T. Engineering Rock Mass Classifications 1989",
-          "Hoek & Brown 2019"
-        ]
-      },
-      {
-        "id": "GM021",
-        "name": "GSI",
-        "name_pt": "IndiceGeologicoDeResistencia",
-        "superclass": "RockClassificationScheme",
-        "description": "Geological Strength Index (Hoek 1994) — quantifies rock mass quality for use in the Hoek-Brown criterion. Range 0-100. GSI = RMR_1989 - 5 (approximate). High GSI (>70): massive, blocky rock; low GSI (<30): heavily sheared, tectonically disrupted.",
-        "description_pt": "Geological Strength Index (Hoek 1994) — quantifica a qualidade do maciço rochoso para o critério Hoek-Brown. Varia de 0 a 100. GSI alto (>70): rocha maciça/em blocos; baixo (<30): maciço muito fraturado.",
-        "unit": "score 0-100",
-        "typical_range": {
-          "min": 10,
-          "max": 100
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Hoek E. Rock Engineering 1994",
-          "Hoek & Brown 2019"
-        ]
-      },
-      {
-        "id": "GM022",
-        "name": "RQD",
-        "name_pt": "IndiceQualidadeRocha",
-        "superclass": "RockClassificationScheme",
-        "description": "Rock Quality Designation (Deere 1963) — percentage of core pieces longer than 100 mm in total core run. Ranges 0-100%. RQD > 90%: excellent; 75-90%: good; 50-75%: fair; 25-50%: poor; < 25%: very poor. Input to RMR, Q-system, and GSI.",
-        "description_pt": "Rock Quality Designation (Deere 1963) — porcentagem de pedaços de testemunho com mais de 100 mm no comprimento total. 0-100%. Entrada para RMR, sistema Q e GSI.",
-        "unit": "%",
-        "typical_range": {
-          "min": 0,
-          "max": 100
-        },
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Deere D.U. SMFE 1963",
-          "ISRM Suggested Methods",
-          "Bieniawski 1989"
-        ]
-      },
-      {
-        "id": "GM023",
-        "name": "Anisotropy",
-        "name_pt": "Anisotropia",
-        "superclass": "RockMechProperty",
-        "description": "Directional dependence of mechanical properties in a rock mass. Transverse isotropy (VTI) is common in shales (Thomsen parameters epsilon, delta, gamma). Anisotropy of elastic moduli, strength (UCS varies with bedding orientation), and permeability (kH/kV). Critical for pre-salt carbonate geomechanics.",
-        "description_pt": "Dependência direcional das propriedades mecânicas da rocha. Isotropia transversal (VTI) é comum em folhelhos (parâmetros de Thomsen). Anisotropia de módulos elásticos, resistência (UCS varia com orientação do acamamento) e permeabilidade (kH/kV).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §6.1",
-          "Thomsen L. Geophysics 1986",
-          "Zoback 2010 §1.3"
-        ]
-      },
-      {
-        "id": "GM024",
-        "name": "Brittleness",
-        "name_pt": "Fragilidade",
-        "superclass": "RockMechProperty",
-        "description": "Tendency of rock to fail suddenly without significant plastic deformation. High brittleness favors natural fracturing and hydraulic fracture complexity. Quantified by brittleness index B = (sigma_c - sigma_t)/(sigma_c + sigma_t) or by (E_norm + nu_norm)/2 (Rickman 2008). Key predictor for unconventional reservoir stimulation.",
-        "description_pt": "Tendência da rocha a romper abruptamente sem deformação plástica significativa. Alta fragilidade favorece fraturamento natural e complexidade de fraturas hidráulicas. Índice de fragilidade B ou (E_norm + nu_norm)/2 (Rickman 2008).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Rickman R. et al. SPE 115258 2008",
-          "Fjaer et al. 2008 §4.2",
-          "Zoback 2010 §7.1"
-        ]
-      },
-      {
-        "id": "GM025",
-        "name": "AndersonStressRegime",
-        "name_pt": "RegimeTensionalDeAnderson",
-        "superclass": "GeomechanicsClassification",
-        "description": "Anderson (1951) classification of tectonic stress regimes based on the relative magnitudes of Sv, SHmax, Shmin. Normal faulting (NF): Sv > SHmax > Shmin; Strike-slip (SS): SHmax > Sv > Shmin; Reverse faulting (RF): SHmax > Shmin > Sv. Controls natural fault type and drilling hazards.",
-        "description_pt": "Classificação de Anderson (1951) dos regimes tectônicos baseada nas magnitudes relativas de Sv, SHmax, Shmin. Falha normal (NF): Sv > SHmax > Shmin; Transcorrente (SS): SHmax > Sv > Shmin; Falha reversa (RF): SHmax > Shmin > Sv.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Anderson E.M. 1951",
-          "Zoback 2010 §1.2",
-          "Fjaer et al. 2008 §2.4"
-        ]
-      },
-      {
-        "id": "GM026",
-        "name": "Wellbore",
-        "name_pt": "PocoGeomecanico",
-        "superclass": "DrillHole",
-        "description": "Cylindrical cavity in rock mass whose stability is governed by the stress concentration around the opening. Near-wellbore stress concentration factor depends on Shmin/SHmax ratio and wellbore orientation. Source of caliper, image log, and LOT/XLOT data used to calibrate the MEM.",
-        "description_pt": "Cavidade cilíndrica na rocha cuja estabilidade é governada pela concentração de tensões ao redor da abertura. Origem de dados de caliper, imagem e LOT/XLOT usados para calibrar o MEM.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §9.1",
-          "Zoback 2010 §8.1"
-        ]
-      }
-    ],
-    "properties": [
-      {
-        "id": "GP001",
-        "name": "youngModulus",
-        "name_pt": "moduloYoung",
-        "domain": "RockMechProperty",
-        "range": "xsd:decimal",
-        "unit": "GPa",
-        "typical_range": {
-          "min": 1,
-          "max": 100
-        },
-        "description": "Young's modulus E in GPa. Static from triaxial test; dynamic from Vp/Vs. Relationship E_dyn = f(Vp, Vs, rho).",
-        "sources": [
-          "Fjaer et al. 2008 §2.2"
-        ]
-      },
-      {
-        "id": "GP002",
-        "name": "ucs",
-        "name_pt": "resistenciaCompressaoUniaxial",
-        "domain": "UCS",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "typical_range": {
-          "min": 5,
-          "max": 600
-        },
-        "description": "Uniaxial Compressive Strength in MPa. ISRM: very low <25 MPa, low 25-50, medium 50-100, high 100-250, very high >250.",
-        "sources": [
-          "ISRM Suggested Methods 1978",
-          "Fjaer et al. 2008 §4.1"
-        ]
-      },
-      {
-        "id": "GP003",
-        "name": "poissonRatio",
-        "name_pt": "razaoPoisson",
-        "domain": "RockMechProperty",
-        "range": "xsd:decimal",
-        "unit": "dimensionless",
-        "typical_range": {
-          "min": 0,
-          "max": 0.5
-        },
-        "description": "Poisson's ratio nu. Physical constraint: 0 <= nu <= 0.5 for isotropic elastic materials.",
-        "sources": [
-          "Fjaer et al. 2008 §2.2"
-        ]
-      },
-      {
-        "id": "GP004",
-        "name": "porePressureGradient",
-        "name_pt": "gradientePressaoPoros",
-        "domain": "PorePressure",
-        "range": "xsd:decimal",
-        "unit": "psi/ft",
-        "unit_si": "MPa/km",
-        "typical_range": {
-          "min_psi_ft": 0.43,
-          "max_psi_ft": 0.95
-        },
-        "description": "Pore pressure gradient. Normal = 0.433 psi/ft (freshwater) to 0.465 psi/ft (seawater brine). Overpressure > 0.6 psi/ft. Calibrated from RFT/MDT, kick margin, Eaton sonic method.",
-        "sources": [
-          "Fjaer et al. 2008 §8.1",
-          "Eaton B.A. JPT 1975"
-        ]
-      },
-      {
-        "id": "GP005",
-        "name": "biotCoefficient",
-        "name_pt": "coeficienteBiot",
-        "domain": "BiotCoefficient",
-        "range": "xsd:decimal",
-        "unit": "dimensionless",
-        "typical_range": {
-          "min": 0.5,
-          "max": 1
-        },
-        "description": "Biot coefficient alpha. alpha = 1 - K_dry/K_grain. Measured in laboratory by comparing drained and undrained bulk moduli.",
-        "sources": [
-          "Biot 1941",
-          "Fjaer et al. 2008 §2.7"
-        ]
-      },
-      {
-        "id": "GP006",
-        "name": "bulkModulus",
-        "name_pt": "moduloVolumetrico",
-        "domain": "RockMechProperty",
-        "range": "xsd:decimal",
-        "unit": "GPa",
-        "typical_range": {
-          "min": 2,
-          "max": 80
-        },
-        "description": "Bulk modulus K in GPa. K = E / (3*(1 - 2*nu)).",
-        "sources": [
-          "Fjaer et al. 2008 §2.2"
-        ]
-      },
-      {
-        "id": "GP007",
-        "name": "shearModulus",
-        "name_pt": "moduloCisalhamento",
-        "domain": "RockMechProperty",
-        "range": "xsd:decimal",
-        "unit": "GPa",
-        "typical_range": {
-          "min": 1,
-          "max": 40
-        },
-        "description": "Shear modulus G in GPa. G = E / (2*(1 + nu)). Also G = rho * Vs^2.",
-        "sources": [
-          "Fjaer et al. 2008 §2.2"
-        ]
-      },
-      {
-        "id": "GP008",
-        "name": "sigma1",
-        "name_pt": "tensaoMaximaPrincipal",
-        "domain": "StressTensor",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "description": "Maximum principal stress sigma_1 in MPa. sigma_1 >= sigma_2 >= sigma_3.",
-        "sources": [
-          "Fjaer et al. 2008 §2.1"
-        ]
-      },
-      {
-        "id": "GP009",
-        "name": "sigma2",
-        "name_pt": "tensaoIntermediariaPrincipal",
-        "domain": "StressTensor",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "description": "Intermediate principal stress sigma_2 in MPa. sigma_1 >= sigma_2 >= sigma_3.",
-        "sources": [
-          "Fjaer et al. 2008 §2.1"
-        ]
-      },
-      {
-        "id": "GP010",
-        "name": "sigma3",
-        "name_pt": "tensaoMinimaPrincipal",
-        "domain": "StressTensor",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "description": "Minimum principal stress sigma_3 in MPa. sigma_1 >= sigma_2 >= sigma_3. Equals Shmin in normal faulting regime.",
-        "sources": [
-          "Fjaer et al. 2008 §2.1"
-        ]
-      },
-      {
-        "id": "GP011",
-        "name": "sv",
-        "name_pt": "tensaoVertical",
-        "domain": "PrincipalStress",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "description": "Vertical stress Sv (overburden) in MPa. Calculated by integrating density log: Sv = integral(rho_bulk * g * dz). Gradient typically 1.0-1.1 psi/ft.",
-        "sources": [
-          "Zoback 2010 §2.2",
-          "Fjaer et al. 2008 §8.2"
-        ]
-      },
-      {
-        "id": "GP012",
-        "name": "sHmax",
-        "name_pt": "tensaoHorizontalMaxima",
-        "domain": "PrincipalStress",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "description": "Maximum horizontal stress SHmax in MPa. Magnitude constrained by frictional strength of faults. Orientation determined from borehole breakouts and drilling-induced tensile fractures.",
-        "sources": [
-          "Zoback 2010 §2.3",
-          "Fjaer et al. 2008 §8.3"
-        ]
-      },
-      {
-        "id": "GP013",
-        "name": "shmin",
-        "name_pt": "tensaoHorizontalMinima",
-        "domain": "PrincipalStress",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "description": "Minimum horizontal stress Shmin in MPa. Most reliably constrained by XLOT/mini-frac closure pressure. Controls fracture gradient and hydraulic fracture propagation direction.",
-        "sources": [
-          "Zoback 2010 §2.3",
-          "Fjaer et al. 2008 §8.3"
-        ]
-      },
-      {
-        "id": "GP014",
-        "name": "cohesion",
-        "name_pt": "coesao",
-        "domain": "MohrCoulombCriterion",
-        "range": "xsd:decimal",
-        "unit": "MPa",
-        "typical_range": {
-          "min": 0,
-          "max": 100
-        },
-        "description": "Cohesion c in MPa (Mohr-Coulomb parameter). Intercept of the failure envelope on the shear stress axis. Zero for unconsolidated sands; high for cemented sandstones and carbonates.",
-        "sources": [
-          "Fjaer et al. 2008 §3.3"
-        ]
-      },
-      {
-        "id": "GP015",
-        "name": "frictionAngle",
-        "name_pt": "anguloAtritoInterno",
-        "domain": "MohrCoulombCriterion",
-        "range": "xsd:decimal",
-        "unit": "degrees",
-        "typical_range": {
-          "min": 15,
-          "max": 45
-        },
-        "description": "Angle of internal friction phi in degrees (Mohr-Coulomb). Slope of the failure envelope: tan(phi). Typical range 20-40 deg for sedimentary rocks.",
-        "sources": [
-          "Fjaer et al. 2008 §3.3",
-          "Zoback 2010 §4.2"
-        ]
-      },
-      {
-        "id": "GP016",
-        "name": "rmrScore",
-        "name_pt": "pontuacaoRMR",
-        "domain": "RockMassRating",
-        "range": "xsd:decimal",
-        "unit": "score 0-100",
-        "typical_range": {
-          "min": 0,
-          "max": 100
-        },
-        "description": "Bieniawski RMR89 score. Sum of six parameter ratings. Classes: I (81-100) very good; II (61-80) good; III (41-60) fair; IV (21-40) poor; V (0-20) very poor.",
-        "sources": [
-          "Bieniawski 1989"
-        ]
-      },
-      {
-        "id": "GP017",
-        "name": "gsiValue",
-        "name_pt": "valorGSI",
-        "domain": "GSI",
-        "range": "xsd:decimal",
-        "unit": "score 0-100",
-        "typical_range": {
-          "min": 10,
-          "max": 100
-        },
-        "description": "GSI value (Geological Strength Index) 0-100. Approximate: GSI = RMR89 - 5.",
-        "sources": [
-          "Hoek 1994",
-          "Hoek & Brown 2019"
-        ]
-      },
-      {
-        "id": "GP018",
-        "name": "rqdValue",
-        "name_pt": "valorRQD",
-        "domain": "RQD",
-        "range": "xsd:decimal",
-        "unit": "%",
-        "typical_range": {
-          "min": 0,
-          "max": 100
-        },
-        "description": "RQD value in percent. Pieces > 100 mm / total core run length * 100%.",
-        "sources": [
-          "Deere 1963",
-          "ISRM Suggested Methods"
-        ]
-      },
-      {
-        "id": "GP019",
-        "name": "brittlenessIndex",
-        "name_pt": "indiceFragilidade",
-        "domain": "Brittleness",
-        "range": "xsd:decimal",
-        "unit": "dimensionless",
-        "typical_range": {
-          "min": 0,
-          "max": 1
-        },
-        "description": "Brittleness index B. Multiple formulations exist. Rickman (2008) SPE 115258: B = (E_norm + (1 - nu_norm))/2 where E_norm and nu_norm are normalized to [0,1] within the formation range.",
-        "sources": [
-          "Rickman et al. SPE 115258 2008"
-        ]
-      },
-      {
-        "id": "GP020",
-        "name": "mudWeightLower",
-        "name_pt": "pesoLamaPiso",
-        "domain": "MudWindow",
-        "range": "xsd:decimal",
-        "unit": "g/cm3",
-        "description": "Lower bound of mud weight window in g/cm3 (equivalent to ppg * 0.12). Set at or above pore pressure gradient to prevent influx.",
-        "sources": [
-          "Fjaer et al. 2008 §10.1"
-        ]
-      },
-      {
-        "id": "GP021",
-        "name": "mudWeightUpper",
-        "name_pt": "pesoLamaTeto",
-        "domain": "MudWindow",
-        "range": "xsd:decimal",
-        "unit": "g/cm3",
-        "description": "Upper bound of mud weight window in g/cm3. Set at or below fracture gradient to prevent lost circulation.",
-        "sources": [
-          "Fjaer et al. 2008 §10.1"
-        ]
-      },
-      {
-        "id": "GP022",
-        "name": "stressRegime",
-        "name_pt": "regimeTensional",
-        "domain": "AndersonStressRegime",
-        "range": "xsd:string",
-        "enum": [
-          "normal_faulting",
-          "strike_slip",
-          "reverse_faulting"
-        ],
-        "description": "Anderson stress regime classification. normal_faulting: Sv > SHmax > Shmin; strike_slip: SHmax > Sv > Shmin; reverse_faulting: SHmax > Shmin > Sv.",
-        "sources": [
-          "Anderson 1951",
-          "Zoback 2010 §1.2"
-        ]
-      }
-    ],
-    "relations": [
-      {
-        "id": "GR001",
-        "name": "induces_failure",
-        "name_pt": "induz_ruptura",
-        "domain": "StressTensor",
-        "range": "RockMechProperty",
-        "description": "Stress state induces failure in a rock mass when it exceeds the failure criterion. Domain: StressTensor; Range: FailureCriterion.",
-        "sources": [
-          "Fjaer et al. 2008 §3.1"
-        ]
-      },
-      {
-        "id": "GR002",
-        "name": "controls_mud_window",
-        "name_pt": "controla_janela_lama",
-        "domain": "PorePressure",
-        "range": "MudWindow",
-        "description": "Pore pressure and fracture gradient jointly control the mud weight window boundaries.",
-        "sources": [
-          "Fjaer et al. 2008 §10.1",
-          "Zoback 2010 §9.1"
-        ]
-      },
-      {
-        "id": "GR003",
-        "name": "triggers_sand_production",
-        "name_pt": "desencadeia_producao_areia",
-        "domain": "StressTensor",
-        "range": "RockMechProperty",
-        "description": "Critical drawdown condition where near-wellbore stress exceeds rock strength triggers sand production (sanding). Predicted by comparing effective wellbore stress against UCS.",
-        "sources": [
-          "Fjaer et al. 2008 §12.1",
-          "Zoback 2010 §10.1"
-        ]
-      },
-      {
-        "id": "GR004",
-        "name": "affects_wellbore_stability",
-        "name_pt": "afeta_estabilidade_poco",
-        "domain": "MechanicalEarthModel",
-        "range": "Wellbore",
-        "description": "MEM predicts wellbore stability: collapse pressure (lower bound) and fracture pressure (upper bound) at each depth in the well.",
-        "sources": [
-          "Fjaer et al. 2008 §9.1",
-          "Zoback 2010 §8.1"
-        ]
-      },
-      {
-        "id": "GR005",
-        "name": "caused_by",
-        "name_pt": "causado_por",
-        "domain": "MudWindow",
-        "range": "AndersonStressRegime",
-        "description": "The width of the mud window is caused_by (influenced by) the stress regime; narrow windows occur in compressive regimes.",
-        "sources": [
-          "Zoback 2010 §9.2"
-        ]
-      },
-      {
-        "id": "GR006",
-        "name": "derivative_with_respect_to",
-        "name_pt": "derivado_em_relacao_a",
-        "domain": "RockMechProperty",
-        "range": "RockMechProperty",
-        "description": "Relation between elastic properties, e.g., Young's modulus and Poisson's ratio are derivative_with_respect_to the sonic velocities Vp and Vs.",
-        "sources": [
-          "Fjaer et al. 2008 §2.2"
-        ]
-      },
-      {
-        "id": "GR007",
-        "name": "bounds_drilling_window",
-        "name_pt": "delimita_janela_perfuracao",
-        "domain": "PorePressure",
-        "range": "MudWindow",
-        "description": "Pore pressure gradient bounds the drilling window from below; fracture gradient bounds it from above.",
-        "sources": [
-          "Fjaer et al. 2008 §10.1"
-        ]
-      },
-      {
-        "id": "GR008",
-        "name": "calibrated_by",
-        "name_pt": "calibrado_por",
-        "domain": "MechanicalEarthModel1D",
-        "range": "Wellbore",
-        "description": "1D MEM is calibrated_by wellbore observations: LOT/XLOT data, caliper breakouts, image logs (FMI/UBI), MDT/RFT measurements.",
-        "sources": [
-          "Zoback 2010 §9.2",
-          "Fjaer et al. 2008 §10.2"
-        ]
-      },
-      {
-        "id": "GR009",
-        "name": "constrained_by",
-        "name_pt": "restringido_por",
-        "domain": "PrincipalStress",
-        "range": "FailureCriterion",
-        "description": "Stress magnitudes are constrained_by frictional limits on pre-existing faults (Mohr-Coulomb); the in situ stress cannot exceed the critically stressed state.",
-        "sources": [
-          "Zoback 2010 §4.3"
-        ]
-      },
-      {
-        "id": "GR010",
-        "name": "derived_from_sonic",
-        "name_pt": "derivado_de_sonico",
-        "domain": "RockMechProperty",
-        "range": "RockMechProperty",
-        "description": "Dynamic elastic moduli (E_dyn, G_dyn, K_dyn, nu_dyn) are derived_from_sonic velocity logs (DTC/DTS). Require static-dynamic conversion for engineering use.",
-        "sources": [
-          "Fjaer et al. 2008 §2.2",
-          "Zoback 2010 §1.3"
-        ]
-      },
-      {
-        "id": "GR011",
-        "name": "input_to_mem",
-        "name_pt": "entrada_para_mem",
-        "domain": "RockMechProperty",
-        "range": "MechanicalEarthModel",
-        "description": "Rock mechanical properties (UCS, E, nu, Biot) serve as input_to_mem and are integrated into the four pillars of the Mechanical Earth Model.",
-        "sources": [
-          "Fjaer et al. 2008 §10.1",
-          "Plumb et al. SPE 65118 2000"
-        ]
-      },
-      {
-        "id": "GR012",
-        "name": "governs_fracture_propagation",
-        "name_pt": "governa_propagacao_fratura",
-        "domain": "PrincipalStress",
-        "range": "MudWindow",
-        "description": "The minimum principal stress (Shmin) governs_fracture_propagation direction and determines the fracture gradient (upper bound of mud window).",
-        "sources": [
-          "Fjaer et al. 2008 §11.1",
-          "Zoback 2010 §6.2"
-        ]
-      }
-    ],
-    "instances": [
-      {
-        "id": "mem-buzios-1d",
-        "type": "MechanicalEarthModel1D",
-        "label": "Buzios Field 1D MEM — Conceptual Example",
-        "label_pt": "MEM 1D Campo de Búzios — Exemplo Conceitual",
-        "description": "Illustrative 1D MEM for a pre-salt carbonate well in the Santos Basin, offshore Brazil. Reflects published ranges for Barra Velha/Itapema carbonates. Values are illustrative, not proprietary data.",
-        "basin": "Santos",
-        "field": "Buzios",
-        "depth_range_m": {
-          "top": 4800,
-          "base": 5800
-        },
-        "stress_regime": "normal_faulting",
-        "pore_pressure_gradient_ppg": {
-          "min": 8.6,
-          "max": 14.5,
-          "note": "Moderate overpressure in pre-salt section"
-        },
-        "fracture_gradient_ppg": {
-          "min": 14.8,
-          "max": 16.5
-        },
-        "mud_window_ppg": {
-          "lower": 14.5,
-          "upper": 14.8,
-          "note": "Very narrow window in carbonate pre-salt interval"
-        },
-        "sv_gradient_psi_ft": 1.03,
-        "sHmax_gradient_psi_ft": 0.92,
-        "shmin_gradient_psi_ft": 0.85,
-        "ucs_range_MPa": {
-          "min": 40,
-          "max": 120,
-          "note": "Barra Velha microbialite carbonate range"
-        },
-        "young_modulus_GPa": {
-          "min": 20,
-          "max": 55
-        },
-        "poisson_ratio": {
-          "min": 0.18,
-          "max": 0.3
-        },
-        "biot_coefficient": 0.8,
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Zoback 2010 §9",
-          "Fjaer et al. 2008 §10",
-          "Plumb et al. SPE 65118 2000"
-        ],
-        "note": "Illustrative values only. Derived from published literature on Santos Basin pre-salt geomechanics. No proprietary Petrobras data."
-      },
-      {
-        "id": "failure-mohr-coulomb",
-        "type": "MohrCoulombCriterion",
-        "label": "Mohr-Coulomb Failure — Sandstone Example",
-        "label_pt": "Critério Mohr-Coulomb — Exemplo Arenito",
-        "description": "Example application of Mohr-Coulomb to a typical shallow-marine sandstone. Cohesion and friction angle are within published ranges for weakly cemented sands.",
-        "rock_type": "sandstone",
-        "cohesion_MPa": 5,
-        "friction_angle_deg": 32,
-        "ucs_derived_MPa": 22.5,
-        "tensile_strength_MPa": 2,
-        "confining_stress_applied_MPa": 10,
-        "failure_envelope_eq": "tau_f = 5 + sigma_n * tan(32 deg)",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Fjaer et al. 2008 §3.3",
-          "Zoback 2010 §4.2",
-          "ISRM Suggested Methods"
-        ]
-      },
-      {
-        "id": "hoek-brown-carbonate",
-        "type": "HoekBrownCriterion",
-        "label": "Hoek-Brown — Fractured Carbonate Example",
-        "label_pt": "Hoek-Brown — Exemplo Carbonato Fraturado",
-        "description": "Hoek-Brown criterion applied to a fractured carbonate reservoir with moderate GSI. GSI reflects blocky, interlocked rock with slightly weathered joint surfaces.",
-        "rock_type": "limestone_fractured",
-        "sigma_ci_MPa": 80,
-        "GSI": 60,
-        "mi": 9,
-        "disturbance_factor_D": 0,
-        "mb_derived": 2.3,
-        "s_derived": 0.0117,
-        "a_derived": 0.503,
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Hoek & Brown 2019",
-          "Hoek et al. Rock Mechanics and Rock Engineering 2002"
-        ]
-      },
-      {
-        "id": "normal-faulting-regime",
-        "type": "AndersonStressRegime",
-        "label": "Normal Faulting Regime — Santos Basin",
-        "label_pt": "Regime de Falha Normal — Bacia de Santos",
-        "description": "Typical extensional tectonic setting of the Santos Basin passive margin. Vertical stress (overburden) is greatest principal stress. Controls dip-slip normal faults and wellbore breakout azimuth.",
-        "stress_regime": "normal_faulting",
-        "sv_relative": "maximum",
-        "sHmax_relative": "intermediate",
-        "shmin_relative": "minimum",
-        "fault_type_expected": "normal_dip_slip",
-        "breakout_orientation": "parallel_to_shmin",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Anderson 1951",
-          "Zoback 2010 §1.2",
-          "Chang C. et al. Mar. Petrol. Geol. 2010"
-        ]
-      },
-      {
-        "id": "mud-window-depleted-reservoir",
-        "type": "MudWindow",
-        "label": "Narrow Mud Window — Depleted Reservoir Example",
-        "label_pt": "Janela de Lama Estreita — Reservatório Depletado",
-        "description": "A depleted reservoir (Pp reduced by 20-30% of initial pressure) causes Shmin to decrease proportionally, narrowing or closing the safe drilling window. Example of a field with pore pressure depletion causing drilling difficulty in infill wells.",
-        "initial_pp_gradient_ppg": 11.5,
-        "depleted_pp_gradient_ppg": 8.8,
-        "fracture_gradient_ppg_undepleted": 14.8,
-        "fracture_gradient_ppg_depleted": 12.5,
-        "mud_window_ppg": {
-          "lower": 8.8,
-          "upper": 9.5,
-          "note": "Window narrows from 3.3 ppg to 0.7 ppg after depletion"
-        },
-        "risk": "lost_circulation_above_9.5ppg_or_influx_below_8.8ppg",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Zoback 2010 §11.1",
-          "Fjaer et al. 2008 §10.3"
-        ]
-      },
-      {
-        "id": "rqd-gsi-rock-mass",
-        "type": "GSI",
-        "label": "Rock Mass Classification Chain — GSI from RQD and RMR",
-        "label_pt": "Cadeia de Classificação de Maciço — GSI a partir de RQD e RMR",
-        "description": "Demonstration of the classification chain: RQD -> RMR -> GSI -> Hoek-Brown parameters. Example for a moderately fractured basement rock.",
-        "rqd_percent": 55,
-        "rmr89_score": 48,
-        "gsi_derived": 43,
-        "rock_mass_class": "Fair (RMR III)",
-        "mb_factor_example": 1.2,
-        "s_factor_example": 0.0038,
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6"
-        ],
-        "sources": [
-          "Bieniawski 1989",
-          "Hoek 1994",
-          "Hoek & Brown 2019",
-          "ISRM Suggested Methods"
-        ]
-      }
-    ]
-  },
-  "geomechanics_fractures": {
-    "meta": {
-      "id": "geomechanics_fractures",
-      "label": "Fracture Ontology Branch — Geomechanics",
-      "label_pt": "Ramo de Fraturas — Geomecânica",
-      "version": "1.0.0",
-      "description": "Fracture and deformation structure ontology branch, extending SWEET deformation and linking to GSO structural geology classes (gso-faults, gso-folds). Covers fracture types, fracture networks, fault zone anatomy, and Anderson stress regime controls on fracturing.",
-      "geocoverage": [
-        "layer1",
-        "layer2",
-        "layer6",
-        "layer7",
-        "sweet"
-      ],
-      "sources": [
-        "Fjaer E., Holt R.M., Horsrud P., Raaen A.M., Risnes R. — Petroleum Related Rock Mechanics, 2nd ed. Elsevier 2008",
-        "Zoback M.D. — Reservoir Geomechanics, Cambridge University Press 2010",
-        "Twiss R.J., Moores E.M. — Structural Geology, 2nd ed. W.H. Freeman 2007",
-        "Caine J.S., Evans J.P., Forster C.B. — Fault zone architecture and permeability structure. Geology 1996",
-        "Fossen H. — Structural Geology, 2nd ed. Cambridge University Press 2016",
-        "Brodaric B., Richard S. — Geoscience Ontology (GSO) v1.0.2. GSC Open File 8796, DOI 10.4095/328296, 2021"
-      ],
-      "sweet_base_uri": "http://sweetontology.net/phenGeolDeformation#",
-      "gso_base_uri": "https://w3id.org/gso/1.0/"
-    },
-    "classes": [
-      {
-        "id": "GF001",
-        "name": "DeformationMechanism",
-        "name_pt": "MecanismoDeDeformacao",
-        "superclass": "sweet:Deformation",
-        "sweet_uri": "http://sweetontology.net/phenGeolDeformation#Deformation",
-        "description": "Process by which rock changes shape or volume. Mechanisms include brittle fracturing, plastic flow, pressure solution, and cataclastic flow. Controls fracture type and permeability evolution.",
-        "description_pt": "Processo pelo qual a rocha muda de forma ou volume. Mecanismos incluem fraturamento frágil, fluxo plástico, solução por pressão e fluxo cataclástico.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7",
-          "sweet"
-        ],
-        "sources": [
-          "Fossen 2016 §6",
-          "Twiss & Moores 2007 §8"
-        ]
-      },
-      {
-        "id": "GF002",
-        "name": "BrittleDeformation",
-        "name_pt": "DeformacaoFragil",
-        "superclass": "DeformationMechanism",
-        "sweet_uri": "http://sweetontology.net/phenGeolDeformation#Fracturing",
-        "description": "Deformation by fracturing and faulting at low temperature and pressure (shallow crustal conditions). Produces joints, faults, and shear bands. Dominant deformation style in most reservoir settings.",
-        "description_pt": "Deformação por fraturamento e falhamento em baixas temperaturas e pressões (condições crustais rasas). Produz juntas, falhas e bandas de cisalhamento.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7",
-          "sweet"
-        ],
-        "sources": [
-          "Fossen 2016 §7",
-          "Zoback 2010 §7.1"
-        ]
-      },
-      {
-        "id": "GF003",
-        "name": "DuctileDeformation",
-        "name_pt": "DeformacaoDuctil",
-        "superclass": "DeformationMechanism",
-        "sweet_uri": "http://sweetontology.net/phenGeolDeformation#Deformation",
-        "description": "Deformation by crystal plasticity, pressure solution, or viscous flow at elevated temperature and pressure. Produces mylonite zones, foliation, and boudinage. Occurs in deep reservoirs and at higher metamorphic grades.",
-        "description_pt": "Deformação por plasticidade cristalina, solução por pressão ou fluxo viscoso em altas temperaturas e pressões. Produz zonas de milonito, foliação e boudinage.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7",
-          "sweet"
-        ],
-        "sources": [
-          "Fossen 2016 §12",
-          "Twiss & Moores 2007 §9"
-        ]
-      },
-      {
-        "id": "GF004",
-        "name": "FractureType",
-        "name_pt": "TipoDeFratura",
-        "superclass": "GeologicalStructure",
-        "description": "Classification of fractures by genesis and kinematics: joint (opening mode I), fault (shear mode II/III), vein (mineralized opening fracture), and shear band (deformation band in porous media).",
-        "description_pt": "Classificação de fraturas por gênese e cinemática: junta (modo I de abertura), falha (modo II/III de cisalhamento), veio (fratura aberta mineralizada), banda de cisalhamento.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §8",
-          "Zoback 2010 §7.1",
-          "Twiss & Moores 2007 §7"
-        ]
-      },
-      {
-        "id": "GF005",
-        "name": "Joint",
-        "name_pt": "Junta",
-        "superclass": "FractureType",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fracture",
-        "description": "Opening-mode fracture (Mode I) with negligible shear displacement. Aperture driven by tensile effective stress exceeding tensile strength. Two sub-types: extension joints (sigma_3 orthogonal to fracture) and hybrid joints. Common in tight carbonates and shales.",
-        "description_pt": "Fratura em modo de abertura (Modo I) com deslocamento cisalhante negligível. Abertura controlada pela tensão efetiva de tração. Comum em carbonatos compactos e folhelhos.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §8.1",
-          "Zoback 2010 §7.2"
-        ]
-      },
-      {
-        "id": "GF006",
-        "name": "Fault",
-        "name_pt": "Falha",
-        "superclass": "FractureType",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
-        "description": "Shear-mode fracture with significant displacement. Classified by slip kinematics: normal (dip-slip, extensional), reverse (dip-slip, compressional), strike-slip (lateral movement). Controls hydrocarbon migration pathways and trap integrity.",
-        "description_pt": "Fratura em modo de cisalhamento com deslocamento significativo. Classificada por cinemática: normal (extensional), reversa (compressional), transcorrente (lateral).",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §9",
-          "Twiss & Moores 2007 §7",
-          "Anderson 1951"
-        ]
-      },
-      {
-        "id": "GF007",
-        "name": "Vein",
-        "name_pt": "Veio",
-        "superclass": "FractureType",
-        "description": "Mineralized fracture filled with crystalline material (calcite, quartz, dolomite). Records paleo-fluid flow directions and trapping conditions. Aperture measurements on core and image logs indicate former open fractures.",
-        "description_pt": "Fratura mineralizada preenchida com material cristalino (calcita, quartzo, dolomita). Registra direções de fluxo de paleofluidos. Medidas de abertura em testemunho e imagem indicam fraturas abertas pretéritas.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §8.3",
-          "Twiss & Moores 2007 §7.4"
-        ]
-      },
-      {
-        "id": "GF008",
-        "name": "ShearBand",
-        "name_pt": "BandaDeCisalhamento",
-        "superclass": "FractureType",
-        "description": "Tabular zone of localized shear strain in porous rock without a discrete fracture surface. Associated with grain crushing (cataclasis) and porosity/permeability reduction. Important in weak, high-porosity sandstones and chalk.",
-        "description_pt": "Zona tabular de deformação cisalhante localizada em rocha porosa sem superfície de fratura discreta. Associada ao esmagamento de grãos e redução de porosidade/permeabilidade.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §8.5",
-          "Zoback 2010 §7.3"
-        ]
-      },
-      {
-        "id": "GF009",
-        "name": "FractureSet",
-        "name_pt": "ConjuntoDeFraturas",
-        "superclass": "GeologicalStructure",
-        "description": "Group of sub-parallel fractures with similar orientation, type, and inferred origin. Characterized by mean orientation (dip, dip direction), aperture distribution, and spacing. Statistical description is foundation of Discrete Fracture Network (DFN) modelling.",
-        "description_pt": "Grupo de fraturas sub-paralelas com orientação, tipo e origem similares. Caracterizado por orientação média (mergulho, azimute), distribuição de abertura e espaçamento. Base do modelamento DFN.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §8.6",
-          "Zoback 2010 §7.4"
-        ]
-      },
-      {
-        "id": "GF010",
-        "name": "FractureNetwork",
-        "name_pt": "RedeDeFraturas",
-        "superclass": "GeologicalStructure",
-        "description": "Interconnected system of fracture sets and/or faults forming a hydraulically connected network. Connectivity determines effective permeability tensor. Modelled as Discrete Fracture Network (DFN) or as equivalent porous medium. Critical for pre-salt carbonate reservoir flow modelling.",
-        "description_pt": "Sistema interconectado de conjuntos de fraturas formando uma rede hidraulicamente conectada. Conectividade determina tensor de permeabilidade efetiva. Modelada como DFN ou meio poroso equivalente.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Zoback 2010 §7.4",
-          "Fjaer et al. 2008 §13.3"
-        ]
-      },
-      {
-        "id": "GF011",
-        "name": "Stylolite",
-        "name_pt": "Estilolito",
-        "superclass": "GeologicalStructure",
-        "description": "Irregular dissolution surface in carbonates formed by pressure solution along grain contacts under compressive stress. Acts as permeability barrier orthogonal to sigma_1. Identified in core and image logs as dark, irregular, sutured surfaces. Oriented perpendicular to the maximum compressive stress.",
-        "description_pt": "Superfície irregular de dissolução em carbonatos formada por solução por pressão. Atua como barreira de permeabilidade. Identificada em testemunho e imagens como superfícies escuras, irregulares e suturadas. Orientada perpendicularmente a sigma_1.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Fossen 2016 §8.4",
-          "Fjaer et al. 2008 §2.8"
-        ]
-      },
-      {
-        "id": "GF012",
-        "name": "FaultZone",
-        "name_pt": "ZonaDeFalha",
-        "superclass": "Fault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/FaultZone",
-        "description": "Three-component architectural model of a mature fault (Caine et al. 1996): (1) fault core — principal slip surfaces and gouge; (2) damage zone — subsidiary fractures and folds flanking the fault; (3) host rock — undeformed protolith. Permeability structure controls fluid flow.",
-        "description_pt": "Modelo arquitetural de três componentes de uma falha matura (Caine et al. 1996): (1) núcleo da falha — superfícies de deslizamento e gouge; (2) zona de dano — fraturas subsidiárias; (3) rocha hospedeira — protólito não deformado.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Caine et al. Geology 1996",
-          "Fossen 2016 §9.5"
-        ]
-      },
-      {
-        "id": "GF013",
-        "name": "FaultCore",
-        "name_pt": "NucleoFalha",
-        "superclass": "FaultZone",
-        "description": "Central zone of a fault containing principal slip surfaces, fault gouge (clay-rich pulverized rock), cataclasite, and/or mylonite. Typically has very low porosity and permeability (clay smear). Shale Gouge Ratio (SGR) is key predictor of sealing capacity.",
-        "description_pt": "Zona central da falha contendo superfícies de deslizamento, gouge de falha (rocha pulverizada rica em argila), cataclasito e/ou milonito. Baixíssima porosidade e permeabilidade. SGR é preditor-chave da capacidade selante.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Caine et al. 1996",
-          "Fossen 2016 §9.5",
-          "Zoback 2010 §7.5"
-        ]
-      },
-      {
-        "id": "GF014",
-        "name": "DamageZone",
-        "name_pt": "ZonaDeDano",
-        "superclass": "FaultZone",
-        "description": "Region flanking the fault core characterized by elevated fracture density, increased permeability, and subsidiary faults and folds. Width scales with fault displacement (D): width ~ 10^0.3D (m). Enhanced permeability makes damage zones important conduits for fluid flow.",
-        "description_pt": "Região flanqueando o núcleo da falha com densidade de fraturas elevada, maior permeabilidade e falhas/dobras subsidiárias. Largura proporcional ao deslocamento da falha. Permeabilidade elevada torna zonas de dano condutos importantes de fluido.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Caine et al. 1996",
-          "Fossen 2016 §9.5",
-          "Bense et al. Earth-Science Reviews 2013"
-        ]
-      },
-      {
-        "id": "GF015",
-        "name": "NormalFault",
-        "name_pt": "FalhaNormal",
-        "superclass": "Fault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/NormalFault",
-        "description": "Dip-slip fault where the hanging wall moves downward relative to the footwall. Formed in extensional tectonic settings (Sv > SHmax > Shmin). Typical dip 50-70 degrees. Creates grabens and half-grabens. Dominant fault type on passive continental margins.",
-        "description_pt": "Falha de dip-slip onde o teto desce em relação ao piso. Formada em regime extensional (Sv > SHmax > Shmin). Mergulho típico 50-70 graus. Cria grabens e meio-grabens. Tipo dominante em margens continentais passivas.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Anderson 1951",
-          "Fossen 2016 §9.2",
-          "Twiss & Moores 2007 §7.2"
-        ]
-      },
-      {
-        "id": "GF016",
-        "name": "ReverseFault",
-        "name_pt": "FalhaReversa",
-        "superclass": "Fault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/ReverseFault",
-        "description": "Dip-slip fault where the hanging wall moves upward relative to the footwall. Formed in compressional settings (SHmax > Shmin > Sv). Low angle (<30 deg) = thrust fault; high angle (>30 deg) = reverse fault. Creates fold-thrust belts and compressional traps.",
-        "description_pt": "Falha de dip-slip onde o teto sobe em relação ao piso. Formada em regime compressional (SHmax > Shmin > Sv). Ângulo baixo (<30 graus) = falha de empurrão; alto ângulo = falha reversa.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Anderson 1951",
-          "Fossen 2016 §9.3",
-          "Twiss & Moores 2007 §7.3"
-        ]
-      },
-      {
-        "id": "GF017",
-        "name": "StrikeSlipFault",
-        "name_pt": "FalhaTranscorrente",
-        "superclass": "Fault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/StrikeSlipFault",
-        "description": "Fault with predominantly lateral (strike-parallel) displacement. Formed in strike-slip (wrench) tectonic settings (SHmax > Sv > Shmin). Sub-vertical fault planes. Creates pull-apart basins (releasing bends) and push-up ridges (restraining bends). Transform faults are a special case.",
-        "description_pt": "Falha com deslocamento predominantemente lateral. Formada em regime transcorrente (SHmax > Sv > Shmin). Planos sub-verticais. Cria bacias pull-apart e altos estruturais.",
-        "geocoverage": [
-          "layer1",
-          "layer2",
-          "layer6",
-          "layer7"
-        ],
-        "sources": [
-          "Anderson 1951",
-          "Fossen 2016 §9.4",
-          "Twiss & Moores 2007 §7.4"
-        ]
-      }
-    ],
-    "properties": [
-      {
-        "id": "GFP001",
-        "name": "fractureAperture",
-        "name_pt": "aberturaFratura",
-        "domain": "FractureType",
-        "range": "xsd:decimal",
-        "unit": "mm",
-        "description": "Fracture aperture (opening width) in mm. Controls hydraulic transmissivity (cubic law: T ~ aperture^3). Natural fractures: 0.01-10 mm. Mechanical aperture (geometric) vs hydraulic aperture (flow-equivalent).",
-        "sources": [
-          "Fjaer et al. 2008 §13.2",
-          "Zoback 2010 §7.4"
-        ]
-      },
-      {
-        "id": "GFP002",
-        "name": "fractureSpacing",
-        "name_pt": "espacamentoFratura",
-        "domain": "FractureSet",
-        "range": "xsd:decimal",
-        "unit": "m",
-        "description": "Mean spacing between adjacent fractures in a set, measured perpendicular to fracture planes. Determines fracture density and bulk permeability enhancement.",
-        "sources": [
-          "Fossen 2016 §8.6"
-        ]
-      },
-      {
-        "id": "GFP003",
-        "name": "fractureStrikeDeg",
-        "name_pt": "azimuteFratura",
-        "domain": "FractureType",
-        "range": "xsd:decimal",
-        "unit": "degrees",
-        "description": "Azimuth of the fracture strike (0-360 degrees from North). Determined from oriented core, image logs (FMI/UBI), or seismic discontinuity attributes.",
-        "sources": [
-          "Zoback 2010 §7.2",
-          "Fjaer et al. 2008 §9.4"
-        ]
-      },
-      {
-        "id": "GFP004",
-        "name": "fractureDipDeg",
-        "name_pt": "mergulhoFratura",
-        "domain": "FractureType",
-        "range": "xsd:decimal",
-        "unit": "degrees",
-        "description": "Dip angle of the fracture plane (0-90 degrees from horizontal). Vertical joints dip 90 deg; horizontal fractures dip 0 deg.",
-        "sources": [
-          "Fossen 2016 §8"
-        ]
-      },
-      {
-        "id": "GFP005",
-        "name": "sgrValue",
-        "name_pt": "valorSGR",
-        "domain": "FaultCore",
-        "range": "xsd:decimal",
-        "unit": "%",
-        "typical_range": {
-          "min": 0,
-          "max": 100
-        },
-        "description": "Shale Gouge Ratio (SGR) in percent. SGR = sum(shale_thickness * fraction_shale) / fault_displacement * 100. SGR > 18-20% = potentially sealing; < 18% = potentially leaking. Computed in TrapTester (Badley Geoscience).",
-        "sources": [
-          "Yielding G. et al. Petroleum Geoscience 1997",
-          "Zoback 2010 §7.5"
-        ],
-        "rag_alert": "SGR (Shale Gouge Ratio) NÃO é SAR (saturados/aromáticos/resinas) nem SGR de gás. É um proxy geomecânico de selância de falha."
-      },
-      {
-        "id": "GFP006",
-        "name": "faultDisplacementM",
-        "name_pt": "deslocamentoFalhaM",
-        "domain": "Fault",
-        "range": "xsd:decimal",
-        "unit": "m",
-        "description": "Cumulative displacement along fault slip surface in meters. Scales with fault length (D ~ L / 20 to L / 100) and damage zone width.",
-        "sources": [
-          "Fossen 2016 §9.1",
-          "Caine et al. 1996"
-        ]
-      },
-      {
-        "id": "GFP007",
-        "name": "fractureDensityPerMeter",
-        "name_pt": "densidadeFraturasPorMetro",
-        "domain": "FractureSet",
-        "range": "xsd:decimal",
-        "unit": "1/m",
-        "description": "Number of fractures per unit length (P10 or P32 measure). P10 = fractures per meter of scanline. Higher density increases effective permeability.",
-        "sources": [
-          "Dershowitz W. & Herda H. ARMA 1992",
-          "Zoback 2010 §7.4"
-        ]
-      }
-    ],
-    "fracture_to_gso_crosswalk": "data/fracture_to_gso.json",
-    "anderson_regimes": {
-      "normal_faulting": {
-        "condition": "Sv > SHmax > Shmin",
-        "fault_type": "Normal (dip-slip, extensional)",
-        "wellbore_breakout_azimuth": "parallel to Shmin azimuth",
-        "typical_setting": "Passive margins, rift basins",
-        "example": "Santos Basin offshore Brazil"
-      },
-      "strike_slip": {
-        "condition": "SHmax > Sv > Shmin",
-        "fault_type": "Strike-slip (lateral, wrench)",
-        "wellbore_breakout_azimuth": "parallel to SHmax azimuth",
-        "typical_setting": "Transform plate boundaries, wrench corridors",
-        "example": "San Andreas Fault system"
-      },
-      "reverse_faulting": {
-        "condition": "SHmax > Shmin > Sv",
-        "fault_type": "Reverse / thrust (compressional)",
-        "wellbore_breakout_azimuth": "parallel to Shmin azimuth",
-        "typical_setting": "Fold-thrust belts, convergent margins",
-        "example": "Zagros fold belt, Andean foreland"
-      }
-    }
-  },
-  "fracture_to_gso_crosswalk": {
-    "meta": {
-      "version": "1.0.0",
-      "description": "Crosswalk between Geolytics Fracture Ontology classes and GSO/Loop3D Geoscience Ontology structural geology classes. Follows the same SKOS-based mapping pattern as data/osdu-gso-crosswalk.json.",
-      "sources": [
-        "Brodaric B., Richard S. — Geoscience Ontology (GSO) v1.0.2. GSC Open File 8796, DOI 10.4095/328296, 2021",
-        "Fjaer E. et al. — Petroleum Related Rock Mechanics, 2nd ed. Elsevier 2008",
-        "Fossen H. — Structural Geology, 2nd ed. Cambridge University Press 2016"
-      ],
-      "license_note": "Use respects CC BY 4.0 of GSO; cite Brodaric & Richard 2021, GSC OF 8796, DOI 10.4095/328296.",
-      "match_kinds": {
-        "exactMatch": "Semantically equivalent concepts — interoperable 1:1.",
-        "closeMatch": "Similar but with scope or definition nuances — use with caution in cross-queries.",
-        "broadMatch": "Geolytics fracture class is more specific than GSO class.",
-        "narrowMatch": "Geolytics fracture class is more general than GSO class."
-      }
-    },
-    "mappings": [
-      {
-        "geolytics_class": "Fault",
-        "geolytics_id": "GF006",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#Fault",
-        "gso_class": "Fault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
-        "match": "exactMatch",
-        "note": "Both define Fault as a discrete surface or zone with shear displacement separating two rock masses. The Geolytics definition adds geomechanical context (Anderson regimes, stress controls) not present in GSO."
-      },
-      {
-        "geolytics_class": "FaultZone",
-        "geolytics_id": "GF012",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#FaultZone",
-        "gso_class": "FaultZone",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/FaultZone",
-        "match": "exactMatch",
-        "note": "Both represent the broader zone of deformation surrounding a fault slip surface. Geolytics adds the Caine et al. (1996) three-component architecture (core, damage zone, host rock) not explicitly in GSO."
-      },
-      {
-        "geolytics_class": "NormalFault",
-        "geolytics_id": "GF015",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#NormalFault",
-        "gso_class": "NormalFault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/NormalFault",
-        "match": "exactMatch",
-        "note": "Kinematic definition is identical: hanging wall descends relative to footwall in extensional setting. Geolytics adds Anderson stress regime condition (Sv > SHmax > Shmin)."
-      },
-      {
-        "geolytics_class": "ReverseFault",
-        "geolytics_id": "GF016",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#ReverseFault",
-        "gso_class": "ReverseFault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/ReverseFault",
-        "match": "exactMatch",
-        "note": "Kinematic definition identical: hanging wall ascends in compressional setting. Geolytics distinguishes thrust (< 30 deg) from reverse fault (> 30 deg) as sub-types, adds Anderson condition (SHmax > Shmin > Sv)."
-      },
-      {
-        "geolytics_class": "StrikeSlipFault",
-        "geolytics_id": "GF017",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#StrikeSlipFault",
-        "gso_class": "StrikeSlipFault",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/StrikeSlipFault",
-        "match": "exactMatch",
-        "note": "Both define lateral (strike-parallel) dominant displacement. Geolytics adds Anderson condition (SHmax > Sv > Shmin) and sub-types (sinistral, dextral) implied but not enumerated here."
-      },
-      {
-        "geolytics_class": "Joint",
-        "geolytics_id": "GF005",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#Joint",
-        "gso_class": "Fracture",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fracture",
-        "match": "narrowMatch",
-        "note": "GSO Fracture is the generic class for any brittle discontinuity; Geolytics Joint is specifically an opening-mode (Mode I) fracture. Joint is a sub-type of Fracture."
-      },
-      {
-        "geolytics_class": "DeformationMechanism",
-        "geolytics_id": "GF001",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#DeformationMechanism",
-        "gso_class": "Deformation",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicdeformation/Deformation",
-        "match": "closeMatch",
-        "note": "GSO Deformation is broader (any change in shape or position); Geolytics DeformationMechanism focuses on the physical process (brittle fracturing, plastic flow, pressure solution). Use closeMatch — do not substitute 1:1."
-      },
-      {
-        "geolytics_class": "FractureSet",
-        "geolytics_id": "GF009",
-        "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#FractureSet",
-        "gso_class": "JointSet",
-        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/JointSet",
-        "match": "closeMatch",
-        "note": "GSO JointSet is restricted to joints (Mode I); Geolytics FractureSet encompasses any sub-parallel group of fractures regardless of mode (joints, shear fractures). Broader scope in Geolytics."
-      }
-    ]
-  }
+  ]
 }

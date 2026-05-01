@@ -1,0 +1,529 @@
+# ============================================================================
+# Geolytics modules-extended — M7/M8/M9/M10 ontology serialization
+# ============================================================================
+# Generated: 2026-05-01T15:27:13.387Z
+# Source: data/modules-extended.json
+# Pattern: GLOSIS *Property/*Value style for quantitative classes
+# ============================================================================
+
+@prefix geo:    <https://geolytics.petrobras.com.br/dict/> .
+@prefix geox:   <https://geolytics.petrobras.com.br/dict/glosis-ext/> .
+@prefix m7:     <https://geolytics.petrobras.com.br/dict/m7-geochem/> .
+@prefix m8:     <https://geolytics.petrobras.com.br/dict/m8-rock/> .
+@prefix m9:     <https://geolytics.petrobras.com.br/dict/m9-geomec/> .
+@prefix m10:    <https://geolytics.petrobras.com.br/dict/m10-fluidos/> .
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix qudt:   <http://qudt.org/schema/qudt/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+
+<https://geolytics.petrobras.com.br/dict/modules>
+    a              owl:Ontology ;
+    owl:versionIRI <https://geolytics.petrobras.com.br/dict/modules/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    dct:title "Geolytics Dictionary — Internal Modules M7/M8/M9/M10"@en ;
+    dct:description "Modules for Petrobras-internal analytical domains: M7 Geochemistry, M8 Rock Physics, M9 Geomechanics, M10 PVT/Fluids. Conceptual definitions only — does not include data classified as Sigilo=Interno."@en ;
+    rdfs:seeAlso <https://geolytics.petrobras.com.br/dict/glosis-ext> ;
+    owl:imports <http://w3id.org/glosis/model/codelists> .
+
+# ── Geoquímica Orgânica e Inorgânica (M7_geochem) ──────────────────────────────────────
+# System origin: GEOQWIN, Rock-Eval, GC
+# Quantity-kind default: http://qudt.org/vocab/quantitykind/MassFraction
+
+m7:analiseGeoquimica a owl:Class ;
+    skos:prefLabel "AnaliseGeoquimica"@pt ;
+    rdfs:subClassOf geox:analyticalObject ;
+    skos:definition """Conjunto de análises sobre amostras para caracterização geoquímica"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C101" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:rochaGeneradora a owl:Class ;
+    skos:prefLabel "RochaGeneradora"@pt ;
+    rdfs:subClassOf geox:formacaoGeologica ;
+    skos:definition """Rocha rica em matéria orgânica capaz de gerar HC (source rock)"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C102" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:rochaGeneradoraProperty a sosa:ObservableProperty ;
+    skos:prefLabel "RochaGeneradora (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/MassFraction> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:rochaGeneradoraValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "RochaGeneradora value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/MassFraction> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:materiaOrganica a owl:Class ;
+    skos:prefLabel "MateriaOrganica"@pt ;
+    rdfs:subClassOf geox:geochemicalObject ;
+    skos:definition """Substância orgânica preservada na rocha com potencial gerador"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C103" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:maturidadeTermal a owl:Class ;
+    skos:prefLabel "MaturidadeTermal"@pt ;
+    rdfs:subClassOf geox:geochemicalProperty ;
+    skos:definition """Estado de evolução termal da matéria orgânica (Ro% e Tmax)"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C104" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:cromatografiaDeGas a owl:Class ;
+    skos:prefLabel "CromatografiaDeGas"@pt ;
+    rdfs:subClassOf geox:analyticalMethod ;
+    skos:definition """GC-FID, GC-TCD, GC-MS — análise da composição dos gases"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C105" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:bioMarcador a owl:Class ;
+    skos:prefLabel "BioMarcador"@pt ;
+    rdfs:subClassOf geox:geochemicalObject ;
+    skos:definition """Hopanos, esteranos, pristano, fitano para correlação óleo-rocha"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C106" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:correlacaoOleoRocha a owl:Class ;
+    skos:prefLabel "CorrelacaoOleoRocha"@pt ;
+    rdfs:subClassOf geox:interpretationObject ;
+    skos:definition """Análise que associa óleo produzido à rocha geradora via biomarcadores"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C107" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m7:janelaDeGeracao a owl:Class ;
+    skos:prefLabel "JanelaDeGeracao"@pt ;
+    rdfs:subClassOf geox:geochemicalProperty ;
+    skos:definition """Faixa de Ro% em que ocorre geração de HC (0.5–2.0%)"""@pt ;
+    geox:moduleId "M7_geochem" ;
+    geox:internalId "C108" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+# ── Rocha e Petrofísica (M8_rock) ──────────────────────────────────────
+# System origin: GDA, Mineral Solver, RockFinder
+# Quantity-kind default: http://qudt.org/vocab/quantitykind/Porosity
+
+m8:litologia a owl:Class ;
+    skos:prefLabel "Litologia"@pt ;
+    rdfs:subClassOf geox:rockProperty ;
+    skos:definition """Classificação composicional da rocha (mineralógica e textural)"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C201" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:mineralogia a owl:Class ;
+    skos:prefLabel "Mineralogia"@pt ;
+    rdfs:subClassOf geox:rockProperty ;
+    skos:definition """Composição mineral identificada (FRX, XRD, Mineral Solver)"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C202" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:faciesSedimentar a owl:Class ;
+    skos:prefLabel "FaciesSedimentar"@pt ;
+    rdfs:subClassOf geox:geologicalObject ;
+    skos:definition """Unidade rochosa com características distintas — base de classificação de reservatório"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C203" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:tipoPorosidade a owl:Class ;
+    skos:prefLabel "TipoPorosidade"@pt ;
+    rdfs:subClassOf geox:reservoirProperty ;
+    skos:definition """Primária (intergranular), secundária (dissolução/fratura), vugular"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C204" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:tipoPorosidadeProperty a sosa:ObservableProperty ;
+    skos:prefLabel "TipoPorosidade (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Porosity> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:tipoPorosidadeValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "TipoPorosidade value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Porosity> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:sistemaFratura a owl:Class ;
+    skos:prefLabel "SistemaFratura"@pt ;
+    rdfs:subClassOf geox:rockStructure ;
+    skos:definition """Conjunto de fraturas naturais que afetam permeabilidade"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C205" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:sistemaFraturaProperty a sosa:ObservableProperty ;
+    skos:prefLabel "SistemaFratura (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Porosity> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:sistemaFraturaValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "SistemaFratura value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Porosity> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:analiseRocha a owl:Class ;
+    skos:prefLabel "AnaliseRocha"@pt ;
+    rdfs:subClassOf geox:analyticalObject ;
+    skos:definition """Análises laboratoriais de rocha (porosimetria, permeametria, MICP)"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C206" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:dolomitizacao a owl:Class ;
+    skos:prefLabel "Dolomitizacao"@pt ;
+    rdfs:subClassOf geox:diageneticProcess ;
+    skos:definition """Substituição de calcita por dolomita — afeta permeabilidade no pré-sal (Castagna)"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C207" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:dolomitizacaoProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Dolomitizacao (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Porosity> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:dolomitizacaoValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Dolomitizacao value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Porosity> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:modeloPetrofisico a owl:Class ;
+    skos:prefLabel "ModeloPetrofisico"@pt ;
+    rdfs:subClassOf geox:interpretationObject ;
+    skos:definition """Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C208" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:faciesDePerfuracao a owl:Class ;
+    skos:prefLabel "FaciesDePerfuracao"@pt ;
+    rdfs:subClassOf geox:operationalObject ;
+    skos:definition """Classificação litológica em tempo real durante perfuração"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C209" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m8:rockFinder a owl:Class ;
+    skos:prefLabel "RockFinder"@pt ;
+    rdfs:subClassOf geox:aIObject ;
+    skos:definition """IA Petrobras (GDA/ML) para sugestão automática de litologia a partir de perfis"""@pt ;
+    geox:moduleId "M8_rock" ;
+    geox:internalId "C210" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+# ── Geomecânica de Reservatório (M9_geomec) ──────────────────────────────────────
+# System origin: GEOMECBR, GERESIM, TrapTester, GDA
+# Quantity-kind default: http://qudt.org/vocab/quantitykind/Pressure
+
+m9:modeloGeomecanico1D a owl:Class ;
+    skos:prefLabel "ModeloGeomecanico1D"@pt ;
+    rdfs:subClassOf geox:geomechanicsObject ;
+    skos:definition """Modelo geomecânico ao longo de um poço (GEOMECBR)"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C301" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:modeloGeomecanico3D a owl:Class ;
+    skos:prefLabel "ModeloGeomecanico3D"@pt ;
+    rdfs:subClassOf geox:geomechanicsObject ;
+    skos:definition """Modelo volumétrico integrado ao modelo geológico (GERESIM)"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C302" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:campoTensionalInSitu a owl:Class ;
+    skos:prefLabel "CampoTensionalInSitu"@pt ;
+    rdfs:subClassOf geox:geomechanicsObject ;
+    skos:definition """Tensores Sv (vertical), SHmax (horiz. max), Shmin (horiz. min)"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C303" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:campoTensionalInSituProperty a sosa:ObservableProperty ;
+    skos:prefLabel "CampoTensionalInSitu (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:campoTensionalInSituValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "CampoTensionalInSitu value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:tensaoVertical a owl:Class ;
+    skos:prefLabel "TensaoVertical"@pt ;
+    rdfs:subClassOf geox:campoTensionalInSitu ;
+    skos:definition """Sv — sobrecarga calculada por integração da densidade"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C304" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:tensaoVerticalProperty a sosa:ObservableProperty ;
+    skos:prefLabel "TensaoVertical (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:tensaoVerticalValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "TensaoVertical value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:tensaoHorizontalMinima a owl:Class ;
+    skos:prefLabel "TensaoHorizontalMinima"@pt ;
+    rdfs:subClassOf geox:campoTensionalInSitu ;
+    skos:definition """Shmin — calibrada por LOT/XLOT/Mini-frac"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C305" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:tensaoHorizontalMaxima a owl:Class ;
+    skos:prefLabel "TensaoHorizontalMaxima"@pt ;
+    rdfs:subClassOf geox:campoTensionalInSitu ;
+    skos:definition """SHmax — orientada por breakouts e fraturas induzidas"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C306" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:pressaoDePoros a owl:Class ;
+    skos:prefLabel "PressaoDePoros"@pt ;
+    rdfs:subClassOf geox:geomechanicsObject ;
+    skos:definition """Pp — fundamental para tensão efetiva e janela de lama"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C307" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:pressaoDePorosProperty a sosa:ObservableProperty ;
+    skos:prefLabel "PressaoDePoros (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:pressaoDePorosValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "PressaoDePoros value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:propriedadeMecanicaRocha a owl:Class ;
+    skos:prefLabel "PropriedadeMecanicaRocha"@pt ;
+    rdfs:subClassOf geox:rockMechanicalProperty ;
+    skos:definition """UCS, E (Young), ν (Poisson), K (bulk), G (shear)"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C308" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:janelaDeLama a owl:Class ;
+    skos:prefLabel "JanelaDeLama"@pt ;
+    rdfs:subClassOf geox:drillingObject ;
+    skos:definition """Intervalo seguro: limInf=colapso, limSup=fratura/perda circulação"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C309" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:breakout a owl:Class ;
+    skos:prefLabel "Breakout"@pt ;
+    rdfs:subClassOf geox:ocorrenciaGeomecanica ;
+    skos:definition """Colapso compressivo na direção Shmin — caliper 4 braços ou FMI/UBI"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C310" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:fraturaInduzida a owl:Class ;
+    skos:prefLabel "FraturaInduzida"@pt ;
+    rdfs:subClassOf geox:ocorrenciaGeomecanica ;
+    skos:definition """Fratura criada por perfuração — orientada por SHmax"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C311" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:fraturaNatural a owl:Class ;
+    skos:prefLabel "FraturaNatural"@pt ;
+    rdfs:subClassOf geox:rockStructure ;
+    skos:definition """Aberta, mineralizada ou induzida"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C312" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:potencialSelanteFalha a owl:Class ;
+    skos:prefLabel "PotencialSelanteFalha"@pt ;
+    rdfs:subClassOf geox:faultProperty ;
+    skos:definition """Capacidade de selo — SGR, CSP, SSF (TrapTester/BEM)"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C313" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:zonaDeDanoDeFalha a owl:Class ;
+    skos:prefLabel "ZonaDeDanoDeFalha"@pt ;
+    rdfs:subClassOf geox:faultProperty ;
+    skos:definition """Volume rochoso adjacente à falha com permeabilidade alterada"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C314" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:zonaDeDanoDeFalhaProperty a sosa:ObservableProperty ;
+    skos:prefLabel "ZonaDeDanoDeFalha (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:zonaDeDanoDeFalhaValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "ZonaDeDanoDeFalha value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:compactacaoReservatorio a owl:Class ;
+    skos:prefLabel "CompactacaoReservatorio"@pt ;
+    rdfs:subClassOf geox:deformationModel ;
+    skos:definition """Compactação por queda de Pp durante produção — afeta φ/k"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C315" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:compactacaoReservatorioProperty a sosa:ObservableProperty ;
+    skos:prefLabel "CompactacaoReservatorio (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:compactacaoReservatorioValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "CompactacaoReservatorio value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:subsidenciaSuperficial a owl:Class ;
+    skos:prefLabel "SubsidenciaSuperficial"@pt ;
+    rdfs:subClassOf geox:deformationModel ;
+    skos:definition """Afundamento superficial por compactação subterrânea"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C316" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:subsidenciaSuperficialProperty a sosa:ObservableProperty ;
+    skos:prefLabel "SubsidenciaSuperficial (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:subsidenciaSuperficialValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "SubsidenciaSuperficial value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:ocorrenciaGeomecanica a owl:Class ;
+    skos:prefLabel "OcorrenciaGeomecanica"@pt ;
+    rdfs:subClassOf geox:operationalEvent ;
+    skos:definition """Breakouts, kick zones, lost circulation, stuck pipe"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C317" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m9:analiseImagemPocoGeomec a owl:Class ;
+    skos:prefLabel "AnaliseImagemPocoGeomec"@pt ;
+    rdfs:subClassOf geox:analyticalObject ;
+    skos:definition """Análise de imagens FMI/UBI para identificar breakouts e fraturas"""@pt ;
+    geox:moduleId "M9_geomec" ;
+    geox:internalId "C318" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+# ── Fluidos — Geoquímica e PVT (M10_fluidos) ──────────────────────────────────────
+# System origin: GEOQWIN, SIRR, LIMS Sample Manager, AIDA
+# Quantity-kind default: http://qudt.org/vocab/quantitykind/Density
+
+m10:amostra a owl:Class ;
+    skos:prefLabel "Amostra"@pt ;
+    skos:definition """Amostra de fluido/óleo/gás/água coletada para análise"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_AMOSTRA" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:amostradeleo a owl:Class ;
+    skos:prefLabel "Amostra de Óleo"@pt ;
+    skos:definition """Subclasse de Amostra — fluido oleoso"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_OLEO" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:amostradeGs a owl:Class ;
+    skos:prefLabel "Amostra de Gás"@pt ;
+    skos:definition """Subclasse de Amostra — fluido gasoso"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_GAS" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:amostradegua a owl:Class ;
+    skos:prefLabel "Amostra de Água"@pt ;
+    skos:definition """Subclasse de Amostra — água de formação"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_AGUA" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:cromatografiaGasosaGCFID a owl:Class ;
+    skos:prefLabel "Cromatografia Gasosa GC-FID"@pt ;
+    skos:definition """Whole Oil quantitativo C6–C35 — base da fingerprint geoquímica"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_GC_FID" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:gCMSSIM a owl:Class ;
+    skos:prefLabel "GC-MS SIM"@pt ;
+    skos:definition """GC + espectrometria de massas — biomarcadores (Pr/Ph, hopanos, esteranos)"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_GC_MS" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:sARA a owl:Class ;
+    skos:prefLabel "SARA"@pt ;
+    skos:definition """Saturados/Aromáticos/Resinas/Asfaltenos — viscosidade e risco de deposição"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_SARA" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:pVT a owl:Class ;
+    skos:prefLabel "PVT"@pt ;
+    skos:definition """Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_PVT" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:carburane a owl:Class ;
+    skos:prefLabel "Carburane"@pt ;
+    skos:definition """Análise de carbon-isotope individual em compostos (CSIA)"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_CARBURANE" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:classedeFluido a owl:Class ;
+    skos:prefLabel "Classe de Fluido"@pt ;
+    skos:definition """Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_CLASS_FLUIDO" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:classedeFluidoProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Classe de Fluido (property)"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:classedeFluidoValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Classe de Fluido value"@pt ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:anlisedeFluido a owl:Class ;
+    skos:prefLabel "Análise de Fluido"@pt ;
+    skos:definition """Conjunto genérico de análises sobre uma amostra"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_ANALISE" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+m10:artefatoAnaltico a owl:Class ;
+    skos:prefLabel "Artefato Analítico"@pt ;
+    skos:definition """Documento, relatório ou dataset gerado pelas análises"""@pt ;
+    geox:moduleId "M10_fluidos" ;
+    geox:internalId "CL_ARTEFATO" ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/modules> .
+
+# === EOF ===

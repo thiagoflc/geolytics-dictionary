@@ -624,10 +624,14 @@ export const ONTOPETRO_EDGES = [
 
   /* M7-M10 análises */
   { source: 'biomarcador',        target: 'correlacao-oleo-rocha', relation: 'enables',       relation_label: 'permite',                 style: 'solid' },
+  { source: 'biomarcador',        target: 'amostra-fluido',     relation: 'derived_from',     relation_label: 'extraído de',             style: 'dashed' },
   { source: 'gc-ms',              target: 'biomarcador',        relation: 'detects',          relation_label: 'detecta',                 style: 'solid' },
   { source: 'amostra-fluido',     target: 'pvt',                relation: 'undergoes',        relation_label: 'submetida a',             style: 'dashed' },
   { source: 'amostra-fluido',     target: 'sara',               relation: 'undergoes',        relation_label: 'submetida a',             style: 'dashed' },
   { source: 'pvt',                target: 'classe-fluido',      relation: 'classifies',       relation_label: 'classifica',              style: 'solid' },
+  { source: 'pvt',                target: 'reservatorio',       relation: 'characterizes',    relation_label: 'caracteriza fluido de',   style: 'solid' },
+  { source: 'correlacao-oleo-rocha', target: 'rocha-geradora',  relation: 'links_to',         relation_label: 'traça origem em',         style: 'solid' },
+  { source: 'classe-fluido',      target: 'reservatorio',       relation: 'characterizes',    relation_label: 'caracteriza',             style: 'dashed' },
   { source: 'modelo-petrofisico', target: 'reservatorio',       relation: 'characterizes',    relation_label: 'caracteriza',             style: 'solid' },
   { source: 'facies-sedimentar',  target: 'reservatorio',       relation: 'composes',         relation_label: 'compõe',                  style: 'solid' },
   { source: 'campo-tensional',    target: 'janela-lama',        relation: 'defines',          relation_label: 'define',                  style: 'solid' },
@@ -782,6 +786,13 @@ export const OSDU_EDGES = [
   { source: 'wellbore',     target: 'topo-formacional', relation: 'has_marker',       relation_label: 'tem marker',       style: 'dashed' },
   { source: 'formacao',     target: 'topo-formacional', relation: 'has_top_at',       relation_label: 'tem topo em',      style: 'solid' },
   { source: 'perfil-poco',  target: 'wellbore',         relation: 'measured_in',      relation_label: 'medida em',        style: 'solid' },
+
+  /* unidade-medida — metadado mandatório ANP (Res. 880/2022 / i-Engine XML) */
+  { source: 'amostra-fluido', target: 'unidade-medida', relation: 'qualified_by',     relation_label: 'qualificada por',  style: 'solid' },
+  { source: 'pvt',            target: 'unidade-medida', relation: 'expressed_in',     relation_label: 'expresso em',      style: 'solid' },
+  { source: 'i-engine',       target: 'unidade-medida', relation: 'enforces',         relation_label: 'valida e impõe',   style: 'solid' },
+  { source: 'bmp',            target: 'unidade-medida', relation: 'standardized_by',  relation_label: 'padronizado em',   style: 'dashed' },
+  { source: 'reservatorio',   target: 'unidade-medida', relation: 'characterized_with', relation_label: 'caracterizado em', style: 'dashed' },
 ];
 
 /* Alinhamento OSDU para os nós novos + alguns existentes que ainda têm null */
