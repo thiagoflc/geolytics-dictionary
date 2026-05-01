@@ -1,0 +1,173 @@
+# ============================================================================
+# Geolytics SHACL shapes — validation contracts
+# ============================================================================
+# Validates instance data against the Geolytics×GLOSIS integration patterns.
+# Run with pyshacl: pyshacl -s geolytics-shapes.ttl -d <data.ttl>
+# ============================================================================
+
+@prefix sh:       <http://www.w3.org/ns/shacl#> .
+@prefix qudt:     <http://qudt.org/schema/qudt/> .
+@prefix sosa:     <http://www.w3.org/ns/sosa/> .
+@prefix iso28258: <http://w3id.org/glosis/model/iso28258/2013/> .
+@prefix glosis_cl: <http://w3id.org/glosis/model/codelists/> .
+@prefix geox:     <https://geolytics.petrobras.com.br/dict/glosis-ext/> .
+@prefix pvt:      <https://geolytics.petrobras.com.br/dict/pvt-procedure/> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolytics.petrobras.com.br/dict/shapes>
+    a              owl:Ontology ;
+    owl:versionIRI <https://geolytics.petrobras.com.br/dict/shapes/1.0.0> ;
+    dct:title "Geolytics×GLOSIS validation shapes"@en ;
+    dct:description "SHACL shapes enforcing the Property/Value pattern, ISO 28258 depth invariants, and SOSA observation completeness."@en .
+
+# ── Shape 1: qudt:Quantity must have numericValue + unit ────────────────────
+
+geox:QuantityShape a sh:NodeShape ;
+    sh:targetClass qudt:Quantity ;
+    sh:property [
+        sh:path qudt:numericValue ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+        sh:message "qudt:Quantity must have exactly one qudt:numericValue (xsd:decimal)."@en ;
+    ] ;
+    sh:property [
+        sh:path qudt:unit ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "qudt:Quantity must have exactly one qudt:unit (IRI)."@en ;
+    ] ;
+    sh:property [
+        sh:path qudt:hasQuantityKind ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "qudt:Quantity should declare its qudt:hasQuantityKind."@en ;
+        sh:severity sh:Warning ;
+    ] .
+
+# ── Shape 2: ISO 28258 ProfileElement depth invariant (upper ≤ lower) ───────
+
+geox:ProfileElementDepthShape a sh:NodeShape ;
+    sh:targetClass iso28258:ProfileElement ;
+    sh:sparql [
+        sh:message "iso28258:ProfileElement.upperDepth must be ≤ lowerDepth (both in metres)."@en ;
+        sh:prefixes <https://geolytics.petrobras.com.br/dict/shapes> ;
+        sh:select """
+            PREFIX iso28258: <http://w3id.org/glosis/model/iso28258/2013/>
+            SELECT ?this ?upper ?lower WHERE {
+                ?this iso28258:ProfileElement.upperDepth ?upper ;
+                      iso28258:ProfileElement.lowerDepth ?lower .
+                FILTER (xsd:decimal(?upper) > xsd:decimal(?lower))
+            }
+        """ ;
+    ] ;
+    sh:property [
+        sh:path iso28258:ProfileElement.upperDepth ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path iso28258:ProfileElement.lowerDepth ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:decimal ;
+    ] ;
+    sh:property [
+        sh:path iso28258:ProfileElement.elementOfProfile ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "ProfileElement must reference its parent Profile via elementOfProfile."@en ;
+    ] .
+
+# ── Shape 3: SOSA Observation must have result + property + (optional) procedure ─
+
+geox:ObservationShape a sh:NodeShape ;
+    sh:targetClass sosa:Observation ;
+    sh:property [
+        sh:path sosa:hasResult ;
+        sh:minCount 1 ;
+        sh:message "sosa:Observation requires sosa:hasResult."@en ;
+    ] ;
+    sh:property [
+        sh:path sosa:observedProperty ;
+        sh:minCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "sosa:Observation requires sosa:observedProperty (IRI of an ObservableProperty)."@en ;
+    ] ;
+    sh:property [
+        sh:path sosa:usedProcedure ;
+        sh:minCount 1 ;
+        sh:severity sh:Warning ;
+        sh:message "sosa:Observation should reference sosa:usedProcedure (e.g. pvt:flashLiberation)."@en ;
+    ] ;
+    sh:property [
+        sh:path sosa:resultTime ;
+        sh:datatype xsd:dateTime ;
+        sh:severity sh:Warning ;
+        sh:message "sosa:Observation should include sosa:resultTime."@en ;
+    ] .
+
+# ── Shape 4: Lithology code must be from a registered scheme ────────────────
+
+geox:LithologyValueShape a sh:NodeShape ;
+    sh:targetSubjectsOf geox:hasLithology ;
+    sh:property [
+        sh:path geox:hasLithology ;
+        sh:nodeKind sh:IRI ;
+        sh:or (
+            [ sh:pattern "^http://w3id\\.org/glosis/model/codelists/lithologyValueCode-" ]
+            [ sh:pattern "^http://resource\\.geosciml\\.org/classifier/cgi/lith" ]
+            [ sh:pattern "^http://inspire\\.ec\\.europa\\.eu/codelist/LithologyValue/" ]
+        ) ;
+        sh:message "Lithology IRI must come from GLOSIS, CGI Simple Lithology or INSPIRE LithologyValue."@en ;
+    ] .
+
+# ── Shape 5: PVT field-data row must reference a procedure ──────────────────
+
+geox:PVTFieldDataShape a sh:NodeShape ;
+    sh:targetClass geox:PVTFieldData ;
+    sh:property [
+        sh:path geox:procedure ;
+        sh:minCount 1 ;
+        sh:class sosa:Procedure ;
+        sh:message "PVT field data must reference a sosa:Procedure (e.g. pvt:flashLiberation)."@en ;
+    ] ;
+    sh:property [
+        sh:path geox:wellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9].*-[A-Z]+-[0-9]+-[A-Z]+$" ;
+        sh:message "wellId must follow ANP pattern (e.g. 1-RJS-702-RJ)."@en ;
+        sh:severity sh:Warning ;
+    ] .
+
+# ── Shape 6: Crosswalk targets must use canonical SKOS predicates ───────────
+
+geox:CrosswalkShape a sh:NodeShape ;
+    sh:targetSubjectsOf skos:exactMatch ;
+    sh:property [
+        sh:path skos:exactMatch ;
+        sh:nodeKind sh:IRI ;
+        sh:message "skos:exactMatch must point to an IRI."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "skos:exactMatch is symmetric — flag for inverse triple if missing."@en ;
+        sh:prefixes <https://geolytics.petrobras.com.br/dict/shapes> ;
+        sh:select """
+            PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+            SELECT ?this ?other WHERE {
+                ?this skos:exactMatch ?other .
+                FILTER NOT EXISTS { ?other skos:exactMatch ?this }
+                FILTER (isIRI(?other))
+            }
+        """ ;
+        sh:severity sh:Info ;
+    ] .
+
+# === EOF ===

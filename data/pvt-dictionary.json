@@ -3,7 +3,14 @@
     "source": "SIRR — Sistema Integrado de Reservatórios Petrobras",
     "description": "Dicionário de campos PVT com completude real da base corporativa",
     "total_fields": 34,
-    "note": "Completude medida na base SIRR. Campos com < 10% são raridade analítica, não ausência de definição."
+    "note": "Completude medida na base SIRR. Campos com < 10% são raridade analítica, não ausência de definição.",
+    "qudt_annotations": {
+      "added_at": "2026-05-01T11:34:25.623Z",
+      "pattern_source": "GLOSIS v1.5.1 — http://w3id.org/glosis/model/",
+      "description": "Cada campo numérico recebe par {property_class, value_class} estilo GLOSIS e referências QUDT. Próximo passo: emitir TTL com owl:Restriction sobre sosa:hasResult / sosa:observedProperty.",
+      "fields_annotated": 18,
+      "fields_total": 34
+    }
   },
   "fields": [
     {
@@ -35,21 +42,48 @@
       "type": "float",
       "completeness_pct": 100,
       "unit": "m",
-      "description": "Topo do intervalo amostrado"
+      "description": "Topo do intervalo amostrado",
+      "qudt": {
+        "unit": "http://qudt.org/vocab/unit/M",
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Length"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Topo_mProperty",
+        "value_class": "geolytics:Topo_mValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Base(m)",
       "type": "float",
       "completeness_pct": 95.7,
       "unit": "m",
-      "description": "Base do intervalo amostrado"
+      "description": "Base do intervalo amostrado",
+      "qudt": {
+        "unit": "http://qudt.org/vocab/unit/M",
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Length"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Base_mProperty",
+        "value_class": "geolytics:Base_mValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Temperatura(°C)",
       "type": "float",
       "completeness_pct": 88.8,
       "unit": "°C",
-      "description": "Temperatura de reservatório"
+      "description": "Temperatura de reservatório",
+      "qudt": {
+        "unit": "http://qudt.org/vocab/unit/DEG_C",
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Temperature"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Temperatura_CProperty",
+        "value_class": "geolytics:Temperatura_CValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Tipo Amostragem",
@@ -97,96 +131,234 @@
       "name": "Fa Tanque",
       "type": "float",
       "completeness_pct": 1.95,
-      "description": "Fator de encolhimento em tanque — campo raríssimo (<2%)"
+      "description": "Fator de encolhimento em tanque — campo raríssimo (<2%)",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/DimensionlessRatio",
+        "note": "Shrinkage factor (dimensionless)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Fa_TanqueProperty",
+        "value_class": "geolytics:Fa_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Dens. Liq Tanque",
       "type": "float",
       "completeness_pct": 8.19,
-      "description": "Densidade do líquido em tanque"
+      "description": "Densidade do líquido em tanque",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Density",
+        "note": "Density — unit depends on context (gas: kg/m3 or air-relative; liquid: g/cm3)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Dens_Liq_TanqueProperty",
+        "value_class": "geolytics:Dens_Liq_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "RGL Tanque",
       "type": "float",
       "completeness_pct": 1.89,
-      "description": "Razão Gás-Líquido em tanque"
+      "description": "Razão Gás-Líquido em tanque",
+      "qudt": {
+        "unit": "https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB",
+        "hasQuantityKind": "https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio",
+        "note": "Gas–oil ratio; QUDT unit may need petroleum-engineering extension"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:RGL_TanqueProperty",
+        "value_class": "geolytics:RGL_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Dg liberado Tanque",
       "type": "float",
       "completeness_pct": 63.1,
-      "description": "Densidade do gás liberado em tanque"
+      "description": "Densidade do gás liberado em tanque",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Density",
+        "note": "Density — unit depends on context (gas: kg/m3 or air-relative; liquid: g/cm3)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Dg_liberado_TanqueProperty",
+        "value_class": "geolytics:Dg_liberado_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Grau API Tanque",
       "type": "float",
       "completeness_pct": 63.2,
       "unit": "°API",
-      "description": "Grau API medido em condições de tanque (superfície)"
+      "description": "Grau API medido em condições de tanque (superfície)",
+      "qudt": {
+        "unit": "https://geolytics.petrobras.com.br/dict/unit/DEG-API",
+        "hasQuantityKind": "https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity",
+        "note": "API gravity scale (special case — relative density)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Grau_API_TanqueProperty",
+        "value_class": "geolytics:Grau_API_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "RGO Tanque",
       "type": "float",
       "completeness_pct": 61.2,
       "unit": "scf/stb",
-      "description": "Razão Gás-Óleo em condições de tanque"
+      "description": "Razão Gás-Óleo em condições de tanque",
+      "qudt": {
+        "unit": "https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB",
+        "hasQuantityKind": "https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio",
+        "note": "Gas–oil ratio; QUDT unit may need petroleum-engineering extension"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:RGO_TanqueProperty",
+        "value_class": "geolytics:RGO_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Coef Exp Term Tanque",
       "type": "float",
       "completeness_pct": 56.6,
-      "description": "Coeficiente de expansão térmica do tanque"
+      "description": "Coeficiente de expansão térmica do tanque",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Coef_Exp_Term_TanqueProperty",
+        "value_class": "geolytics:Coef_Exp_Term_TanqueValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Dg Lab",
       "type": "float",
       "completeness_pct": 1.98,
-      "description": "Densidade do gás em laboratório — campo raríssimo"
+      "description": "Densidade do gás em laboratório — campo raríssimo",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Density",
+        "note": "Density — unit depends on context (gas: kg/m3 or air-relative; liquid: g/cm3)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Dg_LabProperty",
+        "value_class": "geolytics:Dg_LabValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Z Lab",
       "type": "float",
       "completeness_pct": 1.98,
-      "description": "Fator Z (compressibilidade) em laboratório — raríssimo"
+      "description": "Fator Z (compressibilidade) em laboratório — raríssimo",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/DimensionlessRatio",
+        "note": "Compressibility factor (dimensionless)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Z_LabProperty",
+        "value_class": "geolytics:Z_LabValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "RGL Lab",
       "type": "float",
       "completeness_pct": 1.98,
-      "description": "Razão Gás-Líquido em laboratório — raríssimo"
+      "description": "Razão Gás-Líquido em laboratório — raríssimo",
+      "qudt": {
+        "unit": "https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB",
+        "hasQuantityKind": "https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio",
+        "note": "Gas–oil ratio; QUDT unit may need petroleum-engineering extension"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:RGL_LabProperty",
+        "value_class": "geolytics:RGL_LabValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Dg Média Lib. Dif",
       "type": "float",
       "completeness_pct": 58.2,
-      "description": "Densidade do gás média na liberação diferencial"
+      "description": "Densidade do gás média na liberação diferencial",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Density",
+        "note": "Density — unit depends on context (gas: kg/m3 or air-relative; liquid: g/cm3)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Dg_Média_Lib_DifProperty",
+        "value_class": "geolytics:Dg_Média_Lib_DifValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Grau API Óleo Lib. Dif",
       "type": "float",
       "completeness_pct": 77.4,
       "unit": "°API",
-      "description": "Grau API do óleo residual na liberação diferencial"
+      "description": "Grau API do óleo residual na liberação diferencial",
+      "qudt": {
+        "unit": "https://geolytics.petrobras.com.br/dict/unit/DEG-API",
+        "hasQuantityKind": "https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity",
+        "note": "API gravity scale (special case — relative density)"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Grau_API_Óleo_Lib_DifProperty",
+        "value_class": "geolytics:Grau_API_Óleo_Lib_DifValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Temperatura ºC Lib. Dif",
       "type": "float",
       "completeness_pct": 58.2,
       "unit": "°C",
-      "description": "Temperatura da liberação diferencial"
+      "description": "Temperatura da liberação diferencial",
+      "qudt": {
+        "unit": "http://qudt.org/vocab/unit/DEG_C",
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Temperature"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Temperatura_C_Lib_DifProperty",
+        "value_class": "geolytics:Temperatura_C_Lib_DifValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Coef. Exp. Term. Lib. Dif",
       "type": "float",
       "completeness_pct": 55.2,
-      "description": "Coef. expansão térmica na liberação diferencial"
+      "description": "Coef. expansão térmica na liberação diferencial",
+      "qudt": {
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Coef_Exp_Term_Lib_DifProperty",
+        "value_class": "geolytics:Coef_Exp_Term_Lib_DifValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Press. do C.Exp.Term.Lib.Dif",
       "type": "float",
       "completeness_pct": 73.9,
       "unit": "psi",
-      "description": "Pressão do coef. expansão térmica — proxy Psat"
+      "description": "Pressão do coef. expansão térmica — proxy Psat",
+      "qudt": {
+        "unit": "http://qudt.org/vocab/unit/PSI",
+        "hasQuantityKind": "http://qudt.org/vocab/quantitykind/Pressure"
+      },
+      "sosa_pattern": {
+        "property_class": "geolytics:Press_do_C_Exp_Term_Lib_DifProperty",
+        "value_class": "geolytics:Press_do_C_Exp_Term_Lib_DifValue",
+        "pattern": "GLOSIS-style: a `*Property` (sosa:ObservableProperty) paired with a `*Value` (qudt:Quantity with qudt:numericValue + qudt:unit)."
+      }
     },
     {
       "name": "Observação",

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T15:31:13.260Z",
+    "description": "Documentação dos vocabulários CGI/IUGS Lithology disponíveis e mapeamento Geolytics atual.",
+    "note": "Geolytics usa primariamente CGI Simple Lithology 201211 (data/cgi-lithology.json — 437 conceitos). CGI 2016.01 SimpleLithology (266 conceitos hierárquicos) é alvo secundário para conceitos faltantes (ex.: doleritic_rock para IB3)."
+  },
+  "cgi_versions": [
+    {
+      "version": "201211",
+      "iri_base": "http://resource.geosciml.org/classifier/cgi/lithOntology/",
+      "concepts": 437,
+      "structure": "Inclui QAPF (igneous classification grid) — granular para rochas magmáticas",
+      "source_local": "data/cgi-lithology.json",
+      "coverage_in_geolytics": "69 GLOSIS lithology concepts mapped",
+      "use_case": "Default — vocabulário primário de litologia em Layer 1b"
+    },
+    {
+      "version": "2016.01",
+      "iri_base": "http://resource.geosciml.org/classifier/cgi/lithology/",
+      "scheme_iri": "http://resource.geosciml.org/classifierscheme/cgi/2016.01/simplelithology",
+      "concepts": 266,
+      "structure": "Hierarchical — broader/narrower/related com skos:example listando termos comuns (e.g. doleritic_rock includes dolerite/diabase/microdiorite/microgabbro)",
+      "source_url": "https://github.com/CGI-IUGS/cgi-vocabs/blob/master/vocabularies/geosciml/simplelithology.ttl",
+      "coverage_in_geolytics": "1 specific concept (IB3 dolerite → doleritic_rock)",
+      "use_case": "Fallback for concepts missing from 201211 — query when 201211 returns no match"
+    }
+  ],
+  "cross_version_notes": [
+    {
+      "glosis": "IB3 dolerite",
+      "decision": "Mapped to CGI 2016.01 doleritic_rock (skos:example \"dolerite\") because 201211 lacks dedicated dolerite concept",
+      "iri": "http://resource.geosciml.org/classifier/cgi/lithology/doleritic_rock"
+    },
+    {
+      "glosis_pattern": "aggregator concepts (II1, MA2, MA3, MB1, SC1, SC2, SO1)",
+      "decision": "Use 1:N mapping over 201211 individual lithotypes (existing approach in lithology-crosswalk-cgi.json)",
+      "rationale": "201211 has finer lithotype granularity than 2016.01 — better for these aggregators"
+    }
+  ],
+  "recommended_query_pattern": {
+    "description": "When mapping a GLOSIS lithology code to CGI, query both vocabularies in fallback order:",
+    "sparql": "# Try 201211 first\nSELECT ?cgi_iri ?label WHERE {\n  glosis_cl:lithologyValueCode-XX skos:exactMatch|skos:closeMatch ?cgi_iri .\n  ?cgi_iri rdfs:label ?label .\n} LIMIT 1\n# If no result, try 2016.01:\nSELECT ?cgi_iri ?label WHERE {\n  glosis_cl:lithologyValueCode-XX skos:closeMatch ?cgi_iri .\n  ?cgi_iri rdfs:isDefinedBy <http://resource.geosciml.org/classifierscheme/cgi/2016.01/simplelithology> .\n}"
+  }
+}

@@ -10,7 +10,18 @@
       "M9_geomec",
       "M10_fluidos"
     ],
-    "publication_policy": "Apenas definições conceituais. Não inclui dados Sigilo=Interno."
+    "publication_policy": "Apenas definições conceituais. Não inclui dados Sigilo=Interno.",
+    "glosis_pattern_applied": {
+      "added_at": "2026-05-01T11:34:43.651Z",
+      "pattern_source": "GLOSIS v1.5.1 — http://w3id.org/glosis/model/",
+      "applies_to": [
+        "M7_geochem",
+        "M8_rock",
+        "M9_geomec",
+        "M10_fluidos"
+      ],
+      "description": "Cada módulo recebe um bloco qudt_pattern com hints de QUDT + SOSA Property/Value style."
+    }
   },
   "M7_geochem": {
     "label": "Geoquímica Orgânica e Inorgânica",
@@ -27,7 +38,12 @@
         "id": "C102",
         "name": "RochaGeneradora",
         "superclass": "FormacaoGeologica",
-        "description": "Rocha rica em matéria orgânica capaz de gerar HC (source rock)"
+        "description": "Rocha rica em matéria orgânica capaz de gerar HC (source rock)",
+        "sosa_pattern": {
+          "property_class": "geolytics:RochaGeneradoraProperty",
+          "value_class": "geolytics:RochaGeneradoraValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/MassFraction"
+        }
       },
       {
         "id": "C103",
@@ -129,7 +145,18 @@
         "unit": "—",
         "description": "Razão metano/pentanos — separa gases secos de úmidos"
       }
-    ]
+    ],
+    "qudt_pattern": {
+      "pattern_source": "GLOSIS v1.5.1",
+      "quantity_kind_default": "http://qudt.org/vocab/quantitykind/MassFraction",
+      "note": "Geochemistry: mass fractions, %, ppm, mg/g — use cmol/L (glosis_u:CentiMOL-PER-L) for cation exchange.",
+      "instructions": [
+        "Para cada classe quantitativa, criar par {NameProperty, NameValue}.",
+        "NameProperty a sosa:ObservableProperty.",
+        "NameValue a qudt:Quantity ; qudt:numericValue ?v ; qudt:unit ?u .",
+        "Observation a glosis_ob:GL_Observation (ou geolytics:Observation) ; sosa:hasResult ?value ; sosa:observedProperty ?property ."
+      ]
+    }
   },
   "M8_rock": {
     "label": "Rocha e Petrofísica",
@@ -158,13 +185,23 @@
         "id": "C204",
         "name": "TipoPorosidade",
         "superclass": "ReservoirProperty",
-        "description": "Primária (intergranular), secundária (dissolução/fratura), vugular"
+        "description": "Primária (intergranular), secundária (dissolução/fratura), vugular",
+        "sosa_pattern": {
+          "property_class": "geolytics:TipoPorosidadeProperty",
+          "value_class": "geolytics:TipoPorosidadeValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Porosity"
+        }
       },
       {
         "id": "C205",
         "name": "SistemaFratura",
         "superclass": "RockStructure",
-        "description": "Conjunto de fraturas naturais que afetam permeabilidade"
+        "description": "Conjunto de fraturas naturais que afetam permeabilidade",
+        "sosa_pattern": {
+          "property_class": "geolytics:SistemaFraturaProperty",
+          "value_class": "geolytics:SistemaFraturaValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Porosity"
+        }
       },
       {
         "id": "C206",
@@ -176,7 +213,12 @@
         "id": "C207",
         "name": "Dolomitizacao",
         "superclass": "DiageneticProcess",
-        "description": "Substituição de calcita por dolomita — afeta permeabilidade no pré-sal (Castagna)"
+        "description": "Substituição de calcita por dolomita — afeta permeabilidade no pré-sal (Castagna)",
+        "sosa_pattern": {
+          "property_class": "geolytics:DolomitizacaoProperty",
+          "value_class": "geolytics:DolomitizacaoValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Porosity"
+        }
       },
       {
         "id": "C208",
@@ -264,7 +306,18 @@
         "unit": "—",
         "description": "Litologia inferida por ML (RockFinder/GDA) — Petrobras"
       }
-    ]
+    ],
+    "qudt_pattern": {
+      "pattern_source": "GLOSIS v1.5.1",
+      "quantity_kind_default": "http://qudt.org/vocab/quantitykind/Porosity",
+      "note": "Rock physics: bulk density (g/cm3 or kg/m3), porosity (fraction), permeability (mD = milliDarcy).",
+      "instructions": [
+        "Para cada classe quantitativa, criar par {NameProperty, NameValue}.",
+        "NameProperty a sosa:ObservableProperty.",
+        "NameValue a qudt:Quantity ; qudt:numericValue ?v ; qudt:unit ?u .",
+        "Observation a glosis_ob:GL_Observation (ou geolytics:Observation) ; sosa:hasResult ?value ; sosa:observedProperty ?property ."
+      ]
+    }
   },
   "M9_geomec": {
     "label": "Geomecânica de Reservatório",
@@ -288,13 +341,23 @@
         "id": "C303",
         "name": "CampoTensionalInSitu",
         "superclass": "GeomechanicsObject",
-        "description": "Tensores Sv (vertical), SHmax (horiz. max), Shmin (horiz. min)"
+        "description": "Tensores Sv (vertical), SHmax (horiz. max), Shmin (horiz. min)",
+        "sosa_pattern": {
+          "property_class": "geolytics:CampoTensionalInSituProperty",
+          "value_class": "geolytics:CampoTensionalInSituValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Pressure"
+        }
       },
       {
         "id": "C304",
         "name": "TensaoVertical",
         "superclass": "CampoTensionalInSitu",
-        "description": "Sv — sobrecarga calculada por integração da densidade"
+        "description": "Sv — sobrecarga calculada por integração da densidade",
+        "sosa_pattern": {
+          "property_class": "geolytics:TensaoVerticalProperty",
+          "value_class": "geolytics:TensaoVerticalValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Pressure"
+        }
       },
       {
         "id": "C305",
@@ -312,7 +375,12 @@
         "id": "C307",
         "name": "PressaoDePoros",
         "superclass": "GeomechanicsObject",
-        "description": "Pp — fundamental para tensão efetiva e janela de lama"
+        "description": "Pp — fundamental para tensão efetiva e janela de lama",
+        "sosa_pattern": {
+          "property_class": "geolytics:PressaoDePorosProperty",
+          "value_class": "geolytics:PressaoDePorosValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Pressure"
+        }
       },
       {
         "id": "C308",
@@ -354,19 +422,34 @@
         "id": "C314",
         "name": "ZonaDeDanoDeFalha",
         "superclass": "FaultProperty",
-        "description": "Volume rochoso adjacente à falha com permeabilidade alterada"
+        "description": "Volume rochoso adjacente à falha com permeabilidade alterada",
+        "sosa_pattern": {
+          "property_class": "geolytics:ZonaDeDanoDeFalhaProperty",
+          "value_class": "geolytics:ZonaDeDanoDeFalhaValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Pressure"
+        }
       },
       {
         "id": "C315",
         "name": "CompactacaoReservatorio",
         "superclass": "DeformationModel",
-        "description": "Compactação por queda de Pp durante produção — afeta φ/k"
+        "description": "Compactação por queda de Pp durante produção — afeta φ/k",
+        "sosa_pattern": {
+          "property_class": "geolytics:CompactacaoReservatorioProperty",
+          "value_class": "geolytics:CompactacaoReservatorioValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Pressure"
+        }
       },
       {
         "id": "C316",
         "name": "SubsidenciaSuperficial",
         "superclass": "DeformationModel",
-        "description": "Afundamento superficial por compactação subterrânea"
+        "description": "Afundamento superficial por compactação subterrânea",
+        "sosa_pattern": {
+          "property_class": "geolytics:SubsidenciaSuperficialProperty",
+          "value_class": "geolytics:SubsidenciaSuperficialValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Pressure"
+        }
       },
       {
         "id": "C317",
@@ -494,7 +577,18 @@
         "to": "M7_geochem",
         "connection": "Falhas extensionais controlam migração de HC e composição das águas de formação"
       }
-    ]
+    ],
+    "qudt_pattern": {
+      "pattern_source": "GLOSIS v1.5.1",
+      "quantity_kind_default": "http://qudt.org/vocab/quantitykind/Pressure",
+      "note": "Geomechanics: stress (psi/MPa), Young modulus (GPa), Poisson ratio (dimensionless).",
+      "instructions": [
+        "Para cada classe quantitativa, criar par {NameProperty, NameValue}.",
+        "NameProperty a sosa:ObservableProperty.",
+        "NameValue a qudt:Quantity ; qudt:numericValue ?v ; qudt:unit ?u .",
+        "Observation a glosis_ob:GL_Observation (ou geolytics:Observation) ; sosa:hasResult ?value ; sosa:observedProperty ?property ."
+      ]
+    }
   },
   "M10_fluidos": {
     "label": "Fluidos — Geoquímica e PVT",
@@ -551,7 +645,12 @@
       {
         "id": "CL_CLASS_FLUIDO",
         "name": "Classe de Fluido",
-        "description": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO"
+        "description": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO",
+        "sosa_pattern": {
+          "property_class": "geolytics:Classe de FluidoProperty",
+          "value_class": "geolytics:Classe de FluidoValue",
+          "quantity_kind_hint": "http://qudt.org/vocab/quantitykind/Density"
+        }
       },
       {
         "id": "CL_ANALISE",
@@ -636,6 +735,17 @@
         "journey": "Correlacionar",
         "question": "O que se relaciona com o quê (óleo-óleo, óleo-rocha)?"
       }
-    ]
+    ],
+    "qudt_pattern": {
+      "pattern_source": "GLOSIS v1.5.1",
+      "quantity_kind_default": "http://qudt.org/vocab/quantitykind/Density",
+      "note": "PVT/fluids: pressure (psi), temperature (°C), density (g/cm3), GOR (scf/stb), Bo (rbbl/stb).",
+      "instructions": [
+        "Para cada classe quantitativa, criar par {NameProperty, NameValue}.",
+        "NameProperty a sosa:ObservableProperty.",
+        "NameValue a qudt:Quantity ; qudt:numericValue ?v ; qudt:unit ?u .",
+        "Observation a glosis_ob:GL_Observation (ou geolytics:Observation) ; sosa:hasResult ?value ; sosa:observedProperty ?property ."
+      ]
+    }
   }
 }

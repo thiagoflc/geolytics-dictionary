@@ -1,0 +1,1619 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T11:47:52.251Z",
+    "description": "4 codelists do INSPIRE Geomorphology/GeoSciML republicados — usado como vocabulário-alvo para mapear classes de gênese sedimentar GLOSIS U* (não cobertas por CGI Simple Lithology).",
+    "sources": [
+      "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue (38 conceitos)",
+      "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue (16 conceitos)",
+      "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue (166 conceitos — republicação CGI/IUGS)",
+      "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue (7 conceitos)"
+    ],
+    "license": "INSPIRE Registry — EU Public Domain",
+    "counts": {
+      "natural": 38,
+      "anthropogenic": 16,
+      "event_environment": 166,
+      "composition_part_role": 7
+    }
+  },
+  "data": {
+    "natural": {
+      "naturalGeomorphologicFeature": {
+        "id": "naturalGeomorphologicFeature",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/naturalGeomorphologicFeature",
+        "prefLabel": "natural geomorphologic feature",
+        "definition": "A geomorphologic feature produced by the natural dynamics.",
+        "broader": ""
+      },
+      "drainagePattern": {
+        "id": "drainagePattern",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/drainagePattern",
+        "prefLabel": "drainage pattern",
+        "definition": "The configuration or arrangement of stream courses in an area, including gullies or first-order channelized flow areas, higher order tributaries, and main streams.",
+        "broader": ""
+      },
+      "constructionalFeature": {
+        "id": "constructionalFeature",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/constructionalFeature",
+        "prefLabel": "constructional feature",
+        "definition": "Site of a landform that owes its origin, form, position, or general character to depositional (aggradational) processes, such as the accumulation of sediment",
+        "broader": ""
+      },
+      "destructionalFeature": {
+        "id": "destructionalFeature",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/destructionalFeature",
+        "prefLabel": "destructional feature",
+        "definition": "Site of a landform that owes its origin, form, position, or general character to the removal of material by erosion and weathering (degradation) processes resulting from the wearing-down or away of the land surface.",
+        "broader": ""
+      },
+      "degradationFeature": {
+        "id": "degradationFeature",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/degradationFeature",
+        "prefLabel": "degradation feature",
+        "definition": "A geomorphologic feature resulting from the wearing down or away, and the general lowering or reduction, of the Earth's surface by natural processes of weathering and erosion, and which may infer the processes of transportation of sediment.",
+        "broader": ""
+      },
+      "relic": {
+        "id": "relic",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/relic",
+        "prefLabel": "relic",
+        "definition": "A landform that has survived decay or disintegration, or one that has been left behind after the disappearance of the greater part of its substance such as a remnant island.",
+        "broader": ""
+      },
+      "exhumedFeature": {
+        "id": "exhumedFeature",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/exhumedFeature",
+        "prefLabel": "exhumed feature",
+        "definition": "Formerly buried landforms, geomorphologic surfaces, or paleosols that have been re-exposed by erosion of the covering mantle.",
+        "broader": ""
+      },
+      "buriedFeature": {
+        "id": "buriedFeature",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/buriedFeature",
+        "prefLabel": "buried feature",
+        "definition": "Landforms, geomorphologic surfaces, or paleosols covered by younger sediments.",
+        "broader": ""
+      },
+      "pediment": {
+        "id": "pediment",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/pediment",
+        "prefLabel": "pediment",
+        "definition": "A gently sloping erosional surface developed at the foot of a receding hill or mountain slope, commonly with a slightly concave-upward profile, that cross-cuts rock or sediment strata that extend beneath adjacent uplands.",
+        "broader": ""
+      },
+      "erosional": {
+        "id": "erosional",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/erosional",
+        "prefLabel": "erosional features",
+        "definition": "A land surface shaped by the action of erosion, especially by running water.",
+        "broader": ""
+      },
+      "hill": {
+        "id": "hill",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/hill",
+        "prefLabel": "hill",
+        "definition": "A generic term for an elevated area of the land surface, rising at least 30 metres to as much as 300 metres above surrounding lowlands, usually with a nominal summit area relative to bounding slopes, a well-defined, rounded outline and slopes that generally exceed 15 percent.",
+        "broader": ""
+      },
+      "interfluve": {
+        "id": "interfluve",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/interfluve",
+        "prefLabel": "interfluve",
+        "definition": "A geomorphologic component of hills consisting of the uppermost, comparatively level or gently sloped area of a hill; shoulders of back wearing hill slopes can narrow the upland or merge resulting in a strongly convex shape.",
+        "broader": ""
+      },
+      "crest": {
+        "id": "crest",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/crest",
+        "prefLabel": "crest",
+        "definition": "A geomorphologic component of hills consisting of the convex slopes (perpendicular to the contour) that form the narrow, roughly linear top area of a hill, ridge, or other upland where shoulders have converged to the extent that little or no summit remains; dominated by erosion, slope wash and mass movement processes and sediments",
+        "broader": ""
+      },
+      "headSlope": {
+        "id": "headSlope",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/headSlope",
+        "prefLabel": "head slope",
+        "definition": "A geomorphologic component of hills consisting of a laterally concave area of a hillside, especially at the head of a drainage way, resulting in converging overland water flow.",
+        "broader": ""
+      },
+      "sideSlope": {
+        "id": "sideSlope",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/sideSlope",
+        "prefLabel": "side slope",
+        "definition": "A geomorphologic component of hills consisting of a laterally planar area of a hillside, resulting in predominantly parallel overland water flow. Contour lines generally form straight lines.",
+        "broader": ""
+      },
+      "noseSlope": {
+        "id": "noseSlope",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/noseSlope",
+        "prefLabel": "nose slope",
+        "definition": "A geomorphologic component of hills consisting of the projecting end (laterally convex area) of a hillside, resulting in predominantly divergent overland water flow; contour lines generally form convex curves.",
+        "broader": ""
+      },
+      "freeFace": {
+        "id": "freeFace",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/freeFace",
+        "prefLabel": "free face",
+        "definition": "A geomorphologic component of hills and mountains consisting of an outcrop of bare rock that sheds rock fragments and other sediments to, and commonly stands more steeply than the angle of repose of, the colluvial slope immediately below; most commonly found on shoulder and back slope positions, and can comprise part or all of a nose slope or side slope.",
+        "broader": ""
+      },
+      "baseSlope": {
+        "id": "baseSlope",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/baseSlope",
+        "prefLabel": "base slope",
+        "definition": "A geomorphologic component of hills consisting of the concave to linear slope (perpendicular to the contour) which, regardless of the lateral shape, is an area that forms an apron or wedge at the bottom of a hillside dominated by colluvial and slope wash processes and sediments",
+        "broader": ""
+      },
+      "mountain": {
+        "id": "mountain",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/mountain",
+        "prefLabel": "mountain",
+        "definition": "A generic term for an elevated area of the land surface, rising more than 300 metres above surrounding lowlands, usually with a nominal summit area relative to bounding slopes and generally with steep sides (greater than 25 percent slope) with or without considerable bare-rock exposed.",
+        "broader": ""
+      },
+      "mountaintop": {
+        "id": "mountaintop",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/mountaintop",
+        "prefLabel": "mountaintop",
+        "definition": "A geomorphologic component of mountains consisting of the uppermost, comparatively level or gently sloped area of mountains, characterized by relatively short, simple slopes composed of bare rock, residuum, or short-transport colluvial sediments.",
+        "broader": ""
+      },
+      "mountainslope": {
+        "id": "mountainslope",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/mountainslope",
+        "prefLabel": "mountainslope",
+        "definition": "A part of a mountain between the summit and the foot.",
+        "broader": ""
+      },
+      "mountainflank": {
+        "id": "mountainflank",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/mountainflank",
+        "prefLabel": "mountainflank",
+        "definition": "A geomorphologic component of mountains characterized by very long, complex back slopes with comparatively high slope gradients and composed of highly-diverse colluvial sediment mantles, rock outcrops or structural benches.",
+        "broader": ""
+      },
+      "mountainbase": {
+        "id": "mountainbase",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/mountainbase",
+        "prefLabel": "mountainbase",
+        "definition": "A geomorphologic component of mountains consisting of the strongly to slightly concave colluvial apron or wedge at the bottom of mountain slopes.",
+        "broader": ""
+      },
+      "depression": {
+        "id": "depression",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/depression",
+        "prefLabel": "depression",
+        "definition": "Any relatively sunken part of the Earth's surface; especially a low-lying area surrounded by higher ground.",
+        "broader": ""
+      },
+      "plain": {
+        "id": "plain",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/plain",
+        "prefLabel": "plain",
+        "definition": "Any flat area, large or small, at a low elevation; specifically an extensive region of comparatively smooth and level or gently undulaing land, having few or no prominent surface irregularities but sometimes having a considerable slope, and usually at a low elevation with reference to surrounding areas.",
+        "broader": ""
+      },
+      "tectonicStructural": {
+        "id": "tectonicStructural",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/tectonicStructural",
+        "prefLabel": "tectonic and structural features",
+        "definition": "Geomorphologic landscapes and landforms related to regional or local bedrock structures, or crustal movement; and geomorphologic landscapes and landforms related dominantly to water erosion but excluding perennial, channel flow (i.e. fluvial, glaciofluvial), or eolian erosion.",
+        "broader": ""
+      },
+      "volcanic": {
+        "id": "volcanic",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/volcanic",
+        "prefLabel": "volcanic features",
+        "definition": "Geomorphologic landscapes and landforms related to the deep seated (igneous) processes by which magma and associated gases rise through the crust and are extruded onto the earth's surface and into the atmosphere.",
+        "broader": ""
+      },
+      "hydrothermal": {
+        "id": "hydrothermal",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/hydrothermal",
+        "prefLabel": "hydrothermal features",
+        "definition": "Geomorphologic landscapes and landforms related to hydrothermal processes.",
+        "broader": ""
+      },
+      "erosionSurface": {
+        "id": "erosionSurface",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/erosionSurface",
+        "prefLabel": "erosion surface",
+        "definition": "Geomorphologic landscapes and landforms related dominantly to water erosion but excluding perennial channel flow (i.e. fluvial, glaciofluvial) or eolian erosion.",
+        "broader": ""
+      },
+      "slopeGravitational": {
+        "id": "slopeGravitational",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/slopeGravitational",
+        "prefLabel": "slope and gravitational features",
+        "definition": "Geomorphologic landscapes and landforms related to slope environments; geomorphologic landscapes and landforms developed under the action of the gravitational force.",
+        "broader": ""
+      },
+      "nivalPeriglacialPermafrost": {
+        "id": "nivalPeriglacialPermafrost",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/nivalPeriglacialPermafrost",
+        "prefLabel": "nival, periglacial and permafrost features",
+        "definition": "Geomorphologic landscapes and landforms related to snow, non-glacial, cold climate environments; geomorphologic landscapes and landforms occurring in the vicinity of glaciers and ice sheets; geomorphologic landscapes and landforms related to ground, soil, or rock that remains at or below 0º C for at least two years.",
+        "broader": ""
+      },
+      "glacial": {
+        "id": "glacial",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/glacial",
+        "prefLabel": "glacial, glaciofluvial, glaciolacustrine and glaciomarine features",
+        "definition": "Geomorphologic landscapes and landforms related to to glacial, glaciofluvial, glaciolacustrine and glaciomarine environments.",
+        "broader": ""
+      },
+      "eolian": {
+        "id": "eolian",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/eolian",
+        "prefLabel": "eolian features",
+        "definition": "Geomorphologic landscapes and landforms related to wind-dominated environments.",
+        "broader": ""
+      },
+      "marineLittoralCoastalWetland": {
+        "id": "marineLittoralCoastalWetland",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/marineLittoralCoastalWetland",
+        "prefLabel": "marine, littoral and coastal wetlands features",
+        "definition": "Geomorphologic landscapes and landforms related to wave or tidal dynamics developed in marine, shallow marine, near-shore and littoral zone environments, and those related to vegetated and / or shallow wet areas",
+        "broader": ""
+      },
+      "karstChemicalWeathering": {
+        "id": "karstChemicalWeathering",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/karstChemicalWeathering",
+        "prefLabel": "karst and chemical weathering features",
+        "definition": "Geomorphologic landscapes and landforms dominated by mineral dissolution, and commonly, subsurface drainage.",
+        "broader": ""
+      },
+      "alluvialFluvial": {
+        "id": "alluvialFluvial",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/alluvialFluvial",
+        "prefLabel": "alluvial and fluvial features",
+        "definition": "Geomorphologic landscapes and landforms dominantly related to concentrated water flow (channel flow).",
+        "broader": ""
+      },
+      "lacustrine": {
+        "id": "lacustrine",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/lacustrine",
+        "prefLabel": "lacustrine features",
+        "definition": "Geomorphologic landscapes and landforms related to inland permanent water bodies (lakes).",
+        "broader": ""
+      },
+      "impact": {
+        "id": "impact",
+        "iri": "http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/impact",
+        "prefLabel": "impact features",
+        "definition": "Geomorphologic landscapes and landforms related to the impact of extraterrestrial material on the Earth's surface.",
+        "broader": ""
+      }
+    },
+    "anthrop": {
+      "artificialCollapsedDepression": {
+        "id": "artificialCollapsedDepression",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/artificialCollapsedDepression",
+        "prefLabel": "artificial collapsed depression",
+        "definition": "A collapse basin, commonly a closed depression, which is the direct result of surficial subsidence associated with subsurface mining or tunneling.",
+        "broader": ""
+      },
+      "artificialDrainage": {
+        "id": "artificialDrainage",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/artificialDrainage",
+        "prefLabel": "artificial drainage",
+        "definition": "Human-made network built primarily to lower or control the local water table.",
+        "broader": ""
+      },
+      "artificialLevee": {
+        "id": "artificialLevee",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/artificialLevee",
+        "prefLabel": "artificial levee",
+        "definition": "An artificial embankment constructed along the bank of a watercourse or an arm of the sea, to protect land from inundation or to confine streamflow to its channel.",
+        "broader": ""
+      },
+      "dredgedChannel": {
+        "id": "dredgedChannel",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/dredgedChannel",
+        "prefLabel": "dredged channel",
+        "definition": "A roughly linear, deep water area formed by a dredging operation for navigation purposes",
+        "broader": ""
+      },
+      "dump": {
+        "id": "dump",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/dump",
+        "prefLabel": "dump",
+        "definition": "An area of smooth or uneven accumulations or piles of waste rock, earthy material, or general refuse that without major reclamation are incapable of supporting plants.",
+        "broader": ""
+      },
+      "fill": {
+        "id": "fill",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/fill",
+        "prefLabel": "fill",
+        "definition": "Human-constructed deposits of natural earth materials and/or waste materials used to fill a depression, to extend shore land into a body of water, or in building dams.",
+        "broader": ""
+      },
+      "impactCraterAnthropogenic": {
+        "id": "impactCraterAnthropogenic",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/impactCraterAnthropogenic",
+        "prefLabel": "impact crater (anthropogenic)",
+        "definition": "A generally circular or elliptical depression formed by hypervelocity impact of an experimental projectile or ordnance into earthy or rock material.",
+        "broader": ""
+      },
+      "landfillSite": {
+        "id": "landfillSite",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/landfillSite",
+        "prefLabel": "landfill site",
+        "definition": "Waste disposal site used for the controlled deposit of the waste onto or into land.",
+        "broader": ""
+      },
+      "levelledLand": {
+        "id": "levelledLand",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/levelledLand",
+        "prefLabel": "levelled land",
+        "definition": "A land area, usually a field, that has been mechanically flattened or smoothed to facilitate management practices such as flood irrigation.",
+        "broader": ""
+      },
+      "openpitMine": {
+        "id": "openpitMine",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/openpitMine",
+        "prefLabel": "openpit mine",
+        "definition": "A relatively large depression resulting from the excavation of material and redistribution of overburden associated with surficial mining operations.",
+        "broader": ""
+      },
+      "pit": {
+        "id": "pit",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/pit",
+        "prefLabel": "pit",
+        "definition": "A depression, ditch or pit excavated to furnish gravel, sand or other materials for roads or other construction purposes; a type of borrow pit.",
+        "broader": ""
+      },
+      "quarry": {
+        "id": "quarry",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/quarry",
+        "prefLabel": "quarry",
+        "definition": "Excavation areas, open to the sky, usually for the extraction of stone.",
+        "broader": ""
+      },
+      "reclaimedLand": {
+        "id": "reclaimedLand",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/reclaimedLand",
+        "prefLabel": "reclaimed land",
+        "definition": "A land area composed of earthy fill material that has been placed and shaped to approximate natural contours, commonly part of land-reclamation efforts after mining operations. Or a land area, commonly submerged in its native state, that has been protected by artificial structures and drained for agricultural or other purposes.",
+        "broader": ""
+      },
+      "reservoirLake": {
+        "id": "reservoirLake",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/reservoirLake",
+        "prefLabel": "reservoir lake",
+        "definition": "An inland body of permanently standing water, usually fresh, occupying a depression on the Earth’s surface closed by a dam.",
+        "broader": ""
+      },
+      "spoilBank": {
+        "id": "spoilBank",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/spoilBank",
+        "prefLabel": "spoil bank",
+        "definition": "A bank, mound, or other artificial accumulation of rock debris and earthy dump deposits removed from ditches, strip mines, or other excavations.",
+        "broader": ""
+      },
+      "subsidenceAreaAnthropogenic": {
+        "id": "subsidenceAreaAnthropogenic",
+        "iri": "http://inspire.ec.europa.eu/codelist/AnthropogenicGeomorphologicFeatureTypeValue/subsidenceAreaAnthropogenic",
+        "prefLabel": "subsidence area (anthropogenic)",
+        "definition": "An area subject to a process of subsidence induced by anthropogenic activities, for example subsurface mining, tunneling, hydrocarbon or groundwater production.",
+        "broader": ""
+      }
+    },
+    "events": {
+      "earthInteriorSetting": {
+        "id": "earthInteriorSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/earthInteriorSetting",
+        "prefLabel": "earth interior setting",
+        "definition": "Geologic environments within the solid Earth.",
+        "broader": ""
+      },
+      "contactMetamorphicSetting": {
+        "id": "contactMetamorphicSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/contactMetamorphicSetting",
+        "prefLabel": "contact metamorphic setting",
+        "definition": "Metamorphism of country rock at the contact of an igneous body.",
+        "broader": "earthInteriorSetting"
+      },
+      "crustalSetting": {
+        "id": "crustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/crustalSetting",
+        "prefLabel": "crustal setting",
+        "definition": "The outermost layer or shell of the Earth, defined according to various criteria, including seismic velocity, density and composition; that part of the Earth above the Mohorovicic discontinuity, made up of the sial and the sima.",
+        "broader": "earthInteriorSetting"
+      },
+      "oceanicCrustalSetting": {
+        "id": "oceanicCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/oceanicCrustalSetting",
+        "prefLabel": "oceanic-crustal setting",
+        "definition": "That type of the Earth's crust which underlies the ocean basins. The oceanic crust is 5-10 km thick; it has a density of 2.9 g/cm3, and compressional seismic-wave velocities travelling through it at 4-7.2 km/sec. Setting in crust produced by submarine volcanism at a mid ocean ridge.",
+        "broader": "crustalSetting"
+      },
+      "upperOceanicCrustalSetting": {
+        "id": "upperOceanicCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/upperOceanicCrustalSetting",
+        "prefLabel": "upper oceanic crustal setting",
+        "definition": "Oceanic crustal setting dominated by extrusive rocks, abyssal oceanic sediment, with increasing mafic intrusive rock in lower part.",
+        "broader": "oceanicCrustalSetting"
+      },
+      "lowerOceanicCrustalSetting": {
+        "id": "lowerOceanicCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowerOceanicCrustalSetting",
+        "prefLabel": "lower oceanic-crustal setting",
+        "definition": "Setting characterized by dominantly intrusive mafic rocks, with sheeted dike complexes in upper part and gabbroic to ultramafic intrusive or metamorphic rocks in lower part.",
+        "broader": "oceanicCrustalSetting"
+      },
+      "transitionalCrustalSetting": {
+        "id": "transitionalCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/transitionalCrustalSetting",
+        "prefLabel": "transitional-crustal setting",
+        "definition": "Crust formed in the transition zone between continental and oceanic crust, during the history of continental rifting that culminates in the formation of a new ocean.",
+        "broader": "crustalSetting"
+      },
+      "continentalCrustalSetting": {
+        "id": "continentalCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/continentalCrustalSetting",
+        "prefLabel": "continental-crustal setting",
+        "definition": "That type of the Earth's crust which underlies the continents and the continental shelves; it is equivalent to the sial and continental sima and ranges in thickness from about 25 km to more than 70 km under mountain ranges, averaging ~40 km. The density of the continental crust averages ~2.8 g/cm3 and is ~2.7 g.cm3 in the upper layer. The velocities of compressional seismic waves through it average ~6.5 km/s and are less than ~7.0 km/sec.",
+        "broader": "crustalSetting"
+      },
+      "forelandSetting": {
+        "id": "forelandSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/forelandSetting",
+        "prefLabel": "foreland setting",
+        "definition": "The exterior area of an orogenic belt where deformation occurs without significant metamorphism. Generally the foreland is closer to the continental interior than other portions of the orogenic belt are.",
+        "broader": "continentalCrustalSetting"
+      },
+      "hinterlandTectonicSetting": {
+        "id": "hinterlandTectonicSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/hinterlandTectonicSetting",
+        "prefLabel": "hinterland tectonic setting",
+        "definition": "Tectonic setting in the internal part of an orogenic belt, characterized by plastic deformation of rocks accompanied by significant metamorphism, typically involving crystalline basement rocks. Typically denotes the most structurally thickened part of an orogenic belt, between a magmatic arc or collision zone and a more 'external' foreland setting.",
+        "broader": "continentalCrustalSetting"
+      },
+      "lowerContinentalCrustalSetting": {
+        "id": "lowerContinentalCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowerContinentalCrustalSetting",
+        "prefLabel": "lower continental-crustal setting",
+        "definition": "Continental crustal setting characterized by upper amphibolite to granulite facies metamorphism, in situ melting, residual anhydrous metamorphic rocks, and ductile flow of rock bodies.",
+        "broader": "continentalCrustalSetting"
+      },
+      "middleContinentalCrustSetting": {
+        "id": "middleContinentalCrustSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/middleContinentalCrustSetting",
+        "prefLabel": "middle continental crust setting",
+        "definition": "Continental crustal setting characterized by greenschist to upper amphibolite facies metamorphism, plutonic igneous rocks, and ductile deformation.",
+        "broader": "continentalCrustalSetting"
+      },
+      "upperContinentalCrustalSetting": {
+        "id": "upperContinentalCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/upperContinentalCrustalSetting",
+        "prefLabel": "upper continental crustal setting",
+        "definition": "Continental crustal setting dominated by non metamorphosed to low greenschist facies metamorphic rocks, and brittle deformation.",
+        "broader": "continentalCrustalSetting"
+      },
+      "collisionalSetting": {
+        "id": "collisionalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/collisionalSetting",
+        "prefLabel": "collisional setting",
+        "definition": "ectonic setting in which two continental crustal plates impact and are sutured together after intervening oceanic crust is entirely consumed at a subduction zone separating the plates. Such collision typically involves major mountain forming events, exemplified by the modern Alpine and Himalayan mountain chains.",
+        "broader": "continentalCrustalSetting"
+      },
+      "highPressureLowTemperatureEarthInteriorSetting": {
+        "id": "highPressureLowTemperatureEarthInteriorSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/highPressureLowTemperatureEarthInteriorSetting",
+        "prefLabel": "high pressure low temperature Earth interior setting",
+        "definition": "High pressure environment characterized by geothermal gradient significantly lower than standard continental geotherm; environment in which blueschist facies metamorphic rocks form. Typically associated with subduction zones.",
+        "broader": "earthInteriorSetting"
+      },
+      "hypabyssalSetting": {
+        "id": "hypabyssalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/hypabyssalSetting",
+        "prefLabel": "hypabyssal setting",
+        "definition": "Igneous environment close to the Earth's surface, characterized by more rapid cooling than plutonic setting to produce generally fine-grained intrusive igneous rock that is commonly associated with co-magmatic volcanic rocks.",
+        "broader": "earthInteriorSetting"
+      },
+      "lowPressureHighTemperatureSetting": {
+        "id": "lowPressureHighTemperatureSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowPressureHighTemperatureSetting",
+        "prefLabel": "low pressure high temperature setting",
+        "definition": "Setting characterized by temperatures significantly higher that those associated with normal continental geothermal gradient.",
+        "broader": "earthInteriorSetting"
+      },
+      "mantleSetting": {
+        "id": "mantleSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/mantleSetting",
+        "prefLabel": "mantle setting",
+        "definition": "The zone of the Earth below the crust and above the core, which is divided into the upper mantle and the lower mantle, with a transition zone separating them.",
+        "broader": "earthInteriorSetting"
+      },
+      "upperMantleSetting": {
+        "id": "upperMantleSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/upperMantleSetting",
+        "prefLabel": "upper mantle setting",
+        "definition": "That part of the mantle which lies above a depth of about 660 km and has a density of 3.4 g/cm3 to 4.0 g/cm3 with increasing depth. Similarly, P-wave velocity increases from about 8 to 11 km/sec with depth and S wave velocity increases from about 4.5 to 6 km/sec with depth. It is presumed to be peridotitic in composition. It includes the subcrustal lithosphere the asthenosphere and the transition zone.",
+        "broader": "mantleSetting"
+      },
+      "lowerMantleSetting": {
+        "id": "lowerMantleSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowerMantleSetting",
+        "prefLabel": "lower mantle setting",
+        "definition": "That part of the mantle that lies below a depth of about 660 km. With increasing depth, density increases from ~4.4 g/cm3 to ~5.6 g/cm3, and velocity of compressional seismic waves increases from ~10.7 km/s to ~13.7 km/s (Dziewonski and Anderson, 1981).",
+        "broader": "mantleSetting"
+      },
+      "regionalMetamorphicSetting": {
+        "id": "regionalMetamorphicSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/regionalMetamorphicSetting",
+        "prefLabel": "regional metamorphic setting",
+        "definition": "Metamorphism not obviously localized along contacts of igneous bodies; includes burial metamorphism and ocean ridge metamorphism.",
+        "broader": "earthInteriorSetting"
+      },
+      "ultraHighPressureCrustalSetting": {
+        "id": "ultraHighPressureCrustalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/ultraHighPressureCrustalSetting",
+        "prefLabel": "ultra high pressure crustal setting",
+        "definition": "Setting characterized by pressures characteristic of upper mantle, but indicated by mineral assemblage in crustal composition rocks.",
+        "broader": "earthInteriorSetting"
+      },
+      "earthSurfaceSetting": {
+        "id": "earthSurfaceSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/earthSurfaceSetting",
+        "prefLabel": "earth surface setting",
+        "definition": "Geologic environments on the surface of the solid Earth.",
+        "broader": ""
+      },
+      "anoxicSetting": {
+        "id": "anoxicSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/anoxicSetting",
+        "prefLabel": "anoxic setting",
+        "definition": "Setting depleted in oxygen, typically subaqueous.",
+        "broader": "earthSurfaceSetting"
+      },
+      "aridOrSemiAridEnvironmentSetting": {
+        "id": "aridOrSemiAridEnvironmentSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/aridOrSemiAridEnvironmentSetting",
+        "prefLabel": "arid or Semi Arid environment setting",
+        "definition": "Setting characterized by mean annual precipitation of 10 inches (25 cm) or less. (Jackson, 1997, p. 172). Equivalent to SLTT 'Desert setting', but use 'Arid' to emphasize climatic nature of setting definition.",
+        "broader": "earthSurfaceSetting"
+      },
+      "gibberPlainSetting": {
+        "id": "gibberPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/gibberPlainSetting",
+        "prefLabel": "gibber plain setting",
+        "definition": "A desert plain strewn with wind-abraded pebbles, or gibbers; a gravelly desert.",
+        "broader": "aridOrSemiAridEnvironmentSetting"
+      },
+      "marginalMarineSabkhaSetting": {
+        "id": "marginalMarineSabkhaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/marginalMarineSabkhaSetting",
+        "prefLabel": "marginal marine sabkha setting",
+        "definition": "Setting characterized by arid to semi-arid conditions on restricted coastal plains mostly above normal high tide level, with evaporite-saline mineral, tidal-flood, and eolian deposits. Boundaries with intertidal setting and non-tidal terrestrial setting are gradational. (Jackson, 1997, p. 561).",
+        "broader": "aridOrSemiAridEnvironmentSetting"
+      },
+      "playaSetting": {
+        "id": "playaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/playaSetting",
+        "prefLabel": "playa setting",
+        "definition": "The usually dry and nearly level plain that occupies the lowest parts of closed depressions, such as those occurring on intermontane basin floors. Temporary flooding occurs primarily in response to precipitation-runoff events.",
+        "broader": "aridOrSemiAridEnvironmentSetting"
+      },
+      "caveSetting": {
+        "id": "caveSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/caveSetting",
+        "prefLabel": "cave setting",
+        "definition": "A natural underground open space; it generally has a connection to the surface, is large enough for a person to enter, and extends into darkness. The most common type of cave is formed in limestone by dissolution.",
+        "broader": "earthSurfaceSetting"
+      },
+      "deltaicSystemSetting": {
+        "id": "deltaicSystemSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deltaicSystemSetting",
+        "prefLabel": "deltaic system setting",
+        "definition": "Environments at the mouth of a river or stream that enters a standing body of water (ocean or lake). The delta forms a triangular or fan-shaped plain of considerable area. Subaerial parts of the delta are crossed by many distributaries of the main river,",
+        "broader": "earthSurfaceSetting"
+      },
+      "deltaPlainSetting": {
+        "id": "deltaPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deltaPlainSetting",
+        "prefLabel": "delta plain setting",
+        "definition": "The level or nearly level surface composing the landward part of a large or compound delta; strictly, an alluvial plain characterized by repeated channel bifurcation and divergence, multiple distributary channels, and interdistributary flood basins.",
+        "broader": "deltaicSystemSetting"
+      },
+      "lowerDeltaPlainSetting": {
+        "id": "lowerDeltaPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowerDeltaPlainSetting",
+        "prefLabel": "lower delta plain setting",
+        "definition": "The part of a delta plain which is penetrated by saline water and is subject to tidal processes.",
+        "broader": "deltaPlainSetting"
+      },
+      "upperDeltaPlainSetting": {
+        "id": "upperDeltaPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/upperDeltaPlainSetting",
+        "prefLabel": "upper delta plain setting",
+        "definition": "The part of a delta plain essentially unaffected by basinal processes. They do not differ substantially from alluvial environments except that areas of swamp, marsh and lakes are usually more widespread and channels may bifurcate downstream.",
+        "broader": "deltaPlainSetting"
+      },
+      "estuarineDeltaSetting": {
+        "id": "estuarineDeltaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/estuarineDeltaSetting",
+        "prefLabel": "estuarine delta setting",
+        "definition": "A delta that has filled, or is in the process of filling, an estuary.",
+        "broader": "deltaicSystemSetting"
+      },
+      "interdistributaryBaySetting": {
+        "id": "interdistributaryBaySetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/interdistributaryBaySetting",
+        "prefLabel": "interdistributary bay setting",
+        "definition": "A pronounced indentation of the delta front between advancing stream distributaries, occupied by shallow water, and either open to the sea or partly enclosed by minor distributaries.",
+        "broader": "deltaicSystemSetting"
+      },
+      "lacustrineDeltaSetting": {
+        "id": "lacustrineDeltaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lacustrineDeltaSetting",
+        "prefLabel": "lacustrine delta setting",
+        "definition": "The low, nearly flat, alluvial tract of land at or near the mouth of a river, commonly forming a triangular or fan-shaped plain of considerable area, crossed by many distributaries of the main river, perhaps extending beyond the general trend of the lake shore, resulting from the accumulation of sediment supplied by the river in such quantities that it is not removed by waves or currents. Most deltas are partly subaerial and partly below water.",
+        "broader": "deltaicSystemSetting"
+      },
+      "prodeltaSetting": {
+        "id": "prodeltaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/prodeltaSetting",
+        "prefLabel": "prodelta setting",
+        "definition": "The part of a delta that is below the effective depth of wave erosion, lying beyond the delta front, and sloping gently down to the floor of the basin into which the delta is advancing and where clastic river sediment ceases to be a significant part of the basin-floor deposits; it is entirely below the water level.",
+        "broader": "deltaicSystemSetting"
+      },
+      "deltaDistributaryChannelSetting": {
+        "id": "deltaDistributaryChannelSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deltaDistributaryChannelSetting",
+        "prefLabel": "delta distributary channel setting",
+        "definition": "A divergent stream flowing away from the main stream and not returning to it, as in a delta or on an alluvial plain.",
+        "broader": "deltaicSystemSetting"
+      },
+      "deltaDistributaryMouthSetting": {
+        "id": "deltaDistributaryMouthSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deltaDistributaryMouthSetting",
+        "prefLabel": "delta distributary mouth setting",
+        "definition": "The mouth of a delta distributary channel where fluvial discharge moves from confined to unconfined flow conditions.",
+        "broader": "deltaicSystemSetting"
+      },
+      "deltaFrontSetting": {
+        "id": "deltaFrontSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deltaFrontSetting",
+        "prefLabel": "delta front setting",
+        "definition": "A narrow zone where deposition in deltas is most active, consisting of a continuous sheet of sand, and occurring within the effective depth of wave erosion (10 m or less). It is the zone separating the prodelta from the delta plain, and it may or may not be steep\"",
+        "broader": "deltaicSystemSetting"
+      },
+      "glacierRelatedSetting": {
+        "id": "glacierRelatedSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glacierRelatedSetting",
+        "prefLabel": "glacier related setting",
+        "definition": "Earth surface setting with geography defined by spatial relationship to glaciers (e.g. on top of a glacier, next to a glacier, in front of a glacier...). Processes related to moving ice dominate sediment transport and deposition and landform development.",
+        "broader": "earthSurfaceSetting"
+      },
+      "proglacialSetting": {
+        "id": "proglacialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/proglacialSetting",
+        "prefLabel": "proglacial setting",
+        "definition": "Immediately in front of or just beyond the outer limits of a glacier or ice sheet, generally at or near its lower end; said of lakes, streams, deposits, and other features produced by or derived from the glacier ice.",
+        "broader": "glacierRelatedSetting"
+      },
+      "glacierTerminusSetting": {
+        "id": "glacierTerminusSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glacierTerminusSetting",
+        "prefLabel": "glacier terminus setting",
+        "definition": "Region of sediment deposition at the glacier terminus due to melting of glacier ice, melt-out, ablation and flow till setting.",
+        "broader": "proglacialSetting"
+      },
+      "subglacialSetting": {
+        "id": "subglacialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/subglacialSetting",
+        "prefLabel": "subglacial setting",
+        "definition": "Formed or accumulated in or by the bottom parts of a glacier or ice sheet; said of meltwater streams, till, moraine, etc.",
+        "broader": "glacierRelatedSetting"
+      },
+      "supraglacialSetting": {
+        "id": "supraglacialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/supraglacialSetting",
+        "prefLabel": "supraglacial setting",
+        "definition": "\"Carried upon, deposited from, or pertaining to the top surface of a glacier or ice sheet; said of meltwater streams, till, drift, etc. \" (Jackson, 1997, p. 639). Dreimanis (1988, p. 39) recommendation that \"supraglacial\" supersede \"superglacial\" is followed.",
+        "broader": "glacierRelatedSetting"
+      },
+      "englacialSetting": {
+        "id": "englacialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/englacialSetting",
+        "prefLabel": "englacial setting",
+        "definition": "Contained, embedded, or carried within the body of a glacier or ice sheet; said of meltwater streams, till, drift, moraine.",
+        "broader": "glacierRelatedSetting"
+      },
+      "glacialOutwashPlainSetting": {
+        "id": "glacialOutwashPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glacialOutwashPlainSetting",
+        "prefLabel": "glacial outwash plain setting",
+        "definition": "A broad, gently sloping sheet of outwash deposited by meltwater streams flowing in front of or beyond a glacier, and formed by coalescing outwahs fans; the surface of a broad body of outwash.",
+        "broader": "glacierRelatedSetting"
+      },
+      "glacierLateralSetting": {
+        "id": "glacierLateralSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glacierLateralSetting",
+        "prefLabel": "glacier lateral setting",
+        "definition": "Settings adjacent to edges of confined glacier.",
+        "broader": "glacierRelatedSetting"
+      },
+      "hillslopeSetting": {
+        "id": "hillslopeSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/hillslopeSetting",
+        "prefLabel": "hillslope setting",
+        "definition": "Earth surface setting characterized by surface slope angles high enough that gravity alone becomes a significant factor in geomorphic development, as well as base-of-slope areas influenced by hillslope processes. Hillslope activities include creep, sliding, slumping, falling, and other downslope movements caused by slope collapse induced by gravitational influence on earth materials. May be subaerial or subaqueous.",
+        "broader": "earthSurfaceSetting"
+      },
+      "humidTemperateClimaticSetting": {
+        "id": "humidTemperateClimaticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/humidTemperateClimaticSetting",
+        "prefLabel": "humid temperate climatic setting",
+        "definition": "Setting with seasonal climate having hot to cold or humid to arid seasons.",
+        "broader": "earthSurfaceSetting"
+      },
+      "humidTropicalClimaticSetting": {
+        "id": "humidTropicalClimaticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/humidTropicalClimaticSetting",
+        "prefLabel": "humid tropical climatic setting",
+        "definition": "Setting with hot, humid climate influenced by equatorial air masses, no winter season.",
+        "broader": "earthSurfaceSetting"
+      },
+      "polarClimaticSetting": {
+        "id": "polarClimaticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/polarClimaticSetting",
+        "prefLabel": "polar climatic setting",
+        "definition": "Setting with climate dominated by temperatures below the freezing temperature of water. Includes polar deserts because precipitation is generally scant at high latitude. Climatically controlled by arctic air masses, cold dry environment with short summer.",
+        "broader": "earthSurfaceSetting"
+      },
+      "shorelineSetting": {
+        "id": "shorelineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/shorelineSetting",
+        "prefLabel": "shoreline setting",
+        "definition": "Geologic settings characterized by location adjacent to the ocean or a lake. A zone of indefinite width (may be many kilometers), bordering a body of water that extends from the water line inland to the first major change in landform features. Includes settings that may be subaerial, intermittently subaqueous, or shallow subaqueous, but are intrinsically associated with the interface between land areas and water bodies.",
+        "broader": "earthSurfaceSetting"
+      },
+      "strandplainSetting": {
+        "id": "strandplainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/strandplainSetting",
+        "prefLabel": "strandplain setting",
+        "definition": "A prograded shore built seaward by waves and currents, and continuous for some distance along the coast. It is characterized by subparallel beach ridges and swales, in places with associated dunes.",
+        "broader": "shorelineSetting"
+      },
+      "supratidalSetting": {
+        "id": "supratidalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/supratidalSetting",
+        "prefLabel": "supratidal setting",
+        "definition": "Pertaining to the shore area marginal to the littoral zone, just above high-tide level.",
+        "broader": "shorelineSetting"
+      },
+      "tidalSetting": {
+        "id": "tidalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/tidalSetting",
+        "prefLabel": "tidal setting",
+        "definition": "Setting subject to tidal processes.",
+        "broader": "shorelineSetting"
+      },
+      "tidalFlatSetting": {
+        "id": "tidalFlatSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/tidalFlatSetting",
+        "prefLabel": "tidal flat setting",
+        "definition": "An extensive, nearly horizontal, barren tract of land that is alternately covered and uncovered by the tide, and consisting of unconsolidated sediment (mostly mud and sand). It may form the top surface of a deltaic deposit.",
+        "broader": "tidalSetting"
+      },
+      "barrierIslandCoastlineSetting": {
+        "id": "barrierIslandCoastlineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/barrierIslandCoastlineSetting",
+        "prefLabel": "barrier island coastline setting",
+        "definition": "Setting meant to include all the various geographic elements typically associated with a barrier island coastline, including the barrier islands, and geomorphic/geographic elements that are linked by processes associated with the presence of the island (e.g. wash over fans, inlet channel, back barrier lagoon).",
+        "broader": "shorelineSetting"
+      },
+      "barrierLagoonSetting": {
+        "id": "barrierLagoonSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/barrierLagoonSetting",
+        "prefLabel": "barrier lagoon setting",
+        "definition": "A lagoon that is roughly parallel to the coast and is separated from the open ocean by a strip of land or by a barrier reef. Tidal influence is typically restricted and the lagoon is commonly hypersaline.",
+        "broader": "barrierIslandCoastlineSetting"
+      },
+      "barrierBeachSetting": {
+        "id": "barrierBeachSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/barrierBeachSetting",
+        "prefLabel": "barrier beach setting",
+        "definition": "A narrow, elongate sand or gravel ridge rising slightly above the high-tide level and extending generally parallel with the shore, but separated from it by a lagoon (Shepard, 1954, p.1904), estuary, or marsh; it is extended by longshore transport and is rarely more than several kilometers long.",
+        "broader": "barrierIslandCoastlineSetting"
+      },
+      "beachSetting": {
+        "id": "beachSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/beachSetting",
+        "prefLabel": "beach setting",
+        "definition": "The unconsolidated material at the shoreline that covers a gently sloping zone, typically with a concave profile, extending landward from the low-water line to the place where there is a definite change in material or physiographic form (such as a cliff), or to the line of permanent vegetation (usually the effective limit of the highest storm waves); at the shore of a body of water, formed and washed by waves or tides, usually covered by sand or gravel, and lacking a bare rocky surface.",
+        "broader": "shorelineSetting"
+      },
+      "carbonateDominatedShorelineSetting": {
+        "id": "carbonateDominatedShorelineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/carbonateDominatedShorelineSetting",
+        "prefLabel": "carbonate dominated shoreline setting",
+        "definition": "A shoreline setting in which terrigenous input is minor compared to local carbonate sediment production. Constructional biogenic activity is an important element in geomorphic development.",
+        "broader": "shorelineSetting"
+      },
+      "coastalPlainSetting": {
+        "id": "coastalPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/coastalPlainSetting",
+        "prefLabel": "coastal plain setting",
+        "definition": "A low relief plain bordering a water body extending inland to the nearest elevated land, sloping very gently towards the water body. Distinguished from alluvial plain by presence of relict shoreline-related deposits or morphology.",
+        "broader": "shorelineSetting"
+      },
+      "estuarySetting": {
+        "id": "estuarySetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/estuarySetting",
+        "prefLabel": "estuary setting",
+        "definition": "Environments at the seaward end or the widened funnel-shaped tidal mouth of a river valley where fresh water comes into contact with seawater and where tidal effects are evident (adapted from Glossary of Geology, Jackson, 1997, p. 217).",
+        "broader": "shorelineSetting"
+      },
+      "estuarineLagoonSetting": {
+        "id": "estuarineLagoonSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/estuarineLagoonSetting",
+        "prefLabel": "estuarine lagoon setting",
+        "definition": "A lagoon produced by the temporary sealing of a river estuary by a storm barrier. Such lagoons are usually seasonal and exist until the river breaches the barrier; they occur in regions of low or spasmodic rainfall.",
+        "broader": "estuarySetting"
+      },
+      "lagoonalSetting": {
+        "id": "lagoonalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lagoonalSetting",
+        "prefLabel": "lagoonal setting",
+        "definition": "A shallow stretch of salt or brackish water, partly or completely separated from a sea or lake by an offshore reef, barrier island, sand or spit (Jackson, 1997). Water is shallow, tidal and wave-produced effects on sediments; strong light reaches sediment.",
+        "broader": "shorelineSetting"
+      },
+      "lowEnergyShorelineSetting": {
+        "id": "lowEnergyShorelineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowEnergyShorelineSetting",
+        "prefLabel": "low energy shoreline setting",
+        "definition": "Settings characterized by very low surface slope and proximity to shoreline. Generally within peritidal setting, but characterized by low surface gradients and generally low-energy sedimentary processes.",
+        "broader": "shorelineSetting"
+      },
+      "mudFlatSetting": {
+        "id": "mudFlatSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/mudFlatSetting",
+        "prefLabel": "mud flat setting",
+        "definition": "A relatively level area of fine grained material (e.g. silt) along a shore (as in a sheltered estuary or chenier-plain) or around an island, alternately covered and uncovered by the tide or covered by shallow water, and barren of vegetation. Includes most tidal flats, but lacks denotation of tidal influence.",
+        "broader": "lowEnergyShorelineSetting"
+      },
+      "algalFlatSetting": {
+        "id": "algalFlatSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/algalFlatSetting",
+        "prefLabel": "algal flat setting",
+        "definition": "Modern \"algal flats are found on rock or mud in areas flooded only by the highest tides and are often subject to high evaporation rates. Algal flats survive only when an area is salty enough to eliminate snails and other herbivorous animals that eat algae, yet is not so salty that the algae cannot survive. The most common species of algae found on algal flats are blue-green algae of the genera Scytonema and Schizothrix. These algae can tolerate the daily extremes in temperature and oxygen that typify conditions on the flats. Other plants sometimes found on algal flats include one-celled green algae, flagellates, diatoms, bacteria, and isolated scrubby red and black mangroves, as well as patches of saltwort. Animals include false cerith, cerion snails, fiddler crabs, and great land crabs. Flats with well developed algal mats are restricted for the most part to the Keys, with Sugarloaf and Crane Keys offering prime examples of algal flat habitat.\" (Audubon, 1991)",
+        "broader": "lowEnergyShorelineSetting"
+      },
+      "rockyCoastSetting": {
+        "id": "rockyCoastSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/rockyCoastSetting",
+        "prefLabel": "rocky coast setting",
+        "definition": "Shoreline with significant relief and abundant rock outcrop.",
+        "broader": "shorelineSetting"
+      },
+      "subaerialSetting": {
+        "id": "subaerialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/subaerialSetting",
+        "prefLabel": "subaerial setting",
+        "definition": "Setting at the interface between the solid earth and the atmosphere, includes some shallow subaqueous settings in river channels and playas. Characterized by conditions and processes, such as erosion, that exist or operate in the open air on or immediately adjacent to the land surface.",
+        "broader": "earthSurfaceSetting"
+      },
+      "aeolianProcessSetting": {
+        "id": "aeolianProcessSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/aeolianProcessSetting",
+        "prefLabel": "aeolian process setting",
+        "definition": "Sedimentary setting in which wind is the dominant process producing, transporting, and depositing sediment. Typically has low-relief plain or piedmont slope physiography.",
+        "broader": "subaerialSetting"
+      },
+      "dunefieldSetting": {
+        "id": "dunefieldSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/dunefieldSetting",
+        "prefLabel": "dunefield setting",
+        "definition": "Extensive deposits on sand in an area where the supply is abundant. As a characteristic, individual dunes somewhat resemble barchans but are highly irregular in shape and crowded; erg areas of the Sahara are an example.",
+        "broader": "aeolianProcessSetting"
+      },
+      "coastalDuneFieldSetting": {
+        "id": "coastalDuneFieldSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/coastalDuneFieldSetting",
+        "prefLabel": "coastal dune field setting",
+        "definition": "A dune field on low-lying land recently abandoned or built up by the sea; the dunes may ascend a cliff and travel inland.",
+        "broader": "dunefieldSetting"
+      },
+      "dustAccumulationSetting": {
+        "id": "dustAccumulationSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/dustAccumulationSetting",
+        "prefLabel": "dust accumulation setting",
+        "definition": "Setting in which finegrained particles accumulate, e.g. loess deposition.",
+        "broader": "aeolianProcessSetting"
+      },
+      "sandPlainSetting": {
+        "id": "sandPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/sandPlainSetting",
+        "prefLabel": "sand plain setting",
+        "definition": "A sand-covered plain dominated by aeolian processes.",
+        "broader": "aeolianProcessSetting"
+      },
+      "piedmontSlopeSystemSetting": {
+        "id": "piedmontSlopeSystemSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/piedmontSlopeSystemSetting",
+        "prefLabel": "piedmont slope system setting",
+        "definition": "Location on gentle slope at the foot of a mountain; generally used in terms of intermontane-basin terrain. Main components include: (a) An erosional surface on bedrock adjacent to the receding mountain front (pediment, rock pediment); (b) A constructional surface comprising individual alluvial fans and interfan valleys, also near the mountain front; and (c) A distal complex of coalescent fans (bajada), and alluvial slopes without fan form. Piedmont slopes grade to basin-floor depressions with alluvial and temporary lake plains or to surfaces associated with through drainage.",
+        "broader": "subaerialSetting"
+      },
+      "alluvialFanSetting": {
+        "id": "alluvialFanSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/alluvialFanSetting",
+        "prefLabel": "alluvial fan setting",
+        "definition": "A low, outspread, relatively flat to gently sloping mass of loose rock material, shaped like an open fan or a segment of a cone, deposited by a stream (esp. in a semiarid region) at the place where it issues from a narrow mountain valley upon a plain or broad valley, or where a tributary stream is near or at its junction with the main stream, or wherever a constriction in a valley abruptly ceases or the gradient of the stream suddenly decreases; it is steepest near the mouth of the valley where its apex points upstream, and it slopes gently and convexly outward with gradually decreasing gradient.",
+        "broader": "piedmontSlopeSystemSetting"
+      },
+      "alluvialPlainSetting": {
+        "id": "alluvialPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/alluvialPlainSetting",
+        "prefLabel": "alluvial plain setting",
+        "definition": "An assemblage landforms produced by alluvial and fluvial processes (braided streams, terraces, etc.,) that form low gradient, regional ramps along the flanks of mountains and extend great distances from their sources (e.g., High Plains of North America). (NRCS GLOSSARY OF LANDFORM AND GEOLOGIC TERMS). A level or gently sloping tract or a slightly undulating land surface produced by extensive deposition of alluvium... Synonym-- wash plain;...river plain; aggraded valley plain;... (Jackson, 1997, p. 17). May include one or more River plain systems.",
+        "broader": "piedmontSlopeSystemSetting"
+      },
+      "pedimentSetting": {
+        "id": "pedimentSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/pedimentSetting",
+        "prefLabel": "pediment setting",
+        "definition": "A gently sloping erosional surface developed at the foot of a receding hill or mountain slope. The surface may be essentially bare, exposing earth material that extends beneath adjacent uplands; or it may be thinly mantled with alluvium and colluvium, ultimately in transit from upland front to basin or valley lowland. In hill-foot slope terrain the mantle is designated \"pedisediment.\" The term has been used in several geomorphic contexts: Pediments may be classed with respect to (a) landscape positions, for example, intermontane-basin piedmont or valley-border footslope surfaces (respectively, apron and terrace pediments (Cooke and Warren, 1973)); (b) type of material eroded, bedrock or regolith; or (c) combinations of the above. compare - Piedmont slope.",
+        "broader": "piedmontSlopeSystemSetting"
+      },
+      "subaqueousSetting": {
+        "id": "subaqueousSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/subaqueousSetting",
+        "prefLabel": "subaqueous setting",
+        "definition": "Setting situated in or under permanent, standing water. Used for marine and lacustrine settings, but not for fluvial settings.",
+        "broader": "earthSurfaceSetting"
+      },
+      "tidalChannelSetting": {
+        "id": "tidalChannelSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/tidalChannelSetting",
+        "prefLabel": "tidal channel setting",
+        "definition": "A major channel followed by the tidal currents, extending from offshore into a tidal marsh or a tidal flat.",
+        "broader": "subaqueousSetting"
+      },
+      "intertidalSetting": {
+        "id": "intertidalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/intertidalSetting",
+        "prefLabel": "intertidal setting",
+        "definition": "Pertaining to the benthic ocean environment or depth zone between high water and low water; also, pertaining to the organisms of that environment.",
+        "broader": "subaqueousSetting"
+      },
+      "marineSetting": {
+        "id": "marineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/marineSetting",
+        "prefLabel": "marine setting",
+        "definition": "Setting characterized by location under the surface of the sea.",
+        "broader": "subaqueousSetting"
+      },
+      "neriticSetting": {
+        "id": "neriticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/neriticSetting",
+        "prefLabel": "neritic setting",
+        "definition": "The ocean environment at depths between low-tide level and 200 metres, or between low-tide level and approximately the edge of the continental shelf.",
+        "broader": "marineSetting"
+      },
+      "outerNeriticSetting": {
+        "id": "outerNeriticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/outerNeriticSetting",
+        "prefLabel": "outer neritic setting",
+        "definition": "The ocean environment at depths between 100 meters and approximately the edge of the continental shelf or between 100 and 200 meters.",
+        "broader": "neriticSetting"
+      },
+      "innerNeriticSetting": {
+        "id": "innerNeriticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/innerNeriticSetting",
+        "prefLabel": "inner neritic setting",
+        "definition": "The ocean environment at depths between low tide level and 30 metres.",
+        "broader": "neriticSetting"
+      },
+      "middleNeriticSetting": {
+        "id": "middleNeriticSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/middleNeriticSetting",
+        "prefLabel": "middle neritic setting",
+        "definition": "The ocean environment at depths between 30 and 100 metres.",
+        "broader": "neriticSetting"
+      },
+      "oceanHighlandSetting": {
+        "id": "oceanHighlandSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/oceanHighlandSetting",
+        "prefLabel": "ocean highland setting",
+        "definition": "Broad category for subaqueous marine settings characterized by significant relief above adjacent sea floor.",
+        "broader": "marineSetting"
+      },
+      "oceanicPlateauSetting": {
+        "id": "oceanicPlateauSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/oceanicPlateauSetting",
+        "prefLabel": "oceanic plateau setting",
+        "definition": "Region of elevated ocean crust that commonly rises to within 2-3 km of the surface above an abyssal sea floor that lies several km deeper. Climate and water depths are such that a marine carbonate platform does not develop.",
+        "broader": "oceanHighlandSetting"
+      },
+      "midOceanRidgeSetting": {
+        "id": "midOceanRidgeSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/midOceanRidgeSetting",
+        "prefLabel": "mid ocean ridge setting",
+        "definition": "Ocean highland associated with a divergent continental margin (spreading center). Setting is characterized by active volcanism, locally steep relief, hydrothermal activity, and pelagic sedimentation.",
+        "broader": "oceanHighlandSetting"
+      },
+      "slopeRiseSetting": {
+        "id": "slopeRiseSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/slopeRiseSetting",
+        "prefLabel": "slope-rise setting",
+        "definition": "The part of a subaqueous basin that is between a bordering shelf setting, which separate the basin from an adjacent landmass, and a very low-relief basin plain setting.",
+        "broader": "marineSetting"
+      },
+      "submarineFanSetting": {
+        "id": "submarineFanSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/submarineFanSetting",
+        "prefLabel": "submarine fan setting",
+        "definition": "Large fan-shaped cones of sediment on the ocean floor, generally associated with submarine canyons that provide sediment supply to build the fan.",
+        "broader": "marineSetting"
+      },
+      "aboveCarbonateCompensationDepthSetting": {
+        "id": "aboveCarbonateCompensationDepthSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/aboveCarbonateCompensationDepthSetting",
+        "prefLabel": "above carbonate compensation depth setting",
+        "definition": "Marine environment in which carbonate sediment does not dissolve before reaching the sea floor and can accumulate.",
+        "broader": "marineSetting"
+      },
+      "abyssalSetting": {
+        "id": "abyssalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/abyssalSetting",
+        "prefLabel": "abyssal setting",
+        "definition": "The ocean environment at water depths between 3,500 and 6,000 metres.",
+        "broader": "marineSetting"
+      },
+      "basinPlainSetting": {
+        "id": "basinPlainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/basinPlainSetting",
+        "prefLabel": "basin plain setting",
+        "definition": "Near flat areas of ocean floor, slope less than 1:1000; generally receive only distal turbidite and pelagic sediments.",
+        "broader": "marineSetting"
+      },
+      "bathyalSetting": {
+        "id": "bathyalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/bathyalSetting",
+        "prefLabel": "bathyal setting",
+        "definition": "The ocean environment at water depths between 200 and 3500 metres.",
+        "broader": "marineSetting"
+      },
+      "lowerBathyalSetting": {
+        "id": "lowerBathyalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lowerBathyalSetting",
+        "prefLabel": "lower bathyal setting",
+        "definition": "The ocean environment at depths between 1000 and 3500 metres.",
+        "broader": "bathyalSetting"
+      },
+      "middleBathyalSetting": {
+        "id": "middleBathyalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/middleBathyalSetting",
+        "prefLabel": "middle bathyal setting",
+        "definition": "The ocean environment at water depths between 600 and 1000 metres.",
+        "broader": "bathyalSetting"
+      },
+      "upperBathyalSetting": {
+        "id": "upperBathyalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/upperBathyalSetting",
+        "prefLabel": "upper bathyal setting",
+        "definition": "The ocean environment at water depths between 200 and 600 metres.",
+        "broader": "bathyalSetting"
+      },
+      "belowCarbonateCompensationDepthSetting": {
+        "id": "belowCarbonateCompensationDepthSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/belowCarbonateCompensationDepthSetting",
+        "prefLabel": "below carbonate compensation depth setting",
+        "definition": "Marine environment in which water is deep enough that carbonate sediment goes into solution before it can accumulate on the sea floor.",
+        "broader": "marineSetting"
+      },
+      "biologicalReefSetting": {
+        "id": "biologicalReefSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/biologicalReefSetting",
+        "prefLabel": "biological reef setting",
+        "definition": "A ridgelike or moundlike structure, layered or massive, built by sedentary calcareous organisms, esp. corals, and consisting mostly of their remains; it is wave-resistant and stands topographically above the surrounding contemporaneously deposited sediment.",
+        "broader": "marineSetting"
+      },
+      "forereefSetting": {
+        "id": "forereefSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/forereefSetting",
+        "prefLabel": "forereef setting",
+        "definition": "The seaward side of a reef; the slope covered with deposits of coarse reef talus.",
+        "broader": "biologicalReefSetting"
+      },
+      "reefFlatSetting": {
+        "id": "reefFlatSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/reefFlatSetting",
+        "prefLabel": "reef flat setting",
+        "definition": "A stony platform of reef rock, landward of the reef crest at or above the low tide level, occasionally with patches of living coral and associated organisms, and commonly strewn with coral fragments and coral sand.",
+        "broader": "biologicalReefSetting"
+      },
+      "backreefSetting": {
+        "id": "backreefSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/backreefSetting",
+        "prefLabel": "backreef setting",
+        "definition": "The landward side of a reef. The term is often used adjectivally to refer to deposits within the restricted lagoon behind a barrier reef, such as the \"back-reef facies\" of lagoonal deposits. In some places, as on a platform-edge reef tract, \"back reef\" refers to the side of the reef away from the open sea, even though no land may be nearby.",
+        "broader": "biologicalReefSetting"
+      },
+      "continentalBorderlandSetting": {
+        "id": "continentalBorderlandSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/continentalBorderlandSetting",
+        "prefLabel": "continental borderland setting",
+        "definition": "An area of the continental margin between the shoreline and the continental slope that is topographically more complex than the continental shelf. It is characterized by ridges and basins, some of which are below the depth of the continental shelf. An example is the southern California continental borderland (Jackson, 1997, p. 138).",
+        "broader": "marineSetting"
+      },
+      "continentalShelfSetting": {
+        "id": "continentalShelfSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/continentalShelfSetting",
+        "prefLabel": "continental shelf setting",
+        "definition": "That part of the ocean floor that is between the shoreline and the continental slope (or, when there is no noticeable continental slope, a depth of 200 m). It is characterized by its gentle slope of 0.1 degree (Jackson, 1997, p. 138). Continental shelves have a classic shoreline-shelf-slope profile termed 'clinoform'.",
+        "broader": "marineSetting"
+      },
+      "deepSeaTrenchSetting": {
+        "id": "deepSeaTrenchSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deepSeaTrenchSetting",
+        "prefLabel": "deep sea trench setting",
+        "definition": "Deep ocean basin with steep (average 10 degrees) slope toward land, more gentle slope (average 5 degrees) towards the sea, and abundant seismic activity on landward side of trench. Does not denote water depth, but may be very deep.",
+        "broader": "marineSetting"
+      },
+      "epicontinentalMarineSetting": {
+        "id": "epicontinentalMarineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/epicontinentalMarineSetting",
+        "prefLabel": "epicontinental marine setting",
+        "definition": "Marine setting situated within the interior of the continent, rather than at the edge of a continent.",
+        "broader": "marineSetting"
+      },
+      "hadalSetting": {
+        "id": "hadalSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/hadalSetting",
+        "prefLabel": "hadal setting",
+        "definition": "The deepest oceanic environment, i.e., over 6,000 m in depth. Always in deep sea trench.",
+        "broader": "marineSetting"
+      },
+      "marineCarbonatePlatformSetting": {
+        "id": "marineCarbonatePlatformSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/marineCarbonatePlatformSetting",
+        "prefLabel": "marine carbonate platform setting",
+        "definition": "A shallow submerged plateau separated from continental landmasses, on which high biological carbonate production rates produce enough sediment to maintain the platform surface near sea level. Grades into atoll as area becomes smaller and ringing coral reefs become more prominent part of the setting.",
+        "broader": "marineSetting"
+      },
+      "terrestrialSetting": {
+        "id": "terrestrialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/terrestrialSetting",
+        "prefLabel": "terrestrial setting",
+        "definition": "Setting characterized by absence of direct marine influence. Most of the subaerial settings are also terrestrial, but lacustrine settings, while terrestrial, are not subaerial, so the subaerial settings are not included as subcategories.",
+        "broader": "earthSurfaceSetting"
+      },
+      "bogSetting": {
+        "id": "bogSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/bogSetting",
+        "prefLabel": "bog setting",
+        "definition": "Waterlogged, spongy ground, consisting primarily of mosses, containing acidic, decaying vegetation that may develop into peat.",
+        "broader": "terrestrialSetting"
+      },
+      "basinBogSetting": {
+        "id": "basinBogSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/basinBogSetting",
+        "prefLabel": "basin bog setting",
+        "definition": "An ombrotrophic or ombrogene peat/bog whose nutrient supply is exclusively from rain water (including snow and atmospheric fallout) therefore making nutrients extremely oligotrophic.",
+        "broader": "bogSetting"
+      },
+      "blanketBog": {
+        "id": "blanketBog",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/blanketBog",
+        "prefLabel": "blanket bog",
+        "definition": "Topogeneous bog/peat whose moisture content is largely dependent on surface water. It is relatively rich in plant nutrients, nitrogen, and mineral matter, is mildly acidic to nearly neutral, and contains little or no cellulose; forms in topographic depressions with essential stagnat or non-moving minerotrophic water supply",
+        "broader": "bogSetting"
+      },
+      "lacustrineSetting": {
+        "id": "lacustrineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/lacustrineSetting",
+        "prefLabel": "lacustrine setting",
+        "definition": "Setting associated with a lake. Always overlaps with terrestrial, may overlap with subaerial, subaqueous, or shoreline.",
+        "broader": "terrestrialSetting"
+      },
+      "riverPlainSystemSetting": {
+        "id": "riverPlainSystemSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/riverPlainSystemSetting",
+        "prefLabel": "river plain system setting",
+        "definition": "Geologic setting dominated by a river system; river plains may occur in any climatic setting. Includes active channels, abandoned channels, levees, oxbow lakes, flood plain. May be part of an alluvial plain that includes terraces composed of abandoned river plain deposits.",
+        "broader": "terrestrialSetting"
+      },
+      "springSetting": {
+        "id": "springSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/springSetting",
+        "prefLabel": "spring setting",
+        "definition": "Setting characterized by a place where groundwater flows naturally from a rock or the soil onto the land surface or into a water body.",
+        "broader": "riverPlainSystemSetting"
+      },
+      "abandonedRiverChannelSetting": {
+        "id": "abandonedRiverChannelSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/abandonedRiverChannelSetting",
+        "prefLabel": "abandoned river channel setting",
+        "definition": "A drainage channel along which runoff no longer occurs, as on an alluvial fan.",
+        "broader": "riverPlainSystemSetting"
+      },
+      "cutoffMeanderSetting": {
+        "id": "cutoffMeanderSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/cutoffMeanderSetting",
+        "prefLabel": "cutoff meander setting",
+        "definition": "The abandoned, bow- or horseshoe-shaped channel of a former meander, left when the stream formed a cutoff across a narrow meander neck. Note that these are typically lakes, thus also lacustrine.",
+        "broader": "riverPlainSystemSetting"
+      },
+      "floodplainSetting": {
+        "id": "floodplainSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/floodplainSetting",
+        "prefLabel": "floodplain setting",
+        "definition": "The surface or strip of relatively smooth land adjacent to a river channel, constructed by the present river in its existing regimen and covered with water when the river overflows its banks. It is built of alluvium carried by the river during floods and deposited in the sluggish water beyond the influence of the swiftest current. A river has one floodplain and may have one or more terraces representing abandoned floodplains.",
+        "broader": "riverPlainSystemSetting"
+      },
+      "riverChannelSetting": {
+        "id": "riverChannelSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/riverChannelSetting",
+        "prefLabel": "river channel setting",
+        "definition": "The bed where a natural body of surface water flows or may flow; a natural passageway or depression of perceptible extent containing continuously or periodically flowing water, or forming a connecting link between two bodies of water; a watercourse.",
+        "broader": "riverPlainSystemSetting"
+      },
+      "braidedRiverChannelSetting": {
+        "id": "braidedRiverChannelSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/braidedRiverChannelSetting",
+        "prefLabel": "braided river channel setting",
+        "definition": "A stream that divides into or follows an interlacing or tangled network of several small branching and reuniting shallow channels separated from each other by ephemeral branch islands or channel bars, resembling in plan the strands of a complex braid. Such a stream is generally believed to indicate an inability to carry all of its load, such as an overloaded and aggrading stream flowing in a wide channel on a floodplain.",
+        "broader": "riverChannelSetting"
+      },
+      "meanderingRiverChannelSetting": {
+        "id": "meanderingRiverChannelSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/meanderingRiverChannelSetting",
+        "prefLabel": "meandering river channel setting",
+        "definition": "Produced by a mature stream swinging from side to side as it flows across its floodplain or shifts its course laterally toward the convex side of an original curve.",
+        "broader": "riverChannelSetting"
+      },
+      "wetlandSetting": {
+        "id": "wetlandSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/wetlandSetting",
+        "prefLabel": "wetland setting",
+        "definition": "Setting characterized by gentle surface slope, and at least intermittent presence of standing water, which may be fresh, brackish, or saline. Wetland may be terrestrial setting or shoreline setting.",
+        "broader": "earthSurfaceSetting"
+      },
+      "swampOrMarshSetting": {
+        "id": "swampOrMarshSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/swampOrMarshSetting",
+        "prefLabel": "swamp or marsh setting",
+        "definition": "A water-saturated, periodically wet or continually flooded area with the surface not deeply submerged, essentially without the formation of peat. Marshes are characterized by sedges, cattails, rushes, or other aquatic and grasslike vegetation. Swamps are characterized by tree and brush vegetation.",
+        "broader": "wetlandSetting"
+      },
+      "tidalMarshSetting": {
+        "id": "tidalMarshSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/tidalMarshSetting",
+        "prefLabel": "tidal marsh setting",
+        "definition": "A marsh bordering a coast (as in a shallow lagoon or sheltered bay), formed of mud and of the resistant mat of roots of salt-tolerant plants, and regularly inundated during high tides; a marshy tidal flat.",
+        "broader": "swampOrMarshSetting"
+      },
+      "extraTerrestrialSetting": {
+        "id": "extraTerrestrialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/extraTerrestrialSetting",
+        "prefLabel": "extra-terrestrial setting",
+        "definition": "Material originated outside of the Earth or its atmosphere.",
+        "broader": ""
+      },
+      "tectonicallyDefinedSetting": {
+        "id": "tectonicallyDefinedSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/tectonicallyDefinedSetting",
+        "prefLabel": "tectonically defined setting",
+        "definition": "Setting defined by relationships to tectonic plates on or in the Earth.",
+        "broader": ""
+      },
+      "backArcSetting": {
+        "id": "backArcSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/backArcSetting",
+        "prefLabel": "back arc setting",
+        "definition": "Tectonic setting adjacent to a volcanic arc formed above a subduction zone. The back arc setting is on the opposite side of the volcanic arc from the trench at which oceanic crust is consumed in a subduction zone. Back arc setting includes terrane that is affected by plate margin and arc-related processes.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "extendedTerraneSetting": {
+        "id": "extendedTerraneSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/extendedTerraneSetting",
+        "prefLabel": "extended terrane setting",
+        "definition": "Tectonic setting characterized by extension of the upper crust, manifested by formation of rift valleys or basin and range physiography, with arrays of low to high angle normal faults. Modern examples include the North Sea, East Africa, and the Basin and Range of the North American Cordillera. Typically applied in continental crustal settings.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "continentalRiftSetting": {
+        "id": "continentalRiftSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/continentalRiftSetting",
+        "prefLabel": "continental rift setting",
+        "definition": "Extended terrane in a zone of continental breakup, may include incipient oceanic crust. Examples include Red Sea, East Africa Rift, Salton Trough.",
+        "broader": "extendedTerraneSetting"
+      },
+      "hotSpotSetting": {
+        "id": "hotSpotSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/hotSpotSetting",
+        "prefLabel": "hot spot setting",
+        "definition": "Setting in a zone of high heat flow from the mantle. Typically identified in intraplate settings, but hot spot may also interact with active plate margins (Iceland...). Includes surface manifestations like volcanic center, but also includes crust and mantle manifestations as well.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "intraplateTectonicSetting": {
+        "id": "intraplateTectonicSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/intraplateTectonicSetting",
+        "prefLabel": "intraplate tectonic setting",
+        "definition": "Tectonically stable setting far from any active plate margins.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "seamountSetting": {
+        "id": "seamountSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/seamountSetting",
+        "prefLabel": "seamount setting",
+        "definition": "Setting that consists of a conical mountain on the ocean floor (guyot). Typically characterized by active volcanism, pelagic sedimentation. If the mountain is high enough to reach the photic zone, carbonate production may result in reef building to produce a carbonate platform or atoll setting.",
+        "broader": "intraplateTectonicSetting"
+      },
+      "inactiveSpreadingCenterSetting": {
+        "id": "inactiveSpreadingCenterSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/inactiveSpreadingCenterSetting",
+        "prefLabel": "inactive spreading center setting",
+        "definition": "Setting on oceanic crust formed at a spreading center that has been abandoned.",
+        "broader": "intraplateTectonicSetting"
+      },
+      "passiveContinentalMarginSetting": {
+        "id": "passiveContinentalMarginSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/passiveContinentalMarginSetting",
+        "prefLabel": "passive continental margin setting",
+        "definition": "Boundary of continental crust into oceanic crust of an oceanic basin that is not a subduction zone or transform fault system. Generally is rifted margin formed when ocean basin was initially formed.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "plateMarginSetting": {
+        "id": "plateMarginSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/plateMarginSetting",
+        "prefLabel": "plate margin setting",
+        "definition": "Tectonic setting at the boundary between two tectonic plates.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "subductionZoneSetting": {
+        "id": "subductionZoneSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/subductionZoneSetting",
+        "prefLabel": "subduction zone setting",
+        "definition": "Tectonic setting at which a tectonic plate, usually oceanic, is moving down into the mantle beneath another overriding plate.",
+        "broader": "plateMarginSetting"
+      },
+      "transformPlateBoundarySetting": {
+        "id": "transformPlateBoundarySetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/transformPlateBoundarySetting",
+        "prefLabel": "transform plate boundary setting",
+        "definition": "Plate boundary at which the adjacent plates are moving laterally relative to each other.",
+        "broader": "plateMarginSetting"
+      },
+      "volcanicArcSetting": {
+        "id": "volcanicArcSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/volcanicArcSetting",
+        "prefLabel": "volcanic arc setting",
+        "definition": "A generally curvillinear belt of volcanoes above a subduction zone.",
+        "broader": "plateMarginSetting"
+      },
+      "activeContinentalMarginSetting": {
+        "id": "activeContinentalMarginSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/activeContinentalMarginSetting",
+        "prefLabel": "active continental margin setting",
+        "definition": "Plate margin setting on continental crust.",
+        "broader": "plateMarginSetting"
+      },
+      "activeSpreadingCenterSetting": {
+        "id": "activeSpreadingCenterSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/activeSpreadingCenterSetting",
+        "prefLabel": "active spreading center setting",
+        "definition": "Divergent plate margin at which new oceanic crust is being formed.",
+        "broader": "plateMarginSetting"
+      },
+      "fastSpreadingCenterSetting": {
+        "id": "fastSpreadingCenterSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/fastSpreadingCenterSetting",
+        "prefLabel": "fast spreading center setting",
+        "definition": "Spreading center at which the opening rate is greater than 100 mm per year.",
+        "broader": "activeSpreadingCenterSetting"
+      },
+      "mediumRateSpreadingCenterSetting": {
+        "id": "mediumRateSpreadingCenterSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/mediumRateSpreadingCenterSetting",
+        "prefLabel": "medium-rate spreading center setting",
+        "definition": "Spreading center at which the opening rate is between 50 and 100 mm per year.",
+        "broader": "activeSpreadingCenterSetting"
+      },
+      "slowSpreadingCenterSetting": {
+        "id": "slowSpreadingCenterSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/slowSpreadingCenterSetting",
+        "prefLabel": "slow spreading center setting",
+        "definition": "Spreading center at which the opening rate is less than 50 mm per year.",
+        "broader": "activeSpreadingCenterSetting"
+      },
+      "forearcSetting": {
+        "id": "forearcSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/forearcSetting",
+        "prefLabel": "forearc setting",
+        "definition": "Tectonic setting between a subduction-related trench and a volcanic arc.",
+        "broader": "plateMarginSetting"
+      },
+      "plateSpreadingCenterSetting": {
+        "id": "plateSpreadingCenterSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/plateSpreadingCenterSetting",
+        "prefLabel": "plate spreading center setting",
+        "definition": "Tectonic setting where new oceanic crust is being or has been formed at a divergent plate boundary. Includes active and inactive spreading centers.",
+        "broader": "tectonicallyDefinedSetting"
+      },
+      "agriculturalAndForestryLandSetting": {
+        "id": "agriculturalAndForestryLandSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/agriculturalAndForestryLandSetting",
+        "prefLabel": "agricultural and forestry land setting",
+        "definition": "Human influence setting with intensive agricultural activity or forestry land use,  including forest plantations.",
+        "broader": ""
+      },
+      "carbonateShelfSetting": {
+        "id": "carbonateShelfSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/carbonateShelfSetting",
+        "prefLabel": "carbonate shelf setting",
+        "definition": "A type of carbonate platform that is attached to a continental landmass and a region of sedimentation that is analogous to shelf environments for terrigenous clastic deposition. A carbonate shelf may receive some supply of material from the adjacent landmass.",
+        "broader": ""
+      },
+      "deltaSlopeSetting": {
+        "id": "deltaSlopeSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/deltaSlopeSetting",
+        "prefLabel": "delta slope setting",
+        "definition": "Slope setting within the deltaic  system.",
+        "broader": ""
+      },
+      "dwellingAreaSetting": {
+        "id": "dwellingAreaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/dwellingAreaSetting",
+        "prefLabel": "dwelling area setting",
+        "definition": "Dwelling area setting.",
+        "broader": ""
+      },
+      "fanDeltaSetting": {
+        "id": "fanDeltaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/fanDeltaSetting",
+        "prefLabel": "fan delta setting",
+        "definition": "A debris-flow or sheetflood-dominated alluvial fan build out into a lake or the sea.",
+        "broader": ""
+      },
+      "foreshore": {
+        "id": "foreshore",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/foreshore",
+        "prefLabel": "foreshore",
+        "definition": "A foreshore is the region between mean high water and mean low water marks of the tides. Depending on the tidal range this may be a vertical distance of anything from a few tens of centimetres to many meters.",
+        "broader": ""
+      },
+      "glaciofluvialSetting": {
+        "id": "glaciofluvialSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glaciofluvialSetting",
+        "prefLabel": "glaciofluvial setting",
+        "definition": "A setting influenced by glacial meltwater streams. This setting can be sub- en-, supra- and proglacial.",
+        "broader": ""
+      },
+      "glaciolacustrineSetting": {
+        "id": "glaciolacustrineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glaciolacustrineSetting",
+        "prefLabel": "glaciolacustrine setting",
+        "definition": "Ice margin lakes and other lakes related to glaciers. Where meltwater streams enter the lake, sands and gravels are deposited in deltas. At the lake floor, typivally rhythmites (varves) are deposited.Ice margin lakes and other lakes related to glaciers.",
+        "broader": ""
+      },
+      "glaciomarineSetting": {
+        "id": "glaciomarineSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/glaciomarineSetting",
+        "prefLabel": "glaciomarine setting",
+        "definition": "A marine environment influenced by glaciers. Dropstone diamictons and dropstone muds are typical deposits in this environment.",
+        "broader": ""
+      },
+      "graben": {
+        "id": "graben",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/graben",
+        "prefLabel": "graben",
+        "definition": "An elongate trough or basin, bounded on both sides by high-angle normal faults that dip toward one another. It is a structual form that may or may not be geomorphologically expressed as a rift valley.",
+        "broader": ""
+      },
+      "halfGraben": {
+        "id": "halfGraben",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/halfGraben",
+        "prefLabel": "half-graben",
+        "definition": "A elongate , asymmetric trough or basin bounded on one side by a normal fault.",
+        "broader": ""
+      },
+      "humanEnvironmentSetting": {
+        "id": "humanEnvironmentSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/humanEnvironmentSetting",
+        "prefLabel": "human environment setting",
+        "definition": "Human environment setting.",
+        "broader": ""
+      },
+      "intracratonicSetting": {
+        "id": "intracratonicSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/intracratonicSetting",
+        "prefLabel": "intracratonic setting",
+        "definition": "A basin formed within the interior region  of a continent, away from plate boundaries.",
+        "broader": ""
+      },
+      "landReclamationSetting": {
+        "id": "landReclamationSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/landReclamationSetting",
+        "prefLabel": "land reclamation setting",
+        "definition": "Human influence setting making land capable of more intensive use by changing its general character, as by drainage of excessively wet land, irrigation of arid or semiarid land; or recovery of submerged land from seas, lakes and rivers, restoration after human-induced degradation by removing toxic substances.",
+        "broader": ""
+      },
+      "miningAreaSetting": {
+        "id": "miningAreaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/miningAreaSetting",
+        "prefLabel": "mining area setting",
+        "definition": "Human influence setting in which mineral resources are extracted from the ground.",
+        "broader": ""
+      },
+      "saltPan": {
+        "id": "saltPan",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/saltPan",
+        "prefLabel": "salt pan",
+        "definition": "A small, undrained, shallow depression in which water accumulates and evaporates, leaving a salt deposit.",
+        "broader": ""
+      },
+      "wasteAndMaterialDepositionAreaSetting": {
+        "id": "wasteAndMaterialDepositionAreaSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/wasteAndMaterialDepositionAreaSetting",
+        "prefLabel": "waste and material deposition area setting",
+        "definition": "Human influence setting in which non-natural or natural materials from elsewhere are deposited.",
+        "broader": ""
+      },
+      "wetToSubHumidSetting": {
+        "id": "wetToSubHumidSetting",
+        "iri": "http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/wetToSubHumidSetting",
+        "prefLabel": "wet to sub-humid setting",
+        "definition": "A Wet to sub-humid climate is according Thornthwaite's climate classification system associated with rain forests (wet), forests (humid) and grassland (sub-humid).",
+        "broader": ""
+      }
+    },
+    "composition": {
+      "onlyPart": {
+        "id": "onlyPart",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/onlyPart",
+        "prefLabel": "only part",
+        "definition": "Entire described unit consists of a single part or constituent.",
+        "broader": ""
+      },
+      "partOf": {
+        "id": "partOf",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/partOf",
+        "prefLabel": "part of",
+        "definition": "The geologic unit part role is not known in any greater detail.",
+        "broader": ""
+      },
+      "facies": {
+        "id": "facies",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/facies",
+        "prefLabel": "facies",
+        "definition": "Represents a particular body of rock that is a lateral variant of a lithostratigraphic unit, or a variant of a lithodemic unit.",
+        "broader": "partOf"
+      },
+      "inclusion": {
+        "id": "inclusion",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/inclusion",
+        "prefLabel": "inclusion",
+        "definition": "Geologic unit constituent is present as masses with generally sharp boundaries enclosed within a matrix of some other material.",
+        "broader": "partOf"
+      },
+      "lithosome": {
+        "id": "lithosome",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/lithosome",
+        "prefLabel": "lithosome",
+        "definition": "A kind of rock body that has multiple occurrences in a single geologic unit. A mass of rock of uniform character, characterized by geometry, composition, and internal structure.",
+        "broader": "partOf"
+      },
+      "stratigraphicPart": {
+        "id": "stratigraphicPart",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/stratigraphicPart",
+        "prefLabel": "stratigraphic part",
+        "definition": "A geologic unit part that occupies a particular stratigraphic position within a geologic unit.",
+        "broader": "partOf"
+      },
+      "unspecifiedPartRole": {
+        "id": "unspecifiedPartRole",
+        "iri": "http://inspire.ec.europa.eu/codelist/CompositionPartRoleValue/unspecifiedPartRole",
+        "prefLabel": "unspecified part role",
+        "definition": "Geologic unit part with unspecified role.",
+        "broader": "partOf"
+      }
+    }
+  }
+}
