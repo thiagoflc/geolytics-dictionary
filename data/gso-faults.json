@@ -1,0 +1,751 @@
+{
+  "meta": {
+    "generated": "2026-05-01T10:46:50.379Z",
+    "source": "https://raw.githubusercontent.com/Loop3D/GKM/master/Loop3D-GSO/Modules/GSO-Geologic_Structure_Fault.ttl",
+    "module": "GSO-Geologic_Structure_Fault",
+    "base_uri": "https://w3id.org/gso/1.0/geologicfault/ontology",
+    "prefixes": {
+      "dct": "http://purl.org/dc/terms/",
+      "gsfa": "https://w3id.org/gso/1.0/geologicfault/",
+      "gsgq": "https://w3id.org/gso/1.0/geologicquality/",
+      "gsoc": "https://w3id.org/gso/1.0/common/",
+      "gsog": "https://w3id.org/gso/1.0/geology/",
+      "gsoq": "https://w3id.org/gso/1.0/quality/",
+      "gsos": "https://w3id.org/gso/1.0/geologicstructure/",
+      "gspr": "https://w3id.org/gso/1.0/geologicprocess/",
+      "owl": "http://www.w3.org/2002/07/owl#",
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "schema": "https://schema.org/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
+      "xsd": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "license": "CC BY 4.0",
+    "attribution": "Brodaric & Richard 2021, GSC Open File 8796, DOI 10.4095/328296",
+    "class_count": 52
+  },
+  "classes": {
+    "gso:Detachment_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Detachment_Fault",
+      "gso_class": "Detachment_Fault",
+      "pref_label_en": "detachment fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A regional-scale, large displacement, low-angle normal fault.",
+      "parents": [
+        "gsfa:Low_Angle_Normal_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Dextral": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Dextral",
+      "gso_class": "Dextral",
+      "pref_label_en": "dextral",
+      "pref_label_fr": "dextre",
+      "definition_en_canonical": "In plan view, the side opposite the observer is displaced to the right.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Dextral_Strike_Slip_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Dextral_Strike_Slip_Fault",
+      "gso_class": "Dextral_Strike_Slip_Fault",
+      "pref_label_en": "dextral strike slip fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault with right-lateral strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the fault, and right-lateral displacement over more than half the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Strike_Slip_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Dip_Separation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Dip_Separation",
+      "gso_class": "Dip_Separation",
+      "pref_label_en": "dip separation sense",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A fault along which there is some separation parallel to the dip of the fault.",
+      "parents": [
+        "gsfa:Fault_Separation"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Dip_Slip": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Dip_Slip",
+      "gso_class": "Dip_Slip",
+      "pref_label_en": "dip slip",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The net slip of the fault lies in the dip direction of the fault.",
+      "parents": [
+        "gsfa:Fault_Slip"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Ductile_Shear_Zone": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Ductile_Shear_Zone",
+      "gso_class": "Ductile_Shear_Zone",
+      "pref_label_en": "Ductile Shear Zone",
+      "pref_label_fr": null,
+      "definition_en_canonical": "a broadly planar zone of shear displacement within which deformation has occurred without loss of material continuity",
+      "parents": [
+        "gsfa:Fault_Zone"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Extraction": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Extraction",
+      "gso_class": "Extraction",
+      "pref_label_en": "extraction",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Displacement across a fault is substantially in the direction perpendicular to the fault. The fault-parallel displacement is effectively zero.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Extraction_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Extraction_Fault",
+      "gso_class": "Extraction_Fault",
+      "pref_label_en": "extraction fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A fault whose two sides have approached each other substantially in the direction perpendicular to the fault.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
+      "gso_class": "Fault",
+      "pref_label_en": "Fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A discrete surface, or zone of discrete surfaces, with some thickness, separating two rock masses across which one mass has slid past the other and characterized by brittle deformation.",
+      "parents": [
+        "gsos:Fracture"
+      ],
+      "sources": [
+        "this vocabulary"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault_Movement_Magnitude": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault_Movement_Magnitude",
+      "gso_class": "Fault_Movement_Magnitude",
+      "pref_label_en": "Displacement magnitude",
+      "pref_label_fr": null,
+      "definition_en_canonical": "magnitude of slip or separation",
+      "parents": [
+        "gsoc:Physical_Quality"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault_Movement_Sense": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault_Movement_Sense",
+      "gso_class": "Fault_Movement_Sense",
+      "pref_label_en": "Fault movement sense ",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Quality that specifies the relative sense of displacement (right, left, up, down) between rocks on opposites of a fault.",
+      "parents": [
+        "gsoc:Physical_Quality"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault_Movement_Vector": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault_Movement_Vector",
+      "gso_class": "Fault_Movement_Vector",
+      "pref_label_en": "Movement Vector",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Slip vector linking piercing point on opposite sides of fault, or separation vector linking offset surface along fault trace.",
+      "parents": [
+        "gsoc:Physical_Quality"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault_Separation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault_Separation",
+      "gso_class": "Fault_Separation",
+      "pref_label_en": "Separation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "a vector (magnitude and orientation) specifying the distance between the intersection of a surface on opposite sides of a displacment surface. In 3-D is the projection of a vector normal to the displaced surface into the displacment surface, but might also be specified as offset of the intersection of displacement surface and marker surface in some other profile view (e.g. horizontal/map view, or a cross section)",
+      "parents": [
+        "gsoc:Physical_Quality"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault_Slip": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault_Slip",
+      "gso_class": "Fault_Slip",
+      "pref_label_en": "Slip",
+      "pref_label_fr": null,
+      "definition_en_canonical": "a vector (magnitude and orientation) that links a peircing point on opposite sides of a displacement surface.",
+      "parents": [
+        "gsoc:Physical_Quality"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fault_Zone": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Fault_Zone",
+      "gso_class": "Fault_Zone",
+      "pref_label_en": "Fault Zone ",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A material spatial feature that contains one or more fault surfaces as well as deformed rocks related to the faults located between and adjacent to the fault traces",
+      "parents": [
+        "gsoc:Material_Feature"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Generic_Decollement_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Generic_Decollement_Fault",
+      "gso_class": "Generic_Decollement_Fault",
+      "pref_label_en": "generic decollement",
+      "pref_label_fr": "decollement",
+      "definition_en_canonical": "A large-displacement (kilometers or tens of kilometers) shallowly dipping to subhorizontal fault or shear zone.",
+      "parents": [
+        "gsfa:Low_Angle_Fault"
+      ],
+      "sources": [
+        "Neuendorf et al. 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:High_Angle_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/High_Angle_Fault",
+      "gso_class": "High_Angle_Fault",
+      "pref_label_en": "high angle fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault that dips at least 45 degrees over more than half of its recognized extent, for which slip or separation is not explicitly specified.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:High_Angle_Normal_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/High_Angle_Normal_Fault",
+      "gso_class": "High_Angle_Normal_Fault",
+      "pref_label_en": "high angle normal fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault that dips at least 45 degrees over more than half of the recognized extent of the fault with the hanging wall displaced from a structurally higher position relative to footwall rocks.",
+      "parents": [
+        "gsfa:High_Angle_Fault",
+        "gsfa:Normal_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:High_Angle_Reverse_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/High_Angle_Reverse_Fault",
+      "gso_class": "High_Angle_Reverse_Fault",
+      "pref_label_en": "high angle reverse",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Reverse fault that dips at least 45 degrees over more than half of its recognized extent, for which slip or separation is not explicitly specified.",
+      "parents": [
+        "gsfa:High_Angle_Fault",
+        "gsfa:Reverse_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Horizontal_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Horizontal_Fault",
+      "gso_class": "Horizontal_Fault",
+      "pref_label_en": "horizontal fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault that dips less than 10 degrees over more than half the recognized extent of the fault.",
+      "parents": [
+        "gsfa:Low_Angle_Fault"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Left_Normal_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Left_Normal_Fault",
+      "gso_class": "Left_Normal_Fault",
+      "pref_label_en": "left normal fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with left-lateral strike-parallel component and normal dip-parallel component over at least half the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Oblique_Slip_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Left_Reverse_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Left_Reverse_Fault",
+      "gso_class": "Left_Reverse_Fault",
+      "pref_label_en": "left reverse fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with left-lateral strike-parallel component and reverse dip-parallel component over at least half the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Oblique_Slip_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Low_Angle_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Low_Angle_Fault",
+      "gso_class": "Low_Angle_Fault",
+      "pref_label_en": "low angle fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault that dips less than 45 degrees over more than half of the recognized extent of the fault.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Low_Angle_Normal_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Low_Angle_Normal_Fault",
+      "gso_class": "Low_Angle_Normal_Fault",
+      "pref_label_en": "low angle normal fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault that dips less than 45 degrees over more than half of the recognized extent of the fault with the hanging wall displaced from a structurally higher position relative to footwall rocks.",
+      "parents": [
+        "gsfa:Low_Angle_Fault",
+        "gsfa:Normal_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Mixed_Extraction_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Mixed_Extraction_Fault",
+      "gso_class": "Mixed_Extraction_Fault",
+      "pref_label_en": "mixed extraction fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An extraction fault with some displacement within the fault plane.",
+      "parents": [
+        "gsfa:Extraction_Fault"
+      ],
+      "sources": [
+        "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:No_Movement_Sense": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/No_Movement_Sense",
+      "gso_class": "No_Movement_Sense",
+      "pref_label_en": "no movement sense",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The fault-parallel displacement is effectively zero, as in an extraction fault.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Normal": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Normal",
+      "gso_class": "Normal",
+      "pref_label_en": "normal",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The hanging wall has been displaced down relative to the footwall, dip of fault usually 45-90 degrees.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Normal_Dextral": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Normal_Dextral",
+      "gso_class": "Normal_Dextral",
+      "pref_label_en": "normal dextral",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The movement sense includes both normal and dextral components.",
+      "parents": [
+        "gsfa:Dextral",
+        "gsfa:Normal"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Normal_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Normal_Fault",
+      "gso_class": "Normal_Fault",
+      "pref_label_en": "normal fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector over more than half recognized extent of the fault, and for which the fault dips consistently in the same direction, and for which the hanging wall has been displaced down relative to the footwall.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Normal_Sinistral": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Normal_Sinistral",
+      "gso_class": "Normal_Sinistral",
+      "pref_label_en": "normal sinistral",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The movement sense includes both normal and sinistral components.",
+      "parents": [
+        "gsfa:Normal",
+        "gsfa:Sinistral"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Oblique_Slip": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Oblique_Slip",
+      "gso_class": "Oblique_Slip",
+      "pref_label_en": "oblique slip",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The net slip of the fault lies between the strike and dip directions of the fault, the slip vector rakes between 10 and 80 degrees in the plane of the fault.",
+      "parents": [
+        "gsfa:Fault_Slip"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia), SMR"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Oblique_Slip_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Oblique_Slip_Fault",
+      "gso_class": "Oblique_Slip_Fault",
+      "pref_label_en": "oblique slip fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Pure_Extraction_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Pure_Extraction_Fault",
+      "gso_class": "Pure_Extraction_Fault",
+      "pref_label_en": "pure extraction fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "An extraction fault with no discernible displacement within the fault plane.",
+      "parents": [
+        "gsfa:Extraction_Fault"
+      ],
+      "sources": [
+        "Froitzheim, N., Pleuger, J. & Nagel, T.J., 2006. Extraction faults. Journal of Structural Geology v28, pp. 1388-1395."
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Reverse": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Reverse",
+      "gso_class": "Reverse",
+      "pref_label_en": "reverse",
+      "pref_label_fr": "inverse",
+      "definition_en_canonical": "The hanging wall has been displaced up relative to the footwall, dip of fault usually greater than 45 degrees.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Reverse_Dextral": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Reverse_Dextral",
+      "gso_class": "Reverse_Dextral",
+      "pref_label_en": "reverse dextral",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The movement sense includes both reverse and dextral components.",
+      "parents": [
+        "gsfa:Dextral",
+        "gsfa:Reverse"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Reverse_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Reverse_Fault",
+      "gso_class": "Reverse_Fault",
+      "pref_label_en": "reverse fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault with dip-parallel displacement component of slip vector more than 10 times the strike-parallel component of the slip vector at at least one location along the mapped trace of the fault, and the fault dips consistently in the same direction with the hanging wall displaced up relative to the footwall over at least half the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Reverse_Sinistral": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Reverse_Sinistral",
+      "gso_class": "Reverse_Sinistral",
+      "pref_label_en": "reverse sinistral",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The movement sense includes both reverse and sinistral components.",
+      "parents": [
+        "gsfa:Reverse",
+        "gsfa:Sinistral"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Right_Normal_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Right_Normal_Fault",
+      "gso_class": "Right_Normal_Fault",
+      "pref_label_en": "right normal fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with right-lateral strike-parallel component and normal dip-parallel component of slip over at least half the mapped trace of the fault",
+      "parents": [
+        "gsfa:Oblique_Slip_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Right_Reverse_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Right_Reverse_Fault",
+      "gso_class": "Right_Reverse_Fault",
+      "pref_label_en": "right reverse fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "High angle fault with slip vector that has ratio of strike-parallel to dip-parallel displacement between 10 to 1 and 1 to 10 at at least one location along the mapped trace, with a right-lateral strike-parallel component and reverse dip-parallel component of slip over at least half the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Oblique_Slip_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Scissor_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Scissor_Fault",
+      "gso_class": "Scissor_Fault",
+      "pref_label_en": "scissor fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with the opposite sense of offset in the opposite direction.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "Neuendorf et al 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Scissor_Movement": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Scissor_Movement",
+      "gso_class": "Scissor_Movement",
+      "pref_label_en": "scissor",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A fault on which there is increasing offset or separation along the strike from an initial point of no offset, with reverse offset in the opposite direction.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "Neuendorf et al 2005"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Sinistral": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Sinistral",
+      "gso_class": "Sinistral",
+      "pref_label_en": "sinistral",
+      "pref_label_fr": null,
+      "definition_en_canonical": "In plan view the side opposite the observer is displaced to the left.",
+      "parents": [
+        "gsfa:Fault_Movement_Sense"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Sinistral_Strike_Slip_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Sinistral_Strike_Slip_Fault",
+      "gso_class": "Sinistral_Strike_Slip_Fault",
+      "pref_label_en": "sinistral strike slip fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault with left-lateral strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the fault, and left-lateral displacement over more than half the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Strike_Slip_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Strike_Separation": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Strike_Separation",
+      "gso_class": "Strike_Separation",
+      "pref_label_en": "strike separation",
+      "pref_label_fr": null,
+      "definition_en_canonical": "planar features indicate some displacement parallel to the strike of the fault.",
+      "parents": [
+        "gsfa:Fault_Separation"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Strike_Slip": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Strike_Slip",
+      "gso_class": "Strike_Slip",
+      "pref_label_en": "strike slip",
+      "pref_label_fr": null,
+      "definition_en_canonical": "The net slip of the fault (slip vector) is parallel to the strike of the fault.",
+      "parents": [
+        "gsfa:Fault_Slip"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia), this vocabulary"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Strike_Slip_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Strike_Slip_Fault",
+      "gso_class": "Strike_Slip_Fault",
+      "pref_label_en": "strike slip fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault with strike-parallel displacement component of slip vector more than 10 times the dip-parallel component of the slip vector at at least one location along the mapped trace of the fault.",
+      "parents": [
+        "gsfa:Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Thrust_Decollement_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Thrust_Decollement_Fault",
+      "gso_class": "Thrust_Decollement_Fault",
+      "pref_label_en": "thrust decollement",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A regional-scale low-angle thrust fault.",
+      "parents": [
+        "gsfa:Thrust_Fault"
+      ],
+      "sources": [
+        "GeoScience Victoria and others"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Thrust_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Thrust_Fault",
+      "gso_class": "Thrust_Fault",
+      "pref_label_en": "thrust fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "Fault that dips less than 45 degrees over more than half of the recognized extent of the fault, with a hanging wall displaced from a structurally deeper position relative to footwall rocks.",
+      "parents": [
+        "gsfa:Low_Angle_Fault",
+        "gsfa:Reverse_Fault"
+      ],
+      "sources": [
+        "CGI faulttype SKOS vocabulary 2016-10-19"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Transcurrent_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Transcurrent_Fault",
+      "gso_class": "Transcurrent_Fault",
+      "pref_label_en": "transcurrent",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A large scale strike-slip fault in which the fault surface is steeply inclined.",
+      "parents": [
+        "gsfa:High_Angle_Fault",
+        "gsfa:Strike_Slip_Fault"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Transform_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Transform_Fault",
+      "gso_class": "Transform_Fault",
+      "pref_label_en": "transform",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A variety of strike-slip fault along which the displacement suddenly stops or changes form, typically associated with mid-ocean ridges.",
+      "parents": [
+        "gsfa:Strike_Slip_Fault"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Wrench_Fault": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicfault/Wrench_Fault",
+      "gso_class": "Wrench_Fault",
+      "pref_label_en": "wrench fault",
+      "pref_label_fr": null,
+      "definition_en_canonical": "A strike slip fault in which the fault plane dips at least 45 degrees over more than half of the recognized extent of the fault.",
+      "parents": [
+        "gsfa:High_Angle_Fault",
+        "gsfa:Strike_Slip_Fault"
+      ],
+      "sources": [
+        "GGIC vocabularies working group (Australia)"
+      ],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    },
+    "gso:Fracture": {
+      "owl_uri": "https://w3id.org/gso/1.0/geologicstructure/Fracture",
+      "gso_class": "Fracture",
+      "pref_label_en": null,
+      "pref_label_fr": null,
+      "definition_en_canonical": null,
+      "parents": [
+        "gsog:Geologic_Structure"
+      ],
+      "sources": [],
+      "attribution": "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296"
+    }
+  }
+}

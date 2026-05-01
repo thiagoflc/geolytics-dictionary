@@ -648,6 +648,7 @@ export function buildCardsHtml(graph) {
     </div>
     <nav class="ext-links" aria-label="Visualizações">
       <a href="index.html" title="Visão de grafo D3 force-directed">Grafo D3</a>
+      <a href="gso-cards.html" title="Cards das classes GSO/Loop3D (camada 7)">GSO L7</a>
       <a href="data/geolytics.ttl" title="Ontologia em Turtle">TTL</a>
       <a href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geolytics-dictionary/data/geolytics.ttl" target="_blank" rel="noopener" title="Visualizar OWL no WebVOWL">WebVOWL</a>
     </nav>
@@ -679,3 +680,177 @@ export function buildCardsHtml(graph) {
 }
 
 export default buildCardsHtml;
+
+/* ─────────────────────────────────────────────────────────────
+ * GSO cards — pyLODE-style page for Layer 7 (Loop3D Geoscience Ontology)
+ *
+ * Input: array of modules from loadGsoModules() in generate.js, each:
+ *   { meta: { module, base_uri, class_count, license, attribution },
+ *     classes: { "gso:Foo": { gso_class, owl_uri, pref_label_en, ... }, ... } }
+ *
+ * Output: standalone HTML string for gso-cards.html. Reuses CSS/CLIENT_JS.
+ * ───────────────────────────────────────────────────────────── */
+
+const GSO_MODULE_LABELS = {
+  'GSO-Geologic_Structure_Fault':     'Falhas',
+  'GSO-Geologic_Structure_Fold':      'Dobras',
+  'GSO-Geologic_Structure_Foliation': 'Foliação',
+  'GSO-Geologic_Structure_Lineation': 'Lineação',
+  'GSO-Geologic_Structure_Contact':   'Contatos',
+};
+
+const GSO_MODULE_COLORS = {
+  'GSO-Geologic_Structure_Fault':     '#D85A30',
+  'GSO-Geologic_Structure_Fold':      '#C77B30',
+  'GSO-Geologic_Structure_Foliation': '#7F77DD',
+  'GSO-Geologic_Structure_Lineation': '#378ADD',
+  'GSO-Geologic_Structure_Contact':   '#639922',
+};
+
+function gsoModuleLabel(m) {
+  return GSO_MODULE_LABELS[m] || m.replace(/^GSO-Geologic_Structure_/, '');
+}
+
+function gsoModuleColor(m) {
+  return GSO_MODULE_COLORS[m] || '#777';
+}
+
+function renderGsoCard(c, moduleName, indexByCurie) {
+  const id = `gso-${c.gso_class}`;
+  const titleFr = c.pref_label_fr ? ` <span class="label-en">${escapeHtml(c.pref_label_fr)} (fr)</span>` : '';
+  const def = c.definition_en_canonical
+    ? `<p class="def-en">${escapeHtml(c.definition_en_canonical)}</p>`
+    : '';
+  const parents = (c.parents || []).map(p => {
+    const localName = p.includes(':') ? p.split(':')[1] : p;
+    const target = indexByCurie.get(p) || indexByCurie.get(localName);
+    if (target) return `<a class="badge badge-rel" href="#gso-${escapeAttr(target.gso_class)}">${escapeHtml(p)}</a>`;
+    return `<span class="badge" title="External or unresolved CURIE">${escapeHtml(p)}</span>`;
+  }).join('');
+  const sources = renderBadgeList(c.sources || [], 'badge badge-dataset');
+  const owlLink = c.owl_uri
+    ? `<a class="badge badge-en" href="${escapeAttr(c.owl_uri)}" target="_blank" rel="noopener">${escapeHtml(c.owl_uri)}</a>`
+    : '';
+  const haystack = [
+    c.gso_class,
+    c.pref_label_en,
+    c.pref_label_fr,
+    ...(c.parents || []),
+  ].filter(Boolean).join(' ').toLowerCase();
+
+  const color = gsoModuleColor(moduleName);
+  const modLabel = gsoModuleLabel(moduleName);
+
+  return `
+      <section class="card" id="${escapeAttr(id)}" data-type="${escapeAttr(moduleName)}" data-search="${escapeAttr(haystack)}">
+        <header class="card-header">
+          <h2 class="card-title">
+            ${escapeHtml(c.pref_label_en || c.gso_class)}${titleFr}
+          </h2>
+          <div class="card-meta">
+            <span class="pill" style="--pill-color:${color}">${escapeHtml(modLabel)}</span>
+            <span class="legal-source">CC BY 4.0</span>
+            <a class="card-anchor" href="#${escapeAttr(id)}" title="Permalink">#</a>
+          </div>
+        </header>
+        ${def}
+        <div class="rows">
+          ${renderRow('GSO class', `<code>${escapeHtml(c.gso_class)}</code>`)}
+          ${renderRow('OWL URI', owlLink)}
+          ${renderRow('Subclasse de', parents)}
+          ${renderRow('Fonte original', sources)}
+          ${renderRow('Atribuição', `<span class="badge">${escapeHtml(c.attribution || '')}</span>`)}
+        </div>
+      </section>`;
+}
+
+function renderGsoSidebar(byModule) {
+  const order = Object.keys(GSO_MODULE_LABELS).filter(m => byModule.has(m));
+  return order.map(m => {
+    const list = byModule.get(m).slice().sort((a, b) =>
+      (a.pref_label_en || a.gso_class).localeCompare(b.pref_label_en || b.gso_class, 'en')
+    );
+    const items = list.map(c => `
+            <li>
+              <a href="#gso-${escapeAttr(c.gso_class)}" data-search="${escapeAttr((c.pref_label_en || c.gso_class).toLowerCase())}">
+                <span class="dot" style="background:${gsoModuleColor(m)}"></span>${escapeHtml(c.pref_label_en || c.gso_class)}
+              </a>
+            </li>`).join('');
+    return `
+        <div class="toc-group" data-type="${escapeAttr(m)}">
+          <h3 class="toc-heading">
+            <span class="dot" style="background:${gsoModuleColor(m)}"></span>${escapeHtml(gsoModuleLabel(m))}
+            <span class="toc-count">${list.length}</span>
+          </h3>
+          <ul class="toc-list">${items}
+          </ul>
+        </div>`;
+  }).join('');
+}
+
+export function buildGsoCardsHtml(modules) {
+  const all = [];
+  const indexByCurie = new Map();
+  for (const mod of modules) {
+    for (const [curie, c] of Object.entries(mod.classes)) {
+      const enriched = { ...c, _curie: curie, _module: mod.meta.module, attribution: mod.meta.attribution };
+      all.push(enriched);
+      indexByCurie.set(curie, enriched);
+      indexByCurie.set(c.gso_class, enriched);
+    }
+  }
+  all.sort((a, b) => (a.pref_label_en || a.gso_class).localeCompare(b.pref_label_en || b.gso_class, 'en'));
+
+  const byModule = groupBy(all, c => c._module);
+  const compact = (s) => s.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ');
+  const cardsHtml = all.map(c => compact(renderGsoCard(c, c._module, indexByCurie))).join('\n');
+  const sidebarHtml = compact(renderGsoSidebar(byModule));
+  const generated = new Date().toISOString();
+
+  return `<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geolytics Dictionary — GSO (Layer 7) Cards</title>
+  <meta name="description" content="Cartões navegáveis das classes da Geoscience Ontology (Loop3D, Brodaric & Richard 2021), camada 7 do Geolytics Dictionary.">
+  <style>${CSS}</style>
+</head>
+<body>
+  <header class="site-header">
+    <h1>Geolytics Dictionary <span style="color:var(--fg-muted);font-weight:400">— GSO L7 Cards</span></h1>
+    <div class="search-wrap">
+      <input id="search-input" type="search" placeholder="Buscar por classe, label EN ou CURIE…" autocomplete="off" spellcheck="false">
+    </div>
+    <nav class="ext-links" aria-label="Navegação">
+      <a href="index.html" title="Visão de grafo D3 force-directed">Grafo</a>
+      <a href="index-cards.html" title="Cards das entidades L1-L6">Entity Cards</a>
+      <a href="https://github.com/Loop3D/GKM" target="_blank" rel="noopener" title="Repositório GKM">GKM</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Sumário">
+      ${sidebarHtml}
+    </aside>
+
+    <main class="main">
+      <div class="intro">
+        <strong>${all.length}</strong> classes GSO em <strong>${byModule.size}</strong> módulos estruturais ·
+        gerado em <code>${escapeHtml(generated)}</code>.
+        Importado de <a href="https://github.com/Loop3D/GKM" target="_blank" rel="noopener">Loop3D/GKM</a>
+        (Brodaric &amp; Richard 2021, GSC OF 8796, <a href="https://doi.org/10.4095/328296" target="_blank" rel="noopener">DOI 10.4095/328296</a>, CC BY 4.0).
+        Cobre falhas, dobras, foliação, lineação e contatos — gap estrutural complementar a OSDU/ontopetro.
+      </div>
+
+      <div id="no-match" class="no-match">Nenhuma classe corresponde à busca.</div>
+
+      ${cardsHtml}
+    </main>
+  </div>
+
+  <script>${CLIENT_JS}</script>
+</body>
+</html>
+`;
+}
