@@ -125,7 +125,7 @@ jobs:
       - name: Install python package
         run: |
           python -m pip install --upgrade pip
-          pip install -e "python/[graph,rag]" 2>/dev/null || pip install -e python/ || true
+          pip install -e "python/[graph,rag]"
           pip install pytest
 
       - name: Run pytest
@@ -212,8 +212,10 @@ jobs:
           python - <<'EOF'
           import json, sys, os
 
+          import glob
           baseline_path = "eval/baseline.json"
-          results_path = "eval/results.json"
+          candidates = sorted(glob.glob("eval/results/graphrag_validator-*.json"))
+          results_path = candidates[-1] if candidates else ""
 
           if not os.path.exists(baseline_path):
               print("No baseline.json found — skipping regression check.")
@@ -228,8 +230,8 @@ jobs:
           with open(results_path) as f:
               results = json.load(f)
 
-          baseline_score = baseline.get("composite", 0.0)
-          current_score = results.get("composite", 0.0)
+          baseline_score = baseline.get("scores", {}).get("composite_score", 0.0)
+          current_score = results.get("scores", {}).get("composite_score", 0.0)
           threshold = 0.05  # 5% regression threshold
 
           drop = baseline_score - current_score
@@ -247,8 +249,9 @@ jobs:
       - name: Update baseline on main
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          if [ -f eval/results.json ]; then
-            cp eval/results.json eval/baseline.json
+          LATEST=$(ls -1t eval/results/graphrag_validator-*.json 2>/dev/null | head -1)
+          if [ -n "$LATEST" ]; then
+            cp "$LATEST" eval/baseline.json
             git config user.name "github-actions[bot]"
             git config user.email "github-actions[bot]@users.noreply.github.com"
             git add eval/baseline.json
@@ -298,19 +301,17 @@ jobs:
         id: diff
         run: |
           BASE_SHA=${{ github.event.pull_request.base.sha }}
-          HEAD_SHA=${{ github.event.pull_request.head.sha }}
 
-          BASE_GRAPH=$(git show "${BASE_SHA}:data/entity-graph.json" 2>/dev/null || echo '{"nodes":[],"edges":[]}')
-          HEAD_GRAPH=$(cat data/entity-graph.json 2>/dev/null || echo '{"nodes":[],"edges":[]}')
+          git show "${BASE_SHA}:data/entity-graph.json" > /tmp/base-graph.json 2>/dev/null || echo '{"nodes":[],"edges":[]}' > /tmp/base-graph.json
+          cp data/entity-graph.json /tmp/head-graph.json 2>/dev/null || echo '{"nodes":[],"edges":[]}' > /tmp/head-graph.json
 
           python3 - <<'EOF'
           import json, os
 
-          base_raw = os.environ.get("BASE_GRAPH", '{"nodes":[],"edges":[]}')
-          head_raw = os.environ.get("HEAD_GRAPH", '{"nodes":[],"edges":[]}')
-
-          base = json.loads(base_raw)
-          head = json.loads(head_raw)
+          with open("/tmp/base-graph.json") as f:
+              base = json.load(f)
+          with open("/tmp/head-graph.json") as f:
+              head = json.load(f)
 
           base_nodes = {n.get("id") for n in base.get("nodes", [])}
           head_nodes = {n.get("id") for n in head.get("nodes", [])}
@@ -368,9 +369,6 @@ jobs:
               body_escaped = body.replace("%", "%25").replace("\n", "%0A").replace("\r", "%0D")
               f.write(f"body={body_escaped}\n")
           EOF
-        env:
-          BASE_GRAPH: ${{ env.BASE_GRAPH }}
-          HEAD_GRAPH: ${{ env.HEAD_GRAPH }}
 
       - name: Set graph variables
         id: graph-vars
