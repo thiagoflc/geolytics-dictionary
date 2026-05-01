@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T11:33:56.713Z",
+    "generated": "2026-05-01T15:58:49.205Z",
     "count": 20,
     "description": "Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP."
   },
@@ -37,7 +37,10 @@
         "Formação Quissamã",
         "Formação Carapebus",
         "Formação Itapema"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/GeologicFeature",
+      "sweet_alignment_type": "skos:broadMatch",
+      "sweet_module": "realmGeol"
     },
     {
       "id": "reservatorio",
@@ -69,7 +72,10 @@
         "Reservatórios carbonáticos do pré-sal (Coquinas)",
         "Reservatórios turbidíticos de Campos",
         "Reservatório Barra Velha"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/matrRock/Rock",
+      "sweet_alignment_type": "skos:relatedMatch",
+      "sweet_module": "matrRock"
     },
     {
       "id": "sistema-deposicional",
@@ -98,7 +104,10 @@
         "Sistema turbidítico de águas profundas",
         "Sistema lacustre carbonático (pré-sal)",
         "Sistema deltaico"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/Sedimentation",
+      "sweet_alignment_type": "skos:relatedMatch",
+      "sweet_module": "procGeo"
     },
     {
       "id": "litologia",
@@ -131,7 +140,10 @@
         "Carbonato (limestone)",
         "Coquina",
         "Estromatólito"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/matrRock/Rock",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "matrRock"
     },
     {
       "id": "completacao",
@@ -160,7 +172,10 @@
         "Completação seca (dry tree)",
         "Completação molhada (subsea com ANM)",
         "Completação inteligente (smart well)"
-      ]
+      ],
+      "sweet_uri": null,
+      "sweet_alignment_type": null,
+      "sweet_module": null
     },
     {
       "id": "lamina-dagua",
@@ -191,7 +206,10 @@
         "Bacia de Campos: ~1.000 m",
         "Pré-sal de Santos: 1.900–2.400 m",
         "Foz do Amazonas: 2.000–2.880 m"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/propSpaceDistance/Depth",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "propSpaceDistance"
     },
     {
       "id": "acumulacao",
@@ -222,7 +240,10 @@
         "Acumulação de Tupi (descoberta 2006)",
         "Acumulação de Búzios",
         "Acumulação de Mero"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/GeologicFeature",
+      "sweet_alignment_type": "skos:relatedMatch",
+      "sweet_module": "realmGeol"
     },
     {
       "id": "processo-geologico",
@@ -252,7 +273,10 @@
         "Diagênese",
         "Halocinese (tectônica do sal)",
         "Migração secundária de hidrocarbonetos"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/GeologicProcess",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo"
     },
     {
       "id": "hidrocarboneto",
@@ -286,7 +310,10 @@
         "óleo cru",
         "gás natural úmido",
         "condensado"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/matrOrganics/Hydrocarbon",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics"
     },
     {
       "id": "querogenio",
@@ -315,7 +342,10 @@
         "Querogênio Tipo I (lacustre — Lagoa Feia)",
         "Querogênio Tipo II (marinho — Cretáceo)",
         "Querogênio Tipo III (deltaico)"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/matrOrganics/Kerogen",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics"
     },
     {
       "id": "migracao-hidrocarbonetos",
@@ -345,7 +375,10 @@
       "examples": [
         "Migração através do Sistema Petrolífero Lagoa Feia-Macabu",
         "Falhas extensionais como conduto de migração no pré-sal"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/FluidMigration",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo"
     },
     {
       "id": "discordancia",
@@ -376,7 +409,10 @@
       "examples": [
         "Discordância pré-Aptiana (separa pré-sal de rifte)",
         "Discordância intra-Albiana"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/Unconformity",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol"
     },
     {
       "id": "diagenese",
@@ -406,7 +442,10 @@
         "Dolomitização nos carbonatos do pré-sal",
         "Cimentação calcítica",
         "Dissolução geradora de porosidade vugular"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/Diagenesis",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo"
     },
     {
       "id": "evento-tectonico",
@@ -436,7 +475,10 @@
         "Rifteamento mesozoico (abertura do Atlântico Sul)",
         "Halocinese pós-Aptiana (sal de Santos)",
         "Inversão andina"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/procGeo/TectonicProcess",
+      "sweet_alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo"
     },
     {
       "id": "contato-geologico",
@@ -468,7 +510,10 @@
         "Contato Aptiano/Albiano (sal sobre carbonatos do pré-sal)",
         "Discordância pré-rifte",
         "Contato intrusivo entre soleira de diabásio e folhelho"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeol/GeologicContact",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol"
     },
     {
       "id": "dobra",
@@ -502,7 +547,10 @@
         "Anticlinal de Carmópolis (Bacia Sergipe-Alagoas)",
         "Estrutura dobrada de Quiriri",
         "Dobras sinrifte na Bacia do Recôncavo"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeolTectonic/Fold",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic"
     },
     {
       "id": "foliacao",
@@ -535,7 +583,10 @@
         "Xistosidade nos embasamentos cristalinos",
         "Bandamento gnáissico",
         "Estratificação cruzada em arenitos eólicos"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeolTectonic/Foliation",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic"
     },
     {
       "id": "falha-cisalhante",
@@ -568,7 +619,10 @@
         "Falhas de borda do rifte de Campos",
         "Falhas transcorrentes da Bacia Potiguar",
         "Falhamentos lístricos sinrifte"
-      ]
+      ],
+      "sweet_uri": "http://sweetontology.net/realmGeolTectonic/Fault",
+      "sweet_alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic"
     },
     {
       "id": "feature-mapeada",
@@ -596,7 +650,10 @@
       "examples": [
         "Polígono da Formação Quissamã no mapa geológico 1:250.000",
         "Traço de falha em mapa estrutural"
-      ]
+      ],
+      "sweet_uri": null,
+      "sweet_alignment_type": null,
+      "sweet_module": null
     },
     {
       "id": "metodo-perfuracao",
@@ -625,7 +682,10 @@
         "Perfuração rotativa direcional (poços horizontais do pré-sal)",
         "Sondagem com testemunho contínuo",
         "Slimhole drilling"
-      ]
+      ],
+      "sweet_uri": null,
+      "sweet_alignment_type": null,
+      "sweet_module": null
     }
   ]
 }

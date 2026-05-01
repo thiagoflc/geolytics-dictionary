@@ -181,6 +181,22 @@ export const TAXONOMIES = {
     label: 'Confidencialidade', label_en: 'Confidentiality Level',
     values: ['Público','Restrito','Confidencial','Secreto'],
   },
+  failure_modes: {
+    label: 'Modos de Ruptura de Rocha', label_en: 'Rock Failure Modes',
+    description: 'Mecanismos de ruptura de rocha usados em análise geomecânica e design de poços',
+    values: ['tensile', 'shear', 'compaction', 'ductile', 'brittle'],
+  },
+  stress_regimes: {
+    label: 'Regimes Tectônicos de Anderson', label_en: 'Anderson Tectonic Stress Regimes',
+    description: 'Classificação de Anderson (1951) dos regimes de tensão in situ baseado na magnitude relativa dos três tensores principais',
+    values: ['normal_faulting', 'strike_slip', 'reverse_faulting'],
+  },
+  mud_window_zones: {
+    label: 'Zonas da Janela de Lama', label_en: 'Mud Weight Window Zones',
+    description: 'Limites operacionais da janela de peso de lama na perfuração de poços',
+    rag_alert: 'Janela de Lama (M9 Geomecanica) != Janela de Geracao (M7 Geoquimica/Ro%). Sao conceitos completamente distintos.',
+    values: ['pore_pressure', 'collapse', 'fracture', 'overburden'],
+  },
 };
 
 /* ─────────────────────────────────────────────────────────────
@@ -247,6 +263,7 @@ export const MODULES_EXTENDED = {
     label: 'Geomecânica de Reservatório', label_en: 'Reservoir Geomechanics',
     system_origin: 'GEOMECBR, GERESIM, TrapTester, GDA',
     hierarchy_ref: 'GeomechanicsObject.md (arquivo na pasta /dados)',
+    linked_files: ['data/geomechanics.json', 'data/geomechanics-fractures.json', 'data/fracture_to_gso.json'],
     classes: [
       { id: 'C301', name: 'ModeloGeomecanico1D',   superclass: 'GeomechanicsObject', description: 'Modelo geomecânico ao longo de um poço (GEOMECBR)' },
       { id: 'C302', name: 'ModeloGeomecanico3D',   superclass: 'GeomechanicsObject', description: 'Modelo volumétrico integrado ao modelo geológico (GERESIM)' },

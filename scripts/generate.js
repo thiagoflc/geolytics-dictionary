@@ -53,6 +53,27 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
 const DRY_RUN = process.argv.includes('--dry-run');
 
+/* SWEET alignment — load synchronously from data/sweet-alignment.json.
+   Returns a Map<geolytics_id, alignment[]> used by buildTtl. */
+function loadSweetAlignmentSync() {
+  try {
+    const candidate = path.join(ROOT, 'data', 'sweet-alignment.json');
+    if (!fs.existsSync(candidate)) return new Map();
+    const data = JSON.parse(fs.readFileSync(candidate, 'utf8'));
+    const alignments = Array.isArray(data?.alignments) ? data.alignments : [];
+    const map = new Map();
+    for (const a of alignments) {
+      if (!a.geolytics_id) continue;
+      const existing = map.get(a.geolytics_id) || [];
+      existing.push(a);
+      map.set(a.geolytics_id, existing);
+    }
+    return map;
+  } catch {
+    return new Map();
+  }
+}
+
 function alignmentFor(table, id) {
   const a = table[id];
   if (!a) return { petrokgraph_uri: null, osdu_kind: null, geosciml_uri: null, geocoverage: [] };
@@ -106,6 +127,166 @@ function loadGsoModules() {
       const json = JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
       return { file: f, ...json };
     });
+}
+/* ─────────────────────────────────────────────────────────────
+ * SEISMIC MODULE (P2.8) — Aquisicao, Processamento, Inversao
+ * Sources: Yilmaz 2001, Sheriff & Geldart 1995, Russell 1988,
+ *   Connolly 1999, Chopra & Marfurt 2007, Coleou et al. 2003
+ * ───────────────────────────────────────────────────────────── */
+
+function loadSeismicModules() {
+  const dataDir = path.resolve(__dirname, '..', 'data');
+  const files = [
+    'seismic-acquisition.json',
+    'seismic-processing.json',
+    'seismic-inversion-attributes.json',
+  ];
+  return files
+    .map((f) => {
+      const p = path.join(dataDir, f);
+      if (!fs.existsSync(p)) { console.warn(`  [warn] Seismic file not found, skipping: ${f}`); return null; }
+      return JSON.parse(fs.readFileSync(p, 'utf8'));
+    })
+    .filter(Boolean);
+}
+
+function buildSeismicConsolidated() {
+  const modules = loadSeismicModules();
+  const allClasses = {};
+  const allProperties = {};
+  const allRelations = {};
+  const allInstances = {};
+  for (const m of modules) {
+    Object.assign(allClasses, m.classes || {});
+    Object.assign(allProperties, m.properties || {});
+    Object.assign(allRelations, m.relations || {});
+    Object.assign(allInstances, m.instances || {});
+  }
+  return {
+    meta: {
+      version: '1.0.0',
+      generated: NOW,
+      description: 'Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes',
+      module_count: modules.length,
+      class_count: Object.keys(allClasses).length,
+      property_count: Object.keys(allProperties).length,
+      relation_count: Object.keys(allRelations).length,
+      instance_count: Object.keys(allInstances).length,
+      sources: [
+        'Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.',
+        'Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology. Cambridge University Press.',
+        'Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.',
+        'Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.',
+        'Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes. SEG.',
+        'Coleou, T. et al. (2003). Unsupervised seismic facies classification. The Leading Edge.',
+        'OSDU SeismicAcquisitionSurvey / SeismicProcessingProject / SeismicTraceData schemas v1.0.0',
+      ],
+    },
+    modules: modules.map((m) => m.meta),
+    classes: allClasses,
+    properties: allProperties,
+    relations: allRelations,
+    instances: allInstances,
+  };
+}
+
+function buildSeismicRagChunks() {
+  const modules = loadSeismicModules();
+  const lines = [];
+  for (const m of modules) {
+    const moduleName = m.meta.module;
+    for (const [key, c] of Object.entries(m.classes || {})) {
+      const text = `Seismic class "${c.name}" (${c.name_pt || c.name}, superclass ${c.superclass || 'owl:Thing'}): ${c.description || ''}${c.osdu_kind ? ` OSDU kind: ${c.osdu_kind}.` : ''} Sources: ${(c.sources || []).join(', ')}.`;
+      lines.push({
+        id: `seismic_class_${moduleName}_${key}`,
+        type: 'seismic_class',
+        text,
+        metadata: { id: key, name: c.name, module: moduleName, superclass: c.superclass || 'owl:Thing', osdu_kind: c.osdu_kind || null },
+      });
+    }
+    for (const [key, c] of Object.entries(m.classes || {})) {
+      if (!c.superclass || !['SeismicAttribute', 'DHI', 'AVOAnomaly'].includes(c.superclass)) continue;
+      const text = `Seismic attribute "${c.name}" (${c.name_pt || c.name}): ${c.description || ''} Sources: ${(c.sources || []).join(', ')}.`;
+      lines.push({
+        id: `seismic_attribute_${moduleName}_${key}`,
+        type: 'seismic_attribute',
+        text,
+        metadata: { id: key, name: c.name, module: moduleName, attribute_superclass: c.superclass },
+      });
+    }
+    for (const [key, p] of Object.entries(m.properties || {})) {
+      if (p.rag_priority !== 'high') continue;
+      const text = `Seismic property "${p.name}" (${p.name_pt || p.name}): ${p.description || ''} Unit: ${p.unit || 'n/a'}.`;
+      lines.push({
+        id: `seismic_property_${moduleName}_${key}`,
+        type: 'seismic_class',
+        text,
+        metadata: { id: key, name: p.name, unit: p.unit, module: moduleName },
+      });
+    }
+    for (const [key, i] of Object.entries(m.instances || {})) {
+      const attrs = Object.entries(i.attributes || {}).slice(0, 8).map(([k, v]) => `${k}: ${v}`).join('; ');
+      const text = `Seismic instance (${i.id}) "${i.name}" — class ${i.class}. ${i.description || ''}${attrs ? ` Attributes: ${attrs}.` : ''} Source: ${i.source || ''}.`;
+      lines.push({
+        id: `seismic_instance_${moduleName}_${key}`,
+        type: 'seismic_class',
+        text,
+        metadata: { id: key, name: i.name, class: i.class, module: moduleName },
+      });
+    }
+  }
+  return lines;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * GEOMECHANICS — loaded from data/geomechanics.json and
+ * data/geomechanics-fractures.json (P2.7 MEM module)
+ * ───────────────────────────────────────────────────────────── */
+
+function loadGeomechanics() {
+  const dataDir = path.resolve(__dirname, '..', 'data');
+  const gmPath = path.join(dataDir, 'geomechanics.json');
+  if (!fs.existsSync(gmPath)) return null;
+  return JSON.parse(fs.readFileSync(gmPath, 'utf8'));
+}
+
+function loadGeomechanicsFractures() {
+  const dataDir = path.resolve(__dirname, '..', 'data');
+  const gmfPath = path.join(dataDir, 'geomechanics-fractures.json');
+  if (!fs.existsSync(gmfPath)) return null;
+  return JSON.parse(fs.readFileSync(gmfPath, 'utf8'));
+}
+
+function loadFractureToGso() {
+  const dataDir = path.resolve(__dirname, '..', 'data');
+  const p = path.join(dataDir, 'fracture_to_gso.json');
+  if (!fs.existsSync(p)) return null;
+  return JSON.parse(fs.readFileSync(p, 'utf8'));
+}
+
+function buildGeomechanicsApi() {
+  const gm = loadGeomechanics();
+  const gmf = loadGeomechanicsFractures();
+  const ftg = loadFractureToGso();
+  if (!gm) return { meta: { version: VERSION, generated: NOW, error: 'geomechanics.json not found' } };
+  return {
+    meta: {
+      version: VERSION,
+      generated: NOW,
+      source: 'data/geomechanics.json + data/geomechanics-fractures.json',
+      counts: {
+        classes: gm.classes ? gm.classes.length : 0,
+        properties: gm.properties ? gm.properties.length : 0,
+        relations: gm.relations ? gm.relations.length : 0,
+        instances: gm.instances ? gm.instances.length : 0,
+        fracture_classes: gmf && gmf.classes ? gmf.classes.length : 0,
+        fracture_to_gso_mappings: ftg && ftg.mappings ? ftg.mappings.length : 0,
+      },
+    },
+    geomechanics: gm,
+    fractures: gmf,
+    fracture_to_gso_crosswalk: ftg,
+  };
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -589,14 +770,31 @@ function buildGlossary() {
 }
 
 function buildExtendedTerms() {
+  // Enrich each term with sweet_uri/sweet_alignment_type/sweet_module from the SWEET alignment file.
+  const sweetMap = loadSweetAlignmentSync();
+  const terms = EXTENDED_TERMS.map((t) => {
+    const entries = sweetMap.get(t.id) || [];
+    if (entries.length === 0) {
+      return { ...t, sweet_uri: null, sweet_alignment_type: null, sweet_module: null };
+    }
+    // Use the first alignment entry for the primary sweet_uri fields on the term.
+    const primary = entries[0];
+    const uris = Array.isArray(primary.sweet_uris) ? primary.sweet_uris : [];
+    return {
+      ...t,
+      sweet_uri: uris[0] || null,
+      sweet_alignment_type: primary.alignment_type || null,
+      sweet_module: primary.sweet_module || null,
+    };
+  });
   return {
     meta: {
       version: VERSION,
       generated: NOW,
-      count: EXTENDED_TERMS.length,
+      count: terms.length,
       description: 'Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP.',
     },
-    terms: EXTENDED_TERMS,
+    terms,
   };
 }
 
@@ -857,6 +1055,10 @@ function buildFull() {
   const graph = buildEntityGraph();
   const gso = loadGsoModules();
   const gsoTotal = gso.reduce((n, m) => n + (m.meta?.class_count || 0), 0);
+  const seismic = buildSeismicConsolidated();
+  const gm = loadGeomechanics();
+  const gmf = loadGeomechanicsFractures();
+  const ftg = loadFractureToGso();
   return {
     meta: {
       version: VERSION,
@@ -883,8 +1085,18 @@ function buildFull() {
         acronyms: ac ? ac.acronyms.length : 0,
         gso_modules: gso.length,
         gso_classes: gsoTotal,
+        seismic_classes: seismic.meta.class_count,
+        seismic_properties: seismic.meta.property_count,
+        seismic_relations: seismic.meta.relation_count,
+        seismic_instances: seismic.meta.instance_count,
+        geomechanics_classes: gm ? (gm.classes || []).length : 0,
+        geomechanics_properties: gm ? (gm.properties || []).length : 0,
+        geomechanics_relations: gm ? (gm.relations || []).length : 0,
+        geomechanics_instances: gm ? (gm.instances || []).length : 0,
+        fracture_classes: gmf ? (gmf.classes || []).length : 0,
+        fracture_to_gso_mappings: ftg ? (ftg.mappings || []).length : 0,
       },
-      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)'],
+      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)', 'Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)', 'Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)'],
     },
     glossary: GLOSSARIO.map(enrichTerm),
     extended_terms: EXTENDED_TERMS,
@@ -907,6 +1119,10 @@ function buildFull() {
       attribution: m.meta.attribution,
       classes: m.classes,
     })),
+    seismic: seismic,
+    geomechanics: gm || null,
+    geomechanics_fractures: gmf || null,
+    fracture_to_gso_crosswalk: ftg || null,
   };
 }
 
@@ -949,7 +1165,12 @@ function buildApiIndex() {
       acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
       acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
       cgi_lithology:   `${BASE_URL_PLACEHOLDER}/data/cgi-lithology.json`,
+      geomechanics:    `${BASE_URL_PLACEHOLDER}/api/v1/geomechanics.json`,
+      geomechanics_data: `${BASE_URL_PLACEHOLDER}/data/geomechanics.json`,
+      geomechanics_fractures: `${BASE_URL_PLACEHOLDER}/data/geomechanics-fractures.json`,
+      fracture_to_gso: `${BASE_URL_PLACEHOLDER}/data/fracture_to_gso.json`,
       full:            `${BASE_URL_PLACEHOLDER}/data/full.json`,
+      seismic:         `${BASE_URL_PLACEHOLDER}/api/v1/seismic.json`,
       rag_corpus:      `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
       system_prompt_pt: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-ptbr.md`,
       system_prompt_en: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-en.md`,
@@ -1425,6 +1646,51 @@ function buildRagCorpus() {
     }
   }
 
+  /* type=seismic_class / seismic_attribute — P2.8 Seismic module */
+  for (const chunk of buildSeismicRagChunks()) {
+    lines.push(chunk);
+  }
+
+  /* type=geomec_class / geomec_property / geomec_instance — P2.7 MEM module */
+  const gm = loadGeomechanics();
+  if (gm) {
+    for (const c of (gm.classes || [])) {
+      const alert = c.rag_alert ? ` ALERTA RAG: ${c.rag_alert}` : '';
+      const sweet = c.sweet_alignment ? ` SWEET: ${c.sweet_alignment}.` : '';
+      const sources = Array.isArray(c.sources) ? ` Fontes: ${c.sources.join('; ')}.` : '';
+      const geo = c.geocoverage ? ` Cobertura geográfica: ${c.geocoverage}.` : '';
+      const text = `Classe geomecânica ${c.id} "${c.name}" (${c.name_en || c.name}): ${c.definition}${sweet}${sources}${geo}${alert}`;
+      lines.push({
+        id: `geomec_class_${c.id}`,
+        type: 'geomec_class',
+        text,
+        metadata: { id: c.id, name: c.name, sweet_alignment: c.sweet_alignment, geocoverage: c.geocoverage, has_alert: !!c.rag_alert },
+      });
+    }
+    for (const p of (gm.properties || [])) {
+      const unitStr = p.unit ? ` Unidade: ${p.unit}.` : '';
+      const rangeStr = (p.min_value !== undefined && p.max_value !== undefined) ? ` Faixa válida: ${p.min_value}–${p.max_value}.` : '';
+      const alert = p.rag_alert ? ` ALERTA RAG: ${p.rag_alert}` : '';
+      const text = `Propriedade geomecânica ${p.id} "${p.name}" (${p.name_en || p.name}): ${p.description}${unitStr}${rangeStr}${alert}`;
+      lines.push({
+        id: `geomec_property_${p.id}`,
+        type: 'geomec_property',
+        text,
+        metadata: { id: p.id, name: p.name, unit: p.unit || null, has_alert: !!p.rag_alert },
+      });
+    }
+    for (const inst of (gm.instances || [])) {
+      const attrs = Object.entries(inst.attributes || {}).map(([k, v]) => `${k}: ${v}`).join('; ');
+      const text = `Instância geomecânica "${inst.id}" — classe ${inst.class} (${inst.name}).${attrs ? ` Atributos: ${attrs}.` : ''} Fonte: ${inst.source}.`;
+      lines.push({
+        id: `geomec_instance_${inst.id}`,
+        type: 'geomec_instance',
+        text,
+        metadata: { id: inst.id, class: inst.class, name: inst.name, source: inst.source },
+      });
+    }
+  }
+
   return lines.map((l) => JSON.stringify(l)).join('\n') + '\n';
 }
 
@@ -1605,7 +1871,7 @@ writeJson('data/glossary.json',        buildGlossary());
 writeJson('data/extended-terms.json',  buildExtendedTerms());
 writeJson('data/datasets.json',        buildDatasets());
 writeJson('data/entity-graph.json',    buildEntityGraph());
-writeText('data/geolytics.ttl',        buildTtl(buildEntityGraph()));
+writeText('data/geolytics.ttl',        buildTtl(buildEntityGraph(), { sweetAlignment: loadSweetAlignmentSync() }));
 writeText('index-cards.html',          buildCardsHtml(buildEntityGraph()));
 writeText('gso-cards.html',            buildGsoCardsHtml(loadGsoModules()));
 writeJson('data/ontology-types.json',  buildOntologyTypes());
@@ -1624,6 +1890,8 @@ writeJson('api/v1/entities.json',     buildApiEntities());
 writeJson('api/v1/datasets.json',     buildApiDatasets());
 writeJson('api/v1/search-index.json', buildSearchIndex());
 writeJson('api/v1/acronyms.json',     buildApiAcronyms());
+writeJson('api/v1/seismic.json',      buildSeismicConsolidated());
+writeJson('api/v1/geomechanics.json', buildGeomechanicsApi());
 
 console.log('Generating ai/...');
 writeText('ai/rag-corpus.jsonl',       buildRagCorpus());
@@ -1677,3 +1945,86 @@ console.log(`  PVT fields: ${PVT_FIELDS.length}`);
 console.log(`  Systems: ${SYSTEMS.length}`);
 console.log(`  REGIS NER mappings: ${REGIS_NER_MAPPINGS.length}`);
 console.log(`  Ambiguity alerts: ${AMBIGUITY_ALERTS.length}`);
+const _seismicSummary = buildSeismicConsolidated();
+console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicSummary.meta.property_count} properties, ${_seismicSummary.meta.relation_count} relations, ${_seismicSummary.meta.instance_count} instances`);
+
+// Copy WITSML/PRODML crosswalk JSONs into api/v1/ and append RAG chunks (P2.9).
+// Idempotent: overwrites on each generate run.
+(function copyCrosswalks() {
+  const crosswalkFiles = [
+    { src: 'data/witsml-rdf-crosswalk.json', dst: 'api/v1/witsml-rdf-crosswalk.json' },
+    { src: 'data/prodml-rdf-crosswalk.json',  dst: 'api/v1/prodml-rdf-crosswalk.json' },
+  ];
+  let totalChunks = 0;
+  const ragLines = [];
+  for (const { src, dst } of crosswalkFiles) {
+    const srcPath = path.join(ROOT, src);
+    const dstPath = path.join(ROOT, dst);
+    if (!fs.existsSync(srcPath)) {
+      console.warn(`  [warn] Crosswalk source not found, skipping: ${src}`);
+      continue;
+    }
+    fs.mkdirSync(path.dirname(dstPath), { recursive: true });
+    fs.copyFileSync(srcPath, dstPath);
+    if (!DRY_RUN) console.log(`  ✓ ${dst} (copied from ${src})`);
+    else console.log(`  [dry-run] would copy ${src} → ${dst}`);
+
+    let cw;
+    try {
+      cw = JSON.parse(fs.readFileSync(srcPath, 'utf8'));
+    } catch (e) {
+      console.warn(`  [warn] Could not parse crosswalk for RAG: ${src}: ${e.message}`);
+      continue;
+    }
+    const standard = cw.meta && cw.meta.standard ? cw.meta.standard : 'Energistics';
+    for (const cls of (cw.classes || [])) {
+      const primitiveNames = (cls.primitive_properties || [])
+        .map((p) => `${p.name} (${p.type}${p.unit ? ', ' + p.unit : ''})`)
+        .join(', ');
+      const objectNames = (cls.object_properties || [])
+        .map((p) => `${p.name} -> ${p.range}`)
+        .join(', ');
+      const text = [
+        `${cls.witsml_class} (${standard}):`,
+        cls.description_en || cls.description_pt || '',
+        `WITSML URI: ${cls.witsml_uri || cls.prodml_uri}.`,
+        `Maps to: ${cls.rdf_class} (geo: namespace).`,
+        cls.osdu_kind ? `OSDU kind: ${cls.osdu_kind}.` : '',
+        cls.geocore_alignment ? `GeoCore alignment: ${cls.geocore_alignment}.` : '',
+        primitiveNames ? `Properties: ${primitiveNames}.` : '',
+        objectNames ? `Relationships: ${objectNames}.` : '',
+      ].filter(Boolean).join(' ');
+      ragLines.push(JSON.stringify({
+        id: `crosswalk_${standard.toLowerCase().replace(/[^a-z0-9]+/g, '_')}_${cls.witsml_class}`,
+        type: 'witsml_class',
+        text,
+        metadata: {
+          witsml_class: cls.witsml_class,
+          rdf_class: cls.rdf_class,
+          osdu_kind: cls.osdu_kind || null,
+          layer: cls.layer || 'layer4',
+          standard,
+          source: src,
+        },
+      }));
+      totalChunks++;
+    }
+  }
+  if (!DRY_RUN && ragLines.length > 0) {
+    const ragPath = path.join(ROOT, 'ai', 'rag-corpus.jsonl');
+    if (fs.existsSync(ragPath)) {
+      const existing = fs.readFileSync(ragPath, 'utf8');
+      const kept = existing.split('\n').filter((line) => {
+        if (!line.trim()) return false;
+        try { return JSON.parse(line).type !== 'witsml_class'; } catch { return true; }
+      });
+      fs.writeFileSync(ragPath, kept.join('\n') + '\n' + ragLines.join('\n') + '\n', 'utf8');
+      console.log(`  ✓ ai/rag-corpus.jsonl updated (+${totalChunks} witsml_class chunks)`);
+    }
+  } else if (DRY_RUN) {
+    console.log(`  [dry-run] would append ${totalChunks} witsml_class RAG chunks`);
+  }
+  if (totalChunks > 0) {
+    console.log(`  WITSML/PRODML crosswalk classes: ${totalChunks}`);
+  }
+})();

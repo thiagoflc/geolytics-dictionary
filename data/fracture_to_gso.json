@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "description": "Crosswalk between Geolytics Fracture Ontology classes and GSO/Loop3D Geoscience Ontology structural geology classes. Follows the same SKOS-based mapping pattern as data/osdu-gso-crosswalk.json.",
+    "sources": [
+      "Brodaric B., Richard S. — Geoscience Ontology (GSO) v1.0.2. GSC Open File 8796, DOI 10.4095/328296, 2021",
+      "Fjaer E. et al. — Petroleum Related Rock Mechanics, 2nd ed. Elsevier 2008",
+      "Fossen H. — Structural Geology, 2nd ed. Cambridge University Press 2016"
+    ],
+    "license_note": "Use respects CC BY 4.0 of GSO; cite Brodaric & Richard 2021, GSC OF 8796, DOI 10.4095/328296.",
+    "match_kinds": {
+      "exactMatch": "Semantically equivalent concepts — interoperable 1:1.",
+      "closeMatch": "Similar but with scope or definition nuances — use with caution in cross-queries.",
+      "broadMatch": "Geolytics fracture class is more specific than GSO class.",
+      "narrowMatch": "Geolytics fracture class is more general than GSO class."
+    }
+  },
+  "mappings": [
+    {
+      "geolytics_class": "Fault",
+      "geolytics_id": "GF006",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#Fault",
+      "gso_class": "Fault",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
+      "match": "exactMatch",
+      "note": "Both define Fault as a discrete surface or zone with shear displacement separating two rock masses. The Geolytics definition adds geomechanical context (Anderson regimes, stress controls) not present in GSO."
+    },
+    {
+      "geolytics_class": "FaultZone",
+      "geolytics_id": "GF012",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#FaultZone",
+      "gso_class": "FaultZone",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/FaultZone",
+      "match": "exactMatch",
+      "note": "Both represent the broader zone of deformation surrounding a fault slip surface. Geolytics adds the Caine et al. (1996) three-component architecture (core, damage zone, host rock) not explicitly in GSO."
+    },
+    {
+      "geolytics_class": "NormalFault",
+      "geolytics_id": "GF015",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#NormalFault",
+      "gso_class": "NormalFault",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/NormalFault",
+      "match": "exactMatch",
+      "note": "Kinematic definition is identical: hanging wall descends relative to footwall in extensional setting. Geolytics adds Anderson stress regime condition (Sv > SHmax > Shmin)."
+    },
+    {
+      "geolytics_class": "ReverseFault",
+      "geolytics_id": "GF016",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#ReverseFault",
+      "gso_class": "ReverseFault",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/ReverseFault",
+      "match": "exactMatch",
+      "note": "Kinematic definition identical: hanging wall ascends in compressional setting. Geolytics distinguishes thrust (< 30 deg) from reverse fault (> 30 deg) as sub-types, adds Anderson condition (SHmax > Shmin > Sv)."
+    },
+    {
+      "geolytics_class": "StrikeSlipFault",
+      "geolytics_id": "GF017",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#StrikeSlipFault",
+      "gso_class": "StrikeSlipFault",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/StrikeSlipFault",
+      "match": "exactMatch",
+      "note": "Both define lateral (strike-parallel) dominant displacement. Geolytics adds Anderson condition (SHmax > Sv > Shmin) and sub-types (sinistral, dextral) implied but not enumerated here."
+    },
+    {
+      "geolytics_class": "Joint",
+      "geolytics_id": "GF005",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#Joint",
+      "gso_class": "Fracture",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fracture",
+      "match": "narrowMatch",
+      "note": "GSO Fracture is the generic class for any brittle discontinuity; Geolytics Joint is specifically an opening-mode (Mode I) fracture. Joint is a sub-type of Fracture."
+    },
+    {
+      "geolytics_class": "DeformationMechanism",
+      "geolytics_id": "GF001",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#DeformationMechanism",
+      "gso_class": "Deformation",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicdeformation/Deformation",
+      "match": "closeMatch",
+      "note": "GSO Deformation is broader (any change in shape or position); Geolytics DeformationMechanism focuses on the physical process (brittle fracturing, plastic flow, pressure solution). Use closeMatch — do not substitute 1:1."
+    },
+    {
+      "geolytics_class": "FractureSet",
+      "geolytics_id": "GF009",
+      "geolytics_uri": "https://geolytics.petrobras.com.br/dict/geomechanics_fractures#FractureSet",
+      "gso_class": "JointSet",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/JointSet",
+      "match": "closeMatch",
+      "note": "GSO JointSet is restricted to joints (Mode I); Geolytics FractureSet encompasses any sub-parallel group of fractures regardless of mode (joints, shear fractures). Broader scope in Geolytics."
+    }
+  ]
+}

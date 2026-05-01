@@ -15,14 +15,38 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const PREFIXES = [
-  ['geo',  'https://geolytics.petrobras.com.br/dict/'],
-  ['osdu', 'https://w3id.org/osdu#'],
-  ['kg',   'https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#'],
-  ['skos', 'http://www.w3.org/2004/02/skos/core#'],
-  ['rdfs', 'http://www.w3.org/2000/01/rdf-schema#'],
-  ['owl',  'http://www.w3.org/2002/07/owl#'],
-  ['xsd',  'http://www.w3.org/2001/XMLSchema#'],
+  ['geo',   'https://geolytics.petrobras.com.br/dict/'],
+  ['osdu',  'https://w3id.org/osdu#'],
+  ['kg',    'https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#'],
+  ['skos',  'http://www.w3.org/2004/02/skos/core#'],
+  ['rdfs',  'http://www.w3.org/2000/01/rdf-schema#'],
+  ['owl',   'http://www.w3.org/2002/07/owl#'],
+  ['xsd',   'http://www.w3.org/2001/XMLSchema#'],
+  ['sweet', 'http://sweetontology.net/'],
 ];
+
+// Load SWEET alignment data from data/sweet-alignment.json.
+// Returns a Map: geolytics_id -> alignment record(s) (array).
+// Optional — gracefully returns empty Map if file is absent.
+async function loadSweetAlignment() {
+  try {
+    const here = path.dirname(fileURLToPath(import.meta.url));
+    const candidate = path.join(here, '..', 'data', 'sweet-alignment.json');
+    if (!fs.existsSync(candidate)) return new Map();
+    const data = JSON.parse(fs.readFileSync(candidate, 'utf8'));
+    const alignments = Array.isArray(data?.alignments) ? data.alignments : [];
+    const map = new Map();
+    for (const a of alignments) {
+      if (!a.geolytics_id) continue;
+      const existing = map.get(a.geolytics_id) || [];
+      existing.push(a);
+      map.set(a.geolytics_id, existing);
+    }
+    return map;
+  } catch {
+    return new Map();
+  }
+}
 
 // Try to load OSDU_CANONICAL from a sibling file at runtime.
 // Optional — if missing, we fall back to deriving the type slot from the kind.
@@ -108,6 +132,8 @@ export function buildTtl(graph, options = {}) {
   const nodes = Array.isArray(graph?.nodes) ? graph.nodes : [];
   const edges = Array.isArray(graph?.edges) ? graph.edges : [];
   const canonical = options.osduCanonical || null;
+  // sweetAlignment: Map<geolytics_id, alignment[]>  (optional)
+  const sweetAlignment = options.sweetAlignment instanceof Map ? options.sweetAlignment : new Map();
 
   const out = [];
 
@@ -173,6 +199,17 @@ export function buildTtl(graph, options = {}) {
     // rdfs:seeAlso → Petro KGraph URI
     if (node.petrokgraph_uri) {
       preds.push(`rdfs:seeAlso ${uriRef(node.petrokgraph_uri)}`);
+    }
+
+    // SWEET alignment triples (skos:exactMatch / closeMatch / broadMatch / narrowMatch / relatedMatch)
+    const sweetEntries = sweetAlignment.get(node.id) || [];
+    for (const sa of sweetEntries) {
+      const predicate = sa.alignment_type || 'skos:relatedMatch';
+      // predicate is expected as "skos:exactMatch" etc. — emit as-is (valid SKOS property)
+      const uris = Array.isArray(sa.sweet_uris) ? sa.sweet_uris : [];
+      for (const uri of uris) {
+        preds.push(`${predicate} ${uriRef(uri)}`);
+      }
     }
 
     // geo:geocoverage (multi-valued)
@@ -267,10 +304,13 @@ export function buildTtl(graph, options = {}) {
   return out.join('\n');
 }
 
-// Convenience: load OSDU_CANONICAL (if available) and build TTL.
+// Convenience: load OSDU_CANONICAL and SWEET alignment (if available) and build TTL.
 export async function buildTtlAsync(graph) {
-  const canonical = await loadOsduCanonical();
-  return buildTtl(graph, { osduCanonical: canonical });
+  const [canonical, sweetAlignment] = await Promise.all([
+    loadOsduCanonical(),
+    loadSweetAlignment(),
+  ]);
+  return buildTtl(graph, { osduCanonical: canonical, sweetAlignment });
 }
 
 export default buildTtl;

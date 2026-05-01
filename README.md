@@ -11,18 +11,26 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 | Caminho | Conteúdo |
 |---|---|
 | `data/glossary.json` | 23 termos ANP enriquecidos (alinhamento ontológico, sinônimos PT/EN, exemplos) |
-| `data/extended-terms.json` | 8 termos geológicos derivados de GeoCore/O3PO/GeoReservoir |
+| `data/extended-terms.json` | 20 termos geológicos derivados de GeoCore/O3PO/GeoReservoir com `sweet_uri` |
+| `data/sweet-alignment.json` | 66 alinhamentos SKOS com a ontologia SWEET (NASA/ESIPFed) — `sweet_uri`, `alignment_type`, `rationale_pt` |
+| `data/sweet-modules.json` | Catálogo dos 20 módulos SWEET usados (id, full URI, descrição, contagem de termos) |
+| `scripts/sweet-expand.js` | Módulo Node: `expand(termId)` — retorna URIs SWEET + hierarquia embutida para expansão semântica |
+| `docs/SWEET.md` | O que é SWEET, como complementa o GeoCore, como os alinhamentos são curados, como agentes os usam |
 | `data/datasets.json` | 8 datasets ANP/SEP-SIGEP com metadados de colunas |
 | `data/entity-graph.json` | Grafo de 75 entidades + 80 relações com `petrokgraph_uri`, `osdu_kind`, `geocoverage` |
 | `data/ontology-types.json` | Tipologia geoquímica (7) + níveis de processamento (3) + 4 domínios |
 | `data/ontopetro.json` | Ontologia de domínio formal — 6 módulos (20 classes, 20 properties, 20 relations, 10 instances) |
-| `data/taxonomies.json` | 9 enumerações canônicas (litologia, trapa, tipo poço ANP, SPE-PRMS, querogênio, janela de geração…) |
+| `data/taxonomies.json` | 13 enumerações canônicas (litologia, trapa, tipo poço ANP, SPE-PRMS, querogênio, janela de geração, seismic sources/receivers, AVO classes…) |
 | `data/modules-extended.json` | Módulos M7 Geoquímica, M8 Rocha, M9 Geomecânica, M10 Fluidos (camada 6 — Petrobras) |
 | `data/pvt-dictionary.json` | 34 campos PVT do sistema SIRR Petrobras com completude real |
 | `data/systems.json` | 8 sistemas corporativos (GEOQWIN, SIRR, LIMS, AIDA, GDA, GEOMECBR, GERESIM, TrapTester) |
 | `data/regis-ner-schema.json` | Mapeamento PetroGold (PUC-Rio) ↔ entity-graph para pipelines NER |
 | `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas (equipment, regulator, contract, env etc.) |
-| `data/full.json` | Merge de tudo acima |
+| `data/seismic-acquisition.json` | Modulo sismico P2.8 — Aquisicao: 20 classes, 17 propriedades, 9 relacoes, 3 instancias (Yilmaz 2001, Sheriff & Geldart 1995) |
+| `data/seismic-processing.json` | Modulo sismico P2.8 — Processamento: 18 classes, 13 propriedades, 7 relacoes, 3 instancias (Yilmaz 2001) |
+| `data/seismic-inversion-attributes.json` | Modulo sismico P2.8 — Inversao e Atributos: 25 classes, 15 propriedades, 9 relacoes, 4 instancias (Russell 1988, Connolly 1999, Chopra & Marfurt 2007, Coleou et al. 2003) |
+| `data/full.json` | Merge de tudo acima (inclui modulo sismico P2.8) |
+| `api/v1/seismic.json` | Modulo sismico consolidado (63 classes, 45 propriedades, 25 relacoes, 10 instancias) |
 | `ai/ontology-map.json` | Mapa das **6 camadas** semânticas (BFO+GeoCore, O3PO, Petro KGraph, OSDU, ANP, Petrobras Internal) |
 | `ontopetro.txt` | Ontologia de Geociências de Petróleo (fonte primária — não modificar) |
 | `api/v1/index.json` | Manifesto da API com URLs de todos os endpoints |
@@ -40,13 +48,52 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 | `data/osdu-gso-crosswalk.json` | 14 mapeamentos SKOS OSDU↔GSO |
 | `scripts/gso-extract.js` | Parser Turtle minimal para módulos GSO (sem rdflib) |
 | `scripts/generate.js` | Regenera `/data`, `/api` e `/ai` |
-| `data/geolytics-shapes.ttl` | 16 NodeShapes SHACL para validacao formal |
+| `data/geomechanics.json` | Ontologia geomecânica MEM (26 classes, 22 propriedades, 12 relações, 6 instâncias — P2.7) |
+| `data/geomechanics-fractures.json` | Ramo de fraturas: 17 classes (DeformationMechanism, FaultZone, DamageZone, etc.) + regimes de Anderson (P2.7) |
+| `data/fracture_to_gso.json` | 8 mapeamentos SKOS fracturas Geolytics ↔ GSO/Loop3D (P2.7) |
+| `api/v1/geomechanics.json` | Endpoint consolidado (geomechanics + fractures + crosswalk) |
+| `docs/GEOMECHANICS.md` | Conceito MEM, quatro pilares, mapeamento JSON, diagrama Mermaid, downstream applications (P2.7) |
+| `data/geolytics-shapes.ttl` | 22 NodeShapes SHACL (inclui UCSValueShape, PoissonRatioShape, StressTensorShape — P2.7) |
 | `data/geolytics-vocab.ttl` | Vocabulario OWL minimo de apoio (classes + propriedades) |
 | `api/v1/geolytics-shapes.ttl` | Shapes SHACL servidos publicamente |
 | `api/v1/geolytics-vocab.ttl` | Vocabulario OWL servido publicamente |
 | `scripts/validate-shacl.py` | Validador Python (pyshacl) |
 | `scripts/validate-shacl.js` | Wrapper Node.js (delega ao Python se necessario) |
 | `docs/SHACL.md` | Documentacao do sistema SHACL |
+| `docs/SEISMIC.md` | Documentacao do modulo sismico P2.8 (Aquisicao, Processamento, Inversao + diagrama Mermaid + mapeamento OSDU) |
+| `data/witsml-rdf-crosswalk.json` | 25 classes WITSML 2.0 mapeadas para `geo:` + OSDU kind + GeoCore alignment (P2.9) |
+| `data/prodml-rdf-crosswalk.json` | 15 classes PRODML 2.x mapeadas para `geo:` — inclui DTS, DAS, FiberOpticPath, FlowMeasurement (P2.9) |
+| `data/witsml-sample.xml` | XML WITSML 2.0 realista: Well + Wellbore + Trajectory (5 estacoes) + 3 WellboreMarkers (P2.9) |
+| `scripts/witsml-to-rdf.js` | Conversor WITSML XML → Turtle sem dependencias externas; CLI e API (P2.9) |
+| `api/v1/witsml-rdf-crosswalk.json` | Crosswalk WITSML servido publicamente (copiado de data/) |
+| `api/v1/prodml-rdf-crosswalk.json` | Crosswalk PRODML servido publicamente (copiado de data/) |
+| `docs/WITSML.md` | Documentacao do mapeamento WITSML/PRODML → RDF: argumento linear→grafo, schema do crosswalk, exemplos SPARQL/Cypher |
+
+---
+
+## Alinhamento SWEET (Layer 8 — NASA/ESIPFed)
+
+O Geolytics inclui **66 alinhamentos SKOS** com a ontologia [SWEET](https://github.com/ESIPFed/sweet) (Semantic Web for Earth and Environmental Terminology). Os alinhamentos cobrem tipos de rocha, minerais, fluidos, processos geológicos, reinos planetários, propriedades físicas, unidades de medida e intervalos de tempo geológico.
+
+### Expansao semantica via sweet-expand.js
+
+```bash
+node scripts/sweet-expand.js hidrocarboneto
+node scripts/sweet-expand.js diagenese --json
+node scripts/sweet-expand.js falha-cisalhante --include-siblings
+```
+
+```javascript
+import { expand } from './scripts/sweet-expand.js';
+const result = expand('hidrocarboneto', { includeHierarchy: true });
+// result.sweetUris    — URIs SWEET alinhadas
+// result.hierarchy    — pais/filhos da hierarquia embutida
+// result.alignments   — registros completos com rationale
+```
+
+As triplas SKOS (`skos:exactMatch`, `skos:closeMatch`, etc.) sao emitidas automaticamente em `data/geolytics.ttl` durante `node scripts/generate.js`.
+
+Veja `docs/SWEET.md` para documentacao completa.
 
 ---
 

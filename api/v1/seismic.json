@@ -1,0 +1,1797 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T15:58:49.205Z",
+    "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
+    "module_count": 3,
+    "class_count": 64,
+    "property_count": 45,
+    "relation_count": 25,
+    "instance_count": 10,
+    "sources": [
+      "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+      "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology. Cambridge University Press.",
+      "Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.",
+      "Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.",
+      "Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes. SEG.",
+      "Coleou, T. et al. (2003). Unsupervised seismic facies classification. The Leading Edge.",
+      "OSDU SeismicAcquisitionSurvey / SeismicProcessingProject / SeismicTraceData schemas v1.0.0"
+    ]
+  },
+  "modules": [
+    {
+      "module": "seismic_acquisition",
+      "label": "Seismic Acquisition",
+      "label_pt": "Aquisicao Sismica",
+      "version": "1.0.0",
+      "description": "Classes, properties, relations and instances covering seismic survey acquisition: survey types, sources, receivers, geometry and sampling parameters.",
+      "sources": [
+        "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+        "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology (2nd ed.). Cambridge University Press.",
+        "OSDU SeismicAcquisition schema v1.0.0"
+      ],
+      "class_count": 20,
+      "property_count": 17,
+      "relation_count": 9,
+      "instance_count": 3
+    },
+    {
+      "module": "seismic_processing",
+      "label": "Seismic Processing",
+      "label_pt": "Processamento Sismico",
+      "version": "1.0.0",
+      "description": "Classes, properties, relations and instances for the seismic processing workflow: noise suppression, deconvolution, velocity analysis, statics, NMO, DMO, migration, stacking and amplitude compensation.",
+      "sources": [
+        "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+        "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology (2nd ed.). Cambridge University Press.",
+        "OSDU SeismicProcessingProject schema v1.0.0"
+      ],
+      "class_count": 18,
+      "property_count": 13,
+      "relation_count": 7,
+      "instance_count": 3
+    },
+    {
+      "module": "seismic_inversion_attributes",
+      "label": "Seismic Inversion and Attributes",
+      "label_pt": "Inversao Sismica e Atributos",
+      "version": "1.0.0",
+      "description": "Classes, properties, relations and instances for seismic inversion (post-stack, pre-stack, AVO, FWI), rock properties derived from inversion, seismic attributes, DHI classification, AVO anomaly classes, machine-learning facies interpretation (SOM, PCA) and sweet-spot mapping.",
+      "sources": [
+        "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+        "Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.",
+        "Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.",
+        "Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes for Stratigraphic and Structural Interpretation. SEG.",
+        "Coleou, T., Poupon, M. & Azbel, K. (2003). Unsupervised seismic facies classification. The Leading Edge, 22(10), 942-953.",
+        "OSDU SeismicTraceData schema v1.0.0"
+      ],
+      "class_count": 25,
+      "property_count": 15,
+      "relation_count": 9,
+      "instance_count": 4
+    }
+  ],
+  "classes": {
+    "SeismicSurvey": {
+      "id": "SeismicSurvey",
+      "name": "SeismicSurvey",
+      "name_pt": "Levantamento Sismico",
+      "superclass": "owl:Thing",
+      "description": "A controlled experiment in which seismic energy is injected into the Earth and the returning wavefield is recorded to image subsurface structure. Encompasses geometry definition, source specification and receiver deployment. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995",
+        "OSDU"
+      ]
+    },
+    "LandSurvey": {
+      "id": "LandSurvey",
+      "name": "LandSurvey",
+      "name_pt": "Levantamento Terrestre",
+      "superclass": "SeismicSurvey",
+      "description": "Onshore seismic survey in which sources (vibroseis, dynamite) and receivers (geophones) are deployed on land. Near-surface weathering layer and statics corrections are dominant challenges. Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_acquisition",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "MarineSurvey": {
+      "id": "MarineSurvey",
+      "name": "MarineSurvey",
+      "name_pt": "Levantamento Marinho",
+      "superclass": "SeismicSurvey",
+      "description": "Offshore towed-streamer survey in which a vessel tows one or more hydrophone cables. Dominant configuration for deep-water exploration. Ref: Yilmaz 2001, ch. 1; Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "OBNSurvey": {
+      "id": "OBNSurvey",
+      "name": "OBNSurvey",
+      "name_pt": "Levantamento Sismico de Fundo Oceanico (No)",
+      "superclass": "SeismicSurvey",
+      "description": "Ocean-Bottom Node survey: autonomous 4C (Vx, Vy, Vz + hydrophone) sensor packages placed on the seabed. Enables full-azimuth illumination and longer offsets than towed streamers. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "OBSSurvey": {
+      "id": "OBSSurvey",
+      "name": "OBSSurvey",
+      "name_pt": "Levantamento Sismica de Fundo Oceanico (cabo)",
+      "superclass": "SeismicSurvey",
+      "description": "Ocean-Bottom Seismometer/Cable survey: 4C sensors deployed on cables laid on the sea floor, offering P- and S-wave recording for joint PP/PS inversion.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "Source": {
+      "id": "Source",
+      "name": "Source",
+      "name_pt": "Fonte Sismica",
+      "superclass": "owl:Thing",
+      "description": "Device or process that generates seismic energy and injects it into the ground or water. Characterised by peak frequency, dominant frequency band and energy output. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "Airgun": {
+      "id": "Airgun",
+      "name": "Airgun",
+      "name_pt": "Pistola de Ar",
+      "superclass": "Source",
+      "description": "Marine seismic source that releases compressed air (typically 2000 psi) into the water to generate an impulsive pressure wavelet. Standard deep-water acquisition source. Peak frequency range 10-100 Hz. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "operatingPressure_Pa": "1.38e7",
+        "peakFrequency_Hz": "50-80",
+        "volumeRange_cui": "40-2000"
+      },
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "Vibroseis": {
+      "id": "Vibroseis",
+      "name": "Vibroseis",
+      "name_pt": "Vibrosseis",
+      "superclass": "Source",
+      "description": "Land seismic source that emits a swept-frequency (chirp) signal via a vibrating baseplate hydraulically coupled to the ground. Allows controlled bandwidth 6-120 Hz. Requires cross-correlation with pilot sweep to produce zero-phase wavelet. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "sweepFrequencyMin_Hz": "6",
+        "sweepFrequencyMax_Hz": "120",
+        "sweepLength_s": "4-20",
+        "peakForce_N": "267000"
+      },
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "Dynamite": {
+      "id": "Dynamite",
+      "name": "Dynamite",
+      "name_pt": "Explosivo",
+      "superclass": "Source",
+      "description": "Explosive seismic source detonated in a shallow drill hole to generate a broad-band (5-200 Hz) near-impulsive wavelet. Preferred in areas of complex near-surface topography where vibroseis coupling is poor. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "SparkerArray": {
+      "id": "SparkerArray",
+      "name": "SparkerArray",
+      "name_pt": "Array de Sparker",
+      "superclass": "Source",
+      "description": "High-resolution marine source using electrical discharge to vaporise water and generate a broadband (50-1000 Hz) pressure pulse. Used in ultra-high-resolution shallow surveys. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "Receiver": {
+      "id": "Receiver",
+      "name": "Receiver",
+      "name_pt": "Receptor Sismico",
+      "superclass": "owl:Thing",
+      "description": "Sensor that converts mechanical ground or water motion into an electrical signal. Sensitivity, natural frequency and dynamic range determine the recordable bandwidth. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "Hydrophone": {
+      "id": "Hydrophone",
+      "name": "Hydrophone",
+      "name_pt": "Hidrofone",
+      "superclass": "Receiver",
+      "description": "Pressure-sensitive piezoelectric sensor towed in marine streamers. Records scalar pressure wavefield (P-wave only). Sensitivity ~10 mV/Pa. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "sensitivity_mV_per_Pa": "10",
+        "naturalFrequency_Hz": "2-5",
+        "measuredQuantity": "pressure"
+      },
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "Geophone": {
+      "id": "Geophone",
+      "name": "Geophone",
+      "name_pt": "Geofone",
+      "superclass": "Receiver",
+      "description": "Velocity-sensitive electromagnetic sensor planted on the ground surface. Natural frequency typically 10 Hz (land) or 4.5 Hz (OBC). Records particle velocity. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "naturalFrequency_Hz": "4.5-14",
+        "damping": "0.707",
+        "measuredQuantity": "particle_velocity"
+      },
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "AccelerometerMEMS": {
+      "id": "AccelerometerMEMS",
+      "name": "AccelerometerMEMS",
+      "name_pt": "Acelerometro MEMS",
+      "superclass": "Receiver",
+      "description": "Micro-Electro-Mechanical System accelerometer used in nodal acquisition systems. Flat response from DC to several hundred Hz; measures particle acceleration. Superior low-frequency response compared to geophone. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "flatBandMin_Hz": "0",
+        "flatBandMax_Hz": "800",
+        "measuredQuantity": "particle_acceleration"
+      },
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "OBC": {
+      "id": "OBC",
+      "name": "OBC",
+      "name_pt": "Cabo de Fundo Oceanico",
+      "superclass": "Receiver",
+      "description": "Ocean-Bottom Cable: multi-component cable laid on the sea floor carrying collocated hydrophones and geophones (4C). Enables dual-sensor summation and S-wave recording. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "AcquisitionGeometry": {
+      "id": "AcquisitionGeometry",
+      "name": "AcquisitionGeometry",
+      "name_pt": "Geometria de Aquisicao",
+      "superclass": "owl:Thing",
+      "description": "Spatial arrangement of sources and receivers defining illumination, fold, offset distribution and azimuth coverage. Critical for migration operator accuracy. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "StreamerLayout": {
+      "id": "StreamerLayout",
+      "name": "StreamerLayout",
+      "name_pt": "Configuracao de Streamer",
+      "superclass": "AcquisitionGeometry",
+      "description": "Marine geometry in which one or more hydrophone cables (streamers) are towed behind a vessel. Characterised by streamer length, cable separation, tow depth and number of streamers.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "streamerLength_m": "4000-12000",
+        "numberOfStreamers": "1-24",
+        "streamerDepth_m": "5-12",
+        "cableSeparation_m": "25-200"
+      },
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "NodalLayout": {
+      "id": "NodalLayout",
+      "name": "NodalLayout",
+      "name_pt": "Configuracao Nodal",
+      "superclass": "AcquisitionGeometry",
+      "description": "Land or OBN geometry employing autonomous wireless nodes deployed in a regular or irregular grid. Enables full-azimuth illumination.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "SamplingParameters": {
+      "id": "SamplingParameters",
+      "name": "SamplingParameters",
+      "name_pt": "Parametros de Amostragem",
+      "superclass": "owl:Thing",
+      "description": "Temporal and spatial sampling parameters that define the recorded wavefield fidelity and alias constraints. Must satisfy the Nyquist theorem in both time and space. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "Aliasing": {
+      "id": "Aliasing",
+      "name": "Aliasing",
+      "name_pt": "Aliasing / Dobramento Espectral",
+      "superclass": "owl:Thing",
+      "description": "Artifact arising when the sampling interval violates the Nyquist criterion, causing high-frequency energy to fold back into the recorded spectrum. Temporal aliasing: dt > 1/(2*fmax). Spatial aliasing: dx > v/(2*fmax). Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "ProcessingFlow": {
+      "id": "ProcessingFlow",
+      "name": "ProcessingFlow",
+      "name_pt": "Fluxo de Processamento",
+      "superclass": "owl:Thing",
+      "description": "Ordered sequence of processing steps applied to raw seismic data to produce an imaged, interpretable seismic volume. Each step transforms the data in a specific way. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_processing",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "NoiseSuppressionFilter": {
+      "id": "NoiseSuppressionFilter",
+      "name": "NoiseSuppressionFilter",
+      "name_pt": "Filtro de Supressao de Ruido",
+      "superclass": "owl:Thing",
+      "description": "Generic category of operations that attenuate coherent or incoherent noise in seismic data while preserving signal fidelity. Sub-types include DATVF, FXEdit and DenoiseFK. Ref: Yilmaz 2001, ch. 6.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "DATVF": {
+      "id": "DATVF",
+      "name": "DATVF",
+      "name_pt": "DATVF — Denoising Adaptativo no Dominio T-V-F",
+      "superclass": "NoiseSuppressionFilter",
+      "description": "Data-Adaptive Time-Variant Frequency filter that applies a spatially and temporally varying bandpass to track signal frequency content changes with depth/time, suppressing noise outside the signal band without over-smoothing. Ref: Yilmaz 2001.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "FXEdit": {
+      "id": "FXEdit",
+      "name": "FXEdit",
+      "name_pt": "FX Edit — Edicao no Dominio F-X",
+      "superclass": "NoiseSuppressionFilter",
+      "description": "Coherent noise attenuation in the frequency-wavenumber (f-x) domain. Random noise appears as spatially uncorrelated; linear coherent noise is predicted and subtracted via Wiener prediction. Ref: Yilmaz 2001, ch. 6.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "DenoiseFK": {
+      "id": "DenoiseFK",
+      "name": "DenoiseFK",
+      "name_pt": "Denoising FK — Filtragem F-K",
+      "superclass": "NoiseSuppressionFilter",
+      "description": "Frequency-wavenumber (f-k) fan filter that attenuates noise with apparent velocity outside the signal fan. Effective for ground-roll (slow, low-frequency) suppression in land data. Ref: Yilmaz 2001, ch. 6.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "Deconvolution": {
+      "id": "Deconvolution",
+      "name": "Deconvolution",
+      "name_pt": "Deconvolucao",
+      "superclass": "owl:Thing",
+      "description": "Inverse filtering operation that compresses the source wavelet toward a spike (spiking) or reduces its length (predictive), thereby improving temporal resolution and attenuating multiples. Assumes convolutional model: x(t) = w(t)*r(t)+n(t). Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "PredictiveDeconvolution": {
+      "id": "PredictiveDeconvolution",
+      "name": "PredictiveDeconvolution",
+      "name_pt": "Deconvolucao Preditiva",
+      "superclass": "Deconvolution",
+      "description": "Deconvolution in which a prediction distance (lag) greater than one sample is used, concentrating the operation on multiple attenuation at a specified prediction lag (equal to the two-way travel time of the peg-leg multiple). Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_processing",
+      "properties": {
+        "predictionLag_ms": "typical multiple TWTT",
+        "operatorLength_ms": "200-400"
+      },
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "SpikingDeconvolution": {
+      "id": "SpikingDeconvolution",
+      "name": "SpikingDeconvolution",
+      "name_pt": "Deconvolucao por Espicamento",
+      "superclass": "Deconvolution",
+      "description": "Wiener least-squares deconvolution with prediction lag=1 sample, aiming to collapse the wavelet to a spike and maximise temporal resolution. Assumes minimum-phase source wavelet and white reflectivity. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "NMO": {
+      "id": "NMO",
+      "name": "NMO",
+      "name_pt": "NMO — Correcao Normal Moveout",
+      "superclass": "owl:Thing",
+      "description": "Normal Moveout correction: time-shift applied to each trace to remove the hyperbolic offset-dependent arrival time difference and align reflections before stacking. Requires RMS velocity model. Introduces NMO stretch at far offsets. Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_processing",
+      "properties": {
+        "velocityField": "RMS velocity",
+        "stretchMute_percent": "typical 25-40"
+      },
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "DMO": {
+      "id": "DMO",
+      "name": "DMO",
+      "name_pt": "DMO — Correcao Dip Moveout",
+      "superclass": "owl:Thing",
+      "description": "Dip Moveout correction applied after NMO to remove the dip-dependent component of moveout, transforming the data to zero-offset equivalent before stack. Precedes post-stack migration in conventional processing. Ref: Yilmaz 2001, ch. 4.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "Stacking": {
+      "id": "Stacking",
+      "name": "Stacking",
+      "name_pt": "Empilhamento",
+      "superclass": "owl:Thing",
+      "description": "Summation of NMO-corrected CMP traces to produce a single stacked trace with improved signal-to-noise ratio proportional to sqrt(fold). Pre-stack data are retained for AVO and inversion. Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "StaticCorrection": {
+      "id": "StaticCorrection",
+      "name": "StaticCorrection",
+      "name_pt": "Correcao Estatica",
+      "superclass": "owl:Thing",
+      "description": "Time-shift applied to land seismic traces to compensate for near-surface weathering layer thickness and velocity variations, and for surface topography. Comprises elevation statics (field) and residual statics (processing). Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "AmplitudeCompensation": {
+      "id": "AmplitudeCompensation",
+      "name": "AmplitudeCompensation",
+      "name_pt": "Compensacao de Amplitude",
+      "superclass": "owl:Thing",
+      "description": "Amplitude restoration to compensate for geometrical spreading loss and anelastic (Q) attenuation with depth, making amplitude proportional to reflectivity for AVO/DHI analysis. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "SphericalDivergenceCorrection": {
+      "id": "SphericalDivergenceCorrection",
+      "name": "SphericalDivergenceCorrection",
+      "name_pt": "Correcao de Divergencia Esferica",
+      "superclass": "AmplitudeCompensation",
+      "description": "Gain function proportional to t^2 * v^2(t) that compensates for amplitude decay due to spherical divergence of the wavefront. Applied early in the flow before deconvolution. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "QCompensation": {
+      "id": "QCompensation",
+      "name": "QCompensation",
+      "name_pt": "Compensacao-Q (Atenuacao Anelastica)",
+      "superclass": "AmplitudeCompensation",
+      "description": "Inverse-Q filter that restores high-frequency amplitude and phase loss caused by anelastic attenuation (Q factor) during wave propagation. Critical in gas-saturated intervals. Ref: Yilmaz 2001, ch. 7.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "Migration": {
+      "id": "Migration",
+      "name": "Migration",
+      "name_pt": "Migracao Sismica",
+      "superclass": "owl:Thing",
+      "description": "Wave-equation-based imaging operator that collapses diffractions and repositions dipping reflectors to their true subsurface positions. Can be applied pre- or post-stack, in time or depth domain. Ref: Yilmaz 2001, ch. 4-5.",
+      "domain": "seismic_processing",
+      "abstract": true,
+      "sources": [
+        "Yilmaz 2001",
+        "Sheriff & Geldart 1995"
+      ]
+    },
+    "KirchhoffMigration": {
+      "id": "KirchhoffMigration",
+      "name": "KirchhoffMigration",
+      "name_pt": "Migracao de Kirchhoff",
+      "superclass": "Migration",
+      "description": "Asymptotic migration based on the Kirchhoff integral of the scalar wave equation. Computationally efficient for 3D pre-stack time and depth migration; less accurate than RTM in complex velocity structures. Ref: Yilmaz 2001, ch. 4.",
+      "domain": "seismic_processing",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "RTM": {
+      "id": "RTM",
+      "name": "RTM",
+      "name_pt": "RTM — Migracao Reversa no Tempo",
+      "superclass": "Migration",
+      "description": "Reverse Time Migration: two-way wave equation migration that propagates the source wavefield forward and receiver wavefield backward in time, applying an imaging condition. Handles complex velocity models (salt bodies) accurately. Computationally intensive. Ref: Yilmaz 2001, ch. 5.",
+      "domain": "seismic_processing",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "SeismicInversion": {
+      "id": "SeismicInversion",
+      "name": "SeismicInversion",
+      "name_pt": "Inversao Sismica",
+      "superclass": "owl:Thing",
+      "description": "Process of transforming seismic reflection data into quantitative rock property models (impedance, velocity, density) by solving the forward convolution model in reverse. Requires wavelet estimation and low-frequency model from wells. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "abstract": true,
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicTraceData:1.0.0",
+      "sources": [
+        "Russell 1988",
+        "Yilmaz 2001"
+      ]
+    },
+    "PostStackInversion": {
+      "id": "PostStackInversion",
+      "name": "PostStackInversion",
+      "name_pt": "Inversao Pos-Empilhamento",
+      "superclass": "SeismicInversion",
+      "description": "Inversion applied to stacked (zero-offset equivalent) seismic data to estimate acoustic impedance Ip = Vp * rho. Most mature and widely applied inversion method. Methods: band-limited, model-based, sparse-spike. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Russell 1988"
+      ]
+    },
+    "PreStackInversion": {
+      "id": "PreStackInversion",
+      "name": "PreStackInversion",
+      "name_pt": "Inversao Pre-Empilhamento",
+      "superclass": "SeismicInversion",
+      "description": "Simultaneous inversion of partial-angle stacks to estimate Vp, Vs and density using the Zoeppritz equations or Aki-Richards linearisation. Enables direct Vp/Vs and elastic impedance extraction. Ref: Russell 1988; Connolly 1999.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Russell 1988",
+        "Connolly 1999"
+      ]
+    },
+    "AVOInversion": {
+      "id": "AVOInversion",
+      "name": "AVOInversion",
+      "name_pt": "Inversao AVO",
+      "superclass": "SeismicInversion",
+      "description": "Amplitude Versus Offset inversion that extracts AVO intercept (A) and gradient (B) from CDP gathers using the Shuey two-term approximation, enabling fluid and lithology discrimination. Ref: Yilmaz 2001, ch. 11.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "ElasticImpedanceInversion": {
+      "id": "ElasticImpedanceInversion",
+      "name": "ElasticImpedanceInversion",
+      "name_pt": "Inversao de Impedancia Elastica",
+      "superclass": "PreStackInversion",
+      "description": "Inversion of angle-dependent seismic data to Elastic Impedance (EI), the far-offset analogue of acoustic impedance. Defined as EI(theta) = Vp^(1+tan^2θ) * Vs^(-8*K*sin^2θ) * rho^(1-4*K*sin^2θ) where K=Vs^2/Vp^2. Ref: Connolly 1999.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Connolly 1999"
+      ]
+    },
+    "FullWaveformInversion": {
+      "id": "FullWaveformInversion",
+      "name": "FullWaveformInversion",
+      "name_pt": "Inversao de Forma de Onda Completa (FWI)",
+      "superclass": "SeismicInversion",
+      "description": "Iterative inversion that minimises the misfit between observed and modelled waveforms to build high-resolution velocity and density models. Computationally intensive; requires low-frequency data (2-5 Hz). Ref: Yilmaz 2001.",
+      "domain": "seismic_inversion",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "AcousticImpedance": {
+      "id": "AcousticImpedance",
+      "name": "AcousticImpedance",
+      "name_pt": "Impedancia Acustica",
+      "superclass": "owl:Thing",
+      "description": "Product of P-wave velocity and bulk density: Ip = Vp * rho. Primary output of post-stack inversion. Units: g/cm3 * m/s. Used to calibrate well logs and identify lithology/fluid changes. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "properties": {
+        "unit": "g/cm3 * m/s",
+        "typical_range": "3000-20000"
+      },
+      "sources": [
+        "Russell 1988"
+      ]
+    },
+    "ElasticImpedance": {
+      "id": "ElasticImpedance",
+      "name": "ElasticImpedance",
+      "name_pt": "Impedancia Elastica",
+      "superclass": "owl:Thing",
+      "description": "Angle-dependent impedance generalisation of acoustic impedance for non-zero incidence angle, enabling pre-stack seismic calibration. Defined by Connolly (1999). Units: varies with normalisation convention.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Connolly 1999"
+      ]
+    },
+    "RockProperty": {
+      "id": "RockProperty",
+      "name": "RockProperty",
+      "name_pt": "Propriedade de Rocha",
+      "superclass": "owl:Thing",
+      "description": "Quantitative petrophysical or rock-physics parameter derived from seismic inversion or well logs. Includes Vp/Vs ratio, lambda-rho and mu-rho for fluid and lithology discrimination. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "abstract": true,
+      "sources": [
+        "Russell 1988"
+      ]
+    },
+    "VpVsRatio": {
+      "id": "VpVsRatio",
+      "name": "VpVsRatio",
+      "name_pt": "Razao Vp/Vs",
+      "superclass": "RockProperty",
+      "description": "Ratio of P-wave to S-wave velocity. Sensitive to fluid saturation: brine-saturated rock Vp/Vs ~1.9-2.1; gas-saturated Vp/Vs ~1.4-1.7 (Gassmann fluid substitution). Derived from PreStackInversion. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "properties": {
+        "typical_brine": "1.9-2.1",
+        "typical_gas": "1.4-1.7"
+      },
+      "sources": [
+        "Russell 1988"
+      ]
+    },
+    "LambdaRho": {
+      "id": "LambdaRho",
+      "name": "LambdaRho",
+      "name_pt": "Lambda-Rho",
+      "superclass": "RockProperty",
+      "description": "Product of Lame parameter lambda and density: lambda*rho. Highly sensitive to pore fluid: gas decreases lambda-rho significantly relative to brine. Part of the lambda-mu-rho (LMR) rock-physics domain. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Russell 1988"
+      ]
+    },
+    "MuRho": {
+      "id": "MuRho",
+      "name": "MuRho",
+      "name_pt": "Mu-Rho",
+      "superclass": "RockProperty",
+      "description": "Product of shear modulus mu and density. Relatively insensitive to pore fluid but sensitive to lithology (shale vs sand). Pair with LambdaRho for fluid-lithology crossplot. Ref: Russell 1988.",
+      "domain": "seismic_inversion",
+      "sources": [
+        "Russell 1988"
+      ]
+    },
+    "SeismicAttribute": {
+      "id": "SeismicAttribute",
+      "name": "SeismicAttribute",
+      "name_pt": "Atributo Sismico",
+      "superclass": "owl:Thing",
+      "description": "Quantitative measure derived from seismic data through mathematical transformation. Extracts information about structure, stratigraphy, fluid content or lithology not directly visible in the amplitude display. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "abstract": true,
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "Coherence": {
+      "id": "Coherence",
+      "name": "Coherence",
+      "name_pt": "Coerencia",
+      "superclass": "SeismicAttribute",
+      "description": "Measure of lateral similarity of seismic traces. Low coherence indicates faults, fractures or stratigraphic discontinuities. Original algorithm by Bahorich & Farmer (1995); enhanced by semblance (Marfurt et al. 1998). Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "properties": {
+        "value_range": "0-1",
+        "sensitivity": "faults, fractures, channels"
+      },
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "Curvature": {
+      "id": "Curvature",
+      "name": "Curvature",
+      "name_pt": "Curvatura",
+      "superclass": "SeismicAttribute",
+      "description": "Second spatial derivative of the seismic horizon. Most-positive and most-negative curvature highlight flexures, collapse features and subtle faults. Sensitive to fracture corridors. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "RMS": {
+      "id": "RMS",
+      "name": "RMS",
+      "name_pt": "Amplitude RMS",
+      "superclass": "SeismicAttribute",
+      "description": "Root Mean Square amplitude computed over a time window. Sensitive to reflectivity strength; often brightens over hydrocarbons (Class III AVO). Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "SpectralDecomposition": {
+      "id": "SpectralDecomposition",
+      "name": "SpectralDecomposition",
+      "name_pt": "Decomposicao Espectral",
+      "superclass": "SeismicAttribute",
+      "description": "Time-frequency analysis (short-window DFT, CWT or MP) that extracts amplitude and phase at discrete frequencies. Each frequency is sensitive to a specific bed thickness (tuning). Effective for stratigraphic thickness mapping. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "InstantaneousPhase": {
+      "id": "InstantaneousPhase",
+      "name": "InstantaneousPhase",
+      "name_pt": "Fase Instantanea",
+      "superclass": "SeismicAttribute",
+      "description": "Phase of the analytic signal derived via Hilbert transform. Highlights reflector continuity independent of amplitude strength. Useful for stratigraphic correlation. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "Dip": {
+      "id": "Dip",
+      "name": "Dip",
+      "name_pt": "Mergulho Sismico",
+      "superclass": "SeismicAttribute",
+      "description": "Inline and crossline apparent dip of the seismic event derived from the gradient of the instantaneous phase or coherence scan. Input for dip-steered attribute computation. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "unit": "ms/m or degrees",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "Azimuth": {
+      "id": "Azimuth",
+      "name": "Azimuth",
+      "name_pt": "Azimute Sismico",
+      "superclass": "SeismicAttribute",
+      "description": "Compass direction of the steepest dip of a reflector, derived jointly with the Dip attribute. Used to detect structural and fracture orientation. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "unit": "degrees",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "DHI": {
+      "id": "DHI",
+      "name": "DHI",
+      "name_pt": "DHI — Indicador Direto de Hidrocarboneto",
+      "superclass": "SeismicAttribute",
+      "description": "Direct Hydrocarbon Indicator: seismic anomaly whose character is directly controlled by the presence of gas or oil in the reservoir. Includes bright spots, flat spots, phase reversals and AVO anomalies. Ref: Yilmaz 2001, ch. 11.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "AVOAnomaly": {
+      "id": "AVOAnomaly",
+      "name": "AVOAnomaly",
+      "name_pt": "Anomalia AVO",
+      "superclass": "DHI",
+      "description": "Offset-dependent amplitude anomaly at a reservoir interface classified into four Rutherford-Williams classes (I-IV) based on normal-incidence impedance contrast and gradient sign. Class III (negative intercept, negative gradient) is the classic gas sand anomaly. Ref: Yilmaz 2001, ch. 11.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Yilmaz 2001"
+      ]
+    },
+    "SOM": {
+      "id": "SOM",
+      "name": "SOM",
+      "name_pt": "SOM — Mapa Auto-Organizavel",
+      "superclass": "owl:Thing",
+      "description": "Self-Organising Map: unsupervised neural network that projects a multi-attribute seismic volume onto a 2D topology-preserving map for facies classification without prior labels. Ref: Coleou et al. 2003, The Leading Edge.",
+      "domain": "seismic_ml",
+      "sources": [
+        "Coleou et al. 2003"
+      ]
+    },
+    "PCA": {
+      "id": "PCA",
+      "name": "PCA",
+      "name_pt": "PCA — Analise de Componentes Principais",
+      "superclass": "owl:Thing",
+      "description": "Principal Component Analysis applied to a multi-attribute seismic dataset to reduce dimensionality, decorrelate attributes and identify dominant seismic facies components before SOM or supervised classification. Ref: Coleou et al. 2003.",
+      "domain": "seismic_ml",
+      "sources": [
+        "Coleou et al. 2003"
+      ]
+    },
+    "FaciesClassification": {
+      "id": "FaciesClassification",
+      "name": "FaciesClassification",
+      "name_pt": "Classificacao de Facies Sismicas",
+      "superclass": "owl:Thing",
+      "description": "Assignment of seismic volumes or attribute maps to discrete facies classes that correlate with depositional environment or rock type. Can be supervised (with well labels) or unsupervised (SOM/PCA). Ref: Coleou et al. 2003; Chopra & Marfurt 2007.",
+      "domain": "seismic_ml",
+      "sources": [
+        "Coleou et al. 2003",
+        "Chopra & Marfurt 2007"
+      ]
+    },
+    "SweetSpot": {
+      "id": "SweetSpot",
+      "name": "SweetSpot",
+      "name_pt": "Sweet Spot",
+      "superclass": "owl:Thing",
+      "description": "Geospatially bounded zone identified by the intersection of favourable seismic attributes (DHI, AVO anomaly, high porosity inversion) indicating an exploration or production target with elevated hydrocarbon potential. Ref: Chopra & Marfurt 2007.",
+      "domain": "seismic_attributes",
+      "sources": [
+        "Chopra & Marfurt 2007"
+      ]
+    }
+  },
+  "properties": {
+    "samplingInterval": {
+      "id": "samplingInterval",
+      "name": "samplingInterval",
+      "name_pt": "Intervalo de Amostragem",
+      "description": "Time interval between consecutive recorded samples. Standard values: 1 ms (high-resolution), 2 ms (conventional), 4 ms (low-frequency). Must be dt <= 1/(2*fNyquist). Ref: Yilmaz 2001.",
+      "unit": "ms",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "typical_values": "1-4",
+      "rag_priority": "high"
+    },
+    "recordLength": {
+      "id": "recordLength",
+      "name": "recordLength",
+      "name_pt": "Comprimento do Registro",
+      "description": "Total duration of each recorded seismic trace, from shot instant to end of recording. Typical 6-10 s for deep targets.",
+      "unit": "s",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "typical_values": "4-12"
+    },
+    "fold": {
+      "id": "fold",
+      "name": "fold",
+      "name_pt": "Multiplicidade / Fold",
+      "description": "Number of independent seismic traces that contribute to a single stacked trace after CMP sorting. Higher fold improves signal-to-noise ratio. Standard 3D: 60-120x. Ref: Yilmaz 2001.",
+      "unit": "dimensionless",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:integer",
+      "typical_values": "30-180",
+      "rag_priority": "high"
+    },
+    "offset": {
+      "id": "offset",
+      "name": "offset",
+      "name_pt": "Afastamento",
+      "description": "Distance between source and receiver. Minimum offset determines shallow resolution; maximum offset determines depth penetration and NMO velocity resolution. Must be non-negative. Ref: Yilmaz 2001.",
+      "unit": "m",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "typical_values": "0-8000"
+    },
+    "NyquistFrequency": {
+      "id": "NyquistFrequency",
+      "name": "NyquistFrequency",
+      "name_pt": "Frequencia de Nyquist",
+      "description": "Maximum alias-free frequency: fN = 1/(2*dt). For dt=2ms, fN=250Hz. Ref: Yilmaz 2001, eq. 1-1.",
+      "unit": "Hz",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "formula": "1 / (2 * samplingInterval_s)",
+      "rag_priority": "high"
+    },
+    "signalBandwidth": {
+      "id": "signalBandwidth",
+      "name": "signalBandwidth",
+      "name_pt": "Banda do Sinal",
+      "description": "Frequency range of meaningful signal energy after instrument and earth filtering. Typical 8-80 Hz for conventional reflection seismics.",
+      "unit": "Hz",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:string"
+    },
+    "peakFrequency": {
+      "id": "peakFrequency",
+      "name": "peakFrequency",
+      "name_pt": "Frequencia de Pico",
+      "description": "Dominant frequency of the source wavelet or Ricker wavelet. Determines vertical resolution: lambda/4 = v/(4*fPeak). Ref: Yilmaz 2001.",
+      "unit": "Hz",
+      "domain_class": "Source",
+      "range": "xsd:decimal",
+      "typical_values": "20-80"
+    },
+    "operatingPressure": {
+      "id": "operatingPressure",
+      "name": "operatingPressure",
+      "name_pt": "Pressao de Operacao",
+      "description": "Working pressure of an airgun array at fire time. Typical value 138 bar (2000 psi). Controls peak-to-bubble ratio.",
+      "unit": "Pa",
+      "domain_class": "Airgun",
+      "range": "xsd:decimal"
+    },
+    "sweepFrequencyMin": {
+      "id": "sweepFrequencyMin",
+      "name": "sweepFrequencyMin",
+      "name_pt": "Frequencia Minima do Sweep",
+      "description": "Lowest frequency in the vibroseis pilot sweep.",
+      "unit": "Hz",
+      "domain_class": "Vibroseis",
+      "range": "xsd:decimal"
+    },
+    "sweepFrequencyMax": {
+      "id": "sweepFrequencyMax",
+      "name": "sweepFrequencyMax",
+      "name_pt": "Frequencia Maxima do Sweep",
+      "description": "Highest frequency in the vibroseis pilot sweep.",
+      "unit": "Hz",
+      "domain_class": "Vibroseis",
+      "range": "xsd:decimal"
+    },
+    "sweepLength": {
+      "id": "sweepLength",
+      "name": "sweepLength",
+      "name_pt": "Duracao do Sweep",
+      "description": "Duration of the vibroseis sweep signal in seconds. Longer sweeps improve signal-to-noise ratio after correlation.",
+      "unit": "s",
+      "domain_class": "Vibroseis",
+      "range": "xsd:decimal"
+    },
+    "streamerLength": {
+      "id": "streamerLength",
+      "name": "streamerLength",
+      "name_pt": "Comprimento do Streamer",
+      "description": "Total active length of a towed hydrophone cable. Controls maximum offset and hence depth penetration.",
+      "unit": "m",
+      "domain_class": "StreamerLayout",
+      "range": "xsd:decimal",
+      "typical_values": "4000-12000"
+    },
+    "numberOfStreamers": {
+      "id": "numberOfStreamers",
+      "name": "numberOfStreamers",
+      "name_pt": "Numero de Streamers",
+      "description": "Count of towed hydrophone cables. Increases cross-line coverage and survey efficiency.",
+      "unit": "dimensionless",
+      "domain_class": "StreamerLayout",
+      "range": "xsd:integer"
+    },
+    "gridSpacing": {
+      "id": "gridSpacing",
+      "name": "gridSpacing",
+      "name_pt": "Espacamento de Grade",
+      "description": "In-line and cross-line CMP bin dimensions. Determines lateral spatial aliasing limit: dx <= v/(2*fmax). Typical 12.5x12.5m to 25x25m in 3D surveys.",
+      "unit": "m",
+      "domain_class": "AcquisitionGeometry",
+      "range": "xsd:string"
+    },
+    "waterDepth": {
+      "id": "waterDepth",
+      "name": "waterDepth",
+      "name_pt": "Lamina d'Agua",
+      "description": "Water depth at survey location. Determines ghost frequency, node deployment logistics and cable operation window.",
+      "unit": "m",
+      "domain_class": "MarineSurvey",
+      "range": "xsd:decimal"
+    },
+    "receiverSensitivity": {
+      "id": "receiverSensitivity",
+      "name": "receiverSensitivity",
+      "name_pt": "Sensibilidade do Receptor",
+      "description": "Transduction efficiency of a receiver. For hydrophones: mV/Pa; for geophones: V/(m/s).",
+      "unit": "V/(m/s) or mV/Pa",
+      "domain_class": "Receiver",
+      "range": "xsd:decimal"
+    },
+    "surveyArea": {
+      "id": "surveyArea",
+      "name": "surveyArea",
+      "name_pt": "Area do Levantamento",
+      "description": "Total area covered by the seismic survey polygon.",
+      "unit": "km2",
+      "domain_class": "SeismicSurvey",
+      "range": "xsd:decimal"
+    },
+    "processingStep": {
+      "id": "processingStep",
+      "name": "processingStep",
+      "name_pt": "Passo de Processamento",
+      "description": "Ordered step in the processing flow, referencing the class of the operation applied.",
+      "unit": "dimensionless",
+      "domain_class": "ProcessingFlow",
+      "range": "xsd:string"
+    },
+    "stepOrder": {
+      "id": "stepOrder",
+      "name": "stepOrder",
+      "name_pt": "Ordem do Passo",
+      "description": "Integer index of the processing step within the flow (1 = first).",
+      "unit": "dimensionless",
+      "domain_class": "ProcessingFlow",
+      "range": "xsd:integer"
+    },
+    "operatorLength": {
+      "id": "operatorLength",
+      "name": "operatorLength",
+      "name_pt": "Comprimento do Operador",
+      "description": "Length of the deconvolution Wiener filter operator.",
+      "unit": "ms",
+      "domain_class": "Deconvolution",
+      "range": "xsd:integer"
+    },
+    "predictionLag": {
+      "id": "predictionLag",
+      "name": "predictionLag",
+      "name_pt": "Lag de Predicao",
+      "description": "Prediction distance in predictive deconvolution, set to the expected peg-leg multiple TWTT.",
+      "unit": "ms",
+      "domain_class": "PredictiveDeconvolution",
+      "range": "xsd:integer"
+    },
+    "velocityFieldType": {
+      "id": "velocityFieldType",
+      "name": "velocityFieldType",
+      "name_pt": "Tipo de Campo de Velocidade",
+      "description": "Type of velocity model used in NMO or migration: RMS, interval, tomographic.",
+      "unit": "enum",
+      "domain_class": "NMO",
+      "range": "xsd:string"
+    },
+    "stretchMute": {
+      "id": "stretchMute",
+      "name": "stretchMute",
+      "name_pt": "Mute de Estiramento",
+      "description": "Maximum tolerable NMO stretch in percent; traces beyond this limit are muted to prevent low-frequency noise contamination of the stack.",
+      "unit": "percent",
+      "domain_class": "NMO",
+      "range": "xsd:decimal"
+    },
+    "qFactor": {
+      "id": "qFactor",
+      "name": "qFactor",
+      "name_pt": "Fator Q",
+      "description": "Quality factor: ratio of elastic energy stored to energy dissipated per cycle. Low Q (20-100) = high attenuation; high Q (200-1000) = low attenuation. Used in Q-compensation filter design.",
+      "unit": "dimensionless",
+      "domain_class": "QCompensation",
+      "range": "xsd:decimal",
+      "typical_values": "20-1000",
+      "rag_priority": "high"
+    },
+    "migrationAlgorithm": {
+      "id": "migrationAlgorithm",
+      "name": "migrationAlgorithm",
+      "name_pt": "Algoritmo de Migracao",
+      "description": "Algorithm used in the migration step: Kirchhoff, RTM, FWI, Phase-Shift.",
+      "unit": "enum",
+      "domain_class": "Migration",
+      "range": "xsd:string"
+    },
+    "migrationDomain": {
+      "id": "migrationDomain",
+      "name": "migrationDomain",
+      "name_pt": "Dominio de Migracao",
+      "description": "Whether migration is performed in time or depth domain.",
+      "unit": "enum",
+      "domain_class": "Migration",
+      "range": "xsd:string"
+    },
+    "bandpassFilterLow": {
+      "id": "bandpassFilterLow",
+      "name": "bandpassFilterLow",
+      "name_pt": "Frequencia de Corte Inferior",
+      "description": "Low-frequency cut of a bandpass filter applied during processing.",
+      "unit": "Hz",
+      "domain_class": "NoiseSuppressionFilter",
+      "range": "xsd:decimal"
+    },
+    "bandpassFilterHigh": {
+      "id": "bandpassFilterHigh",
+      "name": "bandpassFilterHigh",
+      "name_pt": "Frequencia de Corte Superior",
+      "description": "High-frequency cut of a bandpass filter applied during processing.",
+      "unit": "Hz",
+      "domain_class": "NoiseSuppressionFilter",
+      "range": "xsd:decimal"
+    },
+    "gainFunction": {
+      "id": "gainFunction",
+      "name": "gainFunction",
+      "name_pt": "Funcao de Ganho",
+      "description": "Mathematical form of the amplitude correction applied: t2v2, AGC, balance.",
+      "unit": "enum",
+      "domain_class": "AmplitudeCompensation",
+      "range": "xsd:string"
+    },
+    "staticShift": {
+      "id": "staticShift",
+      "name": "staticShift",
+      "name_pt": "Deslocamento Estatico",
+      "description": "Time shift in milliseconds applied to a trace by static correction.",
+      "unit": "ms",
+      "domain_class": "StaticCorrection",
+      "range": "xsd:decimal"
+    },
+    "acousticImpedance_value": {
+      "id": "acousticImpedance_value",
+      "name": "acousticImpedance_value",
+      "name_pt": "Valor de Impedancia Acustica",
+      "description": "Numerical value of acoustic impedance in g/cm3 * m/s. Typical sand: 6000-10000; shale: 7000-12000; carbonates: 12000-20000.",
+      "unit": "g/cm3 * m/s",
+      "domain_class": "AcousticImpedance",
+      "range": "xsd:decimal",
+      "typical_values": "3000-20000",
+      "rag_priority": "high"
+    },
+    "elasticImpedance_angle": {
+      "id": "elasticImpedance_angle",
+      "name": "elasticImpedance_angle",
+      "name_pt": "Angulo de Incidencia (EI)",
+      "description": "Angle of incidence at which the elastic impedance is computed, typically 15, 30 or 45 degrees.",
+      "unit": "degrees",
+      "domain_class": "ElasticImpedance",
+      "range": "xsd:decimal"
+    },
+    "vpVsRatio_value": {
+      "id": "vpVsRatio_value",
+      "name": "vpVsRatio_value",
+      "name_pt": "Valor da Razao Vp/Vs",
+      "description": "Numerical value of the Vp/Vs ratio. Gas: 1.4-1.7; brine: 1.9-2.1; carbonates: 1.7-2.0.",
+      "unit": "dimensionless",
+      "domain_class": "VpVsRatio",
+      "range": "xsd:decimal",
+      "rag_priority": "high"
+    },
+    "lambdaRho_value": {
+      "id": "lambdaRho_value",
+      "name": "lambdaRho_value",
+      "name_pt": "Valor Lambda-Rho",
+      "description": "lambda*rho in GPa*g/cm3. Decreases significantly in gas-saturated intervals.",
+      "unit": "GPa * g/cm3",
+      "domain_class": "LambdaRho",
+      "range": "xsd:decimal"
+    },
+    "muRho_value": {
+      "id": "muRho_value",
+      "name": "muRho_value",
+      "name_pt": "Valor Mu-Rho",
+      "description": "mu*rho in GPa*g/cm3. Sensitive to rock framework; not to pore fluid.",
+      "unit": "GPa * g/cm3",
+      "domain_class": "MuRho",
+      "range": "xsd:decimal"
+    },
+    "avoIntercept": {
+      "id": "avoIntercept",
+      "name": "avoIntercept",
+      "name_pt": "Intercepto AVO (A)",
+      "description": "Zero-offset reflectivity coefficient A in the Shuey two-term AVO approximation R(theta) = A + B*sin^2(theta). Positive for hard kick, negative for soft kick.",
+      "unit": "dimensionless",
+      "domain_class": "AVOAnomaly",
+      "range": "xsd:decimal"
+    },
+    "avoGradient": {
+      "id": "avoGradient",
+      "name": "avoGradient",
+      "name_pt": "Gradiente AVO (B)",
+      "description": "AVO gradient B in the Shuey two-term approximation. Negative for Class III gas sands (bright spot). Ref: Yilmaz 2001.",
+      "unit": "dimensionless",
+      "domain_class": "AVOAnomaly",
+      "range": "xsd:decimal",
+      "rag_priority": "high"
+    },
+    "avoClass": {
+      "id": "avoClass",
+      "name": "avoClass",
+      "name_pt": "Classe AVO",
+      "description": "Rutherford-Williams AVO classification: I (+A, -B), II (-A or 0A, -B), IIp (+A, +B), III (-A, -B), IV (-A, +B). Ref: Yilmaz 2001.",
+      "unit": "enum",
+      "domain_class": "AVOAnomaly",
+      "range": "xsd:string",
+      "allowed_values": [
+        "I",
+        "II",
+        "IIp",
+        "III",
+        "IV"
+      ]
+    },
+    "coherenceValue": {
+      "id": "coherenceValue",
+      "name": "coherenceValue",
+      "name_pt": "Valor de Coerencia",
+      "description": "Numerical coherence or similarity value between 0 (discontinuous) and 1 (perfectly coherent).",
+      "unit": "dimensionless",
+      "domain_class": "Coherence",
+      "range": "xsd:decimal"
+    },
+    "curvatureType": {
+      "id": "curvatureType",
+      "name": "curvatureType",
+      "name_pt": "Tipo de Curvatura",
+      "description": "Most-positive (k1), most-negative (k2), mean (km) or shape index curvature.",
+      "unit": "enum",
+      "domain_class": "Curvature",
+      "range": "xsd:string"
+    },
+    "spectralFrequency": {
+      "id": "spectralFrequency",
+      "name": "spectralFrequency",
+      "name_pt": "Frequencia Espectral",
+      "description": "Frequency component extracted in spectral decomposition, corresponding to a specific tuning thickness.",
+      "unit": "Hz",
+      "domain_class": "SpectralDecomposition",
+      "range": "xsd:decimal"
+    },
+    "somNeuronCount": {
+      "id": "somNeuronCount",
+      "name": "somNeuronCount",
+      "name_pt": "Numero de Neuronios SOM",
+      "description": "Total number of neurons in the SOM grid (rows x cols). Controls classification resolution.",
+      "unit": "dimensionless",
+      "domain_class": "SOM",
+      "range": "xsd:integer"
+    },
+    "pcaVarianceExplained": {
+      "id": "pcaVarianceExplained",
+      "name": "pcaVarianceExplained",
+      "name_pt": "Variancia Explicada (PCA)",
+      "description": "Cumulative variance explained by the retained principal components, expressed as percentage. Typically 80-95% retained.",
+      "unit": "percent",
+      "domain_class": "PCA",
+      "range": "xsd:decimal"
+    },
+    "inversionMethod": {
+      "id": "inversionMethod",
+      "name": "inversionMethod",
+      "name_pt": "Metodo de Inversao",
+      "description": "Algorithm used in the inversion: band-limited, model-based, sparse-spike, simultaneous, FWI.",
+      "unit": "enum",
+      "domain_class": "SeismicInversion",
+      "range": "xsd:string"
+    },
+    "wellCount": {
+      "id": "wellCount",
+      "name": "wellCount",
+      "name_pt": "Numero de Pocos de Controle",
+      "description": "Number of wells used to constrain the low-frequency model and wavelet extraction in the inversion.",
+      "unit": "dimensionless",
+      "domain_class": "SeismicInversion",
+      "range": "xsd:integer"
+    }
+  },
+  "relations": {
+    "uses_source": {
+      "id": "uses_source",
+      "name": "uses_source",
+      "name_pt": "usa_fonte",
+      "description": "A SeismicSurvey uses one or more Source devices to generate seismic energy.",
+      "domain": "SeismicSurvey",
+      "range": "Source",
+      "cardinality": "1..n",
+      "inverse": "is_source_for"
+    },
+    "deploys_receiver": {
+      "id": "deploys_receiver",
+      "name": "deploys_receiver",
+      "name_pt": "implanta_receptor",
+      "description": "A SeismicSurvey deploys one or more Receiver types.",
+      "domain": "SeismicSurvey",
+      "range": "Receiver",
+      "cardinality": "1..n",
+      "inverse": "is_receiver_for"
+    },
+    "applies_geometry": {
+      "id": "applies_geometry",
+      "name": "applies_geometry",
+      "name_pt": "aplica_geometria",
+      "description": "A SeismicSurvey is characterised by an AcquisitionGeometry.",
+      "domain": "SeismicSurvey",
+      "range": "AcquisitionGeometry",
+      "cardinality": "1..1"
+    },
+    "respects_nyquist": {
+      "id": "respects_nyquist",
+      "name": "respects_nyquist",
+      "name_pt": "respeita_nyquist",
+      "description": "SamplingParameters respects the Nyquist criterion with respect to the signal bandwidth: samplingInterval <= 1/(2*signalBandwidthMax). Violation produces Aliasing.",
+      "domain": "SamplingParameters",
+      "range": "Aliasing",
+      "cardinality": "0..1",
+      "constraint_note": "samplingInterval_s <= 1 / (2 * signalBandwidthMax_Hz)"
+    },
+    "characterised_by": {
+      "id": "characterised_by",
+      "name": "characterised_by",
+      "name_pt": "caracterizado_por",
+      "description": "A SeismicSurvey is characterised by SamplingParameters.",
+      "domain": "SeismicSurvey",
+      "range": "SamplingParameters",
+      "cardinality": "1..1"
+    },
+    "has_subclass": {
+      "id": "has_subclass",
+      "name": "has_subclass",
+      "name_pt": "tem_subclasse",
+      "description": "rdfs:subClassOf relationship within SeismicSurvey hierarchy.",
+      "domain": "SeismicSurvey",
+      "range": "SeismicSurvey",
+      "cardinality": "0..n"
+    },
+    "produces_aliasing": {
+      "id": "produces_aliasing",
+      "name": "produces_aliasing",
+      "name_pt": "produz_aliasing",
+      "description": "Violation of Nyquist constraint produces Aliasing artifact.",
+      "domain": "SamplingParameters",
+      "range": "Aliasing",
+      "cardinality": "0..1"
+    },
+    "is_part_of_survey": {
+      "id": "is_part_of_survey",
+      "name": "is_part_of_survey",
+      "name_pt": "e_parte_de_levantamento",
+      "description": "AcquisitionGeometry or SamplingParameters is defined as part of a SeismicSurvey.",
+      "domain": "AcquisitionGeometry",
+      "range": "SeismicSurvey",
+      "cardinality": "1..1"
+    },
+    "collocated_with": {
+      "id": "collocated_with",
+      "name": "collocated_with",
+      "name_pt": "colocalizado_com",
+      "description": "In OBC/OBN deployments a Hydrophone is collocated with a Geophone or AccelerometerMEMS at the same spatial position.",
+      "domain": "Hydrophone",
+      "range": "Geophone",
+      "cardinality": "0..1"
+    },
+    "precedes": {
+      "id": "precedes",
+      "name": "precedes",
+      "name_pt": "precede",
+      "description": "One processing step temporally precedes another in the processing flow.",
+      "domain": "owl:Thing",
+      "range": "owl:Thing",
+      "cardinality": "0..n",
+      "inverse": "follows"
+    },
+    "follows": {
+      "id": "follows",
+      "name": "follows",
+      "name_pt": "segue",
+      "description": "One processing step follows another.",
+      "domain": "owl:Thing",
+      "range": "owl:Thing",
+      "cardinality": "0..n",
+      "inverse": "precedes"
+    },
+    "part_of_flow": {
+      "id": "part_of_flow",
+      "name": "part_of_flow",
+      "name_pt": "parte_do_fluxo",
+      "description": "A processing step is part of a ProcessingFlow.",
+      "domain": "owl:Thing",
+      "range": "ProcessingFlow",
+      "cardinality": "1..1"
+    },
+    "applies_filter": {
+      "id": "applies_filter",
+      "name": "applies_filter",
+      "name_pt": "aplica_filtro",
+      "description": "A ProcessingFlow applies a NoiseSuppressionFilter.",
+      "domain": "ProcessingFlow",
+      "range": "NoiseSuppressionFilter",
+      "cardinality": "0..n"
+    },
+    "uses_deconvolution": {
+      "id": "uses_deconvolution",
+      "name": "uses_deconvolution",
+      "name_pt": "usa_deconvolucao",
+      "description": "A ProcessingFlow applies a Deconvolution step.",
+      "domain": "ProcessingFlow",
+      "range": "Deconvolution",
+      "cardinality": "0..1"
+    },
+    "uses_migration": {
+      "id": "uses_migration",
+      "name": "uses_migration",
+      "name_pt": "usa_migracao",
+      "description": "A ProcessingFlow applies a Migration algorithm.",
+      "domain": "ProcessingFlow",
+      "range": "Migration",
+      "cardinality": "1..1"
+    },
+    "compensates_amplitude": {
+      "id": "compensates_amplitude",
+      "name": "compensates_amplitude",
+      "name_pt": "compensa_amplitude",
+      "description": "A ProcessingFlow applies an AmplitudeCompensation step.",
+      "domain": "ProcessingFlow",
+      "range": "AmplitudeCompensation",
+      "cardinality": "1..1"
+    },
+    "derived_from": {
+      "id": "derived_from",
+      "name": "derived_from",
+      "name_pt": "derivado_de",
+      "description": "A RockProperty or SeismicAttribute is mathematically derived from SeismicInversion output or another attribute.",
+      "domain": "RockProperty",
+      "range": "SeismicInversion",
+      "cardinality": "1..n",
+      "inverse": "yields"
+    },
+    "correlates_with": {
+      "id": "correlates_with",
+      "name": "correlates_with",
+      "name_pt": "correlaciona_com",
+      "description": "A SeismicAttribute correlates with a RockProperty or another SeismicAttribute in a statistical or physical sense.",
+      "domain": "SeismicAttribute",
+      "range": "RockProperty",
+      "cardinality": "0..n"
+    },
+    "indicates": {
+      "id": "indicates",
+      "name": "indicates",
+      "name_pt": "indica",
+      "description": "A DHI or AVOAnomaly indicates the potential presence of a hydrocarbon accumulation or specific lithofacies.",
+      "domain": "DHI",
+      "range": "SweetSpot",
+      "cardinality": "0..n"
+    },
+    "classified_by": {
+      "id": "classified_by",
+      "name": "classified_by",
+      "name_pt": "classificado_por",
+      "description": "A seismic facies volume is classified by FaciesClassification using SOM or PCA.",
+      "domain": "FaciesClassification",
+      "range": "SOM",
+      "cardinality": "0..1"
+    },
+    "uses_pca": {
+      "id": "uses_pca",
+      "name": "uses_pca",
+      "name_pt": "usa_pca",
+      "description": "A FaciesClassification or SOM uses PCA for dimensionality reduction of seismic attributes.",
+      "domain": "FaciesClassification",
+      "range": "PCA",
+      "cardinality": "0..1"
+    },
+    "input_to_inversion": {
+      "id": "input_to_inversion",
+      "name": "input_to_inversion",
+      "name_pt": "entrada_para_inversao",
+      "description": "Processed seismic data or partial stack is input to a SeismicInversion.",
+      "domain": "owl:Thing",
+      "range": "SeismicInversion",
+      "cardinality": "1..n"
+    },
+    "yields": {
+      "id": "yields",
+      "name": "yields",
+      "name_pt": "produz",
+      "description": "A SeismicInversion yields a RockProperty volume as output.",
+      "domain": "SeismicInversion",
+      "range": "RockProperty",
+      "cardinality": "1..n",
+      "inverse": "derived_from"
+    },
+    "combined_in": {
+      "id": "combined_in",
+      "name": "combined_in",
+      "name_pt": "combinado_em",
+      "description": "Multiple SeismicAttributes are combined in a FaciesClassification or SweetSpot delineation.",
+      "domain": "SeismicAttribute",
+      "range": "SweetSpot",
+      "cardinality": "0..n"
+    },
+    "constrained_by_well": {
+      "id": "constrained_by_well",
+      "name": "constrained_by_well",
+      "name_pt": "restringido_por_poco",
+      "description": "SeismicInversion is constrained by well log data for low-frequency model and wavelet extraction.",
+      "domain": "SeismicInversion",
+      "range": "geo:Poco",
+      "cardinality": "1..n"
+    }
+  },
+  "instances": {
+    "I_BUZ3D_2022": {
+      "id": "I_BUZ3D_2022",
+      "name": "Buzios 3D Wide-Azimuth Streamer Survey 2022",
+      "name_pt": "Levantamento 3D Buzios WA Streamer 2022",
+      "class": "MarineSurvey",
+      "description": "Broadband wide-azimuth 3D towed-streamer survey over the Buzios carbonate pre-salt field, Santos Basin, offshore Brazil. 14 streamers x 8 km, 100 m cable separation, 6.25 m group interval, 2 ms sample interval.",
+      "attributes": {
+        "surveyArea_km2": "2400",
+        "waterDepth_m": "1800-2200",
+        "samplingInterval_ms": "2",
+        "recordLength_s": "10",
+        "fold": "120",
+        "streamerLength_m": "8000",
+        "numberOfStreamers": "14",
+        "gridSpacing_m": "6.25x6.25",
+        "source": "Airgun",
+        "receiver": "Hydrophone",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0"
+      },
+      "source": "Analogous to Buzios-field 3D acquisition programs described in Petrobras technical literature"
+    },
+    "I_LAND_VIB_2021": {
+      "id": "I_LAND_VIB_2021",
+      "name": "Parnaiba Basin Vibroseis Land Survey 2021",
+      "name_pt": "Levantamento Terrestre Vibrosseis Bacia do Parnaiba 2021",
+      "class": "LandSurvey",
+      "description": "Orthogonal-template 3D vibroseis survey in the Parnaiba Basin, northeastern Brazil. Four vibrator fleet, 4-8 Hz linear sweep, 16 s sweep length, 2 ms sample interval, maximum offset 6000 m.",
+      "attributes": {
+        "surveyArea_km2": "800",
+        "samplingInterval_ms": "2",
+        "recordLength_s": "6",
+        "fold": "80",
+        "sweepFrequencyMin_Hz": "4",
+        "sweepFrequencyMax_Hz": "80",
+        "sweepLength_s": "16",
+        "gridSpacing_m": "25x25",
+        "source": "Vibroseis",
+        "receiver": "Geophone"
+      },
+      "source": "Representative of ANP-regulated onshore 3D programs in Brazilian interior basins"
+    },
+    "I_OBN_LULA_2023": {
+      "id": "I_OBN_LULA_2023",
+      "name": "Lula OBN 4C Full-Azimuth Survey 2023",
+      "name_pt": "Levantamento OBN 4C Azimute Pleno Lula 2023",
+      "class": "OBNSurvey",
+      "description": "Ocean-Bottom Node full-azimuth 4C survey over the Lula giant pre-salt field, Santos Basin. Nodes deployed at 2100 m water depth on 400 x 400 m grid; P- and S-wave data recorded for joint PP/PS inversion and imaging through the salt canopy.",
+      "attributes": {
+        "surveyArea_km2": "1200",
+        "waterDepth_m": "2100",
+        "samplingInterval_ms": "2",
+        "recordLength_s": "12",
+        "fold_PP": "240",
+        "fold_PS": "120",
+        "gridSpacing_m": "400x400",
+        "source": "Airgun",
+        "receiver": "OBC+AccelerometerMEMS",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0"
+      },
+      "source": "Analogous to Petrobras OBN programs in Santos Basin ultra-deep water"
+    },
+    "PF_MARINE_RTM": {
+      "id": "PF_MARINE_RTM",
+      "name": "Deep-Water Pre-Stack RTM Processing Flow",
+      "name_pt": "Fluxo RTM Pre-Empilhamento Aguas Profundas",
+      "class": "ProcessingFlow",
+      "description": "Typical pre-stack depth migration processing flow for deep-water broadband 3D marine data: demultiple, deconvolution, NMO/velocity analysis, SRME, RTM.",
+      "steps": [
+        {
+          "order": 1,
+          "step": "SphericalDivergenceCorrection"
+        },
+        {
+          "order": 2,
+          "step": "DATVF"
+        },
+        {
+          "order": 3,
+          "step": "DenoiseFK"
+        },
+        {
+          "order": 4,
+          "step": "FXEdit"
+        },
+        {
+          "order": 5,
+          "step": "SpikingDeconvolution"
+        },
+        {
+          "order": 6,
+          "step": "NMO"
+        },
+        {
+          "order": 7,
+          "step": "Stacking"
+        },
+        {
+          "order": 8,
+          "step": "QCompensation"
+        },
+        {
+          "order": 9,
+          "step": "RTM"
+        }
+      ],
+      "attributes": {
+        "migrationDomain": "depth",
+        "migrationAlgorithm": "RTM",
+        "qFactor": "80-150",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicProcessingProject:1.0.0"
+      },
+      "source": "Representative of Santos Basin pre-salt processing workflows (Yilmaz 2001)"
+    },
+    "PF_LAND_KIRCHHOFF": {
+      "id": "PF_LAND_KIRCHHOFF",
+      "name": "Land Vibroseis Kirchhoff Time Migration Flow",
+      "name_pt": "Fluxo de Migracao de Kirchhoff em Tempo — Vibrosseis Terrestre",
+      "class": "ProcessingFlow",
+      "description": "Standard processing flow for land vibroseis 3D: cross-correlation, statics, bandpass filter, decon, NMO, DMO, Kirchhoff time migration.",
+      "steps": [
+        {
+          "order": 1,
+          "step": "StaticCorrection"
+        },
+        {
+          "order": 2,
+          "step": "SphericalDivergenceCorrection"
+        },
+        {
+          "order": 3,
+          "step": "DenoiseFK"
+        },
+        {
+          "order": 4,
+          "step": "PredictiveDeconvolution"
+        },
+        {
+          "order": 5,
+          "step": "NMO"
+        },
+        {
+          "order": 6,
+          "step": "DMO"
+        },
+        {
+          "order": 7,
+          "step": "Stacking"
+        },
+        {
+          "order": 8,
+          "step": "KirchhoffMigration"
+        }
+      ],
+      "attributes": {
+        "migrationDomain": "time",
+        "migrationAlgorithm": "Kirchhoff",
+        "predictionLag_ms": "120",
+        "stretchMute_percent": "30"
+      },
+      "source": "Yilmaz 2001, standard land processing sequence"
+    },
+    "PF_OBN_PS": {
+      "id": "PF_OBN_PS",
+      "name": "OBN 4C PP/PS Joint Processing Flow",
+      "name_pt": "Fluxo de Processamento Conjunto PP/PS OBN 4C",
+      "class": "ProcessingFlow",
+      "description": "Processing flow for OBN 4C ocean-bottom data including dual-sensor summation, P- and S-wave separation, PP/PS registration, NMO for both modes and joint inversion preparation.",
+      "steps": [
+        {
+          "order": 1,
+          "step": "NoiseSuppressionFilter"
+        },
+        {
+          "order": 2,
+          "step": "SpikingDeconvolution"
+        },
+        {
+          "order": 3,
+          "step": "NMO"
+        },
+        {
+          "order": 4,
+          "step": "AmplitudeCompensation"
+        },
+        {
+          "order": 5,
+          "step": "Stacking"
+        },
+        {
+          "order": 6,
+          "step": "RTM"
+        }
+      ],
+      "attributes": {
+        "migrationDomain": "depth",
+        "migrationAlgorithm": "RTM",
+        "note": "PS mode requires Vp/Vs ratio for NMO and registration"
+      },
+      "source": "Sheriff & Geldart 1995; representative OBN workflow"
+    },
+    "INV_BUZ_POSTSTACK": {
+      "id": "INV_BUZ_POSTSTACK",
+      "name": "Buzios Pre-Salt Post-Stack Acoustic Impedance Inversion",
+      "name_pt": "Inversao Acustica Pos-Empilhamento Pre-Sal Buzios",
+      "class": "PostStackInversion",
+      "description": "Model-based post-stack inversion of the Buzios 3D seismic volume to acoustic impedance, constrained by 12 wells with full-waveform sonic and density logs. Low-frequency model from well interpolation; wavelet extracted from 10 wells using statistical method.",
+      "attributes": {
+        "inversionMethod": "model-based",
+        "wellCount": "12",
+        "outputProduct": "AcousticImpedance",
+        "frequencyBand_Hz": "4-80",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicTraceData:1.0.0"
+      },
+      "source": "Representative of pre-salt carbonate inversion programs in Santos Basin; Russell 1988"
+    },
+    "INV_LULA_PRESTACK": {
+      "id": "INV_LULA_PRESTACK",
+      "name": "Lula Simultaneous Pre-Stack Elastic Inversion",
+      "name_pt": "Inversao Elastica Simultanea Pre-Empilhamento Lula",
+      "class": "PreStackInversion",
+      "description": "Simultaneous pre-stack inversion of near, mid and far angle stacks to extract Ip, Is and density, enabling Vp/Vs, lambda-rho and mu-rho volumes for fluid discrimination in the Lula BVE carbonate reservoir.",
+      "attributes": {
+        "inversionMethod": "simultaneous",
+        "wellCount": "8",
+        "outputProducts": [
+          "AcousticImpedance",
+          "ElasticImpedance",
+          "VpVsRatio",
+          "LambdaRho",
+          "MuRho"
+        ],
+        "nearStackAngle_deg": "5-15",
+        "midStackAngle_deg": "15-30",
+        "farStackAngle_deg": "30-45"
+      },
+      "source": "Russell 1988; Connolly 1999; representative Santos Basin pre-stack program"
+    },
+    "ATTR_COHERENCE_BUZ": {
+      "id": "ATTR_COHERENCE_BUZ",
+      "name": "Buzios Coherence Fault/Fracture Volume",
+      "name_pt": "Volume de Coerencia Falhas/Fracturas Buzios",
+      "class": "Coherence",
+      "description": "Semblance-based coherence attribute extracted from the Buzios RTM migrated volume to delineate fault and fracture networks in the BVE carbonate reservoir. Computed on a 9-trace moving window with 20ms temporal gate.",
+      "attributes": {
+        "algorithm": "semblance",
+        "windowSize_traces": "9",
+        "temporalGate_ms": "20",
+        "sensitivity": "faults, fractures, karst"
+      },
+      "source": "Chopra & Marfurt 2007, ch. 2"
+    },
+    "INST_AVO_CLASS3": {
+      "id": "INST_AVO_CLASS3",
+      "name": "Parnaiba Basin Class III AVO Gas Sand Anomaly",
+      "name_pt": "Anomalia AVO Classe III Areia Gasosa Bacia do Parnaiba",
+      "class": "AVOAnomaly",
+      "description": "Class III AVO anomaly at the Devonian Cabecas Formation top: negative intercept (A=-0.08), strong negative gradient (B=-0.14), consistent with gas-saturated low-impedance sand encased in higher-impedance shale. Produces bright spot and phase reversal at the base.",
+      "attributes": {
+        "avoClass": "III",
+        "avoIntercept": "-0.08",
+        "avoGradient": "-0.14",
+        "productAtAngle30_deg": "-0.082",
+        "interpretation": "gas sand, DHI confirmed"
+      },
+      "source": "Representative of Devonian gas play in Parnaiba Basin; Yilmaz 2001 AVO classification"
+    }
+  }
+}

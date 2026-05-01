@@ -5,9 +5,10 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T11:33:56.730Z
+# Generated: 2026-05-01T15:58:49.225Z
 # Nodes: 107  Edges: 127
 
 #
@@ -56,6 +57,8 @@ geo:bloco a owl:Class ;
     skos:example "BM-C-33" ;
     owl:sameAs <https://w3id.org/osdu#AcquisitionSurvey> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer5" .
 
@@ -66,6 +69,8 @@ geo:campo a owl:Class ;
     skos:definition """Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta."""@pt ;
     owl:sameAs <https://w3id.org/osdu#Field> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Field> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer5" .
 
@@ -85,6 +90,8 @@ geo:bacia-sedimentar a owl:Class ;
     skos:example "Bacia do Recôncavo" ;
     owl:sameAs <https://w3id.org/osdu#Basin> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin> ;
+    skos:exactMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
+    skos:exactMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
@@ -108,6 +115,8 @@ geo:reservatorio a owl:Class ;
     skos:example "Reservatório Barra Velha" ;
     owl:sameAs <https://w3id.org/osdu#Reservoir> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir> ;
+    skos:relatedMatch <http://sweetontology.net/matrRock/Rock> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
@@ -151,6 +160,8 @@ geo:sistema-deposicional a owl:Class ;
     skos:example "Sistema lacustre carbonático (pré-sal)" ;
     skos:example "Sistema deltaico" ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem> ;
+    skos:relatedMatch <http://sweetontology.net/procGeo/Sedimentation> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer2" .
 
@@ -360,6 +371,8 @@ geo:presal a owl:Class ;
     skos:example "Reservatórios de Búzios" ;
     skos:example "Polígono do Pré-sal (Lei 12.351/2010)" ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
+    skos:relatedMatch <http://sweetontology.net/matrRockSedimentary/SaltRock> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
@@ -576,6 +589,8 @@ geo:acumulacao a owl:Class ;
     geo:entityType "operational" ;
     skos:definition "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation> ;
+    skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
+    skos:relatedMatch <http://sweetontology.net/matrOrganics/Hydrocarbon> ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
@@ -696,6 +711,8 @@ geo:litologia a owl:Class ;
     skos:definition """Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201."""@pt ;
     owl:sameAs <https://w3id.org/osdu#LithologyType> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology> ;
+    skos:closeMatch <http://sweetontology.net/matrRock/Rock> ;
+    skos:closeMatch <http://sweetontology.net/matrMineral/Mineral> ;
     geo:geocoverage "layer1" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
