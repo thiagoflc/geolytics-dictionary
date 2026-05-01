@@ -35,6 +35,10 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 | `ai/system-prompt-ptbr.md` | System prompt PT-BR (~800 tokens) |
 | `ai/system-prompt-en.md` | System prompt EN (~800 tokens) |
 | `index.html` | Visualização D3 interativa (GitHub Pages) |
+| `gso-cards.html` | Cards pyLODE-style das 213 classes GSO/Loop3D (camada 7, CC BY 4.0) |
+| `data/gso-{faults,folds,foliations,lineations,contacts}.json` | 213 classes GSO L7 com `owl_uri`, parents, sources |
+| `data/osdu-gso-crosswalk.json` | 14 mapeamentos SKOS OSDU↔GSO |
+| `scripts/gso-extract.js` | Parser Turtle minimal para módulos GSO (sem rdflib) |
 | `scripts/generate.js` | Regenera `/data`, `/api` e `/ai` |
 
 ---

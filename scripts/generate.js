@@ -26,7 +26,7 @@ import {
 } from './ontology-alignment.js';
 import { OSDU_CANONICAL } from './osdu-canonical.js';
 import { buildTtl } from './ttl-serializer.js';
-import { buildCardsHtml } from './cards-html.js';
+import { buildCardsHtml, buildGsoCardsHtml } from './cards-html.js';
 import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from './osdu-extra-nodes.js';
 import {
   ONTOPETRO_CLASSES,
@@ -909,6 +909,13 @@ function buildApiIndex() {
       geolytics_ttl:   `${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
       webvowl_view:    `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
       cards_view:      `${BASE_URL_PLACEHOLDER}/index-cards.html`,
+      gso_cards_view:  `${BASE_URL_PLACEHOLDER}/gso-cards.html`,
+      gso_crosswalk:   `${BASE_URL_PLACEHOLDER}/data/osdu-gso-crosswalk.json`,
+      gso_faults:      `${BASE_URL_PLACEHOLDER}/data/gso-faults.json`,
+      gso_folds:       `${BASE_URL_PLACEHOLDER}/data/gso-folds.json`,
+      gso_foliations:  `${BASE_URL_PLACEHOLDER}/data/gso-foliations.json`,
+      gso_lineations:  `${BASE_URL_PLACEHOLDER}/data/gso-lineations.json`,
+      gso_contacts:    `${BASE_URL_PLACEHOLDER}/data/gso-contacts.json`,
       taxonomies:      `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
       modules_extended:`${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
       pvt_dictionary:  `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
@@ -1574,6 +1581,7 @@ writeJson('data/datasets.json',        buildDatasets());
 writeJson('data/entity-graph.json',    buildEntityGraph());
 writeText('data/geolytics.ttl',        buildTtl(buildEntityGraph()));
 writeText('index-cards.html',          buildCardsHtml(buildEntityGraph()));
+writeText('gso-cards.html',            buildGsoCardsHtml(loadGsoModules()));
 writeJson('data/ontology-types.json',  buildOntologyTypes());
 writeJson('data/ontopetro.json',       buildOntopetro());
 writeJson('data/taxonomies.json',      buildTaxonomies());
