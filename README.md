@@ -104,6 +104,55 @@ index = VectorStoreIndex.from_documents(documents)
 
 Leia o conteúdo de `ai/system-prompt-ptbr.md` (ou `ai/system-prompt-en.md`) e use-o como mensagem de sistema do seu agente conversacional. Ele estabelece o contexto de domínio, define as entidades-chave e explicita os termos que tipicamente confundem modelos genéricos (PAD, UTS, Período Exploratório, Pré-sal, Concessão vs. Partilha).
 
+### Text2Cypher / Text2SPARQL
+
+O diretório `ai/` inclui arquivos de suporte para pipelines de perguntas em linguagem natural convertidas para Cypher (Neo4j) ou SPARQL (RDF/OWL).
+
+| Arquivo | Conteúdo |
+|---|---|
+| `ai/graph-schema.md` | Fragmento de prompt com schema Neo4j: labels, propriedades, relações, cardinalidade e exemplos de tradução PT-BR → Cypher. Prepend ao system prompt ao usar Text2Cypher. |
+| `ai/graph-schema-sparql.md` | Fragmento equivalente para SPARQL: prefixos reais do TTL, classes, propriedades OWL, triples de esquema e exemplos de queries. |
+| `ai/text2cypher-fewshot.jsonl` | 45 exemplos few-shot (30+ obrigatórios) cobrindo todos os 7 tipos de entidade e os principais tipos de relação. |
+| `ai/text2sparql-fewshot.jsonl` | 25 exemplos few-shot SPARQL equivalentes, usando os prefixos reais de `data/geolytics.ttl`. |
+
+#### Formato dos exemplos few-shot
+
+Cada linha dos arquivos `.jsonl` segue o schema:
+
+```json
+{
+  "question_pt": "Qual é a cadeia completa de um poço até o campo que ele pode originar?",
+  "question_en": "What is the full chain from a well to the field it can originate?",
+  "cypher": "MATCH path = (p:Operational {id: 'poco'})-[:may_register]->(nd:Instrument {id: 'notificacao-descoberta'}), (b:Contractual {id: 'pad'})-[:may_yield]->(dc:Contractual {id: 'declaracao-comercialidade'})-[:originates]->(campo:Operational {id: 'campo'}) RETURN p.label AS poco, nd.label AS notificacao, dc.label AS declaracao, campo.label AS campo",
+  "expected_columns": ["poco", "notificacao", "declaracao", "campo"],
+  "difficulty": "multi-hop",
+  "tags": ["operational", "contractual", "chain", "discovery", "campo"]
+}
+```
+
+Para o arquivo SPARQL, o campo `cypher` é substituído por `sparql`:
+
+```json
+{
+  "question_pt": "Quantas classes existem por tipo de entidade (geo:entityType)?",
+  "question_en": "How many classes exist per entity type (geo:entityType)?",
+  "sparql": "PREFIX geo: <https://geolytics.petrobras.com.br/dict/>\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\nSELECT ?entityType (COUNT(?classe) AS ?total)\nWHERE {\n  ?classe a owl:Class ;\n          geo:entityType ?entityType .\n}\nGROUP BY ?entityType\nORDER BY DESC(?total)",
+  "expected_columns": ["entityType", "total"],
+  "difficulty": "aggregation",
+  "tags": ["aggregation", "entity-type", "count"]
+}
+```
+
+#### Casos difíceis cobertos
+
+- Distinguir `geo:reserva` (SPE-PRMS 1P/2P/3P) de Reserva Ambiental (REBIO/RPPN).
+- Distinguir regime Concessão vs Partilha de Produção.
+- Siglas com múltiplos sentidos: `PAD` (Plano de Avaliação ≠ drilling pad), `UTS` (Unidades de Trabalho ≠ Unidade Territorial).
+- Cadeias multi-hop: poço → bloco → bacia → regime contratual (4 saltos).
+- Cadeias multi-hop: rodada de licitação → bloco → PAD → Declaração de Comercialidade → Primeiro Óleo.
+- Campo Tensional (geomecânica) vs Campo de petróleo (ANP).
+- Formação (unidade litoestratigráfica) vs Litologia (tipo petrográfico).
+
 ---
 
 ## Modelo de entidades
@@ -209,6 +258,46 @@ O **Petro KGraph** é uma ontologia formal de Óleo & Gás em português desenvo
 - **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
 - Resoluções ANP nº 708/2017 e nº 815/2020.
 - Contato dos datasets: `sigep_sep@anp.gov.br`.
+
+---
+
+## Graph database
+
+O dicionário pode ser carregado em um Neo4j 5 local para consultas Cypher multi-hop, análise de caminhos e exploração interativa do grafo.
+
+### Quickstart
+
+```bash
+node scripts/build-neo4j.js
+docker compose up
+```
+
+O primeiro comando gera `build/neo4j/nodes.cypher` e `build/neo4j/relationships.cypher`. O `docker compose up` sobe o Neo4j 5 Community com APOC e executa o `loader` que importa os dois arquivos automaticamente (aguarda o Neo4j ficar saudável antes de iniciar).
+
+Browser: http://localhost:7474 — login `neo4j` / senha `geolytics123`.
+
+### Exemplo rápido
+
+```cypher
+// Todas as entidades operacionais sem URI no Petro KGraph
+MATCH (e:Operational)
+WHERE e.petrokgraph_uri IS NULL
+RETURN e.id, e.label, e.geocoverage
+ORDER BY e.label
+```
+
+### Consultas de exemplo
+
+O diretório `docs/queries/` contém 6 consultas comentadas em PT-BR:
+
+| Arquivo | Pergunta |
+|---|---|
+| `01-poco-bloco-bacia-regime.cypher` | Caminho multi-hop poço → bloco → bacia → regime contratual |
+| `02-gso-falha-osdu-crosswalk.cypher` | Classes GSO de falhas com mapeamento OSDU |
+| `03-entidades-sem-petrokgraph.cypher` | Entidades sem URI no Petro KGraph (lacunas ontológicas) |
+| `04-caminho-mais-curto.cypher` | Menor caminho entre quaisquer dois nós (com e sem APOC) |
+| `05-cascata-regulatoria.cypher` | Cascata regulatória Lei 9.478 → ANP → SIGEP |
+| `06-desambiguacao-siglas.cypher` | Siglas com múltiplos sentidos no domínio O&G |
 
 ---
 
