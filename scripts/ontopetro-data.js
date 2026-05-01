@@ -757,6 +757,9 @@ export const OSDU_NODES = [
 export const OSDU_EDGES = [
   { source: 'poco',         target: 'wellbore',         relation: 'has_wellbore',     relation_label: 'tem wellbore',     style: 'solid' },
   { source: 'wellbore',     target: 'poco',             relation: 'belongs_to',       relation_label: 'pertence a',       style: 'solid' },
+  { source: 'wellbore',     target: 'completacao',      relation: 'has_completion',   relation_label: 'tem completação',  style: 'solid' },
+  { source: 'completacao',  target: 'dhsv',             relation: 'contains',         relation_label: 'contém',           style: 'dashed' },
+  { source: 'completacao',  target: 'campo',            relation: 'enables',          relation_label: 'viabiliza',        style: 'dashed' },
   { source: 'wellbore',     target: 'formacao',         relation: 'penetrates',       relation_label: 'penetra',          style: 'dashed' },
   { source: 'wellbore',     target: 'trajetoria-poco',  relation: 'has_trajectory',   relation_label: 'tem trajetória',   style: 'dashed' },
   { source: 'wellbore',     target: 'topo-formacional', relation: 'has_marker',       relation_label: 'tem marker',       style: 'dashed' },

@@ -181,10 +181,18 @@ const GLOSSARIO = [
     definicao: 'Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.',
     fonte: 'ANP/SEP — SIGEP',
     apareceEm: ['pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'area-desenvolvimento', termo: 'Área de Desenvolvimento', categoria: 'operacoes',
-    definicao: 'Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.',
-    fonte: 'ANP/SEP',
+  { id: 'area-desenvolvimento', termo: 'Área de Desenvolvimento da Produção', categoria: 'operacoes',
+    definicao: 'Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado "em desenvolvimento" enquanto a produção comercial ainda não se iniciou.',
+    fonte: 'Lei nº 9.478/1997; RANP 810/2020',
     apareceEm: ['pads-concluidos', 'declaracoes-comercialidade'] },
+  { id: 'plano-desenvolvimento', termo: 'Plano de Desenvolvimento', categoria: 'operacoes',
+    definicao: 'Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção.',
+    fonte: 'RANP 810/2020',
+    apareceEm: ['declaracoes-comercialidade'] },
+  { id: 'primeiro-oleo', termo: 'Primeiro Óleo', categoria: 'operacoes',
+    definicao: 'Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.',
+    fonte: 'ANP/SEP',
+    apareceEm: [] },
   { id: 'rodada-licitacao', termo: 'Rodada de Licitação', categoria: 'regulatorio',
     definicao: 'Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.',
     fonte: 'Dicionário enciclopédico inglês-português de geofísica e geologia',
@@ -417,7 +425,9 @@ const ENTITY_NODES = [
   { id: 'periodo-exploratorio',   label: 'Período Exploratório',   label_en: 'Exploratory Period',             type: 'instrument', glossId: 'periodo-exploratorio' },
   { id: 'processo-sancionador',   label: 'Processo Sancionador',   label_en: 'Sanctioning Proceeding',         type: 'instrument', glossId: 'processo-sancionador' },
   { id: 'notificacao-descoberta', label: 'Notificação Descoberta', label_en: 'Discovery Notification',         type: 'instrument', glossId: 'notificacao-descoberta' },
-  { id: 'area-desenvolvimento',   label: 'Área de Desenvolvimento',label_en: 'Development Area',               type: 'instrument', glossId: 'area-desenvolvimento' },
+  { id: 'area-desenvolvimento',   label: 'Área de Desenvolvimento da Produção', label_en: 'Production Development Phase', type: 'contractual', glossId: 'area-desenvolvimento' },
+  { id: 'plano-desenvolvimento',  label: 'Plano de Desenvolvimento', label_en: 'Development Plan',              type: 'contractual', glossId: 'plano-desenvolvimento' },
+  { id: 'primeiro-oleo',          label: 'Primeiro Óleo',            label_en: 'First Oil',                     type: 'operational', glossId: 'primeiro-oleo' },
 
   /* geological */
   { id: 'presal',           label: 'Pré-sal',         label_en: 'Pre-salt',         type: 'geological', glossId: 'presal' },
@@ -475,17 +485,19 @@ const ENTITY_NODES = [
 
 const EDGES = [
   { source: 'poco',  target: 'bloco',            relation: 'drilled_in',    relation_label: 'perfurado em',         style: 'solid' },
+  { source: 'poco',  target: 'ambiente',         relation: 'classified_by', relation_label: 'classificado por',     style: 'dashed' },
   { source: 'poco',  target: 'bacia-sedimentar', relation: 'located_in',    relation_label: 'localizado em',        style: 'solid' },
   { source: 'poco',  target: 'operador',         relation: 'operated_by',   relation_label: 'operado por',          style: 'solid' },
   { source: 'poco',  target: 'notificacao-descoberta', relation: 'may_register', relation_label: 'pode registrar', style: 'dashed' },
   { source: 'poco',  target: 'presal',           relation: 'may_reach',     relation_label: 'pode atingir',         style: 'dashed' },
   { source: 'poco',  target: 'formacao',         relation: 'traverses',     relation_label: 'atravessa',            style: 'dashed' },
 
-  { source: 'bloco', target: 'bacia-sedimentar', relation: 'delimited_in',  relation_label: 'delimitado em',        style: 'solid' },
-  { source: 'bloco', target: 'contrato-ep',      relation: 'governed_by',   relation_label: 'regido por',           style: 'solid' },
-  { source: 'bloco', target: 'operador',         relation: 'operated_by',   relation_label: 'operado por',          style: 'solid' },
-  { source: 'bloco', target: 'pad',              relation: 'may_have',      relation_label: 'pode ter',             style: 'dashed' },
-  { source: 'bloco', target: 'rodada-licitacao', relation: 'originated_in', relation_label: 'originado em',         style: 'solid' },
+  { source: 'bloco', target: 'bacia-sedimentar', relation: 'delimited_in',   relation_label: 'delimitado em',        style: 'solid' },
+  { source: 'bloco', target: 'contrato-ep',      relation: 'governed_by',    relation_label: 'regido por',           style: 'solid' },
+  { source: 'bloco', target: 'operador',         relation: 'operated_by',    relation_label: 'operado por',          style: 'solid' },
+  { source: 'bloco', target: 'pad',              relation: 'may_have',       relation_label: 'pode ter',             style: 'dashed' },
+  { source: 'bloco', target: 'rodada-licitacao', relation: 'originated_in',  relation_label: 'originado em',         style: 'solid' },
+  { source: 'bloco', target: 'ambiente',         relation: 'classified_by',  relation_label: 'classificado por',     style: 'dashed' },
 
   { source: 'contrato-ep', target: 'anp',                  relation: 'signed_with',  relation_label: 'celebrado com',  style: 'solid' },
   { source: 'contrato-ep', target: 'regime-contratual',    relation: 'defines',      relation_label: 'define',         style: 'solid' },
@@ -495,8 +507,14 @@ const EDGES = [
   { source: 'pad', target: 'bloco',                       relation: 'evaluates', relation_label: 'avalia',     style: 'solid' },
   { source: 'pad', target: 'declaracao-comercialidade',   relation: 'may_yield', relation_label: 'pode gerar', style: 'dashed' },
 
+  { source: 'declaracao-comercialidade', target: 'area-desenvolvimento', relation: 'initiates',   relation_label: 'dá início a',    style: 'solid' },
+  { source: 'area-desenvolvimento',      target: 'plano-desenvolvimento', relation: 'requires',    relation_label: 'exige',          style: 'solid' },
+  { source: 'area-desenvolvimento',      target: 'primeiro-oleo',         relation: 'ends_with',   relation_label: 'encerrada pelo', style: 'dashed' },
+  { source: 'primeiro-oleo',             target: 'campo',                 relation: 'inaugurates', relation_label: 'inaugura',       style: 'solid' },
+
   { source: 'declaracao-comercialidade', target: 'campo', relation: 'originates', relation_label: 'origina', style: 'solid' },
   { source: 'campo',    target: 'bacia-sedimentar', relation: 'located_in',  relation_label: 'localizado em', style: 'solid' },
+  { source: 'campo',    target: 'ambiente',         relation: 'classified_by', relation_label: 'classificado por', style: 'dashed' },
   { source: 'campo',           target: 'reservatorio',         relation: 'sustained_by',       relation_label: 'sustentado por',     style: 'solid' },
   { source: 'reservatorio',    target: 'bacia-sedimentar',     relation: 'contained_in',       relation_label: 'contido em',         style: 'solid' },
   { source: 'reservatorio',    target: 'sistema-deposicional', relation: 'characterized_by',   relation_label: 'caracterizado por',  style: 'solid' },
@@ -506,6 +524,8 @@ const EDGES = [
 
   { source: 'anp', target: 'sigep', relation: 'manages_via',   relation_label: 'gerencia via',  style: 'solid' },
   { source: 'anp', target: 'sep',   relation: 'oversees_via',  relation_label: 'fiscaliza via', style: 'solid' },
+
+  { source: 'bacias-agrupadas', target: 'bacia-sedimentar', relation: 'classifies', relation_label: 'classifica (ANP)', style: 'dashed' },
 
   /* equipment → poço/campo */
   { source: 'bop',                 target: 'poco',  relation: 'installed_on',  relation_label: 'instalado em',         style: 'solid' },

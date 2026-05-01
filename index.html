@@ -253,14 +253,17 @@
   .node:hover circle { stroke: var(--fg); stroke-width: 2px; }
 
   .link {
-    fill: none; stroke: rgba(245,242,234,0.22); stroke-width: 1px;
-    transition: opacity 180ms ease, stroke 180ms ease;
+    fill: none; stroke: rgba(245,242,234,0.52); stroke-width: 1.8px;
+    transition: opacity 180ms ease, stroke 180ms ease, stroke-width 180ms ease;
   }
   .link.dashed {
-    stroke: rgba(245,242,234,0.14); stroke-dasharray: 4,4; stroke-width: 1px;
+    stroke: rgba(245,242,234,0.32); stroke-dasharray: 5,4; stroke-width: 1.3px;
   }
   .link.dim { opacity: 0.04; }
-  .link.active { stroke: var(--fg); stroke-width: 1.5px; opacity: 0.9; }
+  .link.active {
+    stroke: rgba(255,190,60,1); stroke-width: 2.8px; opacity: 1;
+    filter: drop-shadow(0 0 4px rgba(255,190,60,0.55));
+  }
 
   /* ── TOOLTIP ───────────────────────────────────────────── */
   .tooltip {
@@ -302,6 +305,56 @@
   aside::-webkit-scrollbar-track { background: var(--panel); }
   aside::-webkit-scrollbar-thumb { background: var(--hairline-2); }
   aside::-webkit-scrollbar-thumb:hover { background: var(--fg-soft); }
+
+  /* ── NODE SEARCH ───────────────────────────────────────────── */
+  .search-wrap {
+    position: relative; margin-left: auto; display: flex; align-items: center;
+  }
+  .search-icon {
+    position: absolute; left: 9px; top: 50%; transform: translateY(-50%);
+    pointer-events: none; color: var(--fg-soft); display: flex;
+  }
+  #node-search {
+    background: var(--panel-2); border: 1px solid var(--hairline-2);
+    color: var(--fg); font-family: var(--mono); font-size: 11px;
+    padding: 5px 10px 5px 30px; width: 200px; outline: none;
+    transition: border-color 120ms ease, width 160ms ease, box-shadow 120ms ease;
+  }
+  #node-search::placeholder { color: var(--fg-soft); }
+  #node-search:focus {
+    border-color: var(--fg-soft); width: 260px;
+    box-shadow: 0 0 0 2px rgba(245,242,234,0.06);
+  }
+  #node-search.has-results { border-color: rgba(255,190,60,0.6); }
+
+  #search-results {
+    position: absolute; top: calc(100% + 4px); right: 0;
+    background: var(--panel); border: 1px solid var(--hairline-2);
+    min-width: 260px; max-height: 280px; overflow-y: auto;
+    z-index: 200; display: none; box-shadow: var(--shadow);
+  }
+  #search-results.open { display: block; }
+  .sr-item {
+    display: flex; align-items: center; gap: 8px;
+    padding: 7px 12px; cursor: pointer;
+    border-bottom: 1px solid var(--hairline);
+    transition: background 80ms ease;
+  }
+  .sr-item:last-child { border-bottom: none; }
+  .sr-item:hover, .sr-item.active { background: var(--panel-2); }
+  .sr-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .sr-label { font-size: 12px; font-weight: 600; color: var(--fg); }
+  .sr-label mark {
+    background: rgba(255,190,60,0.28); color: inherit; padding: 0 1px;
+    border-radius: 2px;
+  }
+  .sr-en { font-size: 10px; color: var(--fg-soft); font-family: var(--mono); }
+  .sr-empty {
+    padding: 12px; text-align: center;
+    color: var(--fg-soft); font-size: 11px; font-family: var(--mono);
+  }
 </style>
 </head>
 <body>
@@ -337,6 +390,15 @@
     <label><input type="checkbox" data-type="geological" checked /><span class="swatch" style="background:#639922"></span>Geológico</label>
     <label><input type="checkbox" data-type="equipment" checked /><span class="swatch" style="background:#C77B30"></span>Equipamento</label>
     <label><input type="checkbox" data-type="analytical" checked /><span class="swatch" style="background:#E67E22"></span>Analítico</label>
+    <div class="search-wrap">
+      <span class="search-icon">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <circle cx="6.5" cy="6.5" r="4.5"/><line x1="10.5" y1="10.5" x2="14" y2="14"/>
+        </svg>
+      </span>
+      <input id="node-search" type="text" placeholder="Buscar nó…" autocomplete="off" spellcheck="false" />
+      <div id="search-results"></div>
+    </div>
   </div>
 
   <main>
@@ -390,6 +452,8 @@
   const GLOW_TYPES = new Set(['operational', 'actor']);
 
   const container = document.getElementById('graph');
+  const searchInput   = document.getElementById('node-search');
+  const searchResults = document.getElementById('search-results');
   const tooltip = document.getElementById('tooltip');
   const panel = document.getElementById('panel');
   const counts = document.getElementById('counts');
@@ -411,14 +475,30 @@
   merge.append('feMergeNode').attr('in', 'blur');
   merge.append('feMergeNode').attr('in', 'SourceGraphic');
 
+  /* Arrowhead markers */
+  const makeArrow = (id, color) =>
+    defs.append('marker')
+      .attr('id', id)
+      .attr('viewBox', '0 0 8 8')
+      .attr('refX', 7).attr('refY', 4)
+      .attr('markerWidth', 5).attr('markerHeight', 5)
+      .attr('orient', 'auto-start-reverse')
+      .append('path')
+        .attr('d', 'M0,0 L8,4 L0,8 Z')
+        .attr('fill', color);
+  makeArrow('arrow-solid',  'rgba(245,242,234,0.70)');
+  makeArrow('arrow-dashed', 'rgba(245,242,234,0.42)');
+  makeArrow('arrow-active', 'rgba(255,190,60,1)');
+
   const root = svg.append('g');
 
   let currentZoom = 1;
-  svg.call(d3.zoom().scaleExtent([0.3, 4]).on('zoom', (ev) => {
+  const zoomBehavior = d3.zoom().scaleExtent([0.3, 4]).on('zoom', (ev) => {
     root.attr('transform', ev.transform);
     currentZoom = ev.transform.k;
     updateLabels();
-  }));
+  });
+  svg.call(zoomBehavior);
 
   const links = graph.edges.map((e) => ({ ...e }));
   const nodes = graph.nodes.map((n) => ({ ...n }));
@@ -452,7 +532,8 @@
 
   const link = root.append('g').attr('class', 'links').selectAll('line')
     .data(links).join('line')
-    .attr('class', (d) => 'link' + (d.style === 'dashed' ? ' dashed' : ''));
+    .attr('class', (d) => 'link' + (d.style === 'dashed' ? ' dashed' : ''))
+    .attr('marker-end', (d) => d.style === 'dashed' ? 'url(#arrow-dashed)' : 'url(#arrow-solid)');
 
   const node = root.append('g').attr('class', 'nodes').selectAll('g')
     .data(nodes).join('g')
@@ -517,10 +598,17 @@
       const t = typeof l.target === 'object' ? l.target.id : l.target;
       return s === target.id || t === target.id;
     });
+    link.attr('marker-end', (l) => {
+      const s = typeof l.source === 'object' ? l.source.id : l.source;
+      const t = typeof l.target === 'object' ? l.target.id : l.target;
+      const isActive = s === target.id || t === target.id;
+      return isActive ? 'url(#arrow-active)' : (l.style === 'dashed' ? 'url(#arrow-dashed)' : 'url(#arrow-solid)');
+    });
   }
   function clearFocus() {
     node.classed('dim', false).classed('focus', false);
     link.classed('dim', false).classed('active', false);
+    link.attr('marker-end', (l) => l.style === 'dashed' ? 'url(#arrow-dashed)' : 'url(#arrow-solid)');
     /* Re-apply type filters */
     applyFilters();
   }
@@ -529,8 +617,16 @@
     link
       .attr('x1', (d) => d.source.x)
       .attr('y1', (d) => d.source.y)
-      .attr('x2', (d) => d.target.x)
-      .attr('y2', (d) => d.target.y);
+      .attr('x2', (d) => {
+        const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        return d.target.x - (dx / dist) * (d.target.computedSize / 2 + 5);
+      })
+      .attr('y2', (d) => {
+        const dx = d.target.x - d.source.x, dy = d.target.y - d.source.y;
+        const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+        return d.target.y - (dy / dist) * (d.target.computedSize / 2 + 5);
+      });
     node.attr('transform', (d) => `translate(${d.x},${d.y})`);
   });
 
@@ -607,6 +703,124 @@
     const w = container.clientWidth, h = container.clientHeight;
     svg.attr('viewBox', [0, 0, w, h]);
     sim.force('center', d3.forceCenter(w / 2, h / 2)).alpha(0.3).restart();
+  });
+
+  /* ── NODE SEARCH ─────────────────────────────────────────── */
+  function highlight(text, query) {
+    if (!query) return text;
+    const idx = text.toLowerCase().indexOf(query.toLowerCase());
+    if (idx === -1) return text;
+    return text.slice(0, idx)
+      + `<mark>${text.slice(idx, idx + query.length)}</mark>`
+      + text.slice(idx + query.length);
+  }
+
+  function zoomToNode(d) {
+    const W = container.clientWidth, H = container.clientHeight;
+    const scale = Math.min(Math.max(currentZoom, 1.4), 2.2);
+    const tx = W / 2 - scale * d.x;
+    const ty = H / 2 - scale * d.y;
+    svg.transition().duration(520).ease(d3.easeCubicInOut)
+      .call(zoomBehavior.transform, d3.zoomIdentity.translate(tx, ty).scale(scale));
+  }
+
+  function selectNode(d) {
+    closeSearch();
+    zoomToNode(d);
+    focusOn(d);
+    showPanel(d);
+  }
+
+  function closeSearch() {
+    searchResults.classList.remove('open');
+    searchInput.classList.remove('has-results');
+    searchInput.value = '';
+    activeIdx = -1;
+  }
+
+  let activeIdx = -1;
+  let currentMatches = [];
+
+  function renderResults(query) {
+    const q = query.trim();
+    if (q.length < 1) {
+      searchResults.classList.remove('open');
+      searchInput.classList.remove('has-results');
+      activeIdx = -1;
+      currentMatches = [];
+      return;
+    }
+    const ql = q.toLowerCase();
+    currentMatches = nodes.filter((n) => {
+      const candidates = [
+        n.label, n.label_en,
+        ...(n.synonyms_pt || []),
+        ...(n.synonyms_en || []),
+      ];
+      return candidates.some((c) => c && c.toLowerCase().includes(ql));
+    }).slice(0, 12);
+
+    if (currentMatches.length === 0) {
+      searchResults.innerHTML = `<div class="sr-empty">Nenhum resultado para "${q}"</div>`;
+    } else {
+      searchResults.innerHTML = currentMatches.map((n, i) => `
+        <div class="sr-item" data-idx="${i}">
+          <span class="sr-dot" style="background:${n.color || TYPE_COLOR[n.type] || '#888'}"></span>
+          <span>
+            <span class="sr-label">${highlight(n.label, q)}</span>
+            ${n.label_en ? `<span class="sr-en"> · ${n.label_en}</span>` : ''}
+          </span>
+        </div>`).join('');
+
+      searchResults.querySelectorAll('.sr-item').forEach((el) => {
+        el.addEventListener('mousedown', (ev) => {
+          ev.preventDefault();
+          selectNode(currentMatches[+el.dataset.idx]);
+        });
+      });
+    }
+
+    searchInput.classList.toggle('has-results', currentMatches.length > 0);
+    searchResults.classList.add('open');
+    activeIdx = -1;
+  }
+
+  function setActive(idx) {
+    const items = searchResults.querySelectorAll('.sr-item');
+    items.forEach((el) => el.classList.remove('active'));
+    if (idx >= 0 && idx < items.length) {
+      items[idx].classList.add('active');
+      items[idx].scrollIntoView({ block: 'nearest' });
+    }
+    activeIdx = idx;
+  }
+
+  searchInput.addEventListener('input', (ev) => renderResults(ev.target.value));
+
+  searchInput.addEventListener('keydown', (ev) => {
+    const len = currentMatches.length;
+    if (ev.key === 'ArrowDown')  { ev.preventDefault(); setActive((activeIdx + 1) % len); }
+    if (ev.key === 'ArrowUp')    { ev.preventDefault(); setActive((activeIdx - 1 + len) % len); }
+    if (ev.key === 'Enter' && len > 0) {
+      selectNode(currentMatches[activeIdx >= 0 ? activeIdx : 0]);
+    }
+    if (ev.key === 'Escape')     { closeSearch(); clearFocus(); }
+  });
+
+  searchInput.addEventListener('blur', () => {
+    setTimeout(() => searchResults.classList.remove('open'), 150);
+  });
+  searchInput.addEventListener('focus', () => {
+    if (searchInput.value.trim()) renderResults(searchInput.value);
+  });
+
+  /* Cmd/Ctrl+K global shortcut to focus the search */
+  document.addEventListener('keydown', (ev) => {
+    if ((ev.metaKey || ev.ctrlKey) && ev.key === 'k') {
+      ev.preventDefault();
+      searchInput.focus();
+      searchInput.select();
+    }
   });
 })();
 </script>

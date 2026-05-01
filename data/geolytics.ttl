@@ -7,8 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T11:19:49.830Z
-# Nodes: 105  Edges: 116
+# Generated: 2026-05-01T11:33:56.730Z
+# Nodes: 107  Edges: 127
 
 #
 # Classes
@@ -312,15 +312,15 @@ geo:notificacao-descoberta a owl:Class ;
     geo:geocoverage "layer5" .
 
 geo:area-desenvolvimento a owl:Class ;
-    skos:prefLabel "Área de Desenvolvimento"@pt ;
-    skos:prefLabel "Development Area"@en ;
-    geo:entityType "instrument" ;
+    skos:prefLabel "Área de Desenvolvimento da Produção"@pt ;
+    skos:prefLabel "Production Development Phase"@en ;
+    geo:entityType "contractual" ;
     skos:altLabel "área de desenvolvimento"@pt ;
     skos:altLabel "campo"@pt ;
     skos:altLabel "development area"@en ;
     skos:altLabel "field"@en ;
     skos:altLabel "producing field"@en ;
-    skos:definition """Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta."""@pt ;
+    skos:definition """Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado "em desenvolvimento" enquanto a produção comercial ainda não se iniciou."""@pt ;
     skos:example "Tupi" ;
     skos:example "Búzios" ;
     skos:example "Mero" ;
@@ -332,6 +332,18 @@ geo:area-desenvolvimento a owl:Class ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea> ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer5" .
+
+geo:plano-desenvolvimento a owl:Class ;
+    skos:prefLabel "Plano de Desenvolvimento"@pt ;
+    skos:prefLabel "Development Plan"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção."""@pt .
+
+geo:primeiro-oleo a owl:Class ;
+    skos:prefLabel "Primeiro Óleo"@pt ;
+    skos:prefLabel "First Oil"@en ;
+    geo:entityType "operational" ;
+    skos:definition """Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção."""@pt .
 
 geo:presal a owl:Class ;
     skos:prefLabel "Pré-sal"@pt ;
@@ -1182,6 +1194,12 @@ geo:drilled_in a owl:ObjectProperty ;
     rdfs:domain geo:poco ;
     rdfs:range geo:bloco .
 
+geo:classified_by a owl:ObjectProperty ;
+    rdfs:label "classificado por"@pt ;
+    rdfs:label "classified by"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:bloco geo:campo geo:drilling-activity ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:ambiente geo:drilling-reason-type ) ] .
+
 geo:located_in a owl:ObjectProperty ;
     rdfs:label "localizado em"@pt ;
     rdfs:label "located in"@en ;
@@ -1272,6 +1290,30 @@ geo:may_yield a owl:ObjectProperty ;
     rdfs:domain geo:pad ;
     rdfs:range geo:declaracao-comercialidade .
 
+geo:initiates a owl:ObjectProperty ;
+    rdfs:label "dá início a"@pt ;
+    rdfs:label "initiates"@en ;
+    rdfs:domain geo:declaracao-comercialidade ;
+    rdfs:range geo:area-desenvolvimento .
+
+geo:requires a owl:ObjectProperty ;
+    rdfs:label "exige"@pt ;
+    rdfs:label "requires"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:ibama ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:eia geo:rima ) ] .
+
+geo:ends_with a owl:ObjectProperty ;
+    rdfs:label "encerrada pelo"@pt ;
+    rdfs:label "ends with"@en ;
+    rdfs:domain geo:area-desenvolvimento ;
+    rdfs:range geo:primeiro-oleo .
+
+geo:inaugurates a owl:ObjectProperty ;
+    rdfs:label "inaugura"@pt ;
+    rdfs:label "inaugurates"@en ;
+    rdfs:domain geo:primeiro-oleo ;
+    rdfs:range geo:campo .
+
 geo:originates a owl:ObjectProperty ;
     rdfs:label "origina"@pt ;
     rdfs:label "originates"@en ;
@@ -1313,6 +1355,12 @@ geo:oversees_via a owl:ObjectProperty ;
     rdfs:label "oversees via"@en ;
     rdfs:domain geo:anp ;
     rdfs:range geo:sep .
+
+geo:classifies a owl:ObjectProperty ;
+    rdfs:label "classifica (ANP)"@pt ;
+    rdfs:label "classifies"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bacias-agrupadas geo:pvt geo:basin-type geo:document-type geo:facility-type ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:bacia-sedimentar geo:classe-fluido geo:eia geo:fpso ) ] .
 
 geo:installed_on a owl:ObjectProperty ;
     rdfs:label "instalado em"@pt ;
@@ -1392,12 +1440,6 @@ geo:oversees_environment_of a owl:ObjectProperty ;
     rdfs:domain geo:ibama ;
     rdfs:range geo:operador .
 
-geo:requires a owl:ObjectProperty ;
-    rdfs:label "exige"@pt ;
-    rdfs:label "requires"@en ;
-    rdfs:domain geo:ibama ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:eia geo:rima ) ] .
-
 geo:guides a owl:ObjectProperty ;
     rdfs:label "orienta normativamente"@pt ;
     rdfs:label "guides"@en ;
@@ -1443,8 +1485,8 @@ geo:delivers a owl:ObjectProperty ;
 geo:contains a owl:ObjectProperty ;
     rdfs:label "contém"@pt ;
     rdfs:label "contains"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa geo:completacao ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao geo:dhsv ) ] .
 
 geo:characterizes a owl:ObjectProperty ;
     rdfs:label "caracteriza"@pt ;
@@ -1527,8 +1569,8 @@ geo:infers a owl:ObjectProperty ;
 geo:enables a owl:ObjectProperty ;
     rdfs:label "permite"@pt ;
     rdfs:label "enables"@en ;
-    rdfs:domain geo:biomarcador ;
-    rdfs:range geo:correlacao-oleo-rocha .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:biomarcador geo:completacao ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:correlacao-oleo-rocha geo:campo ) ] .
 
 geo:detects a owl:ObjectProperty ;
     rdfs:label "detecta"@pt ;
@@ -1541,12 +1583,6 @@ geo:undergoes a owl:ObjectProperty ;
     rdfs:label "undergoes"@en ;
     rdfs:domain geo:amostra-fluido ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:pvt geo:sara ) ] .
-
-geo:classifies a owl:ObjectProperty ;
-    rdfs:label "classifica"@pt ;
-    rdfs:label "classifies"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:pvt geo:basin-type geo:document-type geo:facility-type ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:classe-fluido geo:bacia-sedimentar geo:eia geo:fpso ) ] .
 
 geo:guides_drilling_of a owl:ObjectProperty ;
     rdfs:label "guia perfuração de"@pt ;
@@ -1583,6 +1619,12 @@ geo:belongs_to a owl:ObjectProperty ;
     rdfs:label "belongs to"@en ;
     rdfs:domain geo:wellbore ;
     rdfs:range geo:poco .
+
+geo:has_completion a owl:ObjectProperty ;
+    rdfs:label "tem completação"@pt ;
+    rdfs:label "has completion"@en ;
+    rdfs:domain geo:wellbore ;
+    rdfs:range geo:completacao .
 
 geo:penetrates a owl:ObjectProperty ;
     rdfs:label "penetra"@pt ;
@@ -1649,12 +1691,6 @@ geo:performed_on a owl:ObjectProperty ;
     rdfs:label "performed on"@en ;
     rdfs:domain geo:drilling-activity ;
     rdfs:range geo:poco .
-
-geo:classified_by a owl:ObjectProperty ;
-    rdfs:label "classificada por"@pt ;
-    rdfs:label "classified by"@en ;
-    rdfs:domain geo:drilling-activity ;
-    rdfs:range geo:drilling-reason-type .
 
 geo:measured_for a owl:ObjectProperty ;
     rdfs:label "medido para"@pt ;
@@ -1769,6 +1805,7 @@ geo:restricts_access_for a owl:ObjectProperty ;
 #
 
 geo:poco geo:drilled_in geo:bloco .
+geo:poco geo:classified_by geo:ambiente .
 geo:poco geo:located_in geo:bacia-sedimentar .
 geo:poco geo:operated_by geo:operador .
 geo:poco geo:may_register geo:notificacao-descoberta .
@@ -1779,14 +1816,20 @@ geo:bloco geo:governed_by geo:contrato-ep .
 geo:bloco geo:operated_by geo:operador .
 geo:bloco geo:may_have geo:pad .
 geo:bloco geo:originated_in geo:rodada-licitacao .
+geo:bloco geo:classified_by geo:ambiente .
 geo:contrato-ep geo:signed_with geo:anp .
 geo:contrato-ep geo:defines geo:regime-contratual .
 geo:contrato-ep geo:organized_in geo:periodo-exploratorio .
 geo:contrato-ep geo:measured_via geo:uts .
 geo:pad geo:evaluates geo:bloco .
 geo:pad geo:may_yield geo:declaracao-comercialidade .
+geo:declaracao-comercialidade geo:initiates geo:area-desenvolvimento .
+geo:area-desenvolvimento geo:requires geo:plano-desenvolvimento .
+geo:area-desenvolvimento geo:ends_with geo:primeiro-oleo .
+geo:primeiro-oleo geo:inaugurates geo:campo .
 geo:declaracao-comercialidade geo:originates geo:campo .
 geo:campo geo:located_in geo:bacia-sedimentar .
+geo:campo geo:classified_by geo:ambiente .
 geo:campo geo:sustained_by geo:reservatorio .
 geo:reservatorio geo:contained_in geo:bacia-sedimentar .
 geo:reservatorio geo:characterized_by geo:sistema-deposicional .
@@ -1794,6 +1837,7 @@ geo:reservatorio geo:hosted_in geo:formacao .
 geo:operador geo:may_have geo:processo-sancionador .
 geo:anp geo:manages_via geo:sigep .
 geo:anp geo:oversees_via geo:sep .
+geo:bacias-agrupadas geo:classifies geo:bacia-sedimentar .
 geo:bop geo:installed_on geo:poco .
 geo:dhsv geo:installed_in geo:poco .
 geo:anm-eq geo:controls geo:poco .
@@ -1850,6 +1894,9 @@ geo:recurso geo:allocated_to geo:bloco .
 geo:operador geo:reports geo:recurso .
 geo:poco geo:has_wellbore geo:wellbore .
 geo:wellbore geo:belongs_to geo:poco .
+geo:wellbore geo:has_completion geo:completacao .
+geo:completacao geo:contains geo:dhsv .
+geo:completacao geo:enables geo:campo .
 geo:wellbore geo:penetrates geo:formacao .
 geo:wellbore geo:has_trajectory geo:trajetoria-poco .
 geo:wellbore geo:has_marker geo:topo-formacional .

@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-01T11:19:49.788Z",
+  "generated": "2026-05-01T11:33:56.713Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
   "nodes": [
     {
@@ -1125,14 +1125,14 @@
     },
     {
       "id": "area-desenvolvimento",
-      "label": "Área de Desenvolvimento",
-      "label_en": "Development Area",
-      "type": "instrument",
-      "color": "#888780",
-      "size": 20,
-      "definition": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
+      "label": "Área de Desenvolvimento da Produção",
+      "label_en": "Production Development Phase",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado \"em desenvolvimento\" enquanto a produção comercial ainda não se iniciou.",
       "definition_en_canonical": "A mineral deposit that has been exploited for commercial purposes.",
-      "legal_source": "ANP/SEP",
+      "legal_source": "Lei nº 9.478/1997; RANP 810/2020",
       "datasets": [
         "pads-concluidos",
         "declaracoes-comercialidade"
@@ -1166,8 +1166,8 @@
       "glossary_id": "area-desenvolvimento",
       "extended_id": null,
       "skos_prefLabel": {
-        "@pt": "Área de Desenvolvimento",
-        "@en": "Development Area"
+        "@pt": "Área de Desenvolvimento da Produção",
+        "@en": "Production Development Phase"
       },
       "skos_altLabel": {
         "@pt": [
@@ -1181,7 +1181,7 @@
         ]
       },
       "skos_definition": {
-        "@pt": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
+        "@pt": "Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado \"em desenvolvimento\" enquanto a produção comercial ainda não se iniciou.",
         "@en": "A mineral deposit that has been exploited for commercial purposes."
       },
       "skos_example": [
@@ -1193,6 +1193,78 @@
         "Sépia",
         "Atapu"
       ]
+    },
+    {
+      "id": "plano-desenvolvimento",
+      "label": "Plano de Desenvolvimento",
+      "label_en": "Development Plan",
+      "type": "contractual",
+      "color": "#7F77DD",
+      "size": 24,
+      "definition": "Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção.",
+      "definition_en_canonical": null,
+      "legal_source": "RANP 810/2020",
+      "datasets": [
+        "declaracoes-comercialidade"
+      ],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "plano-desenvolvimento",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Plano de Desenvolvimento",
+        "@en": "Development Plan"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção.",
+        "@en": null
+      },
+      "skos_example": []
+    },
+    {
+      "id": "primeiro-oleo",
+      "label": "Primeiro Óleo",
+      "label_en": "First Oil",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
+      "definition_en_canonical": null,
+      "legal_source": "ANP/SEP",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": "primeiro-oleo",
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "Primeiro Óleo",
+        "@en": "First Oil"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
+        "@en": null
+      },
+      "skos_example": []
     },
     {
       "id": "presal",
@@ -4888,6 +4960,14 @@
     },
     {
       "source": "poco",
+      "target": "ambiente",
+      "relation": "classified_by",
+      "relation_label_pt": "classificado por",
+      "relation_label_en": "classified by",
+      "style": "dashed"
+    },
+    {
+      "source": "poco",
       "target": "bacia-sedimentar",
       "relation": "located_in",
       "relation_label_pt": "localizado em",
@@ -4967,6 +5047,14 @@
       "style": "solid"
     },
     {
+      "source": "bloco",
+      "target": "ambiente",
+      "relation": "classified_by",
+      "relation_label_pt": "classificado por",
+      "relation_label_en": "classified by",
+      "style": "dashed"
+    },
+    {
       "source": "contrato-ep",
       "target": "anp",
       "relation": "signed_with",
@@ -5016,6 +5104,38 @@
     },
     {
       "source": "declaracao-comercialidade",
+      "target": "area-desenvolvimento",
+      "relation": "initiates",
+      "relation_label_pt": "dá início a",
+      "relation_label_en": "initiates",
+      "style": "solid"
+    },
+    {
+      "source": "area-desenvolvimento",
+      "target": "plano-desenvolvimento",
+      "relation": "requires",
+      "relation_label_pt": "exige",
+      "relation_label_en": "requires",
+      "style": "solid"
+    },
+    {
+      "source": "area-desenvolvimento",
+      "target": "primeiro-oleo",
+      "relation": "ends_with",
+      "relation_label_pt": "encerrada pelo",
+      "relation_label_en": "ends with",
+      "style": "dashed"
+    },
+    {
+      "source": "primeiro-oleo",
+      "target": "campo",
+      "relation": "inaugurates",
+      "relation_label_pt": "inaugura",
+      "relation_label_en": "inaugurates",
+      "style": "solid"
+    },
+    {
+      "source": "declaracao-comercialidade",
       "target": "campo",
       "relation": "originates",
       "relation_label_pt": "origina",
@@ -5029,6 +5149,14 @@
       "relation_label_pt": "localizado em",
       "relation_label_en": "located in",
       "style": "solid"
+    },
+    {
+      "source": "campo",
+      "target": "ambiente",
+      "relation": "classified_by",
+      "relation_label_pt": "classificado por",
+      "relation_label_en": "classified by",
+      "style": "dashed"
     },
     {
       "source": "campo",
@@ -5085,6 +5213,14 @@
       "relation_label_pt": "fiscaliza via",
       "relation_label_en": "oversees via",
       "style": "solid"
+    },
+    {
+      "source": "bacias-agrupadas",
+      "target": "bacia-sedimentar",
+      "relation": "classifies",
+      "relation_label_pt": "classifica (ANP)",
+      "relation_label_en": "classifies",
+      "style": "dashed"
     },
     {
       "source": "bop",
@@ -5533,6 +5669,30 @@
       "relation_label_pt": "pertence a",
       "relation_label_en": "belongs to",
       "style": "solid"
+    },
+    {
+      "source": "wellbore",
+      "target": "completacao",
+      "relation": "has_completion",
+      "relation_label_pt": "tem completação",
+      "relation_label_en": "has completion",
+      "style": "solid"
+    },
+    {
+      "source": "completacao",
+      "target": "dhsv",
+      "relation": "contains",
+      "relation_label_pt": "contém",
+      "relation_label_en": "contains",
+      "style": "dashed"
+    },
+    {
+      "source": "completacao",
+      "target": "campo",
+      "relation": "enables",
+      "relation_label_pt": "viabiliza",
+      "relation_label_en": "enables",
+      "style": "dashed"
     },
     {
       "source": "wellbore",

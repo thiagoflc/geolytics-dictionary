@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T11:19:49.788Z",
-    "count": 23
+    "generated": "2026-05-01T11:33:56.713Z",
+    "count": 25
   },
   "terms": [
     {
@@ -485,10 +485,10 @@
     },
     {
       "id": "area-desenvolvimento",
-      "termo": "Área de Desenvolvimento",
+      "termo": "Área de Desenvolvimento da Produção",
       "categoria": "operacoes",
-      "definicao": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
-      "fonte": "ANP/SEP",
+      "definicao": "Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado \"em desenvolvimento\" enquanto a produção comercial ainda não se iniciou.",
+      "fonte": "Lei nº 9.478/1997; RANP 810/2020",
       "apareceEm": [
         "pads-concluidos",
         "declaracoes-comercialidade"
@@ -518,6 +518,38 @@
         "Sépia",
         "Atapu"
       ]
+    },
+    {
+      "id": "plano-desenvolvimento",
+      "termo": "Plano de Desenvolvimento",
+      "categoria": "operacoes",
+      "definicao": "Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção.",
+      "fonte": "RANP 810/2020",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "primeiro-oleo",
+      "termo": "Primeiro Óleo",
+      "categoria": "operacoes",
+      "definicao": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
+      "fonte": "ANP/SEP",
+      "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "rodada-licitacao",
