@@ -1,17 +1,17 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:30:20.192Z",
+    "generated": "2026-05-01T11:11:02.861Z",
     "description": "Geolytics Dictionary — complete merged dataset",
     "counts": {
       "glossary_terms": 23,
-      "extended_terms": 14,
-      "total_terms": 37,
+      "extended_terms": 20,
+      "total_terms": 43,
       "datasets": 8,
       "entity_nodes": 105,
       "entity_edges": 116,
       "domains": 4,
-      "ontology_layers": 6,
+      "ontology_layers": 7,
       "ontopetro_classes": 20,
       "ontopetro_properties": 20,
       "ontopetro_relations": 20,
@@ -1108,11 +1108,200 @@
         "Halocinese pós-Aptiana (sal de Santos)",
         "Inversão andina"
       ]
+    },
+    {
+      "id": "contato-geologico",
+      "termo": "Contato Geológico",
+      "termo_en": "Geological Contact",
+      "categoria": "geologia",
+      "definicao": "Superfície ou zona estreita que separa duas unidades geológicas distintas. Pode ser deposicional (concordante), erosivo (discordância), intrusivo ou tectônico (falha). Contatos são o esqueleto de mapas geológicos e de modelos 3D de subsuperfície usados em E&P.",
+      "legal_source": "GeoSciML Basic (gsmlb:Contact)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Contact",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "contato geológico",
+        "limite estratigráfico",
+        "superfície de contato"
+      ],
+      "synonyms_en": [
+        "geological contact",
+        "geologic contact",
+        "stratigraphic boundary"
+      ],
+      "examples": [
+        "Contato Aptiano/Albiano (sal sobre carbonatos do pré-sal)",
+        "Discordância pré-rifte",
+        "Contato intrusivo entre soleira de diabásio e folhelho"
+      ]
+    },
+    {
+      "id": "dobra",
+      "termo": "Dobra",
+      "termo_en": "Fold",
+      "categoria": "geologia",
+      "definicao": "Estrutura geológica formada pela deformação dúctil de camadas rochosas, gerando flexuras (anticlinais e sinclinais). Dobras anticlinais são armadilhas estruturais clássicas em E&P — concentram hidrocarbonetos no topo da flexura.",
+      "legal_source": "GeoSciML Basic (gsmlb:Fold)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Fold",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "dobra",
+        "flexura",
+        "anticlinal",
+        "sinclinal"
+      ],
+      "synonyms_en": [
+        "fold",
+        "anticline",
+        "syncline",
+        "flexure"
+      ],
+      "examples": [
+        "Anticlinal de Carmópolis (Bacia Sergipe-Alagoas)",
+        "Estrutura dobrada de Quiriri",
+        "Dobras sinrifte na Bacia do Recôncavo"
+      ]
+    },
+    {
+      "id": "foliacao",
+      "termo": "Foliação",
+      "termo_en": "Foliation",
+      "categoria": "geologia",
+      "definicao": "Estrutura planar penetrativa em rochas — bandamento, xistosidade, clivagem ardosiana, estratificação. Define anisotropia mecânica e hidráulica em reservatórios fraturados e em rochas-selante.",
+      "legal_source": "GeoSciML Basic (gsmlb:Foliation)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Foliation",
+      "geocoverage": [
+        "layer1",
+        "layer1b"
+      ],
+      "synonyms_pt": [
+        "foliação",
+        "xistosidade",
+        "clivagem",
+        "bandamento"
+      ],
+      "synonyms_en": [
+        "foliation",
+        "schistosity",
+        "cleavage",
+        "banding"
+      ],
+      "examples": [
+        "Xistosidade nos embasamentos cristalinos",
+        "Bandamento gnáissico",
+        "Estratificação cruzada em arenitos eólicos"
+      ]
+    },
+    {
+      "id": "falha-cisalhante",
+      "termo": "Falha de Cisalhamento",
+      "termo_en": "Shear Displacement Structure",
+      "categoria": "geologia",
+      "definicao": "Estrutura de fratura com deslocamento relativo entre blocos — falhas normais, inversas, transcorrentes. No pré-sal e em Campos, falhas controlam compartimentação de reservatórios e atuam como caminhos ou barreiras para migração de hidrocarbonetos.",
+      "legal_source": "GeoSciML Basic (gsmlb:ShearDisplacementStructure)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "falha",
+        "estrutura de cisalhamento",
+        "falha geológica",
+        "plano de falha"
+      ],
+      "synonyms_en": [
+        "fault",
+        "shear displacement structure",
+        "fault zone"
+      ],
+      "examples": [
+        "Falhas de borda do rifte de Campos",
+        "Falhas transcorrentes da Bacia Potiguar",
+        "Falhamentos lístricos sinrifte"
+      ]
+    },
+    {
+      "id": "feature-mapeada",
+      "termo": "Feição Mapeada",
+      "termo_en": "Mapped Feature",
+      "categoria": "geologia",
+      "definicao": "Representação espacial concreta (polígono, linha ou ponto) de uma feição geológica em um mapa ou modelo. Distingue a entidade geológica conceitual (ex: Formação Barra Velha) de sua manifestação cartográfica em uma escala/projeção específica.",
+      "legal_source": "GeoSciML Basic (gsmlb:MappedFeature)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#MappedFeature",
+      "geocoverage": [
+        "layer1b"
+      ],
+      "synonyms_pt": [
+        "feição mapeada",
+        "feature cartográfica",
+        "ocorrência mapeada"
+      ],
+      "synonyms_en": [
+        "mapped feature",
+        "cartographic occurrence"
+      ],
+      "examples": [
+        "Polígono da Formação Quissamã no mapa geológico 1:250.000",
+        "Traço de falha em mapa estrutural"
+      ]
+    },
+    {
+      "id": "metodo-perfuracao",
+      "termo": "Método de Perfuração",
+      "termo_en": "Drilling Method",
+      "categoria": "operacional",
+      "definicao": "Técnica empregada para perfuração de poço — rotativa convencional, rotativa direcional, percussão, sondagem por testemunho, hidráulica. Determina diâmetro, taxa de avanço e qualidade do testemunho recuperado.",
+      "legal_source": "GeoSciML Borehole (gsmlbh:drillingMethod)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:reference-data--DrillingMethodType:1.0.0",
+      "geosciml_uri": "http://geosciml.org/def/gsmlbh#drillingMethod",
+      "geocoverage": [
+        "layer1b",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "método de perfuração",
+        "técnica de perfuração"
+      ],
+      "synonyms_en": [
+        "drilling method",
+        "drilling technique"
+      ],
+      "examples": [
+        "Perfuração rotativa direcional (poços horizontais do pré-sal)",
+        "Sondagem com testemunho contínuo",
+        "Slimhole drilling"
+      ]
     }
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:30:20.192Z",
+    "generated": "2026-05-01T11:11:02.861Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -1131,9 +1320,11 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well",
         "osdu_kind": "opendes:osdu:master-data--Well:1.0.0",
+        "geosciml_uri": "http://geosciml.org/def/gsmlbh#Borehole",
         "owl_uri": "https://w3id.org/osdu#Well",
         "geocoverage": [
           "layer1",
+          "layer1b",
           "layer2",
           "layer3",
           "layer4",
@@ -1207,6 +1398,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock",
         "osdu_kind": "opendes:osdu:master-data--AcquisitionSurvey:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4",
@@ -1270,6 +1462,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Field",
         "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#Field",
         "geocoverage": [
           "layer4",
@@ -1313,9 +1506,11 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin",
         "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+        "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicUnit",
         "owl_uri": "https://w3id.org/osdu#Basin",
         "geocoverage": [
           "layer1",
+          "layer1b",
           "layer2",
           "layer3",
           "layer4",
@@ -1377,9 +1572,11 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir",
         "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+        "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicUnit",
         "owl_uri": null,
         "geocoverage": [
           "layer1",
+          "layer1b",
           "layer2",
           "layer3",
           "layer4"
@@ -1440,9 +1637,11 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
         "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+        "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicUnit",
         "owl_uri": "https://w3id.org/osdu#GeologicalFormation",
         "geocoverage": [
           "layer1",
+          "layer1b",
           "layer2",
           "layer3",
           "layer4"
@@ -1505,6 +1704,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -1568,6 +1768,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -1633,6 +1834,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -1697,6 +1899,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BiddingRound",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -1762,6 +1965,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CommercialityDeclaration",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -1806,6 +2010,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumOperator",
         "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#Organisation",
         "geocoverage": [
           "layer3",
@@ -1885,6 +2090,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryAgency",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -1926,6 +2132,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#InformationSystem",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -1971,6 +2178,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryUnit",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2009,6 +2217,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WorkUnit",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2049,6 +2258,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ContractualRegime",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2111,6 +2321,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExploratoryPeriod",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2149,6 +2360,7 @@
         ],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2187,6 +2399,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryNotification",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4",
@@ -2227,6 +2440,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea",
         "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#Field",
         "geocoverage": [
           "layer4",
@@ -2296,6 +2510,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -2364,6 +2579,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BasinGroup",
         "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#Basin",
         "geocoverage": [
           "layer3",
@@ -2407,6 +2623,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#OperationalEnvironment",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3",
@@ -2444,6 +2661,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2480,6 +2698,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2516,6 +2735,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2552,6 +2772,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2588,6 +2809,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2624,6 +2846,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2660,6 +2883,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2696,6 +2920,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2732,6 +2957,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2768,6 +2994,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2804,6 +3031,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -2840,6 +3068,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2876,6 +3105,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2912,6 +3142,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2948,6 +3179,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -2984,6 +3216,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -3020,6 +3253,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -3056,6 +3290,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -3092,6 +3327,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -3128,6 +3364,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -3164,6 +3401,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer5"
@@ -3200,6 +3438,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SourceRock",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -3240,6 +3479,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CapRock",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -3279,6 +3519,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumTrap",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -3317,6 +3558,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumSystem",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -3355,6 +3597,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer2",
@@ -3394,6 +3637,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Play",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3"
@@ -3431,6 +3675,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Prospect",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3"
@@ -3468,6 +3713,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Resource",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3",
@@ -3506,6 +3752,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reserve",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3",
@@ -3544,6 +3791,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFault",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -3582,6 +3830,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1",
@@ -3620,6 +3869,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4",
@@ -3658,6 +3908,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Core",
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4",
@@ -3696,6 +3947,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellLog",
         "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#WellLog",
         "geocoverage": [
           "layer3",
@@ -3735,6 +3987,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3",
@@ -3773,6 +4026,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3",
@@ -3811,6 +4065,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -3848,6 +4103,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -3885,6 +4141,7 @@
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
         "osdu_kind": "opendes:osdu:reference-data--LithologyType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#LithologyType",
         "geocoverage": [
           "layer1",
@@ -3926,6 +4183,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer2",
@@ -3964,6 +4222,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4001,6 +4260,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4038,6 +4298,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4075,6 +4336,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4112,6 +4374,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4149,6 +4412,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--Sample:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#RockSample",
         "geocoverage": [
           "layer4",
@@ -4187,6 +4451,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellborePressure:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4",
@@ -4225,6 +4490,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--FluidType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#FluidType",
         "geocoverage": [
           "layer4",
@@ -4263,6 +4529,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4300,6 +4567,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer6"
@@ -4339,6 +4607,7 @@
         ],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--Wellbore:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#Wellbore",
         "geocoverage": [
           "layer2",
@@ -4404,6 +4673,7 @@
         ],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#WellboreMarkerSet",
         "geocoverage": [
           "layer2",
@@ -4473,6 +4743,7 @@
         ],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#WellboreTrajectory",
         "geocoverage": [
           "layer3",
@@ -4537,6 +4808,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer2",
@@ -4598,6 +4870,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#UnitOfMeasure",
         "geocoverage": [
           "layer2",
@@ -4665,6 +4938,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--ActivityPlan:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -4714,6 +4988,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--ActivityTemplate:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -4763,6 +5038,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--WellActivityProgram:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -4812,6 +5088,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--CasingDesign:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -4861,6 +5138,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--Core:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -4910,6 +5188,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--CementingFluid:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -4963,6 +5242,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--SeismicAcquisitionSurvey:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3"
@@ -5012,6 +5292,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--SeismicProcessingProject:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3"
@@ -5061,6 +5342,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--GeoPoliticalEntity:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1"
@@ -5110,6 +5392,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreArchitecture:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5159,6 +5442,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": "https://w3id.org/osdu#WellboreTrajectory",
         "geocoverage": [
           "layer4"
@@ -5208,6 +5492,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreMarkerSet:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5261,6 +5546,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--SeismicHorizon:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer3"
@@ -5310,6 +5596,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--DrillingActivity:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5359,6 +5646,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--DrillingParameters:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5408,6 +5696,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--MudPump:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5457,6 +5746,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--BasinType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1"
@@ -5502,6 +5792,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--BottomHolePressureType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5551,6 +5842,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--AnnularFluidType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5600,6 +5892,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--WellActivityPhaseType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5649,6 +5942,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--DrillingReasonType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5698,6 +5992,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--DocumentType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1"
@@ -5745,6 +6040,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--LogCurveType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer4"
@@ -5794,6 +6090,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--FacilityType:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1"
@@ -5843,6 +6140,7 @@
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:abstract--ACL:1.0.0",
+        "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
           "layer1"
@@ -7424,7 +7722,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:30:20.192Z",
+    "generated": "2026-05-01T11:11:02.861Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -7445,6 +7743,66 @@
           "litologia",
           "processo-geologico",
           "sistema-deposicional"
+        ]
+      },
+      {
+        "id": "layer1b",
+        "name": "GeoSciML + CGI Simple Lithology",
+        "maintainer": "OGC + CGI/IUGS (Commission for the Management and Application of Geoscience Information)",
+        "type": "international_standard",
+        "github": "https://github.com/opengeospatial/GeoSciML",
+        "modules": {
+          "gsmlb": {
+            "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmlb.ttl",
+            "namespace": "http://geosciml.org/def/gsmlb#",
+            "classes": 33,
+            "properties": 56,
+            "scope": "Geologia básica — GeologicUnit, GeologicStructure, GeologicEvent, EarthMaterial, MappedFeature, Fold, Foliation, ShearDisplacementStructure"
+          },
+          "gsmlbh": {
+            "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmlbh.ttl",
+            "namespace": "http://geosciml.org/def/gsmlbh#",
+            "classes": 6,
+            "properties": 18,
+            "scope": "Boreholes — Borehole, BoreholeInterval, MappedInterval, OriginPosition, DrillingDetails"
+          },
+          "gsmll": {
+            "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/2_after_manual_edit/gsmll.ttl",
+            "namespace": "http://geosciml.org/def/gsmll#",
+            "classes": 7,
+            "scope": "Logical views para serialização de dados (BoreholeView, GeologicUnitView, ContactView, etc.)"
+          },
+          "gwml2": {
+            "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/minimal/gwml2_minimal.ttl",
+            "namespace": "http://gwml2.org/def/gwml2#",
+            "classes": 29,
+            "scope": "Águas subterrâneas — Casing, Screen, Sealing, Filtration, WellConstruction (componentes transferíveis para poços de petróleo)"
+          },
+          "cgi_lithology": {
+            "url": "https://raw.githubusercontent.com/opengeospatial/GeoSciML/master/ontology/CGI-SimpleLithology201211.ttl",
+            "namespace": "http://resource.geosciml.org/classifier/cgi/lithOntology/",
+            "concepts": 437,
+            "scope": "Vocabulário canônico de litologias — limestone, dolostone, arenite, sandstone, mudstone, basalt, granite, rock_salt, anhydrite, anthracite_coal, etc."
+          }
+        },
+        "description": "Padrão internacional OGC para troca de dados geológicos. Complementa GeoCore com modelo detalhado de Borehole (gsmlbh) e vocabulário canônico de litologias (CGI Simple Lithology, ~437 conceitos). Usado como referência por serviços geológicos nacionais (USGS, BGS, Geoscience Australia, CPRM-BR). Adotado como vocabulário-base por OSDU para LithologyType.",
+        "concepts_count": 512,
+        "language": "OWL/RDF/SKOS",
+        "license": "OGC public spec / Apache 2.0",
+        "relationship": "EXTENDS_GEOCORE — GeoSciML detalha estruturas (Fold, Foliation, ShearDisplacement) e fornece vocabulário litológico canônico que GeoCore referencia mas não enumera.",
+        "osdu_convergence": "CGI Simple Lithology é vocabulário recomendado para popular opendes:osdu:reference-data--LithologyType. Equivalência classe-a-classe pode ser estabelecida via owl:equivalentClass.",
+        "geolytics_coverage": [
+          "poco",
+          "wellbore",
+          "bacia-sedimentar",
+          "formacao-geologica",
+          "reservatorio",
+          "litologia",
+          "contato-geologico",
+          "dobra",
+          "foliacao",
+          "falha-cisalhante",
+          "feature-mapeada"
         ]
       },
       {
@@ -7648,7 +8006,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-01T10:30:20.192Z",
+      "generated": "2026-05-01T11:11:02.861Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",

@@ -55,10 +55,11 @@ const DRY_RUN = process.argv.includes('--dry-run');
 
 function alignmentFor(table, id) {
   const a = table[id];
-  if (!a) return { petrokgraph_uri: null, osdu_kind: null, geocoverage: [] };
+  if (!a) return { petrokgraph_uri: null, osdu_kind: null, geosciml_uri: null, geocoverage: [] };
   return {
     petrokgraph_uri: a.kg ? `${PETROKGRAPH_BASE}${a.kg}` : null,
     osdu_kind: a.osdu,
+    geosciml_uri: a.gsml || null,
     geocoverage: a.layers || [],
   };
 }
@@ -699,6 +700,7 @@ function buildEntityGraph() {
       datasets: g && Array.isArray(g.apareceEm) ? g.apareceEm : [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: align.osdu_kind,
+      geosciml_uri: align.geosciml_uri,
       owl_uri: canon.owl_uri,
       geocoverage: align.geocoverage,
       synonyms_pt: e ? e.synonyms_pt : enrich.synonyms_pt,
@@ -727,6 +729,7 @@ function buildEntityGraph() {
       datasets: [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: align.osdu_kind,
+      geosciml_uri: align.geosciml_uri,
       owl_uri: canon.owl_uri,
       geocoverage: align.geocoverage,
       synonyms_pt: [],
@@ -755,6 +758,7 @@ function buildEntityGraph() {
       datasets: n.datasets || [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: kind,
+      geosciml_uri: align.geosciml_uri,
       owl_uri: canon.owl_uri,
       geocoverage: n.layers_override || align.geocoverage,
       synonyms_pt: n.synonyms_pt || [],
@@ -783,6 +787,7 @@ function buildEntityGraph() {
       datasets: n.datasets || [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: kind,
+      geosciml_uri: align.geosciml_uri,
       owl_uri: canon.owl_uri,
       geocoverage: n.layers_override || align.geocoverage,
       synonyms_pt: n.synonyms_pt || [],
@@ -890,6 +895,7 @@ function buildApiIndex() {
       regis_ner:       `${BASE_URL_PLACEHOLDER}/data/regis-ner-schema.json`,
       acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
       acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
+      cgi_lithology:   `${BASE_URL_PLACEHOLDER}/data/cgi-lithology.json`,
       full:            `${BASE_URL_PLACEHOLDER}/data/full.json`,
       rag_corpus:      `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
       system_prompt_pt: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-ptbr.md`,

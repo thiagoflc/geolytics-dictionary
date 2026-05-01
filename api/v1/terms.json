@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:30:20.192Z",
-    "count": 37
+    "generated": "2026-05-01T11:11:02.861Z",
+    "count": 43
   },
   "terms": [
     {
@@ -1141,6 +1141,213 @@
       ],
       "datasets": [],
       "fonte": "GeoCore",
+      "source": "extended"
+    },
+    {
+      "id": "contato-geologico",
+      "termo": "Contato Geológico",
+      "termo_en": "Geological Contact",
+      "categoria": "geologia",
+      "definicao": "Superfície ou zona estreita que separa duas unidades geológicas distintas. Pode ser deposicional (concordante), erosivo (discordância), intrusivo ou tectônico (falha). Contatos são o esqueleto de mapas geológicos e de modelos 3D de subsuperfície usados em E&P.",
+      "legal_source": "GeoSciML Basic (gsmlb:Contact)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Contact",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "contato geológico",
+        "limite estratigráfico",
+        "superfície de contato"
+      ],
+      "synonyms_en": [
+        "geological contact",
+        "geologic contact",
+        "stratigraphic boundary"
+      ],
+      "examples": [
+        "Contato Aptiano/Albiano (sal sobre carbonatos do pré-sal)",
+        "Discordância pré-rifte",
+        "Contato intrusivo entre soleira de diabásio e folhelho"
+      ],
+      "datasets": [],
+      "fonte": "GeoSciML Basic (gsmlb:Contact)",
+      "source": "extended"
+    },
+    {
+      "id": "dobra",
+      "termo": "Dobra",
+      "termo_en": "Fold",
+      "categoria": "geologia",
+      "definicao": "Estrutura geológica formada pela deformação dúctil de camadas rochosas, gerando flexuras (anticlinais e sinclinais). Dobras anticlinais são armadilhas estruturais clássicas em E&P — concentram hidrocarbonetos no topo da flexura.",
+      "legal_source": "GeoSciML Basic (gsmlb:Fold)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Fold",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "dobra",
+        "flexura",
+        "anticlinal",
+        "sinclinal"
+      ],
+      "synonyms_en": [
+        "fold",
+        "anticline",
+        "syncline",
+        "flexure"
+      ],
+      "examples": [
+        "Anticlinal de Carmópolis (Bacia Sergipe-Alagoas)",
+        "Estrutura dobrada de Quiriri",
+        "Dobras sinrifte na Bacia do Recôncavo"
+      ],
+      "datasets": [],
+      "fonte": "GeoSciML Basic (gsmlb:Fold)",
+      "source": "extended"
+    },
+    {
+      "id": "foliacao",
+      "termo": "Foliação",
+      "termo_en": "Foliation",
+      "categoria": "geologia",
+      "definicao": "Estrutura planar penetrativa em rochas — bandamento, xistosidade, clivagem ardosiana, estratificação. Define anisotropia mecânica e hidráulica em reservatórios fraturados e em rochas-selante.",
+      "legal_source": "GeoSciML Basic (gsmlb:Foliation)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Foliation",
+      "geocoverage": [
+        "layer1",
+        "layer1b"
+      ],
+      "synonyms_pt": [
+        "foliação",
+        "xistosidade",
+        "clivagem",
+        "bandamento"
+      ],
+      "synonyms_en": [
+        "foliation",
+        "schistosity",
+        "cleavage",
+        "banding"
+      ],
+      "examples": [
+        "Xistosidade nos embasamentos cristalinos",
+        "Bandamento gnáissico",
+        "Estratificação cruzada em arenitos eólicos"
+      ],
+      "datasets": [],
+      "fonte": "GeoSciML Basic (gsmlb:Foliation)",
+      "source": "extended"
+    },
+    {
+      "id": "falha-cisalhante",
+      "termo": "Falha de Cisalhamento",
+      "termo_en": "Shear Displacement Structure",
+      "categoria": "geologia",
+      "definicao": "Estrutura de fratura com deslocamento relativo entre blocos — falhas normais, inversas, transcorrentes. No pré-sal e em Campos, falhas controlam compartimentação de reservatórios e atuam como caminhos ou barreiras para migração de hidrocarbonetos.",
+      "legal_source": "GeoSciML Basic (gsmlb:ShearDisplacementStructure)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+      "geocoverage": [
+        "layer1",
+        "layer1b",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "falha",
+        "estrutura de cisalhamento",
+        "falha geológica",
+        "plano de falha"
+      ],
+      "synonyms_en": [
+        "fault",
+        "shear displacement structure",
+        "fault zone"
+      ],
+      "examples": [
+        "Falhas de borda do rifte de Campos",
+        "Falhas transcorrentes da Bacia Potiguar",
+        "Falhamentos lístricos sinrifte"
+      ],
+      "datasets": [],
+      "fonte": "GeoSciML Basic (gsmlb:ShearDisplacementStructure)",
+      "source": "extended"
+    },
+    {
+      "id": "feature-mapeada",
+      "termo": "Feição Mapeada",
+      "termo_en": "Mapped Feature",
+      "categoria": "geologia",
+      "definicao": "Representação espacial concreta (polígono, linha ou ponto) de uma feição geológica em um mapa ou modelo. Distingue a entidade geológica conceitual (ex: Formação Barra Velha) de sua manifestação cartográfica em uma escala/projeção específica.",
+      "legal_source": "GeoSciML Basic (gsmlb:MappedFeature)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#MappedFeature",
+      "geocoverage": [
+        "layer1b"
+      ],
+      "synonyms_pt": [
+        "feição mapeada",
+        "feature cartográfica",
+        "ocorrência mapeada"
+      ],
+      "synonyms_en": [
+        "mapped feature",
+        "cartographic occurrence"
+      ],
+      "examples": [
+        "Polígono da Formação Quissamã no mapa geológico 1:250.000",
+        "Traço de falha em mapa estrutural"
+      ],
+      "datasets": [],
+      "fonte": "GeoSciML Basic (gsmlb:MappedFeature)",
+      "source": "extended"
+    },
+    {
+      "id": "metodo-perfuracao",
+      "termo": "Método de Perfuração",
+      "termo_en": "Drilling Method",
+      "categoria": "operacional",
+      "definicao": "Técnica empregada para perfuração de poço — rotativa convencional, rotativa direcional, percussão, sondagem por testemunho, hidráulica. Determina diâmetro, taxa de avanço e qualidade do testemunho recuperado.",
+      "legal_source": "GeoSciML Borehole (gsmlbh:drillingMethod)",
+      "apareceEm": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:reference-data--DrillingMethodType:1.0.0",
+      "geosciml_uri": "http://geosciml.org/def/gsmlbh#drillingMethod",
+      "geocoverage": [
+        "layer1b",
+        "layer4"
+      ],
+      "synonyms_pt": [
+        "método de perfuração",
+        "técnica de perfuração"
+      ],
+      "synonyms_en": [
+        "drilling method",
+        "drilling technique"
+      ],
+      "examples": [
+        "Perfuração rotativa direcional (poços horizontais do pré-sal)",
+        "Sondagem com testemunho contínuo",
+        "Slimhole drilling"
+      ],
+      "datasets": [],
+      "fonte": "GeoSciML Borehole (gsmlbh:drillingMethod)",
       "source": "extended"
     }
   ]
