@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T11:33:56.713Z",
+    "generated": "2026-05-01T13:23:24.861Z",
     "count": 107
   },
   "entities": [
@@ -88,6 +88,11 @@
             "to": "ambiente",
             "relation": "classified_by",
             "style": "dashed"
+          },
+          {
+            "to": "amostra-fluido",
+            "relation": "yields",
+            "style": "solid"
           },
           {
             "to": "bacia-sedimentar",
@@ -640,6 +645,16 @@
             "from": "trapa",
             "relation": "comprises",
             "style": "solid"
+          },
+          {
+            "from": "pvt",
+            "relation": "characterizes",
+            "style": "solid"
+          },
+          {
+            "from": "classe-fluido",
+            "relation": "characterizes",
+            "style": "dashed"
           },
           {
             "from": "modelo-petrofisico",
@@ -3233,6 +3248,11 @@
             "from": "maturidade-termal",
             "relation": "characterizes",
             "style": "solid"
+          },
+          {
+            "from": "correlacao-oleo-rocha",
+            "relation": "links_to",
+            "style": "solid"
           }
         ]
       }
@@ -4099,6 +4119,11 @@
             "to": "correlacao-oleo-rocha",
             "relation": "enables",
             "style": "solid"
+          },
+          {
+            "to": "amostra-fluido",
+            "relation": "derived_from",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -4148,7 +4173,13 @@
       },
       "skos_example": [],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "rocha-geradora",
+            "relation": "links_to",
+            "style": "solid"
+          }
+        ],
         "incoming": [
           {
             "from": "biomarcador",
@@ -4561,7 +4592,18 @@
             "style": "dashed"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "poco",
+            "relation": "yields",
+            "style": "solid"
+          },
+          {
+            "from": "biomarcador",
+            "relation": "derived_from",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {
@@ -4607,6 +4649,11 @@
           {
             "to": "classe-fluido",
             "relation": "classifies",
+            "style": "solid"
+          },
+          {
+            "to": "reservatorio",
+            "relation": "characterizes",
             "style": "solid"
           }
         ],
@@ -4663,7 +4710,13 @@
       },
       "skos_example": [],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "reservatorio",
+            "relation": "characterizes",
+            "style": "dashed"
+          }
+        ],
         "incoming": [
           {
             "from": "pvt",

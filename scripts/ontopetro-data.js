@@ -607,10 +607,14 @@ export const ONTOPETRO_EDGES = [
 
   /* M7-M10 análises */
   { source: 'biomarcador',        target: 'correlacao-oleo-rocha', relation: 'enables',       relation_label: 'permite',                 style: 'solid' },
+  { source: 'biomarcador',        target: 'amostra-fluido',     relation: 'derived_from',     relation_label: 'extraído de',             style: 'dashed' },
   { source: 'gc-ms',              target: 'biomarcador',        relation: 'detects',          relation_label: 'detecta',                 style: 'solid' },
   { source: 'amostra-fluido',     target: 'pvt',                relation: 'undergoes',        relation_label: 'submetida a',             style: 'dashed' },
   { source: 'amostra-fluido',     target: 'sara',               relation: 'undergoes',        relation_label: 'submetida a',             style: 'dashed' },
   { source: 'pvt',                target: 'classe-fluido',      relation: 'classifies',       relation_label: 'classifica',              style: 'solid' },
+  { source: 'pvt',                target: 'reservatorio',       relation: 'characterizes',    relation_label: 'caracteriza fluido de',   style: 'solid' },
+  { source: 'correlacao-oleo-rocha', target: 'rocha-geradora',  relation: 'links_to',         relation_label: 'traça origem em',         style: 'solid' },
+  { source: 'classe-fluido',      target: 'reservatorio',       relation: 'characterizes',    relation_label: 'caracteriza',             style: 'dashed' },
   { source: 'modelo-petrofisico', target: 'reservatorio',       relation: 'characterizes',    relation_label: 'caracteriza',             style: 'solid' },
   { source: 'facies-sedimentar',  target: 'reservatorio',       relation: 'composes',         relation_label: 'compõe',                  style: 'solid' },
   { source: 'campo-tensional',    target: 'janela-lama',        relation: 'defines',          relation_label: 'define',                  style: 'solid' },

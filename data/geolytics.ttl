@@ -7,8 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T11:33:56.730Z
-# Nodes: 107  Edges: 127
+# Generated: 2026-05-01T13:23:24.893Z
+# Nodes: 107  Edges: 132
 
 #
 # Classes
@@ -1200,6 +1200,12 @@ geo:classified_by a owl:ObjectProperty ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:bloco geo:campo geo:drilling-activity ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:ambiente geo:drilling-reason-type ) ] .
 
+geo:yields a owl:ObjectProperty ;
+    rdfs:label "gera amostra de"@pt ;
+    rdfs:label "yields"@en ;
+    rdfs:domain geo:poco ;
+    rdfs:range geo:amostra-fluido .
+
 geo:located_in a owl:ObjectProperty ;
     rdfs:label "localizado em"@pt ;
     rdfs:label "located in"@en ;
@@ -1491,7 +1497,7 @@ geo:contains a owl:ObjectProperty ;
 geo:characterizes a owl:ObjectProperty ;
     rdfs:label "caracteriza"@pt ;
     rdfs:label "characterizes"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:maturidade-termal geo:modelo-petrofisico ) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:maturidade-termal geo:pvt geo:classe-fluido geo:modelo-petrofisico ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:reservatorio ) ] .
 
 geo:seals a owl:ObjectProperty ;
@@ -1527,8 +1533,8 @@ geo:declares a owl:ObjectProperty ;
 geo:derived_from a owl:ObjectProperty ;
     rdfs:label "deriva de"@pt ;
     rdfs:label "derived from"@en ;
-    rdfs:domain geo:reserva ;
-    rdfs:range geo:recurso .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido ) ] .
 
 geo:spawns a owl:ObjectProperty ;
     rdfs:label "gera"@pt ;
@@ -1583,6 +1589,12 @@ geo:undergoes a owl:ObjectProperty ;
     rdfs:label "undergoes"@en ;
     rdfs:domain geo:amostra-fluido ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:pvt geo:sara ) ] .
+
+geo:links_to a owl:ObjectProperty ;
+    rdfs:label "traça origem em"@pt ;
+    rdfs:label "links to"@en ;
+    rdfs:domain geo:correlacao-oleo-rocha ;
+    rdfs:range geo:rocha-geradora .
 
 geo:guides_drilling_of a owl:ObjectProperty ;
     rdfs:label "guia perfuração de"@pt ;
@@ -1806,6 +1818,7 @@ geo:restricts_access_for a owl:ObjectProperty ;
 
 geo:poco geo:drilled_in geo:bloco .
 geo:poco geo:classified_by geo:ambiente .
+geo:poco geo:yields geo:amostra-fluido .
 geo:poco geo:located_in geo:bacia-sedimentar .
 geo:poco geo:operated_by geo:operador .
 geo:poco geo:may_register geo:notificacao-descoberta .
@@ -1881,10 +1894,14 @@ geo:testemunho geo:samples geo:formacao .
 geo:perfil-poco geo:measures geo:poco .
 geo:perfil-poco geo:infers geo:litologia .
 geo:biomarcador geo:enables geo:correlacao-oleo-rocha .
+geo:biomarcador geo:derived_from geo:amostra-fluido .
 geo:gc-ms geo:detects geo:biomarcador .
 geo:amostra-fluido geo:undergoes geo:pvt .
 geo:amostra-fluido geo:undergoes geo:sara .
 geo:pvt geo:classifies geo:classe-fluido .
+geo:pvt geo:characterizes geo:reservatorio .
+geo:correlacao-oleo-rocha geo:links_to geo:rocha-geradora .
+geo:classe-fluido geo:characterizes geo:reservatorio .
 geo:modelo-petrofisico geo:characterizes geo:reservatorio .
 geo:facies-sedimentar geo:composes geo:reservatorio .
 geo:campo-tensional geo:defines geo:janela-lama .

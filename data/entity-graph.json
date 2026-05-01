@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "generated": "2026-05-01T11:33:56.713Z",
+  "generated": "2026-05-01T13:23:24.861Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
   "nodes": [
     {
@@ -4968,6 +4968,14 @@
     },
     {
       "source": "poco",
+      "target": "amostra-fluido",
+      "relation": "yields",
+      "relation_label_pt": "gera amostra de",
+      "relation_label_en": "yields",
+      "style": "solid"
+    },
+    {
+      "source": "poco",
       "target": "bacia-sedimentar",
       "relation": "located_in",
       "relation_label_pt": "localizado em",
@@ -5567,6 +5575,14 @@
       "style": "solid"
     },
     {
+      "source": "biomarcador",
+      "target": "amostra-fluido",
+      "relation": "derived_from",
+      "relation_label_pt": "extraído de",
+      "relation_label_en": "derived from",
+      "style": "dashed"
+    },
+    {
       "source": "gc-ms",
       "target": "biomarcador",
       "relation": "detects",
@@ -5597,6 +5613,30 @@
       "relation_label_pt": "classifica",
       "relation_label_en": "classifies",
       "style": "solid"
+    },
+    {
+      "source": "pvt",
+      "target": "reservatorio",
+      "relation": "characterizes",
+      "relation_label_pt": "caracteriza fluido de",
+      "relation_label_en": "characterizes",
+      "style": "solid"
+    },
+    {
+      "source": "correlacao-oleo-rocha",
+      "target": "rocha-geradora",
+      "relation": "links_to",
+      "relation_label_pt": "traça origem em",
+      "relation_label_en": "links to",
+      "style": "solid"
+    },
+    {
+      "source": "classe-fluido",
+      "target": "reservatorio",
+      "relation": "characterizes",
+      "relation_label_pt": "caracteriza",
+      "relation_label_en": "characterizes",
+      "style": "dashed"
     },
     {
       "source": "modelo-petrofisico",

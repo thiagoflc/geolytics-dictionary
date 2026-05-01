@@ -486,6 +486,7 @@ const ENTITY_NODES = [
 const EDGES = [
   { source: 'poco',  target: 'bloco',            relation: 'drilled_in',    relation_label: 'perfurado em',         style: 'solid' },
   { source: 'poco',  target: 'ambiente',         relation: 'classified_by', relation_label: 'classificado por',     style: 'dashed' },
+  { source: 'poco',  target: 'amostra-fluido',   relation: 'yields',        relation_label: 'gera amostra de',      style: 'solid' },
   { source: 'poco',  target: 'bacia-sedimentar', relation: 'located_in',    relation_label: 'localizado em',        style: 'solid' },
   { source: 'poco',  target: 'operador',         relation: 'operated_by',   relation_label: 'operado por',          style: 'solid' },
   { source: 'poco',  target: 'notificacao-descoberta', relation: 'may_register', relation_label: 'pode registrar', style: 'dashed' },
