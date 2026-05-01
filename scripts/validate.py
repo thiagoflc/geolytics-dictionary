@@ -23,6 +23,7 @@ ONTOLOGY_FILES = [
     ROOT / "data" / "glosis" / "geolytics-modules.ttl",
     ROOT / "data" / "glosis" / "geolytics-units.ttl",
     ROOT / "data" / "glosis" / "pvt-procedures.ttl",
+    ROOT / "data" / "glosis" / "geolytics-ep-backbone.ttl",
 ]
 
 
