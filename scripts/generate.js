@@ -26,6 +26,8 @@ import {
 } from './ontology-alignment.js';
 import { OSDU_CANONICAL } from './osdu-canonical.js';
 import { buildTtl } from './ttl-serializer.js';
+import { buildCardsHtml } from './cards-html.js';
+import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from './osdu-extra-nodes.js';
 import {
   ONTOPETRO_CLASSES,
   ONTOPETRO_PROPERTIES,
@@ -706,8 +708,9 @@ function buildEntityGraph() {
       extended_id: n.extendedId || null,
     };
   });
-  /* Ontopetro/M7-M10 nodes — alignment via ONTOPETRO_ALIGNMENT, com merge OSDU */
-  const MERGED_ALIGNMENT = { ...ONTOPETRO_ALIGNMENT, ...OSDU_ALIGNMENT_ADDITIONS };
+  /* Ontopetro/M7-M10 nodes — alignment via ONTOPETRO_ALIGNMENT, com merge OSDU
+     (incluindo as 25 classes OSDU extras vindas do osdu-extra-nodes.js). */
+  const MERGED_ALIGNMENT = { ...ONTOPETRO_ALIGNMENT, ...OSDU_ALIGNMENT_ADDITIONS, ...OSDU_EXTRA_ALIGNMENT };
   const ontopetroNodes = ONTOPETRO_NODES.map((n) => {
     const align = alignmentFor(MERGED_ALIGNMENT, n.id);
     const canon = osduCanonical(align.osdu_kind);
@@ -762,10 +765,38 @@ function buildEntityGraph() {
       osdu: true,
     };
   });
+  /* OSDU extra nodes (25 classes derived from Accenture OSDU.ttl) */
+  const osduExtraNodes = OSDU_EXTRA_NODES.map((n) => {
+    const align = alignmentFor(MERGED_ALIGNMENT, n.id);
+    const kind = n.osdu_kind_override || align.osdu_kind;
+    const canon = osduCanonical(kind);
+    return {
+      id: n.id,
+      label: n.label,
+      label_en: n.label_en,
+      type: n.type,
+      color: COLORS[n.type],
+      size: n.size || SIZES[n.type] || 16,
+      definition: n.definition,
+      definition_en_canonical: canon.definition_en_canonical,
+      legal_source: n.fonte || null,
+      datasets: n.datasets || [],
+      petrokgraph_uri: align.petrokgraph_uri,
+      osdu_kind: kind,
+      owl_uri: canon.owl_uri,
+      geocoverage: n.layers_override || align.geocoverage,
+      synonyms_pt: n.synonyms_pt || [],
+      synonyms_en: n.synonyms_en || [],
+      examples: n.examples || [],
+      glossary_id: null,
+      extended_id: null,
+      osdu_extra: true,
+    };
+  });
   /* Final nodes carry their SKOS aliases for direct interop. */
-  const nodes = [...baseNodes, ...ontopetroNodes, ...osduNodes].map(withSkosAliases);
+  const nodes = [...baseNodes, ...ontopetroNodes, ...osduNodes, ...osduExtraNodes].map(withSkosAliases);
   /* deriva relation_label_en a partir do snake_case do campo relation */
-  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES].map((e) => ({
+  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES].map((e) => ({
     source: e.source,
     target: e.target,
     relation: e.relation,
@@ -795,8 +826,8 @@ function buildFull() {
         extended_terms: EXTENDED_TERMS.length,
         total_terms: GLOSSARIO.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length,
-        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length,
+        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length,
+        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
         ontopetro_classes: ONTOPETRO_CLASSES.length,
@@ -851,6 +882,7 @@ function buildApiIndex() {
       osdu_mapping:    `${BASE_URL_PLACEHOLDER}/data/osdu-mapping.json`,
       geolytics_ttl:   `${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
       webvowl_view:    `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
+      cards_view:      `${BASE_URL_PLACEHOLDER}/index-cards.html`,
       taxonomies:      `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
       modules_extended:`${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
       pvt_dictionary:  `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
@@ -1490,6 +1522,7 @@ writeJson('data/extended-terms.json',  buildExtendedTerms());
 writeJson('data/datasets.json',        buildDatasets());
 writeJson('data/entity-graph.json',    buildEntityGraph());
 writeText('data/geolytics.ttl',        buildTtl(buildEntityGraph()));
+writeText('index-cards.html',          buildCardsHtml(buildEntityGraph()));
 writeJson('data/ontology-types.json',  buildOntologyTypes());
 writeJson('data/ontopetro.json',       buildOntopetro());
 writeJson('data/taxonomies.json',      buildTaxonomies());
@@ -1517,8 +1550,8 @@ console.log('\n✓ Done.');
 console.log(`  Glossary terms: ${GLOSSARIO.length}`);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
-console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU)`);
-console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length}`);
+console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra)`);
+console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
 console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);

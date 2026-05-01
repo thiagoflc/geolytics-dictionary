@@ -7,8 +7,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T10:20:02.389Z
-# Nodes: 80  Edges: 87
+# Generated: 2026-05-01T10:30:20.211Z
+# Nodes: 105  Edges: 116
 
 #
 # Classes
@@ -868,6 +868,306 @@ geo:unidade-medida a owl:Class ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
 
+geo:activity-plan a owl:Class ;
+    skos:prefLabel "Plano de Atividade"@pt ;
+    skos:prefLabel "Activity Plan"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "plano de atividades"@pt ;
+    skos:altLabel "cronograma operacional"@pt ;
+    skos:altLabel "activity plan"@en ;
+    skos:altLabel "planned activities"@en ;
+    skos:definition """Informações sobre uma série de atividades planejadas — agrupa passos, responsáveis e marcos de uma campanha operacional. (OSDU canonical: Information about a series of planned activities.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#ActivityPlan> ;
+    geo:geocoverage "layer4" .
+
+geo:activity-template a owl:Class ;
+    skos:prefLabel "Template de Atividade"@pt ;
+    skos:prefLabel "Activity Template"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "modelo de atividade"@pt ;
+    skos:altLabel "work-step"@pt ;
+    skos:altLabel "activity template"@en ;
+    skos:altLabel "work step"@en ;
+    skos:definition """Descrição de um tipo de atividade, por exemplo, um passo (work-step) reutilizável dentro de um workflow operacional. (OSDU canonical: Description of one type of activity, e.g., a work-step in a workflow.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#ActivityTemplate> ;
+    geo:geocoverage "layer4" .
+
+geo:well-activity-program a owl:Class ;
+    skos:prefLabel "Programa de Atividade de Poço"@pt ;
+    skos:prefLabel "Well Activity Program"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "programa de poço"@pt ;
+    skos:altLabel "programa operacional de poço"@pt ;
+    skos:altLabel "well activity program"@en ;
+    skos:altLabel "well program"@en ;
+    skos:definition """Descrição completa do Programa de Atividades para um poço (ou conjunto de poços e/ou wellbores), cobrindo objetivos, fases e procedimentos. (OSDU canonical: A complete description of an Activity Program for a unique or a set of Well(s) and/or Wellbore(s).)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellActivityProgram> ;
+    geo:geocoverage "layer4" .
+
+geo:casing-design a owl:Class ;
+    skos:prefLabel "Desenho de Revestimento"@pt ;
+    skos:prefLabel "Casing Design"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "projeto de revestimento"@pt ;
+    skos:altLabel "casing"@pt ;
+    skos:altLabel "casing design"@en ;
+    skos:altLabel "casing program"@en ;
+    skos:definition """Projeto de revestimento (casing) de um poço, descrevendo seções, diâmetros, graus de aço, conexões e profundidades planejadas. (OSDU canonical: The design of the Casing in a wellbore.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#CasingDesign> ;
+    geo:geocoverage "layer4" .
+
+geo:core-sample a owl:Class ;
+    skos:prefLabel "Testemunho (Core)"@pt ;
+    skos:prefLabel "Core"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "core"@pt ;
+    skos:altLabel "amostra de testemunho"@pt ;
+    skos:altLabel "core"@en ;
+    skos:altLabel "rock core"@en ;
+    skos:definition """Amostra de rocha obtida por perfuração com coroa oca e barril testemunhador, preservando arranjo estratigráfico para análises laboratoriais. (OSDU canonical: A rock sample obtained by drilling into the earth with a pipe conveyed hollow bit and core barrel.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#Core> ;
+    geo:geocoverage "layer4" .
+
+geo:cementing-fluid a owl:Class ;
+    skos:prefLabel "Fluido de Cimentação"@pt ;
+    skos:prefLabel "Cementing Fluid"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "pasta de cimento"@pt ;
+    skos:altLabel "espaçador"@pt ;
+    skos:altLabel "lavador"@pt ;
+    skos:altLabel "cementing fluid"@en ;
+    skos:altLabel "cement slurry"@en ;
+    skos:altLabel "spacer"@en ;
+    skos:definition """Fluidos envolvidos na operação de cimentação: lama deslocada, lavadores e espaçadores, pastas de cimento e fluido de deslocamento. (OSDU canonical: Displaced Mud, washes and spacers, cements, displacement mud.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#CementingFluid> ;
+    geo:geocoverage "layer4" .
+
+geo:seismic-acquisition-survey a owl:Class ;
+    skos:prefLabel "Levantamento de Aquisição Sísmica"@pt ;
+    skos:prefLabel "Seismic Acquisition Survey"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "levantamento sísmico"@pt ;
+    skos:altLabel "aquisição de campo"@pt ;
+    skos:altLabel "seismic survey"@en ;
+    skos:altLabel "field survey"@en ;
+    skos:definition """Projeto de aquisição sísmica que mobiliza recursos em campo para registrar dados — também chamado field survey ou programa de campo; difere da geometria dos equipamentos (nav), que é um WPC. (OSDU canonical: A seismic acquisition project is a type of business project that deploys resources to the field to record seismic data. It may be referred to as a field survey, acquisition survey, or field program.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#SeismicAcquisitionSurvey> ;
+    geo:geocoverage "layer3" .
+
+geo:seismic-processing-project a owl:Class ;
+    skos:prefLabel "Projeto de Processamento Sísmico"@pt ;
+    skos:prefLabel "Seismic Processing Project"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "processamento sísmico"@pt ;
+    skos:altLabel "reprocessamento sísmico"@pt ;
+    skos:altLabel "seismic processing"@en ;
+    skos:altLabel "reprocessing project"@en ;
+    skos:definition """Projeto de negócio que gere a criação de produtos sísmicos processados; pode mesclar dados de múltiplos surveys de campo. Processamentos originais e reprocessamentos geram projetos separados. (OSDU canonical: A seismic processing project is a type of business project which manages the creation of processed seismic work products.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#SeismicProcessingProject> ;
+    geo:geocoverage "layer3" .
+
+geo:geo-political-entity a owl:Class ;
+    skos:prefLabel "Entidade Geopolítica"@pt ;
+    skos:prefLabel "Geo Political Entity"@en ;
+    geo:entityType "actor" ;
+    skos:altLabel "entidade política"@pt ;
+    skos:altLabel "jurisdição"@pt ;
+    skos:altLabel "geopolitical entity"@en ;
+    skos:altLabel "jurisdiction"@en ;
+    skos:definition """Área geográfica nomeada definida e administrada por uma entidade oficial — país, estado, bloco, área especial. (OSDU canonical: A named geographical area which is defined and administered by an official entity.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#GeoPoliticalEntity> ;
+    geo:geocoverage "layer1" .
+
+geo:wellbore-architecture a owl:Class ;
+    skos:prefLabel "Arquitetura do Poço"@pt ;
+    skos:prefLabel "Wellbore Architecture"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "arquitetura de poço"@pt ;
+    skos:altLabel "estrutura do poço"@pt ;
+    skos:altLabel "wellbore architecture"@en ;
+    skos:altLabel "borehole architecture"@en ;
+    skos:definition """Descreve as estruturas físicas de um poço — revestimentos, cimentações, completação e equipamentos permanentes do poço. (OSDU canonical: Describes the physical structures for a borehole.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellboreArchitecture> ;
+    geo:geocoverage "layer4" .
+
+geo:wellbore-trajectory a owl:Class ;
+    skos:prefLabel "Trajetória do Poço (WPC)"@pt ;
+    skos:prefLabel "Wellbore Trajectory"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "deviation survey"@pt ;
+    skos:altLabel "pesquisa direcional"@pt ;
+    skos:altLabel "wellbore trajectory"@en ;
+    skos:altLabel "deviation survey"@en ;
+    skos:definition """Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellboreTrajectory> ;
+    geo:geocoverage "layer4" .
+
+geo:wellbore-marker-set a owl:Class ;
+    skos:prefLabel "Conjunto de Marcadores de Poço"@pt ;
+    skos:prefLabel "Wellbore Marker Set"@en ;
+    geo:entityType "geological" ;
+    skos:altLabel "topos de formação"@pt ;
+    skos:altLabel "picks"@pt ;
+    skos:altLabel "marcadores"@pt ;
+    skos:altLabel "formation tops"@en ;
+    skos:altLabel "picks"@en ;
+    skos:altLabel "markers"@en ;
+    skos:definition """Marcadores que identificam profundidades em um poço — abaixo de uma referência — onde alguém ou um processo automatizado registra observação relevante (geralmente mudança de rocha). Conhecidos como picks ou tops de formação. (OSDU canonical: Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellboreMarkerSet> ;
+    geo:geocoverage "layer4" .
+
+geo:seismic-horizon a owl:Class ;
+    skos:prefLabel "Horizonte Sísmico"@pt ;
+    skos:prefLabel "Seismic Horizon"@en ;
+    geo:entityType "geological" ;
+    skos:altLabel "horizonte interpretado"@pt ;
+    skos:altLabel "superfície sísmica"@pt ;
+    skos:altLabel "seismic horizon"@en ;
+    skos:altLabel "interpreted horizon"@en ;
+    skos:definition """Conjunto de picks relacionados à geometria de processamento sísmico que define uma superfície interpretada; a geometria utilizada é referenciada pelo Interpretation Project. (OSDU canonical: A set of picks related to seismic processing geometry which define a surface.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#SeismicHorizon> ;
+    geo:geocoverage "layer3" .
+
+geo:drilling-activity a owl:Class ;
+    skos:prefLabel "Atividade de Perfuração"@pt ;
+    skos:prefLabel "Drilling Activity"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "atividade do drilling report"@pt ;
+    skos:altLabel "operacao de sonda"@pt ;
+    skos:altLabel "drilling activity"@en ;
+    skos:altLabel "rig activity"@en ;
+    skos:definition """Informação sobre uma atividade individual que faz parte do Drilling Report — operação granular registrada na rotina de perfuração. (OSDU canonical: Information regarding an individual activity that is part of the Drilling Report.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#DrillingActivity> ;
+    geo:geocoverage "layer4" .
+
+geo:drilling-parameters a owl:Class ;
+    skos:prefLabel "Parâmetros de Perfuração"@pt ;
+    skos:prefLabel "Drilling Parameters"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "parâmetros de BHA"@pt ;
+    skos:altLabel "dados de perfuração"@pt ;
+    skos:altLabel "drilling parameters"@en ;
+    skos:altLabel "bha parameters"@en ;
+    skos:definition """Parâmetros de perfuração da BHA: dados estatísticos e calculados da operação por corrida — profundidades, atividades, temperatura, pressão, vazões, torque etc. (OSDU canonical: The bottomhole assembly drilling parameters schema, which contains statistical and calculated operations data for the run.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#DrillingParameters> ;
+    geo:geocoverage "layer4" .
+
+geo:mud-pump a owl:Class ;
+    skos:prefLabel "Bomba de Lama"@pt ;
+    skos:prefLabel "Mud Pump"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "bomba de fluido"@pt ;
+    skos:altLabel "mud pump"@pt ;
+    skos:altLabel "mud pump"@en ;
+    skos:altLabel "rig pump"@en ;
+    skos:definition """Bombas presentes na sonda — equipamento responsável pela circulação de fluido de perfuração no sistema. (OSDU canonical: Pumps present on the rig.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#MudPump> ;
+    geo:geocoverage "layer4" .
+
+geo:basin-type a owl:Class ;
+    skos:prefLabel "Tipo de Bacia"@pt ;
+    skos:prefLabel "Basin Type"@en ;
+    geo:entityType "geological" ;
+    skos:altLabel "tipo de bacia sedimentar"@pt ;
+    skos:altLabel "basin type"@en ;
+    skos:definition """Região geológica onde se acumularam sedimentos depositados, deprimida ou preservada na crosta — taxonomia para classificar bacias. (OSDU canonical: A geologic region where an accumulation of deposited sediments has depressed or is preserved within the crust.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#BasinType> ;
+    geo:geocoverage "layer1" .
+
+geo:bottom-hole-pressure-type a owl:Class ;
+    skos:prefLabel "Tipo de Pressão de Fundo"@pt ;
+    skos:prefLabel "Bottom Hole Pressure Type"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "BHP"@pt ;
+    skos:altLabel "pressão estática de fundo"@pt ;
+    skos:altLabel "bottomhole pressure type"@en ;
+    skos:altLabel "BHP type"@en ;
+    skos:definition """Método utilizado para calcular ou medir a pressão de fundo (bottomhole pressure) durante o canhoneio. (OSDU canonical: The Method used to calculate or measure bottomhole pressure during perforation job.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#BottomHolePressureType> ;
+    geo:geocoverage "layer4" .
+
+geo:annular-fluid-type a owl:Class ;
+    skos:prefLabel "Tipo de Fluido no Anular"@pt ;
+    skos:prefLabel "Annular Fluid Type"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "fluido anular"@pt ;
+    skos:altLabel "kill fluid"@pt ;
+    skos:altLabel "annular fluid"@en ;
+    skos:altLabel "wellbore fluid"@en ;
+    skos:definition """Tipo de fluido presente no anular do poço no momento de uma operação de canhoneio. (OSDU canonical: Type of fluid in wellbore at time of perforation job.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#AnnularFluidType> ;
+    geo:geocoverage "layer4" .
+
+geo:well-activity-phase-type a owl:Class ;
+    skos:prefLabel "Fase da Atividade do Poço"@pt ;
+    skos:prefLabel "Well Activity Phase Type"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "fase do poço"@pt ;
+    skos:altLabel "milestone do poço"@pt ;
+    skos:altLabel "well phase"@en ;
+    skos:altLabel "activity phase"@en ;
+    skos:definition """Marcos-chave em um programa de atividade de poço, geralmente baseados nas seções principais do poço ou em trabalhos não relacionados ao poço. (OSDU canonical: Key milestones in a well activity program, usually based on the major sections of the well or non well-related work.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellActivityPhaseType> ;
+    geo:geocoverage "layer4" .
+
+geo:drilling-reason-type a owl:Class ;
+    skos:prefLabel "Tipo de Razão de Perfuração"@pt ;
+    skos:prefLabel "Drilling Reason Type"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "motivo da perfuração"@pt ;
+    skos:altLabel "finalidade do poço"@pt ;
+    skos:altLabel "drilling reason"@en ;
+    skos:altLabel "well purpose"@en ;
+    skos:definition """Usado para descrever o tipo de razão (motivo) de perfuração — explica por que um poço foi perfurado (exploratório, delimitatório, produtor, injetor, etc.). (OSDU canonical: Used to describe the type of drilling reasons.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#DrillingReasonType> ;
+    geo:geocoverage "layer4" .
+
+geo:document-type a owl:Class ;
+    skos:prefLabel "Tipo de Documento"@pt ;
+    skos:prefLabel "Document Type"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "tipo documental"@pt ;
+    skos:altLabel "classificação de documento"@pt ;
+    skos:altLabel "document type"@en ;
+    skos:definition """Material impresso ou eletrônico contendo comunicação ou evidência destinado a registro persistente ou permanente — taxonomia de tipos documentais (relatório, contrato, parecer, etc.). (OSDU canonical: A piece of printed or electronic material containing communication or evidence that is intended for persistent or permanent record.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#DocumentType> ;
+    geo:geocoverage "layer1" .
+
+geo:log-curve-type a owl:Class ;
+    skos:prefLabel "Tipo de Curva de Perfil"@pt ;
+    skos:prefLabel "Log Curve Type"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "mnemônico de log"@pt ;
+    skos:altLabel "curva de log"@pt ;
+    skos:altLabel "log curve"@en ;
+    skos:altLabel "curve mnemonic"@en ;
+    skos:definition """Mnemônico padrão escolhido pela companhia para curvas de perfilagem — OSDU disponibiliza uma lista inicial (ex.: GR, RHOB, NPHI, DTC). (OSDU canonical: LogCurveType is the standard mnemonic chosen by the company - OSDU provides an initial list.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#LogCurveType> ;
+    geo:geocoverage "layer4" .
+
+geo:facility-type a owl:Class ;
+    skos:prefLabel "Tipo de Instalação"@pt ;
+    skos:prefLabel "Facility Type"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "tipo de facility"@pt ;
+    skos:altLabel "tipo de unidade"@pt ;
+    skos:altLabel "facility type"@en ;
+    skos:altLabel "installation type"@en ;
+    skos:definition """Identifica e descreve o tipo de instalação. Uma facility é um agrupamento de equipamentos em um sítio geográfico específico, usado em atividades energéticas como exploração, extração, geração, armazenamento, processamento, descarte, suprimento ou transferência. Pode ser de superfície ou subsuperfície. (OSDU canonical: Used to identify and describe the type of facility.)"""@pt ;
+    owl:sameAs <https://w3id.org/osdu#FacilityType> ;
+    geo:geocoverage "layer1" .
+
+geo:acl a owl:Class ;
+    skos:prefLabel "Lista de Controle de Acesso (ACL)"@pt ;
+    skos:prefLabel "ACL"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "controle de acesso"@pt ;
+    skos:altLabel "permissões"@pt ;
+    skos:altLabel "acl"@en ;
+    skos:altLabel "access control list"@en ;
+    skos:definition """Tags de controle de acesso associadas a uma entidade. Estrutura incluída pelas SystemProperties acl, presente em todos os registros OSDU; não extensível. (OSDU canonical: The access control tags associated with this entity. This structure is included by the SystemProperties acl, which is part of all OSDU records.)"""@pt ;
+    geo:geocoverage "layer1" .
+
 #
 # Object properties
 #
@@ -1241,8 +1541,8 @@ geo:undergoes a owl:ObjectProperty ;
 geo:classifies a owl:ObjectProperty ;
     rdfs:label "classifica"@pt ;
     rdfs:label "classifies"@en ;
-    rdfs:domain geo:pvt ;
-    rdfs:range geo:classe-fluido .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:pvt geo:basin-type geo:document-type geo:facility-type ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:classe-fluido geo:bacia-sedimentar geo:eia geo:fpso ) ] .
 
 geo:guides_drilling_of a owl:ObjectProperty ;
     rdfs:label "guia perfuração de"@pt ;
@@ -1309,6 +1609,156 @@ geo:measured_in a owl:ObjectProperty ;
     rdfs:label "measured in"@en ;
     rdfs:domain geo:perfil-poco ;
     rdfs:range geo:wellbore .
+
+geo:plans_activity_for a owl:ObjectProperty ;
+    rdfs:label "planeja atividade em"@pt ;
+    rdfs:label "plans activity for"@en ;
+    rdfs:domain geo:activity-plan ;
+    rdfs:range geo:poco .
+
+geo:composed_of a owl:ObjectProperty ;
+    rdfs:label "composto por"@pt ;
+    rdfs:label "composed of"@en ;
+    rdfs:domain geo:activity-plan ;
+    rdfs:range geo:activity-template .
+
+geo:governs a owl:ObjectProperty ;
+    rdfs:label "governa programa de"@pt ;
+    rdfs:label "governs"@en ;
+    rdfs:domain geo:well-activity-program ;
+    rdfs:range geo:poco .
+
+geo:has_phase a owl:ObjectProperty ;
+    rdfs:label "tem fase"@pt ;
+    rdfs:label "has phase"@en ;
+    rdfs:domain geo:well-activity-program ;
+    rdfs:range geo:well-activity-phase-type .
+
+geo:realized_by a owl:ObjectProperty ;
+    rdfs:label "realizado por"@pt ;
+    rdfs:label "realized by"@en ;
+    rdfs:domain geo:well-activity-program ;
+    rdfs:range geo:drilling-activity .
+
+geo:performed_on a owl:ObjectProperty ;
+    rdfs:label "executada em"@pt ;
+    rdfs:label "performed on"@en ;
+    rdfs:domain geo:drilling-activity ;
+    rdfs:range geo:poco .
+
+geo:classified_by a owl:ObjectProperty ;
+    rdfs:label "classificada por"@pt ;
+    rdfs:label "classified by"@en ;
+    rdfs:domain geo:drilling-activity ;
+    rdfs:range geo:drilling-reason-type .
+
+geo:measured_for a owl:ObjectProperty ;
+    rdfs:label "medido para"@pt ;
+    rdfs:label "measured for"@en ;
+    rdfs:domain geo:drilling-parameters ;
+    rdfs:range geo:bha .
+
+geo:used_in a owl:ObjectProperty ;
+    rdfs:label "usado em"@pt ;
+    rdfs:label "used in"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mud-pump geo:cementing-fluid ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:drilling-activity geo:casing-design ) ] .
+
+geo:describes_structure_of a owl:ObjectProperty ;
+    rdfs:label "descreve estrutura de"@pt ;
+    rdfs:label "describes structure of"@en ;
+    rdfs:domain geo:wellbore-architecture ;
+    rdfs:range geo:wellbore .
+
+geo:part_of a owl:ObjectProperty ;
+    rdfs:label "parte de"@pt ;
+    rdfs:label "part of"@en ;
+    rdfs:domain geo:casing-design ;
+    rdfs:range geo:wellbore-architecture .
+
+geo:positions a owl:ObjectProperty ;
+    rdfs:label "posiciona"@pt ;
+    rdfs:label "positions"@en ;
+    rdfs:domain geo:wellbore-trajectory ;
+    rdfs:range geo:wellbore .
+
+geo:identifies_in a owl:ObjectProperty ;
+    rdfs:label "identifica em"@pt ;
+    rdfs:label "identifies in"@en ;
+    rdfs:domain geo:wellbore-marker-set ;
+    rdfs:range geo:wellbore .
+
+geo:specializes a owl:ObjectProperty ;
+    rdfs:label "especializa"@pt ;
+    rdfs:label "specializes"@en ;
+    rdfs:domain geo:wellbore-marker-set ;
+    rdfs:range geo:topo-formacional .
+
+geo:maps_to a owl:ObjectProperty ;
+    rdfs:label "mapeia para"@pt ;
+    rdfs:label "maps to"@en ;
+    rdfs:domain geo:wellbore-marker-set ;
+    rdfs:range geo:intervalo-estratigrafico .
+
+geo:aligns_with a owl:ObjectProperty ;
+    rdfs:label "alinha-se com"@pt ;
+    rdfs:label "aligns with"@en ;
+    rdfs:domain geo:core-sample ;
+    rdfs:range geo:testemunho .
+
+geo:classifies_curve_in a owl:ObjectProperty ;
+    rdfs:label "classifica curva de"@pt ;
+    rdfs:label "classifies curve in"@en ;
+    rdfs:domain geo:log-curve-type ;
+    rdfs:range geo:perfil-poco .
+
+geo:covers a owl:ObjectProperty ;
+    rdfs:label "cobre"@pt ;
+    rdfs:label "covers"@en ;
+    rdfs:domain geo:seismic-acquisition-survey ;
+    rdfs:range geo:bacia-sedimentar .
+
+geo:processes a owl:ObjectProperty ;
+    rdfs:label "processa dados de"@pt ;
+    rdfs:label "processes"@en ;
+    rdfs:domain geo:seismic-processing-project ;
+    rdfs:range geo:seismic-acquisition-survey .
+
+geo:output_of a owl:ObjectProperty ;
+    rdfs:label "saída de"@pt ;
+    rdfs:label "output of"@en ;
+    rdfs:domain geo:seismic-horizon ;
+    rdfs:range geo:seismic-processing-project .
+
+geo:correlates_with a owl:ObjectProperty ;
+    rdfs:label "correlaciona com"@pt ;
+    rdfs:label "correlates with"@en ;
+    rdfs:domain geo:seismic-horizon ;
+    rdfs:range geo:topo-formacional .
+
+geo:measurement_for a owl:ObjectProperty ;
+    rdfs:label "medição para"@pt ;
+    rdfs:label "measurement for"@en ;
+    rdfs:domain geo:bottom-hole-pressure-type ;
+    rdfs:range geo:pvt .
+
+geo:related_to a owl:ObjectProperty ;
+    rdfs:label "relacionado a"@pt ;
+    rdfs:label "related to"@en ;
+    rdfs:domain geo:annular-fluid-type ;
+    rdfs:range geo:janela-lama .
+
+geo:jurisdiction_of a owl:ObjectProperty ;
+    rdfs:label "jurisdição de"@pt ;
+    rdfs:label "jurisdiction of"@en ;
+    rdfs:domain geo:geo-political-entity ;
+    rdfs:range geo:anp .
+
+geo:restricts_access_for a owl:ObjectProperty ;
+    rdfs:label "restringe acesso para"@pt ;
+    rdfs:label "restricts access for"@en ;
+    rdfs:domain geo:acl ;
+    rdfs:range geo:operador .
 
 #
 # Edges (instance-level relation triples)
@@ -1401,3 +1851,32 @@ geo:wellbore geo:has_trajectory geo:trajetoria-poco .
 geo:wellbore geo:has_marker geo:topo-formacional .
 geo:formacao geo:has_top_at geo:topo-formacional .
 geo:perfil-poco geo:measured_in geo:wellbore .
+geo:activity-plan geo:plans_activity_for geo:poco .
+geo:activity-plan geo:composed_of geo:activity-template .
+geo:well-activity-program geo:governs geo:poco .
+geo:well-activity-program geo:has_phase geo:well-activity-phase-type .
+geo:well-activity-program geo:realized_by geo:drilling-activity .
+geo:drilling-activity geo:performed_on geo:poco .
+geo:drilling-activity geo:classified_by geo:drilling-reason-type .
+geo:drilling-parameters geo:measured_for geo:bha .
+geo:mud-pump geo:used_in geo:drilling-activity .
+geo:wellbore-architecture geo:describes_structure_of geo:wellbore .
+geo:casing-design geo:part_of geo:wellbore-architecture .
+geo:cementing-fluid geo:used_in geo:casing-design .
+geo:wellbore-trajectory geo:positions geo:wellbore .
+geo:wellbore-marker-set geo:identifies_in geo:wellbore .
+geo:wellbore-marker-set geo:specializes geo:topo-formacional .
+geo:wellbore-marker-set geo:maps_to geo:intervalo-estratigrafico .
+geo:core-sample geo:aligns_with geo:testemunho .
+geo:log-curve-type geo:classifies_curve_in geo:perfil-poco .
+geo:seismic-acquisition-survey geo:covers geo:bacia-sedimentar .
+geo:seismic-processing-project geo:processes geo:seismic-acquisition-survey .
+geo:seismic-horizon geo:output_of geo:seismic-processing-project .
+geo:seismic-horizon geo:correlates_with geo:topo-formacional .
+geo:basin-type geo:classifies geo:bacia-sedimentar .
+geo:bottom-hole-pressure-type geo:measurement_for geo:pvt .
+geo:annular-fluid-type geo:related_to geo:janela-lama .
+geo:document-type geo:classifies geo:eia .
+geo:facility-type geo:classifies geo:fpso .
+geo:geo-political-entity geo:jurisdiction_of geo:anp .
+geo:acl geo:restricts_access_for geo:operador .

@@ -1,15 +1,15 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:20:02.364Z",
+    "generated": "2026-05-01T10:30:20.192Z",
     "description": "Geolytics Dictionary — complete merged dataset",
     "counts": {
       "glossary_terms": 23,
       "extended_terms": 14,
       "total_terms": 37,
       "datasets": 8,
-      "entity_nodes": 80,
-      "entity_edges": 87,
+      "entity_nodes": 105,
+      "entity_edges": 116,
       "domains": 4,
       "ontology_layers": 6,
       "ontopetro_classes": 20,
@@ -1112,7 +1112,7 @@
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:20:02.364Z",
+    "generated": "2026-05-01T10:30:20.192Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -4651,6 +4651,1233 @@
           "ºAPI (API gravity) — densidade óleo",
           "GAPI (Gamma Ray API) — argilosidade"
         ]
+      },
+      {
+        "id": "activity-plan",
+        "label": "Plano de Atividade",
+        "label_en": "Activity Plan",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Informações sobre uma série de atividades planejadas — agrupa passos, responsáveis e marcos de uma campanha operacional. (OSDU canonical: Information about a series of planned activities.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--ActivityPlan:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "plano de atividades",
+          "cronograma operacional"
+        ],
+        "synonyms_en": [
+          "activity plan",
+          "planned activities"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Plano de Atividade",
+          "@en": "Activity Plan"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "plano de atividades",
+            "cronograma operacional"
+          ],
+          "@en": [
+            "activity plan",
+            "planned activities"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Informações sobre uma série de atividades planejadas — agrupa passos, responsáveis e marcos de uma campanha operacional. (OSDU canonical: Information about a series of planned activities.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "activity-template",
+        "label": "Template de Atividade",
+        "label_en": "Activity Template",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Descrição de um tipo de atividade, por exemplo, um passo (work-step) reutilizável dentro de um workflow operacional. (OSDU canonical: Description of one type of activity, e.g., a work-step in a workflow.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--ActivityTemplate:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "modelo de atividade",
+          "work-step"
+        ],
+        "synonyms_en": [
+          "activity template",
+          "work step"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Template de Atividade",
+          "@en": "Activity Template"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "modelo de atividade",
+            "work-step"
+          ],
+          "@en": [
+            "activity template",
+            "work step"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Descrição de um tipo de atividade, por exemplo, um passo (work-step) reutilizável dentro de um workflow operacional. (OSDU canonical: Description of one type of activity, e.g., a work-step in a workflow.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "well-activity-program",
+        "label": "Programa de Atividade de Poço",
+        "label_en": "Well Activity Program",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Descrição completa do Programa de Atividades para um poço (ou conjunto de poços e/ou wellbores), cobrindo objetivos, fases e procedimentos. (OSDU canonical: A complete description of an Activity Program for a unique or a set of Well(s) and/or Wellbore(s).)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--WellActivityProgram:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "programa de poço",
+          "programa operacional de poço"
+        ],
+        "synonyms_en": [
+          "well activity program",
+          "well program"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Programa de Atividade de Poço",
+          "@en": "Well Activity Program"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "programa de poço",
+            "programa operacional de poço"
+          ],
+          "@en": [
+            "well activity program",
+            "well program"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Descrição completa do Programa de Atividades para um poço (ou conjunto de poços e/ou wellbores), cobrindo objetivos, fases e procedimentos. (OSDU canonical: A complete description of an Activity Program for a unique or a set of Well(s) and/or Wellbore(s).)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "casing-design",
+        "label": "Desenho de Revestimento",
+        "label_en": "Casing Design",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 22,
+        "definition": "Projeto de revestimento (casing) de um poço, descrevendo seções, diâmetros, graus de aço, conexões e profundidades planejadas. (OSDU canonical: The design of the Casing in a wellbore.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--CasingDesign:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "projeto de revestimento",
+          "casing"
+        ],
+        "synonyms_en": [
+          "casing design",
+          "casing program"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Desenho de Revestimento",
+          "@en": "Casing Design"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "projeto de revestimento",
+            "casing"
+          ],
+          "@en": [
+            "casing design",
+            "casing program"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Projeto de revestimento (casing) de um poço, descrevendo seções, diâmetros, graus de aço, conexões e profundidades planejadas. (OSDU canonical: The design of the Casing in a wellbore.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "core-sample",
+        "label": "Testemunho (Core)",
+        "label_en": "Core",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 22,
+        "definition": "Amostra de rocha obtida por perfuração com coroa oca e barril testemunhador, preservando arranjo estratigráfico para análises laboratoriais. (OSDU canonical: A rock sample obtained by drilling into the earth with a pipe conveyed hollow bit and core barrel.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--Core:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "core",
+          "amostra de testemunho"
+        ],
+        "synonyms_en": [
+          "core",
+          "rock core"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Testemunho (Core)",
+          "@en": "Core"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "core",
+            "amostra de testemunho"
+          ],
+          "@en": [
+            "core",
+            "rock core"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Amostra de rocha obtida por perfuração com coroa oca e barril testemunhador, preservando arranjo estratigráfico para análises laboratoriais. (OSDU canonical: A rock sample obtained by drilling into the earth with a pipe conveyed hollow bit and core barrel.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "cementing-fluid",
+        "label": "Fluido de Cimentação",
+        "label_en": "Cementing Fluid",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 22,
+        "definition": "Fluidos envolvidos na operação de cimentação: lama deslocada, lavadores e espaçadores, pastas de cimento e fluido de deslocamento. (OSDU canonical: Displaced Mud, washes and spacers, cements, displacement mud.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--CementingFluid:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "pasta de cimento",
+          "espaçador",
+          "lavador"
+        ],
+        "synonyms_en": [
+          "cementing fluid",
+          "cement slurry",
+          "spacer"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Fluido de Cimentação",
+          "@en": "Cementing Fluid"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pasta de cimento",
+            "espaçador",
+            "lavador"
+          ],
+          "@en": [
+            "cementing fluid",
+            "cement slurry",
+            "spacer"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Fluidos envolvidos na operação de cimentação: lama deslocada, lavadores e espaçadores, pastas de cimento e fluido de deslocamento. (OSDU canonical: Displaced Mud, washes and spacers, cements, displacement mud.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "seismic-acquisition-survey",
+        "label": "Levantamento de Aquisição Sísmica",
+        "label_en": "Seismic Acquisition Survey",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 22,
+        "definition": "Projeto de aquisição sísmica que mobiliza recursos em campo para registrar dados — também chamado field survey ou programa de campo; difere da geometria dos equipamentos (nav), que é um WPC. (OSDU canonical: A seismic acquisition project is a type of business project that deploys resources to the field to record seismic data. It may be referred to as a field survey, acquisition survey, or field program.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--SeismicAcquisitionSurvey:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer3"
+        ],
+        "synonyms_pt": [
+          "levantamento sísmico",
+          "aquisição de campo"
+        ],
+        "synonyms_en": [
+          "seismic survey",
+          "field survey"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Levantamento de Aquisição Sísmica",
+          "@en": "Seismic Acquisition Survey"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "levantamento sísmico",
+            "aquisição de campo"
+          ],
+          "@en": [
+            "seismic survey",
+            "field survey"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Projeto de aquisição sísmica que mobiliza recursos em campo para registrar dados — também chamado field survey ou programa de campo; difere da geometria dos equipamentos (nav), que é um WPC. (OSDU canonical: A seismic acquisition project is a type of business project that deploys resources to the field to record seismic data. It may be referred to as a field survey, acquisition survey, or field program.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "seismic-processing-project",
+        "label": "Projeto de Processamento Sísmico",
+        "label_en": "Seismic Processing Project",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 22,
+        "definition": "Projeto de negócio que gere a criação de produtos sísmicos processados; pode mesclar dados de múltiplos surveys de campo. Processamentos originais e reprocessamentos geram projetos separados. (OSDU canonical: A seismic processing project is a type of business project which manages the creation of processed seismic work products.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--SeismicProcessingProject:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer3"
+        ],
+        "synonyms_pt": [
+          "processamento sísmico",
+          "reprocessamento sísmico"
+        ],
+        "synonyms_en": [
+          "seismic processing",
+          "reprocessing project"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Projeto de Processamento Sísmico",
+          "@en": "Seismic Processing Project"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "processamento sísmico",
+            "reprocessamento sísmico"
+          ],
+          "@en": [
+            "seismic processing",
+            "reprocessing project"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Projeto de negócio que gere a criação de produtos sísmicos processados; pode mesclar dados de múltiplos surveys de campo. Processamentos originais e reprocessamentos geram projetos separados. (OSDU canonical: A seismic processing project is a type of business project which manages the creation of processed seismic work products.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "geo-political-entity",
+        "label": "Entidade Geopolítica",
+        "label_en": "Geo Political Entity",
+        "type": "actor",
+        "color": "#D85A30",
+        "size": 22,
+        "definition": "Área geográfica nomeada definida e administrada por uma entidade oficial — país, estado, bloco, área especial. (OSDU canonical: A named geographical area which is defined and administered by an official entity.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:master-data--GeoPoliticalEntity:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1"
+        ],
+        "synonyms_pt": [
+          "entidade política",
+          "jurisdição"
+        ],
+        "synonyms_en": [
+          "geopolitical entity",
+          "jurisdiction"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Entidade Geopolítica",
+          "@en": "Geo Political Entity"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "entidade política",
+            "jurisdição"
+          ],
+          "@en": [
+            "geopolitical entity",
+            "jurisdiction"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Área geográfica nomeada definida e administrada por uma entidade oficial — país, estado, bloco, área especial. (OSDU canonical: A named geographical area which is defined and administered by an official entity.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "wellbore-architecture",
+        "label": "Arquitetura do Poço",
+        "label_en": "Wellbore Architecture",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 18,
+        "definition": "Descreve as estruturas físicas de um poço — revestimentos, cimentações, completação e equipamentos permanentes do poço. (OSDU canonical: Describes the physical structures for a borehole.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--WellboreArchitecture:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "arquitetura de poço",
+          "estrutura do poço"
+        ],
+        "synonyms_en": [
+          "wellbore architecture",
+          "borehole architecture"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Arquitetura do Poço",
+          "@en": "Wellbore Architecture"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "arquitetura de poço",
+            "estrutura do poço"
+          ],
+          "@en": [
+            "wellbore architecture",
+            "borehole architecture"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Descreve as estruturas físicas de um poço — revestimentos, cimentações, completação e equipamentos permanentes do poço. (OSDU canonical: Describes the physical structures for a borehole.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "wellbore-trajectory",
+        "label": "Trajetória do Poço (WPC)",
+        "label_en": "Wellbore Trajectory",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)",
+        "definition_en_canonical": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space.",
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#WellboreTrajectory",
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "deviation survey",
+          "pesquisa direcional"
+        ],
+        "synonyms_en": [
+          "wellbore trajectory",
+          "deviation survey"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Trajetória do Poço (WPC)",
+          "@en": "Wellbore Trajectory"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "deviation survey",
+            "pesquisa direcional"
+          ],
+          "@en": [
+            "wellbore trajectory",
+            "deviation survey"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)",
+          "@en": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "wellbore-marker-set",
+        "label": "Conjunto de Marcadores de Poço",
+        "label_en": "Wellbore Marker Set",
+        "type": "geological",
+        "color": "#639922",
+        "size": 18,
+        "definition": "Marcadores que identificam profundidades em um poço — abaixo de uma referência — onde alguém ou um processo automatizado registra observação relevante (geralmente mudança de rocha). Conhecidos como picks ou tops de formação. (OSDU canonical: Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--WellboreMarkerSet:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "topos de formação",
+          "picks",
+          "marcadores"
+        ],
+        "synonyms_en": [
+          "formation tops",
+          "picks",
+          "markers"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Conjunto de Marcadores de Poço",
+          "@en": "Wellbore Marker Set"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "topos de formação",
+            "picks",
+            "marcadores"
+          ],
+          "@en": [
+            "formation tops",
+            "picks",
+            "markers"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Marcadores que identificam profundidades em um poço — abaixo de uma referência — onde alguém ou um processo automatizado registra observação relevante (geralmente mudança de rocha). Conhecidos como picks ou tops de formação. (OSDU canonical: Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "seismic-horizon",
+        "label": "Horizonte Sísmico",
+        "label_en": "Seismic Horizon",
+        "type": "geological",
+        "color": "#639922",
+        "size": 18,
+        "definition": "Conjunto de picks relacionados à geometria de processamento sísmico que define uma superfície interpretada; a geometria utilizada é referenciada pelo Interpretation Project. (OSDU canonical: A set of picks related to seismic processing geometry which define a surface.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicHorizon:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer3"
+        ],
+        "synonyms_pt": [
+          "horizonte interpretado",
+          "superfície sísmica"
+        ],
+        "synonyms_en": [
+          "seismic horizon",
+          "interpreted horizon"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Horizonte Sísmico",
+          "@en": "Seismic Horizon"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "horizonte interpretado",
+            "superfície sísmica"
+          ],
+          "@en": [
+            "seismic horizon",
+            "interpreted horizon"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Conjunto de picks relacionados à geometria de processamento sísmico que define uma superfície interpretada; a geometria utilizada é referenciada pelo Interpretation Project. (OSDU canonical: A set of picks related to seismic processing geometry which define a surface.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "drilling-activity",
+        "label": "Atividade de Perfuração",
+        "label_en": "Drilling Activity",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 18,
+        "definition": "Informação sobre uma atividade individual que faz parte do Drilling Report — operação granular registrada na rotina de perfuração. (OSDU canonical: Information regarding an individual activity that is part of the Drilling Report.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--DrillingActivity:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "atividade do drilling report",
+          "operacao de sonda"
+        ],
+        "synonyms_en": [
+          "drilling activity",
+          "rig activity"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Atividade de Perfuração",
+          "@en": "Drilling Activity"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "atividade do drilling report",
+            "operacao de sonda"
+          ],
+          "@en": [
+            "drilling activity",
+            "rig activity"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Informação sobre uma atividade individual que faz parte do Drilling Report — operação granular registrada na rotina de perfuração. (OSDU canonical: Information regarding an individual activity that is part of the Drilling Report.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "drilling-parameters",
+        "label": "Parâmetros de Perfuração",
+        "label_en": "Drilling Parameters",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 18,
+        "definition": "Parâmetros de perfuração da BHA: dados estatísticos e calculados da operação por corrida — profundidades, atividades, temperatura, pressão, vazões, torque etc. (OSDU canonical: The bottomhole assembly drilling parameters schema, which contains statistical and calculated operations data for the run.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--DrillingParameters:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "parâmetros de BHA",
+          "dados de perfuração"
+        ],
+        "synonyms_en": [
+          "drilling parameters",
+          "bha parameters"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Parâmetros de Perfuração",
+          "@en": "Drilling Parameters"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "parâmetros de BHA",
+            "dados de perfuração"
+          ],
+          "@en": [
+            "drilling parameters",
+            "bha parameters"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Parâmetros de perfuração da BHA: dados estatísticos e calculados da operação por corrida — profundidades, atividades, temperatura, pressão, vazões, torque etc. (OSDU canonical: The bottomhole assembly drilling parameters schema, which contains statistical and calculated operations data for the run.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "mud-pump",
+        "label": "Bomba de Lama",
+        "label_en": "Mud Pump",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 16,
+        "definition": "Bombas presentes na sonda — equipamento responsável pela circulação de fluido de perfuração no sistema. (OSDU canonical: Pumps present on the rig.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--MudPump:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "bomba de fluido",
+          "mud pump"
+        ],
+        "synonyms_en": [
+          "mud pump",
+          "rig pump"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Bomba de Lama",
+          "@en": "Mud Pump"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "bomba de fluido",
+            "mud pump"
+          ],
+          "@en": [
+            "mud pump",
+            "rig pump"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Bombas presentes na sonda — equipamento responsável pela circulação de fluido de perfuração no sistema. (OSDU canonical: Pumps present on the rig.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "basin-type",
+        "label": "Tipo de Bacia",
+        "label_en": "Basin Type",
+        "type": "geological",
+        "color": "#639922",
+        "size": 16,
+        "definition": "Região geológica onde se acumularam sedimentos depositados, deprimida ou preservada na crosta — taxonomia para classificar bacias. (OSDU canonical: A geologic region where an accumulation of deposited sediments has depressed or is preserved within the crust.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--BasinType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1"
+        ],
+        "synonyms_pt": [
+          "tipo de bacia sedimentar"
+        ],
+        "synonyms_en": [
+          "basin type"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Bacia",
+          "@en": "Basin Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "tipo de bacia sedimentar"
+          ],
+          "@en": [
+            "basin type"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Região geológica onde se acumularam sedimentos depositados, deprimida ou preservada na crosta — taxonomia para classificar bacias. (OSDU canonical: A geologic region where an accumulation of deposited sediments has depressed or is preserved within the crust.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "bottom-hole-pressure-type",
+        "label": "Tipo de Pressão de Fundo",
+        "label_en": "Bottom Hole Pressure Type",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 16,
+        "definition": "Método utilizado para calcular ou medir a pressão de fundo (bottomhole pressure) durante o canhoneio. (OSDU canonical: The Method used to calculate or measure bottomhole pressure during perforation job.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--BottomHolePressureType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "BHP",
+          "pressão estática de fundo"
+        ],
+        "synonyms_en": [
+          "bottomhole pressure type",
+          "BHP type"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Pressão de Fundo",
+          "@en": "Bottom Hole Pressure Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "BHP",
+            "pressão estática de fundo"
+          ],
+          "@en": [
+            "bottomhole pressure type",
+            "BHP type"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Método utilizado para calcular ou medir a pressão de fundo (bottomhole pressure) durante o canhoneio. (OSDU canonical: The Method used to calculate or measure bottomhole pressure during perforation job.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "annular-fluid-type",
+        "label": "Tipo de Fluido no Anular",
+        "label_en": "Annular Fluid Type",
+        "type": "analytical",
+        "color": "#E67E22",
+        "size": 16,
+        "definition": "Tipo de fluido presente no anular do poço no momento de uma operação de canhoneio. (OSDU canonical: Type of fluid in wellbore at time of perforation job.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--AnnularFluidType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "fluido anular",
+          "kill fluid"
+        ],
+        "synonyms_en": [
+          "annular fluid",
+          "wellbore fluid"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Fluido no Anular",
+          "@en": "Annular Fluid Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "fluido anular",
+            "kill fluid"
+          ],
+          "@en": [
+            "annular fluid",
+            "wellbore fluid"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Tipo de fluido presente no anular do poço no momento de uma operação de canhoneio. (OSDU canonical: Type of fluid in wellbore at time of perforation job.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "well-activity-phase-type",
+        "label": "Fase da Atividade do Poço",
+        "label_en": "Well Activity Phase Type",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 16,
+        "definition": "Marcos-chave em um programa de atividade de poço, geralmente baseados nas seções principais do poço ou em trabalhos não relacionados ao poço. (OSDU canonical: Key milestones in a well activity program, usually based on the major sections of the well or non well-related work.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--WellActivityPhaseType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "fase do poço",
+          "milestone do poço"
+        ],
+        "synonyms_en": [
+          "well phase",
+          "activity phase"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Fase da Atividade do Poço",
+          "@en": "Well Activity Phase Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "fase do poço",
+            "milestone do poço"
+          ],
+          "@en": [
+            "well phase",
+            "activity phase"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Marcos-chave em um programa de atividade de poço, geralmente baseados nas seções principais do poço ou em trabalhos não relacionados ao poço. (OSDU canonical: Key milestones in a well activity program, usually based on the major sections of the well or non well-related work.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "drilling-reason-type",
+        "label": "Tipo de Razão de Perfuração",
+        "label_en": "Drilling Reason Type",
+        "type": "operational",
+        "color": "#378ADD",
+        "size": 16,
+        "definition": "Usado para descrever o tipo de razão (motivo) de perfuração — explica por que um poço foi perfurado (exploratório, delimitatório, produtor, injetor, etc.). (OSDU canonical: Used to describe the type of drilling reasons.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--DrillingReasonType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "motivo da perfuração",
+          "finalidade do poço"
+        ],
+        "synonyms_en": [
+          "drilling reason",
+          "well purpose"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Razão de Perfuração",
+          "@en": "Drilling Reason Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "motivo da perfuração",
+            "finalidade do poço"
+          ],
+          "@en": [
+            "drilling reason",
+            "well purpose"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Usado para descrever o tipo de razão (motivo) de perfuração — explica por que um poço foi perfurado (exploratório, delimitatório, produtor, injetor, etc.). (OSDU canonical: Used to describe the type of drilling reasons.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "document-type",
+        "label": "Tipo de Documento",
+        "label_en": "Document Type",
+        "type": "contractual",
+        "color": "#7F77DD",
+        "size": 16,
+        "definition": "Material impresso ou eletrônico contendo comunicação ou evidência destinado a registro persistente ou permanente — taxonomia de tipos documentais (relatório, contrato, parecer, etc.). (OSDU canonical: A piece of printed or electronic material containing communication or evidence that is intended for persistent or permanent record.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--DocumentType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1"
+        ],
+        "synonyms_pt": [
+          "tipo documental",
+          "classificação de documento"
+        ],
+        "synonyms_en": [
+          "document type"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Documento",
+          "@en": "Document Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "tipo documental",
+            "classificação de documento"
+          ],
+          "@en": [
+            "document type"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Material impresso ou eletrônico contendo comunicação ou evidência destinado a registro persistente ou permanente — taxonomia de tipos documentais (relatório, contrato, parecer, etc.). (OSDU canonical: A piece of printed or electronic material containing communication or evidence that is intended for persistent or permanent record.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "log-curve-type",
+        "label": "Tipo de Curva de Perfil",
+        "label_en": "Log Curve Type",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 16,
+        "definition": "Mnemônico padrão escolhido pela companhia para curvas de perfilagem — OSDU disponibiliza uma lista inicial (ex.: GR, RHOB, NPHI, DTC). (OSDU canonical: LogCurveType is the standard mnemonic chosen by the company - OSDU provides an initial list.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--LogCurveType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer4"
+        ],
+        "synonyms_pt": [
+          "mnemônico de log",
+          "curva de log"
+        ],
+        "synonyms_en": [
+          "log curve",
+          "curve mnemonic"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Curva de Perfil",
+          "@en": "Log Curve Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "mnemônico de log",
+            "curva de log"
+          ],
+          "@en": [
+            "log curve",
+            "curve mnemonic"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Mnemônico padrão escolhido pela companhia para curvas de perfilagem — OSDU disponibiliza uma lista inicial (ex.: GR, RHOB, NPHI, DTC). (OSDU canonical: LogCurveType is the standard mnemonic chosen by the company - OSDU provides an initial list.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "facility-type",
+        "label": "Tipo de Instalação",
+        "label_en": "Facility Type",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 16,
+        "definition": "Identifica e descreve o tipo de instalação. Uma facility é um agrupamento de equipamentos em um sítio geográfico específico, usado em atividades energéticas como exploração, extração, geração, armazenamento, processamento, descarte, suprimento ou transferência. Pode ser de superfície ou subsuperfície. (OSDU canonical: Used to identify and describe the type of facility.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--FacilityType:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1"
+        ],
+        "synonyms_pt": [
+          "tipo de facility",
+          "tipo de unidade"
+        ],
+        "synonyms_en": [
+          "facility type",
+          "installation type"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Tipo de Instalação",
+          "@en": "Facility Type"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "tipo de facility",
+            "tipo de unidade"
+          ],
+          "@en": [
+            "facility type",
+            "installation type"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Identifica e descreve o tipo de instalação. Uma facility é um agrupamento de equipamentos em um sítio geográfico específico, usado em atividades energéticas como exploração, extração, geração, armazenamento, processamento, descarte, suprimento ou transferência. Pode ser de superfície ou subsuperfície. (OSDU canonical: Used to identify and describe the type of facility.)",
+          "@en": null
+        },
+        "skos_example": []
+      },
+      {
+        "id": "acl",
+        "label": "Lista de Controle de Acesso (ACL)",
+        "label_en": "ACL",
+        "type": "contractual",
+        "color": "#7F77DD",
+        "size": 16,
+        "definition": "Tags de controle de acesso associadas a uma entidade. Estrutura incluída pelas SystemProperties acl, presente em todos os registros OSDU; não extensível. (OSDU canonical: The access control tags associated with this entity. This structure is included by the SystemProperties acl, which is part of all OSDU records.)",
+        "definition_en_canonical": null,
+        "legal_source": "Accenture/OSDU OWL",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:abstract--ACL:1.0.0",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1"
+        ],
+        "synonyms_pt": [
+          "controle de acesso",
+          "permissões"
+        ],
+        "synonyms_en": [
+          "acl",
+          "access control list"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "osdu_extra": true,
+        "skos_prefLabel": {
+          "@pt": "Lista de Controle de Acesso (ACL)",
+          "@en": "ACL"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "controle de acesso",
+            "permissões"
+          ],
+          "@en": [
+            "acl",
+            "access control list"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Tags de controle de acesso associadas a uma entidade. Estrutura incluída pelas SystemProperties acl, presente em todos os registros OSDU; não extensível. (OSDU canonical: The access control tags associated with this entity. This structure is included by the SystemProperties acl, which is part of all OSDU records.)",
+          "@en": null
+        },
+        "skos_example": []
       }
     ],
     "edges": [
@@ -5349,6 +6576,238 @@
         "relation_label_pt": "medida em",
         "relation_label_en": "measured in",
         "style": "solid"
+      },
+      {
+        "source": "activity-plan",
+        "target": "poco",
+        "relation": "plans_activity_for",
+        "relation_label_pt": "planeja atividade em",
+        "relation_label_en": "plans activity for",
+        "style": "dashed"
+      },
+      {
+        "source": "activity-plan",
+        "target": "activity-template",
+        "relation": "composed_of",
+        "relation_label_pt": "composto por",
+        "relation_label_en": "composed of",
+        "style": "solid"
+      },
+      {
+        "source": "well-activity-program",
+        "target": "poco",
+        "relation": "governs",
+        "relation_label_pt": "governa programa de",
+        "relation_label_en": "governs",
+        "style": "solid"
+      },
+      {
+        "source": "well-activity-program",
+        "target": "well-activity-phase-type",
+        "relation": "has_phase",
+        "relation_label_pt": "tem fase",
+        "relation_label_en": "has phase",
+        "style": "dashed"
+      },
+      {
+        "source": "well-activity-program",
+        "target": "drilling-activity",
+        "relation": "realized_by",
+        "relation_label_pt": "realizado por",
+        "relation_label_en": "realized by",
+        "style": "solid"
+      },
+      {
+        "source": "drilling-activity",
+        "target": "poco",
+        "relation": "performed_on",
+        "relation_label_pt": "executada em",
+        "relation_label_en": "performed on",
+        "style": "solid"
+      },
+      {
+        "source": "drilling-activity",
+        "target": "drilling-reason-type",
+        "relation": "classified_by",
+        "relation_label_pt": "classificada por",
+        "relation_label_en": "classified by",
+        "style": "dashed"
+      },
+      {
+        "source": "drilling-parameters",
+        "target": "bha",
+        "relation": "measured_for",
+        "relation_label_pt": "medido para",
+        "relation_label_en": "measured for",
+        "style": "solid"
+      },
+      {
+        "source": "mud-pump",
+        "target": "drilling-activity",
+        "relation": "used_in",
+        "relation_label_pt": "usado em",
+        "relation_label_en": "used in",
+        "style": "dashed"
+      },
+      {
+        "source": "wellbore-architecture",
+        "target": "wellbore",
+        "relation": "describes_structure_of",
+        "relation_label_pt": "descreve estrutura de",
+        "relation_label_en": "describes structure of",
+        "style": "solid"
+      },
+      {
+        "source": "casing-design",
+        "target": "wellbore-architecture",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "cementing-fluid",
+        "target": "casing-design",
+        "relation": "used_in",
+        "relation_label_pt": "usado em",
+        "relation_label_en": "used in",
+        "style": "dashed"
+      },
+      {
+        "source": "wellbore-trajectory",
+        "target": "wellbore",
+        "relation": "positions",
+        "relation_label_pt": "posiciona",
+        "relation_label_en": "positions",
+        "style": "solid"
+      },
+      {
+        "source": "wellbore-marker-set",
+        "target": "wellbore",
+        "relation": "identifies_in",
+        "relation_label_pt": "identifica em",
+        "relation_label_en": "identifies in",
+        "style": "solid"
+      },
+      {
+        "source": "wellbore-marker-set",
+        "target": "topo-formacional",
+        "relation": "specializes",
+        "relation_label_pt": "especializa",
+        "relation_label_en": "specializes",
+        "style": "dashed"
+      },
+      {
+        "source": "wellbore-marker-set",
+        "target": "intervalo-estratigrafico",
+        "relation": "maps_to",
+        "relation_label_pt": "mapeia para",
+        "relation_label_en": "maps to",
+        "style": "dashed"
+      },
+      {
+        "source": "core-sample",
+        "target": "testemunho",
+        "relation": "aligns_with",
+        "relation_label_pt": "alinha-se com",
+        "relation_label_en": "aligns with",
+        "style": "dashed"
+      },
+      {
+        "source": "log-curve-type",
+        "target": "perfil-poco",
+        "relation": "classifies_curve_in",
+        "relation_label_pt": "classifica curva de",
+        "relation_label_en": "classifies curve in",
+        "style": "dashed"
+      },
+      {
+        "source": "seismic-acquisition-survey",
+        "target": "bacia-sedimentar",
+        "relation": "covers",
+        "relation_label_pt": "cobre",
+        "relation_label_en": "covers",
+        "style": "dashed"
+      },
+      {
+        "source": "seismic-processing-project",
+        "target": "seismic-acquisition-survey",
+        "relation": "processes",
+        "relation_label_pt": "processa dados de",
+        "relation_label_en": "processes",
+        "style": "solid"
+      },
+      {
+        "source": "seismic-horizon",
+        "target": "seismic-processing-project",
+        "relation": "output_of",
+        "relation_label_pt": "saída de",
+        "relation_label_en": "output of",
+        "style": "solid"
+      },
+      {
+        "source": "seismic-horizon",
+        "target": "topo-formacional",
+        "relation": "correlates_with",
+        "relation_label_pt": "correlaciona com",
+        "relation_label_en": "correlates with",
+        "style": "dashed"
+      },
+      {
+        "source": "basin-type",
+        "target": "bacia-sedimentar",
+        "relation": "classifies",
+        "relation_label_pt": "classifica",
+        "relation_label_en": "classifies",
+        "style": "dashed"
+      },
+      {
+        "source": "bottom-hole-pressure-type",
+        "target": "pvt",
+        "relation": "measurement_for",
+        "relation_label_pt": "medição para",
+        "relation_label_en": "measurement for",
+        "style": "dashed"
+      },
+      {
+        "source": "annular-fluid-type",
+        "target": "janela-lama",
+        "relation": "related_to",
+        "relation_label_pt": "relacionado a",
+        "relation_label_en": "related to",
+        "style": "dashed"
+      },
+      {
+        "source": "document-type",
+        "target": "eia",
+        "relation": "classifies",
+        "relation_label_pt": "classifica documento de",
+        "relation_label_en": "classifies",
+        "style": "dashed"
+      },
+      {
+        "source": "facility-type",
+        "target": "fpso",
+        "relation": "classifies",
+        "relation_label_pt": "classifica",
+        "relation_label_en": "classifies",
+        "style": "dashed"
+      },
+      {
+        "source": "geo-political-entity",
+        "target": "anp",
+        "relation": "jurisdiction_of",
+        "relation_label_pt": "jurisdição de",
+        "relation_label_en": "jurisdiction of",
+        "style": "dashed"
+      },
+      {
+        "source": "acl",
+        "target": "operador",
+        "relation": "restricts_access_for",
+        "relation_label_pt": "restringe acesso para",
+        "relation_label_en": "restricts access for",
+        "style": "dashed"
       }
     ]
   },
@@ -5965,7 +7424,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-05-01T10:20:02.364Z",
+    "generated": "2026-05-01T10:30:20.192Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -6189,7 +7648,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-01T10:20:02.364Z",
+      "generated": "2026-05-01T10:30:20.192Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
