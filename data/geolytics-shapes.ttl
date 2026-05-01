@@ -1,0 +1,429 @@
+# geolytics-shapes.ttl — SHACL shapes for the Geolytics Dictionary
+# Validates instances of the geo: vocabulary against formal constraints.
+#
+# Prefixes follow data/geolytics.ttl exactly.
+# Run: python scripts/validate-shacl.py
+
+@prefix geo:  <https://geolytics.petrobras.com.br/dict/> .
+@prefix osdu: <https://w3id.org/osdu#> .
+@prefix kg:   <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix dash: <http://datashapes.org/dash#> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 1: WellShape — validates geo:Poco instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:WellShape a sh:NodeShape ;
+    rdfs:label "Forma de Poço"@pt ;
+    rdfs:label "Well Shape"@en ;
+    sh:targetClass geo:Poco ;
+    rdfs:comment "Valida instâncias de poços: tipoPoco deve ser valor canônico ANP, operador e bloco com cardinalidade 1..1."@pt ;
+
+    # tipoPoco must come from the canonical ANP well-type enum
+    sh:property [
+        sh:path geo:tipoPoco ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "exploratorio" "avaliacao" "desenvolvimento" "especial" "injetor" "produtor" ) ;
+        sh:datatype xsd:string ;
+        sh:message "tipoPoco deve ser um dos valores canônicos ANP: exploratorio, avaliacao, desenvolvimento, especial, injetor, produtor."@pt ;
+    ] ;
+
+    # operador: exactly one
+    sh:property [
+        sh:path geo:operador ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class geo:Operador ;
+        sh:message "Um poço deve ter exactamente um operador (geo:Operador)."@pt ;
+    ] ;
+
+    # bloco: exactly one
+    sh:property [
+        sh:path geo:bloco ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class geo:Bloco ;
+        sh:message "Um poço deve estar associado a exactamente um bloco (geo:Bloco)."@pt ;
+    ] ;
+
+    # skos:prefLabel is required (at minimum one language tag)
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Poço deve ter ao menos um skos:prefLabel com tag de idioma."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 2: BlocoShape — validates geo:Bloco instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:BlocoShape a sh:NodeShape ;
+    rdfs:label "Forma de Bloco Exploratório"@pt ;
+    rdfs:label "Exploration Block Shape"@en ;
+    sh:targetClass geo:Bloco ;
+    rdfs:comment "Valida instâncias de blocos: regimeContratual deve ser valor canônico, bacia com cardinalidade 1..1."@pt ;
+
+    # regimeContratual must be one of the three Brazilian contract regimes
+    sh:property [
+        sh:path geo:regimeContratual ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "Concessao" "Partilha" "CessaoOnerosa" ) ;
+        sh:datatype xsd:string ;
+        sh:message "regimeContratual deve ser Concessao, Partilha ou CessaoOnerosa."@pt ;
+    ] ;
+
+    # bacia: exactly one sedimentary basin
+    sh:property [
+        sh:path geo:bacia ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:class geo:BaciaSedimentar ;
+        sh:message "Um bloco deve estar delimitado em exactamente uma bacia sedimentar (geo:BaciaSedimentar)."@pt ;
+    ] ;
+
+    # prefLabel required
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "Bloco deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 3: ReservaShape — validates geo:Reserva instances (SPE-PRMS)
+# Explicitly disjoint from geo:ReservaAmbiental
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:ReservaShape a sh:NodeShape ;
+    rdfs:label "Forma de Reserva SPE-PRMS"@pt ;
+    rdfs:label "Reserve Shape (SPE-PRMS)"@en ;
+    sh:targetClass geo:Reserva ;
+    rdfs:comment "Valida instâncias de reservas SPE-PRMS: categoriaSPEPRMS deve ser 1P/2P/3P/C1C/C2C/C3C. DISJUNTA de geo:ReservaAmbiental."@pt ;
+
+    # categoriaSPEPRMS from canonical SPE-PRMS enum
+    sh:property [
+        sh:path geo:categoriaSPEPRMS ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "1P" "2P" "3P" "C1C" "C2C" "C3C" ) ;
+        sh:datatype xsd:string ;
+        sh:message "categoriaSPEPRMS deve ser 1P, 2P, 3P, C1C, C2C ou C3C (SPE-PRMS). NOTA: geo:Reserva (SPE-PRMS) e geo:ReservaAmbiental sao conceitos DISTINTOS."@pt ;
+    ] ;
+
+    # Disjointness: a geo:Reserva must NOT also be a geo:ReservaAmbiental
+    sh:not [
+        sh:class geo:ReservaAmbiental ;
+    ] ;
+
+    sh:message "geo:Reserva e geo:ReservaAmbiental sao disjuntas — uma instancia nao pode ser ambas simultaneamente."@pt .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 4: OSDUKindShape — validates the osdu_kind literal format
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:OSDUKindShape a sh:NodeShape ;
+    rdfs:label "Forma de Kind OSDU"@pt ;
+    rdfs:label "OSDU Kind Shape"@en ;
+    sh:targetSubjectsOf geo:osduKind ;
+    rdfs:comment "Valida que o literal geo:osduKind segue o padrao opendes:osdu:master-data--TypeName:major.minor.patch."@pt ;
+
+    sh:property [
+        sh:path geo:osduKind ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^opendes:osdu:master-data--[A-Z][A-Za-z]+:[0-9]+\\.[0-9]+\\.[0-9]+$" ;
+        sh:message "geo:osduKind deve seguir o padrao opendes:osdu:master-data--TypeName:major.minor.patch (ex: opendes:osdu:master-data--Well:1.0.0)."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 5: AcronymShape — validates acronym entries
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:AcronymShape a sh:NodeShape ;
+    rdfs:label "Forma de Sigla O&G"@pt ;
+    rdfs:label "Acronym Shape"@en ;
+    sh:targetClass geo:Acronym ;
+    rdfs:comment "Valida entradas de siglario: sigla obrigatorio, ao menos uma expansao (PT ou EN), category de lista canonica."@pt ;
+
+    # sigla: required, exactly one
+    sh:property [
+        sh:path geo:sigla ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "Sigla deve ter exactamente um valor geo:sigla."@pt ;
+    ] ;
+
+    # At least one of expansion_pt or expansion_en
+    sh:or (
+        [ sh:property [ sh:path geo:expansion_pt ; sh:minCount 1 ] ]
+        [ sh:property [ sh:path geo:expansion_en ; sh:minCount 1 ] ]
+    ) ;
+
+    # category from controlled vocabulary
+    sh:property [
+        sh:path geo:category ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in (
+            "equipment" "measurement" "fluid" "process" "environmental"
+            "standard_body" "contract" "unit" "lithology" "geophysics"
+            "well_state" "regulator" "it_generic" "general" "organization"
+        ) ;
+        sh:datatype xsd:string ;
+        sh:message "category deve ser um dos valores canônicos do siglario Geolytics."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 6: GSOClassShape — validates GSO/Loop3D structural geology class URIs
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GSOClassShape a sh:NodeShape ;
+    rdfs:label "Forma de Classe GSO"@pt ;
+    rdfs:label "GSO Class Shape"@en ;
+    sh:targetClass geo:GSOClass ;
+    rdfs:comment "Valida classes da ontologia GSO/Loop3D: owl_uri deve apontar para loop3d.org."@pt ;
+
+    sh:property [
+        sh:path geo:owlUri ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:pattern "^https?://(www\\.)?loop3d\\.org/" ;
+        sh:message "owl_uri de classe GSO deve ser um IRI no dominio loop3d.org."@pt ;
+    ] ;
+
+    # GSO classes must have a prefLabel
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "Classe GSO deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 7: GeocoverageShape — validates geocoverage values
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeocoverageShape a sh:NodeShape ;
+    rdfs:label "Forma de Cobertura Semântica"@pt ;
+    rdfs:label "Geocoverage Shape"@en ;
+    sh:targetSubjectsOf geo:geocoverage ;
+    rdfs:comment "Valida que geo:geocoverage usa apenas valores da lista canônica de 8 camadas."@pt ;
+
+    sh:property [
+        sh:path geo:geocoverage ;
+        sh:minCount 1 ;
+        sh:in ( "layer1" "layer1b" "layer2" "layer3" "layer4" "layer5" "layer6" "layer7" ) ;
+        sh:datatype xsd:string ;
+        sh:message "geo:geocoverage deve ser um dos 8 valores canônicos: layer1, layer1b, layer2, layer3, layer4, layer5, layer6, layer7."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 8: OntopetroClassShape — validates ontopetro class identifiers
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:OntopetroClassShape a sh:NodeShape ;
+    rdfs:label "Forma de Classe Ontopetro"@pt ;
+    rdfs:label "Ontopetro Class Shape"@en ;
+    sh:targetClass geo:OntopetroClass ;
+    rdfs:comment "Valida classes da ontopetro: id segue padrao C000-C999, ao menos uma fonte declarada."@pt ;
+
+    sh:property [
+        sh:path geo:classId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^C[0-9]{3}$" ;
+        sh:message "classId de OntopetroClass deve seguir o padrao C000-C999 (ex: C001, C020)."@pt ;
+    ] ;
+
+    # At least one source declared
+    sh:property [
+        sh:path geo:source ;
+        sh:minCount 1 ;
+        sh:message "OntopetroClass deve ter ao menos uma fonte declarada via geo:source."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 9: EntityClassShape — validates core entity owl:Class nodes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:EntityClassShape a sh:NodeShape ;
+    rdfs:label "Forma de Classe de Entidade"@pt ;
+    rdfs:label "Entity Class Shape"@en ;
+    sh:targetSubjectsOf geo:entityType ;
+    rdfs:comment "Toda owl:Class com geo:entityType deve ter prefLabel PT e EN e definição PT."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 2 ;
+        sh:message "Classe deve ter ao menos dois skos:prefLabel (PT e EN)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "Classe deve ter ao menos um skos:definition."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:entityType ;
+        sh:maxCount 1 ;
+        sh:in ( "operational" "contractual" "actor" "instrument" "geological" "equipment" "analytical" ) ;
+        sh:datatype xsd:string ;
+        sh:message "geo:entityType deve ser um dos 7 tipos canônicos do modelo de entidades."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 10: ObjectPropertyShape — validates geo: object properties
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:ObjectPropertyShape a sh:NodeShape ;
+    rdfs:label "Forma de Propriedade de Objeto"@pt ;
+    rdfs:label "Object Property Shape"@en ;
+    sh:targetClass owl:ObjectProperty ;
+    rdfs:comment "Toda owl:ObjectProperty do namespace geo: deve ter rdfs:label PT e EN."@pt ;
+
+    sh:property [
+        sh:path rdfs:label ;
+        sh:minCount 2 ;
+        sh:message "ObjectProperty deve ter ao menos dois rdfs:label (PT e EN)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:domain ;
+        sh:minCount 1 ;
+        sh:message "ObjectProperty deve declarar rdfs:domain."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path rdfs:range ;
+        sh:minCount 1 ;
+        sh:message "ObjectProperty deve declarar rdfs:range."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 11: SameAsLinkShape — validates owl:sameAs targets are IRIs
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:SameAsLinkShape a sh:NodeShape ;
+    rdfs:label "Forma de Link owl:sameAs"@pt ;
+    rdfs:label "SameAs Link Shape"@en ;
+    sh:targetSubjectsOf owl:sameAs ;
+    rdfs:comment "Subjects com owl:sameAs devem apontar para IRIs externas bem-formadas."@pt ;
+
+    sh:property [
+        sh:path owl:sameAs ;
+        sh:nodeKind sh:IRI ;
+        sh:message "owl:sameAs deve ter como valor um IRI (nao um literal)."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 12: PrefLabelUniquenessShape — skos:prefLabel unique per language
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:PrefLabelUniquenessShape a sh:NodeShape ;
+    rdfs:label "Forma de Unicidade de prefLabel"@pt ;
+    rdfs:label "PrefLabel Uniqueness Shape"@en ;
+    sh:targetSubjectsOf skos:prefLabel ;
+    rdfs:comment "Classes nao devem ter mais de dois skos:prefLabel (um PT, um EN)."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:maxCount 4 ;
+        sh:message "skos:prefLabel nao deve ter mais de 4 valores por sujeito (recomendado: 1 PT + 1 EN)."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 13: OperadorShape — validates geo:Operador instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:OperadorShape a sh:NodeShape ;
+    rdfs:label "Forma de Operador"@pt ;
+    rdfs:label "Operator Shape"@en ;
+    sh:targetClass geo:Operador ;
+    rdfs:comment "Valida instâncias de operadores: prefLabel obrigatorio."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "Operador deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 14: BaciaSedimentarShape — validates geo:BaciaSedimentar instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:BaciaSedimentarShape a sh:NodeShape ;
+    rdfs:label "Forma de Bacia Sedimentar"@pt ;
+    rdfs:label "Sedimentary Basin Shape"@en ;
+    sh:targetClass geo:BaciaSedimentar ;
+    rdfs:comment "Valida instâncias de bacias sedimentares: prefLabel e definicao obrigatorios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "BaciaSedimentar deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "BaciaSedimentar deve ter ao menos um skos:definition."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 15: OsduUriPattern — validates osdu: IRI namespace usage
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:OsduUriPatternShape a sh:NodeShape ;
+    rdfs:label "Forma de URI OSDU"@pt ;
+    rdfs:label "OSDU URI Pattern Shape"@en ;
+    sh:targetSubjectsOf owl:sameAs ;
+    rdfs:comment "Entidades com owl:sameAs para OSDU devem usar o namespace canônico https://w3id.org/osdu#."@pt ;
+
+    sh:sparql [
+        sh:message "owl:sameAs para OSDU deve usar o namespace https://w3id.org/osdu# (nao outros dominios OSDU)."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+            SELECT $this ?value
+            WHERE {
+                $this owl:sameAs ?value .
+                FILTER(
+                    CONTAINS(STR(?value), "osdu") &&
+                    !STRSTARTS(STR(?value), "https://w3id.org/osdu#") &&
+                    !STRSTARTS(STR(?value), "http://w3id.org/osdu#")
+                )
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 16: ContratacaoShape — validates geo:ContratoEP instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:ContratacaoShape a sh:NodeShape ;
+    rdfs:label "Forma de Contrato E&P"@pt ;
+    rdfs:label "E&P Contract Shape"@en ;
+    sh:targetClass geo:ContratoEP ;
+    rdfs:comment "Valida contratos E&P brasileiros: definicao e prefLabel obrigatorios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "ContratoEP deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "ContratoEP deve ter ao menos um skos:definition."@pt ;
+    ] .

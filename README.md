@@ -40,6 +40,40 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 | `data/osdu-gso-crosswalk.json` | 14 mapeamentos SKOS OSDU↔GSO |
 | `scripts/gso-extract.js` | Parser Turtle minimal para módulos GSO (sem rdflib) |
 | `scripts/generate.js` | Regenera `/data`, `/api` e `/ai` |
+| `data/geolytics-shapes.ttl` | 16 NodeShapes SHACL para validacao formal |
+| `data/geolytics-vocab.ttl` | Vocabulario OWL minimo de apoio (classes + propriedades) |
+| `api/v1/geolytics-shapes.ttl` | Shapes SHACL servidos publicamente |
+| `api/v1/geolytics-vocab.ttl` | Vocabulario OWL servido publicamente |
+| `scripts/validate-shacl.py` | Validador Python (pyshacl) |
+| `scripts/validate-shacl.js` | Wrapper Node.js (delega ao Python se necessario) |
+| `docs/SHACL.md` | Documentacao do sistema SHACL |
+
+---
+
+## Validacao SHACL formal
+
+O grafo `data/geolytics.ttl` pode ser validado contra restricoes formais usando [SHACL](https://www.w3.org/TR/shacl/).
+
+### Instalacao rapida
+
+```bash
+pip install -r scripts/requirements.txt
+python scripts/validate-shacl.py
+```
+
+### O que e validado
+
+- `geo:Poco` — `tipoPoco` de enum ANP canonico, `operador` e `bloco` com cardinalidade 1..1
+- `geo:Bloco` — `regimeContratual` in {Concessao, Partilha, CessaoOnerosa}, `bacia` 1..1
+- `geo:Reserva` — `categoriaSPEPRMS` in {1P,2P,3P,C1C,C2C,C3C}; disjunto de `ReservaAmbiental`
+- `geo:osduKind` — padrao `opendes:osdu:master-data--TypeName:major.minor.patch`
+- `geo:Acronym` — `sigla` obrigatorio, ao menos uma expansao PT/EN, `category` de lista canonica
+- `geo:GSOClass` — `owlUri` com dominio `loop3d.org`
+- `geo:geocoverage` — valores restritos a {layer1, layer1b, layer2, ..., layer7}
+- `geo:OntopetroClass` — `classId` padrao `C000-C999`, ao menos um `source`
+- Mais 8 shapes para classes de entidades, propriedades de objeto, links `owl:sameAs` e contratos E&P
+
+Veja `docs/SHACL.md` para documentacao completa e instrucoes de como adicionar novas shapes.
 
 ---
 
@@ -152,6 +186,75 @@ Para o arquivo SPARQL, o campo `cypher` é substituído por `sparql`:
 - Cadeias multi-hop: rodada de licitação → bloco → PAD → Declaração de Comercialidade → Primeiro Óleo.
 - Campo Tensional (geomecânica) vs Campo de petróleo (ANP).
 - Formação (unidade litoestratigráfica) vs Litologia (tipo petrográfico).
+
+---
+
+## Semantic Validator
+
+A deterministic, side-effect-free validator that checks claims (free text or structured objects) against the canonical enumerations in `data/taxonomies.json`, `data/entity-graph.json`, and related files. Mirrors the Python validator at `examples/langgraph-agent/nodes/validator.py` and shares the same rule IDs.
+
+### Rules enforced
+
+| Rule ID | Severity | Description |
+|---|---|---|
+| `SPE_PRMS_INVALID_CATEGORY` | error | Only 1P/2P/3P (Reservas) and C1C/C2C/C3C (Recursos Contingentes) are valid |
+| `RESERVA_AMBIGUITY` | warning | Flags "Reserva" near REBIO/RPPN/APA terms — distinguish SPE-PRMS vs ambiental |
+| `REGIME_CONTRATUAL_INVALID` | error | Must be Concessão, Partilha de Produção, or Cessão Onerosa |
+| `TIPO_POCO_INVALID` | error | ANP well code prefix must be 1, 2, 3, 4, 6, or 7 |
+| `LITOLOGIA_INVALID` | warning | Lithology must be in canonical CGI/GeoSciML enumeration |
+| `JANELA_GERACAO_INVALID` | warning | Generation window must match Ro% scale enumeration |
+| `ACRONYM_AMBIGUOUS` | warning | Ambiguous siglas (PAD, UTS, API…) must include disambiguation context |
+| `OSDU_KIND_FORMAT` | error | Must match `opendes:osdu:<domain>--<Type>:<major>.<minor>.<patch>` |
+| `LAYER_COVERAGE_MISMATCH` | warning | Entity asserted in layer X but geocoverage does not include X |
+
+The full machine-readable manifest is at `api/v1/validate-rules.json`.
+
+### CLI usage
+
+```bash
+# Validate free text — exit code 0 = valid, 1 = violations
+node scripts/validate-cli.js "Reserva 4P do Campo de Búzios"
+
+# Valid claim
+node scripts/validate-cli.js "Bloco BS-500 em regime de Concessão"
+
+# Invalid regime
+node scripts/validate-cli.js "Bloco BS-500 em regime de Privatização"
+
+# Human-readable output
+node scripts/validate-cli.js --format text "Reserva 4P do pré-sal"
+
+# Validate a JSON file containing an array of claims
+node scripts/validate-cli.js --file claims.json --format json
+```
+
+### JavaScript API
+
+```js
+const { validate } = require('./scripts/semantic-validator');
+
+// Free-text claim
+const result = validate('Reserva 4P do Campo de Búzios');
+// { valid: false, violations: [{rule: 'SPE_PRMS_INVALID_CATEGORY', ...}], warnings: [] }
+
+// Structured claim with layer-coverage check
+const structured = validate({
+  type: 'entity',
+  value: 'poco referenciado em layer9',
+  context: { entity_id: 'poco', layer: 'layer9' }
+});
+// { valid: true, violations: [], warnings: [{rule: 'LAYER_COVERAGE_MISMATCH', ...}] }
+
+console.log(result.valid);          // false
+console.log(result.violations[0].rule);        // 'SPE_PRMS_INVALID_CATEGORY'
+console.log(result.violations[0].suggested_fix);
+```
+
+### Running the test suite
+
+```bash
+node --test tests/validator.test.js
+```
 
 ---
 
@@ -298,6 +401,77 @@ O diretório `docs/queries/` contém 6 consultas comentadas em PT-BR:
 | `04-caminho-mais-curto.cypher` | Menor caminho entre quaisquer dois nós (com e sem APOC) |
 | `05-cascata-regulatoria.cypher` | Cascata regulatória Lei 9.478 → ANP → SIGEP |
 | `06-desambiguacao-siglas.cypher` | Siglas com múltiplos sentidos no domínio O&G |
+
+---
+
+## MCP server
+
+The `mcp/geolytics-mcp/` directory contains a TypeScript MCP server that exposes the dictionary as 9 AI tools over stdio transport. Any MCP-compatible agent (Claude Desktop, Claude Code, Cursor, LangGraph) can use it offline without an API key or embedding provider.
+
+### Install and build
+
+```bash
+cd mcp/geolytics-mcp
+npm install
+npm run build
+```
+
+### Configuration
+
+**Claude Desktop** — add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "geolytics": {
+      "command": "node",
+      "args": ["/path/to/geolytics-dictionary/mcp/geolytics-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+**Claude Code** — add to your project's `.claude/settings.json` or globally to `~/.claude/settings.json`:
+
+```json
+{
+  "mcpServers": {
+    "geolytics": {
+      "command": "node",
+      "args": ["/path/to/geolytics-dictionary/mcp/geolytics-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+**Cursor** — add to `.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "geolytics": {
+      "command": "node",
+      "args": ["/path/to/geolytics-dictionary/mcp/geolytics-mcp/dist/index.js"]
+    }
+  }
+}
+```
+
+### Available tools
+
+| Tool | Description |
+|---|---|
+| `lookup_term` | Search glossary + extended-terms + ontopetro by name (PT/EN), with fuzzy option |
+| `expand_acronym` | Expand an O&G sigla; returns all senses with disambiguation hint |
+| `get_entity` | Fetch entity node with all outgoing/incoming relations resolved |
+| `get_entity_neighbors` | Multi-hop BFS traversal (1-3 hops), optional edge type filter |
+| `validate_claim` | Validate natural-language claim against the ontology (requires P1.4) |
+| `cypher_query` | Run Cypher against Neo4j — only active when `NEO4J_URI` is set |
+| `search_rag` | BM25 full-text search over `ai/rag-corpus.jsonl` (no embedding provider) |
+| `list_layers` | List all semantic layers with metadata |
+| `crosswalk_lookup` | Find equivalent terms across layers by URI, OSDU kind or entity id |
+
+See `mcp/geolytics-mcp/README.md` for full documentation, sample call/response shapes, and Neo4j setup.
 
 ---
 

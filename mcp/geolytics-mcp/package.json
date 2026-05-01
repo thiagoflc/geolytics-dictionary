@@ -1,0 +1,29 @@
+{
+  "name": "geolytics-mcp",
+  "version": "0.1.0",
+  "description": "MCP server exposing the Geolytics O&G semantic dictionary as AI tools",
+  "type": "module",
+  "bin": {
+    "geolytics-mcp": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "zod": "^3.23.0",
+    "zod-to-json-schema": "^3.23.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "dist"
+  ]
+}

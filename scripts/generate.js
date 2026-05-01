@@ -1631,6 +1631,39 @@ writeText('ai/system-prompt-ptbr.md',  SYSTEM_PROMPT_PT);
 writeText('ai/system-prompt-en.md',    SYSTEM_PROMPT_EN);
 writeJson('ai/ontology-map.json',      buildOntologyMap());
 
+// Defensive: generate validate-rules manifest only if the builder is present.
+(function generateValidateManifest() {
+  const manifestScript = path.resolve(__dirname, 'build-validate-manifest.js');
+  if (!fs.existsSync(manifestScript)) return;
+  try {
+    const { buildManifest } = require('./build-validate-manifest.js');
+    writeJson('api/v1/validate-rules.json', buildManifest());
+  } catch (err) {
+    console.warn(`  [warn] Could not generate validate-rules.json: ${err.message}`);
+  }
+})();
+
+// Copy SHACL shapes and vocab into api/v1/ so they are publicly served.
+// Idempotent: overwrites on each generate run.
+(function copyShacl() {
+  const shaclFiles = [
+    { src: 'data/geolytics-shapes.ttl', dst: 'api/v1/geolytics-shapes.ttl' },
+    { src: 'data/geolytics-vocab.ttl',  dst: 'api/v1/geolytics-vocab.ttl' },
+  ];
+  for (const { src, dst } of shaclFiles) {
+    const srcPath = path.join(ROOT, src);
+    const dstPath = path.join(ROOT, dst);
+    if (!fs.existsSync(srcPath)) {
+      console.warn(`  [warn] SHACL source not found, skipping copy: ${src}`);
+      continue;
+    }
+    fs.mkdirSync(path.dirname(dstPath), { recursive: true });
+    fs.copyFileSync(srcPath, dstPath);
+    if (!DRY_RUN) console.log(`  ✓ ${dst} (copied from ${src})`);
+    else console.log(`  [dry-run] would copy ${src} → ${dst}`);
+  }
+})();
+
 console.log('\n✓ Done.');
 console.log(`  Glossary terms: ${GLOSSARIO.length}`);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
