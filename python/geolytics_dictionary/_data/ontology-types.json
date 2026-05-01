@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T16:05:20.772Z"
+  },
+  "domains": [
+    {
+      "id": "ativos",
+      "label": "Ativos",
+      "desc": "Blocos, campos, concessões, PADs, regulatório ANP"
+    },
+    {
+      "id": "fluidos",
+      "label": "Fluidos",
+      "desc": "Produção e injeção — óleo, gás, água, condensado, CO2, vapor"
+    },
+    {
+      "id": "rocha",
+      "label": "Rocha",
+      "desc": "Bacias sedimentares, formações, estratigrafia, ambiente deposicional"
+    },
+    {
+      "id": "geomecanica",
+      "label": "Geomecânica",
+      "desc": "Profundidade, estratificação, stress in-situ (em roadmap)"
+    }
+  ],
+  "typology": {
+    "label": "Tipologia do Dado",
+    "desc": "O que o dado representa quimicamente/operacionalmente",
+    "items": [
+      {
+        "id": "geo_org",
+        "label": "Geoquímica Orgânica",
+        "desc": "TOC, pirólise, biomarcadores, maturidade"
+      },
+      {
+        "id": "geo_inorg",
+        "label": "Geoquímica Inorgânica",
+        "desc": "Isótopos, traços inorgânicos"
+      },
+      {
+        "id": "geo_hidro",
+        "label": "Hidrogeoquímica",
+        "desc": "Análise de água de formação"
+      },
+      {
+        "id": "pvt",
+        "label": "PVT",
+        "desc": "Propriedades pressão-volume-temperatura"
+      },
+      {
+        "id": "show",
+        "label": "Show de Fluido",
+        "desc": "Observação visual em perfuração"
+      },
+      {
+        "id": "teste",
+        "label": "Teste de Formação",
+        "desc": "DST, teste de produção"
+      },
+      {
+        "id": "composicao",
+        "label": "Composição Molecular",
+        "desc": "GC, GC-MS, espectrometria"
+      }
+    ]
+  },
+  "processing_levels": {
+    "label": "Nível de Processamento",
+    "desc": "Grau de transformação do dado bruto ao produto analítico",
+    "items": [
+      {
+        "id": "primario",
+        "label": "Dado Primário",
+        "desc": "Medida direta de amostra ou análise laboratorial"
+      },
+      {
+        "id": "interpretado",
+        "label": "Dado Interpretado",
+        "desc": "Classificação, mapa ou modelo derivado das medidas"
+      },
+      {
+        "id": "curado",
+        "label": "Produto Curado",
+        "desc": "Dataset validado, harmonizado e versionado"
+      }
+    ]
+  }
+}

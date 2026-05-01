@@ -4,6 +4,46 @@ Ontologia semântica do domínio de **Exploração & Produção (E&P) de petról
 
 **Visualização interativa:** https://thiagoflc.github.io/geolytics-dictionary
 
+## Python Package
+
+```bash
+pip install geolytics-dictionary
+```
+
+```python
+from geolytics_dictionary import Dictionary, KnowledgeGraph, Validator, SweetExpander
+
+d = Dictionary()
+d.lookup("Pré-sal")          # list[Term]
+d.acronym("BOP")             # list[Acronym]
+d.layers()                   # list[Layer]
+
+kg = KnowledgeGraph.from_local()
+kg.entity("poco")
+kg.shortest_path("poco", "reservatorio")
+
+v = Validator()
+v.validate("Reserva 4P do Campo de Búzios")  # Report with SPE_PRMS_INVALID_CATEGORY violation
+
+s = SweetExpander()
+s.expand("hidrocarboneto", strategy="exactMatch")  # list of SWEET URIs
+```
+
+See [`python/README.md`](python/README.md) for full documentation.
+
+---
+
+## Notebooks
+
+Quatro notebooks Jupyter didáticos para cientistas de dados em geociências. Executáveis após `pip install -r notebooks/requirements.txt`.
+
+| Notebook | Descrição |
+|---|---|
+| [`notebooks/01_explore_graph.ipynb`](notebooks/01_explore_graph.ipynb) | Exploração do grafo de entidades com NetworkX: estatísticas, sub-grafo ao redor de `poco`, caminho mais curto, comunidades e exportação GraphML. |
+| [`notebooks/02_rag_with_validator.ipynb`](notebooks/02_rag_with_validator.ipynb) | Pipeline RAG sobre o `rag-corpus.jsonl` com índice BM25 (sem API key), demonstração de recuperação correta e detecção de alucinação via validador semântico. |
+| [`notebooks/03_langgraph_multiagent.ipynb`](notebooks/03_langgraph_multiagent.ipynb) | Execução do agente LangGraph multi-nó com roteamento, decomposição multi-hop, validação e síntese; renderização do DAG em Mermaid e troca de provedor LLM. |
+| [`notebooks/04_geomec_qa.ipynb`](notebooks/04_geomec_qa.ipynb) | Estudo de caso em geomecânica: consulta de propriedades elásticas para MEM 1D, Círculo de Mohr, validação SHACL `StressTensorShape` e crosswalk fratura-GSO. |
+
 ---
 
 ## Estrutura
@@ -532,7 +572,47 @@ O script regrava todos os arquivos em `/data`, `/api/v1` e `/ai`. Os dados-fonte
 
 ---
 
+## Continuous Integration
+
+Every pull request and push to `main` runs a suite of automated checks via GitHub Actions.
+
+### Workflows
+
+| Workflow | File | Trigger |
+|---|---|---|
+| CI | `.github/workflows/ci.yml` | push / pull_request |
+| Release | `.github/workflows/release.yml` | tag `v*` |
+
+### CI jobs (`.github/workflows/ci.yml`)
+
+| Job | What it checks |
+|---|---|
+| `lint` | Node syntax (`node --check`) over all `scripts/*.js`; Python syntax (`python -m py_compile`) over all `.py` files |
+| `node-tests` | Runs `node --test tests/validator.test.js`; then verifies that `node scripts/generate.js` produces no diff in `data/full.json` or `api/v1/` |
+| `shacl` | Installs pyshacl + rdflib in an isolated venv and runs `python scripts/validate-shacl.py` |
+| `python-tests` | Installs the Python package and runs `pytest python/tests/ -q` |
+| `langgraph-tests` | Installs LangGraph agent deps (CPU-only) and runs `pytest examples/langgraph-agent/tests/ -q` |
+| `eval` | Runs the offline eval harness (`--runner vector_only` and `--runner graphrag_validator`, `--offline --limit 30`), generates the report, and fails if the composite score regresses more than 5% below `eval/baseline.json`. On `main`, updates `eval/baseline.json` automatically. |
+| `mcp-build` | Installs `mcp/geolytics-mcp` deps and runs `npx tsc --noEmit` to verify TypeScript compiles without errors |
+| `graph-diff` | Posts a Markdown comment on the PR summarising added/removed nodes and edges in `data/entity-graph.json` |
+
+All jobs run on `ubuntu-latest` with Node 20 and Python 3.11 in parallel (no inter-job dependencies). The only secret required for releases is the PyPI OIDC environment (`pypi`); all CI jobs run without secrets from a fresh clone.
+
+### Verifying regen locally
+
+```bash
+bash scripts/check-regen.sh
+```
+
+This runs `node scripts/generate.js` and exits non-zero if any tracked file changes. Run this before every commit that touches `data/` sources inside `scripts/generate.js`.
+
+### Release workflow (`.github/workflows/release.yml`)
+
+Push a tag matching `v*` to trigger a PyPI publish. The workflow builds the wheel from `python/` using `python -m build` and publishes via OIDC (no long-lived token needed — configure the `pypi` GitHub environment with the Trusted Publisher on PyPI).
+
+---
+
 ## Licença
 
-- **Código** (`scripts/`, `index.html`): MIT.
-- **Dados** (`data/`, `api/`, `ai/`): derivados de informações públicas da ANP/SEP. Uso livre para fins educacionais, de pesquisa e desenvolvimento, mantendo a atribuição à fonte original.
+- **Codigo** (`scripts/`, `index.html`): MIT.
+- **Dados** (`data/`, `api/`, `ai/`): derivados de informacoes publicas da ANP/SEP. Uso livre para fins educacionais, de pesquisa e desenvolvimento, mantendo a atribuicao a fonte original.

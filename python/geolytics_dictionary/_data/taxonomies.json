@@ -1,0 +1,270 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T16:05:20.772Z",
+    "count": 12
+  },
+  "taxonomies": {
+    "tipo_litologia": {
+      "label": "Tipo de Litologia",
+      "label_en": "Lithology Type",
+      "values": {
+        "siliciclastico": {
+          "label": "Siliciclástico",
+          "children": [
+            "arenito",
+            "conglomerado",
+            "folhelho",
+            "argilito"
+          ]
+        },
+        "carbonatico": {
+          "label": "Carbonático",
+          "children": [
+            "calcario",
+            "dolomito",
+            "marga"
+          ]
+        }
+      }
+    },
+    "tipo_trapa": {
+      "label": "Tipo de Trapa Petrolífera",
+      "label_en": "Petroleum Trap Type",
+      "values": {
+        "estrutural": {
+          "label": "Estrutural",
+          "children": [
+            "anticlinal",
+            "falha",
+            "domo_sal"
+          ]
+        },
+        "estratigrafico": {
+          "label": "Estratigráfico",
+          "children": [
+            "pinch_out",
+            "discordancia"
+          ]
+        },
+        "combinado": {
+          "label": "Combinado",
+          "children": []
+        }
+      }
+    },
+    "tipo_poco": {
+      "label": "Tipo de Poço ANP",
+      "label_en": "ANP Well Type",
+      "description": "Convenção de nomenclatura ANP: o prefixo numérico indica a categoria",
+      "values": {
+        "exploratorio": {
+          "label": "Exploratório",
+          "prefix": "1-xxx",
+          "examples": [
+            "1-RJS-702-RJ",
+            "1-BRSA-944-RJS"
+          ]
+        },
+        "avaliacao": {
+          "label": "Avaliação",
+          "prefix": "2-xxx",
+          "examples": [
+            "2-ANP-1-RJ"
+          ]
+        },
+        "desenvolvimento": {
+          "label": "Desenvolvimento",
+          "prefix": "3-xxx ou 7-xxx",
+          "examples": [
+            "7-BUZ-5-RJS",
+            "3-NA-0001-RN"
+          ]
+        },
+        "especial": {
+          "label": "Especial",
+          "prefix": "4-xxx ou 6-xxx",
+          "examples": []
+        }
+      }
+    },
+    "categoria_recurso_spe_prms": {
+      "label": "Categoria de Recurso (SPE-PRMS)",
+      "label_en": "SPE-PRMS Resource Category",
+      "description": "Society of Petroleum Engineers — Petroleum Resources Management System",
+      "rag_alert": "Reserva (SPE-PRMS) ≠ Reserva Ambiental (REBIO/RPPN). Sempre desambiguar.",
+      "values": {
+        "reservas": {
+          "label": "Reservas",
+          "children": {
+            "1P": {
+              "label": "Provadas (1P)",
+              "certainty": "alta"
+            },
+            "2P": {
+              "label": "Prováveis (2P)",
+              "certainty": "média"
+            },
+            "3P": {
+              "label": "Possíveis (3P)",
+              "certainty": "baixa"
+            }
+          }
+        },
+        "contingentes": {
+          "label": "Recursos Contingentes",
+          "children": {
+            "C1C": {
+              "label": "C1C"
+            },
+            "C2C": {
+              "label": "C2C"
+            },
+            "C3C": {
+              "label": "C3C"
+            }
+          }
+        }
+      }
+    },
+    "tipo_fluido_reservatorio": {
+      "label": "Tipo de Fluido de Reservatório",
+      "label_en": "Reservoir Fluid Type",
+      "values": [
+        "oleo_volatil",
+        "oleo_negro",
+        "gas_condensado",
+        "gas_umido",
+        "gas_seco"
+      ]
+    },
+    "tipo_querogeno": {
+      "label": "Tipo de Querogênio",
+      "label_en": "Kerogen Type",
+      "values": {
+        "tipo_I": {
+          "label": "Tipo I",
+          "origem": "Lacustre / algas",
+          "produto": "óleo"
+        },
+        "tipo_II": {
+          "label": "Tipo II",
+          "origem": "Marinho",
+          "produto": "óleo + gás"
+        },
+        "tipo_IIS": {
+          "label": "Tipo IIS",
+          "origem": "Marinho com enxofre",
+          "produto": "óleo rico em S"
+        },
+        "tipo_III": {
+          "label": "Tipo III",
+          "origem": "Terrígeno / vegetal",
+          "produto": "gás"
+        },
+        "tipo_IV": {
+          "label": "Tipo IV",
+          "origem": "Inertinita",
+          "produto": "sem potencial gerador"
+        }
+      }
+    },
+    "janela_geracao": {
+      "label": "Janela de Geração de Hidrocarbonetos",
+      "label_en": "Hydrocarbon Generation Window",
+      "description": "Baseada na reflectância da vitrinita (Ro%)",
+      "rag_alert": "Janela de Geração ≠ Janela de Lama. A primeira é uma faixa de maturação Ro%; a segunda é o intervalo seguro de peso de lama na perfuração.",
+      "values": [
+        {
+          "id": "imaturo",
+          "label": "Imaturo",
+          "ro_min": null,
+          "ro_max": 0.5,
+          "produto": null
+        },
+        {
+          "id": "janela_oleo",
+          "label": "Janela de Óleo",
+          "ro_min": 0.5,
+          "ro_max": 1,
+          "produto": "óleo"
+        },
+        {
+          "id": "gas_umido",
+          "label": "Janela de Gás Úmido",
+          "ro_min": 1,
+          "ro_max": 1.3,
+          "produto": "gás úmido"
+        },
+        {
+          "id": "gas_seco",
+          "label": "Janela de Gás Seco",
+          "ro_min": 1.3,
+          "ro_max": 2,
+          "produto": "gás seco"
+        },
+        {
+          "id": "sobrematuro",
+          "label": "Sobrematuro",
+          "ro_min": 2,
+          "ro_max": null,
+          "produto": null
+        }
+      ]
+    },
+    "status_qualidade_dado": {
+      "label": "Status de Qualidade do Dado",
+      "label_en": "Data Quality Status",
+      "description": "Modelo de proveniência do ontopetro Módulo 6",
+      "values": [
+        "Raso",
+        "Verificado",
+        "Certificado"
+      ]
+    },
+    "confidencialidade": {
+      "label": "Confidencialidade",
+      "label_en": "Confidentiality Level",
+      "values": [
+        "Público",
+        "Restrito",
+        "Confidencial",
+        "Secreto"
+      ]
+    },
+    "failure_modes": {
+      "label": "Modos de Ruptura de Rocha",
+      "label_en": "Rock Failure Modes",
+      "description": "Mecanismos de ruptura de rocha usados em análise geomecânica e design de poços",
+      "values": [
+        "tensile",
+        "shear",
+        "compaction",
+        "ductile",
+        "brittle"
+      ]
+    },
+    "stress_regimes": {
+      "label": "Regimes Tectônicos de Anderson",
+      "label_en": "Anderson Tectonic Stress Regimes",
+      "description": "Classificação de Anderson (1951) dos regimes de tensão in situ baseado na magnitude relativa dos três tensores principais",
+      "values": [
+        "normal_faulting",
+        "strike_slip",
+        "reverse_faulting"
+      ]
+    },
+    "mud_window_zones": {
+      "label": "Zonas da Janela de Lama",
+      "label_en": "Mud Weight Window Zones",
+      "description": "Limites operacionais da janela de peso de lama na perfuração de poços",
+      "rag_alert": "Janela de Lama (M9 Geomecanica) != Janela de Geracao (M7 Geoquimica/Ro%). Sao conceitos completamente distintos.",
+      "values": [
+        "pore_pressure",
+        "collapse",
+        "fracture",
+        "overburden"
+      ]
+    }
+  }
+}

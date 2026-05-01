@@ -1,0 +1,73 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "geolytics-dictionary"
+dynamic = ["version"]
+description = "Python SDK for the Geolytics O&G domain dictionary — terms, ontology graph, semantic validator, and SWEET expander."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [
+  { name = "Thiago Lopes", email = "thiagoflc@gmail.com" },
+]
+keywords = [
+  "oil-and-gas", "ontology", "knowledge-graph", "dictionary",
+  "geoscience", "petroleum", "nlp", "semantic-validation",
+]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Information Analysis",
+  "Topic :: Text Processing :: Linguistic",
+]
+dependencies = [
+  "requests>=2.31",
+]
+
+[project.optional-dependencies]
+graph = [
+  "networkx>=3.0",
+]
+rag = [
+  "rank-bm25>=0.2.2",
+]
+dev = [
+  "pytest>=7.0",
+  "networkx>=3.0",
+  "rank-bm25>=0.2.2",
+]
+
+[project.scripts]
+geolytics-validate = "geolytics_dictionary.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/thiagoflc/geolytics-dictionary"
+Repository = "https://github.com/thiagoflc/geolytics-dictionary"
+Issues = "https://github.com/thiagoflc/geolytics-dictionary/issues"
+
+[tool.hatch.version]
+path = "geolytics_dictionary/_version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["geolytics_dictionary"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"geolytics_dictionary/_data" = "geolytics_dictionary/_data"
+
+[tool.hatch.build.targets.sdist]
+include = [
+  "/geolytics_dictionary",
+  "/MANIFEST.in",
+  "/README.md",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

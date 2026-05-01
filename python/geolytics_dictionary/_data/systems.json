@@ -1,0 +1,117 @@
+{
+  "version": "1.0.0",
+  "generated": "2026-05-01T16:05:20.772Z",
+  "description": "Sistemas corporativos Petrobras que alimentam o Geolytics Dictionary",
+  "note": "Sistemas = proveniência, não acesso. Estes IDs são metadado de origem dos dados, não endpoints conectáveis.",
+  "systems": [
+    {
+      "id": "GEOQWIN",
+      "name": "GEOQWIN",
+      "type": "Banco de dados analítico",
+      "domain": "M7 Geoquímica + M10 Fluidos",
+      "description": "Banco de dados da Geoquímica Petrobras. Cromatografia (GC-FID, GC-MS), Rock-Eval, SARA, biomarcadores, isótopos e controle de amostras/oleoteca.",
+      "data_objects": [
+        "Amostras",
+        "Cromatogramas GC-FID",
+        "GC-MS SIM",
+        "Rock-Eval",
+        "SARA",
+        "δ13C IRMS"
+      ]
+    },
+    {
+      "id": "SIRR",
+      "name": "SIRR — Sistema Integrado de Reservatórios",
+      "type": "Base corporativa",
+      "domain": "M10 Fluidos / PVT",
+      "description": "Base corporativa Petrobras de dados PVT. Certificados Flash, ECC, liberação diferencial, viscosidade. 35 campos com completude real (ver pvt-dictionary.json).",
+      "data_objects": [
+        "PVT Flash",
+        "ECC",
+        "Liberação Diferencial",
+        "Viscosidade",
+        "API",
+        "RGO",
+        "Psat"
+      ]
+    },
+    {
+      "id": "LIMS",
+      "name": "LIMS Sample Manager",
+      "type": "LIMS",
+      "domain": "M7 + M10",
+      "description": "Gerenciamento de amostras e resultados laboratoriais. Customizações LF→BDIEP. Interface entre laboratório externo e base corporativa.",
+      "data_objects": [
+        "SAMPLE",
+        "RESULT",
+        "TEST",
+        "metadados de amostra"
+      ]
+    },
+    {
+      "id": "AIDA",
+      "name": "AIDA",
+      "type": "Sistema de classificação",
+      "domain": "M10 Fluidos",
+      "description": "Sistema Petrobras para classificação automática do tipo de fluido. Usa API e RGO para classificar: black oil, óleo volátil, condensado, gás úmido, gás seco.",
+      "data_objects": [
+        "CL_CLASS_FLUIDO",
+        "Classificação API+RGO"
+      ]
+    },
+    {
+      "id": "GDA",
+      "name": "GDA — Gerenciamento de Dados e Análises",
+      "type": "Plataforma analítica",
+      "domain": "M8 Rocha + M9 Geomecânica",
+      "description": "Plataforma interna Petrobras para processamento de perfis, módulos elásticos dinâmicos (DTC/DTS → E, ν), Mineral Solver, RockFinder (ML litologia), modelagem geomecânica 1D.",
+      "data_objects": [
+        "Perfis processados",
+        "UCS dinâmico",
+        "E dinâmico",
+        "ν dinâmico",
+        "DTC/DTS sintéticos",
+        "classificação litológica ML"
+      ]
+    },
+    {
+      "id": "GEOMECBR",
+      "name": "GEOMECBR",
+      "type": "Software de modelagem",
+      "domain": "M9 Geomecânica",
+      "description": "Software Petrobras para modelagem geomecânica 1D de poços. Gera perfis de JanelaDeLama, UCS, tensões in situ calibrados.",
+      "data_objects": [
+        "Modelo geomecânico 1D",
+        "JanelaDeLama",
+        "CampoTensional",
+        "UCS calibrado"
+      ]
+    },
+    {
+      "id": "GERESIM",
+      "name": "GERESIM",
+      "type": "Software de simulação",
+      "domain": "M9 Geomecânica",
+      "description": "Solução Petrobras para modelagem geomecânica 3D volumétrica, integrada ao modelo geológico.",
+      "data_objects": [
+        "Modelo geomecânico 3D",
+        "Subsidência",
+        "Compactação de reservatório"
+      ]
+    },
+    {
+      "id": "TrapTester",
+      "name": "TrapTester / Badley Geoscience",
+      "type": "Software externo",
+      "domain": "M9 Geomecânica / Estrutural",
+      "description": "Análise de potencial selante de falhas. Calcula SGR (Shale Gouge Ratio), CSP, SSF via método BEM.",
+      "data_objects": [
+        "SGR",
+        "CSP",
+        "SSF",
+        "PotencialSelanteFalha",
+        "ZonaDeDanoDeFalha"
+      ]
+    }
+  ]
+}

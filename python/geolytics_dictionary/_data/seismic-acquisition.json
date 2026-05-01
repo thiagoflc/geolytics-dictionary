@@ -1,0 +1,554 @@
+{
+  "meta": {
+    "module": "seismic_acquisition",
+    "label": "Seismic Acquisition",
+    "label_pt": "Aquisicao Sismica",
+    "version": "1.0.0",
+    "description": "Classes, properties, relations and instances covering seismic survey acquisition: survey types, sources, receivers, geometry and sampling parameters.",
+    "sources": [
+      "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+      "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology (2nd ed.). Cambridge University Press.",
+      "OSDU SeismicAcquisition schema v1.0.0"
+    ],
+    "class_count": 20,
+    "property_count": 17,
+    "relation_count": 9,
+    "instance_count": 3
+  },
+  "classes": {
+    "SeismicSurvey": {
+      "id": "SeismicSurvey",
+      "name": "SeismicSurvey",
+      "name_pt": "Levantamento Sismico",
+      "superclass": "owl:Thing",
+      "description": "A controlled experiment in which seismic energy is injected into the Earth and the returning wavefield is recorded to image subsurface structure. Encompasses geometry definition, source specification and receiver deployment. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995", "OSDU"]
+    },
+    "LandSurvey": {
+      "id": "LandSurvey",
+      "name": "LandSurvey",
+      "name_pt": "Levantamento Terrestre",
+      "superclass": "SeismicSurvey",
+      "description": "Onshore seismic survey in which sources (vibroseis, dynamite) and receivers (geophones) are deployed on land. Near-surface weathering layer and statics corrections are dominant challenges. Ref: Yilmaz 2001, ch. 3.",
+      "domain": "seismic_acquisition",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "MarineSurvey": {
+      "id": "MarineSurvey",
+      "name": "MarineSurvey",
+      "name_pt": "Levantamento Marinho",
+      "superclass": "SeismicSurvey",
+      "description": "Offshore towed-streamer survey in which a vessel tows one or more hydrophone cables. Dominant configuration for deep-water exploration. Ref: Yilmaz 2001, ch. 1; Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "OBNSurvey": {
+      "id": "OBNSurvey",
+      "name": "OBNSurvey",
+      "name_pt": "Levantamento Sismico de Fundo Oceanico (No)",
+      "superclass": "SeismicSurvey",
+      "description": "Ocean-Bottom Node survey: autonomous 4C (Vx, Vy, Vz + hydrophone) sensor packages placed on the seabed. Enables full-azimuth illumination and longer offsets than towed streamers. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0",
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "OBSSurvey": {
+      "id": "OBSSurvey",
+      "name": "OBSSurvey",
+      "name_pt": "Levantamento Sismica de Fundo Oceanico (cabo)",
+      "superclass": "SeismicSurvey",
+      "description": "Ocean-Bottom Seismometer/Cable survey: 4C sensors deployed on cables laid on the sea floor, offering P- and S-wave recording for joint PP/PS inversion.",
+      "domain": "seismic_acquisition",
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "Source": {
+      "id": "Source",
+      "name": "Source",
+      "name_pt": "Fonte Sismica",
+      "superclass": "owl:Thing",
+      "description": "Device or process that generates seismic energy and injects it into the ground or water. Characterised by peak frequency, dominant frequency band and energy output. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "Airgun": {
+      "id": "Airgun",
+      "name": "Airgun",
+      "name_pt": "Pistola de Ar",
+      "superclass": "Source",
+      "description": "Marine seismic source that releases compressed air (typically 2000 psi) into the water to generate an impulsive pressure wavelet. Standard deep-water acquisition source. Peak frequency range 10-100 Hz. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "operatingPressure_Pa": "1.38e7",
+        "peakFrequency_Hz": "50-80",
+        "volumeRange_cui": "40-2000"
+      },
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "Vibroseis": {
+      "id": "Vibroseis",
+      "name": "Vibroseis",
+      "name_pt": "Vibrosseis",
+      "superclass": "Source",
+      "description": "Land seismic source that emits a swept-frequency (chirp) signal via a vibrating baseplate hydraulically coupled to the ground. Allows controlled bandwidth 6-120 Hz. Requires cross-correlation with pilot sweep to produce zero-phase wavelet. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "sweepFrequencyMin_Hz": "6",
+        "sweepFrequencyMax_Hz": "120",
+        "sweepLength_s": "4-20",
+        "peakForce_N": "267000"
+      },
+      "sources": ["Yilmaz 2001"]
+    },
+    "Dynamite": {
+      "id": "Dynamite",
+      "name": "Dynamite",
+      "name_pt": "Explosivo",
+      "superclass": "Source",
+      "description": "Explosive seismic source detonated in a shallow drill hole to generate a broad-band (5-200 Hz) near-impulsive wavelet. Preferred in areas of complex near-surface topography where vibroseis coupling is poor. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "SparkerArray": {
+      "id": "SparkerArray",
+      "name": "SparkerArray",
+      "name_pt": "Array de Sparker",
+      "superclass": "Source",
+      "description": "High-resolution marine source using electrical discharge to vaporise water and generate a broadband (50-1000 Hz) pressure pulse. Used in ultra-high-resolution shallow surveys. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "Receiver": {
+      "id": "Receiver",
+      "name": "Receiver",
+      "name_pt": "Receptor Sismico",
+      "superclass": "owl:Thing",
+      "description": "Sensor that converts mechanical ground or water motion into an electrical signal. Sensitivity, natural frequency and dynamic range determine the recordable bandwidth. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "sources": ["Yilmaz 2001"]
+    },
+    "Hydrophone": {
+      "id": "Hydrophone",
+      "name": "Hydrophone",
+      "name_pt": "Hidrofone",
+      "superclass": "Receiver",
+      "description": "Pressure-sensitive piezoelectric sensor towed in marine streamers. Records scalar pressure wavefield (P-wave only). Sensitivity ~10 mV/Pa. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "sensitivity_mV_per_Pa": "10",
+        "naturalFrequency_Hz": "2-5",
+        "measuredQuantity": "pressure"
+      },
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "Geophone": {
+      "id": "Geophone",
+      "name": "Geophone",
+      "name_pt": "Geofone",
+      "superclass": "Receiver",
+      "description": "Velocity-sensitive electromagnetic sensor planted on the ground surface. Natural frequency typically 10 Hz (land) or 4.5 Hz (OBC). Records particle velocity. Ref: Yilmaz 2001, ch. 2.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "naturalFrequency_Hz": "4.5-14",
+        "damping": "0.707",
+        "measuredQuantity": "particle_velocity"
+      },
+      "sources": ["Yilmaz 2001"]
+    },
+    "AccelerometerMEMS": {
+      "id": "AccelerometerMEMS",
+      "name": "AccelerometerMEMS",
+      "name_pt": "Acelerometro MEMS",
+      "superclass": "Receiver",
+      "description": "Micro-Electro-Mechanical System accelerometer used in nodal acquisition systems. Flat response from DC to several hundred Hz; measures particle acceleration. Superior low-frequency response compared to geophone. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "flatBandMin_Hz": "0",
+        "flatBandMax_Hz": "800",
+        "measuredQuantity": "particle_acceleration"
+      },
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "OBC": {
+      "id": "OBC",
+      "name": "OBC",
+      "name_pt": "Cabo de Fundo Oceanico",
+      "superclass": "Receiver",
+      "description": "Ocean-Bottom Cable: multi-component cable laid on the sea floor carrying collocated hydrophones and geophones (4C). Enables dual-sensor summation and S-wave recording. Ref: Sheriff & Geldart 1995.",
+      "domain": "seismic_acquisition",
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "AcquisitionGeometry": {
+      "id": "AcquisitionGeometry",
+      "name": "AcquisitionGeometry",
+      "name_pt": "Geometria de Aquisicao",
+      "superclass": "owl:Thing",
+      "description": "Spatial arrangement of sources and receivers defining illumination, fold, offset distribution and azimuth coverage. Critical for migration operator accuracy. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "abstract": true,
+      "sources": ["Yilmaz 2001"]
+    },
+    "StreamerLayout": {
+      "id": "StreamerLayout",
+      "name": "StreamerLayout",
+      "name_pt": "Configuracao de Streamer",
+      "superclass": "AcquisitionGeometry",
+      "description": "Marine geometry in which one or more hydrophone cables (streamers) are towed behind a vessel. Characterised by streamer length, cable separation, tow depth and number of streamers.",
+      "domain": "seismic_acquisition",
+      "properties": {
+        "streamerLength_m": "4000-12000",
+        "numberOfStreamers": "1-24",
+        "streamerDepth_m": "5-12",
+        "cableSeparation_m": "25-200"
+      },
+      "sources": ["Yilmaz 2001"]
+    },
+    "NodalLayout": {
+      "id": "NodalLayout",
+      "name": "NodalLayout",
+      "name_pt": "Configuracao Nodal",
+      "superclass": "AcquisitionGeometry",
+      "description": "Land or OBN geometry employing autonomous wireless nodes deployed in a regular or irregular grid. Enables full-azimuth illumination.",
+      "domain": "seismic_acquisition",
+      "sources": ["Sheriff & Geldart 1995"]
+    },
+    "SamplingParameters": {
+      "id": "SamplingParameters",
+      "name": "SamplingParameters",
+      "name_pt": "Parametros de Amostragem",
+      "superclass": "owl:Thing",
+      "description": "Temporal and spatial sampling parameters that define the recorded wavefield fidelity and alias constraints. Must satisfy the Nyquist theorem in both time and space. Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "sources": ["Yilmaz 2001", "Sheriff & Geldart 1995"]
+    },
+    "Aliasing": {
+      "id": "Aliasing",
+      "name": "Aliasing",
+      "name_pt": "Aliasing / Dobramento Espectral",
+      "superclass": "owl:Thing",
+      "description": "Artifact arising when the sampling interval violates the Nyquist criterion, causing high-frequency energy to fold back into the recorded spectrum. Temporal aliasing: dt > 1/(2*fmax). Spatial aliasing: dx > v/(2*fmax). Ref: Yilmaz 2001, ch. 1.",
+      "domain": "seismic_acquisition",
+      "sources": ["Yilmaz 2001"]
+    }
+  },
+  "properties": {
+    "samplingInterval": {
+      "id": "samplingInterval",
+      "name": "samplingInterval",
+      "name_pt": "Intervalo de Amostragem",
+      "description": "Time interval between consecutive recorded samples. Standard values: 1 ms (high-resolution), 2 ms (conventional), 4 ms (low-frequency). Must be dt <= 1/(2*fNyquist). Ref: Yilmaz 2001.",
+      "unit": "ms",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "typical_values": "1-4",
+      "rag_priority": "high"
+    },
+    "recordLength": {
+      "id": "recordLength",
+      "name": "recordLength",
+      "name_pt": "Comprimento do Registro",
+      "description": "Total duration of each recorded seismic trace, from shot instant to end of recording. Typical 6-10 s for deep targets.",
+      "unit": "s",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "typical_values": "4-12"
+    },
+    "fold": {
+      "id": "fold",
+      "name": "fold",
+      "name_pt": "Multiplicidade / Fold",
+      "description": "Number of independent seismic traces that contribute to a single stacked trace after CMP sorting. Higher fold improves signal-to-noise ratio. Standard 3D: 60-120x. Ref: Yilmaz 2001.",
+      "unit": "dimensionless",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:integer",
+      "typical_values": "30-180",
+      "rag_priority": "high"
+    },
+    "offset": {
+      "id": "offset",
+      "name": "offset",
+      "name_pt": "Afastamento",
+      "description": "Distance between source and receiver. Minimum offset determines shallow resolution; maximum offset determines depth penetration and NMO velocity resolution. Must be non-negative. Ref: Yilmaz 2001.",
+      "unit": "m",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "typical_values": "0-8000"
+    },
+    "NyquistFrequency": {
+      "id": "NyquistFrequency",
+      "name": "NyquistFrequency",
+      "name_pt": "Frequencia de Nyquist",
+      "description": "Maximum alias-free frequency: fN = 1/(2*dt). For dt=2ms, fN=250Hz. Ref: Yilmaz 2001, eq. 1-1.",
+      "unit": "Hz",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:decimal",
+      "formula": "1 / (2 * samplingInterval_s)",
+      "rag_priority": "high"
+    },
+    "signalBandwidth": {
+      "id": "signalBandwidth",
+      "name": "signalBandwidth",
+      "name_pt": "Banda do Sinal",
+      "description": "Frequency range of meaningful signal energy after instrument and earth filtering. Typical 8-80 Hz for conventional reflection seismics.",
+      "unit": "Hz",
+      "domain_class": "SamplingParameters",
+      "range": "xsd:string"
+    },
+    "peakFrequency": {
+      "id": "peakFrequency",
+      "name": "peakFrequency",
+      "name_pt": "Frequencia de Pico",
+      "description": "Dominant frequency of the source wavelet or Ricker wavelet. Determines vertical resolution: lambda/4 = v/(4*fPeak). Ref: Yilmaz 2001.",
+      "unit": "Hz",
+      "domain_class": "Source",
+      "range": "xsd:decimal",
+      "typical_values": "20-80"
+    },
+    "operatingPressure": {
+      "id": "operatingPressure",
+      "name": "operatingPressure",
+      "name_pt": "Pressao de Operacao",
+      "description": "Working pressure of an airgun array at fire time. Typical value 138 bar (2000 psi). Controls peak-to-bubble ratio.",
+      "unit": "Pa",
+      "domain_class": "Airgun",
+      "range": "xsd:decimal"
+    },
+    "sweepFrequencyMin": {
+      "id": "sweepFrequencyMin",
+      "name": "sweepFrequencyMin",
+      "name_pt": "Frequencia Minima do Sweep",
+      "description": "Lowest frequency in the vibroseis pilot sweep.",
+      "unit": "Hz",
+      "domain_class": "Vibroseis",
+      "range": "xsd:decimal"
+    },
+    "sweepFrequencyMax": {
+      "id": "sweepFrequencyMax",
+      "name": "sweepFrequencyMax",
+      "name_pt": "Frequencia Maxima do Sweep",
+      "description": "Highest frequency in the vibroseis pilot sweep.",
+      "unit": "Hz",
+      "domain_class": "Vibroseis",
+      "range": "xsd:decimal"
+    },
+    "sweepLength": {
+      "id": "sweepLength",
+      "name": "sweepLength",
+      "name_pt": "Duracao do Sweep",
+      "description": "Duration of the vibroseis sweep signal in seconds. Longer sweeps improve signal-to-noise ratio after correlation.",
+      "unit": "s",
+      "domain_class": "Vibroseis",
+      "range": "xsd:decimal"
+    },
+    "streamerLength": {
+      "id": "streamerLength",
+      "name": "streamerLength",
+      "name_pt": "Comprimento do Streamer",
+      "description": "Total active length of a towed hydrophone cable. Controls maximum offset and hence depth penetration.",
+      "unit": "m",
+      "domain_class": "StreamerLayout",
+      "range": "xsd:decimal",
+      "typical_values": "4000-12000"
+    },
+    "numberOfStreamers": {
+      "id": "numberOfStreamers",
+      "name": "numberOfStreamers",
+      "name_pt": "Numero de Streamers",
+      "description": "Count of towed hydrophone cables. Increases cross-line coverage and survey efficiency.",
+      "unit": "dimensionless",
+      "domain_class": "StreamerLayout",
+      "range": "xsd:integer"
+    },
+    "gridSpacing": {
+      "id": "gridSpacing",
+      "name": "gridSpacing",
+      "name_pt": "Espacamento de Grade",
+      "description": "In-line and cross-line CMP bin dimensions. Determines lateral spatial aliasing limit: dx <= v/(2*fmax). Typical 12.5x12.5m to 25x25m in 3D surveys.",
+      "unit": "m",
+      "domain_class": "AcquisitionGeometry",
+      "range": "xsd:string"
+    },
+    "waterDepth": {
+      "id": "waterDepth",
+      "name": "waterDepth",
+      "name_pt": "Lamina d'Agua",
+      "description": "Water depth at survey location. Determines ghost frequency, node deployment logistics and cable operation window.",
+      "unit": "m",
+      "domain_class": "MarineSurvey",
+      "range": "xsd:decimal"
+    },
+    "receiverSensitivity": {
+      "id": "receiverSensitivity",
+      "name": "receiverSensitivity",
+      "name_pt": "Sensibilidade do Receptor",
+      "description": "Transduction efficiency of a receiver. For hydrophones: mV/Pa; for geophones: V/(m/s).",
+      "unit": "V/(m/s) or mV/Pa",
+      "domain_class": "Receiver",
+      "range": "xsd:decimal"
+    },
+    "surveyArea": {
+      "id": "surveyArea",
+      "name": "surveyArea",
+      "name_pt": "Area do Levantamento",
+      "description": "Total area covered by the seismic survey polygon.",
+      "unit": "km2",
+      "domain_class": "SeismicSurvey",
+      "range": "xsd:decimal"
+    }
+  },
+  "relations": {
+    "uses_source": {
+      "id": "uses_source",
+      "name": "uses_source",
+      "name_pt": "usa_fonte",
+      "description": "A SeismicSurvey uses one or more Source devices to generate seismic energy.",
+      "domain": "SeismicSurvey",
+      "range": "Source",
+      "cardinality": "1..n",
+      "inverse": "is_source_for"
+    },
+    "deploys_receiver": {
+      "id": "deploys_receiver",
+      "name": "deploys_receiver",
+      "name_pt": "implanta_receptor",
+      "description": "A SeismicSurvey deploys one or more Receiver types.",
+      "domain": "SeismicSurvey",
+      "range": "Receiver",
+      "cardinality": "1..n",
+      "inverse": "is_receiver_for"
+    },
+    "applies_geometry": {
+      "id": "applies_geometry",
+      "name": "applies_geometry",
+      "name_pt": "aplica_geometria",
+      "description": "A SeismicSurvey is characterised by an AcquisitionGeometry.",
+      "domain": "SeismicSurvey",
+      "range": "AcquisitionGeometry",
+      "cardinality": "1..1"
+    },
+    "respects_nyquist": {
+      "id": "respects_nyquist",
+      "name": "respects_nyquist",
+      "name_pt": "respeita_nyquist",
+      "description": "SamplingParameters respects the Nyquist criterion with respect to the signal bandwidth: samplingInterval <= 1/(2*signalBandwidthMax). Violation produces Aliasing.",
+      "domain": "SamplingParameters",
+      "range": "Aliasing",
+      "cardinality": "0..1",
+      "constraint_note": "samplingInterval_s <= 1 / (2 * signalBandwidthMax_Hz)"
+    },
+    "characterised_by": {
+      "id": "characterised_by",
+      "name": "characterised_by",
+      "name_pt": "caracterizado_por",
+      "description": "A SeismicSurvey is characterised by SamplingParameters.",
+      "domain": "SeismicSurvey",
+      "range": "SamplingParameters",
+      "cardinality": "1..1"
+    },
+    "has_subclass": {
+      "id": "has_subclass",
+      "name": "has_subclass",
+      "name_pt": "tem_subclasse",
+      "description": "rdfs:subClassOf relationship within SeismicSurvey hierarchy.",
+      "domain": "SeismicSurvey",
+      "range": "SeismicSurvey",
+      "cardinality": "0..n"
+    },
+    "produces_aliasing": {
+      "id": "produces_aliasing",
+      "name": "produces_aliasing",
+      "name_pt": "produz_aliasing",
+      "description": "Violation of Nyquist constraint produces Aliasing artifact.",
+      "domain": "SamplingParameters",
+      "range": "Aliasing",
+      "cardinality": "0..1"
+    },
+    "is_part_of_survey": {
+      "id": "is_part_of_survey",
+      "name": "is_part_of_survey",
+      "name_pt": "e_parte_de_levantamento",
+      "description": "AcquisitionGeometry or SamplingParameters is defined as part of a SeismicSurvey.",
+      "domain": "AcquisitionGeometry",
+      "range": "SeismicSurvey",
+      "cardinality": "1..1"
+    },
+    "collocated_with": {
+      "id": "collocated_with",
+      "name": "collocated_with",
+      "name_pt": "colocalizado_com",
+      "description": "In OBC/OBN deployments a Hydrophone is collocated with a Geophone or AccelerometerMEMS at the same spatial position.",
+      "domain": "Hydrophone",
+      "range": "Geophone",
+      "cardinality": "0..1"
+    }
+  },
+  "instances": {
+    "I_BUZ3D_2022": {
+      "id": "I_BUZ3D_2022",
+      "name": "Buzios 3D Wide-Azimuth Streamer Survey 2022",
+      "name_pt": "Levantamento 3D Buzios WA Streamer 2022",
+      "class": "MarineSurvey",
+      "description": "Broadband wide-azimuth 3D towed-streamer survey over the Buzios carbonate pre-salt field, Santos Basin, offshore Brazil. 14 streamers x 8 km, 100 m cable separation, 6.25 m group interval, 2 ms sample interval.",
+      "attributes": {
+        "surveyArea_km2": "2400",
+        "waterDepth_m": "1800-2200",
+        "samplingInterval_ms": "2",
+        "recordLength_s": "10",
+        "fold": "120",
+        "streamerLength_m": "8000",
+        "numberOfStreamers": "14",
+        "gridSpacing_m": "6.25x6.25",
+        "source": "Airgun",
+        "receiver": "Hydrophone",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0"
+      },
+      "source": "Analogous to Buzios-field 3D acquisition programs described in Petrobras technical literature"
+    },
+    "I_LAND_VIB_2021": {
+      "id": "I_LAND_VIB_2021",
+      "name": "Parnaiba Basin Vibroseis Land Survey 2021",
+      "name_pt": "Levantamento Terrestre Vibrosseis Bacia do Parnaiba 2021",
+      "class": "LandSurvey",
+      "description": "Orthogonal-template 3D vibroseis survey in the Parnaiba Basin, northeastern Brazil. Four vibrator fleet, 4-8 Hz linear sweep, 16 s sweep length, 2 ms sample interval, maximum offset 6000 m.",
+      "attributes": {
+        "surveyArea_km2": "800",
+        "samplingInterval_ms": "2",
+        "recordLength_s": "6",
+        "fold": "80",
+        "sweepFrequencyMin_Hz": "4",
+        "sweepFrequencyMax_Hz": "80",
+        "sweepLength_s": "16",
+        "gridSpacing_m": "25x25",
+        "source": "Vibroseis",
+        "receiver": "Geophone"
+      },
+      "source": "Representative of ANP-regulated onshore 3D programs in Brazilian interior basins"
+    },
+    "I_OBN_LULA_2023": {
+      "id": "I_OBN_LULA_2023",
+      "name": "Lula OBN 4C Full-Azimuth Survey 2023",
+      "name_pt": "Levantamento OBN 4C Azimute Pleno Lula 2023",
+      "class": "OBNSurvey",
+      "description": "Ocean-Bottom Node full-azimuth 4C survey over the Lula giant pre-salt field, Santos Basin. Nodes deployed at 2100 m water depth on 400 x 400 m grid; P- and S-wave data recorded for joint PP/PS inversion and imaging through the salt canopy.",
+      "attributes": {
+        "surveyArea_km2": "1200",
+        "waterDepth_m": "2100",
+        "samplingInterval_ms": "2",
+        "recordLength_s": "12",
+        "fold_PP": "240",
+        "fold_PS": "120",
+        "gridSpacing_m": "400x400",
+        "source": "Airgun",
+        "receiver": "OBC+AccelerometerMEMS",
+        "osdu_kind": "opendes:osdu:work-product-component--SeismicAcquisitionSurvey:1.0.0"
+      },
+      "source": "Analogous to Petrobras OBN programs in Santos Basin ultra-deep water"
+    }
+  }
+}

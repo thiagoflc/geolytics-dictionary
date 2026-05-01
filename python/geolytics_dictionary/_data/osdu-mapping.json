@@ -1,0 +1,281 @@
+{
+  "version": "1.0.0",
+  "description": "OSDU kind → Geolytics entity-graph mapping. Authority: opendes (The Open Group public sandbox). Referência para campos osdu_kind em todos os arquivos do dicionário.",
+  "osdu_platform": "https://osduforum.org",
+  "accenture_viz_tool": "https://accenture.github.io/OSDU-Ontology",
+  "schema_registry": "https://github.com/Accenture/OSDU-Ontology",
+  "data_tripartition": {
+    "master_data": {
+      "description": "Entidades estáveis de negócio. Ciclo de vida longo. Equivalem aos nós operational e actor do Geolytics entity-graph.",
+      "geolytics_node_types": ["operational", "actor"],
+      "osdu_kinds": [
+        {
+          "osdu_kind": "opendes:osdu:master-data--Well:1.0.0",
+          "geolytics_node_id": "poco",
+          "geolytics_label_pt": "Poço",
+          "anp_field_mapping": { "POCO_NUM": "Well.WellID (ExternalID)", "POCO_POCO_NOME": "Well.WellName" },
+          "note": "ANP 'poço' = OSDU Well (registro de superfície e legal). Não confundir com Wellbore (trecho físico)."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--Wellbore:1.0.0",
+          "geolytics_node_id": "wellbore",
+          "geolytics_label_pt": "Trecho Perfurado",
+          "anp_field_mapping": { "POCO_STATUS": "Wellbore.StatusID", "POCO_TIPO": "Wellbore.DrillingReasonID" },
+          "note": "Trecho físico perfurado. 1 poço ANP (sem sidetrack) = 1 Well + 1 Wellbore. Poços com sidetrack: múltiplos Wellbores numerados por SequenceNumber."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+          "geolytics_node_id": "campo",
+          "geolytics_label_pt": "Campo de Produção",
+          "anp_field_mapping": { "CAMPO_CODIGO": "Field.FieldID", "CAMPO_NOME": "Field.FieldName" },
+          "note": "Campo de produção ANP. Gerado a partir de Declaração de Comercialidade aprovada pela ANP."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+          "geolytics_node_id": "bacia-sedimentar",
+          "geolytics_label_pt": "Bacia Sedimentar",
+          "anp_field_mapping": { "BACIA_CODIGO": "Basin.BasinID", "BACIA_NOME": "Basin.BasinName" },
+          "note": "ANP define 29 bacias sedimentares no território brasileiro (SIGEP). Ex: Bacia de Santos, Bacia de Campos, Bacia do Solimões."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+          "geolytics_node_id": "operador",
+          "geolytics_label_pt": "Operador",
+          "anp_field_mapping": { "POCO_OPERADORA_SIGLA": "Organisation.OperatorCode", "POCO_OPERADORA": "Organisation.OrganisationName" },
+          "note": "Empresa operadora, parceiro de consórcio, prestador de serviço. ANP código operadora → OSDU Organisation."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+          "geolytics_node_id": "formacao",
+          "geolytics_label_pt": "Formação Geológica",
+          "note": "Formação geológica formal. Ex: Formação Barra Velha (Pré-sal), Formação Macaroni, Formação Macaé."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+          "geolytics_node_id": "reservatorio",
+          "geolytics_label_pt": "Reservatório",
+          "note": "Corpo reservatório declarado para produção. Associado a um Field."
+        },
+        {
+          "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+          "geolytics_node_id": "completacao",
+          "geolytics_label_pt": "Completação de Poço",
+          "note": "Conjunto de operações e equipamentos: casing, tubing, perforações, árvore de natal."
+        }
+      ]
+    },
+    "reference_data": {
+      "description": "Vocabulários controlados e enumerações. Equivalem às taxonomias do Geolytics. Itens com ID e código padronizado.",
+      "geolytics_node_types": ["instrument", "geological"],
+      "osdu_kinds": [
+        {
+          "osdu_kind": "opendes:osdu:reference-data--WellStatus:1.0.0",
+          "geolytics_node_id": "status-poco",
+          "geolytics_label_pt": "Status do Poço",
+          "controlled_vocabulary": ["active", "abandoned", "P&A", "suspended", "injecting", "producing"],
+          "anp_equivalents": ["Em Produção", "Abandonado", "Abandonado com Abandono Definitivo", "Suspenso"],
+          "note": "Status operacional do wellbore. ANP usa nomenclatura própria que deve ser mapeada para OSDU vocabulary."
+        },
+        {
+          "osdu_kind": "opendes:osdu:reference-data--WellType:1.0.0",
+          "geolytics_node_id": "tipo-poco",
+          "geolytics_label_pt": "Tipo de Poço",
+          "controlled_vocabulary": ["exploration", "appraisal", "development", "injection", "monitoring", "wildcat"],
+          "anp_equivalents": {
+            "1-xxx": "exploratório",
+            "3-xxx": "desenvolvimento",
+            "4-xxx": "injeção",
+            "7-xxx": "monitoramento/observação"
+          },
+          "note": "Prefixo ANP POCO_NUM indica tipo: 1=exploratório, 2=estratigráfico, 3=desenvolvimento, 4=injeção, 5=pioneiro, 6=extensão, 7=monitoramento."
+        },
+        {
+          "osdu_kind": "opendes:osdu:reference-data--LithologyType:1.0.0",
+          "geolytics_node_id": "litologia",
+          "geolytics_label_pt": "Litologia",
+          "controlled_vocabulary": ["sandstone", "limestone", "shale", "salt", "evaporite", "granite", "basalt", "dolomite", "marl"],
+          "pt_equivalents": ["arenito", "calcário", "folhelho/argilito", "sal", "evaporito", "granito", "basalto", "dolomita", "marga"],
+          "note": "Tipo litológico de rocha. Vocabulário OSDU usa inglês; Geolytics mantém equivalentes em português."
+        },
+        {
+          "osdu_kind": "opendes:osdu:reference-data--FluidType:1.0.0",
+          "geolytics_node_id": "classe-fluido",
+          "geolytics_label_pt": "Classe de Fluido",
+          "controlled_vocabulary": ["black_oil", "volatile_oil", "condensate", "wet_gas", "dry_gas", "water"],
+          "pt_equivalents": ["óleo negro", "óleo volátil", "condensado", "gás úmido", "gás seco", "água de formação"],
+          "note": "Classificação de fluido de reservatório. Definida por API (ºAPI), RGO (m³/m³) e Psat. Relacionada a classe-fluido e pvt no Geolytics."
+        },
+        {
+          "osdu_kind": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+          "geolytics_node_id": "unidade-medida",
+          "geolytics_label_pt": "Unidade de Medida",
+          "critical_units": [
+            { "symbol": "m", "quantity": "depth/length", "system": "SI", "note": "ANP usa metros" },
+            { "symbol": "ft", "quantity": "depth/length", "system": "imperial", "note": "Dados legados/internacionais" },
+            { "symbol": "mD", "quantity": "permeability", "system": "Darcy", "note": "miliDarcy — NÃO confundir com mD (metro/dia)" },
+            { "symbol": "ºAPI", "quantity": "oil_density", "system": "API", "note": "Graus API — densidade inversa. Alto API = óleo leve" },
+            { "symbol": "GAPI", "quantity": "gamma_ray_log", "system": "API", "note": "Gamma Ray API units — gapi ≠ ºAPI" },
+            { "symbol": "psi", "quantity": "pressure", "system": "imperial", "note": "lb/in² — common in reservoir/PVT data" },
+            { "symbol": "MPa", "quantity": "pressure", "system": "SI", "note": "MegaPascal — ANP/Petrobras padrão" },
+            { "symbol": "m³/d", "quantity": "flow_rate", "system": "SI", "note": "Produção de petróleo em metro cúbico por dia" },
+            { "symbol": "bbl/d", "quantity": "flow_rate", "system": "imperial", "note": "Barris por dia — 1 bbl = 0.15899 m³" }
+          ],
+          "note": "Crítico para interoperabilidade: ANP usa SI (m, MPa, m³) mas dados legados/internacionais frequentemente em imperial (ft, psi, bbl). OSDU UnitOfMeasure é o vocabulário canônico de conversão."
+        },
+        {
+          "osdu_kind": "opendes:osdu:reference-data--WellDrillingReasonType:1.0.0",
+          "geolytics_node_id": "tipo-poco",
+          "geolytics_label_pt": "Finalidade da Perfuração",
+          "controlled_vocabulary": ["exploration", "appraisal", "development", "injection", "disposal", "monitoring"],
+          "note": "Finalidade declarada para perfuração. Complementa WellType. No contexto ANP = campo POCO_CATEGORIA."
+        }
+      ]
+    },
+    "work_product_components": {
+      "description": "Dados interpretativos e derivados. Resultado de análises, serviços e interpretações. Equivalem aos nós analytical do Geolytics.",
+      "geolytics_node_types": ["analytical"],
+      "osdu_kinds": [
+        {
+          "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+          "geolytics_node_id": "perfil-poco",
+          "geolytics_label_pt": "Perfil de Poço",
+          "sosa_pattern": {
+            "observation": "WellLog",
+            "featureOfInterest": "Wellbore",
+            "observedProperty": "LogCurve (GR, RHOB, NPHI, DT, RT, CALI)",
+            "usedProcedure": "LoggingService (wireline / LWD)",
+            "hasResult": "DepthIndexedValues + UOM"
+          },
+          "common_curves": ["GR", "RHOB", "NPHI", "DT", "RT", "LLD", "CALI", "PEF", "DRHO"],
+          "note": "Perfil de poço convencional. Cada curva é uma sosa:Observation. GR = Gamma Ray (argilosidade); RHOB = densidade; NPHI = porosidade nêutron; DT = sônico; RT = resistividade total."
+        },
+        {
+          "osdu_kind": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+          "geolytics_node_id": "topo-formacional",
+          "geolytics_label_pt": "Topo Formacional",
+          "note": "Pick de profundidade onde o wellbore intercepta o topo (ou base) de uma formação geológica. Medido em MD (profundidade ao longo do fio) e TVD (profundidade vertical real). Dado fundamental para correlações estratigráficas entre poços e modelagem de reservatórios."
+        },
+        {
+          "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+          "geolytics_node_id": "trajetoria-poco",
+          "geolytics_label_pt": "Trajetória do Poço",
+          "survey_fields": ["MD", "inclination_deg", "azimuth_deg", "TVD", "NS_offset_m", "EW_offset_m", "DLS_deg_30m"],
+          "note": "Survey direcional do wellbore. Diferencia poços verticais (inclinação ≈ 0°) de direcionais (inclinação > 30°) e horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e cálculo de TVD."
+        },
+        {
+          "osdu_kind": "opendes:osdu:work-product-component--WellborePressure:1.0.0",
+          "geolytics_node_id": "pvt",
+          "geolytics_label_pt": "Pressão de Reservatório",
+          "note": "Dados de pressão estática e dinâmica: DST (Drill Stem Test), RFT/MDT (Wireline Formation Test), pressão inicial de reservatório. Alimenta análise PVT e modelo de reservatório."
+        }
+      ]
+    }
+  },
+  "lineage_model": {
+    "description": "Modelo de proveniência OSDU para dados públicos ANP → Geolytics",
+    "chain": [
+      {
+        "step": 1,
+        "layer": "L5",
+        "source": "ANP public registry",
+        "systems": ["SIGEP", "BDP (Banco de Dados de Poços)", "dados abertos ANP"],
+        "osdu_record_type": "source-record",
+        "note": "Dado bruto ANP. Domínio público (Lei 9478/1997 + Resolução ANP 47/2014)."
+      },
+      {
+        "step": 2,
+        "layer": "L4",
+        "source": "OSDU ingest pipeline",
+        "osdu_record_type": "master-data--Well + master-data--Wellbore",
+        "note": "Ingestion para plataforma OSDU com mapeamento de campos ANP → OSDU schema. Campo POCO_NUM vira ExternalID. Operadora vira Organisation."
+      },
+      {
+        "step": 3,
+        "layer": "L6",
+        "source": "Geolytics semantic enrichment",
+        "systems": ["Geolytics platform", "entity-graph", "RAG corpus"],
+        "note": "Enriquecimento semântico: adição de petrokgraph_uri, osdu_kind, camadas semânticas L1-L5, módulos M7-M10."
+      }
+    ],
+    "ancestry_example": {
+      "id": "geolytics:internal:Well:1-RJS-702-RJ",
+      "kind": "opendes:osdu:master-data--Well:1.0.0",
+      "ancestry": {
+        "parents": ["opendes:osdu:source-record:ANP:POCO_NUM:1-RJS-702-RJ"]
+      },
+      "legal": {
+        "legaltags": ["opendes-ANP-public-data"],
+        "otherRelevantDataCountries": ["BR"]
+      }
+    }
+  },
+  "well_wellbore_disambiguation": {
+    "description": "A distinção Well/Wellbore é a mais comum fonte de confusão na migração ANP→OSDU",
+    "summary": "Well = registro de superfície e legal (o 'poço' da ANP). Wellbore = trecho físico perfurado.",
+    "rules": {
+      "single_bore": "1 poço ANP (sem sidetrack) = 1 Well + 1 Wellbore. WellboreID = WellID + '-001'.",
+      "with_sidetrack": "1 poço ANP com sidetrack = 1 Well + N Wellbores (SequenceNumber 001, 002, ...).",
+      "anp_conflation": "ANP conflate os dois no registro único POCO_NUM — não há campo separado para wellbore na BDP pública."
+    },
+    "anp_to_osdu_field_map": {
+      "POCO_NUM": "Well.WellID (ExternalID)",
+      "POCO_POCO_NOME": "Well.WellName",
+      "POCO_OPERADORA_SIGLA": "Well.OperatorID → Organisation.OperatorCode",
+      "POCO_STATUS": "Wellbore.StatusID → reference-data--WellStatus",
+      "POCO_TIPO": "Wellbore.DrillingReasonID → reference-data--WellDrillingReasonType",
+      "POCO_CAMPO": "Well.FieldID → master-data--Field",
+      "POCO_BACIA_SIGLA": "Well.BasinID → master-data--Basin",
+      "POCO_ESTADO_SIGLA": "Well.SpatialLocation.CountrySubdivisionCode",
+      "POCO_LATITUDE_BASE_4C": "Well.SpatialLocation.Coordinates.Latitude",
+      "POCO_LONGITUDE_BASE_4C": "Well.SpatialLocation.Coordinates.Longitude"
+    }
+  },
+  "viz_tool_design_patterns": {
+    "source": "Accenture OSDU-Ontology GitHub Pages (https://accenture.github.io/OSDU-Ontology)",
+    "applicable_to": "SPEC 8: index.html — GitHub Pages D3 Force Graph",
+    "patterns": [
+      {
+        "id": "node_color_by_category",
+        "description": "Nodes colored by OSDU data category",
+        "mapping": {
+          "master_data": "#378ADD",
+          "reference_data": "#888780",
+          "work_product_components": "#E67E22",
+          "geological": "#639922",
+          "contractual": "#0072b1"
+        },
+        "note": "Geolytics already uses node.color in entity-graph.json — align with OSDU category colors."
+      },
+      {
+        "id": "node_size_by_degree",
+        "description": "Node radius proportional to number of connections (degree centrality)",
+        "d3_implementation": "d3.map(links, link counting) → scale radius 16-36px",
+        "note": "Nós muito conectados (como 'poco', 'bacia', 'formacao') ficam maiores — destaca entidades centrais."
+      },
+      {
+        "id": "sidebar_properties",
+        "description": "Right panel shows node properties when clicked",
+        "fields_to_show": ["label", "label_en", "type", "definition", "osdu_kind", "petrokgraph_uri", "geocoverage", "datasets", "legal_source"],
+        "note": "Já está em SPEC 8. Adicionar link direto ao schema OSDU: https://osduforum.org/schema/{osdu_kind}"
+      },
+      {
+        "id": "search_filter_bar",
+        "description": "Top bar with text search + domain/category toggle buttons",
+        "implementation": "input[type=text] + checkbox buttons per node type",
+        "note": "Ao filtrar, usar opacity:0.1 nos nós ocultos (não remove do DOM — mantém força da simulação)."
+      },
+      {
+        "id": "layer_badges",
+        "description": "Semantic layer badges in sidebar (L1 GeoCore ... L5 ANP)",
+        "colors": {
+          "L1_GeoCore": { "bg": "#EEEDFE", "text": "#3C3489" },
+          "L2_O3PO": { "bg": "#E1F5EE", "text": "#085041" },
+          "L3_PetroKGraph": { "bg": "#E6F1FB", "text": "#042C53" },
+          "L4_OSDU": { "bg": "#F1EFE8", "text": "#2C2C2A" },
+          "L5_ANP": { "bg": "#EAF3DE", "text": "#173404" }
+        },
+        "note": "Já definido em SPEC 8. Implementar como badges clicáveis que filtram o grafo por layer."
+      }
+    ]
+  }
+}

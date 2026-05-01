@@ -1,0 +1,701 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-01T00:00:00.000Z",
+    "description": "SWEET (Semantic Web for Earth and Environmental Terminology) URI cross-walks for Geolytics terms. Alignments enable agents to expand semantic search via genuine ontological synonymy.",
+    "sweet_base": "http://sweetontology.net/",
+    "sweet_repo": "https://github.com/ESIPFed/sweet",
+    "skos_prefix": "http://www.w3.org/2004/02/skos/core#",
+    "verification_note": "URIs follow official ESIPFed SWEET v3.6 module and class naming conventions. Alignments marked 'to-be-verified' require human review against the live Turtle files.",
+    "total_alignments": 66
+  },
+  "alignments": [
+    {
+      "geolytics_id": "reservatorio",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRock/Rock",
+        "http://sweetontology.net/realmGeol/GeologicFeature"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "matrRock",
+      "rationale_pt": "Reservatório é um corpo rochoso com porosidade e permeabilidade; relaciona-se com a classe Rock de matrRock e com GeologicFeature do realmGeol."
+    },
+    {
+      "geolytics_id": "formacao-geologica",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin"
+      ],
+      "alignment_type": "skos:broadMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Formação Geológica é um subtipo de GeologicFeature (SWEET realmGeol). A ligação com SedimentaryBasin é broadMatch pois formações ocorrem em bacias."
+    },
+    {
+      "geolytics_id": "litologia",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRock/Rock",
+        "http://sweetontology.net/matrMineral/Mineral"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "matrRock",
+      "rationale_pt": "Litologia descreve as propriedades físicas de uma rocha, alinhando-se de perto com Rock de matrRock e seus componentes minerais (matrMineral)."
+    },
+    {
+      "geolytics_id": "hidrocarboneto",
+      "sweet_uris": [
+        "http://sweetontology.net/matrOrganics/Hydrocarbon",
+        "http://sweetontology.net/matrOrganics/OrganicCompound"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics",
+      "rationale_pt": "Hidrocarboneto corresponde exatamente a Hydrocarbon em matrOrganics — composto orgânico de carbono e hidrogênio."
+    },
+    {
+      "geolytics_id": "hidrocarboneto",
+      "sweet_uris": [
+        "http://sweetontology.net/matrOrganics/Oil",
+        "http://sweetontology.net/matrOrganics/NaturalGas"
+      ],
+      "alignment_type": "skos:narrowMatch",
+      "sweet_module": "matrOrganics",
+      "rationale_pt": "Oil e NaturalGas são subtipos de Hydrocarbon em SWEET, representando os dois produtos primários do domínio E&P."
+    },
+    {
+      "geolytics_id": "querogenio",
+      "sweet_uris": [
+        "http://sweetontology.net/matrOrganics/Kerogen"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics",
+      "rationale_pt": "Kerogen é termo definido explicitamente em matrOrganics do SWEET, correspondendo exatamente ao querogênio — matéria orgânica insolúvel geradora de hidrocarbonetos."
+    },
+    {
+      "geolytics_id": "processo-geologico",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "http://sweetontology.net/proc/Process"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Processo Geológico corresponde exatamente a GeologicProcess em procGeo. A classe-pai proc:Process cobre processos em geral."
+    },
+    {
+      "geolytics_id": "diagenese",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Diagenesis",
+        "http://sweetontology.net/procGeo/GeologicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Diagênese é mapeada diretamente a Diagenesis em procGeo, subclasse de GeologicProcess."
+    },
+    {
+      "geolytics_id": "evento-tectonico",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/TectonicProcess",
+        "http://sweetontology.net/procGeo/Rifting"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Evento Tectônico é closamente alinhado a TectonicProcess; Rifting é o principal evento tectônico no contexto das bacias brasileiras."
+    },
+    {
+      "geolytics_id": "migracao-hidrocarbonetos",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/FluidMigration",
+        "http://sweetontology.net/procGeo/GeologicProcess"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Migração de Hidrocarbonetos alinha-se com FluidMigration em procGeo. closeMatch pois SWEET trata migração de fluidos em geral, não especificamente de HC."
+    },
+    {
+      "geolytics_id": "sistema-deposicional",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Sedimentation",
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Sistema Deposicional é um conjunto de ambientes de deposição; relaciona-se com Sedimentation (processo) e SedimentaryBasin (realm) do SWEET."
+    },
+    {
+      "geolytics_id": "falha-cisalhante",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeolTectonic/Fault",
+        "http://sweetontology.net/realmGeolTectonic/FaultZone"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic",
+      "rationale_pt": "Falha de Cisalhamento corresponde a Fault em realmGeolTectonic. FaultZone cobre a zona de falha associada."
+    },
+    {
+      "geolytics_id": "dobra",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeolTectonic/Fold",
+        "http://sweetontology.net/realmGeolTectonic/Anticline",
+        "http://sweetontology.net/realmGeolTectonic/Syncline"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic",
+      "rationale_pt": "Dobra mapeia diretamente para Fold em realmGeolTectonic. Anticline e Syncline são subtipos específicos relevantes para armadilhas estruturais em E&P."
+    },
+    {
+      "geolytics_id": "foliacao",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeolTectonic/Foliation"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolTectonic",
+      "rationale_pt": "Foliação mapeia exatamente para Foliation em realmGeolTectonic — estrutura planar penetrativa em rochas metamórficas e deformadas."
+    },
+    {
+      "geolytics_id": "discordancia",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/Unconformity",
+        "http://sweetontology.net/realmGeol/GeologicFeature"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Discordância mapeia exatamente para Unconformity em realmGeol — superfície que separa rochas com hiato deposicional ou erosivo."
+    },
+    {
+      "geolytics_id": "contato-geologico",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicContact",
+        "http://sweetontology.net/realmGeol/GeologicFeature"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Contato Geológico corresponde a GeologicContact em realmGeol — superfície que separa unidades geológicas distintas."
+    },
+    {
+      "geolytics_id": "acumulacao",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "http://sweetontology.net/matrOrganics/Hydrocarbon"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Acumulação de Hidrocarbonetos é uma feição geológica (GeologicFeature) contendo hidrocarbonetos. Não há classe específica de acumulação no SWEET — relatedMatch."
+    },
+    {
+      "geolytics_id": "bacia-sedimentar",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin",
+        "http://sweetontology.net/realmGeol/GeologicFeature"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeolBasin",
+      "rationale_pt": "Bacia Sedimentar mapeia exatamente para SedimentaryBasin em realmGeolBasin — depressão crustal onde se acumulam sedimentos."
+    },
+    {
+      "geolytics_id": "presal",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "http://sweetontology.net/matrRockSedimentary/SaltRock"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Pré-sal é específico ao contexto brasileiro — designa camadas abaixo de evaporitos (sal). SaltRock de matrRockSedimentary cobre o evaporito selante. relatedMatch por especificidade contextual."
+    },
+    {
+      "geolytics_id": "poco-anp",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/Borehole",
+        "http://sweetontology.net/realmGeol/GeologicFeature"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Poço ANP é closeMatch de Borehole em realmGeol — perfuração que penetra o subsolo para exploração ou produção."
+    },
+    {
+      "geolytics_id": "bloco",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Bloco exploratório é uma subdivisão administrativa de bacias sedimentares. relatedMatch com GeologicFeature e SedimentaryBasin por ausência de classe administrativa equivalente no SWEET."
+    },
+    {
+      "geolytics_id": "rocha-ignea",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockIgneous/IgneousRock",
+        "http://sweetontology.net/matrRock/Rock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockIgneous",
+      "rationale_pt": "Rocha Ígnea corresponde exatamente a IgneousRock em matrRockIgneous — rocha formada pela solidificação de magma."
+    },
+    {
+      "geolytics_id": "rocha-sedimentar",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "http://sweetontology.net/matrRock/Rock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockSedimentary",
+      "rationale_pt": "Rocha Sedimentar corresponde exatamente a SedimentaryRock em matrRockSedimentary — rocha formada pela deposição e litificação de sedimentos."
+    },
+    {
+      "geolytics_id": "rocha-metamorfica",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockMetamorphic/MetamorphicRock",
+        "http://sweetontology.net/matrRock/Rock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockMetamorphic",
+      "rationale_pt": "Rocha Metamórfica corresponde exatamente a MetamorphicRock em matrRockMetamorphic — rocha transformada por calor e pressão."
+    },
+    {
+      "geolytics_id": "arenito",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockSedimentary/Sandstone",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockSedimentary",
+      "rationale_pt": "Arenito corresponde exatamente a Sandstone em matrRockSedimentary — rocha sedimentar clástica de grãos de areia, reservatório clássico do pós-sal."
+    },
+    {
+      "geolytics_id": "calcario",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockSedimentary/Limestone",
+        "http://sweetontology.net/matrRockSedimentary/CarbonatiteRock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockSedimentary",
+      "rationale_pt": "Calcário corresponde exatamente a Limestone em matrRockSedimentary — rocha carbonática, principal tipo de reservatório do pré-sal brasileiro."
+    },
+    {
+      "geolytics_id": "folhelho",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockSedimentary/Shale",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockSedimentary",
+      "rationale_pt": "Folhelho corresponde exatamente a Shale em matrRockSedimentary — rocha sedimentar fina, tipicamente rocha geradora ou selante."
+    },
+    {
+      "geolytics_id": "evaporito",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockSedimentary/EvaporiteRock",
+        "http://sweetontology.net/matrRockSedimentary/SaltRock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockSedimentary",
+      "rationale_pt": "Evaporito corresponde a EvaporiteRock em matrRockSedimentary. SaltRock é o evaporito salino específico que sela os reservatórios do pré-sal."
+    },
+    {
+      "geolytics_id": "granito",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockIgneous/Granite",
+        "http://sweetontology.net/matrRockIgneous/IntrusiveRock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockIgneous",
+      "rationale_pt": "Granito corresponde exatamente a Granite em matrRockIgneous — rocha plutônica félsica, frequente no embasamento cristalino."
+    },
+    {
+      "geolytics_id": "basalto",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockIgneous/Basalt",
+        "http://sweetontology.net/matrRockIgneous/ExtrusiveRock"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrRockIgneous",
+      "rationale_pt": "Basalto corresponde exatamente a Basalt em matrRockIgneous — rocha vulcânica máfica, ocorre como derrames intercalados a sequências sedimentares."
+    },
+    {
+      "geolytics_id": "dolomita",
+      "sweet_uris": [
+        "http://sweetontology.net/matrRockSedimentary/Dolostone",
+        "http://sweetontology.net/matrMineral/Dolomite"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "matrRockSedimentary",
+      "rationale_pt": "Dolomita (rocha) é closeMatch de Dolostone em SWEET; o mineral componente é Dolomite de matrMineral. Relevante pela dolomitização nos carbonatos pré-sal."
+    },
+    {
+      "geolytics_id": "agua",
+      "sweet_uris": [
+        "http://sweetontology.net/matr/Water",
+        "http://sweetontology.net/realmHydro/HydrospherePart"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matr",
+      "rationale_pt": "Água corresponde exatamente a Water em matr — substância H2O, fundamental como fluido de formação e injeção em E&P."
+    },
+    {
+      "geolytics_id": "salmoura",
+      "sweet_uris": [
+        "http://sweetontology.net/matr/Brine",
+        "http://sweetontology.net/matr/SalineWater"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matr",
+      "rationale_pt": "Salmoura corresponde exatamente a Brine em matr — solução aquosa com alta salinidade, típica de formações profundas e aquíferos do pré-sal."
+    },
+    {
+      "geolytics_id": "gas-natural",
+      "sweet_uris": [
+        "http://sweetontology.net/matrOrganics/NaturalGas",
+        "http://sweetontology.net/matrOrganics/Methane"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics",
+      "rationale_pt": "Gás Natural corresponde exatamente a NaturalGas em matrOrganics. Methane é o principal componente."
+    },
+    {
+      "geolytics_id": "oleo-cru",
+      "sweet_uris": [
+        "http://sweetontology.net/matrOrganics/Oil",
+        "http://sweetontology.net/matrOrganics/Hydrocarbon"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics",
+      "rationale_pt": "Óleo cru corresponde exatamente a Oil em matrOrganics — hidrocarboneto líquido extraído do reservatório."
+    },
+    {
+      "geolytics_id": "condensado",
+      "sweet_uris": [
+        "http://sweetontology.net/matrOrganics/Condensate",
+        "http://sweetontology.net/matrOrganics/Hydrocarbon"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrOrganics",
+      "rationale_pt": "Condensado corresponde exatamente a Condensate em matrOrganics — hidrocarboneto que condensa da fase gasosa nas condições de superfície."
+    },
+    {
+      "geolytics_id": "pressao",
+      "sweet_uris": [
+        "http://sweetontology.net/propPressure/Pressure",
+        "http://sweetontology.net/prop/PhysicalProperty"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "propPressure",
+      "rationale_pt": "Pressão corresponde exatamente a Pressure em propPressure — propriedade física fundamental em E&P (pressão de poro, pressão de reservatório)."
+    },
+    {
+      "geolytics_id": "temperatura",
+      "sweet_uris": [
+        "http://sweetontology.net/propTemperature/Temperature",
+        "http://sweetontology.net/prop/PhysicalProperty"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "propTemperature",
+      "rationale_pt": "Temperatura corresponde exatamente a Temperature em propTemperature — propriedade crítica para maturação do querogênio e comportamento de fluidos."
+    },
+    {
+      "geolytics_id": "densidade",
+      "sweet_uris": [
+        "http://sweetontology.net/propMass/Density",
+        "http://sweetontology.net/prop/PhysicalProperty"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "propMass",
+      "rationale_pt": "Densidade corresponde exatamente a Density em propMass — massa por unidade de volume, usada em perfilagem de poços e caracterização de fluidos."
+    },
+    {
+      "geolytics_id": "viscosidade",
+      "sweet_uris": [
+        "http://sweetontology.net/propFluidTransport/Viscosity",
+        "http://sweetontology.net/prop/PhysicalProperty"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "propFluidTransport",
+      "rationale_pt": "Viscosidade corresponde exatamente a Viscosity em propFluidTransport — resistência ao escoamento de fluidos, determinante para produtividade de poços."
+    },
+    {
+      "geolytics_id": "porosidade",
+      "sweet_uris": [
+        "http://sweetontology.net/propSpaceMultidimensional/Porosity",
+        "http://sweetontology.net/prop/PhysicalProperty"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "propSpaceMultidimensional",
+      "rationale_pt": "Porosidade corresponde exatamente a Porosity em propSpaceMultidimensional — fração do volume poroso da rocha, parâmetro fundamental de reservatório."
+    },
+    {
+      "geolytics_id": "permeabilidade",
+      "sweet_uris": [
+        "http://sweetontology.net/propFluidTransport/Permeability",
+        "http://sweetontology.net/prop/PhysicalProperty"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "propFluidTransport",
+      "rationale_pt": "Permeabilidade corresponde exatamente a Permeability em propFluidTransport — capacidade de uma rocha de transmitir fluidos sob gradiente de pressão."
+    },
+    {
+      "geolytics_id": "unidade-pa",
+      "sweet_uris": [
+        "http://sweetontology.net/reprSciUnits/Pascal"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprSciUnits",
+      "rationale_pt": "Pascal (Pa) corresponde exatamente à classe Pascal em reprSciUnits — unidade SI de pressão, usada para pressão de poro e de fratura."
+    },
+    {
+      "geolytics_id": "unidade-kelvin",
+      "sweet_uris": [
+        "http://sweetontology.net/reprSciUnits/Kelvin"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprSciUnits",
+      "rationale_pt": "Kelvin (K) corresponde exatamente à classe Kelvin em reprSciUnits — unidade SI de temperatura termodinâmica."
+    },
+    {
+      "geolytics_id": "unidade-metro",
+      "sweet_uris": [
+        "http://sweetontology.net/reprSciUnits/Meter"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprSciUnits",
+      "rationale_pt": "Metro (m) corresponde exatamente à classe Meter em reprSciUnits — unidade SI de comprimento, usada para profundidade de poços e lâmina d'água."
+    },
+    {
+      "geolytics_id": "unidade-darcy",
+      "sweet_uris": [
+        "http://sweetontology.net/reprSciUnits/Darcy"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprSciUnits",
+      "rationale_pt": "Darcy (D) e milidarcy (mD) correspondem à classe Darcy em reprSciUnits — unidade de permeabilidade amplamente usada em E&P.",
+      "verification_note": "to-be-verified"
+    },
+    {
+      "geolytics_id": "litosfera",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/Lithosphere",
+        "http://sweetontology.net/realm/PlanetaryRealm"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Litosfera corresponde exatamente a Lithosphere em realmGeol — camada rígida exterior da Terra que inclui crosta e manto superior."
+    },
+    {
+      "geolytics_id": "hidrosfera",
+      "sweet_uris": [
+        "http://sweetontology.net/realmHydro/Hydrosphere",
+        "http://sweetontology.net/realm/PlanetaryRealm"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmHydro",
+      "rationale_pt": "Hidrosfera corresponde exatamente a Hydrosphere em realmHydro — conjunto de águas da Terra, relevante para aquíferos e produção de água associada."
+    },
+    {
+      "geolytics_id": "sedimentacao",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Sedimentation",
+        "http://sweetontology.net/procGeo/GeologicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Sedimentação corresponde exatamente a Sedimentation em procGeo — processo de deposição de sedimentos que forma reservatórios clásticos."
+    },
+    {
+      "geolytics_id": "erosao",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Erosion",
+        "http://sweetontology.net/procGeo/GeologicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Erosão corresponde exatamente a Erosion em procGeo — processo de remoção de material rochoso pela ação de água, vento ou gelo."
+    },
+    {
+      "geolytics_id": "falhamento",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Faulting",
+        "http://sweetontology.net/procGeo/TectonicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Falhamento corresponde exatamente a Faulting em procGeo — processo de formação e movimentação de falhas geológicas."
+    },
+    {
+      "geolytics_id": "dobramento",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Folding",
+        "http://sweetontology.net/procGeo/TectonicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Dobramento corresponde exatamente a Folding em procGeo — processo de deformação dúctil que gera dobras anticlinais e sinclinais."
+    },
+    {
+      "geolytics_id": "magmatismo",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Magmatism",
+        "http://sweetontology.net/procGeo/GeologicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Magmatismo corresponde exatamente a Magmatism em procGeo — conjunto de processos de geração, movimentação e consolidação de magma.",
+      "verification_note": "to-be-verified"
+    },
+    {
+      "geolytics_id": "metamorfismo",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Metamorphism",
+        "http://sweetontology.net/procGeo/GeologicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Metamorfismo corresponde exatamente a Metamorphism em procGeo — transformação de rochas por calor e pressão sem fusão."
+    },
+    {
+      "geolytics_id": "cretaceo",
+      "sweet_uris": [
+        "http://sweetontology.net/reprTimeGeologic/Cretaceous",
+        "http://sweetontology.net/reprTimeGeologic/GeochronologicEra"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprTimeGeologic",
+      "rationale_pt": "Cretáceo corresponde exatamente a Cretaceous em reprTimeGeologic — período geológico (145–66 Ma) de formação dos principais reservatórios brasileiros."
+    },
+    {
+      "geolytics_id": "aptiano",
+      "sweet_uris": [
+        "http://sweetontology.net/reprTimeGeologic/Aptian",
+        "http://sweetontology.net/reprTimeGeologic/GeochronologicEra"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprTimeGeologic",
+      "rationale_pt": "Aptiano corresponde a Aptian em reprTimeGeologic — estágio do Cretáceo quando se depositou o sal evaporítico selante do pré-sal."
+    },
+    {
+      "geolytics_id": "mesozoico",
+      "sweet_uris": [
+        "http://sweetontology.net/reprTimeGeologic/Mesozoic",
+        "http://sweetontology.net/reprTimeGeologic/GeochronologicEra"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "reprTimeGeologic",
+      "rationale_pt": "Mesozoico corresponde exatamente a Mesozoic em reprTimeGeologic — era geológica (252–66 Ma) da abertura do Atlântico Sul e formação das bacias sedimentares brasileiras."
+    },
+    {
+      "geolytics_id": "campo",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Campo de petróleo é uma entidade administrativa/econômica contendo feições geológicas. relatedMatch pois SWEET não distingue campos produtores como classe própria."
+    },
+    {
+      "geolytics_id": "lamina-dagua",
+      "sweet_uris": [
+        "http://sweetontology.net/propSpaceDistance/Depth",
+        "http://sweetontology.net/realmHydro/Ocean"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propSpaceDistance",
+      "rationale_pt": "Lâmina d'água é a profundidade da coluna de água — closeMatch com Depth em propSpaceDistance. Ocean contextualiza o domínio marinho."
+    },
+    {
+      "geolytics_id": "magnetita",
+      "sweet_uris": [
+        "http://sweetontology.net/matrMineral/Magnetite",
+        "http://sweetontology.net/matrMineral/Mineral"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrMineral",
+      "rationale_pt": "Magnetita corresponde exatamente a Magnetite em matrMineral — mineral de ferro-titânio presente em rochas ígneas e metamórficas."
+    },
+    {
+      "geolytics_id": "quartzo",
+      "sweet_uris": [
+        "http://sweetontology.net/matrMineral/Quartz",
+        "http://sweetontology.net/matrMineral/Mineral"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrMineral",
+      "rationale_pt": "Quartzo corresponde exatamente a Quartz em matrMineral — mineral silicático abundante em arenitos, influencia cimentação diagenética."
+    },
+    {
+      "geolytics_id": "calcita",
+      "sweet_uris": [
+        "http://sweetontology.net/matrMineral/Calcite",
+        "http://sweetontology.net/matrMineral/Mineral"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrMineral",
+      "rationale_pt": "Calcita corresponde exatamente a Calcite em matrMineral — mineral carbonático principal em calcários e cimentos diagenéticos."
+    },
+    {
+      "geolytics_id": "pirita",
+      "sweet_uris": [
+        "http://sweetontology.net/matrMineral/Pyrite",
+        "http://sweetontology.net/matrMineral/Mineral"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "matrMineral",
+      "rationale_pt": "Pirita corresponde exatamente a Pyrite em matrMineral — sulfeto de ferro indicador de ambiente redutor (anóxico) em folhelhos geradores."
+    },
+    {
+      "geolytics_id": "rifteamento",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Rifting",
+        "http://sweetontology.net/procGeo/TectonicProcess"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Rifteamento corresponde exatamente a Rifting em procGeo — separação de placas que formou o Atlântico Sul e as bacias de margem passiva brasileiras."
+    },
+    {
+      "geolytics_id": "oceano",
+      "sweet_uris": [
+        "http://sweetontology.net/realmHydro/Ocean",
+        "http://sweetontology.net/realmHydro/Hydrosphere"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmHydro",
+      "rationale_pt": "Oceano corresponde exatamente a Ocean em realmHydro — contexto operacional das atividades offshore brasileiras."
+    },
+    {
+      "geolytics_id": "crosta",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/Crust",
+        "http://sweetontology.net/realmGeol/Lithosphere"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Crosta terrestre corresponde exatamente a Crust em realmGeol — camada mais externa da Terra onde ocorrem as rochas reservatório."
+    },
+    {
+      "geolytics_id": "manto",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/Mantle",
+        "http://sweetontology.net/realmGeol/Lithosphere"
+      ],
+      "alignment_type": "skos:exactMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Manto terrestre corresponde exatamente a Mantle em realmGeol — camada intermediária da Terra, fonte de magmas."
+    },
+    {
+      "geolytics_id": "mecanismo-deformacao",
+      "sweet_uris": [
+        "http://sweetontology.net/procGeo/Deformation",
+        "http://sweetontology.net/procGeo/TectonicProcess"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "procGeo",
+      "rationale_pt": "Mecanismo de Deformação é closeMatch de Deformation em procGeo — inclui deformação dúctil e frágil, controlando microestruturas de reservatório.",
+      "verification_note": "to-be-verified"
+    },
+    {
+      "geolytics_id": "feicao-mapeada",
+      "sweet_uris": [
+        "http://sweetontology.net/realmGeol/GeologicFeature"
+      ],
+      "alignment_type": "skos:broadMatch",
+      "sweet_module": "realmGeol",
+      "rationale_pt": "Feição Mapeada é uma representação espacial de GeologicFeature (SWEET). broadMatch pois SWEET define a entidade conceitual, não a representação cartográfica."
+    }
+  ]
+}

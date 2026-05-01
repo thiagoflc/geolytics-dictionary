@@ -1,0 +1,264 @@
+{
+  "meta": {
+    "source": "SIRR — Sistema Integrado de Reservatórios Petrobras",
+    "description": "Dicionário de campos PVT com completude real da base corporativa",
+    "total_fields": 34,
+    "note": "Completude medida na base SIRR. Campos com < 10% são raridade analítica, não ausência de definição."
+  },
+  "fields": [
+    {
+      "name": "Poço",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Identificador do poço ANP"
+    },
+    {
+      "name": "Campo",
+      "type": "text",
+      "completeness_pct": 92.9,
+      "description": "Nome do campo de produção"
+    },
+    {
+      "name": "Bacia",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Bacia sedimentar"
+    },
+    {
+      "name": "Data Amostragem",
+      "type": "date",
+      "completeness_pct": 100,
+      "description": "Data da coleta da amostra"
+    },
+    {
+      "name": "Topo(m)",
+      "type": "float",
+      "completeness_pct": 100,
+      "unit": "m",
+      "description": "Topo do intervalo amostrado"
+    },
+    {
+      "name": "Base(m)",
+      "type": "float",
+      "completeness_pct": 95.7,
+      "unit": "m",
+      "description": "Base do intervalo amostrado"
+    },
+    {
+      "name": "Temperatura(°C)",
+      "type": "float",
+      "completeness_pct": 88.8,
+      "unit": "°C",
+      "description": "Temperatura de reservatório"
+    },
+    {
+      "name": "Tipo Amostragem",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Método de amostragem (fundo/superfície)"
+    },
+    {
+      "name": "Data Análise",
+      "type": "date",
+      "completeness_pct": 80.5,
+      "description": "Data do ensaio laboratorial"
+    },
+    {
+      "name": "Análise PVT",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Tipo de análise PVT realizada"
+    },
+    {
+      "name": "Documento da Análise",
+      "type": "text",
+      "completeness_pct": 85.3,
+      "description": "Referência ao certificado/documento"
+    },
+    {
+      "name": "Nº Solicitação",
+      "type": "float",
+      "completeness_pct": 100,
+      "description": "Identificador da solicitação"
+    },
+    {
+      "name": "Dt Operação Estabiliz Poço",
+      "type": "date",
+      "completeness_pct": 100,
+      "description": "Data de estabilização operacional do poço"
+    },
+    {
+      "name": "Autoria",
+      "type": "text",
+      "completeness_pct": 95.2,
+      "description": "Laboratório/responsável pela análise"
+    },
+    {
+      "name": "Fa Tanque",
+      "type": "float",
+      "completeness_pct": 1.95,
+      "description": "Fator de encolhimento em tanque — campo raríssimo (<2%)"
+    },
+    {
+      "name": "Dens. Liq Tanque",
+      "type": "float",
+      "completeness_pct": 8.19,
+      "description": "Densidade do líquido em tanque"
+    },
+    {
+      "name": "RGL Tanque",
+      "type": "float",
+      "completeness_pct": 1.89,
+      "description": "Razão Gás-Líquido em tanque"
+    },
+    {
+      "name": "Dg liberado Tanque",
+      "type": "float",
+      "completeness_pct": 63.1,
+      "description": "Densidade do gás liberado em tanque"
+    },
+    {
+      "name": "Grau API Tanque",
+      "type": "float",
+      "completeness_pct": 63.2,
+      "unit": "°API",
+      "description": "Grau API medido em condições de tanque (superfície)"
+    },
+    {
+      "name": "RGO Tanque",
+      "type": "float",
+      "completeness_pct": 61.2,
+      "unit": "scf/stb",
+      "description": "Razão Gás-Óleo em condições de tanque"
+    },
+    {
+      "name": "Coef Exp Term Tanque",
+      "type": "float",
+      "completeness_pct": 56.6,
+      "description": "Coeficiente de expansão térmica do tanque"
+    },
+    {
+      "name": "Dg Lab",
+      "type": "float",
+      "completeness_pct": 1.98,
+      "description": "Densidade do gás em laboratório — campo raríssimo"
+    },
+    {
+      "name": "Z Lab",
+      "type": "float",
+      "completeness_pct": 1.98,
+      "description": "Fator Z (compressibilidade) em laboratório — raríssimo"
+    },
+    {
+      "name": "RGL Lab",
+      "type": "float",
+      "completeness_pct": 1.98,
+      "description": "Razão Gás-Líquido em laboratório — raríssimo"
+    },
+    {
+      "name": "Dg Média Lib. Dif",
+      "type": "float",
+      "completeness_pct": 58.2,
+      "description": "Densidade do gás média na liberação diferencial"
+    },
+    {
+      "name": "Grau API Óleo Lib. Dif",
+      "type": "float",
+      "completeness_pct": 77.4,
+      "unit": "°API",
+      "description": "Grau API do óleo residual na liberação diferencial"
+    },
+    {
+      "name": "Temperatura ºC Lib. Dif",
+      "type": "float",
+      "completeness_pct": 58.2,
+      "unit": "°C",
+      "description": "Temperatura da liberação diferencial"
+    },
+    {
+      "name": "Coef. Exp. Term. Lib. Dif",
+      "type": "float",
+      "completeness_pct": 55.2,
+      "description": "Coef. expansão térmica na liberação diferencial"
+    },
+    {
+      "name": "Press. do C.Exp.Term.Lib.Dif",
+      "type": "float",
+      "completeness_pct": 73.9,
+      "unit": "psi",
+      "description": "Pressão do coef. expansão térmica — proxy Psat"
+    },
+    {
+      "name": "Observação",
+      "type": "text",
+      "completeness_pct": 14.4,
+      "description": "Notas livres do analista"
+    },
+    {
+      "name": "Data Ult. Atualização",
+      "type": "date",
+      "completeness_pct": 100,
+      "description": "Última atualização do registro"
+    },
+    {
+      "name": "Chave Usuário",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Identificador do usuário/operador"
+    },
+    {
+      "name": "Fluido Amostra",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Tipo de fluido (óleo/gás/água)"
+    },
+    {
+      "name": "Experimento",
+      "type": "text",
+      "completeness_pct": 100,
+      "description": "Tipo de ensaio PVT"
+    }
+  ],
+  "completeness_notes": {
+    "high_completeness": [
+      "Poço",
+      "Campo",
+      "Bacia",
+      "Data Amostragem",
+      "Topo(m)",
+      "Base(m)",
+      "Tipo Amostragem",
+      "Análise PVT",
+      "Nº Solicitação",
+      "Dt Operação Estabiliz Poço",
+      "Autoria",
+      "Data Ult. Atualização",
+      "Chave Usuário",
+      "Fluido Amostra",
+      "Experimento"
+    ],
+    "medium_completeness": [
+      "Temperatura(°C)",
+      "Data Análise",
+      "Documento da Análise",
+      "Dg liberado Tanque",
+      "Grau API Tanque",
+      "RGO Tanque",
+      "Coef Exp Term Tanque",
+      "Dg Média Lib. Dif",
+      "Grau API Óleo Lib. Dif",
+      "Temperatura ºC Lib. Dif",
+      "Coef. Exp. Term. Lib. Dif",
+      "Press. do C.Exp.Term.Lib.Dif"
+    ],
+    "low_completeness_expected": [
+      "Fa Tanque",
+      "Dens. Liq Tanque",
+      "RGL Tanque",
+      "Dg Lab",
+      "Z Lab",
+      "RGL Lab"
+    ],
+    "rag_note": "Campos com baixa completude são dados de ensaios especiais — não indicam lacuna de dado, indicam raridade de análise. Um agente RAG deve interpretar \"Fa Tanque disponível\" como sinal de análise avançada."
+  }
+}
