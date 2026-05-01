@@ -13,21 +13,42 @@
     "auto_match_warning": "Matches gerados por igualdade/substring de label. closeMatch ≠ exactMatch — validar manualmente antes de SPARQL cruzado.",
     "review_summary": {
       "auto_match": 19,
-      "manual_match": 50,
-      "no_match": 19,
+      "manual_match": 51,
+      "no_match": 18,
       "by_kind": {
         "exactMatch": 19,
-        "closeMatch": 35,
-        "noMatch": 19,
+        "closeMatch": 36,
         "broadMatch": 14,
-        "relatedMatch": 1
-      }
+        "relatedMatch": 1,
+        "noMatch": 18
+      },
+      "total_target_links": 81
     },
-    "last_revised": "2026-05-01T11:42:45.823Z",
+    "last_revised": "2026-05-01T15:26:26.467Z",
     "no_match_continuation": {
       "description": "Os 19 conceitos com match=noMatch contra CGI Simple Lithology foram remapeados em arquivo separado — INSPIRE Geomorphology é o vocabulário-alvo correto para classes de gênese (U*).",
       "see": "data/glosis/lithology-crosswalk-inspire-geomorph.json",
       "coverage": "16 de 19 noMatch foram cobertos com INSPIRE Geomorph; 3 permanecem sem match (IB3 dolerite — pertence a vocabulário litológico; UU/UU2 — agregadores genéricos)."
+    },
+    "one_to_n_aggregators": {
+      "description": "13 GLOSIS conceitos que agregam múltiplos litotipos receberam campo cgi_targets[] (mapeamento 1:N). cgi_id/cgi_label/cgi_iri apontam para o target canônico (primeiro) por compatibilidade retroativa.",
+      "count": 13,
+      "total_target_links": 81,
+      "glosis_codes": [
+        "II1",
+        "MA2",
+        "MA3",
+        "MB1",
+        "MU1",
+        "SC1",
+        "SC2",
+        "SE1",
+        "SO1",
+        "UF2",
+        "UR1",
+        "UU5",
+        "IU"
+      ]
     }
   },
   "glosis_top_groups": [
@@ -166,12 +187,19 @@
       "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB3",
       "glosis_label": "dolerite",
       "glosis_broader": "lithologyValueCode-IB",
-      "cgi_id": null,
-      "cgi_label": null,
-      "cgi_iri": null,
-      "match": "noMatch",
-      "note": "GLOSIS \"dolerite\" — CGI Simple Lithology não rotula dolerite/diabase individualmente.",
-      "review": "manual"
+      "cgi_id": "doleritic_rock",
+      "cgi_label": "doleritic rock",
+      "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithology/doleritic_rock",
+      "match": "closeMatch",
+      "note": "GLOSIS \"dolerite\" ⊂ CGI 2016.01 \"doleritic rock\" (skos:example inclui \"dolerite\", \"diabase\", \"microdiorite\", \"microgabbro\"). Vocabulary update: scheme migrado de 201211 para 2016.01 para alcançar este conceito.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "doleritic_rock",
+          "label": "doleritic rock",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithology/doleritic_rock"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-II",
@@ -194,8 +222,25 @@
       "cgi_label": "andesite",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/andesite",
       "match": "closeMatch",
-      "note": "GLOSIS agrupa \"andesite, trachyte, phonolite\" (intermediários efusivos); CGI tem só \"andesite\" rotulado individualmente — trachyte/phonolite existem como rótulos próprios em CGI: cf. trachytoid, phonolite.",
-      "review": "manual"
+      "note": "1:N — 3 CGI targets cobrem GLOSIS \"andesite, trachyte, phonolite\": andesite; trachyte; phonolite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "andesite",
+          "label": "andesite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/andesite"
+        },
+        {
+          "id": "trachyte",
+          "label": "trachyte",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/trachyte"
+        },
+        {
+          "id": "phonolite",
+          "label": "phonolite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/phonolite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-II2",
@@ -278,8 +323,15 @@
       "cgi_label": "ultrabasic igneous rock",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/ultrabasic_igneous_rock",
       "match": "closeMatch",
-      "note": "GLOSIS \"ultrabasic igneous\"; CGI usa \"ultrabasic igneous rock\" (sufixo \"rock\" explícito).",
-      "review": "manual"
+      "note": "1:N — 1 CGI targets cobrem GLOSIS \"ultrabasic igneous\": ultrabasic igneous rock.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "ultrabasic_igneous_rock",
+          "label": "ultrabasic igneous rock",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/ultrabasic_igneous_rock"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-IU1",
@@ -362,8 +414,20 @@
       "cgi_label": "gneiss",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/gneiss",
       "match": "closeMatch",
-      "note": "GLOSIS agrupa \"gneiss, migmatite\"; CGI tem ambos como termos separados (gneiss, migmatite).",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"gneiss, migmatite\": gneiss; migmatite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "gneiss",
+          "label": "gneiss",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/gneiss"
+        },
+        {
+          "id": "migmatite",
+          "label": "migmatite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/migmatite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-MA3",
@@ -374,8 +438,20 @@
       "cgi_label": "slate",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/slate",
       "match": "closeMatch",
-      "note": "GLOSIS agrupa \"slate, phyllite (pelitic rocks)\"; CGI tem slate + phyllite separados.",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"slate, phyllite (pelitic rocks)\": slate; phyllite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "slate",
+          "label": "slate",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/slate"
+        },
+        {
+          "id": "phyllite",
+          "label": "phyllite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/phyllite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-MA4",
@@ -410,8 +486,20 @@
       "cgi_label": "slate",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/slate",
       "match": "closeMatch",
-      "note": "GLOSIS agrupa \"slate, phyllite\" — duplicação em GLOSIS (MA3 e MB1 com mesmo rótulo).",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"slate, phyllite (pelitic rocks)\": slate; phyllite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "slate",
+          "label": "slate",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/slate"
+        },
+        {
+          "id": "phyllite",
+          "label": "phyllite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/phyllite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-MB2",
@@ -494,8 +582,15 @@
       "cgi_label": "serpentinite",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/serpentinite",
       "match": "closeMatch",
-      "note": "GLOSIS \"serpentinite, greenstone\"; CGI tem serpentinite, mas \"greenstone\" não é rótulo individual (subclasse de basic metamorphic rock).",
-      "review": "manual"
+      "note": "1:N — 1 CGI targets cobrem GLOSIS \"serpentinite, greenstone\": serpentinite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "serpentinite",
+          "label": "serpentinite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/serpentinite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-S",
@@ -530,8 +625,20 @@
       "cgi_label": "generic conglomerate",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/generic_conglomerate",
       "match": "closeMatch",
-      "note": "GLOSIS \"conglomerate, breccia\"; CGI tem ambos: generic conglomerate + clastic breccia (cf. mapeamento múltiplo).",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"conglomerate, breccia\": generic conglomerate; breccia.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "generic_conglomerate",
+          "label": "generic conglomerate",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/generic_conglomerate"
+        },
+        {
+          "id": "breccia",
+          "label": "breccia",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/breccia"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-SC2",
@@ -542,8 +649,25 @@
       "cgi_label": "generic sandstone",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/generic_sandstone",
       "match": "closeMatch",
-      "note": "GLOSIS \"sandstone, greywacke, arkose\"; CGI tem generic sandstone + greywacke (litharenite) + arkose como narrower.",
-      "review": "manual"
+      "note": "1:N — 3 CGI targets cobrem GLOSIS \"sandstone, greywacke, arkose\": generic sandstone; wacke; arenite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "generic_sandstone",
+          "label": "generic sandstone",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/generic_sandstone"
+        },
+        {
+          "id": "wackestone",
+          "label": "wacke",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/wackestone"
+        },
+        {
+          "id": "arenite",
+          "label": "arenite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/arenite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-SC3",
@@ -602,8 +726,15 @@
       "cgi_label": "gypsum or anhydrite",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/rock_gypsum_or_anhydrite",
       "match": "closeMatch",
-      "note": "GLOSIS \"anhydrite, gypsum\"; CGI rotula como \"gypsum or anhydrite\" — equivalente.",
-      "review": "manual"
+      "note": "1:N — 1 CGI targets cobrem GLOSIS \"anhydrite, gypsum\": gypsum or anhydrite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "rock_gypsum_or_anhydrite",
+          "label": "gypsum or anhydrite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/rock_gypsum_or_anhydrite"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-SE2",
@@ -638,8 +769,20 @@
       "cgi_label": "limestone",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/limestone",
       "match": "closeMatch",
-      "note": "GLOSIS \"limestone, other carbonate rock\"; CGI tem limestone + dolomite + outros sob carbonate sedimentary rock.",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"limestone, other carbonate rock\": limestone; dolomite.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "limestone",
+          "label": "limestone",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/limestone"
+        },
+        {
+          "id": "dolostone",
+          "label": "dolomite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/dolostone"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-SO2",
@@ -818,8 +961,20 @@
       "cgi_label": "clay",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/clay",
       "match": "closeMatch",
-      "note": "GLOSIS agrupa \"clay, silt and loam\" como sedimentos finos fluviais; CGI tem termos separados — mapping para clay é parcial.",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"clay, silt and loam\": clay; silt.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "clay",
+          "label": "clay",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/clay"
+        },
+        {
+          "id": "silt",
+          "label": "silt",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/silt"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-UG",
@@ -1034,8 +1189,20 @@
       "cgi_label": "bauxite",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/bauxite",
       "match": "closeMatch",
-      "note": "GLOSIS \"bauxite, laterite\"; CGI tem bauxite + laterite separados.",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"bauxite, laterite\": bauxite; duricrust.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "bauxite",
+          "label": "bauxite",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/bauxite"
+        },
+        {
+          "id": "duricrust",
+          "label": "duricrust",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/duricrust"
+        }
+      ]
     },
     {
       "glosis_id": "lithologyValueCode-UU",
@@ -1106,8 +1273,20 @@
       "cgi_label": "gravel",
       "cgi_iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/gravel",
       "match": "closeMatch",
-      "note": "GLOSIS \"gravel, broken rock\"; CGI tem gravel + rock fragments separados.",
-      "review": "manual"
+      "note": "1:N — 2 CGI targets cobrem GLOSIS \"gravel, broken rock\": gravel; breccia.",
+      "review": "manual",
+      "cgi_targets": [
+        {
+          "id": "gravel",
+          "label": "gravel",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/gravel"
+        },
+        {
+          "id": "breccia",
+          "label": "breccia",
+          "iri": "http://resource.geosciml.org/classifier/cgi/lithOntology/breccia"
+        }
+      ]
     }
   ]
 }
