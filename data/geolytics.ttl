@@ -1,0 +1,1403 @@
+@prefix geo: <https://geolytics.petrobras.com.br/dict/> .
+@prefix osdu: <https://w3id.org/osdu#> .
+@prefix kg: <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# Geolytics dictionary — entity graph (Turtle serialization)
+# Generated: 2026-05-01T10:20:02.389Z
+# Nodes: 80  Edges: 87
+
+#
+# Classes
+#
+
+geo:poco a owl:Class ;
+    skos:prefLabel "Poço"@pt ;
+    skos:prefLabel "Well"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "poço"@pt ;
+    skos:altLabel "poço exploratório"@pt ;
+    skos:altLabel "poço de petróleo"@pt ;
+    skos:altLabel "well"@en ;
+    skos:altLabel "borehole"@en ;
+    skos:altLabel "exploratory well"@en ;
+    skos:altLabel "oil well"@en ;
+    skos:definition """Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias."""@pt ;
+    skos:example "1-RJS-702-RJ (Tupi)" ;
+    skos:example "1-BRSA-1135-RJS" ;
+    skos:example "3-BRSA-944-RJS (Búzios)" ;
+    skos:example "1-ANP-2-AL" ;
+    owl:sameAs <https://w3id.org/osdu#Well> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:bloco a owl:Class ;
+    skos:prefLabel "Bloco"@pt ;
+    skos:prefLabel "Block"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "bloco exploratório"@pt ;
+    skos:altLabel "área concedida"@pt ;
+    skos:altLabel "block"@en ;
+    skos:altLabel "exploration block"@en ;
+    skos:altLabel "lease block"@en ;
+    skos:altLabel "concession block"@en ;
+    skos:definition """Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural."""@pt ;
+    skos:example "BM-S-11 (Lula)" ;
+    skos:example "BCAM-40 (Búzios)" ;
+    skos:example "BS-4 (Atlanta)" ;
+    skos:example "BM-C-33" ;
+    owl:sameAs <https://w3id.org/osdu#AcquisitionSurvey> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:campo a owl:Class ;
+    skos:prefLabel "Campo"@pt ;
+    skos:prefLabel "Field"@en ;
+    geo:entityType "operational" ;
+    skos:definition """Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#Field> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Field> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:bacia-sedimentar a owl:Class ;
+    skos:prefLabel "Bacia Sedimentar"@pt ;
+    skos:prefLabel "Sedimentary Basin"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "bacia"@pt ;
+    skos:altLabel "bacia sedimentar"@pt ;
+    skos:altLabel "basin"@en ;
+    skos:altLabel "sedimentary basin"@en ;
+    skos:definition """Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não."""@pt ;
+    skos:example "Bacia de Campos" ;
+    skos:example "Bacia de Santos" ;
+    skos:example "Bacia de Sergipe-Alagoas" ;
+    skos:example "Bacia Potiguar" ;
+    skos:example "Bacia do Recôncavo" ;
+    owl:sameAs <https://w3id.org/osdu#Basin> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:reservatorio a owl:Class ;
+    skos:prefLabel "Reservatório"@pt ;
+    skos:prefLabel "Reservoir"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "reservatório"@pt ;
+    skos:altLabel "rocha-reservatório"@pt ;
+    skos:altLabel "corpo reservatório"@pt ;
+    skos:altLabel "reservoir"@en ;
+    skos:altLabel "reservoir rock"@en ;
+    skos:altLabel "pay zone"@en ;
+    skos:definition """Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo."""@pt ;
+    skos:example "Reservatórios carbonáticos do pré-sal (Coquinas)" ;
+    skos:example "Reservatórios turbidíticos de Campos" ;
+    skos:example "Reservatório Barra Velha" ;
+    owl:sameAs <https://w3id.org/osdu#Reservoir> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:formacao a owl:Class ;
+    skos:prefLabel "Formação"@pt ;
+    skos:prefLabel "Geological Formation"@en ;
+    geo:entityType "geological" ;
+    skos:altLabel "formação"@pt ;
+    skos:altLabel "unidade litoestratigráfica"@pt ;
+    skos:altLabel "unidade geológica"@pt ;
+    skos:altLabel "formation"@en ;
+    skos:altLabel "geological formation"@en ;
+    skos:altLabel "lithostratigraphic unit"@en ;
+    skos:definition """Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore."""@pt ;
+    skos:example "Formação Barra Velha (pré-sal)" ;
+    skos:example "Formação Quissamã" ;
+    skos:example "Formação Carapebus" ;
+    skos:example "Formação Itapema" ;
+    owl:sameAs <https://w3id.org/osdu#GeologicalFormation> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:sistema-deposicional a owl:Class ;
+    skos:prefLabel "Sistema Deposicional"@pt ;
+    skos:prefLabel "Depositional System"@en ;
+    geo:entityType "geological" ;
+    skos:altLabel "sistema deposicional"@pt ;
+    skos:altLabel "sistema sedimentar"@pt ;
+    skos:altLabel "ambiente deposicional"@pt ;
+    skos:altLabel "depositional system"@en ;
+    skos:altLabel "sedimentary system"@en ;
+    skos:definition """Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos."""@pt ;
+    skos:example "Sistema turbidítico de águas profundas" ;
+    skos:example "Sistema lacustre carbonático (pré-sal)" ;
+    skos:example "Sistema deltaico" ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:contrato-ep a owl:Class ;
+    skos:prefLabel "Contrato E&P"@pt ;
+    skos:prefLabel "E&P Contract"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "contrato de E&P"@pt ;
+    skos:altLabel "contrato de concessão"@pt ;
+    skos:altLabel "contrato de partilha"@pt ;
+    skos:altLabel "E&P contract"@en ;
+    skos:altLabel "exploration and production contract"@en ;
+    skos:altLabel "upstream contract"@en ;
+    skos:definition """Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção."""@pt ;
+    skos:example "Concessão BM-S-11" ;
+    skos:example "Partilha de Libra" ;
+    skos:example "Cessão Onerosa de Búzios" ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract> ;
+    geo:geocoverage "layer5" .
+
+geo:pad a owl:Class ;
+    skos:prefLabel "PAD"@pt ;
+    skos:prefLabel "Discovery Evaluation Plan"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "Plano de Avaliação de Descobertas"@pt ;
+    skos:altLabel "PAD"@pt ;
+    skos:altLabel "Discovery Evaluation Plan"@en ;
+    skos:altLabel "Appraisal Plan"@en ;
+    skos:altLabel "DEP"@en ;
+    skos:definition """Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso."""@pt ;
+    skos:example "PAD Búzios" ;
+    skos:example "PAD Mero" ;
+    skos:example "PAD Sépia" ;
+    skos:example "PAD Atapu" ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan> ;
+    geo:geocoverage "layer5" .
+
+geo:rodada-licitacao a owl:Class ;
+    skos:prefLabel "Rodada de Licitação"@pt ;
+    skos:prefLabel "Bid Round"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "rodada"@pt ;
+    skos:altLabel "leilão de blocos"@pt ;
+    skos:altLabel "rodada da ANP"@pt ;
+    skos:altLabel "bidding round"@en ;
+    skos:altLabel "oil auction"@en ;
+    skos:altLabel "licensing round"@en ;
+    skos:definition """Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil."""@pt ;
+    skos:example "1ª Rodada (1999)" ;
+    skos:example "17ª Rodada (2022)" ;
+    skos:example "1ª Rodada de Partilha (2013, Libra)" ;
+    skos:example "Cessão Onerosa (2019)" ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BiddingRound> ;
+    geo:geocoverage "layer5" .
+
+geo:declaracao-comercialidade a owl:Class ;
+    skos:prefLabel "Declaração de Comercialidade"@pt ;
+    skos:prefLabel "Commerciality Declaration"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CommercialityDeclaration> ;
+    geo:geocoverage "layer5" .
+
+geo:operador a owl:Class ;
+    skos:prefLabel "Operador"@pt ;
+    skos:prefLabel "Operator"@en ;
+    geo:entityType "actor" ;
+    skos:altLabel "operadora"@pt ;
+    skos:altLabel "concessionária"@pt ;
+    skos:altLabel "empresa operadora"@pt ;
+    skos:altLabel "operator"@en ;
+    skos:altLabel "operating company"@en ;
+    skos:altLabel "lead operator"@en ;
+    skos:definition """Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado."""@pt ;
+    skos:example "Petrobras" ;
+    skos:example "Shell Brasil" ;
+    skos:example "Equinor" ;
+    skos:example "TotalEnergies" ;
+    skos:example "Repsol Sinopec" ;
+    skos:example "BP Brasil" ;
+    skos:example "Galp Energia" ;
+    owl:sameAs <https://w3id.org/osdu#Organisation> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumOperator> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:anp a owl:Class ;
+    skos:prefLabel "ANP"@pt ;
+    skos:prefLabel "ANP (Brazilian Oil & Gas Regulator)"@en ;
+    geo:entityType "actor" ;
+    skos:definition """Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryAgency> ;
+    geo:geocoverage "layer5" .
+
+geo:sigep a owl:Class ;
+    skos:prefLabel "SIGEP"@pt ;
+    skos:prefLabel "SIGEP (E&P Information System)"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#InformationSystem> ;
+    geo:geocoverage "layer5" .
+
+geo:sep a owl:Class ;
+    skos:prefLabel "SEP"@pt ;
+    skos:prefLabel "SEP (ANP Exploration Office)"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryUnit> ;
+    geo:geocoverage "layer5" .
+
+geo:uts a owl:Class ;
+    skos:prefLabel "UTS"@pt ;
+    skos:prefLabel "Work Units"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WorkUnit> ;
+    geo:geocoverage "layer5" .
+
+geo:regime-contratual a owl:Class ;
+    skos:prefLabel "Regime Contratual"@pt ;
+    skos:prefLabel "Contract Regime"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "regime"@pt ;
+    skos:altLabel "modalidade contratual"@pt ;
+    skos:altLabel "regime de exploração"@pt ;
+    skos:altLabel "contract regime"@en ;
+    skos:altLabel "contract model"@en ;
+    skos:altLabel "fiscal regime"@en ;
+    skos:definition """Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal."""@pt ;
+    skos:example "Concessão (Lei 9.478/1997)" ;
+    skos:example "Partilha de Produção (Lei 12.351/2010)" ;
+    skos:example "Cessão Onerosa" ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ContractualRegime> ;
+    geo:geocoverage "layer5" .
+
+geo:periodo-exploratorio a owl:Class ;
+    skos:prefLabel "Período Exploratório"@pt ;
+    skos:prefLabel "Exploratory Period"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExploratoryPeriod> ;
+    geo:geocoverage "layer5" .
+
+geo:processo-sancionador a owl:Class ;
+    skos:prefLabel "Processo Sancionador"@pt ;
+    skos:prefLabel "Sanctioning Proceeding"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:notificacao-descoberta a owl:Class ;
+    skos:prefLabel "Notificação Descoberta"@pt ;
+    skos:prefLabel "Discovery Notification"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryNotification> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:area-desenvolvimento a owl:Class ;
+    skos:prefLabel "Área de Desenvolvimento"@pt ;
+    skos:prefLabel "Development Area"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "área de desenvolvimento"@pt ;
+    skos:altLabel "campo"@pt ;
+    skos:altLabel "development area"@en ;
+    skos:altLabel "field"@en ;
+    skos:altLabel "producing field"@en ;
+    skos:definition """Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta."""@pt ;
+    skos:example "Tupi" ;
+    skos:example "Búzios" ;
+    skos:example "Mero" ;
+    skos:example "Sapinhoá" ;
+    skos:example "Lula" ;
+    skos:example "Sépia" ;
+    skos:example "Atapu" ;
+    owl:sameAs <https://w3id.org/osdu#Field> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:presal a owl:Class ;
+    skos:prefLabel "Pré-sal"@pt ;
+    skos:prefLabel "Pre-salt"@en ;
+    geo:entityType "geological" ;
+    skos:altLabel "pré-sal"@pt ;
+    skos:altLabel "camada do pré-sal"@pt ;
+    skos:altLabel "reservatórios do pré-sal"@pt ;
+    skos:altLabel "pre-salt"@en ;
+    skos:altLabel "sub-salt"@en ;
+    skos:altLabel "subsalt"@en ;
+    skos:definition """Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável."""@pt ;
+    skos:example "Reservatórios de Tupi" ;
+    skos:example "Reservatórios de Búzios" ;
+    skos:example "Polígono do Pré-sal (Lei 12.351/2010)" ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer5" .
+
+geo:bacias-agrupadas a owl:Class ;
+    skos:prefLabel "Bacias Agrupadas"@pt ;
+    skos:prefLabel "Grouped Basins"@en ;
+    geo:entityType "geological" ;
+    skos:definition """Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#Basin> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BasinGroup> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer5" .
+
+geo:ambiente a owl:Class ;
+    skos:prefLabel "Ambiente"@pt ;
+    skos:prefLabel "Environment"@en ;
+    geo:entityType "geological" ;
+    skos:definition """Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#OperationalEnvironment> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer5" .
+
+geo:bop a owl:Class ;
+    skos:prefLabel "BOP"@pt ;
+    skos:prefLabel "Blowout Preventer"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:fpso a owl:Class ;
+    skos:prefLabel "FPSO"@pt ;
+    skos:prefLabel "Floating Production, Storage and Offloading"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:anm-eq a owl:Class ;
+    skos:prefLabel "ANM"@pt ;
+    skos:prefLabel "Wet Christmas Tree (Árvore de Natal Molhada)"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:riser a owl:Class ;
+    skos:prefLabel "Riser"@pt ;
+    skos:prefLabel "Riser"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS)."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:rov a owl:Class ;
+    skos:prefLabel "ROV"@pt ;
+    skos:prefLabel "Remotely Operated Vehicle"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:dhsv a owl:Class ;
+    skos:prefLabel "DHSV"@pt ;
+    skos:prefLabel "Downhole Safety Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:bha a owl:Class ;
+    skos:prefLabel "BHA"@pt ;
+    skos:prefLabel "Bottom-Hole Assembly"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD)."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:esp-eq a owl:Class ;
+    skos:prefLabel "ESP/BCS"@pt ;
+    skos:prefLabel "Electrical Submersible Pump"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:mwd a owl:Class ;
+    skos:prefLabel "MWD"@pt ;
+    skos:prefLabel "Measure While Drilling"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:lwd a owl:Class ;
+    skos:prefLabel "LWD"@pt ;
+    skos:prefLabel "Logging While Drilling"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:manifold-submarino a owl:Class ;
+    skos:prefLabel "Manifold Submarino"@pt ;
+    skos:prefLabel "Subsea Manifold"@en ;
+    geo:entityType "equipment" ;
+    skos:definition """Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços."""@pt ;
+    geo:geocoverage "layer4" .
+
+geo:ibama a owl:Class ;
+    skos:prefLabel "IBAMA"@pt ;
+    skos:prefLabel "Brazilian Institute of Environment"@en ;
+    geo:entityType "actor" ;
+    skos:definition """Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:conama a owl:Class ;
+    skos:prefLabel "CONAMA"@pt ;
+    skos:prefLabel "National Environmental Council"@en ;
+    geo:entityType "actor" ;
+    skos:definition """Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:ana-agencia a owl:Class ;
+    skos:prefLabel "ANA"@pt ;
+    skos:prefLabel "National Water Agency"@en ;
+    geo:entityType "actor" ;
+    skos:definition """Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida)."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:ibp a owl:Class ;
+    skos:prefLabel "IBP"@pt ;
+    skos:prefLabel "Brazilian Petroleum Institute"@en ;
+    geo:entityType "actor" ;
+    skos:definition """Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:bndes a owl:Class ;
+    skos:prefLabel "BNDES"@pt ;
+    skos:prefLabel "National Development Bank"@en ;
+    geo:entityType "actor" ;
+    skos:definition """Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:eia a owl:Class ;
+    skos:prefLabel "EIA"@pt ;
+    skos:prefLabel "Environmental Impact Study"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção)."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:rima a owl:Class ;
+    skos:prefLabel "RIMA"@pt ;
+    skos:prefLabel "Environmental Impact Report"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:afe a owl:Class ;
+    skos:prefLabel "AFE"@pt ;
+    skos:prefLabel "Approval for Expenditure"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:joa a owl:Class ;
+    skos:prefLabel "JOA"@pt ;
+    skos:prefLabel "Joint Operating Agreement"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:epc a owl:Class ;
+    skos:prefLabel "EPC"@pt ;
+    skos:prefLabel "Engineering, Procurement, Construction"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto)."""@pt ;
+    geo:geocoverage "layer5" .
+
+geo:rocha-geradora a owl:Class ;
+    skos:prefLabel "Rocha Geradora"@pt ;
+    skos:prefLabel "Source Rock"@en ;
+    geo:entityType "geological" ;
+    skos:definition """Rocha rica em matéria orgânica (COT > 1%) capaz de gerar HC quando submetida à temperatura adequada. Equivale a C005 em ontopetro."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SourceRock> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer6" .
+
+geo:rocha-capacitante a owl:Class ;
+    skos:prefLabel "Rocha Capacitante"@pt ;
+    skos:prefLabel "Cap Rock"@en ;
+    geo:entityType "geological" ;
+    skos:definition """Rocha de baixa permeabilidade que sela o reservatório, impedindo migração de HC para fora da trapa. Equivale a C004 em ontopetro."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CapRock> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" .
+
+geo:trapa a owl:Class ;
+    skos:prefLabel "Trapa"@pt ;
+    skos:prefLabel "Petroleum Trap"@en ;
+    geo:entityType "geological" ;
+    skos:definition "Configuração geológica (estrutural, estratigráfica ou combinada) que permite acúmulo de HC. C006 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumTrap> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer3" .
+
+geo:sistema-petrolifero a owl:Class ;
+    skos:prefLabel "Sistema Petrolífero"@pt ;
+    skos:prefLabel "Petroleum System"@en ;
+    geo:entityType "geological" ;
+    skos:definition "Conjunto integrado de rocha geradora, migração, reservatório, capa e trapa. C007 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumSystem> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer3" .
+
+geo:acumulacao a owl:Class ;
+    skos:prefLabel "Acumulação"@pt ;
+    skos:prefLabel "Hydrocarbon Accumulation"@en ;
+    geo:entityType "operational" ;
+    skos:definition "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation> ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:play a owl:Class ;
+    skos:prefLabel "Play"@pt ;
+    skos:prefLabel "Play"@en ;
+    geo:entityType "operational" ;
+    skos:definition "Combinação de elementos petrolíferos com potencial exploratório regional. C017 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Play> ;
+    geo:geocoverage "layer3" .
+
+geo:prospecto a owl:Class ;
+    skos:prefLabel "Prospecto"@pt ;
+    skos:prefLabel "Prospect"@en ;
+    geo:entityType "operational" ;
+    skos:definition "Área específica com potencial para acumulação, dentro de um play. C018 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Prospect> ;
+    geo:geocoverage "layer3" .
+
+geo:recurso a owl:Class ;
+    skos:prefLabel "Recurso"@pt ;
+    skos:prefLabel "Resource"@en ;
+    geo:entityType "contractual" ;
+    skos:definition "Volume de HC com grau variável de certeza geológica. Categorizado por SPE-PRMS. C019 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Resource> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer5" .
+
+geo:reserva a owl:Class ;
+    skos:prefLabel "Reserva"@pt ;
+    skos:prefLabel "Reserve"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Volume de HC tecnicamente recuperável e economicamente viável. Categorias 1P/2P/3P. C020 em ontopetro. NÃO confundir com Reserva Ambiental."""@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reserve> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer5" .
+
+geo:falha a owl:Class ;
+    skos:prefLabel "Falha Geológica"@pt ;
+    skos:prefLabel "Geological Fault"@en ;
+    geo:entityType "geological" ;
+    skos:definition "Descontinuidade tectônica com deslocamento relativo das camadas. C016 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFault> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer3" .
+
+geo:idade-geologica a owl:Class ;
+    skos:prefLabel "Idade Geológica"@pt ;
+    skos:prefLabel "Geological Age"@en ;
+    geo:entityType "geological" ;
+    skos:definition "Período/época formal segundo ICS GTS2020. Ex.: Aptiano, Albiano, Cretáceo Superior. Tipo NER PetroGold IDA."@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer3" .
+
+geo:intervalo-estratigrafico a owl:Class ;
+    skos:prefLabel "Intervalo Estratigráfico"@pt ;
+    skos:prefLabel "Stratigraphic Interval"@en ;
+    geo:entityType "geological" ;
+    skos:definition """Seção de poço delimitada por dois marcos (topo/base). Usado em testagem, completação e avaliação. NÃO confundir com Idade. Tipo NER PetroGold INT."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:testemunho a owl:Class ;
+    skos:prefLabel "Testemunho"@pt ;
+    skos:prefLabel "Core Sample"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Amostra cilíndrica de rocha extraída durante perfuração. C012 em ontopetro."@pt ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Core> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:perfil-poco a owl:Class ;
+    skos:prefLabel "Perfil de Poço"@pt ;
+    skos:prefLabel "Well Log"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Medição contínua de propriedades físicas ao longo do poço (gamma, densidade, sônico, neutron, NMR). C013 em ontopetro."@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellLog> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellLog> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:materia-organica a owl:Class ;
+    skos:prefLabel "Matéria Orgânica"@pt ;
+    skos:prefLabel "Organic Matter"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Substância orgânica preservada na rocha geradora com potencial de gerar HC. Caracterizada por Rock-Eval e tipo de querogênio (I/II/IIS/III/IV). M7 C103."""@pt ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer6" .
+
+geo:maturidade-termal a owl:Class ;
+    skos:prefLabel "Maturidade Termal"@pt ;
+    skos:prefLabel "Thermal Maturity"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Estado de evolução termal medido por Ro% (vitrinita) e Tmax (Rock-Eval). Janela óleo: Ro 0.5–1.0%, Tmax ~435°C. M7 C104."@pt ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer6" .
+
+geo:biomarcador a owl:Class ;
+    skos:prefLabel "Biomarcador"@pt ;
+    skos:prefLabel "Biomarker"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Composto orgânico preservado (hopanos, esteranos, pristano, fitano) usado para correlação óleo-rocha via GC-MS. M7 C106."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:correlacao-oleo-rocha a owl:Class ;
+    skos:prefLabel "Correlação Óleo-Rocha"@pt ;
+    skos:prefLabel "Oil-Source Correlation"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Análise que associa hidrocarbonetos produzidos à rocha geradora de origem via assinatura de biomarcadores e isótopos. M7 C107."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:litologia a owl:Class ;
+    skos:prefLabel "Litologia"@pt ;
+    skos:prefLabel "Lithology"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#LithologyType> ;
+    rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology> ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:facies-sedimentar a owl:Class ;
+    skos:prefLabel "Fácies Sedimentar"@pt ;
+    skos:prefLabel "Sedimentary Facies"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Unidade rochosa com características físicas e biológicas distintas — base de classificação de reservatório. M8 C203."@pt ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer6" .
+
+geo:modelo-petrofisico a owl:Class ;
+    skos:prefLabel "Modelo Petrofísico"@pt ;
+    skos:prefLabel "Petrophysical Model"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw via equação de Archie. M8 C208."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:campo-tensional a owl:Class ;
+    skos:prefLabel "Campo Tensional"@pt ;
+    skos:prefLabel "In-Situ Stress Field"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Conjunto Sv (vertical), SHmax (horizontal máximo), Shmin (horizontal mínimo). Base do modelo geomecânico. M9 C303."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:janela-lama a owl:Class ;
+    skos:prefLabel "Janela de Lama"@pt ;
+    skos:prefLabel "Mud Weight Window"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Intervalo seguro de peso de lama: limite inferior=colapso (breakout), limite superior=fratura (perda circulação). NÃO confundir com Janela de Geração (Ro%). M9 C309."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:ocorrencia-geomec a owl:Class ;
+    skos:prefLabel "Ocorrência Geomecânica"@pt ;
+    skos:prefLabel "Geomechanical Event"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Eventos: breakouts, kick zones, lost circulation, stuck pipe. Indicadores de problemas operacionais. M9 C317."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:potencial-selante a owl:Class ;
+    skos:prefLabel "Potencial Selante"@pt ;
+    skos:prefLabel "Fault Sealing Potential"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Capacidade de falha reter HC — calculado por SGR (Shale Gouge Ratio), CSP e SSF no TrapTester. SGR > 18–20% = potencial selante. M9 C313."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:amostra-fluido a owl:Class ;
+    skos:prefLabel "Amostra de Fluido"@pt ;
+    skos:prefLabel "Fluid Sample"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA."@pt ;
+    owl:sameAs <https://w3id.org/osdu#Sample> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:pvt a owl:Class ;
+    skos:prefLabel "PVT"@pt ;
+    skos:prefLabel "PVT Analysis"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Ensaios pressão-volume-temperatura: Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR (35 campos com completude documentada). M10 CL_PVT."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#WellborePressure> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:classe-fluido a owl:Class ;
+    skos:prefLabel "Classe de Fluido"@pt ;
+    skos:prefLabel "Fluid Class"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO. Sistema AIDA. M10 CL_CLASS_FLUIDO."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#FluidType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:gc-ms a owl:Class ;
+    skos:prefLabel "GC-MS"@pt ;
+    skos:prefLabel "GC-MS SIM"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Cromatografia gasosa com espectrometria de massas para biomarcadores (Pr/Ph, hopanos, esteranos). M10 CL_GC_MS."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:sara a owl:Class ;
+    skos:prefLabel "SARA"@pt ;
+    skos:prefLabel "SARA"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Saturados/Aromáticos/Resinas/Asfaltenos — fracionamento do óleo bruto. Correlaciona com viscosidade e risco de deposição. M10 CL_SARA."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:wellbore a owl:Class ;
+    skos:prefLabel "Trecho Perfurado"@pt ;
+    skos:prefLabel "Wellbore"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "trecho perfurado"@pt ;
+    skos:altLabel "furo"@pt ;
+    skos:altLabel "wellbore"@pt ;
+    skos:altLabel "poço físico"@pt ;
+    skos:altLabel "wellbore"@en ;
+    skos:altLabel "borehole"@en ;
+    skos:altLabel "drilled hole"@en ;
+    skos:definition """Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente."""@pt ;
+    skos:example "1-RJS-702-RJ (wellbore único)" ;
+    skos:example "3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)" ;
+    owl:sameAs <https://w3id.org/osdu#Wellbore> ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:topo-formacional a owl:Class ;
+    skos:prefLabel "Topo Formacional"@pt ;
+    skos:prefLabel "Formation Top / Wellbore Marker"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "topo de formação"@pt ;
+    skos:altLabel "marco estratigráfico"@pt ;
+    skos:altLabel "pick estratigráfico"@pt ;
+    skos:altLabel "marker"@pt ;
+    skos:altLabel "formation top"@en ;
+    skos:altLabel "wellbore marker"@en ;
+    skos:altLabel "stratigraphic pick"@en ;
+    skos:altLabel "formation pick"@en ;
+    skos:definition """Pick da profundidade (em MD — Measured Depth — e TVD — True Vertical Depth) em que o wellbore intercepta o topo de uma formação geológica. Dado fundamental em correlações estratigráficas entre poços e na construção de modelos de reservatórios 3D. Exemplo: Topo da Formação Barra Velha no poço 1-RJS-702-RJ a MD=4220m / TVD=4105m."""@pt ;
+    skos:example "Topo Fm. Barra Velha a 4220m MD" ;
+    skos:example "Topo Fm. Macaé a 2890m MD" ;
+    skos:example "Base do Sal a 3410m TVD" ;
+    owl:sameAs <https://w3id.org/osdu#WellboreMarker> ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:trajetoria-poco a owl:Class ;
+    skos:prefLabel "Trajetória do Poço"@pt ;
+    skos:prefLabel "Wellbore Trajectory"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "trajetória direcional"@pt ;
+    skos:altLabel "survey direcional"@pt ;
+    skos:altLabel "desvio do poço"@pt ;
+    skos:altLabel "perfil direcional"@pt ;
+    skos:altLabel "wellbore trajectory"@en ;
+    skos:altLabel "directional survey"@en ;
+    skos:altLabel "deviation survey"@en ;
+    skos:altLabel "trajectory survey"@en ;
+    skos:definition """Survey direcional do wellbore: sequência de medições de profundidade (MD), inclinação e azimute ao longo do trecho perfurado. Permite calcular a posição 3D real do poço (TVD, offsets Norte/Sul/Leste/Oeste). Diferencia poços verticais (inclinação ≈ 0°) de poços direcionais (inclinação > 30°) e poços horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e para o cálculo correto de pressão hidrostática."""@pt ;
+    skos:example "Poço horizontal pré-sal: 60° inclinação em 2800m TVD" ;
+    skos:example "Poço vertical 1-RJS-702-RJ: inclinação < 3°" ;
+    owl:sameAs <https://w3id.org/osdu#WellboreTrajectory> ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:completacao a owl:Class ;
+    skos:prefLabel "Completação"@pt ;
+    skos:prefLabel "Well Completion"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "completação"@pt ;
+    skos:altLabel "acabamento de poço"@pt ;
+    skos:altLabel "completion"@pt ;
+    skos:altLabel "well completion"@en ;
+    skos:altLabel "completion"@en ;
+    skos:definition """Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura: revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV), perforações (canhoneio) das zonas produtoras e árvore de natal. No OSDU corresponde a master-data--WellboreCompletion, vinculado ao Wellbore. Tipos: completação seca (dry tree, plataforma fixa), molhada (subsea com ANM) ou inteligente (smart well — múltiplas zonas controladas)."""@pt ;
+    skos:example "Completação seca (dry tree)" ;
+    skos:example "Completação molhada subsea com ANM" ;
+    skos:example "Completação inteligente (smart well)" ;
+    owl:sameAs <https://w3id.org/osdu#WellboreCompletion> ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+geo:unidade-medida a owl:Class ;
+    skos:prefLabel "Unidade de Medida"@pt ;
+    skos:prefLabel "Unit of Measure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "unidade"@pt ;
+    skos:altLabel "unidade SI"@pt ;
+    skos:altLabel "unidade imperial"@pt ;
+    skos:altLabel "UOM"@pt ;
+    skos:altLabel "unit of measure"@en ;
+    skos:altLabel "UOM"@en ;
+    skos:altLabel "unit"@en ;
+    skos:altLabel "measurement unit"@en ;
+    skos:definition """Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados."""@pt ;
+    skos:example "mD (miliDarcy) — permeabilidade" ;
+    skos:example "ºAPI (API gravity) — densidade óleo" ;
+    skos:example "GAPI (Gamma Ray API) — argilosidade" ;
+    owl:sameAs <https://w3id.org/osdu#UnitOfMeasure> ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer3" ;
+    geo:geocoverage "layer4" .
+
+#
+# Object properties
+#
+
+geo:drilled_in a owl:ObjectProperty ;
+    rdfs:label "perfurado em"@pt ;
+    rdfs:label "drilled in"@en ;
+    rdfs:domain geo:poco ;
+    rdfs:range geo:bloco .
+
+geo:located_in a owl:ObjectProperty ;
+    rdfs:label "localizado em"@pt ;
+    rdfs:label "located in"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:campo ) ] ;
+    rdfs:range geo:bacia-sedimentar .
+
+geo:operated_by a owl:ObjectProperty ;
+    rdfs:label "operado por"@pt ;
+    rdfs:label "operated by"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:bloco ) ] ;
+    rdfs:range geo:operador .
+
+geo:may_register a owl:ObjectProperty ;
+    rdfs:label "pode registrar"@pt ;
+    rdfs:label "may register"@en ;
+    rdfs:domain geo:poco ;
+    rdfs:range geo:notificacao-descoberta .
+
+geo:may_reach a owl:ObjectProperty ;
+    rdfs:label "pode atingir"@pt ;
+    rdfs:label "may reach"@en ;
+    rdfs:domain geo:poco ;
+    rdfs:range geo:presal .
+
+geo:traverses a owl:ObjectProperty ;
+    rdfs:label "atravessa"@pt ;
+    rdfs:label "traverses"@en ;
+    rdfs:domain geo:poco ;
+    rdfs:range geo:formacao .
+
+geo:delimited_in a owl:ObjectProperty ;
+    rdfs:label "delimitado em"@pt ;
+    rdfs:label "delimited in"@en ;
+    rdfs:domain geo:bloco ;
+    rdfs:range geo:bacia-sedimentar .
+
+geo:governed_by a owl:ObjectProperty ;
+    rdfs:label "regido por"@pt ;
+    rdfs:label "governed by"@en ;
+    rdfs:domain geo:bloco ;
+    rdfs:range geo:contrato-ep .
+
+geo:may_have a owl:ObjectProperty ;
+    rdfs:label "pode ter"@pt ;
+    rdfs:label "may have"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bloco geo:operador ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pad geo:processo-sancionador ) ] .
+
+geo:originated_in a owl:ObjectProperty ;
+    rdfs:label "originado em"@pt ;
+    rdfs:label "originated in"@en ;
+    rdfs:domain geo:bloco ;
+    rdfs:range geo:rodada-licitacao .
+
+geo:signed_with a owl:ObjectProperty ;
+    rdfs:label "celebrado com"@pt ;
+    rdfs:label "signed with"@en ;
+    rdfs:domain geo:contrato-ep ;
+    rdfs:range geo:anp .
+
+geo:defines a owl:ObjectProperty ;
+    rdfs:label "define"@pt ;
+    rdfs:label "defines"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:campo-tensional ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:regime-contratual geo:janela-lama ) ] .
+
+geo:organized_in a owl:ObjectProperty ;
+    rdfs:label "organizado em"@pt ;
+    rdfs:label "organized in"@en ;
+    rdfs:domain geo:contrato-ep ;
+    rdfs:range geo:periodo-exploratorio .
+
+geo:measured_via a owl:ObjectProperty ;
+    rdfs:label "mede via"@pt ;
+    rdfs:label "measured via"@en ;
+    rdfs:domain geo:contrato-ep ;
+    rdfs:range geo:uts .
+
+geo:evaluates a owl:ObjectProperty ;
+    rdfs:label "avalia"@pt ;
+    rdfs:label "evaluates"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:bloco .
+
+geo:may_yield a owl:ObjectProperty ;
+    rdfs:label "pode gerar"@pt ;
+    rdfs:label "may yield"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:declaracao-comercialidade .
+
+geo:originates a owl:ObjectProperty ;
+    rdfs:label "origina"@pt ;
+    rdfs:label "originates"@en ;
+    rdfs:domain geo:declaracao-comercialidade ;
+    rdfs:range geo:campo .
+
+geo:sustained_by a owl:ObjectProperty ;
+    rdfs:label "sustentado por"@pt ;
+    rdfs:label "sustained by"@en ;
+    rdfs:domain geo:campo ;
+    rdfs:range geo:reservatorio .
+
+geo:contained_in a owl:ObjectProperty ;
+    rdfs:label "contido em"@pt ;
+    rdfs:label "contained in"@en ;
+    rdfs:domain geo:reservatorio ;
+    rdfs:range geo:bacia-sedimentar .
+
+geo:characterized_by a owl:ObjectProperty ;
+    rdfs:label "caracterizado por"@pt ;
+    rdfs:label "characterized by"@en ;
+    rdfs:domain geo:reservatorio ;
+    rdfs:range geo:sistema-deposicional .
+
+geo:hosted_in a owl:ObjectProperty ;
+    rdfs:label "hospedado em"@pt ;
+    rdfs:label "hosted in"@en ;
+    rdfs:domain geo:reservatorio ;
+    rdfs:range geo:formacao .
+
+geo:manages_via a owl:ObjectProperty ;
+    rdfs:label "gerencia via"@pt ;
+    rdfs:label "manages via"@en ;
+    rdfs:domain geo:anp ;
+    rdfs:range geo:sigep .
+
+geo:oversees_via a owl:ObjectProperty ;
+    rdfs:label "fiscaliza via"@pt ;
+    rdfs:label "oversees via"@en ;
+    rdfs:domain geo:anp ;
+    rdfs:range geo:sep .
+
+geo:installed_on a owl:ObjectProperty ;
+    rdfs:label "instalado em"@pt ;
+    rdfs:label "installed on"@en ;
+    rdfs:domain geo:bop ;
+    rdfs:range geo:poco .
+
+geo:installed_in a owl:ObjectProperty ;
+    rdfs:label "instalado em"@pt ;
+    rdfs:label "installed in"@en ;
+    rdfs:domain geo:dhsv ;
+    rdfs:range geo:poco .
+
+geo:controls a owl:ObjectProperty ;
+    rdfs:label "controla"@pt ;
+    rdfs:label "controls"@en ;
+    rdfs:domain geo:anm-eq ;
+    rdfs:range geo:poco .
+
+geo:composes a owl:ObjectProperty ;
+    rdfs:label "compõe coluna"@pt ;
+    rdfs:label "composes"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bha geo:facies-sedimentar ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:poco geo:reservatorio ) ] .
+
+geo:lifts_from a owl:ObjectProperty ;
+    rdfs:label "eleva fluido em"@pt ;
+    rdfs:label "lifts from"@en ;
+    rdfs:domain geo:esp-eq ;
+    rdfs:range geo:poco .
+
+geo:measures a owl:ObjectProperty ;
+    rdfs:label "mede em"@pt ;
+    rdfs:label "measures"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mwd geo:perfil-poco ) ] ;
+    rdfs:range geo:poco .
+
+geo:logs a owl:ObjectProperty ;
+    rdfs:label "perfila"@pt ;
+    rdfs:label "logs"@en ;
+    rdfs:domain geo:lwd ;
+    rdfs:range geo:poco .
+
+geo:produces_at a owl:ObjectProperty ;
+    rdfs:label "produz em"@pt ;
+    rdfs:label "produces at"@en ;
+    rdfs:domain geo:fpso ;
+    rdfs:range geo:campo .
+
+geo:connects a owl:ObjectProperty ;
+    rdfs:label "conecta"@pt ;
+    rdfs:label "connects"@en ;
+    rdfs:domain geo:riser ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:anm-eq geo:fpso ) ] .
+
+geo:operates a owl:ObjectProperty ;
+    rdfs:label "opera"@pt ;
+    rdfs:label "operates"@en ;
+    rdfs:domain geo:rov ;
+    rdfs:range geo:anm-eq .
+
+geo:gathers_from a owl:ObjectProperty ;
+    rdfs:label "agrega fluxo de"@pt ;
+    rdfs:label "gathers from"@en ;
+    rdfs:domain geo:manifold-submarino ;
+    rdfs:range geo:poco .
+
+geo:feeds a owl:ObjectProperty ;
+    rdfs:label "alimenta"@pt ;
+    rdfs:label "feeds"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:manifold-submarino geo:rocha-geradora ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:fpso geo:sistema-petrolifero ) ] .
+
+geo:oversees_environment_of a owl:ObjectProperty ;
+    rdfs:label "fiscaliza ambientalmente"@pt ;
+    rdfs:label "oversees environment of"@en ;
+    rdfs:domain geo:ibama ;
+    rdfs:range geo:operador .
+
+geo:requires a owl:ObjectProperty ;
+    rdfs:label "exige"@pt ;
+    rdfs:label "requires"@en ;
+    rdfs:domain geo:ibama ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:eia geo:rima ) ] .
+
+geo:guides a owl:ObjectProperty ;
+    rdfs:label "orienta normativamente"@pt ;
+    rdfs:label "guides"@en ;
+    rdfs:domain geo:conama ;
+    rdfs:range geo:ibama .
+
+geo:regulates_water_use_of a owl:ObjectProperty ;
+    rdfs:label "regula uso de água"@pt ;
+    rdfs:label "regulates water use of"@en ;
+    rdfs:domain geo:ana-agencia ;
+    rdfs:range geo:operador .
+
+geo:represents a owl:ObjectProperty ;
+    rdfs:label "representa"@pt ;
+    rdfs:label "represents"@en ;
+    rdfs:domain geo:ibp ;
+    rdfs:range geo:operador .
+
+geo:finances a owl:ObjectProperty ;
+    rdfs:label "financia"@pt ;
+    rdfs:label "finances"@en ;
+    rdfs:domain geo:bndes ;
+    rdfs:range geo:bloco .
+
+geo:authorizes_spending_for a owl:ObjectProperty ;
+    rdfs:label "autoriza gasto em"@pt ;
+    rdfs:label "authorizes spending for"@en ;
+    rdfs:domain geo:afe ;
+    rdfs:range geo:poco .
+
+geo:complements a owl:ObjectProperty ;
+    rdfs:label "complementa"@pt ;
+    rdfs:label "complements"@en ;
+    rdfs:domain geo:joa ;
+    rdfs:range geo:contrato-ep .
+
+geo:delivers a owl:ObjectProperty ;
+    rdfs:label "entrega"@pt ;
+    rdfs:label "delivers"@en ;
+    rdfs:domain geo:epc ;
+    rdfs:range geo:fpso .
+
+geo:contains a owl:ObjectProperty ;
+    rdfs:label "contém"@pt ;
+    rdfs:label "contains"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao ) ] .
+
+geo:characterizes a owl:ObjectProperty ;
+    rdfs:label "caracteriza"@pt ;
+    rdfs:label "characterizes"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:maturidade-termal geo:modelo-petrofisico ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:reservatorio ) ] .
+
+geo:seals a owl:ObjectProperty ;
+    rdfs:label "sela"@pt ;
+    rdfs:label "seals"@en ;
+    rdfs:domain geo:rocha-capacitante ;
+    rdfs:range geo:reservatorio .
+
+geo:comprises a owl:ObjectProperty ;
+    rdfs:label "comporta"@pt ;
+    rdfs:label "comprises"@en ;
+    rdfs:domain geo:trapa ;
+    rdfs:range geo:reservatorio .
+
+geo:integrates_to a owl:ObjectProperty ;
+    rdfs:label "integra-se a"@pt ;
+    rdfs:label "integrates to"@en ;
+    rdfs:domain geo:sistema-petrolifero ;
+    rdfs:range geo:bacia-sedimentar .
+
+geo:becomes a owl:ObjectProperty ;
+    rdfs:label "origina"@pt ;
+    rdfs:label "becomes"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:acumulacao geo:prospecto ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:campo geo:acumulacao ) ] .
+
+geo:declares a owl:ObjectProperty ;
+    rdfs:label "declara"@pt ;
+    rdfs:label "declares"@en ;
+    rdfs:domain geo:campo ;
+    rdfs:range geo:reserva .
+
+geo:derived_from a owl:ObjectProperty ;
+    rdfs:label "deriva de"@pt ;
+    rdfs:label "derived from"@en ;
+    rdfs:domain geo:reserva ;
+    rdfs:range geo:recurso .
+
+geo:spawns a owl:ObjectProperty ;
+    rdfs:label "gera"@pt ;
+    rdfs:label "spawns"@en ;
+    rdfs:domain geo:play ;
+    rdfs:range geo:prospecto .
+
+geo:forms a owl:ObjectProperty ;
+    rdfs:label "compõe"@pt ;
+    rdfs:label "forms"@en ;
+    rdfs:domain geo:falha ;
+    rdfs:range geo:trapa .
+
+geo:has_property a owl:ObjectProperty ;
+    rdfs:label "tem propriedade"@pt ;
+    rdfs:label "has property"@en ;
+    rdfs:domain geo:falha ;
+    rdfs:range geo:potencial-selante .
+
+geo:has_age a owl:ObjectProperty ;
+    rdfs:label "tem idade"@pt ;
+    rdfs:label "has age"@en ;
+    rdfs:domain geo:formacao ;
+    rdfs:range geo:idade-geologica .
+
+geo:samples a owl:ObjectProperty ;
+    rdfs:label "amostra"@pt ;
+    rdfs:label "samples"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:testemunho ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:intervalo-estratigrafico geo:formacao ) ] .
+
+geo:infers a owl:ObjectProperty ;
+    rdfs:label "infere"@pt ;
+    rdfs:label "infers"@en ;
+    rdfs:domain geo:perfil-poco ;
+    rdfs:range geo:litologia .
+
+geo:enables a owl:ObjectProperty ;
+    rdfs:label "permite"@pt ;
+    rdfs:label "enables"@en ;
+    rdfs:domain geo:biomarcador ;
+    rdfs:range geo:correlacao-oleo-rocha .
+
+geo:detects a owl:ObjectProperty ;
+    rdfs:label "detecta"@pt ;
+    rdfs:label "detects"@en ;
+    rdfs:domain geo:gc-ms ;
+    rdfs:range geo:biomarcador .
+
+geo:undergoes a owl:ObjectProperty ;
+    rdfs:label "submetida a"@pt ;
+    rdfs:label "undergoes"@en ;
+    rdfs:domain geo:amostra-fluido ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pvt geo:sara ) ] .
+
+geo:classifies a owl:ObjectProperty ;
+    rdfs:label "classifica"@pt ;
+    rdfs:label "classifies"@en ;
+    rdfs:domain geo:pvt ;
+    rdfs:range geo:classe-fluido .
+
+geo:guides_drilling_of a owl:ObjectProperty ;
+    rdfs:label "guia perfuração de"@pt ;
+    rdfs:label "guides drilling of"@en ;
+    rdfs:domain geo:janela-lama ;
+    rdfs:range geo:poco .
+
+geo:occurs_in a owl:ObjectProperty ;
+    rdfs:label "ocorre em"@pt ;
+    rdfs:label "occurs in"@en ;
+    rdfs:domain geo:ocorrencia-geomec ;
+    rdfs:range geo:poco .
+
+geo:allocated_to a owl:ObjectProperty ;
+    rdfs:label "alocado em"@pt ;
+    rdfs:label "allocated to"@en ;
+    rdfs:domain geo:recurso ;
+    rdfs:range geo:bloco .
+
+geo:reports a owl:ObjectProperty ;
+    rdfs:label "reporta"@pt ;
+    rdfs:label "reports"@en ;
+    rdfs:domain geo:operador ;
+    rdfs:range geo:recurso .
+
+geo:has_wellbore a owl:ObjectProperty ;
+    rdfs:label "tem wellbore"@pt ;
+    rdfs:label "has wellbore"@en ;
+    rdfs:domain geo:poco ;
+    rdfs:range geo:wellbore .
+
+geo:belongs_to a owl:ObjectProperty ;
+    rdfs:label "pertence a"@pt ;
+    rdfs:label "belongs to"@en ;
+    rdfs:domain geo:wellbore ;
+    rdfs:range geo:poco .
+
+geo:penetrates a owl:ObjectProperty ;
+    rdfs:label "penetra"@pt ;
+    rdfs:label "penetrates"@en ;
+    rdfs:domain geo:wellbore ;
+    rdfs:range geo:formacao .
+
+geo:has_trajectory a owl:ObjectProperty ;
+    rdfs:label "tem trajetória"@pt ;
+    rdfs:label "has trajectory"@en ;
+    rdfs:domain geo:wellbore ;
+    rdfs:range geo:trajetoria-poco .
+
+geo:has_marker a owl:ObjectProperty ;
+    rdfs:label "tem marker"@pt ;
+    rdfs:label "has marker"@en ;
+    rdfs:domain geo:wellbore ;
+    rdfs:range geo:topo-formacional .
+
+geo:has_top_at a owl:ObjectProperty ;
+    rdfs:label "tem topo em"@pt ;
+    rdfs:label "has top at"@en ;
+    rdfs:domain geo:formacao ;
+    rdfs:range geo:topo-formacional .
+
+geo:measured_in a owl:ObjectProperty ;
+    rdfs:label "medida em"@pt ;
+    rdfs:label "measured in"@en ;
+    rdfs:domain geo:perfil-poco ;
+    rdfs:range geo:wellbore .
+
+#
+# Edges (instance-level relation triples)
+#
+
+geo:poco geo:drilled_in geo:bloco .
+geo:poco geo:located_in geo:bacia-sedimentar .
+geo:poco geo:operated_by geo:operador .
+geo:poco geo:may_register geo:notificacao-descoberta .
+geo:poco geo:may_reach geo:presal .
+geo:poco geo:traverses geo:formacao .
+geo:bloco geo:delimited_in geo:bacia-sedimentar .
+geo:bloco geo:governed_by geo:contrato-ep .
+geo:bloco geo:operated_by geo:operador .
+geo:bloco geo:may_have geo:pad .
+geo:bloco geo:originated_in geo:rodada-licitacao .
+geo:contrato-ep geo:signed_with geo:anp .
+geo:contrato-ep geo:defines geo:regime-contratual .
+geo:contrato-ep geo:organized_in geo:periodo-exploratorio .
+geo:contrato-ep geo:measured_via geo:uts .
+geo:pad geo:evaluates geo:bloco .
+geo:pad geo:may_yield geo:declaracao-comercialidade .
+geo:declaracao-comercialidade geo:originates geo:campo .
+geo:campo geo:located_in geo:bacia-sedimentar .
+geo:campo geo:sustained_by geo:reservatorio .
+geo:reservatorio geo:contained_in geo:bacia-sedimentar .
+geo:reservatorio geo:characterized_by geo:sistema-deposicional .
+geo:reservatorio geo:hosted_in geo:formacao .
+geo:operador geo:may_have geo:processo-sancionador .
+geo:anp geo:manages_via geo:sigep .
+geo:anp geo:oversees_via geo:sep .
+geo:bop geo:installed_on geo:poco .
+geo:dhsv geo:installed_in geo:poco .
+geo:anm-eq geo:controls geo:poco .
+geo:bha geo:composes geo:poco .
+geo:esp-eq geo:lifts_from geo:poco .
+geo:mwd geo:measures geo:poco .
+geo:lwd geo:logs geo:poco .
+geo:fpso geo:produces_at geo:campo .
+geo:riser geo:connects geo:anm-eq .
+geo:riser geo:connects geo:fpso .
+geo:rov geo:operates geo:anm-eq .
+geo:manifold-submarino geo:gathers_from geo:poco .
+geo:manifold-submarino geo:feeds geo:fpso .
+geo:ibama geo:oversees_environment_of geo:operador .
+geo:ibama geo:requires geo:eia .
+geo:ibama geo:requires geo:rima .
+geo:conama geo:guides geo:ibama .
+geo:ana-agencia geo:regulates_water_use_of geo:operador .
+geo:ibp geo:represents geo:operador .
+geo:bndes geo:finances geo:bloco .
+geo:afe geo:authorizes_spending_for geo:poco .
+geo:joa geo:complements geo:contrato-ep .
+geo:epc geo:delivers geo:fpso .
+geo:rocha-geradora geo:contains geo:materia-organica .
+geo:rocha-geradora geo:feeds geo:sistema-petrolifero .
+geo:maturidade-termal geo:characterizes geo:rocha-geradora .
+geo:rocha-capacitante geo:seals geo:reservatorio .
+geo:trapa geo:comprises geo:reservatorio .
+geo:trapa geo:contains geo:acumulacao .
+geo:sistema-petrolifero geo:integrates_to geo:bacia-sedimentar .
+geo:acumulacao geo:becomes geo:campo .
+geo:campo geo:declares geo:reserva .
+geo:reserva geo:derived_from geo:recurso .
+geo:play geo:spawns geo:prospecto .
+geo:prospecto geo:becomes geo:acumulacao .
+geo:falha geo:forms geo:trapa .
+geo:falha geo:has_property geo:potencial-selante .
+geo:formacao geo:has_age geo:idade-geologica .
+geo:poco geo:samples geo:intervalo-estratigrafico .
+geo:testemunho geo:samples geo:formacao .
+geo:perfil-poco geo:measures geo:poco .
+geo:perfil-poco geo:infers geo:litologia .
+geo:biomarcador geo:enables geo:correlacao-oleo-rocha .
+geo:gc-ms geo:detects geo:biomarcador .
+geo:amostra-fluido geo:undergoes geo:pvt .
+geo:amostra-fluido geo:undergoes geo:sara .
+geo:pvt geo:classifies geo:classe-fluido .
+geo:modelo-petrofisico geo:characterizes geo:reservatorio .
+geo:facies-sedimentar geo:composes geo:reservatorio .
+geo:campo-tensional geo:defines geo:janela-lama .
+geo:janela-lama geo:guides_drilling_of geo:poco .
+geo:ocorrencia-geomec geo:occurs_in geo:poco .
+geo:recurso geo:allocated_to geo:bloco .
+geo:operador geo:reports geo:recurso .
+geo:poco geo:has_wellbore geo:wellbore .
+geo:wellbore geo:belongs_to geo:poco .
+geo:wellbore geo:penetrates geo:formacao .
+geo:wellbore geo:has_trajectory geo:trajetoria-poco .
+geo:wellbore geo:has_marker geo:topo-formacional .
+geo:formacao geo:has_top_at geo:topo-formacional .
+geo:perfil-poco geo:measured_in geo:wellbore .

@@ -24,6 +24,8 @@ import {
   DEDUP_RULES,
   RECOMMENDED_USAGE,
 } from './ontology-alignment.js';
+import { OSDU_CANONICAL } from './osdu-canonical.js';
+import { buildTtl } from './ttl-serializer.js';
 import {
   ONTOPETRO_CLASSES,
   ONTOPETRO_PROPERTIES,
@@ -56,6 +58,32 @@ function alignmentFor(table, id) {
     petrokgraph_uri: a.kg ? `${PETROKGRAPH_BASE}${a.kg}` : null,
     osdu_kind: a.osdu,
     geocoverage: a.layers || [],
+  };
+}
+
+/* OSDU canonical enrichment — pulls owl_uri + canonical EN definition
+   from Accenture OSDU.ttl via scripts/osdu-canonical.js */
+function osduCanonical(kind) {
+  if (!kind) return { owl_uri: null, definition_en_canonical: null };
+  const c = OSDU_CANONICAL[kind];
+  if (!c) return { owl_uri: null, definition_en_canonical: null };
+  return {
+    owl_uri: c.owl_uri || null,
+    definition_en_canonical: c.definition_en_canonical || null,
+    osdu_class: c.osdu_class || null,
+    osdu_canonical_note: c.note || null,
+  };
+}
+
+/* SKOS aliases — every node ALSO carries the SKOS-named equivalent fields
+   for direct interop with rdflib / Protégé / GraphDB consumers. */
+function withSkosAliases(node) {
+  return {
+    ...node,
+    skos_prefLabel:  { '@pt': node.label, '@en': node.label_en },
+    skos_altLabel:   { '@pt': node.synonyms_pt || [], '@en': node.synonyms_en || [] },
+    skos_definition: { '@pt': node.definition, '@en': node.definition_en_canonical || null },
+    skos_example:    node.examples || [],
   };
 }
 
@@ -655,6 +683,7 @@ function buildEntityGraph() {
     const e = n.extendedId ? ext(n.extendedId) : null;
     const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
     const enrich = n.glossId ? enrichmentFor(n.glossId) : { synonyms_pt: [], synonyms_en: [], examples: [] };
+    const canon = osduCanonical(align.osdu_kind);
     return {
       id: n.id,
       label: n.label,
@@ -663,10 +692,12 @@ function buildEntityGraph() {
       color: COLORS[n.type],
       size: SIZES[n.type],
       definition: n.definicaoOverride || (g ? g.definicao : (e ? e.definicao : '')),
+      definition_en_canonical: canon.definition_en_canonical,
       legal_source: n.fonte || (g ? g.fonte : (e ? e.legal_source : null)),
       datasets: g && Array.isArray(g.apareceEm) ? g.apareceEm : [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: align.osdu_kind,
+      owl_uri: canon.owl_uri,
       geocoverage: align.geocoverage,
       synonyms_pt: e ? e.synonyms_pt : enrich.synonyms_pt,
       synonyms_en: e ? e.synonyms_en : enrich.synonyms_en,
@@ -679,6 +710,7 @@ function buildEntityGraph() {
   const MERGED_ALIGNMENT = { ...ONTOPETRO_ALIGNMENT, ...OSDU_ALIGNMENT_ADDITIONS };
   const ontopetroNodes = ONTOPETRO_NODES.map((n) => {
     const align = alignmentFor(MERGED_ALIGNMENT, n.id);
+    const canon = osduCanonical(align.osdu_kind);
     return {
       id: n.id,
       label: n.label,
@@ -687,10 +719,12 @@ function buildEntityGraph() {
       color: COLORS[n.type],
       size: SIZES[n.type],
       definition: n.definition,
+      definition_en_canonical: canon.definition_en_canonical,
       legal_source: n.fonte || null,
       datasets: [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: align.osdu_kind,
+      owl_uri: canon.owl_uri,
       geocoverage: align.geocoverage,
       synonyms_pt: [],
       synonyms_en: [],
@@ -703,6 +737,8 @@ function buildEntityGraph() {
   /* OSDU layer-4 nodes (4 novos: wellbore, topo-formacional, trajetoria-poco, unidade-medida) */
   const osduNodes = OSDU_NODES.map((n) => {
     const align = alignmentFor(MERGED_ALIGNMENT, n.id);
+    const kind = n.osdu_kind_override || align.osdu_kind;
+    const canon = osduCanonical(kind);
     return {
       id: n.id,
       label: n.label,
@@ -711,10 +747,12 @@ function buildEntityGraph() {
       color: COLORS[n.type],
       size: n.size || SIZES[n.type],
       definition: n.definition,
+      definition_en_canonical: canon.definition_en_canonical,
       legal_source: n.fonte || null,
       datasets: n.datasets || [],
       petrokgraph_uri: align.petrokgraph_uri,
-      osdu_kind: n.osdu_kind_override || align.osdu_kind,
+      osdu_kind: kind,
+      owl_uri: canon.owl_uri,
       geocoverage: n.layers_override || align.geocoverage,
       synonyms_pt: n.synonyms_pt || [],
       synonyms_en: n.synonyms_en || [],
@@ -724,7 +762,8 @@ function buildEntityGraph() {
       osdu: true,
     };
   });
-  const nodes = [...baseNodes, ...ontopetroNodes, ...osduNodes];
+  /* Final nodes carry their SKOS aliases for direct interop. */
+  const nodes = [...baseNodes, ...ontopetroNodes, ...osduNodes].map(withSkosAliases);
   /* deriva relation_label_en a partir do snake_case do campo relation */
   const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES].map((e) => ({
     source: e.source,
@@ -810,6 +849,8 @@ function buildApiIndex() {
       ontology_map:    `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
       ontopetro:       `${BASE_URL_PLACEHOLDER}/data/ontopetro.json`,
       osdu_mapping:    `${BASE_URL_PLACEHOLDER}/data/osdu-mapping.json`,
+      geolytics_ttl:   `${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
+      webvowl_view:    `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
       taxonomies:      `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
       modules_extended:`${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
       pvt_dictionary:  `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
@@ -1448,6 +1489,7 @@ writeJson('data/glossary.json',        buildGlossary());
 writeJson('data/extended-terms.json',  buildExtendedTerms());
 writeJson('data/datasets.json',        buildDatasets());
 writeJson('data/entity-graph.json',    buildEntityGraph());
+writeText('data/geolytics.ttl',        buildTtl(buildEntityGraph()));
 writeJson('data/ontology-types.json',  buildOntologyTypes());
 writeJson('data/ontopetro.json',       buildOntopetro());
 writeJson('data/taxonomies.json',      buildTaxonomies());

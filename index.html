@@ -318,8 +318,13 @@
       ${exBlock}
       ${d.legal_source ? `<div class="row"><div class="k">Fonte legal</div><div class="v">${d.legal_source}</div></div>` : ''}
       ${(d.datasets && d.datasets.length) ? `<div class="row"><div class="k">Aparece nos datasets</div><div class="v">${datasetBadges}</div></div>` : ''}
-      ${d.petrokgraph_uri ? `<div class="row"><div class="k">Alinhamento ontológico</div><div class="v"><a class="ext-link" href="${d.petrokgraph_uri}" target="_blank" rel="noopener">Petro KGraph (PUC-Rio)</a></div></div>` : ''}
-      ${d.osdu_kind ? `<div class="row"><div class="k">OSDU schema</div><div class="v"><code style="font-size:11px">${d.osdu_kind}</code></div></div>` : ''}
+      ${d.definition_en_canonical ? `<div class="row"><div class="k">Definition (OSDU canonical)</div><div class="v" style="font-style:italic">${d.definition_en_canonical}</div></div>` : ''}
+      ${d.petrokgraph_uri || d.owl_uri ? `<div class="row"><div class="k">Alinhamento ontológico</div><div class="v">
+        ${d.petrokgraph_uri ? `<a class="ext-link" href="${d.petrokgraph_uri}" target="_blank" rel="noopener">Petro KGraph (PUC-Rio)</a>` : ''}
+        ${d.owl_uri ? `<a class="ext-link" href="${d.owl_uri}" target="_blank" rel="noopener">OSDU OWL class (W3ID)</a>` : ''}
+        ${d.owl_uri ? `<a class="ext-link" href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geolytics-dictionary/data/geolytics.ttl" target="_blank" rel="noopener">View graph in WebVOWL</a>` : ''}
+      </div></div>` : ''}
+      ${d.osdu_kind ? `<div class="row"><div class="k">OSDU kind</div><div class="v"><code style="font-size:11px">${d.osdu_kind}</code></div></div>` : ''}
     `;
   }
 

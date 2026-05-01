@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:32:12.921Z",
+    "generated": "2026-05-01T10:20:02.364Z",
     "description": "Geolytics Dictionary — complete merged dataset",
     "counts": {
       "glossary_terms": 23,
@@ -1112,7 +1112,7 @@
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:32:12.921Z",
+    "generated": "2026-05-01T10:20:02.364Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -1123,6 +1123,7 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.",
+        "definition_en_canonical": "The origin of a set of wellbores.",
         "legal_source": "ANP/SEP",
         "datasets": [
           "pocos-exploratorios",
@@ -1130,6 +1131,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well",
         "osdu_kind": "opendes:osdu:master-data--Well:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Well",
         "geocoverage": [
           "layer1",
           "layer2",
@@ -1155,7 +1157,34 @@
           "1-ANP-2-AL"
         ],
         "glossary_id": "poco-anp",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Poço",
+          "@en": "Well"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "poço",
+            "poço exploratório",
+            "poço de petróleo"
+          ],
+          "@en": [
+            "well",
+            "borehole",
+            "exploratory well",
+            "oil well"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.",
+          "@en": "The origin of a set of wellbores."
+        },
+        "skos_example": [
+          "1-RJS-702-RJ (Tupi)",
+          "1-BRSA-1135-RJS",
+          "3-BRSA-944-RJS (Búzios)",
+          "1-ANP-2-AL"
+        ]
       },
       {
         "id": "bloco",
@@ -1165,6 +1194,7 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.",
+        "definition_en_canonical": null,
         "legal_source": "Lei nº 9478, de 06/08/1997",
         "datasets": [
           "pocos-exploratorios",
@@ -1177,6 +1207,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationBlock",
         "osdu_kind": "opendes:osdu:master-data--AcquisitionSurvey:1.0.0",
+        "owl_uri": null,
         "geocoverage": [
           "layer4",
           "layer5"
@@ -1198,7 +1229,33 @@
           "BM-C-33"
         ],
         "glossary_id": "bloco",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Bloco",
+          "@en": "Block"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "bloco exploratório",
+            "área concedida"
+          ],
+          "@en": [
+            "block",
+            "exploration block",
+            "lease block",
+            "concession block"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.",
+          "@en": null
+        },
+        "skos_example": [
+          "BM-S-11 (Lula)",
+          "BCAM-40 (Búzios)",
+          "BS-4 (Atlanta)",
+          "BM-C-33"
+        ]
       },
       {
         "id": "campo",
@@ -1208,10 +1265,12 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.",
+        "definition_en_canonical": "A mineral deposit that has been exploited for commercial purposes.",
         "legal_source": "ANP/SEP",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Field",
         "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Field",
         "geocoverage": [
           "layer4",
           "layer5"
@@ -1220,7 +1279,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Campo",
+          "@en": "Field"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.",
+          "@en": "A mineral deposit that has been exploited for commercial purposes."
+        },
+        "skos_example": []
       },
       {
         "id": "bacia-sedimentar",
@@ -1230,6 +1302,7 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não.",
+        "definition_en_canonical": "A natural geographic area covering a single depositional system.",
         "legal_source": "Lei nº 9478, de 06/08/1997",
         "datasets": [
           "pocos-exploratorios",
@@ -1240,6 +1313,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SedimentaryBasin",
         "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Basin",
         "geocoverage": [
           "layer1",
           "layer2",
@@ -1263,7 +1337,32 @@
           "Bacia do Recôncavo"
         ],
         "glossary_id": "bacia-sedimentar",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Bacia Sedimentar",
+          "@en": "Sedimentary Basin"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "bacia",
+            "bacia sedimentar"
+          ],
+          "@en": [
+            "basin",
+            "sedimentary basin"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não.",
+          "@en": "A natural geographic area covering a single depositional system."
+        },
+        "skos_example": [
+          "Bacia de Campos",
+          "Bacia de Santos",
+          "Bacia de Sergipe-Alagoas",
+          "Bacia Potiguar",
+          "Bacia do Recôncavo"
+        ]
       },
       {
         "id": "reservatorio",
@@ -1273,10 +1372,12 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.",
+        "definition_en_canonical": null,
         "legal_source": "GeoCore + GeoReservoir (UFRGS)",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reservoir",
         "osdu_kind": "opendes:osdu:master-data--Reservoir:1.0.0",
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer2",
@@ -1299,7 +1400,32 @@
           "Reservatório Barra Velha"
         ],
         "glossary_id": null,
-        "extended_id": "reservatorio"
+        "extended_id": "reservatorio",
+        "skos_prefLabel": {
+          "@pt": "Reservatório",
+          "@en": "Reservoir"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "reservatório",
+            "rocha-reservatório",
+            "corpo reservatório"
+          ],
+          "@en": [
+            "reservoir",
+            "reservoir rock",
+            "pay zone"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos sob condições de pressão e temperatura adequadas. Equivale ao GeologicalBody do GeoCore com propriedades de porosidade e permeabilidade. O reservatório é a unidade econômica fundamental da exploração de petróleo.",
+          "@en": null
+        },
+        "skos_example": [
+          "Reservatórios carbonáticos do pré-sal (Coquinas)",
+          "Reservatórios turbidíticos de Campos",
+          "Reservatório Barra Velha"
+        ]
       },
       {
         "id": "formacao",
@@ -1309,10 +1435,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.",
+        "definition_en_canonical": "The name given to a body of rock having a consistent set of physical (litho-stratigraphic), temporal (chrono-stratigraphic) or fossil (bio-stratigraphic) characteristics that distinguishes it from adjacent bodies of rock, and which occupies a particular position in the layers of rock in a geographical region.",
         "legal_source": "GeoCore (UFRGS/Geosiris)",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
         "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#GeologicalFormation",
         "geocoverage": [
           "layer1",
           "layer2",
@@ -1336,7 +1464,33 @@
           "Formação Itapema"
         ],
         "glossary_id": null,
-        "extended_id": "formacao-geologica"
+        "extended_id": "formacao-geologica",
+        "skos_prefLabel": {
+          "@pt": "Formação",
+          "@en": "Geological Formation"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "formação",
+            "unidade litoestratigráfica",
+            "unidade geológica"
+          ],
+          "@en": [
+            "formation",
+            "geological formation",
+            "lithostratigraphic unit"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Unidade litoestratigráfica formal com características rochosas homogêneas, definida por suas propriedades litológicas e posição estratigráfica. É a unidade fundamental de mapeamento geológico e equivale ao conceito de GeologicalUnit do GeoCore.",
+          "@en": "The name given to a body of rock having a consistent set of physical (litho-stratigraphic), temporal (chrono-stratigraphic) or fossil (bio-stratigraphic) characteristics that distinguishes it from adjacent bodies of rock, and which occupies a particular position in the layers of rock in a geographical region."
+        },
+        "skos_example": [
+          "Formação Barra Velha (pré-sal)",
+          "Formação Quissamã",
+          "Formação Carapebus",
+          "Formação Itapema"
+        ]
       },
       {
         "id": "sistema-deposicional",
@@ -1346,10 +1500,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.",
+        "definition_en_canonical": null,
         "legal_source": "GeoReservoir (UFRGS)",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DepositionalSystem",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer2"
@@ -1369,7 +1525,31 @@
           "Sistema deltaico"
         ],
         "glossary_id": null,
-        "extended_id": "sistema-deposicional"
+        "extended_id": "sistema-deposicional",
+        "skos_prefLabel": {
+          "@pt": "Sistema Deposicional",
+          "@en": "Depositional System"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "sistema deposicional",
+            "sistema sedimentar",
+            "ambiente deposicional"
+          ],
+          "@en": [
+            "depositional system",
+            "sedimentary system"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Conjunto de ambientes deposicionais geneticamente relacionados que depositaram sedimentos durante um evento ou época geológica. É a base da classificação de reservatórios de águas profundas brasileiros, especialmente os turbidíticos da Bacia de Campos e os carbonáticos do pré-sal de Santos.",
+          "@en": null
+        },
+        "skos_example": [
+          "Sistema turbidítico de águas profundas",
+          "Sistema lacustre carbonático (pré-sal)",
+          "Sistema deltaico"
+        ]
       },
       {
         "id": "contrato-ep",
@@ -1379,6 +1559,7 @@
         "color": "#7F77DD",
         "size": 24,
         "definition": "Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "blocos-contrato",
@@ -1387,6 +1568,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1406,7 +1588,32 @@
           "Cessão Onerosa de Búzios"
         ],
         "glossary_id": "contrato-ep",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Contrato E&P",
+          "@en": "E&P Contract"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "contrato de E&P",
+            "contrato de concessão",
+            "contrato de partilha"
+          ],
+          "@en": [
+            "E&P contract",
+            "exploration and production contract",
+            "upstream contract"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção.",
+          "@en": null
+        },
+        "skos_example": [
+          "Concessão BM-S-11",
+          "Partilha de Libra",
+          "Cessão Onerosa de Búzios"
+        ]
       },
       {
         "id": "pad",
@@ -1416,6 +1623,7 @@
         "color": "#7F77DD",
         "size": 24,
         "definition": "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP — SIGEP",
         "datasets": [
           "pads-andamento",
@@ -1425,6 +1633,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1444,7 +1653,32 @@
           "PAD Atapu"
         ],
         "glossary_id": "pad",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "PAD",
+          "@en": "Discovery Evaluation Plan"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "Plano de Avaliação de Descobertas",
+            "PAD"
+          ],
+          "@en": [
+            "Discovery Evaluation Plan",
+            "Appraisal Plan",
+            "DEP"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso.",
+          "@en": null
+        },
+        "skos_example": [
+          "PAD Búzios",
+          "PAD Mero",
+          "PAD Sépia",
+          "PAD Atapu"
+        ]
       },
       {
         "id": "rodada-licitacao",
@@ -1454,6 +1688,7 @@
         "color": "#7F77DD",
         "size": 24,
         "definition": "Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.",
+        "definition_en_canonical": null,
         "legal_source": "Dicionário enciclopédico inglês-português de geofísica e geologia",
         "datasets": [
           "pads-andamento",
@@ -1462,6 +1697,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BiddingRound",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1482,7 +1718,33 @@
           "Cessão Onerosa (2019)"
         ],
         "glossary_id": "rodada-licitacao",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Rodada de Licitação",
+          "@en": "Bid Round"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "rodada",
+            "leilão de blocos",
+            "rodada da ANP"
+          ],
+          "@en": [
+            "bidding round",
+            "oil auction",
+            "licensing round"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.",
+          "@en": null
+        },
+        "skos_example": [
+          "1ª Rodada (1999)",
+          "17ª Rodada (2022)",
+          "1ª Rodada de Partilha (2013, Libra)",
+          "Cessão Onerosa (2019)"
+        ]
       },
       {
         "id": "declaracao-comercialidade",
@@ -1492,6 +1754,7 @@
         "color": "#7F77DD",
         "size": 24,
         "definition": "Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP — SIGEP",
         "datasets": [
           "pads-concluidos",
@@ -1499,6 +1762,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CommercialityDeclaration",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1506,7 +1770,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "declaracao-comercialidade",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Declaração de Comercialidade",
+          "@en": "Commerciality Declaration"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "operador",
@@ -1516,6 +1793,7 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado.",
+        "definition_en_canonical": "A legal or administrative body, institution, or company, or any of its divisions.",
         "legal_source": "ANP/SEP",
         "datasets": [
           "pocos-exploratorios",
@@ -1528,6 +1806,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumOperator",
         "osdu_kind": "opendes:osdu:master-data--Organisation:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Organisation",
         "geocoverage": [
           "layer3",
           "layer4",
@@ -1553,7 +1832,36 @@
           "Galp Energia"
         ],
         "glossary_id": "operador",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Operador",
+          "@en": "Operator"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "operadora",
+            "concessionária",
+            "empresa operadora"
+          ],
+          "@en": [
+            "operator",
+            "operating company",
+            "lead operator"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado.",
+          "@en": "A legal or administrative body, institution, or company, or any of its divisions."
+        },
+        "skos_example": [
+          "Petrobras",
+          "Shell Brasil",
+          "Equinor",
+          "TotalEnergies",
+          "Repsol Sinopec",
+          "BP Brasil",
+          "Galp Energia"
+        ]
       },
       {
         "id": "anp",
@@ -1563,6 +1871,7 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.",
+        "definition_en_canonical": null,
         "legal_source": "Lei nº 9478/1997",
         "datasets": [
           "pocos-exploratorios",
@@ -1576,6 +1885,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryAgency",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1583,7 +1893,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "anp",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "ANP",
+          "@en": "ANP (Brazilian Oil & Gas Regulator)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "sigep",
@@ -1593,6 +1916,7 @@
         "color": "#888780",
         "size": 20,
         "definition": "Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "pocos-exploratorios",
@@ -1602,6 +1926,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#InformationSystem",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1609,7 +1934,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "sigep",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "SIGEP",
+          "@en": "SIGEP (E&P Information System)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "sep",
@@ -1619,6 +1957,7 @@
         "color": "#888780",
         "size": 20,
         "definition": "Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.",
+        "definition_en_canonical": null,
         "legal_source": "ANP",
         "datasets": [
           "pocos-exploratorios",
@@ -1632,6 +1971,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#RegulatoryUnit",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1639,7 +1979,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "sep",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "SEP",
+          "@en": "SEP (ANP Exploration Office)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "uts",
@@ -1649,12 +2002,14 @@
         "color": "#888780",
         "size": 20,
         "definition": "Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "blocos-contrato"
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WorkUnit",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1662,7 +2017,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "uts",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "UTS",
+          "@en": "Work Units"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "regime-contratual",
@@ -1672,6 +2040,7 @@
         "color": "#888780",
         "size": 20,
         "definition": "Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "pads-andamento",
@@ -1680,6 +2049,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ContractualRegime",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1699,7 +2069,32 @@
           "Cessão Onerosa"
         ],
         "glossary_id": "regime-contratual",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Regime Contratual",
+          "@en": "Contract Regime"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "regime",
+            "modalidade contratual",
+            "regime de exploração"
+          ],
+          "@en": [
+            "contract regime",
+            "contract model",
+            "fiscal regime"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal.",
+          "@en": null
+        },
+        "skos_example": [
+          "Concessão (Lei 9.478/1997)",
+          "Partilha de Produção (Lei 12.351/2010)",
+          "Cessão Onerosa"
+        ]
       },
       {
         "id": "periodo-exploratorio",
@@ -1709,12 +2104,14 @@
         "color": "#888780",
         "size": 20,
         "definition": "Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "blocos-contrato"
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExploratoryPeriod",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1722,7 +2119,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "periodo-exploratorio",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Período Exploratório",
+          "@en": "Exploratory Period"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "processo-sancionador",
@@ -1732,12 +2142,14 @@
         "color": "#888780",
         "size": 20,
         "definition": "Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "processos-sancionadores"
         ],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -1745,7 +2157,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "processo-sancionador",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Processo Sancionador",
+          "@en": "Sanctioning Proceeding"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "notificacao-descoberta",
@@ -1755,12 +2180,14 @@
         "color": "#888780",
         "size": 20,
         "definition": "Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP — SIGEP",
         "datasets": [
           "pocos-exploratorios"
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryNotification",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4",
           "layer5"
@@ -1769,7 +2196,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "notificacao-descoberta",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Notificação Descoberta",
+          "@en": "Discovery Notification"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "area-desenvolvimento",
@@ -1779,6 +2219,7 @@
         "color": "#888780",
         "size": 20,
         "definition": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
+        "definition_en_canonical": "A mineral deposit that has been exploited for commercial purposes.",
         "legal_source": "ANP/SEP",
         "datasets": [
           "pads-concluidos",
@@ -1786,6 +2227,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DevelopmentArea",
         "osdu_kind": "opendes:osdu:master-data--Field:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Field",
         "geocoverage": [
           "layer4",
           "layer5"
@@ -1809,7 +2251,35 @@
           "Atapu"
         ],
         "glossary_id": "area-desenvolvimento",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Área de Desenvolvimento",
+          "@en": "Development Area"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "área de desenvolvimento",
+            "campo"
+          ],
+          "@en": [
+            "development area",
+            "field",
+            "producing field"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Área produtora de petróleo ou gás natural, a partir de um reservatório contínuo ou de mais de um reservatório, a profundidades variáveis. Resulta da declaração de comercialidade após avaliação técnica positiva de uma descoberta.",
+          "@en": "A mineral deposit that has been exploited for commercial purposes."
+        },
+        "skos_example": [
+          "Tupi",
+          "Búzios",
+          "Mero",
+          "Sapinhoá",
+          "Lula",
+          "Sépia",
+          "Atapu"
+        ]
       },
       {
         "id": "presal",
@@ -1819,12 +2289,14 @@
         "color": "#639922",
         "size": 20,
         "definition": "Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "pocos-exploratorios"
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PresaltLayer",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer2",
@@ -1847,7 +2319,32 @@
           "Polígono do Pré-sal (Lei 12.351/2010)"
         ],
         "glossary_id": "presal",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Pré-sal",
+          "@en": "Pre-salt"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pré-sal",
+            "camada do pré-sal",
+            "reservatórios do pré-sal"
+          ],
+          "@en": [
+            "pre-salt",
+            "sub-salt",
+            "subsalt"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável.",
+          "@en": null
+        },
+        "skos_example": [
+          "Reservatórios de Tupi",
+          "Reservatórios de Búzios",
+          "Polígono do Pré-sal (Lei 12.351/2010)"
+        ]
       },
       {
         "id": "bacias-agrupadas",
@@ -1857,6 +2354,7 @@
         "color": "#639922",
         "size": 20,
         "definition": "Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).",
+        "definition_en_canonical": "A natural geographic area covering a single depositional system.",
         "legal_source": "ANP/SEP",
         "datasets": [
           "pocos-exploratorios",
@@ -1866,6 +2364,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#BasinGroup",
         "osdu_kind": "opendes:osdu:master-data--Basin:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Basin",
         "geocoverage": [
           "layer3",
           "layer5"
@@ -1874,7 +2373,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "bacias-agrupadas",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Bacias Agrupadas",
+          "@en": "Grouped Basins"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).",
+          "@en": "A natural geographic area covering a single depositional system."
+        },
+        "skos_example": []
       },
       {
         "id": "ambiente",
@@ -1884,6 +2396,7 @@
         "color": "#639922",
         "size": 20,
         "definition": "Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.",
+        "definition_en_canonical": null,
         "legal_source": "ANP/SEP",
         "datasets": [
           "pocos-exploratorios",
@@ -1894,6 +2407,7 @@
         ],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#OperationalEnvironment",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3",
           "layer5"
@@ -1902,7 +2416,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": "ambiente",
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Ambiente",
+          "@en": "Environment"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "bop",
@@ -1912,10 +2439,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G / API",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -1923,7 +2452,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "BOP",
+          "@en": "Blowout Preventer"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "fpso",
@@ -1933,10 +2475,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -1944,7 +2488,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "FPSO",
+          "@en": "Floating Production, Storage and Offloading"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "anm-eq",
@@ -1954,10 +2511,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -1965,7 +2524,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "ANM",
+          "@en": "Wet Christmas Tree (Árvore de Natal Molhada)"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "riser",
@@ -1975,10 +2547,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -1986,7 +2560,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Riser",
+          "@en": "Riser"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "rov",
@@ -1996,10 +2583,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2007,7 +2596,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "ROV",
+          "@en": "Remotely Operated Vehicle"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "dhsv",
@@ -2017,10 +2619,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2028,7 +2632,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "DHSV",
+          "@en": "Downhole Safety Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "bha",
@@ -2038,10 +2655,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2049,7 +2668,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "BHA",
+          "@en": "Bottom-Hole Assembly"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "esp-eq",
@@ -2059,10 +2691,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2070,7 +2704,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "ESP/BCS",
+          "@en": "Electrical Submersible Pump"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "mwd",
@@ -2080,10 +2727,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2091,7 +2740,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "MWD",
+          "@en": "Measure While Drilling"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "lwd",
@@ -2101,10 +2763,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2112,7 +2776,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "LWD",
+          "@en": "Logging While Drilling"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "manifold-submarino",
@@ -2122,10 +2799,12 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4"
         ],
@@ -2133,7 +2812,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "Manifold Submarino",
+          "@en": "Subsea Manifold"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "ibama",
@@ -2143,10 +2835,12 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G / Lei 7.735/1989",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2154,7 +2848,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "IBAMA",
+          "@en": "Brazilian Institute of Environment"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "conama",
@@ -2164,10 +2871,12 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G / Lei 6.938/1981",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2175,7 +2884,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "CONAMA",
+          "@en": "National Environmental Council"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "ana-agencia",
@@ -2185,10 +2907,12 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2196,7 +2920,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "ANA",
+          "@en": "National Water Agency"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "ibp",
@@ -2206,10 +2943,12 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2217,7 +2956,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "IBP",
+          "@en": "Brazilian Petroleum Institute"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "bndes",
@@ -2227,10 +2979,12 @@
         "color": "#D85A30",
         "size": 24,
         "definition": "Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2238,7 +2992,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "BNDES",
+          "@en": "National Development Bank"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "eia",
@@ -2248,10 +3015,12 @@
         "color": "#888780",
         "size": 20,
         "definition": "Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G / Resolução CONAMA 1/1986",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2259,7 +3028,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "EIA",
+          "@en": "Environmental Impact Study"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "rima",
@@ -2269,10 +3051,12 @@
         "color": "#888780",
         "size": 20,
         "definition": "Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2280,7 +3064,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "RIMA",
+          "@en": "Environmental Impact Report"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "afe",
@@ -2290,10 +3087,12 @@
         "color": "#888780",
         "size": 20,
         "definition": "Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2301,7 +3100,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "AFE",
+          "@en": "Approval for Expenditure"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "joa",
@@ -2311,10 +3123,12 @@
         "color": "#888780",
         "size": 20,
         "definition": "Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2322,7 +3136,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "JOA",
+          "@en": "Joint Operating Agreement"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "epc",
@@ -2332,10 +3159,12 @@
         "color": "#888780",
         "size": 20,
         "definition": "Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).",
+        "definition_en_canonical": null,
         "legal_source": "Siglário O&G",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer5"
         ],
@@ -2343,7 +3172,20 @@
         "synonyms_en": [],
         "examples": [],
         "glossary_id": null,
-        "extended_id": null
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "EPC",
+          "@en": "Engineering, Procurement, Construction"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "rocha-geradora",
@@ -2353,10 +3195,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Rocha rica em matéria orgânica (COT > 1%) capaz de gerar HC quando submetida à temperatura adequada. Equivale a C005 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "GeoCore / ontopetro C005",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SourceRock",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer2",
@@ -2368,7 +3212,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Rocha Geradora",
+          "@en": "Source Rock"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Rocha rica em matéria orgânica (COT > 1%) capaz de gerar HC quando submetida à temperatura adequada. Equivale a C005 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "rocha-capacitante",
@@ -2378,10 +3235,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Rocha de baixa permeabilidade que sela o reservatório, impedindo migração de HC para fora da trapa. Equivale a C004 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "GeoCore / ontopetro C004",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CapRock",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer2",
@@ -2392,7 +3251,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Rocha Capacitante",
+          "@en": "Cap Rock"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Rocha de baixa permeabilidade que sela o reservatório, impedindo migração de HC para fora da trapa. Equivale a C004 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "trapa",
@@ -2402,10 +3274,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Configuração geológica (estrutural, estratigráfica ou combinada) que permite acúmulo de HC. C006 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "PPDM / ontopetro C006",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumTrap",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer3"
@@ -2415,7 +3289,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Trapa",
+          "@en": "Petroleum Trap"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Configuração geológica (estrutural, estratigráfica ou combinada) que permite acúmulo de HC. C006 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "sistema-petrolifero",
@@ -2425,10 +3312,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Conjunto integrado de rocha geradora, migração, reservatório, capa e trapa. C007 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "PPDM / GeoCore",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumSystem",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer3"
@@ -2438,7 +3327,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Sistema Petrolífero",
+          "@en": "Petroleum System"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Conjunto integrado de rocha geradora, migração, reservatório, capa e trapa. C007 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "acumulacao",
@@ -2448,10 +3350,12 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "PPDM / ontopetro C008",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer2",
           "layer3",
@@ -2462,7 +3366,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Acumulação",
+          "@en": "Hydrocarbon Accumulation"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "play",
@@ -2472,10 +3389,12 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Combinação de elementos petrolíferos com potencial exploratório regional. C017 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "PPDM / ontopetro C017",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Play",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3"
         ],
@@ -2484,7 +3403,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Play",
+          "@en": "Play"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Combinação de elementos petrolíferos com potencial exploratório regional. C017 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "prospecto",
@@ -2494,10 +3426,12 @@
         "color": "#378ADD",
         "size": 28,
         "definition": "Área específica com potencial para acumulação, dentro de um play. C018 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "PPDM / ontopetro C018",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Prospect",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3"
         ],
@@ -2506,7 +3440,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Prospecto",
+          "@en": "Prospect"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Área específica com potencial para acumulação, dentro de um play. C018 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "recurso",
@@ -2516,10 +3463,12 @@
         "color": "#7F77DD",
         "size": 24,
         "definition": "Volume de HC com grau variável de certeza geológica. Categorizado por SPE-PRMS. C019 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "ANP / SPE-PRMS / ontopetro C019",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Resource",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3",
           "layer5"
@@ -2529,7 +3478,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Recurso",
+          "@en": "Resource"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Volume de HC com grau variável de certeza geológica. Categorizado por SPE-PRMS. C019 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "reserva",
@@ -2539,10 +3501,12 @@
         "color": "#7F77DD",
         "size": 24,
         "definition": "Volume de HC tecnicamente recuperável e economicamente viável. Categorias 1P/2P/3P. C020 em ontopetro. NÃO confundir com Reserva Ambiental.",
+        "definition_en_canonical": null,
         "legal_source": "ANP / SPE-PRMS / ontopetro C020",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Reserve",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3",
           "layer5"
@@ -2552,7 +3516,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Reserva",
+          "@en": "Reserve"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Volume de HC tecnicamente recuperável e economicamente viável. Categorias 1P/2P/3P. C020 em ontopetro. NÃO confundir com Reserva Ambiental.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "falha",
@@ -2562,10 +3539,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Descontinuidade tectônica com deslocamento relativo das camadas. C016 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "GeoCore / ontopetro C016",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFault",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer3"
@@ -2575,7 +3554,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Falha Geológica",
+          "@en": "Geological Fault"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Descontinuidade tectônica com deslocamento relativo das camadas. C016 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "idade-geologica",
@@ -2585,10 +3577,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Período/época formal segundo ICS GTS2020. Ex.: Aptiano, Albiano, Cretáceo Superior. Tipo NER PetroGold IDA.",
+        "definition_en_canonical": null,
         "legal_source": "ICS GTS2020 / PetroGold",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer1",
           "layer3"
@@ -2598,7 +3592,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Idade Geológica",
+          "@en": "Geological Age"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Período/época formal segundo ICS GTS2020. Ex.: Aptiano, Albiano, Cretáceo Superior. Tipo NER PetroGold IDA.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "intervalo-estratigrafico",
@@ -2608,10 +3615,12 @@
         "color": "#639922",
         "size": 20,
         "definition": "Seção de poço delimitada por dois marcos (topo/base). Usado em testagem, completação e avaliação. NÃO confundir com Idade. Tipo NER PetroGold INT.",
+        "definition_en_canonical": null,
         "legal_source": "PetroGold / Petrobras",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4",
           "layer6"
@@ -2621,7 +3630,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Intervalo Estratigráfico",
+          "@en": "Stratigraphic Interval"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Seção de poço delimitada por dois marcos (topo/base). Usado em testagem, completação e avaliação. NÃO confundir com Idade. Tipo NER PetroGold INT.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "testemunho",
@@ -2631,10 +3653,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Amostra cilíndrica de rocha extraída durante perfuração. C012 em ontopetro.",
+        "definition_en_canonical": null,
         "legal_source": "GDGEO / ontopetro C012",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Core",
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer4",
           "layer6"
@@ -2644,7 +3668,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Testemunho",
+          "@en": "Core Sample"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Amostra cilíndrica de rocha extraída durante perfuração. C012 em ontopetro.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "perfil-poco",
@@ -2654,10 +3691,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Medição contínua de propriedades físicas ao longo do poço (gamma, densidade, sônico, neutron, NMR). C013 em ontopetro.",
+        "definition_en_canonical": "A well log is a data type that correlates a particular measurement or multiple measurements in a wellbore against depth and/or time within that wellbore. When plotted visually, well logs are typically long line graphs (called curves) but may sometimes be discrete points or intervals. This schema object is intended for digital well logs, not raster log files or raster calibration files, but may be used for the latter in the absence of a defined OSDU schema for these use cases.",
         "legal_source": "PPDM / ontopetro C013",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellLog",
         "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#WellLog",
         "geocoverage": [
           "layer3",
           "layer4",
@@ -2668,7 +3707,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Perfil de Poço",
+          "@en": "Well Log"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Medição contínua de propriedades físicas ao longo do poço (gamma, densidade, sônico, neutron, NMR). C013 em ontopetro.",
+          "@en": "A well log is a data type that correlates a particular measurement or multiple measurements in a wellbore against depth and/or time within that wellbore. When plotted visually, well logs are typically long line graphs (called curves) but may sometimes be discrete points or intervals. This schema object is intended for digital well logs, not raster log files or raster calibration files, but may be used for the latter in the absence of a defined OSDU schema for these use cases."
+        },
+        "skos_example": []
       },
       {
         "id": "materia-organica",
@@ -2678,10 +3730,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Substância orgânica preservada na rocha geradora com potencial de gerar HC. Caracterizada por Rock-Eval e tipo de querogênio (I/II/IIS/III/IV). M7 C103.",
+        "definition_en_canonical": null,
         "legal_source": "GEOQWIN / Rock-Eval",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3",
           "layer6"
@@ -2691,7 +3745,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Matéria Orgânica",
+          "@en": "Organic Matter"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Substância orgânica preservada na rocha geradora com potencial de gerar HC. Caracterizada por Rock-Eval e tipo de querogênio (I/II/IIS/III/IV). M7 C103.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "maturidade-termal",
@@ -2701,10 +3768,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Estado de evolução termal medido por Ro% (vitrinita) e Tmax (Rock-Eval). Janela óleo: Ro 0.5–1.0%, Tmax ~435°C. M7 C104.",
+        "definition_en_canonical": null,
         "legal_source": "GEOQWIN",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer3",
           "layer6"
@@ -2714,7 +3783,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Maturidade Termal",
+          "@en": "Thermal Maturity"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Estado de evolução termal medido por Ro% (vitrinita) e Tmax (Rock-Eval). Janela óleo: Ro 0.5–1.0%, Tmax ~435°C. M7 C104.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "biomarcador",
@@ -2724,10 +3806,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Composto orgânico preservado (hopanos, esteranos, pristano, fitano) usado para correlação óleo-rocha via GC-MS. M7 C106.",
+        "definition_en_canonical": null,
         "legal_source": "GEOQWIN / GC-MS SIM",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2736,7 +3820,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Biomarcador",
+          "@en": "Biomarker"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Composto orgânico preservado (hopanos, esteranos, pristano, fitano) usado para correlação óleo-rocha via GC-MS. M7 C106.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "correlacao-oleo-rocha",
@@ -2746,10 +3843,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Análise que associa hidrocarbonetos produzidos à rocha geradora de origem via assinatura de biomarcadores e isótopos. M7 C107.",
+        "definition_en_canonical": null,
         "legal_source": "GEOQWIN",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2758,7 +3857,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Correlação Óleo-Rocha",
+          "@en": "Oil-Source Correlation"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Análise que associa hidrocarbonetos produzidos à rocha geradora de origem via assinatura de biomarcadores e isótopos. M7 C107.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "litologia",
@@ -2768,10 +3880,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201.",
+        "definition_en_canonical": "Geological description for the type of lithology",
         "legal_source": "GDA / RockFinder",
         "datasets": [],
         "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Lithology",
         "osdu_kind": "opendes:osdu:reference-data--LithologyType:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#LithologyType",
         "geocoverage": [
           "layer1",
           "layer2",
@@ -2784,7 +3898,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Litologia",
+          "@en": "Lithology"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201.",
+          "@en": "Geological description for the type of lithology"
+        },
+        "skos_example": []
       },
       {
         "id": "facies-sedimentar",
@@ -2794,10 +3921,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Unidade rochosa com características físicas e biológicas distintas — base de classificação de reservatório. M8 C203.",
+        "definition_en_canonical": null,
         "legal_source": "Petrobras / GeoCore",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer2",
           "layer6"
@@ -2807,7 +3936,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Fácies Sedimentar",
+          "@en": "Sedimentary Facies"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Unidade rochosa com características físicas e biológicas distintas — base de classificação de reservatório. M8 C203.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "modelo-petrofisico",
@@ -2817,10 +3959,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw via equação de Archie. M8 C208.",
+        "definition_en_canonical": null,
         "legal_source": "GDA",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2829,7 +3973,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Modelo Petrofísico",
+          "@en": "Petrophysical Model"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw via equação de Archie. M8 C208.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "campo-tensional",
@@ -2839,10 +3996,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Conjunto Sv (vertical), SHmax (horizontal máximo), Shmin (horizontal mínimo). Base do modelo geomecânico. M9 C303.",
+        "definition_en_canonical": null,
         "legal_source": "GEOMECBR / GERESIM",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2851,7 +4010,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Campo Tensional",
+          "@en": "In-Situ Stress Field"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Conjunto Sv (vertical), SHmax (horizontal máximo), Shmin (horizontal mínimo). Base do modelo geomecânico. M9 C303.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "janela-lama",
@@ -2861,10 +4033,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Intervalo seguro de peso de lama: limite inferior=colapso (breakout), limite superior=fratura (perda circulação). NÃO confundir com Janela de Geração (Ro%). M9 C309.",
+        "definition_en_canonical": null,
         "legal_source": "GEOMECBR",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2873,7 +4047,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Janela de Lama",
+          "@en": "Mud Weight Window"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Intervalo seguro de peso de lama: limite inferior=colapso (breakout), limite superior=fratura (perda circulação). NÃO confundir com Janela de Geração (Ro%). M9 C309.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "ocorrencia-geomec",
@@ -2883,10 +4070,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Eventos: breakouts, kick zones, lost circulation, stuck pipe. Indicadores de problemas operacionais. M9 C317.",
+        "definition_en_canonical": null,
         "legal_source": "GEOMECBR / Petrobras",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2895,7 +4084,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Ocorrência Geomecânica",
+          "@en": "Geomechanical Event"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Eventos: breakouts, kick zones, lost circulation, stuck pipe. Indicadores de problemas operacionais. M9 C317.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "potencial-selante",
@@ -2905,10 +4107,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Capacidade de falha reter HC — calculado por SGR (Shale Gouge Ratio), CSP e SSF no TrapTester. SGR > 18–20% = potencial selante. M9 C313.",
+        "definition_en_canonical": null,
         "legal_source": "TrapTester / Badley",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -2917,7 +4121,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Potencial Selante",
+          "@en": "Fault Sealing Potential"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Capacidade de falha reter HC — calculado por SGR (Shale Gouge Ratio), CSP e SSF no TrapTester. SGR > 18–20% = potencial selante. M9 C313.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "amostra-fluido",
@@ -2927,10 +4144,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
+        "definition_en_canonical": "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc.",
         "legal_source": "LIMS Sample Manager",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--Sample:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#RockSample",
         "geocoverage": [
           "layer4",
           "layer6"
@@ -2940,7 +4159,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Amostra de Fluido",
+          "@en": "Fluid Sample"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
+          "@en": "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc."
+        },
+        "skos_example": []
       },
       {
         "id": "pvt",
@@ -2950,10 +4182,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Ensaios pressão-volume-temperatura: Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR (35 campos com completude documentada). M10 CL_PVT.",
+        "definition_en_canonical": null,
         "legal_source": "SIRR",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellborePressure:1.0.0",
+        "owl_uri": null,
         "geocoverage": [
           "layer4",
           "layer6"
@@ -2963,7 +4197,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "PVT",
+          "@en": "PVT Analysis"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Ensaios pressão-volume-temperatura: Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR (35 campos com completude documentada). M10 CL_PVT.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "classe-fluido",
@@ -2973,10 +4220,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO. Sistema AIDA. M10 CL_CLASS_FLUIDO.",
+        "definition_en_canonical": "Type of drilling or completions fluid",
         "legal_source": "AIDA",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--FluidType:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#FluidType",
         "geocoverage": [
           "layer4",
           "layer6"
@@ -2986,7 +4235,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "Classe de Fluido",
+          "@en": "Fluid Class"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO. Sistema AIDA. M10 CL_CLASS_FLUIDO.",
+          "@en": "Type of drilling or completions fluid"
+        },
+        "skos_example": []
       },
       {
         "id": "gc-ms",
@@ -2996,10 +4258,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Cromatografia gasosa com espectrometria de massas para biomarcadores (Pr/Ph, hopanos, esteranos). M10 CL_GC_MS.",
+        "definition_en_canonical": null,
         "legal_source": "GEOQWIN",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -3008,7 +4272,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "GC-MS",
+          "@en": "GC-MS SIM"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Cromatografia gasosa com espectrometria de massas para biomarcadores (Pr/Ph, hopanos, esteranos). M10 CL_GC_MS.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "sara",
@@ -3018,10 +4295,12 @@
         "color": "#E67E22",
         "size": 20,
         "definition": "Saturados/Aromáticos/Resinas/Asfaltenos — fracionamento do óleo bruto. Correlaciona com viscosidade e risco de deposição. M10 CL_SARA.",
+        "definition_en_canonical": null,
         "legal_source": "GEOQWIN",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": null,
+        "owl_uri": null,
         "geocoverage": [
           "layer6"
         ],
@@ -3030,7 +4309,20 @@
         "examples": [],
         "glossary_id": null,
         "extended_id": null,
-        "ontopetro": true
+        "ontopetro": true,
+        "skos_prefLabel": {
+          "@pt": "SARA",
+          "@en": "SARA"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Saturados/Aromáticos/Resinas/Asfaltenos — fracionamento do óleo bruto. Correlaciona com viscosidade e risco de deposição. M10 CL_SARA.",
+          "@en": null
+        },
+        "skos_example": []
       },
       {
         "id": "wellbore",
@@ -3040,12 +4332,14 @@
         "color": "#378ADD",
         "size": 22,
         "definition": "Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente.",
+        "definition_en_canonical": "A hole in the ground extending from a point at the earth's surface to the maximum point of penetration.",
         "legal_source": "ANP/BDP + OSDU master-data--Wellbore",
         "datasets": [
           "pocos-exploratorios"
         ],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--Wellbore:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#Wellbore",
         "geocoverage": [
           "layer2",
           "layer3",
@@ -3068,7 +4362,32 @@
         ],
         "glossary_id": null,
         "extended_id": null,
-        "osdu": true
+        "osdu": true,
+        "skos_prefLabel": {
+          "@pt": "Trecho Perfurado",
+          "@en": "Wellbore"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "trecho perfurado",
+            "furo",
+            "wellbore",
+            "poço físico"
+          ],
+          "@en": [
+            "wellbore",
+            "borehole",
+            "drilled hole"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente.",
+          "@en": "A hole in the ground extending from a point at the earth's surface to the maximum point of penetration."
+        },
+        "skos_example": [
+          "1-RJS-702-RJ (wellbore único)",
+          "3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)"
+        ]
       },
       {
         "id": "topo-formacional",
@@ -3078,12 +4397,14 @@
         "color": "#E67E22",
         "size": 18,
         "definition": "Pick da profundidade (em MD — Measured Depth — e TVD — True Vertical Depth) em que o wellbore intercepta o topo de uma formação geológica. Dado fundamental em correlações estratigráficas entre poços e na construção de modelos de reservatórios 3D. Exemplo: Topo da Formação Barra Velha no poço 1-RJS-702-RJ a MD=4220m / TVD=4105m.",
+        "definition_en_canonical": "Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation, which is usually a change in the rock that intersects that wellbore. Formation Marker data includes attributes/properties that put these depths in context. Formation Markers are sometimes known as picks or formation tops.",
         "legal_source": "Relatórios de completação / OSDU WellboreMarker",
         "datasets": [
           "pocos-exploratorios"
         ],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#WellboreMarkerSet",
         "geocoverage": [
           "layer2",
           "layer3",
@@ -3108,7 +4429,34 @@
         ],
         "glossary_id": null,
         "extended_id": null,
-        "osdu": true
+        "osdu": true,
+        "skos_prefLabel": {
+          "@pt": "Topo Formacional",
+          "@en": "Formation Top / Wellbore Marker"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "topo de formação",
+            "marco estratigráfico",
+            "pick estratigráfico",
+            "marker"
+          ],
+          "@en": [
+            "formation top",
+            "wellbore marker",
+            "stratigraphic pick",
+            "formation pick"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pick da profundidade (em MD — Measured Depth — e TVD — True Vertical Depth) em que o wellbore intercepta o topo de uma formação geológica. Dado fundamental em correlações estratigráficas entre poços e na construção de modelos de reservatórios 3D. Exemplo: Topo da Formação Barra Velha no poço 1-RJS-702-RJ a MD=4220m / TVD=4105m.",
+          "@en": "Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation, which is usually a change in the rock that intersects that wellbore. Formation Marker data includes attributes/properties that put these depths in context. Formation Markers are sometimes known as picks or formation tops."
+        },
+        "skos_example": [
+          "Topo Fm. Barra Velha a 4220m MD",
+          "Topo Fm. Macaé a 2890m MD",
+          "Base do Sal a 3410m TVD"
+        ]
       },
       {
         "id": "trajetoria-poco",
@@ -3118,12 +4466,14 @@
         "color": "#E67E22",
         "size": 16,
         "definition": "Survey direcional do wellbore: sequência de medições de profundidade (MD), inclinação e azimute ao longo do trecho perfurado. Permite calcular a posição 3D real do poço (TVD, offsets Norte/Sul/Leste/Oeste). Diferencia poços verticais (inclinação ≈ 0°) de poços direcionais (inclinação > 30°) e poços horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e para o cálculo correto de pressão hidrostática.",
+        "definition_en_canonical": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space.",
         "legal_source": "Relatórios de completação / OSDU WellboreTrajectory",
         "datasets": [
           "pocos-exploratorios"
         ],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#WellboreTrajectory",
         "geocoverage": [
           "layer3",
           "layer4"
@@ -3146,7 +4496,33 @@
         ],
         "glossary_id": null,
         "extended_id": null,
-        "osdu": true
+        "osdu": true,
+        "skos_prefLabel": {
+          "@pt": "Trajetória do Poço",
+          "@en": "Wellbore Trajectory"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "trajetória direcional",
+            "survey direcional",
+            "desvio do poço",
+            "perfil direcional"
+          ],
+          "@en": [
+            "wellbore trajectory",
+            "directional survey",
+            "deviation survey",
+            "trajectory survey"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Survey direcional do wellbore: sequência de medições de profundidade (MD), inclinação e azimute ao longo do trecho perfurado. Permite calcular a posição 3D real do poço (TVD, offsets Norte/Sul/Leste/Oeste). Diferencia poços verticais (inclinação ≈ 0°) de poços direcionais (inclinação > 30°) e poços horizontais (inclinação ≈ 90°). Essencial para visualização 3D de poços offshore e para o cálculo correto de pressão hidrostática.",
+          "@en": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space."
+        },
+        "skos_example": [
+          "Poço horizontal pré-sal: 60° inclinação em 2800m TVD",
+          "Poço vertical 1-RJS-702-RJ: inclinação < 3°"
+        ]
       },
       {
         "id": "completacao",
@@ -3156,10 +4532,12 @@
         "color": "#378ADD",
         "size": 18,
         "definition": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura: revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV), perforações (canhoneio) das zonas produtoras e árvore de natal. No OSDU corresponde a master-data--WellboreCompletion, vinculado ao Wellbore. Tipos: completação seca (dry tree, plataforma fixa), molhada (subsea com ANM) ou inteligente (smart well — múltiplas zonas controladas).",
+        "definition_en_canonical": null,
         "legal_source": "O3PO (UFRGS) / OSDU master-data--WellboreCompletion",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:master-data--WellboreCompletion:1.0.0",
+        "owl_uri": null,
         "geocoverage": [
           "layer2",
           "layer3",
@@ -3181,7 +4559,31 @@
         ],
         "glossary_id": null,
         "extended_id": null,
-        "osdu": true
+        "osdu": true,
+        "skos_prefLabel": {
+          "@pt": "Completação",
+          "@en": "Well Completion"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "completação",
+            "acabamento de poço",
+            "completion"
+          ],
+          "@en": [
+            "well completion",
+            "completion"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Conjunto de operações e equipamentos instalados no poço após a perfuração para viabilizar a produção segura: revestimento de produção, tubing (coluna de produção), packers, válvulas de subsuperfície (DHSV), perforações (canhoneio) das zonas produtoras e árvore de natal. No OSDU corresponde a master-data--WellboreCompletion, vinculado ao Wellbore. Tipos: completação seca (dry tree, plataforma fixa), molhada (subsea com ANM) ou inteligente (smart well — múltiplas zonas controladas).",
+          "@en": null
+        },
+        "skos_example": [
+          "Completação seca (dry tree)",
+          "Completação molhada subsea com ANM",
+          "Completação inteligente (smart well)"
+        ]
       },
       {
         "id": "unidade-medida",
@@ -3191,10 +4593,12 @@
         "color": "#888780",
         "size": 14,
         "definition": "Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados.",
+        "definition_en_canonical": "Used to describe the unit of measures.",
         "legal_source": "OSDU reference-data--UnitOfMeasure / BIPM SI / API standards",
         "datasets": [],
         "petrokgraph_uri": null,
         "osdu_kind": "opendes:osdu:reference-data--UnitOfMeasure:1.0.0",
+        "owl_uri": "https://w3id.org/osdu#UnitOfMeasure",
         "geocoverage": [
           "layer2",
           "layer3",
@@ -3219,7 +4623,34 @@
         ],
         "glossary_id": null,
         "extended_id": null,
-        "osdu": true
+        "osdu": true,
+        "skos_prefLabel": {
+          "@pt": "Unidade de Medida",
+          "@en": "Unit of Measure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "unidade",
+            "unidade SI",
+            "unidade imperial",
+            "UOM"
+          ],
+          "@en": [
+            "unit of measure",
+            "UOM",
+            "unit",
+            "measurement unit"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Vocabulário controlado de unidades de medida usadas nos dados de subsuperfície. Crítico para interoperabilidade entre sistemas: ANP/Petrobras usa SI (metros, MPa, m³/d) enquanto dados legados e internacionais frequentemente usam sistema imperial (ft, psi, bbl/d). O mD (miliDarcy) é um caso especial — unidade do sistema CGS-Gaussian amplamente usada em petrofísica. A conversão de unidades sem referência ao vocabulário OSDU é fonte frequente de erros em integração de dados.",
+          "@en": "Used to describe the unit of measures."
+        },
+        "skos_example": [
+          "mD (miliDarcy) — permeabilidade",
+          "ºAPI (API gravity) — densidade óleo",
+          "GAPI (Gamma Ray API) — argilosidade"
+        ]
       }
     ],
     "edges": [
@@ -4534,7 +5965,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-04-30T22:32:12.921Z",
+    "generated": "2026-05-01T10:20:02.364Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -4758,7 +6189,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-04-30T22:32:12.921Z",
+      "generated": "2026-05-01T10:20:02.364Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
