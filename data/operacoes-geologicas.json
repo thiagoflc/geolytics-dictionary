@@ -12,7 +12,11 @@
       "OSDU R3 Master & Work Product Component schemas (Well, Wellbore, WellLog, MudLog)",
       "GeoSciML 4.1 — Borehole, Specimen",
       "WITSML 2.1 — mudLog, log, trajectory, formationMarker",
-      "Petrobras BDIEP / BDIAP catalog"
+      "Petrobras BDIEP / BDIAP catalog",
+      "PE-2EXP-00059 — Programa de Amostragem (SINPEP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536",
+      "PE-2EXP-00061 — Mudlogging / MWD-LWD / Geostopping (SINPEP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812",
+      "PE-2EXP-00065 — Perfilagem a Cabo / ROP (SINPEP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41813",
+      "PE-2E&P-00773 — DST / Teste de Formação (SINPEP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19855"
     ],
     "alignments": {
       "osdu": [
@@ -146,8 +150,11 @@
       "evidence_status": "documented",
       "evidence_refs": [
         "EXATA e GDA — Transformação Digital na aquisição geológica de poços (SharePoint)",
-        "OGDA — análise de gases e parâmetros de perfuração (SIMGEO 2024)"
-      ]
+        "OGDA — análise de gases e parâmetros de perfuração (SIMGEO 2024)",
+        "PE-2EXP-00059 — programa de amostragem: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536",
+        "PE-2EXP-00061 — definição normativa de mudlogging: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
+      ],
+      "sinpep_standards": ["PE-2EXP-00059", "PE-2EXP-00061"]
     },
     "CuttingsSampling": {
       "id": "OG012",
@@ -156,7 +163,13 @@
       "superclass": "ServiceLine",
       "description": "Collection, description and lithological classification of rock cuttings carried by the drilling fluid.",
       "description_pt": "Coleta, descrição e classificação litológica dos cascalhos trazidos pelo fluido de perfuração.",
-      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/cuttings"
+      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/cuttings",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2EXP-00059 — programa de amostragem: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536",
+        "PE-2EXP-00061 — definição normativa de mudlogging: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
+      ],
+      "sinpep_standards": ["PE-2EXP-00059", "PE-2EXP-00061"]
     },
     "DRX": {
       "id": "OG013",
@@ -172,11 +185,14 @@
       "synonyms": ["XRD", "X-Ray Diffraction", "Difratometria de Raios X"],
       "manager": "EXP/OGP/AQG",
       "stored_in": "TBD",
-      "stored_in_note": "Diferente do FRX (que tem módulo dedicado confirmado no SIGEO), não há evidência documental de módulo DRX no SIGEO. Dado pode ser processado fora do SIGEO. A confirmar com o time de DM.",
-      "evidence_status": "partial",
+      "stored_in_note": "DRX é processado externamente (laboratório de calha ou laboratorio externo) — confirmado por PE-2EXP-00059. Diferente de FRX, que possui módulo dedicado no SIGEO. Não há módulo DRX no SIGEO.",
+      "evidence_status": "documented",
       "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/cuttings",
+      "evidence_refs": [
+        "PE-2EXP-00059 — Programa de Amostragem confirma processamento externo de DRX (sem módulo SIGEO dedicado): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536"
+      ],
+      "sinpep_standards": ["PE-2EXP-00059"],
       "evidence_gaps": [
-        "Módulo DRX no SIGEO não confirmado documentalmente (analogia com FRX é inferência)",
         "Pipeline de ingestão DRX → AIDA/Databricks não documentado",
         "Padronização de mnemônicos DRX no SIGEO não documentada na ontologia",
         "Integração ao pipeline text-to-SQL do GeoDO ausente",
@@ -309,7 +325,12 @@
       "name_pt": "AmostragemLateral",
       "superclass": "ServiceLine",
       "description": "Collection of rock plugs via wireline tools after drilling a section.",
-      "description_pt": "Coleta de plugues de rocha via ferramentas de wireline."
+      "description_pt": "Coleta de plugues de rocha via ferramentas de wireline.",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2EXP-00065 — perfilagem a cabo (ROP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41813"
+      ],
+      "sinpep_standards": ["PE-2EXP-00065"]
     },
     "MWD_LWD": {
       "id": "OG016",
@@ -322,8 +343,10 @@
       "primary_system": "EXATA",
       "evidence_status": "documented",
       "evidence_refs": [
-        "EXATA e GDA SharePoint — perfilagem LWD transmitida em tempo real"
-      ]
+        "EXATA e GDA SharePoint — perfilagem LWD transmitida em tempo real",
+        "PE-2EXP-00061 — definição normativa de MWD/LWD: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
+      ],
+      "sinpep_standards": ["PE-2EXP-00061"]
     },
     "WirelineLogging": {
       "id": "OG017",
@@ -333,7 +356,12 @@
       "description": "Acquisition of well logs after drilling each phase, lowered on cable.",
       "description_pt": "Aquisição de perfis de poço após a perfuração de cada fase, descidos a cabo.",
       "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
-      "witsml_object": "log"
+      "witsml_object": "log",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2EXP-00065 — perfilagem a cabo (ROP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41813"
+      ],
+      "sinpep_standards": ["PE-2EXP-00065"]
     },
     "FormationTesting": {
       "id": "OG018",
@@ -342,7 +370,12 @@
       "superclass": "ServiceLine",
       "description": "Fluid sampling and pressure measurement in reservoirs (RFT/MDT/DST).",
       "description_pt": "Amostragem de fluidos e medição de pressões em reservatórios (RFT/MDT/DST).",
-      "links_to": "teste-formacao"
+      "links_to": "teste-formacao",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2E&P-00773 — DST (Drill Stem Test): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19855"
+      ],
+      "sinpep_standards": ["PE-2E&P-00773"]
     },
     "Geostopping": {
       "id": "OG019",
@@ -350,7 +383,12 @@
       "name_pt": "Geostopping",
       "superclass": "ServiceLine",
       "description": "Real-time monitoring for precise stop at geological targets, especially in pre-salt operations.",
-      "description_pt": "Monitoramento em tempo real para parada precisa em alvos geológicos, especialmente no pré-sal."
+      "description_pt": "Monitoramento em tempo real para parada precisa em alvos geológicos, especialmente no pré-sal.",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2EXP-00061 — definição normativa de geostopping: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
+      ],
+      "sinpep_standards": ["PE-2EXP-00061"]
     },
 
     "WellJourneyPhase": {
