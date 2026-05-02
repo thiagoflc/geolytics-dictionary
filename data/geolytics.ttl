@@ -8,8 +8,8 @@
 @prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-01T23:14:27.562Z
-# Nodes: 113  Edges: 149
+# Generated: 2026-05-02T18:19:50.124Z
+# Nodes: 147  Edges: 190
 
 #
 # Classes
@@ -1237,6 +1237,300 @@ geo:acl a owl:Class ;
     skos:definition """Tags de controle de acesso associadas a uma entidade. Estrutura incluída pelas SystemProperties acl, presente em todos os registros OSDU; não extensível. (OSDU canonical: The access control tags associated with this entity. This structure is included by the SystemProperties acl, which is part of all OSDU records.)"""@pt ;
     geo:geocoverage "layer1" .
 
+geo:operacoes-geologicas a owl:Class ;
+    skos:prefLabel "Operações Geológicas"@pt ;
+    skos:prefLabel "Geological Operations"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "Operações Geológicas"@pt ;
+    skos:altLabel "Aquisição de Dados Geológicos"@pt ;
+    skos:altLabel "Geological Operations"@en ;
+    skos:altLabel "Geological Data Acquisition"@en ;
+    skos:definition """Disciplina que agrupa técnicas analíticas e operacionais de aquisição de dados geológicos (DRX, FRX, geoquímica) aplicadas a amostras de poço e formação. Detalhada no módulo data/operacoes-geologicas.json (OG001)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:drx a owl:Class ;
+    skos:prefLabel "Difração de Raios X"@pt ;
+    skos:prefLabel "X-Ray Diffraction"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "DRX"@pt ;
+    skos:altLabel "Difratometria de Raios X"@pt ;
+    skos:altLabel "Difração de Raios X"@pt ;
+    skos:altLabel "XRD"@en ;
+    skos:altLabel "X-Ray Diffraction"@en ;
+    skos:definition """Técnica analítica de identificação mineralógica baseada na difração de raios X em amostras de rocha. Permite caracterizar mineralogia e auxiliar a classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:frx a owl:Class ;
+    skos:prefLabel "Fluorescência de Raios X"@pt ;
+    skos:prefLabel "X-Ray Fluorescence"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "FRX"@pt ;
+    skos:altLabel "Fluorescência de Raios-X"@pt ;
+    skos:altLabel "Análise de FRX"@pt ;
+    skos:altLabel "XRF"@en ;
+    skos:altLabel "X-Ray Fluorescence"@en ;
+    skos:definition """Técnica analítica de determinação da composição elementar de amostras de rocha por fluorescência de raios X. Gera assinatura geoquímica usada na caracterização e correlação de formações. Detalhada em data/operacoes-geologicas.json (OG013b)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:dna-geoquimico a owl:Class ;
+    skos:prefLabel "DNA Geoquímico"@pt ;
+    skos:prefLabel "Geochemical DNA"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "DNA Geoquímico"@pt ;
+    skos:altLabel "Assinatura Geoquímica de Formação"@pt ;
+    skos:altLabel "Impressão Digital Geoquímica"@pt ;
+    skos:altLabel "Geochemical DNA"@en ;
+    skos:altLabel "Geochemical Formation Signature"@en ;
+    skos:altLabel "Geochemical Fingerprint"@en ;
+    skos:definition """Assinatura geoquímica de uma formação derivada de medidas de FRX, usada como impressão digital elementar para correlação estratigráfica e classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013c)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:mudlogging-time-series a owl:Class ;
+    skos:prefLabel "Curvas de Tempo de Mudlogging"@pt ;
+    skos:prefLabel "Mudlogging Time Series"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Fluxo contínuo de parâmetros de perfuração e análise de gás transmitido da sonda ao EXATA. Esquema detalhado do registro temporal produzido pela Mudlogging."""@pt .
+
+geo:gas-show-event a owl:Class ;
+    skos:prefLabel "Evento Discreto de Indício de Hidrocarboneto"@pt ;
+    skos:prefLabel "Gas Show Event"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "show de gás"@pt ;
+    skos:altLabel "indício de hidrocarboneto"@pt ;
+    skos:altLabel "gas show"@en ;
+    skos:altLabel "hydrocarbon show"@en ;
+    skos:definition """Evento discreto de indício de gás/óleo detectado durante o mudlogging. Complementa a série temporal contínua com valores de pico, análise de razões (wetness/balance/character) e metadados de coleta em vacutainer."""@pt .
+
+geo:kick-event a owl:Class ;
+    skos:prefLabel "Evento Discreto de Kick"@pt ;
+    skos:prefLabel "Kick Event"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "kick"@pt ;
+    skos:altLabel "well kick"@en ;
+    skos:altLabel "influx event"@en ;
+    skos:definition """Evento discreto de kick (influxo de formação). Mesma entidade conceitual do registro OGEOMEC com TipoOcorrencia='Kick' no módulo pai — este esquema é a visão geológica resolvida no tempo; OGEOMEC é o registro de ocorrência geomecânica."""@pt .
+
+geo:cuttings-sample-detailed a owl:Class ;
+    skos:prefLabel "Amostra de Calha (Esquema Detalhado)"@pt ;
+    skos:prefLabel "Cuttings Sample (Detailed)"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Esquema detalhado de amostra de calha conforme PE-2EXP-00059, superando o stub leve do módulo pai. Registra intervalo, classificação litológica, observações petrofísicas, percentuais de litologia (componentes independentes, NÃO somam 100%) e FKs para análises laboratoriais."""@pt .
+
+geo:core-run a owl:Class ;
+    skos:prefLabel "Corrida de Testemunho"@pt ;
+    skos:prefLabel "Core Run"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Corrida única de testemunhagem em um wellbore — intervalos programado e recuperado, percentual de recuperação, tipo de tubo, contagens de plugues e FKs para OSDU/GeoSciML/BDIEP/SIGEO/QPG."""@pt .
+
+geo:core-plug a owl:Class ;
+    skos:prefLabel "Plugue de Testemunho"@pt ;
+    skos:prefLabel "Core Plug"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "plugue"@pt ;
+    skos:altLabel "plug de testemunho"@pt ;
+    skos:altLabel "core plug"@en ;
+    skos:definition "Plugue cilíndrico extraído de uma CoreRun para análise laboratorial."@pt .
+
+geo:sidewall-core-sample a owl:Class ;
+    skos:prefLabel "Amostra Lateral (SWC)"@pt ;
+    skos:prefLabel "Sidewall Core Sample"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "SWC"@pt ;
+    skos:altLabel "amostra lateral"@pt ;
+    skos:altLabel "sidewall core"@en ;
+    skos:altLabel "SWC"@en ;
+    skos:definition """Amostra lateral (SWC) adquirida durante corrida wireline — ferramentas rotativas (RSCT), de percussão (CST) ou mecânicas."""@pt .
+
+geo:lwd-run a owl:Class ;
+    skos:prefLabel "Corrida LWD/MWD"@pt ;
+    skos:prefLabel "LWD/MWD Run"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "LWD"@pt ;
+    skos:altLabel "MWD"@pt ;
+    skos:altLabel "Corrida MWD/LWD"@pt ;
+    skos:altLabel "LWD"@en ;
+    skos:altLabel "MWD"@en ;
+    skos:altLabel "Logging While Drilling"@en ;
+    skos:altLabel "Measurement While Drilling"@en ;
+    skos:definition """Corrida única LWD/MWD — fase, BHA, prestadora, stack de ferramentas, curvas em tempo real vs memória, versão WITSML, taxas de amostragem e ID do log no EXATA. Distinção MWD (medidas direcionais/perfuração) vs LWD (avaliação de formação durante perfuração) per PE-2EXP-00061."""@pt .
+
+geo:wireline-run a owl:Class ;
+    skos:prefLabel "Corrida de Perfilagem a Cabo"@pt ;
+    skos:prefLabel "Wireline Logging Run"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "perfilagem a cabo"@pt ;
+    skos:altLabel "wireline"@pt ;
+    skos:altLabel "wireline logging"@en ;
+    skos:altLabel "open-hole wireline run"@en ;
+    skos:definition """Corrida única de perfilagem a cabo conforme PE-2EXP-00065. Inclui fase, número da corrida, tipo, intervalo de seção repetida (mínimo 60m por PE-2EXP-00065), ferramentas, mnemônicos, BHT e peso de lama, FKs para amostras de fluido e SWCs, e flag de qualidade."""@pt .
+
+geo:formation-pressure-point a owl:Class ;
+    skos:prefLabel "Ponto de Pressão de Formação (RFT/MDT/MiniDST)"@pt ;
+    skos:prefLabel "Formation Pressure Point (RFT/MDT)"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "RFT"@pt ;
+    skos:altLabel "MDT"@pt ;
+    skos:altLabel "MiniDST"@pt ;
+    skos:altLabel "RFT point"@en ;
+    skos:altLabel "MDT pretest"@en ;
+    skos:definition """Medida única de pressão de formação (pretest) — RFT/MDT/XPT/FMT/MiniDST. Inclui pressão estática/fluxo, mobilidade, qualidade do pretest e coleta de amostra."""@pt .
+
+geo:dst-interval a owl:Class ;
+    skos:prefLabel "Intervalo de Teste de Formação (DST)"@pt ;
+    skos:prefLabel "DST Interval"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "DST"@pt ;
+    skos:altLabel "Drill Stem Test"@en ;
+    skos:definition """Intervalo de DST conforme PE-2E&P-00773. Interpretação definitiva da produtividade do poço. CRÍTICO: dados DST armazenados no SIRR (NÃO BDIEP). Gestor é RES/TR/AR (Reservatórios), NÃO EXP/OGP/AQG. Arquivos (FT1/2/5, Saphir, PanSystem) ficam em BDOC."""@pt .
+
+geo:geostopping-event a owl:Class ;
+    skos:prefLabel "Evento de Geostopping"@pt ;
+    skos:prefLabel "Geostopping Event"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Evento de decisão de geostopping — decisão em tempo real de parar a perfuração em profundidade precisa, baseada em curvas LWD, indícios de gás, tendência de MSE, mudança de fácies. Conforme definição PE-2EXP-00061. KPIs (decision_time_h, npt_avoided_h) são métricas operacionais inferidas."""@pt .
+
+geo:sirr a owl:Class ;
+    skos:prefLabel "Sistema de Informações de Reservas e Reservatórios"@pt ;
+    skos:prefLabel "Reserves & Reservoirs Information System (SIRR)"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Sistema canônico Petrobras para interpretações definitivas de DST e informações de reservas/reservatórios. Gestor: RES/TR/AR. Destino dos dados definitivos de DST e interpretações de teste de formação."""@pt .
+
+geo:bdoc a owl:Class ;
+    skos:prefLabel "Repositório Documental BDOC"@pt ;
+    skos:prefLabel "BDOC Document Repository"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "repositório documental"@pt ;
+    skos:altLabel "document repository"@en ;
+    skos:definition """Repositório documental para arquivos brutos: LAS/DLIS (wireline/LWD), fotos de testemunho, FT1/FT2/FT5 (DST), projetos Saphir/PanSystem."""@pt .
+
+geo:vge a owl:Class ;
+    skos:prefLabel "Visualizador de Geo-dados (acesso BDIEP)"@pt ;
+    skos:prefLabel "Geo-data Visualizer (VGE/BDIEP)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "BDIEP"@pt ;
+    skos:definition """Camada de visualização de geo-dados que provê acesso ao BDIEP. Já referenciada em operacoes-geologicas.json#classes.RMG.stored_in; formalizada aqui como sistema de primeira classe."""@pt .
+
+geo:roa a owl:Class ;
+    skos:prefLabel "Relatório de Ocorrências Anômalas"@pt ;
+    skos:prefLabel "Anomalous Occurrences Report (ROA)"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "relatório de ocorrências anômalas"@pt ;
+    skos:definition """Sub-documento do ROP registrando anomalias durante uma corrida wireline ou LWD. Referenciado por WirelineRun.anomaly_reports e LWDRun."""@pt .
+
+geo:cassandra-exata-curva-tempo a owl:Class ;
+    skos:prefLabel "Camada Cassandra — mdae.exata_curva_tempo"@pt ;
+    skos:prefLabel "Cassandra mdae.exata_curva_tempo Layer"@en ;
+    geo:entityType "instrument" ;
+    skos:definition """Camada de storage para séries temporais do EXATA. Caminho Cassandra: mdae.exata_curva_tempo. Complementa Oracle (hot data) para séries de alta frequência (mudlogging, LWD)."""@pt .
+
+geo:pag a owl:Class ;
+    skos:prefLabel "Perfil de Acompanhamento Geológico"@pt ;
+    skos:prefLabel "Geological Monitoring Profile (PAG)"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "perfil de acompanhamento geológico"@pt ;
+    skos:definition """Documento operacional do mudlogging contendo parâmetros de perfuração, percentuais de litologia, interpretação litológica, indícios de hidrocarboneto e dados de fluidos. Conforme PE-2EXP-00061."""@pt .
+
+geo:frame a owl:Class ;
+    skos:prefLabel "Frame de Configuração de Aquisição"@pt ;
+    skos:prefLabel "Acquisition Configuration Frame"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "frame de aquisição"@pt ;
+    skos:altLabel "acquisition frame"@en ;
+    skos:definition """Documento de configuração da prestadora especificando curvas em tempo real, curvas em memória, offsets de ferramenta, números de série, ROP máximo, taxa de amostragem e taxa de transmissão para uma corrida LWD ou wireline."""@pt .
+
+geo:fluid-sample a owl:Class ;
+    skos:prefLabel "Amostra de Fluido"@pt ;
+    skos:prefLabel "Fluid Sample"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "amostra de fluido"@pt ;
+    skos:altLabel "fluid sample"@en ;
+    skos:definition """Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST. Destino de FK de FormationPressurePoint e DSTInterval."""@pt .
+
+geo:mudlogging a owl:Class ;
+    skos:prefLabel "Mudlogging"@pt ;
+    skos:prefLabel "Mudlogging"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Linha de serviço de Operações Geológicas: monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real, transmitidos da sonda ao EXATA. Documento primário são os dados em tempo real (não o BDP). Normado por PE-2EXP-00059 e PE-2EXP-00061."""@pt .
+
+geo:cuttings-sampling a owl:Class ;
+    skos:prefLabel "Coleta de Calha"@pt ;
+    skos:prefLabel "Cuttings Sampling"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "amostragem de calha"@pt ;
+    skos:altLabel "amostras de calha"@pt ;
+    skos:altLabel "cuttings sample collection"@en ;
+    skos:definition """Linha de serviço de Operações Geológicas: coleta, descrição e classificação litológica dos cascalhos trazidos pelo fluido de perfuração. Insumo para classificação litológica e correlação. Normado por PE-2EXP-00059 e PE-2EXP-00061."""@pt .
+
+geo:coring a owl:Class ;
+    skos:prefLabel "Testemunhagem"@pt ;
+    skos:prefLabel "Coring"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Linha de serviço de Operações Geológicas: extração de cilindros de rocha (testemunhos) para análise laboratorial detalhada. Alinhada ao GeoSciML (specimentype/core). Insumo direto para IGP e caracterização de reservatório."""@pt .
+
+geo:sidewall-sampling a owl:Class ;
+    skos:prefLabel "Amostragem Lateral (SWC)"@pt ;
+    skos:prefLabel "Sidewall Sampling"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "SWC"@pt ;
+    skos:altLabel "sidewall core"@en ;
+    skos:altLabel "SWC"@en ;
+    skos:definition """Linha de serviço de Operações Geológicas: coleta de plugues laterais de rocha por ferramentas de wireline após a perfuração de uma seção. Normado por PE-2EXP-00065."""@pt .
+
+geo:mwd-lwd a owl:Class ;
+    skos:prefLabel "MWD/LWD"@pt ;
+    skos:prefLabel "MWD/LWD"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Linha de serviço de Operações Geológicas: medição e perfilagem durante a perfuração — dados petrofísicos e direcionais em tempo real. Registro primário são as curvas transmitidas ao EXATA, não o BDP. Normado por PE-2EXP-00061."""@pt .
+
+geo:wireline-logging a owl:Class ;
+    skos:prefLabel "Perfilagem a Cabo"@pt ;
+    skos:prefLabel "Wireline Logging"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Linha de serviço de Operações Geológicas: aquisição de perfis de poço descidos a cabo após a perfuração de cada fase. Alinhada ao OSDU (work-product-component--WellLog). Normado por PE-2EXP-00065."""@pt .
+
+geo:formation-testing a owl:Class ;
+    skos:prefLabel "Teste de Formação"@pt ;
+    skos:prefLabel "Formation Testing"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "RFT"@pt ;
+    skos:altLabel "MDT"@pt ;
+    skos:altLabel "DST"@pt ;
+    skos:altLabel "formation test"@en ;
+    skos:altLabel "RFT"@en ;
+    skos:altLabel "MDT"@en ;
+    skos:altLabel "DST"@en ;
+    skos:definition """Linha de serviço de Operações Geológicas: amostragem de fluidos e medição de pressões em reservatórios (RFT/MDT/DST). DST normado por PE-2E&P-00773. Calibra modelos de pressão de poros (geomechanics:GM004)."""@pt .
+
+geo:geostopping a owl:Class ;
+    skos:prefLabel "Geostopping"@pt ;
+    skos:prefLabel "Geostopping"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Linha de serviço de Operações Geológicas: monitoramento em tempo real para parada precisa em alvos geológicos, especialmente no pré-sal. Decisões baseadas em curvas LWD, indícios de gás, MSE e mudanças de fácies. Normado por PE-2EXP-00061."""@pt .
+
+geo:ogeomec a owl:Class ;
+    skos:prefLabel "Ocorrências Geomecânicas"@pt ;
+    skos:prefLabel "Geomechanical Occurrences (OGEOMEC)"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "OGEOMEC"@pt ;
+    skos:altLabel "Planilha de Ocorrências Geomecânicas"@pt ;
+    skos:altLabel "OGEOMEC"@en ;
+    skos:altLabel "Geomechanical Occurrences Table"@en ;
+    skos:definition """Tabela relacional de ocorrências geomecânicas durante a perfuração, persistida na BDIEP. Cada linha representa um evento (kick, perda, prisão, arraste, topamento) com intervalo, ECD, peso de lama, procedimento, diâmetro e BHA. Fonte estruturada primária para retroanálise e busca de análogos (898 ocorrências; 544 poços)."""@pt .
+
+geo:rcsd a owl:Class ;
+    skos:prefLabel "Relatório do CSD de Operações"@pt ;
+    skos:prefLabel "CSD Operations Report (RCSD)"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "RCSD"@pt ;
+    skos:altLabel "Relatório CSD"@pt ;
+    skos:altLabel "RCSD"@en ;
+    skos:altLabel "CSD Report"@en ;
+    skos:definition """Relatório do CSD (Centro de Suporte à Decisão) de Operações — documento PPT semi-estruturado armazenado em SharePoint / Drive Científico CSD. Consolida o status operacional emitido pelo CSD."""@pt .
+
 #
 # Object properties
 #
@@ -1580,8 +1874,8 @@ geo:authorizes_spending_for a owl:ObjectProperty ;
 geo:complements a owl:ObjectProperty ;
     rdfs:label "complementa"@pt ;
     rdfs:label "complements"@en ;
-    rdfs:domain geo:joa ;
-    rdfs:range geo:contrato-ep .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:joa geo:drx geo:frx ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:frx geo:drx ) ] .
 
 geo:delivers a owl:ObjectProperty ;
     rdfs:label "entrega"@pt ;
@@ -1826,7 +2120,7 @@ geo:realized_by a owl:ObjectProperty ;
 geo:performed_on a owl:ObjectProperty ;
     rdfs:label "executada em"@pt ;
     rdfs:label "performed on"@en ;
-    rdfs:domain geo:drilling-activity ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:drilling-activity geo:drx geo:frx ) ] ;
     rdfs:range geo:poco .
 
 geo:measured_for a owl:ObjectProperty ;
@@ -1910,8 +2204,8 @@ geo:output_of a owl:ObjectProperty ;
 geo:correlates_with a owl:ObjectProperty ;
     rdfs:label "correlaciona com"@pt ;
     rdfs:label "correlates with"@en ;
-    rdfs:domain geo:seismic-horizon ;
-    rdfs:range geo:topo-formacional .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:seismic-horizon geo:kick-event ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:topo-formacional geo:gas-show-event ) ] .
 
 geo:measurement_for a owl:ObjectProperty ;
     rdfs:label "medição para"@pt ;
@@ -1936,6 +2230,114 @@ geo:restricts_access_for a owl:ObjectProperty ;
     rdfs:label "restricts access for"@en ;
     rdfs:domain geo:acl ;
     rdfs:range geo:operador .
+
+geo:executes a owl:ObjectProperty ;
+    rdfs:label "executa"@pt ;
+    rdfs:label "executes"@en ;
+    rdfs:domain geo:operacoes-geologicas ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:drx geo:frx ) ] .
+
+geo:feeds_signature a owl:ObjectProperty ;
+    rdfs:label "alimenta assinatura"@pt ;
+    rdfs:label "feeds signature"@en ;
+    rdfs:domain geo:frx ;
+    rdfs:range geo:dna-geoquimico .
+
+geo:alimenta_classificacao_litologica a owl:ObjectProperty ;
+    rdfs:label "alimenta classificação litológica"@pt ;
+    rdfs:label "feeds lithological classification"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:drx geo:frx ) ] ;
+    rdfs:range geo:formacao .
+
+geo:acquired_during a owl:ObjectProperty ;
+    rdfs:label "adquirido durante"@pt ;
+    rdfs:label "acquired during"@en ;
+    rdfs:domain geo:sidewall-core-sample ;
+    rdfs:range geo:wireline-run .
+
+geo:has_plug a owl:ObjectProperty ;
+    rdfs:label "tem plugue"@pt ;
+    rdfs:label "has plug"@en ;
+    rdfs:domain geo:core-run ;
+    rdfs:range geo:core-plug .
+
+geo:feeds_decision a owl:ObjectProperty ;
+    rdfs:label "alimenta decisão"@pt ;
+    rdfs:label "feeds decision"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:gas-show-event geo:lwd-run ) ] ;
+    rdfs:range geo:geostopping-event .
+
+geo:stored_in a owl:ObjectProperty ;
+    rdfs:label "armazenado em"@pt ;
+    rdfs:label "stored in"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:dst-interval geo:mudlogging-time-series ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:sirr geo:cassandra-exata-curva-tempo ) ] .
+
+geo:files_stored_in a owl:ObjectProperty ;
+    rdfs:label "arquivos armazenados em"@pt ;
+    rdfs:label "files stored in"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:wireline-run geo:lwd-run ) ] ;
+    rdfs:range geo:bdoc .
+
+geo:photos_stored_in a owl:ObjectProperty ;
+    rdfs:label "fotos armazenadas em"@pt ;
+    rdfs:label "photos stored in"@en ;
+    rdfs:domain geo:core-run ;
+    rdfs:range geo:bdoc .
+
+geo:documents_anomaly a owl:ObjectProperty ;
+    rdfs:label "documenta anomalia"@pt ;
+    rdfs:label "documents anomaly"@en ;
+    rdfs:domain geo:wireline-run ;
+    rdfs:range geo:roa .
+
+geo:configures a owl:ObjectProperty ;
+    rdfs:label "configura"@pt ;
+    rdfs:label "configures"@en ;
+    rdfs:domain geo:frame ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:lwd-run geo:wireline-run ) ] .
+
+geo:collects a owl:ObjectProperty ;
+    rdfs:label "coleta"@pt ;
+    rdfs:label "collects"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:formation-pressure-point geo:dst-interval ) ] ;
+    rdfs:range geo:fluid-sample .
+
+geo:uses a owl:ObjectProperty ;
+    rdfs:label "usa"@pt ;
+    rdfs:label "uses"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:lwd-run geo:wireline-run ) ] ;
+    rdfs:range geo:bha .
+
+geo:executes_servico a owl:ObjectProperty ;
+    rdfs:label "executa serviço"@pt ;
+    rdfs:label "executes service"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:cuttings-sampling geo:coring geo:sidewall-sampling geo:mwd-lwd geo:wireline-logging geo:formation-testing geo:geostopping ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:mudlogging-time-series geo:gas-show-event geo:cuttings-sample-detailed geo:core-run geo:sidewall-core-sample geo:lwd-run geo:wireline-run geo:formation-pressure-point geo:dst-interval geo:geostopping-event ) ] .
+
+geo:produces a owl:ObjectProperty ;
+    rdfs:label "produz"@pt ;
+    rdfs:label "produces"@en ;
+    rdfs:domain geo:mudlogging ;
+    rdfs:range geo:pag .
+
+geo:recorded_in a owl:ObjectProperty ;
+    rdfs:label "registrado em"@pt ;
+    rdfs:label "recorded in"@en ;
+    rdfs:domain geo:kick-event ;
+    rdfs:range geo:ogeomec .
+
+geo:narrated_in a owl:ObjectProperty ;
+    rdfs:label "narrado em"@pt ;
+    rdfs:label "narrated in"@en ;
+    rdfs:domain geo:geostopping-event ;
+    rdfs:range geo:rcsd .
+
+geo:uses_tool a owl:ObjectProperty ;
+    rdfs:label "usa ferramenta"@pt ;
+    rdfs:label "uses tool"@en ;
+    rdfs:domain geo:mwd-lwd ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:mwd geo:lwd ) ] .
 
 #
 # Edges (instance-level relation triples)
@@ -2090,3 +2492,44 @@ geo:document-type geo:classifies geo:eia .
 geo:facility-type geo:classifies geo:fpso .
 geo:geo-political-entity geo:jurisdiction_of geo:anp .
 geo:acl geo:restricts_access_for geo:operador .
+geo:operacoes-geologicas geo:executes geo:drx .
+geo:operacoes-geologicas geo:executes geo:frx .
+geo:drx geo:complements geo:frx .
+geo:frx geo:complements geo:drx .
+geo:frx geo:feeds_signature geo:dna-geoquimico .
+geo:drx geo:performed_on geo:poco .
+geo:frx geo:performed_on geo:poco .
+geo:drx geo:alimenta_classificacao_litologica geo:formacao .
+geo:frx geo:alimenta_classificacao_litologica geo:formacao .
+geo:sidewall-core-sample geo:acquired_during geo:wireline-run .
+geo:core-run geo:has_plug geo:core-plug .
+geo:gas-show-event geo:feeds_decision geo:geostopping-event .
+geo:lwd-run geo:feeds_decision geo:geostopping-event .
+geo:dst-interval geo:stored_in geo:sirr .
+geo:wireline-run geo:files_stored_in geo:bdoc .
+geo:lwd-run geo:files_stored_in geo:bdoc .
+geo:core-run geo:photos_stored_in geo:bdoc .
+geo:wireline-run geo:documents_anomaly geo:roa .
+geo:frame geo:configures geo:lwd-run .
+geo:frame geo:configures geo:wireline-run .
+geo:formation-pressure-point geo:collects geo:fluid-sample .
+geo:dst-interval geo:collects geo:fluid-sample .
+geo:lwd-run geo:uses geo:bha .
+geo:wireline-run geo:uses geo:bha .
+geo:mudlogging-time-series geo:stored_in geo:cassandra-exata-curva-tempo .
+geo:kick-event geo:correlates_with geo:gas-show-event .
+geo:mudlogging geo:executes_servico geo:mudlogging-time-series .
+geo:mudlogging geo:executes_servico geo:gas-show-event .
+geo:mudlogging geo:produces geo:pag .
+geo:cuttings-sampling geo:executes_servico geo:cuttings-sample-detailed .
+geo:coring geo:executes_servico geo:core-run .
+geo:sidewall-sampling geo:executes_servico geo:sidewall-core-sample .
+geo:mwd-lwd geo:executes_servico geo:lwd-run .
+geo:wireline-logging geo:executes_servico geo:wireline-run .
+geo:formation-testing geo:executes_servico geo:formation-pressure-point .
+geo:formation-testing geo:executes_servico geo:dst-interval .
+geo:geostopping geo:executes_servico geo:geostopping-event .
+geo:kick-event geo:recorded_in geo:ogeomec .
+geo:geostopping-event geo:narrated_in geo:rcsd .
+geo:mwd-lwd geo:uses_tool geo:mwd .
+geo:mwd-lwd geo:uses_tool geo:lwd .

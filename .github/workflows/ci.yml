@@ -370,76 +370,19 @@ jobs:
               f.write(f"body={body_escaped}\n")
           EOF
 
-      - name: Set graph variables
-        id: graph-vars
-        run: |
-          BASE_SHA=${{ github.event.pull_request.base.sha }}
-          BASE_GRAPH=$(git show "${BASE_SHA}:data/entity-graph.json" 2>/dev/null || echo '{"nodes":[],"edges":[]}')
-          HEAD_GRAPH=$(cat data/entity-graph.json 2>/dev/null || echo '{"nodes":[],"edges":[]}')
-          echo "base_graph<<GRAPH_EOF" >> $GITHUB_OUTPUT
-          echo "$BASE_GRAPH" >> $GITHUB_OUTPUT
-          echo "GRAPH_EOF" >> $GITHUB_OUTPUT
-          echo "head_graph<<GRAPH_EOF" >> $GITHUB_OUTPUT
-          echo "$HEAD_GRAPH" >> $GITHUB_OUTPUT
-          echo "GRAPH_EOF" >> $GITHUB_OUTPUT
-
       - name: Post graph diff comment
         uses: actions/github-script@v7
+        env:
+          DIFF_BODY: ${{ steps.diff.outputs.body }}
         with:
           script: |
-            const baseRaw = process.env.BASE_GRAPH_RAW || '{"nodes":[],"edges":[]}';
-            const headRaw = process.env.HEAD_GRAPH_RAW || '{"nodes":[],"edges":[]}';
-
-            let base, head;
-            try { base = JSON.parse(baseRaw); } catch { base = {nodes:[], edges:[]}; }
-            try { head = JSON.parse(headRaw); } catch { head = {nodes:[], edges:[]}; }
-
-            const baseNodes = new Set((base.nodes || []).map(n => n.id));
-            const headNodes = new Set((head.nodes || []).map(n => n.id));
-            const baseEdges = new Set((base.edges || []).map(e => `${e.from}|${e.rel}|${e.to}`));
-            const headEdges = new Set((head.edges || []).map(e => `${e.from}|${e.rel}|${e.to}`));
-
-            const addedNodes = [...headNodes].filter(n => !baseNodes.has(n)).sort();
-            const removedNodes = [...baseNodes].filter(n => !headNodes.has(n)).sort();
-            const addedEdges = [...headEdges].filter(e => !baseEdges.has(e)).sort();
-            const removedEdges = [...baseEdges].filter(e => !headEdges.has(e)).sort();
-
-            const lines = ['## Entity graph diff', ''];
-            lines.push(`**Nodes:** ${baseNodes.size} -> ${headNodes.size} (${addedNodes.length >= 0 ? '+' : ''}${addedNodes.length} added, -${removedNodes.length} removed)`);
-            lines.push(`**Edges:** ${baseEdges.size} -> ${headEdges.size} (${addedEdges.length >= 0 ? '+' : ''}${addedEdges.length} added, -${removedEdges.length} removed)`);
-
-            if (addedNodes.length > 0) {
-              lines.push('', '### Added nodes');
-              addedNodes.slice(0, 20).forEach(n => lines.push(`- \`${n}\``));
-              if (addedNodes.length > 20) lines.push(`- ... and ${addedNodes.length - 20} more`);
-            }
-            if (removedNodes.length > 0) {
-              lines.push('', '### Removed nodes');
-              removedNodes.slice(0, 20).forEach(n => lines.push(`- \`${n}\``));
-              if (removedNodes.length > 20) lines.push(`- ... and ${removedNodes.length - 20} more`);
-            }
-            if (addedEdges.length > 0) {
-              lines.push('', '### Added edges');
-              addedEdges.slice(0, 20).forEach(e => {
-                const [from, rel, to] = e.split('|');
-                lines.push(`- \`${from}\` --${rel}--> \`${to}\``);
-              });
-              if (addedEdges.length > 20) lines.push(`- ... and ${addedEdges.length - 20} more`);
-            }
-            if (removedEdges.length > 0) {
-              lines.push('', '### Removed edges');
-              removedEdges.slice(0, 20).forEach(e => {
-                const [from, rel, to] = e.split('|');
-                lines.push(`- \`${from}\` --${rel}--> \`${to}\``);
-              });
-              if (removedEdges.length > 20) lines.push(`- ... and ${removedEdges.length - 20} more`);
-            }
-            if (!addedNodes.length && !removedNodes.length && !addedEdges.length && !removedEdges.length) {
-              lines.push('', 'No changes to entity graph.');
-            }
-
-            const body = lines.join('\n');
+            // Body already computed by the previous Python step.
+            // Passing the full graph JSON via env hits "Argument list too long"
+            // once the graph grows past a few thousand entries.
+            const rawBody = (process.env.DIFF_BODY || '')
+              .replace(/%0A/g, '\n').replace(/%0D/g, '\r').replace(/%25/g, '%');
             const marker = '<!-- entity-graph-diff -->';
+            const fullBody = `${marker}\n${rawBody || '## Entity graph diff\n\nNo changes detected.'}`;
 
             const { data: comments } = await github.rest.issues.listComments({
               owner: context.repo.owner,
@@ -448,8 +391,6 @@ jobs:
             });
 
             const existing = comments.find(c => c.body.includes(marker));
-            const fullBody = `${marker}\n${body}`;
-
             if (existing) {
               await github.rest.issues.updateComment({
                 owner: context.repo.owner,
@@ -465,6 +406,3 @@ jobs:
                 body: fullBody,
               });
             }
-        env:
-          BASE_GRAPH_RAW: ${{ steps.graph-vars.outputs.base_graph }}
-          HEAD_GRAPH_RAW: ${{ steps.graph-vars.outputs.head_graph }}

@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-01T23:14:27.548Z",
-    "count": 31
+    "generated": "2026-05-02T20:44:00.332Z",
+    "count": 42
   },
   "terms": [
     {
@@ -779,6 +779,319 @@
       "synonyms_pt": [],
       "synonyms_en": [],
       "examples": []
+    },
+    {
+      "id": "drx",
+      "termo": "DRX — Difração de Raios X",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Análise por difração de raios X em amostras de calha ou testemunho, fornecendo composição mineralógica qualitativa e semi-quantitativa. Insumo crítico para classificação litológica, correlação estratigráfica e decisões de estabilidade de poço (identificação de argilominerais reativos). Complementar ao FRX. Gestão: EXP/OGP/AQG.",
+      "fonte": "Petrobras EXP/OGP — Operações Geológicas",
+      "source": "data/operacoes-geologicas.json#DRX",
+      "apareceEm": [],
+      "termo_en": "X-Ray Diffraction",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "DRX",
+        "Difração de Raios X",
+        "Difratometria de Raios X"
+      ],
+      "synonyms_en": [
+        "XRD",
+        "X-Ray Diffraction"
+      ],
+      "examples": [
+        "QTZ (Quartzo)",
+        "CAL (Calcita)",
+        "DOL (Dolomita)",
+        "Argilominerais (esmectita, ilita, caulinita, clorita)"
+      ]
+    },
+    {
+      "id": "frx",
+      "termo": "FRX — Fluorescência de Raios X",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Análise por fluorescência de raios X em amostras de calha, fornecendo composição elementar (elementos maiores e traço). Permite classificação litológica via razões elementares, correlação geoquímica entre poços e construção de assinaturas geoquímicas de formações (DNA Geoquímico). Armazenado no SIGEO em módulo dedicado. Gestão: EXP/OGP/AQG.",
+      "fonte": "Petrobras EXP/OGP — SIGEO Análise de Dados de FRX",
+      "source": "data/operacoes-geologicas.json#FRX",
+      "apareceEm": [],
+      "termo_en": "X-Ray Fluorescence",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "FRX",
+        "Fluorescência de Raios X",
+        "Análise de FRX"
+      ],
+      "synonyms_en": [
+        "XRF",
+        "X-Ray Fluorescence"
+      ],
+      "examples": [
+        "Razões Fe/Ba para discriminação de formações",
+        "Razão Ca/K (carbonato vs siliciclástico)",
+        "Pearce Nb/Y x Zr/Ti (rochas ígneas)"
+      ]
+    },
+    {
+      "id": "dna-geoquimico",
+      "termo": "DNA Geoquímico",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Assinatura geoquímica de uma formação construída a partir de razões elementares de FRX em múltiplos poços. Usado como impressão digital para correlação estratigráfica e análise de proveniência. Termo emerge das razões elementares padronizadas de FRX; nomenclatura interna da equipe AQG (status: inferido).",
+      "fonte": "Petrobras EXP/OGP/AQG (jargão operacional)",
+      "source": "data/operacoes-geologicas.json#DNAGeoquimico",
+      "apareceEm": [],
+      "termo_en": "Geochemical Signature",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "assinatura geoquímica",
+        "fingerprint geoquímico"
+      ],
+      "synonyms_en": [
+        "geochemical signature",
+        "geochemical fingerprint"
+      ],
+      "examples": []
+    },
+    {
+      "id": "ogeomec",
+      "termo": "OGEOMEC — Ocorrências Geomecânicas",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Tabela relacional de ocorrências geomecânicas durante a perfuração, persistida na BDIEP. Cada linha representa um evento (kick, perda, prisão, arraste, topamento, estolamento, etc.) com intervalo de profundidade, estado do fluido (ECD, peso de lama), procedimento de poço, diâmetro e BHA. Fonte estruturada primária para retroanálise e busca de análogos. Gestão: EXP/OGP/AQG/AIP-OGEO.",
+      "fonte": "Petrobras — Workshop Geomecânica de Poços; Schema OGEOMEC.xlsx",
+      "source": "data/operacoes-geologicas.json#OGEOMEC",
+      "apareceEm": [],
+      "termo_en": "Geomechanical Occurrences",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "Ocorrências Geomecânicas",
+        "Planilha de Ocorrências Geomecânicas"
+      ],
+      "synonyms_en": [
+        "Geomechanical Occurrences",
+        "drilling incident table"
+      ],
+      "examples": [
+        "Kick",
+        "Perda Din/Est/Total",
+        "Prisão",
+        "Arraste",
+        "Topamento",
+        "Estolamento",
+        "Gas Manobra"
+      ]
+    },
+    {
+      "id": "qpg",
+      "termo": "QPG — Quadro de Previsão Geológica",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Quadro de Previsão Geológica — publicado no SIGEO/BDIEP, consolida a representação visual das possíveis características geológicas do poço: previsão litológica, marcadores, falhas, tempo sísmico, objetivos e previsões de ferramentas/técnicas de aquisição. Principal insumo de planejamento consumido pelas atividades de aquisição. Gestão: EXP/OGP.",
+      "fonte": "Petrobras — SIGEO wiki (Quadro de Previsão Geológica)",
+      "source": "data/operacoes-geologicas.json#QPG",
+      "apareceEm": [],
+      "termo_en": "Geological Prognosis Chart",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "Quadro de Previsão Geológica",
+        "Prognóstico Geológico"
+      ],
+      "synonyms_en": [
+        "geological prognosis",
+        "predicted geology chart"
+      ],
+      "examples": []
+    },
+    {
+      "id": "perfil-composto",
+      "termo": "Perfil Composto",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Perfil Composto — integra, para um único poço, curvas de perfis (wireline e MWD/LWD), descrições litológicas, indícios, testes de formação, registros direcionais e demais dados adquiridos — recuperados da BDIEP via SIGEO. Produto canônico pós-perfuração da disciplina de Consolidação de Dados de Poço (WellDataConsolidation). Gestão: EXP/OGP.",
+      "fonte": "Petrobras — SIGEO wiki (Perfil Composto)",
+      "source": "data/operacoes-geologicas.json#PerfilComposto",
+      "apareceEm": [],
+      "termo_en": "Composite Log",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "Perfil Composto",
+        "perfil consolidado de poço"
+      ],
+      "synonyms_en": [
+        "composite log",
+        "well composite log"
+      ],
+      "examples": []
+    },
+    {
+      "id": "geostopping",
+      "termo": "Geostopping",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Monitoramento em tempo real para parada precisa em alvos geológicos durante a perfuração, especialmente no pré-sal. Linha de serviço de Operações Geológicas executada pelo CGOR usando dados streaming do EXATA (mudlogging + MWD/LWD).",
+      "fonte": "Petrobras — Centro Geológico de Operação Remota (CGOR)",
+      "source": "data/operacoes-geologicas.json#Geostopping",
+      "apareceEm": [],
+      "termo_en": "Geostopping",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "geostopping",
+        "parada geológica"
+      ],
+      "synonyms_en": [
+        "geostopping",
+        "geological stop"
+      ],
+      "examples": [
+        "Parada precisa no topo de carbonato pré-sal"
+      ]
+    },
+    {
+      "id": "mudlogging",
+      "termo": "Mudlogging",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real na sonda. Documento primário são os dados transmitidos em tempo real para o EXATA (não o BDP, que é do engenheiro fiscal). Alinhamento OSDU: opendes:osdu:work-product-component--MudLog:1.0.0. Objeto WITSML: mudLog.",
+      "fonte": "Petrobras — EXATA e GDA (SharePoint); OGDA SIMGEO 2024",
+      "source": "data/operacoes-geologicas.json#Mudlogging",
+      "apareceEm": [],
+      "termo_en": "Mudlogging",
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:work-product-component--MudLog:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "mudlogging",
+        "perfilagem de lama"
+      ],
+      "synonyms_en": [
+        "mudlogging",
+        "mud logging"
+      ],
+      "examples": [
+        "Análise de gases em tempo real",
+        "Monitoramento de ROP, WOB, torque"
+      ]
+    },
+    {
+      "id": "cuttings",
+      "termo": "Cuttings (Amostra de Calha)",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Coleta, descrição e classificação litológica dos cascalhos (cuttings) trazidos à superfície pelo fluido de perfuração. Linha de serviço base para descrição litológica do poço, FRX e DRX. Alinhamento GeoSciML/CGI: specimentype/cuttings.",
+      "fonte": "Petrobras — Operações Geológicas; GeoSciML CGI specimentype",
+      "source": "data/operacoes-geologicas.json#CuttingsSampling",
+      "apareceEm": [],
+      "termo_en": "Cuttings",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "amostra de calha",
+        "calha",
+        "cascalho de perfuração",
+        "cuttings"
+      ],
+      "synonyms_en": [
+        "cuttings",
+        "drill cuttings",
+        "rock cuttings"
+      ],
+      "examples": []
+    },
+    {
+      "id": "testemunho",
+      "termo": "Testemunho (Coring)",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Extração de cilindros de rocha (testemunhos) durante a perfuração para análise laboratorial detalhada. Linha de serviço de Operações Geológicas. Alinhamento GeoSciML/CGI: specimentype/core.",
+      "fonte": "Petrobras — Operações Geológicas; GeoSciML CGI specimentype",
+      "source": "data/operacoes-geologicas.json#Coring",
+      "apareceEm": [],
+      "termo_en": "Core / Coring",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "testemunho",
+        "testemunhagem",
+        "core"
+      ],
+      "synonyms_en": [
+        "core",
+        "coring",
+        "rock core"
+      ],
+      "examples": [
+        "Testemunhagem em reservatório carbonático pré-sal"
+      ]
+    },
+    {
+      "id": "wireline",
+      "termo": "Wireline (Perfilagem a Cabo)",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Aquisição de perfis de poço (well logs) após a perfuração de cada fase, com ferramentas descidas a cabo. Linha de serviço de Operações Geológicas. Alimenta o Perfil Composto. Alinhamento OSDU: opendes:osdu:work-product-component--WellLog:1.0.0. Objeto WITSML: log.",
+      "fonte": "Petrobras — Operações Geológicas; OSDU R3 WellLog",
+      "source": "data/operacoes-geologicas.json#WirelineLogging",
+      "apareceEm": [],
+      "termo_en": "Wireline Logging",
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "perfilagem a cabo",
+        "wireline",
+        "perfilagem por cabo"
+      ],
+      "synonyms_en": [
+        "wireline logging",
+        "wireline",
+        "open-hole logging"
+      ],
+      "examples": [
+        "Suite básica: GR, resistividade, neutrão, densidade",
+        "Suite especial: NMR, dipmeter, image log"
+      ]
     }
   ]
 }
