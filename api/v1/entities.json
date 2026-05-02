@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-02T20:55:03.064Z",
+    "generated": "2026-05-02T21:05:44.123Z",
     "count": 164
   },
   "entities": [
@@ -796,16 +796,6 @@
             "from": "wellbore",
             "relation": "penetrates",
             "style": "dashed"
-          },
-          {
-            "from": "drx",
-            "relation": "alimenta_classificacao_litologica",
-            "style": "solid"
-          },
-          {
-            "from": "frx",
-            "relation": "alimenta_classificacao_litologica",
-            "style": "solid"
           }
         ]
       }
@@ -4674,6 +4664,16 @@
             "from": "perfil-poco",
             "relation": "infers",
             "style": "dashed"
+          },
+          {
+            "from": "drx",
+            "relation": "alimenta_classificacao_litologica",
+            "style": "solid"
+          },
+          {
+            "from": "frx",
+            "relation": "alimenta_classificacao_litologica",
+            "style": "solid"
           }
         ]
       }
@@ -7371,6 +7371,10 @@
         "@en": "Discipline grouping analytical and operational geological data-acquisition techniques (XRD, XRF, geochemistry) applied to well and formation samples. Detailed in module data/operacoes-geologicas.json (OG001)."
       },
       "skos_example": [],
+      "evidence_status": "inferred",
+      "evidence_refs": [
+        "Petrobras EXP/OGP — Macroprocesso Explorar, N3 'Prover planejamento, aquisição e avaliação de dados geológicos e petrofísicos'"
+      ],
       "relations": {
         "outgoing": [
           {
@@ -7479,6 +7483,11 @@
         "@en": "Analytical technique for mineralogical identification based on X-ray diffraction patterns from rock samples. Supports mineralogy characterization and lithological classification. Detailed in data/operacoes-geologicas.json (OG013)."
       },
       "skos_example": [],
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2EXP-00059",
+        "SIGEO wiki — Análise de Dados de FRX"
+      ],
       "relations": {
         "outgoing": [
           {
@@ -7492,7 +7501,7 @@
             "style": "solid"
           },
           {
-            "to": "formacao",
+            "to": "litologia",
             "relation": "alimenta_classificacao_litologica",
             "style": "solid"
           }
@@ -7568,6 +7577,11 @@
         "@en": "Analytical technique to determine elemental composition of rock samples via X-ray fluorescence. Produces a geochemical signature used in formation characterization and correlation. Detailed in data/operacoes-geologicas.json (OG013b)."
       },
       "skos_example": [],
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PE-2EXP-00059",
+        "SIGEO wiki — Análise de Dados de FRX"
+      ],
       "relations": {
         "outgoing": [
           {
@@ -7586,7 +7600,7 @@
             "style": "solid"
           },
           {
-            "to": "formacao",
+            "to": "litologia",
             "relation": "alimenta_classificacao_litologica",
             "style": "solid"
           },
@@ -7669,6 +7683,10 @@
         "@en": "Geochemical signature of a formation derived from XRF measurements, used as an elemental fingerprint for stratigraphic correlation and lithological classification. Detailed in data/operacoes-geologicas.json (OG013c)."
       },
       "skos_example": [],
+      "evidence_status": "inferred",
+      "evidence_refs": [
+        "Petrobras EXP/OGP/AQG — jargão operacional; inferido de dados de FRX multi-poço"
+      ],
       "relations": {
         "outgoing": [],
         "incoming": [
@@ -8161,7 +8179,7 @@
           },
           {
             "to": "qpg",
-            "relation": "derived_from",
+            "relation": "informed_by",
             "style": "dashed"
           }
         ],
@@ -8262,7 +8280,13 @@
         "BDIEP"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "bdiep",
+            "relation": "provides_access_to",
+            "style": "solid"
+          }
+        ],
         "incoming": []
       }
     },
@@ -8875,7 +8899,7 @@
           },
           {
             "from": "geostopping-event",
-            "relation": "derived_from",
+            "relation": "informed_by",
             "style": "dashed"
           },
           {
@@ -9366,6 +9390,11 @@
             "from": "mwd-lwd",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "from": "gda",
+            "relation": "provides_access_to",
+            "style": "solid"
           }
         ]
       }
@@ -9461,6 +9490,16 @@
             "from": "sigeo",
             "relation": "publishes_to",
             "style": "solid"
+          },
+          {
+            "from": "vge",
+            "relation": "provides_access_to",
+            "style": "solid"
+          },
+          {
+            "from": "bdiap",
+            "relation": "complements",
+            "style": "dashed"
           }
         ]
       }
@@ -9484,7 +9523,13 @@
         "BDIAP"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "bdiep",
+            "relation": "complements",
+            "style": "dashed"
+          }
+        ],
         "incoming": []
       }
     },
@@ -9525,6 +9570,11 @@
             "from": "bdiep",
             "relation": "feeds",
             "style": "dashed"
+          },
+          {
+            "from": "geodo",
+            "relation": "queries",
+            "style": "dashed"
           }
         ]
       }
@@ -9548,7 +9598,13 @@
         "GeoDO"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "aida",
+            "relation": "queries",
+            "style": "dashed"
+          }
+        ],
         "incoming": []
       }
     },
@@ -9574,7 +9630,13 @@
         "GDA"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "exata",
+            "relation": "provides_access_to",
+            "style": "solid"
+          }
+        ],
         "incoming": []
       }
     }

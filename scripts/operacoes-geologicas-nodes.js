@@ -60,7 +60,9 @@ export const OG_NODES = [
       "@pt": "Disciplina que agrupa técnicas analíticas e operacionais de aquisição de dados geológicos (DRX, FRX, geoquímica) aplicadas a amostras de poço e formação. Detalhada no módulo data/operacoes-geologicas.json (OG001).",
       "@en": "Discipline grouping analytical and operational geological data-acquisition techniques (XRD, XRF, geochemistry) applied to well and formation samples. Detailed in module data/operacoes-geologicas.json (OG001)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "inferred",
+    "evidence_refs": ["Petrobras EXP/OGP — Macroprocesso Explorar, N3 'Prover planejamento, aquisição e avaliação de dados geológicos e petrofísicos'"]
   },
   {
     "id": "drx",
@@ -113,7 +115,9 @@ export const OG_NODES = [
       "@pt": "Técnica analítica de identificação mineralógica baseada na difração de raios X em amostras de rocha. Permite caracterizar mineralogia e auxiliar a classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013).",
       "@en": "Analytical technique for mineralogical identification based on X-ray diffraction patterns from rock samples. Supports mineralogy characterization and lithological classification. Detailed in data/operacoes-geologicas.json (OG013)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "documented",
+    "evidence_refs": ["PE-2EXP-00059", "SIGEO wiki — Análise de Dados de FRX"]
   },
   {
     "id": "frx",
@@ -166,7 +170,9 @@ export const OG_NODES = [
       "@pt": "Técnica analítica de determinação da composição elementar de amostras de rocha por fluorescência de raios X. Gera assinatura geoquímica usada na caracterização e correlação de formações. Detalhada em data/operacoes-geologicas.json (OG013b).",
       "@en": "Analytical technique to determine elemental composition of rock samples via X-ray fluorescence. Produces a geochemical signature used in formation characterization and correlation. Detailed in data/operacoes-geologicas.json (OG013b)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "documented",
+    "evidence_refs": ["PE-2EXP-00059", "SIGEO wiki — Análise de Dados de FRX"]
   },
   {
     "id": "dna-geoquimico",
@@ -221,7 +227,9 @@ export const OG_NODES = [
       "@pt": "Assinatura geoquímica de uma formação derivada de medidas de FRX, usada como impressão digital elementar para correlação estratigráfica e classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013c).",
       "@en": "Geochemical signature of a formation derived from XRF measurements, used as an elemental fingerprint for stratigraphic correlation and lithological classification. Detailed in data/operacoes-geologicas.json (OG013c)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "inferred",
+    "evidence_refs": ["Petrobras EXP/OGP/AQG — jargão operacional; inferido de dados de FRX multi-poço"]
   },
   {
     "id": "mudlogging-time-series",
@@ -1074,7 +1082,7 @@ export const OG_EDGES = [
   },
   {
     "source": "drx",
-    "target": "formacao",
+    "target": "litologia",
     "relation": "alimenta_classificacao_litologica",
     "relation_label": "alimenta classificação litológica",
     "relation_label_en": "feeds lithological classification",
@@ -1082,7 +1090,7 @@ export const OG_EDGES = [
   },
   {
     "source": "frx",
-    "target": "formacao",
+    "target": "litologia",
     "relation": "alimenta_classificacao_litologica",
     "relation_label": "alimenta classificação litológica",
     "relation_label_en": "feeds lithological classification",
@@ -1559,7 +1567,7 @@ export const OG_EDGES = [
     "relation_label": "derivado de",
     "relation_label_en": "derived from",
     "style": "dashed",
-    "evidence_status": "documented"
+    "evidence_status": "inferred"
   },
   {
     "source": "rcsd",
@@ -1609,9 +1617,9 @@ export const OG_EDGES = [
   {
     "source": "geostopping-event",
     "target": "qpg",
-    "relation": "derived_from",
-    "relation_label": "derivado de",
-    "relation_label_en": "derived from",
+    "relation": "informed_by",
+    "relation_label": "informado por",
+    "relation_label_en": "informed by",
     "style": "dashed",
     "evidence_status": "documented"
   },
@@ -1751,6 +1759,38 @@ export const OG_EDGES = [
     "relation": "publishes_to",
     "relation_label": "publica em",
     "relation_label_en": "publishes to",
+    "style": "solid"
+  },
+  {
+    "source": "vge",
+    "target": "bdiep",
+    "relation": "provides_access_to",
+    "relation_label": "provê acesso a",
+    "relation_label_en": "provides access to",
+    "style": "solid"
+  },
+  {
+    "source": "bdiap",
+    "target": "bdiep",
+    "relation": "complements",
+    "relation_label": "complementa",
+    "relation_label_en": "complements",
+    "style": "dashed"
+  },
+  {
+    "source": "geodo",
+    "target": "aida",
+    "relation": "queries",
+    "relation_label": "consulta",
+    "relation_label_en": "queries",
+    "style": "dashed"
+  },
+  {
+    "source": "gda",
+    "target": "exata",
+    "relation": "provides_access_to",
+    "relation_label": "provê acesso a",
+    "relation_label_en": "provides access to",
     "style": "solid"
   }
 ];
