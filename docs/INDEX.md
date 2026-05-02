@@ -19,9 +19,9 @@ Mapa de navegacao para toda a documentacao do projeto.
 
 | Arquivo | Descricao |
 |---|---|
-| [GEOMECHANICS.md](GEOMECHANICS.md) | Modulo MEM P2.7: conceito, quatro pilares do MEM 1D, mapeamento JSON, diagrama Mermaid, Circulo de Mohr, SHACL shapes, crosswalk fraturas-GSO |
+| [GEOMECHANICS.md](GEOMECHANICS.md) | Modulo MEM P2.7: conceito, quatro pilares do MEM 1D, mapeamento JSON, diagrama Mermaid, Circulo de Mohr, SHACL shapes, crosswalk fraturas-GSO. **Inclui modulo L6 Corporate Petrobras** (47 entidades GEOMEC*, crosswalk L2↔L6, SHACL shapes 23-30, integracao com Validator do LangGraph). |
 | [SEISMIC.md](SEISMIC.md) | Modulo sismico P2.8: aquisicao, processamento, inversao e atributos. Diagrama Mermaid, mapeamento OSDU, classes AVO |
-| [SHACL.md](SHACL.md) | Documentacao do sistema SHACL: 22 NodeShapes, como validar, como adicionar novas shapes |
+| [SHACL.md](SHACL.md) | Documentacao do sistema SHACL: 30 NodeShapes, como validar, como adicionar novas shapes |
 | [SWEET.md](SWEET.md) | Alinhamento SWEET (NASA/ESIPFed): 66 alinhamentos SKOS, expansao semantica via `sweet-expand.js`, uso em agentes |
 | [WITSML.md](WITSML.md) | Mapeamento WITSML/PRODML → RDF: argumento linear→grafo, schema do crosswalk, exemplos SPARQL/Cypher |
 
@@ -32,7 +32,6 @@ Mapa de navegacao para toda a documentacao do projeto.
 | Arquivo | Descricao |
 |---|---|
 | [ENTITIES.md](ENTITIES.md) | Modelo de entidades: 6 tipos, relacoes tipadas, campos por no, API e MCP tools, queries Cypher de exemplo |
-| [ENTITIES.md#operações-geológicas--aquisição-de-dados-geoquímicos](ENTITIES.md#operações-geológicas--aquisição-de-dados-geoquímicos) | Operacoes Geologicas DRX/FRX: mnemonicos minerais, elementos maiores/traco e razoes elementares Petrobras EXP/OGP/AQG |
 | [ACRONYMS.md](ACRONYMS.md) | Siglario O&G: 1.102 siglas categorizadas, estrutura JSON, siglas com multiplos sentidos, filtragem RAG |
 | [BRAZIL_SPECIFIC.md](BRAZIL_SPECIFIC.md) | Os 11 conceitos exclusivamente brasileiros (camada 5 — ANP): Bloco, PAD, Contrato E&P, Rodada de Licitacao, UTS, Regime Contratual, Periodos Exploratorios, Processo Sancionador, Notificacao de Descoberta, Declaracao de Comercialidade |
 | [EXTERNAL_STANDARDS.md](EXTERNAL_STANDARDS.md) | Padroes externos: Petro KGraph (PUC-Rio), PPDM, SPE-PRMS (hierarquia de reservas), OSDU (crosswalks e formato osdu_kind) |

@@ -2894,3 +2894,415 @@ geo:BHAShape a sh:NodeShape ;
         sh:message "BHA.last_update constraint."@en ;
     ] .
 
+# Shape 30: GeomechCorporateEntityShape — validates geo:GeomechCorporateEntity
+# Source: data/geomechanics-corporate.json schema_policy
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechCorporateEntityShape
+    a sh:NodeShape ;
+    sh:name "GeomechCorporateEntityShape" ;
+    rdfs:label "Forma de Entidade Corporativa de Geomecânica"@pt ;
+    sh:description "Valida estrutura mínima de cada entidade GEOMEC* do módulo L6 corporativo: id, label, definição, categoria, confiança."@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+
+    sh:property [
+        sh:path geo:corporateId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^GEOMEC[0-9]{3}[A-Z]?$" ;
+        sh:message "geo:corporateId deve seguir o padrão GEOMECnnn[A-Z?] (ex.: GEOMEC042, GEOMEC026A)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:labelPt ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Toda entidade corporativa deve ter exatamente um geo:labelPt com tag de idioma @pt."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:definitionPt ;
+        sh:minCount 1 ;
+        sh:datatype rdf:langString ;
+        sh:message "Toda entidade corporativa deve ter ao menos um geo:definitionPt com tag de idioma @pt."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:category ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:in ( "Classifier" "Document" "Formula" "GovernanceKPI" "Measurement" "Model" "Process" "Property" "Risk" "Tool" ) ;
+        sh:message "geo:category deve ser um dos valores canônicos: Classifier, Document, Formula, GovernanceKPI, Measurement, Model, Process, Property, Risk, Tool."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:confidence ;
+        sh:maxCount 1 ;
+        sh:in ( "low" "medium" "high" ) ;
+        sh:message "geo:confidence (quando presente) deve ser low, medium ou high."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 31: GeomechCorporateRelationShape — relationType + targetEntity
+# Source: schema_policy.relationship_normalization (SNAKE_CASE_UPPER vocabulary)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechCorporateRelationShape
+    a sh:NodeShape ;
+    sh:name "GeomechCorporateRelationShape" ;
+    rdfs:label "Forma de Relação Corporativa de Geomecânica"@pt ;
+    sh:description "Valida estrutura de cada relação: relationType em SNAKE_CASE_UPPER e targetEntity como IRI geo:."@pt ;
+    sh:targetClass geo:GeomechCorporateRelation ;
+
+    sh:property [
+        sh:path geo:relationType ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "AMPLIFIES" "AUTHORITATIVE_FOR"
+            "CALIBRATES" "CO_MEASURED_WITH" "COMPUTES" "CONSTRAINS" "CONTAINS"
+            "DEFINES_LOWER_BOUND" "DEFINES_UPPER_BOUND" "DERIVED_FROM"
+            "ENABLES" "ESTIMATES"
+            "FORMALIZES"
+            "GOVERNED_BY"
+            "INFLUENCED_BY" "INFLUENCES"
+            "IS_CALCULATED_FROM" "IS_INPUT_FOR" "IS_PART_OF" "IS_RISK_FOR" "IS_SPECIALIZATION_OF"
+            "MAY_TRIGGER" "MEASURES" "MONITORS"
+            "OWNED_BY"
+            "PERFORMED_BY" "PRECEDED_BY" "PRODUCES"
+            "RELATED_TO" "REQUIRES" "REQUIRES_INPUT"
+            "STORAGE_FOR" "SUPPORTS"
+            "USED_WITH"
+        ) ;
+        sh:message "geo:relationType deve ser um dos 34 verbos do enum corporativo aprovado em 2026-05-02. Ver schema_policy.canonical_relation_enum."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:targetEntity ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:nodeKind sh:IRI ;
+        sh:message "geo:targetEntity deve ser exatamente um IRI."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:edgeNote ;
+        sh:maxCount 1 ;
+        sh:message "geo:edgeNote (opcional) explica nuance da relação — máximo um por aresta."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 32: GeomechLowConfidenceMustHaveGapShape
+# Regra: confiança "low" exige ao menos um evidence_gap documentado.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechLowConfidenceMustHaveGapShape
+    a sh:NodeShape ;
+    sh:name "GeomechLowConfidenceMustHaveGapShape" ;
+    rdfs:label "Confiança baixa exige evidence_gap"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:sparql [
+        sh:message "Entidade com geo:confidence 'low' deve ter ao menos um geo:evidenceGap documentado."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:confidence \"low\" .
+    FILTER NOT EXISTS { $this geo:evidenceGap ?g }
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 33: GeomechDeprecatedEntityShape
+# Regra: se geo:isDeprecated true, deve declarar geo:replacedBy com IRI(s).
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechDeprecatedEntityShape
+    a sh:NodeShape ;
+    sh:name "GeomechDeprecatedEntityShape" ;
+    rdfs:label "Entidade depreciada exige replacedBy"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:sparql [
+        sh:message "Entidade depreciada (geo:isDeprecated true) deve declarar pelo menos um geo:replacedBy."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:isDeprecated true .
+    FILTER NOT EXISTS { $this geo:replacedBy ?r }
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 34: GeomechActiveRefToDeprecatedShape
+# Regra: nenhuma relação ATIVA pode apontar para entidade depreciada.
+# (Refs auditadas com geo:repointedFrom continuam permitidas — o targetEntity
+# delas já foi reapontado para o substituto.)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechActiveRefToDeprecatedShape
+    a sh:NodeShape ;
+    sh:name "GeomechActiveRefToDeprecatedShape" ;
+    rdfs:label "Sem refs ativas a entidades depreciadas"@pt ;
+    sh:targetClass geo:GeomechCorporateRelation ;
+    sh:sparql [
+        sh:message "Esta relação aponta para uma entidade depreciada — re-rotear para o substituto declarado em geo:replacedBy."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:targetEntity ?t .
+    ?t geo:isDeprecated true .
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 35: GeomechFormulaCategoryShape
+# Regra: entidade categoria=Formula deve ter formulaExpression preenchida.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechFormulaCategoryShape
+    a sh:NodeShape ;
+    sh:name "GeomechFormulaCategoryShape" ;
+    rdfs:label "Entidade Formula exige expressão"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:sparql [
+        sh:message "Entidade com category 'Formula' deve declarar geo:formulaExpression."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:category \"Formula\" .
+    FILTER NOT EXISTS { $this geo:formulaExpression ?e }
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 36: GeomechRelationTargetExistsShape
+# Regra: targetEntity de uma relação deve ser uma GeomechCorporateEntity conhecida
+# (integridade referencial closed-world dentro do módulo L6).
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechRelationTargetExistsShape
+    a sh:NodeShape ;
+    sh:name "GeomechRelationTargetExistsShape" ;
+    rdfs:label "Integridade referencial L6"@pt ;
+    sh:targetClass geo:GeomechCorporateRelation ;
+    sh:sparql [
+        sh:message "geo:targetEntity referencia IRI que não é uma geo:GeomechCorporateEntity declarada."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+SELECT $this ?t
+WHERE {
+    $this geo:targetEntity ?t .
+    FILTER NOT EXISTS { ?t rdf:type geo:GeomechCorporateEntity }
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 37: GeomechOutOfScopeShape
+# Regra: out-of-scope flag exige declaração de in_scope_for_module.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechOutOfScopeShape
+    a sh:NodeShape ;
+    sh:name "GeomechOutOfScopeShape" ;
+    rdfs:label "Out-of-scope exige módulo destino"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:sparql [
+        sh:message "Entidade com geo:isOutOfScope true deve declarar geo:inScopeForModule indicando o módulo correto."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:isOutOfScope true .
+    FILTER NOT EXISTS { $this geo:inScopeForModule ?m }
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 38: GeomechCorporateSourceShape — validates structured citation entries
+# Each entity.source (when present as structured form) must carry sourceDocId
+# matching the PE-XXX or PP-XXX document code pattern. Section and citation
+# are recommended but not required.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechCorporateSourceShape
+    a sh:NodeShape ;
+    sh:name "GeomechCorporateSourceShape" ;
+    rdfs:label "Forma de Citação Documental Corporativa"@pt ;
+    sh:description "Valida entradas de geo:source — doc_id obrigatório no padrão PE-XXX ou PP-XXX."@pt ;
+    sh:targetClass geo:GeomechCorporateSource ;
+
+    sh:property [
+        sh:path geo:sourceDocId ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^(PE|PP|N)-[A-Z0-9&]+-[0-9]+(-[A-Z0-9]+)?$|^CoI:.+|^OSDU:.+" ;
+        sh:message "geo:sourceDocId deve seguir padrão PE-XXX-NNNNN, PP-XXX-NNNNN, CoI:* ou OSDU:* (ex.: PE-2RES-00009, PP-2E&P-00322, CoI:CENPES)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:sourceSection ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "geo:sourceSection (opcional) deve ser string única identificando capítulo/seção do documento."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:sourceCitation ;
+        sh:maxCount 1 ;
+        sh:message "geo:sourceCitation (opcional) deve ser uma única citação literal (≤25 palavras recomendado)."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 39: GeomechHighConfidenceShouldHaveSourceShape (advisory)
+# Recommendation: confidence=high entities should carry at least one source.
+# Implemented as severity sh:Warning so low-data legacy entities don't block.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechHighConfidenceShouldHaveSourceShape
+    a sh:NodeShape ;
+    sh:name "GeomechHighConfidenceShouldHaveSourceShape" ;
+    rdfs:label "Confiança alta deveria citar fonte"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Entidade com confidence=high deveria ter ao menos um geo:source com sourceDocId."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:confidence "high" .
+    FILTER NOT EXISTS { $this geo:source ?s }
+}
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 40: GeomechPriorityTierShape — validates priority_tier enum
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechPriorityTierShape
+    a sh:NodeShape ;
+    sh:name "GeomechPriorityTierShape" ;
+    rdfs:label "Tier de prioridade válido"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+
+    sh:property [
+        sh:path geo:priorityTier ;
+        sh:maxCount 1 ;
+        sh:in ( "core_15" "extended" ) ;
+        sh:message "geo:priorityTier deve ser 'core_15' ou 'extended'."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shapes 41-44: Advisory constraints (severity=Warning)
+# Decisão da governança 2026-05-02: aplicáveis em v2 do schema; aqui ficam
+# como warnings para detectar violações sem bloquear.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechRequiresEdgeNoteShape
+    a sh:NodeShape ;
+    sh:name "GeomechRequiresEdgeNoteShape" ;
+    rdfs:label "REQUIRES exige edge_note quando alvo não é Document (advisory)"@pt ;
+    sh:targetClass geo:GeomechCorporateRelation ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Relação REQUIRES sem edge_note. Recomendação: adicionar edge_note especificando tipo (validação/análise/conhecimento) — REQUIRES_INPUT é mais preciso quando o alvo é Property/Measurement computacional."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:relationType "REQUIRES" .
+    $this geo:targetEntity ?t .
+    ?t geo:category ?c .
+    FILTER ( ?c != "Document" )
+    FILTER NOT EXISTS { $this geo:edgeNote ?n }
+}
+""" ;
+    ] .
+
+geo:GeomechContainsDomainShape
+    a sh:NodeShape ;
+    sh:name "GeomechContainsDomainShape" ;
+    rdfs:label "CONTAINS deve ter origem em Document (advisory)"@pt ;
+    sh:targetClass geo:GeomechCorporateRelation ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Relação CONTAINS deve ter origem (subject) em entidade categoria=Document. Para meronimia geral use IS_PART_OF."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this ?src
+WHERE {
+    $this geo:relationType "CONTAINS" .
+    ?src geo:hasRelation $this ;
+         geo:category ?cat .
+    FILTER ( ?cat != "Document" )
+}
+""" ;
+    ] .
+
+geo:GeomechAuthoritativeUniqueShape
+    a sh:NodeShape ;
+    sh:name "GeomechAuthoritativeUniqueShape" ;
+    rdfs:label "AUTHORITATIVE_FOR é único por entidade-alvo (advisory)"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Mais de um sistema declara AUTHORITATIVE_FOR esta entidade. Cada entidade deve ter no máximo 1 golden source. Use STORAGE_FOR para repositórios secundários."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this (COUNT(?src) AS ?n)
+WHERE {
+    ?src geo:hasRelation ?rel .
+    ?rel geo:relationType "AUTHORITATIVE_FOR" ;
+         geo:targetEntity $this .
+}
+GROUP BY $this
+HAVING ( ?n > 1 )
+""" ;
+    ] .
+
+geo:GeomechSpecializationLinearShape
+    a sh:NodeShape ;
+    sh:name "GeomechSpecializationLinearShape" ;
+    rdfs:label "IS_SPECIALIZATION_OF deve formar hierarquia linear (advisory)"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Esta entidade tem mais de 1 pai via IS_SPECIALIZATION_OF — herança múltipla pode gerar inferências indevidas em DAGs. Considere refatorar."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this (COUNT(?parent) AS ?n)
+WHERE {
+    $this geo:hasRelation ?rel .
+    ?rel geo:relationType "IS_SPECIALIZATION_OF" ;
+         geo:targetEntity ?parent .
+}
+GROUP BY $this
+HAVING ( ?n > 1 )
+""" ;
+    ] .

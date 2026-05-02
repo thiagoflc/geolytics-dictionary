@@ -1,0 +1,110 @@
+# Backfill ChatPetrobras EXP/GEO/TGEO/ICD — Geomecânica E&P 15 Conceitos Críticos
+# Versão 2.0 | 2026-05-02
+# Aplica via: python scripts/backfill-geomec-corporate.py <this-file> --dry-run
+#
+# Os IDs GEO_MEC_NNN do time foram resolvidos por LABEL para os IDs estáveis GEOMEC* do KG.
+# Mapeamento confirmado:
+#   GEO_MEC_001 Pp        → GEOMEC001 (mesmo)
+#   GEO_MEC_002 Shmin     → GEOMEC002 (mesmo)
+#   GEO_MEC_003 JOL       → GEOMEC003 (mesmo)
+#   GEO_MEC_004 ECD       → GEOMEC019 (renumeração: GEOMEC004 é Estado de Tensões In Situ)
+
+- match_id: GEOMEC001
+  apply:
+    label_pt: "Pressão de Poros"
+    label_en: "Pore Pressure"
+    confidence: high
+    priority_tier: core_15
+    external_id_chatpetrobras: GEO_MEC_001
+    standard_unit: "ppg (lb/gal)"
+    units_observed_union: ["psi", "ppg (lb/gal)", "kgf/cm²/m"]
+    acronym_union: ["Pp", "PP", "poropressão"]
+    definition_pt: "Pressão exercida pelo fluido contido nos poros das formações rochosas em subsuperfície. Quando igual à pressão hidrostática, denomina-se pressão de poros normal; quando superior, configura sobrepressão (geopressão). Para o reservatório, deve ser prevista via modelo de fluxo acoplado ao modelo geomecânico."
+    definition_en: "Pressure exerted by the fluid contained in the pores of subsurface rock formations. When equal to hydrostatic pressure, it is called normal pore pressure; when higher, it constitutes overpressure (geopressure)."
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "3.10.2 Perfuração de Fases com Retorno"
+        citation: "O peso mínimo utilizado deve considerar a máxima pressão de poros esperada."
+      - doc_id: PP-2E&P-00322
+        section: "3.9.2 Aquisição de Dados Geomecânicos"
+        citation: "Poropressão considerando corpos anormalmente pressurizados e formações portadoras de hidrocarbonetos, quando couber."
+      - doc_id: PE-2RES-00014
+        section: "3.4.1 Testes de absorção e fraturamento"
+        citation: "As estimativas das pressões de poros nas fases com retorno de fluido para plataforma são insumo fundamental."
+    relationships_replace:
+      - relation_type: INFLUENCES
+        target_id: GEOMEC002
+        target_label: "Tensão Mínima Horizontal"
+      - relation_type: IS_PART_OF
+        target_id: GEOMEC003
+        target_label: "Janela Operacional de Lama"
+      - relation_type: INFLUENCES
+        target_id: GEOMEC005
+        target_label: "Tensão Efetiva"
+      - relation_type: CONSTRAINS
+        target_id: GEOMEC019
+        target_label: "Densidade Equivalente de Circulação"
+
+- match_id: GEOMEC002
+  apply:
+    label_pt: "Tensão Mínima Horizontal (Gradiente de Fratura)"
+    label_en: "Minimum Horizontal Stress / Fracture Gradient"
+    confidence: high
+    priority_tier: core_15
+    external_id_chatpetrobras: GEO_MEC_002
+    standard_unit: "ppg (lb/gal)"
+    units_observed_union: ["ppg (lb/gal)", "kgf/cm²/m", "psi"]
+    acronym_union: ["Shmin", "S3", "GF"]
+    definition_pt: "Componente de menor magnitude das tensões horizontais in situ. Determina o limite superior da Janela Operacional de Lama, pois sua superação por pressão de fluido provoca fraturamento hidráulico da formação e perda de circulação. Medida por testes de fraturamento (xLOT, Mini-frac, SRT) e calibrada com LOTs."
+    definition_en: "Minimum-magnitude component of the horizontal in situ stresses. Defines the upper bound of the Mud Weight Window; exceeding it with fluid pressure causes hydraulic fracturing and lost circulation."
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "3.10.3 Dimensionamento dos Revestimentos"
+        citation: "Os limites inferior (gradiente de colapso) e superior (gradiente de fratura) da janela operacional são estimados com base nas curvas de tensão in-situ (tensão mínima)."
+      - doc_id: PP-2E&P-00322
+        section: "3.9.2 Aquisição de Dados Geomecânicos"
+        citation: "Tensão mínima: Esse é o dado mais relevante para calibração do modelo geomecânico, pois ele amarra a tensão compressiva de menor magnitude."
+      - doc_id: PE-2RES-00014
+        section: "3.4.1 Testes de absorção e fraturamento"
+        citation: "a estimativa da magnitude da tensão horizontal mínima é feita com base em uma operação que envolva a propagação de uma fratura na formação."
+    relationships_replace:
+      - relation_type: IS_CALCULATED_FROM
+        target_id: GEOMEC001
+        target_label: "Pressão de Poros"
+      - relation_type: CONSTRAINS
+        target_id: GEOMEC003
+        target_label: "Janela Operacional de Lama"
+      - relation_type: MEASURED_BY
+        target_id: GEOMEC006
+        target_label: "Testes LOT/xLOT/FIT"
+
+- match_id: GEOMEC003
+  apply:
+    label_pt: "Janela Operacional de Lama"
+    label_en: "Mud Weight Window / Drilling Operational Window"
+    confidence: high
+    priority_tier: core_15
+    external_id_chatpetrobras: GEO_MEC_003
+    definition_pt: "Intervalo de massa específica do fluido de perfuração compreendido entre o gradiente de colapso (limite inferior) e o gradiente de fratura (limite superior). O estreitamento da janela impacta diretamente o número de fases perfuradas e a extensão das fases. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas curvas de Pp e tensões in situ do RES."
+    definition_en: "Range of drilling fluid density bounded below by the collapse gradient and above by the fracture gradient. Narrowing of the window directly impacts the number and length of drilled sections."
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF"
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "3.10.3 Dimensionamento dos Revestimentos"
+      - doc_id: PE-2RES-00014
+        section: "3.4.2 Potencial Geológico de Perda"
+      - doc_id: PP-2E&P-00322
+        section: "5. Definições"
+    relationships_replace:
+      - relation_type: LOWER_BOUND_DEFINED_BY
+        target_id: GEOMEC001
+        target_label: "Pressão de Poros"
+      - relation_type: UPPER_BOUND_DEFINED_BY
+        target_id: GEOMEC002
+        target_label: "Tensão Mínima Horizontal"
+      - relation_type: LOWER_BOUND_DEFINED_BY
+        target_id: GEOMEC009
+        target_label: "Gradiente de Colapso"
+      - relation_type: CONSTRAINS
+        target_id: GEOMEC019
+        target_label: "Densidade Equivalente de Circulação"

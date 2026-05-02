@@ -1,0 +1,507 @@
+{
+  "$schema": "https://geolytics.petrobras.com.br/schemas/geomechanics-ontology-patch.schema.json",
+  "metadata": {
+    "version": "1.5-consolidated",
+    "base_file": "Ontologia_geomec.json",
+    "status": "validated",
+    "entity_count": 10,
+    "generated_at": "2026-05-02",
+    "validation_generated_at": "2026-05-02T15:26:46",
+    "generated_for": "Geolytics Dictionary — Corporate Knowledge Graph"
+  },
+  "schema_policy": {
+    "recommended_normalized_fields": [
+      "id",
+      "label_pt",
+      "label_en",
+      "observed_variants",
+      "acronym",
+      "definition_pt",
+      "definition_en",
+      "standard_unit",
+      "units_observed",
+      "category",
+      "confidence",
+      "relationships",
+      "osdu_mapping",
+      "evidence_gaps",
+      "owner_department",
+      "official_datastore",
+      "internal_tools",
+      "internal_standards",
+      "sources"
+    ],
+    "category_extension_recommended": [
+      "Classifier",
+      "Document",
+      "Formula",
+      "GovernanceKPI",
+      "Measurement",
+      "Model",
+      "Process",
+      "Property",
+      "Risk",
+      "Tool"
+    ],
+    "relationship_normalization_note": "Consolidado em objeto JSON único. Relation_type mantido como string para preservar compatibilidade com o patch; recomenda-se governar por enum corporativo expandido."
+  },
+  "entities": [
+    {
+      "id": "GEOMEC036",
+      "label_pt": "Fórmula de ECD",
+      "label_en": "ECD Formula",
+      "observed_variants": [
+        "Fórmula ECD",
+        "Equação da ECD",
+        "ECD (lb/gal)",
+        "FORMULA_ECD001"
+      ],
+      "acronym": [
+        "ECD"
+      ],
+      "definition_pt": "Entidade computável que representa a equação documentada para cálculo da Densidade Equivalente de Circulação a partir da pressão hidrostática, perda de carga anular e profundidade vertical.",
+      "definition_en": "Computable entity representing the documented equation used to calculate Equivalent Circulating Density from hydrostatic pressure, annular pressure loss and vertical depth.",
+      "standard_unit": "lb/gal",
+      "units_observed": [
+        "lb/gal",
+        "psi",
+        "m"
+      ],
+      "category": "Formula",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC019",
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_label": "Densidade Equivalente de Circulação"
+        },
+        {
+          "target_id": "GEOMEC003",
+          "relation_type": "CONSTRAINS",
+          "target_label": "Janela Operacional de Lama"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Deve receber citação documental direta do padrão PE-2POC-00453 antes da ingestão definitiva.",
+        "Validar se 0.1704 é constante corporativa única para todos os cenários de profundidade/unidade."
+      ],
+      "formula": {
+        "expression": "ECD (lb/gal) = [Ph(psi) + ΔPa(psi)] / [0.1704 × L(m)]",
+        "variables": {
+          "Ph": "Pressão hidrostática do fluido",
+          "ΔPa": "Perda de carga anular",
+          "L": "Profundidade vertical no ponto avaliado"
+        }
+      }
+    },
+    {
+      "id": "GEOMEC037",
+      "label_pt": "Densidade Equivalente Estática",
+      "label_en": "Equivalent Static Density",
+      "observed_variants": [
+        "ESD",
+        "Equivalent Static Density",
+        "densidade equivalente estática"
+      ],
+      "acronym": [
+        "ESD"
+      ],
+      "definition_pt": "Componente estática da densidade equivalente medida em condição sem circulação, distinguida da ECD dinâmica no contexto de leituras PWD e controle hidráulico.",
+      "definition_en": "Static equivalent density component measured under non-circulating conditions, distinguished from dynamic ECD in PWD readings and hydraulic control.",
+      "standard_unit": "lb/gal",
+      "units_observed": [
+        "lb/gal",
+        "ppg"
+      ],
+      "category": "Measurement",
+      "confidence": "low",
+      "relationships": [
+        {
+          "target_id": "GEOMEC019",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Densidade Equivalente de Circulação"
+        },
+        {
+          "target_id": "GEOMEC020",
+          "relation_type": "INFLUENCES",
+          "target_label": "Managed Pressure Drilling"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "O arquivo base cita ESD como componente estática da ECD, mas não traz definição autônoma com fonte primária.",
+        "Requer validação em padrão operacional ou manual PWD/PWDa."
+      ]
+    },
+    {
+      "id": "GEOMEC038",
+      "label_pt": "Pressão Hidrostática do Fluido de Perfuração",
+      "label_en": "Drilling Fluid Hydrostatic Pressure",
+      "observed_variants": [
+        "Pressão hidrostática",
+        "Ph",
+        "pressão hidrostática do fluido",
+        "hydrostatic pressure"
+      ],
+      "acronym": [
+        "Ph"
+      ],
+      "definition_pt": "Parcela de pressão exercida pela coluna estática de fluido de perfuração em determinada profundidade, usada como componente do cálculo da ECD e da margem operacional contra influxo e perda.",
+      "definition_en": "Pressure component exerted by the static drilling fluid column at a given depth, used in ECD calculation and operational margin assessment against influx and losses.",
+      "standard_unit": "psi",
+      "units_observed": [
+        "psi",
+        "lb/gal",
+        "m"
+      ],
+      "category": "Property",
+      "confidence": "low",
+      "relationships": [
+        {
+          "target_id": "GEOMEC036",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Fórmula de ECD"
+        },
+        {
+          "target_id": "GEOMEC019",
+          "relation_type": "INFLUENCES",
+          "target_label": "Densidade Equivalente de Circulação"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Precisa de fonte primária específica para definição e unidade oficial.",
+        "Pode ser modelada como variável de fórmula em vez de entidade de domínio, dependendo do schema final."
+      ]
+    },
+    {
+      "id": "GEOMEC039",
+      "label_pt": "Perda de Carga Anular",
+      "label_en": "Annular Pressure Loss",
+      "observed_variants": [
+        "ΔPa",
+        "perda de carga",
+        "perda de carga anular",
+        "annular pressure loss"
+      ],
+      "acronym": [
+        "ΔPa"
+      ],
+      "definition_pt": "Parcela de pressão associada ao escoamento do fluido no anular entre a profundidade avaliada e a superfície, usada como componente dinâmica no cálculo da ECD.",
+      "definition_en": "Pressure component associated with drilling fluid flow through the annulus from evaluated depth to surface, used as the dynamic component in ECD calculation.",
+      "standard_unit": "psi",
+      "units_observed": [
+        "psi"
+      ],
+      "category": "Property",
+      "confidence": "low",
+      "relationships": [
+        {
+          "target_id": "GEOMEC036",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Fórmula de ECD"
+        },
+        {
+          "target_id": "GEOMEC019",
+          "relation_type": "INFLUENCES",
+          "target_label": "Densidade Equivalente de Circulação"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Não aparece como verbete conceitual autônomo no arquivo base.",
+        "Requer confirmação documental para modelos hidráulicos SIMCARR/PWDa."
+      ]
+    },
+    {
+      "id": "GEOMEC040",
+      "label_pt": "Anchor Point",
+      "label_en": "Anchor Point",
+      "observed_variants": [
+        "AP",
+        "Anchor Point",
+        "ponto de ancoragem",
+        "profundidade de referência"
+      ],
+      "acronym": [
+        "AP"
+      ],
+      "definition_pt": "Profundidade de referência usada em operações MPD para manter e controlar a pressão anular por meio de contrapressão de superfície.",
+      "definition_en": "Reference depth used in MPD operations to maintain and control annular pressure through surface back pressure.",
+      "standard_unit": "m",
+      "units_observed": [
+        "m",
+        "psi"
+      ],
+      "category": "Measurement",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC020",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Managed Pressure Drilling"
+        },
+        {
+          "target_id": "GEOMEC019",
+          "relation_type": "CONSTRAINS",
+          "target_label": "Densidade Equivalente de Circulação"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Definido no GEOMEC020 como parâmetro; validar se deve virar entidade autônoma.",
+        "Falta fonte com regra explícita para seleção do Anchor Point."
+      ]
+    },
+    {
+      "id": "GEOMEC041",
+      "label_pt": "Contrapressão de Superfície",
+      "label_en": "Surface Back Pressure",
+      "observed_variants": [
+        "SBP",
+        "Surface Back Pressure",
+        "contrapressão",
+        "contrapressão de superfície"
+      ],
+      "acronym": [
+        "SBP"
+      ],
+      "definition_pt": "Contrapressão aplicada na superfície em operações MPD para controlar o perfil de pressão no anular e manter a pressão no Anchor Point.",
+      "definition_en": "Surface-applied back pressure in MPD operations used to control the annular pressure profile and maintain pressure at the Anchor Point.",
+      "standard_unit": "psi",
+      "units_observed": [
+        "psi"
+      ],
+      "category": "Property",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC020",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Managed Pressure Drilling"
+        },
+        {
+          "target_id": "GEOMEC019",
+          "relation_type": "INFLUENCES",
+          "target_label": "Densidade Equivalente de Circulação"
+        },
+        {
+          "target_id": "GEOMEC040",
+          "relation_type": "CONSTRAINS",
+          "target_label": "Anchor Point"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Falta citação primária específica para limites operacionais de pressão.",
+        "PRV e setpoints podem exigir entidade própria em iteração futura."
+      ]
+    },
+    {
+      "id": "GEOMEC042",
+      "label_pt": "ISIP — Pressão Instantânea de Fechamento",
+      "label_en": "Instantaneous Shut-In Pressure",
+      "observed_variants": [
+        "ISIP",
+        "Instantaneous Shut-In Pressure",
+        "pressão de fechamento",
+        "pressão instantânea de fechamento"
+      ],
+      "acronym": [
+        "ISIP"
+      ],
+      "definition_pt": "Pressão registrada imediatamente após o fechamento do bombeio em testes de fraturamento, usada como indicador de qualidade para estimar a tensão horizontal mínima.",
+      "definition_en": "Pressure recorded immediately after shut-in during fracturing tests, used as a quality indicator to estimate minimum horizontal stress.",
+      "standard_unit": "psi",
+      "units_observed": [
+        "psi",
+        "kgf/cm²",
+        "lb/gal"
+      ],
+      "category": "Measurement",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC031",
+          "relation_type": "MEASURED_BY",
+          "target_label": "XLOT"
+        },
+        {
+          "target_id": "GEOMEC002",
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_label": "Tensão Mínima Horizontal"
+        },
+        {
+          "target_id": "GEOMEC006",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Testes de Absorção e Fraturamento"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Requer fonte direta para definição formal.",
+        "Pode ser measurement associado a cada evento de teste, não apenas conceito."
+      ]
+    },
+    {
+      "id": "GEOMEC043",
+      "label_pt": "Pressão de Fechamento de Fratura",
+      "label_en": "Fracture Closure Pressure",
+      "observed_variants": [
+        "Pc",
+        "pressão de fechamento",
+        "closure pressure",
+        "fracture closure pressure"
+      ],
+      "acronym": [
+        "Pc"
+      ],
+      "definition_pt": "Pressão associada ao fechamento da fratura durante testes de fraturamento ou microfraturamento, usada na calibração da tensão mínima horizontal.",
+      "definition_en": "Pressure associated with fracture closure during fracturing or microfracturing tests, used to calibrate minimum horizontal stress.",
+      "standard_unit": "psi",
+      "units_observed": [
+        "psi",
+        "kgf/cm²"
+      ],
+      "category": "Measurement",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC002",
+          "relation_type": "MEASURED_BY",
+          "target_label": "Tensão Mínima Horizontal"
+        },
+        {
+          "target_id": "GEOMEC031",
+          "relation_type": "IS_PART_OF",
+          "target_label": "XLOT"
+        },
+        {
+          "target_id": "GEOMEC033",
+          "relation_type": "INFLUENCES",
+          "target_label": "Fraturamento Hidráulico"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Não há verbete formal separado no arquivo base.",
+        "Resolver sobreposição com ISIP e pressão de reabertura/propagação."
+      ]
+    },
+    {
+      "id": "GEOMEC044",
+      "label_pt": "Washout",
+      "label_en": "Washout",
+      "observed_variants": [
+        "Washout",
+        "washout",
+        "arrombamento",
+        "alargamento do poço"
+      ],
+      "acronym": [],
+      "definition_pt": "Alargamento do poço observado por caliper ou perfil de imagem, associado à instabilidade da parede do poço, erosão ou colapso mecânico, com impacto na qualidade de perfis e estabilidade operacional.",
+      "definition_en": "Borehole enlargement observed from caliper or image logs, associated with wellbore wall instability, erosion or mechanical collapse, impacting log quality and operational stability.",
+      "standard_unit": "in",
+      "units_observed": [
+        "in",
+        "%"
+      ],
+      "category": "Risk",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC009",
+          "relation_type": "INFLUENCES",
+          "target_label": "Gradiente de Colapso"
+        },
+        {
+          "target_id": "GEOMEC015",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Estabilidade de Poço / Geohazards"
+        },
+        {
+          "target_id": "GEOMEC023",
+          "relation_type": "DERIVED_FROM",
+          "target_label": "Breakouts e Fraturas Induzidas"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Citado no contexto de estabilidade, mas não formalizado como entidade própria.",
+        "Validar critério quantitativo corporativo por caliper."
+      ]
+    },
+    {
+      "id": "GEOMEC045",
+      "label_pt": "Prisão de Coluna",
+      "label_en": "Stuck Pipe",
+      "observed_variants": [
+        "prisão de coluna",
+        "Stuck Pipe",
+        "prisões",
+        "arrastes",
+        "topamentos",
+        "estolamentos"
+      ],
+      "acronym": [],
+      "definition_pt": "Evento operacional de poço associado a instabilidade, colapso, cascalhos, diferencial de pressão ou geometria do poço, tratado como risco relevante em estabilidade e monitoramento geomecânico.",
+      "definition_en": "Operational well event associated with instability, collapse, cuttings, differential pressure or well geometry, treated as a relevant risk in wellbore stability and geomechanical monitoring.",
+      "standard_unit": "N/A",
+      "units_observed": [],
+      "category": "Risk",
+      "confidence": "medium",
+      "relationships": [
+        {
+          "target_id": "GEOMEC015",
+          "relation_type": "IS_PART_OF",
+          "target_label": "Estabilidade de Poço / Geohazards"
+        },
+        {
+          "target_id": "GEOMEC009",
+          "relation_type": "INFLUENCES",
+          "target_label": "Gradiente de Colapso"
+        },
+        {
+          "target_id": "GEOMEC025",
+          "relation_type": "MEASURED_BY",
+          "target_label": "CSD — Centro de Suporte à Decisão"
+        }
+      ],
+      "osdu_mapping": null,
+      "evidence_gaps": [
+        "Citado como evento monitorado e consequência de colapso, mas sem definição formal separada.",
+        "Requer ligação com BDIEP/OpenWells/BDP para evidência operacional por evento."
+      ]
+    }
+  ],
+  "deprecated_entities": [
+    {
+      "id": "GEOMEC026",
+      "replacement_ids": [
+        "GEOMEC026A",
+        "GEOMEC026B"
+      ],
+      "reason": "Substituído por QPG e Laudo Geomecânico para separar documentos com responsabilidades distintas."
+    }
+  ],
+  "validation_report": {
+    "is_valid_json": true,
+    "is_valid_patch": true,
+    "errors": [],
+    "checked_rules": [
+      "parse JSON único",
+      "IDs únicos",
+      "campos obrigatórios",
+      "category válida",
+      "confidence válida",
+      "relationships estruturados"
+    ]
+  },
+  "recommended_next_backlog": [
+    "Adicionar sources por campo com supports",
+    "Validar relation_type contra enum corporativo",
+    "Unificar aliases e depreciações",
+    "Adicionar owner_department e official_datastore"
+  ]
+}

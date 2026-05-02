@@ -4,7 +4,11 @@
 
 The Mechanical Earth Model (MEM) is the core deliverable of petroleum geomechanics. It is a quantitative description of the mechanical state of a formation — the subsurface geometry, pore fluid pressure, in situ stresses, and elastic and strength properties of the rock. The MEM is the starting point for every geomechanical application: wellbore stability analysis, sand production prediction, hydraulic fracture design, reservoir compaction modelling, and fault reactivation risk.
 
-This module covers `data/geomechanics.json` (26 classes, 22 properties, 12 relations, 6 instances) and `data/geomechanics-fractures.json` (17 fracture classes, 7 properties, 8 GSO crosswalk mappings).
+This documentation covers three artifacts:
+
+- `data/geomechanics.json` (26 classes, 22 properties, 12 relations, 6 instances) — **academic L1-L2 backbone** (Fjaer/Zoback/Hoek/ISRM).
+- `data/geomechanics-fractures.json` (17 fracture classes, 7 properties, 8 GSO crosswalk mappings) — fractures sub-module.
+- `data/geomechanics-corporate.json` (47 entities, 170 relations) + `data/geomechanics-corporate-crosswalk.json` — **corporate L6 module** (Petrobras-internal standards). See [Layer 6 — Petrobras Corporate Module](#layer-6--petrobras-corporate-module) below.
 
 ---
 
@@ -154,6 +158,127 @@ Depletion of reservoir pressure (Pp decrease) causes the effective stress to inc
 
 ---
 
+## Layer 6 — Petrobras Corporate Module
+
+The repository ships a second geomechanics module, `data/geomechanics-corporate.json`, that captures the Petrobras-internal operationalization of the academic concepts above. It is not a competing ontology — it is the corporate counterpart that names internal standards, owners, datastores, and tools, and is linked to the academic L1-L2 module via `data/geomechanics-corporate-crosswalk.json`.
+
+```mermaid
+flowchart LR
+    subgraph L1L2["Layer 1-2 — Academic"]
+        GMx["GM* / GP* / GR*<br/>26 classes + 22 props + 12 rels<br/>Source: Fjaer/Zoback/Hoek/ISRM"]
+    end
+    subgraph L6["Layer 6 — Corporate Petrobras"]
+        GEOMECx["GEOMEC*<br/>47 entities + 170 relations<br/>Source: PE-2RES/POC standards"]
+    end
+    GMx <-- "geomechanics-corporate-<br/>crosswalk.json<br/>(SKOS exact/close/related)" --> GEOMECx
+    GEOMECx --> SHACL["SHACL shapes 23-30<br/>(geolytics-shapes.ttl)"]
+    GEOMECx --> RAG["RAG corpus<br/>(46 entity + 24 crosswalk chunks)"]
+    RAG --> Validator["LangGraph Validator<br/>+ confidence + evidence_gaps"]
+```
+
+### Module inventory
+
+| Path | Content |
+|---|---|
+| `data/geomechanics-corporate.json` | 47 entities (GEOMEC001-045 + 026A/B), 170 relations, schema-normalized snake_case, deprecation handled |
+| `data/geomechanics-corporate-crosswalk.json` | 47 SKOS mappings to L1-L2: 8 exactMatch + 4 closeMatch + 12 relatedMatch + 23 noMatch |
+| `data/sources/geomechanics-corporate/` | Original raw inputs preserved for audit (5 concatenated JSON blocks v1.0-1.4 + patch v1.5) |
+| `scripts/geomec-corporate-to-ttl.py` | JSON → Turtle serializer for SHACL validation |
+| `scripts/validate-geomec-corporate.py` | End-to-end SHACL runner (PT-BR output) |
+| `tests/test_geomec_corporate_shacl.py` | 1 conformance + 9 violation-injection tests |
+
+### Schema and governance fields
+
+Each L6 entity carries fields beyond the academic schema:
+
+| Field | Purpose |
+|---|---|
+| `confidence` (low / medium / high) | Reliability of the documented evidence behind the entity. Drives the LangGraph Validator's PROVISIONAL flag (see below). |
+| `evidence_gaps` (list) | Explicit documentation gaps known by the curator. SHACL Shape 25 enforces: `confidence=low` ⇒ at least one gap. |
+| `owner_department` | Petrobras gerência responsible (RES, POÇOS/SPO/PEP/PROJ-PERF, AGP, etc.). Currently a backlog item — pending backfill. |
+| `official_datastore` | Authoritative store of record (SIRR, SIGEO, BDIEP, OpenWells, BDP). Backlog. |
+| `internal_tools` | Petrobras software (GeomecBR, GERESIM, SIGEO, SEST TR). Backlog. |
+| `internal_standards` | PE-2RES/POC document codes that govern the entity. Backlog. |
+| `out_of_scope_flag` | Marks entities that belong to a different module (e.g. GEOMEC026A QPG → Geologia de Locação Exploratória). SHACL Shape 30 requires `in_scope_for_module`. |
+| `formula.expression` + `variables` | For Formula-category entities (currently only GEOMEC036 ECD). SHACL Shape 28 requires expression. |
+
+### Deprecation lifecycle
+
+`GEOMEC026` was originally a single entity covering both QPG and Laudo Geomecânico. Patch v1.5 split it:
+
+- `GEOMEC026A` — **QPG (Quadro de Previsões Geológicas)** — flagged `out_of_scope_flag.in_scope_for_module = "geologia-locacao-exploratoria"`. Kept here for traceability; will migrate when that module exists.
+- `GEOMEC026B` — **Laudo Geomecânico** — active replacement for the geomechanics-scope half.
+- `GEOMEC026` — kept as `deprecated.replaced_by = [026A, 026B]` for audit. All previously active references (`GEOMEC025 PRODUCES`, `GEOMEC027 ENABLES`) were re-routed to `GEOMEC026B`. SHACL Shape 27 prevents new active refs to deprecated ids.
+
+### Crosswalk to academic module
+
+The crosswalk enables multi-hop reasoning. Each L6 entity has at most one mapping to a `GM*` class (and optionally a property-level `GP*` reference). Match kinds follow SKOS: `exactMatch`, `closeMatch`, `broadMatch`, `narrowMatch`, `relatedMatch`, `noMatch`.
+
+Examples (full table in `data/geomechanics-corporate-crosswalk.json`):
+
+| Corporate (L6) | Academic (L2) | Match | Why |
+|---|---|---|---|
+| GEOMEC001 Pressão de Poros | GM004 PorePressure (+ GP004 porePressureGradient) | exactMatch | Same physical concept; unit conversion needed (lb/gal vs psi/ft) |
+| GEOMEC002 Tensão Mín Horizontal | GM002 PrincipalStress (Shmin) + GP013 shmin | closeMatch | L6 coalesces Shmin physics with FractureGradient operational meaning |
+| GEOMEC031 XLOT | GR008 calibrated_by | relatedMatch | Calibration method for Shmin, with PE-2POC-01495 details |
+| GEOMEC035 Modelo Geomecânico 3D | GM012 MechanicalEarthModel3D | exactMatch | Direct equivalence |
+| GEOMEC028 GeomecBR | — | noMatch | Corporate-only software tool; L2 has no `Software` class |
+
+The crosswalk also documents 15 academic classes that have no corporate counterpart (`l2_unmapped_in_l6`), most notably `GM020-022` (RMR/GSI/RQD — geotechnical metrics not used in E&P at Petrobras).
+
+### SHACL governance (shapes 23-30)
+
+Beyond the structural shapes 1-22 of the wider dictionary, eight new shapes target the corporate module:
+
+| Shape | Rule |
+|---|---|
+| 23 GeomechCorporateEntityShape | id pattern `GEOMEC\d{3}[A-Z]?`, label_pt + definition_pt + category required, confidence enum |
+| 24 GeomechCorporateRelationShape | relation_type in SNAKE_CASE_UPPER, target_entity is IRI |
+| 25 GeomechLowConfidenceMustHaveGapShape | `confidence=low` ⇒ ≥1 evidence_gap |
+| 26 GeomechDeprecatedEntityShape | `isDeprecated true` ⇒ ≥1 replacedBy |
+| 27 GeomechActiveRefToDeprecatedShape | No active relation may target a deprecated entity |
+| 28 GeomechFormulaCategoryShape | `category=Formula` ⇒ formulaExpression present |
+| 29 GeomechRelationTargetExistsShape | target_entity must be a declared GeomechCorporateEntity |
+| 30 GeomechOutOfScopeShape | `isOutOfScope true` ⇒ in_scope_for_module declared |
+
+Run end-to-end:
+
+```bash
+python scripts/validate-geomec-corporate.py
+# ✓ CONFORME — 47 entidades, 170 relações, 0 violações.
+python -m unittest tests.test_geomec_corporate_shacl -v
+# 10 tests OK
+```
+
+### LangGraph Validator integration
+
+The reference agent at `examples/langgraph-agent/` extends the deterministic validator with three new severity-aware rules driven by the L6 metadata:
+
+- **CORPORATE_LOW_CONFIDENCE_PROVISIONAL** (`severity=provisional`) — when retrieved RAG chunks supporting the answer are exclusively `confidence=low`, the answer is marked PROVISORIA and evidence_gaps are surfaced. Does not invalidate the answer.
+- **GEOMEC_DEPRECATED_REFERENCE** (`severity=warn`) — flags `GEOMEC026` mentions and points to GEOMEC026B.
+- **GEOMEC_OUT_OF_SCOPE_REFERENCE** (`severity=warn`) — flags `GEOMEC026A` mentions and redirects to the Geologia de Locação Exploratória module.
+
+The synthesizer renders the three severities in distinct sections so users can distinguish blocking errors from provisional answers and informational warnings.
+
+### RAG corpus exposure
+
+`scripts/generate.js` emits two new chunk types into `ai/rag-corpus.jsonl`:
+
+- `geomec_corporate_entity` — 46 chunks (deprecated GEOMEC026 skipped). Text carries `[confiança: …]`, definition, formula, relations, evidence_gaps, out-of-scope marker. Metadata carries `layer=L6`, confidence, governance fields, OSDU mapping.
+- `geomec_corporate_crosswalk` — 24 chunks (one per non-noMatch mapping) with metadata `layer_pair=L2-L6`, enabling the agent's router to bridge corporate↔academic queries.
+
+### Open backlog
+
+Tracked inside `data/geomechanics-corporate.json` under `meta.recommended_next_backlog`:
+
+- Backfill `confidence` + `definition_en` for legacy entities GEOMEC001-035.
+- Backfill `sources/owner_department/official_datastore/internal_tools/internal_standards` for GEOMEC036-045.
+- Migrate GEOMEC026A (QPG) to a future Geologia de Locação Exploratória module.
+- Resolve overlap between GEOMEC036.formula.variables and GEOMEC038/039 (variable vs first-class entity).
+- Review relation directionality flagged in patch v1.5 cards: GEOMEC042/043/045 `MEASURED_BY` semantics.
+
+---
+
 ## Key Disambiguation Notes
 
 | Term | Module | Definition |
@@ -163,6 +288,8 @@ Depletion of reservoir pressure (Pp decrease) causes the effective stress to inc
 | UCS estatico | M9 | UCS from laboratory triaxial test — the authoritative value for engineering design. |
 | UCS dinamico | M9 | UCS estimated from sonic DTC/DTS logs via empirical correlation. Differs 20-40% from static; requires calibration before use. |
 | SGR (Shale Gouge Ratio) | M9 | Fault sealing proxy (%). Not to be confused with SAR (geochemistry) or SGR (gas). |
+| QPG (Quadro de Previsões Geológicas) | Geologia de Locação Exploratória (out-of-scope here) | Geological prognosis chart for exploratory prospects. Listed in the L6 corporate file as GEOMEC026A with `out_of_scope_flag` for traceability — the geomechanics deliverable is the Laudo Geomecânico (GEOMEC026B), not the QPG. |
+| GEOMEC026 (deprecated) | L6 corporate | Old aggregate of QPG + Laudo. Replaced by GEOMEC026A and GEOMEC026B. New code/queries must not reference 026 directly. |
 
 ---
 

@@ -1,0 +1,416 @@
+# Backfill Governance Extended — template para 29 entidades não-core_15
+# Versão template | gerado 2026-05-02
+# Dono do preenchimento: Gestão e Governança de Dados (GGD) + RES/TR/GMR + POÇOS
+#
+# ──────────────────────────────────────────────────────────────────────
+# WORKFLOW DE USO
+# ──────────────────────────────────────────────────────────────────────
+# 1. O time GGD/RES/POÇOS abre este YAML e, para cada entrada:
+#       - confirma ou corrige os valores marcados com `# CONFIRMED FROM: ...`
+#         (foram extraídos de texto JÁ existente em data/geomechanics-corporate.json
+#          — confiança alta, mas devem ser ratificados pelo dono do campo);
+#       - preenche cada campo marcado `# TODO: ...` ou remove a entrada do
+#         campo se realmente não se aplica;
+#       - adiciona itens em `sources_append` (estruturados: doc_id/section/citation)
+#         sempre que houver citação documental disponível.
+#
+# 2. Validação (dry-run, NÃO modifica o master JSON):
+#       python3 scripts/backfill-geomec-corporate.py \
+#           data/sources/geomechanics-corporate/backfill-governance-extended-31-template.yaml \
+#           --dry-run
+#
+# 3. Aplicação definitiva (modifica data/geomechanics-corporate.json,
+#    arquivando valores antigos sob entity._legacy.<field>):
+#       python3 scripts/backfill-geomec-corporate.py \
+#           data/sources/geomechanics-corporate/backfill-governance-extended-31-template.yaml
+#
+# ──────────────────────────────────────────────────────────────────────
+# ESCOPO
+# ──────────────────────────────────────────────────────────────────────
+# Cobre as 29 entidades NÃO marcadas com priority_tier=core_15.
+# (Spec original previa 31, mas o master JSON tem 47 = 16 core_15
+#  + 2 deprecated/out-of-scope (GEOMEC026, GEOMEC026A) + 29 alvos.)
+# Entidades fora deste template:
+#   - 16 core_15 (GEOMEC001..013, 019, 020, 021): backfill já feito,
+#     governança será revisada em frente separada;
+#   - GEOMEC026 (deprecated) e GEOMEC026A (out_of_scope): não receberão
+#     governança neste ciclo.
+#
+# ──────────────────────────────────────────────────────────────────────
+# CONVENÇÃO DE DOMÍNIOS / DATASTORES MENCIONADOS NO ARQUIVO BASE
+# ──────────────────────────────────────────────────────────────────────
+# owner_department candidatos observados:
+#   "RES" (Reservatórios) | "RES/TR/GMR" | "POÇOS/SPO/PEP/PROJ-PERF"
+#   "AGP" / "AGP/RES-EE/CTGI/CT-GGER" | "CENPES/PDIEP/GEO/GEM"
+#   "CSD-GEOMEC" | "POCOS/SPO/SP/PAD" | "PROLAB"
+# official_datastore candidatos:
+#   ["SIRR"], ["SIGEO"], ["BDIEP"], ["OpenWells"], ["SIPLEX"], ["VGE"],
+#   ["BDGEOL"], ["GERESIM"], ["PROLAB"]
+# internal_tools candidatos (sistemas/simuladores):
+#   ["GeomecBR"], ["SIGEO"], ["SEST TR"], ["SEST 2.0"], ["SIMCARR"],
+#   ["PWDa"], ["Techlog"], ["Petrel"], ["SKUA-GOCAD"], ["Stimplan"],
+#   ["DCS"], ["EXATA"], ["RTO-LIVE"], ["V3O2"], ["WELLSOM"], ["SEIDR"],
+#   ["Predict"], ["VIGRES"]
+# internal_standards: códigos PE-/PP- (ex: PE-2RES-00009, PP-2E&P-00322)
+#
+# ──────────────────────────────────────────────────────────────────────
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  PROPERTY (5 entidades)                                          ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC014
+  # label_pt: Compressibilidade de Poros
+  apply:
+    owner_department: "RES" # CONFIRMED FROM: "produto primário para simulação de reservatórios" + "Cp é insumo crítico na interpretação de TLDs"
+    official_datastore: ["SIRR"] # TODO: confirmar se Cp é registrado no SIRR como atributo do modelo geomecânico ou em datastore específico (PROLAB para ensaios?)
+    internal_tools: ["GeomecBR"] # CONFIRMED FROM: "modelagem geomecânica numérica 3D" + GEOMEC024 cita "GeomecBR acoplado ao simulador de fluxo"
+    internal_standards: ["PP-2E&P-00322"] # CONFIRMED FROM: "Correlação Petrobras para turbiditos (Figura 9 do PP-2E&P-00322)"
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "§3.5.6 Dados Laboratoriais / Figura 9"
+        citation: "" # TODO: extrair citação literal da Correlação Petrobras para turbiditos
+
+- match_id: GEOMEC017
+  # label_pt: Regime de Falhas
+  apply:
+    owner_department: "RES/TR/GMR" # TODO: confirmar — definição cita PE-2RES-00016 e PP-2E&P-00322 (donos: RES) mas Análise Estrutural pode ter dono específico
+    official_datastore: [] # TODO: regime de falhas é atributo do modelo geomecânico (SIRR)? ou só reportado no Laudo (SIPLEX)?
+    internal_tools: [] # TODO: ferramenta de análise SED — Petrel? Move? confirmar com geologia estrutural
+    internal_standards: ["PE-2RES-00016", "PP-2E&P-00322"] # CONFIRMED FROM: "padrões PE-2RES-00016 e PP-2E&P-00322 descrevem a Análise Estrutural"
+    sources_append: []
+
+- match_id: GEOMEC024
+  # label_pt: Compressibilidade de Poros Uniaxial
+  apply:
+    owner_department: "RES" # CONFIRMED FROM: "produto primário para simulação de reservatórios" (mesmo dono de GEOMEC014)
+    official_datastore: ["SIRR"] # TODO: confirmar persistência (mesma decisão de GEOMEC014)
+    internal_tools: ["GeomecBR"] # CONFIRMED FROM: "Abordagem geomecânica numérica via GeomecBR acoplado ao simulador de fluxo (Método 3b — solução two-way)"
+    internal_standards: ["PP-2E&P-00322"] # CONFIRMED FROM: "equação interna Petrobras: Cp_uni = Cp_hid × [(1+ν)(1-2ν)] / (1-ν)² [PP-2E&P-00322, equação (2)]"
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "Equação (2)"
+        citation: "" # TODO: extrair citação literal da equação de conversão Cp_hid → Cp_uni
+
+- match_id: GEOMEC027
+  # label_pt: IMGR — Índice de Modelagem de Geomecânica de Reservatório
+  apply:
+    owner_department: "RES/TR/GMR" # CONFIRMED FROM: "A gerência RES/TR/GMR é responsável pela validação de todos os modelos geomecânicos da companhia"
+    official_datastore: ["SIRR"] # CONFIRMED FROM: "modelo geomecânico vigente ... deve estar registrado no SIRR (Sistema de Informação de Reservas e Reservatórios) — módulo de geomecânica"
+    internal_tools: [] # TODO: confirmar se há ferramenta dedicada para cálculo/dashboard do IMGR (VIGRES?)
+    internal_standards: ["PP-2E&P-00322"] # CONFIRMED FROM: "modelo geomecânico deve ser atualizado em no máximo 3 anos ... [PP-2E&P-00322]"
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "" # TODO: localizar §
+        citation: "" # TODO: citação literal sobre prazo máximo de 3 anos e registro no SIRR
+
+- match_id: GEOMEC038
+  # label_pt: Pressão Hidrostática do Fluido de Perfuração (Ph)
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — Ph é insumo de cálculo de ECD; dono do cálculo é POÇOS
+    official_datastore: [] # TODO: Ph é atributo derivado, normalmente não persistido; confirmar se há armazenamento no PWDa/SIMCARR
+    internal_tools: ["PWDa", "SIMCARR"] # CONFIRMED FROM: definição de ECD (GEOMEC019) cita "Monitorada em tempo real pelo PWDa e pelo SIMCARR" — Ph é componente do cálculo
+    internal_standards: ["PE-2POC-00453"] # TODO: confirmar — fonte primária do conceito Ph na Petrobras (mesma fonte da Fórmula de ECD)
+    sources_append: [] # TODO: levantar citação primária no PE-2POC-00453 (gap declarado em evidence_gaps)
+
+- match_id: GEOMEC039
+  # label_pt: Perda de Carga Anular (ΔPa)
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — ΔPa é parâmetro hidráulico; dono é POÇOS
+    official_datastore: [] # TODO: idem GEOMEC038 — atributo derivado, persistência incerta
+    internal_tools: ["SIMCARR", "PWDa"] # CONFIRMED FROM: evidence_gaps "Requer confirmação documental para modelos hidráulicos SIMCARR/PWDa"
+    internal_standards: ["PE-2POC-00453"] # TODO: confirmar — mesma fonte da Fórmula de ECD
+    sources_append: [] # TODO: extrair citação primária
+
+- match_id: GEOMEC041
+  # label_pt: Contrapressão de Superfície (SBP)
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — SBP é parâmetro de operação MPD, gerenciado por POÇOS
+    official_datastore: [] # TODO: SBP é setpoint operacional; confirmar se persiste em algum datastore
+    internal_tools: [] # TODO: sistema MPD (CSD MPD) controla SBP — confirmar nome do sistema/console
+    internal_standards: ["PP-2POC-00341"] # TODO: confirmar — padrão MPD é fonte de definições do MPD (vide GEOMEC020)
+    sources_append: []
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  PROCESS (10 entidades)                                          ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC015
+  # label_pt: Estabilidade de Poço / Análise de Geohazards
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — análise emite Laudo Geomecânico; ownership pode ser compartilhado RES↔POÇOS
+    official_datastore: ["SIPLEX", "VGE"] # CONFIRMED FROM: GEOMEC026B (Laudo Geomecânico) "Armazenamento oficial: SIPLEX" + "Relatório Geomecânico Final ... arquivado no VGE"
+    internal_tools: ["SIGEO", "SEST TR", "SEIDR", "WELLSOM", "OpenWells"] # CONFIRMED FROM: definition_pt "Ferramentas internas: SIGEO, SEST TR (Simulador de Estabilidade), SEIDR, Wellsom, OpenWells"
+    internal_standards: ["PE-2RES-00009"] # CONFIRMED FROM: padrão de Avaliação de Riscos Geológicos e Geomecânicos para Poços (cf. meta.sources)
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC016
+  # label_pt: Subsidência e Compactação
+  apply:
+    owner_department: "RES/TR/GMR" # TODO: confirmar — subsidência é monitorada na governança de modelos geomecânicos (RES/TR/GMR é dono dos modelos)
+    official_datastore: ["SIRR"] # CONFIRMED FROM: GEOMEC028 "Os resultados [GeomecBR] são registrados no SIRR" + IMGR registra modelos vigentes no SIRR
+    internal_tools: ["GeomecBR", "GERESIM", "VIGRES"] # CONFIRMED FROM: "GeomecBR (Petrobras) e o simulador GERESIM são ferramentas internas para modelagem" + "Painel de monitoramento disponível em: vigres.petrobras.com.br"
+    internal_standards: ["PP-2E&P-00322"] # CONFIRMED FROM: "PP-2E&P-00322 define três faixas de risco operacional: <40 cm / 40-100 cm / >100 cm"
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "" # TODO: localizar § sobre faixas de risco de subsidência
+        citation: "" # TODO
+
+- match_id: GEOMEC018
+  # label_pt: Reativação de Falhas Geológicas
+  apply:
+    owner_department: "RES/TR/GMR" # CONFIRMED FROM: "toda atualização de modelo geomecânico submetida à GMR (RES/TR/GMR) deve obrigatoriamente incluir a análise de reativação de falhas"
+    official_datastore: ["SIRR"] # TODO: confirmar — análise faz parte do modelo geomecânico vigente (SIRR via IMGR)
+    internal_tools: ["GeomecBR", "VIGRES"] # CONFIRMED FROM: "monitoramento contínuo é feito via Sísmica 4D e pelo painel VIGRES (vigres.petrobras.com.br)"
+    internal_standards: ["PP-2E&P-00322", "PE-2RES-00009", "PE-2E&P-00878"] # CONFIRMED FROM: definição cita os três padrões explicitamente
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "" # TODO
+        citation: "" # TODO: citação sobre obrigatoriedade da análise de reativação na entrega à GMR
+
+- match_id: GEOMEC022
+  # label_pt: Scratch Test e Ensaios Mecânicos de Rocha em Laboratório
+  apply:
+    owner_department: "PROLAB" # CONFIRMED FROM: "As amostras são gerenciadas pelo PROLAB" — porém TODO: confirmar se PROLAB é depto ou só datastore
+    official_datastore: ["SIRR", "PROLAB"] # CONFIRMED FROM: "amostras gerenciadas pelo PROLAB e os resultados registrados no SIRR"
+    internal_tools: [] # TODO: equipamento/sistema de ensaio (laboratório CENPES?)
+    internal_standards: ["PP-2E&P-00322"] # CONFIRMED FROM: "principal dado obtido a Resistência à Compressão Uniaxial (UCS) [PP-2E&P-00322]" + ref CT CMR 010/2015 (CENPES)
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "§3.5.6 Dados Laboratoriais"
+        citation: "" # TODO
+
+- match_id: GEOMEC023
+  # label_pt: Breakouts e Fraturas Induzidas (Perfil de Imagem)
+  apply:
+    owner_department: "RES/TR/GMR" # TODO: confirmar — análise alimenta modelo geomecânico (RES); aquisição é poços
+    official_datastore: ["BDIEP"] # CONFIRMED FROM: "os dados devem ser carregados no BDIEP via VGE e incorporados no modelo geomecânico até o FEL2"
+    internal_tools: ["Techlog", "SEST TR"] # CONFIRMED FROM: "retroanálise de breakouts ... realizada nos sistemas Techlog e SEST TR"
+    internal_standards: ["PP-2E&P-00322", "PE-2RES-00016"] # CONFIRMED FROM: "[PP-2E&P-00322, PE-2RES-00016]" citados na definição
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "" # TODO
+        citation: "" # TODO: citação literal sobre obrigatoriedade de 100% dos perfis de imagem terem análise de breakout
+
+- match_id: GEOMEC025
+  # label_pt: CSD — Centro de Suporte à Decisão (Geomecânica)
+  apply:
+    owner_department: "CSD-GEOMEC" # CONFIRMED FROM: nome próprio da entidade; TODO confirmar hierarquia formal (subordinação a EXP? a POÇOS?)
+    official_datastore: ["SIPLEX", "VGE"] # CONFIRMED FROM: "Armazenamento oficial: SIPLEX [PE-2EXP-00074]" (do Laudo) + "Relatório Geomecânico Final de Poço ... arquivado no VGE"
+    internal_tools: ["DCS", "EXATA", "PWDa", "SIGEO 3", "V3O2", "Petrel", "RTO-LIVE", "SEST 2.0", "Predict", "OpenWells", "WELLSOM"] # CONFIRMED FROM: definition_pt enumera todos esses sistemas
+    internal_standards: ["PE-2EXP-00074", "PE-2EXP-00066", "PE-1PBR-01038"] # CONFIRMED FROM: definição cita explicitamente os três padrões
+    sources_append:
+      - doc_id: PE-2EXP-00074
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC031
+  # label_pt: XLOT — Teste de Fraturamento Estendido
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — operação é executada na perfuração (POÇOS) mas calibra modelo de RES
+    official_datastore: ["BDIEP"] # TODO: confirmar — testes de pressão tipicamente vão para BDIEP
+    internal_tools: ["SEST TR", "SIGEO"] # TODO: confirmar — ferramentas de análise (cf. GEOMEC030 cita análise/calibração de LOT/FIT em SIGEO+SEST TR)
+    internal_standards: ["PP-2E&P-00322", "PE-2E&P-00984", "PE-2RES-00014"] # CONFIRMED FROM: definição cita os três padrões
+    sources_append:
+      - doc_id: PE-2RES-00014
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC032
+  # label_pt: Pulso de Pressão (Operação AGP)
+  apply:
+    owner_department: "AGP/RES-EE/CTGI/CT-GGER" # CONFIRMED FROM: "devem ser determinados exclusivamente pela equipe de Geomecânica de Reservatórios da AGP (AGP/RES-EE/CTGI/CT-GGER)"
+    official_datastore: [] # TODO: confirmar onde fica o registro da operação (BDP? OpenWells?)
+    internal_tools: [] # TODO: ferramenta usada para definição da pressão de pulso e tempos
+    internal_standards: ["PE-2AGP-00027"] # CONFIRMED FROM: "[PE-2AGP-00027]" citado na definição
+    sources_append:
+      - doc_id: PE-2AGP-00027
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC033
+  # label_pt: Fraturamento Hidráulico (Estimulação)
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — fraturamento de estimulação é operação POÇOS
+    official_datastore: ["OpenWells"] # TODO: confirmar — eventos operacionais ficam em OpenWells/BDP
+    internal_tools: ["Stimplan"] # CONFIRMED FROM: "geometria da fratura e simulador Stimplan"
+    internal_standards: ["PE-2POC-01246", "PE-2POC-01495"] # CONFIRMED FROM: "Manual de Projeto de Fraturamento [PE-2POC-01246]" + meta.sources lista PE-2POC-01495 (Microfraturamento)
+    sources_append:
+      - doc_id: PE-2POC-01246
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC034
+  # label_pt: DFIT / DPPT — Testes Dinâmicos
+  apply:
+    owner_department: "CSD-GEOMEC" # CONFIRMED FROM: "resultados são usados para ajuste em tempo real das curvas de Pp e Shmin no SEST 2.0 pelo CSD GEOMEC"
+    official_datastore: ["BDIEP"] # TODO: confirmar — testes de pressão dinâmicos
+    internal_tools: ["SEST 2.0"] # CONFIRMED FROM: "ajuste em tempo real ... no SEST 2.0"
+    internal_standards: ["PP-2POC-00341", "PE-2POC-01232", "PE-1PBR-01326"] # CONFIRMED FROM: definição cita os três padrões
+    sources_append:
+      - doc_id: PP-2POC-00341
+        section: "§5 Definições"
+        citation: "" # TODO: extrair citações de DFIT e DPPT
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  TOOL (3 entidades)                                              ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC028
+  # label_pt: GeomecBR — Simulador Geomecânico por Elementos Finitos
+  apply:
+    owner_department: "CENPES/PDIEP/GEO/GEM" # CONFIRMED FROM: "Desenvolvido pelo CENPES" + meta.sources cita "CoI: CENPES/PDIEP/GEO/GEM"
+    official_datastore: ["SIRR"] # CONFIRMED FROM: "Os resultados são registrados no SIRR"
+    internal_tools: ["GeomecBR", "SKUA-GOCAD", "Petrel"] # CONFIRMED FROM: "fluxo de dados de geomecânica usando GeomecBR em conjunto com SKUA-GOCAD (AspenTech) e Petrel"
+    internal_standards: ["PP-2E&P-00322"] # CONFIRMED FROM: "[PP-2E&P-00322]"
+    sources_append:
+      - doc_id: PP-2E&P-00322
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC029
+  # label_pt: GERESIM — Sistema de Gerenciamento de Simulações
+  apply:
+    owner_department: "RES/TR/GMR" # TODO: confirmar — GERESIM é usado para validar modelos via ISA da GMR; CENPES pode ser dono técnico
+    official_datastore: ["GERESIM", "SIRR"] # CONFIRMED FROM: "modelos geomecânicos vigentes devem ser cadastrados no GERESIM/SIRR após validação pela RES/TR/GMR"
+    internal_tools: ["GERESIM"] # auto-referência (a entidade É a ferramenta)
+    internal_standards: ["PE-2RES-00009", "PE-2E&P-00726"] # CONFIRMED FROM: "[PE-2RES-00009]" + "[PE-2E&P-00726]"
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "" # TODO
+        citation: "" # TODO
+
+- match_id: GEOMEC030
+  # label_pt: SIGEO e SEST TR — Sistemas 1D
+  apply:
+    owner_department: "CENPES/PDIEP/GEO/GEM" # CONFIRMED FROM: "SEST 2.0 ... desenvolvida em parceria CENPES/PUC-RJ" + "metodologia descrita na CT CMR 010/2015 (CENPES)"
+    official_datastore: ["BDGEOL", "SIGEO"] # CONFIRMED FROM: "SIGEO ... acesso direto ao BDGEOL (banco de dados geológicos)"
+    internal_tools: ["SIGEO", "SEST TR", "SEST 2.0", "Techlog"] # CONFIRMED FROM: definição enumera todos esses sistemas
+    internal_standards: ["PE-2RES-00014", "PE-2EXP-00074"] # CONFIRMED FROM: "[PE-2RES-00014]" + "[PE-2EXP-00074]"
+    sources_append:
+      - doc_id: PE-2RES-00014
+        section: "" # TODO
+        citation: "" # TODO
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  DOCUMENT (1 entidade)                                           ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC026B
+  # label_pt: Laudo Geomecânico
+  apply:
+    owner_department: "RES/TR/GMR" # CONFIRMED FROM: "confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR"
+    official_datastore: ["SIPLEX", "VGE"] # CONFIRMED FROM: "Armazenamento oficial: SIPLEX [PE-2EXP-00074]" + "Relatório Geomecânico Final ... arquivado no VGE"
+    internal_tools: ["GERESIM"] # CONFIRMED FROM: GEOMEC029 "auxílio à construção do gráfico composto do Laudo Geomecânico"
+    internal_standards: ["PE-2RES-00009", "PE-2EXP-00074"] # CONFIRMED FROM: "[PE-2RES-00009]" + "[PE-2EXP-00074]"
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "" # TODO
+        citation: "" # TODO
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  MODEL (1 entidade)                                              ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC035
+  # label_pt: Modelo Geomecânico 3D de Reservatórios
+  apply:
+    owner_department: "RES/TR/GMR" # CONFIRMED FROM: "validado via ISA da RES/TR/GMR"
+    official_datastore: ["SIRR"] # CONFIRMED FROM: "modelo vigente ... deve estar registrado no SIRR (IMGR ≤ 3 anos)"
+    internal_tools: ["GeomecBR", "GERESIM"] # CONFIRMED FROM: "simulação pelo Método dos Elementos Finitos" (GeomecBR) + GEOMEC029 cadastra modelos no GERESIM/SIRR
+    internal_standards: ["PE-2RES-00009"] # CONFIRMED FROM: "[PE-2RES-00009]" citado múltiplas vezes
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "" # TODO
+        citation: "" # TODO
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  MEASUREMENT (4 entidades)                                       ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC037
+  # label_pt: Densidade Equivalente Estática (ESD)
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — ESD é leitura PWD operacional (POÇOS)
+    official_datastore: [] # TODO: leitura tempo-real, persistência típica em PWDa? confirmar
+    internal_tools: ["PWDa"] # CONFIRMED FROM: evidence_gaps "Requer validação em padrão operacional ou manual PWD/PWDa"
+    internal_standards: [] # TODO: identificar manual PWD/PWDa (gap declarado)
+    sources_append: [] # TODO: gap declarado em evidence_gaps — sem fonte primária
+
+- match_id: GEOMEC040
+  # label_pt: Anchor Point (AP)
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — AP é parâmetro MPD (POÇOS)
+    official_datastore: [] # TODO: AP é setpoint, persistência incerta
+    internal_tools: [] # TODO: sistema de controle MPD (CSD MPD?)
+    internal_standards: ["PP-2POC-00341"] # CONFIRMED FROM: GEOMEC020 (MPD) cita PP-2POC-00341 §5 "AP - Anchor point"
+    sources_append:
+      - doc_id: PP-2POC-00341
+        section: "§5 Definições"
+        citation: "AP - Anchor point: A profundidade na qual a pressão no anular do poço deve ser mantida constante com emprego do sistema de MPD, para todos os alinhamentos possíveis."
+
+- match_id: GEOMEC042
+  # label_pt: ISIP — Pressão Instantânea de Fechamento
+  apply:
+    owner_department: "RES/TR/GMR" # TODO: confirmar — ISIP calibra Shmin do modelo geomecânico (RES); aquisição é POÇOS
+    official_datastore: ["BDIEP"] # TODO: confirmar — dados de testes de fraturamento
+    internal_tools: ["SEST TR"] # TODO: confirmar — análise de testes em SEST TR (cf. GEOMEC030)
+    internal_standards: ["PE-2RES-00014"] # CONFIRMED FROM: GEOMEC031 cita "[PE-2RES-00014]" para hierarquia de qualidade que inclui ISIP
+    sources_append: [] # TODO: extrair citação do PE-2RES-00014 sobre ISIP
+
+- match_id: GEOMEC043
+  # label_pt: Pressão de Fechamento de Fratura (Pc)
+  apply:
+    owner_department: "RES/TR/GMR" # TODO: confirmar — idem ISIP; calibra Shmin
+    official_datastore: ["BDIEP"] # TODO: idem ISIP
+    internal_tools: ["SEST TR"] # TODO: idem ISIP
+    internal_standards: ["PE-2RES-00014"] # TODO: confirmar — fonte da definição
+    sources_append: [] # TODO: gap declarado — sobreposição com ISIP/reabertura precisa ser resolvida
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  FORMULA (1 entidade)                                            ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC036
+  # label_pt: Fórmula de ECD
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # CONFIRMED FROM: GEOMEC009 cita "POÇOS/SPO/PEP/PROJ-PERF" como dono dos cálculos da janela operacional, da qual ECD é parte
+    official_datastore: [] # TODO: fórmula é definição corporativa, não persistida
+    internal_tools: ["PWDa", "SIMCARR"] # CONFIRMED FROM: GEOMEC019 (ECD) "Monitorada em tempo real pelo PWDa e pelo SIMCARR"
+    internal_standards: ["PE-2POC-00453"] # CONFIRMED FROM: evidence_gaps "Deve receber citação documental direta do padrão PE-2POC-00453 antes da ingestão definitiva"
+    sources_append:
+      - doc_id: PE-2POC-00453
+        section: "§3.2.1 Conceito de ECD"
+        citation: "ECD (lb/gal) = [Ph(psi) + Δ Pa(psi)] / [0,1704 x L(m)]"
+
+# ╔══════════════════════════════════════════════════════════════════╗
+# ║  RISK (2 entidades)                                              ║
+# ╚══════════════════════════════════════════════════════════════════╝
+
+- match_id: GEOMEC044
+  # label_pt: Washout
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # TODO: confirmar — evento de poço, monitorado por POÇOS (CSD-GEOMEC)
+    official_datastore: ["OpenWells", "BDIEP"] # TODO: confirmar — washout aparece em caliper (BDIEP) e BDP/OpenWells
+    internal_tools: ["WELLSOM", "SIGEO"] # TODO: confirmar — ferramentas de análise de caliper/imagem
+    internal_standards: ["PE-2RES-00009"] # TODO: padrão de Avaliação de Riscos cita washout?
+    sources_append: [] # TODO: gap declarado — falta critério quantitativo corporativo por caliper
+
+- match_id: GEOMEC045
+  # label_pt: Prisão de Coluna
+  apply:
+    owner_department: "POÇOS/SPO/PEP/PROJ-PERF" # CONFIRMED FROM: GEOMEC009 cita "POÇOS/SPO/PEP/PROJ-PERF" como dono da janela operacional cujo descumprimento causa prisão de coluna
+    official_datastore: ["OpenWells", "BDIEP"] # CONFIRMED FROM: evidence_gaps "Requer ligação com BDIEP/OpenWells/BDP para evidência operacional por evento" + GEOMEC025 cita BDP gerenciado via OpenWells
+    internal_tools: ["WELLSOM", "OpenWells"] # CONFIRMED FROM: GEOMEC025 cita WELLSOM e OpenWells para gestão de eventos de poço
+    internal_standards: ["PE-2RES-00009"] # CONFIRMED FROM: GEOMEC009 cita PE-2RES-00009 §3.4.3 "Arraste, Estolamento, Prisão"
+    sources_append:
+      - doc_id: PE-2RES-00009
+        section: "§3.4.3 Arraste, Estolamento, Prisão"
+        citation: "" # TODO: extrair citação literal do padrão sobre prisão de coluna
+
+# ──────────────────────────────────────────────────────────────────────
+# FIM DO TEMPLATE — 29 entradas
+# ──────────────────────────────────────────────────────────────────────

@@ -1,0 +1,510 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "id": "geomechanics-corporate-crosswalk",
+    "label": "Crosswalk L2 ↔ L6 — Geomechanics Academic ↔ Petrobras Corporate",
+    "label_pt": "Crosswalk L2 ↔ L6 — Geomecânica Acadêmica ↔ Corporativa Petrobras",
+    "description": "Alinhamento SKOS entre o módulo acadêmico de Geomecânica (data/geomechanics.json — Layer 1-2, 26 classes GM* + 22 propriedades GP* + 12 relações GR*, baseado em Fjaer/Zoback/Hoek/ISRM) e o módulo corporativo (data/geomechanics-corporate.json — Layer 6, 47 entidades GEOMEC* com padrões PE-2RES/POC e ferramentas Petrobras). Permite multi-hop entre conceito acadêmico e operacionalização corporativa.",
+    "sources": [
+      "data/geomechanics.json — L1-L2 academic backbone",
+      "data/geomechanics-corporate.json — L6 corporate operationalization"
+    ],
+    "match_kinds": {
+      "exactMatch": "Conceitos semanticamente equivalentes — interoperáveis 1:1.",
+      "closeMatch": "Conceitos próximos com nuances de escopo (e.g. classe genérica vs propriedade específica, valor absoluto vs gradiente). Usar com cautela em queries cruzadas.",
+      "broadMatch": "L2 mais geral; L6 é caso particular dentro de L2.",
+      "narrowMatch": "L2 mais específico; L6 mais amplo.",
+      "relatedMatch": "Relação semântica clara mas não hierárquica (insumo, calibração, aplicação).",
+      "noMatch": "Conceito existe apenas em uma camada (corporativo-puro: ferramentas, sistemas, KPIs, documentos; ou acadêmico-puro: classes formais sem operacionalização documentada)."
+    },
+    "summary": {
+      "total_l6_entities": 47,
+      "exactMatch": 8,
+      "closeMatch": 4,
+      "relatedMatch": 12,
+      "noMatch": 23,
+      "l2_classes_total": 26,
+      "l2_classes_with_l6_counterpart": 11,
+      "l2_classes_unmapped": 15,
+      "l6_only_reason_breakdown": {
+        "corporate_tools_systems": 3,
+        "corporate_documents": 3,
+        "corporate_processes_no_l2_class": 9,
+        "corporate_kpi_governance": 1,
+        "out_of_scope_other_module": 1,
+        "deprecated_audit_only": 1,
+        "formula_or_variable_not_modelled_in_l2": 4,
+        "operational_concept_no_l2_class": 1
+      }
+    },
+    "next_steps": [
+      "Adicionar GP* property-level matches como atributo bidirecional (e.g. GEOMEC001 hasProperty GP004 porePressureGradient)",
+      "Quando módulo Geologia de Locação Exploratória existir, mover crosswalk de GEOMEC026A para lá",
+      "Considerar enriquecer L2 com classes para Subsidence, FaultReactivation, BoreholeBreakout — atualmente discutidas em docs/GEOMECHANICS.md mas sem classe formal"
+    ]
+  },
+  "mappings": [
+    {
+      "corporate_id": "GEOMEC001",
+      "corporate_label_pt": "Pressão de Poros",
+      "academic_id": "GM004",
+      "academic_class": "PorePressure",
+      "academic_property": "GP004:porePressureGradient",
+      "match": "exactMatch",
+      "note": "Pp na ontologia corporativa = PorePressure em L2. Atenção a unidade: L6 usa lb/gal/ppg (gradiente para perfuração) ou psi (absoluto); L2 GP004 é gradiente em psi/ft. Conversão deve ser aplicada antes de comparação."
+    },
+    {
+      "corporate_id": "GEOMEC002",
+      "corporate_label_pt": "Tensão Mínima Horizontal (Gradiente de Fratura)",
+      "academic_id": "GM002",
+      "academic_class": "PrincipalStress",
+      "academic_property": "GP013:shmin",
+      "match": "closeMatch",
+      "note": "Shmin em L2 é uma das três PrincipalStress; em L6 está coalescida com 'Gradiente de Fratura' (limite operacional superior da JOL). L2 separa estritamente Shmin (propriedade física) de FractureGradient (operacional) — em L6 os dois sentidos coexistem na mesma entidade."
+    },
+    {
+      "corporate_id": "GEOMEC003",
+      "corporate_label_pt": "Janela Operacional de Lama",
+      "academic_id": "GM005",
+      "academic_class": "MudWindow",
+      "match": "exactMatch",
+      "note": "Conceito idêntico. L2 expõe via GP020 mudWeightLower e GP021 mudWeightUpper; L6 expõe via relações LOWER_BOUND_DEFINED_BY (Pp) e UPPER_BOUND_DEFINED_BY (Shmin)."
+    },
+    {
+      "corporate_id": "GEOMEC004",
+      "corporate_label_pt": "Estado de Tensões In Situ (Geotensões)",
+      "academic_id": "GM001",
+      "academic_class": "StressTensor",
+      "match": "closeMatch",
+      "note": "L2 StressTensor é o objeto matemático (tensor 3x3 simétrico); L6 'Estado de Tensões In Situ' é o conceito operacional (Sv, SHmax, Shmin medidos). L6 abstrai o tensor; o tensor é a representação matemática de L6."
+    },
+    {
+      "corporate_id": "GEOMEC005",
+      "corporate_label_pt": "Tensão Efetiva",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "relatedMatch",
+      "note": "L2 não tem classe formal EffectiveStress, apenas o princípio de Biot-Terzaghi mencionado em docs/GEOMECHANICS.md. L6 GEOMEC005 está relacionado a GM004 PorePressure + GM017 BiotCoefficient via fórmula sigma_eff = sigma_total - alpha*Pp. Recomenda-se adicionar classe EffectiveStress em L2."
+    },
+    {
+      "corporate_id": "GEOMEC006",
+      "corporate_label_pt": "Testes de Absorção e Fraturamento",
+      "academic_id": "GR008",
+      "academic_class": "calibrated_by",
+      "match": "relatedMatch",
+      "note": "L2 não tem classe Test; tem a relação calibrated_by que liga PorePressure/Stresses a métodos de calibração. L6 GEOMEC006 é o agrupador de LOT/FIT/xLOT/Microfrac. Insumo para Shmin (GM002→GP013)."
+    },
+    {
+      "corporate_id": "GEOMEC007",
+      "corporate_label_pt": "Tensão Vertical (Sobrecarga)",
+      "academic_id": "GM002",
+      "academic_class": "PrincipalStress",
+      "academic_property": "GP011:sv",
+      "match": "closeMatch",
+      "note": "Sv = vertical/overburden stress. L2 modela como instância de PrincipalStress com propriedade GP011. Conceito físico idêntico; L6 adiciona método operacional (integração de log de densidade)."
+    },
+    {
+      "corporate_id": "GEOMEC008",
+      "corporate_label_pt": "Tensão Horizontal Máxima",
+      "academic_id": "GM002",
+      "academic_class": "PrincipalStress",
+      "academic_property": "GP012:sHmax",
+      "match": "closeMatch",
+      "note": "SHmax. Idem GEOMEC007 — instância de PrincipalStress. Determinada por azimute de breakouts/DITF (GEOMEC023) em L6; L2 não modela métodos de determinação."
+    },
+    {
+      "corporate_id": "GEOMEC009",
+      "corporate_label_pt": "Gradiente de Colapso",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "relatedMatch",
+      "note": "Limite inferior da MudWindow (GM005). L2 não tem classe explícita; a propriedade GP020 mudWeightLower é o ponto de contato. Recomenda-se adicionar classe CollapseGradient em L2 (já mencionada em docs/GEOMECHANICS.md como 'lower bound')."
+    },
+    {
+      "corporate_id": "GEOMEC010",
+      "corporate_label_pt": "Resistência à Compressão Uniaxial",
+      "academic_id": "GM014",
+      "academic_class": "UCS",
+      "academic_property": "GP002:ucs",
+      "match": "exactMatch",
+      "note": "UCS — equivalência direta. L2 e L6 ambos enfatizam distinção static vs dynamic (ver GEOMEC022 scratch test em L6 para metodologia)."
+    },
+    {
+      "corporate_id": "GEOMEC011",
+      "corporate_label_pt": "Módulo de Young (Módulo de Elasticidade)",
+      "academic_id": "GM015",
+      "academic_class": "YoungModulus",
+      "academic_property": "GP001:youngModulus",
+      "match": "exactMatch",
+      "note": "Equivalência direta. Tanto L2 quanto L6 distinguem dinâmico (sônico) vs estático (laboratório); L6 detalha calibração via REQUIRES_CALIBRATION."
+    },
+    {
+      "corporate_id": "GEOMEC012",
+      "corporate_label_pt": "Coeficiente de Poisson",
+      "academic_id": "GM016",
+      "academic_class": "PoissonRatio",
+      "academic_property": "GP003:poissonRatio",
+      "match": "exactMatch",
+      "note": "Equivalência direta."
+    },
+    {
+      "corporate_id": "GEOMEC013",
+      "corporate_label_pt": "Coeficiente de Biot-Willis",
+      "academic_id": "GM017",
+      "academic_class": "BiotCoefficient",
+      "academic_property": "GP005:biotCoefficient",
+      "match": "exactMatch",
+      "note": "Coeficiente de Biot α (0–1). Equivalência direta. Usado no princípio de tensão efetiva (GEOMEC005)."
+    },
+    {
+      "corporate_id": "GEOMEC014",
+      "corporate_label_pt": "Compressibilidade de Poros",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "L2 não modela compressibilidade de poros como classe distinta. Relacionado conceitualmente a GM018 BulkModulus mas sem mapeamento direto. Backlog de enriquecimento L2."
+    },
+    {
+      "corporate_id": "GEOMEC015",
+      "corporate_label_pt": "Estabilidade de Poço / Análise de Geohazards",
+      "academic_id": "GR004",
+      "academic_class": "affects_wellbore_stability",
+      "match": "relatedMatch",
+      "note": "L2 expressa como relação entre stresses, mud weight e GM026 Wellbore. L6 GEOMEC015 é o processo agregador. Multi-hop: GEOMEC044 Washout → GEOMEC015 → GR004 → GM026."
+    },
+    {
+      "corporate_id": "GEOMEC016",
+      "corporate_label_pt": "Subsidência e Compactação",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Aplicação clássica do MEM 3D mencionada em docs/GEOMECHANICS.md mas sem classe L2. Backlog de enriquecimento — L6 já define faixas de risco (<40 cm moderada; 40–100 cm elevada; >100 cm extrema)."
+    },
+    {
+      "corporate_id": "GEOMEC017",
+      "corporate_label_pt": "Regime de Falhas",
+      "academic_id": "GM025",
+      "academic_class": "AndersonStressRegime",
+      "academic_property": "GP022:stressRegime",
+      "match": "exactMatch",
+      "note": "Regime Anderson (NF/SS/RF). Equivalência direta. L6 documenta regime hidrostático em evaporitos como caso especial (Shmin ≈ Sv)."
+    },
+    {
+      "corporate_id": "GEOMEC018",
+      "corporate_label_pt": "Reativação de Falhas Geológicas",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Aplicação do MEM mencionada em docs/GEOMECHANICS.md. Sem classe L2 formal. Recomenda-se adicionar classe FaultReactivation em L2 com relação a SealIntegrity/SGR."
+    },
+    {
+      "corporate_id": "GEOMEC019",
+      "corporate_label_pt": "Densidade Equivalente de Circulação",
+      "academic_id": "GM005",
+      "academic_class": "MudWindow",
+      "match": "relatedMatch",
+      "note": "ECD é conceito hidráulico dinâmico não modelado em L2. Relacionado à MudWindow (GP020/GP021) — ECD operacional precisa estar dentro da janela. Composto por GEOMEC037 (ESD) + GEOMEC038 (Ph) + GEOMEC039 (ΔPa)."
+    },
+    {
+      "corporate_id": "GEOMEC020",
+      "corporate_label_pt": "Perfuração com Controle de Pressão (MPD)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Tecnologia de perfuração corporativa. L2 trata pressão de fluido como variável (GP020/GP021) mas não modela o método operacional MPD."
+    },
+    {
+      "corporate_id": "GEOMEC021",
+      "corporate_label_pt": "Pressão de Crescimento Anular (APB)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Risco operacional pós-cimentação típico de poços HPHT. Sem contraparte L2."
+    },
+    {
+      "corporate_id": "GEOMEC022",
+      "corporate_label_pt": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "L2 não modela ensaios laboratoriais como classes (apenas as propriedades resultantes — UCS, E, ν). Relacionado conceitualmente a GM014/GM015/GM016 como método de obtenção. Recomenda-se classe LaboratoryTest em L2."
+    },
+    {
+      "corporate_id": "GEOMEC023",
+      "corporate_label_pt": "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Mencionado em docs/GEOMECHANICS.md como método para SHmax mas sem classe. Recomenda-se adicionar BoreholeBreakout e DrillingInducedTensileFracture em L2."
+    },
+    {
+      "corporate_id": "GEOMEC024",
+      "corporate_label_pt": "Compressibilidade de Poros Uniaxial",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Variante restrita de GEOMEC014. Sem contraparte L2."
+    },
+    {
+      "corporate_id": "GEOMEC025",
+      "corporate_label_pt": "CSD — Centro de Suporte à Decisão (Geomecânica)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Estrutura organizacional Petrobras. Conceito puramente corporativo (L6-only)."
+    },
+    {
+      "corporate_id": "GEOMEC026",
+      "corporate_label_pt": "Laudo Geomecânico e QPG (deprecated)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Entidade deprecada — substituída por GEOMEC026A (QPG, fora de escopo) e GEOMEC026B (Laudo). Mantida para audit trail; não usar em novas referências."
+    },
+    {
+      "corporate_id": "GEOMEC026A",
+      "corporate_label_pt": "QPG — Quadro de Previsões Geológicas",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Out-of-scope para Geomecânica. Pertence a módulo Geologia de Locação Exploratória (a ser criado). Crosswalk apropriado deve ser implementado naquele módulo."
+    },
+    {
+      "corporate_id": "GEOMEC026B",
+      "corporate_label_pt": "Laudo Geomecânico",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Documento corporativo de entrega. L2 não modela artefatos documentais, apenas conceitos físicos. Receptor de output dos modelos MEM (GM010/GM011/GM012)."
+    },
+    {
+      "corporate_id": "GEOMEC027",
+      "corporate_label_pt": "IMGR — Índice de Modelagem de Geomecânica de Reservatório",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "KPI de governança Petrobras. L6-only."
+    },
+    {
+      "corporate_id": "GEOMEC028",
+      "corporate_label_pt": "GeomecBR — Simulador Geomecânico por Elementos Finitos (Petrobras)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Software corporativo Petrobras. Implementa numericamente conceitos modelados em GM010 MechanicalEarthModel mas é instrumento, não conceito ontológico em L2."
+    },
+    {
+      "corporate_id": "GEOMEC029",
+      "corporate_label_pt": "GERESIM — Sistema de Gerenciamento de Simulações de Reservatórios",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Sistema corporativo Petrobras. L6-only."
+    },
+    {
+      "corporate_id": "GEOMEC030",
+      "corporate_label_pt": "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço",
+      "academic_id": "GM011",
+      "academic_class": "MechanicalEarthModel1D",
+      "match": "relatedMatch",
+      "note": "Tools que computam o conceito GM011 MEM1D. Implementação corporativa do modelo acadêmico — relação implements_concept."
+    },
+    {
+      "corporate_id": "GEOMEC031",
+      "corporate_label_pt": "XLOT — Teste de Fraturamento Estendido (Metodologia Interna)",
+      "academic_id": "GR008",
+      "academic_class": "calibrated_by",
+      "match": "relatedMatch",
+      "note": "Método de calibração de Shmin (GM002→GP013). Multi-hop: GEOMEC031 → GR008 → GM002. L6 carrega metodologia corporativa específica não detalhada em L2."
+    },
+    {
+      "corporate_id": "GEOMEC032",
+      "corporate_label_pt": "Pulso de Pressão (Operação AGP)",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Operação de monitoramento de reservatório AGP. Sem contraparte L2."
+    },
+    {
+      "corporate_id": "GEOMEC033",
+      "corporate_label_pt": "Fraturamento Hidráulico (Estimulação)",
+      "academic_id": "GR012",
+      "academic_class": "governs_fracture_propagation",
+      "match": "relatedMatch",
+      "note": "L2 expressa como relação entre stress regime e propagação de fratura. L6 GEOMEC033 é o processo de estimulação (PE-2POC-01246). Insumo: GP013 shmin determina azimute."
+    },
+    {
+      "corporate_id": "GEOMEC034",
+      "corporate_label_pt": "DFIT / DPPT — Testes Dinâmicos de Integridade e Pressão de Poros",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Testes corporativos (variantes XLOT/microfrac). Insumo para Pp e Shmin via GR008 calibrated_by, mas sem classe L2 dedicada."
+    },
+    {
+      "corporate_id": "GEOMEC035",
+      "corporate_label_pt": "Modelo Geomecânico 3D de Reservatórios",
+      "academic_id": "GM012",
+      "academic_class": "MechanicalEarthModel3D",
+      "match": "exactMatch",
+      "note": "Equivalência direta. L6 adiciona contexto de aplicação em reservatórios e ferramentas de execução (GeomecBR, GERESIM)."
+    },
+    {
+      "corporate_id": "GEOMEC036",
+      "corporate_label_pt": "Fórmula de ECD",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Entidade computável (fórmula). L2 não modela fórmulas como classes ontológicas — modela apenas as propriedades envolvidas (GP020/GP021). Candidata a virar tool no MCP Server."
+    },
+    {
+      "corporate_id": "GEOMEC037",
+      "corporate_label_pt": "Densidade Equivalente Estática",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Componente estática da ECD (GEOMEC019). Conceito hidráulico não modelado em L2."
+    },
+    {
+      "corporate_id": "GEOMEC038",
+      "corporate_label_pt": "Pressão Hidrostática do Fluido de Perfuração",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Variável da fórmula de ECD (GEOMEC036). Overlap pendente: pode ser entidade ou apenas variável embutida na fórmula."
+    },
+    {
+      "corporate_id": "GEOMEC039",
+      "corporate_label_pt": "Perda de Carga Anular",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Variável da fórmula de ECD (GEOMEC036). Mesmo overlap que GEOMEC038."
+    },
+    {
+      "corporate_id": "GEOMEC040",
+      "corporate_label_pt": "Anchor Point",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Conceito específico de MPD (GEOMEC020). Sem contraparte L2."
+    },
+    {
+      "corporate_id": "GEOMEC041",
+      "corporate_label_pt": "Contrapressão de Superfície",
+      "academic_id": null,
+      "academic_class": null,
+      "match": "noMatch",
+      "note": "Variável operacional de MPD. Sem contraparte L2."
+    },
+    {
+      "corporate_id": "GEOMEC042",
+      "corporate_label_pt": "ISIP — Pressão Instantânea de Fechamento",
+      "academic_id": "GR008",
+      "academic_class": "calibrated_by",
+      "match": "relatedMatch",
+      "note": "Indicador de qualidade em testes de fraturamento; usado para estimar Shmin. Multi-hop: GEOMEC042 → calibrates → GM002 PrincipalStress (GP013 shmin)."
+    },
+    {
+      "corporate_id": "GEOMEC043",
+      "corporate_label_pt": "Pressão de Fechamento de Fratura",
+      "academic_id": "GR008",
+      "academic_class": "calibrated_by",
+      "match": "relatedMatch",
+      "note": "Pc usado para calibrar Shmin (GM002→GP013). Sobreposição semântica com GEOMEC042 ISIP — registrar relação MEASURED_AFTER entre eles."
+    },
+    {
+      "corporate_id": "GEOMEC044",
+      "corporate_label_pt": "Washout",
+      "academic_id": "GR004",
+      "academic_class": "affects_wellbore_stability",
+      "match": "relatedMatch",
+      "note": "Manifestação de instabilidade do poço. L2 expressa via GR004 sobre GM026 Wellbore. L6 detalha critério (caliper, perfil de imagem)."
+    },
+    {
+      "corporate_id": "GEOMEC045",
+      "corporate_label_pt": "Prisão de Coluna",
+      "academic_id": "GR004",
+      "academic_class": "affects_wellbore_stability",
+      "match": "relatedMatch",
+      "note": "Evento operacional consequente de instabilidade (GEOMEC015). L2 modela apenas a relação genérica GR004; L6 acrescenta evento monitorável (BDIEP/OpenWells/BDP)."
+    }
+  ],
+  "l2_unmapped_in_l6": [
+    {
+      "academic_id": "GM003",
+      "academic_class": "ShearStress",
+      "note": "Não há entidade corporativa específica para tensão cisalhante em L6 — embutida no conceito de Estado de Tensões In Situ (GEOMEC004) e nos critérios de ruptura (não modelados em L6)."
+    },
+    {
+      "academic_id": "GM006",
+      "academic_class": "MohrCircle",
+      "note": "Representação gráfica usada em análise de critério de ruptura. Não modelada como entidade em L6."
+    },
+    {
+      "academic_id": "GM007",
+      "academic_class": "FailureCriterion",
+      "note": "L6 não modela critérios de ruptura como entidades — uso de Mohr-Coulomb/Hoek-Brown está implícito em GEOMEC009 Gradiente de Colapso e GEOMEC015."
+    },
+    {
+      "academic_id": "GM008",
+      "academic_class": "MohrCoulombCriterion",
+      "note": "Idem GM007."
+    },
+    {
+      "academic_id": "GM009",
+      "academic_class": "HoekBrownCriterion",
+      "note": "Idem GM007."
+    },
+    {
+      "academic_id": "GM010",
+      "academic_class": "MechanicalEarthModel",
+      "note": "Conceito raiz MEM. L6 expressa as duas variantes (1D em GEOMEC030, 3D em GEOMEC035) mas não a classe genérica."
+    },
+    {
+      "academic_id": "GM013",
+      "academic_class": "RockMechProperty",
+      "note": "Superclasse abstrata em L2. L6 expressa as propriedades concretas (UCS, E, ν, Biot, etc.) sem nó genérico."
+    },
+    {
+      "academic_id": "GM018",
+      "academic_class": "BulkModulus",
+      "note": "Não modelado em L6 — usado implicitamente em GEOMEC014 Compressibilidade de Poros."
+    },
+    {
+      "academic_id": "GM019",
+      "academic_class": "ShearModulus",
+      "note": "Idem GM018 — não modelado em L6 explicitamente."
+    },
+    {
+      "academic_id": "GM020",
+      "academic_class": "RockMassRating",
+      "note": "RMR (Bieniawski). Sistema de classificação de maciço rochoso típico de geotecnia/mineração; Petrobras não usa em geomecânica de reservatório, daí ausência em L6."
+    },
+    {
+      "academic_id": "GM021",
+      "academic_class": "GSI",
+      "note": "Geological Strength Index. Idem GM020 — não usado no contexto Petrobras de E&P."
+    },
+    {
+      "academic_id": "GM022",
+      "academic_class": "RQD",
+      "note": "Rock Quality Designation. Idem GM020."
+    },
+    {
+      "academic_id": "GM023",
+      "academic_class": "Anisotropy",
+      "note": "Anisotropia mecânica de rocha. Discutida em padrões corporativos mas sem entidade dedicada em L6."
+    },
+    {
+      "academic_id": "GM024",
+      "academic_class": "Brittleness",
+      "note": "Índice de fragilidade. Relevante em estimulação (fraturamento) mas não modelado em L6."
+    },
+    {
+      "academic_id": "GM026",
+      "academic_class": "Wellbore",
+      "note": "Conceito poço como objeto geomecânico. L6 trata o poço transversalmente em vários processos (estabilidade, MPD, breakouts) sem nó dedicado — possivelmente porque 'poço' já existe como entidade no nível superior do KG corporativo."
+    }
+  ]
+}
