@@ -13,6 +13,14 @@
       "definition": "Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.",
       "definition_en_canonical": "The origin of a set of wellbores.",
       "legal_source": "ANP/SEP",
+      "primary_key": "nome_anp",
+      "primary_key_standard": "ANP/SEP nomenclature",
+      "primary_key_pattern": "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$",
+      "joined_by_modules": [
+        "data/operacoes-geologicas.json#OGEOMEC.Poco",
+        "data/operacoes-geologicas.json#FRX.Poco",
+        "data/operacoes-geologicas.json#DRX.Poco"
+      ],
       "datasets": [
         "pocos-exploratorios",
         "blocos-contrato"

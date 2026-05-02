@@ -1198,3 +1198,227 @@ geo:DNAGeoquimicoShape a sh:NodeShape ;
         sh:minCount 1 ;
         sh:message "DNAGeoquimico deve ter ao menos um skos:definition."@pt ;
     ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 26: OGEOMECShape — validates geo:OGEOMEC instances
+# 24 columns from data/operacoes-geologicas.json, 6 controlled vocabularies.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:OGEOMECShape a sh:NodeShape ;
+    rdfs:label "Forma de OGEOMEC"@pt ;
+    rdfs:label "OGEOMEC Shape"@en ;
+    sh:targetClass geo:OGEOMEC ;
+    rdfs:comment "Valida ocorrências geomecânicas: Poco no padrão ANP, TipoOcorrencia/Procedimento/Fluido/Unidade/PesoFluidoUnit/FaseTipo de vocabulário controlado, profundidades >= 0, FasePoco em [1,12], Data obrigatória."@pt ;
+
+    # Poco — ANP regex
+    sh:property [
+        sh:path geo:ogeomecPoco ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "ogeomecPoco deve seguir o padrão ANP (ex: 1-BRSA-1234-RJS)."@pt ;
+    ] ;
+
+    # TipoOcorrencia (12 values)
+    sh:property [
+        sh:path geo:ogeomecTipoOcorrencia ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "Kick" "Falso Kick" "Perda Din" "Perda Est" "Perda Total"
+            "Prisao" "Ameaca Prisao" "Arraste" "Topamento" "Estolamento"
+            "Fundo Falso" "Gas Manobra"
+        ) ;
+        sh:message "ogeomecTipoOcorrencia deve ser um dos 12 valores do vocabulário OGEOMEC_TipoOcorrencia."@pt ;
+    ] ;
+
+    # ProcedimentoPoco (8 values)
+    sh:property [
+        sh:path geo:ogeomecProcedimentoPoco ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "PERFURACAO" "DESCIDA DE COLUNA" "RETIRADA DE COLUNA" "CIMENTACAO"
+            "REVESTIMENTO" "PERFILAGEM A CABO" "TESTEMUNHAGEM" "OPERACOES SEM AVANCO"
+        ) ;
+        sh:message "ogeomecProcedimentoPoco deve ser um dos 8 valores do vocabulário OGEOMEC_ProcedimentoPoco."@pt ;
+    ] ;
+
+    # Fluido (4 values)
+    sh:property [
+        sh:path geo:ogeomecFluido ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "FLUIDO DE PERFURAÇÃO AQUOSO"
+            "FLUIDO DE PERFURAÇÃO NÃO AQUOSO"
+            "FLUIDO COMPLETAÇÃO AQUOSO"
+            "AGUA DO MAR"
+        ) ;
+        sh:message "ogeomecFluido deve ser um dos 4 valores do vocabulário OGEOMEC_Fluido."@pt ;
+    ] ;
+
+    # UnidadeValor (11 values)
+    sh:property [
+        sh:path geo:ogeomecUnidadeValor ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "klbf" "ton" "kN.m" "klbf.ft" "bbl" "m3" "psi" "ppm" "units" "min" "m"
+        ) ;
+        sh:message "ogeomecUnidadeValor deve ser um dos 11 valores do vocabulário OGEOMEC_UnidadeValor."@pt ;
+    ] ;
+
+    # PesoFluidoUnit (3 values)
+    sh:property [
+        sh:path geo:ogeomecPesoFluidoUnit ;
+        sh:datatype xsd:string ;
+        sh:in ( "ppg" "g/cm3" "sg" ) ;
+        sh:message "ogeomecPesoFluidoUnit deve ser ppg, g/cm3 ou sg."@pt ;
+    ] ;
+
+    # FaseTipo (2 values)
+    sh:property [
+        sh:path geo:ogeomecFaseTipo ;
+        sh:datatype xsd:string ;
+        sh:in ( "SEM_RETORNO" "COM_RETORNO" ) ;
+        sh:message "ogeomecFaseTipo deve ser SEM_RETORNO ou COM_RETORNO."@pt ;
+    ] ;
+
+    # Numeric depth fields >= 0
+    sh:property [
+        sh:path geo:ogeomecTopoOcorrencia ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecTopoOcorrencia deve ser xsd:double >= 0 (metros MD)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:ogeomecBaseOcorrencia ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecBaseOcorrencia deve ser xsd:double >= 0 (metros MD)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:ogeomecProfundidadePerfuracao ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecProfundidadePerfuracao deve ser xsd:double >= 0 (metros MD)."@pt ;
+    ] ;
+
+    # ECD and PesoFluido >= 0 (no upper bound — unit varies)
+    sh:property [
+        sh:path geo:ogeomecECD ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecECD deve ser xsd:double >= 0 (unidade canônica ppg)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:ogeomecPesoFluido ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecPesoFluido deve ser xsd:double >= 0 (unidade auditada via ogeomecPesoFluidoUnit)."@pt ;
+    ] ;
+
+    # Data — required
+    sh:property [
+        sh:path geo:ogeomecData ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "ogeomecData é obrigatório (xsd:date)."@pt ;
+    ] ;
+
+    # FasePoco — integer in [1, 12] (observed range)
+    sh:property [
+        sh:path geo:ogeomecFasePoco ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:maxInclusive 12 ;
+        sh:message "ogeomecFasePoco deve ser xsd:integer no intervalo [1, 12] (faixa observada)."@pt ;
+    ] ;
+
+    # SPARQL: TopoOcorrencia <= BaseOcorrencia
+    sh:sparql [
+        sh:message "ogeomecTopoOcorrencia deve ser <= ogeomecBaseOcorrencia (topo acima da base, MD crescente)."@pt ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this
+            WHERE {
+                $this geo:ogeomecTopoOcorrencia ?topo .
+                $this geo:ogeomecBaseOcorrencia ?base .
+                FILTER ( ?topo > ?base )
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 27: QPGShape — validates geo:QPG instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:QPGShape a sh:NodeShape ;
+    rdfs:label "Forma de QPG"@pt ;
+    rdfs:label "QPG Shape"@en ;
+    sh:targetClass geo:QPG ;
+    rdfs:comment "Valida Quadros de Previsão Geológica: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "QPG deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "QPG deve ter ao menos um skos:definition."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 28: PerfilCompostoShape — validates geo:PerfilComposto instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:PerfilCompostoShape a sh:NodeShape ;
+    rdfs:label "Forma de Perfil Composto"@pt ;
+    rdfs:label "Composite Log Shape"@en ;
+    sh:targetClass geo:PerfilComposto ;
+    rdfs:comment "Valida Perfis Compostos: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "PerfilComposto deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "PerfilComposto deve ter ao menos um skos:definition."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 29: LitologiaShape — validates geo:Litologia instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:LitologiaShape a sh:NodeShape ;
+    rdfs:label "Forma de Litologia"@pt ;
+    rdfs:label "Lithology Shape"@en ;
+    sh:targetClass geo:Litologia ;
+    rdfs:comment "Valida interpretações litológicas: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "Litologia deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "Litologia deve ter ao menos um skos:definition."@pt ;
+    ] .

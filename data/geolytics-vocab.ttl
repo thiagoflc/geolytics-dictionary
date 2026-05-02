@@ -840,3 +840,678 @@ geo:feedsSignature a owl:ObjectProperty ;
     rdfs:comment "Liga uma análise FRX à assinatura DNAGeoquimico que ela alimenta com razões elementares."@pt ;
     rdfs:domain geo:FRX ;
     rdfs:range geo:DNAGeoquimico .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Geological Operations: documents (OG030-OG039) and systems (OG040-OG050)
+# Source: data/operacoes-geologicas.json
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeologicalOperationsDocument a owl:Class ;
+    rdfs:label "Documento de Operações Geológicas"@pt ;
+    rdfs:label "Geological Operations Document"@en ;
+    skos:prefLabel "Documento de Operações Geológicas"@pt ;
+    skos:prefLabel "Geological Operations Document"@en ;
+    skos:definition "Classe abstrata dos documentos e datasets produzidos pelas linhas de serviço de Operações Geológicas (OGEOMEC, QPG, Perfil Composto, Litologia, RMG, BDP, IGP, ROP-Logging, RCSD)."@pt ;
+    skos:definition "Abstract class for documents and datasets produced by Geological Operations service lines (OGEOMEC, QPG, Composite Log, Lithology, RMG, BDP, IGP, ROP Logging, RCSD)."@en .
+
+geo:GeologicalOperationsSystem a owl:Class ;
+    rdfs:label "Sistema de Operações Geológicas"@pt ;
+    rdfs:label "Geological Operations System"@en ;
+    skos:prefLabel "Sistema de Operações Geológicas"@pt ;
+    skos:prefLabel "Geological Operations System"@en ;
+    skos:definition "Classe abstrata dos sistemas de suporte aos fluxos de Operações Geológicas (EXATA, SIGEO, BDIEP, CGOR, CSD, Buscador de Análogos Geomec)."@pt ;
+    skos:definition "Abstract class for systems supporting Geological Operations workflows (EXATA, SIGEO, BDIEP, CGOR, CSD, Geomechanical Analogs Search)."@en .
+
+# ── Document subclasses ──
+
+geo:OGEOMEC a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "OGEOMEC"@pt ;
+    rdfs:label "OGEOMEC"@en ;
+    skos:prefLabel "Planilha de Ocorrências Geomecânicas"@pt ;
+    skos:prefLabel "Geomechanical Occurrences Sheet"@en ;
+    skos:altLabel "Ocorrências Geomecânicas"@pt ;
+    skos:altLabel "Geomechanical Occurrences"@en ;
+    skos:altLabel "OcorrenciasGeomecanicas"@pt ;
+    skos:definition "Tabela relacional de ocorrências geomecânicas durante a perfuração, persistida na BDIEP. Cada linha representa um evento (kick, perda, prisão, arraste, topamento, estolamento, etc.) com intervalo de profundidade, estado do fluido (ECD, peso de lama), procedimento, diâmetro do poço aberto e BHA. Fonte estruturada primária para retroanálise e busca de poços análogos."@pt ;
+    skos:definition "Relational table of geomechanical occurrences during drilling, persisted in BDIEP. Each row represents a single event (kick, lost circulation, stuck pipe, drag, tagging, stalling, etc.) with depth interval, fluid state (ECD, mud weight), drilling procedure, hole size and BHA. Primary structured source for retro-analysis and analog-well search."@en .
+
+geo:QPG a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "QPG"@pt ;
+    rdfs:label "QPG"@en ;
+    skos:prefLabel "Quadro de Previsão Geológica"@pt ;
+    skos:prefLabel "Geological Prognosis Chart"@en ;
+    skos:altLabel "QuadroDePrevisaoGeologica"@pt ;
+    skos:altLabel "Geological Prognosis"@en ;
+    skos:definition "Quadro de Previsão Geológica publicado no SIGEO/BDIEP que consolida a previsão litológica, marcadores, falhas, tempo sísmico, objetivos e ferramentas/técnicas de aquisição previstas para o poço. Principal insumo de planejamento."@pt ;
+    skos:definition "Geological prognosis published in SIGEO/BDIEP consolidating predicted lithology, formation markers, faults, seismic time, drilling targets, and planned acquisition tools for an upcoming well. Primary planning artifact."@en .
+
+geo:PerfilComposto a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Perfil Composto"@pt ;
+    rdfs:label "Composite Log"@en ;
+    skos:prefLabel "Perfil Composto"@pt ;
+    skos:prefLabel "Composite Log"@en ;
+    skos:altLabel "Composite Well Log"@en ;
+    skos:definition "Perfil Composto que integra, para um único poço, curvas de perfis, descrições litológicas, indícios de gás, testes de formação, registros direcionais e demais dados adquiridos — recuperados da BDIEP via SIGEO. Produto canônico pós-perfuração."@pt ;
+    skos:definition "Composite log integrating, for a single well, well log curves, lithological descriptions, gas shows, formation tests, directional records and other acquired data — sourced from BDIEP via SIGEO. Canonical post-drilling product."@en .
+
+geo:Litologia a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Litologia"@pt ;
+    rdfs:label "Lithology (interpreted)"@en ;
+    skos:prefLabel "Litologia (interpretada)"@pt ;
+    skos:prefLabel "Interpreted Lithology"@en ;
+    skos:altLabel "Lithology Interpretation"@en ;
+    skos:definition "Interpretação litológica do poço — porcentagens e descrições por amostra de calha, arquivada no SIGEO. Distinta do dado bruto da calha (insumo)."@pt ;
+    skos:definition "Lithology interpretation of the well — percentages and descriptions per cuttings sample, archived in SIGEO. Distinguished from raw cuttings data (which is the input)."@en .
+
+geo:RMG a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "RMG"@pt ;
+    rdfs:label "RMG"@en ;
+    skos:prefLabel "Relatório de Monitoramento Geomecânico"@pt ;
+    skos:prefLabel "Geomechanical Monitoring Report"@en ;
+    skos:altLabel "RelatorioMonitoramentoGeomecanico"@pt ;
+    skos:definition "Relatório de Monitoramento Geomecânico — PDF não estruturado emitido pela equipe EXP/OGP/AQG/AIP-OGEO, armazenado em VGE / Pasta de Poço."@pt ;
+    skos:definition "Geomechanical Monitoring Report — non-structured PDF issued by the EXP/OGP/AQG/AIP-OGEO team, stored in VGE / well folder."@en .
+
+geo:BDP a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "BDP"@pt ;
+    rdfs:label "BDP"@en ;
+    skos:prefLabel "Boletim Diário de Perfuração"@pt ;
+    skos:prefLabel "Daily Drilling Bulletin"@en ;
+    skos:altLabel "BoletimDiarioPerfuracao"@pt ;
+    skos:altLabel "Daily Drilling Report"@en ;
+    skos:definition "Boletim Diário de Perfuração — dataset estruturado em CSV disponível via API POÇOS, gerido pela disciplina POÇOS."@pt ;
+    skos:definition "Daily Drilling Bulletin — structured CSV dataset available via the POÇOS API, managed by the POÇOS discipline."@en .
+
+geo:IGP a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "IGP"@pt ;
+    rdfs:label "IGP"@en ;
+    skos:prefLabel "Informativo Geológico de Poço"@pt ;
+    skos:prefLabel "Well Geological Bulletin"@en ;
+    skos:altLabel "InformativoGeologicoDePoco"@pt ;
+    skos:definition "Informativo Geológico de Poço — relatório não estruturado (PDF/Word) consolidando a informação geológica do poço. Gestor: EXP/OGP/AQG."@pt ;
+    skos:definition "Well Geological Bulletin — non-structured PDF/Word report consolidating geological information of a well. Manager: EXP/OGP/AQG."@en .
+
+geo:ROPLogging a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "ROP Logging"@pt ;
+    rdfs:label "ROP Logging Report"@en ;
+    skos:prefLabel "Relatório de Operações de Perfilagem"@pt ;
+    skos:prefLabel "Logging Operations Report"@en ;
+    skos:altLabel "RelatorioOperacoesPerfilagem"@pt ;
+    skos:altLabel "ROP_Logging"@en ;
+    skos:definition "Relatório de Operações de Perfilagem — CSV estruturado exposto via API EXATA, gerido por EXP/OGP/TOGPR."@pt ;
+    skos:definition "Logging Operations Report — structured CSV exposed via the EXATA API, managed by EXP/OGP/TOGPR."@en .
+
+geo:RCSD a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "RCSD"@pt ;
+    rdfs:label "RCSD"@en ;
+    skos:prefLabel "Relatório do CSD de Operações"@pt ;
+    skos:prefLabel "CSD Operations Report"@en ;
+    skos:altLabel "RelatorioCSDOperacoes"@pt ;
+    skos:definition "Relatório do CSD (Centro de Suporte à Decisão) de Operações — apresentação PPTX semi-estruturada armazenada em SharePoint."@pt ;
+    skos:definition "CSD (Decision Support Center) Operations Report — semi-structured PPTX presentation stored on SharePoint."@en .
+
+# ── System subclasses ──
+
+geo:EXATA a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "EXATA"@pt ;
+    rdfs:label "EXATA"@en ;
+    skos:prefLabel "EXATA"@pt ;
+    skos:prefLabel "EXATA"@en ;
+    skos:definition "Plataforma Petrobras de transmissão e visualização de dados de poço em tempo real."@pt ;
+    skos:definition "Petrobras real-time well-data transmission and visualization platform."@en .
+
+geo:SIGEO a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "SIGEO"@pt ;
+    rdfs:label "SIGEO"@en ;
+    skos:prefLabel "SIGEO"@pt ;
+    skos:prefLabel "SIGEO"@en ;
+    skos:definition "Sistema de Geologia Petrobras — análise, visualização e arquivamento de dados geológicos (perfis, FRX, litologia, mineralogia)."@pt ;
+    skos:definition "Petrobras Geology system — analysis, visualization and archival of geological data (logs, XRF, lithology, mineralogy)."@en .
+
+geo:BDIEP a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "BDIEP"@pt ;
+    rdfs:label "BDIEP"@en ;
+    skos:prefLabel "Base de Dados Integrada de E&P"@pt ;
+    skos:prefLabel "Integrated E&P Database"@en ;
+    skos:definition "Base de Dados Integrada de E&P — repositório de dados estruturados de poço da Petrobras."@pt ;
+    skos:definition "Integrated E&P Database — Petrobras structured well-data repository."@en .
+
+geo:CGOR a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "CGOR"@pt ;
+    rdfs:label "CGOR"@en ;
+    skos:prefLabel "Centro Geológico de Operação Remota"@pt ;
+    skos:prefLabel "Geological Remote Operations Center"@en ;
+    skos:altLabel "Centro Geológico de Operação Remota e Automação"@pt ;
+    skos:definition "Centro Geológico de Operação Remota — centro Petrobras que monitora poços em perfuração em tempo real consumindo dados do EXATA. Realiza geostopping, avaliação de formação e decisões operacionais remotas."@pt ;
+    skos:definition "Geological Remote Operations Center — Petrobras center that monitors drilling wells in real time using EXATA data streams. Performs geostopping, formation evaluation and remote operational decisions."@en .
+
+geo:CSD a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "CSD"@pt ;
+    rdfs:label "CSD"@en ;
+    skos:prefLabel "Centro de Suporte à Decisão de Operações"@pt ;
+    skos:prefLabel "Operations Decision Support Center"@en ;
+    skos:altLabel "CSD de Operações"@pt ;
+    skos:definition "Centro de Suporte à Decisão de Operações — emite o RCSD consolidando o status operacional. Armazenado em SharePoint / Drive Científico CSD."@pt ;
+    skos:definition "Operations Decision Support Center — issues the RCSD consolidating operational status. Stored on SharePoint / CSD Scientific Drive."@en .
+
+geo:BuscadorAnalogosGeomec a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "Buscador de Análogos Geomecânicos"@pt ;
+    rdfs:label "Geomechanical Analogs Search"@en ;
+    skos:prefLabel "Buscador de Análogos Geomecânicos"@pt ;
+    skos:prefLabel "Geomechanical Analogs Search"@en ;
+    skos:altLabel "Analog Wells Search (Geomechanics)"@en ;
+    skos:definition "Ferramenta interna Petrobras de busca de poços análogos usando QPG, Perfil Composto, modelo de geopressões, LOTs e Ocorrências Geomecânicas (OGEOMEC) como insumos."@pt ;
+    skos:definition "Petrobras internal tool that retrieves analog wells using QPG, Composite Log, geopressure model, LOTs and Geomechanical Occurrences (OGEOMEC) as inputs."@en .
+
+# ── MudWindow auxiliary class (referenced by violatesMudWindow) ──
+
+geo:MudWindow a owl:Class ;
+    rdfs:label "Janela de Lama"@pt ;
+    rdfs:label "Mud Window"@en ;
+    skos:prefLabel "Janela Operacional de Lama"@pt ;
+    skos:prefLabel "Operational Mud Window"@en ;
+    skos:altLabel "GM005"@en ;
+    skos:definition "Janela operacional de peso de lama delimitada por pressão de poros (limite inferior — risco de kick) e gradiente de fratura (limite superior — risco de perda). Conceito GM005 do módulo de Geomecânica."@pt ;
+    skos:definition "Operational mud-weight window bounded by pore pressure (lower bound — kick risk) and fracture gradient (upper bound — lost-circulation risk). Module Geomechanics concept GM005."@en .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OGEOMEC datatype properties (24 fields; domain = geo:OGEOMEC)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:ogeomecPais a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC País"@pt ;
+    rdfs:label "OGEOMEC Country"@en ;
+    rdfs:comment "País do poço (campo de contexto OGEOMEC)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecPoco a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Poço"@pt ;
+    rdfs:label "OGEOMEC Well"@en ;
+    rdfs:comment "Nome ANP do poço (FK para geo:Poco via ANP_well_name). Campo de contexto OGEOMEC."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecCampo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Campo"@pt ;
+    rdfs:label "OGEOMEC Field"@en ;
+    rdfs:comment "Nome ANP do campo (FK para geo:Campo via ANP_field_name)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecBacia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Bacia"@pt ;
+    rdfs:label "OGEOMEC Basin"@en ;
+    rdfs:comment "Nome ANP da bacia sedimentar (FK para geo:BaciaSedimentar via ANP_basin_name)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecDescricaoOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Descrição da Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Description"@en ;
+    rdfs:comment "Texto livre descrevendo a ocorrência. Insumo para NLP/text-to-SQL."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecTipoOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Tipo de Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Type"@en ;
+    rdfs:comment "Tipo da ocorrência geomecânica (vocabulário controlado OGEOMEC_TipoOcorrencia, 12 valores)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecData a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Data"@pt ;
+    rdfs:label "OGEOMEC Date"@en ;
+    rdfs:comment "Data da ocorrência geomecânica (xsd:date)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:date .
+
+geo:ogeomecProfundidadePerfuracao a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Profundidade de Perfuração"@pt ;
+    rdfs:label "OGEOMEC Drilling Depth"@en ;
+    rdfs:comment "Profundidade total perfurada (MD, em metros) no momento da ocorrência."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecTopoOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Topo da Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Top"@en ;
+    rdfs:comment "Topo do intervalo afetado (MD, em metros)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecBaseOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Base da Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Base"@en ;
+    rdfs:comment "Base do intervalo afetado (MD, em metros)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecValorMinimo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Valor Mínimo"@pt ;
+    rdfs:label "OGEOMEC Min Value"@en ;
+    rdfs:comment "Valor mínimo da grandeza medida. Unidade depende do TipoOcorrencia — ver ogeomecUnidadeValor."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecValorMaximo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Valor Máximo"@pt ;
+    rdfs:label "OGEOMEC Max Value"@en ;
+    rdfs:comment "Valor máximo da grandeza medida. Unidade depende do TipoOcorrencia — ver ogeomecUnidadeValor."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecUnidadeValor a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Unidade do Valor"@pt ;
+    rdfs:label "OGEOMEC Value Unit"@en ;
+    rdfs:comment "Unidade dos campos valorMinimo/valorMaximo (vocabulário OGEOMEC_UnidadeValor: klbf, ton, kN.m, klbf.ft, bbl, m3, psi, ppm, units, min, m). Recomendado por PE-2RES-00009."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecECD a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC ECD (Densidade Equivalente de Circulação)"@pt ;
+    rdfs:label "OGEOMEC ECD (Equivalent Circulating Density)"@en ;
+    rdfs:comment "Equivalent Circulating Density no momento da ocorrência. Unidade canônica: ppg (= lb/gal), padrão de fato offshore Brasil. Liga a geo:MudWindow (GM005)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecPesoFluido a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Peso de Fluido"@pt ;
+    rdfs:label "OGEOMEC Mud Weight"@en ;
+    rdfs:comment "Peso de lama estático (mud weight). Unidade canônica: ppg. Conversão: 1 ppg = 0,1198 g/cm3."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecPesoFluidoUnit a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Unidade de Peso de Fluido"@pt ;
+    rdfs:label "OGEOMEC Mud Weight Unit"@en ;
+    rdfs:comment "Unidade original do peso de fluido para auditoria (vocabulário OGEOMEC_PesoFluidoUnit: ppg, g/cm3, sg). PE-2POC-00453 usa ppg; projetos legados usam g/cm3."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecFluido a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Fluido"@pt ;
+    rdfs:label "OGEOMEC Fluid"@en ;
+    rdfs:comment "Tipo de fluido em uso (vocabulário OGEOMEC_Fluido, 4 valores)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecProcedimentoPoco a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Procedimento de Poço"@pt ;
+    rdfs:label "OGEOMEC Well Procedure"@en ;
+    rdfs:comment "Procedimento operacional em curso (vocabulário OGEOMEC_ProcedimentoPoco, 8 valores)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecDiametroNominal a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Diâmetro Nominal"@pt ;
+    rdfs:label "OGEOMEC Nominal Diameter"@en ;
+    rdfs:comment "Diâmetro do poço aberto (hole size), em polegadas. 16 valores observados (8 1/2, 12 1/4, 17 1/2, 26, 36, etc.). Inversamente correlacionado com FasePoco."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecFasePoco a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Fase do Poço"@pt ;
+    rdfs:label "OGEOMEC Well Phase"@en ;
+    rdfs:comment "Código cronológico da fase do poço (1..N). Fases baixas = mais rasas / maiores diâmetros / 'sem retorno'; fases altas = mais profundas / menores diâmetros / 'com retorno'. Faixa observada: 1..12."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:integer .
+
+geo:ogeomecFaseTipo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Tipo de Fase"@pt ;
+    rdfs:label "OGEOMEC Phase Type"@en ;
+    rdfs:comment "SEM_RETORNO (fases iniciais sem retorno de fluido) ou COM_RETORNO (circulação fechada). Vocabulário OGEOMEC_FaseTipo."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecCodigoBroca a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Código da Broca"@pt ;
+    rdfs:label "OGEOMEC Bit Code"@en ;
+    rdfs:comment "Código identificador da broca em uso."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecModeloBroca a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Modelo da Broca"@pt ;
+    rdfs:label "OGEOMEC Bit Model"@en ;
+    rdfs:comment "Modelo/descrição da broca em uso."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecBHA a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Coluna de Perfuração (BHA)"@pt ;
+    rdfs:label "OGEOMEC Bottom Hole Assembly"@en ;
+    rdfs:comment "Bottom Hole Assembly (BHA) — coluna de perfuração em uso no momento da ocorrência."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Object properties for OGEOMEC linkage
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:violatesMudWindow a owl:ObjectProperty ;
+    rdfs:label "viola janela de lama"@pt ;
+    rdfs:label "violates mud window"@en ;
+    rdfs:comment "Liga uma ocorrência OGEOMEC à janela operacional de lama (geo:MudWindow / GM005) quando o evento viola o limite inferior (kick) ou superior (perda)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range geo:MudWindow .
+
+geo:derivedFrom a owl:ObjectProperty ;
+    rdfs:label "derivado de"@pt ;
+    rdfs:label "derived from"@en ;
+    rdfs:comment "Liga um documento de Operações Geológicas a outro documento do qual ele é derivado (ex.: Perfil Composto derivado de Litologia + curvas; OGEOMEC derivado de BDP)."@pt ;
+    rdfs:domain geo:GeologicalOperationsDocument ;
+    rdfs:range geo:GeologicalOperationsDocument .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SKOS ConceptSchemes for the 6 OGEOMEC controlled vocabularies
+# ─────────────────────────────────────────────────────────────────────────────
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de Ocorrência OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Occurrence Types"@en ;
+    skos:definition "Vocabulário controlado dos 12 tipos de ocorrências geomecânicas registradas na OGEOMEC."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Kick> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Kick"@pt ;
+    skos:prefLabel "Kick"@en ;
+    skos:notation "Kick" ;
+    skos:definition "Influxo de fluido da formação (PorePressure > MudPressure). Viola o limite inferior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/FalsoKick> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Falso Kick"@pt ;
+    skos:prefLabel "False Kick"@en ;
+    skos:notation "Falso Kick" ;
+    skos:definition "Indício de influxo descartado após verificação (flow check)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/PerdaDin> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Perda Din"@pt ;
+    skos:prefLabel "Dynamic Loss"@en ;
+    skos:notation "Perda Din" ;
+    skos:definition "Perda de circulação durante bombeamento (perda dinâmica). Viola limite superior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/PerdaEst> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Perda Est"@pt ;
+    skos:prefLabel "Static Loss"@en ;
+    skos:notation "Perda Est" ;
+    skos:definition "Perda de circulação com bomba parada (perda estática). Viola limite superior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/PerdaTotal> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Perda Total"@pt ;
+    skos:prefLabel "Total Loss"@en ;
+    skos:notation "Perda Total" ;
+    skos:definition "Perda total de retorno de fluido. Viola limite superior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Prisao> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Prisao"@pt ;
+    skos:prefLabel "Stuck Pipe"@en ;
+    skos:notation "Prisao" ;
+    skos:definition "Coluna presa — não pode ser movimentada."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/AmeacaPrisao> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Ameaca Prisao"@pt ;
+    skos:prefLabel "Stuck-Pipe Risk"@en ;
+    skos:notation "Ameaca Prisao" ;
+    skos:definition "Tendência de prisão detectada (drag/torque crescente)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Arraste> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Arraste"@pt ;
+    skos:prefLabel "Drag"@en ;
+    skos:notation "Arraste" ;
+    skos:definition "Atrito anormal durante movimentação da coluna."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Topamento> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Topamento"@pt ;
+    skos:prefLabel "Tagging"@en ;
+    skos:notation "Topamento" ;
+    skos:definition "Coluna toca obstáculo no poço (cascalho, ledge, fundo falso)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Estolamento> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Estolamento"@pt ;
+    skos:prefLabel "Stalling"@en ;
+    skos:notation "Estolamento" ;
+    skos:definition "Parada de rotação do motor de fundo / top drive sob torque excessivo."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/FundoFalso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Fundo Falso"@pt ;
+    skos:prefLabel "False Bottom"@en ;
+    skos:notation "Fundo Falso" ;
+    skos:definition "Falso fundo por acúmulo de cascalho."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/GasManobra> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Gas Manobra"@pt ;
+    skos:prefLabel "Trip Gas"@en ;
+    skos:notation "Gas Manobra" ;
+    skos:definition "Gás detectado após manobra — não é kick, mas indica permeabilidade da formação."@pt .
+
+# ── OGEOMEC_ProcedimentoPoco (8 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> a skos:ConceptScheme ;
+    skos:prefLabel "Procedimentos de Poço OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Well Procedures"@en ;
+    skos:definition "Vocabulário controlado dos 8 procedimentos operacionais registrados na OGEOMEC."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/PERFURACAO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "PERFURACAO"@pt ;
+    skos:prefLabel "Drilling"@en ;
+    skos:notation "PERFURACAO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/DESCIDA_DE_COLUNA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "DESCIDA DE COLUNA"@pt ;
+    skos:prefLabel "Run In Hole"@en ;
+    skos:notation "DESCIDA DE COLUNA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/RETIRADA_DE_COLUNA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "RETIRADA DE COLUNA"@pt ;
+    skos:prefLabel "Pull Out Of Hole"@en ;
+    skos:notation "RETIRADA DE COLUNA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/CIMENTACAO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "CIMENTACAO"@pt ;
+    skos:prefLabel "Cementing"@en ;
+    skos:notation "CIMENTACAO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/REVESTIMENTO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "REVESTIMENTO"@pt ;
+    skos:prefLabel "Casing"@en ;
+    skos:notation "REVESTIMENTO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/PERFILAGEM_A_CABO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "PERFILAGEM A CABO"@pt ;
+    skos:prefLabel "Wireline Logging"@en ;
+    skos:notation "PERFILAGEM A CABO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/TESTEMUNHAGEM> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "TESTEMUNHAGEM"@pt ;
+    skos:prefLabel "Coring"@en ;
+    skos:notation "TESTEMUNHAGEM" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/OPERACOES_SEM_AVANCO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "OPERACOES SEM AVANCO"@pt ;
+    skos:prefLabel "Operations Without Progress"@en ;
+    skos:notation "OPERACOES SEM AVANCO" .
+
+# ── OGEOMEC_Fluido (4 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> a skos:ConceptScheme ;
+    skos:prefLabel "Fluidos OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Fluids"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/FluidoPerfuracaoAquoso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "FLUIDO DE PERFURAÇÃO AQUOSO"@pt ;
+    skos:prefLabel "Water-Based Drilling Fluid"@en ;
+    skos:notation "FLUIDO DE PERFURAÇÃO AQUOSO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/FluidoPerfuracaoNaoAquoso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "FLUIDO DE PERFURAÇÃO NÃO AQUOSO"@pt ;
+    skos:prefLabel "Non-Aqueous Drilling Fluid"@en ;
+    skos:notation "FLUIDO DE PERFURAÇÃO NÃO AQUOSO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/FluidoCompletacaoAquoso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "FLUIDO COMPLETAÇÃO AQUOSO"@pt ;
+    skos:prefLabel "Water-Based Completion Fluid"@en ;
+    skos:notation "FLUIDO COMPLETAÇÃO AQUOSO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/AguaDoMar> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "AGUA DO MAR"@pt ;
+    skos:prefLabel "Sea Water"@en ;
+    skos:notation "AGUA DO MAR" .
+
+# ── OGEOMEC_UnidadeValor (11 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> a skos:ConceptScheme ;
+    skos:prefLabel "Unidades de Valor OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Value Units"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/klbf> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "klbf"@en ;
+    skos:notation "klbf" ;
+    skos:definition "Kilo libras-força (force) — aplica-se a Arraste, Topamento, Ameaca Prisao."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/ton> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "ton"@en ;
+    skos:notation "ton" ;
+    skos:definition "Tonelada-força (force) — aplica-se a Topamento."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/kNm> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "kN.m"@en ;
+    skos:notation "kN.m" ;
+    skos:definition "Kilonewton-metro (torque) — aplica-se a Estolamento, Ameaca Prisao."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/klbfft> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "klbf.ft"@en ;
+    skos:notation "klbf.ft" ;
+    skos:definition "Kilo libra-força por pé (torque) — aplica-se a Estolamento."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/bbl> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "bbl"@en ;
+    skos:notation "bbl" ;
+    skos:definition "Barril (volume) — aplica-se a Perdas, Kick, Falso Kick."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/m3> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "m3"@en ;
+    skos:notation "m3" ;
+    skos:definition "Metro cúbico (volume) — aplica-se a Perdas, Kick."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/psi> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "psi"@en ;
+    skos:notation "psi" ;
+    skos:definition "Libra por polegada quadrada (pressure) — aplica-se a Kick, Falso Kick."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/ppm> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "ppm"@en ;
+    skos:notation "ppm" ;
+    skos:definition "Partes por milhão (concentration) — aplica-se a Gas Manobra."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/units> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "units"@en ;
+    skos:notation "units" ;
+    skos:definition "Gas units (mudlogger) — aplica-se a Gas Manobra."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/min> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "min"@en ;
+    skos:notation "min" ;
+    skos:definition "Minutos (duração) — aplica-se a Prisao."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/m> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "m"@en ;
+    skos:notation "m" ;
+    skos:definition "Metros (offset/length) — aplica-se a Fundo Falso."@pt .
+
+# ── OGEOMEC_PesoFluidoUnit (3 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> a skos:ConceptScheme ;
+    skos:prefLabel "Unidades de Peso de Fluido OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Mud Weight Units"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit/ppg> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> ;
+    skos:prefLabel "ppg"@en ;
+    skos:notation "ppg" ;
+    skos:altLabel "lb/gal"@en ;
+    skos:definition "Pounds per gallon — padrão de fato offshore Brasil. Refs: PE-2POC-00453, PE-2POC-00445, PE-2POC-00756."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit/gcm3> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> ;
+    skos:prefLabel "g/cm3"@en ;
+    skos:notation "g/cm3" ;
+    skos:altLabel "sg"@en ;
+    skos:definition "Gramas por centímetro cúbico — comum em poços terrestres e projetos legados. Conversão: 1 ppg = 0,1198 g/cm3."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit/sg> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> ;
+    skos:prefLabel "sg"@en ;
+    skos:notation "sg" ;
+    skos:altLabel "g/cm3"@en ;
+    skos:definition "Specific gravity (adimensional, equivalente a g/cm3)."@pt .
+
+# ── OGEOMEC_FaseTipo (2 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo> a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de Fase de Poço OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Well Phase Types"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo/SEM_RETORNO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo> ;
+    skos:prefLabel "SEM_RETORNO"@pt ;
+    skos:prefLabel "No Returns"@en ;
+    skos:notation "SEM_RETORNO" ;
+    skos:definition "Fases iniciais (geralmente 1 e 2) — sem retorno de fluido a superfície. Típico offshore: brocas >= 17 1/2 pol. Ref: PE-2POC-00595."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo/COM_RETORNO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo> ;
+    skos:prefLabel "COM_RETORNO"@pt ;
+    skos:prefLabel "With Returns"@en ;
+    skos:notation "COM_RETORNO" ;
+    skos:definition "Fases com circulação fechada via riser/revestimento — retorno de fluido a superfície. Típico: fases 3+, brocas <= 12 1/4 pol."@pt .
