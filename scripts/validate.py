@@ -24,6 +24,7 @@ ONTOLOGY_FILES = [
     ROOT / "data" / "glosis" / "geolytics-units.ttl",
     ROOT / "data" / "glosis" / "pvt-procedures.ttl",
     ROOT / "data" / "glosis" / "geolytics-ep-backbone.ttl",
+    ROOT / "data" / "glosis" / "geolytics-petrography-i18n.ttl",
 ]
 
 
@@ -199,15 +200,46 @@ def crosswalk_audit() -> int:
     return 0
 
 
+def lang_coverage() -> int:
+    """Count prefLabels per language in the ontology graph."""
+    import rdflib
+    from rdflib.namespace import SKOS
+
+    g = parse_ttl_files()
+    by_lang: dict[str, int] = {}
+    no_lang = 0
+    for s, p, o in g.triples((None, SKOS.prefLabel, None)):
+        if hasattr(o, "language") and o.language:
+            by_lang[o.language] = by_lang.get(o.language, 0) + 1
+        else:
+            no_lang += 1
+    print("\nLanguage coverage of skos:prefLabel triples:")
+    for lang, n in sorted(by_lang.items(), key=lambda x: -x[1]):
+        print(f"  @{lang:5s}  {n}")
+    if no_lang:
+        print(f"  (no lang) {no_lang}")
+    print()
+    # Expected: at least 254 EN + 254 PT + 254 ES = 762 (plus other ontology labels)
+    en, pt, es = by_lang.get("en", 0), by_lang.get("pt", 0), by_lang.get("es", 0)
+    if pt < 200 or es < 200:
+        print(f"WARN: PT={pt} or ES={es} below 200 — translations may be incomplete")
+        return 1
+    print(f"PASS — multilingual coverage adequate (en={en}, pt={pt}, es={es})")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("data", nargs="?", help="Instance TTL/JSON-LD to validate")
     p.add_argument("--self-check", action="store_true", help="Parse all ontology + shape files")
     p.add_argument("--crosswalk-audit", action="store_true", help="Audit crosswalk consistency")
+    p.add_argument("--lang-coverage", action="store_true", help="Count prefLabels per language")
     args = p.parse_args()
 
     if args.crosswalk_audit:
         return crosswalk_audit()
+    if args.lang_coverage:
+        return lang_coverage()
     if args.self_check or not args.data:
         return self_check()
     return validate_instance(Path(args.data))

@@ -5,800 +5,1246 @@
     "description": "GLOSIS lithologyValueCode — 88 conceitos hierárquicos (FAO/SOTER) extraídos do TTL oficial. Hierarquia: I igneous, M metamorphic, S sedimentary consolidated, U unconsolidated.",
     "scheme_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode",
     "license": "CC BY-NC-SA 3.0 IGO",
-    "citation": "Palma R., Janiak B., Reznik T., Schleidt K. (2020). GloSIS Ontology v1.0. SIEUSOIL."
+    "citation": "Palma R., Janiak B., Reznik T., Schleidt K. (2020). GloSIS Ontology v1.0. SIEUSOIL.",
+    "languages": [
+      "en",
+      "pt",
+      "es"
+    ],
+    "translations_applied_at": "2026-05-02T21:31:54.192Z"
   },
   "data": {
     "lithologyValueCode-I": {
       "id": "lithologyValueCode-I",
       "code": "I",
-      "prefLabel": "igneous rock",
+      "prefLabel": {
+        "en": "igneous rock",
+        "pt": "rocha ígnea",
+        "es": "roca ígnea"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock",
       "notation": "I",
       "broader": null,
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-I"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-I",
+      "prefLabel_legacy": "igneous rock"
     },
     "lithologyValueCode-IA": {
       "id": "lithologyValueCode-IA",
       "code": "IA",
-      "prefLabel": "acid igneous",
+      "prefLabel": {
+        "en": "acid igneous",
+        "pt": "ígnea ácida",
+        "es": "ígnea ácida"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of acid igneous",
       "notation": "IA",
       "broader": "lithologyValueCode-I",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA",
+      "prefLabel_legacy": "acid igneous"
     },
     "lithologyValueCode-IA1": {
       "id": "lithologyValueCode-IA1",
       "code": "IA1",
-      "prefLabel": "diorite",
+      "prefLabel": {
+        "en": "diorite",
+        "pt": "diorito",
+        "es": "diorita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of acid igneous of type diorite",
       "notation": "IA1",
       "broader": "lithologyValueCode-IA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA1",
+      "prefLabel_legacy": "diorite"
     },
     "lithologyValueCode-IA2": {
       "id": "lithologyValueCode-IA2",
       "code": "IA2",
-      "prefLabel": "grano-diorite",
+      "prefLabel": {
+        "en": "grano-diorite",
+        "pt": "granodiorito",
+        "es": "granodiorita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of acid igneous of type grano-diorite",
       "notation": "IA2",
       "broader": "lithologyValueCode-IA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA2",
+      "prefLabel_legacy": "grano-diorite"
     },
     "lithologyValueCode-IA3": {
       "id": "lithologyValueCode-IA3",
       "code": "IA3",
-      "prefLabel": "quartz-diorite",
+      "prefLabel": {
+        "en": "quartz-diorite",
+        "pt": "quartzo-diorito",
+        "es": "cuarzodiorita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of acid igneous of type quartz-diorite",
       "notation": "IA3",
       "broader": "lithologyValueCode-IA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA3",
+      "prefLabel_legacy": "quartz-diorite"
     },
     "lithologyValueCode-IA4": {
       "id": "lithologyValueCode-IA4",
       "code": "IA4",
-      "prefLabel": "rhyolite",
+      "prefLabel": {
+        "en": "rhyolite",
+        "pt": "riolito",
+        "es": "riolita"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of acid igneous of type rhyolite",
       "notation": "IA4",
       "broader": "lithologyValueCode-IA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA4"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IA4",
+      "prefLabel_legacy": "rhyolite"
     },
     "lithologyValueCode-IB": {
       "id": "lithologyValueCode-IB",
       "code": "IB",
-      "prefLabel": "basic igneous",
+      "prefLabel": {
+        "en": "basic igneous",
+        "pt": "ígnea básica",
+        "es": "ígnea básica"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of basic igneous",
       "notation": "IB",
       "broader": "lithologyValueCode-I",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB",
+      "prefLabel_legacy": "basic igneous"
     },
     "lithologyValueCode-IB1": {
       "id": "lithologyValueCode-IB1",
       "code": "IB1",
-      "prefLabel": "gabbro",
+      "prefLabel": {
+        "en": "gabbro",
+        "pt": "gabro",
+        "es": "gabro"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of basic igneous of type gabbro",
       "notation": "IB1",
       "broader": "lithologyValueCode-IB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB1",
+      "prefLabel_legacy": "gabbro"
     },
     "lithologyValueCode-IB2": {
       "id": "lithologyValueCode-IB2",
       "code": "IB2",
-      "prefLabel": "basalt",
+      "prefLabel": {
+        "en": "basalt",
+        "pt": "basalto",
+        "es": "basalto"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of basic igneous of type basalt",
       "notation": "IB2",
       "broader": "lithologyValueCode-IB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB2",
+      "prefLabel_legacy": "basalt"
     },
     "lithologyValueCode-IB3": {
       "id": "lithologyValueCode-IB3",
       "code": "IB3",
-      "prefLabel": "dolerite",
+      "prefLabel": {
+        "en": "dolerite",
+        "pt": "dolerito",
+        "es": "dolerita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of basic igneous of type dolerite",
       "notation": "IB3",
       "broader": "lithologyValueCode-IB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB3",
+      "prefLabel_legacy": "dolerite"
     },
     "lithologyValueCode-II": {
       "id": "lithologyValueCode-II",
       "code": "II",
-      "prefLabel": "intermediate igneous",
+      "prefLabel": {
+        "en": "intermediate igneous",
+        "pt": "ígnea intermediária",
+        "es": "ígnea intermedia"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of intermediate igneous",
       "notation": "II",
       "broader": "lithologyValueCode-I",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-II"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-II",
+      "prefLabel_legacy": "intermediate igneous"
     },
     "lithologyValueCode-II1": {
       "id": "lithologyValueCode-II1",
       "code": "II1",
-      "prefLabel": "andesite, trachyte, phonolite",
+      "prefLabel": {
+        "en": "andesite, trachyte, phonolite",
+        "pt": "andesito, traquito, fonolito",
+        "es": "andesita, traquita, fonolita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of intermediate igneous of type andesite, trachyte, phonolite",
       "notation": "II1",
       "broader": "lithologyValueCode-II",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-II1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-II1",
+      "prefLabel_legacy": "andesite, trachyte, phonolite"
     },
     "lithologyValueCode-II2": {
       "id": "lithologyValueCode-II2",
       "code": "II2",
-      "prefLabel": "diorite-syenite",
+      "prefLabel": {
+        "en": "diorite-syenite",
+        "pt": "diorito-sienito",
+        "es": "diorita-sienita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of intermediate igneous of type diorite-syenite",
       "notation": "II2",
       "broader": "lithologyValueCode-II",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-II2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-II2",
+      "prefLabel_legacy": "diorite-syenite"
     },
     "lithologyValueCode-IP": {
       "id": "lithologyValueCode-IP",
       "code": "IP",
-      "prefLabel": "pyroclastic",
+      "prefLabel": {
+        "en": "pyroclastic",
+        "pt": "piroclástico",
+        "es": "piroclástico"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of pyroclastic",
       "notation": "IP",
       "broader": "lithologyValueCode-I",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP",
+      "prefLabel_legacy": "pyroclastic"
     },
     "lithologyValueCode-IP1": {
       "id": "lithologyValueCode-IP1",
       "code": "IP1",
-      "prefLabel": "tuff, tuffite",
+      "prefLabel": {
+        "en": "tuff, tuffite",
+        "pt": "tufo, tufito",
+        "es": "toba, tobita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of pyroclastic of type tuff, tuffite",
       "notation": "IP1",
       "broader": "lithologyValueCode-IP",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP1",
+      "prefLabel_legacy": "tuff, tuffite"
     },
     "lithologyValueCode-IP2": {
       "id": "lithologyValueCode-IP2",
       "code": "IP2",
-      "prefLabel": "volcanic scoria/breccia",
+      "prefLabel": {
+        "en": "volcanic scoria/breccia",
+        "pt": "escória/brecha vulcânica",
+        "es": "escoria/brecha volcánica"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of pyroclastic of type volcanic scoria/breccia",
       "notation": "IP2",
       "broader": "lithologyValueCode-IP",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP2",
+      "prefLabel_legacy": "volcanic scoria/breccia"
     },
     "lithologyValueCode-IP3": {
       "id": "lithologyValueCode-IP3",
       "code": "IP3",
-      "prefLabel": "volcanic ash",
+      "prefLabel": {
+        "en": "volcanic ash",
+        "pt": "cinza vulcânica",
+        "es": "ceniza volcánica"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of pyroclastic of type volcanic ash",
       "notation": "IP3",
       "broader": "lithologyValueCode-IP",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP3",
+      "prefLabel_legacy": "volcanic ash"
     },
     "lithologyValueCode-IP4": {
       "id": "lithologyValueCode-IP4",
       "code": "IP4",
-      "prefLabel": "ignimbrite",
+      "prefLabel": {
+        "en": "ignimbrite",
+        "pt": "ignimbrito",
+        "es": "ignimbrita"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type ignimbrite",
       "notation": "IP4",
       "broader": "lithologyValueCode-IP",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP4"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IP4",
+      "prefLabel_legacy": "ignimbrite"
     },
     "lithologyValueCode-IU": {
       "id": "lithologyValueCode-IU",
       "code": "IU",
-      "prefLabel": "ultrabasic igneous",
+      "prefLabel": {
+        "en": "ultrabasic igneous",
+        "pt": "ígnea ultrabásica",
+        "es": "ígnea ultrabásica"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of ultrabasic igneous",
       "notation": "IU",
       "broader": "lithologyValueCode-I",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU",
+      "prefLabel_legacy": "ultrabasic igneous"
     },
     "lithologyValueCode-IU1": {
       "id": "lithologyValueCode-IU1",
       "code": "IU1",
-      "prefLabel": "peridotite",
+      "prefLabel": {
+        "en": "peridotite",
+        "pt": "peridotito",
+        "es": "peridotita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of ultrabasic igneous of type peridotite",
       "notation": "IU1",
       "broader": "lithologyValueCode-IU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU1",
+      "prefLabel_legacy": "peridotite"
     },
     "lithologyValueCode-IU2": {
       "id": "lithologyValueCode-IU2",
       "code": "IU2",
-      "prefLabel": "pyroxenite",
+      "prefLabel": {
+        "en": "pyroxenite",
+        "pt": "piroxenito",
+        "es": "piroxenita"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of ultrabasic igneous of type pyroxenite",
       "notation": "IU2",
       "broader": "lithologyValueCode-IU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU2",
+      "prefLabel_legacy": "pyroxenite"
     },
     "lithologyValueCode-IU3": {
       "id": "lithologyValueCode-IU3",
       "code": "IU3",
-      "prefLabel": "ilmenite, magnetite, ironstone, serpentine",
+      "prefLabel": {
+        "en": "ilmenite, magnetite, ironstone, serpentine",
+        "pt": "ilmenita, magnetita, ironstone, serpentina",
+        "es": "ilmenita, magnetita, ironstone, serpentina"
+      },
       "definition": "Hierarchy of lithology from the major class of igneous rock and the group of ultrabasic igneous of type ilmenite, magnetite, ironstone, serpentine",
       "notation": "IU3",
       "broader": "lithologyValueCode-IU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IU3",
+      "prefLabel_legacy": "ilmenite, magnetite, ironstone, serpentine"
     },
     "lithologyValueCode-M": {
       "id": "lithologyValueCode-M",
       "code": "M",
-      "prefLabel": "metamorphic rock",
+      "prefLabel": {
+        "en": "metamorphic rock",
+        "pt": "rocha metamórfica",
+        "es": "roca metamórfica"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock",
       "notation": "M",
       "broader": null,
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-M"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-M",
+      "prefLabel_legacy": "metamorphic rock"
     },
     "lithologyValueCode-MA": {
       "id": "lithologyValueCode-MA",
       "code": "MA",
-      "prefLabel": "acid metamorphic",
+      "prefLabel": {
+        "en": "acid metamorphic",
+        "pt": "metamórfica ácida",
+        "es": "metamórfica ácida"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic",
       "notation": "MA",
       "broader": "lithologyValueCode-M",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA",
+      "prefLabel_legacy": "acid metamorphic"
     },
     "lithologyValueCode-MA1": {
       "id": "lithologyValueCode-MA1",
       "code": "MA1",
-      "prefLabel": "quartzite",
+      "prefLabel": {
+        "en": "quartzite",
+        "pt": "quartzito",
+        "es": "cuarcita"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type quartzite",
       "notation": "MA1",
       "broader": "lithologyValueCode-MA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA1",
+      "prefLabel_legacy": "quartzite"
     },
     "lithologyValueCode-MA2": {
       "id": "lithologyValueCode-MA2",
       "code": "MA2",
-      "prefLabel": "gneiss, migmatite",
+      "prefLabel": {
+        "en": "gneiss, migmatite",
+        "pt": "gnaisse, migmatito",
+        "es": "gneis, migmatita"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type gneiss, migmatite",
       "notation": "MA2",
       "broader": "lithologyValueCode-MA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA2",
+      "prefLabel_legacy": "gneiss, migmatite"
     },
     "lithologyValueCode-MA3": {
       "id": "lithologyValueCode-MA3",
       "code": "MA3",
-      "prefLabel": "slate, phyllite (pelitic rocks)",
+      "prefLabel": {
+        "en": "slate, phyllite (pelitic rocks)",
+        "pt": "ardósia, filito (rochas pelíticas)",
+        "es": "pizarra, filita (rocas pelíticas)"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type slate, phyllite (pelitic rocks)",
       "notation": "MA3",
       "broader": "lithologyValueCode-MA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA3",
+      "prefLabel_legacy": "slate, phyllite (pelitic rocks)"
     },
     "lithologyValueCode-MA4": {
       "id": "lithologyValueCode-MA4",
       "code": "MA4",
-      "prefLabel": "schist",
+      "prefLabel": {
+        "en": "schist",
+        "pt": "xisto",
+        "es": "esquisto"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type schist",
       "notation": "MA4",
       "broader": "lithologyValueCode-MA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA4"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MA4",
+      "prefLabel_legacy": "schist"
     },
     "lithologyValueCode-MB": {
       "id": "lithologyValueCode-MB",
       "code": "MB",
-      "prefLabel": "basic metamorphic",
+      "prefLabel": {
+        "en": "basic metamorphic",
+        "pt": "metamórfica básica",
+        "es": "metamórfica básica"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of basic metamorphic",
       "notation": "MB",
       "broader": "lithologyValueCode-M",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB",
+      "prefLabel_legacy": "basic metamorphic"
     },
     "lithologyValueCode-MB1": {
       "id": "lithologyValueCode-MB1",
       "code": "MB1",
-      "prefLabel": "slate, phyllite (pelitic rocks)",
+      "prefLabel": {
+        "en": "slate, phyllite (pelitic rocks)",
+        "pt": "ardósia, filito (rochas pelíticas)",
+        "es": "pizarra, filita (rocas pelíticas)"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type slate, phyllite (pelitic rocks)",
       "notation": "MB1",
       "broader": "lithologyValueCode-MB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB1",
+      "prefLabel_legacy": "slate, phyllite (pelitic rocks)"
     },
     "lithologyValueCode-MB2": {
       "id": "lithologyValueCode-MB2",
       "code": "MB2",
-      "prefLabel": "(green)schist",
+      "prefLabel": {
+        "en": "(green)schist",
+        "pt": "xisto verde",
+        "es": "esquisto verde"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of acid metamorphic of type (green)schist",
       "notation": "MB2",
       "broader": "lithologyValueCode-MB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB2",
+      "prefLabel_legacy": "(green)schist"
     },
     "lithologyValueCode-MB3": {
       "id": "lithologyValueCode-MB3",
       "code": "MB3",
-      "prefLabel": "gneiss rich in Fe–Mg minerals",
+      "prefLabel": {
+        "en": "gneiss rich in Fe–Mg minerals",
+        "pt": "gnaisse rico em minerais Fe–Mg",
+        "es": "gneis rico en minerales Fe–Mg"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of basic metamorphic of type gneiss rich in Fe–Mg minerals",
       "notation": "MB3",
       "broader": "lithologyValueCode-MB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB3",
+      "prefLabel_legacy": "gneiss rich in Fe–Mg minerals"
     },
     "lithologyValueCode-MB4": {
       "id": "lithologyValueCode-MB4",
       "code": "MB4",
-      "prefLabel": "metamorphic limestone (marble)",
+      "prefLabel": {
+        "en": "metamorphic limestone (marble)",
+        "pt": "mármore (calcário metamórfico)",
+        "es": "mármol (caliza metamórfica)"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of basic metamorphic of type metamorphic limestone (marble)",
       "notation": "MB4",
       "broader": "lithologyValueCode-MB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB4"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB4",
+      "prefLabel_legacy": "metamorphic limestone (marble)"
     },
     "lithologyValueCode-MB5": {
       "id": "lithologyValueCode-MB5",
       "code": "MB5",
-      "prefLabel": "amphibolite",
+      "prefLabel": {
+        "en": "amphibolite",
+        "pt": "anfibolito",
+        "es": "anfibolita"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of basic metamorphic of type amphibolite",
       "notation": "MB5",
       "broader": "lithologyValueCode-MB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB5"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB5",
+      "prefLabel_legacy": "amphibolite"
     },
     "lithologyValueCode-MB6": {
       "id": "lithologyValueCode-MB6",
       "code": "MB6",
-      "prefLabel": "eclogite",
+      "prefLabel": {
+        "en": "eclogite",
+        "pt": "eclogito",
+        "es": "eclogita"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of basic metamorphic of type eclogite",
       "notation": "MB6",
       "broader": "lithologyValueCode-MB",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB6"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MB6",
+      "prefLabel_legacy": "eclogite"
     },
     "lithologyValueCode-MU": {
       "id": "lithologyValueCode-MU",
       "code": "MU",
-      "prefLabel": "ultrabasic metamorphic",
+      "prefLabel": {
+        "en": "ultrabasic metamorphic",
+        "pt": "metamórfica ultrabásica",
+        "es": "metamórfica ultrabásica"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of ultrabasic metamorphic",
       "notation": "MU",
       "broader": "lithologyValueCode-M",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MU"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MU",
+      "prefLabel_legacy": "ultrabasic metamorphic"
     },
     "lithologyValueCode-MU1": {
       "id": "lithologyValueCode-MU1",
       "code": "MU1",
-      "prefLabel": "serpentinite, greenstone",
+      "prefLabel": {
+        "en": "serpentinite, greenstone",
+        "pt": "serpentinito, rocha verde",
+        "es": "serpentinita, roca verde"
+      },
       "definition": "Hierarchy of lithology from the major class of metamorphic rock and the group of ultrabasic metamorphic of type serpentinite, greenstone",
       "notation": "MU1",
       "broader": "lithologyValueCode-MU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MU1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-MU1",
+      "prefLabel_legacy": "serpentinite, greenstone"
     },
     "lithologyValueCode-S": {
       "id": "lithologyValueCode-S",
       "code": "S",
-      "prefLabel": "sedimentary rock (consolidated)",
+      "prefLabel": {
+        "en": "sedimentary rock (consolidated)",
+        "pt": "rocha sedimentar (consolidada)",
+        "es": "roca sedimentaria (consolidada)"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated)",
       "notation": "S",
       "broader": null,
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-S"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-S",
+      "prefLabel_legacy": "sedimentary rock (consolidated)"
     },
     "lithologyValueCode-SC": {
       "id": "lithologyValueCode-SC",
       "code": "SC",
-      "prefLabel": "clastic sediments",
+      "prefLabel": {
+        "en": "clastic sediments",
+        "pt": "sedimentos clásticos",
+        "es": "sedimentos clásticos"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of clastic sediments",
       "notation": "SC",
       "broader": "lithologyValueCode-S",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC",
+      "prefLabel_legacy": "clastic sediments"
     },
     "lithologyValueCode-SC1": {
       "id": "lithologyValueCode-SC1",
       "code": "SC1",
-      "prefLabel": "conglomerate, breccia",
+      "prefLabel": {
+        "en": "conglomerate, breccia",
+        "pt": "conglomerado, brecha",
+        "es": "conglomerado, brecha"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of clastic sediments of type conglomerate, breccia",
       "notation": "SC1",
       "broader": "lithologyValueCode-SC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC1",
+      "prefLabel_legacy": "conglomerate, breccia"
     },
     "lithologyValueCode-SC2": {
       "id": "lithologyValueCode-SC2",
       "code": "SC2",
-      "prefLabel": "sandstone, greywacke, arkose",
+      "prefLabel": {
+        "en": "sandstone, greywacke, arkose",
+        "pt": "arenito, grauvaca, arcósio",
+        "es": "arenisca, grauvaca, arcosa"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of clastic sediments of type sandstone, greywacke, arkose",
       "notation": "SC2",
       "broader": "lithologyValueCode-SC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC2",
+      "prefLabel_legacy": "sandstone, greywacke, arkose"
     },
     "lithologyValueCode-SC3": {
       "id": "lithologyValueCode-SC3",
       "code": "SC3",
-      "prefLabel": "silt-, mud-, claystone",
+      "prefLabel": {
+        "en": "silt-, mud-, claystone",
+        "pt": "siltito, lamito, argilito",
+        "es": "limolita, lutita, arcillita"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of clastic sediments of type silt-, mud-, claystone",
       "notation": "SC3",
       "broader": "lithologyValueCode-SC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC3",
+      "prefLabel_legacy": "silt-, mud-, claystone"
     },
     "lithologyValueCode-SC4": {
       "id": "lithologyValueCode-SC4",
       "code": "SC4",
-      "prefLabel": "shale",
+      "prefLabel": {
+        "en": "shale",
+        "pt": "folhelho",
+        "es": "lutita"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of clastic sediments of type shale",
       "notation": "SC4",
       "broader": "lithologyValueCode-SC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC4"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC4",
+      "prefLabel_legacy": "shale"
     },
     "lithologyValueCode-SC5": {
       "id": "lithologyValueCode-SC5",
       "code": "SC5",
-      "prefLabel": "ironstone",
+      "prefLabel": {
+        "en": "ironstone",
+        "pt": "ironstone (ferruginoso)",
+        "es": "roca ferruginosa"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated)and the group of acid metamorphic of type ironstone",
       "notation": "SC5",
       "broader": "lithologyValueCode-SC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC5"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SC5",
+      "prefLabel_legacy": "ironstone"
     },
     "lithologyValueCode-SE": {
       "id": "lithologyValueCode-SE",
       "code": "SE",
-      "prefLabel": "evaporites",
+      "prefLabel": {
+        "en": "evaporites",
+        "pt": "evaporitos",
+        "es": "evaporitas"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of evaporites",
       "notation": "SE",
       "broader": "lithologyValueCode-S",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SE"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SE",
+      "prefLabel_legacy": "evaporites"
     },
     "lithologyValueCode-SE1": {
       "id": "lithologyValueCode-SE1",
       "code": "SE1",
-      "prefLabel": "anhydrite, gypsum",
+      "prefLabel": {
+        "en": "anhydrite, gypsum",
+        "pt": "anidrita, gipsita",
+        "es": "anhidrita, yeso"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of acid evaporites of type anhydrite, gypsum",
       "notation": "SE1",
       "broader": "lithologyValueCode-SE",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SE1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SE1",
+      "prefLabel_legacy": "anhydrite, gypsum"
     },
     "lithologyValueCode-SE2": {
       "id": "lithologyValueCode-SE2",
       "code": "SE2",
-      "prefLabel": "halite",
+      "prefLabel": {
+        "en": "halite",
+        "pt": "halita",
+        "es": "halita"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of evaporites of type halite",
       "notation": "SE2",
       "broader": "lithologyValueCode-SE",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SE2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SE2",
+      "prefLabel_legacy": "halite"
     },
     "lithologyValueCode-SO": {
       "id": "lithologyValueCode-SO",
       "code": "SO",
-      "prefLabel": "carbonatic, organic",
+      "prefLabel": {
+        "en": "carbonatic, organic",
+        "pt": "carbonática, orgânica",
+        "es": "carbonática, orgánica"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of carbonatic, organic",
       "notation": "SO",
       "broader": "lithologyValueCode-S",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO",
+      "prefLabel_legacy": "carbonatic, organic"
     },
     "lithologyValueCode-SO1": {
       "id": "lithologyValueCode-SO1",
       "code": "SO1",
-      "prefLabel": "limestone, other carbonate rock",
+      "prefLabel": {
+        "en": "limestone, other carbonate rock",
+        "pt": "calcário, outras carbonáticas",
+        "es": "caliza, otras carbonatadas"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of carbonatic, organic of type limestone, other carbonate rock",
       "notation": "SO1",
       "broader": "lithologyValueCode-SO",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO1",
+      "prefLabel_legacy": "limestone, other carbonate rock"
     },
     "lithologyValueCode-SO2": {
       "id": "lithologyValueCode-SO2",
       "code": "SO2",
-      "prefLabel": "marl and other mixtures",
+      "prefLabel": {
+        "en": "marl and other mixtures",
+        "pt": "marga e outras misturas",
+        "es": "marga y otras mezclas"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of carbonatic, organic of type marl and other mixtures",
       "notation": "SO2",
       "broader": "lithologyValueCode-SO",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO2",
+      "prefLabel_legacy": "marl and other mixtures"
     },
     "lithologyValueCode-SO3": {
       "id": "lithologyValueCode-SO3",
       "code": "SO3",
-      "prefLabel": "coals, bitumen and related rocks",
+      "prefLabel": {
+        "en": "coals, bitumen and related rocks",
+        "pt": "carvões, betume e correlatas",
+        "es": "carbones, betún y rocas afines"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of carbonatic, organic of type coals, bitumen and related rocks",
       "notation": "SO3",
       "broader": "lithologyValueCode-SO",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-SO3",
+      "prefLabel_legacy": "coals, bitumen and related rocks"
     },
     "lithologyValueCode-U": {
       "id": "lithologyValueCode-U",
       "code": "U",
-      "prefLabel": "sedimentary rock (unconsolidated)",
+      "prefLabel": {
+        "en": "sedimentary rock (unconsolidated)",
+        "pt": "sedimento (não consolidado)",
+        "es": "sedimento (no consolidado)"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated)",
       "notation": "U",
       "broader": null,
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-U"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-U",
+      "prefLabel_legacy": "sedimentary rock (unconsolidated)"
     },
     "lithologyValueCode-UA": {
       "id": "lithologyValueCode-UA",
       "code": "UA",
-      "prefLabel": "anthropogenic/technogenic",
+      "prefLabel": {
+        "en": "anthropogenic/technogenic",
+        "pt": "antropogênico/tecnogênico",
+        "es": "antropogénico/tecnogénico"
+      },
       "definition": "Hierarchy of lithology from the group of anthropogenic/technogenic",
       "notation": "UA",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UA"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UA",
+      "prefLabel_legacy": "anthropogenic/technogenic"
     },
     "lithologyValueCode-UA1": {
       "id": "lithologyValueCode-UA1",
       "code": "UA1",
-      "prefLabel": "redeposited natural material",
+      "prefLabel": {
+        "en": "redeposited natural material",
+        "pt": "material natural redepositado",
+        "es": "material natural redepositado"
+      },
       "definition": "Hierarchy of lithology from the group of anthropogenic/technogenic of type redeposited natural material",
       "notation": "UA1",
       "broader": "lithologyValueCode-UA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UA1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UA1",
+      "prefLabel_legacy": "redeposited natural material"
     },
     "lithologyValueCode-UA2": {
       "id": "lithologyValueCode-UA2",
       "code": "UA2",
-      "prefLabel": "industrial/artisanal deposits",
+      "prefLabel": {
+        "en": "industrial/artisanal deposits",
+        "pt": "depósitos industriais/artesanais",
+        "es": "depósitos industriales/artesanales"
+      },
       "definition": "Hierarchy of lithology from the group of unspecified deposits of type industrial/artisanal deposits",
       "notation": "UA2",
       "broader": "lithologyValueCode-UA",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UA2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UA2",
+      "prefLabel_legacy": "industrial/artisanal deposits"
     },
     "lithologyValueCode-UC": {
       "id": "lithologyValueCode-UC",
       "code": "UC",
-      "prefLabel": "colluvial",
+      "prefLabel": {
+        "en": "colluvial",
+        "pt": "coluvial",
+        "es": "coluvial"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of colluvial",
       "notation": "UC",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC",
+      "prefLabel_legacy": "colluvial"
     },
     "lithologyValueCode-UC1": {
       "id": "lithologyValueCode-UC1",
       "code": "UC1",
-      "prefLabel": "slope deposits",
+      "prefLabel": {
+        "en": "slope deposits",
+        "pt": "depósitos de encosta",
+        "es": "depósitos de ladera"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of colluvial of type slope deposits",
       "notation": "UC1",
       "broader": "lithologyValueCode-UC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC1",
+      "prefLabel_legacy": "slope deposits"
     },
     "lithologyValueCode-UC2": {
       "id": "lithologyValueCode-UC2",
       "code": "UC2",
-      "prefLabel": "lahar",
+      "prefLabel": {
+        "en": "lahar",
+        "pt": "lahar",
+        "es": "lahar"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of colluvial of type lahar",
       "notation": "UC2",
       "broader": "lithologyValueCode-UC",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UC2",
+      "prefLabel_legacy": "lahar"
     },
     "lithologyValueCode-UE": {
       "id": "lithologyValueCode-UE",
       "code": "UE",
-      "prefLabel": "eolian",
+      "prefLabel": {
+        "en": "eolian",
+        "pt": "eólico",
+        "es": "eólico"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of eolian",
       "notation": "UE",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE",
+      "prefLabel_legacy": "eolian"
     },
     "lithologyValueCode-UE1": {
       "id": "lithologyValueCode-UE1",
       "code": "UE1",
-      "prefLabel": "loess",
+      "prefLabel": {
+        "en": "loess",
+        "pt": "loess",
+        "es": "loess"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of eolian of type loess",
       "notation": "UE1",
       "broader": "lithologyValueCode-UE",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE1",
+      "prefLabel_legacy": "loess"
     },
     "lithologyValueCode-UE2": {
       "id": "lithologyValueCode-UE2",
       "code": "UE2",
-      "prefLabel": "sand",
+      "prefLabel": {
+        "en": "sand",
+        "pt": "areia",
+        "es": "arena"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of lacustrine of type sand",
       "notation": "UE2",
       "broader": "lithologyValueCode-UE",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UE2",
+      "prefLabel_legacy": "sand"
     },
     "lithologyValueCode-UF": {
       "id": "lithologyValueCode-UF",
       "code": "UF",
-      "prefLabel": "fluvial",
+      "prefLabel": {
+        "en": "fluvial",
+        "pt": "fluvial",
+        "es": "fluvial"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of fluvial",
       "notation": "UF",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF",
+      "prefLabel_legacy": "fluvial"
     },
     "lithologyValueCode-UF1": {
       "id": "lithologyValueCode-UF1",
       "code": "UF1",
-      "prefLabel": "sand and gravel",
+      "prefLabel": {
+        "en": "sand and gravel",
+        "pt": "areia e cascalho",
+        "es": "arena y grava"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of fluvial of type sand and gravel",
       "notation": "UF1",
       "broader": "lithologyValueCode-UF",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF1",
+      "prefLabel_legacy": "sand and gravel"
     },
     "lithologyValueCode-UF2": {
       "id": "lithologyValueCode-UF2",
       "code": "UF2",
-      "prefLabel": "clay, silt and loam",
+      "prefLabel": {
+        "en": "clay, silt and loam",
+        "pt": "argila, silte e franco",
+        "es": "arcilla, limo y franco"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of fluvial of type clay, silt and loam",
       "notation": "UF2",
       "broader": "lithologyValueCode-UF",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UF2",
+      "prefLabel_legacy": "clay, silt and loam"
     },
     "lithologyValueCode-UG": {
       "id": "lithologyValueCode-UG",
       "code": "UG",
-      "prefLabel": "glacial",
+      "prefLabel": {
+        "en": "glacial",
+        "pt": "glacial",
+        "es": "glacial"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of glacial",
       "notation": "UG",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG",
+      "prefLabel_legacy": "glacial"
     },
     "lithologyValueCode-UG1": {
       "id": "lithologyValueCode-UG1",
       "code": "UG1",
-      "prefLabel": "moraine",
+      "prefLabel": {
+        "en": "moraine",
+        "pt": "morena",
+        "es": "morrena"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of glacial of type moraine",
       "notation": "UG1",
       "broader": "lithologyValueCode-UG",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG1",
+      "prefLabel_legacy": "moraine"
     },
     "lithologyValueCode-UG2": {
       "id": "lithologyValueCode-UG2",
       "code": "UG2",
-      "prefLabel": "UG2 glacio-fluvial sand",
+      "prefLabel": {
+        "en": "UG2 glacio-fluvial sand",
+        "pt": "areia glácio-fluvial",
+        "es": "arena glaciofluvial"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of glacial of type glacio-fluvial sand",
       "notation": "UG2",
       "broader": "lithologyValueCode-UG",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG2",
+      "prefLabel_legacy": "UG2 glacio-fluvial sand"
     },
     "lithologyValueCode-UG3": {
       "id": "lithologyValueCode-UG3",
       "code": "UG3",
-      "prefLabel": "UG3 glacio-fluvial gravel",
+      "prefLabel": {
+        "en": "UG3 glacio-fluvial gravel",
+        "pt": "cascalho glácio-fluvial",
+        "es": "grava glaciofluvial"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of kryogenic of type glacio-fluvial gravel",
       "notation": "UG3",
       "broader": "lithologyValueCode-UG",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UG3",
+      "prefLabel_legacy": "UG3 glacio-fluvial gravel"
     },
     "lithologyValueCode-UK": {
       "id": "lithologyValueCode-UK",
       "code": "UK",
-      "prefLabel": "kryogenic",
+      "prefLabel": {
+        "en": "kryogenic",
+        "pt": "criogênico",
+        "es": "criogénico"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of kryogenic",
       "notation": "UK",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK",
+      "prefLabel_legacy": "kryogenic"
     },
     "lithologyValueCode-UK1": {
       "id": "lithologyValueCode-UK1",
       "code": "UK1",
-      "prefLabel": "periglacial rock debris",
+      "prefLabel": {
+        "en": "periglacial rock debris",
+        "pt": "detritos rochosos periglaciais",
+        "es": "detritos rocosos periglaciares"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of kryogenic of type periglacial rock debris",
       "notation": "UK1",
       "broader": "lithologyValueCode-UK",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK1",
+      "prefLabel_legacy": "periglacial rock debris"
     },
     "lithologyValueCode-UK2": {
       "id": "lithologyValueCode-UK2",
       "code": "UK2",
-      "prefLabel": "periglacial solifluction layer",
+      "prefLabel": {
+        "en": "periglacial solifluction layer",
+        "pt": "camada de solifluxão periglacial",
+        "es": "capa de solifluxión periglaciar"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of kryogenic of type periglacial solifluction layer",
       "notation": "UK2",
       "broader": "lithologyValueCode-UK",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UK2",
+      "prefLabel_legacy": "periglacial solifluction layer"
     },
     "lithologyValueCode-UL": {
       "id": "lithologyValueCode-UL",
       "code": "UL",
-      "prefLabel": "lacustrine",
+      "prefLabel": {
+        "en": "lacustrine",
+        "pt": "lacustre",
+        "es": "lacustre"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of lacustrine",
       "notation": "UL",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL",
+      "prefLabel_legacy": "lacustrine"
     },
     "lithologyValueCode-UL1": {
       "id": "lithologyValueCode-UL1",
       "code": "UL1",
-      "prefLabel": "sand",
+      "prefLabel": {
+        "en": "sand",
+        "pt": "areia",
+        "es": "arena"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of lacustrine of type sand",
       "notation": "UL1",
       "broader": "lithologyValueCode-UL",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL1",
+      "prefLabel_legacy": "sand"
     },
     "lithologyValueCode-UL2": {
       "id": "lithologyValueCode-UL2",
       "code": "UL2",
-      "prefLabel": "silt and clay",
+      "prefLabel": {
+        "en": "silt and clay",
+        "pt": "silte e argila",
+        "es": "limo y arcilla"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of lacustrine of type silt and clay",
       "notation": "UL2",
       "broader": "lithologyValueCode-UL",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UL2",
+      "prefLabel_legacy": "silt and clay"
     },
     "lithologyValueCode-UM": {
       "id": "lithologyValueCode-UM",
       "code": "UM",
-      "prefLabel": "marine, estuarine",
+      "prefLabel": {
+        "en": "marine, estuarine",
+        "pt": "marinho, estuarino",
+        "es": "marino, estuarino"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of marine, estuarine",
       "notation": "UM",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM",
+      "prefLabel_legacy": "marine, estuarine"
     },
     "lithologyValueCode-UM1": {
       "id": "lithologyValueCode-UM1",
       "code": "UM1",
-      "prefLabel": "sand",
+      "prefLabel": {
+        "en": "sand",
+        "pt": "areia",
+        "es": "arena"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of marine, estuarine of type sand",
       "notation": "UM1",
       "broader": "lithologyValueCode-UM",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM1",
+      "prefLabel_legacy": "sand"
     },
     "lithologyValueCode-UM2": {
       "id": "lithologyValueCode-UM2",
       "code": "UM2",
-      "prefLabel": "clay and silt",
+      "prefLabel": {
+        "en": "clay and silt",
+        "pt": "argila e silte",
+        "es": "arcilla y limo"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (consolidated) and the group of marine and estuarine of type clay and silt",
       "notation": "UM2",
       "broader": "lithologyValueCode-UM",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UM2",
+      "prefLabel_legacy": "clay and silt"
     },
     "lithologyValueCode-UO": {
       "id": "lithologyValueCode-UO",
       "code": "UO",
-      "prefLabel": "organic",
+      "prefLabel": {
+        "en": "organic",
+        "pt": "orgânico",
+        "es": "orgánico"
+      },
       "definition": "Hierarchy of lithology from the group of organic",
       "notation": "UO",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO",
+      "prefLabel_legacy": "organic"
     },
     "lithologyValueCode-UO1": {
       "id": "lithologyValueCode-UO1",
       "code": "UO1",
-      "prefLabel": "rainwater-fed moor peat",
+      "prefLabel": {
+        "en": "rainwater-fed moor peat",
+        "pt": "turfa de pântano alimentada por chuva",
+        "es": "turba de páramo alimentada por lluvia"
+      },
       "definition": "Hierarchy of lithology from the group of organic of type rainwater-fed moor peat",
       "notation": "UO1",
       "broader": "lithologyValueCode-UO",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO1",
+      "prefLabel_legacy": "rainwater-fed moor peat"
     },
     "lithologyValueCode-UO2": {
       "id": "lithologyValueCode-UO2",
       "code": "UO2",
-      "prefLabel": "groundwater-fed bog peat",
+      "prefLabel": {
+        "en": "groundwater-fed bog peat",
+        "pt": "turfa de brejo alimentada por aquífero",
+        "es": "turba de ciénaga alimentada por acuífero"
+      },
       "definition": "Hierarchy of lithology from the group of organic of type groundwater-fed bog peat",
       "notation": "UO2",
       "broader": "lithologyValueCode-UO",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UO2",
+      "prefLabel_legacy": "groundwater-fed bog peat"
     },
     "lithologyValueCode-UR": {
       "id": "lithologyValueCode-UR",
       "code": "UR",
-      "prefLabel": "weathered residuum",
+      "prefLabel": {
+        "en": "weathered residuum",
+        "pt": "resíduo de intemperismo",
+        "es": "residuo de meteorización"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of weathered residuum",
       "notation": "UR",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UR"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UR",
+      "prefLabel_legacy": "weathered residuum"
     },
     "lithologyValueCode-UR1": {
       "id": "lithologyValueCode-UR1",
       "code": "UR1",
-      "prefLabel": "bauxite, laterite",
+      "prefLabel": {
+        "en": "bauxite, laterite",
+        "pt": "bauxita, laterita",
+        "es": "bauxita, laterita"
+      },
       "definition": "Hierarchy of lithology from the major class of sedimentary rock (unconsolidated) and the group of weathered residuum of type bauxite, laterite",
       "notation": "UR1",
       "broader": "lithologyValueCode-UR",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UR1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UR1",
+      "prefLabel_legacy": "bauxite, laterite"
     },
     "lithologyValueCode-UU": {
       "id": "lithologyValueCode-UU",
       "code": "UU",
-      "prefLabel": "unspecified deposits",
+      "prefLabel": {
+        "en": "unspecified deposits",
+        "pt": "depósitos não especificados",
+        "es": "depósitos no especificados"
+      },
       "definition": "Hierarchy of lithology from the group of unspecified deposits",
       "notation": "UU",
       "broader": "lithologyValueCode-U",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU",
+      "prefLabel_legacy": "unspecified deposits"
     },
     "lithologyValueCode-UU1": {
       "id": "lithologyValueCode-UU1",
       "code": "UU1",
-      "prefLabel": "clay",
+      "prefLabel": {
+        "en": "clay",
+        "pt": "argila",
+        "es": "arcilla"
+      },
       "definition": "Hierarchy of lithology from the group of unspecified deposits of type clay",
       "notation": "UU1",
       "broader": "lithologyValueCode-UU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU1"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU1",
+      "prefLabel_legacy": "clay"
     },
     "lithologyValueCode-UU2": {
       "id": "lithologyValueCode-UU2",
       "code": "UU2",
-      "prefLabel": "loam and silt",
+      "prefLabel": {
+        "en": "loam and silt",
+        "pt": "franco e silte",
+        "es": "franco y limo"
+      },
       "definition": "Hierarchy of lithology from the group of unspecified deposits of type loam and silt",
       "notation": "UU2",
       "broader": "lithologyValueCode-UU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU2"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU2",
+      "prefLabel_legacy": "loam and silt"
     },
     "lithologyValueCode-UU3": {
       "id": "lithologyValueCode-UU3",
       "code": "UU3",
-      "prefLabel": "sand",
+      "prefLabel": {
+        "en": "sand",
+        "pt": "areia",
+        "es": "arena"
+      },
       "definition": "Hierarchy of lithology from group of unspecified depositsof type sand",
       "notation": "UU3",
       "broader": "lithologyValueCode-UU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU3"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU3",
+      "prefLabel_legacy": "sand"
     },
     "lithologyValueCode-UU4": {
       "id": "lithologyValueCode-UU4",
       "code": "UU4",
-      "prefLabel": "gravelly sand",
+      "prefLabel": {
+        "en": "gravelly sand",
+        "pt": "areia com cascalho",
+        "es": "arena con grava"
+      },
       "definition": "Hierarchy of lithology from the group of unspecified deposits of type gravelly sand",
       "notation": "UU4",
       "broader": "lithologyValueCode-UU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU4"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU4",
+      "prefLabel_legacy": "gravelly sand"
     },
     "lithologyValueCode-UU5": {
       "id": "lithologyValueCode-UU5",
       "code": "UU5",
-      "prefLabel": "gravel, broken rock",
+      "prefLabel": {
+        "en": "gravel, broken rock",
+        "pt": "cascalho, fragmentos de rocha",
+        "es": "grava, fragmentos de roca"
+      },
       "definition": "Hierarchy of lithology from the group of unspecified deposits of type gravel, broken rock",
       "notation": "UU5",
       "broader": "lithologyValueCode-UU",
-      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU5"
+      "iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-UU5",
+      "prefLabel_legacy": "gravel, broken rock"
     }
   }
 }

@@ -170,4 +170,15 @@ geox:CrosswalkShape a sh:NodeShape ;
         sh:severity sh:Info ;
     ] .
 
+# ── Shape 7: prefLabel language coverage (PT/ES/EN expected) ─────────────────
+
+geox:LabelLanguageCoverageShape a sh:NodeShape ;
+    sh:targetSubjectsOf skos:prefLabel ;
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:languageIn ("en" "pt" "es") ;
+        sh:severity sh:Info ;
+        sh:message "skos:prefLabel should use language tags from {en, pt, es}."@en ;
+    ] .
+
 # === EOF ===
