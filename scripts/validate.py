@@ -24,6 +24,7 @@ ONTOLOGY_FILES = [
     ROOT / "data" / "glosis" / "geolytics-units.ttl",
     ROOT / "data" / "glosis" / "pvt-procedures.ttl",
     ROOT / "data" / "glosis" / "geolytics-ep-backbone.ttl",
+    ROOT / "data" / "glosis" / "geolytics-petrography-i18n.ttl",
 ]
 
 
@@ -152,12 +153,43 @@ def crosswalk_audit() -> int:
         if m.get("match") not in valid_kinds:
             issues.append(f"  invalid match kind: {m.get('match')} on {m.get('glosis_id')}")
 
+    # 5. INSPIRE LithologyValue transitive crosswalk (if file present)
+    inspire_litho_path = ROOT / "data" / "glosis" / "lithology-crosswalk-inspire-litho.json"
+    inspire_litho_count = 0
+    if inspire_litho_path.exists():
+        cw_insp_litho = json.loads(inspire_litho_path.read_text())
+        for m in cw_insp_litho["mappings"]:
+            inspire_litho_count += 1
+            # Source GLOSIS code must exist
+            if m["glosis_id"] not in litho:
+                issues.append(f"  inspire-litho: unknown glosis_id '{m['glosis_id']}'")
+            # IRIs must be well-formed
+            for fld in ("glosis_iri", "cgi_2016_iri", "inspire_iri"):
+                v = m.get(fld, "")
+                if not v.startswith("http"):
+                    issues.append(f"  inspire-litho: malformed {fld} on {m['glosis_id']}: {v}")
+            if not m.get("inspire_iri", "").startswith("http://inspire.ec.europa.eu/codelist/LithologyValue/"):
+                issues.append(f"  inspire-litho: {m['glosis_id']} inspire_iri not in LithologyValue scheme")
+            # Transitive match strength must be ≤ weakest hop
+            order = ["exactMatch", "closeMatch", "broadMatch", "relatedMatch"]
+            cgi_k = m.get("cgi_match_kind", "exactMatch")
+            insp_k = m.get("inspire_match_kind", "exactMatch")
+            transitive = m.get("transitive_match", "")
+            if transitive in order and cgi_k in order and insp_k in order:
+                weakest = max(order.index(cgi_k), order.index(insp_k))
+                if order.index(transitive) < weakest:
+                    issues.append(
+                        f"  inspire-litho: {m['glosis_id']} transitive_match '{transitive}' "
+                        f"stronger than weakest hop ('{order[weakest]}')"
+                    )
+
     # Summary
     print(f"GLOSIS lithology concepts: {len(litho)}")
     print(f"CGI crosswalk mappings: {len(cw_cgi['mappings'])}")
     print(f"  of which noMatch: {sum(1 for m in cw_cgi['mappings'] if m['match']=='noMatch')}")
-    print(f"INSPIRE crosswalk mappings: {len(cw_insp['mappings'])}")
-    print(f"  with INSPIRE targets: {sum(1 for m in cw_insp['mappings'] if m.get('inspire_targets'))}")
+    print(f"INSPIRE Geomorph mappings: {len(cw_insp['mappings'])}")
+    print(f"  with targets: {sum(1 for m in cw_insp['mappings'] if m.get('inspire_targets'))}")
+    print(f"INSPIRE LithologyValue mappings (transitive): {inspire_litho_count}")
     print()
     if issues:
         print(f"FAIL — {len(issues)} issue(s):")
@@ -168,15 +200,46 @@ def crosswalk_audit() -> int:
     return 0
 
 
+def lang_coverage() -> int:
+    """Count prefLabels per language in the ontology graph."""
+    import rdflib
+    from rdflib.namespace import SKOS
+
+    g = parse_ttl_files()
+    by_lang: dict[str, int] = {}
+    no_lang = 0
+    for s, p, o in g.triples((None, SKOS.prefLabel, None)):
+        if hasattr(o, "language") and o.language:
+            by_lang[o.language] = by_lang.get(o.language, 0) + 1
+        else:
+            no_lang += 1
+    print("\nLanguage coverage of skos:prefLabel triples:")
+    for lang, n in sorted(by_lang.items(), key=lambda x: -x[1]):
+        print(f"  @{lang:5s}  {n}")
+    if no_lang:
+        print(f"  (no lang) {no_lang}")
+    print()
+    # Expected: at least 254 EN + 254 PT + 254 ES = 762 (plus other ontology labels)
+    en, pt, es = by_lang.get("en", 0), by_lang.get("pt", 0), by_lang.get("es", 0)
+    if pt < 200 or es < 200:
+        print(f"WARN: PT={pt} or ES={es} below 200 — translations may be incomplete")
+        return 1
+    print(f"PASS — multilingual coverage adequate (en={en}, pt={pt}, es={es})")
+    return 0
+
+
 def main() -> int:
     p = argparse.ArgumentParser()
     p.add_argument("data", nargs="?", help="Instance TTL/JSON-LD to validate")
     p.add_argument("--self-check", action="store_true", help="Parse all ontology + shape files")
     p.add_argument("--crosswalk-audit", action="store_true", help="Audit crosswalk consistency")
+    p.add_argument("--lang-coverage", action="store_true", help="Count prefLabels per language")
     args = p.parse_args()
 
     if args.crosswalk_audit:
         return crosswalk_audit()
+    if args.lang_coverage:
+        return lang_coverage()
     if args.self_check or not args.data:
         return self_check()
     return validate_instance(Path(args.data))

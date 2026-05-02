@@ -1,0 +1,519 @@
+# ============================================================================
+# Geolytics petrography i18n — PT/ES SKOS prefLabels
+# ============================================================================
+# Generated: 2026-05-02T21:43:47.259Z
+# Source: data/glosis/translations/petrography.{pt,es}.csv
+# Sources cited: CPRM 2018, ABNT NBR 6502, IGME Diccionario, Schlumberger
+# Pattern: <glosis_cl:concept-IRI>  skos:prefLabel "term"@pt, "term"@es
+# ============================================================================
+
+@prefix glosis_cl: <http://w3id.org/glosis/model/codelists/> .
+@prefix skos:      <http://www.w3.org/2004/02/skos/core#> .
+@prefix owl:       <http://www.w3.org/2002/07/owl#> .
+@prefix dct:       <http://purl.org/dc/terms/> .
+
+<https://geolytics.petrobras.com.br/dict/petrography-i18n>
+    a              owl:Ontology ;
+    owl:versionInfo "1.0.0" ;
+    dct:title "GLOSIS petrography i18n labels (PT/ES)"@en ;
+    dct:description "PT/ES SKOS prefLabels for 166 GLOSIS petrography concepts."@en .
+
+glosis_cl:cementationDegreeValueCode-C
+    skos:prefLabel "cimentado"@pt , "cementado"@es .
+
+glosis_cl:cementationDegreeValueCode-I
+    skos:prefLabel "endurecido"@pt , "endurecido"@es .
+
+glosis_cl:cementationDegreeValueCode-M
+    skos:prefLabel "moderadamente cimentado"@pt , "moderadamente cementado"@es .
+
+glosis_cl:cementationDegreeValueCode-N
+    skos:prefLabel "não cimentado e não compactado"@pt , "no cementado y no compactado"@es .
+
+glosis_cl:cementationDegreeValueCode-W
+    skos:prefLabel "fracamente cimentado"@pt , "débilmente cementado"@es .
+
+glosis_cl:cementationDegreeValueCode-Y
+    skos:prefLabel "compactado mas não cimentado"@pt , "compactado pero no cementado"@es .
+
+glosis_cl:cementationNatureValueCode-C
+    skos:prefLabel "argila"@pt , "arcilla"@es .
+
+glosis_cl:cementationNatureValueCode-CS
+    skos:prefLabel "argila–sesquióxidos"@pt , "arcilla–sesquióxidos"@es .
+
+glosis_cl:cementationNatureValueCode-F
+    skos:prefLabel "ferro"@pt , "hierro"@es .
+
+glosis_cl:cementationNatureValueCode-FM
+    skos:prefLabel "ferro–manganês (sesquióxidos)"@pt , "hierro–manganeso (sesquióxidos)"@es .
+
+glosis_cl:cementationNatureValueCode-FO
+    skos:prefLabel "ferro–matéria orgânica"@pt , "hierro–materia orgánica"@es .
+
+glosis_cl:cementationNatureValueCode-GY
+    skos:prefLabel "gipsita"@pt , "yeso"@es .
+
+glosis_cl:cementationNatureValueCode-I
+    skos:prefLabel "gelo"@pt , "hielo"@es .
+
+glosis_cl:cementationNatureValueCode-K
+    skos:prefLabel "carbonatos"@pt , "carbonatos"@es .
+
+glosis_cl:cementationNatureValueCode-KQ
+    skos:prefLabel "carbonatos–sílica"@pt , "carbonatos–sílice"@es .
+
+glosis_cl:cementationNatureValueCode-M
+    skos:prefLabel "mecânica"@pt , "mecánica"@es .
+
+glosis_cl:cementationNatureValueCode-NK
+    skos:prefLabel "desconhecida"@pt , "desconocida"@es .
+
+glosis_cl:cementationNatureValueCode-P
+    skos:prefLabel "aração"@pt , "arado"@es .
+
+glosis_cl:cementationNatureValueCode-Q
+    skos:prefLabel "sílica"@pt , "sílice"@es .
+
+glosis_cl:cementationFabricValueCode-D
+    skos:prefLabel "nodular"@pt , "nodular"@es .
+
+glosis_cl:cementationFabricValueCode-Pi
+    skos:prefLabel "pisolítico"@pt , "pisolítico"@es .
+
+glosis_cl:cementationFabricValueCode-Pl
+    skos:prefLabel "placoso"@pt , "laminar"@es .
+
+glosis_cl:cementationFabricValueCode-V
+    skos:prefLabel "vesicular"@pt , "vesicular"@es .
+
+glosis_cl:cementationContinuityValueCode-B
+    skos:prefLabel "quebrada"@pt , "rota"@es .
+
+glosis_cl:cementationContinuityValueCode-C
+    skos:prefLabel "contínua"@pt , "continua"@es .
+
+glosis_cl:cementationContinuityValueCode-D
+    skos:prefLabel "descontínua"@pt , "discontinua"@es .
+
+glosis_cl:weatheringValueCode-F
+    skos:prefLabel "fresco ou levemente intemperizado"@pt , "fresco o ligeramente meteorizado"@es .
+
+glosis_cl:weatheringValueCode-S
+    skos:prefLabel "fortemente intemperizado"@pt , "fuertemente meteorizado"@es .
+
+glosis_cl:weatheringValueCode-W
+    skos:prefLabel "intemperizado"@pt , "meteorizado"@es .
+
+glosis_cl:porosityClassValueCode-1
+    skos:prefLabel "muito baixa"@pt , "muy baja"@es .
+
+glosis_cl:porosityClassValueCode-2
+    skos:prefLabel "baixa"@pt , "baja"@es .
+
+glosis_cl:porosityClassValueCode-3
+    skos:prefLabel "média"@pt , "media"@es .
+
+glosis_cl:porosityClassValueCode-4
+    skos:prefLabel "alta"@pt , "alta"@es .
+
+glosis_cl:porosityClassValueCode-5
+    skos:prefLabel "muito alta"@pt , "muy alta"@es .
+
+glosis_cl:structureGradeValueCode-MO
+    skos:prefLabel "moderada"@pt , "moderada"@es .
+
+glosis_cl:structureGradeValueCode-MS
+    skos:prefLabel "moderada a forte"@pt , "moderada a fuerte"@es .
+
+glosis_cl:structureGradeValueCode-ST
+    skos:prefLabel "forte"@pt , "fuerte"@es .
+
+glosis_cl:structureGradeValueCode-WE
+    skos:prefLabel "fraca"@pt , "débil"@es .
+
+glosis_cl:structureGradeValueCode-WM
+    skos:prefLabel "fraca a moderada"@pt , "débil a moderada"@es .
+
+glosis_cl:structureSizeValueCode-CO
+    skos:prefLabel "grossa"@pt , "gruesa"@es .
+
+glosis_cl:structureSizeValueCode-EC
+    skos:prefLabel "extremamente grossa"@pt , "extremadamente gruesa"@es .
+
+glosis_cl:structureSizeValueCode-FI
+    skos:prefLabel "fina"@pt , "fina"@es .
+
+glosis_cl:structureSizeValueCode-ME
+    skos:prefLabel "média"@pt , "media"@es .
+
+glosis_cl:structureSizeValueCode-VC
+    skos:prefLabel "muito grossa"@pt , "muy gruesa"@es .
+
+glosis_cl:structureSizeValueCode-VF
+    skos:prefLabel "muito fina"@pt , "muy fina"@es .
+
+glosis_cl:rockSizeValueCode-A
+    skos:prefLabel "artefatos"@pt , "artefactos"@es .
+
+glosis_cl:rockSizeValueCode-AC
+    skos:prefLabel "artefatos grossos"@pt , "artefactos gruesos"@es .
+
+glosis_cl:rockSizeValueCode-AF
+    skos:prefLabel "artefatos finos"@pt , "artefactos finos"@es .
+
+glosis_cl:rockSizeValueCode-AM
+    skos:prefLabel "artefatos médios"@pt , "artefactos medios"@es .
+
+glosis_cl:rockSizeValueCode-AV
+    skos:prefLabel "artefatos muito finos"@pt , "artefactos muy finos"@es .
+
+glosis_cl:rockSizeValueCode-BL
+    skos:prefLabel "matacões e blocos grandes"@pt , "bloques y grandes bloques"@es .
+
+glosis_cl:rockSizeValueCode-C
+    skos:prefLabel "combinação de classes"@pt , "combinación de clases"@es .
+
+glosis_cl:rockSizeValueCode-CS
+    skos:prefLabel "cascalho grosso e pedras"@pt , "grava gruesa y piedras"@es .
+
+glosis_cl:rockSizeValueCode-FM
+    skos:prefLabel "cascalho/artefatos finos e médios"@pt , "grava/artefactos finos y medios"@es .
+
+glosis_cl:rockSizeValueCode-MC
+    skos:prefLabel "cascalho/artefatos médios e grossos"@pt , "grava/artefactos medios y gruesos"@es .
+
+glosis_cl:rockSizeValueCode-R
+    skos:prefLabel "fragmentos de rocha"@pt , "fragmentos de roca"@es .
+
+glosis_cl:rockSizeValueCode-RB
+    skos:prefLabel "matacões"@pt , "bloques"@es .
+
+glosis_cl:rockSizeValueCode-RC
+    skos:prefLabel "cascalho grosso"@pt , "grava gruesa"@es .
+
+glosis_cl:rockSizeValueCode-RF
+    skos:prefLabel "cascalho fino"@pt , "grava fina"@es .
+
+glosis_cl:rockSizeValueCode-RL
+    skos:prefLabel "blocos grandes"@pt , "bloques grandes"@es .
+
+glosis_cl:rockSizeValueCode-RM
+    skos:prefLabel "cascalho médio"@pt , "grava media"@es .
+
+glosis_cl:rockSizeValueCode-RS
+    skos:prefLabel "pedras"@pt , "piedras"@es .
+
+glosis_cl:rockSizeValueCode-SB
+    skos:prefLabel "pedras e matacões"@pt , "piedras y bloques"@es .
+
+glosis_cl:rockShapeValueCode-A
+    skos:prefLabel "angular"@pt , "angular"@es .
+
+glosis_cl:rockShapeValueCode-F
+    skos:prefLabel "achatado"@pt , "plano"@es .
+
+glosis_cl:rockShapeValueCode-R
+    skos:prefLabel "arredondado"@pt , "redondeado"@es .
+
+glosis_cl:rockShapeValueCode-S
+    skos:prefLabel "subarredondado"@pt , "subredondeado"@es .
+
+glosis_cl:rockAbundanceValueCode-A
+    skos:prefLabel "abundante"@pt , "abundante"@es .
+
+glosis_cl:rockAbundanceValueCode-C
+    skos:prefLabel "comum"@pt , "común"@es .
+
+glosis_cl:rockAbundanceValueCode-D
+    skos:prefLabel "dominante"@pt , "dominante"@es .
+
+glosis_cl:rockAbundanceValueCode-F
+    skos:prefLabel "poucos"@pt , "pocos"@es .
+
+glosis_cl:rockAbundanceValueCode-M
+    skos:prefLabel "muitos"@pt , "muchos"@es .
+
+glosis_cl:rockAbundanceValueCode-N
+    skos:prefLabel "nenhum"@pt , "ninguno"@es .
+
+glosis_cl:rockAbundanceValueCode-S
+    skos:prefLabel "linha de pedras"@pt , "línea de piedras"@es .
+
+glosis_cl:rockAbundanceValueCode-V
+    skos:prefLabel "muito poucos"@pt , "muy pocos"@es .
+
+glosis_cl:plasticityValueCode-NPL
+    skos:prefLabel "não plástica"@pt , "no plástica"@es .
+
+glosis_cl:plasticityValueCode-PL
+    skos:prefLabel "plástica"@pt , "plástica"@es .
+
+glosis_cl:plasticityValueCode-PVP
+    skos:prefLabel "plástica a muito plástica"@pt , "plástica a muy plástica"@es .
+
+glosis_cl:plasticityValueCode-SPL
+    skos:prefLabel "ligeiramente plástica"@pt , "ligeramente plástica"@es .
+
+glosis_cl:plasticityValueCode-SPP
+    skos:prefLabel "ligeira a plástica"@pt , "ligera a plástica"@es .
+
+glosis_cl:plasticityValueCode-VPL
+    skos:prefLabel "muito plástica"@pt , "muy plástica"@es .
+
+glosis_cl:stickinessValueCode-NST
+    skos:prefLabel "não pegajosa"@pt , "no pegajosa"@es .
+
+glosis_cl:stickinessValueCode-SSS
+    skos:prefLabel "ligeira a pegajosa"@pt , "ligera a pegajosa"@es .
+
+glosis_cl:stickinessValueCode-SST
+    skos:prefLabel "ligeiramente pegajosa"@pt , "ligeramente pegajosa"@es .
+
+glosis_cl:stickinessValueCode-ST
+    skos:prefLabel "pegajosa"@pt , "pegajosa"@es .
+
+glosis_cl:stickinessValueCode-SVS
+    skos:prefLabel "pegajosa a muito pegajosa"@pt , "pegajosa a muy pegajosa"@es .
+
+glosis_cl:stickinessValueCode-VST
+    skos:prefLabel "muito pegajosa"@pt , "muy pegajosa"@es .
+
+glosis_cl:consistenceDryValueCode-EHA
+    skos:prefLabel "extremamente duro"@pt , "extremadamente duro"@es .
+
+glosis_cl:consistenceDryValueCode-HA
+    skos:prefLabel "duro"@pt , "duro"@es .
+
+glosis_cl:consistenceDryValueCode-HVH
+    skos:prefLabel "duro a muito duro"@pt , "duro a muy duro"@es .
+
+glosis_cl:consistenceDryValueCode-LO
+    skos:prefLabel "solto"@pt , "suelto"@es .
+
+glosis_cl:consistenceDryValueCode-SHA
+    skos:prefLabel "ligeiramente duro"@pt , "ligeramente duro"@es .
+
+glosis_cl:consistenceDryValueCode-SHH
+    skos:prefLabel "ligeiramente duro a duro"@pt , "ligeramente duro a duro"@es .
+
+glosis_cl:consistenceDryValueCode-SO
+    skos:prefLabel "macio"@pt , "blando"@es .
+
+glosis_cl:consistenceDryValueCode-SSH
+    skos:prefLabel "macio a ligeiramente duro"@pt , "blando a ligeramente duro"@es .
+
+glosis_cl:consistenceDryValueCode-VHA
+    skos:prefLabel "muito duro"@pt , "muy duro"@es .
+
+glosis_cl:consistenceMoistValueCode-EFI
+    skos:prefLabel "extremamente firme"@pt , "extremadamente firme"@es .
+
+glosis_cl:consistenceMoistValueCode-FI
+    skos:prefLabel "firme"@pt , "firme"@es .
+
+glosis_cl:consistenceMoistValueCode-FR
+    skos:prefLabel "friável"@pt , "friable"@es .
+
+glosis_cl:consistenceMoistValueCode-LO
+    skos:prefLabel "solto"@pt , "suelto"@es .
+
+glosis_cl:consistenceMoistValueCode-VFI
+    skos:prefLabel "muito firme"@pt , "muy firme"@es .
+
+glosis_cl:consistenceMoistValueCode-VFR
+    skos:prefLabel "muito friável"@pt , "muy friable"@es .
+
+glosis_cl:fragmentsClassValueCode-FGF1
+    skos:prefLabel "fração gravimétrica 01"@pt , "fracción gravimétrica 01"@es .
+
+glosis_cl:fragmentsClassValueCode-FGF2
+    skos:prefLabel "fração gravimétrica 02"@pt , "fracción gravimétrica 02"@es .
+
+glosis_cl:fragmentsClassValueCode-FGF3
+    skos:prefLabel "fração gravimétrica 03"@pt , "fracción gravimétrica 03"@es .
+
+glosis_cl:fragmentsClassValueCode-FGF4
+    skos:prefLabel "fração gravimétrica 04"@pt , "fracción gravimétrica 04"@es .
+
+glosis_cl:fragmentsClassValueCode-FGT
+    skos:prefLabel "fração gravimétrica total"@pt , "fracción gravimétrica total"@es .
+
+glosis_cl:fragmentsClassValueCode-FV1
+    skos:prefLabel "fração volumétrica 01"@pt , "fracción volumétrica 01"@es .
+
+glosis_cl:fragmentsClassValueCode-FV2
+    skos:prefLabel "fração volumétrica 02"@pt , "fracción volumétrica 02"@es .
+
+glosis_cl:fragmentsClassValueCode-FV3
+    skos:prefLabel "fração volumétrica 03"@pt , "fracción volumétrica 03"@es .
+
+glosis_cl:fragmentsClassValueCode-FVE
+    skos:prefLabel "estimativa volumétrica de fragmentos"@pt , "estimación volumétrica de fragmentos"@es .
+
+glosis_cl:fragmentsClassValueCode-FVT
+    skos:prefLabel "fração volumétrica total"@pt , "fracción volumétrica total"@es .
+
+glosis_cl:fragmentsSizeValueCode-B
+    skos:prefLabel "matacões"@pt , "bloques"@es .
+
+glosis_cl:fragmentsSizeValueCode-C
+    skos:prefLabel "cascalho grosso"@pt , "grava gruesa"@es .
+
+glosis_cl:fragmentsSizeValueCode-F
+    skos:prefLabel "cascalho fino"@pt , "grava fina"@es .
+
+glosis_cl:fragmentsSizeValueCode-L
+    skos:prefLabel "blocos grandes"@pt , "bloques grandes"@es .
+
+glosis_cl:fragmentsSizeValueCode-M
+    skos:prefLabel "cascalho médio"@pt , "grava media"@es .
+
+glosis_cl:fragmentsSizeValueCode-S
+    skos:prefLabel "pedras"@pt , "piedras"@es .
+
+glosis_cl:fragmentCoverValueCode-A
+    skos:prefLabel "abundante"@pt , "abundante"@es .
+
+glosis_cl:fragmentCoverValueCode-C
+    skos:prefLabel "comum"@pt , "común"@es .
+
+glosis_cl:fragmentCoverValueCode-D
+    skos:prefLabel "dominante"@pt , "dominante"@es .
+
+glosis_cl:fragmentCoverValueCode-F
+    skos:prefLabel "poucos"@pt , "pocos"@es .
+
+glosis_cl:fragmentCoverValueCode-M
+    skos:prefLabel "muitos"@pt , "muchos"@es .
+
+glosis_cl:fragmentCoverValueCode-N
+    skos:prefLabel "nenhum"@pt , "ninguno"@es .
+
+glosis_cl:fragmentCoverValueCode-V
+    skos:prefLabel "muito poucos"@pt , "muy pocos"@es .
+
+glosis_cl:majorLandFormValueCode-L
+    skos:prefLabel "terreno plano"@pt , "tierra llana"@es .
+
+glosis_cl:majorLandFormValueCode-LD
+    skos:prefLabel "depressão"@pt , "depresión"@es .
+
+glosis_cl:majorLandFormValueCode-LL
+    skos:prefLabel "planalto"@pt , "meseta"@es .
+
+glosis_cl:majorLandFormValueCode-LP
+    skos:prefLabel "planície"@pt , "llanura"@es .
+
+glosis_cl:majorLandFormValueCode-LV
+    skos:prefLabel "fundo de vale"@pt , "fondo de valle"@es .
+
+glosis_cl:majorLandFormValueCode-S
+    skos:prefLabel "terreno inclinado"@pt , "tierra inclinada"@es .
+
+glosis_cl:majorLandFormValueCode-SE
+    skos:prefLabel "zona de escarpa de gradiente médio"@pt , "zona de escarpe de gradiente medio"@es .
+
+glosis_cl:majorLandFormValueCode-SH
+    skos:prefLabel "colina de gradiente médio"@pt , "colina de gradiente medio"@es .
+
+glosis_cl:majorLandFormValueCode-SM
+    skos:prefLabel "montanha de gradiente médio"@pt , "montaña de gradiente medio"@es .
+
+glosis_cl:majorLandFormValueCode-SP
+    skos:prefLabel "planície dissecada"@pt , "llanura disectada"@es .
+
+glosis_cl:majorLandFormValueCode-SV
+    skos:prefLabel "vale de gradiente médio"@pt , "valle de gradiente medio"@es .
+
+glosis_cl:majorLandFormValueCode-T
+    skos:prefLabel "terreno íngreme"@pt , "tierra escarpada"@es .
+
+glosis_cl:majorLandFormValueCode-TE
+    skos:prefLabel "zona de escarpa de gradiente alto"@pt , "zona de escarpe de gradiente alto"@es .
+
+glosis_cl:majorLandFormValueCode-TH
+    skos:prefLabel "colina de gradiente alto"@pt , "colina de gradiente alto"@es .
+
+glosis_cl:majorLandFormValueCode-TM
+    skos:prefLabel "montanha de gradiente alto"@pt , "montaña de gradiente alto"@es .
+
+glosis_cl:majorLandFormValueCode-TV
+    skos:prefLabel "vale de gradiente alto"@pt , "valle de gradiente alto"@es .
+
+glosis_cl:physiographyValueCode-BOdl
+    skos:prefLabel "fundo (linha de drenagem)"@pt , "fondo (línea de drenaje)"@es .
+
+glosis_cl:physiographyValueCode-BOf
+    skos:prefLabel "fundo (plano)"@pt , "fondo (plano)"@es .
+
+glosis_cl:physiographyValueCode-CR
+    skos:prefLabel "crista (cume)"@pt , "cresta (cumbre)"@es .
+
+glosis_cl:physiographyValueCode-HI
+    skos:prefLabel "parte alta (elevação)"@pt , "parte alta (elevación)"@es .
+
+glosis_cl:physiographyValueCode-IN
+    skos:prefLabel "parte intermediária (talvegue)"@pt , "parte intermedia (talvegue)"@es .
+
+glosis_cl:physiographyValueCode-LO
+    skos:prefLabel "parte baixa (e mergulho)"@pt , "parte baja (y buzamiento)"@es .
+
+glosis_cl:physiographyValueCode-LS
+    skos:prefLabel "baixa encosta (sopé)"@pt , "ladera baja (pie de ladera)"@es .
+
+glosis_cl:physiographyValueCode-MS
+    skos:prefLabel "meia encosta"@pt , "ladera media"@es .
+
+glosis_cl:physiographyValueCode-TS
+    skos:prefLabel "sopé"@pt , "pie de ladera"@es .
+
+glosis_cl:physiographyValueCode-UP
+    skos:prefLabel "alta encosta (ombro)"@pt , "ladera alta (hombro)"@es .
+
+glosis_cl:slopeFormValueCode-C
+    skos:prefLabel "côncava"@pt , "cóncava"@es .
+
+glosis_cl:slopeFormValueCode-S
+    skos:prefLabel "retilínea"@pt , "recta"@es .
+
+glosis_cl:slopeFormValueCode-T
+    skos:prefLabel "em terraços"@pt , "aterrazada"@es .
+
+glosis_cl:slopeFormValueCode-V
+    skos:prefLabel "convexa"@pt , "convexa"@es .
+
+glosis_cl:slopeFormValueCode-X
+    skos:prefLabel "complexa (irregular)"@pt , "compleja (irregular)"@es .
+
+glosis_cl:slopeGradientClassValueCode-1
+    skos:prefLabel "plano"@pt , "plano"@es .
+
+glosis_cl:slopeGradientClassValueCode-10
+    skos:prefLabel "muito íngreme"@pt , "muy escarpada"@es .
+
+glosis_cl:slopeGradientClassValueCode-2
+    skos:prefLabel "plano"@pt , "llano"@es .
+
+glosis_cl:slopeGradientClassValueCode-3
+    skos:prefLabel "quase plano"@pt , "casi llano"@es .
+
+glosis_cl:slopeGradientClassValueCode-4
+    skos:prefLabel "muito suavemente inclinado"@pt , "muy suavemente inclinada"@es .
+
+glosis_cl:slopeGradientClassValueCode-5
+    skos:prefLabel "suavemente inclinado"@pt , "suavemente inclinada"@es .
+
+glosis_cl:slopeGradientClassValueCode-6
+    skos:prefLabel "inclinado"@pt , "inclinada"@es .
+
+glosis_cl:slopeGradientClassValueCode-7
+    skos:prefLabel "fortemente inclinado"@pt , "fuertemente inclinada"@es .
+
+glosis_cl:slopeGradientClassValueCode-8
+    skos:prefLabel "moderadamente íngreme"@pt , "moderadamente escarpada"@es .
+
+glosis_cl:slopeGradientClassValueCode-9
+    skos:prefLabel "íngreme"@pt , "escarpada"@es .
+
+# === EOF ===

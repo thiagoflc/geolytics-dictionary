@@ -1,0 +1,161 @@
+# ============================================================================
+# Geolytics petroleum-engineering units of measurement
+# ============================================================================
+# Extension to QUDT for E&P-specific units not present in upstream QUDT.
+# Pattern follows GLOSIS unit module (CC BY 4.0):
+#   - Each unit declared as qudt:Unit
+#   - qudt:hasQuantityKind links to QUDT quantitykind
+#   - qudt:ucumCode provides the canonical UCUM symbol
+#   - qudt:plainTextDescription human-readable
+#
+# Licença: CC BY 4.0 (compatível com QUDT upstream).
+# Espelha o padrão GLOSIS upstream, em que `glosis_unit.ttl` é CC BY 4.0
+# enquanto `glosis_main` carrega CC BY-NC-SA 3.0 IGO. Este módulo de
+# unidades é independente e não é considerado obra derivada do GLOSIS
+# (não importa nem reusa termos GLOSIS), pelo que pode ser distribuído
+# sob licença mais permissiva.
+# ============================================================================
+
+@prefix geolytics_u:    <https://geolytics.petrobras.com.br/dict/unit/> .
+@prefix geolytics_qk:   <https://geolytics.petrobras.com.br/dict/quantitykind/> .
+@prefix qudt:           <http://qudt.org/schema/qudt/> .
+@prefix quantitykind:   <http://qudt.org/vocab/quantitykind/> .
+@prefix unit:           <http://qudt.org/vocab/unit/> .
+@prefix owl:            <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:           <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:           <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:            <http://purl.org/dc/terms/> .
+@prefix xsd:            <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolytics.petrobras.com.br/dict/unit>
+    a              owl:Ontology ;
+    owl:versionIRI <https://geolytics.petrobras.com.br/dict/unit/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    dct:title "Geolytics petroleum-engineering unit extension"@en ;
+    dct:description "Units of measurement specific to upstream oil & gas (production rate, gas-oil ratio, formation volume factor, etc.) absent from QUDT upstream. Modeled after the GLOSIS unit module."@en ;
+    dct:license <https://creativecommons.org/licenses/by/4.0/> ;
+    rdfs:seeAlso <http://qudt.org/schema/qudt/> ,
+                 <http://w3id.org/glosis/model/unit/> .
+
+# ── Quantity kinds (E&P-specific) ───────────────────────────────────────────
+
+geolytics_qk:GasOilRatio a qudt:QuantityKind ;
+    rdfs:label "Gas-Oil Ratio (GOR)"@en ;
+    skos:definition "Volume of gas at standard conditions divided by volume of stock-tank oil. Dimensionally a volume ratio (Sm3/Sm3 or scf/STB)."@en ;
+    qudt:applicableUnit geolytics_u:SCF-PER-STB , geolytics_u:SM3-PER-SM3 .
+
+geolytics_qk:FormationVolumeFactor a qudt:QuantityKind ;
+    rdfs:label "Formation Volume Factor (Bo, Bg, Bw)"@en ;
+    skos:definition "Ratio of fluid volume at reservoir conditions to volume at standard surface conditions. Dimensionless ratio (rbbl/STB or Rm3/Sm3)."@en ;
+    qudt:applicableUnit geolytics_u:RB-PER-STB , geolytics_u:RM3-PER-SM3 .
+
+geolytics_qk:VolumetricFlowRateOfOil a qudt:QuantityKind ;
+    rdfs:label "Volumetric flow rate (oil)"@en ;
+    skos:definition "Volume of stock-tank oil produced per unit time. SI: m³/s; field: bbl/day (BOPD)."@en ;
+    qudt:applicableUnit geolytics_u:BBL-PER-D , unit:M3-PER-SEC ;
+    qudt:broader quantitykind:VolumeFlowRate .
+
+geolytics_qk:VolumetricFlowRateOfGas a qudt:QuantityKind ;
+    rdfs:label "Volumetric flow rate (gas)"@en ;
+    skos:definition "Volume of gas produced per unit time at standard conditions. Field: Mcf/day or MMscf/day."@en ;
+    qudt:applicableUnit geolytics_u:MCF-PER-D , geolytics_u:MMSCF-PER-D ;
+    qudt:broader quantitykind:VolumeFlowRate .
+
+geolytics_qk:APIGravity a qudt:QuantityKind ;
+    rdfs:label "API gravity"@en ;
+    skos:definition "Specific-gravity scale developed by the American Petroleum Institute. °API = (141.5/SG) − 131.5, where SG is specific gravity at 60°F. Inversely proportional to density."@en ;
+    qudt:applicableUnit geolytics_u:DEG-API ;
+    qudt:broader quantitykind:Density .
+
+# ── Units ───────────────────────────────────────────────────────────────────
+
+geolytics_u:BBL-PER-D a qudt:Unit ;
+    rdfs:label "Barrel per day"@en ;
+    qudt:hasQuantityKind geolytics_qk:VolumetricFlowRateOfOil ;
+    qudt:plainTextDescription "Petroleum barrel (42 US gallons = 0.158987294928 m³) per day. Used for oil-production rate (BOPD)."@en ;
+    qudt:ucumCode "[bbl_us]/d"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    qudt:conversionMultiplier "1.8401307283950617e-6"^^xsd:double ;
+    qudt:conversionMultiplierSI "1.8401307283950617e-6"^^xsd:double ;
+    skos:altLabel "BOPD"@en , "bbl/d"@en , "BPD"@en .
+
+geolytics_u:MCF-PER-D a qudt:Unit ;
+    rdfs:label "Thousand cubic foot per day"@en ;
+    qudt:hasQuantityKind geolytics_qk:VolumetricFlowRateOfGas ;
+    qudt:plainTextDescription "1000 standard cubic feet of gas per day. M = 1000 (Roman numeral M, NOT mega)."@en ;
+    qudt:ucumCode "[scf_us].10*3/d"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "Mcf/d"@en , "MCF/D"@en .
+
+geolytics_u:MMSCF-PER-D a qudt:Unit ;
+    rdfs:label "Million standard cubic foot per day"@en ;
+    qudt:hasQuantityKind geolytics_qk:VolumetricFlowRateOfGas ;
+    qudt:plainTextDescription "10⁶ standard cubic feet of gas per day. MM = 1,000,000 (Roman MxM = Million, NOT mega-mega)."@en ;
+    qudt:ucumCode "[scf_us].10*6/d"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "MMscf/d"@en , "MMSCF/D"@en .
+
+geolytics_u:SCF-PER-STB a qudt:Unit ;
+    rdfs:label "Standard cubic foot per stock-tank barrel"@en ;
+    qudt:hasQuantityKind geolytics_qk:GasOilRatio ;
+    qudt:plainTextDescription "Standard cubic foot of gas per stock-tank barrel of oil. Standard unit for GOR (gas-oil ratio) in field units."@en ;
+    qudt:ucumCode "[scf_us]/[bbl_us]"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "scf/STB"@en , "scf/stb"@en , "SCF/STB"@en .
+
+geolytics_u:SM3-PER-SM3 a qudt:Unit ;
+    rdfs:label "Standard cubic metre per standard cubic metre"@en ;
+    qudt:hasQuantityKind geolytics_qk:GasOilRatio ;
+    qudt:plainTextDescription "Standard cubic metre of gas per standard cubic metre of oil. SI equivalent of scf/STB; conversion factor 1 scf/STB ≈ 0.1781 Sm³/Sm³."@en ;
+    qudt:ucumCode "m3/m3"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "Sm³/Sm³"@en , "m³/m³"@en .
+
+geolytics_u:RB-PER-STB a qudt:Unit ;
+    rdfs:label "Reservoir barrel per stock-tank barrel"@en ;
+    qudt:hasQuantityKind geolytics_qk:FormationVolumeFactor ;
+    qudt:plainTextDescription "Reservoir-condition barrel of fluid per stock-tank barrel of oil. Standard unit for Bo (oil formation volume factor) in field units."@en ;
+    qudt:ucumCode "[bbl_us].rsv/[bbl_us]"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "rb/stb"@en , "RB/STB"@en , "rbbl/STB"@en .
+
+geolytics_u:RM3-PER-SM3 a qudt:Unit ;
+    rdfs:label "Reservoir cubic metre per standard cubic metre"@en ;
+    qudt:hasQuantityKind geolytics_qk:FormationVolumeFactor ;
+    qudt:plainTextDescription "Reservoir-condition cubic metre per standard cubic metre. SI equivalent of RB/STB."@en ;
+    qudt:ucumCode "m3.rsv/m3"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "Rm³/Sm³"@en .
+
+geolytics_u:DEG-API a qudt:Unit ;
+    rdfs:label "Degree API"@en ;
+    qudt:hasQuantityKind geolytics_qk:APIGravity ;
+    qudt:plainTextDescription "API gravity scale, °API = (141.5 / SG_60F) − 131.5. Inversely proportional to specific gravity at 60°F. Light oil > 31.1°API; heavy oil < 22.3°API."@en ;
+    qudt:ucumCode "[degAPI]"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "°API"@en , "deg API"@en .
+
+geolytics_u:PSI-A a qudt:Unit ;
+    rdfs:label "Pound-force per square inch (absolute)"@en ;
+    qudt:hasQuantityKind quantitykind:Pressure ;
+    qudt:plainTextDescription "Absolute pressure in psi (referenced to vacuum, not atmospheric). 1 psia = 6894.757 Pa. Distinguishes from psig (gauge), which subtracts atmospheric pressure."@en ;
+    qudt:ucumCode "[psi]"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    qudt:conversionMultiplier "6894.757293168361"^^xsd:double ;
+    skos:altLabel "psia"@en .
+
+geolytics_u:PSI-G a qudt:Unit ;
+    rdfs:label "Pound-force per square inch (gauge)"@en ;
+    qudt:hasQuantityKind quantitykind:Pressure ;
+    qudt:plainTextDescription "Gauge pressure in psi (referenced to atmospheric pressure). psig = psia − 14.696. Used for wellhead and surface pressures."@en ;
+    qudt:ucumCode "[psi].gage"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    skos:altLabel "psig"@en .
+
+geolytics_u:CP a qudt:Unit ;
+    rdfs:label "Centipoise"@en ;
+    qudt:hasQuantityKind quantitykind:DynamicViscosity ;
+    qudt:plainTextDescription "Centipoise — 1 cP = 10⁻³ Pa·s = 1 mPa·s. Dynamic viscosity unit; viscosity of water at 20°C ≈ 1 cP."@en ;
+    qudt:ucumCode "cP"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    qudt:conversionMultiplier "0.001"^^xsd:double ;
+    skos:altLabel "cP"@en .
+
+geolytics_u:MILLIDARCY a qudt:Unit ;
+    rdfs:label "Millidarcy"@en ;
+    qudt:hasQuantityKind quantitykind:Permeability ;
+    qudt:plainTextDescription "Millidarcy — unit of permeability. 1 mD = 9.869233e-16 m². Reservoir permeability typically 0.1 mD to 10000 mD."@en ;
+    qudt:ucumCode "mD"^^<http://qudt.org/schema/qudt/UCUMcs> ;
+    qudt:conversionMultiplier "9.869232667160129e-16"^^xsd:double ;
+    skos:altLabel "mD"@en , "mDarcy"@en .
+
+# === EOF ===

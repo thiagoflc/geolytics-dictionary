@@ -4,7 +4,13 @@
     "source_ttl": "https://github.com/glosis-ld/glosis/blob/master/glosis_cl.ttl",
     "description": "22 codelists GLOSIS relevantes para petrografia/diagênese/sedimentologia: cementação, weathering, porosidade, estrutura, fragmentos, plasticidade, paisagem.",
     "license": "CC BY-NC-SA 3.0 IGO",
-    "citation": "GLOSIS v1.5.1 — http://w3id.org/glosis/model/codelists/"
+    "citation": "GLOSIS v1.5.1 — http://w3id.org/glosis/model/codelists/",
+    "languages": [
+      "en",
+      "pt",
+      "es"
+    ],
+    "translations_applied_at": "2026-05-02T21:43:47.258Z"
   },
   "data": {
     "cementationDegreeValueCode": {
@@ -13,56 +19,86 @@
         {
           "id": "cementationDegreeValueCode-C",
           "code": "C",
-          "prefLabel": "Cemented",
+          "prefLabel": {
+            "en": "Cemented",
+            "pt": "cimentado",
+            "es": "cementado"
+          },
           "definition": "Cemented mass cannot be broken in the hands and is continuous (more than 90 percent of soil mass).",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-C",
+          "prefLabel_legacy": "Cemented"
         },
         {
           "id": "cementationDegreeValueCode-I",
           "code": "I",
-          "prefLabel": "Indurated",
+          "prefLabel": {
+            "en": "Indurated",
+            "pt": "endurecido",
+            "es": "endurecido"
+          },
           "definition": "Cemented mass cannot be broken by body weight (75-kg standard soil scientist) (more than 90 percent of soil mass).",
           "notation": "I",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-I"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-I",
+          "prefLabel_legacy": "Indurated"
         },
         {
           "id": "cementationDegreeValueCode-M",
           "code": "M",
-          "prefLabel": "Moderately cemented",
+          "prefLabel": {
+            "en": "Moderately cemented",
+            "pt": "moderadamente cimentado",
+            "es": "moderadamente cementado"
+          },
           "definition": "Cemented mass cannot be broken in the hands but is discontinuous (less than 90 percent of soil mass).",
           "notation": "M",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-M"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-M",
+          "prefLabel_legacy": "Moderately cemented"
         },
         {
           "id": "cementationDegreeValueCode-N",
           "code": "N",
-          "prefLabel": "Non-cemented and non-compacted",
+          "prefLabel": {
+            "en": "Non-cemented and non-compacted",
+            "pt": "não cimentado e não compactado",
+            "es": "no cementado y no compactado"
+          },
           "definition": "Neither cementation nor compaction observed (slakes in water).",
           "notation": "N",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-N"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-N",
+          "prefLabel_legacy": "Non-cemented and non-compacted"
         },
         {
           "id": "cementationDegreeValueCode-W",
           "code": "W",
-          "prefLabel": "Weakly cemented",
+          "prefLabel": {
+            "en": "Weakly cemented",
+            "pt": "fracamente cimentado",
+            "es": "débilmente cementado"
+          },
           "definition": "Cemented mass is brittle and hard, but can be broken in the hands.",
           "notation": "W",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-W"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-W",
+          "prefLabel_legacy": "Weakly cemented"
         },
         {
           "id": "cementationDegreeValueCode-Y",
           "code": "Y",
-          "prefLabel": "Compacted but non-cemented",
+          "prefLabel": {
+            "en": "Compacted but non-cemented",
+            "pt": "compactado mas não cimentado",
+            "es": "compactado pero no cementado"
+          },
           "definition": "Compacted mass is appreciably harder or more brittle than other comparable soil mass (slakes in water).",
           "notation": "Y",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-Y"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationDegreeValueCode-Y",
+          "prefLabel_legacy": "Compacted but non-cemented"
         }
       ]
     },
@@ -72,119 +108,184 @@
         {
           "id": "cementationNatureValueCode-C",
           "code": "C",
-          "prefLabel": "Clay",
+          "prefLabel": {
+            "en": "Clay",
+            "pt": "argila",
+            "es": "arcilla"
+          },
           "definition": "Primary cementing material containing Clay",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-C",
+          "prefLabel_legacy": "Clay"
         },
         {
           "id": "cementationNatureValueCode-CS",
           "code": "CS",
-          "prefLabel": "Clay–sesquioxides",
+          "prefLabel": {
+            "en": "Clay–sesquioxides",
+            "pt": "argila–sesquióxidos",
+            "es": "arcilla–sesquióxidos"
+          },
           "definition": "Primary cementing material containing Clay–sesquioxides",
           "notation": "CS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-CS"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-CS",
+          "prefLabel_legacy": "Clay–sesquioxides"
         },
         {
           "id": "cementationNatureValueCode-F",
           "code": "F",
-          "prefLabel": "Iron",
+          "prefLabel": {
+            "en": "Iron",
+            "pt": "ferro",
+            "es": "hierro"
+          },
           "definition": "Primary cementing material containing Iron",
           "notation": "F",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-F"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-F",
+          "prefLabel_legacy": "Iron"
         },
         {
           "id": "cementationNatureValueCode-FM",
           "code": "FM",
-          "prefLabel": "Iron–manganese (sesquioxides)",
+          "prefLabel": {
+            "en": "Iron–manganese (sesquioxides)",
+            "pt": "ferro–manganês (sesquióxidos)",
+            "es": "hierro–manganeso (sesquióxidos)"
+          },
           "definition": "Primary cementing material containing Iron–manganese (sesquioxides)",
           "notation": "FM",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-FM"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-FM",
+          "prefLabel_legacy": "Iron–manganese (sesquioxides)"
         },
         {
           "id": "cementationNatureValueCode-FO",
           "code": "FO",
-          "prefLabel": "Iron–organic matter",
+          "prefLabel": {
+            "en": "Iron–organic matter",
+            "pt": "ferro–matéria orgânica",
+            "es": "hierro–materia orgánica"
+          },
           "definition": "Primary cementing material containing Iron–organic matter",
           "notation": "FO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-FO"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-FO",
+          "prefLabel_legacy": "Iron–organic matter"
         },
         {
           "id": "cementationNatureValueCode-GY",
           "code": "GY",
-          "prefLabel": "Gypsum",
+          "prefLabel": {
+            "en": "Gypsum",
+            "pt": "gipsita",
+            "es": "yeso"
+          },
           "definition": "Primary cementing material containing Gypsum",
           "notation": "GY",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-GY"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-GY",
+          "prefLabel_legacy": "Gypsum"
         },
         {
           "id": "cementationNatureValueCode-I",
           "code": "I",
-          "prefLabel": "Ice",
+          "prefLabel": {
+            "en": "Ice",
+            "pt": "gelo",
+            "es": "hielo"
+          },
           "definition": "Primary cementing material containing Ice",
           "notation": "I",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-I"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-I",
+          "prefLabel_legacy": "Ice"
         },
         {
           "id": "cementationNatureValueCode-K",
           "code": "K",
-          "prefLabel": "Carbonates",
+          "prefLabel": {
+            "en": "Carbonates",
+            "pt": "carbonatos",
+            "es": "carbonatos"
+          },
           "definition": "Primary cementing material containing Carbonates",
           "notation": "K",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-K"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-K",
+          "prefLabel_legacy": "Carbonates"
         },
         {
           "id": "cementationNatureValueCode-KQ",
           "code": "KQ",
-          "prefLabel": "Carbonates–silica",
+          "prefLabel": {
+            "en": "Carbonates–silica",
+            "pt": "carbonatos–sílica",
+            "es": "carbonatos–sílice"
+          },
           "definition": "Primary cementing material containing Carbonates–silica",
           "notation": "KQ",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-KQ"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-KQ",
+          "prefLabel_legacy": "Carbonates–silica"
         },
         {
           "id": "cementationNatureValueCode-M",
           "code": "M",
-          "prefLabel": "Mechanical",
+          "prefLabel": {
+            "en": "Mechanical",
+            "pt": "mecânica",
+            "es": "mecánica"
+          },
           "definition": "Primary cementing material containing Mechanical",
           "notation": "M",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-M"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-M",
+          "prefLabel_legacy": "Mechanical"
         },
         {
           "id": "cementationNatureValueCode-NK",
           "code": "NK",
-          "prefLabel": "Not known",
+          "prefLabel": {
+            "en": "Not known",
+            "pt": "desconhecida",
+            "es": "desconocida"
+          },
           "definition": "Primary cementing material containing Not known contents",
           "notation": "NK",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-NK"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-NK",
+          "prefLabel_legacy": "Not known"
         },
         {
           "id": "cementationNatureValueCode-P",
           "code": "P",
-          "prefLabel": "Ploughing",
+          "prefLabel": {
+            "en": "Ploughing",
+            "pt": "aração",
+            "es": "arado"
+          },
           "definition": "Primary cementing material containing Ploughing",
           "notation": "P",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-P"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-P",
+          "prefLabel_legacy": "Ploughing"
         },
         {
           "id": "cementationNatureValueCode-Q",
           "code": "Q",
-          "prefLabel": "Silica",
+          "prefLabel": {
+            "en": "Silica",
+            "pt": "sílica",
+            "es": "sílice"
+          },
           "definition": "Primary cementing material containing Silica",
           "notation": "Q",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-Q"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationNatureValueCode-Q",
+          "prefLabel_legacy": "Silica"
         }
       ]
     },
@@ -194,38 +295,58 @@
         {
           "id": "cementationFabricValueCode-D",
           "code": "D",
-          "prefLabel": "Nodular",
+          "prefLabel": {
+            "en": "Nodular",
+            "pt": "nodular",
+            "es": "nodular"
+          },
           "definition": "The layer is largely constructed from cemented nodules or concretions of irregular shape.",
           "notation": "D",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-D"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-D",
+          "prefLabel_legacy": "Nodular"
         },
         {
           "id": "cementationFabricValueCode-Pi",
           "code": "Pi",
-          "prefLabel": "Pisolithic",
+          "prefLabel": {
+            "en": "Pisolithic",
+            "pt": "pisolítico",
+            "es": "pisolítico"
+          },
           "definition": "The layer is largely constructed from cemented spherical nodules.",
           "notation": "Pi",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-Pi"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-Pi",
+          "prefLabel_legacy": "Pisolithic"
         },
         {
           "id": "cementationFabricValueCode-Pl",
           "code": "Pl",
-          "prefLabel": "Platy",
+          "prefLabel": {
+            "en": "Platy",
+            "pt": "placoso",
+            "es": "laminar"
+          },
           "definition": "The compacted or cemented parts are platelike and have a horizontal or subhorizontal orientation.",
           "notation": "Pl",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-Pl"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-Pl",
+          "prefLabel_legacy": "Platy"
         },
         {
           "id": "cementationFabricValueCode-V",
           "code": "V",
-          "prefLabel": "Vesicular",
+          "prefLabel": {
+            "en": "Vesicular",
+            "pt": "vesicular",
+            "es": "vesicular"
+          },
           "definition": "The layer has large, equidimensional voids that may be filled with uncemented material.",
           "notation": "V",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-V"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationFabricValueCode-V",
+          "prefLabel_legacy": "Vesicular"
         }
       ]
     },
@@ -235,29 +356,44 @@
         {
           "id": "cementationContinuityValueCode-B",
           "code": "B",
-          "prefLabel": "Broken",
+          "prefLabel": {
+            "en": "Broken",
+            "pt": "quebrada",
+            "es": "rota"
+          },
           "definition": "The layer is less than 50 percent cemented or compacted, and shows a rather irregular appearance.",
           "notation": "B",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationContinuityValueCode-B"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationContinuityValueCode-B",
+          "prefLabel_legacy": "Broken"
         },
         {
           "id": "cementationContinuityValueCode-C",
           "code": "C",
-          "prefLabel": "Continuous",
+          "prefLabel": {
+            "en": "Continuous",
+            "pt": "contínua",
+            "es": "continua"
+          },
           "definition": "The layer is more than 90 percent cemented or compacted, and is only interrupted in places by cracks or fissures.",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationContinuityValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationContinuityValueCode-C",
+          "prefLabel_legacy": "Continuous"
         },
         {
           "id": "cementationContinuityValueCode-D",
           "code": "D",
-          "prefLabel": "Discontinuous",
+          "prefLabel": {
+            "en": "Discontinuous",
+            "pt": "descontínua",
+            "es": "discontinua"
+          },
           "definition": "The layer is 50–90 percent cemented or compacted, and in general shows a regular appearance.",
           "notation": "D",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/cementationContinuityValueCode-D"
+          "iri": "http://w3id.org/glosis/model/codelists/cementationContinuityValueCode-D",
+          "prefLabel_legacy": "Discontinuous"
         }
       ]
     },
@@ -267,29 +403,44 @@
         {
           "id": "weatheringValueCode-F",
           "code": "F",
-          "prefLabel": "Fresh or slightly weathered",
+          "prefLabel": {
+            "en": "Fresh or slightly weathered",
+            "pt": "fresco ou levemente intemperizado",
+            "es": "fresco o ligeramente meteorizado"
+          },
           "definition": "Fragments show little or no signs of weathering.",
           "notation": "F",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/weatheringValueCode-F"
+          "iri": "http://w3id.org/glosis/model/codelists/weatheringValueCode-F",
+          "prefLabel_legacy": "Fresh or slightly weathered"
         },
         {
           "id": "weatheringValueCode-S",
           "code": "S",
-          "prefLabel": "Strongly weathered",
+          "prefLabel": {
+            "en": "Strongly weathered",
+            "pt": "fortemente intemperizado",
+            "es": "fuertemente meteorizado"
+          },
           "definition": "All but the most resistant minerals are weathered, strongly discoloured and altered throughout the fragments, which tend to disintegrate under only moderate pressure.",
           "notation": "S",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/weatheringValueCode-S"
+          "iri": "http://w3id.org/glosis/model/codelists/weatheringValueCode-S",
+          "prefLabel_legacy": "Strongly weathered"
         },
         {
           "id": "weatheringValueCode-W",
           "code": "W",
-          "prefLabel": "Weathered",
+          "prefLabel": {
+            "en": "Weathered",
+            "pt": "intemperizado",
+            "es": "meteorizado"
+          },
           "definition": "Partial weathering is indicated by discoloration and loss of crystal form in the outer parts of the fragments while the centres remain relatively fresh and the fragments have lost little of their original strength.",
           "notation": "W",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/weatheringValueCode-W"
+          "iri": "http://w3id.org/glosis/model/codelists/weatheringValueCode-W",
+          "prefLabel_legacy": "Weathered"
         }
       ]
     },
@@ -299,47 +450,72 @@
         {
           "id": "porosityClassValueCode-1",
           "code": "1",
-          "prefLabel": "Very low",
+          "prefLabel": {
+            "en": "Very low",
+            "pt": "muito baixa",
+            "es": "muy baja"
+          },
           "definition": "Very low porosity of les than 2%",
           "notation": "1",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-1"
+          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-1",
+          "prefLabel_legacy": "Very low"
         },
         {
           "id": "porosityClassValueCode-2",
           "code": "2",
-          "prefLabel": "Low",
+          "prefLabel": {
+            "en": "Low",
+            "pt": "baixa",
+            "es": "baja"
+          },
           "definition": "Low porosity of 2–5%",
           "notation": "2",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-2"
+          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-2",
+          "prefLabel_legacy": "Low"
         },
         {
           "id": "porosityClassValueCode-3",
           "code": "3",
-          "prefLabel": "Medium",
+          "prefLabel": {
+            "en": "Medium",
+            "pt": "média",
+            "es": "media"
+          },
           "definition": "Medium porosity of 5–15%",
           "notation": "3",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-3"
+          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-3",
+          "prefLabel_legacy": "Medium"
         },
         {
           "id": "porosityClassValueCode-4",
           "code": "4",
-          "prefLabel": "High",
+          "prefLabel": {
+            "en": "High",
+            "pt": "alta",
+            "es": "alta"
+          },
           "definition": "High porosity of 15–40%",
           "notation": "4",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-4"
+          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-4",
+          "prefLabel_legacy": "High"
         },
         {
           "id": "porosityClassValueCode-5",
           "code": "5",
-          "prefLabel": "Very high",
+          "prefLabel": {
+            "en": "Very high",
+            "pt": "muito alta",
+            "es": "muy alta"
+          },
           "definition": "Very high porosity of more than 40%",
           "notation": "5",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-5"
+          "iri": "http://w3id.org/glosis/model/codelists/porosityClassValueCode-5",
+          "prefLabel_legacy": "Very high"
         }
       ]
     },
@@ -349,47 +525,72 @@
         {
           "id": "structureGradeValueCode-MO",
           "code": "MO",
-          "prefLabel": "Moderate",
+          "prefLabel": {
+            "en": "Moderate",
+            "pt": "moderada",
+            "es": "moderada"
+          },
           "definition": "Aggregates are observable in place and there is a distinct arrangement of natural surfaces of weakness. When disturbed, the soil material breaks into a mixture of many entire aggregates, some broken aggregates, and little material without aggregates faces. Aggregates surfaces generally show distinct differences with the aggregates interiors.",
           "notation": "MO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-MO"
+          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-MO",
+          "prefLabel_legacy": "Moderate"
         },
         {
           "id": "structureGradeValueCode-MS",
           "code": "MS",
-          "prefLabel": "Moderate to strong",
+          "prefLabel": {
+            "en": "Moderate to strong",
+            "pt": "moderada a forte",
+            "es": "moderada a fuerte"
+          },
           "definition": "Moderate to strong",
           "notation": "MS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-MS"
+          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-MS",
+          "prefLabel_legacy": "Moderate to strong"
         },
         {
           "id": "structureGradeValueCode-ST",
           "code": "ST",
-          "prefLabel": "Strong",
+          "prefLabel": {
+            "en": "Strong",
+            "pt": "forte",
+            "es": "fuerte"
+          },
           "definition": "Aggregates are clearly observable in place and there is a prominent arrangement of natural surfaces of weakness. When disturbed, the soil material separates mainly into entire aggregates. Aggregates surfaces generally differ markedly from aggregate interiors.",
           "notation": "ST",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-ST"
+          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-ST",
+          "prefLabel_legacy": "Strong"
         },
         {
           "id": "structureGradeValueCode-WE",
           "code": "WE",
-          "prefLabel": "Weak",
+          "prefLabel": {
+            "en": "Weak",
+            "pt": "fraca",
+            "es": "débil"
+          },
           "definition": "Aggregates are barely observable in place and there is only a weak arrangement of natural surfaces of weakness. When gently disturbed, the soil material breaks into a mixture of few entire aggregates, many broken aggregates, and much material without aggregate faces. Aggregate surfaces differ in some way from the aggregate interior.",
           "notation": "WE",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-WE"
+          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-WE",
+          "prefLabel_legacy": "Weak"
         },
         {
           "id": "structureGradeValueCode-WM",
           "code": "WM",
-          "prefLabel": "Weak to moderate",
+          "prefLabel": {
+            "en": "Weak to moderate",
+            "pt": "fraca a moderada",
+            "es": "débil a moderada"
+          },
           "definition": "Weak to moderate",
           "notation": "WM",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-WM"
+          "iri": "http://w3id.org/glosis/model/codelists/structureGradeValueCode-WM",
+          "prefLabel_legacy": "Weak to moderate"
         }
       ]
     },
@@ -399,56 +600,86 @@
         {
           "id": "structureSizeValueCode-CO",
           "code": "CO",
-          "prefLabel": "Coarse/thick",
+          "prefLabel": {
+            "en": "Coarse/thick",
+            "pt": "grossa",
+            "es": "gruesa"
+          },
           "definition": "5–10 50–100 20–50",
           "notation": "CO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-CO"
+          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-CO",
+          "prefLabel_legacy": "Coarse/thick"
         },
         {
           "id": "structureSizeValueCode-EC",
           "code": "EC",
-          "prefLabel": "Extremely coarse",
+          "prefLabel": {
+            "en": "Extremely coarse",
+            "pt": "extremamente grossa",
+            "es": "extremadamente gruesa"
+          },
           "definition": "– > 500 –",
           "notation": "EC",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-EC"
+          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-EC",
+          "prefLabel_legacy": "Extremely coarse"
         },
         {
           "id": "structureSizeValueCode-FI",
           "code": "FI",
-          "prefLabel": "Fine/thin",
+          "prefLabel": {
+            "en": "Fine/thin",
+            "pt": "fina",
+            "es": "fina"
+          },
           "definition": "1–2 10–20 5–10",
           "notation": "FI",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-FI"
+          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-FI",
+          "prefLabel_legacy": "Fine/thin"
         },
         {
           "id": "structureSizeValueCode-ME",
           "code": "ME",
-          "prefLabel": "Medium",
+          "prefLabel": {
+            "en": "Medium",
+            "pt": "média",
+            "es": "media"
+          },
           "definition": "2–5 20–50 10–20",
           "notation": "ME",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-ME"
+          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-ME",
+          "prefLabel_legacy": "Medium"
         },
         {
           "id": "structureSizeValueCode-VC",
           "code": "VC",
-          "prefLabel": "Very coarse/thick",
+          "prefLabel": {
+            "en": "Very coarse/thick",
+            "pt": "muito grossa",
+            "es": "muy gruesa"
+          },
           "definition": "> 10 1.1.000 > 50",
           "notation": "VC",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-VC"
+          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-VC",
+          "prefLabel_legacy": "Very coarse/thick"
         },
         {
           "id": "structureSizeValueCode-VF",
           "code": "VF",
-          "prefLabel": "Very fine/thin",
+          "prefLabel": {
+            "en": "Very fine/thin",
+            "pt": "muito fina",
+            "es": "muy fina"
+          },
           "definition": "< 1 < 10 < 5",
           "notation": "VF",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-VF"
+          "iri": "http://w3id.org/glosis/model/codelists/structureSizeValueCode-VF",
+          "prefLabel_legacy": "Very fine/thin"
         }
       ]
     },
@@ -458,164 +689,254 @@
         {
           "id": "rockSizeValueCode-A",
           "code": "A",
-          "prefLabel": "Artefacts",
+          "prefLabel": {
+            "en": "Artefacts",
+            "pt": "artefatos",
+            "es": "artefactos"
+          },
           "definition": "Aretfacts in soil measured in (mm)",
           "notation": "A",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-A"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-A",
+          "prefLabel_legacy": "Artefacts"
         },
         {
           "id": "rockSizeValueCode-AC",
           "code": "AC",
-          "prefLabel": "Coarse artefacts",
+          "prefLabel": {
+            "en": "Coarse artefacts",
+            "pt": "artefatos grossos",
+            "es": "artefactos gruesos"
+          },
           "definition": "Coarse artefacts in soil greater than 20mm",
           "notation": "AC",
           "broader": "rockSizeValueCode-A",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AC"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AC",
+          "prefLabel_legacy": "Coarse artefacts"
         },
         {
           "id": "rockSizeValueCode-AF",
           "code": "AF",
-          "prefLabel": "Fine artefacts",
+          "prefLabel": {
+            "en": "Fine artefacts",
+            "pt": "artefatos finos",
+            "es": "artefactos finos"
+          },
           "definition": "Fine artefacts in soild of size between 2mm–6mm",
           "notation": "AF",
           "broader": "rockSizeValueCode-A",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AF"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AF",
+          "prefLabel_legacy": "Fine artefacts"
         },
         {
           "id": "rockSizeValueCode-AM",
           "code": "AM",
-          "prefLabel": "Medium artefacts",
+          "prefLabel": {
+            "en": "Medium artefacts",
+            "pt": "artefatos médios",
+            "es": "artefactos medios"
+          },
           "definition": "6mm–20mm",
           "notation": "AM",
           "broader": "rockSizeValueCode-A",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AM"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AM",
+          "prefLabel_legacy": "Medium artefacts"
         },
         {
           "id": "rockSizeValueCode-AV",
           "code": "AV",
-          "prefLabel": "Very fine artefacts",
+          "prefLabel": {
+            "en": "Very fine artefacts",
+            "pt": "artefatos muito finos",
+            "es": "artefactos muy finos"
+          },
           "definition": "Very fine artefacsts in soil of size < 2mm",
           "notation": "AV",
           "broader": "rockSizeValueCode-A",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AV"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-AV",
+          "prefLabel_legacy": "Very fine artefacts"
         },
         {
           "id": "rockSizeValueCode-BL",
           "code": "BL",
-          "prefLabel": "Boulders and large boulders",
+          "prefLabel": {
+            "en": "Boulders and large boulders",
+            "pt": "matacões e blocos grandes",
+            "es": "bloques y grandes bloques"
+          },
           "definition": "Combination of boulderds and large boulders",
           "notation": "BL",
           "broader": "rockSizeValueCode-C",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-BL"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-BL",
+          "prefLabel_legacy": "Boulders and large boulders"
         },
         {
           "id": "rockSizeValueCode-C",
           "code": "C",
-          "prefLabel": "Combination of classes",
+          "prefLabel": {
+            "en": "Combination of classes",
+            "pt": "combinação de classes",
+            "es": "combinación de clases"
+          },
           "definition": "Class combination of rock fragment and artefacts",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-C",
+          "prefLabel_legacy": "Combination of classes"
         },
         {
           "id": "rockSizeValueCode-CS",
           "code": "CS",
-          "prefLabel": "Coarse gravel and stones",
+          "prefLabel": {
+            "en": "Coarse gravel and stones",
+            "pt": "cascalho grosso e pedras",
+            "es": "grava gruesa y piedras"
+          },
           "definition": "Combination rock fragments and artefacts of coarse gravel and stones",
           "notation": "CS",
           "broader": "rockSizeValueCode-C",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-CS"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-CS",
+          "prefLabel_legacy": "Coarse gravel and stones"
         },
         {
           "id": "rockSizeValueCode-FM",
           "code": "FM",
-          "prefLabel": "Fine and medium gravel/artefacts",
+          "prefLabel": {
+            "en": "Fine and medium gravel/artefacts",
+            "pt": "cascalho/artefatos finos e médios",
+            "es": "grava/artefactos finos y medios"
+          },
           "definition": "Combination of fine and medium gravel and artefacts",
           "notation": "FM",
           "broader": "rockSizeValueCode-C",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-FM"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-FM",
+          "prefLabel_legacy": "Fine and medium gravel/artefacts"
         },
         {
           "id": "rockSizeValueCode-MC",
           "code": "MC",
-          "prefLabel": "Medium and coarse gravel/artefacts",
+          "prefLabel": {
+            "en": "Medium and coarse gravel/artefacts",
+            "pt": "cascalho/artefatos médios e grossos",
+            "es": "grava/artefactos medios y gruesos"
+          },
           "definition": "Combination of medium and course gravels and artefacts",
           "notation": "MC",
           "broader": "rockSizeValueCode-C",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-MC"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-MC",
+          "prefLabel_legacy": "Medium and coarse gravel/artefacts"
         },
         {
           "id": "rockSizeValueCode-R",
           "code": "R",
-          "prefLabel": "Rock fragments",
+          "prefLabel": {
+            "en": "Rock fragments",
+            "pt": "fragmentos de rocha",
+            "es": "fragmentos de roca"
+          },
           "definition": "Rock fragments measured in mm",
           "notation": "R",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-R"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-R",
+          "prefLabel_legacy": "Rock fragments"
         },
         {
           "id": "rockSizeValueCode-RB",
           "code": "RB",
-          "prefLabel": "Boulders",
+          "prefLabel": {
+            "en": "Boulders",
+            "pt": "matacões",
+            "es": "bloques"
+          },
           "definition": "60mm–200mm",
           "notation": "RB",
           "broader": "rockSizeValueCode-R",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RB"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RB",
+          "prefLabel_legacy": "Boulders"
         },
         {
           "id": "rockSizeValueCode-RC",
           "code": "RC",
-          "prefLabel": "Coarse gravel",
+          "prefLabel": {
+            "en": "Coarse gravel",
+            "pt": "cascalho grosso",
+            "es": "grava gruesa"
+          },
           "definition": "Coarse gravel of size  20mm–60mm",
           "notation": "RC",
           "broader": "rockSizeValueCode-R",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RC"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RC",
+          "prefLabel_legacy": "Coarse gravel"
         },
         {
           "id": "rockSizeValueCode-RF",
           "code": "RF",
-          "prefLabel": "Fine gravel",
+          "prefLabel": {
+            "en": "Fine gravel",
+            "pt": "cascalho fino",
+            "es": "grava fina"
+          },
           "definition": "Rock fragments of mainly fine gravel of size from 2mm–6mm",
           "notation": "RF",
           "broader": "rockSizeValueCode-R",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RF"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RF",
+          "prefLabel_legacy": "Fine gravel"
         },
         {
           "id": "rockSizeValueCode-RL",
           "code": "RL",
-          "prefLabel": "Large boulders",
+          "prefLabel": {
+            "en": "Large boulders",
+            "pt": "blocos grandes",
+            "es": "bloques grandes"
+          },
           "definition": "Rock fragments mainly in the form of large boulders of size more than 600mm",
           "notation": "RL",
           "broader": "rockSizeValueCode-R",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RL"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RL",
+          "prefLabel_legacy": "Large boulders"
         },
         {
           "id": "rockSizeValueCode-RM",
           "code": "RM",
-          "prefLabel": "Medium gravel",
+          "prefLabel": {
+            "en": "Medium gravel",
+            "pt": "cascalho médio",
+            "es": "grava media"
+          },
           "definition": "Combination of rocks and artefacts of medium gravel of size from 6mm–20mm",
           "notation": "RM",
           "broader": "rockSizeValueCode-R",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RM"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RM",
+          "prefLabel_legacy": "Medium gravel"
         },
         {
           "id": "rockSizeValueCode-RS",
           "code": "RS",
-          "prefLabel": "Stones",
+          "prefLabel": {
+            "en": "Stones",
+            "pt": "pedras",
+            "es": "piedras"
+          },
           "definition": "Rock fragments mainly stones of size from 60mm–200mm",
           "notation": "RS",
           "broader": "rockSizeValueCode-R",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RS"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-RS",
+          "prefLabel_legacy": "Stones"
         },
         {
           "id": "rockSizeValueCode-SB",
           "code": "SB",
-          "prefLabel": "Stones and boulders",
+          "prefLabel": {
+            "en": "Stones and boulders",
+            "pt": "pedras e matacões",
+            "es": "piedras y bloques"
+          },
           "definition": "Combination of stone and boulders",
           "notation": "SB",
           "broader": "rockSizeValueCode-C",
-          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-SB"
+          "iri": "http://w3id.org/glosis/model/codelists/rockSizeValueCode-SB",
+          "prefLabel_legacy": "Stones and boulders"
         }
       ]
     },
@@ -625,38 +946,58 @@
         {
           "id": "rockShapeValueCode-A",
           "code": "A",
-          "prefLabel": "Angular",
+          "prefLabel": {
+            "en": "Angular",
+            "pt": "angular",
+            "es": "angular"
+          },
           "definition": "Angular rock shape",
           "notation": "A",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-A"
+          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-A",
+          "prefLabel_legacy": "Angular"
         },
         {
           "id": "rockShapeValueCode-F",
           "code": "F",
-          "prefLabel": "Flat",
+          "prefLabel": {
+            "en": "Flat",
+            "pt": "achatado",
+            "es": "plano"
+          },
           "definition": "Flat rock shape",
           "notation": "F",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-F"
+          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-F",
+          "prefLabel_legacy": "Flat"
         },
         {
           "id": "rockShapeValueCode-R",
           "code": "R",
-          "prefLabel": "Rounded",
+          "prefLabel": {
+            "en": "Rounded",
+            "pt": "arredondado",
+            "es": "redondeado"
+          },
           "definition": "Rounded rock shape",
           "notation": "R",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-R"
+          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-R",
+          "prefLabel_legacy": "Rounded"
         },
         {
           "id": "rockShapeValueCode-S",
           "code": "S",
-          "prefLabel": "Subrounded",
+          "prefLabel": {
+            "en": "Subrounded",
+            "pt": "subarredondado",
+            "es": "subredondeado"
+          },
           "definition": "Subrounded rock shape",
           "notation": "S",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-S"
+          "iri": "http://w3id.org/glosis/model/codelists/rockShapeValueCode-S",
+          "prefLabel_legacy": "Subrounded"
         }
       ]
     },
@@ -666,74 +1007,114 @@
         {
           "id": "rockAbundanceValueCode-A",
           "code": "A",
-          "prefLabel": "Abundant",
+          "prefLabel": {
+            "en": "Abundant",
+            "pt": "abundante",
+            "es": "abundante"
+          },
           "definition": "40%–80% of rock fragments",
           "notation": "A",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-A"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-A",
+          "prefLabel_legacy": "Abundant"
         },
         {
           "id": "rockAbundanceValueCode-C",
           "code": "C",
-          "prefLabel": "Common",
+          "prefLabel": {
+            "en": "Common",
+            "pt": "comum",
+            "es": "común"
+          },
           "definition": "5%–15% of rock fragments",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-C",
+          "prefLabel_legacy": "Common"
         },
         {
           "id": "rockAbundanceValueCode-D",
           "code": "D",
-          "prefLabel": "Dominant",
+          "prefLabel": {
+            "en": "Dominant",
+            "pt": "dominante",
+            "es": "dominante"
+          },
           "definition": "> 80% of rock fragments",
           "notation": "D",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-D"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-D",
+          "prefLabel_legacy": "Dominant"
         },
         {
           "id": "rockAbundanceValueCode-F",
           "code": "F",
-          "prefLabel": "Few",
+          "prefLabel": {
+            "en": "Few",
+            "pt": "poucos",
+            "es": "pocos"
+          },
           "definition": "2%–5% of rock fragments",
           "notation": "F",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-F"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-F",
+          "prefLabel_legacy": "Few"
         },
         {
           "id": "rockAbundanceValueCode-M",
           "code": "M",
-          "prefLabel": "Many",
+          "prefLabel": {
+            "en": "Many",
+            "pt": "muitos",
+            "es": "muchos"
+          },
           "definition": "15%–40% of rock fragments",
           "notation": "M",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-M"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-M",
+          "prefLabel_legacy": "Many"
         },
         {
           "id": "rockAbundanceValueCode-N",
           "code": "N",
-          "prefLabel": "None",
+          "prefLabel": {
+            "en": "None",
+            "pt": "nenhum",
+            "es": "ninguno"
+          },
           "definition": "0% of rock fragments",
           "notation": "N",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-N"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-N",
+          "prefLabel_legacy": "None"
         },
         {
           "id": "rockAbundanceValueCode-S",
           "code": "S",
-          "prefLabel": "Stone line",
+          "prefLabel": {
+            "en": "Stone line",
+            "pt": "linha de pedras",
+            "es": "línea de piedras"
+          },
           "definition": "any content, but concentrated at a distinct depth of a horizon",
           "notation": "S",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-S"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-S",
+          "prefLabel_legacy": "Stone line"
         },
         {
           "id": "rockAbundanceValueCode-V",
           "code": "V",
-          "prefLabel": "Very few",
+          "prefLabel": {
+            "en": "Very few",
+            "pt": "muito poucos",
+            "es": "muy pocos"
+          },
           "definition": "0%–2% of rock fragments",
           "notation": "V",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-V"
+          "iri": "http://w3id.org/glosis/model/codelists/rockAbundanceValueCode-V",
+          "prefLabel_legacy": "Very few"
         }
       ]
     },
@@ -743,56 +1124,86 @@
         {
           "id": "plasticityValueCode-NPL",
           "code": "NPL",
-          "prefLabel": "Non-plastic",
+          "prefLabel": {
+            "en": "Non-plastic",
+            "pt": "não plástica",
+            "es": "no plástica"
+          },
           "definition": "No wire is formable.",
           "notation": "NPL",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-NPL"
+          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-NPL",
+          "prefLabel_legacy": "Non-plastic"
         },
         {
           "id": "plasticityValueCode-PL",
           "code": "PL",
-          "prefLabel": "Plastic",
+          "prefLabel": {
+            "en": "Plastic",
+            "pt": "plástica",
+            "es": "plástica"
+          },
           "definition": "Wire formable but breaks if bent into a ring; slight to moderate force required for deformation of the soil mass.",
           "notation": "PL",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-PL"
+          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-PL",
+          "prefLabel_legacy": "Plastic"
         },
         {
           "id": "plasticityValueCode-PVP",
           "code": "PVP",
-          "prefLabel": "plastic to very plastic",
+          "prefLabel": {
+            "en": "plastic to very plastic",
+            "pt": "plástica a muito plástica",
+            "es": "plástica a muy plástica"
+          },
           "definition": "Additioanl plasticity code with combination of  PL and VPL",
           "notation": "PVP",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-PVP"
+          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-PVP",
+          "prefLabel_legacy": "plastic to very plastic"
         },
         {
           "id": "plasticityValueCode-SPL",
           "code": "SPL",
-          "prefLabel": "Slightly plastic",
+          "prefLabel": {
+            "en": "Slightly plastic",
+            "pt": "ligeiramente plástica",
+            "es": "ligeramente plástica"
+          },
           "definition": "Wire formable but breaks immediately if bent into a ring; soil mass deformed by very slight force.",
           "notation": "SPL",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-SPL"
+          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-SPL",
+          "prefLabel_legacy": "Slightly plastic"
         },
         {
           "id": "plasticityValueCode-SPP",
           "code": "SPP",
-          "prefLabel": "slightly plastic to plastic",
+          "prefLabel": {
+            "en": "slightly plastic to plastic",
+            "pt": "ligeira a plástica",
+            "es": "ligera a plástica"
+          },
           "definition": "Additioanl plasticity code with combination of  SPL and PL",
           "notation": "SPP",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-SPP"
+          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-SPP",
+          "prefLabel_legacy": "slightly plastic to plastic"
         },
         {
           "id": "plasticityValueCode-VPL",
           "code": "VPL",
-          "prefLabel": "Very plastic",
+          "prefLabel": {
+            "en": "Very plastic",
+            "pt": "muito plástica",
+            "es": "muy plástica"
+          },
           "definition": "Wire formable and can be bent into a ring; moderately strong to very strong force required for deformation of the soil mass.",
           "notation": "VPL",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-VPL"
+          "iri": "http://w3id.org/glosis/model/codelists/plasticityValueCode-VPL",
+          "prefLabel_legacy": "Very plastic"
         }
       ]
     },
@@ -802,56 +1213,86 @@
         {
           "id": "stickinessValueCode-NST",
           "code": "NST",
-          "prefLabel": "Non-sticky",
+          "prefLabel": {
+            "en": "Non-sticky",
+            "pt": "não pegajosa",
+            "es": "no pegajosa"
+          },
           "definition": "After release of pressure, practically no soil material adheres to thumb and finger.",
           "notation": "NST",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-NST"
+          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-NST",
+          "prefLabel_legacy": "Non-sticky"
         },
         {
           "id": "stickinessValueCode-SSS",
           "code": "SSS",
-          "prefLabel": "slightly sticky to sticky",
+          "prefLabel": {
+            "en": "slightly sticky to sticky",
+            "pt": "ligeira a pegajosa",
+            "es": "ligera a pegajosa"
+          },
           "definition": "Additional code of combination of SST and ST",
           "notation": "SSS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-SSS"
+          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-SSS",
+          "prefLabel_legacy": "slightly sticky to sticky"
         },
         {
           "id": "stickinessValueCode-SST",
           "code": "SST",
-          "prefLabel": "Slightly sticky",
+          "prefLabel": {
+            "en": "Slightly sticky",
+            "pt": "ligeiramente pegajosa",
+            "es": "ligeramente pegajosa"
+          },
           "definition": "After pressure, soil material adheres to both thumb and finger but comes off one or the other rather cleanly. It is not appreciably stretched when the digits are separated.",
           "notation": "SST",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-SST"
+          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-SST",
+          "prefLabel_legacy": "Slightly sticky"
         },
         {
           "id": "stickinessValueCode-ST",
           "code": "ST",
-          "prefLabel": "Sticky",
+          "prefLabel": {
+            "en": "Sticky",
+            "pt": "pegajosa",
+            "es": "pegajosa"
+          },
           "definition": "After pressure, soil material adheres to both thumb and finger and tends to stretch somewhat and pull apart rather than pulling free from either digit.",
           "notation": "ST",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-ST"
+          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-ST",
+          "prefLabel_legacy": "Sticky"
         },
         {
           "id": "stickinessValueCode-SVS",
           "code": "SVS",
-          "prefLabel": "sticky to very sticky",
+          "prefLabel": {
+            "en": "sticky to very sticky",
+            "pt": "pegajosa a muito pegajosa",
+            "es": "pegajosa a muy pegajosa"
+          },
           "definition": "Additional code of combination of ST and VST",
           "notation": "SVS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-SVS"
+          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-SVS",
+          "prefLabel_legacy": "sticky to very sticky"
         },
         {
           "id": "stickinessValueCode-VST",
           "code": "VST",
-          "prefLabel": "Very sticky",
+          "prefLabel": {
+            "en": "Very sticky",
+            "pt": "muito pegajosa",
+            "es": "muy pegajosa"
+          },
           "definition": "After pressure, soil material adheres strongly to both thumb and finger and is decidedly stretched when they are separated.",
           "notation": "VST",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-VST"
+          "iri": "http://w3id.org/glosis/model/codelists/stickinessValueCode-VST",
+          "prefLabel_legacy": "Very sticky"
         }
       ]
     },
@@ -861,83 +1302,128 @@
         {
           "id": "consistenceDryValueCode-EHA",
           "code": "EHA",
-          "prefLabel": "Extremely hard",
+          "prefLabel": {
+            "en": "Extremely hard",
+            "pt": "extremamente duro",
+            "es": "extremadamente duro"
+          },
           "definition": "Extremely resistant to pressure; cannot be broken in the hands.",
           "notation": "EHA",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-EHA"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-EHA",
+          "prefLabel_legacy": "Extremely hard"
         },
         {
           "id": "consistenceDryValueCode-HA",
           "code": "HA",
-          "prefLabel": "Hard",
+          "prefLabel": {
+            "en": "Hard",
+            "pt": "duro",
+            "es": "duro"
+          },
           "definition": "Moderately resistant to pressure; can be broken in the hands; not breakable between thumb and forefinger.",
           "notation": "HA",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-HA"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-HA",
+          "prefLabel_legacy": "Hard"
         },
         {
           "id": "consistenceDryValueCode-HVH",
           "code": "HVH",
-          "prefLabel": "hard to very hard",
+          "prefLabel": {
+            "en": "hard to very hard",
+            "pt": "duro a muito duro",
+            "es": "duro a muy duro"
+          },
           "definition": "Additional code formed by combining HA and VHA",
           "notation": "HVH",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-HVH"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-HVH",
+          "prefLabel_legacy": "hard to very hard"
         },
         {
           "id": "consistenceDryValueCode-LO",
           "code": "LO",
-          "prefLabel": "Loose",
+          "prefLabel": {
+            "en": "Loose",
+            "pt": "solto",
+            "es": "suelto"
+          },
           "definition": "Non-coherent.",
           "notation": "LO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-LO"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-LO",
+          "prefLabel_legacy": "Loose"
         },
         {
           "id": "consistenceDryValueCode-SHA",
           "code": "SHA",
-          "prefLabel": "Slightly hard",
+          "prefLabel": {
+            "en": "Slightly hard",
+            "pt": "ligeiramente duro",
+            "es": "ligeramente duro"
+          },
           "definition": "Weakly resistant to pressure; easily broken between thumb and forefinger.",
           "notation": "SHA",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SHA"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SHA",
+          "prefLabel_legacy": "Slightly hard"
         },
         {
           "id": "consistenceDryValueCode-SHH",
           "code": "SHH",
-          "prefLabel": "slightly hard to hard",
+          "prefLabel": {
+            "en": "slightly hard to hard",
+            "pt": "ligeiramente duro a duro",
+            "es": "ligeramente duro a duro"
+          },
           "definition": "slightly hard to hard",
           "notation": "SHH",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SHH"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SHH",
+          "prefLabel_legacy": "slightly hard to hard"
         },
         {
           "id": "consistenceDryValueCode-SO",
           "code": "SO",
-          "prefLabel": "Soft",
+          "prefLabel": {
+            "en": "Soft",
+            "pt": "macio",
+            "es": "blando"
+          },
           "definition": "Soil mass is very weakly coherent and fragile; breaks to powder or individual grains under very slight pressure.",
           "notation": "SO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SO"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SO",
+          "prefLabel_legacy": "Soft"
         },
         {
           "id": "consistenceDryValueCode-SSH",
           "code": "SSH",
-          "prefLabel": "soft to slightly hard",
+          "prefLabel": {
+            "en": "soft to slightly hard",
+            "pt": "macio a ligeiramente duro",
+            "es": "blando a ligeramente duro"
+          },
           "definition": "soft to slightly hard",
           "notation": "SSH",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SSH"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-SSH",
+          "prefLabel_legacy": "soft to slightly hard"
         },
         {
           "id": "consistenceDryValueCode-VHA",
           "code": "VHA",
-          "prefLabel": "Very hard",
+          "prefLabel": {
+            "en": "Very hard",
+            "pt": "muito duro",
+            "es": "muy duro"
+          },
           "definition": "Very hard Very resistant to pressure; can be broken in the hands only with difficulty.",
           "notation": "VHA",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-VHA"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceDryValueCode-VHA",
+          "prefLabel_legacy": "Very hard"
         }
       ]
     },
@@ -947,56 +1433,86 @@
         {
           "id": "consistenceMoistValueCode-EFI",
           "code": "EFI",
-          "prefLabel": "Extremely firm",
+          "prefLabel": {
+            "en": "Extremely firm",
+            "pt": "extremamente firme",
+            "es": "extremadamente firme"
+          },
           "definition": "Soil material crushes only under very strong pressure; cannot be crushed between thumb and forefinger.",
           "notation": "EFI",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-EFI"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-EFI",
+          "prefLabel_legacy": "Extremely firm"
         },
         {
           "id": "consistenceMoistValueCode-FI",
           "code": "FI",
-          "prefLabel": "Firm",
+          "prefLabel": {
+            "en": "Firm",
+            "pt": "firme",
+            "es": "firme"
+          },
           "definition": "Soil material crushes under moderate pressure between thumb and forefinger, but resistance is distinctly noticeable.",
           "notation": "FI",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-FI"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-FI",
+          "prefLabel_legacy": "Firm"
         },
         {
           "id": "consistenceMoistValueCode-FR",
           "code": "FR",
-          "prefLabel": "Friable",
+          "prefLabel": {
+            "en": "Friable",
+            "pt": "friável",
+            "es": "friable"
+          },
           "definition": "Soil material crushes easily under gentle to moderate pressure between thumb and forefinger, and coheres when pressed together.",
           "notation": "FR",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-FR"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-FR",
+          "prefLabel_legacy": "Friable"
         },
         {
           "id": "consistenceMoistValueCode-LO",
           "code": "LO",
-          "prefLabel": "Loose",
+          "prefLabel": {
+            "en": "Loose",
+            "pt": "solto",
+            "es": "suelto"
+          },
           "definition": "Non-coherent.",
           "notation": "LO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-LO"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-LO",
+          "prefLabel_legacy": "Loose"
         },
         {
           "id": "consistenceMoistValueCode-VFI",
           "code": "VFI",
-          "prefLabel": "Very firm",
+          "prefLabel": {
+            "en": "Very firm",
+            "pt": "muito firme",
+            "es": "muy firme"
+          },
           "definition": "Soil material crushes under strong pressures; barely crushable between thumb and forefinger.",
           "notation": "VFI",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-VFI"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-VFI",
+          "prefLabel_legacy": "Very firm"
         },
         {
           "id": "consistenceMoistValueCode-VFR",
           "code": "VFR",
-          "prefLabel": "Very friable",
+          "prefLabel": {
+            "en": "Very friable",
+            "pt": "muito friável",
+            "es": "muy friable"
+          },
           "definition": "Soil material crushes under very gentle pressure, but coheres when pressed together.",
           "notation": "VFR",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-VFR"
+          "iri": "http://w3id.org/glosis/model/codelists/consistenceMoistValueCode-VFR",
+          "prefLabel_legacy": "Very friable"
         }
       ]
     },
@@ -1006,92 +1522,142 @@
         {
           "id": "fragmentsClassValueCode-FGF1",
           "code": "FGF1",
-          "prefLabel": "FragmentsGravimetricFraction01",
+          "prefLabel": {
+            "en": "FragmentsGravimetricFraction01",
+            "pt": "fração gravimétrica 01",
+            "es": "fracción gravimétrica 01"
+          },
           "definition": "Horizon layer property of Coarse fragments - gravimetric fraction 01",
           "notation": "FGF1",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF1"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF1",
+          "prefLabel_legacy": "FragmentsGravimetricFraction01"
         },
         {
           "id": "fragmentsClassValueCode-FGF2",
           "code": "FGF2",
-          "prefLabel": "FragmentsGravimetricFraction02",
+          "prefLabel": {
+            "en": "FragmentsGravimetricFraction02",
+            "pt": "fração gravimétrica 02",
+            "es": "fracción gravimétrica 02"
+          },
           "definition": "Horizon layer property of Coarse fragments - gravimetric fraction 02",
           "notation": "FGF2",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF2"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF2",
+          "prefLabel_legacy": "FragmentsGravimetricFraction02"
         },
         {
           "id": "fragmentsClassValueCode-FGF3",
           "code": "FGF3",
-          "prefLabel": "FragmentsGravimetricFraction03",
+          "prefLabel": {
+            "en": "FragmentsGravimetricFraction03",
+            "pt": "fração gravimétrica 03",
+            "es": "fracción gravimétrica 03"
+          },
           "definition": "Horizon layer property of Coarse fragments - gravimetric fraction 03",
           "notation": "FGF3",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF3"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF3",
+          "prefLabel_legacy": "FragmentsGravimetricFraction03"
         },
         {
           "id": "fragmentsClassValueCode-FGF4",
           "code": "FGF4",
-          "prefLabel": "FragmentsGravimetricFraction04",
+          "prefLabel": {
+            "en": "FragmentsGravimetricFraction04",
+            "pt": "fração gravimétrica 04",
+            "es": "fracción gravimétrica 04"
+          },
           "definition": "Horizon layer property of Coarse fragments - gravimetric fraction 04",
           "notation": "FGF4",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF4"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGF4",
+          "prefLabel_legacy": "FragmentsGravimetricFraction04"
         },
         {
           "id": "fragmentsClassValueCode-FGT",
           "code": "FGT",
-          "prefLabel": "FragmentsGravimetricTotal",
+          "prefLabel": {
+            "en": "FragmentsGravimetricTotal",
+            "pt": "fração gravimétrica total",
+            "es": "fracción gravimétrica total"
+          },
           "definition": "Horizon layer property of Coarse fragments - gravimetric total",
           "notation": "FGT",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGT"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FGT",
+          "prefLabel_legacy": "FragmentsGravimetricTotal"
         },
         {
           "id": "fragmentsClassValueCode-FV1",
           "code": "FV1",
-          "prefLabel": "FragmentsVolumetric01",
+          "prefLabel": {
+            "en": "FragmentsVolumetric01",
+            "pt": "fração volumétrica 01",
+            "es": "fracción volumétrica 01"
+          },
           "definition": "Horizon layer property of Coarse fragments - volumetric fraction 01",
           "notation": "FV1",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FV1"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FV1",
+          "prefLabel_legacy": "FragmentsVolumetric01"
         },
         {
           "id": "fragmentsClassValueCode-FV2",
           "code": "FV2",
-          "prefLabel": "FragmentsVolumetric02",
+          "prefLabel": {
+            "en": "FragmentsVolumetric02",
+            "pt": "fração volumétrica 02",
+            "es": "fracción volumétrica 02"
+          },
           "definition": "Horizon layer property of Coarse fragments - volumetric fraction 02",
           "notation": "FV2",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FV2"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FV2",
+          "prefLabel_legacy": "FragmentsVolumetric02"
         },
         {
           "id": "fragmentsClassValueCode-FV3",
           "code": "FV3",
-          "prefLabel": "FragmentsVolumetric03",
+          "prefLabel": {
+            "en": "FragmentsVolumetric03",
+            "pt": "fração volumétrica 03",
+            "es": "fracción volumétrica 03"
+          },
           "definition": "Horizon layer property of Coarse fragments - volumetric fraction 03",
           "notation": "FV3",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FV3"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FV3",
+          "prefLabel_legacy": "FragmentsVolumetric03"
         },
         {
           "id": "fragmentsClassValueCode-FVE",
           "code": "FVE",
-          "prefLabel": "FragmentsVolumetricEstimate",
+          "prefLabel": {
+            "en": "FragmentsVolumetricEstimate",
+            "pt": "estimativa volumétrica de fragmentos",
+            "es": "estimación volumétrica de fragmentos"
+          },
           "definition": "Horizon layer property of Coarse fragments - volumetric total, field estimated ",
           "notation": "FVE",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FVE"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FVE",
+          "prefLabel_legacy": "FragmentsVolumetricEstimate"
         },
         {
           "id": "fragmentsClassValueCode-FVT",
           "code": "FVT",
-          "prefLabel": "FragmentsVolumetricTotal",
+          "prefLabel": {
+            "en": "FragmentsVolumetricTotal",
+            "pt": "fração volumétrica total",
+            "es": "fracción volumétrica total"
+          },
           "definition": "Horizon layer property of Coarse fragments - volumetric total",
           "notation": "FVT",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FVT"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsClassValueCode-FVT",
+          "prefLabel_legacy": "FragmentsVolumetricTotal"
         }
       ]
     },
@@ -1101,56 +1667,86 @@
         {
           "id": "fragmentsSizeValueCode-B",
           "code": "B",
-          "prefLabel": "Boulders",
+          "prefLabel": {
+            "en": "Boulders",
+            "pt": "matacões",
+            "es": "bloques"
+          },
           "definition": "Boulders of coarse size of 20cm–60cm",
           "notation": "B",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-B"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-B",
+          "prefLabel_legacy": "Boulders"
         },
         {
           "id": "fragmentsSizeValueCode-C",
           "code": "C",
-          "prefLabel": "Coarse gravel",
+          "prefLabel": {
+            "en": "Coarse gravel",
+            "pt": "cascalho grosso",
+            "es": "grava gruesa"
+          },
           "definition": "Coarse gravel of size 2cm–6cm",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-C",
+          "prefLabel_legacy": "Coarse gravel"
         },
         {
           "id": "fragmentsSizeValueCode-F",
           "code": "F",
-          "prefLabel": "Fine gravel",
+          "prefLabel": {
+            "en": "Fine gravel",
+            "pt": "cascalho fino",
+            "es": "grava fina"
+          },
           "definition": "Fine gravel coarse size of 0.2cm–0.6cm",
           "notation": "F",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-F"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-F",
+          "prefLabel_legacy": "Fine gravel"
         },
         {
           "id": "fragmentsSizeValueCode-L",
           "code": "L",
-          "prefLabel": "Large boulders",
+          "prefLabel": {
+            "en": "Large boulders",
+            "pt": "blocos grandes",
+            "es": "bloques grandes"
+          },
           "definition": "Large boulders of coarse size 60cm–200cm",
           "notation": "L",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-L"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-L",
+          "prefLabel_legacy": "Large boulders"
         },
         {
           "id": "fragmentsSizeValueCode-M",
           "code": "M",
-          "prefLabel": "Medium gravel",
+          "prefLabel": {
+            "en": "Medium gravel",
+            "pt": "cascalho médio",
+            "es": "grava media"
+          },
           "definition": "Medium gravel coarse size of 0.6cm–2.0cm",
           "notation": "M",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-M"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-M",
+          "prefLabel_legacy": "Medium gravel"
         },
         {
           "id": "fragmentsSizeValueCode-S",
           "code": "S",
-          "prefLabel": "Stones",
+          "prefLabel": {
+            "en": "Stones",
+            "pt": "pedras",
+            "es": "piedras"
+          },
           "definition": "Stones of coarse size 6cm–20cm",
           "notation": "S",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-S"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentsSizeValueCode-S",
+          "prefLabel_legacy": "Stones"
         }
       ]
     },
@@ -1160,65 +1756,100 @@
         {
           "id": "fragmentCoverValueCode-A",
           "code": "A",
-          "prefLabel": "Abundant",
+          "prefLabel": {
+            "en": "Abundant",
+            "pt": "abundante",
+            "es": "abundante"
+          },
           "definition": "40%–80% of coarse surface fragments",
           "notation": "A",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-A"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-A",
+          "prefLabel_legacy": "Abundant"
         },
         {
           "id": "fragmentCoverValueCode-C",
           "code": "C",
-          "prefLabel": "Common",
+          "prefLabel": {
+            "en": "Common",
+            "pt": "comum",
+            "es": "común"
+          },
           "definition": "5%–15% of coarse surface fragments",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-C",
+          "prefLabel_legacy": "Common"
         },
         {
           "id": "fragmentCoverValueCode-D",
           "code": "D",
-          "prefLabel": "Dominant",
+          "prefLabel": {
+            "en": "Dominant",
+            "pt": "dominante",
+            "es": "dominante"
+          },
           "definition": "> 80% of coarse surface fragments",
           "notation": "D",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-D"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-D",
+          "prefLabel_legacy": "Dominant"
         },
         {
           "id": "fragmentCoverValueCode-F",
           "code": "F",
-          "prefLabel": "Few",
+          "prefLabel": {
+            "en": "Few",
+            "pt": "poucos",
+            "es": "pocos"
+          },
           "definition": "2%–5% of coarse surface fragments",
           "notation": "F",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-F"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-F",
+          "prefLabel_legacy": "Few"
         },
         {
           "id": "fragmentCoverValueCode-M",
           "code": "M",
-          "prefLabel": "Many",
+          "prefLabel": {
+            "en": "Many",
+            "pt": "muitos",
+            "es": "muchos"
+          },
           "definition": "15%–40% of coarse surface fragments",
           "notation": "M",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-M"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-M",
+          "prefLabel_legacy": "Many"
         },
         {
           "id": "fragmentCoverValueCode-N",
           "code": "N",
-          "prefLabel": "None",
+          "prefLabel": {
+            "en": "None",
+            "pt": "nenhum",
+            "es": "ninguno"
+          },
           "definition": "0% of coarse surface fragments",
           "notation": "N",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-N"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-N",
+          "prefLabel_legacy": "None"
         },
         {
           "id": "fragmentCoverValueCode-V",
           "code": "V",
-          "prefLabel": "Very few",
+          "prefLabel": {
+            "en": "Very few",
+            "pt": "muito poucos",
+            "es": "muy pocos"
+          },
           "definition": "0%–2% of coarse surface fragments",
           "notation": "V",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-V"
+          "iri": "http://w3id.org/glosis/model/codelists/fragmentCoverValueCode-V",
+          "prefLabel_legacy": "Very few"
         }
       ]
     },
@@ -1228,146 +1859,226 @@
         {
           "id": "majorLandFormValueCode-L",
           "code": "L",
-          "prefLabel": "level land",
+          "prefLabel": {
+            "en": "level land",
+            "pt": "terreno plano",
+            "es": "tierra llana"
+          },
           "definition": "first level of landform is level land (L)",
           "notation": "L",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-L"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-L",
+          "prefLabel_legacy": "level land"
         },
         {
           "id": "majorLandFormValueCode-LD",
           "code": "LD",
-          "prefLabel": "depression",
+          "prefLabel": {
+            "en": "depression",
+            "pt": "depressão",
+            "es": "depresión"
+          },
           "definition": "first level of landform is level land (L) and the second level is depression (LD)",
           "notation": "LD",
           "broader": "majorLandFormValueCode-L",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LD"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LD",
+          "prefLabel_legacy": "depression"
         },
         {
           "id": "majorLandFormValueCode-LL",
           "code": "LL",
-          "prefLabel": "plateau",
+          "prefLabel": {
+            "en": "plateau",
+            "pt": "planalto",
+            "es": "meseta"
+          },
           "definition": "first level of landform is level land (L) and the second level is plateau (LL)",
           "notation": "LL",
           "broader": "majorLandFormValueCode-L",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LL"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LL",
+          "prefLabel_legacy": "plateau"
         },
         {
           "id": "majorLandFormValueCode-LP",
           "code": "LP",
-          "prefLabel": "plain",
+          "prefLabel": {
+            "en": "plain",
+            "pt": "planície",
+            "es": "llanura"
+          },
           "definition": "first level of landform is level land (L) and the second level is plain (LP)",
           "notation": "LP",
           "broader": "majorLandFormValueCode-L",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LP"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LP",
+          "prefLabel_legacy": "plain"
         },
         {
           "id": "majorLandFormValueCode-LV",
           "code": "LV",
-          "prefLabel": "valley floor",
+          "prefLabel": {
+            "en": "valley floor",
+            "pt": "fundo de vale",
+            "es": "fondo de valle"
+          },
           "definition": "first level of landform is level land (L) and the second level is valley floor (LV)",
           "notation": "LV",
           "broader": "majorLandFormValueCode-L",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LV"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-LV",
+          "prefLabel_legacy": "valley floor"
         },
         {
           "id": "majorLandFormValueCode-S",
           "code": "S",
-          "prefLabel": "sloping land",
+          "prefLabel": {
+            "en": "sloping land",
+            "pt": "terreno inclinado",
+            "es": "tierra inclinada"
+          },
           "definition": "first level of landform is sloping land (S)",
           "notation": "S",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-S"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-S",
+          "prefLabel_legacy": "sloping land"
         },
         {
           "id": "majorLandFormValueCode-SE",
           "code": "SE",
-          "prefLabel": "medium-gradient escarpment zone",
+          "prefLabel": {
+            "en": "medium-gradient escarpment zone",
+            "pt": "zona de escarpa de gradiente médio",
+            "es": "zona de escarpe de gradiente medio"
+          },
           "definition": "first level of landform is sloping land (S) and the second level is medium-gradient escarpment zone (SE)",
           "notation": "SE",
           "broader": "majorLandFormValueCode-S",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SE"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SE",
+          "prefLabel_legacy": "medium-gradient escarpment zone"
         },
         {
           "id": "majorLandFormValueCode-SH",
           "code": "SH",
-          "prefLabel": "medium-gradient hill",
+          "prefLabel": {
+            "en": "medium-gradient hill",
+            "pt": "colina de gradiente médio",
+            "es": "colina de gradiente medio"
+          },
           "definition": "first level of landform is sloping land (S) and the second level is medium gradient hill (SH)",
           "notation": "SH",
           "broader": "majorLandFormValueCode-S",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SH"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SH",
+          "prefLabel_legacy": "medium-gradient hill"
         },
         {
           "id": "majorLandFormValueCode-SM",
           "code": "SM",
-          "prefLabel": "medium-gradient mountain",
+          "prefLabel": {
+            "en": "medium-gradient mountain",
+            "pt": "montanha de gradiente médio",
+            "es": "montaña de gradiente medio"
+          },
           "definition": "first level of landform is sloping land (S) and the second level is medium-gradient mountain (SM)",
           "notation": "SM",
           "broader": "majorLandFormValueCode-S",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SM"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SM",
+          "prefLabel_legacy": "medium-gradient mountain"
         },
         {
           "id": "majorLandFormValueCode-SP",
           "code": "SP",
-          "prefLabel": "dissected plain",
+          "prefLabel": {
+            "en": "dissected plain",
+            "pt": "planície dissecada",
+            "es": "llanura disectada"
+          },
           "definition": "first level of landform is sloping land (S) and the second level is dissected plain (SP)",
           "notation": "SP",
           "broader": "majorLandFormValueCode-S",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SP"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SP",
+          "prefLabel_legacy": "dissected plain"
         },
         {
           "id": "majorLandFormValueCode-SV",
           "code": "SV",
-          "prefLabel": "medium-gradient valley",
+          "prefLabel": {
+            "en": "medium-gradient valley",
+            "pt": "vale de gradiente médio",
+            "es": "valle de gradiente medio"
+          },
           "definition": "first level of landform is sloping land (S) and the second level is medium gradient valley (SV)",
           "notation": "SV",
           "broader": "majorLandFormValueCode-S",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SV"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-SV",
+          "prefLabel_legacy": "medium-gradient valley"
         },
         {
           "id": "majorLandFormValueCode-T",
           "code": "T",
-          "prefLabel": "steep land",
+          "prefLabel": {
+            "en": "steep land",
+            "pt": "terreno íngreme",
+            "es": "tierra escarpada"
+          },
           "definition": "first level of landform is steep land (T)",
           "notation": "T",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-T"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-T",
+          "prefLabel_legacy": "steep land"
         },
         {
           "id": "majorLandFormValueCode-TE",
           "code": "TE",
-          "prefLabel": "high-gradient escarpment zone",
+          "prefLabel": {
+            "en": "high-gradient escarpment zone",
+            "pt": "zona de escarpa de gradiente alto",
+            "es": "zona de escarpe de gradiente alto"
+          },
           "definition": "first level of landform is steep land (T) and the second level is high-gradient escarpment zone (TE)",
           "notation": "TE",
           "broader": "majorLandFormValueCode-T",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TE"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TE",
+          "prefLabel_legacy": "high-gradient escarpment zone"
         },
         {
           "id": "majorLandFormValueCode-TH",
           "code": "TH",
-          "prefLabel": "high-gradient hill",
+          "prefLabel": {
+            "en": "high-gradient hill",
+            "pt": "colina de gradiente alto",
+            "es": "colina de gradiente alto"
+          },
           "definition": "first level of landform is steep land (T) and the second level is high gradient hill (TH)",
           "notation": "TH",
           "broader": "majorLandFormValueCode-T",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TH"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TH",
+          "prefLabel_legacy": "high-gradient hill"
         },
         {
           "id": "majorLandFormValueCode-TM",
           "code": "TM",
-          "prefLabel": "high-gradient mountain",
+          "prefLabel": {
+            "en": "high-gradient mountain",
+            "pt": "montanha de gradiente alto",
+            "es": "montaña de gradiente alto"
+          },
           "definition": "first level of landform is steep land (T) and the second level is high-gradient mountain (TM)",
           "notation": "TM",
           "broader": "majorLandFormValueCode-T",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TM"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TM",
+          "prefLabel_legacy": "high-gradient mountain"
         },
         {
           "id": "majorLandFormValueCode-TV",
           "code": "TV",
-          "prefLabel": "high-gradient valley",
+          "prefLabel": {
+            "en": "high-gradient valley",
+            "pt": "vale de gradiente alto",
+            "es": "valle de gradiente alto"
+          },
           "definition": "first level of landform is steep land (T) and the second level is high gradient valley (TV)",
           "notation": "TV",
           "broader": "majorLandFormValueCode-T",
-          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TV"
+          "iri": "http://w3id.org/glosis/model/codelists/majorLandFormValueCode-TV",
+          "prefLabel_legacy": "high-gradient valley"
         }
       ]
     },
@@ -1377,92 +2088,142 @@
         {
           "id": "physiographyValueCode-BOdl",
           "code": "BOdl",
-          "prefLabel": "Bottom (drainage line)",
+          "prefLabel": {
+            "en": "Bottom (drainage line)",
+            "pt": "fundo (linha de drenagem)",
+            "es": "fondo (línea de drenaje)"
+          },
           "definition": "Position in flat or almost flat terrain: Bottom (drainage line)",
           "notation": "BOdl",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-BOdl"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-BOdl",
+          "prefLabel_legacy": "Bottom (drainage line)"
         },
         {
           "id": "physiographyValueCode-BOf",
           "code": "BOf",
-          "prefLabel": "Bottom (flat)",
+          "prefLabel": {
+            "en": "Bottom (flat)",
+            "pt": "fundo (plano)",
+            "es": "fondo (plano)"
+          },
           "definition": "Position in undulating to mountainous terrain: Bottom (flat)",
           "notation": "BOf",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-BOf"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-BOf",
+          "prefLabel_legacy": "Bottom (flat)"
         },
         {
           "id": "physiographyValueCode-CR",
           "code": "CR",
-          "prefLabel": "Crest (summit)",
+          "prefLabel": {
+            "en": "Crest (summit)",
+            "pt": "crista (cume)",
+            "es": "cresta (cumbre)"
+          },
           "definition": "Position in undulating to mountainous terrain: Crest (summit)",
           "notation": "CR",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-CR"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-CR",
+          "prefLabel_legacy": "Crest (summit)"
         },
         {
           "id": "physiographyValueCode-HI",
           "code": "HI",
-          "prefLabel": "Higher part (rise)",
+          "prefLabel": {
+            "en": "Higher part (rise)",
+            "pt": "parte alta (elevação)",
+            "es": "parte alta (elevación)"
+          },
           "definition": "Position in flat or almost flat terrain: Higher part (rise)",
           "notation": "HI",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-HI"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-HI",
+          "prefLabel_legacy": "Higher part (rise)"
         },
         {
           "id": "physiographyValueCode-IN",
           "code": "IN",
-          "prefLabel": "Intermediate part (talf)",
+          "prefLabel": {
+            "en": "Intermediate part (talf)",
+            "pt": "parte intermediária (talvegue)",
+            "es": "parte intermedia (talvegue)"
+          },
           "definition": "Position in flat or almost flat terrain: Intermediate part (talf)",
           "notation": "IN",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-IN"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-IN",
+          "prefLabel_legacy": "Intermediate part (talf)"
         },
         {
           "id": "physiographyValueCode-LO",
           "code": "LO",
-          "prefLabel": "Lower part (and dip)",
+          "prefLabel": {
+            "en": "Lower part (and dip)",
+            "pt": "parte baixa (e mergulho)",
+            "es": "parte baja (y buzamiento)"
+          },
           "definition": "Position in flat or almost flat terrain: Lower part (and dip)",
           "notation": "LO",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-LO"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-LO",
+          "prefLabel_legacy": "Lower part (and dip)"
         },
         {
           "id": "physiographyValueCode-LS",
           "code": "LS",
-          "prefLabel": "Lower slope (foot slope)",
+          "prefLabel": {
+            "en": "Lower slope (foot slope)",
+            "pt": "baixa encosta (sopé)",
+            "es": "ladera baja (pie de ladera)"
+          },
           "definition": "Position in undulating to mountainous terrain: Lower slope (foot slope)",
           "notation": "LS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-LS"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-LS",
+          "prefLabel_legacy": "Lower slope (foot slope)"
         },
         {
           "id": "physiographyValueCode-MS",
           "code": "MS",
-          "prefLabel": "Middle slope (back slope)",
+          "prefLabel": {
+            "en": "Middle slope (back slope)",
+            "pt": "meia encosta",
+            "es": "ladera media"
+          },
           "definition": "Position in undulating to mountainous terrain: Middle slope (back slope)",
           "notation": "MS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-MS"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-MS",
+          "prefLabel_legacy": "Middle slope (back slope)"
         },
         {
           "id": "physiographyValueCode-TS",
           "code": "TS",
-          "prefLabel": "Toe slope",
+          "prefLabel": {
+            "en": "Toe slope",
+            "pt": "sopé",
+            "es": "pie de ladera"
+          },
           "definition": "Position in undulating to mountainous terrain: Toe slope",
           "notation": "TS",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-TS"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-TS",
+          "prefLabel_legacy": "Toe slope"
         },
         {
           "id": "physiographyValueCode-UP",
           "code": "UP",
-          "prefLabel": "Upper slope (shoulder)",
+          "prefLabel": {
+            "en": "Upper slope (shoulder)",
+            "pt": "alta encosta (ombro)",
+            "es": "ladera alta (hombro)"
+          },
           "definition": "Position in undulating to mountainous terrain: Upper slope (shoulder)",
           "notation": "UP",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-UP"
+          "iri": "http://w3id.org/glosis/model/codelists/physiographyValueCode-UP",
+          "prefLabel_legacy": "Upper slope (shoulder)"
         }
       ]
     },
@@ -1472,47 +2233,72 @@
         {
           "id": "slopeFormValueCode-C",
           "code": "C",
-          "prefLabel": "concave",
+          "prefLabel": {
+            "en": "concave",
+            "pt": "côncava",
+            "es": "cóncava"
+          },
           "definition": "concave slope form",
           "notation": "C",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-C"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-C",
+          "prefLabel_legacy": "concave"
         },
         {
           "id": "slopeFormValueCode-S",
           "code": "S",
-          "prefLabel": "straight",
+          "prefLabel": {
+            "en": "straight",
+            "pt": "retilínea",
+            "es": "recta"
+          },
           "definition": "straight slope form",
           "notation": "S",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-S"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-S",
+          "prefLabel_legacy": "straight"
         },
         {
           "id": "slopeFormValueCode-T",
           "code": "T",
-          "prefLabel": "terraced",
+          "prefLabel": {
+            "en": "terraced",
+            "pt": "em terraços",
+            "es": "aterrazada"
+          },
           "definition": "terraced slope form",
           "notation": "T",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-T"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-T",
+          "prefLabel_legacy": "terraced"
         },
         {
           "id": "slopeFormValueCode-V",
           "code": "V",
-          "prefLabel": "convex",
+          "prefLabel": {
+            "en": "convex",
+            "pt": "convexa",
+            "es": "convexa"
+          },
           "definition": "convex slope form",
           "notation": "V",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-V"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-V",
+          "prefLabel_legacy": "convex"
         },
         {
           "id": "slopeFormValueCode-X",
           "code": "X",
-          "prefLabel": "complex (irregular)",
+          "prefLabel": {
+            "en": "complex (irregular)",
+            "pt": "complexa (irregular)",
+            "es": "compleja (irregular)"
+          },
           "definition": "complex (irregular) slope form",
           "notation": "X",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-X"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeFormValueCode-X",
+          "prefLabel_legacy": "complex (irregular)"
         }
       ]
     },
@@ -1522,92 +2308,142 @@
         {
           "id": "slopeGradientClassValueCode-1",
           "code": "1",
-          "prefLabel": "Flat",
+          "prefLabel": {
+            "en": "Flat",
+            "pt": "plano",
+            "es": "plano"
+          },
           "definition": "0–0.2% of slope gradient",
           "notation": "1",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-1"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-1",
+          "prefLabel_legacy": "Flat"
         },
         {
           "id": "slopeGradientClassValueCode-10",
           "code": "10",
-          "prefLabel": "Very steep",
+          "prefLabel": {
+            "en": "Very steep",
+            "pt": "muito íngreme",
+            "es": "muy escarpada"
+          },
           "definition": "> 60% of slope gradient",
           "notation": "10",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-10"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-10",
+          "prefLabel_legacy": "Very steep"
         },
         {
           "id": "slopeGradientClassValueCode-2",
           "code": "2",
-          "prefLabel": "Level",
+          "prefLabel": {
+            "en": "Level",
+            "pt": "plano",
+            "es": "llano"
+          },
           "definition": "0.2–0.5 % of slope gradient",
           "notation": "2",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-2"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-2",
+          "prefLabel_legacy": "Level"
         },
         {
           "id": "slopeGradientClassValueCode-3",
           "code": "3",
-          "prefLabel": "Nearly level",
+          "prefLabel": {
+            "en": "Nearly level",
+            "pt": "quase plano",
+            "es": "casi llano"
+          },
           "definition": "0.5–1.0 % of slope gradient",
           "notation": "3",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-3"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-3",
+          "prefLabel_legacy": "Nearly level"
         },
         {
           "id": "slopeGradientClassValueCode-4",
           "code": "4",
-          "prefLabel": "Very gently sloping",
+          "prefLabel": {
+            "en": "Very gently sloping",
+            "pt": "muito suavemente inclinado",
+            "es": "muy suavemente inclinada"
+          },
           "definition": "1.0–2.0 % of slope gradient",
           "notation": "4",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-4"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-4",
+          "prefLabel_legacy": "Very gently sloping"
         },
         {
           "id": "slopeGradientClassValueCode-5",
           "code": "5",
-          "prefLabel": "Gently sloping",
+          "prefLabel": {
+            "en": "Gently sloping",
+            "pt": "suavemente inclinado",
+            "es": "suavemente inclinada"
+          },
           "definition": "2–5% of slope gradient",
           "notation": "5",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-5"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-5",
+          "prefLabel_legacy": "Gently sloping"
         },
         {
           "id": "slopeGradientClassValueCode-6",
           "code": "6",
-          "prefLabel": "Sloping",
+          "prefLabel": {
+            "en": "Sloping",
+            "pt": "inclinado",
+            "es": "inclinada"
+          },
           "definition": "5–10 % of slope gradient",
           "notation": "6",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-6"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-6",
+          "prefLabel_legacy": "Sloping"
         },
         {
           "id": "slopeGradientClassValueCode-7",
           "code": "7",
-          "prefLabel": "Strongly sloping",
+          "prefLabel": {
+            "en": "Strongly sloping",
+            "pt": "fortemente inclinado",
+            "es": "fuertemente inclinada"
+          },
           "definition": "10–15% of slope gradient",
           "notation": "7",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-7"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-7",
+          "prefLabel_legacy": "Strongly sloping"
         },
         {
           "id": "slopeGradientClassValueCode-8",
           "code": "8",
-          "prefLabel": "Moderately steep",
+          "prefLabel": {
+            "en": "Moderately steep",
+            "pt": "moderadamente íngreme",
+            "es": "moderadamente escarpada"
+          },
           "definition": "15–30 % of slope gradient",
           "notation": "8",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-8"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-8",
+          "prefLabel_legacy": "Moderately steep"
         },
         {
           "id": "slopeGradientClassValueCode-9",
           "code": "9",
-          "prefLabel": "Steep",
+          "prefLabel": {
+            "en": "Steep",
+            "pt": "íngreme",
+            "es": "escarpada"
+          },
           "definition": "30–60 % of slope gradient",
           "notation": "9",
           "broader": null,
-          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-9"
+          "iri": "http://w3id.org/glosis/model/codelists/slopeGradientClassValueCode-9",
+          "prefLabel_legacy": "Steep"
         }
       ]
     }
