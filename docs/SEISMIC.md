@@ -1,6 +1,6 @@
 # Seismic Module — P2.8
 
-Geolytics Dictionary P2.8 adds formal coverage of the seismic geophysics lifecycle across three sub-domains: **Acquisition**, **Processing** and **Inversion / Attributes**. The module is structured as three JSON data files that are merged into `data/full.json` and served individually as `api/v1/seismic.json`.
+GeoBrain P2.8 adds formal coverage of the seismic geophysics lifecycle across three sub-domains: **Acquisition**, **Processing** and **Inversion / Attributes**. The module is structured as three JSON data files that are merged into `data/full.json` and served individually as `api/v1/seismic.json`.
 
 ---
 

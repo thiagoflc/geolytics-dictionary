@@ -4,7 +4,7 @@ import pytest
 
 pytest.importorskip("networkx", reason="networkx required for graph tests")
 
-from geolytics_dictionary import KnowledgeGraph, Entity
+from geobrain import KnowledgeGraph, Entity
 
 
 @pytest.fixture(scope="module")

@@ -1,4 +1,4 @@
-# SHACL Formal Validation — Geolytics Dictionary
+# SHACL Formal Validation — GeoBrain
 
 ## O que e SHACL
 
@@ -71,7 +71,7 @@ O validador Python emite um relatorio em PT-BR. Exemplo de saida conforme:
 
 ```
 ======================================================================
-Validador SHACL — Geolytics Dictionary
+Validador SHACL — GeoBrain
 ======================================================================
   Dados   : data/geolytics.ttl
   Shapes  : data/geolytics-shapes.ttl

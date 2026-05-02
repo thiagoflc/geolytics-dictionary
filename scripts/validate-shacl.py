@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-validate-shacl.py — Valida data/geolytics.ttl contra data/geolytics-shapes.ttl
+validate-shacl.py — Valida data/geolytics.ttl contra data/geobrain-shapes.ttl
 usando pyshacl.
 
 Saida: relatorio legivel em PT-BR no stdout.
@@ -22,7 +22,7 @@ from pathlib import Path
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Validador SHACL do Geolytics Dictionary (PT-BR)"
+        description="Validador SHACL do GeoBrain (PT-BR)"
     )
     parser.add_argument(
         "--data",
@@ -32,12 +32,12 @@ def main() -> int:
     parser.add_argument(
         "--shapes",
         default=None,
-        help="Caminho para o arquivo de shapes (padrao: data/geolytics-shapes.ttl)",
+        help="Caminho para o arquivo de shapes (padrao: data/geobrain-shapes.ttl)",
     )
     parser.add_argument(
         "--ontology",
         default=None,
-        help="Caminho para o vocabulario OWL de apoio (padrao: data/geolytics-vocab.ttl)",
+        help="Caminho para o vocabulario OWL de apoio (padrao: data/geobrain-vocab.ttl)",
     )
     parser.add_argument(
         "--verbose",
@@ -57,12 +57,12 @@ def main() -> int:
 
     data_path = Path(args.data) if args.data else root / "data" / "geolytics.ttl"
     shapes_path = (
-        Path(args.shapes) if args.shapes else root / "data" / "geolytics-shapes.ttl"
+        Path(args.shapes) if args.shapes else root / "data" / "geobrain-shapes.ttl"
     )
     vocab_path = (
         Path(args.ontology)
         if args.ontology
-        else root / "data" / "geolytics-vocab.ttl"
+        else root / "data" / "geobrain-vocab.ttl"
     )
 
     # Check files exist
@@ -92,7 +92,7 @@ def main() -> int:
 
     # Load data graph
     print("=" * 70)
-    print("Validador SHACL — Geolytics Dictionary")
+    print("Validador SHACL — GeoBrain")
     print("=" * 70)
     print(f"  Dados   : {data_path}")
     print(f"  Shapes  : {shapes_path}")
@@ -295,7 +295,7 @@ def _print_report(conforms: bool, violations: list[dict], verbose: bool, raw_tex
         print("  sao 'achados de dados' — indicam que o TTL usa essas entidades como")
         print("  schema (sem instancias de geo:Poco, geo:Bloco etc.). Para validar")
         print("  instancias, popule o grafo com dados de instancia conforme o")
-        print("  vocabulario em data/geolytics-vocab.ttl.")
+        print("  vocabulario em data/geobrain-vocab.ttl.")
 
     if verbose and raw_text:
         print()

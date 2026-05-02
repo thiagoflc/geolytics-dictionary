@@ -89,7 +89,7 @@ async function runWithNodeLib(SHACLValidator, dataFile, shapesFile, vocabFile) {
   }
 
   console.log('='.repeat(70));
-  console.log('Validador SHACL — Geolytics Dictionary (Node.js / rdf-validate-shacl)');
+  console.log('Validador SHACL — GeoBrain (Node.js / rdf-validate-shacl)');
   console.log('='.repeat(70));
   console.log(`  Dados   : ${dataFile}`);
   console.log(`  Shapes  : ${shapesFile}`);

@@ -1,12 +1,12 @@
 services:
   neo4j:
     image: neo4j:5-community
-    container_name: geolytics-neo4j
+    container_name: geobrain-neo4j
     ports:
       - "7474:7474"
       - "7687:7687"
     environment:
-      NEO4J_AUTH: neo4j/geolytics123
+      NEO4J_AUTH: neo4j/geobrain123
       NEO4J_PLUGINS: '["apoc"]'
       NEO4J_dbms_security_procedures_unrestricted: apoc.*
       NEO4J_server_memory_heap_initial__size: 512m
@@ -23,7 +23,7 @@ services:
 
   loader:
     image: neo4j:5-community
-    container_name: geolytics-loader
+    container_name: geobrain-loader
     depends_on:
       neo4j:
         condition: service_healthy
@@ -33,9 +33,9 @@ services:
     command:
       - |
         echo "Loading nodes..."
-        cypher-shell -a bolt://neo4j:7687 -u neo4j -p geolytics123 --file /import/nodes.cypher
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p geobrain123 --file /import/nodes.cypher
         echo "Loading relationships..."
-        cypher-shell -a bolt://neo4j:7687 -u neo4j -p geolytics123 --file /import/relationships.cypher
+        cypher-shell -a bolt://neo4j:7687 -u neo4j -p geobrain123 --file /import/relationships.cypher
         echo "Done."
     restart: "no"
 

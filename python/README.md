@@ -1,6 +1,6 @@
-# geolytics-dictionary
+# geobrain
 
-Python SDK for the [Geolytics O&G Domain Dictionary](https://github.com/thiagoflc/geolytics-dictionary) — a bilingual (Portuguese/English) semantic knowledge base for petroleum exploration and production.
+Python SDK for the [Geolytics O&G Domain Dictionary](https://github.com/thiagoflc/geobrain) — a bilingual (Portuguese/English) semantic knowledge base for petroleum exploration and production.
 
 ## Features
 
@@ -15,20 +15,20 @@ Python SDK for the [Geolytics O&G Domain Dictionary](https://github.com/thiagofl
 ## Installation
 
 ```bash
-pip install geolytics-dictionary
+pip install geobrain
 ```
 
 With optional extras:
 
 ```bash
 # Knowledge graph support (requires networkx)
-pip install "geolytics-dictionary[graph]"
+pip install "geobrain[graph]"
 
 # BM25 RAG retrieval (requires rank-bm25)
-pip install "geolytics-dictionary[rag]"
+pip install "geobrain[rag]"
 
 # All extras
-pip install "geolytics-dictionary[graph,rag]"
+pip install "geobrain[graph,rag]"
 ```
 
 ## Quickstart
@@ -36,7 +36,7 @@ pip install "geolytics-dictionary[graph,rag]"
 ### Dictionary
 
 ```python
-from geolytics_dictionary import Dictionary
+from geobrain import Dictionary
 
 d = Dictionary()
 
@@ -57,7 +57,7 @@ for layer in layers:
 ### Knowledge Graph
 
 ```python
-from geolytics_dictionary import KnowledgeGraph
+from geobrain import KnowledgeGraph
 
 kg = KnowledgeGraph.from_local()
 
@@ -80,7 +80,7 @@ cypher = kg.cypher_export()
 ### Semantic Validator
 
 ```python
-from geolytics_dictionary import Validator
+from geobrain import Validator
 
 v = Validator()
 
@@ -105,7 +105,7 @@ print(report.valid)  # True
 ### SWEET Expander
 
 ```python
-from geolytics_dictionary import SweetExpander
+from geobrain import SweetExpander
 
 s = SweetExpander()
 
@@ -137,7 +137,7 @@ echo "Reservas 2P certificadas" | geolytics-validate -
 
 ```python
 from langchain.tools import Tool
-from geolytics_dictionary import Validator, Dictionary
+from geobrain import Validator, Dictionary
 
 v = Validator()
 d = Dictionary()
@@ -159,20 +159,20 @@ lookup_tool = Tool(
 
 ```python
 from llama_index.core.tools import FunctionTool
-from geolytics_dictionary import Dictionary
+from geobrain import Dictionary
 
 d = Dictionary()
 
 dictionary_tool = FunctionTool.from_defaults(
     fn=lambda query: [t.definicao for t in d.lookup(query)],
-    name="geolytics_dictionary",
+    name="geobrain",
     description="Returns Portuguese/English definitions for O&G terms.",
 )
 ```
 
 ## Bundled Data
 
-The package ships with data bundled in `geolytics_dictionary/_data/`:
+The package ships with data bundled in `geobrain/_data/`:
 
 | File | Description |
 |------|-------------|
@@ -202,4 +202,4 @@ The `Validator` implements deterministic rules with parity to `scripts/semantic-
 
 ## License
 
-MIT. See [LICENSE](https://github.com/thiagoflc/geolytics-dictionary/blob/main/LICENSE).
+MIT. See [LICENSE](https://github.com/thiagoflc/geobrain/blob/main/LICENSE).

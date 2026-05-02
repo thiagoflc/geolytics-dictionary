@@ -1,5 +1,5 @@
 """
-metrics.py — Evaluation metrics for the geolytics-dictionary eval harness.
+metrics.py — Evaluation metrics for the geobrain eval harness.
 
 All functions operate on plain Python dicts/lists so they can be called
 from run.py without additional dependencies.

@@ -174,7 +174,7 @@ let doc = `# Referencia de Classes e Propriedades — Ontologia Geolytics
 > Nao edite manualmente — execute \`node scripts/build-ontology-doc.js\` para regenerar.
 
 Este documento lista todas as classes, propriedades, relacoes e instancias formais
-dos modulos de ontologia do Geolytics Dictionary, extraidas diretamente dos arquivos JSON canonicos.
+dos modulos de ontologia do GeoBrain, extraidas diretamente dos arquivos JSON canonicos.
 
 ---
 

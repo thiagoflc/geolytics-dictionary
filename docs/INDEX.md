@@ -1,4 +1,4 @@
-# Indice de documentacao — Geolytics Dictionary
+# Indice de documentacao — GeoBrain
 
 Mapa de navegacao para toda a documentacao do projeto.
 
@@ -57,7 +57,7 @@ O diretorio `queries/` contem 6 consultas Cypher comentadas em PT-BR:
 ## Guias de inicio rapido
 
 - **Carregar o dicionario em Python**: ver raiz `README.md` → secao "Como usar os dados"
-- **Instalar o pacote Python**: `pip install geolytics-dictionary` — ver `python/README.md`
+- **Instalar o pacote Python**: `pip install geobrain` — ver `python/README.md`
 - **Subir o grafo em Neo4j**: `node scripts/build-neo4j.js && docker compose up`
 - **Instalar o MCP Server**: ver `mcp/geolytics-mcp/README.md`
 - **Rodar o agente LangGraph**: `cd examples/langgraph-agent && python run_demo.py`

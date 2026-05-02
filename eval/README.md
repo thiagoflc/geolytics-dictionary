@@ -1,6 +1,6 @@
-# Eval Harness — geolytics-dictionary
+# Eval Harness — geobrain
 
-Offline evaluation harness for the geolytics-dictionary knowledge-graph RAG system.
+Offline evaluation harness for the geobrain knowledge-graph RAG system.
 Used to measure and compare retrieval quality across runner configurations.
 
 ---
@@ -151,7 +151,7 @@ Guidelines:
 
 This harness was developed as part of:
 
-> Lopes, T. F. (2026). *Geolytics Dictionary: A Knowledge-Graph-Augmented
+> Lopes, T. F. (2026). *GeoBrain: A Knowledge-Graph-Augmented
 > Retrieval System for Brazilian Petroleum Regulation Terminology*.
 > Master's thesis, Universidade X.
 

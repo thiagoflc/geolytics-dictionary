@@ -1,4 +1,4 @@
-# Arquitetura do Geolytics Dictionary
+# Arquitetura do GeoBrain
 
 Documentacao da arquitetura semantica, pipeline ETL e topologia do agente GraphRAG.
 
@@ -6,7 +6,7 @@ Documentacao da arquitetura semantica, pipeline ETL e topologia do agente GraphR
 
 ## Visao geral das camadas semanticas
 
-O Geolytics Dictionary organiza o conhecimento de E&P em 7+ camadas independentes e complementares. Cada termo carrega o campo `geocoverage` indicando em quais camadas possui cobertura formal.
+O GeoBrain organiza o conhecimento de E&P em 7+ camadas independentes e complementares. Cada termo carrega o campo `geocoverage` indicando em quais camadas possui cobertura formal.
 
 ```mermaid
 graph TD
@@ -93,7 +93,7 @@ graph TD
     KG --> MCP["MCP Server<br/>(stdio transport)<br/>Claude Desktop / Cursor / Claude Code"]
     KG --> LG["LangGraph Agent<br/>(Router-Decomposer-GraphQuery-RAG-Validator-Synthesizer)"]
     KG --> NB["Notebooks Jupyter<br/>(notebooks/01-04)"]
-    KG --> PY["Python Package<br/>geolytics-dictionary<br/>(Dictionary, KnowledgeGraph, Validator, SweetExpander)"]
+    KG --> PY["Python Package<br/>geobrain<br/>(Dictionary, KnowledgeGraph, Validator, SweetExpander)"]
     KG --> SHACL["SHACL Validator<br/>(pyshacl)<br/>22 NodeShapes"]
     KG --> T2C["Text2Cypher / Text2SPARQL<br/>(ai/text2cypher-fewshot.jsonl<br/>ai/text2sparql-fewshot.jsonl)"]
 

@@ -2,7 +2,7 @@
 
 import pytest
 
-from geolytics_dictionary import SweetExpander, ExpansionResult, Alignment
+from geobrain import SweetExpander, ExpansionResult, Alignment
 
 
 @pytest.fixture(scope="module")

@@ -170,7 +170,7 @@ function buildManifest() {
     meta: {
       version: '1.0.0',
       generated: new Date().toISOString(),
-      description: 'Semantic validator rules manifest — Geolytics Dictionary',
+      description: 'Semantic validator rules manifest — GeoBrain',
       total_rules: RULES.length,
       python_validator_mirror: 'examples/langgraph-agent/nodes/validator.py',
     },

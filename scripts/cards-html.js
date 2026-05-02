@@ -636,21 +636,21 @@ export function buildCardsHtml(graph) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Geolytics Dictionary — Entity Cards</title>
-  <meta name="description" content="Cartões navegáveis das entidades do Geolytics Dictionary, no estilo da documentação OWL gerada pelo pyLODE.">
+  <title>GeoBrain — Entity Cards</title>
+  <meta name="description" content="Cartões navegáveis das entidades do GeoBrain, no estilo da documentação OWL gerada pelo pyLODE.">
   <style>${CSS}</style>
 </head>
 <body>
   <header class="site-header">
-    <h1>Geolytics Dictionary <span style="color:var(--fg-muted);font-weight:400">— Entity Cards</span></h1>
+    <h1>GeoBrain <span style="color:var(--fg-muted);font-weight:400">— Entity Cards</span></h1>
     <div class="search-wrap">
       <input id="search-input" type="search" placeholder="Buscar por rótulo, sinônimo ou ID…" autocomplete="off" spellcheck="false">
     </div>
     <nav class="ext-links" aria-label="Visualizações">
       <a href="index.html" title="Visão de grafo D3 force-directed">Grafo D3</a>
       <a href="gso-cards.html" title="Cards das classes GSO/Loop3D (camada 7)">GSO L7</a>
-      <a href="data/geolytics.ttl" title="Ontologia em Turtle">TTL</a>
-      <a href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geolytics-dictionary/data/geolytics.ttl" target="_blank" rel="noopener" title="Visualizar OWL no WebVOWL">WebVOWL</a>
+      <a href="data/geobrain.ttl" title="Ontologia em Turtle">TTL</a>
+      <a href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geobrain/data/geobrain.ttl" target="_blank" rel="noopener" title="Visualizar OWL no WebVOWL">WebVOWL</a>
     </nav>
   </header>
 
@@ -812,13 +812,13 @@ export function buildGsoCardsHtml(modules) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Geolytics Dictionary — GSO (Layer 7) Cards</title>
-  <meta name="description" content="Cartões navegáveis das classes da Geoscience Ontology (Loop3D, Brodaric & Richard 2021), camada 7 do Geolytics Dictionary.">
+  <title>GeoBrain — GSO (Layer 7) Cards</title>
+  <meta name="description" content="Cartões navegáveis das classes da Geoscience Ontology (Loop3D, Brodaric & Richard 2021), camada 7 do GeoBrain.">
   <style>${CSS}</style>
 </head>
 <body>
   <header class="site-header">
-    <h1>Geolytics Dictionary <span style="color:var(--fg-muted);font-weight:400">— GSO L7 Cards</span></h1>
+    <h1>GeoBrain <span style="color:var(--fg-muted);font-weight:400">— GSO L7 Cards</span></h1>
     <div class="search-wrap">
       <input id="search-input" type="search" placeholder="Buscar por classe, label EN ou CURIE…" autocomplete="off" spellcheck="false">
     </div>

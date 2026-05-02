@@ -393,7 +393,7 @@ export const OSDU_EXTRA_NODES = [
   },
 ];
 
-/* Edges connecting new nodes to the existing geolytics-dictionary graph
+/* Edges connecting new nodes to the existing geobrain graph
    where natural relations exist. Source/target use hyphen-case IDs. */
 export const OSDU_EXTRA_EDGES = [
   // Activity / program structures

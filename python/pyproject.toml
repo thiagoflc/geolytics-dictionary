@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "geolytics-dictionary"
+name = "geobrain"
 dynamic = ["version"]
-description = "Python SDK for the Geolytics O&G domain dictionary — terms, ontology graph, semantic validator, and SWEET expander."
+description = "Python SDK for GeoBrain — O&G domain dictionary — terms, ontology graph, semantic validator, and SWEET expander."
 readme = "README.md"
 license = { text = "MIT" }
 requires-python = ">=3.10"
@@ -46,25 +46,25 @@ dev = [
 ]
 
 [project.scripts]
-geolytics-validate = "geolytics_dictionary.cli:main"
+geobrain-validate = "geobrain.cli:main"
 
 [project.urls]
-Homepage = "https://github.com/thiagoflc/geolytics-dictionary"
-Repository = "https://github.com/thiagoflc/geolytics-dictionary"
-Issues = "https://github.com/thiagoflc/geolytics-dictionary/issues"
+Homepage = "https://github.com/thiagoflc/geobrain"
+Repository = "https://github.com/thiagoflc/geobrain"
+Issues = "https://github.com/thiagoflc/geobrain/issues"
 
 [tool.hatch.version]
-path = "geolytics_dictionary/_version.py"
+path = "geobrain/_version.py"
 
 [tool.hatch.build.targets.wheel]
-packages = ["geolytics_dictionary"]
+packages = ["geobrain"]
 
 [tool.hatch.build.targets.wheel.force-include]
-"geolytics_dictionary/_data" = "geolytics_dictionary/_data"
+"geobrain/_data" = "geobrain/_data"
 
 [tool.hatch.build.targets.sdist]
 include = [
-  "/geolytics_dictionary",
+  "/geobrain",
   "/MANIFEST.in",
   "/README.md",
 ]

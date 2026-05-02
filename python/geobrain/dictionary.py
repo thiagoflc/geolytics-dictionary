@@ -114,7 +114,7 @@ def _layer_from_dict(d: dict[str, Any]) -> Layer:
 
 
 class Dictionary:
-    """High-level access to the Geolytics Dictionary data.
+    """High-level access to the GeoBrain data.
 
     Loads bundled data once on construction. All lookups are case-insensitive
     and accent-insensitive.

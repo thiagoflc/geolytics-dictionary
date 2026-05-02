@@ -2,7 +2,7 @@
 
 import pytest
 
-from geolytics_dictionary import Dictionary, Term, Acronym, Layer
+from geobrain import Dictionary, Term, Acronym, Layer
 
 
 @pytest.fixture(scope="module")

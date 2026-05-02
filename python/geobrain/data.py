@@ -10,7 +10,7 @@ from typing import Any
 _DATA_DIR = Path(__file__).parent / "_data"
 
 # Remote base — GitHub Pages for this repo
-_REMOTE_BASE = "https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data"
+_REMOTE_BASE = "https://raw.githubusercontent.com/thiagoflc/geobrain/main/data"
 
 
 def _local_path(filename: str) -> Path:

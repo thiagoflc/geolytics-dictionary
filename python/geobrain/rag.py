@@ -2,7 +2,7 @@
 
 Requires the ``rank-bm25`` optional dependency:
 
-    pip install geolytics-dictionary[rag]
+    pip install geobrain[rag]
 """
 
 from __future__ import annotations
@@ -49,11 +49,11 @@ class BM25Retriever:
 
     Requires ``rank-bm25``:
 
-        pip install geolytics-dictionary[rag]
+        pip install geobrain[rag]
 
     Usage::
 
-        from geolytics_dictionary.rag import BM25Retriever
+        from geobrain.rag import BM25Retriever
         r = BM25Retriever()
         results = r.search("reservatorio carbonatico pre-sal", top_k=5)
         for hit in results:
@@ -67,7 +67,7 @@ class BM25Retriever:
         except ImportError as exc:
             raise ImportError(
                 "rank-bm25 is required for BM25Retriever. "
-                "Install it with: pip install geolytics-dictionary[rag]"
+                "Install it with: pip install geobrain[rag]"
             ) from exc
 
     @cached_property

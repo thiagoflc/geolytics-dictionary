@@ -75,7 +75,19 @@
         "joins_to": "entity-graph.json#bacia-sedimentar",
         "join_alias": "ANP_basin_name",
         "evidence_status": "partial",
-        "normalization_gap": "OGEOMEC's `Bacia` values are all-caps short forms ('SANTOS', 'CAMPOS MAR', 'POTIGUAR MAR') that do NOT match entity-graph#bacia-sedimentar canonical labels verbatim. A normalization map (OGEOMEC short form -> bacia-sedimentar canonical id) is required before joins are reliable. Not enumerated here — flagged as TODO for the data steward."
+        "normalization_gap": "OGEOMEC's `Bacia` values are all-caps short forms ('SANTOS', 'CAMPOS MAR', 'POTIGUAR MAR') that do NOT match entity-graph#bacia-sedimentar canonical labels verbatim. A normalization map (OGEOMEC short form -> bacia-sedimentar canonical id) is required before joins are reliable. Not enumerated here — flagged as TODO for the data steward. Normalization map added (partial coverage).",
+        "normalization_map": {
+          "SANTOS": "bacia-santos",
+          "CAMPOS MAR": "bacia-campos",
+          "POTIGUAR MAR": "bacia-potiguar",
+          "ESPIRITO SANTO MAR": "bacia-espirito-santo",
+          "CAMAMU ALMADA": "bacia-camamu-almada",
+          "RECONCAVO": "bacia-reconcavo",
+          "SOLIMOES": "bacia-solimoes",
+          "CAMPOS": "bacia-campos"
+        },
+        "normalization_status": "partial",
+        "normalization_note": "Map covers most frequent OGEOMEC basins. Additional short forms may exist — data steward should verify against full OGEOMEC.Bacia distinct values."
       }
     }
   },
@@ -234,9 +246,9 @@
         "PE-2EXP-00059"
       ],
       "evidence_gaps": [
-        "Pipeline de ingestão DRX → AIDA/Databricks não documentado",
-        "Padronização de mnemônicos DRX no SIGEO não documentada na ontologia",
-        "Integração ao pipeline text-to-SQL do GeoDO ausente",
+        "Pipeline de ingestão DRX → AIDA/Databricks não documentado — caminho esperado: SIGEO → BDIEP → AIDA (Delta Lake). Status: gap aberto, sem referência SINPEP.",
+        "Padronização de mnemônicos DRX no SIGEO não documentada na ontologia — lista canônica de minerais (QTZ, CAL, DOL, etc.) não publicada em PE-2EXP.",
+        "Integração ao pipeline text-to-SQL do GeoDO ausente — DRX não aparece nos esquemas de tabela documentados no GeoDO.",
         "DRX não tem 'consumido por' explicitamente mapeado — provavelmente alimenta Avaliação de Formações e Consolidação de Dados (Perfil Composto), por analogia com FRX"
       ],
       "context_fields": [
@@ -709,7 +721,7 @@
       "id": "OG013c",
       "name": "DNAGeoquimico",
       "name_pt": "DNA Geoquimico",
-      "superclass": "GeologicalOperationsDocument",
+      "superclass": "ServiceLine",
       "description": "Geochemical signature of a stratigraphic formation built from FRX elemental ratios across multiple wells. Used as a fingerprint for stratigraphic correlation and provenance analysis.",
       "description_pt": "Assinatura geoquimica de uma formacao construida a partir de razoes elementares de FRX em multiplos pocos. Usado como impressao digital para correlacao estratigrafica e analise de proveniencia.",
       "format": "derived",
@@ -729,7 +741,11 @@
       "description": "Extraction of cylindrical rock cores for detailed laboratory analysis.",
       "description_pt": "Extração de cilindros de rocha para análise laboratorial detalhada.",
       "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/core",
-      "evidence_status": "unverified",
+      "evidence_status": "partial",
+      "evidence_refs": ["PE-2EXP-00059", "PE-2EXP-00061", "GeoSciML CGI specimentype/core"],
+      "osdu_kind": "opendes:osdu:master-data--RockSample:1.0.0",
+      "witsml_object": "objectGroup (core)",
+      "primary_system": "BDIEP / SIGEO",
       "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "SidewallSampling": {

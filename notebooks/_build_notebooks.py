@@ -72,7 +72,7 @@ def save(name: str, notebook: dict) -> None:
 NB1_CELLS = [
     md(
         "# 01 — Exploracao do Grafo de Entidades com NetworkX\n\n"
-        "Neste notebook exploramos o grafo de entidades do **Geolytics Dictionary** "
+        "Neste notebook exploramos o grafo de entidades do **GeoBrain** "
         "usando a biblioteca [NetworkX](https://networkx.org/). O grafo contem "
         "107 nos e 127 arestas representando conceitos do dominio de "
         "Exploracao & Producao (E&P) de petroleo e gas no Brasil.\n\n"
@@ -115,7 +115,7 @@ NB1_CELLS = [
     code(
         "# URL publica via GitHub Pages\n"
         "GRAPH_URL = (\n"
-        "    'https://thiagoflc.github.io/geolytics-dictionary/data/entity-graph.json'\n"
+        "    'https://thiagoflc.github.io/geobrain/data/entity-graph.json'\n"
         ")\n\n"
         "# Fallback: arquivo local (util se estiver offline)\n"
         "import os\n"
@@ -352,7 +352,7 @@ NB2_CELLS = [
     md(
         "# 02 — RAG com Validacao Semantica\n\n"
         "Este notebook demonstra um pipeline de **Retrieval-Augmented Generation (RAG)** "
-        "usando o `rag-corpus.jsonl` do Geolytics Dictionary. Para executar sem "
+        "usando o `rag-corpus.jsonl` do GeoBrain. Para executar sem "
         "nenhuma chave de API usamos `rank_bm25` como mecanismo de recuperacao "
         "esparsa (BM25). Em producao substituiria pelo indice vetorial de sua escolha "
         "(FAISS, Chroma, Pinecone etc.).\n\n"
@@ -392,7 +392,7 @@ NB2_CELLS = [
     md("## 2. Carregamento do corpus"),
     code(
         "CORPUS_URL = (\n"
-        "    'https://thiagoflc.github.io/geolytics-dictionary/ai/rag-corpus.jsonl'\n"
+        "    'https://thiagoflc.github.io/geobrain/ai/rag-corpus.jsonl'\n"
         ")\n"
         "LOCAL_CORPUS = os.path.join(\n"
         "    os.path.dirname(os.getcwd()), 'ai', 'rag-corpus.jsonl'\n"
@@ -880,7 +880,7 @@ NB4_CELLS = [
     md(
         "# 04 — Geomecanica QA: Modelo de Terra Mecanico (MEM)\n\n"
         "Este notebook e um estudo de caso aprofundado no modulo de "
-        "**Geomecanica** do Geolytics Dictionary. Cobrimos:\n\n"
+        "**Geomecanica** do GeoBrain. Cobrimos:\n\n"
         "- Consulta a propriedades elasticas necessarias para um MEM 1D.\n"
         "- Visualizacao do **Circulo de Mohr** para um estado de tensao sintetico.\n"
         "- Validacao SHACL da restricao `StressTensorShape`.\n"
@@ -911,7 +911,7 @@ NB4_CELLS = [
         "import matplotlib.pyplot as plt\n"
         "import matplotlib.patches as mpatches\n"
         "import numpy as np\n\n"
-        "BASE_URL = 'https://thiagoflc.github.io/geolytics-dictionary'\n"
+        "BASE_URL = 'https://thiagoflc.github.io/geobrain'\n"
         "DATA_DIR = os.path.join(os.path.dirname(os.getcwd()), 'data')\n\n"
         "def fetch_json(url: str, local_path: str) -> dict:\n"
         "    \"\"\"Baixa JSON via HTTP com fallback para arquivo local.\"\"\"\n"

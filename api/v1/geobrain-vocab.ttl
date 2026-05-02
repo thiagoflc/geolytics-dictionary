@@ -1,5 +1,5 @@
-# geolytics-vocab.ttl — Minimal explicit OWL vocabulary
-# Declares the canonical classes and properties used by geolytics-shapes.ttl
+# geobrain-vocab.ttl — Minimal explicit OWL vocabulary
+# Declares the canonical classes and properties used by geobrain-shapes.ttl
 # so the SHACL file is self-contained for tooling like pyshacl.
 #
 # Includes:
@@ -24,9 +24,9 @@
 
 <https://geolytics.petrobras.com.br/dict/vocab>
     a owl:Ontology ;
-    rdfs:label "Geolytics Vocabulary"@en ;
-    rdfs:label "Vocabulário Geolytics"@pt ;
-    rdfs:comment "Vocabulário OWL mínimo que declara as classes e propriedades usadas pelos shapes SHACL do Geolytics Dictionary."@pt ;
+    rdfs:label "GeoBrain Vocabulary"@en ;
+    rdfs:label "Vocabulário GeoBrain"@pt ;
+    rdfs:comment "Vocabulário OWL mínimo que declara as classes e propriedades usadas pelos shapes SHACL do GeoBrain."@pt ;
     owl:versionInfo "1.0.0" .
 
 # ─────────────────────────────────────────────────────────────────────────────

@@ -230,7 +230,7 @@ crosswalk.mappings.forEach(m => {
 fs.mkdirSync(OUT, { recursive: true });
 
 const nodeHeader = [
-  '// Geolytics Dictionary — Neo4j node import',
+  '// GeoBrain — Neo4j node import',
   `// Generated: ${new Date().toISOString()}`,
   '// Run with: cypher-shell -u neo4j -p <password> --file build/neo4j/nodes.cypher',
   '',
@@ -238,7 +238,7 @@ const nodeHeader = [
 fs.writeFileSync(path.join(OUT, 'nodes.cypher'), nodeHeader.join('\n') + lines.nodes.join('\n'));
 
 const relHeader = [
-  '// Geolytics Dictionary — Neo4j relationship import',
+  '// GeoBrain — Neo4j relationship import',
   `// Generated: ${new Date().toISOString()}`,
   '// Run AFTER nodes.cypher',
   '// Run with: cypher-shell -u neo4j -p <password> --file build/neo4j/relationships.cypher',

@@ -48,7 +48,7 @@ class KnowledgeGraph:
 
     Requires the ``networkx`` optional dependency:
 
-        pip install geolytics-dictionary[graph]
+        pip install geobrain[graph]
 
     Usage::
 
@@ -65,7 +65,7 @@ class KnowledgeGraph:
         except ImportError as exc:
             raise ImportError(
                 "networkx is required for KnowledgeGraph. "
-                "Install it with: pip install geolytics-dictionary[graph]"
+                "Install it with: pip install geobrain[graph]"
             ) from exc
 
         self._nx = nx

@@ -6,7 +6,7 @@ suite in tests/validator.test.js.
 
 import pytest
 
-from geolytics_dictionary import Validator, Report, Violation
+from geobrain import Validator, Report, Violation
 
 
 @pytest.fixture(scope="module")

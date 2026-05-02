@@ -1,10 +1,10 @@
-# Geolytics Dictionary
+# GeoBrain
 
 Ontologia semantica do dominio de **Exploracao & Producao (E&P) de petroleo e gas natural no Brasil**, derivada do modulo Dicionario da plataforma Geolytics. Dados oficiais da **ANP/SEP — SIGEP**, organizados como JSON estatico, grafo de entidades e corpus pronto para RAG.
 
 A motivacao central e que RAG vetorial puro falha em perguntas multi-hop de O&G (quatro saltos entre poco → bloco → bacia → regime contratual), em disambiguacoes estruturais (PAD como contrato ANP vs. drilling pad) e em verificacao de consistencia regulatoria (SPE-PRMS nao reconhece "4P"). Este repositorio prove a base semantica — ontologia em camadas, grafo tipado, SHACL shapes e agente LangGraph com validador deterministico — para superar essas limitacoes. Ver [docs/GRAPHRAG.md](docs/GRAPHRAG.md) para a receita completa.
 
-**Visualizacao interativa:** https://thiagoflc.github.io/geolytics-dictionary
+**Visualizacao interativa:** https://thiagoflc.github.io/geobrain
 
 **Documentacao completa:** [docs/INDEX.md](docs/INDEX.md)
 
@@ -70,7 +70,7 @@ A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente esta
 | `mcp/geolytics-mcp/` | MCP Server TypeScript (9 ferramentas) |
 | `examples/langgraph-agent/` | Agente LangGraph multi-no |
 | `notebooks/` | 4 notebooks Jupyter didaticos |
-| `python/` | Pacote Python `geolytics-dictionary` |
+| `python/` | Pacote Python `geobrain` |
 | `docs/` | Documentacao completa — ver [docs/INDEX.md](docs/INDEX.md) |
 
 ---
@@ -78,7 +78,7 @@ A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente esta
 ## Python Package
 
 ```bash
-pip install geolytics-dictionary
+pip install geobrain
 ```
 
 ```python
@@ -160,14 +160,14 @@ bash scripts/check-regen.sh        # verifica se ha diff apos regen
 
 Via raw GitHub:
 ```
-https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/data/glossary.json
-https://raw.githubusercontent.com/thiagoflc/geolytics-dictionary/main/ai/rag-corpus.jsonl
+https://raw.githubusercontent.com/thiagoflc/geobrain/main/data/glossary.json
+https://raw.githubusercontent.com/thiagoflc/geobrain/main/ai/rag-corpus.jsonl
 ```
 
 Via GitHub Pages:
 ```
-https://thiagoflc.github.io/geolytics-dictionary/api/v1/index.json
-https://thiagoflc.github.io/geolytics-dictionary/data/full.json
+https://thiagoflc.github.io/geobrain/api/v1/index.json
+https://thiagoflc.github.io/geobrain/data/full.json
 ```
 
 Para carregar o corpus RAG em LangChain, LlamaIndex ou usar o system prompt, ver a secao "Como usar os dados" em [docs/GRAPHRAG.md](docs/GRAPHRAG.md).

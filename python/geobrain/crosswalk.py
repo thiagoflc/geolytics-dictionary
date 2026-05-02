@@ -46,7 +46,7 @@ class CrosswalkIndex:
 
     Usage::
 
-        from geolytics_dictionary import CrosswalkIndex
+        from geobrain import CrosswalkIndex
         cx = CrosswalkIndex()
         entries = cx.lookup_by_osdu_kind("opendes:osdu:master-data--Well:1.0.0")
         entries = cx.lookup_by_class("Well")

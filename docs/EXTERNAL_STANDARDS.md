@@ -1,6 +1,6 @@
 # Padroes externos — Petro KGraph, PPDM, SPE-PRMS, OSDU
 
-Documentacao dos padroes externos referenciados pelo Geolytics Dictionary, com indicacoes de como cada um e usado e onde encontrar os mapeamentos.
+Documentacao dos padroes externos referenciados pelo GeoBrain, com indicacoes de como cada um e usado e onde encontrar os mapeamentos.
 
 ---
 

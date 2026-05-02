@@ -11,7 +11,7 @@
 
 ## 1. Arquitetura — 11 módulos (relevante como template)
 
-Padrão é diretamente reusável para a Geolytics Dictionary: ontologia mestre que faz `owl:imports` de módulos por escopo, codelists separados como SKOS, módulo de unidades QUDT.
+Padrão é diretamente reusável para a GeoBrain: ontologia mestre que faz `owl:imports` de módulos por escopo, codelists separados como SKOS, módulo de unidades QUDT.
 
 | Módulo | IRI base | Conteúdo | Tamanho |
 |---|---|---|---|
@@ -88,7 +88,7 @@ Esse pattern é exatamente o que falta na camada O3PO/PetroKGraph e no PVT-Dicti
 **Codelists de procedimento analítico (27)** — reusar formato:
 `pHProcedure`, `cationExchangeCapacitySoilProcedure`, `effectiveCecProcedure`, `bulkDensityFineEarthProcedure`, `bulkDensityWholeSoilProcedure`, `carbonOrganicProcedure`, `carbonInorganicProcedure`, `carbonTotalProcedure`, `nitrogenTotalProcedure`, `pSAProcedure` (Particle Size Analysis), `electricalConductivityProcedure`, `hydraulicConductivityProcedure`, `porosityProcedure`, `moistureContentProcedure`, `availableWaterHoldingCapacityProcedure`, `phosphorusRetentionProcedure`, `gypsumProcedure`, `solubleSaltsProcedure`, `totalCarbonateEquivalentProcedure`, `acidityExchangeableProcedure`, `baseSaturationProcedure`, `exchangeableBasesProcedure`, `extractableElementsProcedure`, `totalElementsProcedure`, `coarseFragmentsProcedure`, `organicMatterProcedure`, `textureSumProcedure`.
 
-> **Padrão**: cada `Procedure` é `skos:Concept` **e** `sosa:Procedure` simultaneamente — vinculação direta ao SOSA. **Replicar em `geolytics-dictionary` para procedimentos PVT/geoquímica** (já existe `pvt-dictionary.json` com 34 campos do SIRR).
+> **Padrão**: cada `Procedure` é `skos:Concept` **e** `sosa:Procedure` simultaneamente — vinculação direta ao SOSA. **Replicar em `geobrain` para procedimentos PVT/geoquímica** (já existe `pvt-dictionary.json` com 34 campos do SIRR).
 
 ---
 

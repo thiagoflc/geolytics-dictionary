@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-run.py — CLI entry point for the geolytics-dictionary eval harness.
+run.py — CLI entry point for the geobrain eval harness.
 
 Usage:
     python3 eval/run.py --runner vector_only --offline --limit 30
@@ -88,7 +88,7 @@ def run_question(runner_module, question_row: dict) -> dict:
 
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run the geolytics-dictionary eval harness."
+        description="Run the geobrain eval harness."
     )
     parser.add_argument(
         "--runner",

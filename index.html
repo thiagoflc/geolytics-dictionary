@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Geolytics Dictionary — ANP Oil & Gas Ontology</title>
+<title>GeoBrain — ANP Oil & Gas Ontology</title>
 <meta name="description" content="Visualização interativa da ontologia ANP de Exploração & Produção de petróleo no Brasil." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -366,9 +366,9 @@
     <div class="actions">
       <a href="index-cards.html">Cards</a>
       <a href="gso-cards.html">GSO L7</a>
-      <a href="data/geolytics.ttl">TTL</a>
+      <a href="data/geobrain.ttl">TTL</a>
       <a href="data/full.json" download>JSON</a>
-      <a href="https://github.com/thiagoflc/geolytics-dictionary" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/thiagoflc/geobrain" target="_blank" rel="noopener">GitHub</a>
     </div>
   </header>
   <div class="ribbon" aria-hidden="true">
@@ -677,7 +677,7 @@
         ${d.petrokgraph_uri || d.owl_uri ? `<div class="row"><div class="k">Alinhamento ontológico</div><div class="v">
           ${d.petrokgraph_uri ? `<a class="ext-link" href="${d.petrokgraph_uri}" target="_blank" rel="noopener">Petro KGraph (PUC-Rio)</a>` : ''}
           ${d.owl_uri ? `<a class="ext-link" href="${d.owl_uri}" target="_blank" rel="noopener">OSDU OWL class (W3ID)</a>` : ''}
-          ${d.owl_uri ? `<a class="ext-link" href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geolytics-dictionary/data/geolytics.ttl" target="_blank" rel="noopener">Open in WebVOWL</a>` : ''}
+          ${d.owl_uri ? `<a class="ext-link" href="https://service.tib.eu/webvowl/#iri=https://thiagoflc.github.io/geobrain/data/geobrain.ttl" target="_blank" rel="noopener">Open in WebVOWL</a>` : ''}
         </div></div>` : ''}
       </div>`;
     panel.innerHTML = headHtml + bodyHtml;

@@ -1,4 +1,4 @@
-"""cli.py — Command-line interface for geolytics-dictionary.
+"""cli.py — Command-line interface for geobrain.
 
 Entry point: ``geolytics-validate``
 
@@ -55,7 +55,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.version:
-        from geolytics_dictionary._version import __version__
+        from geobrain._version import __version__
         print(__version__)
         return 0
 
@@ -68,7 +68,7 @@ def main(argv: list[str] | None = None) -> int:
     if not claim_text:
         parser.error("No claim provided. Pass text as argument or via stdin.")
 
-    from geolytics_dictionary.validator import Validator
+    from geobrain.validator import Validator
 
     v = Validator()
     report = v.validate(claim_text)

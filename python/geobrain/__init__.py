@@ -1,8 +1,8 @@
-"""geolytics_dictionary — Python SDK for the Geolytics O&G domain dictionary.
+"""geobrain — Python SDK for the Geolytics O&G domain dictionary.
 
 Core exports::
 
-    from geolytics_dictionary import Dictionary, KnowledgeGraph, Validator, SweetExpander
+    from geobrain import Dictionary, KnowledgeGraph, Validator, SweetExpander
 
     d = Dictionary()
     d.lookup("Pré-sal")           # list[Term]

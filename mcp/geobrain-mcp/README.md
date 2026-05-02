@@ -1,4 +1,4 @@
-# geolytics-mcp
+# geobrain-mcp
 
 MCP server exposing the Geolytics O&G semantic dictionary as AI tools.
 
@@ -10,7 +10,7 @@ Designed for local use with Claude Desktop, Claude Code, Cursor, and LangGraph a
 ## Installation
 
 ```bash
-cd mcp/geolytics-mcp
+cd mcp/geobrain-mcp
 npm install
 npm run build
 ```
@@ -34,7 +34,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "geolytics": {
       "command": "node",
-      "args": ["/absolute/path/to/geolytics-dictionary/mcp/geolytics-mcp/dist/index.js"]
+      "args": ["/absolute/path/to/geobrain/mcp/geobrain-mcp/dist/index.js"]
     }
   }
 }
@@ -49,7 +49,7 @@ Add to your project's `.claude/settings.json`:
   "mcpServers": {
     "geolytics": {
       "command": "node",
-      "args": ["/absolute/path/to/geolytics-dictionary/mcp/geolytics-mcp/dist/index.js"]
+      "args": ["/absolute/path/to/geobrain/mcp/geobrain-mcp/dist/index.js"]
     }
   }
 }
@@ -66,7 +66,7 @@ In `.cursor/mcp.json`:
   "mcpServers": {
     "geolytics": {
       "command": "node",
-      "args": ["/absolute/path/to/geolytics-dictionary/mcp/geolytics-mcp/dist/index.js"]
+      "args": ["/absolute/path/to/geobrain/mcp/geobrain-mcp/dist/index.js"]
     }
   }
 }

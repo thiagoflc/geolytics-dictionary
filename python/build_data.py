@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """build_data.py — Copy data files from the repo root into the package bundle.
 
-Run this before building a wheel to ensure geolytics_dictionary/_data/ is
+Run this before building a wheel to ensure geobrain/_data/ is
 populated with all required JSON and JSONL files.
 
 Usage::
@@ -23,7 +23,7 @@ HERE = Path(__file__).parent
 REPO_ROOT = HERE.parent
 DATA_SRC = REPO_ROOT / "data"
 AI_SRC = REPO_ROOT / "ai"
-DATA_DEST = HERE / "geolytics_dictionary" / "_data"
+DATA_DEST = HERE / "geobrain" / "_data"
 
 # Files to copy from data/
 DATA_FILES = [

@@ -1,6 +1,6 @@
 # GLOSIS reuse layer
 
-Reaproveitamento da **GloSIS v1.5.1** (Global Soil Information System ontology — SIEUSOIL/EJP SOIL/ISRIC) para enriquecer o Geolytics Dictionary.
+Reaproveitamento da **GloSIS v1.5.1** (Global Soil Information System ontology — SIEUSOIL/EJP SOIL/ISRIC) para enriquecer o GeoBrain.
 Análise completa: `../glosis-extraction.md`.
 
 ## Arquivos
@@ -68,4 +68,4 @@ Self-check status: 6 TTL files (1361 triples) + 6 JSON files — todos OK.
 2. **Tradução PT/ES** dos labels (atualmente só EN no GLOSIS upstream).
 3. **Registrar PURL** em w3id.org (ver `w3id-registration-draft.md`).
 4. **WiDoco generation** para gerar HTML pyLODE-style automático dos TTLs.
-5. **FAIRsharing registration** do Geolytics Dictionary (espelhar `doi.org/10.25504/FAIRsharing.af87a1`).
+5. **FAIRsharing registration** do GeoBrain (espelhar `doi.org/10.25504/FAIRsharing.af87a1`).

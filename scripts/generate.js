@@ -920,7 +920,7 @@ function buildSystems() {
   return {
     version: VERSION,
     generated: NOW,
-    description: 'Sistemas corporativos Petrobras que alimentam o Geolytics Dictionary',
+    description: 'Sistemas corporativos Petrobras que alimentam o GeoBrain',
     note: 'Sistemas = proveniência, não acesso. Estes IDs são metadado de origem dos dados, não endpoints conectáveis.',
     systems: SYSTEMS,
   };
@@ -1132,7 +1132,7 @@ function buildFull() {
     meta: {
       version: VERSION,
       generated: NOW,
-      description: 'Geolytics Dictionary — complete merged dataset',
+      description: 'GeoBrain — complete merged dataset',
       counts: {
         glossary_terms: GLOSSARIO.length + OG_GLOSSARY.length,
         extended_terms: EXTENDED_TERMS.length,
@@ -1199,7 +1199,7 @@ function buildFull() {
  * API v1
  * ───────────────────────────────────────────────────────────── */
 
-const BASE_URL_PLACEHOLDER = 'https://thiagoflc.github.io/geolytics-dictionary';
+const BASE_URL_PLACEHOLDER = 'https://thiagoflc.github.io/geobrain';
 
 function buildApiIndex() {
   return {
@@ -1216,8 +1216,8 @@ function buildApiIndex() {
       ontology_map:    `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
       ontopetro:       `${BASE_URL_PLACEHOLDER}/data/ontopetro.json`,
       osdu_mapping:    `${BASE_URL_PLACEHOLDER}/data/osdu-mapping.json`,
-      geolytics_ttl:   `${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
-      webvowl_view:    `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geolytics.ttl`,
+      geolytics_ttl:   `${BASE_URL_PLACEHOLDER}/data/geobrain.ttl`,
+      webvowl_view:    `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geobrain.ttl`,
       cards_view:      `${BASE_URL_PLACEHOLDER}/index-cards.html`,
       gso_cards_view:  `${BASE_URL_PLACEHOLDER}/gso-cards.html`,
       gso_crosswalk:   `${BASE_URL_PLACEHOLDER}/data/osdu-gso-crosswalk.json`,
@@ -1447,7 +1447,7 @@ function buildRagCorpus() {
   /* type=ontology_layer — descreve cada uma das 5 camadas semânticas */
   for (const layer of LAYER_DEFINITIONS) {
     const coverageList = Array.isArray(layer.geolytics_coverage) ? layer.geolytics_coverage.join(', ') : layer.geolytics_coverage;
-    const text = `${layer.name} (${layer.id}, mantida por ${layer.maintainer}): ${layer.description}${layer.relationship_to_geocore ? ` Relação com GeoCore: ${layer.relationship_to_geocore}.` : ''} Cobertura no Geolytics Dictionary: ${coverageList}.`;
+    const text = `${layer.name} (${layer.id}, mantida por ${layer.maintainer}): ${layer.description}${layer.relationship_to_geocore ? ` Relação com GeoCore: ${layer.relationship_to_geocore}.` : ''} Cobertura no GeoBrain: ${coverageList}.`;
     lines.push({
       id: `ontology_layer_${layer.id}`,
       type: 'ontology_layer',
@@ -1940,7 +1940,7 @@ writeJson('data/glossary.json',        buildGlossary());
 writeJson('data/extended-terms.json',  buildExtendedTerms());
 writeJson('data/datasets.json',        buildDatasets());
 writeJson('data/entity-graph.json',    buildEntityGraph());
-writeText('data/geolytics.ttl',        buildTtl(buildEntityGraph(), { sweetAlignment: loadSweetAlignmentSync() }));
+writeText('data/geobrain.ttl',        buildTtl(buildEntityGraph(), { sweetAlignment: loadSweetAlignmentSync() }));
 writeText('index-cards.html',          buildCardsHtml(buildEntityGraph()));
 writeText('gso-cards.html',            buildGsoCardsHtml(loadGsoModules()));
 writeJson('data/ontology-types.json',  buildOntologyTypes());
@@ -1984,8 +1984,8 @@ writeJson('ai/ontology-map.json',      buildOntologyMap());
 // Idempotent: overwrites on each generate run.
 (function copyShacl() {
   const shaclFiles = [
-    { src: 'data/geolytics-shapes.ttl', dst: 'api/v1/geolytics-shapes.ttl' },
-    { src: 'data/geolytics-vocab.ttl',  dst: 'api/v1/geolytics-vocab.ttl' },
+    { src: 'data/geobrain-shapes.ttl', dst: 'api/v1/geobrain-shapes.ttl' },
+    { src: 'data/geobrain-vocab.ttl',  dst: 'api/v1/geobrain-vocab.ttl' },
   ];
   for (const { src, dst } of shaclFiles) {
     const srcPath = path.join(ROOT, src);
