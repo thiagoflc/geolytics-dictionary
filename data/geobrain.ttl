@@ -8,8 +8,8 @@
 @prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-02T20:49:22.073Z
-# Nodes: 153  Edges: 223
+# Generated: 2026-05-02T20:55:03.089Z
+# Nodes: 164  Edges: 238
 
 #
 # Classes
@@ -1592,6 +1592,110 @@ geo:lessons-learned a owl:Class ;
     skos:altLabel "lessons learned"@en ;
     skos:definition """Fase de lições aprendidas ao fim da jornada do poço — agrega RCSD, OGEOMEC e RMG para alimentar a RetroAnálise do próximo poço. Fase final do ciclo da jornada do poço (WellJourneyPhase). Gestor: EXP/OGP."""@pt .
 
+geo:retro-analysis a owl:Class ;
+    skos:prefLabel "Retroanálise"@pt ;
+    skos:prefLabel "Retro Analysis"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "retroanálise"@pt ;
+    skos:altLabel "análise retrospectiva"@pt ;
+    skos:altLabel "retro analysis"@en ;
+    skos:altLabel "retrospective analysis"@en ;
+    skos:definition """Fase inicial da jornada do poço — análise dos dados históricos de poços análogos (OGEOMEC, RMG) para subsidiar o planejamento. Consumes lessons-learned de poços anteriores."""@pt .
+
+geo:input-elaboration a owl:Class ;
+    skos:prefLabel "Elaboração de Insumos"@pt ;
+    skos:prefLabel "Input Elaboration"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "elaboração de insumos"@pt ;
+    skos:altLabel "planejamento de aquisição"@pt ;
+    skos:altLabel "input elaboration"@en ;
+    skos:altLabel "acquisition planning"@en ;
+    skos:definition """Fase de planejamento detalhado — elaboração do QPG e demais insumos técnicos (programas de aquisição, seleção de linhas de serviço). Upstream de todas as atividades de campo."""@pt .
+
+geo:operational-monitoring a owl:Class ;
+    skos:prefLabel "Acompanhamento Operacional"@pt ;
+    skos:prefLabel "Operational Monitoring"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "acompanhamento operacional"@pt ;
+    skos:altLabel "monitoramento de poço"@pt ;
+    skos:altLabel "operational monitoring"@en ;
+    skos:altLabel "well monitoring"@en ;
+    skos:definition """Fase de execução — acompanhamento em tempo real das linhas de serviço (mudlogging, MWD/LWD, geostopping) via EXATA. Produz BDP, PAG e eventos discretos (kick, gas show)."""@pt .
+
+geo:formation-evaluation a owl:Class ;
+    skos:prefLabel "Avaliação de Formações"@pt ;
+    skos:prefLabel "Formation Evaluation"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "avaliação de formações"@pt ;
+    skos:altLabel "avaliação petrofísica"@pt ;
+    skos:altLabel "formation evaluation"@en ;
+    skos:altLabel "petrophysical evaluation"@en ;
+    skos:definition """Fase pós-perfuração — interpretação integrada de wireline, LWD, FRX/DRX, testes e amostras para gerar IGP e Perfil Composto. Alimenta a consolidação de dados do poço."""@pt .
+
+geo:exata a owl:Class ;
+    skos:prefLabel "EXATA"@pt ;
+    skos:prefLabel "EXATA (Real-time Acquisition System)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "EXATA"@pt ;
+    skos:altLabel "sistema de aquisição em tempo real"@pt ;
+    skos:altLabel "EXATA"@en ;
+    skos:altLabel "real-time well data acquisition system"@en ;
+    skos:definition """Sistema Petrobras de aquisição e transmissão de dados em tempo real de poço — integra dados de mudlogging, MWD/LWD e geostopping via streaming. Backend Oracle (hot data) + Cassandra (séries temporais). Centro operacional: CGOR."""@pt .
+
+geo:sigeo a owl:Class ;
+    skos:prefLabel "SIGEO"@pt ;
+    skos:prefLabel "SIGEO (Geological Information System)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "SIGEO"@pt ;
+    skos:altLabel "SIGEO"@en ;
+    skos:altLabel "geological information system"@en ;
+    skos:definition """Sistema de Informações Geológicas Petrobras — repositório canônico de QPG, Perfil Composto, FRX e dados geológicos de poço. Acesso via VGE (BDIEP). Principal sistema de gestão de dados geológicos pós-perfuração."""@pt .
+
+geo:bdiep a owl:Class ;
+    skos:prefLabel "BDIEP"@pt ;
+    skos:prefLabel "BDIEP (Exploration and Production Well Database)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "BDIEP"@pt ;
+    skos:altLabel "BDIEP"@en ;
+    skos:altLabel "E&P well information database"@en ;
+    skos:definition """Banco de Dados de Informações de Exploração e Produção — repositório primário de dados de poço Petrobras. Armazena OGEOMEC, QPG, dados de wireline/LWD e demais dados de aquisição. Acessado via VGE."""@pt .
+
+geo:bdiap a owl:Class ;
+    skos:prefLabel "BDIAP"@pt ;
+    skos:prefLabel "BDIAP (Production Well Database)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "BDIAP"@pt ;
+    skos:altLabel "BDIAP"@en ;
+    skos:definition """Banco de Dados de Informações de Avaliação e Produção — repositório de dados de poços em produção. Complementar ao BDIEP para fase de desenvolvimento e produção."""@pt .
+
+geo:aida a owl:Class ;
+    skos:prefLabel "AIDA"@pt ;
+    skos:prefLabel "AIDA (Analytical Platform / Databricks)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "AIDA"@pt ;
+    skos:altLabel "plataforma analítica"@pt ;
+    skos:altLabel "Databricks"@pt ;
+    skos:altLabel "AIDA"@en ;
+    skos:altLabel "analytical platform"@en ;
+    skos:altLabel "Databricks"@en ;
+    skos:definition """Plataforma analítica Petrobras baseada em Databricks/Delta Lake — destino downstream dos dados de operações geológicas (DRX, FRX, OGEOMEC) para análise exploratória, ML e GraphRAG. Pipeline de ingestão BDIEP → AIDA não totalmente documentado (gap conhecido)."""@pt .
+
+geo:geodo a owl:Class ;
+    skos:prefLabel "GeoDO"@pt ;
+    skos:prefLabel "GeoDO (Geological Operations Data Orchestrator)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "GeoDO"@pt ;
+    skos:altLabel "GeoDO"@en ;
+    skos:definition """Sistema de orquestração de dados de operações geológicas — inclui pipeline text-to-SQL para consultas em linguagem natural sobre dados de poço. Integração com DRX/FRX pendente (gap de documentação)."""@pt .
+
+geo:gda a owl:Class ;
+    skos:prefLabel "GDA"@pt ;
+    skos:prefLabel "GDA (Geological Data Access)"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "GDA"@pt ;
+    skos:altLabel "GDA"@en ;
+    skos:definition """Camada de acesso a dados geológicos — interface de consulta para dados de operações geológicas (mudlogging, EXATA). Referenciado em fontes de mudlogging (GDA SharePoint)."""@pt .
+
 #
 # Object properties
 #
@@ -1893,8 +1997,8 @@ geo:gathers_from a owl:ObjectProperty ;
 geo:feeds a owl:ObjectProperty ;
     rdfs:label "alimenta"@pt ;
     rdfs:label "feeds"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:manifold-submarino geo:rocha-geradora ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:fpso geo:sistema-petrolifero ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:manifold-submarino geo:rocha-geradora geo:exata geo:bdiep ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:fpso geo:sistema-petrolifero geo:aida ) ] .
 
 geo:oversees_environment_of a owl:ObjectProperty ;
     rdfs:label "fiscaliza ambientalmente"@pt ;
@@ -2331,8 +2435,8 @@ geo:feeds_decision a owl:ObjectProperty ;
 geo:stored_in a owl:ObjectProperty ;
     rdfs:label "armazenado em"@pt ;
     rdfs:label "stored in"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:dst-interval geo:mudlogging-time-series ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:sirr geo:cassandra-exata-curva-tempo ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:dst-interval geo:mudlogging-time-series geo:mudlogging geo:mwd-lwd geo:frx geo:qpg geo:perfil-composto geo:ogeomec ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:sirr geo:cassandra-exata-curva-tempo geo:exata geo:sigeo geo:bdiep ) ] .
 
 geo:files_stored_in a owl:ObjectProperty ;
     rdfs:label "arquivos armazenados em"@pt ;
@@ -2379,8 +2483,8 @@ geo:executes_servico a owl:ObjectProperty ;
 geo:produces a owl:ObjectProperty ;
     rdfs:label "produz"@pt ;
     rdfs:label "produces"@en ;
-    rdfs:domain geo:mudlogging ;
-    rdfs:range geo:pag .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto ) ] .
 
 geo:recorded_in a owl:ObjectProperty ;
     rdfs:label "registrado em"@pt ;
@@ -2399,6 +2503,24 @@ geo:uses_tool a owl:ObjectProperty ;
     rdfs:label "uses tool"@en ;
     rdfs:domain geo:mwd-lwd ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:mwd geo:lwd ) ] .
+
+geo:feeds_back_to a owl:ObjectProperty ;
+    rdfs:label "alimenta retroanálise"@pt ;
+    rdfs:label "feeds back to"@en ;
+    rdfs:domain geo:lessons-learned ;
+    rdfs:range geo:retro-analysis .
+
+geo:precedes a owl:ObjectProperty ;
+    rdfs:label "precede"@pt ;
+    rdfs:label "precedes"@en ;
+    rdfs:domain geo:retro-analysis ;
+    rdfs:range geo:input-elaboration .
+
+geo:publishes_to a owl:ObjectProperty ;
+    rdfs:label "publica em"@pt ;
+    rdfs:label "publishes to"@en ;
+    rdfs:domain geo:sigeo ;
+    rdfs:range geo:bdiep .
 
 #
 # Edges (instance-level relation triples)
@@ -2627,3 +2749,18 @@ geo:lessons-learned geo:derived_from geo:rmg .
 geo:geostopping-event geo:derived_from geo:qpg .
 geo:pag geo:derived_from geo:cuttings-sample-detailed .
 geo:pag geo:derived_from geo:gas-show-event .
+geo:lessons-learned geo:feeds_back_to geo:retro-analysis .
+geo:retro-analysis geo:precedes geo:input-elaboration .
+geo:input-elaboration geo:produces geo:qpg .
+geo:operational-monitoring geo:produces geo:bdp .
+geo:formation-evaluation geo:produces geo:igp .
+geo:formation-evaluation geo:produces geo:perfil-composto .
+geo:mudlogging geo:stored_in geo:exata .
+geo:mwd-lwd geo:stored_in geo:exata .
+geo:frx geo:stored_in geo:sigeo .
+geo:qpg geo:stored_in geo:sigeo .
+geo:perfil-composto geo:stored_in geo:sigeo .
+geo:ogeomec geo:stored_in geo:bdiep .
+geo:exata geo:feeds geo:aida .
+geo:bdiep geo:feeds geo:aida .
+geo:sigeo geo:publishes_to geo:bdiep .

@@ -421,9 +421,10 @@
         "SIGEO — Análise de Dados de FRX (sigeo3wiki SharePoint)"
       ],
       "evidence_gaps": [
-        "Pipeline de ingestão FRX SIGEO → AIDA/Databricks não documentado",
-        "Padrões de rocha de referência no módulo SIGEO de QC não documentados na ontologia",
-        "Integração ao pipeline text-to-SQL do GeoDO ausente"
+        "Pipeline de ingestão FRX SIGEO → AIDA/Databricks não documentado — caminho esperado: SIGEO módulo 'Análise de Dados de FRX' → export → AIDA (Delta Lake). Status: gap aberto.",
+        "Padrões de rocha de referência no módulo SIGEO de QC não documentados na ontologia — materiais de calibração usados nos laboratórios de FRX não catalogados.",
+        "Integração ao pipeline text-to-SQL do GeoDO ausente — FRX não aparece nos esquemas de tabela documentados no GeoDO.",
+        "FRX→PerfilComposto derivation edge added to entity-graph (resolved via OG_DOC_LINEAGE materialization 2026-05-02)"
       ],
       "context_fields": [
         {
