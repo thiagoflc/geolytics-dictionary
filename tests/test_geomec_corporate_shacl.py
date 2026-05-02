@@ -163,5 +163,25 @@ class TestShapesFireOnViolations(unittest.TestCase):
         self.assertTrue(any("inScopeForModule" in m for m in msgs))
 
 
+class TestLabTestCategoryAcceptance(unittest.TestCase):
+    """The category enum must include 'LabTest' after the labtest ingestion."""
+
+    def test_labtest_is_a_valid_category(self):
+        from rdflib import Literal
+        g = _live_graph()
+        # GEOMEC061 should exist with category=LabTest. If not, this test is N/A
+        # but if present, must validate cleanly.
+        from rdflib import Namespace
+        GEO = Namespace("https://geolytics.petrobras.com.br/dict/")
+        labtests = list(g.subjects(GEO.category, Literal("LabTest")))
+        if not labtests:
+            self.skipTest("No LabTest entities yet (Frente 1 not applied)")
+        conforms, msgs = _validate(g)
+        # If conforms is False because of category, the enum wasn't updated
+        category_violations = [m for m in msgs if "category" in m.lower() and "LabTest" in str(g)]
+        self.assertTrue(conforms or not any("category" in m.lower() for m in msgs),
+                        f"LabTest category should be accepted by enum. Messages: {msgs}")
+
+
 if __name__ == "__main__":
     unittest.main()

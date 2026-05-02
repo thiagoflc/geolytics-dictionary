@@ -1760,6 +1760,40 @@ function buildRagCorpus() {
     }
   }
 
+  /* type=geomec_corporate_entity — L6 corporate module (P2.10) */
+  const gmCorpPath = path.resolve(__dirname, '..', 'data', 'geomechanics-corporate.json');
+  if (fs.existsSync(gmCorpPath)) {
+    const gmCorp = JSON.parse(fs.readFileSync(gmCorpPath, 'utf8'));
+    for (const e of (gmCorp.entities || [])) {
+      if (e.deprecated) continue;
+      const conf = e.confidence ? ` [confiança: ${e.confidence}]` : '';
+      const def = e.definition_pt || e.definition || '';
+      const formulaStr = e.formula ? ` Fórmula: ${e.formula}.` : '';
+      const gapStr = (e.evidence_gaps && e.evidence_gaps.length)
+        ? ` Lacunas de evidência: ${e.evidence_gaps.join('; ')}.` : '';
+      const oosStr = e.out_of_scope_flag ? ' [OUT_OF_SCOPE]' : '';
+      const provStr = (e.obtained_from_lab_tests || [])
+        .map((p) => `${p.test_label}${p.primary ? ' (primário)' : ''}: ${p.method_note}`)
+        .join(' | ');
+      const provBlock = provStr ? ` Métodos de obtenção: ${provStr}.` : '';
+      const text = `Entidade corporativa ${e.id} "${e.label_pt || e.label}"${conf}: ${def}${formulaStr}${gapStr}${provBlock}${oosStr}`;
+      lines.push({
+        id: `geomec_corporate_entity_${e.id}`,
+        type: 'geomec_corporate_entity',
+        text,
+        metadata: {
+          id: e.id,
+          category: e.category,
+          confidence: e.confidence || null,
+          layer: 'L6',
+          out_of_scope: !!e.out_of_scope_flag,
+          lab_test_method_count: (e.obtained_from_lab_tests || []).length,
+          primary_lab_test: ((e.obtained_from_lab_tests || []).find((p) => p.primary) || {}).test_id || null,
+        },
+      });
+    }
+  }
+
   return lines.map((l) => JSON.stringify(l)).join('\n') + '\n';
 }
 

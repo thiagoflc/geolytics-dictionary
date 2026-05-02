@@ -2933,7 +2933,7 @@ geo:GeomechCorporateEntityShape
         sh:path geo:category ;
         sh:minCount 1 ;
         sh:maxCount 1 ;
-        sh:in ( "Classifier" "Document" "Formula" "GovernanceKPI" "Measurement" "Model" "Process" "Property" "Risk" "Tool" ) ;
+        sh:in ( "Classifier" "Document" "Formula" "GovernanceKPI" "LabTest" "Measurement" "Model" "Process" "Property" "Risk" "Tool" ) ;
         sh:message "geo:category deve ser um dos valores canônicos: Classifier, Document, Formula, GovernanceKPI, Measurement, Model, Process, Property, Risk, Tool."@pt ;
     ] ;
 
@@ -3304,5 +3304,32 @@ WHERE {
 }
 GROUP BY $this
 HAVING ( ?n > 1 )
+""" ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 45: GeomechLabTestProvenanceShape — LabTest deve ter MEASURES ou IS_INPUT_FOR (advisory)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeomechLabTestProvenanceShape
+    a sh:NodeShape ;
+    sh:name "GeomechLabTestProvenanceShape" ;
+    rdfs:label "LabTest deve ter relação MEASURES ou IS_INPUT_FOR (advisory)"@pt ;
+    sh:targetClass geo:GeomechCorporateEntity ;
+    sh:severity sh:Warning ;
+    sh:sparql [
+        sh:message "Entidade categoria=LabTest deveria ter ao menos uma relação MEASURES ou IS_INPUT_FOR documentando quais propriedades o ensaio produz."@pt ;
+        sh:prefixes geo: ;
+        sh:select """
+PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+SELECT $this
+WHERE {
+    $this geo:category "LabTest" .
+    FILTER NOT EXISTS {
+        $this geo:hasRelation ?r .
+        ?r geo:relationType ?rt .
+        FILTER ( ?rt = "MEASURES" || ?rt = "IS_INPUT_FOR" )
+    }
+}
 """ ;
     ] .
