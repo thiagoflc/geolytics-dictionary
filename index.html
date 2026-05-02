@@ -306,6 +306,77 @@
   aside::-webkit-scrollbar-thumb { background: var(--hairline-2); }
   aside::-webkit-scrollbar-thumb:hover { background: var(--fg-soft); }
 
+  /* ── ZOOM CONTROLS ──────────────────────────────────────── */
+  .zoom-controls {
+    position: absolute; bottom: 46px; left: 18px;
+    display: flex; align-items: center; gap: 0;
+    font-family: var(--mono); font-size: 10px; letter-spacing: 0.05em;
+    z-index: 20; user-select: none;
+  }
+  .zoom-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 30px; height: 26px;
+    background: rgba(6,6,6,0.90); border: 1px solid var(--hairline-2);
+    color: var(--fg-soft); cursor: pointer; border-right: none;
+    transition: background 90ms ease, color 90ms ease, transform 80ms ease;
+  }
+  .zoom-btn:hover { background: var(--panel-2); color: var(--fg); }
+  .zoom-btn:active { transform: scale(0.90); }
+  .zoom-btn.z-end { border-right: 1px solid var(--hairline-2); }
+  #zoom-level {
+    display: flex; align-items: center; justify-content: center;
+    min-width: 48px; height: 26px; padding: 0 6px;
+    background: rgba(6,6,6,0.90); border: 1px solid var(--hairline-2); border-right: none;
+    color: var(--fg); font-weight: 700; font-size: 10px; cursor: pointer;
+    transition: color 90ms ease;
+  }
+  #zoom-level:hover { color: var(--t-actor); }
+  .zoom-divider {
+    width: 1px; height: 26px; background: var(--hairline-2); flex-shrink: 0; margin: 0 5px;
+  }
+
+  /* ── MINIMAP ────────────────────────────────────────────── */
+  .minimap-wrap {
+    position: absolute; bottom: 46px; right: 18px; z-index: 20;
+    font-family: var(--mono);
+  }
+  .minimap-head {
+    display: flex; align-items: center; justify-content: space-between;
+    height: 22px; padding: 0 9px;
+    background: rgba(6,6,6,0.90); border: 1px solid var(--hairline-2); border-bottom: none;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--fg-soft);
+  }
+  .minimap-head button {
+    background: none; border: none; cursor: pointer;
+    color: var(--fg-soft); font-size: 10px; padding: 0 2px; line-height: 1;
+    transition: color 90ms ease;
+  }
+  .minimap-head button:hover { color: var(--fg); }
+  #minimap-svg {
+    display: block; cursor: crosshair;
+    border: 1px solid var(--hairline-2);
+    background: rgba(4,4,4,0.93);
+  }
+  .minimap-wrap.collapsed #minimap-svg { display: none; }
+
+  /* ── KEYBOARD HINT ──────────────────────────────────────── */
+  .kbd-hint {
+    position: absolute; bottom: 46px; left: 50%; transform: translateX(-50%);
+    display: flex; align-items: center; gap: 14px;
+    font-family: var(--mono); font-size: 9px; letter-spacing: 0.10em; text-transform: uppercase;
+    color: rgba(245,242,234,0.22); pointer-events: none; user-select: none;
+    white-space: nowrap; z-index: 10;
+  }
+  .kbd-hint kbd {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-width: 18px; height: 16px; padding: 0 4px;
+    border: 1px solid rgba(245,242,234,0.14);
+    background: rgba(255,255,255,0.04);
+    border-radius: 2px; font-family: inherit; font-size: 9px;
+    color: rgba(245,242,234,0.28); margin-right: 4px;
+  }
+
   /* ── NODE SEARCH ───────────────────────────────────────────── */
   .search-wrap {
     position: relative; margin-left: auto; display: flex; align-items: center;
@@ -404,6 +475,45 @@
   <main>
     <div id="graph">
       <div class="axis-label">Force-Directed Graph · D3 v7</div>
+
+      <!-- Zoom controls -->
+      <div class="zoom-controls" aria-label="Controles de zoom">
+        <button class="zoom-btn" id="btn-zoom-out" title="Diminuir (−)">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <line x1="2.5" y1="6" x2="9.5" y2="6"/>
+          </svg>
+        </button>
+        <div id="zoom-level" title="Nível de zoom · clique para resetar (0)" role="status" aria-live="polite">100%</div>
+        <button class="zoom-btn z-end" id="btn-zoom-in" title="Ampliar (+)">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+            <line x1="6" y1="2.5" x2="6" y2="9.5"/><line x1="2.5" y1="6" x2="9.5" y2="6"/>
+          </svg>
+        </button>
+        <div class="zoom-divider" aria-hidden="true"></div>
+        <button class="zoom-btn z-end" id="btn-fit" title="Ajustar ao grafo (F)">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="2,4.5 2,2 4.5,2"/><polyline points="7.5,2 10,2 10,4.5"/>
+            <polyline points="10,7.5 10,10 7.5,10"/><polyline points="4.5,10 2,10 2,7.5"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Keyboard hints -->
+      <div class="kbd-hint" aria-hidden="true">
+        <span><kbd>+</kbd><kbd>−</kbd> zoom</span>
+        <span><kbd>F</kbd> ajustar</span>
+        <span><kbd>0</kbd> resetar</span>
+        <span><kbd>⌘K</kbd> buscar</span>
+      </div>
+
+      <!-- Minimap -->
+      <div class="minimap-wrap" id="minimap-wrap">
+        <div class="minimap-head">
+          <span>Minimap</span>
+          <button id="minimap-toggle" title="Recolher minimap">▾</button>
+        </div>
+        <svg id="minimap-svg" width="160" height="110"></svg>
+      </div>
     </div>
     <aside id="panel" class="empty">Selecione uma entidade</aside>
   </main>
@@ -493,12 +603,125 @@
   const root = svg.append('g');
 
   let currentZoom = 1;
-  const zoomBehavior = d3.zoom().scaleExtent([0.3, 4]).on('zoom', (ev) => {
+  const zoomBehavior = d3.zoom().scaleExtent([0.1, 8]).on('zoom', (ev) => {
     root.attr('transform', ev.transform);
     currentZoom = ev.transform.k;
     updateLabels();
+    updateZoomDisplay();
+    updateMinimap();
   });
   svg.call(zoomBehavior);
+
+  /* ── ZOOM TOOLS ─────────────────────────────────────────── */
+  function updateZoomDisplay() {
+    const el = document.getElementById('zoom-level');
+    if (el) el.textContent = Math.round(currentZoom * 100) + '%';
+  }
+
+  const ZOOM_STEP = 1.35;
+
+  function zoomIn() {
+    svg.transition().duration(240).ease(d3.easeCubicOut)
+      .call(zoomBehavior.scaleBy, ZOOM_STEP);
+  }
+  function zoomOut() {
+    svg.transition().duration(240).ease(d3.easeCubicOut)
+      .call(zoomBehavior.scaleBy, 1 / ZOOM_STEP);
+  }
+  function resetView() {
+    svg.transition().duration(500).ease(d3.easeCubicInOut)
+      .call(zoomBehavior.transform, d3.zoomIdentity);
+  }
+  function fitView() {
+    const settled = nodes.filter((n) => n.x != null && !isNaN(n.x));
+    if (!settled.length) return;
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    settled.forEach((n) => {
+      const r = n.computedSize / 2 + 16;
+      x0 = Math.min(x0, n.x - r); y0 = Math.min(y0, n.y - r);
+      x1 = Math.max(x1, n.x + r); y1 = Math.max(y1, n.y + r);
+    });
+    const w = container.clientWidth, h = container.clientHeight;
+    const bw = x1 - x0, bh = y1 - y0;
+    const sc = Math.min(0.92 * Math.min(w / bw, h / bh), 3);
+    svg.transition().duration(620).ease(d3.easeCubicInOut)
+      .call(zoomBehavior.transform,
+        d3.zoomIdentity
+          .translate(w / 2 - sc * (x0 + bw / 2), h / 2 - sc * (y0 + bh / 2))
+          .scale(sc));
+  }
+
+  document.getElementById('btn-zoom-in').addEventListener('click', zoomIn);
+  document.getElementById('btn-zoom-out').addEventListener('click', zoomOut);
+  document.getElementById('btn-fit').addEventListener('click', fitView);
+  document.getElementById('zoom-level').addEventListener('click', resetView);
+
+  /* ── MINIMAP ─────────────────────────────────────────────── */
+  const MM_W = 160, MM_H = 110;
+  const mmSvg = d3.select('#minimap-svg');
+  const mmDots = mmSvg.append('g');
+  const mmVP = mmSvg.append('rect')
+    .attr('fill', 'rgba(255,190,60,0.07)')
+    .attr('stroke', 'rgba(255,190,60,0.72)')
+    .attr('stroke-width', 1.2)
+    .attr('rx', 1.5);
+
+  let _mm = null;
+
+  function updateMinimap() {
+    const settled = nodes.filter((n) => n.x != null && !isNaN(n.x));
+    if (!settled.length) return;
+    const PAD = 20;
+    let bx0 = Infinity, by0 = Infinity, bx1 = -Infinity, by1 = -Infinity;
+    settled.forEach((n) => {
+      bx0 = Math.min(bx0, n.x); by0 = Math.min(by0, n.y);
+      bx1 = Math.max(bx1, n.x); by1 = Math.max(by1, n.y);
+    });
+    bx0 -= PAD; by0 -= PAD; bx1 += PAD; by1 += PAD;
+    const bw = bx1 - bx0, bh = by1 - by0;
+    const sc = Math.min(MM_W / bw, MM_H / bh);
+    const offX = (MM_W - bw * sc) / 2;
+    const offY = (MM_H - bh * sc) / 2;
+    _mm = { bx0, by0, sc, offX, offY };
+
+    mmDots.selectAll('circle')
+      .data(settled, (d) => d.id)
+      .join('circle')
+      .attr('cx', (n) => offX + (n.x - bx0) * sc)
+      .attr('cy', (n) => offY + (n.y - by0) * sc)
+      .attr('r', (n) => Math.max(1.2, (n.computedSize / 2) * sc * 0.65))
+      .attr('fill', (n) => n.color || TYPE_COLOR[n.type] || '#888')
+      .attr('opacity', 0.72);
+
+    const t = d3.zoomTransform(svg.node());
+    const cw = container.clientWidth, ch = container.clientHeight;
+    mmVP
+      .attr('x', offX + (-t.x / t.k - bx0) * sc)
+      .attr('y', offY + (-t.y / t.k - by0) * sc)
+      .attr('width', Math.max(4, (cw / t.k) * sc))
+      .attr('height', Math.max(4, (ch / t.k) * sc));
+  }
+
+  mmSvg.on('click', (ev) => {
+    if (!_mm) return;
+    const [mx, my] = d3.pointer(ev);
+    const simX = (mx - _mm.offX) / _mm.sc + _mm.bx0;
+    const simY = (my - _mm.offY) / _mm.sc + _mm.by0;
+    const cw = container.clientWidth, ch = container.clientHeight;
+    svg.transition().duration(340).ease(d3.easeCubicOut)
+      .call(zoomBehavior.transform,
+        d3.zoomIdentity
+          .translate(cw / 2 - currentZoom * simX, ch / 2 - currentZoom * simY)
+          .scale(currentZoom));
+  });
+
+  document.getElementById('minimap-toggle').addEventListener('click', () => {
+    const wrap = document.getElementById('minimap-wrap');
+    const btn  = document.getElementById('minimap-toggle');
+    wrap.classList.toggle('collapsed');
+    btn.textContent = wrap.classList.contains('collapsed') ? '▸' : '▾';
+    btn.title = wrap.classList.contains('collapsed') ? 'Expandir minimap' : 'Recolher minimap';
+  });
 
   const links = graph.edges.map((e) => ({ ...e }));
   const nodes = graph.nodes.map((n) => ({ ...n }));
@@ -628,6 +851,7 @@
         return d.target.y - (dy / dist) * (d.target.computedSize / 2 + 5);
       });
     node.attr('transform', (d) => `translate(${d.x},${d.y})`);
+    updateMinimap();
   });
 
   const layerLabels = {
@@ -814,13 +1038,20 @@
     if (searchInput.value.trim()) renderResults(searchInput.value);
   });
 
-  /* Cmd/Ctrl+K global shortcut to focus the search */
+  /* Global keyboard shortcuts */
   document.addEventListener('keydown', (ev) => {
     if ((ev.metaKey || ev.ctrlKey) && ev.key === 'k') {
       ev.preventDefault();
       searchInput.focus();
       searchInput.select();
+      return;
     }
+    /* Skip zoom shortcuts when typing in search */
+    if (document.activeElement === searchInput) return;
+    if ((ev.key === '+' || ev.key === '=') && !ev.metaKey && !ev.ctrlKey) { ev.preventDefault(); zoomIn(); }
+    if ((ev.key === '-' || ev.key === '_') && !ev.metaKey && !ev.ctrlKey) { ev.preventDefault(); zoomOut(); }
+    if (ev.key === '0' && !ev.metaKey && !ev.ctrlKey) { ev.preventDefault(); resetView(); }
+    if ((ev.key === 'f' || ev.key === 'F') && !ev.metaKey && !ev.ctrlKey) { ev.preventDefault(); fitView(); }
   });
 })();
 </script>
