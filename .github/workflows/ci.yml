@@ -37,7 +37,7 @@ jobs:
           find . -name "*.py" \
             -not -path "./.git/*" \
             -not -path "./node_modules/*" \
-            -not -path "./mcp/geolytics-mcp/node_modules/*" \
+            -not -path "./mcp/geobrain-mcp/node_modules/*" \
             | xargs python -m py_compile
 
   node-tests:
@@ -246,17 +246,29 @@ jobs:
               print("PASS: composite score within acceptable range.")
           EOF
 
-      - name: Update baseline on main
+      - name: Detect baseline drift on main (manual update required)
+        # Branch protection on main blocks github-actions[bot] from pushing
+        # directly. Instead of trying to commit the baseline (which fails with
+        # 403), this step DETECTS drift and surfaces it as a workflow notice.
+        # When drift is detected, run locally:
+        #   cp eval/results/graphrag_validator-*.json eval/baseline.json
+        #   git add eval/baseline.json && git commit -m "chore: update eval baseline"
+        # and push via PR.
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        continue-on-error: true
         run: |
           LATEST=$(ls -1t eval/results/graphrag_validator-*.json 2>/dev/null | head -1)
-          if [ -n "$LATEST" ]; then
-            cp "$LATEST" eval/baseline.json
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
-            git add eval/baseline.json
-            git diff --staged --quiet || git commit -m "chore: update eval baseline [skip ci]"
-            git push
+          if [ -z "$LATEST" ]; then
+            echo "No graphrag_validator result found — nothing to compare."
+            exit 0
+          fi
+          if diff -q "$LATEST" eval/baseline.json > /dev/null 2>&1; then
+            echo "✓ Baseline matches latest eval result — no drift."
+          else
+            echo "::notice title=Eval baseline drift detected::eval/baseline.json differs from $LATEST. Update manually via PR (see step comment)."
+            echo ""
+            echo "=== Diff (first 50 lines) ==="
+            diff "$LATEST" eval/baseline.json | head -50 || true
           fi
 
   mcp-build:
@@ -273,16 +285,16 @@ jobs:
       - name: Cache npm (mcp)
         uses: actions/cache@v4
         with:
-          path: mcp/geolytics-mcp/node_modules
-          key: npm-mcp-${{ hashFiles('mcp/geolytics-mcp/package-lock.json') }}
+          path: mcp/geobrain-mcp/node_modules
+          key: npm-mcp-${{ hashFiles('mcp/geobrain-mcp/package-lock.json') }}
           restore-keys: npm-mcp-
 
       - name: Install MCP deps
-        working-directory: mcp/geolytics-mcp
+        working-directory: mcp/geobrain-mcp
         run: npm ci
 
       - name: TypeScript type check
-        working-directory: mcp/geolytics-mcp
+        working-directory: mcp/geobrain-mcp
         run: npx tsc --noEmit
 
   graph-diff:
