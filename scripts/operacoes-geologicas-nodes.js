@@ -60,7 +60,9 @@ export const OG_NODES = [
       "@pt": "Disciplina que agrupa técnicas analíticas e operacionais de aquisição de dados geológicos (DRX, FRX, geoquímica) aplicadas a amostras de poço e formação. Detalhada no módulo data/operacoes-geologicas.json (OG001).",
       "@en": "Discipline grouping analytical and operational geological data-acquisition techniques (XRD, XRF, geochemistry) applied to well and formation samples. Detailed in module data/operacoes-geologicas.json (OG001)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "inferred",
+    "evidence_refs": ["Petrobras EXP/OGP — Macroprocesso Explorar, N3 'Prover planejamento, aquisição e avaliação de dados geológicos e petrofísicos'"]
   },
   {
     "id": "drx",
@@ -113,7 +115,9 @@ export const OG_NODES = [
       "@pt": "Técnica analítica de identificação mineralógica baseada na difração de raios X em amostras de rocha. Permite caracterizar mineralogia e auxiliar a classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013).",
       "@en": "Analytical technique for mineralogical identification based on X-ray diffraction patterns from rock samples. Supports mineralogy characterization and lithological classification. Detailed in data/operacoes-geologicas.json (OG013)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "documented",
+    "evidence_refs": ["PE-2EXP-00059", "SIGEO wiki — Análise de Dados de FRX"]
   },
   {
     "id": "frx",
@@ -166,7 +170,9 @@ export const OG_NODES = [
       "@pt": "Técnica analítica de determinação da composição elementar de amostras de rocha por fluorescência de raios X. Gera assinatura geoquímica usada na caracterização e correlação de formações. Detalhada em data/operacoes-geologicas.json (OG013b).",
       "@en": "Analytical technique to determine elemental composition of rock samples via X-ray fluorescence. Produces a geochemical signature used in formation characterization and correlation. Detailed in data/operacoes-geologicas.json (OG013b)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "documented",
+    "evidence_refs": ["PE-2EXP-00059", "SIGEO wiki — Análise de Dados de FRX"]
   },
   {
     "id": "dna-geoquimico",
@@ -221,7 +227,9 @@ export const OG_NODES = [
       "@pt": "Assinatura geoquímica de uma formação derivada de medidas de FRX, usada como impressão digital elementar para correlação estratigráfica e classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013c).",
       "@en": "Geochemical signature of a formation derived from XRF measurements, used as an elemental fingerprint for stratigraphic correlation and lithological classification. Detailed in data/operacoes-geologicas.json (OG013c)."
     },
-    "skos_example": []
+    "skos_example": [],
+    "evidence_status": "inferred",
+    "evidence_refs": ["Petrobras EXP/OGP/AQG — jargão operacional; inferido de dados de FRX multi-poço"]
   },
   {
     "id": "mudlogging-time-series",
@@ -1012,6 +1020,100 @@ export const OG_NODES = [
     "superclass": "GeologicalOperationsSystem",
     "synonyms_pt": ["GDA"],
     "synonyms_en": ["GDA"]
+  },
+  {
+    "id": "laudo-geomecanico",
+    "label": "Laudo Geomecânico",
+    "label_en": "Geomechanical Report (Laudo Geomecânico)",
+    "type": "contractual",
+    "color": "#7F77DD",
+    "size": 22,
+    "definition": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal para subsidiar o projeto e o acompanhamento do poço. Produzido pelo CSD Geomecânica (RES/GMR ou área responsável). Distinto do QPG (prognóstico geológico) — não inferir existência para todos os poços.",
+    "module": "data/operacoes-geologicas.json#OG051",
+    "evidence_status": "partial",
+    "confidence": "high",
+    "evidence_refs": [
+      "Workshop Geomecânica Poços — Confecção de Laudo Geomecânico (Búzios) — Bruno Figalgo",
+      "PE-2EXP-00074 Anexo B — Manual CSD GEOMEC (Relatório Geomecânico de Poços)",
+      "PoC AWS Agente 1 OGEO — RMG PDF VGE/Pasta de poço",
+      "8-BUZ-86D-RJS RelFinal Geomec Monitoramento (exemplo)"
+    ],
+    "manager": "RES/GMR ou área geomecânica responsável (needs_governance_confirmation)",
+    "operational_contributor": "CSD Geomecânica",
+    "stored_in": "VGE / Pasta de Poço",
+    "stored_in_candidates": ["VGE", "Pasta de poço / drive científico", "SIPLEX (needs_confirmation)"],
+    "superclass": "GeologicalOperationsDocument",
+    "geomechanics_class": "GM027",
+    "document_role": {
+      "role_type": "formal_technical_evidence",
+      "primary_use": [
+        "Apoiar projeto de poço",
+        "Registrar análise de riscos geomecânicos",
+        "Apoiar monitoramento geomecânico",
+        "Consolidar evidências técnicas de geopressões, tensões e ocorrências",
+        "Dar rastreabilidade a decisões técnicas"
+      ]
+    },
+    "known_content_sections": [
+      "Cabeçalho",
+      "Localização em mapa e seção sísmica",
+      "Contexto sísmico estrutural",
+      "Contexto estratigráfico ou por intervalo",
+      "Análise dos Riscos Geomecânicos",
+      "Curvas e modelos de geopressões",
+      "Modelo Geomecânico",
+      "Ocorrências Geomecânicas",
+      "Considerações finais"
+    ],
+    "internal_tools": ["SIGEO", "SEST", "SEST 2.0", "PWDa", "RTO-LIVE", "EXATA", "Petrel", "GeomecBR", "GERESIM"],
+    "quality_rules": [
+      { "rule_id": "LG_QA_001", "rule": "Não tratar Laudo Geomecânico e QPG como a mesma entidade.", "severity": "high" },
+      { "rule_id": "LG_QA_002", "rule": "Não inferir existência de Laudo Geomecânico para todos os poços.", "severity": "high" },
+      { "rule_id": "LG_QA_003", "rule": "Relatório de Monitoramento Geomecânico CSD = documento relacionado, não necessariamente Laudo pré-perfuração.", "severity": "medium" },
+      { "rule_id": "LG_QA_004", "rule": "Separar evidências pré-perfuração, tempo real e post-mortem.", "severity": "medium" }
+    ],
+    "graph_rag_behavior": {
+      "retrieval_priority": "high",
+      "disambiguation_rule": "Se a consulta mencionar laudo, relatório geomecânico, geohazards, riscos geomecânicos, locação, projeto de poço, curva de geopressão ou monitoramento geomecânico, recuperar laudo-geomecanico antes de documentos genéricos.",
+      "must_return_with": [
+        "qpg quando a pergunta envolver previsão geológica",
+        "ogeomec quando a pergunta envolver eventos observados",
+        "curvas de geopressões quando a pergunta envolver janela operacional",
+        "modelo geomecânico quando a pergunta envolver tensões ou geohazards"
+      ],
+      "example_queries": [
+        "Existe Laudo Geomecânico para este poço?",
+        "Quais riscos geomecânicos foram apontados no laudo?",
+        "O laudo contém curvas de geopressões?",
+        "Quais ocorrências foram consideradas na análise?",
+        "Compare o QPG com o Laudo Geomecânico."
+      ]
+    },
+    "synonyms_pt": [
+      "Laudo Geomecânico",
+      "Laudo de Geomecânica",
+      "Laudo Geomecânico de locação",
+      "Laudo Geomecânico de poço",
+      "Relatório Geomecânico",
+      "Relatório Geomecânico de Poço",
+      "Análise de Estabilidade de Poço"
+    ],
+    "synonyms_en": [
+      "geomechanical report",
+      "wellbore stability report",
+      "geomechanical assessment",
+      "geomechanical prognosis",
+      "Geomechanical Report"
+    ],
+    "skos_prefLabel": { "@pt": "Laudo Geomecânico", "@en": "Geomechanical Report" },
+    "skos_altLabel": {
+      "@pt": ["Laudo de Geomecânica", "Laudo Geomecânico de locação", "Relatório Geomecânico de Poço", "Análise de Estabilidade de Poço", "Prognóstico Geomecânico"],
+      "@en": ["wellbore stability report", "geomechanical assessment", "geomechanical prognosis"]
+    },
+    "skos_definition": {
+      "@pt": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica para subsidiar o projeto e o acompanhamento do poço.",
+      "@en": "Technical document that consolidates the geomechanical analysis associated with a well location or well, bringing together geological, structural, seismic and operational context, as well as geomechanical risks, geopressure curves/models and stress information when available."
+    }
   }
 ];
 
@@ -1074,7 +1176,7 @@ export const OG_EDGES = [
   },
   {
     "source": "drx",
-    "target": "formacao",
+    "target": "litologia",
     "relation": "alimenta_classificacao_litologica",
     "relation_label": "alimenta classificação litológica",
     "relation_label_en": "feeds lithological classification",
@@ -1082,7 +1184,7 @@ export const OG_EDGES = [
   },
   {
     "source": "frx",
-    "target": "formacao",
+    "target": "litologia",
     "relation": "alimenta_classificacao_litologica",
     "relation_label": "alimenta classificação litológica",
     "relation_label_en": "feeds lithological classification",
@@ -1559,7 +1661,7 @@ export const OG_EDGES = [
     "relation_label": "derivado de",
     "relation_label_en": "derived from",
     "style": "dashed",
-    "evidence_status": "documented"
+    "evidence_status": "inferred"
   },
   {
     "source": "rcsd",
@@ -1609,9 +1711,9 @@ export const OG_EDGES = [
   {
     "source": "geostopping-event",
     "target": "qpg",
-    "relation": "derived_from",
-    "relation_label": "derivado de",
-    "relation_label_en": "derived from",
+    "relation": "informed_by",
+    "relation_label": "informado por",
+    "relation_label_en": "informed by",
     "style": "dashed",
     "evidence_status": "documented"
   },
@@ -1752,6 +1854,94 @@ export const OG_EDGES = [
     "relation_label": "publica em",
     "relation_label_en": "publishes to",
     "style": "solid"
+  },
+  {
+    "source": "vge",
+    "target": "bdiep",
+    "relation": "provides_access_to",
+    "relation_label": "provê acesso a",
+    "relation_label_en": "provides access to",
+    "style": "solid"
+  },
+  {
+    "source": "bdiap",
+    "target": "bdiep",
+    "relation": "complements",
+    "relation_label": "complementa",
+    "relation_label_en": "complements",
+    "style": "dashed"
+  },
+  {
+    "source": "geodo",
+    "target": "aida",
+    "relation": "queries",
+    "relation_label": "consulta",
+    "relation_label_en": "queries",
+    "style": "dashed"
+  },
+  {
+    "source": "gda",
+    "target": "exata",
+    "relation": "provides_access_to",
+    "relation_label": "provê acesso a",
+    "relation_label_en": "provides access to",
+    "style": "solid"
+  },
+  {
+    "source": "retro-analysis",
+    "target": "laudo-geomecanico",
+    "relation": "produces",
+    "relation_label": "produz",
+    "relation_label_en": "produces",
+    "style": "solid"
+  },
+  {
+    "source": "laudo-geomecanico",
+    "target": "qpg",
+    "relation": "requires_input",
+    "relation_label": "requer como insumo",
+    "relation_label_en": "requires input",
+    "style": "dashed"
+  },
+  {
+    "source": "laudo-geomecanico",
+    "target": "poco",
+    "relation": "references",
+    "relation_label": "referenciado a",
+    "relation_label_en": "references",
+    "style": "solid"
+  },
+  {
+    "source": "laudo-geomecanico",
+    "target": "input-elaboration",
+    "relation": "subsidizes",
+    "relation_label": "subsidia",
+    "relation_label_en": "subsidizes",
+    "style": "solid"
+  },
+  {
+    "source": "laudo-geomecanico",
+    "target": "rmg",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed"
+  },
+  {
+    "source": "laudo-geomecanico",
+    "target": "ogeomec",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed"
+  },
+  {
+    "source": "laudo-geomecanico",
+    "target": "vge",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "dashed"
   }
 ];
 

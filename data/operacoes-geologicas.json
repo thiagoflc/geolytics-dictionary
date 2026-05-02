@@ -722,7 +722,7 @@
       "id": "OG013c",
       "name": "DNAGeoquimico",
       "name_pt": "DNA Geoquimico",
-      "superclass": "ServiceLine",
+      "superclass": "GeologicalOperationsDocument",
       "description": "Geochemical signature of a stratigraphic formation built from FRX elemental ratios across multiple wells. Used as a fingerprint for stratigraphic correlation and provenance analysis.",
       "description_pt": "Assinatura geoquimica de uma formacao construida a partir de razoes elementares de FRX em multiplos pocos. Usado como impressao digital para correlacao estratigrafica e analise de proveniencia.",
       "format": "derived",
@@ -1568,6 +1568,32 @@
       "evidence_refs": [
         "Briefing — Buscador de Análogos Geomec"
       ]
+    },
+    "LaudoGeomecanico": {
+      "id": "OG051",
+      "name": "LaudoGeomecanico",
+      "name_pt": "LaudoGeomecanico",
+      "label_pt": "Laudo Geomecânico",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Technical document that consolidates the geomechanical analysis associated with a well location or well, bringing together geological, structural, seismic and operational context, as well as geomechanical risks, geopressure curves/models and stress information when available. role_type: formal_technical_evidence. Produced by CSD Geomecânica (RES/GMR or responsible area). QA: do not treat as equivalent to QPG; do not infer existence for all wells; separate pre-drilling/real-time/post-mortem evidence.",
+      "description_pt": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões. role_type: formal_technical_evidence. Produzido pelo CSD Geomecânica (RES/GMR ou área responsável). QA: não tratar como equivalente ao QPG; não inferir existência para todos os poços; separar evidências pré-perfuração, tempo real e post-mortem.",
+      "format": "PDF",
+      "structured": false,
+      "manager": "RES/GMR ou área geomecânica responsável (needs_governance_confirmation)",
+      "operational_contributor": "CSD Geomecânica",
+      "stored_in": "VGE / Pasta de Poço",
+      "stored_in_candidates": ["VGE", "Pasta de poço / drive científico", "SIPLEX (needs_confirmation)"],
+      "business_purpose": "Subsidiar decisões de projeto e acompanhamento de poços por meio da consolidação de riscos geomecânicos, contexto estrutural/geológico e evidências técnicas disponíveis.",
+      "evidence_status": "partial",
+      "confidence": "high",
+      "evidence_refs": [
+        "Workshop Geomecânica Poços — Confecção de Laudo Geomecânico (Búzios) — Bruno Figalgo",
+        "PE-2EXP-00074 Anexo B — Manual CSD GEOMEC (Relatório Geomecânico de Poços)",
+        "PoC AWS Agente 1 OGEO — RMG PDF VGE/Pasta de poço",
+        "8-BUZ-86D-RJS RelFinal Geomec Monitoramento (exemplo de documento)"
+      ],
+      "geomechanics_class": "GM027",
+      "status": "draft_for_human_review"
     }
   },
   "properties": [
@@ -1823,7 +1849,7 @@
           "order": 2,
           "phase": "InputElaboration",
           "service_line": null,
-          "produces": "IGP"
+          "produces": "QPG"
         },
         {
           "order": 3,

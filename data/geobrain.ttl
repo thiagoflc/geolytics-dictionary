@@ -8,8 +8,8 @@
 @prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-02T20:55:03.089Z
-# Nodes: 164  Edges: 238
+# Generated: 2026-05-02T21:43:24.819Z
+# Nodes: 165  Edges: 249
 
 #
 # Classes
@@ -1696,6 +1696,24 @@ geo:gda a owl:Class ;
     skos:altLabel "GDA"@en ;
     skos:definition """Camada de acesso a dados geológicos — interface de consulta para dados de operações geológicas (mudlogging, EXATA). Referenciado em fontes de mudlogging (GDA SharePoint)."""@pt .
 
+geo:laudo-geomecanico a owl:Class ;
+    skos:prefLabel "Laudo Geomecânico"@pt ;
+    skos:prefLabel "Geomechanical Report (Laudo Geomecânico)"@en ;
+    geo:entityType "contractual" ;
+    skos:altLabel "Laudo Geomecânico"@pt ;
+    skos:altLabel "Laudo de Geomecânica"@pt ;
+    skos:altLabel "Laudo Geomecânico de locação"@pt ;
+    skos:altLabel "Laudo Geomecânico de poço"@pt ;
+    skos:altLabel "Relatório Geomecânico"@pt ;
+    skos:altLabel "Relatório Geomecânico de Poço"@pt ;
+    skos:altLabel "Análise de Estabilidade de Poço"@pt ;
+    skos:altLabel "geomechanical report"@en ;
+    skos:altLabel "wellbore stability report"@en ;
+    skos:altLabel "geomechanical assessment"@en ;
+    skos:altLabel "geomechanical prognosis"@en ;
+    skos:altLabel "Geomechanical Report"@en ;
+    skos:definition """Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal para subsidiar o projeto e o acompanhamento do poço. Produzido pelo CSD Geomecânica (RES/GMR ou área responsável). Distinto do QPG (prognóstico geológico) — não inferir existência para todos os poços."""@pt .
+
 #
 # Object properties
 #
@@ -2039,8 +2057,8 @@ geo:authorizes_spending_for a owl:ObjectProperty ;
 geo:complements a owl:ObjectProperty ;
     rdfs:label "complementa"@pt ;
     rdfs:label "complements"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:joa geo:drx geo:frx ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:frx geo:drx ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:joa geo:drx geo:frx geo:bdiap ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:frx geo:drx geo:bdiep ) ] .
 
 geo:delivers a owl:ObjectProperty ;
     rdfs:label "entrega"@pt ;
@@ -2093,7 +2111,7 @@ geo:declares a owl:ObjectProperty ;
 geo:derived_from a owl:ObjectProperty ;
     rdfs:label "deriva de"@pt ;
     rdfs:label "derived from"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador geo:bdp geo:igp geo:perfil-composto geo:rmg geo:ogeomec geo:rcsd geo:lessons-learned geo:geostopping-event geo:pag ) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador geo:bdp geo:igp geo:perfil-composto geo:rmg geo:ogeomec geo:rcsd geo:lessons-learned geo:pag geo:laudo-geomecanico ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido geo:qpg geo:bdp geo:pag geo:igp geo:wireline-run geo:lwd-run geo:cuttings-sample-detailed geo:frx geo:drx geo:formation-pressure-point geo:dst-interval geo:core-run geo:ogeomec geo:rmg geo:rcsd geo:gas-show-event ) ] .
 
 geo:spawns a owl:ObjectProperty ;
@@ -2412,7 +2430,7 @@ geo:alimenta_classificacao_litologica a owl:ObjectProperty ;
     rdfs:label "alimenta classificação litológica"@pt ;
     rdfs:label "feeds lithological classification"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:drx geo:frx ) ] ;
-    rdfs:range geo:formacao .
+    rdfs:range geo:litologia .
 
 geo:acquired_during a owl:ObjectProperty ;
     rdfs:label "adquirido durante"@pt ;
@@ -2435,8 +2453,8 @@ geo:feeds_decision a owl:ObjectProperty ;
 geo:stored_in a owl:ObjectProperty ;
     rdfs:label "armazenado em"@pt ;
     rdfs:label "stored in"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:dst-interval geo:mudlogging-time-series geo:mudlogging geo:mwd-lwd geo:frx geo:qpg geo:perfil-composto geo:ogeomec ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:sirr geo:cassandra-exata-curva-tempo geo:exata geo:sigeo geo:bdiep ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:dst-interval geo:mudlogging-time-series geo:mudlogging geo:mwd-lwd geo:frx geo:qpg geo:perfil-composto geo:ogeomec geo:laudo-geomecanico ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:sirr geo:cassandra-exata-curva-tempo geo:exata geo:sigeo geo:bdiep geo:vge ) ] .
 
 geo:files_stored_in a owl:ObjectProperty ;
     rdfs:label "arquivos armazenados em"@pt ;
@@ -2483,8 +2501,8 @@ geo:executes_servico a owl:ObjectProperty ;
 geo:produces a owl:ObjectProperty ;
     rdfs:label "produz"@pt ;
     rdfs:label "produces"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation geo:retro-analysis ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto geo:laudo-geomecanico ) ] .
 
 geo:recorded_in a owl:ObjectProperty ;
     rdfs:label "registrado em"@pt ;
@@ -2504,6 +2522,12 @@ geo:uses_tool a owl:ObjectProperty ;
     rdfs:domain geo:mwd-lwd ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:mwd geo:lwd ) ] .
 
+geo:informed_by a owl:ObjectProperty ;
+    rdfs:label "informado por"@pt ;
+    rdfs:label "informed by"@en ;
+    rdfs:domain geo:geostopping-event ;
+    rdfs:range geo:qpg .
+
 geo:feeds_back_to a owl:ObjectProperty ;
     rdfs:label "alimenta retroanálise"@pt ;
     rdfs:label "feeds back to"@en ;
@@ -2521,6 +2545,36 @@ geo:publishes_to a owl:ObjectProperty ;
     rdfs:label "publishes to"@en ;
     rdfs:domain geo:sigeo ;
     rdfs:range geo:bdiep .
+
+geo:provides_access_to a owl:ObjectProperty ;
+    rdfs:label "provê acesso a"@pt ;
+    rdfs:label "provides access to"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:vge geo:gda ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:bdiep geo:exata ) ] .
+
+geo:queries a owl:ObjectProperty ;
+    rdfs:label "consulta"@pt ;
+    rdfs:label "queries"@en ;
+    rdfs:domain geo:geodo ;
+    rdfs:range geo:aida .
+
+geo:requires_input a owl:ObjectProperty ;
+    rdfs:label "requer como insumo"@pt ;
+    rdfs:label "requires input"@en ;
+    rdfs:domain geo:laudo-geomecanico ;
+    rdfs:range geo:qpg .
+
+geo:references a owl:ObjectProperty ;
+    rdfs:label "referenciado a"@pt ;
+    rdfs:label "references"@en ;
+    rdfs:domain geo:laudo-geomecanico ;
+    rdfs:range geo:poco .
+
+geo:subsidizes a owl:ObjectProperty ;
+    rdfs:label "subsidia"@pt ;
+    rdfs:label "subsidizes"@en ;
+    rdfs:domain geo:laudo-geomecanico ;
+    rdfs:range geo:input-elaboration .
 
 #
 # Edges (instance-level relation triples)
@@ -2682,8 +2736,8 @@ geo:frx geo:complements geo:drx .
 geo:frx geo:feeds_signature geo:dna-geoquimico .
 geo:drx geo:performed_on geo:poco .
 geo:frx geo:performed_on geo:poco .
-geo:drx geo:alimenta_classificacao_litologica geo:formacao .
-geo:frx geo:alimenta_classificacao_litologica geo:formacao .
+geo:drx geo:alimenta_classificacao_litologica geo:litologia .
+geo:frx geo:alimenta_classificacao_litologica geo:litologia .
 geo:sidewall-core-sample geo:acquired_during geo:wireline-run .
 geo:core-run geo:has_plug geo:core-plug .
 geo:gas-show-event geo:feeds_decision geo:geostopping-event .
@@ -2746,7 +2800,7 @@ geo:rcsd geo:derived_from geo:bdp .
 geo:lessons-learned geo:derived_from geo:rcsd .
 geo:lessons-learned geo:derived_from geo:ogeomec .
 geo:lessons-learned geo:derived_from geo:rmg .
-geo:geostopping-event geo:derived_from geo:qpg .
+geo:geostopping-event geo:informed_by geo:qpg .
 geo:pag geo:derived_from geo:cuttings-sample-detailed .
 geo:pag geo:derived_from geo:gas-show-event .
 geo:lessons-learned geo:feeds_back_to geo:retro-analysis .
@@ -2764,3 +2818,14 @@ geo:ogeomec geo:stored_in geo:bdiep .
 geo:exata geo:feeds geo:aida .
 geo:bdiep geo:feeds geo:aida .
 geo:sigeo geo:publishes_to geo:bdiep .
+geo:vge geo:provides_access_to geo:bdiep .
+geo:bdiap geo:complements geo:bdiep .
+geo:geodo geo:queries geo:aida .
+geo:gda geo:provides_access_to geo:exata .
+geo:retro-analysis geo:produces geo:laudo-geomecanico .
+geo:laudo-geomecanico geo:requires_input geo:qpg .
+geo:laudo-geomecanico geo:references geo:poco .
+geo:laudo-geomecanico geo:subsidizes geo:input-elaboration .
+geo:laudo-geomecanico geo:derived_from geo:rmg .
+geo:laudo-geomecanico geo:derived_from geo:ogeomec .
+geo:laudo-geomecanico geo:stored_in geo:vge .
