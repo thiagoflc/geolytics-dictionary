@@ -28,6 +28,7 @@ import { OSDU_CANONICAL } from './osdu-canonical.js';
 import { buildTtl } from './ttl-serializer.js';
 import { buildCardsHtml, buildGsoCardsHtml } from './cards-html.js';
 import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from './osdu-extra-nodes.js';
+import { OG_NODES, OG_EDGES, OG_GLOSSARY } from './operacoes-geologicas-nodes.js';
 import {
   ONTOPETRO_CLASSES,
   ONTOPETRO_PROPERTIES,
@@ -600,7 +601,15 @@ const SIZES = { operational: 28, contractual: 24, actor: 24, instrument: 20, geo
 /* Mapa: id-entidade-grafo → glossario_id (quando existe) */
 const ENTITY_NODES = [
   /* operational */
-  { id: 'poco',  label: 'Poço',             label_en: 'Well',                type: 'operational', glossId: 'poco-anp' },
+  { id: 'poco',  label: 'Poço',             label_en: 'Well',                type: 'operational', glossId: 'poco-anp',
+    primary_key: 'nome_anp',
+    primary_key_standard: 'ANP/SEP nomenclature',
+    primary_key_pattern: '^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$',
+    joined_by_modules: [
+      'data/operacoes-geologicas.json#OGEOMEC.Poco',
+      'data/operacoes-geologicas.json#FRX.Poco',
+      'data/operacoes-geologicas.json#DRX.Poco',
+    ] },
   { id: 'bloco', label: 'Bloco',            label_en: 'Block',               type: 'operational', glossId: 'bloco' },
   { id: 'campo', label: 'Campo',            label_en: 'Field',               type: 'operational', glossId: null,
     definicaoOverride: 'Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.',
@@ -810,9 +819,10 @@ function enrichTerm(t) {
 }
 
 function buildGlossary() {
+  const terms = [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY];
   return {
-    meta: { version: VERSION, generated: NOW, count: GLOSSARIO.length },
-    terms: GLOSSARIO.map(enrichTerm),
+    meta: { version: VERSION, generated: NOW, count: terms.length },
+    terms,
   };
 }
 
@@ -976,6 +986,10 @@ function buildEntityGraph() {
       definition: n.definicaoOverride || (g ? g.definicao : (e ? e.definicao : '')),
       definition_en_canonical: canon.definition_en_canonical,
       legal_source: n.fonte || (g ? g.fonte : (e ? e.legal_source : null)),
+      ...(n.primary_key ? { primary_key: n.primary_key } : {}),
+      ...(n.primary_key_standard ? { primary_key_standard: n.primary_key_standard } : {}),
+      ...(n.primary_key_pattern ? { primary_key_pattern: n.primary_key_pattern } : {}),
+      ...(n.joined_by_modules ? { joined_by_modules: n.joined_by_modules } : {}),
       datasets: g && Array.isArray(g.apareceEm) ? g.apareceEm : [],
       petrokgraph_uri: align.petrokgraph_uri,
       osdu_kind: align.osdu_kind,
@@ -1078,14 +1092,22 @@ function buildEntityGraph() {
     };
   });
   /* Final nodes carry their SKOS aliases for direct interop. */
-  const nodes = [...baseNodes, ...ontopetroNodes, ...osduNodes, ...osduExtraNodes].map(withSkosAliases);
-  /* deriva relation_label_en a partir do snake_case do campo relation */
-  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES].map((e) => ({
+  const nodes = [
+    ...[...baseNodes, ...ontopetroNodes, ...osduNodes, ...osduExtraNodes].map(withSkosAliases),
+    /* OG nodes are stored fully-baked (skos aliases inlined where appropriate) and
+       are NOT re-mapped through withSkosAliases — that would add empty aliases to
+       the 30 OG nodes that intentionally do not carry them. */
+    ...OG_NODES,
+  ];
+  /* deriva relation_label_en a partir do snake_case do campo relation, exceto
+     quando a aresta já traz relation_label_en explícito (caso OG_EDGES, onde
+     os labels foram traduzidos manualmente). */
+  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES, ...OG_EDGES].map((e) => ({
     source: e.source,
     target: e.target,
     relation: e.relation,
     relation_label_pt: e.relation_label,
-    relation_label_en: e.relation.replace(/_/g, ' '),
+    relation_label_en: e.relation_label_en || e.relation.replace(/_/g, ' '),
     style: e.style,
   }));
   return {
@@ -1112,12 +1134,12 @@ function buildFull() {
       generated: NOW,
       description: 'Geolytics Dictionary — complete merged dataset',
       counts: {
-        glossary_terms: GLOSSARIO.length,
+        glossary_terms: GLOSSARIO.length + OG_GLOSSARY.length,
         extended_terms: EXTENDED_TERMS.length,
-        total_terms: GLOSSARIO.length + EXTENDED_TERMS.length,
+        total_terms: GLOSSARIO.length + OG_GLOSSARY.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length,
-        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length,
+        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length,
+        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
         ontopetro_classes: ONTOPETRO_CLASSES.length,
@@ -1145,7 +1167,7 @@ function buildFull() {
       },
       sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)', 'Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)', 'Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)'],
     },
-    glossary: GLOSSARIO.map(enrichTerm),
+    glossary: [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY],
     extended_terms: EXTENDED_TERMS,
     entity_graph: graph,
     datasets: CONJUNTOS,
@@ -1980,11 +2002,11 @@ writeJson('ai/ontology-map.json',      buildOntologyMap());
 })();
 
 console.log('\n✓ Done.');
-console.log(`  Glossary terms: ${GLOSSARIO.length}`);
+console.log(`  Glossary terms: ${GLOSSARIO.length + OG_GLOSSARY.length} (${GLOSSARIO.length} base + ${OG_GLOSSARY.length} OG)`);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
-console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra)`);
-console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length}`);
+console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG)`);
+console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
 console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);
