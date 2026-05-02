@@ -53,7 +53,8 @@
         "sources",
         "priority_tier",
         "external_id_chatpetrobras",
-        "_legacy"
+        "_legacy",
+        "obtained_from_lab_tests"
       ],
       "sources_schema": {
         "form": "structured",
@@ -76,6 +77,7 @@
         "Document",
         "Formula",
         "GovernanceKPI",
+        "LabTest",
         "Measurement",
         "Model",
         "Process",
@@ -258,6 +260,20 @@
           "IS_PART_OF (extended definition)": "Definição expandida 'co-medido' viola meronimia formal.",
           "CO_OCCURS_WITH": "Implicaria co-ocorrência obrigatória — incorreto para o par Washout↔Breakout."
         }
+      },
+      "lab_test_provenance_schema": {
+        "field_name": "obtained_from_lab_tests",
+        "form": "structured",
+        "semantics": "REPLACE",
+        "semantics_note": "Curated list per property entity. The script does not union/append; re-running with the same curated list is a no-op. If a different list is already present, the previous value is archived to _legacy.obtained_from_lab_tests_prev and replaced.",
+        "item_shape": {
+          "test_id": "string — REQUIRED — id of the lab-test entity (e.g. GEOMEC061)",
+          "test_label": "string — REQUIRED — human-readable label of the test",
+          "primary": "boolean — REQUIRED — true iff this is the primary method for the property",
+          "method_note": "string — REQUIRED — short note describing how the property is obtained from this test"
+        },
+        "primary_cardinality": "exactly one item per property must have primary=true",
+        "depends_on": "lab-test entities GEOMEC061–067 (Frente 1)"
       }
     },
     "architecture_notes": [
@@ -271,7 +287,9 @@
       "Resolução de Overlap 2026-05-02 — Variáveis de fórmulas promovidas a entidades de primeira classe. GEOMEC036.formula.variables (dict) substituído por formula.variable_refs (list[{symbol, entity_id}]) e relacionamentos REQUIRES_INPUT/IS_INPUT_FOR explícitos entre GEOMEC036 ↔ GEOMEC038/GEOMEC039. Variável L permanece como referência sem entity_id (gap registrado). Dicionário antigo movido para entity._legacy.formula_variables para auditoria.",
       "Vocabulário Canonical 2026-05-02 — Gestão e Governança de Dados aprovou enum de 34 verbos canônicos: 31 da proposta inicial + 3 adicionais (AUTHORITATIVE_FOR, OWNED_BY, AMPLIFIES). Migrados: 26 mesclas + 20 inversões = 46 arestas alteradas. 5 regras de desambiguação documentadas em schema_policy.canonical_relation_enum.disambiguation_rules. 4 ressalvas SHACL registradas como non-blocking para v2.",
       "Vocabulário Canonical 2026-05-02 — Gestão e Governança de Dados aprovou enum de 34 verbos canônicos: 31 da proposta inicial + 3 adicionais (AUTHORITATIVE_FOR, OWNED_BY, AMPLIFIES). Migrados: 1 mesclas + 1 inversões = 2 arestas alteradas. 5 regras de desambiguação documentadas em schema_policy.canonical_relation_enum.disambiguation_rules. 4 ressalvas SHACL registradas como non-blocking para v2.",
-      "Frente F response 2026-05-02 — Gestão e Governança de Dados aplicou evidências documentais SINPEP a 8 entidades skeleton: 6 enriquecidas in-place (GEOMEC046–051), 2 splits (GEOMEC052→052A+052B, GEOMEC053→053A+053B) seguindo o padrão de deprecação do GEOMEC026. 4 entidades promovidas para confidence=high (046, 052A, 052B, 053A, 053B); 5 promovidas para medium (047, 048, 049, 050, 051). Lacunas residuais documentadas em cada entity.evidence_gaps."
+      "Frente F response 2026-05-02 — Gestão e Governança de Dados aplicou evidências documentais SINPEP a 8 entidades skeleton: 6 enriquecidas in-place (GEOMEC046–051), 2 splits (GEOMEC052→052A+052B, GEOMEC053→053A+053B) seguindo o padrão de deprecação do GEOMEC026. 4 entidades promovidas para confidence=high (046, 052A, 052B, 053A, 053B); 5 promovidas para medium (047, 048, 049, 050, 051). Lacunas residuais documentadas em cada entity.evidence_gaps.",
+      "Lab-tests batch 2026-05-02 — adicionadas 7 entidades de ensaios de laboratório (GEOMEC061–GEOMEC067) sob nova categoria 'LabTest', todas IS_PART_OF GEOMEC022 (Scratch Test e Ensaios Mecânicos). Definições baseadas em prática-padrão ISRM; sources=[] e evidence_gaps explicitando ausência de PE-XXX vinculado e calibração Petrobras-interna. SHACL: enum de categoria deve ser estendida com 'LabTest' em geo:GeomechCorporateEntityShape (parallel agent).",
+      "Lab-test provenance backfill 2026-05-02 — adicionado campo `obtained_from_lab_tests` (REPLACE) a 6 entidades de propriedade geomecânica (GEOMEC010, 011, 012, 013, 014, 024), amarrando-as às entidades de ensaio de laboratório GEOMEC061–067 criadas em paralelo pela Frente 1. Cada item registra test_id, test_label, primary e method_note; exatamente um item por propriedade tem primary=true. Esquema do campo documentado em meta.schema_policy.lab_test_provenance_schema."
     ],
     "ingestion_decisions": {
       "deprecation_GEOMEC026": "Re-routed all refs to GEOMEC026B (Laudo Geomecânico). GEOMEC026A (QPG) flagged out-of-scope (see entity.out_of_scope_flag).",
@@ -1303,6 +1321,26 @@
           "section": "§3.3.3 Tensões horizontais máximas",
           "citation": "UCS é a resistência não confinada da rocha, que pode ser estimada por alguma das diversas equações disponíveis na literatura ou por medidas diretas em testemunho."
         }
+      ],
+      "obtained_from_lab_tests": [
+        {
+          "test_id": "GEOMEC062",
+          "test_label": "Ensaio UCS (Uniaxial sem Confinamento)",
+          "primary": true,
+          "method_note": "Método primário — medição direta na ruptura uniaxial sem confinamento."
+        },
+        {
+          "test_id": "GEOMEC061",
+          "test_label": "Ensaio Triaxial",
+          "primary": false,
+          "method_note": "Componente uniaxial extraído da envoltória de ruptura."
+        },
+        {
+          "test_id": "GEOMEC022",
+          "test_label": "Scratch Test",
+          "primary": false,
+          "method_note": "Estimativa contínua ao longo do testemunho via correlação de força de arranhamento."
+        }
       ]
     },
     {
@@ -1379,6 +1417,20 @@
           "section": "§3.5.6 Dados Laboratoriais",
           "citation": "Compressibilidade de Poros Uniaxial: O módulo de Young e coeficiente de Poisson também podem ser determinados."
         }
+      ],
+      "obtained_from_lab_tests": [
+        {
+          "test_id": "GEOMEC061",
+          "test_label": "Ensaio Triaxial",
+          "primary": true,
+          "method_note": "Método primário (estático) — derivado da curva tensão-deformação confinada."
+        },
+        {
+          "test_id": "GEOMEC062",
+          "test_label": "Ensaio UCS",
+          "primary": false,
+          "method_note": "Estático uniaxial sem confinamento."
+        }
       ]
     },
     {
@@ -1448,6 +1500,20 @@
           "section": "§3.5.6 Dados Laboratoriais",
           "citation": "Compressibilidade de Poros Uniaxial: O módulo de Young e coeficiente de Poisson também podem ser determinados."
         }
+      ],
+      "obtained_from_lab_tests": [
+        {
+          "test_id": "GEOMEC061",
+          "test_label": "Ensaio Triaxial",
+          "primary": true,
+          "method_note": "Razão deformação lateral/axial em ensaio triaxial drenado."
+        },
+        {
+          "test_id": "GEOMEC062",
+          "test_label": "Ensaio UCS",
+          "primary": false,
+          "method_note": "Razão deformação lateral/axial em ensaio uniaxial."
+        }
       ]
     },
     {
@@ -1511,6 +1577,20 @@
           "section": "§3.4.2.6 Correção da depleção",
           "citation": "supondo que o coeficiente de Biot seja igual à unidade e um coeficiente de Poisson de 0,25, a variação da magnitude de uma tensão total horizontal é igual a 2/3 da depleção do reservatório."
         }
+      ],
+      "obtained_from_lab_tests": [
+        {
+          "test_id": "GEOMEC063",
+          "test_label": "Ensaio Hidrostático",
+          "primary": true,
+          "method_note": "Calculado da rigidez bulk Kb (hidrostático) e Ks tabelado da literatura — ver PE-2RES-00014 §3.4.2.5."
+        },
+        {
+          "test_id": "GEOMEC061",
+          "test_label": "Ensaio Triaxial",
+          "primary": false,
+          "method_note": "Estimativa indireta via módulos elásticos."
+        }
       ]
     },
     {
@@ -1564,6 +1644,20 @@
           "doc_id": "PP-2E&P-00322",
           "section": "§3.8 Método 3b",
           "citation": "\"Na interpretação dos Testes de Longa Duração (TLD), a compressibilidade de poros da formação deve ser estimada criteriosamente, uma vez que esse parâmetro pode impactar significativamente as interpretações dos volumes in place.\"\n"
+        }
+      ],
+      "obtained_from_lab_tests": [
+        {
+          "test_id": "GEOMEC063",
+          "test_label": "Ensaio Hidrostático",
+          "primary": true,
+          "method_note": "Estado de tensão hidrostático isotrópico — Cb."
+        },
+        {
+          "test_id": "GEOMEC065",
+          "test_label": "Ensaio Oedométrico",
+          "primary": false,
+          "method_note": "Caso particular uniaxial — alimenta GEOMEC024."
         }
       ]
     },
@@ -2272,6 +2366,14 @@
           "doc_id": "PP-2E&P-00322",
           "section": "§3.8 Método 2: Ensaios de Laboratório / Equação (2)",
           "citation": "\"A compressibilidade de poros obtida em ensaios hidrostáticos em laboratório deve ser corrigida para que possa ser aplicada em estudos de reservatórios [...] onde é a compressibilidade de poros em condição uniaxial sob variação da pressão de poros e é a compressibilidade de poros em condição hidrostática sob variação da pressão de poros.\"\n"
+        }
+      ],
+      "obtained_from_lab_tests": [
+        {
+          "test_id": "GEOMEC065",
+          "test_label": "Ensaio Oedométrico",
+          "primary": true,
+          "method_note": "Método primário — deformação lateral nula, vertical permitida."
         }
       ]
     },
@@ -4378,6 +4480,229 @@
           "doc_id": "PE-2POC-00106",
           "section": "Tabela 1 — Registro no OpenWells/Atlas",
           "citation": "MFRAC ABS ULT C — pressão de propagação registrada no patamar estabilizado durante bombeio contínuo do microfraturamento."
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC061",
+      "label_pt": "Ensaio Triaxial",
+      "label_en": "Triaxial Test",
+      "category": "LabTest",
+      "confidence": "medium",
+      "acronym": [
+        "Triaxial"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Ensaio de compressão axial sob confinamento radial constante, executado em corpo de prova cilíndrico de rocha intacta. Permite obter resistência à compressão sob tensão de confinamento (UCS confinada), módulo de Young, coeficiente de Poisson e envoltória de ruptura (Mohr–Coulomb / Hoek–Brown). Aplicado em caracterização geomecânica de reservatório e capeadora para modelos 1D/3D MEM.",
+      "definition_en": "Axial compression test under constant radial confining pressure on a cylindrical intact rock specimen. Yields confined strength, Young's modulus, Poisson's ratio, and the Mohr–Coulomb/Hoek–Brown failure envelope. Standard input for reservoir/cap-rock geomechanical characterization (1D/3D MEM).",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity.",
+        "Faixas típicas de tensão de confinamento usadas pela Petrobras (single-stage vs. multi-stage) não capturadas."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC010",
+          "target_label": "Resistência à Compressão Uniaxial (UCS)"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC011",
+          "target_label": "Módulo de Young"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC012",
+          "target_label": "Coeficiente de Poisson"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC005",
+          "target_label": "Tensão Efetiva"
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC062",
+      "label_pt": "Ensaio UCS (Uniaxial sem Confinamento)",
+      "label_en": "Unconfined Compression Test",
+      "category": "LabTest",
+      "confidence": "medium",
+      "acronym": [
+        "UCS test",
+        "UCS"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Compressão axial em corpo de prova cilíndrico de rocha sem aplicação de tensão de confinamento (σ3 = 0). Fornece a resistência à compressão uniaxial (UCS) — propriedade primária de resistência da rocha. Quando instrumentado com strain-gauges, permite estimar também módulo de Young e coeficiente de Poisson estáticos.",
+      "definition_en": "Axial compression test on a cylindrical rock specimen with zero confining pressure (σ3 = 0). Yields the Unconfined Compressive Strength (UCS) — the primary rock-strength descriptor. Optional strain-gauge instrumentation also provides static Young's modulus and Poisson's ratio.",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC010",
+          "target_label": "Resistência à Compressão Uniaxial (UCS)"
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC063",
+      "label_pt": "Ensaio Hidrostático",
+      "label_en": "Hydrostatic Compression Test",
+      "category": "LabTest",
+      "confidence": "medium",
+      "acronym": [
+        "Hydrostat"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Ensaio em que o corpo de prova é submetido a tensão isotrópica crescente (σ1 = σ2 = σ3) com medição da deformação volumétrica. Caracteriza a compressibilidade da rocha e dos poros, fornecendo Cbc e Cpc usadas em modelos de compactação/subsidência e em correções de porosidade in-situ.",
+      "definition_en": "Test under increasing isotropic stress (σ1 = σ2 = σ3) with volumetric strain measurement. Characterizes rock and pore compressibility, providing Cbc/Cpc used in compaction/subsidence modeling and in-situ porosity corrections.",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity.",
+        "Distinção entre Cpc (drenado) e outros tipos de compressibilidade reportada no ensaio precisa ser explicitada por entidade alvo."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC014",
+          "target_label": "Compressibilidade de Poros"
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC064",
+      "label_pt": "Ensaio Brasileiro (Tração)",
+      "label_en": "Brazilian Tensile Test",
+      "category": "LabTest",
+      "confidence": "medium",
+      "acronym": [
+        "BR",
+        "Brazilian"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Ensaio de tração indireta no qual um disco de rocha é comprimido entre dois pratos diametralmente opostos, induzindo tração no plano central. A resistência à tração σt é calculada a partir da carga de ruptura e da geometria do corpo de prova (norma ISRM). Fornece dado primário para calibração de envoltórias de ruptura e cálculo de pressão de quebra em fraturamento.",
+      "definition_en": "Indirect tensile test in which a rock disc is compressed between two diametrically opposed platens, inducing tension on the central plane. Tensile strength σt is computed from the failure load and specimen geometry (ISRM). Primary input for failure-envelope calibration and fracture breakdown-pressure calculations.",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity.",
+        "Não há entidade alvo para 'Resistência à Tração σt' no dicionário corporativo atual — criar GEOMEC para σt e religar este ensaio com MEASURES."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC065",
+      "label_pt": "Ensaio Oedométrico",
+      "label_en": "Oedometric Test",
+      "category": "LabTest",
+      "confidence": "medium",
+      "acronym": [
+        "Oedo"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Compressão uniaxial sob deformação lateral nula (condição K0): o corpo de prova é confinado em um anel rígido e tensionado axialmente em estágios. Fornece a compressibilidade de poros uniaxial (Cpu/Cm), parâmetro chave para modelagem de compactação de reservatório e subsidência em campos clásticos.",
+      "definition_en": "Uniaxial compression under zero lateral strain (K0 condition): the specimen is confined in a rigid ring and axially loaded in stages. Yields the uniaxial pore compressibility (Cpu/Cm), a key input for reservoir compaction and subsidence modeling in clastic fields.",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+        },
+        {
+          "relation_type": "MEASURES",
+          "target_id": "GEOMEC024",
+          "target_label": "Compressibilidade de Poros Uniaxial"
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC066",
+      "label_pt": "Ensaio TWC (Thick-Walled Cylinder)",
+      "label_en": "Thick-Walled Cylinder Test",
+      "category": "LabTest",
+      "confidence": "low",
+      "acronym": [
+        "TWC"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Ensaio em corpo de prova cilíndrico oco submetido simultaneamente a pressão externa e (opcionalmente) interna, simulando o estado de tensões no entorno de um poço aberto. Mede a pressão crítica de colapso da parede interna e é o ensaio padrão de laboratório para avaliação de risco de produção de areia (sanding) em arenitos pouco consolidados.",
+      "definition_en": "Test on a hollow cylindrical specimen under external (and optionally internal) pressure, simulating the near-wellbore stress state. Measures the critical inner-wall collapse pressure and is the standard laboratory method for sand-production risk assessment in poorly consolidated sandstones.",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity.",
+        "Não há entidade alvo para 'Sand Production Risk' no dicionário corporativo atual — criar GEOMEC para risco de produção de areia e religar este ensaio com MEASURES.",
+        "Confidence=low: dependência forte de geometria do CP e calibração específica Petrobras ainda não inventariada."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+        },
+        {
+          "relation_type": "IS_INPUT_FOR",
+          "target_id": "GEOMEC015",
+          "target_label": "Estabilidade de Poço / Análise de Geohazards"
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC067",
+      "label_pt": "Ensaio de Volume Poroso",
+      "label_en": "Pore Volume Analysis",
+      "category": "LabTest",
+      "confidence": "medium",
+      "acronym": [
+        "PVA"
+      ],
+      "standard_unit": null,
+      "definition_pt": "Conjunto de ensaios laboratoriais para determinação do volume de poros e porosidade efetiva de plug de rocha — tipicamente por porosimetria a hélio ou método de saturação. Fornece o volume poroso de referência usado em ensaios de compressibilidade, permeabilidade e correções petrofísicas. Escopo formal pertence à Petrofísica; mantido aqui pelo acoplamento direto com ensaios geomecânicos (Hidrostático, Oedométrico).",
+      "definition_en": "Set of laboratory measurements determining pore volume and effective porosity of a rock plug — typically by helium porosimetry or saturation methods. Supplies the reference pore volume used in compressibility, permeability and petrophysical-correction calculations. Formal scope is Petrophysics; retained here for direct coupling with geomechanical tests (Hydrostatic, Oedometric).",
+      "evidence_gaps": [
+        "Procedimento ainda não vinculado a uma norma ISRM específica nem a um PE-XXX Petrobras-interno; sources=[] até curadoria pelo time de laboratório.",
+        "Constantes de calibração e procedimentos Petrobras-internos (parâmetros de ensaio, geometria de corpo de prova, tolerâncias) não documentados nesta entity.",
+        "Não há entidades alvo para 'Porosidade efetiva' nem 'Permeabilidade absoluta' no dicionário corporativo atual — escopo Petrofísica; criar entidades e religar este ensaio com MEASURES quando elas existirem."
+      ],
+      "sources": [],
+      "relationships": [
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC022",
+          "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
         }
       ]
     }
