@@ -22,6 +22,19 @@ Rules enforced
    The ANP well-type prefix must be one of the canonical values from the
    tipo_poco taxonomy (exploratorio/1-, avaliacao/2-, desenvolvimento/3-
    or 7-, especial/4- or 6-).
+
+5. CORPORATE_LOW_CONFIDENCE_PROVISIONAL  (severity=provisional)
+   The retrieved L6 corporate evidence supporting the answer is exclusively
+   marked confidence=low with documented evidence_gaps. The answer is not
+   invalidated, but must be presented as provisional and the gaps surfaced.
+
+6. GEOMEC_DEPRECATED_REFERENCE  (severity=warn)
+   The draft or question references a deprecated GEOMEC* id (e.g. GEOMEC026).
+   Suggest the active replacement(s).
+
+7. GEOMEC_OUT_OF_SCOPE_REFERENCE  (severity=warn)
+   The draft references a GEOMEC* id flagged out_of_scope_flag (e.g. GEOMEC026A
+   for QPG, which belongs to Geologia de Locação Exploratória).
 """
 
 from __future__ import annotations
@@ -225,10 +238,104 @@ def _check_tipo_poco_anp(text: str) -> list[Violation]:
 # ---------------------------------------------------------------------------
 
 
+_GEOMEC_ID_PATTERN = re.compile(r"\bGEOMEC(\d{3})([A-Z]?)\b")
+
+
+def _check_corporate_low_confidence_provisional(state: AgentState) -> list[Violation]:
+    """Mark answer provisional when L6 support is exclusively low-confidence.
+
+    Triggered when at least one retrieved chunk of type=geomec_corporate_entity
+    has confidence=low AND no corporate chunk in the retrieval has confidence
+    medium or high. Does not invalidate the answer (severity=provisional).
+    """
+    violations: list[Violation] = []
+    rag_results = state.get("rag_results") or []
+    corporate = [
+        c for c in rag_results
+        if (c.get("type") == "geomec_corporate_entity"
+            or c.get("metadata", {}).get("module") == "geomechanics-corporate")
+    ]
+    if not corporate:
+        return violations
+
+    confidences = {c.get("metadata", {}).get("confidence") for c in corporate}
+    has_low = "low" in confidences
+    has_better = any(c in confidences for c in ("medium", "high"))
+    if not has_low or has_better:
+        return violations
+
+    low_chunks = [c for c in corporate if c.get("metadata", {}).get("confidence") == "low"]
+    ids = [c.get("metadata", {}).get("id", "?") for c in low_chunks]
+    has_gaps = any(c.get("metadata", {}).get("has_evidence_gaps") for c in low_chunks)
+
+    violations.append(
+        {
+            "rule": "CORPORATE_LOW_CONFIDENCE_PROVISIONAL",
+            "evidence": (
+                f"Suporte L6 exclusivamente em entidade(s) confidence=low: {', '.join(ids)}."
+                + (" Lacunas de evidência documentadas." if has_gaps else "")
+            ),
+            "suggested_fix": (
+                "Apresentar resposta como PROVISÓRIA. Citar explicitamente as lacunas de "
+                "evidência da entidade corporativa e recomendar consulta a fonte primária "
+                "(padrão PE-2RES/POC referenciado) antes de uso operacional."
+            ),
+            "severity": "provisional",
+        }
+    )
+    return violations
+
+
+def _check_geomec_deprecated_reference(text: str) -> list[Violation]:
+    """Flag mentions of GEOMEC026 (deprecated) without A/B suffix."""
+    violations: list[Violation] = []
+    seen: set[str] = set()
+    for m in _GEOMEC_ID_PATTERN.finditer(text):
+        full = m.group(0)
+        suffix = m.group(2)
+        if m.group(1) == "026" and suffix == "" and full not in seen:
+            seen.add(full)
+            violations.append(
+                {
+                    "rule": "GEOMEC_DEPRECATED_REFERENCE",
+                    "evidence": f"Referência a entidade depreciada '{full}'.",
+                    "suggested_fix": (
+                        "GEOMEC026 foi depreciada — substituir por GEOMEC026B "
+                        "(Laudo Geomecânico) para contexto de geomecânica. "
+                        "GEOMEC026A (QPG) pertence ao módulo de Geologia de Locação "
+                        "Exploratória, não a este módulo."
+                    ),
+                    "severity": "warn",
+                }
+            )
+    return violations
+
+
+def _check_geomec_out_of_scope_reference(text: str) -> list[Violation]:
+    """Flag mentions of out-of-scope GEOMEC* ids (e.g. GEOMEC026A for QPG)."""
+    violations: list[Violation] = []
+    if "GEOMEC026A" in text:
+        violations.append(
+            {
+                "rule": "GEOMEC_OUT_OF_SCOPE_REFERENCE",
+                "evidence": "Referência a GEOMEC026A (QPG) no contexto de Geomecânica.",
+                "suggested_fix": (
+                    "QPG (Quadro de Previsões Geológicas) está fora do escopo do módulo "
+                    "Geomecânica — pertence a Geologia de Locação Exploratória. "
+                    "Para o documento geomecânico use GEOMEC026B (Laudo Geomecânico)."
+                ),
+                "severity": "warn",
+            }
+        )
+    return violations
+
+
 def validator_node(state: AgentState) -> AgentState:
     """Run all deterministic validation rules against the question and draft.
 
-    Writes `validation` (ValidationResult) into state.
+    Writes `validation` (ValidationResult) into state. The result is "valid"
+    only when there are zero error-severity findings; provisional/warn entries
+    are surfaced but do not block.
     """
     # Check both the original question and the current draft (if present)
     text_to_check = state.get("draft", "") + " " + state.get("question", "")
@@ -238,9 +345,15 @@ def validator_node(state: AgentState) -> AgentState:
     violations.extend(_check_reserva_ambiental_confusion(text_to_check))
     violations.extend(_check_regime_contratual(text_to_check))
     violations.extend(_check_tipo_poco_anp(text_to_check))
+    violations.extend(_check_corporate_low_confidence_provisional(state))
+    violations.extend(_check_geomec_deprecated_reference(text_to_check))
+    violations.extend(_check_geomec_out_of_scope_reference(text_to_check))
+
+    # Default severity = "error" for backwards compatibility with rules 1-4
+    has_error = any(v.get("severity", "error") == "error" for v in violations)
 
     validation: ValidationResult = {
-        "valid": len(violations) == 0,
+        "valid": not has_error,
         "violations": violations,
     }
 

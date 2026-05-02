@@ -240,3 +240,142 @@ class TestValidatorNode:
         state: AgentState = {"question": "Teste", "iteration": 1}
         result = validator_node(state)
         assert result.get("iteration") == 1
+
+
+# ---------------------------------------------------------------------------
+# Rule 5: CORPORATE_LOW_CONFIDENCE_PROVISIONAL
+# ---------------------------------------------------------------------------
+
+
+from nodes.validator import (
+    _check_corporate_low_confidence_provisional,
+    _check_geomec_deprecated_reference,
+    _check_geomec_out_of_scope_reference,
+)
+
+
+def _corp_chunk(eid: str, conf: str | None, has_gaps: bool = False) -> dict:
+    return {
+        "id": f"geomec_corporate_{eid}",
+        "type": "geomec_corporate_entity",
+        "text": f"chunk for {eid}",
+        "metadata": {
+            "id": eid,
+            "confidence": conf,
+            "has_evidence_gaps": has_gaps,
+            "module": "geomechanics-corporate",
+        },
+    }
+
+
+class TestCorporateLowConfidence:
+    def test_no_corporate_chunks_no_violation(self) -> None:
+        state: AgentState = {"rag_results": []}
+        violations = _check_corporate_low_confidence_provisional(state)
+        assert violations == []
+
+    def test_only_low_confidence_triggers_provisional(self) -> None:
+        state: AgentState = {
+            "rag_results": [
+                _corp_chunk("GEOMEC037", "low", has_gaps=True),
+                _corp_chunk("GEOMEC038", "low", has_gaps=True),
+            ]
+        }
+        violations = _check_corporate_low_confidence_provisional(state)
+        assert len(violations) == 1
+        v = violations[0]
+        assert v["rule"] == "CORPORATE_LOW_CONFIDENCE_PROVISIONAL"
+        assert v["severity"] == "provisional"
+        assert "GEOMEC037" in v["evidence"]
+        assert "lacuna" in v["evidence"].lower()
+
+    def test_mix_with_medium_does_not_trigger(self) -> None:
+        state: AgentState = {
+            "rag_results": [
+                _corp_chunk("GEOMEC037", "low", has_gaps=True),
+                _corp_chunk("GEOMEC036", "medium"),
+            ]
+        }
+        violations = _check_corporate_low_confidence_provisional(state)
+        assert violations == []
+
+    def test_only_high_does_not_trigger(self) -> None:
+        state: AgentState = {
+            "rag_results": [_corp_chunk("GEOMEC003", "high")]
+        }
+        violations = _check_corporate_low_confidence_provisional(state)
+        assert violations == []
+
+    def test_validator_node_marks_valid_when_only_provisional(self) -> None:
+        """Provisional findings do not invalidate the answer."""
+        state: AgentState = {
+            "question": "Como calcular ECD?",
+            "rag_results": [_corp_chunk("GEOMEC037", "low", has_gaps=True)],
+        }
+        result = validator_node(state)
+        assert result["validation"]["valid"] is True
+        assert any(v["rule"] == "CORPORATE_LOW_CONFIDENCE_PROVISIONAL"
+                   for v in result["validation"]["violations"])
+
+
+class TestGeomecDeprecatedReference:
+    def test_geomec026_flagged(self) -> None:
+        violations = _check_geomec_deprecated_reference(
+            "Conforme GEOMEC026, o laudo deve incluir..."
+        )
+        assert len(violations) == 1
+        assert violations[0]["rule"] == "GEOMEC_DEPRECATED_REFERENCE"
+        assert violations[0]["severity"] == "warn"
+        assert "GEOMEC026B" in violations[0]["suggested_fix"]
+
+    def test_geomec026a_not_flagged_as_deprecated(self) -> None:
+        violations = _check_geomec_deprecated_reference("Veja GEOMEC026A")
+        assert violations == []  # 026A is out_of_scope, not deprecated
+
+    def test_geomec026b_not_flagged(self) -> None:
+        violations = _check_geomec_deprecated_reference(
+            "Laudo Geomecânico (GEOMEC026B) é o documento corporativo."
+        )
+        assert violations == []
+
+    def test_other_geomec_ids_not_flagged(self) -> None:
+        violations = _check_geomec_deprecated_reference("GEOMEC036 e GEOMEC042")
+        assert violations == []
+
+    def test_dedup_repeated_mentions(self) -> None:
+        violations = _check_geomec_deprecated_reference(
+            "GEOMEC026 e novamente GEOMEC026"
+        )
+        assert len(violations) == 1
+
+
+class TestGeomecOutOfScopeReference:
+    def test_geomec026a_flagged(self) -> None:
+        violations = _check_geomec_out_of_scope_reference(
+            "O QPG (GEOMEC026A) é parte da entrega geomecânica."
+        )
+        assert len(violations) == 1
+        assert violations[0]["rule"] == "GEOMEC_OUT_OF_SCOPE_REFERENCE"
+        assert violations[0]["severity"] == "warn"
+        assert "Geologia de Locação Exploratória" in violations[0]["suggested_fix"]
+
+    def test_no_026a_no_violation(self) -> None:
+        violations = _check_geomec_out_of_scope_reference(
+            "GEOMEC026B contém os limites operacionais."
+        )
+        assert violations == []
+
+
+class TestValidatorNodeMixedSeverities:
+    def test_error_present_marks_invalid(self) -> None:
+        """Any error-severity violation invalidates regardless of provisional/warn."""
+        state: AgentState = {
+            "question": "Reserva 4P",
+            "rag_results": [_corp_chunk("GEOMEC037", "low", has_gaps=True)],
+            "iteration": 0,
+        }
+        result = validator_node(state)
+        assert result["validation"]["valid"] is False
+        rules = [v["rule"] for v in result["validation"]["violations"]]
+        assert "SPE_PRMS_INVALID_CATEGORY" in rules
+        assert "CORPORATE_LOW_CONFIDENCE_PROVISIONAL" in rules
