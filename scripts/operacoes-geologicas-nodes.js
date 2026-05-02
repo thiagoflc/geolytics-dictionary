@@ -744,6 +744,104 @@ export const OG_NODES = [
       "RCSD",
       "CSD Report"
     ]
+  },
+  {
+    "id": "qpg",
+    "label": "Quadro de Previsão Geológica",
+    "label_en": "Geological Prognosis Chart (QPG)",
+    "type": "contractual",
+    "color": "#7F77DD",
+    "size": 24,
+    "definition": "Quadro de Previsão Geológica — publicado no SIGEO/BDIEP, consolida a representação visual das possíveis características geológicas do poço: previsão litológica, marcadores, falhas, tempo sísmico, objetivos e previsões de ferramentas/técnicas de aquisição. Principal insumo de planejamento consumido pelas atividades de aquisição. Raiz da linhagem de documentos do poço.",
+    "module": "data/operacoes-geologicas.json#OG037",
+    "evidence_status": "documented",
+    "evidence_refs": ["SIGEO wiki — Quadro de Previsão Geológica", "SIGEO wiki — Publicação e Recuperação de QPG", "Briefing Buscador de Análogos Geomec"],
+    "manager": "EXP/OGP",
+    "stored_in": "SIGEO / BDIEP",
+    "superclass": "GeologicalOperationsDocument",
+    "synonyms_pt": ["Quadro de Previsão Geológica", "Prognóstico Geológico", "QPG"],
+    "synonyms_en": ["geological prognosis", "predicted geology chart", "QPG"]
+  },
+  {
+    "id": "bdp",
+    "label": "Boletim Diário de Perfuração",
+    "label_en": "Daily Drilling Bulletin (BDP)",
+    "type": "contractual",
+    "color": "#7F77DD",
+    "size": 22,
+    "definition": "Boletim Diário de Perfuração — boletim estruturado (CSV) disponível via API POÇOS. Registra a execução diária contra o prognóstico do QPG. Gestor: POÇOS. Insumo de retroanálise e upstream do IGP e OGEOMEC.",
+    "module": "data/operacoes-geologicas.json#OG032",
+    "evidence_status": "partial",
+    "evidence_refs": ["PE-2EXP-00061"],
+    "manager": "POÇOS",
+    "superclass": "GeologicalOperationsDocument",
+    "synonyms_pt": ["BDP", "Boletim Diário de Perfuração"],
+    "synonyms_en": ["BDP", "daily drilling bulletin"]
+  },
+  {
+    "id": "igp",
+    "label": "Informativo Geológico de Poço",
+    "label_en": "Well Geological Information (IGP)",
+    "type": "contractual",
+    "color": "#7F77DD",
+    "size": 22,
+    "definition": "Informativo Geológico de Poço — relatório não estruturado (PDF/Word) consolidando a informação geológica do poço após a perfuração de cada fase. Integra BDP, QPG e PAG. Gestor: EXP/OGP/AQG. Insumo do Perfil Composto.",
+    "module": "data/operacoes-geologicas.json#OG031",
+    "evidence_status": "partial",
+    "evidence_refs": ["PE-2EXP-00061"],
+    "manager": "EXP/OGP/AQG",
+    "superclass": "GeologicalOperationsDocument",
+    "synonyms_pt": ["IGP", "Informativo Geológico de Poço"],
+    "synonyms_en": ["IGP", "well geological information"]
+  },
+  {
+    "id": "perfil-composto",
+    "label": "Perfil Composto",
+    "label_en": "Composite Log",
+    "type": "contractual",
+    "color": "#7F77DD",
+    "size": 24,
+    "definition": "Perfil Composto — produto canônico pós-perfuração que integra, para um único poço, curvas de perfis (wireline e MWD/LWD), descrições litológicas, indícios, testes de formação, registros direcionais e demais dados adquiridos — recuperados da BDIEP via SIGEO. Produto da disciplina de Consolidação de Dados de Poço.",
+    "module": "data/operacoes-geologicas.json#OG038",
+    "evidence_status": "documented",
+    "evidence_refs": ["SIGEO wiki — Perfil Composto"],
+    "manager": "EXP/OGP",
+    "stored_in": "SIGEO / BDIEP",
+    "superclass": "GeologicalOperationsDocument",
+    "synonyms_pt": ["Perfil Composto", "perfil consolidado de poço"],
+    "synonyms_en": ["composite log", "well composite log"]
+  },
+  {
+    "id": "rmg",
+    "label": "Relatório de Monitoramento Geomecânico",
+    "label_en": "Geomechanical Monitoring Report (RMG)",
+    "type": "contractual",
+    "color": "#7F77DD",
+    "size": 22,
+    "definition": "Relatório de Monitoramento Geomecânico — PDF não estruturado armazenado em VGE / Pasta de Poço. Sintetiza ocorrências geomecânicas (OGEOMEC) e operações diárias (BDP) para retroanálise e lessons learned. Gestor: EXP/OGP/AQG/AIP-OGEO.",
+    "module": "data/operacoes-geologicas.json#OG033",
+    "evidence_status": "documented",
+    "evidence_refs": ["PoC AWS Agente 1 OGEO — RMG em VGE/Pasta de poço", "Workshop Geomecânica — 544 poços com Ocorrências Geomecânicas em BDIEP"],
+    "manager": "EXP/OGP/AQG/AIP-OGEO",
+    "stored_in": "VGE / Pasta de Poço",
+    "superclass": "GeologicalOperationsDocument",
+    "synonyms_pt": ["RMG", "Relatório de Monitoramento Geomecânico"],
+    "synonyms_en": ["RMG", "geomechanical monitoring report"]
+  },
+  {
+    "id": "lessons-learned",
+    "label": "Lições Aprendidas",
+    "label_en": "Lessons Learned",
+    "type": "operational",
+    "color": "#378ADD",
+    "size": 20,
+    "definition": "Fase de lições aprendidas ao fim da jornada do poço — agrega RCSD, OGEOMEC e RMG para alimentar a RetroAnálise do próximo poço. Fase final do ciclo da jornada do poço (WellJourneyPhase). Gestor: EXP/OGP.",
+    "module": "data/operacoes-geologicas.json#OG025",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "WellJourneyPhase",
+    "synonyms_pt": ["Lições Aprendidas", "Lessons Learned"],
+    "synonyms_en": ["lessons learned"]
   }
 ];
 
@@ -1075,6 +1173,295 @@ export const OG_EDGES = [
     "relation_label": "usa ferramenta",
     "relation_label_en": "uses tool",
     "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "mudlogging",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "cuttings-sampling",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "coring",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "sidewall-sampling",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "mwd-lwd",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "wireline-logging",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "formation-testing",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "operacoes-geologicas",
+    "target": "geostopping",
+    "relation": "executes",
+    "relation_label": "executa",
+    "relation_label_en": "executes",
+    "style": "solid"
+  },
+  {
+    "source": "bdp",
+    "target": "qpg",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "igp",
+    "target": "bdp",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "igp",
+    "target": "qpg",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "igp",
+    "target": "pag",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "igp",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "wireline-run",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "lwd-run",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "cuttings-sample-detailed",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "frx",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "drx",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "formation-pressure-point",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "dst-interval",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "core-run",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "rmg",
+    "target": "bdp",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "inferred"
+  },
+  {
+    "source": "rmg",
+    "target": "ogeomec",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "inferred"
+  },
+  {
+    "source": "ogeomec",
+    "target": "bdp",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "rcsd",
+    "target": "rmg",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "rcsd",
+    "target": "ogeomec",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "rcsd",
+    "target": "bdp",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "lessons-learned",
+    "target": "rcsd",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "inferred"
+  },
+  {
+    "source": "lessons-learned",
+    "target": "ogeomec",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "inferred"
+  },
+  {
+    "source": "lessons-learned",
+    "target": "rmg",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "inferred"
+  },
+  {
+    "source": "geostopping-event",
+    "target": "qpg",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "pag",
+    "target": "cuttings-sample-detailed",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
+  },
+  {
+    "source": "pag",
+    "target": "gas-show-event",
+    "relation": "derived_from",
+    "relation_label": "derivado de",
+    "relation_label_en": "derived from",
+    "style": "dashed",
+    "evidence_status": "documented"
   }
 ];
 
