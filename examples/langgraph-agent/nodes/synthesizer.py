@@ -71,13 +71,31 @@ def _build_context(state: AgentState) -> str:
         parts.append("")
 
     validation = state.get("validation")
-    if validation and not validation.get("valid") and validation.get("violations"):
-        parts.append("=== VIOLACOES DE VALIDACAO SEMANTICA ===")
-        for v in validation["violations"]:
-            parts.append(f"Regra: {v['rule']}")
-            parts.append(f"Evidencia: {v['evidence']}")
-            parts.append(f"Correcao: {v['suggested_fix']}")
-        parts.append("")
+    if validation and validation.get("violations"):
+        errors = [v for v in validation["violations"] if v.get("severity", "error") == "error"]
+        provisionals = [v for v in validation["violations"] if v.get("severity") == "provisional"]
+        warns = [v for v in validation["violations"] if v.get("severity") == "warn"]
+        if errors:
+            parts.append("=== VIOLACOES DE VALIDACAO SEMANTICA ===")
+            for v in errors:
+                parts.append(f"Regra: {v['rule']}")
+                parts.append(f"Evidencia: {v['evidence']}")
+                parts.append(f"Correcao: {v['suggested_fix']}")
+            parts.append("")
+        if provisionals:
+            parts.append("=== AVISO: RESPOSTA PROVISORIA (baixa confiança das fontes) ===")
+            for v in provisionals:
+                parts.append(f"Regra: {v['rule']}")
+                parts.append(f"Evidencia: {v['evidence']}")
+                parts.append(f"Orientacao: {v['suggested_fix']}")
+            parts.append("")
+        if warns:
+            parts.append("=== AVISOS NAO-BLOQUEANTES ===")
+            for v in warns:
+                parts.append(f"Regra: {v['rule']}")
+                parts.append(f"Evidencia: {v['evidence']}")
+                parts.append(f"Orientacao: {v['suggested_fix']}")
+            parts.append("")
 
     return "\n".join(parts)
 
@@ -91,13 +109,29 @@ def _template_answer(state: AgentState) -> str:
 
     lines: list[str] = [f"Pergunta: {question}", ""]
 
-    # Validation failures always come first
-    if validation and not validation.get("valid"):
-        lines.append("AVISO DE VALIDACAO SEMANTICA:")
-        for v in validation.get("violations", []):
-            lines.append(f"  [{v['rule']}] {v['evidence']}")
-            lines.append(f"  Correcao: {v['suggested_fix']}")
-        lines.append("")
+    # Findings come first — split by severity
+    if validation and validation.get("violations"):
+        errors = [v for v in validation["violations"] if v.get("severity", "error") == "error"]
+        provisionals = [v for v in validation["violations"] if v.get("severity") == "provisional"]
+        warns = [v for v in validation["violations"] if v.get("severity") == "warn"]
+        if errors:
+            lines.append("AVISO DE VALIDACAO SEMANTICA:")
+            for v in errors:
+                lines.append(f"  [{v['rule']}] {v['evidence']}")
+                lines.append(f"  Correcao: {v['suggested_fix']}")
+            lines.append("")
+        if provisionals:
+            lines.append("RESPOSTA PROVISORIA — baixa confianca das fontes corporativas:")
+            for v in provisionals:
+                lines.append(f"  [{v['rule']}] {v['evidence']}")
+                lines.append(f"  Orientacao: {v['suggested_fix']}")
+            lines.append("")
+        if warns:
+            lines.append("AVISOS NAO-BLOQUEANTES:")
+            for v in warns:
+                lines.append(f"  [{v['rule']}] {v['evidence']}")
+                lines.append(f"  Orientacao: {v['suggested_fix']}")
+            lines.append("")
 
     # Graph findings
     found_nodes: list[str] = []

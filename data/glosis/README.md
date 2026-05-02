@@ -1,6 +1,6 @@
 # GLOSIS reuse layer
 
-Reaproveitamento da **GloSIS v1.5.1** (Global Soil Information System ontology — SIEUSOIL/EJP SOIL/ISRIC) para enriquecer o GeoBrain.
+Reaproveitamento da **GloSIS v1.5.1** (Global Soil Information System ontology — SIEUSOIL/EJP SOIL/ISRIC) para enriquecer o Geolytics Dictionary.
 Análise completa: `../glosis-extraction.md`.
 
 ## Arquivos
@@ -12,14 +12,17 @@ Análise completa: `../glosis-extraction.md`.
 | `petrography-codelists.json` | 22 codelists (cementação, weathering, porosidade, estrutura, granulometria, plasticidade, landform) — 166 conceitos | `glosis_cl.ttl` |
 | `inspire-geomorph-codelists.json` | 4 codelists INSPIRE Geomorphology/EventEnvironment — 227 conceitos (38 + 16 + 166 + 7) | INSPIRE Registry RDF |
 | `lithology-crosswalk-inspire-geomorph.json` | **Crosswalk dos 19 GLOSIS noMatch** contra INSPIRE Geomorph (1:N, 29 links totais — 2 exactMatch, 9 closeMatch, 5 broadMatch, 3 ainda noMatch) | manual |
-| `geolytics-glosis-ext.ttl` | **Ontologia OWL+SKOS** — 416 triples: 4 `owl:imports` (codelists, ISO 28258, procedures, units), 98 mappings SKOS, backbone E&P, par `*Property`/`*Value` para 18 campos PVT | gerado |
+| `lithology-crosswalk-inspire-litho.json` | Crosswalk transitivo GLOSIS → CGI 2016.01 → INSPIRE **LithologyValue** (mínimo: 1 mapeamento IB3, documenta o pattern) | derivado |
+| `geolytics-glosis-ext.ttl` | **Ontologia OWL+SKOS** — 417 triples: 4 `owl:imports` (codelists, ISO 28258, procedures, units), 99 mappings SKOS, backbone E&P, par `*Property`/`*Value` para 18 campos PVT | gerado |
 | `geolytics-modules.ttl` | M7/M8/M9/M10 modules serialization — 463 triples | gerado |
 | `geolytics-units.ttl` | Unidades petroleiras (BBL/D, MCF/D, SCF/STB, RB/STB, °API, psia, cP, mD…) — 123 triples, 13 unidades, 5 quantity kinds | manual |
 | `pvt-procedures.ttl` | 8 procedures PVT (flash/differential liberation, CCE, swelling, separator, viscosity, slim-tube, multi-contact) — 116 triples | manual |
 | `geolytics-ep-backbone.ttl` | ISO 28258 alias completo: 16 object properties + cardinalidades + SOSA bridge — 136 triples | manual |
-| `geolytics-shapes.ttl` | 6 SHACL shapes (qudt:Quantity, ISO depth invariant, SOSA Observation, lithology IRI source, PVT row, crosswalk symmetry) — 107 triples | manual |
+| `geolytics-shapes.ttl` | 7 SHACL shapes (qudt:Quantity, ISO depth invariant, SOSA Observation, lithology IRI source, PVT row, crosswalk symmetry, lang coverage) | manual |
+| `geolytics-petrography-i18n.ttl` | PT/ES SKOS prefLabels para 166 conceitos petrográficos — 336 triples | gerado |
+| `translations/` | CSVs de tradução PT/ES (508 rows) + bibliography (sources.md) | seed + revisão |
 | `cgi-version-strategy.json` | Estratégia de fallback CGI 201211 ↔ 2016.01 | doc |
-| `source-ttl/` | Cache local dos 11 módulos GLOSIS v1.5.1 (~1,2 MB) | upstream |
+| `source-ttl/` | Cache local dos 11 módulos GLOSIS v1.5.1 + INSPIRE LithologyValue (~1,9 MB) | upstream |
 | `README.md` | Este arquivo | — |
 
 ## Onde foi integrado no projeto
@@ -60,12 +63,28 @@ python3 scripts/validate.py --crosswalk-audit  # check crosswalk integrity
 python3 scripts/validate.py <data.ttl>         # SHACL validate instance data
 ```
 
-Self-check status: 6 TTL files (1361 triples) + 6 JSON files — todos OK.
+Self-check status: 7 TTL files (1880 triples) + 7 JSON files — todos OK.
+Lang coverage: en=49, pt=372, es=254 — PASS.
+
+## i18n — Português / Espanhol
+
+254 conceitos GLOSIS (88 lithology + 166 petrography) traduzidos para PT/ES peninsular:
+- **Fontes:** CPRM Glossário Geológico 2018, ABNT NBR 6502, IGME Diccionario, Schlumberger Glossary
+- **Workflow:** `scripts/seed-translations.js` → CSVs em `translations/` → `scripts/apply-translations.js` → JSON + TTL + RAG
+- **Validação:** `python3 scripts/validate.py --lang-coverage`
+
+## HTML reference docs
+
+`docs/glosis/` contém 6 módulos HTML auto-gerados via pyLODE 2.13:
+- glosis-ext, modules, units, ep-backbone, pvt-procedures, petrography-i18n
+- Total: ~205 KB, 1780 ontology triples documentados
+- Build: `bash scripts/build-docs.sh`
+- Serve local: `python3 -m http.server 8000 -d docs/`
 
 ## Próximos passos sugeridos
 
 1. **2 conceitos remanescentes:** `UU` e `UU2` são agregadores genéricos sem equivalente — manter como noMatch.
-2. **Tradução PT/ES** dos labels (atualmente só EN no GLOSIS upstream).
-3. **Registrar PURL** em w3id.org (ver `w3id-registration-draft.md`).
-4. **WiDoco generation** para gerar HTML pyLODE-style automático dos TTLs.
-5. **FAIRsharing registration** do GeoBrain (espelhar `doi.org/10.25504/FAIRsharing.af87a1`).
+2. **Registrar PURL** em w3id.org (ver `w3id-registration-draft.md`).
+3. **FAIRsharing registration** do projeto (espelhar `doi.org/10.25504/FAIRsharing.af87a1`).
+4. **Domain-expert review** dos labels PT/ES marcados `auto:cognate-vetted` (reviewer atual: `claude-auto`).
+5. **Expand INSPIRE LithologyValue crosswalk** dos 13 GLOSIS aggregators via remapping para CGI 2016.01.

@@ -1,0 +1,1852 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "standard": "Geolytics Dictionary / Geodo JSON Schema",
+    "sources": [
+      "PE-2RES-00009 - Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
+      "PE-2RES-00014 - Modelagem Geomecânica 1D",
+      "PP-2E&P-00322 - Geomecânica e Geologia Estrutural para Reservatórios",
+      "PE-2POC-01246 - Manual de Projeto de Fraturamento",
+      "PE-2POC-01495 - Elaborar Projeto de Microfraturamento",
+      "PE-2E&P-00984 - Diretrizes para Aquisição de Dados de Reservatório durante o DP",
+      "CoI: Gestão e Governança de Dados (Fluxo de Dados de Geomecânica)",
+      "CoI: CENPES/PDIEP/GEO/GEM"
+    ],
+    "generated_at": "2026-05-02",
+    "generated_for": "Geolytics Dictionary — Corporate Knowledge Graph"
+  },
+  "entities": [
+    {
+      "id": "GEOMEC001",
+      "labelpt": "Pressão de Poros",
+      "labelen": "Pore Pressure",
+      "acronym": ["Pp", "PP", "Pporo", "poropressão"],
+      "definition": "Pressão exercida pelo fluido contido nos poros das formações rochosas em subsuperfície. Quando igual à pressão hidrostática, é denominada pressão de poros normal. Quando superior, configura sobrepressão (geopressão). Nas fases com retorno de fluido, a pressão de poros da formação é calculada indiretamente pela pressão estabilizada do poço. Para o reservatório, deve-se empregar o modelo de fluxo para prever a poropressão ao longo da vida produtiva do campo. Sigla oficial nos gráficos compostos do Laudo Geomecânico: Pp.",
+      "standardunit": "lb/gal (ppg) — para perfuração; kgf/cm²/m — para gradiente; psi — para valor absoluto",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "INFLUENCES",
+          "targetlabel": "Gradiente de Fratura (Tensão Mínima Horizontal)"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "ISCOMPONENTOF",
+          "targetlabel": "Janela Operacional de Lama"
+        },
+        {
+          "targetid": "GEOMEC005",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Tensão Efetiva (Princípio de Biot-Willis)"
+        },
+        {
+          "targetid": "GEOMEC006",
+          "relationtype": "ISDETERMINEDBY",
+          "targetlabel": "LOT / FIT / xLOT / Microfraturamento"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellborePressure:1.*"
+    },
+    {
+      "id": "GEOMEC002",
+      "labelpt": "Tensão Mínima Horizontal (Gradiente de Fratura)",
+      "labelen": "Minimum Horizontal Stress / Fracture Gradient",
+      "acronym": ["Shmin", "S3", "GF", "σhmin", "Gradiente de Absorção"],
+      "definition": "Componente de menor magnitude das tensões horizontais in situ. Determina o limite superior da janela operacional de lama, pois ao ultrapassá-la ocorre fraturamento hidráulico da formação (perda de circulação induzida). É medida diretamente por testes de fraturamento (Mini-frac, xLOT, Micro-TI, SRT) e calibrada com dados de LOT. Nos Laudos Geomecânicos da Petrobras é representada como curva 'S3' no gráfico composto de geotensões. A curva ajustada de absorção é obtida pela multiplicação de um fator (multiplicador m) sobre a curva S3. Nos evaporitos, o regime é hidrostático: Shmin ≈ Sv.",
+      "standardunit": "lb/gal (ppg) — gradiente; kgf/cm²/m; psi",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Pressão de Poros (via Princípio de Biot-Willis e coeficiente de Poisson)"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "DEFINES_UPPER_BOUND",
+          "targetlabel": "Janela Operacional de Lama"
+        },
+        {
+          "targetid": "GEOMEC006",
+          "relationtype": "ISCALIBRATEDBY",
+          "targetlabel": "Testes de Absorção e Fraturamento (LOT, xLOT, Mini-frac)"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "ISCOMPONENTOF",
+          "targetlabel": "Estado de Tensões In Situ"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellLog:1.* (FracturePressure curve)"
+    },
+    {
+      "id": "GEOMEC003",
+      "labelpt": "Janela Operacional de Lama",
+      "labelen": "Mud Weight Window / Drilling Operational Window",
+      "acronym": ["JOL", "Mud Window", "Janela Operacional"],
+      "definition": "Intervalo de massa específica do fluido de perfuração compreendido entre o limite inferior (gradiente de colapso) e o limite superior (gradiente de fratura / tensão mínima S3). O peso mínimo deve ser superior à máxima pressão de poros prevista. O peso máximo deve ser inferior à tensão mínima (S3) para evitar perda de circulação induzida. O estreitamento ou alargamento da janela operacional impacta diretamente o número de fases e o dimensionamento dos revestimentos. Produto conjunto das gerências RES (fornece Pp e tensões in situ) e POÇOS/SPO/PEP/PROJ-PERF (calcula GF e gradiente de colapso). Para maior eficiência, recomenda-se considerar as curvas de pressão de colapso inferior e superior.",
+      "standardunit": "lb/gal (ppg); g/cm³; kg/m³",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "LOWER_BOUND_DEFINEDBY",
+          "targetlabel": "Pressão de Poros"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "UPPER_BOUND_DEFINEDBY",
+          "targetlabel": "Tensão Mínima Horizontal (Gradiente de Fratura)"
+        },
+        {
+          "targetid": "GEOMEC009",
+          "relationtype": "INCLUDES",
+          "targetlabel": "Gradiente de Colapso"
+        }
+      ],
+      "osdu_mapping": null
+    },
+    {
+      "id": "GEOMEC004",
+      "labelpt": "Estado de Tensões In Situ (Geotensões)",
+      "labelen": "In Situ Stress State",
+      "acronym": ["Tensões In Situ", "Geotensões", "S1/S2/S3"],
+      "definition": "Conjunto das três tensões principais que atuam nas formações rochosas em subsuperfície antes de qualquer perturbação: tensão vertical (Sv), tensão horizontal máxima (SHmax = S1 em regime normal) e tensão horizontal mínima (Shmin = S3). No gráfico composto dos Laudos Geomecânicos da Petrobras, são representadas as magnitudes e azimutes de S1, S2 e S3, calibradas aos testes de pressão (LOT, XLOT, FIT). O estado de tensões deve obedecer ao princípio de equilíbrio quase-estático. Nos evaporitos, o estado tende a ser hidrostático (S1≈S2≈S3≈Sv). O workflow de ajuste de tensões in situ é o processo iterativo entre modelos geomecânicos de reservatório e de poços.",
+      "standardunit": "psi; kgf/cm²; MPa",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC007",
+          "relationtype": "INCLUDES",
+          "targetlabel": "Tensão Vertical (Sv) — Sobrecarga"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "INCLUDES",
+          "targetlabel": "Tensão Mínima Horizontal (Shmin / S3)"
+        },
+        {
+          "targetid": "GEOMEC008",
+          "relationtype": "INCLUDES",
+          "targetlabel": "Tensão Horizontal Máxima (SHmax / S1)"
+        },
+        {
+          "targetid": "GEOMEC005",
+          "relationtype": "REQUIRES",
+          "targetlabel": "Tensão Efetiva (via Biot)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--GeomechanicalModel:1.*"
+    },
+    {
+      "id": "GEOMEC005",
+      "labelpt": "Tensão Efetiva",
+      "labelen": "Effective Stress",
+      "acronym": ["σ'", "Sv_ef", "Tensão Efetiva Vertical"],
+      "definition": "Tensão resultante após descontar a contribuição da pressão de poros, conforme o Princípio das Tensões Efetivas com representação adequada do coeficiente de Biot-Willis (α). Fundamental para o cálculo das deformações e resistência das rochas. A variação da poropressão induz variação nas tensões horizontais totais: em compactação uniaxial, Δσh = [α(1-2ν)/(1-ν)] × ΔPp. A tensão efetiva é o parâmetro central no critério de resistência (Mohr-Coulomb) e nas análises de plastificação do reservatório.",
+      "standardunit": "psi; MPa; kgf/cm²",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Estado de Tensões In Situ (Tensão Total)"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Pressão de Poros"
+        },
+        {
+          "targetid": "GEOMEC013",
+          "relationtype": "REQUIRES",
+          "targetlabel": "Coeficiente de Biot-Willis (α)"
+        }
+      ],
+      "osdu_mapping": null
+    },
+    {
+      "id": "GEOMEC006",
+      "labelpt": "Testes de Absorção e Fraturamento",
+      "labelen": "Leak-Off Test / Extended Leak-Off Test / Microfracturing",
+      "acronym": ["LOT", "xLOT", "FIT", "Mini-frac", "MicroFrac", "SRT", "SDT", "Micro-TI", "DFIT"],
+      "definition": "Conjunto de operações de campo realizadas durante a perfuração ou completação dos poços para medição e calibração das tensões in situ, especialmente da tensão mínima horizontal (Shmin). Classificação na Petrobras: (1) Baixo custo: FIT, LOT, microfraturamento com coluna de perfuração (XLOT); (2) Alto custo: Microfraturamento/Micro-TI com ferramenta dedicada (coluna ou a cabo). O FIT determina pressão máxima para combate a kick; o LOT indica a pressão de absorção (ponto de desvio da linearidade P×t); o xLOT fornece pressão de reabertura e fechamento de fratura — estimativa direta de Shmin. O Micro-TI ocorre na completação com fluido de completação.",
+      "standardunit": "psi; kgf/cm²; lb/gal (ppg)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "MEASURES",
+          "targetlabel": "Tensão Mínima Horizontal (Shmin)"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "CALIBRATES",
+          "targetlabel": "Estado de Tensões In Situ"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellTest:1.* (LeakOffTest)"
+    },
+    {
+      "id": "GEOMEC007",
+      "labelpt": "Tensão Vertical (Sobrecarga)",
+      "labelen": "Overburden Stress / Vertical Stress",
+      "acronym": ["Sv", "GS", "Gradiente de Sobrecarga", "Sv total"],
+      "definition": "Componente vertical do estado de tensões, gerada pelo peso das formações rochosas sobrejacentes. É calculada pela integração do perfil de densidade ao longo da coluna de rocha (Sv = ∫ρg·dz). É o dado mais fundamental para a definição do estado de tensões em subsuperfície. Em formações salinas, as tensões horizontais tendem a ser próximas a Sv (regime hidrostático). Para zonas salinas, o peso do fluido de perfuração deve ser próximo ao gradiente de sobrecarga para reduzir a taxa de fluência do sal. Nos Laudos Geomecânicos, a curva de sobrecarga baliza o limite máximo físico do gradiente.",
+      "standardunit": "lb/gal (ppg); kgf/cm²/m; psi",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "ISCOMPONENTOF",
+          "targetlabel": "Estado de Tensões In Situ"
+        },
+        {
+          "targetid": "GEOMEC005",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Tensão Efetiva Vertical"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellLog:1.* (OverburdenStress curve)"
+    },
+    {
+      "id": "GEOMEC008",
+      "labelpt": "Tensão Horizontal Máxima",
+      "labelen": "Maximum Horizontal Stress",
+      "acronym": ["SHmax", "S1", "σHmax"],
+      "definition": "Componente de maior magnitude entre as tensões horizontais in situ. Não pode ser medida diretamente — é estimada por retroanálise de breakouts (elipse do poço onde a rocha falhou por compressão) e de fraturas induzidas identificadas em perfis de imagem, além de mecanismos focais de terremotos. A direção da SHmax é inferida pela orientação das fraturas induzidas nos perfis de imagem (perpendicular aos breakouts). O modelo de integridade de poço de Santos et al. (CT CMR 010/2015) é a metodologia interna recomendada para modelagem de SHmax. O strike da S3 (mínima) é o ângulo com o Norte Geográfico reportado nos gráficos compostos.",
+      "standardunit": "psi; MPa; kgf/cm²",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "ISCOMPONENTOF",
+          "targetlabel": "Estado de Tensões In Situ"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "ISDETERMINEDFROM",
+          "targetlabel": "Retroanálise de Breakouts e Fraturas Induzidas"
+        }
+      ],
+      "osdu_mapping": null
+    },
+    {
+      "id": "GEOMEC009",
+      "labelpt": "Gradiente de Colapso",
+      "labelen": "Collapse Gradient / Wellbore Collapse Pressure",
+      "acronym": ["GC", "Gradiente de Colapso", "Pressão de Colapso"],
+      "definition": "Limite inferior da janela operacional de lama abaixo do qual a rocha falha mecanicamente por cisalhamento ou tração, levando ao colapso do poço. O colapso pode se manifestar como alargamento (washout, breakouts — em rochas frágeis como arenitos) ou fechamento do diâmetro (em rochas dúcteis como sal e folhelhos). Nos Laudos Geomecânicos da Petrobras, são reportadas curvas de colapso inferior e superior para dimensionamento do peso de fluido. O colapso do poço é a principal causa de eventos de arraste, estolamento, prisão de coluna, topamentos e fundo falso. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas tensões in situ do RES.",
+      "standardunit": "lb/gal (ppg); g/cm³",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "DEFINES_LOWER_BOUND",
+          "targetlabel": "Janela Operacional de Lama"
+        },
+        {
+          "targetid": "GEOMEC010",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Resistência à Compressão Uniaxial (UCS)"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Estado de Tensões In Situ"
+        }
+      ],
+      "osdu_mapping": null
+    },
+    {
+      "id": "GEOMEC010",
+      "labelpt": "Resistência à Compressão Uniaxial",
+      "labelen": "Uniaxial Compressive Strength",
+      "acronym": ["UCS", "RCU", "Co"],
+      "definition": "Resistência da rocha sob carga axial sem confinamento lateral. Parâmetro fundamental para a análise de estabilidade de poços e cálculo do gradiente de colapso. Na Petrobras, o UCS é obtido principalmente pelo ensaio de Scratch Test (arranhamento de testemunho ao longo do eixo axial), cujo resultado de resistência ao arranhamento é correlacionável com as propriedades mecânicas. Pode também ser estimado a partir de correlações com perfis de poços (DTC, DTS, densidade). Utilizado nos critérios de resistência de Mohr-Coulomb e Drucker-Prager para análise de plastificação do reservatório.",
+      "standardunit": "MPa; psi; kgf/cm²",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC009",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Gradiente de Colapso"
+        },
+        {
+          "targetid": "GEOMEC011",
+          "relationtype": "ISPAIREDWITH",
+          "targetlabel": "Módulo de Young (E)"
+        }
+      ],
+      "osdu_mapping": null
+    },
+    {
+      "id": "GEOMEC011",
+      "labelpt": "Módulo de Young (Módulo de Elasticidade)",
+      "labelen": "Young's Modulus / Elastic Modulus",
+      "acronym": ["E", "Edyn", "Est", "Módulo de Young"],
+      "definition": "Propriedade elástica que mede a rigidez da rocha, definida como a razão entre tensão e deformação axial em ensaio uniaxial. Na Petrobras, distinguem-se os módulos dinâmico (Edyn — obtido de perfis sônicos DTC e DTS via equações elásticas) e estático (Est — obtido em ensaios de laboratório em testemunhos). A correlação de Lacy (1996) é a referência interna para conversão Edyn → Est. O módulo de Young é insumo obrigatório para modelagem de estabilidade de poços, análise de Underground Venting (UV2/UV3) e projeto de fraturamento hidráulico. Para zonas salinas, pode ser obtido via fluxo Teixeira et al. (2019): Vp → Vs → E → densidade.",
+      "standardunit": "GPa; MPa; psi",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC012",
+          "relationtype": "ISPAIREDWITH",
+          "targetlabel": "Coeficiente de Poisson (ν)"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Tensão Mínima Horizontal (via método elástico)"
+        },
+        {
+          "targetid": "GEOMEC014",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Coeficiente de Biot-Willis (α)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--RockMechanicsTest:1.* (YoungModulus)"
+    },
+    {
+      "id": "GEOMEC012",
+      "labelpt": "Coeficiente de Poisson",
+      "labelen": "Poisson's Ratio",
+      "acronym": ["ν", "nu", "Poisson"],
+      "definition": "Razão entre a deformação lateral e a deformação axial de uma rocha sob carga uniaxial. Parâmetro elástico fundamental para o cálculo da tensão horizontal mínima (via método elástico) e para a modelagem do comportamento poro-elástico. O coeficiente de Poisson dinâmico é calculado a partir das velocidades Vp e Vs (equações de Castagna et al., 1993 quando não há DTS). Não há correlação clara entre os valores dinâmico (petrossísmica) e estático (laboratório) — geralmente as estimativas dinâmicas são empregadas sem correções nas simulações geomecânicas. Sigla oficial interna nos padrões Petrobras: ν (nu). Insumo obrigatório para análise de UV2/UV3.",
+      "standardunit": "adimensional (0 a 0,5)",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC011",
+          "relationtype": "ISPAIREDWITH",
+          "targetlabel": "Módulo de Young (E)"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Tensão Mínima Horizontal (via método elástico)"
+        },
+        {
+          "targetid": "GEOMEC005",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Variação de Tensão Efetiva por Depleção"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--RockMechanicsTest:1.* (PoissonsRatio)"
+    },
+    {
+      "id": "GEOMEC013",
+      "labelpt": "Coeficiente de Biot-Willis",
+      "labelen": "Biot-Willis Coefficient",
+      "acronym": ["α", "Biot", "Coef. Biot"],
+      "definition": "Parâmetro poro-elástico que quantifica a fração da pressão de poros que contribui para a tensão efetiva (α = 1 - Kb/Ks, onde Kb é a rigidez bulk da rocha e Ks é a rigidez bulk dos grãos). É calculado a partir do módulo bulk da rocha (Kb) e dos valores tabelados da rigidez dos grãos (Ks) para diferentes litologias (Tabela 5 do PE-2RES-00014). Na Petrobras, o coeficiente de Biot é um elemento mandatório na modelagem do equilíbrio estrutural do estado de tensões (PP-2E&P-00322). Em reservatórios onde α ≈ 1, a variação de Pp tem impacto máximo nas tensões horizontais totais.",
+      "standardunit": "adimensional (0 a 1)",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC005",
+          "relationtype": "ISUSEDTOCALCULATE",
+          "targetlabel": "Tensão Efetiva"
+        },
+        {
+          "targetid": "GEOMEC011",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Módulo de Young / Módulo Bulk (Kb)"
+        }
+      ],
+      "osdu_mapping": null
+    },
+    {
+      "id": "GEOMEC014",
+      "labelpt": "Compressibilidade de Poros",
+      "labelen": "Pore Volume Compressibility",
+      "acronym": ["Cp", "Cp_uni", "Cp_hid", "Compressibilidade de Poros"],
+      "definition": "Variação fracional do volume de poros por unidade de variação da pressão de poros. Na Petrobras, distinguem-se: Cp hidrostático (ensaio com tensões iguais em todas as direções — requer conversão para modo uniaxial) e Cp uniaxial (condição de campo, onde deformações laterais são restritas — produto primário para simulação de reservatórios). Metodologias oficiais: correlações (Hall, Newman, Correlação Petrobras para turbiditos), ensaios de laboratório e modelagem geomecânica numérica 3D. A Correlação Petrobras para turbiditos (Figura 9 do PP-2E&P-00322) relaciona Cp com a porosidade e é referência interna. O Cp é insumo crítico na interpretação de TLDs e para os simuladores de fluxo.",
+      "standardunit": "psi⁻¹; MPa⁻¹; kgf/cm²⁻¹",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "DEPENDSON",
+          "targetlabel": "Pressão de Poros (variação durante produção)"
+        },
+        {
+          "targetid": "GEOMEC013",
+          "relationtype": "ISRELATEDTO",
+          "targetlabel": "Coeficiente de Biot-Willis"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--RockMechanicsTest:1.* (PoreVolumeCompressibility)"
+    },
+    {
+      "id": "GEOMEC015",
+      "labelpt": "Estabilidade de Poço / Análise de Geohazards",
+      "labelen": "Wellbore Stability / Geohazard Assessment",
+      "acronym": ["Estabilidade de Poço", "Geohazards", "Geohazards de Poços", "Laudo Geomecânico"],
+      "definition": "Análise multidisciplinar e integrada que avalia os riscos geológicos e geomecânicos ao longo da trajetória de um poço (Geohazards), com o objetivo de emitir Laudos Geomecânicos para as locações e mitigar riscos de construção. Os principais eventos geomecânicos monitorados são: influxos de água, perdas de circulação severas, arrastes, topamentos, estolamentos e prisão de coluna. A análise contempla: tensões in situ, janela operacional, poropressão, perfil litológico e histórico de eventos em poços correlatos. Produto primário: QPG (Quadro de Previsão Geológica) e Laudo Geomecânico. Ferramentas internas: SIGEO, SEST TR (Simulador de Estabilidade), SEIDR, Wellsom, OpenWells.",
+      "standardunit": "N/A (produto analítico)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "REQUIRES",
+          "targetlabel": "Janela Operacional de Lama"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "REQUIRES",
+          "targetlabel": "Pressão de Poros"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "REQUIRES",
+          "targetlabel": "Estado de Tensões In Situ"
+        },
+        {
+          "targetid": "GEOMEC010",
+          "relationtype": "REQUIRES",
+          "targetlabel": "Resistência à Compressão Uniaxial (UCS)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellboreStabilityAnalysis:1.*"
+    }
+  ]
+}
+
+ Notas Críticas de Arquitetura — Para o Time Geolytics
+Com base nos documentos consultados, registro as seguintes observações para governança do Knowledge Graph:
+1. Separação de Responsabilidades (RES × POÇOS)
+Os padrões [PE-2RES-00009] e [PP-2E&P-00322] deixam explícito que o gradiente de colapso (GEOMEC009) e o gradiente de fratura (GEOMEC002) são calculados pela gerência POÇOS/SPO/PEP/PROJ-PERF, enquanto a curva de Pp e as tensões S1/S2/S3 são produto do RES. Isso deve ser refletido como propriedade owner_department no schema.
+2. Distinção Dinâmico × Estático (GEOMEC011/GEOMEC012)
+O grafo deve distinguir E_dynamic de E_static como nós separados com relação REQUIRES_CALIBRATION, pois esta distinção é operacionalmente crítica e explicitamente descrita nos padrões.
+3. Sistemas de Registro Oficiais
+Os dados geomecânicos têm sistemas oficiais de armazenamento: SIRR (modelos geomecânicos), SIGEO (perfis de poço), Wellsom/OpenWells (eventos BDP). Sugerimos adicionar campo official_datastore em cada entidade.
+4. Entidade não incluída mas recomendada (16ª)
+O conceito de Subsidência / Compactação (GEOMEC016) é um produto crítico dos modelos geomecânicos 3D com três faixas de risco definidas nos padrões (< 40 cm: moderada; 40–100 cm: elevada; > 100 cm: extrema — [PP-2E&P-00322]) e merece inclusão em próxima iteração.
+
+{
+  "metadata": {
+    "version": "1.1",
+    "update_note": "Adição das entidades GEOMEC016, GEOMEC017, GEOMEC018 ao Geolytics Dictionary",
+    "sources_added": [
+      "PP-2E&P-00322 - Geomecânica e Geologia Estrutural para Reservatórios",
+      "PE-2RES-00009 - Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
+      "PE-2RES-00016 - Geologia Estrutural para Reservatórios",
+      "PE-2AGP-00027 - Gestão e Monitoramento dos Limites Geomecânicos dos Reservatórios da AGP",
+      "PE-2E&P-00878 - Análise de Incertezas de Reservatórios para Geração das Curvas de Previsão de Produção"
+    ],
+    "generated_at": "2026-05-02"
+  },
+  "entities": [
+    {
+      "id": "GEOMEC016",
+      "labelpt": "Subsidência e Compactação",
+      "labelen": "Subsidence and Compaction",
+      "acronym": [
+        "Subsidência",
+        "Compactação do Reservatório",
+        "Assentamento do Fundo Marinho"
+      ],
+      "definition": "Deslocamento vertical do assoalho marinho ou da superfície terrestre causado pela compactação das rochas reservatório e sobrejacentes em resposta à queda de pressão de poros durante a produção. A compactação ocorre em nível do reservatório e a subsidência é medida na superfície ou fundo do mar. Na Petrobras, o PP-2E&P-00322 define três faixas de risco operacional: (i) < 40 cm — subsidência moderada, considerada segura; (ii) 40–100 cm — subsidência elevada, requer monitoramento ativo; (iii) > 100 cm — subsidência extrema, obriga monitoramento e revisão do projeto de explotação. O monitoramento é realizado por: GPS/InSAR (onshore ou plataformas fixas); medidas de pressão d'água de alta precisão (offshore profundo); tiltmeters e BTIs (Bases Torpedo Instrumentadas); levantamentos batimétricos com AUV (recomendados quando subsidência máxima prevista > 40 cm). O sistema computacional GeomecBR (Petrobras) e o simulador GERESIM são ferramentas internas para modelagem. O modelo geomecânico vigente deve ser calibrado se a relação entre subsidência constatada e prevista superar ±20%. Feições anômalas no sedimento marinho (identificadas por ROV) podem indicar escape de fluidos ou efeitos de subsidência. Painel de monitoramento disponível em: vigres.petrobras.com.br.",
+      "standardunit": "cm; m (deslocamento vertical absoluto)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC014",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Compressibilidade de Poros (Cp)"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "TRIGGEREDBY",
+          "targetlabel": "Pressão de Poros (queda por depleção)"
+        },
+        {
+          "targetid": "GEOMEC007",
+          "relationtype": "RELATEDTO",
+          "targetlabel": "Tensão Vertical (Sv) — carga sobre o reservatório"
+        },
+        {
+          "targetid": "GEOMEC018",
+          "relationtype": "MAY_TRIGGER",
+          "targetlabel": "Reativação de Falhas Geológicas"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "OUTPUTOF",
+          "targetlabel": "Modelo Geomecânico 3D (produto: mapa de subsidência)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--SubsidenceModel:1.*",
+      "internal_tools": [
+        "GeomecBR (solver MEF interno Petrobras, desde 2009)",
+        "GERESIM (módulo geomecânica / SIRR)",
+        "VIGRES (painel monitoramento: vigres.petrobras.com.br)",
+        "AUV (levantamento batimétrico offshore)",
+        "BTI — Base Torpedo Instrumentada",
+        "InSAR — Interferometria de Satélite (onshore)",
+        "ROV — Remotely Operated Vehicle (inspeção offshore)"
+      ],
+      "risk_thresholds": {
+        "moderada": "< 40 cm",
+        "elevada": "40 cm – 100 cm",
+        "extrema": "> 100 cm"
+      }
+    },
+    {
+      "id": "GEOMEC017",
+      "labelpt": "Regime de Falhas",
+      "labelen": "Fault Regime / Stress Regime",
+      "acronym": [
+        "Regime de Falhas",
+        "Regime Tectônico",
+        "SED",
+        "Estilo Estrutural"
+      ],
+      "definition": "Classificação do estado de tensões in situ com base na relação de magnitude entre as três tensões principais (Sv, SHmax, Shmin), que determina o tipo predominante de falha geológica na área e controla a abertura e orientação de fraturas. Os três regimes clássicos são: (i) Normal (extensional): Sv > SHmax > Shmin — falhas normais predominam, tensão vertical é a maior; (ii) Strike-slip (transcorrente): SHmax > Sv > Shmin — falhas transcorrentes predominam; (iii) Reverso (compressional): SHmax > Shmin > Sv — falhas reversas predominam. Na Petrobras, os padrões PE-2RES-00016 e PP-2E&P-00322 descrevem a Análise Estrutural em três etapas: (I) Descritiva/Geométrica — orientação, mergulho, rejeito; (II) Cinemática — movimento relativo entre blocos; (III) Dinâmica/Paleotensorial — inversão do campo de tensões (Análise do Sistema Esforço-Deformação, SED). A inclinação da S1 com a vertical e o strike da S3 com o Norte Geográfico são reportados nos gráficos compostos dos Laudos Geomecânicos. A retroanálise de breakouts (elipse do poço) indica direção de SHmax (perpendicular); fraturas induzidas indicam a direção de SHmax (paralela). O regime de falhas também condiciona a metodologia de ajuste de tensões — no sal, regime é hidrostático (S1≈S2≈S3).",
+      "standardunit": "adimensional (classificação qualitativa); azimute em graus (N) para direções",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "ISCLASSIFICATIONOF",
+          "targetlabel": "Estado de Tensões In Situ (S1, S2, S3)"
+        },
+        {
+          "targetid": "GEOMEC008",
+          "relationtype": "DETERMINEDBY",
+          "targetlabel": "Tensão Horizontal Máxima (SHmax) — magnitude relativa"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "DETERMINEDBY",
+          "targetlabel": "Tensão Mínima Horizontal (Shmin) — magnitude relativa"
+        },
+        {
+          "targetid": "GEOMEC007",
+          "relationtype": "DETERMINEDBY",
+          "targetlabel": "Tensão Vertical (Sv) — magnitude relativa"
+        },
+        {
+          "targetid": "GEOMEC018",
+          "relationtype": "CONTROLS",
+          "targetlabel": "Reativação de Falhas Geológicas (orienta planos críticos)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "ISREQUIREDBY",
+          "targetlabel": "Estabilidade de Poço / Geohazards"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_tools": [
+        "Perfis de Imagem (breakouts e fraturas induzidas)",
+        "Análise Estrutural (PE-2RES-00016, PP-2E&P-00322)",
+        "Retroanálise de breakouts (CT CMR 010/2015)",
+        "Software MOVE (restauração estrutural e inversão paleotensorial)",
+        "Software Orient (inversão de tensões)",
+        "NFP — Natural Fracture Prediction (Petrel)",
+        "GFM — Geomechanical Forward Modeling (Petrel)"
+      ],
+      "classification": {
+        "normal": "Sv > SHmax > Shmin — extensional, bacias rifte (ex: Bacia de Santos pós-sal)",
+        "strike_slip": "SHmax > Sv > Shmin — transcorrente",
+        "reverso": "SHmax > Shmin > Sv — compressional",
+        "hidrostatico": "Sv ≈ SHmax ≈ Shmin — evaporitos e sal (Pré-Sal)"
+      }
+    },
+    {
+      "id": "GEOMEC018",
+      "labelpt": "Reativação de Falhas Geológicas",
+      "labelen": "Fault Reactivation",
+      "acronym": [
+        "Reativação de Falhas",
+        "Slip Tendency",
+        "Falha Criticamente Estressada"
+      ],
+      "definition": "Processo pelo qual falhas geológicas preexistentes são remobilizadas em resposta à alteração do estado de tensões efetivas causada por injeção ou produção de fluidos no reservatório. A reativação compromete o selo hidráulico da rocha capeadora e pode provocar: escape de hidrocarbonetos para o leito marinho; sismicidade induzida; e danos à integridade de poços e equipamentos submarinos. Na Petrobras, o PP-2E&P-00322 define que toda atualização de modelo geomecânico submetida à GMR (RES/TR/GMR) deve obrigatoriamente incluir a análise de reativação de falhas como entregável, bem como os novos valores de pressão-limite de injeção. O critério para avaliar a iminência de reativação é verificar se as pressões de fluido estimadas nas falhas geológicas excedem a tensão normal nos planos de falha (Slip Tendency). Os movimentos de massa submarinos podem ocorrer como consequência de reativações de falhas associadas aos efeitos da produção, conforme descrito no PE-2RES-00009. O PE-2E&P-00878 classifica a reativação de falhas como uma das principais incertezas geomecânicas nas curvas de previsão de produção, juntamente com compressibilidade, estado de tensões e Pp. O monitoramento contínuo é feito via Sísmica 4D e pelo painel VIGRES (vigres.petrobras.com.br), com avaliação periódica de patologias estruturais pelo ROV. A análise de reativação deve considerar os cenários de depleção forçada (mínima injeção), não apenas o caso base.",
+      "standardunit": "adimensional (Fator de Segurança FSi; razão tensão de cisalhamento / tensão normal no plano de falha)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "TRIGGEREDBY",
+          "targetlabel": "Variação de Pressão de Poros (depleção ou injeção excessiva)"
+        },
+        {
+          "targetid": "GEOMEC005",
+          "relationtype": "GOVERNEDBY",
+          "targetlabel": "Tensão Efetiva (redução pelo aumento de Pp na falha)"
+        },
+        {
+          "targetid": "GEOMEC017",
+          "relationtype": "CONTROLLEDBY",
+          "targetlabel": "Regime de Falhas (orienta planos críticos)"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "LIMITEDBY",
+          "targetlabel": "Tensão Mínima Horizontal (limite superior Shmin na capeadora)"
+        },
+        {
+          "targetid": "GEOMEC016",
+          "relationtype": "MAY_TRIGGER",
+          "targetlabel": "Subsidência (amplificada por reativação de falhas)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "ISRISKFOR",
+          "targetlabel": "Estabilidade de Poço / Geohazards (falhas ativas na trajetória)"
+        }
+      ],
+      "osdu_mapping": null,
+      "safety_factors": {
+        "FSi_min_tensoes_bem_definidas": "> 1.1",
+        "FSi_min_tensoes_incertas": "> 1.2",
+        "nota": "FSi = (Shmin_capeadora - Pp_normal) / (P_injecao - Pp_normal). Avaliação ao longo de toda a vida produtiva do poço."
+      },
+      "internal_tools": [
+        "GeomecBR (simulador MEF interno Petrobras)",
+        "Sísmica 4D (monitoramento de variações de tensão e escape de fluidos)",
+        "VIGRES — Painel Geomecânico (vigres.petrobras.com.br/VigilanciaReservatorio/geomecanica)",
+        "SIRR — Sistema de Informação de Reservas e Reservatórios (registro dos modelos)",
+        "ROV — inspeção periódica de equipamentos submarinos em campos com risco",
+        "TrapTester v.7 — análise de potencial selante de falhas (CoI: CENPES/GEM)",
+        "Software MOVE — análise de potencial selante e restauração estrutural"
+      ]
+    }
+  ]
+}
+
+
+#Mapa de Relacionamentos Cross-Entidade — Visão Grafo Completo (18 nós)
+# GEOMEC016 — Subsidência e Compactação
+GEOMEC016 --[ISCALCULATEDFROM]--> GEOMEC014  (Cp)
+GEOMEC016 --[TRIGGEREDBY]-------> GEOMEC001  (Pp / depleção)
+GEOMEC016 --[RELATEDTO]----------> GEOMEC007  (Sv)
+GEOMEC016 --[MAY_TRIGGER]--------> GEOMEC018  (Reativação de Falhas)
+GEOMEC016 --[OUTPUTOF]-----------> GEOMEC004  (Modelo 3D)
+
+# GEOMEC017 — Regime de Falhas
+GEOMEC017 --[ISCLASSIFICATIONOF]--> GEOMEC004  (Estado Tensões)
+GEOMEC017 --[DETERMINEDBY]--------> GEOMEC008  (SHmax)
+GEOMEC017 --[DETERMINEDBY]--------> GEOMEC002  (Shmin)
+GEOMEC017 --[DETERMINEDBY]--------> GEOMEC007  (Sv)
+GEOMEC017 --[CONTROLS]-----------> GEOMEC018  (Reativação)
+GEOMEC017 --[ISREQUIREDBY]--------> GEOMEC015  (Estab. Poço)
+
+# GEOMEC018 — Reativação de Falhas
+GEOMEC018 --[TRIGGEREDBY]--------> GEOMEC001  (Pp)
+GEOMEC018 --[GOVERNEDBY]---------> GEOMEC005  (Tensão Efetiva)
+GEOMEC018 --[CONTROLLEDBY]-------> GEOMEC017  (Regime de Falhas)
+GEOMEC018 --[LIMITEDBY]----------> GEOMEC002  (Shmin capeadora)
+GEOMEC018 --[MAY_TRIGGER]--------> GEOMEC016  (Subsidência)
+GEOMEC018 --[ISRISKFOR]----------> GEOMEC015  (Estab. Poço)
+
+Observações Técnicas Finais para o Time Geolytics
+1. 🔁 Ciclo de Retroalimentação GEOMEC016 ↔ GEOMEC018
+Os padrões [PP-2E&P-00322] e [PE-2RES-00009] evidenciam um ciclo bidirecional: a subsidência pode amplificar a reativação de falhas e, reciprocamente, a reativação de falhas pode acelerar a subsidência. No grafo, isso se manifesta como arestas bidirecionais MAY_TRIGGER entre os dois nós — recomenda-se modelar como aresta direcional com peso de probabilidade.
+2. 📐 Campo obrigatório sugerido: owner_department
+O [PP-2E&P-00322] é explícito: a análise de GEOMEC018 (reativação de falhas) é responsabilidade mandatória da gerência RES/TR/GMR a cada atualização do modelo. Isso deve ser capturado como metadado owner_department: "RES/TR/GMR" nas entidades GEOMEC016, GEOMEC017 e GEOMEC018.
+3. ⚡ GEOMEC017 como nó "hub" de classificação
+O Regime de Falhas (GEOMEC017) não possui unidade física mensurável — é um nó classificador que condiciona comportamentos de múltiplos outros nós. No schema do grafo, recomenda-se tipá-lo como category: "Classifier" e não como category: "Property" puro, para facilitar queries de travessia.
+4. 🔑 FSi — Fator de Segurança de Injeção
+O threshold FSi > 1,1 / 1,2 definido em [PP-2E&P-00322] para GEOMEC018 é um limite operacional oficial da companhia. Deve ser armazenado como constraint no nó, não apenas na definition, para que sistemas de alerta do VIGRES possam referenciar o grafo diretamente.
+
+{
+  "metadata": {
+    "version": "1.2",
+    "update_note": "Adição das entidades GEOMEC019, GEOMEC020 e GEOMEC021 — bloco temático Completação e Operações Especiais",
+    "sources_added": [
+      "PE-2POC-00453 - Limpeza de Poço e Hidráulica (SIMCARR / PWD)",
+      "PP-2POC-00341 - Elaborar Projeto Especializado de Perfuração de Poços Marítimos de Desenvolvimento",
+      "PE-2POC-01130 - Elaboração de Envelope Operacional na Disciplina de Estrutura de Poço",
+      "PE-2POC-01472 - Simulação de Esforços em Colunas de Produção e Injeção",
+      "PE-2POC-01049 - Diretrizes Técnicas de Projeto de Poço — Completação Marítima",
+      "PE-2POC-01113 - [MPD][SBP][OPER] Detecção e Circulação de Influxo com Sistema MPD",
+      "PE-1PBR-01326 - Fingerprint MPD",
+      "PE-1PBR-01315 - Identificação de Falso Kick",
+      "PE-2RES-00009 - Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP"
+    ],
+    "generated_at": "2026-05-02"
+  },
+  "entities": [
+    {
+      "id": "GEOMEC019",
+      "labelpt": "Densidade Equivalente de Circulação",
+      "labelen": "Equivalent Circulating Density",
+      "acronym": [
+        "ECD",
+        "Equivalent Circulating Density",
+        "Densidade de Circulação Equivalente"
+      ],
+      "definition": "A ECD indica a pressão dinâmica exercida em uma determinada profundidade vertical do poço (L), expressa como massa específica equivalente de fluido de perfuração. É a soma de duas componentes: a pressão hidrostática (Ph) exercida pelo fluido e a perda de carga (ΔPa) decorrente do escoamento do fluido desde aquela profundidade até a superfície. Equação oficial Petrobras [PE-2POC-00453]: ECD (lb/gal) = [Ph(psi) + ΔPa(psi)] / [0,1704 × L(m)]. A ECD real medida pelo sensor PWD (Pressure While Drilling) tem duas componentes: (i) estática — gera a ESD (Equivalent Static Density); (ii) dinâmica — relacionada ao movimento da coluna, fluxo do fluido e perdas de carga no anular. A ECD é monitorada em tempo real pelo PWDa (ferramenta Petrobras) e pelo SIMCARR. Uma ECD acima da tensão mínima da formação (S3) induz fratura hidráulica e perda de circulação. Uma ECD abaixo da pressão de poros provoca influxo. A ECD é diretamente afetada por: ROP, profundidade, quebra de gel, RPM, vazão, temperatura e influxos. Em operações MPD, a ECD é controlada pela contrapressão de superfície (SBP) mantida no Anchor Point (AP). No contexto do Pré-Sal, sondas MPD são empregadas para gerenciar a janela operacional estreita dos campos [PE-2RES-00009].",
+      "standardunit": "lb/gal (ppg); g/cm³",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "MUSTSTAYIN",
+          "targetlabel": "Janela Operacional de Lama (entre GC e GF)"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "LOWERLIMITDEFINEDBY",
+          "targetlabel": "Pressão de Poros (ECD > Pp para evitar influxo)"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "UPPERLIMITDEFINEDBY",
+          "targetlabel": "Tensão Mínima Horizontal / GF (ECD < Shmin para evitar fratura)"
+        },
+        {
+          "targetid": "GEOMEC020",
+          "relationtype": "CONTROLLEDBY",
+          "targetlabel": "MPD — Managed Pressure Drilling (controla ECD via SBP)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellLog:1.* (ECDCurve)",
+      "internal_tools": [
+        "SIMCARR — Simulador de Carreamento e Hidráulica (Petrobras)",
+        "PWD — Pressure While Drilling (ferramenta de fundo)",
+        "PWDa — Pressure While Drilling Analyser (Petrobras)",
+        "ESD — Equivalent Static Density (sensor PWD em modo estático)",
+        "Sistema MPD — ECD vs. Vazão simulado pelo módulo MPD do SIMCARR"
+      ],
+      "formula": {
+        "expression": "ECD (lb/gal) = [Ph(psi) + ΔPa(psi)] / [0.1704 × L(m)]",
+        "source": "PE-2POC-00453 — Limpeza de Poço e Hidráulica"
+      }
+    },
+    {
+      "id": "GEOMEC020",
+      "labelpt": "Perfuração com Controle de Pressão (MPD)",
+      "labelen": "Managed Pressure Drilling",
+      "acronym": [
+        "MPD",
+        "Managed Pressure Drilling",
+        "SBP",
+        "Surface Back Pressure",
+        "AP",
+        "Anchor Point",
+        "PMCD",
+        "FMCD",
+        "MCD"
+      ],
+      "definition": "Conjunto de técnicas de perfuração (ou completação) adaptáveis utilizadas para controlar com precisão o perfil de pressão no anular do poço através de um circuito de circulação fechado e pressurizado [PE-1PBR-01315]. A técnica principal aplicada na Petrobras é a SBP (Surface Back Pressure), na qual uma contrapressão ativa é aplicada na superfície para manter a pressão constante no Anchor Point (AP) — profundidade de referência na qual a pressão do anular é controlada para todos os alinhamentos possíveis [PP-2POC-00341]. O MPD permite: detecção precoce de influxos via medidor Coriolis; circulação de influxos menores sem fechamento de BOP (volume máximo ≤ 20 bbl com simulação de 40 bbl); perfuração em janelas operacionais estreitas (como zonas pós-sal e pré-sal com carbonatos carstificados). Sub-técnicas documentadas: PMCD (Pressurized Mud Cap Drilling) — perfuração sem retorno com anular pressurizado, aplicada em zonas de perdas totais [PE-1PBR-01123]; FMCD (Floating Mud Cap Drilling) — nível de fluido cai abaixo da mesa rotativa. O Fingerprint MPD [PE-1PBR-01326] é a etapa obrigatória de calibração do sistema antes de cada fase, incluindo: eficiência das bombas, perdas de carga, compressibilidade, DFIT/DPPT simulados e simulado de controle de poço. O CSD MPD (Centro de Suporte à Decisão) acompanha as operações MPD remotamente.",
+      "standardunit": "psi (contrapressão SBP); lb/gal (ECD resultante)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC019",
+          "relationtype": "CONTROLS",
+          "targetlabel": "ECD (via contrapressão SBP no Anchor Point)"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "ENABLES_DRILLING_WITHIN",
+          "targetlabel": "Janela Operacional de Lama estreita"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "PREVENTS_BELOW",
+          "targetlabel": "Pressão de Poros (evita influxo por subpressão)"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "PREVENTS_ABOVE",
+          "targetlabel": "Tensão Mínima / GF (evita perda por sobrepressão)"
+        },
+        {
+          "targetid": "GEOMEC006",
+          "relationtype": "INCLUDES",
+          "targetlabel": "DFIT e DPPT — testes geomecânicos realizados com sistema MPD"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_standards": [
+        "PE-1PBR-01326 — Fingerprint MPD",
+        "PE-2POC-01113 — [MPD][SBP][OPER] Detecção e Circulação de Influxo",
+        "PE-2POC-01247 — Perfuração com Contrapressão na Superfície (MPD/SBP)",
+        "PE-2POC-01232 — Procedimentos MPD para Determinação de Janela Operacional (DFIT/DPPT)",
+        "PE-2POC-01115 — [MPD][GERAL] Treinamento",
+        "PE-1PBR-01123 — Perfuração PMCD (MPD/PMCD)",
+        "PE-1PBR-00733 — Simulações Hidráulicas de Controle de Poço"
+      ],
+      "key_parameters": {
+        "AP": "Anchor Point — profundidade de referência de controle de pressão",
+        "SBP": "Surface Back Pressure — contrapressão aplicada na superfície",
+        "max_volume_kick_MPD": "≤ 20 bbl (necessita simulação de 40 bbl para circular pelo MPD)",
+        "max_volume_sem_simulacao": "≤ 2 bbl (sem simulação prévia)",
+        "Coriolis": "Medidor de vazão mássica — principal sensor de detecção de influxo em MPD",
+        "PRV_limite": "Pressão Relief Valve — setpoint ~1750 psi (exploratório) / ~1300 psi (desenvolvimento)"
+      }
+    },
+    {
+      "id": "GEOMEC021",
+      "labelpt": "Pressão de Crescimento Anular (APB)",
+      "labelen": "Annular Pressure Buildup",
+      "acronym": [
+        "APB",
+        "Annular Pressure Buildup",
+        "AFE",
+        "Annulus Fluid Expansion",
+        "APB Salino",
+        "Pressão Sustentada"
+      ],
+      "definition": "O APB (Annular Pressure Buildup) é o acréscimo de pressão no anular confinado de um poço decorrente da expansão térmica do fluido confinado (AFE — Annulus Fluid Expansion) causada pelo aquecimento durante operações de produção ou injeção de fluidos quentes [PP-2POC-00341 e PE-2POC-01472]. Em poços submarinos, especialmente HP/HT (High Pressure / High Temperature), os valores de APB podem ser elevados e levar à falha mecânica dos revestimentos e/ou da coluna de produção. Existe também o APB reverso (negativo), causado pela contração térmica dos fluidos anulares em operações de injeção de fluidos frios. Caso especial crítico: APB Salino — em poços com anular B confinado por formação salina, o sal flui contra o revestimento (fluência), aplicando carregamento uniforme equivalente ao gradiente de sobrecarga (Sv). A pressão sustentada máxima é calculada como: σ_prop = k_prop × σ_ov, onde k_prop = 1,1 [PE-2POC-01054]. As tensões in situ no sal são utilizadas no cálculo do APB conforme descrito em [PE-2RES-00009]. O APB é crítico quando não há possibilidade de controlar a variação de pressão no anular. As soluções de controle de APB em poços produtores, em ordem de prioridade, são: (1) Linha de serviço do anular; (2) Linha do anular do riser de completação (HCR) via sonda; (3) Drenagem via XO/flowline; (4) Nitrogênio no anular A (pré-assentamento do packer); (5) Nitrogênio por MGL; (6) Nitrogênio por Sliding Sleeve [PE-2POC-01049]. A VGL de pino cisalhável é dimensionada para romper antes de qualquer risco à integridade da COP causado por APB não controlado [PE-2POC-01472].",
+      "standardunit": "psi; kgf/cm² (pressão diferencial no anular)",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC007",
+          "relationtype": "DRIVENBY",
+          "targetlabel": "Tensão Vertical / Gradiente de Sobrecarga (APB Salino ≈ k × Sv)"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "RELATEDTO",
+          "targetlabel": "Estado de Tensões In Situ (tensões no sal usadas no cálculo APB)"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "CONSTRAINS",
+          "targetlabel": "Janela Operacional (APB estreita margem de cimentação e revestimento)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "ISRISKFOR",
+          "targetlabel": "Estabilidade de Poço / Integridade do Revestimento"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_standards": [
+        "PE-2POC-01472 — Simulação de Esforços em Colunas de Produção e Injeção",
+        "PE-2POC-01130 — Elaboração de Envelope Operacional — Estrutura de Poço",
+        "PE-2POC-01049 — Diretrizes Técnicas de Projeto de Poço — Completação Marítima",
+        "PE-2POC-01054 — Diretrizes Técnicas para Determinação de Limites de Projeto e Envelopes Operacionais",
+        "PP-2POC-00341 — Elaborar Projeto Especializado de Perfuração de Poços Marítimos"
+      ],
+      "key_parameters": {
+        "AFE": "Annulus Fluid Expansion — variação de volume por expansão/contração térmica",
+        "APB_positivo": "Expansão térmica (produção/injeção quente) — risco de burst no revestimento",
+        "APB_negativo": "Contração térmica (injeção fria) — risco de colapso no revestimento",
+        "APB_salino": "Sal flui contra revestimento — carregamento uniforme ≈ gradiente de sobrecarga (k=1,1)",
+        "kprop": "1,1 × σ_overburden na sapata do revestimento anterior (PE-2POC-01054)",
+        "ferramentas_simulacao": "WellCat (simulador térmico e de esforços); PoçoWeb (registro do envelope operacional)"
+      }
+    }
+  ]
+}
+
+
+# GEOMEC019 — ECD
+GEOMEC019 --[MUSTSTAYIN]-----------> GEOMEC003  (Janela Operacional)
+GEOMEC019 --[LOWERLIMITDEFINEDBY]--> GEOMEC001  (Pp)
+GEOMEC019 --[UPPERLIMITDEFINEDBY]--> GEOMEC002  (Shmin / GF)
+GEOMEC019 --[CONTROLLEDBY]---------> GEOMEC020  (MPD / SBP)
+
+# GEOMEC020 — MPD
+GEOMEC020 --[CONTROLS]-------------> GEOMEC019  (ECD)
+GEOMEC020 --[ENABLES_DRILLING_WITHIN]-> GEOMEC003  (Janela Operacional)
+GEOMEC020 --[PREVENTS_BELOW]-------> GEOMEC001  (Pp)
+GEOMEC020 --[PREVENTS_ABOVE]-------> GEOMEC002  (Shmin / GF)
+GEOMEC020 --[INCLUDES]-------------> GEOMEC006  (Testes: DFIT, DPPT)
+
+# GEOMEC021 — APB
+GEOMEC021 --[DRIVENBY]-------------> GEOMEC007  (Sv — APB Salino)
+GEOMEC021 --[RELATEDTO]-----------> GEOMEC004  (Estado de Tensões — tensões no sal)
+GEOMEC021 --[CONSTRAINS]----------> GEOMEC003  (Janela Operacional)
+GEOMEC021 --[ISRISKFOR]-----------> GEOMEC015  (Estabilidade de Poço)
+
+Notas Técnicas para o Time Geolytics
+1. 🔗 Tríade Operacional GEOMEC019 ↔ GEOMEC020 ↔ GEOMEC003
+Os três nós formam o núcleo do gerenciamento hidráulico de poços na Petrobras: a ECD (019) deve ser mantida dentro da janela operacional (003), e o MPD (020) é a técnica que viabiliza isso quando a janela é estreita. No grafo, esses três nós constituem um subgrafo de alta centralidade — qualquer consulta sobre perfuração em carbonatos pré-sal ou zonas depletadas deve atravessar esse triângulo.
+2. ⚠️ APB Salino — Nó Híbrido Geomecânica + Estrutura de Poço
+O GEOMEC021 é único no dicionário por ser um nó de fronteira entre dois domínios: Geomecânica (comportamento do sal, regime de tensões) e Estrutura de Poço (dimensionamento de revestimento, envelope operacional). Recomenda-se criar um campo domain_tags: ["geomechanics", "well_structure", "completion"] para facilitar queries cross-domain no Knowledge Graph.
+3. 🧰 Campo internal_tools vs. internal_standards
+Na resposta anterior usamos internal_tools. Para GEOMEC020 e GEOMEC021, a documentação é mais orientada a padrões operacionais do que ferramentas computacionais, portanto usamos internal_standards. Recomenda-se unificar esses campos no schema como references com subtipo tool ou standard.
+4. 📐 Fórmula como entidade própria no grafo
+A equação da ECD (GEOMEC019) é a única fórmula computável explicitamente documentada nos padrões [PE-2POC-00453]. Sugerimos criar um nó separado FORMULA_ECD001 do tipo Formula com relação DEFINES apontando para GEOMEC019 — isso permite que o Knowledge Graph seja consultável por equações, habilitando futuramente cálculos automáticos via agentes.
+
+
+GEOMEC001  Pressão de Poros                      → Property
+GEOMEC002  Tensão Mínima Horizontal / GF          → Property
+GEOMEC003  Janela Operacional de Lama             → Process       ◄── HUB central de perfuração
+GEOMEC004  Estado de Tensões In Situ              → Property
+GEOMEC005  Tensão Efetiva                         → Property
+GEOMEC006  Testes LOT/xLOT/FIT/MicroFrac          → Process
+GEOMEC007  Tensão Vertical (Sobrecarga)            → Property
+GEOMEC008  Tensão Horizontal Máxima               → Property
+GEOMEC009  Gradiente de Colapso                   → Property
+GEOMEC010  Resistência à Compressão Uniaxial      → Property
+GEOMEC011  Módulo de Young (E)                    → Property
+GEOMEC012  Coeficiente de Poisson (ν)              → Property
+GEOMEC013  Coeficiente de Biot-Willis (α)          → Property
+GEOMEC014  Compressibilidade de Poros (Cp)         → Property
+GEOMEC015  Estabilidade de Poço / Geohazards       → Process       ◄── HUB central de risco
+GEOMEC016  Subsidência e Compactação               → Process
+GEOMEC017  Regime de Falhas                        → Classifier    ◄── Nó classificador
+GEOMEC018  Reativação de Falhas Geológicas         → Process
+GEOMEC019  ECD                                    → Property
+GEOMEC020  MPD — Managed Pressure Drilling         → Process       ◄── Novo HUB operacional
+GEOMEC021  APB — Annular Pressure Buildup          → Property
+
+
+{
+  "metadata": {
+    "version": "1.3",
+    "update_note": "Adição dos blocos 4 e 5 — GEOMEC022 a GEOMEC027",
+    "sources_added": [
+      "PP-2E&P-00322 — Geomecânica e Geologia Estrutural para Reservatórios",
+      "PE-2RES-00014 — Modelagem Geomecânica 1D",
+      "PE-2RES-00016 — Geologia Estrutural para Reservatórios",
+      "PE-2RES-00009 — Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
+      "PE-2EXP-00066 — Realizar Monitoramento Geomecânico em Ambiente CSD",
+      "PE-2EXP-00074 — Realizar a Operação e o Monitoramento da Aquisição de Dados Geológicos nos Ambientes Integrados da Exploração",
+      "PE-2E&P-00572 — Prospecto de Locação Explotatória",
+      "PE-1PBR-01038 — Centro de Suporte à Decisão da Área de Perfuração e Aquisição de Dados Geológicos",
+      "PE-2POC-01481 — Operação do Centro de Suporte à Decisão de Poços — CSD"
+    ],
+    "generated_at": "2026-05-02"
+  },
+  "entities": [
+
+    {
+      "id": "GEOMEC022",
+      "labelpt": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório",
+      "labelen": "Scratch Test / Rock Mechanics Laboratory Tests",
+      "acronym": ["Scratch Test", "UCS Lab", "Ensaio Não Confinado", "Ensaio Triaxial"],
+      "definition": "Conjunto de ensaios laboratoriais realizados em amostras de testemunho ou plugues extraídos de poços para determinação das propriedades mecânicas estáticas das rochas. O Scratch Test é o método preferencial na Petrobras para obtenção do UCS de forma contínua ao longo do eixo axial do testemunho: a resistência ao arranhamento do testemunho é correlacionável com as propriedades mecânicas, sendo o principal dado obtido a Resistência à Compressão Uniaxial (UCS) [PP-2E&P-00322]. Os ensaios de confinamento incluem: (i) Compressibilidade de Poros Hidrostático — carregamento igual em todas as direções; produto principal: módulo bulk; requer conversão para modo uniaxial antes de uso em simulação de reservatórios; (ii) Compressibilidade de Poros Uniaxial — tensão axial constante, variação da pressão de poros com restrição lateral; produto principal: Cp uniaxial, E e ν; (iii) Sensibilidade da Permeabilidade ao Confinamento — amostra confinada com medição simultânea de permeabilidade; produto principal: curva k × tensão. As trajetórias de tensões empregadas nos ensaios devem ser as mais próximas às esperadas no campo. A calibração da envoltória de resistência ao cisalhamento (Mohr-Coulomb) com dados de Scratch Test e ensaios triaxiais é descrita na CT CMR 010/2015 (CENPES). As amostras são gerenciadas pelo PROLAB e os resultados registrados no SIRR.",
+      "standardunit": "MPa; psi (UCS, módulos); psi⁻¹ (compressibilidade); mD (permeabilidade)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC010",
+          "relationtype": "PRODUCES",
+          "targetlabel": "Resistência à Compressão Uniaxial (UCS) — dado primário do Scratch Test"
+        },
+        {
+          "targetid": "GEOMEC011",
+          "relationtype": "PRODUCES",
+          "targetlabel": "Módulo de Young estático (Est) — dado dos ensaios triaxiais"
+        },
+        {
+          "targetid": "GEOMEC012",
+          "relationtype": "PRODUCES",
+          "targetlabel": "Coeficiente de Poisson estático (ν)"
+        },
+        {
+          "targetid": "GEOMEC014",
+          "relationtype": "PRODUCES",
+          "targetlabel": "Compressibilidade de Poros (Cp uniaxial)"
+        },
+        {
+          "targetid": "GEOMEC011",
+          "relationtype": "CALIBRATES",
+          "targetlabel": "Módulo de Young dinâmico → estático (conversão Edyn → Est)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--RockMechanicsTest:1.*",
+      "internal_tools": [
+        "PROLAB — sistema de gestão de amostras de laboratório",
+        "SIRR — registro dos resultados dos ensaios",
+        "CT CMR 010/2015 (CENPES) — Metodologia de Análise Geomecânica de Poços"
+      ]
+    },
+
+    {
+      "id": "GEOMEC023",
+      "labelpt": "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
+      "labelen": "Borehole Breakouts and Drilling-Induced Tensile Fractures",
+      "acronym": ["Breakout", "FIT", "Fraturas Induzidas", "Perfil de Imagem", "FMI", "OBMI"],
+      "definition": "Feições geomecânicas identificadas em perfis de imagem (resistividade ou acústica, ex: FMI, OBMI) que permitem determinar a orientação e a magnitude das tensões horizontais in situ [PP-2E&P-00322, PE-2RES-00016]. Breakouts são elipses de colapso por cisalhamento (alargamento do poço) perpendiculares à SHmax — sua orientação indica a direção de Shmin. Fraturas Induzidas por Perfuração são fraturas de tração alinhadas com a direção de SHmax. A metodologia de Barton et al. (1988) e Zoback et al. (2003), referenciada internamente, utiliza o ângulo de abertura do breakout para calcular a magnitude de SHmax em função de UCS, Pp, Mw e Shmin. Norma interna mandatória [PP-2E&P-00322]: 100% dos perfis de imagem do campo devem ter análise de breakout; os dados devem ser carregados no BDIEP via VGE e incorporados no modelo geomecânico até o FEL2. A retroanálise de breakouts é uma das principais fontes para ajuste do modelo geomecânico 1D (CT CMR 010/2015 — Santos et al.) e é realizada nos sistemas Techlog e SEST TR. A interpretação deve distinguir breakouts de colapso mecânico (lavagem) dos causados por erosão química ou instabilidade hidráulica.",
+      "standardunit": "graus (azimute, ângulo de abertura); adimensional (qualidade A–E da medição)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC008",
+          "relationtype": "DETERMINES_DIRECTION",
+          "targetlabel": "Tensão Horizontal Máxima (SHmax) — fraturas induzidas paralelas a SHmax"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "DETERMINES_DIRECTION",
+          "targetlabel": "Tensão Mínima Horizontal (Shmin) — breakouts perpendiculares a Shmin"
+        },
+        {
+          "targetid": "GEOMEC008",
+          "relationtype": "ALLOWS_ESTIMATION",
+          "targetlabel": "Magnitude de SHmax (via retroanálise Barton-Zoback)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "ISINPUTFOR",
+          "targetlabel": "Estabilidade de Poço (calibração do modelo geomecânico)"
+        },
+        {
+          "targetid": "GEOMEC017",
+          "relationtype": "ISINPUTFOR",
+          "targetlabel": "Regime de Falhas (inferência local do regime tectônico)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellLog:1.* (ImageLog_BreakoutAnalysis)",
+      "internal_tools": [
+        "FMI (Formation MicroImager) — Schlumberger",
+        "OBMI (Oil-Base MicroImager) — Schlumberger",
+        "Techlog — análise de perfis de imagem",
+        "SEST TR (Simulador de Estabilidade) — Petrobras",
+        "SIGEO 3 — módulo ADGEOMEC (acesso aos perfis processados)",
+        "BDIEP/VGE — repositório oficial das interpretações",
+        "CT CMR 010/2015 — metodologia interna de retroanálise de breakouts"
+      ],
+      "mandatory_rule": "100% dos perfis de imagem do campo devem ter análise de breakout carregada no BDIEP até o FEL2 [PP-2E&P-00322]"
+    },
+
+    {
+      "id": "GEOMEC024",
+      "labelpt": "Compressibilidade de Poros Uniaxial",
+      "labelen": "Uniaxial Pore Volume Compressibility",
+      "acronym": ["Cp_uni", "Cpc", "Compressibilidade Uniaxial"],
+      "definition": "Variação fracional do volume de poros por unidade de variação da pressão de poros em condições de deformação uniaxial (deformações laterais restritas), que reproduz as condições in situ em campo onde as deformações são majoritariamente verticais. Distingue-se do Cp hidrostático obtido em laboratório, que deve ser convertido pela equação interna Petrobras: Cp_uni = Cp_hid × [(1+ν)(1-2ν)] / (1-ν)² [PP-2E&P-00322, equação (2)]. Métodos de obtenção na Petrobras: (1) Correlações empíricas — a Correlação Petrobras para turbiditos (Figura 9 do PP-2E&P-00322) relaciona Cp com porosidade, com curva de ajuste médio e limites superior e inferior; correlações de Hall, Newman e Van Der Knaap devem ser evitadas por resultados inapropriados; (2) Ensaios de laboratório com correção hidrostático→uniaxial; (3) Abordagem geomecânica analítica (Método 3a) ou numérica via GeomecBR acoplado ao simulador de fluxo (Método 3b — solução two-way, mais robusta). Na interpretação de TLDs (Testes de Longa Duração), o Cp impacta significativamente as interpretações de volumes in place, sendo crítico seu uso criterioso.",
+      "standardunit": "psi⁻¹; MPa⁻¹; kgf/cm²⁻¹",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC014",
+          "relationtype": "ISSPECIALIZATIONOF",
+          "targetlabel": "Compressibilidade de Poros (Cp) — versão uniaxial in situ"
+        },
+        {
+          "targetid": "GEOMEC012",
+          "relationtype": "ISCALCULATEDFROM",
+          "targetlabel": "Coeficiente de Poisson (ν) — para converter Cp_hid → Cp_uni"
+        },
+        {
+          "targetid": "GEOMEC016",
+          "relationtype": "ISREQUIREDFOR",
+          "targetlabel": "Subsidência (insumo para cálculo de compactação via simulação)"
+        },
+        {
+          "targetid": "GEOMEC022",
+          "relationtype": "OBTAINEDBY",
+          "targetlabel": "Ensaios de Laboratório (Scratch Test / Ensaio Uniaxial)"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--RockMechanicsTest:1.* (PoreVolumeCompressibility_Uniaxial)",
+      "internal_correlation": {
+        "name": "Correlação Petrobras — Turbiditos",
+        "reference": "PP-2E&P-00322, Figura 9",
+        "description": "Relaciona Cp com porosidade para turbiditos, com curvas de ajuste médio, limite superior (ajuste 1) e limite inferior (ajuste 2)"
+      }
+    },
+
+    {
+      "id": "GEOMEC025",
+      "labelpt": "CSD — Centro de Suporte à Decisão (Geomecânica)",
+      "labelen": "Decision Support Center — Geomechanics (CSD GEOMEC)",
+      "acronym": ["CSD", "CSD GEOMEC", "CSD MPD", "CGOR", "Centro de Suporte à Decisão"],
+      "definition": "Ambiente integrado e multidisciplinar da Petrobras que opera 24h/7d em regime de TIR (Turno Ininterrupto de Revezamento) para monitorar em tempo real as operações geológicas, de geomecânica e de perfuração de poços. O CSD GEOMEC especificamente é responsável por: monitorar parâmetros de perfuração, perfis e informações pertinentes às operações de poços (SITOP) em tempo real via sistemas DCS, EXATA, PWDa, SIGEO 3, V3O2, Petrel e RTO-LIVE; prover prognóstico de curvas de geopressões e atualização dos modelos em tempo real (SEST 2.0 e Predict); gerar Modelo Geomecânico Atualizado, Relatório Geomecânico de Poços, Ocorrências Geomecânicas, Boletim Operacional e Alerta Operacional [PE-2EXP-00074]. Todos os eventos geomecânicos de poço (influxos, perdas, breakouts, arrastes, prisões, fundo falso) são relatados nos Boletins Diários de Perfuração (BDP) e gerenciados pela Halliburton via OpenWells, com acesso também via WELLSOM e SIGEO 3. O monitoramento geomecânico segue o padrão PE-2EXP-00066 (Realizar Monitoramento Geomecânico em Ambiente CSD). O CSD MPD é a variante especializada para operações com Managed Pressure Drilling. Existe também o CSD de Poços Marítimos (POCOS/SPO/SP/PAD), gerenciado pelo padrão PE-1PBR-01038.",
+      "standardunit": "N/A (serviço operacional em tempo real)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "MONITORS",
+          "targetlabel": "Estabilidade de Poço / Eventos Geomecânicos (em tempo real)"
+        },
+        {
+          "targetid": "GEOMEC026",
+          "relationtype": "PRODUCES",
+          "targetlabel": "Laudo Geomecânico e Relatório Geomecânico Final"
+        },
+        {
+          "targetid": "GEOMEC019",
+          "relationtype": "MONITORS",
+          "targetlabel": "ECD (via PWDa e RTO-LIVE em tempo real)"
+        },
+        {
+          "targetid": "GEOMEC020",
+          "relationtype": "SUPPORTS",
+          "targetlabel": "MPD — via CSD MPD dedicado"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_standards": [
+        "PE-2EXP-00066 — Realizar Monitoramento Geomecânico em Ambiente CSD",
+        "PE-2EXP-00074 — Realizar a Operação e o Monitoramento nos Ambientes Integrados da Exploração",
+        "PE-1PBR-01038 — CSD da Área de Perfuração e Aquisição de Dados Geológicos",
+        "PE-2POC-01481 — Operação do Centro de Suporte à Decisão de Poços"
+      ],
+      "internal_tools": [
+        "SEST 2.0 — geomecânica de poço em tempo real (CENPES/PUC-RJ)",
+        "PWDa — Pressure While Drilling Analyser (Petrobras)",
+        "RTO-LIVE — sistema de transmissão e normalização de dados de sonda",
+        "EXATA/IVE — visualização e edição de dados de poço",
+        "WELLSOM — acesso aos eventos geomecânicos nos BDPs (Petrobras)",
+        "OpenWells — banco de dados de poços (Halliburton)",
+        "SIGEO 3 — ADGEOMEC — dados geomecânicos de campo",
+        "BDIEP — repositório oficial de ocorrências geomecânicas"
+      ]
+    },
+
+    {
+      "id": "GEOMEC026",
+      "labelpt": "Laudo Geomecânico e QPG",
+      "labelen": "Geomechanical Report / Geological Prognosis Chart",
+      "acronym": ["Laudo Geomecânico", "QPG", "Quadro de Previsões Geológicas", "Prospecto de Locação"],
+      "definition": "O Laudo Geomecânico é o documento técnico principal que compila a análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3, Pp) extraídas do modelo geomecânico 3D validado [PE-2RES-00009]. É confeccionado pelo Ativo com suporte da gerência RES/TR/GMR e deve conter: trajetória final otimizada, riscos geológico-geomecânicos residuais, resultados de shallow hazards, tensões in situ calibradas, previsão de poropressão e Laudo de UV (quando aplicável). O Laudo Geomecânico é arquivado no SIPLEX [PE-2EXP-00074]. Prazos críticos (contados antes do início da perfuração): -140 dias: início da Análise de Geohazards Complementar; -120 dias: emissão do Laudo Geomecânico (reunião de Kick-Off); -90 dias: Projeto Final do Poço; -60 dias: ISA do Prospecto com Laudo em anexo; -20 dias: NPP à ANP. O QPG (Quadro de Previsões Geológicas) é o quadro esquemático gráfico que apresenta as previsões litológicas, cronoestratigráficas, fluidos, profundidades de sapatas, diâmetros, programa de avaliação e objetivos do poço — é insumo do Prospecto e do Laudo Geomecânico [PE-2E&P-00572]. As curvas fornecidas pelo RES para o Laudo são: Pp (lb/gal), S1/S2/S3 (Magnitude e Azimute), curva ajustada de LOT e versão suavizada (média móvel), planilha em psi e figura em lb/gal.",
+      "standardunit": "N/A (documento técnico); curvas em lb/gal e psi",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "CONTAINS",
+          "targetlabel": "Previsão de Pressão de Poros (curva Pp ao longo da trajetória)"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "CONTAINS",
+          "targetlabel": "Curvas de Tensões In Situ (S1, S2, S3 — Magnitude e Azimute)"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "ENABLES_DESIGN",
+          "targetlabel": "Janela Operacional de Lama (insumo para o Projeto Final do Poço)"
+        },
+        {
+          "targetid": "GEOMEC025",
+          "relationtype": "PRODUCEDBY",
+          "targetlabel": "CSD GEOMEC (monitoramento e emissão do Relatório Final)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "FORMALIZES",
+          "targetlabel": "Análise de Geohazards (documento formal para ANP/GEP)"
+        }
+      ],
+      "osdu_mapping": null,
+      "key_deadlines_days_before_spud": {
+        "-140d": "Início da Análise de Geohazards Complementar",
+        "-120d": "Emissão do Laudo Geomecânico (Reunião de Kick-Off)",
+        "-90d": "Projeto Final do Poço (fases, sapatas, fluidos)",
+        "-75d": "Consolidação do Prospecto",
+        "-60d": "ISA com Prospecto + Laudo Geomecânico em anexo",
+        "-20d": "NPP — Notificação de Perfuração de Poço à ANP"
+      },
+      "internal_standards": [
+        "PE-2RES-00009 — Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
+        "PE-2E&P-00572 — Prospecto de Locação Explotatória",
+        "PE-2EXP-00074 — Monitoramento nos Ambientes Integrados da Exploração",
+        "PE-2EXP-00066 — Monitoramento Geomecânico em Ambiente CSD"
+      ]
+    },
+
+    {
+      "id": "GEOMEC027",
+      "labelpt": "IMGR — Índice de Modelagem de Geomecânica de Reservatório",
+      "labelen": "Reservoir Geomechanics Modelling Index",
+      "acronym": ["IMGR", "Índice de Modelagem Geomecânica", "SIRR"],
+      "definition": "Indicador de governança corporativa que mede o nível de atualização e maturidade dos modelos geomecânicos dos campos da Petrobras. Define o prazo máximo de vigência de um modelo geomecânico: caso não sofra renovação por novos dados ou atualizações significativas do modelo de fluxo/geológico, o modelo geomecânico deve ser atualizado em no máximo 3 anos após sua última modificação [PP-2E&P-00322]. O modelo geomecânico vigente que suporta as decisões operacionais do campo deve estar registrado no SIRR (Sistema de Informação de Reservas e Reservatórios) — módulo de geomecânica [PP-2E&P-00322]. O fluxo de aprovação de atualização exige que o ativo envie para a RES/TR/GMR: motivação da atualização, dados utilizados, análise de reativação de falhas, novos valores de pressão-limite de injeção, mapa de compactação, histograma de compressibilidade e mapa de subsidência — com comparativo entre modelos anterior e atual. A validação é formalizada pela emissão de ISA pela GMR. O IMGR é também um critério de auditoria dos Grupos de Revisão de Reservatórios (FEL1, FEL2, FEL3). A gerência RES/TR/GMR é responsável pela validação de todos os modelos geomecânicos da companhia.",
+      "standardunit": "adimensional (indicador de maturidade / anos desde última atualização)",
+      "category": "Property",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "GOVERNSUPDATE",
+          "targetlabel": "Estado de Tensões In Situ (periodicidade máxima de atualização: 3 anos)"
+        },
+        {
+          "targetid": "GEOMEC018",
+          "relationtype": "REQUIRESANALYSIS",
+          "targetlabel": "Reativação de Falhas (entregável obrigatório a cada atualização)"
+        },
+        {
+          "targetid": "GEOMEC016",
+          "relationtype": "REQUIRESANALYSIS",
+          "targetlabel": "Subsidência (mapa obrigatório a cada atualização)"
+        },
+        {
+          "targetid": "GEOMEC026",
+          "relationtype": "ENABLES",
+          "targetlabel": "Emissão do Laudo Geomecânico (requer modelo atualizado e validado)"
+        }
+      ],
+      "osdu_mapping": null,
+      "governance": {
+        "max_validity_years": 3,
+        "approval_authority": "RES/TR/GMR — Gerência Corporativa de Geomecânica de Reservatórios",
+        "official_datastore": "SIRR — módulo de geomecânica",
+        "approval_document": "ISA emitida pela RES/TR/GMR",
+        "mandatory_deliverables_on_update": [
+          "Análise de reativação de falhas",
+          "Novos valores de pressão-limite de injeção",
+          "Mapa de compactação do reservatório",
+          "Histograma da compressibilidade das rochas",
+          "Mapa de subsidência do assoalho marinho",
+          "Comparativo entre modelos anterior e atual"
+        ]
+      }
+    }
+
+  ]
+}
+
+
+# GEOMEC022 — Scratch Test / Ensaios Lab
+GEOMEC022 --[PRODUCES]-----------> GEOMEC010  (UCS)
+GEOMEC022 --[PRODUCES]-----------> GEOMEC011  (E estático)
+GEOMEC022 --[PRODUCES]-----------> GEOMEC012  (ν estático)
+GEOMEC022 --[PRODUCES]-----------> GEOMEC014  (Cp uniaxial)
+GEOMEC022 --[CALIBRATES]---------> GEOMEC011  (Edyn → Est)
+
+# GEOMEC023 — Breakouts e Fraturas Induzidas
+GEOMEC023 --[DETERMINES_DIRECTION]--> GEOMEC008  (SHmax)
+GEOMEC023 --[DETERMINES_DIRECTION]--> GEOMEC002  (Shmin)
+GEOMEC023 --[ALLOWS_ESTIMATION]-----> GEOMEC008  (magnitude SHmax)
+GEOMEC023 --[ISINPUTFOR]-----------> GEOMEC015  (estabilidade poço)
+GEOMEC023 --[ISINPUTFOR]-----------> GEOMEC017  (regime de falhas)
+
+# GEOMEC024 — Cp Uniaxial
+GEOMEC024 --[ISSPECIALIZATIONOF]--> GEOMEC014  (Cp geral)
+GEOMEC024 --[ISCALCULATEDFROM]---> GEOMEC012  (ν para conversão)
+GEOMEC024 --[ISREQUIREDFOR]------> GEOMEC016  (subsidência)
+GEOMEC024 --[OBTAINEDBY]---------> GEOMEC022  (ensaios lab)
+
+# GEOMEC025 — CSD GEOMEC
+GEOMEC025 --[MONITORS]-----------> GEOMEC015  (eventos geomecânicos)
+GEOMEC025 --[PRODUCES]-----------> GEOMEC026  (Laudo Geomecânico)
+GEOMEC025 --[MONITORS]-----------> GEOMEC019  (ECD tempo real)
+GEOMEC025 --[SUPPORTS]-----------> GEOMEC020  (MPD via CSD MPD)
+
+# GEOMEC026 — Laudo Geomecânico / QPG
+GEOMEC026 --[CONTAINS]-----------> GEOMEC001  (curva Pp)
+GEOMEC026 --[CONTAINS]-----------> GEOMEC004  (curvas S1/S2/S3)
+GEOMEC026 --[ENABLES_DESIGN]-----> GEOMEC003  (janela operacional)
+GEOMEC026 --[PRODUCEDBY]---------> GEOMEC025  (CSD GEOMEC)
+GEOMEC026 --[FORMALIZES]---------> GEOMEC015  (análise de geohazards)
+
+# GEOMEC027 — IMGR
+GEOMEC027 --[GOVERNSUPDATE]------> GEOMEC004  (Estado de Tensões)
+GEOMEC027 --[REQUIRESANALYSIS]---> GEOMEC018  (reativação de falhas)
+GEOMEC027 --[REQUIRESANALYSIS]---> GEOMEC016  (subsidência)
+GEOMEC027 --[ENABLES]-----------> GEOMEC026  (Laudo Geomecânico)
+
+══════════════════════════════════════════════════════════════
+BLOCO 1 — TENSÕES E PRESSÕES FUNDAMENTAIS (001–008)
+══════════════════════════════════════════════════════════════
+GEOMEC001  Pressão de Poros (Pp)                    → Property
+GEOMEC002  Tensão Mínima Horizontal / GF (Shmin/S3) → Property
+GEOMEC003  Janela Operacional de Lama               → Process  ◄── HUB perfuração
+GEOMEC004  Estado de Tensões In Situ                → Property
+GEOMEC005  Tensão Efetiva                           → Property
+GEOMEC006  Testes LOT/xLOT/FIT/MicroFrac            → Process
+GEOMEC007  Tensão Vertical (Sv)                     → Property
+GEOMEC008  Tensão Horizontal Máxima (SHmax)         → Property
+
+══════════════════════════════════════════════════════════════
+BLOCO 2 — PROPRIEDADES MECÂNICAS E ELÁSTICAS (009–014)
+══════════════════════════════════════════════════════════════
+GEOMEC009  Gradiente de Colapso                     → Property
+GEOMEC010  UCS — Resistência à Compressão Uniaxial  → Property
+GEOMEC011  Módulo de Young (E)                      → Property
+GEOMEC012  Coeficiente de Poisson (ν)               → Property
+GEOMEC013  Coeficiente de Biot-Willis (α)           → Property
+GEOMEC014  Compressibilidade de Poros (Cp)          → Property
+
+══════════════════════════════════════════════════════════════
+BLOCO 3 — RISCO, ESTRUTURA E PRODUÇÃO (015–018)
+══════════════════════════════════════════════════════════════
+GEOMEC015  Estabilidade de Poço / Geohazards        → Process  ◄── HUB risco
+GEOMEC016  Subsidência e Compactação                → Process
+GEOMEC017  Regime de Falhas                         → Classifier
+GEOMEC018  Reativação de Falhas Geológicas          → Process
+
+══════════════════════════════════════════════════════════════
+BLOCO 4 — OPERAÇÕES ESPECIAIS (019–021)
+══════════════════════════════════════════════════════════════
+GEOMEC019  ECD — Densidade Equivalente de Circulação → Property
+GEOMEC020  MPD — Managed Pressure Drilling          → Process  ◄── HUB operacional
+GEOMEC021  APB — Annular Pressure Buildup           → Property
+
+══════════════════════════════════════════════════════════════
+BLOCO 5 — LABORATÓRIO E DADOS DE POÇO (022–024)
+══════════════════════════════════════════════════════════════
+GEOMEC022  Scratch Test / Ensaios Lab               → Process
+GEOMEC023  Breakouts e Fraturas Induzidas           → Process
+GEOMEC024  Compressibilidade de Poros Uniaxial      → Property
+
+══════════════════════════════════════════════════════════════
+BLOCO 6 — MONITORAMENTO E GOVERNANÇA (025–027)
+══════════════════════════════════════════════════════════════
+GEOMEC025  CSD — Centro de Suporte à Decisão       → Process
+GEOMEC026  Laudo Geomecânico / QPG                  → Process
+GEOMEC027  IMGR — Índice de Modelagem Geomecânica  → Property ◄── KPI governança
+
+TOTAL: 27 entidades | ~100 relacionamentos mapeados | 3 HUBs + 1 Classifier + 1 KPI
+
+Notas Finais para o Time Geolytics
+1. Ciclo de Vida do Conhecimento Geomecânico (GEOMEC025 → 026 → 027)
+O grafo evidencia o ciclo fechado de governança da Petrobras: o CSD GEOMEC (025) monitora em tempo real → produz o Laudo (026) → o IMGR (027) controla a periodicidade de atualização do modelo → que retroalimenta o CSD. Este é o principal loop de feedback do Knowledge Graph — recomendamos modelá-lo explicitamente como um ciclo com timestamp.
+2. GEOMEC023 como "Nó Conversor" (campo → tensão)
+O nó de Breakouts/Fraturas Induzidas (023) é o único que converte dados de campo observacional diretamente em valores de tensão (008) sem necessidade de ensaio de pressão. No grafo, ele funciona como ponte entre o domínio "dado de poço" e o domínio "estado de tensões", sendo crítico para campos onde LOTs/xLOTs são escassos.
+3. Regra Mandatória — Campo mandatory_rule em GEOMEC023
+A obrigatoriedade de 100% de análise de breakout [PP-2E&P-00322] é uma regra de compliance técnico que pode ser usada para auditoria automática via Knowledge Graph. Sugerimos implementar uma query Cypher que identifique campos onde breakout_analysis_coverage < 100% E FEL_stage >= FEL2.
+
+
+{
+  "metadata": {
+    "version": "1.4",
+    "update_note": "Correção GEOMEC026 → 026A/026B + Blocos 7 e 8 (GEOMEC028 a GEOMEC035)",
+    "generated_at": "2026-05-02"
+  },
+  "entities": [
+
+    {
+      "id": "GEOMEC026A",
+      "labelpt": "QPG — Quadro de Previsões Geológicas",
+      "labelen": "Geological Prognosis Chart",
+      "acronym": ["QPG", "Quadro de Previsões Geológicas", "QPG Preliminar", "QPG Final"],
+      "definition": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
+      "standardunit": "N/A (documento técnico gráfico — cotas em m TVDSS e MD)",
+      "category": "Document",
+      "owner_department": "Gerência de Reservatórios do Ativo (Intérpretes da locação)",
+      "relationships": [
+        {
+          "targetid": "GEOMEC026B",
+          "relationtype": "ISINPUTFOR",
+          "targetlabel": "Laudo Geomecânico — QPG Preliminar é insumo obrigatório para elaboração do Laudo"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "CONTAINS_FORECAST",
+          "targetlabel": "Pressão de Poros prevista (pressão estática dos IPFs)"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "CONTAINS_FORECAST",
+          "targetlabel": "Janela Operacional implícita (fluidos de perfuração e diâmetros por fase)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "ISINPUTFOR",
+          "targetlabel": "Estabilidade de Poço / Análise de Geohazards"
+        }
+      ],
+      "osdu_mapping": null,
+      "key_deadlines": {
+        "-125d": "QPG Preliminar emitido para o Kick-Off (-120 dias)",
+        "-60d": "QPG Final anexado ao Prospecto (ISA)",
+        "reperfuração": "Novo QPG mandatório se reperfuração ocorreu por questões geomecânicas [PE-2E&P-00572]"
+      },
+      "internal_standards": [
+        "PE-2E&P-00572 — Prospecto de Locação Explotatória",
+        "PE-2EXP-00067 — Realizar a Aquisição de Dados Geológicos e Petrofísicos",
+        "PE-2EXP-00074 — Monitoramento nos Ambientes Integrados da Exploração",
+        "PE-2RES-00009 — Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP"
+      ],
+      "repositories": ["BDIEP via SIGEO (publicação estruturada)", "SIRR — módulo Projetos de Locação"]
+    },
+
+    {
+      "id": "GEOMEC026B",
+      "labelpt": "Laudo Geomecânico",
+      "labelen": "Geomechanical Report",
+      "acronym": ["Laudo Geomecânico", "Laudo de Geomecânica", "Relatório Geomecânico"],
+      "definition": "Documento técnico formal que compila a Análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3 — Magnitude e Azimute), gradiente de poropressão e dados de testes de pressão (LOT/XLOT/FIT), extraídas do modelo geomecânico 3D validado pelo RES/TR/GMR. É confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR, e deve conter obrigatoriamente: (i) trajetória final otimizada aprovada no Pré Kick-Off; (ii) riscos geológico-geomecânicos residuais na trajetória; (iii) poços correlatos com eventos geomecânicos; (iv) resultados dos estudos de shallow hazards (SUB/ES/GEO); (v) tensões in situ calibradas ao modelo geomecânico 3D aprovado; (vi) previsão de poropressão nas rochas não-reservatório; (vii) análise de Underground Venting (UV) quando aplicável [PE-2RES-00009]. As curvas fornecidas pelo RES incluem versão original e suavizada (média móvel), planilha em psi e figura em lb/gal. O Laudo é apresentado na reunião de Kick-Off (-120 dias antes da perfuração) e posteriormente emitido via ISA junto ao Prospecto (-60 dias). Armazenamento oficial: SIPLEX [PE-2EXP-00074]. Após a perfuração, o CSD GEOMEC emite o Relatório Geomecânico Final de Poço, que é arquivado no VGE [PE-2EXP-00074].",
+      "standardunit": "N/A (documento técnico — curvas em lb/gal e psi)",
+      "category": "Document",
+      "owner_department": "Ativo de Produção / Gerência de Reservatórios (validação: RES/TR/GMR)",
+      "relationships": [
+        {
+          "targetid": "GEOMEC026A",
+          "relationtype": "REQUIRESINPUT",
+          "targetlabel": "QPG Preliminar — insumo obrigatório para elaboração do Laudo"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "CONTAINS",
+          "targetlabel": "Curva de Poropressão prevista (lb/gal e psi)"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "CONTAINS",
+          "targetlabel": "Curvas S1/S2/S3 (Magnitude e Azimute) ao longo da trajetória"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "ENABLES_DESIGN",
+          "targetlabel": "Janela Operacional — insumo para o Projeto Final do Poço (-90 dias)"
+        },
+        {
+          "targetid": "GEOMEC015",
+          "relationtype": "FORMALIZES",
+          "targetlabel": "Análise de Geohazards — documento formal para GEP e ANP"
+        },
+        {
+          "targetid": "GEOMEC025",
+          "relationtype": "PRODUCEDBY",
+          "targetlabel": "CSD GEOMEC — emite Relatório Geomecânico Final após perfuração"
+        }
+      ],
+      "osdu_mapping": null,
+      "key_deadlines": {
+        "-125d": "Recebe QPG Preliminar (Projeto Direcional disponível)",
+        "-120d": "Emissão do Laudo (reunião Kick-Off)",
+        "-90d": "Projeto Final do Poço elaborado com base no Laudo",
+        "-60d": "ISA do Prospecto com Laudo em anexo (distribuição formal)",
+        "pós_perfuração": "CSD GEOMEC emite Relatório Geomecânico Final (arquivado no VGE)"
+      },
+      "internal_standards": [
+        "PE-2RES-00009 — Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
+        "PE-2E&P-00572 — Prospecto de Locação Explotatória",
+        "PE-2EXP-00074 — Monitoramento nos Ambientes Integrados da Exploração",
+        "PE-2EXP-00066 — Realizar Monitoramento Geomecânico em Ambiente CSD"
+      ],
+      "repositories": ["SIPLEX (Laudo pré-perfuração)", "VGE (Relatório Geomecânico Final pós-perfuração)"]
+    },
+
+    {
+      "id": "GEOMEC028",
+      "labelpt": "GeomecBR — Simulador Geomecânico por Elementos Finitos (Petrobras)",
+      "labelen": "GeomecBR — Finite Element Geomechanical Simulator",
+      "acronym": ["GeomecBR", "GEOMECBR"],
+      "definition": "Sistema computacional interno da Petrobras baseado no Método dos Elementos Finitos (MEF) para solução da Equação de Balanço de Momento (Equação de Equilíbrio) em modelos geomecânicos 3D de reservatórios. Desenvolvido pelo CENPES e empregado em estudos de Reservatórios desde 2009 [PP-2E&P-00322]. Calcula tensões, deformações e deslocamentos no volume de rocha modelado, considerando reologia dos materiais (incluindo comportamento viscoplástico de evaporitos) e condições de contorno. Permite simulação acoplada com simuladores de fluxo de reservatórios (acoplamento two-way), capturando campos de saturação e poropressão ao longo da vida produtiva. A simulação divide-se em: (i) inicialização do estado de tensões (pré-produção) e (ii) explotação do reservatório. Produz como resultados: compressibilidade de poros por célula da malha, mapas de compactação, mapas de subsidência, análise de reativação de falhas, trajetórias de tensões e avaliações de integridade da rocha capeadora. O fluxo de dados de geomecânica usando GeomecBR em conjunto com SKUA-GOCAD (AspenTech) e Petrel está documentado na Comunidade de Interesse de Gestão e Governança de Dados. Os resultados são registrados no SIRR.",
+      "standardunit": "N/A (simulador numérico — resultados em psi, MPa, m)",
+      "category": "Tool",
+      "owner_department": "CENPES (desenvolvimento); RES/TR/GMR (validação dos modelos)",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "COMPUTES",
+          "targetlabel": "Estado de Tensões In Situ (solução numérica 3D)"
+        },
+        {
+          "targetid": "GEOMEC016",
+          "relationtype": "COMPUTES",
+          "targetlabel": "Subsidência e Compactação (mapa por campo)"
+        },
+        {
+          "targetid": "GEOMEC014",
+          "relationtype": "COMPUTES",
+          "targetlabel": "Compressibilidade de Poros (por elemento da malha)"
+        },
+        {
+          "targetid": "GEOMEC018",
+          "relationtype": "ANALYZES",
+          "targetlabel": "Reativação de Falhas Geológicas"
+        },
+        {
+          "targetid": "GEOMEC029",
+          "relationtype": "USEDWITH",
+          "targetlabel": "GERESIM (pré/pós-processamento e interface com simulador de fluxo)"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_references": [
+        "PP-2E&P-00322 — menciona GeomecBR como sistema computacional MEF para modelagem geomecânica 3D",
+        "CoI Gestão e Governança de Dados — Fluxo de Dados de Geomecânica (Búzios)"
+      ],
+      "coupling_mode": "Two-way acoplado com simulador de fluxo (IMEX/ECLIPSE/INTERSECT) via GERESIM"
+    },
+
+    {
+      "id": "GEOMEC029",
+      "labelpt": "GERESIM — Sistema de Gerenciamento de Simulações de Reservatórios",
+      "labelen": "GERESIM — Reservoir Simulation Management System",
+      "acronym": ["GERESIM", "GERESIM 3D"],
+      "definition": "Sistema computacional interno da Petrobras para gerenciamento e orquestração de simulações de reservatórios. No contexto geomecânico, o GERESIM possui aplicação específica para auxílio à construção do gráfico composto do Laudo Geomecânico, permitindo integrar o Modelo Geomecânico 3D de Reservatórios com a trajetória do poço e os dados geológicos [PE-2RES-00009]. Insumos requeridos: modelo geomecânico 3D validado, arquivo de trajetória do poço (ex: Trajetoria.txt), QPG (Quadro de Previsões Geológicas), planilha de dados medidos (tomadas de pressão, LOT, FIT, pressões de fechamento) e planilha de eventos de poço (perdas, fechamentos, breakouts, influxos). O GERESIM é referenciado em [PE-2RES-00009] como módulo para geração do gráfico composto de geotensões. É também usado para pré e pós-processamento em simulações de fluxo [PE-2E&P-00726], integrando modelos geológicos e geomecânicos para simulações acopladas. Os modelos geomecânicos vigentes devem ser cadastrados no GERESIM/SIRR após validação pela RES/TR/GMR via ISA.",
+      "standardunit": "N/A (sistema de gestão e pré/pós-processamento)",
+      "category": "Tool",
+      "owner_department": "CENPES / RES/GDTD (suporte técnico)",
+      "relationships": [
+        {
+          "targetid": "GEOMEC028",
+          "relationtype": "INTERFACES_WITH",
+          "targetlabel": "GeomecBR (acoplamento geomecânico-fluxo)"
+        },
+        {
+          "targetid": "GEOMEC026B",
+          "relationtype": "GENERATES",
+          "targetlabel": "Gráfico Composto do Laudo Geomecânico (integração trajetória × tensões × QPG)"
+        },
+        {
+          "targetid": "GEOMEC027",
+          "relationtype": "STORAGEFOR",
+          "targetlabel": "IMGR — repositório SIRR para modelos geomecânicos validados"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_references": [
+        "PE-2RES-00009 — GERESIM citado para construção do gráfico composto do Laudo",
+        "PE-2E&P-00726 — listado como software de pré/pós-processamento de simulação de reservatórios"
+      ]
+    },
+
+    {
+      "id": "GEOMEC030",
+      "labelpt": "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço",
+      "labelen": "SIGEO and SEST TR — 1D Well Geomechanical Modeling Systems",
+      "acronym": ["SIGEO", "SEST TR", "SEST", "SEST 2.0", "Simulador de Estabilidade"],
+      "definition": "Conjunto de sistemas computacionais internos da Petrobras para modelagem geomecânica 1D de poço, utilizados tanto no planejamento (SIGEO/SEST TR) quanto em tempo real durante a perfuração (SEST 2.0). O SIGEO (Sistema Integrado de Geologia e Geofísica) possui módulo de análise geomecânica 1D com acesso direto ao BDGEOL (banco de dados geológicos), permitindo refinamento de correlações por litologia. Contém módulo multipoços para calibração do volume de densidade pela equação de Gardner. O SEST TR (Simulador de Estabilidade — Tecnologia Reservatórios) é a ferramenta padrão para estimativa de tensões horizontais mínimas, integrado ao banco de dados da empresa; é usado na análise e calibração de LOT/FIT em conjunto com o SIGEO [PE-2RES-00014]. O SEST 2.0 é a versão de uso em tempo real no CSD GEOMEC, desenvolvida em parceria CENPES/PUC-RJ, para atualização dinâmica dos modelos de geopressão durante a perfuração [PE-2EXP-00074]. O Techlog (Schlumberger) é também referenciado para construção de modelos 1D em pós-perfuração [PE-2EXP-00074]. A metodologia de análise geomecânica de poços está descrita na CT CMR 010/2015 (CENPES).",
+      "standardunit": "N/A (sistemas de modelagem — resultados em lb/gal, psi, kgf/cm²/m)",
+      "category": "Tool",
+      "owner_department": "CENPES (SEST TR, SEST 2.0); Schlumberger (Techlog — licenciado)",
+      "relationships": [
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "COMPUTES_1D",
+          "targetlabel": "Estado de Tensões In Situ (perfil 1D ao longo do poço)"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "ESTIMATES",
+          "targetlabel": "Tensão Mínima Horizontal (curva Shmin × profundidade)"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "ESTIMATES",
+          "targetlabel": "Pressão de Poros (prognóstico e atualização em tempo real)"
+        },
+        {
+          "targetid": "GEOMEC025",
+          "relationtype": "USEDBY",
+          "targetlabel": "CSD GEOMEC (SEST 2.0 em tempo real)"
+        },
+        {
+          "targetid": "GEOMEC028",
+          "relationtype": "COMPLEMENTEDBY",
+          "targetlabel": "GeomecBR (extensão para modelagem 3D, quando 1D é insuficiente)"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_references": [
+        "PE-2RES-00014 — SIGEO e SEST TR como ferramentas de modelagem 1D",
+        "PE-2EXP-00074 — SEST 2.0 e Techlog usados pelo CSD GEOMEC",
+        "CT CMR 010/2015 (CENPES) — Metodologia de Análise Geomecânica de Poços de Petróleo"
+      ]
+    },
+
+    {
+      "id": "GEOMEC031",
+      "labelpt": "XLOT — Teste de Fraturamento Estendido (Metodologia Interna)",
+      "labelen": "Extended Leak-Off Test — Methodology",
+      "acronym": ["XLOT", "xLOT", "Microfraturamento com Coluna de Perfuração", "Microfraturamento de Baixo Custo", "Mini-frac", "MicroFrac"],
+      "definition": "Metodologia de aquisição de dados de tensão in situ de maior qualidade que o LOT convencional, pois envolve a propagação controlada de uma fratura na formação, permitindo a medição direta de pressões de reabertura, propagação e fechamento de fratura — indicadores diretos da tensão mínima horizontal (Shmin). Na Petrobras, é denominado internamente como 'Microfraturamento com Coluna de Perfuração' ou 'XLOT — Microfraturamento de Baixo Custo' [PP-2E&P-00322, PE-2E&P-00984]. Classificado como operação de baixo custo por ser realizado durante a perfuração após o assentamento da sapata, sem manobras dedicadas. O xLOT/Microfraturamento fornece: pressão de reabertura de fratura, pressão de propagação, ISIP (Instantaneous Shut-In Pressure = tensão mínima), e curva de declínio de pressão. Segundo o padrão [PE-2RES-00014], os procedimentos de análise seguem a hierarquia de qualidade: (1) Mini-frac/MicroFrac/xLOT com ciclos múltiplos — maior qualidade; (2) SRT/SDT/TI/MicroTI; (3) LOT com indicativos de absorção. O ISIP é a pressão estabilizada após o fechamento do bombeio e é o indicador de melhor qualidade para Shmin. A metodologia de ajuste das deformações horizontais a partir dos xLOTs está descrita na CT CMR 010/2015 (Santos et al.).",
+      "standardunit": "psi; kgf/cm²; lb/gal equivalente",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "MEASURES",
+          "targetlabel": "Tensão Mínima Horizontal — ISIP é indicador direto de Shmin"
+        },
+        {
+          "targetid": "GEOMEC006",
+          "relationtype": "ISSPECIALIZATIONOF",
+          "targetlabel": "Testes de Absorção e Fraturamento (LOT/xLOT/FIT — família)"
+        },
+        {
+          "targetid": "GEOMEC030",
+          "relationtype": "CALIBRATES",
+          "targetlabel": "SIGEO/SEST TR — os xLOTs calibram as curvas de tensão mínima"
+        },
+        {
+          "targetid": "GEOMEC027",
+          "relationtype": "SATISFIES",
+          "targetlabel": "IMGR — operação de baixo custo que alimenta o modelo geomecânico"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellTest:1.* (ExtendedLeakOffTest)",
+      "quality_hierarchy": {
+        "1_highest": "Mini-frac / MicroFrac / xLOT com múltiplos ciclos (Pc direto)",
+        "2_medium": "SRT / SDT / TI / MicroTI (Pc inferido)",
+        "3_lower": "LOT convencional (pressão de absorção — limite inferior de Shmin)"
+      },
+      "internal_standards": [
+        "PP-2E&P-00322 — metodologia e hierarquia de qualidade",
+        "PE-2RES-00014 — Modelagem Geomecânica 1D",
+        "PE-2E&P-00984 — Diretrizes para Aquisição de Dados de Reservatório",
+        "PE-2POC-01495 — Elaborar Projeto de Microfraturamento"
+      ]
+    },
+
+    {
+      "id": "GEOMEC032",
+      "labelpt": "Pulso de Pressão (Operação AGP)",
+      "labelen": "Pressure Pulse Operation",
+      "acronym": ["Pulso de Pressão", "Pressure Pulse"],
+      "definition": "Operação especializada realizada em poços injetores na Petrobras, descrita no padrão [PE-2AGP-00027], com o objetivo de realizar fraturamento controlado da rocha reservatório para otimização da injetividade. O procedimento consiste em: (i) reduzir a pressão de poros abaixo do nível normal (induzindo redução das tensões principais), e (ii) em seguida, realizar uma rápida elevação de pressão no poço até o fraturamento controlado. A pressão a ser utilizada no Pulso de Pressão e os tempos do esquema operacional devem ser determinados exclusivamente pela equipe de Geomecânica de Reservatórios da AGP (AGP/RES-EE/CTGI/CT-GGER). Este conceito é distinto do fraturamento hidráulico convencional (GEOMEC033) por ser uma operação de injeção com parâmetros definidos por estudo geomecânico específico, não por projeto de fraturamento de estimulação. É um dos mecanismos de gerenciamento geomecânico ativo de campos em produção.",
+      "standardunit": "psi; kgf/cm² (pressão do pulso e timing)",
+      "category": "Process",
+      "owner_department": "AGP/RES-EE/CTGI/CT-GGER — responsável pela determinação dos parâmetros",
+      "relationships": [
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "EXPLOITS",
+          "targetlabel": "Tensão Mínima Horizontal — operação induz fratura ao atingir Shmin"
+        },
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "MANIPULATES",
+          "targetlabel": "Pressão de Poros — redução prévia é parte do protocolo"
+        },
+        {
+          "targetid": "GEOMEC027",
+          "relationtype": "REQUIRESVALIDATION",
+          "targetlabel": "IMGR — parâmetros validados pelo modelo geomecânico vigente"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_standards": [
+        "PE-2AGP-00027 — Gestão e Monitoramento dos Limites Geomecânicos dos Reservatórios da AGP"
+      ]
+    },
+
+    {
+      "id": "GEOMEC033",
+      "labelpt": "Fraturamento Hidráulico (Estimulação)",
+      "labelen": "Hydraulic Fracturing — Well Stimulation",
+      "acronym": ["Fraturamento Hidráulico", "Frac", "Fraturamento Propado", "Fraturamento Ácido", "Fracpack"],
+      "definition": "Técnica de estimulação de poços na qual um fluido é bombeado sob alta pressão para criar ou reabrir fraturas na formação rochosa, aumentando a produtividade ou injetividade do poço. Na Petrobras, o Manual de Projeto de Fraturamento [PE-2POC-01246] descreve dois tipos: (i) Fraturamento Propado — agente de sustentação granular (propante) é bombeado em gel reticulado para manter a fratura aberta após o fechamento; aplicado em arenitos; (ii) Fraturamento Ácido — ácido ataca as faces da fratura em carbonatos, gerando canais condutivos; indicado quando haja equivalência com o propado, por ser de menor risco operacional. O projeto de fraturamento requer: modelo geomecânico da formação, janela de fraturamento, parâmetros de resistência (UCS, RES — Rock Embedment Strength para fraturamento ácido), geometria da fratura e simulador Stimplan. A pressão de fechamento da fratura (ISIP) e a Net Pressure são parâmetros fundamentais. Os testes de calibração em ordem de preferência são: Micro-TI, SRT/SDT e Minifrac. O Fracpack é a técnica de contenção de areia amplamente aplicada na Bacia de Campos.",
+      "standardunit": "psi (pressões de fraturamento); bbl/min (vazão de bombeio); lb/ft² (concentração de propante)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "REQUIRESKNOWLEDGE",
+          "targetlabel": "Tensão Mínima Horizontal — limite que define a pressão de fraturamento"
+        },
+        {
+          "targetid": "GEOMEC003",
+          "relationtype": "OPERATESABOVE",
+          "targetlabel": "Janela Operacional — frac opera acima do limite superior de Shmin"
+        },
+        {
+          "targetid": "GEOMEC031",
+          "relationtype": "PRECEDEDBY",
+          "targetlabel": "XLOT / Mini-frac / Micro-TI — testes de calibração pré-fraturamento"
+        },
+        {
+          "targetid": "GEOMEC010",
+          "relationtype": "REQUIRESINPUT",
+          "targetlabel": "UCS — define a pressão de quebra da rocha"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--WellboreTreatment:1.* (HydraulicFracturing)",
+      "internal_standards": [
+        "PE-2POC-01246 — Manual de Projeto de Fraturamento",
+        "PE-2POC-01286 — Diretrizes para Operações de Estimulação em Poços Terrestres",
+        "PE-2POC-01495 — Elaborar Projeto de Microfraturamento"
+      ]
+    },
+
+    {
+      "id": "GEOMEC034",
+      "labelpt": "DFIT / DPPT — Testes Dinâmicos de Integridade e Pressão de Poros",
+      "labelen": "DFIT / DPPT — Dynamic Formation Integrity and Pore Pressure Tests",
+      "acronym": ["DFIT", "DPPT", "DLOT", "Dynamic Formation Integrity Test", "Dynamic Pore Pressure Test"],
+      "definition": "Conjunto de testes dinâmicos de pressão realizados com o sistema MPD para determinação dos limites operacionais da janela de perfuração durante a perfuração de uma fase. São dois testes distintos e complementares, descritos no padrão [PP-2POC-00341] e padrão [PE-2POC-01232]: (i) DFIT (Dynamic Formation Integrity Test) — teste em condições dinâmicas (com circulação) para verificação da resistência da formação às pressões esperadas nas operações subsequentes — determina o limite superior da janela operacional (equivalente dinâmico do LOT); (ii) DPPT (Dynamic Pore Pressure Test) — teste em condições dinâmicas para verificação do limite inferior da janela operacional — confirma ou atualiza o gradiente de pressão de poros previsto. O DLOT (Dynamic Leak Off Test) é sinônimo de DFIT usado em alguns padrões. Esses testes são realizados durante o Fingerprint MPD [PE-1PBR-01326] e calibram o modelo hidráulico do sistema MPD antes da perfuração da fase. Os resultados são usados para ajuste em tempo real das curvas de Pp e Shmin no SEST 2.0 pelo CSD GEOMEC.",
+      "standardunit": "psi; lb/gal equivalente (ECD)",
+      "category": "Process",
+      "relationships": [
+        {
+          "targetid": "GEOMEC001",
+          "relationtype": "DETERMINES",
+          "targetlabel": "Pressão de Poros — DPPT confirma o limite inferior da janela"
+        },
+        {
+          "targetid": "GEOMEC002",
+          "relationtype": "DETERMINES",
+          "targetlabel": "Tensão Mínima Horizontal — DFIT confirma o limite superior da janela"
+        },
+        {
+          "targetid": "GEOMEC020",
+          "relationtype": "PERFORMEDBY",
+          "targetlabel": "MPD — testes realizados com o sistema de contrapressão MPD"
+        },
+        {
+          "targetid": "GEOMEC031",
+          "relationtype": "COMPLEMENTEDBY",
+          "targetlabel": "xLOT / Mini-frac — versão estática de maior qualidade"
+        }
+      ],
+      "osdu_mapping": null,
+      "internal_standards": [
+        "PP-2POC-00341 — Elaborar Projeto Especializado de Perfuração de Poços Marítimos (definições DFIT/DPPT)",
+        "PE-2POC-01232 — Procedimentos MPD para Determinação de Janela Operacional",
+        "PE-1PBR-01326 — Fingerprint MPD (simulação de DFIT/DPPT)"
+      ]
+    },
+
+    {
+      "id": "GEOMEC035",
+      "labelpt": "Modelo Geomecânico 3D de Reservatórios",
+      "labelen": "3D Reservoir Geomechanical Model",
+      "acronym": ["Modelo Geomecânico 3D", "MG3D", "Modelo Geomecânico de Reservatório", "Modelo Geomecânico MEF"],
+      "definition": "Modelo numérico tridimensional que descreve a evolução do estado de tensões, deformações e deslocamentos em subsuperfície em função das propriedades mecânicas e estágios de carregamento (variações de poropressão), através de simulação pelo Método dos Elementos Finitos [PE-2RES-00009]. Compreende as formações rochosas e sedimentos desde a superfície (onshore) ou fundo do mar (offshore) até profundidades maiores que o próprio reservatório, incluindo volumes de rocha adjacentes para condições de contorno adequadas. Deve ser refinado no reservatório para capturar feições geomecânicas de interesse. A modelagem 3D é mandatória em casos geologicamente ou estruturalmente complexos — em casos simples pode ser substituída por modelos 1D [PE-2RES-00009]. As propriedades mecânicas devem ser distribuídas na malha representando todo o espectro de deformabilidade e resistência. O modelo deve estar aderente aos modelos geológico e de escoamento. Inclui obrigatoriamente: peso próprio das formações, pressão da lâmina d'água, poropressão, Princípio de Biot-Willis, propriedades elásticas, resistência ao cisalhamento, comportamento viscoplástico de evaporitos e deformações tectônicas [PE-2RES-00009]. O modelo vigente que suporta decisões operacionais do campo deve estar registrado no SIRR (IMGR ≤ 3 anos) e validado via ISA da RES/TR/GMR.",
+      "standardunit": "N/A (modelo computacional — resultados em psi, MPa, m, m³)",
+      "category": "Model",
+      "owner_department": "Gerência de Reservatórios do Ativo (custódia); RES/TR/GMR (validação e aprovação)",
+      "relationships": [
+        {
+          "targetid": "GEOMEC028",
+          "relationtype": "IMPLEMENTEDBY",
+          "targetlabel": "GeomecBR — solver MEF interno Petrobras"
+        },
+        {
+          "targetid": "GEOMEC029",
+          "relationtype": "MANAGEDBY",
+          "targetlabel": "GERESIM — gestão, acoplamento e pré/pós-processamento"
+        },
+        {
+          "targetid": "GEOMEC004",
+          "relationtype": "OUTPUTS",
+          "targetlabel": "Estado de Tensões In Situ (produto principal do modelo)"
+        },
+        {
+          "targetid": "GEOMEC027",
+          "relationtype": "GOVERNEDBY",
+          "targetlabel": "IMGR — periodicidade máxima de atualização: 3 anos"
+        },
+        {
+          "targetid": "GEOMEC026B",
+          "relationtype": "ISINPUTFOR",
+          "targetlabel": "Laudo Geomecânico — curvas S1/S2/S3 extraídas do modelo 3D"
+        },
+        {
+          "targetid": "GEOMEC016",
+          "relationtype": "OUTPUTS",
+          "targetlabel": "Mapa de Subsidência e Compactação"
+        },
+        {
+          "targetid": "GEOMEC018",
+          "relationtype": "OUTPUTS",
+          "targetlabel": "Análise de Reativação de Falhas"
+        }
+      ],
+      "osdu_mapping": "osdu:wks:work-product-component--GeomechanicalModel:1.*",
+      "mandatory_inputs": [
+        "Peso próprio das formações (integração do perfil de densidade)",
+        "Pressão da lâmina d'água",
+        "Poropressão (anormal e reservatório com HC)",
+        "Coeficiente de Biot-Willis (α)",
+        "Propriedades elásticas (E, ν — estático)",
+        "Resistência ao cisalhamento das formações",
+        "Comportamento viscoplástico de evaporitos (quando houver)",
+        "Deformações tectônicas (quando couber)"
+      ],
+      "internal_standards": [
+        "PP-2E&P-00322 — Geomecânica e Geologia Estrutural para Reservatórios",
+        "PE-2RES-00009 — Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
+        "PE-2RES-00014 — Modelagem Geomecânica 1D (complementar ao 3D)"
+      ]
+    }
+
+  ]
+}
+
+
+
+# GEOMEC026A — QPG
+GEOMEC026A --[ISINPUTFOR]----------> GEOMEC026B  (Laudo precisa do QPG)
+GEOMEC026A --[CONTAINS_FORECAST]--> GEOMEC001   (Pp prevista)
+GEOMEC026A --[CONTAINS_FORECAST]--> GEOMEC003   (janela operacional implícita)
+GEOMEC026A --[ISINPUTFOR]----------> GEOMEC015   (análise de geohazards)
+
+# GEOMEC026B — Laudo Geomecânico
+GEOMEC026B --[REQUIRESINPUT]-------> GEOMEC026A  (QPG Preliminar)
+GEOMEC026B --[CONTAINS]-----------> GEOMEC001   (curva Pp)
+GEOMEC026B --[CONTAINS]-----------> GEOMEC004   (curvas S1/S2/S3)
+GEOMEC026B --[ENABLES_DESIGN]-----> GEOMEC003   (janela operacional)
+GEOMEC026B --[FORMALIZES]---------> GEOMEC015   (análise de geohazards)
+GEOMEC026B --[PRODUCEDBY]---------> GEOMEC025   (CSD GEOMEC pós-perf)
+
+# GEOMEC028 — GeomecBR
+GEOMEC028 --[COMPUTES]-----------> GEOMEC004   (tensões 3D)
+GEOMEC028 --[COMPUTES]-----------> GEOMEC016   (subsidência)
+GEOMEC028 --[COMPUTES]-----------> GEOMEC014   (Cp por célula)
+GEOMEC028 --[ANALYZES]-----------> GEOMEC018   (reativação de falhas)
+GEOMEC028 --[USEDWITH]-----------> GEOMEC029   (GERESIM)
+
+# GEOMEC029 — GERESIM
+GEOMEC029 --[INTERFACES_WITH]----> GEOMEC028   (GeomecBR)
+GEOMEC029 --[GENERATES]----------> GEOMEC026B  (gráfico composto)
+GEOMEC029 --[STORAGEFOR]---------> GEOMEC027   (modelos no SIRR)
+
+# GEOMEC030 — SIGEO / SEST TR / SEST 2.0
+GEOMEC030 --[COMPUTES_1D]--------> GEOMEC004   (tensões 1D)
+GEOMEC030 --[ESTIMATES]----------> GEOMEC002   (Shmin 1D)
+GEOMEC030 --[ESTIMATES]----------> GEOMEC001   (Pp 1D / tempo real)
+GEOMEC030 --[USEDBY]-------------> GEOMEC025   (CSD GEOMEC)
+GEOMEC030 --[COMPLEMENTEDBY]-----> GEOMEC028   (3D quando 1D insuficiente)
+
+# GEOMEC031 — XLOT
+GEOMEC031 --[MEASURES]-----------> GEOMEC002   (Shmin via ISIP)
+GEOMEC031 --[ISSPECIALIZATIONOF]--> GEOMEC006   (família LOT/xLOT/FIT)
+GEOMEC031 --[CALIBRATES]---------> GEOMEC030   (curvas SIGEO/SEST TR)
+GEOMEC031 --[SATISFIES]----------> GEOMEC027   (IMGR — alimenta modelo)
+
+# GEOMEC032 — Pulso de Pressão (AGP)
+GEOMEC032 --[EXPLOITS]-----------> GEOMEC002   (Shmin)
+GEOMEC032 --[MANIPULATES]--------> GEOMEC001   (Pp — redução prévia)
+GEOMEC032 --[REQUIRESVALIDATION]--> GEOMEC027  (IMGR)
+
+# GEOMEC033 — Fraturamento Hidráulico (Estimulação)
+GEOMEC033 --[REQUIRESKNOWLEDGE]--> GEOMEC002   (Shmin)
+GEOMEC033 --[OPERATESABOVE]------> GEOMEC003   (JOL — acima do GF)
+GEOMEC033 --[PRECEDEDBY]---------> GEOMEC031   (XLOT / Mini-frac)
+GEOMEC033 --[REQUIRESINPUT]------> GEOMEC010   (UCS — pressão de quebra)
+
+# GEOMEC034 — DFIT / DPPT
+GEOMEC034 --[DETERMINES]---------> GEOMEC001   (Pp — DPPT)
+GEOMEC034 --[DETERMINES]---------> GEOMEC002   (Shmin — DFIT)
+GEOMEC034 --[PERFORMEDBY]--------> GEOMEC020   (MPD)
+GEOMEC034 --[COMPLEMENTEDBY]-----> GEOMEC031   (xLOT — versão estática)
+
+# GEOMEC035 — Modelo Geomecânico 3D
+GEOMEC035 --[IMPLEMENTEDBY]------> GEOMEC028   (GeomecBR)
+GEOMEC035 --[MANAGEDBY]----------> GEOMEC029   (GERESIM)
+GEOMEC035 --[OUTPUTS]-----------> GEOMEC004   (tensões in situ)
+GEOMEC035 --[GOVERNEDBY]---------> GEOMEC027   (IMGR)
+GEOMEC035 --[ISINPUTFOR]---------> GEOMEC026B  (Laudo Geomecânico)
+GEOMEC035 --[OUTPUTS]-----------> GEOMEC016   (subsidência)
+GEOMEC035 --[OUTPUTS]-----------> GEOMEC018   (reativação de falhas)
+
+═══════════════════════════════════════════════════════════════════
+BLOCO 1 — TENSÕES E PRESSÕES (001–008)         8 nós
+BLOCO 2 — PROPRIEDADES MECÂNICAS (009–014)     6 nós
+BLOCO 3 — RISCO, ESTRUTURA E PRODUÇÃO (015–018) 4 nós
+BLOCO 4 — OPERAÇÕES ESPECIAIS (019–021)        3 nós
+BLOCO 5 — LABORATÓRIO E DADOS DE POÇO (022–024) 3 nós
+BLOCO 6 — MONITORAMENTO E GOVERNANÇA (025–027)
+  ├── GEOMEC025  CSD GEOMEC
+  ├── GEOMEC026A QPG ◄── SEPARADO (origem: Intérpretes/EXP)
+  ├── GEOMEC026B Laudo Geomecânico ◄── SEPARADO (origem: RES/Ativo)
+  └── GEOMEC027  IMGR
+BLOCO 7 — MODELAGEM NUMÉRICA (028–030)
+  ├── GEOMEC028  GeomecBR (MEF interno Petrobras)
+  ├── GEOMEC029  GERESIM
+  └── GEOMEC030  SIGEO / SEST TR / SEST 2.0
+BLOCO 8 — ENSAIOS IN SITU ESPECIAIS (031–035)
+  ├── GEOMEC031  XLOT / Mini-frac (metodologia interna)
+  ├── GEOMEC032  Pulso de Pressão (AGP)
+  ├── GEOMEC033  Fraturamento Hidráulico (estimulação)
+  ├── GEOMEC034  DFIT / DPPT (MPD)
+  └── GEOMEC035  Modelo Geomecânico 3D (entidade-modelo)
+
+TOTAL: 37 entidades | ~130 relacionamentos | 3 HUBs + 1 Classifier
+       + 1 KPI governança + 3 Tools + 1 Model + 2 Documents
+═══════════════════════════════════════════════════════════════════
+
+
+Notas Técnicas Finais
+1. 🔑 Separação QPG × Laudo — Impacto no Grafo
+Com a separação, o grafo agora modela corretamente a sequência de dependência documental: Projeto Direcional → QPG Preliminar → Laudo Geomecânico → Projeto Final do Poço → Prospecto. Este fluxo é o critical path da construção de poços de DP e pode ser usado para verificação de conformidade de prazos automaticamente via Knowledge Graph.
+2. 🔁 Ciclo Completo de Modelagem (028 → 029 → 035 → 027 → 028)
+Os quatro nós formam o loop de atualização geomecânica: GeomecBR (028) roda o modelo → GERESIM (029) gerencia e armazena → Modelo 3D (035) é o produto → IMGR (027) controla a validade → que dispara nova rodada no GeomecBR. Este é o ciclo de governança do modelo geomecânico corporativo.
+3. ⚡ DFIT/DPPT (034) vs. xLOT (031) — Distinção Operacional Crítica
+Os dois nós são frequentemente confundidos no jargão. A distinção crucial documentada nos padrões internos: xLOT é estático (poço parado, maior qualidade para Shmin); DFIT/DPPT são dinâmicos (durante circulação com MPD, menor qualidade mas viáveis operacionalmente). O grafo deve preservar esta distinção como aresta COMPLEMENTEDBY bidirecional entre 031 e 034.
+4. 📐 GEOMEC035 como "Nó-Mãe" do Estado de Tensões
+O Modelo Geomecânico 3D (035) é o único nó que agrega e harmoniza todos os dados de entrada (density log, LOT, xLOT, breakouts, ensaios lab) para produzir o campo de tensões tridimensional consistente. No grafo, todos os nós de entrada deveriam ter arestas FEEDS apontando para 035, tornando-o o nó de maior in-degree do Knowledge Graph — ideal para queries de rastreabilidade.

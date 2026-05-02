@@ -29,7 +29,7 @@ graph TD
     KG --> API["API REST estatica<br/>api/v1/"]
     KG --> RAG["RAG Corpus<br/>1.245 chunks"]
     KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
-    KG --> TTL["RDF / SHACL<br/>22 NodeShapes"]
+    KG --> TTL["RDF / SHACL<br/>30 NodeShapes"]
 
     API --> MCP["MCP Server<br/>9 ferramentas AI"]
     RAG --> AGENT["LangGraph Agent<br/>Router-Decomposer-GraphQuery-RAG-Validator-Synthesizer"]
@@ -56,7 +56,7 @@ A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente esta
 | `data/seismic-*.json` | Modulo sismico P2.8 — aquisicao, processamento, inversao |
 | `data/witsml-rdf-crosswalk.json` | 25 classes WITSML 2.0 mapeadas para `geo:` |
 | `data/prodml-rdf-crosswalk.json` | 15 classes PRODML 2.x mapeadas para `geo:` |
-| `data/geolytics-shapes.ttl` | 22 NodeShapes SHACL |
+| `data/geolytics-shapes.ttl` | 30 NodeShapes SHACL |
 | `data/sweet-alignment.json` | 66 alinhamentos SKOS com SWEET (NASA/ESIPFed) |
 | `data/gso-*.json` | 213 classes GSO/Loop3D (Layer 7) |
 | `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas |
@@ -142,7 +142,7 @@ python scripts/validate-shacl.py
 node --test tests/validator.test.js
 ```
 
-Ver [docs/SHACL.md](docs/SHACL.md) para as 22 NodeShapes e como adicionar novas.
+Ver [docs/SHACL.md](docs/SHACL.md) para as 30 NodeShapes e como adicionar novas.
 
 ---
 

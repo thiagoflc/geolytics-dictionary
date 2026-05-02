@@ -1,0 +1,191 @@
+# ============================================================================
+# Geolytics E&P backbone — alias completo do ISO 28258 para domínio petroleiro
+# ============================================================================
+# Espelha as 16 object properties ISO 28258 com domain/range/cardinalidades
+# para o domínio E&P. As classes E&P são subClassOf das classes ISO 28258
+# (declaradas em geolytics-glosis-ext.ttl), garantindo interoperabilidade.
+# ============================================================================
+
+@prefix geox:     <https://geolytics.petrobras.com.br/dict/glosis-ext/> .
+@prefix iso28258: <http://w3id.org/glosis/model/iso28258/2013/> .
+@prefix sosa:     <http://www.w3.org/ns/sosa/> .
+@prefix owl:      <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:     <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:     <http://www.w3.org/2004/02/skos/core#> .
+@prefix dct:      <http://purl.org/dc/terms/> .
+@prefix xsd:      <http://www.w3.org/2001/XMLSchema#> .
+
+<https://geolytics.petrobras.com.br/dict/ep-backbone>
+    a              owl:Ontology ;
+    owl:versionIRI <https://geolytics.petrobras.com.br/dict/ep-backbone/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    dct:title "Geolytics E&P backbone — ISO 28258 alias for petroleum upstream"@en ;
+    dct:description "Mirror of the 16 ISO 28258 object properties with E&P-specific domain/range and cardinalities. Bloco→Locação→Poço→Intervalo→Camada hierarchy with full traversal patterns."@en ;
+    rdfs:seeAlso <https://geolytics.petrobras.com.br/dict/glosis-ext> ;
+    owl:imports <http://w3id.org/glosis/model/iso28258/2013> .
+
+# ── 1. Bloco ↔ Locação ──────────────────────────────────────────────────────
+
+geox:hasLocation a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Site.samplingPlot ;
+    skos:prefLabel "tem locação"@pt , "has location"@en ;
+    rdfs:domain geox:Bloco ;
+    rdfs:range geox:Locacao ;
+    rdfs:comment "Um bloco pode ter múltiplas locações de poço."@pt ;
+    owl:inverseOf geox:locationIn .
+
+geox:locationIn a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Plot.plotInSite ;
+    skos:prefLabel "locação em"@pt , "location in"@en ;
+    rdfs:domain geox:Locacao ;
+    rdfs:range geox:Bloco ;
+    owl:inverseOf geox:hasLocation .
+
+geox:typicalProfile a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Site.typicalProfile ;
+    skos:prefLabel "perfil típico do bloco"@pt , "typical block profile"@en ;
+    rdfs:domain geox:Bloco ;
+    rdfs:range geox:PerfilPoco ;
+    rdfs:comment "Perfil estratigráfico de referência para todo o bloco (declarativo)."@pt .
+
+# ── 2. Locação ↔ Poço (Profile) ─────────────────────────────────────────────
+
+geox:hasWellProfile a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Plot.profile ;
+    skos:prefLabel "tem perfil de poço"@pt , "has well profile"@en ;
+    rdfs:domain geox:Locacao ;
+    rdfs:range geox:PerfilPoco ;
+    owl:inverseOf geox:wellProfileSite .
+
+geox:wellProfileSite a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Profile.profileSite ;
+    skos:prefLabel "sítio do perfil"@pt , "well profile site"@en ;
+    rdfs:domain geox:PerfilPoco ;
+    rdfs:range geox:Locacao ;
+    owl:inverseOf geox:hasWellProfile .
+
+geox:samplingPlotOfProfile a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Profile.samplingPlot ;
+    skos:prefLabel "plot de amostragem do perfil"@pt , "sampling plot of profile"@en ;
+    rdfs:domain geox:PerfilPoco ;
+    rdfs:range geox:Locacao .
+
+# ── 3. Poço ↔ Intervalo (ProfileElement) ────────────────────────────────────
+
+geox:hasInterval a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Profile.element ;
+    skos:prefLabel "tem intervalo"@pt , "has interval"@en ;
+    rdfs:domain geox:PerfilPoco ;
+    rdfs:range geox:Intervalo ;
+    owl:inverseOf geox:intervalOfWellProfile .
+
+geox:intervalOfWellProfile a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:ProfileElement.elementOfProfile ;
+    skos:prefLabel "intervalo do perfil"@pt , "interval of well profile"@en ;
+    rdfs:domain geox:Intervalo ;
+    rdfs:range geox:PerfilPoco ;
+    owl:inverseOf geox:hasInterval .
+
+# ── 4. Profundidades do intervalo (datatype properties) ─────────────────────
+
+geox:upperDepth a owl:DatatypeProperty ;
+    rdfs:subPropertyOf iso28258:ProfileElement.upperDepth ;
+    skos:prefLabel "topo (m)"@pt , "upper depth (m)"@en ;
+    rdfs:domain geox:Intervalo ;
+    rdfs:range xsd:decimal ;
+    rdfs:comment "Profundidade do topo do intervalo, em metros TVD ou TVDSS conforme contexto."@pt .
+
+geox:lowerDepth a owl:DatatypeProperty ;
+    rdfs:subPropertyOf iso28258:ProfileElement.lowerDepth ;
+    skos:prefLabel "base (m)"@pt , "lower depth (m)"@en ;
+    rdfs:domain geox:Intervalo ;
+    rdfs:range xsd:decimal .
+
+geox:order a owl:DatatypeProperty ;
+    rdfs:subPropertyOf iso28258:ProfileElement.order ;
+    skos:prefLabel "ordem do intervalo"@pt , "interval order"@en ;
+    rdfs:domain geox:Intervalo ;
+    rdfs:range xsd:nonNegativeInteger ;
+    rdfs:comment "Ordem do intervalo no perfil (0 = topo)."@pt .
+
+# ── 5. Intervalo ↔ Camada/Horizonte ─────────────────────────────────────────
+
+geox:hasLayer a owl:ObjectProperty ;
+    skos:prefLabel "tem camada"@pt , "has layer"@en ;
+    rdfs:domain geox:Intervalo ;
+    rdfs:range geox:CamadaSedimentar ;
+    rdfs:comment "Liga o intervalo (ProfileElement) à camada sedimentar que o constitui. Completa a cadeia Poço→Intervalo→Camada→Diagênese."@pt ;
+    owl:inverseOf geox:layerOfInterval .
+
+geox:layerOfInterval a owl:ObjectProperty ;
+    skos:prefLabel "camada do intervalo"@pt , "layer of interval"@en ;
+    rdfs:domain geox:CamadaSedimentar ;
+    rdfs:range geox:Intervalo ;
+    owl:inverseOf geox:hasLayer .
+
+geox:layerInInterval a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Layer.developedHorizon ;
+    skos:prefLabel "camada no intervalo"@pt , "layer in interval"@en ;
+    rdfs:domain geox:CamadaSedimentar ;
+    rdfs:range geox:UnidadeDiagenetica ;
+    rdfs:comment "Camada sedimentar pode desenvolver unidades diagenéticas (cimento, lixiviação, etc.)."@pt .
+
+geox:diageneticHorizonOf a owl:ObjectProperty ;
+    rdfs:subPropertyOf iso28258:Horizon.horizonInLayer ;
+    skos:prefLabel "horizonte diagenético de"@pt , "diagenetic horizon of"@en ;
+    rdfs:domain geox:UnidadeDiagenetica ;
+    rdfs:range geox:CamadaSedimentar ;
+    owl:inverseOf geox:layerInInterval .
+
+# ── 6. Cardinality restrictions on the structural classes ───────────────────
+
+geox:Bloco rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty geox:hasLocation ;
+    owl:minCardinality "0"^^xsd:nonNegativeInteger
+] .
+
+geox:Locacao rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty geox:locationIn ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger
+] , [
+    a owl:Restriction ;
+    owl:onProperty geox:hasWellProfile ;
+    owl:minCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+geox:PerfilPoco rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty geox:wellProfileSite ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger
+] , [
+    a owl:Restriction ;
+    owl:onProperty geox:hasInterval ;
+    owl:minCardinality "1"^^xsd:nonNegativeInteger
+] .
+
+geox:Intervalo rdfs:subClassOf [
+    a owl:Restriction ;
+    owl:onProperty geox:intervalOfWellProfile ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger
+] , [
+    a owl:Restriction ;
+    owl:onProperty geox:upperDepth ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger
+] , [
+    a owl:Restriction ;
+    owl:onProperty geox:lowerDepth ;
+    owl:cardinality "1"^^xsd:nonNegativeInteger
+] .
+
+# ── 7. SOSA bridge: Observation links to Interval via FeatureOfInterest ─────
+
+geox:observedAtInterval a owl:ObjectProperty ;
+    rdfs:subPropertyOf sosa:hasFeatureOfInterest ;
+    skos:prefLabel "observado no intervalo"@pt , "observed at interval"@en ;
+    rdfs:domain sosa:Observation ;
+    rdfs:range geox:Intervalo ;
+    rdfs:comment "PVT/petrofísica/geoquímica obs vinculadas ao intervalo de profundidade do poço."@pt .
+
+# === EOF ===

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Geolytics Dictionary — GLOSIS Integration Layer</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC40lEQVRYhe2UT0hUQRzHp6Iss1B3VZKIDbbdfW9mnoi4f3zzjkJQeOgS0SEIb1EWBGGlLLu460zQPQM1unUIIjA6rfpm6ZAhHjoIRVQUFUlEbG+euTsdXG1d3VL3bVD4g+9h+L35fT/8fvN7ADgY9aHY5fpIvK82HO9ysu66wxWOzbkjcekKx0a2ALYA/n2AGi3a6ArFezcidziecQygNhhrcUficjP6PwBqtGijKxy/thnVBePHywYoDsFhl53GV8SEcsTx4usCMLUewTVpc23BNvEzm6Neyf1+KcG2vwqwUjgrOJq2JmHftwmkVBRGTvncFodnbI7vChO/FRznCmHsNM7aHM9Yk7Df5iqsLMw9sMNOK2g+jS4IEz0UJv4iuJZb2RltWnB4UZqH6ioGAgAAGe5vtiZhtzDx7OoRadLmeM7m6IRjhnLMW2Vx1bA5GhAmnhIcz6/xNj4Ujsky8UspwfayjDPjsF2Y6L7N8Vzx/BfP+KPg6LbgSqd8DnfJW2CnbaLhfH5ephpqygJYvQU4Z3P82TLRsDDhUTnmrSq+Y3N0Mg+Xldy/zwEAnLMWZ3pHpNExmfLs/t0dOdVcbT0JeKxUwFP2VljjqiE47Jp53LTXNxhsUZjerTByXWX6VZWRs/4bIQ2ACv+UAomgDzLCISNZxAxZKMhIDjLy1JfsaK+I+eGBUBNk5E2x8RogX/PdcDZUqieWTSh5D6nOVKqfhoycUmlHFFIyu5RXqf7AcQDISCpv/tqbMBqK883RtmpISRoxQyJKPgGn3wNk5NEigDFa6hslqV/Kj+FdBQD0bshIDlKSLlVcoWQo36UhR80BAMB73lulMn0EMpJTqD6qJiOt3mho/8GbkT2BZNgDB/V+RI0fkOrT3kRIVQbaDizJm2hdNbINBxwk5xAj3yEjuV9rZ1iIkgxixkLBA83mz8uCjLwoGwAx0vOnFSy5mtR4VTaAQvVORMnwZgSpzkrV/QmdE2tKe46+MQAAAABJRU5ErkJggg==">
+    <link rel="icon" type="image/png" sizes="16x16" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABhklEQVQ4jbWPzStEURjG3yQLirlGKUnKFO45Z+SjmXvnnmthQcpCoVhYmD/AwmJiI3OvZuZc2U3UlKU0/gAslMw9JgvhHxAr2fko7r0jHSsl+TgbTz2Lt5731/MASEiJW9ONml2QyX6rsGalmnT74v8BDf12hxJfpV8d1uwNKUBYszabdFv84L8B9X0rESVmmUup2fme0cVhJWaZHw4NWL1Sew
+EAfDe6H3Dy6Ll456WEJsRZS630MwCAOI20ei5OBpxse5zcBZw8eS4uPpfIuDiCainIg9umBCU0GZzgLZ9Hn31OgoATL+CkLDGB5H1OKj4nFd/FBxUXJ0UZNb4edw/6nLyJXaj5FeCVyPLNIVmYK8TG1IwWb16L1gEACAFV90ftoT8bdOX0EeyY99gxBXZMgRz6qGb1KantAACI0UvE6F5XJqEjpsdURouI0Vt5gGOUkUNnPu7ObGIIMfNaGqDmjDRi9FZldF1lRgYzeqUyeoiY4ag5Iy3RgOYRM8+/M2bG8efsO4hGrpmJseyMAAAAAElFTkSuQmCC">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    
+    <style>
+        #pylode {
+            position: fixed;
+            top: 130px;
+            left: -60px;
+            font-size: small;
+            transform: rotate(-90deg);
+            color: grey;
+        }
+        #pylode a {
+            font-size: 2em;
+            font-weight: bold;
+            text-decoration: none;
+            color: #005A9C;
+        }
+        #pylode a:hover {
+            color: #333;
+        }
+
+        .cardinality {
+            font-style: italic;
+            color: #aa00aa;
+        }
+
+        dt {
+            font-weight: bold;
+            padding: 5px 0 5px 0;
+        }
+
+        ul.hlist {
+            list-style-type: none;
+            border: 1px solid navy;
+            padding:5px;
+            background-color: #F4FFFF;
+        }
+
+        ul.hierarchy {
+            border: 1px solid navy;
+            padding: 5px 25px 5px 25px;
+            background-color: #F4FFFF;
+        }
+
+
+        ul.hlist li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        .entity {
+            border: 1px solid navy;
+            margin:5px 0 5px 0;
+            padding: 5px;
+        }
+
+        .entity th {
+            width: 150px;
+            vertical-align: top;
+        }
+
+        .entity th,
+        .entity td {
+            padding-bottom: 20px;
+        }
+
+        .entity table th {
+            text-align: left;
+        }
+
+        section#overview img {
+            max-width: 1000px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            text-align: left
+        }
+        h1, h2, h3 {
+            color: #005A9C; background: white
+        }
+        h1 {
+            font: 170% sans-serif;
+            line-height: 110%;
+        }
+        h2 {
+            font: 140% sans-serif;
+            margin-top:40px;
+        }
+        h3 {
+            font: 120% sans-serif;
+            margin-top: 3px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid navy;
+        }
+        h4 { font: bold 100% sans-serif }
+        h5 { font: italic 100% sans-serif }
+        h6 { font: small-caps 100% sans-serif }
+
+
+        body {
+            padding: 2em 70px 2em 70px;
+            margin: 0;
+            font-family: sans-serif;
+            color: black;
+            background: white;
+            background-position: top left;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            text-align: justify;
+        }
+
+        section {
+            max-width: 1500px;
+        }
+
+        .figure {
+            margin-bottom: 20px;
+        }
+
+        :link { color: #00C; background: transparent }
+        :visited { color: #609; background: transparent }
+        a:active { color: #C00; background: transparent }
+
+        .sup-c,
+        .sup-op,
+        .sup-fp,
+        .sup-dp,
+        .sup-ap,
+        .sup-p,
+        .sup-ni,
+        .sup-con,
+        .sup-col {
+            cursor:help;
+            margin-left: 3px;
+        }
+
+        .sup-c {
+            color:orange;
+        }
+
+        .sup-op {
+            color:navy;
+        }
+
+        .sup-fp {
+            color:lightskyblue;
+        }
+
+        .sup-dp {
+            color:green;
+        }
+
+        .sup-ap {
+            color:darkred;
+        }
+
+        .sup-p {
+            color:black;
+        }
+
+        .sup-ni {
+            color:brown;
+        }
+
+        .sup-con {
+            color:orange;
+        }
+
+        .sup-col {
+            color:darkred;
+        }
+
+        code {
+            font-size: large;
+            color: darkred;
+        }
+
+        /* less prominent links for properties */
+        .proplink {
+            color: #336;
+            text-decoration: none;
+        }
+    </style>
+    
+    <script type="application/ld+json">
+      [
+  {
+    "@id": "https://geolytics.petrobras.com.br/dict/glosis-ext",
+    "@type": [
+      "https://schema.org/DefinedTermSet"
+    ],
+    "https://schema.org/description": [
+      {
+        "@value": "<p>Camada de integração que declara owl:imports para módulos GLOSIS (codelists, ISO 28258 backbone, procedures, units), emite os crosswalks SKOS GLOSIS↔CGI e GLOSIS↔INSPIRE Geomorph, e materializa o padrão SOSA Property/Value sobre os campos quantitativos do PVT-Dictionary.</p>"
+      }
+    ],
+    "https://schema.org/license": [
+      {
+        "@id": "https://creativecommons.org/licenses/by-nc-sa/3.0/igo/"
+      }
+    ],
+    "https://schema.org/name": [
+      {
+        "@value": "Geolytics Dictionary — GLOSIS Integration Layer"
+      }
+    ],
+    "https://schema.org/rights": [
+      {
+        "@value": "Compatível com CC BY-NC-SA 3.0 IGO devido à dependência GLOSIS — atribuir SIEUSOIL/ISRIC/PSNC e demais coautores."
+      }
+    ]
+  }
+]
+    </script>
+</head>
+<body>
+  <div id="pylode">made by <a href="http://github.com/rdflib/pyLODE">
+    <span style="color:#329545;">p</span><span style="color:#f9cb33;">y</span>LODE</a>
+    <span style="font-size:smaller;">2.13.2</span>
+  </div>
+  <h1>Geolytics Dictionary — GLOSIS Integration Layer</h1>
+<section id="metadata">
+    <h2 style="display:none;">Metadata</h2>
+    <dl>
+        <dt>URI</dt>
+        <dd><code>https://geolytics.petrobras.com.br/dict/glosis-ext</code></dd>
+        <dt><a class="proplink" href="https://www.dublincore.org/specifications/dublin-core/dcmi-terms/#http://purl.org/dc/terms/creator">Creator</a>(s)</dt>
+        <dd>
+            Thiago Lopes<br/>
+        </dd>
+        <dt>Version Information</dt>
+        <dd>1.0.0</dd>
+        <dt>Version URI</dt>
+        <dd><a href="https://geolytics.petrobras.com.br/dict/glosis-ext/1.0.0">https://geolytics.petrobras.com.br/dict/glosis-ext/1.0.0</a></dd>
+        <dt>Imports</dt>
+        <dd>
+            <a href="http://w3id.org/glosis/model/codelists">http://w3id.org/glosis/model/codelists</a><br/>
+            <a href="http://w3id.org/glosis/model/iso28258/2013">http://w3id.org/glosis/model/iso28258/2013</a><br/>
+            <a href="http://w3id.org/glosis/model/procedure">http://w3id.org/glosis/model/procedure</a><br/>
+            <a href="http://w3id.org/glosis/model/unit">http://w3id.org/glosis/model/unit</a><br/>
+        </dd>
+        <dt>License &amp; Rights</dt>
+        <dd>
+            <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/igo/">https://creativecommons.org/licenses/by-nc-sa/3.0/igo/</a><br />
+            Compatível com CC BY-NC-SA 3.0 IGO devido à dependência GLOSIS — atribuir SIEUSOIL/ISRIC/PSNC e demais coautores.
+        </dd>
+        <dt>Ontology RDF</dt>
+        <dd><a href="geolytics-glosis-ext.ttl">RDF (turtle)</a></dd>
+    </dl>
+    <h2>Description</h2>
+    <div id="description">
+        <p>Camada de integração que declara owl:imports para módulos GLOSIS (codelists, ISO 28258 backbone, procedures, units), emite os crosswalks SKOS GLOSIS↔CGI e GLOSIS↔INSPIRE Geomorph, e materializa o padrão SOSA Property/Value sobre os campos quantitativos do PVT-Dictionary.</p>
+    </div>
+</section>
+<section id="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li><a href="#classes">Classes</a></li>
+        <li><a href="#namedindividuals">Named Individuals</a></li>
+        <li><a href="#namespaces">Namespaces</a></li>
+        <li><a href="#legend">Legend</a></li>
+    </ol>
+</section>
+<section id="overview">
+    <h2>Overview</h2>
+    <div class="figure">
+        <div style="width:500px; height:50px; background-color: lightgrey; border:solid 2px grey; padding:10px;margin-bottom:5px; text-align:center;">Pictures say 1,000 words</div>
+        <div class="caption"><strong>Figure 1:</strong> Ontology overview</div>
+    </div>
+</section>
+  <section id="classes">
+    <h2>Classes <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <ul class="hlist">
+      <li><a href="https://geolytics.petrobras.com.br/dict/Base_mValue">geo1:Base_mValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Coef_Exp_Term_Lib_DifValue">geo1:Coef_Exp_Term_Lib_DifValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Coef_Exp_Term_TanqueValue">geo1:Coef_Exp_Term_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Dens_Liq_TanqueValue">geo1:Dens_Liq_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Dg_LabValue">geo1:Dg_LabValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Dg_Média_Lib_DifValue">geo1:Dg_Média_Lib_DifValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Dg_liberado_TanqueValue">geo1:Dg_liberado_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Fa_TanqueValue">geo1:Fa_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Grau_API_TanqueValue">geo1:Grau_API_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Grau_API_Óleo_Lib_DifValue">geo1:Grau_API_Óleo_Lib_DifValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Press_do_C_Exp_Term_Lib_DifValue">geo1:Press_do_C_Exp_Term_Lib_DifValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/RGL_LabValue">geo1:RGL_LabValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/RGL_TanqueValue">geo1:RGL_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/RGO_TanqueValue">geo1:RGO_TanqueValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Temperatura_CValue">geo1:Temperatura_CValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Temperatura_C_Lib_DifValue">geo1:Temperatura_C_Lib_DifValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Topo_mValue">geo1:Topo_mValue</a></li>
+      <li><a href="https://geolytics.petrobras.com.br/dict/Z_LabValue">geo1:Z_LabValue</a></li>
+      <li><a href="#Block">Block</a></li>
+      <li><a href="#Sedimentarylayer">Sedimentary layer</a></li>
+      <li><a href="#Interval">Interval</a></li>
+      <li><a href="#Welllocation">Well location</a></li>
+      <li><a href="#Wellprofile">Well profile</a></li>
+      <li><a href="#Diageneticunit">Diagenetic unit</a></li>
+    </ul>
+    <div class="entity class" id="Base(m)value">
+        <h3>
+          Base(m) value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Base(m)value" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Base_mValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Length">quantitykind:Length</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/unit/M">unit:M</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Coef.Exp.Term.Lib.Difvalue">
+        <h3>
+          Coef. Exp. Term. Lib. Dif value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Coef.Exp.Term.Lib.Difvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Coef_Exp_Term_Lib_DifValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient">quantitykind:ThermalExpansionCoefficient</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="CoefExpTermTanquevalue">
+        <h3>
+          Coef Exp Term Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#CoefExpTermTanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Coef_Exp_Term_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient">quantitykind:ThermalExpansionCoefficient</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Dens.LiqTanquevalue">
+        <h3>
+          Dens. Liq Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Dens.LiqTanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Dens_Liq_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Density">quantitykind:Density</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DgLabvalue">
+        <h3>
+          Dg Lab value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#DgLabvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Dg_LabValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Density">quantitykind:Density</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DgMdiaLib.Difvalue">
+        <h3>
+          Dg Média Lib. Dif value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#DgMdiaLib.Difvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Dg_Média_Lib_DifValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Density">quantitykind:Density</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="DgliberadoTanquevalue">
+        <h3>
+          Dg liberado Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#DgliberadoTanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Dg_liberado_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Density">quantitykind:Density</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="FaTanquevalue">
+        <h3>
+          Fa Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#FaTanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Fa_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/DimensionlessRatio">quantitykind:DimensionlessRatio</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="GrauAPITanquevalue">
+        <h3>
+          Grau API Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#GrauAPITanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Grau_API_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/unit/DEG-API">https://geolytics.petrobras.com.br/dict/unit/DEG-API</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity">https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="GrauAPIleoLib.Difvalue">
+        <h3>
+          Grau API Óleo Lib. Dif value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#GrauAPIleoLib.Difvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Grau_API_Óleo_Lib_DifValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/unit/DEG-API">https://geolytics.petrobras.com.br/dict/unit/DEG-API</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Density">quantitykind:Density</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Press.doC.Exp.Term.Lib.Difvalue">
+        <h3>
+          Press. do C.Exp.Term.Lib.Dif value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Press.doC.Exp.Term.Lib.Difvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Press_do_C_Exp_Term_Lib_DifValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/unit/PSI">unit:PSI</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Pressure">quantitykind:Pressure</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="RGLLabvalue">
+        <h3>
+          RGL Lab value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#RGLLabvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/RGL_LabValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio">https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB">https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="RGLTanquevalue">
+        <h3>
+          RGL Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#RGLTanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/RGL_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio">https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB">https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="RGOTanquevalue">
+        <h3>
+          RGO Tanque value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#RGOTanquevalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/RGO_TanqueValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio">https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB">https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Temperatura(C)value">
+        <h3>
+          Temperatura(°C) value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Temperatura(C)value" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Temperatura_CValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/unit/DEG_C">unit:DEG_C</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Temperature">quantitykind:Temperature</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="TemperaturaCLib.Difvalue">
+        <h3>
+          Temperatura ºC Lib. Dif value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#TemperaturaCLib.Difvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Temperatura_C_Lib_DifValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Temperature">quantitykind:Temperature</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/unit/DEG_C">unit:DEG_C</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Topo(m)value">
+        <h3>
+          Topo(m) value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Topo(m)value" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Topo_mValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/unit">qudt:unit</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/unit/M">unit:M</a><sup class="sup-c" title="class">c</sup><br/>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/Length">quantitykind:Length</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="ZLabvalue">
+        <h3>
+          Z Lab value<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#ZLabvalue" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/Z_LabValue</code></td>
+            </tr>
+            <tr>
+                <th>Is Defined By</th>
+                <td>
+                    https://geolytics.petrobras.com.br/dict/glosis-ext
+                </td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/Quantity">qudt:Quantity</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+            <tr>
+                <th>Restrictions</th>
+                <td>
+                    <a href="http://qudt.org/schema/qudt/hasQuantityKind">qudt:hasQuantityKind</a> <span class="cardinality">value</span> <a href="http://qudt.org/vocab/quantitykind/DimensionlessRatio">quantitykind:DimensionlessRatio</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Block">
+        <h3>
+          Block<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Block" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/glosis-ext/Bloco</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://w3id.org/glosis/model/iso28258/2013/Site">iso28258:Site</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Sedimentarylayer">
+        <h3>
+          Sedimentary layer<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Sedimentarylayer" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/glosis-ext/CamadaSedimentar</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://w3id.org/glosis/model/iso28258/2013/Layer">iso28258:Layer</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Interval">
+        <h3>
+          Interval<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Interval" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/glosis-ext/Intervalo</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://w3id.org/glosis/model/iso28258/2013/ProfileElement">iso28258:ProfileElement</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Welllocation">
+        <h3>
+          Well location<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Welllocation" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/glosis-ext/Locacao</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://w3id.org/glosis/model/iso28258/2013/Plot">iso28258:Plot</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Wellprofile">
+        <h3>
+          Well profile<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Wellprofile" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/glosis-ext/PerfilPoco</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://w3id.org/glosis/model/iso28258/2013/Profile">iso28258:Profile</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="entity class" id="Diageneticunit">
+        <h3>
+          Diagenetic unit<sup title="class" class="sup-c">c</sup>
+          <span style="float:right; margin-right:10px; font-size:smaller;"><a href="#Diageneticunit" title="fragment link to here">#</a> <a href="#classes" title="Classes Index">Classes</a></span>
+        </h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td><code>https://geolytics.petrobras.com.br/dict/glosis-ext/UnidadeDiagenetica</code></td>
+            </tr>
+            <tr>
+                <th>Super-classes</th>
+                <td>
+                    <a href="http://w3id.org/glosis/model/iso28258/2013/Horizon">iso28258:Horizon</a><sup class="sup-c" title="class">c</sup><br/>
+                </td>
+            </tr>
+        </table>
+    </div>
+</section>
+  
+    <section id="namedindividuals">
+        <h2>Named Individuals <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+        <ul class="hlist">
+            <li><a href="#m10-fluidos-pattern">m10-fluidos-pattern</a></li>
+            <li><a href="#m7-geochem-pattern">m7-geochem-pattern</a></li>
+            <li><a href="#m8-rock-pattern">m8-rock-pattern</a></li>
+            <li><a href="#m9-geomec-pattern">m9-geomec-pattern</a></li>
+        </ul>
+            <div class="entity named_individual" id="m10-fluidos-pattern">
+        <h3>m10-fluidos-pattern<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://geolytics.petrobras.com.br/dict/glosis-ext/m10-fluidos-pattern
+                  
+                  </code>
+                </td>
+            </tr>
+        </table>
+    </div>
+            <div class="entity named_individual" id="m7-geochem-pattern">
+        <h3>m7-geochem-pattern<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://geolytics.petrobras.com.br/dict/glosis-ext/m7-geochem-pattern
+                  
+                  </code>
+                </td>
+            </tr>
+        </table>
+    </div>
+            <div class="entity named_individual" id="m8-rock-pattern">
+        <h3>m8-rock-pattern<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://geolytics.petrobras.com.br/dict/glosis-ext/m8-rock-pattern
+                  
+                  </code>
+                </td>
+            </tr>
+        </table>
+    </div>
+            <div class="entity named_individual" id="m9-geomec-pattern">
+        <h3>m9-geomec-pattern<sup title="named individual" class="sup-ni">ni</sup></h3>
+        <table>
+            <tr>
+                <th>URI</th>
+                <td>
+                  <code>
+                      https://geolytics.petrobras.com.br/dict/glosis-ext/m9-geomec-pattern
+                  
+                  </code>
+                </td>
+            </tr>
+        </table>
+    </div>
+    </section>
+
+  <section id="namespaces">
+    <h2>Namespaces <span style="float:right; font-size:smaller;"><a href="">&uparrow;</a></span></h2>
+    <dl>
+        <dt>default (:)</dt>
+        <dd><code>https://geolytics.petrobras.com.br/dict/glosis-ext</code></dd>
+        <dt>brick</dt>
+        <dd><code>https://brickschema.org/schema/Brick#</code></dd>
+        <dt>cgi_lith2</dt>
+        <dd><code>http://resource.geosciml.org/classifier/cgi/lithOntology/</code></dd>
+        <dt>cgi_litho</dt>
+        <dd><code>http://resource.geosciml.org/classifier/cgi/lithology/</code></dd>
+        <dt>csvw</dt>
+        <dd><code>http://www.w3.org/ns/csvw#</code></dd>
+        <dt>dc</dt>
+        <dd><code>http://purl.org/dc/elements/1.1/</code></dd>
+        <dt>dcam</dt>
+        <dd><code>http://purl.org/dc/dcam/</code></dd>
+        <dt>dcat</dt>
+        <dd><code>http://www.w3.org/ns/dcat#</code></dd>
+        <dt>dcmitype</dt>
+        <dd><code>http://purl.org/dc/dcmitype/</code></dd>
+        <dt>dct</dt>
+        <dd><code>http://purl.org/dc/terms/</code></dd>
+        <dt>doap</dt>
+        <dd><code>http://usefulinc.com/ns/doap#</code></dd>
+        <dt>foaf</dt>
+        <dd><code>http://xmlns.com/foaf/0.1/</code></dd>
+        <dt>geo</dt>
+        <dd><code>http://www.opengis.net/ont/geosparql#</code></dd>
+        <dt>geo1</dt>
+        <dd><code>https://geolytics.petrobras.com.br/dict/</code></dd>
+        <dt>glosis_cl</dt>
+        <dd><code>http://w3id.org/glosis/model/codelists/</code></dd>
+        <dt>glosis_cm</dt>
+        <dd><code>http://w3id.org/glosis/model/common/</code></dd>
+        <dt>glosis_lh</dt>
+        <dd><code>http://w3id.org/glosis/model/layerhorizon/</code></dd>
+        <dt>glosis_ma</dt>
+        <dd><code>http://w3id.org/glosis/model/main/</code></dd>
+        <dt>glosis_ob</dt>
+        <dd><code>http://w3id.org/glosis/model/observation/</code></dd>
+        <dt>glosis_proc</dt>
+        <dd><code>http://w3id.org/glosis/model/procedure/</code></dd>
+        <dt>glosis_u</dt>
+        <dd><code>http://w3id.org/glosis/model/unit/</code></dd>
+        <dt>inspire_eventenv</dt>
+        <dd><code>http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/</code></dd>
+        <dt>inspire_litho</dt>
+        <dd><code>http://inspire.ec.europa.eu/codelist/LithologyValue/</code></dd>
+        <dt>inspire_natgeom</dt>
+        <dd><code>http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/</code></dd>
+        <dt>iso28258</dt>
+        <dd><code>http://w3id.org/glosis/model/iso28258/2013/</code></dd>
+        <dt>odrl</dt>
+        <dd><code>http://www.w3.org/ns/odrl/2/</code></dd>
+        <dt>org</dt>
+        <dd><code>http://www.w3.org/ns/org#</code></dd>
+        <dt>owl</dt>
+        <dd><code>http://www.w3.org/2002/07/owl#</code></dd>
+        <dt>prof</dt>
+        <dd><code>http://www.w3.org/ns/dx/prof/</code></dd>
+        <dt>prov</dt>
+        <dd><code>http://www.w3.org/ns/prov#</code></dd>
+        <dt>qb</dt>
+        <dd><code>http://purl.org/linked-data/cube#</code></dd>
+        <dt>quantitykind</dt>
+        <dd><code>http://qudt.org/vocab/quantitykind/</code></dd>
+        <dt>qudt</dt>
+        <dd><code>http://qudt.org/schema/qudt/</code></dd>
+        <dt>rdf</dt>
+        <dd><code>http://www.w3.org/1999/02/22-rdf-syntax-ns#</code></dd>
+        <dt>rdfs</dt>
+        <dd><code>http://www.w3.org/2000/01/rdf-schema#</code></dd>
+        <dt>sdo</dt>
+        <dd><code>https://schema.org/</code></dd>
+        <dt>sh</dt>
+        <dd><code>http://www.w3.org/ns/shacl#</code></dd>
+        <dt>skos</dt>
+        <dd><code>http://www.w3.org/2004/02/skos/core#</code></dd>
+        <dt>sosa</dt>
+        <dd><code>http://www.w3.org/ns/sosa/</code></dd>
+        <dt>ssn</dt>
+        <dd><code>http://www.w3.org/ns/ssn/</code></dd>
+        <dt>time</dt>
+        <dd><code>http://www.w3.org/2006/time#</code></dd>
+        <dt>unit</dt>
+        <dd><code>http://qudt.org/vocab/unit/</code></dd>
+        <dt>vann</dt>
+        <dd><code>http://purl.org/vocab/vann/</code></dd>
+        <dt>void</dt>
+        <dd><code>http://rdfs.org/ns/void#</code></dd>
+        <dt>wgs</dt>
+        <dd><code>https://www.w3.org/2003/01/geo/wgs84_pos#</code></dd>
+        <dt>xsd</dt>
+        <dd><code>http://www.w3.org/2001/XMLSchema#</code></dd>
+    </dl>
+</section>
+  <section id="legend">
+      <h2>Legend</h2>
+      <table class="entity">
+          <tr><td><sup class="sup-c" title="Classes">c</sup></td><td>Classes</td></tr>
+          <tr><td><sup class="sup-op" title="Object Properties">op</sup></td><td>Object Properties</td></tr>
+          <tr><td><sup class="sup-fp" title="Functional Properties">fp</sup></td><td>Functional Properties</td></tr>
+          <tr><td><sup class="sup-dp" title="Data Properties">dp</sup></td><td>Data Properties</td></tr>
+          <tr><td><sup class="sup-ap" title="Annotation Properties">ap</sup></td><td>Annotation Properties</td></tr>
+          <tr><td><sup class="sup-p" title="Properties">p</sup></td><td>Properties</td></tr>
+          <tr><td><sup class="sup-ni" title="Named Individuals">ni</sup></td><td>Named Individuals</td></tr>
+      </table>
+  </section>
+</body>
+</html>

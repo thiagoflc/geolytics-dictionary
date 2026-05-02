@@ -19,9 +19,9 @@ Mapa de navegacao para toda a documentacao do projeto.
 
 | Arquivo | Descricao |
 |---|---|
-| [GEOMECHANICS.md](GEOMECHANICS.md) | Modulo MEM P2.7: conceito, quatro pilares do MEM 1D, mapeamento JSON, diagrama Mermaid, Circulo de Mohr, SHACL shapes, crosswalk fraturas-GSO |
+| [GEOMECHANICS.md](GEOMECHANICS.md) | Modulo MEM P2.7: conceito, quatro pilares do MEM 1D, mapeamento JSON, diagrama Mermaid, Circulo de Mohr, SHACL shapes, crosswalk fraturas-GSO. **Inclui modulo L6 Corporate Petrobras** (47 entidades GEOMEC*, crosswalk L2↔L6, SHACL shapes 23-30, integracao com Validator do LangGraph). |
 | [SEISMIC.md](SEISMIC.md) | Modulo sismico P2.8: aquisicao, processamento, inversao e atributos. Diagrama Mermaid, mapeamento OSDU, classes AVO |
-| [SHACL.md](SHACL.md) | Documentacao do sistema SHACL: 22 NodeShapes, como validar, como adicionar novas shapes |
+| [SHACL.md](SHACL.md) | Documentacao do sistema SHACL: 30 NodeShapes, como validar, como adicionar novas shapes |
 | [SWEET.md](SWEET.md) | Alinhamento SWEET (NASA/ESIPFed): 66 alinhamentos SKOS, expansao semantica via `sweet-expand.js`, uso em agentes |
 | [WITSML.md](WITSML.md) | Mapeamento WITSML/PRODML → RDF: argumento linear→grafo, schema do crosswalk, exemplos SPARQL/Cypher |
 

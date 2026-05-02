@@ -27,7 +27,7 @@ O dicionario Geolytics serializa seu grafo de entidades em `data/geolytics.ttl` 
 
 | Arquivo | Descricao |
 |---|---|
-| `data/geolytics-shapes.ttl` | 16 NodeShapes SHACL |
+| `data/geolytics-shapes.ttl` | 30 NodeShapes SHACL |
 | `data/geolytics-vocab.ttl` | Vocabulario OWL minimo de apoio (classes + propriedades) |
 | `scripts/validate-shacl.py` | Validador Python (pyshacl) — recomendado |
 | `scripts/validate-shacl.js` | Wrapper Node.js (rdf-validate-shacl ou delega ao Python) |
@@ -108,6 +108,27 @@ O script retorna **codigo de saida 0** se conforme, **1** se houver violacoes.
 | `geo:BaciaSedimentarShape` | `geo:BaciaSedimentar` | `skos:prefLabel` e `skos:definition` obrigatorios |
 | `geo:OsduUriPatternShape` | subjects de `owl:sameAs` | links OSDU usam `https://w3id.org/osdu#` |
 | `geo:ContratacaoShape` | `geo:ContratoEP` | `skos:prefLabel` e `skos:definition` obrigatorios |
+| `geo:WellboreMarkerShape` | `geo:WellboreMarker` | id, mdRef, rangeRef obrigatorios (P2.9) |
+| `geo:TrajectoryStationShape` | `geo:TrajectoryStation` | md, inclination, azimuth obrigatorios (P2.9) |
+| `geo:UCSValueShape` | subjects de `geo:ucs` | `xsd:decimal` em [0, 600] MPa |
+| `geo:PoissonRatioShape` | subjects de `geo:poissonRatio` | `xsd:decimal` em [0, 0.5] |
+| `geo:StressTensorShape` | `geo:StressTensor` | sigma1 >= sigma2 >= sigma3 (Anderson) via SPARQL |
+| **L6 Corporate (shapes 23-30)** | | **Modulo Petrobras — ver [GEOMECHANICS.md](GEOMECHANICS.md#layer-6--petrobras-corporate-module)** |
+| `geo:GeomechCorporateEntityShape` | `geo:GeomechCorporateEntity` | id padrao `GEOMECnnn[A-Z?]`, label_pt + definition_pt, category enum, confidence enum |
+| `geo:GeomechCorporateRelationShape` | `geo:GeomechCorporateRelation` | relationType em SNAKE_CASE_UPPER, targetEntity IRI |
+| `geo:GeomechLowConfidenceMustHaveGapShape` | `geo:GeomechCorporateEntity` | `confidence=low` ⇒ ao menos um `evidenceGap` (SPARQL) |
+| `geo:GeomechDeprecatedEntityShape` | `geo:GeomechCorporateEntity` | `isDeprecated true` ⇒ ao menos um `replacedBy` (SPARQL) |
+| `geo:GeomechActiveRefToDeprecatedShape` | `geo:GeomechCorporateRelation` | nenhuma relacao ativa pode apontar para entidade depreciada (SPARQL) |
+| `geo:GeomechFormulaCategoryShape` | `geo:GeomechCorporateEntity` | `category=Formula` ⇒ `formulaExpression` presente (SPARQL) |
+| `geo:GeomechRelationTargetExistsShape` | `geo:GeomechCorporateRelation` | targetEntity deve ser uma `GeomechCorporateEntity` declarada (SPARQL) |
+| `geo:GeomechOutOfScopeShape` | `geo:GeomechCorporateEntity` | `isOutOfScope true` ⇒ `inScopeForModule` declarado (SPARQL) |
+
+Para validar especificamente o modulo L6 Corporate de geomecanica:
+
+```bash
+python scripts/validate-geomec-corporate.py
+python -m unittest tests.test_geomec_corporate_shacl -v
+```
 
 ## Como adicionar uma nova shape
 

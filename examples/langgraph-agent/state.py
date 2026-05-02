@@ -6,12 +6,20 @@ from typing import Any, Optional
 from typing_extensions import TypedDict
 
 
-class Violation(TypedDict):
-    """A single semantic validation violation."""
+class Violation(TypedDict, total=False):
+    """A single semantic validation finding.
+
+    `severity` is one of:
+      - "error"       — invalid claim that must be corrected (default).
+      - "provisional" — answer is supported only by low-confidence evidence;
+                        present finding to user but do not invalidate answer.
+      - "warn"        — non-blocking flag (e.g. deprecated/out-of-scope ref).
+    """
 
     rule: str
     evidence: str
     suggested_fix: str
+    severity: str
 
 
 class ValidationResult(TypedDict):

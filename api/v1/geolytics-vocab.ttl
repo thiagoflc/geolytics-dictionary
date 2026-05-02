@@ -1,0 +1,3790 @@
+# geolytics-vocab.ttl — Minimal explicit OWL vocabulary
+# Declares the canonical classes and properties used by geolytics-shapes.ttl
+# so the SHACL file is self-contained for tooling like pyshacl.
+#
+# Includes:
+#   - rdfs:label in PT and EN for every term
+#   - owl:sameAs links to external layer URIs when known
+#   - owl:disjointWith for Reserva / ReservaAmbiental
+#
+# This file is NOT auto-generated. Edit manually when adding new terms.
+
+@prefix geo:  <https://geolytics.petrobras.com.br/dict/> .
+@prefix osdu: <https://w3id.org/osdu#> .
+@prefix kg:   <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ontology header
+# ─────────────────────────────────────────────────────────────────────────────
+
+<https://geolytics.petrobras.com.br/dict/vocab>
+    a owl:Ontology ;
+    rdfs:label "Geolytics Vocabulary"@en ;
+    rdfs:label "Vocabulário Geolytics"@pt ;
+    rdfs:comment "Vocabulário OWL mínimo que declara as classes e propriedades usadas pelos shapes SHACL do Geolytics Dictionary."@pt ;
+    owl:versionInfo "1.0.0" .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Core domain classes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:Poco a owl:Class ;
+    rdfs:label "Poço"@pt ;
+    rdfs:label "Well"@en ;
+    rdfs:comment "Poço de petróleo ou gás natural identificado pela ANP (prefixo numérico 1-, 2-, 3- etc.)."@pt ;
+    owl:sameAs osdu:Well ;
+    owl:sameAs kg:Well ;
+    rdfs:seeAlso <http://geosciml.org/def/gsmlbh#Borehole> .
+
+geo:Bloco a owl:Class ;
+    rdfs:label "Bloco Exploratório"@pt ;
+    rdfs:label "Exploration Block"@en ;
+    rdfs:comment "Parte de uma bacia sedimentar onde são desenvolvidas atividades de E&P, delimitada por coordenadas geográficas (Lei 9.478/1997)."@pt ;
+    rdfs:seeAlso kg:ExplorationBlock .
+
+geo:BaciaSedimentar a owl:Class ;
+    rdfs:label "Bacia Sedimentar"@pt ;
+    rdfs:label "Sedimentary Basin"@en ;
+    rdfs:comment "Depressão crustal onde sedimentos se acumulam ao longo do tempo geológico."@pt ;
+    owl:sameAs osdu:Basin ;
+    owl:sameAs kg:SedimentaryBasin .
+
+geo:Campo a owl:Class ;
+    rdfs:label "Campo de Petróleo"@pt ;
+    rdfs:label "Oil Field"@en ;
+    rdfs:comment "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios."@pt ;
+    owl:sameAs osdu:Field ;
+    owl:sameAs kg:Field .
+
+geo:Reservatorio a owl:Class ;
+    rdfs:label "Reservatório"@pt ;
+    rdfs:label "Reservoir"@en ;
+    rdfs:comment "Corpo rochoso poroso e permeável capaz de armazenar e produzir hidrocarbonetos."@pt ;
+    owl:sameAs osdu:Reservoir ;
+    owl:sameAs kg:Reservoir .
+
+geo:Operador a owl:Class ;
+    rdfs:label "Operador"@pt ;
+    rdfs:label "Operator"@en ;
+    rdfs:comment "Empresa designada para conduzir operações E&P no bloco."@pt ;
+    owl:sameAs osdu:Organisation ;
+    owl:sameAs kg:PetroleumOperator .
+
+geo:ContratoEP a owl:Class ;
+    rdfs:label "Contrato E&P"@pt ;
+    rdfs:label "E&P Contract"@en ;
+    rdfs:comment "Contrato de Exploração e Produção celebrado entre o agente econômico e a ANP."@pt ;
+    rdfs:seeAlso kg:ExplorationProductionContract .
+
+geo:Reserva a owl:Class ;
+    rdfs:label "Reserva SPE-PRMS"@pt ;
+    rdfs:label "Reserve (SPE-PRMS)"@en ;
+    rdfs:comment "Volume de HC tecnicamente recuperável e economicamente viável — categorias 1P/2P/3P (SPE-PRMS). NAO confundir com Reserva Ambiental."@pt ;
+    owl:disjointWith geo:ReservaAmbiental ;
+    rdfs:seeAlso kg:Reserve .
+
+geo:ReservaAmbiental a owl:Class ;
+    rdfs:label "Reserva Ambiental"@pt ;
+    rdfs:label "Environmental Reserve"@en ;
+    rdfs:comment "Unidade de conservação ambiental (REBIO, RPPN, etc.) — conceitualmente DISJUNTA de geo:Reserva (SPE-PRMS)."@pt ;
+    owl:disjointWith geo:Reserva .
+
+geo:Acronym a owl:Class ;
+    rdfs:label "Sigla O&G"@pt ;
+    rdfs:label "O&G Acronym"@en ;
+    rdfs:comment "Entrada do siglário O&G com expansão PT e/ou EN e categoria temática."@pt .
+
+geo:GSOClass a owl:Class ;
+    rdfs:label "Classe GSO/Loop3D"@pt ;
+    rdfs:label "GSO/Loop3D Class"@en ;
+    rdfs:comment "Classe da ontologia GSO (Geoscience Ontology) do projeto Loop3D — camada 7 estrutural."@pt ;
+    rdfs:seeAlso <https://loop3d.org/GSO/ontology/2020/1/master/LoopStructural.owl> .
+
+geo:OntopetroClass a owl:Class ;
+    rdfs:label "Classe Ontopetro"@pt ;
+    rdfs:label "Ontopetro Class"@en ;
+    rdfs:comment "Classe da ontologia formal de Geociências de Petróleo Ontopetro (C001-C999)."@pt .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Data properties used by shapes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:entityType a owl:DatatypeProperty ;
+    rdfs:label "tipo de entidade"@pt ;
+    rdfs:label "entity type"@en ;
+    rdfs:comment "Categoria da entidade no modelo Geolytics: operational, contractual, actor, instrument, geological, equipment, analytical."@pt ;
+    rdfs:range xsd:string .
+
+geo:tipoPoco a owl:DatatypeProperty ;
+    rdfs:label "tipo de poço ANP"@pt ;
+    rdfs:label "ANP well type"@en ;
+    rdfs:comment "Categoria ANP do poço: exploratorio, avaliacao, desenvolvimento, especial, injetor, produtor."@pt ;
+    rdfs:domain geo:Poco ;
+    rdfs:range xsd:string .
+
+geo:regimeContratual a owl:DatatypeProperty ;
+    rdfs:label "regime contratual"@pt ;
+    rdfs:label "contract regime"@en ;
+    rdfs:comment "Modalidade contratual do bloco: Concessao, Partilha ou CessaoOnerosa."@pt ;
+    rdfs:domain geo:Bloco ;
+    rdfs:range xsd:string .
+
+geo:categoriaSPEPRMS a owl:DatatypeProperty ;
+    rdfs:label "categoria SPE-PRMS"@pt ;
+    rdfs:label "SPE-PRMS category"@en ;
+    rdfs:comment "Categoria de reserva ou recurso segundo o SPE-PRMS: 1P, 2P, 3P, C1C, C2C, C3C."@pt ;
+    rdfs:domain geo:Reserva ;
+    rdfs:range xsd:string .
+
+geo:osduKind a owl:DatatypeProperty ;
+    rdfs:label "kind OSDU"@pt ;
+    rdfs:label "OSDU kind"@en ;
+    rdfs:comment "Identificador canônico OSDU no formato opendes:osdu:master-data--TypeName:major.minor.patch."@pt ;
+    rdfs:range xsd:string .
+
+geo:geocoverage a owl:DatatypeProperty ;
+    rdfs:label "cobertura semântica"@pt ;
+    rdfs:label "semantic coverage"@en ;
+    rdfs:comment "Camadas ontológicas em que o conceito tem cobertura formal: layer1, layer1b, layer2, ..., layer7."@pt ;
+    rdfs:range xsd:string .
+
+geo:sigla a owl:DatatypeProperty ;
+    rdfs:label "sigla"@pt ;
+    rdfs:label "acronym"@en ;
+    rdfs:comment "Sigla em letras maiúsculas, sem espaços."@pt ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:expansion_pt a owl:DatatypeProperty ;
+    rdfs:label "expansão em português"@pt ;
+    rdfs:label "Portuguese expansion"@en ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:expansion_en a owl:DatatypeProperty ;
+    rdfs:label "expansão em inglês"@pt ;
+    rdfs:label "English expansion"@en ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:category a owl:DatatypeProperty ;
+    rdfs:label "categoria temática"@pt ;
+    rdfs:label "thematic category"@en ;
+    rdfs:domain geo:Acronym ;
+    rdfs:range xsd:string .
+
+geo:owlUri a owl:DatatypeProperty ;
+    rdfs:label "URI OWL"@pt ;
+    rdfs:label "OWL URI"@en ;
+    rdfs:comment "URI canônica da classe na ontologia de origem (ex: loop3d.org para GSO)."@pt ;
+    rdfs:range xsd:anyURI .
+
+geo:classId a owl:DatatypeProperty ;
+    rdfs:label "identificador de classe"@pt ;
+    rdfs:label "class identifier"@en ;
+    rdfs:comment "Identificador canônico da classe no formato C000-C999."@pt ;
+    rdfs:domain geo:OntopetroClass ;
+    rdfs:range xsd:string .
+
+geo:source a owl:DatatypeProperty ;
+    rdfs:label "fonte ontológica"@pt ;
+    rdfs:label "ontological source"@en ;
+    rdfs:comment "Fonte primária da classe: GeoCore, PPDM, GDGEO, SPE-PRMS, ANP, OSDU."@pt ;
+    rdfs:domain geo:OntopetroClass ;
+    rdfs:range xsd:string .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Object properties used by shapes
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:operador a owl:ObjectProperty ;
+    rdfs:label "operado por"@pt ;
+    rdfs:label "operated by"@en ;
+    rdfs:domain geo:Poco ;
+    rdfs:range geo:Operador .
+
+geo:bloco a owl:ObjectProperty ;
+    rdfs:label "perfurado em bloco"@pt ;
+    rdfs:label "drilled in block"@en ;
+    rdfs:domain geo:Poco ;
+    rdfs:range geo:Bloco .
+
+geo:bacia a owl:ObjectProperty ;
+    rdfs:label "delimitado em bacia"@pt ;
+    rdfs:label "delimited in basin"@en ;
+    rdfs:domain geo:Bloco ;
+    rdfs:range geo:BaciaSedimentar .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WITSML 2.0 / Energistics drilling and subsurface classes (P2.9)
+# owl:sameAs links to Energistics WITSML 2.0 URIs
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:Well a owl:Class ;
+    rdfs:label "Poco WITSML"@pt ;
+    rdfs:label "Well (WITSML)"@en ;
+    rdfs:comment "Poco de petroleo ou gas como entidade raiz WITSML 2.0 — agrupa todos os wellbores de uma locacao."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#Well> ;
+    owl:sameAs osdu:Well ;
+    rdfs:subClassOf geo:Poco ;
+    rdfs:seeAlso <http://geosciml.org/def/gsmlbh#Borehole> .
+
+geo:Wellbore a owl:Class ;
+    rdfs:label "Wellbore (WITSML)"@pt ;
+    rdfs:label "Wellbore (WITSML)"@en ;
+    rdfs:comment "Furo de sondagem individual dentro de um poco — cada sidetrack ou desvio cria um novo Wellbore."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#Wellbore> ;
+    owl:sameAs osdu:Wellbore ;
+    rdfs:seeAlso <http://www.opengis.net/ont/geosciml/4.1/gsmlbh#Borehole> .
+
+geo:WellboreMarker a owl:Class ;
+    rdfs:label "Marcador de Wellbore"@pt ;
+    rdfs:label "Wellbore Marker"@en ;
+    rdfs:comment "Topo ou base de unidade estratigrafica identificada no wellbore — inclui profundidade medida e inclinacao."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#WellboreMarker> ;
+    rdfs:seeAlso <http://www.opengis.net/ont/geosciml/4.1/gsmlbh#BoreholeInterval> .
+
+geo:Trajectory a owl:Class ;
+    rdfs:label "Trajetoria Direcional"@pt ;
+    rdfs:label "Directional Trajectory"@en ;
+    rdfs:comment "Trajetoria direcional do wellbore — conjunto de estacoes de survey que descrevem o caminho 3D do furo."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#Trajectory> ;
+    owl:sameAs osdu:Trajectory ;
+    rdfs:seeAlso <http://www.opengis.net/ont/sf#Curve> .
+
+geo:TrajectoryStation a owl:Class ;
+    rdfs:label "Estacao de Survey"@pt ;
+    rdfs:label "Trajectory Station"@en ;
+    rdfs:comment "Ponto de medicao da trajetoria direcional: MD, inclinacao e azimute."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#TrajectoryStation> ;
+    rdfs:seeAlso <http://www.opengis.net/ont/sf#Point> .
+
+geo:LogCurve a owl:Class ;
+    rdfs:label "Curva de Perfil"@pt ;
+    rdfs:label "Well Log Curve"@en ;
+    rdfs:comment "Curva de perfil geofisico — sequencia de valores de uma propriedade fisica em funcao da profundidade medida."@pt ;
+    owl:sameAs <http://www.energistics.org/energyml/data/witsmlv2/2.0#LogCurve> ;
+    owl:sameAs osdu:WellLog ;
+    rdfs:seeAlso <http://www.w3.org/ns/ssn/Observation> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# WITSML data and object properties (P2.9)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:md a owl:DatatypeProperty ;
+    rdfs:label "profundidade medida"@pt ;
+    rdfs:label "measured depth"@en ;
+    rdfs:comment "Profundidade Medida (MD) ao longo da trajetoria do furo, em metros."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:tvd a owl:DatatypeProperty ;
+    rdfs:label "profundidade vertical verdadeira"@pt ;
+    rdfs:label "true vertical depth"@en ;
+    rdfs:comment "Profundidade Vertical Verdadeira (TVD), em metros. Para pocos verticais, TVD = MD."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:incl a owl:DatatypeProperty ;
+    rdfs:label "inclinacao"@pt ;
+    rdfs:label "inclination"@en ;
+    rdfs:comment "Inclinacao do furo em relacao a vertical, em graus [0..180]."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:azi a owl:DatatypeProperty ;
+    rdfs:label "azimute"@pt ;
+    rdfs:label "azimuth"@en ;
+    rdfs:comment "Azimute magnetico ou verdadeiro do furo, em graus [0..360]."@pt ;
+    rdfs:range xsd:decimal .
+
+geo:dipAngle a owl:DatatypeProperty ;
+    rdfs:label "angulo de mergulho"@pt ;
+    rdfs:label "dip angle"@en ;
+    rdfs:comment "Angulo de mergulho da unidade estratigrafica no marcador, em graus."@pt ;
+    rdfs:domain geo:WellboreMarker ;
+    rdfs:range xsd:decimal .
+
+geo:dipDirection a owl:DatatypeProperty ;
+    rdfs:label "direcao do mergulho"@pt ;
+    rdfs:label "dip direction"@en ;
+    rdfs:comment "Direcao do mergulho (azimute 0-360 graus) da unidade estratigrafica no marcador."@pt ;
+    rdfs:domain geo:WellboreMarker ;
+    rdfs:range xsd:decimal .
+
+geo:hasWellbore a owl:ObjectProperty ;
+    rdfs:label "possui wellbore"@pt ;
+    rdfs:label "has wellbore"@en ;
+    rdfs:domain geo:Well ;
+    rdfs:range geo:Wellbore .
+
+geo:partOfWell a owl:ObjectProperty ;
+    rdfs:label "pertence ao poco"@pt ;
+    rdfs:label "part of well"@en ;
+    rdfs:domain geo:Wellbore ;
+    rdfs:range geo:Well .
+
+geo:hasTrajectory a owl:ObjectProperty ;
+    rdfs:label "possui trajetoria"@pt ;
+    rdfs:label "has trajectory"@en ;
+    rdfs:domain geo:Wellbore ;
+    rdfs:range geo:Trajectory .
+
+geo:partOfWellbore a owl:ObjectProperty ;
+    rdfs:label "pertence ao wellbore"@pt ;
+    rdfs:label "part of wellbore"@en ;
+    rdfs:domain geo:WellboreMarker ;
+    rdfs:range geo:Wellbore .
+
+geo:inTrajectory a owl:ObjectProperty ;
+    rdfs:label "pertence a trajetoria"@pt ;
+    rdfs:label "in trajectory"@en ;
+    rdfs:domain geo:TrajectoryStation ;
+    rdfs:range geo:Trajectory .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Geochemical analysis classes (DRX, FRX, DNA Geoquimico) — ServiceLine layer
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeochemicalAnalysis a owl:Class ;
+    rdfs:label "Análise Geoquímica"@pt ;
+    rdfs:label "Geochemical Analysis"@en ;
+    rdfs:comment "Classe-mãe para análises geoquímicas de amostras de rocha (calha ou testemunho): mineralógicas (DRX) e elementares (FRX)."@pt ;
+    skos:definition "Parent class for rock-sample geochemical analyses (cuttings or core): mineralogical (XRD) and elemental (XRF)."@en ;
+    skos:definition "Classe-mãe para análises geoquímicas de amostras de rocha (calha ou testemunho)."@pt .
+
+geo:DRX a owl:Class ;
+    rdfs:label "Difração de Raios X"@pt ;
+    rdfs:label "X-Ray Diffraction"@en ;
+    rdfs:subClassOf geo:GeochemicalAnalysis ;
+    skos:prefLabel "Difração de Raios X"@pt ;
+    skos:prefLabel "X-Ray Diffraction"@en ;
+    skos:altLabel "XRD"@en ;
+    skos:altLabel "X-Ray Diffraction"@en ;
+    skos:altLabel "Difratometria de Raios X"@pt ;
+    skos:definition "X-Ray Diffraction analysis of cuttings or core samples, yielding qualitative and semi-quantitative mineralogical composition. Critical input for lithological classification, stratigraphic correlation and wellbore stability decisions (reactive clay identification)."@en ;
+    skos:definition "Análise por difração de raios X em amostras de calha ou testemunho, fornecendo composição mineralógica qualitativa e semi-quantitativa. Insumo crítico para classificação litológica, correlação estratigráfica e decisões de estabilidade de poço (identificação de argilominerais reativos)."@pt ;
+    rdfs:seeAlso <http://resource.geosciml.org/classifier/cgi/specimentype/cuttings> .
+
+geo:FRX a owl:Class ;
+    rdfs:label "Fluorescência de Raios X"@pt ;
+    rdfs:label "X-Ray Fluorescence"@en ;
+    rdfs:subClassOf geo:GeochemicalAnalysis ;
+    skos:prefLabel "Fluorescência de Raios X"@pt ;
+    skos:prefLabel "X-Ray Fluorescence"@en ;
+    skos:altLabel "XRF"@en ;
+    skos:altLabel "X-Ray Fluorescence"@en ;
+    skos:altLabel "Fluorescencia de Raios-X"@pt ;
+    skos:altLabel "Analise de FRX"@pt ;
+    skos:definition "X-Ray Fluorescence analysis of cuttings, yielding elemental composition (major + trace elements) of drilled rock. Enables lithological classification via elemental ratios, geochemical correlation across wells, and construction of formation geochemical signatures (DNA Geoquímico)."@en ;
+    skos:definition "Análise por fluorescência de raios X em amostras de calha, fornecendo composição elementar (elementos maiores e traço). Permite classificação litológica via razões elementares, correlação geoquímica entre poços e construção de assinaturas geoquímicas de formações (DNA Geoquímico)."@pt .
+
+geo:DNAGeoquimico a owl:Class ;
+    rdfs:label "DNA Geoquímico"@pt ;
+    rdfs:label "Geochemical DNA"@en ;
+    skos:prefLabel "DNA Geoquímico"@pt ;
+    skos:prefLabel "Geochemical Signature"@en ;
+    skos:altLabel "Assinatura Geoquímica"@pt ;
+    skos:altLabel "Geochemical Fingerprint"@en ;
+    skos:definition "Geochemical signature of a stratigraphic formation built from FRX elemental ratios across multiple wells. Used as a fingerprint for stratigraphic correlation and provenance analysis."@en ;
+    skos:definition "Assinatura geoquímica de uma formação construída a partir de razões elementares de FRX em múltiplos poços. Usada como impressão digital para correlação estratigráfica e análise de proveniência."@pt .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DRX mineralogical percent properties (12 minerals, all xsd:double, unit %)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:drxQuartzPercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Quartzo (%)"@pt ;
+    rdfs:label "XRD Quartz (%)"@en ;
+    rdfs:comment "Percentual de Quartzo (mnemônico SIGEO: QTZ) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxCalcitePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Calcita (%)"@pt ;
+    rdfs:label "XRD Calcite (%)"@en ;
+    rdfs:comment "Percentual de Calcita (mnemônico SIGEO: CAL) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxDolomitePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Dolomita (%)"@pt ;
+    rdfs:label "XRD Dolomite (%)"@en ;
+    rdfs:comment "Percentual de Dolomita (mnemônico SIGEO: DOL) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxClayMineralsPercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Argilominerais (%)"@pt ;
+    rdfs:label "XRD Clay Minerals (%)"@en ;
+    rdfs:comment "Percentual de Argilominerais (mnemônico SIGEO: A_M) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxAnhydritePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Anidrita (%)"@pt ;
+    rdfs:label "XRD Anhydrite (%)"@en ;
+    rdfs:comment "Percentual de Anidrita (mnemônico SIGEO: AND) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxHalitePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Halita (%)"@pt ;
+    rdfs:label "XRD Halite (%)"@en ;
+    rdfs:comment "Percentual de Halita (mnemônico SIGEO: HAL) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxPlagioclasePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Plagioclasio (%)"@pt ;
+    rdfs:label "XRD Plagioclase (%)"@en ;
+    rdfs:comment "Percentual de Plagioclasio (mnemônico SIGEO: PLG) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxKFeldsparPercent a owl:DatatypeProperty ;
+    rdfs:label "DRX K-Feldspato (%)"@pt ;
+    rdfs:label "XRD K-Feldspar (%)"@en ;
+    rdfs:comment "Percentual de K-Feldspato (mnemônico SIGEO: KFD) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxPyritePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Pirita (%)"@pt ;
+    rdfs:label "XRD Pyrite (%)"@en ;
+    rdfs:comment "Percentual de Pirita (mnemônico SIGEO: PIR) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxPyroxenePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Piroxenio (%)"@pt ;
+    rdfs:label "XRD Pyroxene (%)"@en ;
+    rdfs:comment "Percentual de Piroxenio (mnemônico SIGEO: PRX) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxAmphibolePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Anfibolio (%)"@pt ;
+    rdfs:label "XRD Amphibole (%)"@en ;
+    rdfs:comment "Percentual de Anfibolio (mnemônico SIGEO: ANF) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxOlivinePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Olivina (%)"@pt ;
+    rdfs:label "XRD Olivine (%)"@en ;
+    rdfs:comment "Percentual de Olivina (mnemônico SIGEO: OLI) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FRX major-element percent properties (11 elements, xsd:double, unit %)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:frxNaMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Na maior (%)"@pt ;
+    rdfs:label "XRF Na major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Na determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxMgMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Mg maior (%)"@pt ;
+    rdfs:label "XRF Mg major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Mg determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxAlMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Al maior (%)"@pt ;
+    rdfs:label "XRF Al major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Al determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSiMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Si maior (%)"@pt ;
+    rdfs:label "XRF Si major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Si determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxPMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX P maior (%)"@pt ;
+    rdfs:label "XRF P major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior P determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX S maior (%)"@pt ;
+    rdfs:label "XRF S major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior S determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxKMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX K maior (%)"@pt ;
+    rdfs:label "XRF K major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior K determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCaMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Ca maior (%)"@pt ;
+    rdfs:label "XRF Ca major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Ca determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTiMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Ti maior (%)"@pt ;
+    rdfs:label "XRF Ti major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Ti determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxMnMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Mn maior (%)"@pt ;
+    rdfs:label "XRF Mn major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Mn determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxFeMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Fe maior (%)"@pt ;
+    rdfs:label "XRF Fe major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Fe determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FRX trace-element ppm properties (37 elements, xsd:double, unit ppm)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:frxClTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cl traço (ppm)"@pt ;
+    rdfs:label "XRF Cl trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cl determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxVTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX V traço (ppm)"@pt ;
+    rdfs:label "XRF V trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço V determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cr traço (ppm)"@pt ;
+    rdfs:label "XRF Cr trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cr determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCoTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Co traço (ppm)"@pt ;
+    rdfs:label "XRF Co trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Co determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxNiTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ni traço (ppm)"@pt ;
+    rdfs:label "XRF Ni trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ni determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCuTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cu traço (ppm)"@pt ;
+    rdfs:label "XRF Cu trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cu determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxZnTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Zn traço (ppm)"@pt ;
+    rdfs:label "XRF Zn trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Zn determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxGaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ga traço (ppm)"@pt ;
+    rdfs:label "XRF Ga trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ga determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxGeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ge traço (ppm)"@pt ;
+    rdfs:label "XRF Ge trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ge determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxAsTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX As traço (ppm)"@pt ;
+    rdfs:label "XRF As trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço As determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Se traço (ppm)"@pt ;
+    rdfs:label "XRF Se trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Se determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxBrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Br traço (ppm)"@pt ;
+    rdfs:label "XRF Br trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Br determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxRbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Rb traço (ppm)"@pt ;
+    rdfs:label "XRF Rb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Rb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Sr traço (ppm)"@pt ;
+    rdfs:label "XRF Sr trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Sr determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxYTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Y traço (ppm)"@pt ;
+    rdfs:label "XRF Y trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Y determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxZrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Zr traço (ppm)"@pt ;
+    rdfs:label "XRF Zr trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Zr determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxNbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Nb traço (ppm)"@pt ;
+    rdfs:label "XRF Nb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Nb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxMoTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Mo traço (ppm)"@pt ;
+    rdfs:label "XRF Mo trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Mo determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxAgTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ag traço (ppm)"@pt ;
+    rdfs:label "XRF Ag trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ag determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCdTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cd traço (ppm)"@pt ;
+    rdfs:label "XRF Cd trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cd determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSnTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Sn traço (ppm)"@pt ;
+    rdfs:label "XRF Sn trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Sn determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Sb traço (ppm)"@pt ;
+    rdfs:label "XRF Sb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Sb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Te traço (ppm)"@pt ;
+    rdfs:label "XRF Te trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Te determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxITracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX I traço (ppm)"@pt ;
+    rdfs:label "XRF I trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço I determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCsTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cs traço (ppm)"@pt ;
+    rdfs:label "XRF Cs trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cs determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxBaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ba traço (ppm)"@pt ;
+    rdfs:label "XRF Ba trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ba determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxLaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX La traço (ppm)"@pt ;
+    rdfs:label "XRF La trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço La determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ce traço (ppm)"@pt ;
+    rdfs:label "XRF Ce trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ce determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxHfTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Hf traço (ppm)"@pt ;
+    rdfs:label "XRF Hf trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Hf determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ta traço (ppm)"@pt ;
+    rdfs:label "XRF Ta trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ta determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxWTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX W traço (ppm)"@pt ;
+    rdfs:label "XRF W trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço W determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxHgTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Hg traço (ppm)"@pt ;
+    rdfs:label "XRF Hg trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Hg determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTlTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Tl traço (ppm)"@pt ;
+    rdfs:label "XRF Tl trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Tl determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxPbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Pb traço (ppm)"@pt ;
+    rdfs:label "XRF Pb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Pb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxBiTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Bi traço (ppm)"@pt ;
+    rdfs:label "XRF Bi trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Bi determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxThTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Th traço (ppm)"@pt ;
+    rdfs:label "XRF Th trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Th determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxUTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX U traço (ppm)"@pt ;
+    rdfs:label "XRF U trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço U determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Object properties linking DRX, FRX and DNA Geoquimico
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:complementsAnalysis a owl:ObjectProperty ;
+    rdfs:label "complementa análise"@pt ;
+    rdfs:label "complements analysis"@en ;
+    rdfs:comment "Liga DRX e FRX como análises geoquímicas complementares sobre as mesmas amostras."@pt ;
+    rdfs:domain geo:GeochemicalAnalysis ;
+    rdfs:range geo:GeochemicalAnalysis .
+
+geo:feedsSignature a owl:ObjectProperty ;
+    rdfs:label "alimenta assinatura"@pt ;
+    rdfs:label "feeds signature"@en ;
+    rdfs:comment "Liga uma análise FRX à assinatura DNAGeoquimico que ela alimenta com razões elementares."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range geo:DNAGeoquimico .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Geological Operations: documents (OG030-OG039) and systems (OG040-OG050)
+# Source: data/operacoes-geologicas.json
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeologicalOperationsDocument a owl:Class ;
+    rdfs:label "Documento de Operações Geológicas"@pt ;
+    rdfs:label "Geological Operations Document"@en ;
+    skos:prefLabel "Documento de Operações Geológicas"@pt ;
+    skos:prefLabel "Geological Operations Document"@en ;
+    skos:definition "Classe abstrata dos documentos e datasets produzidos pelas linhas de serviço de Operações Geológicas (OGEOMEC, QPG, Perfil Composto, Litologia, RMG, BDP, IGP, ROP-Logging, RCSD)."@pt ;
+    skos:definition "Abstract class for documents and datasets produced by Geological Operations service lines (OGEOMEC, QPG, Composite Log, Lithology, RMG, BDP, IGP, ROP Logging, RCSD)."@en .
+
+geo:GeologicalOperationsSystem a owl:Class ;
+    rdfs:label "Sistema de Operações Geológicas"@pt ;
+    rdfs:label "Geological Operations System"@en ;
+    skos:prefLabel "Sistema de Operações Geológicas"@pt ;
+    skos:prefLabel "Geological Operations System"@en ;
+    skos:definition "Classe abstrata dos sistemas de suporte aos fluxos de Operações Geológicas (EXATA, SIGEO, BDIEP, CGOR, CSD, Buscador de Análogos Geomec)."@pt ;
+    skos:definition "Abstract class for systems supporting Geological Operations workflows (EXATA, SIGEO, BDIEP, CGOR, CSD, Geomechanical Analogs Search)."@en .
+
+# ── Document subclasses ──
+
+geo:OGEOMEC a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "OGEOMEC"@pt ;
+    rdfs:label "OGEOMEC"@en ;
+    skos:prefLabel "Planilha de Ocorrências Geomecânicas"@pt ;
+    skos:prefLabel "Geomechanical Occurrences Sheet"@en ;
+    skos:altLabel "Ocorrências Geomecânicas"@pt ;
+    skos:altLabel "Geomechanical Occurrences"@en ;
+    skos:altLabel "OcorrenciasGeomecanicas"@pt ;
+    skos:definition "Tabela relacional de ocorrências geomecânicas durante a perfuração, persistida na BDIEP. Cada linha representa um evento (kick, perda, prisão, arraste, topamento, estolamento, etc.) com intervalo de profundidade, estado do fluido (ECD, peso de lama), procedimento, diâmetro do poço aberto e BHA. Fonte estruturada primária para retroanálise e busca de poços análogos."@pt ;
+    skos:definition "Relational table of geomechanical occurrences during drilling, persisted in BDIEP. Each row represents a single event (kick, lost circulation, stuck pipe, drag, tagging, stalling, etc.) with depth interval, fluid state (ECD, mud weight), drilling procedure, hole size and BHA. Primary structured source for retro-analysis and analog-well search."@en .
+
+geo:QPG a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "QPG"@pt ;
+    rdfs:label "QPG"@en ;
+    skos:prefLabel "Quadro de Previsão Geológica"@pt ;
+    skos:prefLabel "Geological Prognosis Chart"@en ;
+    skos:altLabel "QuadroDePrevisaoGeologica"@pt ;
+    skos:altLabel "Geological Prognosis"@en ;
+    skos:definition "Quadro de Previsão Geológica publicado no SIGEO/BDIEP que consolida a previsão litológica, marcadores, falhas, tempo sísmico, objetivos e ferramentas/técnicas de aquisição previstas para o poço. Principal insumo de planejamento."@pt ;
+    skos:definition "Geological prognosis published in SIGEO/BDIEP consolidating predicted lithology, formation markers, faults, seismic time, drilling targets, and planned acquisition tools for an upcoming well. Primary planning artifact."@en .
+
+geo:PerfilComposto a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Perfil Composto"@pt ;
+    rdfs:label "Composite Log"@en ;
+    skos:prefLabel "Perfil Composto"@pt ;
+    skos:prefLabel "Composite Log"@en ;
+    skos:altLabel "Composite Well Log"@en ;
+    skos:definition "Perfil Composto que integra, para um único poço, curvas de perfis, descrições litológicas, indícios de gás, testes de formação, registros direcionais e demais dados adquiridos — recuperados da BDIEP via SIGEO. Produto canônico pós-perfuração."@pt ;
+    skos:definition "Composite log integrating, for a single well, well log curves, lithological descriptions, gas shows, formation tests, directional records and other acquired data — sourced from BDIEP via SIGEO. Canonical post-drilling product."@en .
+
+geo:Litologia a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Litologia"@pt ;
+    rdfs:label "Lithology (interpreted)"@en ;
+    skos:prefLabel "Litologia (interpretada)"@pt ;
+    skos:prefLabel "Interpreted Lithology"@en ;
+    skos:altLabel "Lithology Interpretation"@en ;
+    skos:definition "Interpretação litológica do poço — porcentagens e descrições por amostra de calha, arquivada no SIGEO. Distinta do dado bruto da calha (insumo)."@pt ;
+    skos:definition "Lithology interpretation of the well — percentages and descriptions per cuttings sample, archived in SIGEO. Distinguished from raw cuttings data (which is the input)."@en .
+
+geo:RMG a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "RMG"@pt ;
+    rdfs:label "RMG"@en ;
+    skos:prefLabel "Relatório de Monitoramento Geomecânico"@pt ;
+    skos:prefLabel "Geomechanical Monitoring Report"@en ;
+    skos:altLabel "RelatorioMonitoramentoGeomecanico"@pt ;
+    skos:definition "Relatório de Monitoramento Geomecânico — PDF não estruturado emitido pela equipe EXP/OGP/AQG/AIP-OGEO, armazenado em VGE / Pasta de Poço."@pt ;
+    skos:definition "Geomechanical Monitoring Report — non-structured PDF issued by the EXP/OGP/AQG/AIP-OGEO team, stored in VGE / well folder."@en .
+
+geo:BDP a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "BDP"@pt ;
+    rdfs:label "BDP"@en ;
+    skos:prefLabel "Boletim Diário de Perfuração"@pt ;
+    skos:prefLabel "Daily Drilling Bulletin"@en ;
+    skos:altLabel "BoletimDiarioPerfuracao"@pt ;
+    skos:altLabel "Daily Drilling Report"@en ;
+    skos:definition "Boletim Diário de Perfuração — dataset estruturado em CSV disponível via API POÇOS, gerido pela disciplina POÇOS."@pt ;
+    skos:definition "Daily Drilling Bulletin — structured CSV dataset available via the POÇOS API, managed by the POÇOS discipline."@en .
+
+geo:IGP a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "IGP"@pt ;
+    rdfs:label "IGP"@en ;
+    skos:prefLabel "Informativo Geológico de Poço"@pt ;
+    skos:prefLabel "Well Geological Bulletin"@en ;
+    skos:altLabel "InformativoGeologicoDePoco"@pt ;
+    skos:definition "Informativo Geológico de Poço — relatório não estruturado (PDF/Word) consolidando a informação geológica do poço. Gestor: EXP/OGP/AQG."@pt ;
+    skos:definition "Well Geological Bulletin — non-structured PDF/Word report consolidating geological information of a well. Manager: EXP/OGP/AQG."@en .
+
+geo:ROPLogging a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "ROP Logging"@pt ;
+    rdfs:label "ROP Logging Report"@en ;
+    skos:prefLabel "Relatório de Operações de Perfilagem"@pt ;
+    skos:prefLabel "Logging Operations Report"@en ;
+    skos:altLabel "RelatorioOperacoesPerfilagem"@pt ;
+    skos:altLabel "ROP_Logging"@en ;
+    skos:definition "Relatório de Operações de Perfilagem — CSV estruturado exposto via API EXATA, gerido por EXP/OGP/TOGPR."@pt ;
+    skos:definition "Logging Operations Report — structured CSV exposed via the EXATA API, managed by EXP/OGP/TOGPR."@en .
+
+geo:RCSD a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "RCSD"@pt ;
+    rdfs:label "RCSD"@en ;
+    skos:prefLabel "Relatório do CSD de Operações"@pt ;
+    skos:prefLabel "CSD Operations Report"@en ;
+    skos:altLabel "RelatorioCSDOperacoes"@pt ;
+    skos:definition "Relatório do CSD (Centro de Suporte à Decisão) de Operações — apresentação PPTX semi-estruturada armazenada em SharePoint."@pt ;
+    skos:definition "CSD (Decision Support Center) Operations Report — semi-structured PPTX presentation stored on SharePoint."@en .
+
+# ── System subclasses ──
+
+geo:EXATA a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "EXATA"@pt ;
+    rdfs:label "EXATA"@en ;
+    skos:prefLabel "EXATA"@pt ;
+    skos:prefLabel "EXATA"@en ;
+    skos:definition "Plataforma Petrobras de transmissão e visualização de dados de poço em tempo real."@pt ;
+    skos:definition "Petrobras real-time well-data transmission and visualization platform."@en .
+
+geo:SIGEO a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "SIGEO"@pt ;
+    rdfs:label "SIGEO"@en ;
+    skos:prefLabel "SIGEO"@pt ;
+    skos:prefLabel "SIGEO"@en ;
+    skos:definition "Sistema de Geologia Petrobras — análise, visualização e arquivamento de dados geológicos (perfis, FRX, litologia, mineralogia)."@pt ;
+    skos:definition "Petrobras Geology system — analysis, visualization and archival of geological data (logs, XRF, lithology, mineralogy)."@en .
+
+geo:BDIEP a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "BDIEP"@pt ;
+    rdfs:label "BDIEP"@en ;
+    skos:prefLabel "Base de Dados Integrada de E&P"@pt ;
+    skos:prefLabel "Integrated E&P Database"@en ;
+    skos:definition "Base de Dados Integrada de E&P — repositório de dados estruturados de poço da Petrobras."@pt ;
+    skos:definition "Integrated E&P Database — Petrobras structured well-data repository."@en .
+
+geo:CGOR a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "CGOR"@pt ;
+    rdfs:label "CGOR"@en ;
+    skos:prefLabel "Centro Geológico de Operação Remota"@pt ;
+    skos:prefLabel "Geological Remote Operations Center"@en ;
+    skos:altLabel "Centro Geológico de Operação Remota e Automação"@pt ;
+    skos:definition "Centro Geológico de Operação Remota — centro Petrobras que monitora poços em perfuração em tempo real consumindo dados do EXATA. Realiza geostopping, avaliação de formação e decisões operacionais remotas."@pt ;
+    skos:definition "Geological Remote Operations Center — Petrobras center that monitors drilling wells in real time using EXATA data streams. Performs geostopping, formation evaluation and remote operational decisions."@en .
+
+geo:CSD a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "CSD"@pt ;
+    rdfs:label "CSD"@en ;
+    skos:prefLabel "Centro de Suporte à Decisão de Operações"@pt ;
+    skos:prefLabel "Operations Decision Support Center"@en ;
+    skos:altLabel "CSD de Operações"@pt ;
+    skos:definition "Centro de Suporte à Decisão de Operações — emite o RCSD consolidando o status operacional. Armazenado em SharePoint / Drive Científico CSD."@pt ;
+    skos:definition "Operations Decision Support Center — issues the RCSD consolidating operational status. Stored on SharePoint / CSD Scientific Drive."@en .
+
+geo:BuscadorAnalogosGeomec a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "Buscador de Análogos Geomecânicos"@pt ;
+    rdfs:label "Geomechanical Analogs Search"@en ;
+    skos:prefLabel "Buscador de Análogos Geomecânicos"@pt ;
+    skos:prefLabel "Geomechanical Analogs Search"@en ;
+    skos:altLabel "Analog Wells Search (Geomechanics)"@en ;
+    skos:definition "Ferramenta interna Petrobras de busca de poços análogos usando QPG, Perfil Composto, modelo de geopressões, LOTs e Ocorrências Geomecânicas (OGEOMEC) como insumos."@pt ;
+    skos:definition "Petrobras internal tool that retrieves analog wells using QPG, Composite Log, geopressure model, LOTs and Geomechanical Occurrences (OGEOMEC) as inputs."@en .
+
+# ── MudWindow auxiliary class (referenced by violatesMudWindow) ──
+
+geo:MudWindow a owl:Class ;
+    rdfs:label "Janela de Lama"@pt ;
+    rdfs:label "Mud Window"@en ;
+    skos:prefLabel "Janela Operacional de Lama"@pt ;
+    skos:prefLabel "Operational Mud Window"@en ;
+    skos:altLabel "GM005"@en ;
+    skos:definition "Janela operacional de peso de lama delimitada por pressão de poros (limite inferior — risco de kick) e gradiente de fratura (limite superior — risco de perda). Conceito GM005 do módulo de Geomecânica."@pt ;
+    skos:definition "Operational mud-weight window bounded by pore pressure (lower bound — kick risk) and fracture gradient (upper bound — lost-circulation risk). Module Geomechanics concept GM005."@en .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# OGEOMEC datatype properties (24 fields; domain = geo:OGEOMEC)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:ogeomecPais a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC País"@pt ;
+    rdfs:label "OGEOMEC Country"@en ;
+    rdfs:comment "País do poço (campo de contexto OGEOMEC)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecPoco a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Poço"@pt ;
+    rdfs:label "OGEOMEC Well"@en ;
+    rdfs:comment "Nome ANP do poço (FK para geo:Poco via ANP_well_name). Campo de contexto OGEOMEC."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecCampo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Campo"@pt ;
+    rdfs:label "OGEOMEC Field"@en ;
+    rdfs:comment "Nome ANP do campo (FK para geo:Campo via ANP_field_name)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecBacia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Bacia"@pt ;
+    rdfs:label "OGEOMEC Basin"@en ;
+    rdfs:comment "Nome ANP da bacia sedimentar (FK para geo:BaciaSedimentar via ANP_basin_name)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecDescricaoOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Descrição da Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Description"@en ;
+    rdfs:comment "Texto livre descrevendo a ocorrência. Insumo para NLP/text-to-SQL."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecTipoOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Tipo de Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Type"@en ;
+    rdfs:comment "Tipo da ocorrência geomecânica (vocabulário controlado OGEOMEC_TipoOcorrencia, 12 valores)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecData a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Data"@pt ;
+    rdfs:label "OGEOMEC Date"@en ;
+    rdfs:comment "Data da ocorrência geomecânica (xsd:date)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:date .
+
+geo:ogeomecProfundidadePerfuracao a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Profundidade de Perfuração"@pt ;
+    rdfs:label "OGEOMEC Drilling Depth"@en ;
+    rdfs:comment "Profundidade total perfurada (MD, em metros) no momento da ocorrência."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecTopoOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Topo da Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Top"@en ;
+    rdfs:comment "Topo do intervalo afetado (MD, em metros)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecBaseOcorrencia a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Base da Ocorrência"@pt ;
+    rdfs:label "OGEOMEC Occurrence Base"@en ;
+    rdfs:comment "Base do intervalo afetado (MD, em metros)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecValorMinimo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Valor Mínimo"@pt ;
+    rdfs:label "OGEOMEC Min Value"@en ;
+    rdfs:comment "Valor mínimo da grandeza medida. Unidade depende do TipoOcorrencia — ver ogeomecUnidadeValor."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecValorMaximo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Valor Máximo"@pt ;
+    rdfs:label "OGEOMEC Max Value"@en ;
+    rdfs:comment "Valor máximo da grandeza medida. Unidade depende do TipoOcorrencia — ver ogeomecUnidadeValor."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecUnidadeValor a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Unidade do Valor"@pt ;
+    rdfs:label "OGEOMEC Value Unit"@en ;
+    rdfs:comment "Unidade dos campos valorMinimo/valorMaximo (vocabulário OGEOMEC_UnidadeValor: klbf, ton, kN.m, klbf.ft, bbl, m3, psi, ppm, units, min, m). Recomendado por PE-2RES-00009."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecECD a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC ECD (Densidade Equivalente de Circulação)"@pt ;
+    rdfs:label "OGEOMEC ECD (Equivalent Circulating Density)"@en ;
+    rdfs:comment "Equivalent Circulating Density no momento da ocorrência. Unidade canônica: ppg (= lb/gal), padrão de fato offshore Brasil. Liga a geo:MudWindow (GM005)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecPesoFluido a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Peso de Fluido"@pt ;
+    rdfs:label "OGEOMEC Mud Weight"@en ;
+    rdfs:comment "Peso de lama estático (mud weight). Unidade canônica: ppg. Conversão: 1 ppg = 0,1198 g/cm3."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:double .
+
+geo:ogeomecPesoFluidoUnit a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Unidade de Peso de Fluido"@pt ;
+    rdfs:label "OGEOMEC Mud Weight Unit"@en ;
+    rdfs:comment "Unidade original do peso de fluido para auditoria (vocabulário OGEOMEC_PesoFluidoUnit: ppg, g/cm3, sg). PE-2POC-00453 usa ppg; projetos legados usam g/cm3."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecFluido a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Fluido"@pt ;
+    rdfs:label "OGEOMEC Fluid"@en ;
+    rdfs:comment "Tipo de fluido em uso (vocabulário OGEOMEC_Fluido, 4 valores)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecProcedimentoPoco a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Procedimento de Poço"@pt ;
+    rdfs:label "OGEOMEC Well Procedure"@en ;
+    rdfs:comment "Procedimento operacional em curso (vocabulário OGEOMEC_ProcedimentoPoco, 8 valores)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecDiametroNominal a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Diâmetro Nominal"@pt ;
+    rdfs:label "OGEOMEC Nominal Diameter"@en ;
+    rdfs:comment "Diâmetro do poço aberto (hole size), em polegadas. 16 valores observados (8 1/2, 12 1/4, 17 1/2, 26, 36, etc.). Inversamente correlacionado com FasePoco."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecFasePoco a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Fase do Poço"@pt ;
+    rdfs:label "OGEOMEC Well Phase"@en ;
+    rdfs:comment "Código cronológico da fase do poço (1..N). Fases baixas = mais rasas / maiores diâmetros / 'sem retorno'; fases altas = mais profundas / menores diâmetros / 'com retorno'. Faixa observada: 1..12."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:integer .
+
+geo:ogeomecFaseTipo a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Tipo de Fase"@pt ;
+    rdfs:label "OGEOMEC Phase Type"@en ;
+    rdfs:comment "SEM_RETORNO (fases iniciais sem retorno de fluido) ou COM_RETORNO (circulação fechada). Vocabulário OGEOMEC_FaseTipo."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecCodigoBroca a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Código da Broca"@pt ;
+    rdfs:label "OGEOMEC Bit Code"@en ;
+    rdfs:comment "Código identificador da broca em uso."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecModeloBroca a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Modelo da Broca"@pt ;
+    rdfs:label "OGEOMEC Bit Model"@en ;
+    rdfs:comment "Modelo/descrição da broca em uso."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+geo:ogeomecBHA a owl:DatatypeProperty ;
+    rdfs:label "OGEOMEC Coluna de Perfuração (BHA)"@pt ;
+    rdfs:label "OGEOMEC Bottom Hole Assembly"@en ;
+    rdfs:comment "Bottom Hole Assembly (BHA) — coluna de perfuração em uso no momento da ocorrência."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range xsd:string .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Object properties for OGEOMEC linkage
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:violatesMudWindow a owl:ObjectProperty ;
+    rdfs:label "viola janela de lama"@pt ;
+    rdfs:label "violates mud window"@en ;
+    rdfs:comment "Liga uma ocorrência OGEOMEC à janela operacional de lama (geo:MudWindow / GM005) quando o evento viola o limite inferior (kick) ou superior (perda)."@pt ;
+    rdfs:domain geo:OGEOMEC ;
+    rdfs:range geo:MudWindow .
+
+geo:derivedFrom a owl:ObjectProperty ;
+    rdfs:label "derivado de"@pt ;
+    rdfs:label "derived from"@en ;
+    rdfs:comment "Liga um documento de Operações Geológicas a outro documento do qual ele é derivado (ex.: Perfil Composto derivado de Litologia + curvas; OGEOMEC derivado de BDP)."@pt ;
+    rdfs:domain geo:GeologicalOperationsDocument ;
+    rdfs:range geo:GeologicalOperationsDocument .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# SKOS ConceptSchemes for the 6 OGEOMEC controlled vocabularies
+# ─────────────────────────────────────────────────────────────────────────────
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de Ocorrência OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Occurrence Types"@en ;
+    skos:definition "Vocabulário controlado dos 12 tipos de ocorrências geomecânicas registradas na OGEOMEC."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Kick> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Kick"@pt ;
+    skos:prefLabel "Kick"@en ;
+    skos:notation "Kick" ;
+    skos:definition "Influxo de fluido da formação (PorePressure > MudPressure). Viola o limite inferior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/FalsoKick> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Falso Kick"@pt ;
+    skos:prefLabel "False Kick"@en ;
+    skos:notation "Falso Kick" ;
+    skos:definition "Indício de influxo descartado após verificação (flow check)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/PerdaDin> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Perda Din"@pt ;
+    skos:prefLabel "Dynamic Loss"@en ;
+    skos:notation "Perda Din" ;
+    skos:definition "Perda de circulação durante bombeamento (perda dinâmica). Viola limite superior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/PerdaEst> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Perda Est"@pt ;
+    skos:prefLabel "Static Loss"@en ;
+    skos:notation "Perda Est" ;
+    skos:definition "Perda de circulação com bomba parada (perda estática). Viola limite superior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/PerdaTotal> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Perda Total"@pt ;
+    skos:prefLabel "Total Loss"@en ;
+    skos:notation "Perda Total" ;
+    skos:definition "Perda total de retorno de fluido. Viola limite superior da janela de lama (GM005)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Prisao> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Prisao"@pt ;
+    skos:prefLabel "Stuck Pipe"@en ;
+    skos:notation "Prisao" ;
+    skos:definition "Coluna presa — não pode ser movimentada."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/AmeacaPrisao> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Ameaca Prisao"@pt ;
+    skos:prefLabel "Stuck-Pipe Risk"@en ;
+    skos:notation "Ameaca Prisao" ;
+    skos:definition "Tendência de prisão detectada (drag/torque crescente)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Arraste> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Arraste"@pt ;
+    skos:prefLabel "Drag"@en ;
+    skos:notation "Arraste" ;
+    skos:definition "Atrito anormal durante movimentação da coluna."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Topamento> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Topamento"@pt ;
+    skos:prefLabel "Tagging"@en ;
+    skos:notation "Topamento" ;
+    skos:definition "Coluna toca obstáculo no poço (cascalho, ledge, fundo falso)."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/Estolamento> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Estolamento"@pt ;
+    skos:prefLabel "Stalling"@en ;
+    skos:notation "Estolamento" ;
+    skos:definition "Parada de rotação do motor de fundo / top drive sob torque excessivo."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/FundoFalso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Fundo Falso"@pt ;
+    skos:prefLabel "False Bottom"@en ;
+    skos:notation "Fundo Falso" ;
+    skos:definition "Falso fundo por acúmulo de cascalho."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia/GasManobra> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_TipoOcorrencia> ;
+    skos:prefLabel "Gas Manobra"@pt ;
+    skos:prefLabel "Trip Gas"@en ;
+    skos:notation "Gas Manobra" ;
+    skos:definition "Gás detectado após manobra — não é kick, mas indica permeabilidade da formação."@pt .
+
+# ── OGEOMEC_ProcedimentoPoco (8 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> a skos:ConceptScheme ;
+    skos:prefLabel "Procedimentos de Poço OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Well Procedures"@en ;
+    skos:definition "Vocabulário controlado dos 8 procedimentos operacionais registrados na OGEOMEC."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/PERFURACAO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "PERFURACAO"@pt ;
+    skos:prefLabel "Drilling"@en ;
+    skos:notation "PERFURACAO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/DESCIDA_DE_COLUNA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "DESCIDA DE COLUNA"@pt ;
+    skos:prefLabel "Run In Hole"@en ;
+    skos:notation "DESCIDA DE COLUNA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/RETIRADA_DE_COLUNA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "RETIRADA DE COLUNA"@pt ;
+    skos:prefLabel "Pull Out Of Hole"@en ;
+    skos:notation "RETIRADA DE COLUNA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/CIMENTACAO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "CIMENTACAO"@pt ;
+    skos:prefLabel "Cementing"@en ;
+    skos:notation "CIMENTACAO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/REVESTIMENTO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "REVESTIMENTO"@pt ;
+    skos:prefLabel "Casing"@en ;
+    skos:notation "REVESTIMENTO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/PERFILAGEM_A_CABO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "PERFILAGEM A CABO"@pt ;
+    skos:prefLabel "Wireline Logging"@en ;
+    skos:notation "PERFILAGEM A CABO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/TESTEMUNHAGEM> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "TESTEMUNHAGEM"@pt ;
+    skos:prefLabel "Coring"@en ;
+    skos:notation "TESTEMUNHAGEM" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco/OPERACOES_SEM_AVANCO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_ProcedimentoPoco> ;
+    skos:prefLabel "OPERACOES SEM AVANCO"@pt ;
+    skos:prefLabel "Operations Without Progress"@en ;
+    skos:notation "OPERACOES SEM AVANCO" .
+
+# ── OGEOMEC_Fluido (4 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> a skos:ConceptScheme ;
+    skos:prefLabel "Fluidos OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Fluids"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/FluidoPerfuracaoAquoso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "FLUIDO DE PERFURAÇÃO AQUOSO"@pt ;
+    skos:prefLabel "Water-Based Drilling Fluid"@en ;
+    skos:notation "FLUIDO DE PERFURAÇÃO AQUOSO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/FluidoPerfuracaoNaoAquoso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "FLUIDO DE PERFURAÇÃO NÃO AQUOSO"@pt ;
+    skos:prefLabel "Non-Aqueous Drilling Fluid"@en ;
+    skos:notation "FLUIDO DE PERFURAÇÃO NÃO AQUOSO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/FluidoCompletacaoAquoso> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "FLUIDO COMPLETAÇÃO AQUOSO"@pt ;
+    skos:prefLabel "Water-Based Completion Fluid"@en ;
+    skos:notation "FLUIDO COMPLETAÇÃO AQUOSO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido/AguaDoMar> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_Fluido> ;
+    skos:prefLabel "AGUA DO MAR"@pt ;
+    skos:prefLabel "Sea Water"@en ;
+    skos:notation "AGUA DO MAR" .
+
+# ── OGEOMEC_UnidadeValor (11 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> a skos:ConceptScheme ;
+    skos:prefLabel "Unidades de Valor OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Value Units"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/klbf> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "klbf"@en ;
+    skos:notation "klbf" ;
+    skos:definition "Kilo libras-força (force) — aplica-se a Arraste, Topamento, Ameaca Prisao."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/ton> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "ton"@en ;
+    skos:notation "ton" ;
+    skos:definition "Tonelada-força (force) — aplica-se a Topamento."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/kNm> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "kN.m"@en ;
+    skos:notation "kN.m" ;
+    skos:definition "Kilonewton-metro (torque) — aplica-se a Estolamento, Ameaca Prisao."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/klbfft> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "klbf.ft"@en ;
+    skos:notation "klbf.ft" ;
+    skos:definition "Kilo libra-força por pé (torque) — aplica-se a Estolamento."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/bbl> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "bbl"@en ;
+    skos:notation "bbl" ;
+    skos:definition "Barril (volume) — aplica-se a Perdas, Kick, Falso Kick."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/m3> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "m3"@en ;
+    skos:notation "m3" ;
+    skos:definition "Metro cúbico (volume) — aplica-se a Perdas, Kick."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/psi> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "psi"@en ;
+    skos:notation "psi" ;
+    skos:definition "Libra por polegada quadrada (pressure) — aplica-se a Kick, Falso Kick."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/ppm> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "ppm"@en ;
+    skos:notation "ppm" ;
+    skos:definition "Partes por milhão (concentration) — aplica-se a Gas Manobra."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/units> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "units"@en ;
+    skos:notation "units" ;
+    skos:definition "Gas units (mudlogger) — aplica-se a Gas Manobra."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/min> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "min"@en ;
+    skos:notation "min" ;
+    skos:definition "Minutos (duração) — aplica-se a Prisao."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor/m> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_UnidadeValor> ;
+    skos:prefLabel "m"@en ;
+    skos:notation "m" ;
+    skos:definition "Metros (offset/length) — aplica-se a Fundo Falso."@pt .
+
+# ── OGEOMEC_PesoFluidoUnit (3 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> a skos:ConceptScheme ;
+    skos:prefLabel "Unidades de Peso de Fluido OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Mud Weight Units"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit/ppg> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> ;
+    skos:prefLabel "ppg"@en ;
+    skos:notation "ppg" ;
+    skos:altLabel "lb/gal"@en ;
+    skos:definition "Pounds per gallon — padrão de fato offshore Brasil. Refs: PE-2POC-00453, PE-2POC-00445, PE-2POC-00756."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit/gcm3> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> ;
+    skos:prefLabel "g/cm3"@en ;
+    skos:notation "g/cm3" ;
+    skos:altLabel "sg"@en ;
+    skos:definition "Gramas por centímetro cúbico — comum em poços terrestres e projetos legados. Conversão: 1 ppg = 0,1198 g/cm3."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit/sg> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_PesoFluidoUnit> ;
+    skos:prefLabel "sg"@en ;
+    skos:notation "sg" ;
+    skos:altLabel "g/cm3"@en ;
+    skos:definition "Specific gravity (adimensional, equivalente a g/cm3)."@pt .
+
+# ── OGEOMEC_FaseTipo (2 values) ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo> a skos:ConceptScheme ;
+    skos:prefLabel "Tipos de Fase de Poço OGEOMEC"@pt ;
+    skos:prefLabel "OGEOMEC Well Phase Types"@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo/SEM_RETORNO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo> ;
+    skos:prefLabel "SEM_RETORNO"@pt ;
+    skos:prefLabel "No Returns"@en ;
+    skos:notation "SEM_RETORNO" ;
+    skos:definition "Fases iniciais (geralmente 1 e 2) — sem retorno de fluido a superfície. Típico offshore: brocas >= 17 1/2 pol. Ref: PE-2POC-00595."@pt .
+
+<https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo/COM_RETORNO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/OGEOMEC_FaseTipo> ;
+    skos:prefLabel "COM_RETORNO"@pt ;
+    skos:prefLabel "With Returns"@en ;
+    skos:notation "COM_RETORNO" ;
+    skos:definition "Fases com circulação fechada via riser/revestimento — retorno de fluido a superfície. Típico: fases 3+, brocas <= 12 1/4 pol."@pt .
+# ─────────────────────────────────────────────────────────────────────────────
+# Service Line Detailed Schemas (operacoes-geologicas-servicos.json)
+# 21 classes: 12 wellsite acquisition records + 9 supporting systems/documents
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Abstract parent for the service lines themselves (Mudlogging, Wireline, etc.)
+# Source: data/operacoes-geologicas.json#OG010
+geo:ServiceLine a owl:Class ;
+    rdfs:label "Linha de Serviço"@pt ;
+    rdfs:label "Service Line"@en ;
+    skos:prefLabel "Linha de Serviço"@pt ;
+    skos:prefLabel "Service Line"@en ;
+    skos:definition "Classe abstrata das atividades técnicas executadas por Operações Geológicas em um poço (mudlogging, amostragem de calha, testemunhagem, amostragem lateral, MWD/LWD, perfilagem a cabo, teste de formação, geostopping)."@pt ;
+    skos:definition "Abstract class for technical activities performed by Geological Operations on a well."@en .
+
+# Abstract parent for the 12 detailed wellsite acquisition records
+geo:WellsiteAcquisitionRecord a owl:Class ;
+    rdfs:label "Registro de Aquisição em Poço"@pt ;
+    rdfs:label "Wellsite Acquisition Record"@en ;
+    skos:prefLabel "Registro de Aquisição em Poço"@pt ;
+    skos:prefLabel "Wellsite Acquisition Record"@en ;
+    skos:definition "Classe abstrata para registros detalhados produzidos pelas linhas de serviço de aquisição em poço (mudlogging, cuttings, coring, sidewall, LWD, wireline, formation testing, geostopping)."@pt ;
+    skos:definition "Abstract class for detailed records produced by wellsite acquisition service lines (mudlogging, cuttings, coring, sidewall, LWD, wireline, formation testing, geostopping)."@en .
+
+# Abstract parent for laboratory specimens (CorePlug, FluidSample)
+geo:Specimen a owl:Class ;
+    rdfs:label "Amostra"@pt ;
+    rdfs:label "Specimen"@en ;
+    skos:prefLabel "Amostra"@pt ;
+    skos:prefLabel "Specimen"@en ;
+    skos:definition "Classe abstrata para amostras físicas (plugues de testemunho, amostras de fluido) coletadas em poço para análise laboratorial."@pt ;
+    rdfs:seeAlso <http://resource.geosciml.org/classifier/cgi/specimentype> .
+
+geo:MudloggingTimeSeries a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Curvas de Tempo de Mudlogging"@pt ;
+    rdfs:label "MudloggingTimeSeries"@en ;
+    skos:prefLabel "Curvas de Tempo de Mudlogging"@pt ;
+    skos:prefLabel "MudloggingTimeSeries"@en ;
+    skos:altLabel "MudloggingSerieTemporal"@pt ;
+    skos:definition "Fluxo contínuo de parâmetros de perfuração e análise de gás transmitido da sonda ao EXATA."@pt ;
+    skos:definition "Continuous time-series stream of drilling parameters and gas analysis transmitted from the rig to EXATA."@en .
+
+geo:GasShowEvent a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Evento Discreto de Indício de Hidrocarboneto"@pt ;
+    rdfs:label "GasShowEvent"@en ;
+    skos:prefLabel "Evento Discreto de Indício de Hidrocarboneto"@pt ;
+    skos:prefLabel "GasShowEvent"@en ;
+    skos:altLabel "EventoIndicioGas"@pt ;
+    skos:definition "Evento discreto de indício de gás/óleo detectado durante o mudlogging."@pt ;
+    skos:definition "Discrete gas/oil show event detected during mudlogging."@en .
+
+geo:KickEvent a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Evento Discreto de Kick"@pt ;
+    rdfs:label "KickEvent"@en ;
+    skos:prefLabel "Evento Discreto de Kick"@pt ;
+    skos:prefLabel "KickEvent"@en ;
+    skos:altLabel "EventoKick"@pt ;
+    skos:definition "Evento discreto de kick (influxo de formação)."@pt ;
+    skos:definition "Discrete kick (formation influx) event."@en .
+
+geo:CuttingsSampleDetailed a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Amostra de Calha (Esquema Detalhado)"@pt ;
+    rdfs:label "CuttingsSampleDetailed"@en ;
+    skos:prefLabel "Amostra de Calha (Esquema Detalhado)"@pt ;
+    skos:prefLabel "CuttingsSampleDetailed"@en ;
+    skos:altLabel "AmostraCalhaDetalhada"@pt ;
+    skos:definition "Esquema detalhado de amostra de calha conforme PE-2EXP-00059, superando o stub leve do módulo pai."@pt ;
+    skos:definition "Detailed cuttings sample schema per PE-2EXP-00059, superseding the lightweight CuttingsSampling stub in the parent module."@en .
+
+geo:CoreRun a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Corrida de Testemunho"@pt ;
+    rdfs:label "CoreRun"@en ;
+    skos:prefLabel "Corrida de Testemunho"@pt ;
+    skos:prefLabel "CoreRun"@en ;
+    skos:altLabel "CorridaTestemunho"@pt ;
+    skos:definition "Corrida única de testemunhagem em um wellbore — intervalos programado e recuperado, percentual de recuperação, tipo de tubo, contagens de plugues e FKs para OSDU/GeoSciML/BDIEP/SIGEO/QPG."@pt ;
+    skos:definition "Single coring run on a wellbore — programmed and recovered intervals, recovery percentage, barrel type, plug counts and FKs to OSDU RockSample, GeoSciML Specimen and Petrobras BDIEP/SIGEO/QPG references."@en .
+
+geo:CorePlug a owl:Class ;
+    rdfs:subClassOf geo:Specimen ;
+    rdfs:label "Plugue de Testemunho"@pt ;
+    rdfs:label "CorePlug"@en ;
+    skos:prefLabel "Plugue de Testemunho"@pt ;
+    skos:prefLabel "CorePlug"@en ;
+    skos:altLabel "PlugueTestemunho"@pt ;
+    skos:definition "Plugue cilíndrico extraído de uma CoreRun para análise laboratorial."@pt ;
+    skos:definition "Cylindrical plug extracted from a CoreRun for laboratory analysis (petrography, petrophysics, geomechanics, geochemistry)."@en .
+
+geo:SidewallCoreSample a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Amostra Lateral (SWC)"@pt ;
+    rdfs:label "SidewallCoreSample"@en ;
+    skos:prefLabel "Amostra Lateral (SWC)"@pt ;
+    skos:prefLabel "SidewallCoreSample"@en ;
+    skos:altLabel "AmostraSidewallCore"@pt ;
+    skos:definition "Amostra lateral (SWC) adquirida durante corrida wireline — ferramentas rotativas (RSCT), de percussão (CST) ou mecânicas."@pt ;
+    skos:definition "Sidewall core sample (SWC) acquired during a wireline run — rotary (RSCT), percussion (CST) or mechanical tools."@en .
+
+geo:LWDRun a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Corrida LWD/MWD"@pt ;
+    rdfs:label "LWDRun"@en ;
+    skos:prefLabel "Corrida LWD/MWD"@pt ;
+    skos:prefLabel "LWDRun"@en ;
+    skos:altLabel "CorridaLWD"@pt ;
+    skos:definition "Corrida única LWD/MWD — fase, BHA, prestadora, stack de ferramentas, curvas em tempo real vs memória, versão WITSML, taxas de amostragem e ID do log no EXATA."@pt ;
+    skos:definition "Single LWD/MWD run on a wellbore — phase, BHA, vendor, tool stack, real-time vs memory curves, WITSML version, sample rates and EXATA log id."@en .
+
+geo:WirelineRun a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Corrida de Perfilagem a Cabo"@pt ;
+    rdfs:label "WirelineRun"@en ;
+    skos:prefLabel "Corrida de Perfilagem a Cabo"@pt ;
+    skos:prefLabel "WirelineRun"@en ;
+    skos:altLabel "CorridaWireline"@pt ;
+    skos:definition "Corrida única de perfilagem a cabo conforme PE-2EXP-00065."@pt ;
+    skos:definition "Single wireline run per PE-2EXP-00065."@en .
+
+geo:FormationPressurePoint a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Ponto de Pressão de Formação (RFT/MDT/MiniDST)"@pt ;
+    rdfs:label "FormationPressurePoint"@en ;
+    skos:prefLabel "Ponto de Pressão de Formação (RFT/MDT/MiniDST)"@pt ;
+    skos:prefLabel "FormationPressurePoint"@en ;
+    skos:altLabel "PontoPressaoFormacao"@pt ;
+    skos:definition "Medida única de pressão de formação (pretest) — RFT/MDT/XPT/FMT/MiniDST."@pt ;
+    skos:definition "Single formation pressure measurement (pretest) — RFT, MDT, XPT, FMT or MiniDST."@en .
+
+geo:DSTInterval a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Intervalo de Teste de Formação (DST)"@pt ;
+    rdfs:label "DSTInterval"@en ;
+    skos:prefLabel "Intervalo de Teste de Formação (DST)"@pt ;
+    skos:prefLabel "DSTInterval"@en ;
+    skos:altLabel "IntervaloDST"@pt ;
+    skos:definition "Intervalo de DST conforme PE-2E&P-00773."@pt ;
+    skos:definition "Drill Stem Test interval per PE-2E&P-00773."@en .
+
+geo:GeostoppingEvent a owl:Class ;
+    rdfs:subClassOf geo:WellsiteAcquisitionRecord ;
+    rdfs:label "Evento de Geostopping"@pt ;
+    rdfs:label "GeostoppingEvent"@en ;
+    skos:prefLabel "Evento de Geostopping"@pt ;
+    skos:prefLabel "GeostoppingEvent"@en ;
+    skos:altLabel "EventoGeostopping"@pt ;
+    skos:definition "Evento de decisão de geostopping — decisão em tempo real de parar a perfuração em profundidade precisa, baseada em curvas LWD, indícios de gás, tendência de MSE, mudança de fácies."@pt ;
+    skos:definition "Geostopping decision event — real-time decision to stop drilling at a precise depth based on LWD curves, gas shows, MSE trend, facies change."@en .
+
+geo:SIRR a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "Sistema de Informações de Reservas e Reservatórios"@pt ;
+    rdfs:label "SIRR"@en ;
+    skos:prefLabel "Sistema de Informações de Reservas e Reservatórios"@pt ;
+    skos:prefLabel "SIRR"@en ;
+    skos:definition "Sistema canônico Petrobras para interpretações definitivas de DST e informações de reservas/reservatórios."@pt ;
+    skos:definition "Petrobras canonical system for definitive DST interpretations and reservoir/reserve information."@en .
+
+geo:BDOC a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "Repositório Documental BDOC"@pt ;
+    rdfs:label "BDOC"@en ;
+    skos:prefLabel "Repositório Documental BDOC"@pt ;
+    skos:prefLabel "BDOC"@en ;
+    skos:definition "Repositório documental para arquivos brutos: LAS/DLIS (wireline/LWD), fotos de testemunho, FT1/FT2/FT5 (DST), projetos Saphir/PanSystem."@pt ;
+    skos:definition "Document repository for raw acquisition files: LAS/DLIS (wireline/LWD), core photos, FT1/FT2/FT5 DST data files, Saphir/PanSystem interpretation projects."@en .
+
+geo:VGE a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "Visualizador de Geo-dados (acesso BDIEP)"@pt ;
+    rdfs:label "VGE"@en ;
+    skos:prefLabel "Visualizador de Geo-dados (acesso BDIEP)"@pt ;
+    skos:prefLabel "VGE"@en ;
+    skos:definition "Camada de visualização de geo-dados que provê acesso ao BDIEP."@pt ;
+    skos:definition "Geo-data visualization layer providing user access to BDIEP."@en .
+
+geo:ROA a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Relatório de Ocorrências Anômalas"@pt ;
+    rdfs:label "ROA"@en ;
+    skos:prefLabel "Relatório de Ocorrências Anômalas"@pt ;
+    skos:prefLabel "ROA"@en ;
+    skos:definition "Sub-documento do ROP registrando anomalias durante uma corrida wireline ou LWD."@pt ;
+    skos:definition "Sub-document of ROP recording anomalies during a wireline or LWD run (tool failures, signal loss, BHA stuck, hole conditions)."@en .
+
+geo:CassandraExataCurvaTempo a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsSystem ;
+    rdfs:label "Camada Cassandra — mdae.exata_curva_tempo"@pt ;
+    rdfs:label "Cassandra_ExataCurvaTempo"@en ;
+    skos:prefLabel "Camada Cassandra — mdae.exata_curva_tempo"@pt ;
+    skos:prefLabel "Cassandra_ExataCurvaTempo"@en ;
+    skos:definition "Camada de storage para séries temporais do EXATA."@pt ;
+    skos:definition "Storage layer for EXATA time-series."@en .
+
+geo:PAG a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Perfil de Acompanhamento Geológico"@pt ;
+    rdfs:label "PAG"@en ;
+    skos:prefLabel "Perfil de Acompanhamento Geológico"@pt ;
+    skos:prefLabel "PAG"@en ;
+    skos:definition "Documento operacional do mudlogging contendo parâmetros de perfuração, percentuais de litologia, interpretação litológica, indícios de hidrocarboneto e dados de fluidos."@pt ;
+    skos:definition "Operational document from mudlogging containing drilling parameters, lithology percentages, lithology interpretation, hydrocarbon shows and fluid data."@en .
+
+geo:FRAME a owl:Class ;
+    rdfs:subClassOf geo:GeologicalOperationsDocument ;
+    rdfs:label "Frame de Configuração de Aquisição"@pt ;
+    rdfs:label "FRAME"@en ;
+    skos:prefLabel "Frame de Configuração de Aquisição"@pt ;
+    skos:prefLabel "FRAME"@en ;
+    skos:definition "Documento de configuração da prestadora especificando curvas em tempo real, curvas em memória, offsets de ferramenta, números de série, ROP máximo, taxa de amostragem e taxa de transmissão para uma corrida LWD ou wireline."@pt ;
+    skos:definition "Service company configuration document specifying realtime curves, memory curves, tool offsets, serial numbers, max ROP, sample rate and transmission rate for an LWD or wireline run."@en .
+
+geo:FluidSample a owl:Class ;
+    rdfs:subClassOf geo:Specimen ;
+    rdfs:label "Amostra de Fluido"@pt ;
+    rdfs:label "FluidSample"@en ;
+    skos:prefLabel "Amostra de Fluido"@pt ;
+    skos:prefLabel "FluidSample"@en ;
+    skos:altLabel "AmostraFluido"@pt ;
+    skos:definition "Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST."@pt ;
+    skos:definition "Reservoir fluid sample collected via formation pressure point (RFT/MDT/MiniDST) or DST."@en .
+
+geo:BHA a owl:Class ;
+    rdfs:subClassOf owl:Thing ;
+    rdfs:label "Bottom Hole Assembly"@pt ;
+    rdfs:label "BHA"@en ;
+    skos:prefLabel "Bottom Hole Assembly"@pt ;
+    skos:prefLabel "BHA"@en ;
+    skos:definition "Configuração da Bottom Hole Assembly — stack de componentes, comprimento total, peso, última atualização."@pt ;
+    skos:definition "Bottom Hole Assembly configuration entity — components stack, total length, weight, last update."@en .
+
+# ── Datatype properties for service-line detailed schemas ──
+
+# MudloggingTimeSeries datatype properties
+geo:mudloggingTimeSeriesWellId a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries well_id"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:string .
+
+geo:mudloggingTimeSeriesWellboreId a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries wellbore_id"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:string .
+
+geo:mudloggingTimeSeriesLogId a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries log_id"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:string .
+
+geo:mudloggingTimeSeriesTimestampUtc a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries timestamp_utc"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:dateTime .
+
+geo:mudloggingTimeSeriesDepthBitMd a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries depth_bit_md (m)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesLagDepthMd a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries lag_depth_md (m)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesRop a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries rop (m/h)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesWob a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries wob (kN)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesRpm a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries rpm (rpm)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesTorque a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries torque (kN.m)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesSpp a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries spp (kPa)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesFlowIn a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries flow_in (l/min)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesGasTotal a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries gas_total (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesC1 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries c1 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesC2 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries c2 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesC3 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries c3 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesIc4 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries ic4 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesNc4 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries nc4 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesIc5 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries ic5 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesNc5 a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries nc5 (% vol)"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:double .
+
+geo:mudloggingTimeSeriesSourceSystem a owl:DatatypeProperty ;
+    rdfs:label "MudloggingTimeSeries source_system"@en ;
+    rdfs:domain geo:MudloggingTimeSeries ;
+    rdfs:range xsd:string .
+
+
+# GasShowEvent datatype properties
+geo:gasShowEventEventId a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent event_id"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:string .
+
+geo:gasShowEventWellId a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent well_id"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:string .
+
+geo:gasShowEventDepthTopMd a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent depth_top_md (m)"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventDepthBaseMd a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent depth_base_md (m)"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventGasTotalPeak a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent gas_total_peak (% vol)"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventC1Peak a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent c1_peak (% vol)"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventWetnessRatio a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent wetness_ratio"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventBalanceRatio a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent balance_ratio"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventCharacterRatio a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent character_ratio"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:double .
+
+geo:gasShowEventVacutainerCollected a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent vacutainer_collected"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:boolean .
+
+geo:gasShowEventVacutainerCount a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent vacutainer_count"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:integer .
+
+geo:gasShowEventShowType a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent show_type"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:string .
+
+geo:gasShowEventRemarks a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent remarks"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:string .
+
+geo:gasShowEventRecordedBy a owl:DatatypeProperty ;
+    rdfs:label "GasShowEvent recorded_by"@en ;
+    rdfs:domain geo:GasShowEvent ;
+    rdfs:range xsd:string .
+
+
+# KickEvent datatype properties
+geo:kickEventEventId a owl:DatatypeProperty ;
+    rdfs:label "KickEvent event_id"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:string .
+
+geo:kickEventWellId a owl:DatatypeProperty ;
+    rdfs:label "KickEvent well_id"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:string .
+
+geo:kickEventDepthMd a owl:DatatypeProperty ;
+    rdfs:label "KickEvent depth_md (m)"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:double .
+
+geo:kickEventTimestampUtc a owl:DatatypeProperty ;
+    rdfs:label "KickEvent timestamp_utc"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:dateTime .
+
+geo:kickEventAssociatedGasShowId a owl:DatatypeProperty ;
+    rdfs:label "KickEvent associated_gas_show_id"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:string .
+
+geo:kickEventInfluxVolumeBbl a owl:DatatypeProperty ;
+    rdfs:label "KickEvent influx_volume_bbl (bbl)"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:double .
+
+geo:kickEventShutinDrillpipePressurePsi a owl:DatatypeProperty ;
+    rdfs:label "KickEvent shutin_drillpipe_pressure_psi (psi)"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:double .
+
+geo:kickEventShutinCasingPressurePsi a owl:DatatypeProperty ;
+    rdfs:label "KickEvent shutin_casing_pressure_psi (psi)"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:double .
+
+geo:kickEventFluidType a owl:DatatypeProperty ;
+    rdfs:label "KickEvent fluid_type"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:string .
+
+geo:kickEventOgeomecRowId a owl:DatatypeProperty ;
+    rdfs:label "KickEvent ogeomec_row_id"@en ;
+    rdfs:domain geo:KickEvent ;
+    rdfs:range xsd:string .
+
+
+# CuttingsSampleDetailed datatype properties
+geo:cuttingsSampleDetailedSampleId a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed sample_id"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedWellId a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed well_id"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedDepthTopMd a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed depth_top_md (m)"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:double .
+
+geo:cuttingsSampleDetailedDepthBaseMd a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed depth_base_md (m)"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:double .
+
+geo:cuttingsSampleDetailedIntervalM a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed interval_m (m)"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:double .
+
+geo:cuttingsSampleDetailedCollectionPurpose a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed collection_purpose"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedRecordedBy a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed recorded_by"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedRecordedAt a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed recorded_at"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:dateTime .
+
+geo:cuttingsSampleDetailedMainLithology a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed main_lithology"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedColor a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed color"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedTexture a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed texture"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedGrainSizeMm a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed grain_size_mm (mm)"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:double .
+
+geo:cuttingsSampleDetailedSorting a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed sorting"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedFolkClass a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed folk_class"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedDunhamClass a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed dunham_class"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedBioclastPct a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed bioclast_pct (%)"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:double .
+
+geo:cuttingsSampleDetailedHardness a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed hardness"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedLithologyPct a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed lithology_pct"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedFluorescence a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed fluorescence"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedFluorescenceColor a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed fluorescence_color"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedCutFluorescence a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed cut_fluorescence"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedOdor a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed odor"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedDrxRunId a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed drx_run_id"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedFrxRunId a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed frx_run_id"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedPaleoRunId a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed paleo_run_id"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedSigeoId a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed sigeo_id"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+geo:cuttingsSampleDetailedPagReference a owl:DatatypeProperty ;
+    rdfs:label "CuttingsSampleDetailed pag_reference"@en ;
+    rdfs:domain geo:CuttingsSampleDetailed ;
+    rdfs:range xsd:string .
+
+
+# CoreRun datatype properties
+geo:coreRunCoreId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun core_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunWellId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun well_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunWellboreId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun wellbore_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunRunNumber a owl:DatatypeProperty ;
+    rdfs:label "CoreRun run_number"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:integer .
+
+geo:coreRunDepthTopMd a owl:DatatypeProperty ;
+    rdfs:label "CoreRun depth_top_md (m)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunDepthBaseMd a owl:DatatypeProperty ;
+    rdfs:label "CoreRun depth_base_md (m)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunDepthTopMdActual a owl:DatatypeProperty ;
+    rdfs:label "CoreRun depth_top_md_actual (m)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunDepthBaseMdActual a owl:DatatypeProperty ;
+    rdfs:label "CoreRun depth_base_md_actual (m)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunDrilledIntervalM a owl:DatatypeProperty ;
+    rdfs:label "CoreRun drilled_interval_m (m)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunRecoveredM a owl:DatatypeProperty ;
+    rdfs:label "CoreRun recovered_m (m)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunRecoveryPct a owl:DatatypeProperty ;
+    rdfs:label "CoreRun recovery_pct (%)"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:double .
+
+geo:coreRunBarrelType a owl:DatatypeProperty ;
+    rdfs:label "CoreRun barrel_type"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunCoreCatcher a owl:DatatypeProperty ;
+    rdfs:label "CoreRun core_catcher"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:boolean .
+
+geo:coreRunPlugCount a owl:DatatypeProperty ;
+    rdfs:label "CoreRun plug_count"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:integer .
+
+geo:coreRunPlugIds a owl:DatatypeProperty ;
+    rdfs:label "CoreRun plug_ids"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunPhotoCount a owl:DatatypeProperty ;
+    rdfs:label "CoreRun photo_count"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:integer .
+
+geo:coreRunPhotoUrls a owl:DatatypeProperty ;
+    rdfs:label "CoreRun photo_urls"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunCtScanAvailable a owl:DatatypeProperty ;
+    rdfs:label "CoreRun ct_scan_available"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:boolean .
+
+geo:coreRunOsduRockSampleId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun osdu_rock_sample_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunGeoscimlSampleId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun geosciml_sample_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunBdiepId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun bdiep_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunSigeoId a owl:DatatypeProperty ;
+    rdfs:label "CoreRun sigeo_id"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunQpgReference a owl:DatatypeProperty ;
+    rdfs:label "CoreRun qpg_reference"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:string .
+
+geo:coreRunRecordedAt a owl:DatatypeProperty ;
+    rdfs:label "CoreRun recorded_at"@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range xsd:dateTime .
+
+
+# CorePlug datatype properties
+geo:corePlugPlugId a owl:DatatypeProperty ;
+    rdfs:label "CorePlug plug_id"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:string .
+
+geo:corePlugCoreId a owl:DatatypeProperty ;
+    rdfs:label "CorePlug core_id"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:string .
+
+geo:corePlugPlugNumber a owl:DatatypeProperty ;
+    rdfs:label "CorePlug plug_number"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:integer .
+
+geo:corePlugDepthMd a owl:DatatypeProperty ;
+    rdfs:label "CorePlug depth_md (m)"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:double .
+
+geo:corePlugOrientationDeg a owl:DatatypeProperty ;
+    rdfs:label "CorePlug orientation_deg (deg)"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:double .
+
+geo:corePlugPlugType a owl:DatatypeProperty ;
+    rdfs:label "CorePlug plug_type"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:string .
+
+geo:corePlugIntegrity a owl:DatatypeProperty ;
+    rdfs:label "CorePlug integrity"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:string .
+
+geo:corePlugAnalysisPurpose a owl:DatatypeProperty ;
+    rdfs:label "CorePlug analysis_purpose"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:string .
+
+geo:corePlugLabId a owl:DatatypeProperty ;
+    rdfs:label "CorePlug lab_id"@en ;
+    rdfs:domain geo:CorePlug ;
+    rdfs:range xsd:string .
+
+
+# SidewallCoreSample datatype properties
+geo:sidewallCoreSampleSwcId a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample swc_id"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleWellId a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample well_id"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleWirelineRunId a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample wireline_run_id"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleSampleNumber a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample sample_number"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:integer .
+
+geo:sidewallCoreSampleDepthMd a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample depth_md (m)"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:double .
+
+geo:sidewallCoreSampleIntegrity a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample integrity"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleDiameterMm a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample diameter_mm (mm)"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:double .
+
+geo:sidewallCoreSampleLengthMm a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample length_mm (mm)"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:double .
+
+geo:sidewallCoreSampleLithology a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample lithology"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleOilShow a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample oil_show"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleAnalysisPurpose a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample analysis_purpose"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleToolType a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample tool_type"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleToolVendor a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample tool_vendor"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleToolModel a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample tool_model"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleRopId a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample rop_id"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleBdiepId a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample bdiep_id"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+geo:sidewallCoreSampleCollectedAt a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample collected_at"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:dateTime .
+
+geo:sidewallCoreSampleRemarks a owl:DatatypeProperty ;
+    rdfs:label "SidewallCoreSample remarks"@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range xsd:string .
+
+
+# LWDRun datatype properties
+geo:lWDRunRunId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun run_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunWellId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun well_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunWellboreId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun wellbore_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunPhase a owl:DatatypeProperty ;
+    rdfs:label "LWDRun phase"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunBhaId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun bha_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunDepthTopMd a owl:DatatypeProperty ;
+    rdfs:label "LWDRun depth_top_md (m)"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:double .
+
+geo:lWDRunDepthBaseMd a owl:DatatypeProperty ;
+    rdfs:label "LWDRun depth_base_md (m)"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:double .
+
+geo:lWDRunServiceCompany a owl:DatatypeProperty ;
+    rdfs:label "LWDRun service_company"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunTools a owl:DatatypeProperty ;
+    rdfs:label "LWDRun tools"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunWitsmlVersion a owl:DatatypeProperty ;
+    rdfs:label "LWDRun witsml_version"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunExataLogId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun exata_log_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunRopId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun rop_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunBdiepId a owl:DatatypeProperty ;
+    rdfs:label "LWDRun bdiep_id"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunAcquiredStart a owl:DatatypeProperty ;
+    rdfs:label "LWDRun acquired_start"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:dateTime .
+
+geo:lWDRunAcquiredEnd a owl:DatatypeProperty ;
+    rdfs:label "LWDRun acquired_end"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:dateTime .
+
+geo:lWDRunRealtimeCurves a owl:DatatypeProperty ;
+    rdfs:label "LWDRun realtime_curves"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunMemoryCurves a owl:DatatypeProperty ;
+    rdfs:label "LWDRun memory_curves"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:string .
+
+geo:lWDRunSampleRateM a owl:DatatypeProperty ;
+    rdfs:label "LWDRun sample_rate_m (m)"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:double .
+
+geo:lWDRunSampleRateS a owl:DatatypeProperty ;
+    rdfs:label "LWDRun sample_rate_s (s)"@en ;
+    rdfs:domain geo:LWDRun ;
+    rdfs:range xsd:double .
+
+
+# WirelineRun datatype properties
+geo:wirelineRunRunId a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun run_id"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunWellId a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun well_id"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunWellboreId a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun wellbore_id"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunPhase a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun phase"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunRunNumber a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun run_number"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:integer .
+
+geo:wirelineRunServiceCompany a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun service_company"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunDepthTopMd a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun depth_top_md (m)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunDepthBaseMd a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun depth_base_md (m)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunTools a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun tools"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunCurvesAcquired a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun curves_acquired"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunRopId a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun rop_id"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunBdiepId a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun bdiep_id"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunAcquiredStart a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun acquired_start"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:dateTime .
+
+geo:wirelineRunAcquiredEnd a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun acquired_end"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:dateTime .
+
+geo:wirelineRunRecordedBy a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun recorded_by"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunRunType a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun run_type"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunRepeatSectionTopMd a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun repeat_section_top_md (m)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunRepeatSectionBaseMd a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun repeat_section_base_md (m)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunLoggingSpeedMH a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun logging_speed_m_h (m/h)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunQualityFlag a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun quality_flag"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunAnomalyReports a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun anomaly_reports"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunEvalScore a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun eval_score"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:integer .
+
+geo:wirelineRunLasFileUrl a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun las_file_url"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:anyURI .
+
+geo:wirelineRunDlisFileUrl a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun dlis_file_url"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:anyURI .
+
+geo:wirelineRunBhtC a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun bht_c (C)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunMudWeightKgM3 a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun mud_weight_kg_m3 (kg/m3)"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:double .
+
+geo:wirelineRunFluidSampleIds a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun fluid_sample_ids"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+geo:wirelineRunSwcIds a owl:DatatypeProperty ;
+    rdfs:label "WirelineRun swc_ids"@en ;
+    rdfs:domain geo:WirelineRun ;
+    rdfs:range xsd:string .
+
+
+# FormationPressurePoint datatype properties
+geo:formationPressurePointPointId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint point_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointWellId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint well_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointWirelineRunId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint wireline_run_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointDepthMd a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint depth_md (m)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointDepthTvdss a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint depth_tvdss (m)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointRopId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint rop_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointBdiepId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint bdiep_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointSirrId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint sirr_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointRecordedAt a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint recorded_at"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:dateTime .
+
+geo:formationPressurePointToolType a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint tool_type"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointPressureKpa a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint pressure_kpa (kPa)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointPressureStaticKpa a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint pressure_static_kpa (kPa)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointTemperatureC a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint temperature_c (C)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointMobilityMdCp a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint mobility_md_cp (mD/cP)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointPretestQuality a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint pretest_quality"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointPretestVolumeCc a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint pretest_volume_cc (cc)"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:double .
+
+geo:formationPressurePointFluidSampleCollected a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint fluid_sample_collected"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:boolean .
+
+geo:formationPressurePointFluidSampleId a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint fluid_sample_id"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+geo:formationPressurePointFluidTypePrelim a owl:DatatypeProperty ;
+    rdfs:label "FormationPressurePoint fluid_type_prelim"@en ;
+    rdfs:domain geo:FormationPressurePoint ;
+    rdfs:range xsd:string .
+
+
+# DSTInterval datatype properties
+geo:dSTIntervalDstId a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval dst_id"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:string .
+
+geo:dSTIntervalWellId a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval well_id"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:string .
+
+geo:dSTIntervalTestNumber a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval test_number"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:integer .
+
+geo:dSTIntervalDepthTopMd a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval depth_top_md (m)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalDepthBaseMd a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval depth_base_md (m)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalPerforatedIntervals a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval perforated_intervals"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:string .
+
+geo:dSTIntervalSirrId a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval sirr_id"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:string .
+
+geo:dSTIntervalBdiepId a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval bdiep_id"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:string .
+
+geo:dSTIntervalTestStart a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval test_start"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:dateTime .
+
+geo:dSTIntervalTestEnd a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval test_end"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:dateTime .
+
+geo:dSTIntervalFlowingPressureKpa a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval flowing_pressure_kpa (kPa)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalShutinPressureKpa a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval shutin_pressure_kpa (kPa)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalInitialShutinKpa a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval initial_shutin_kpa (kPa)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalFinalShutinKpa a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval final_shutin_kpa (kPa)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalStaticPressureKpa a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval static_pressure_kpa (kPa)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalFlowRateM3D a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval flow_rate_m3_d (m3/d)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalGorM3M3 a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval gor_m3_m3 (m3/m3)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalWatercutPct a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval watercut_pct (%)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalProductivityIndex a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval productivity_index"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalSkinFactor a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval skin_factor"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalTransmissibility a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval transmissibility"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalPermeabilityMd a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval permeability_md (mD)"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:double .
+
+geo:dSTIntervalFluidSampleIds a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval fluid_sample_ids"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:string .
+
+geo:dSTIntervalFt1FileUrl a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval ft1_file_url"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:anyURI .
+
+geo:dSTIntervalFt2FileUrl a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval ft2_file_url"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:anyURI .
+
+geo:dSTIntervalFt5FileUrl a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval ft5_file_url"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:anyURI .
+
+geo:dSTIntervalSaphirFileUrl a owl:DatatypeProperty ;
+    rdfs:label "DSTInterval saphir_file_url"@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range xsd:anyURI .
+
+
+# GeostoppingEvent datatype properties
+geo:geostoppingEventEventId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent event_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventWellId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent well_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventWellboreId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent wellbore_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventDepthDecisionMd a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent depth_decision_md (m)"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:double .
+
+geo:geostoppingEventDepthPlannedMd a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent depth_planned_md (m)"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:double .
+
+geo:geostoppingEventDepthDeltaM a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent depth_delta_m (m)"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:double .
+
+geo:geostoppingEventRcsdReference a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent rcsd_reference"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventQpgVersion a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent qpg_version"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventIgpIssueDate a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent igp_issue_date"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:date .
+
+geo:geostoppingEventGeologistId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent geologist_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventCsdSessionId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent csd_session_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventDecidedAt a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent decided_at"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:dateTime .
+
+geo:geostoppingEventDecisionType a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent decision_type"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventDecisionRationale a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent decision_rationale"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventLwdRunId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent lwd_run_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventGasShowId a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent gas_show_id"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventMseTrend a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent mse_trend"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:string .
+
+geo:geostoppingEventFaciesChange a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent facies_change"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:boolean .
+
+geo:geostoppingEventTargetReached a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent target_reached"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:boolean .
+
+geo:geostoppingEventDecisionTimeH a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent decision_time_h (h)"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:double .
+
+geo:geostoppingEventNptAvoidedH a owl:DatatypeProperty ;
+    rdfs:label "GeostoppingEvent npt_avoided_h (h)"@en ;
+    rdfs:domain geo:GeostoppingEvent ;
+    rdfs:range xsd:double .
+
+
+# FRAME datatype properties
+geo:fRAMERealtimeCurves a owl:DatatypeProperty ;
+    rdfs:label "FRAME realtime_curves"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:string .
+
+geo:fRAMEMemoryCurves a owl:DatatypeProperty ;
+    rdfs:label "FRAME memory_curves"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:string .
+
+geo:fRAMEOffsets a owl:DatatypeProperty ;
+    rdfs:label "FRAME offsets"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:string .
+
+geo:fRAMESerialNumbers a owl:DatatypeProperty ;
+    rdfs:label "FRAME serial_numbers"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:string .
+
+geo:fRAMEMaxRopMH a owl:DatatypeProperty ;
+    rdfs:label "FRAME max_rop_m_h (m/h)"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:double .
+
+geo:fRAMESampleRate a owl:DatatypeProperty ;
+    rdfs:label "FRAME sample_rate"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:string .
+
+geo:fRAMETransmissionRate a owl:DatatypeProperty ;
+    rdfs:label "FRAME transmission_rate"@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range xsd:string .
+
+
+# FluidSample datatype properties
+geo:fluidSampleSampleId a owl:DatatypeProperty ;
+    rdfs:label "FluidSample sample_id"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:string .
+
+geo:fluidSampleWellId a owl:DatatypeProperty ;
+    rdfs:label "FluidSample well_id"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:string .
+
+geo:fluidSampleDepthMd a owl:DatatypeProperty ;
+    rdfs:label "FluidSample depth_md (m)"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:double .
+
+geo:fluidSampleFluidType a owl:DatatypeProperty ;
+    rdfs:label "FluidSample fluid_type"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:string .
+
+geo:fluidSampleSampleVolumeCc a owl:DatatypeProperty ;
+    rdfs:label "FluidSample sample_volume_cc (cc)"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:double .
+
+geo:fluidSampleContainerType a owl:DatatypeProperty ;
+    rdfs:label "FluidSample container_type"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:string .
+
+geo:fluidSampleLabDestination a owl:DatatypeProperty ;
+    rdfs:label "FluidSample lab_destination"@en ;
+    rdfs:domain geo:FluidSample ;
+    rdfs:range xsd:string .
+
+
+# BHA datatype properties
+geo:bHABhaId a owl:DatatypeProperty ;
+    rdfs:label "BHA bha_id"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:string .
+
+geo:bHAWellId a owl:DatatypeProperty ;
+    rdfs:label "BHA well_id"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:string .
+
+geo:bHAPhase a owl:DatatypeProperty ;
+    rdfs:label "BHA phase"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:string .
+
+geo:bHAComponents a owl:DatatypeProperty ;
+    rdfs:label "BHA components"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:string .
+
+geo:bHATotalLengthM a owl:DatatypeProperty ;
+    rdfs:label "BHA total_length_m (m)"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:double .
+
+geo:bHATotalWeightKg a owl:DatatypeProperty ;
+    rdfs:label "BHA total_weight_kg (kg)"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:double .
+
+geo:bHALastUpdate a owl:DatatypeProperty ;
+    rdfs:label "BHA last_update"@en ;
+    rdfs:domain geo:BHA ;
+    rdfs:range xsd:dateTime .
+
+
+# ── Object properties for service-line relations ──
+
+geo:executesServico a owl:ObjectProperty ;
+    rdfs:label "executa serviço"@pt ;
+    rdfs:label "executesServico"@en ;
+    rdfs:comment "A service line (e.g. Mudlogging) executes a detailed acquisition record (e.g. MudloggingTimeSeries)."@en ;
+    rdfs:domain geo:ServiceLine ;
+    rdfs:range geo:WellsiteAcquisitionRecord .
+
+geo:acquiredDuring a owl:ObjectProperty ;
+    rdfs:label "adquirido durante"@pt ;
+    rdfs:label "acquiredDuring"@en ;
+    rdfs:comment "A sidewall core sample is acquired during a wireline run."@en ;
+    rdfs:domain geo:SidewallCoreSample ;
+    rdfs:range geo:WirelineRun .
+
+geo:hasPlug a owl:ObjectProperty ;
+    rdfs:label "tem plugue"@pt ;
+    rdfs:label "hasPlug"@en ;
+    rdfs:comment "A core run yields one or more core plugs."@en ;
+    rdfs:domain geo:CoreRun ;
+    rdfs:range geo:CorePlug .
+
+geo:feedsGeostoppingDecision a owl:ObjectProperty ;
+    rdfs:label "alimenta decisão de geostopping"@pt ;
+    rdfs:label "feedsGeostoppingDecision"@en ;
+    rdfs:comment "An LWD run or gas show event feeds a geostopping decision."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range geo:GeostoppingEvent .
+
+geo:storedInSirr a owl:ObjectProperty ;
+    rdfs:label "armazenado no SIRR"@pt ;
+    rdfs:label "storedInSirr"@en ;
+    rdfs:comment "Definitive DST interpretation is stored in SIRR."@en ;
+    rdfs:domain geo:DSTInterval ;
+    rdfs:range geo:SIRR .
+
+geo:storedInBdoc a owl:ObjectProperty ;
+    rdfs:label "armazenado no BDOC"@pt ;
+    rdfs:label "storedInBdoc"@en ;
+    rdfs:comment "Raw acquisition files are stored in BDOC."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range geo:BDOC .
+
+geo:documentsAnomaly a owl:ObjectProperty ;
+    rdfs:label "documenta anomalia"@pt ;
+    rdfs:label "documentsAnomaly"@en ;
+    rdfs:comment "ROA documents anomalies of a wireline or LWD run."@en ;
+    rdfs:domain geo:ROA ;
+    rdfs:range owl:Thing .
+
+geo:configures a owl:ObjectProperty ;
+    rdfs:label "configura"@pt ;
+    rdfs:label "configures"@en ;
+    rdfs:comment "FRAME configures an LWD or wireline run."@en ;
+    rdfs:domain geo:FRAME ;
+    rdfs:range owl:Thing .
+
+geo:extendsParent a owl:ObjectProperty ;
+    rdfs:label "estende classe pai"@pt ;
+    rdfs:label "extendsParent"@en ;
+    rdfs:comment "A detailed-schema class extends a parent class in operacoes-geologicas.json."@en ;
+    rdfs:domain owl:Thing ;
+    rdfs:range owl:Thing .
+
+# ── SKOS ConceptSchemes for service-line controlled vocabularies ──
+
+<https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type> a skos:ConceptScheme ;
+    skos:prefLabel "GasShow_Type"@en ;
+    skos:definition "Controlled vocabulary for GasShowEvent.GasShow_Type."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type/GAS> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type> ;
+    skos:prefLabel "Indício de gás"@en ;
+    skos:notation "GAS" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type/OIL_CUT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type> ;
+    skos:prefLabel "Indício de óleo (oil cut)"@en ;
+    skos:notation "OIL_CUT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type/CONDENSATE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type> ;
+    skos:prefLabel "Indício de condensado"@en ;
+    skos:notation "CONDENSATE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type/NONE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/GasShow_Type> ;
+    skos:prefLabel "Sem indício relevante"@en ;
+    skos:notation "NONE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> a skos:ConceptScheme ;
+    skos:prefLabel "Cuttings_CollectionPurpose"@en ;
+    skos:definition "Controlled vocabulary for CuttingsSampleDetailed.Cuttings_CollectionPurpose."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose/GEO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> ;
+    skos:prefLabel "Descrição geológica padrão"@en ;
+    skos:notation "GEO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose/PALEO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> ;
+    skos:prefLabel "Análise paleontológica/bioestratigráfica"@en ;
+    skos:notation "PALEO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose/ANP> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> ;
+    skos:prefLabel "Amostra regulatória ANP"@en ;
+    skos:notation "ANP" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose/PARTNER> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> ;
+    skos:prefLabel "Amostra para parceiros do consórcio"@en ;
+    skos:notation "PARTNER" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose/LITO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> ;
+    skos:prefLabel "Análise litológica (DRX/FRX)"@en ;
+    skos:notation "LITO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose/GEOMEC> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_CollectionPurpose> ;
+    skos:prefLabel "Análise geomecânica (argilominerais reativos)"@en ;
+    skos:notation "GEOMEC" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture> a skos:ConceptScheme ;
+    skos:prefLabel "Cuttings_Texture"@en ;
+    skos:definition "Controlled vocabulary for CuttingsSampleDetailed.Cuttings_Texture."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture/FINA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture> ;
+    skos:prefLabel "Fina"@en ;
+    skos:notation "FINA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture/MEDIA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture> ;
+    skos:prefLabel "Média"@en ;
+    skos:notation "MEDIA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture/GROSSA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture> ;
+    skos:prefLabel "Grossa"@en ;
+    skos:notation "GROSSA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture/MUITO_GROSSA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture> ;
+    skos:prefLabel "Muito grossa"@en ;
+    skos:notation "MUITO_GROSSA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture/ARGILOSA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Texture> ;
+    skos:prefLabel "Argilosa"@en ;
+    skos:notation "ARGILOSA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting> a skos:ConceptScheme ;
+    skos:prefLabel "Cuttings_Sorting"@en ;
+    skos:definition "Controlled vocabulary for CuttingsSampleDetailed.Cuttings_Sorting."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting/BEM> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting> ;
+    skos:prefLabel "Bem selecionado"@en ;
+    skos:notation "BEM" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting/MOD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting> ;
+    skos:prefLabel "Moderadamente selecionado"@en ;
+    skos:notation "MOD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting/MAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting> ;
+    skos:prefLabel "Mal selecionado"@en ;
+    skos:notation "MAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting/MUITO_MAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Sorting> ;
+    skos:prefLabel "Muito mal selecionado"@en ;
+    skos:notation "MUITO_MAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness> a skos:ConceptScheme ;
+    skos:prefLabel "Cuttings_Hardness"@en ;
+    skos:definition "Controlled vocabulary for CuttingsSampleDetailed.Cuttings_Hardness."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness/FRIAVEL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness> ;
+    skos:prefLabel "Friável"@en ;
+    skos:notation "FRIAVEL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness/MODERADO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness> ;
+    skos:prefLabel "Moderado"@en ;
+    skos:notation "MODERADO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness/DURO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness> ;
+    skos:prefLabel "Duro"@en ;
+    skos:notation "DURO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness/MUITO_DURO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Hardness> ;
+    skos:prefLabel "Muito duro"@en ;
+    skos:notation "MUITO_DURO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence> a skos:ConceptScheme ;
+    skos:prefLabel "Cuttings_Fluorescence"@en ;
+    skos:definition "Controlled vocabulary for CuttingsSampleDetailed.Cuttings_Fluorescence."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence/AUSENTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence> ;
+    skos:prefLabel "Ausente"@en ;
+    skos:notation "AUSENTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence/FRACA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence> ;
+    skos:prefLabel "Fraca"@en ;
+    skos:notation "FRACA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence/MOD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence> ;
+    skos:prefLabel "Moderada"@en ;
+    skos:notation "MOD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence/FORTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence> ;
+    skos:prefLabel "Forte"@en ;
+    skos:notation "FORTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence/MUITO_FORTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Fluorescence> ;
+    skos:prefLabel "Muito forte"@en ;
+    skos:notation "MUITO_FORTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor> a skos:ConceptScheme ;
+    skos:prefLabel "Cuttings_Odor"@en ;
+    skos:definition "Controlled vocabulary for CuttingsSampleDetailed.Cuttings_Odor."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor/AUSENTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor> ;
+    skos:prefLabel "Ausente"@en ;
+    skos:notation "AUSENTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor/LEVE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor> ;
+    skos:prefLabel "Leve"@en ;
+    skos:notation "LEVE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor/MOD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor> ;
+    skos:prefLabel "Moderado"@en ;
+    skos:notation "MOD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor/FORTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Cuttings_Odor> ;
+    skos:prefLabel "Forte"@en ;
+    skos:notation "FORTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType> a skos:ConceptScheme ;
+    skos:prefLabel "CoreRun_BarrelType"@en ;
+    skos:definition "Controlled vocabulary for CoreRun.CoreRun_BarrelType."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType/CONVENCIONAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType> ;
+    skos:prefLabel "Tubo convencional"@en ;
+    skos:notation "CONVENCIONAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType/ORIENTADO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType> ;
+    skos:prefLabel "Orientado (com referência azimutal)"@en ;
+    skos:notation "ORIENTADO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType/FICHA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType> ;
+    skos:prefLabel "Tubo ficha"@en ;
+    skos:notation "FICHA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType/WIRELINE_CORE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CoreRun_BarrelType> ;
+    skos:prefLabel "Wireline core (recuperação a cabo)"@en ;
+    skos:notation "WIRELINE_CORE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type> a skos:ConceptScheme ;
+    skos:prefLabel "CorePlug_Type"@en ;
+    skos:definition "Controlled vocabulary for CorePlug.CorePlug_Type."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type/HORIZONTAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type> ;
+    skos:prefLabel "Plugue horizontal"@en ;
+    skos:notation "HORIZONTAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type/VERTICAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type> ;
+    skos:prefLabel "Plugue vertical"@en ;
+    skos:notation "VERTICAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type/OBLIQUO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Type> ;
+    skos:prefLabel "Plugue oblíquo"@en ;
+    skos:notation "OBLIQUO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose> a skos:ConceptScheme ;
+    skos:prefLabel "CorePlug_AnalysisPurpose"@en ;
+    skos:definition "Controlled vocabulary for CorePlug.CorePlug_AnalysisPurpose."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose/PETROGRAFIA> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose> ;
+    skos:prefLabel "Análise petrográfica"@en ;
+    skos:notation "PETROGRAFIA" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose/PETROPHYSICS> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose> ;
+    skos:prefLabel "Petrofísica básica/especial"@en ;
+    skos:notation "PETROPHYSICS" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose/GEOMEC> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose> ;
+    skos:prefLabel "Análise geomecânica (UCS, Young, Poisson)"@en ;
+    skos:notation "GEOMEC" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose/GEOQUIM> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_AnalysisPurpose> ;
+    skos:prefLabel "Geoquímica orgânica/inorgânica"@en ;
+    skos:notation "GEOQUIM" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity> a skos:ConceptScheme ;
+    skos:prefLabel "CorePlug_Integrity"@en ;
+    skos:definition "Controlled vocabulary for CorePlug.CorePlug_Integrity."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity/INTEGRO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity> ;
+    skos:prefLabel "Íntegro"@en ;
+    skos:notation "INTEGRO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity/FRATURADO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity> ;
+    skos:prefLabel "Fraturado"@en ;
+    skos:notation "FRATURADO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity/FRAGMENTADO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/CorePlug_Integrity> ;
+    skos:prefLabel "Fragmentado"@en ;
+    skos:notation "FRAGMENTADO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType> a skos:ConceptScheme ;
+    skos:prefLabel "SWC_ToolType"@en ;
+    skos:definition "Controlled vocabulary for SidewallCoreSample.SWC_ToolType."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType/ROTARY_RSCT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType> ;
+    skos:prefLabel "Rotary Sidewall Core Tool"@en ;
+    skos:notation "ROTARY/RSCT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType/PERCUSSION_CST> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType> ;
+    skos:prefLabel "Percussion / Conventional Sidewall Tool"@en ;
+    skos:notation "PERCUSSION/CST" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType/MECHANICAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolType> ;
+    skos:prefLabel "Mecânica (outras)"@en ;
+    skos:notation "MECHANICAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor> a skos:ConceptScheme ;
+    skos:prefLabel "SWC_ToolVendor"@en ;
+    skos:definition "Controlled vocabulary for SidewallCoreSample.SWC_ToolVendor."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor/SLB> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor> ;
+    skos:prefLabel "SLB (ex-Schlumberger)"@en ;
+    skos:notation "SLB" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor/BHI> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor> ;
+    skos:prefLabel "Baker Hughes"@en ;
+    skos:notation "BHI" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor/HAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_ToolVendor> ;
+    skos:prefLabel "Halliburton"@en ;
+    skos:notation "HAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity> a skos:ConceptScheme ;
+    skos:prefLabel "SWC_Integrity"@en ;
+    skos:definition "Controlled vocabulary for SidewallCoreSample.SWC_Integrity."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity/INTEGRO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity> ;
+    skos:prefLabel "Íntegro"@en ;
+    skos:notation "INTEGRO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity/FRATURADO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity> ;
+    skos:prefLabel "Fraturado"@en ;
+    skos:notation "FRATURADO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity/PO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity> ;
+    skos:prefLabel "Em pó / desagregado"@en ;
+    skos:notation "PO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity/PERDIDO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_Integrity> ;
+    skos:prefLabel "Perdido / não recuperado"@en ;
+    skos:notation "PERDIDO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow> a skos:ConceptScheme ;
+    skos:prefLabel "SWC_OilShow"@en ;
+    skos:definition "Controlled vocabulary for SidewallCoreSample.SWC_OilShow."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow/AUSENTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow> ;
+    skos:prefLabel "Ausente"@en ;
+    skos:notation "AUSENTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow/LEVE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow> ;
+    skos:prefLabel "Leve"@en ;
+    skos:notation "LEVE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow/MOD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow> ;
+    skos:prefLabel "Moderado"@en ;
+    skos:notation "MOD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow/FORTE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/SWC_OilShow> ;
+    skos:prefLabel "Forte"@en ;
+    skos:notation "FORTE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase> a skos:ConceptScheme ;
+    skos:prefLabel "LWD_Phase"@en ;
+    skos:definition "Controlled vocabulary for LWDRun.LWD_Phase."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase/FASE1> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase> ;
+    skos:prefLabel "Fase 1 (>=26 pol, sem retorno)"@en ;
+    skos:notation "FASE1" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase/FASE2> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase> ;
+    skos:prefLabel "Fase 2 (~17 1/2 pol, sem retorno)"@en ;
+    skos:notation "FASE2" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase/FASE3> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase> ;
+    skos:prefLabel "Fase 3 (~12 1/4 pol, com retorno)"@en ;
+    skos:notation "FASE3" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase/FASE4> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase> ;
+    skos:prefLabel "Fase 4 (~8 1/2 pol, com retorno)"@en ;
+    skos:notation "FASE4" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase/PILOTO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_Phase> ;
+    skos:prefLabel "Poço piloto"@en ;
+    skos:notation "PILOTO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany> a skos:ConceptScheme ;
+    skos:prefLabel "LWD_ServiceCompany"@en ;
+    skos:definition "Controlled vocabulary for LWDRun.LWD_ServiceCompany."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany/SLB> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany> ;
+    skos:prefLabel "SLB"@en ;
+    skos:notation "SLB" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany/BHI> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany> ;
+    skos:prefLabel "Baker Hughes"@en ;
+    skos:notation "BHI" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany/HAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_ServiceCompany> ;
+    skos:prefLabel "Halliburton"@en ;
+    skos:notation "HAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion> a skos:ConceptScheme ;
+    skos:prefLabel "LWD_WitsmlVersion"@en ;
+    skos:definition "Controlled vocabulary for LWDRun.LWD_WitsmlVersion."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion/1_3_1> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion> ;
+    skos:prefLabel "1.3.1"@en ;
+    skos:notation "1.3.1" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion/1_4_1> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion> ;
+    skos:prefLabel "1.4.1"@en ;
+    skos:notation "1.4.1" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion/2_0> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/LWD_WitsmlVersion> ;
+    skos:prefLabel "2.0"@en ;
+    skos:notation "2.0" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase> a skos:ConceptScheme ;
+    skos:prefLabel "Wireline_Phase"@en ;
+    skos:definition "Controlled vocabulary for WirelineRun.Wireline_Phase."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase/FASE1> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase> ;
+    skos:prefLabel "FASE1"@en ;
+    skos:notation "FASE1" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase/FASE2> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase> ;
+    skos:prefLabel "FASE2"@en ;
+    skos:notation "FASE2" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase/FASE3> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase> ;
+    skos:prefLabel "FASE3"@en ;
+    skos:notation "FASE3" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase/FASE4> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase> ;
+    skos:prefLabel "FASE4"@en ;
+    skos:notation "FASE4" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase/PILOTO> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_Phase> ;
+    skos:prefLabel "PILOTO"@en ;
+    skos:notation "PILOTO" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType> a skos:ConceptScheme ;
+    skos:prefLabel "Wireline_RunType"@en ;
+    skos:definition "Controlled vocabulary for WirelineRun.Wireline_RunType."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType/MAIN> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType> ;
+    skos:prefLabel "Corrida principal"@en ;
+    skos:notation "MAIN" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType/REPEAT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType> ;
+    skos:prefLabel "Repetição"@en ;
+    skos:notation "REPEAT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType/CHECK_SHOT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType> ;
+    skos:prefLabel "Check-shot sísmico"@en ;
+    skos:notation "CHECK_SHOT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType/CASED_HOLE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_RunType> ;
+    skos:prefLabel "Cased-hole logging"@en ;
+    skos:notation "CASED_HOLE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag> a skos:ConceptScheme ;
+    skos:prefLabel "Wireline_QualityFlag"@en ;
+    skos:definition "Controlled vocabulary for WirelineRun.Wireline_QualityFlag."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag/GOOD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag> ;
+    skos:prefLabel "Qualidade boa"@en ;
+    skos:notation "GOOD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag/PARTIAL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag> ;
+    skos:prefLabel "Parcial"@en ;
+    skos:notation "PARTIAL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag/POOR> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag> ;
+    skos:prefLabel "Ruim"@en ;
+    skos:notation "POOR" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag/FAILED> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Wireline_QualityFlag> ;
+    skos:prefLabel "Falha"@en ;
+    skos:notation "FAILED" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType> a skos:ConceptScheme ;
+    skos:prefLabel "FormPressure_ToolType"@en ;
+    skos:definition "Controlled vocabulary for FormationPressurePoint.FormPressure_ToolType."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType/RFT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType> ;
+    skos:prefLabel "Repeat Formation Tester"@en ;
+    skos:notation "RFT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType/MDT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType> ;
+    skos:prefLabel "Modular Dynamics Tester (SLB)"@en ;
+    skos:notation "MDT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType/XPT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType> ;
+    skos:prefLabel "Xpress Pressure Tester"@en ;
+    skos:notation "XPT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType/FMT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType> ;
+    skos:prefLabel "Formation Multi-Tester"@en ;
+    skos:notation "FMT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType/MINIDST> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_ToolType> ;
+    skos:prefLabel "Mini-DST (wireline)"@en ;
+    skos:notation "MINIDST" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality> a skos:ConceptScheme ;
+    skos:prefLabel "FormPressure_PretestQuality"@en ;
+    skos:definition "Controlled vocabulary for FormationPressurePoint.FormPressure_PretestQuality."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality/GOOD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality> ;
+    skos:prefLabel "Boa"@en ;
+    skos:notation "GOOD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality/SUPERCHARGE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality> ;
+    skos:prefLabel "Supercarregamento"@en ;
+    skos:notation "SUPERCHARGE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality/TIGHT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality> ;
+    skos:prefLabel "Tight (baixa mobilidade)"@en ;
+    skos:notation "TIGHT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality/DRY> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality> ;
+    skos:prefLabel "Seco"@en ;
+    skos:notation "DRY" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality/MUDSPIKE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_PretestQuality> ;
+    skos:prefLabel "Mud spike (contaminação)"@en ;
+    skos:notation "MUDSPIKE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim> a skos:ConceptScheme ;
+    skos:prefLabel "FormPressure_FluidTypePrelim"@en ;
+    skos:definition "Controlled vocabulary for FormationPressurePoint.FormPressure_FluidTypePrelim."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim/GAS> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim> ;
+    skos:prefLabel "GAS"@en ;
+    skos:notation "GAS" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim/OIL> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim> ;
+    skos:prefLabel "OIL"@en ;
+    skos:notation "OIL" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim/CONDENSATE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim> ;
+    skos:prefLabel "CONDENSATE"@en ;
+    skos:notation "CONDENSATE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim/WATER> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim> ;
+    skos:prefLabel "WATER"@en ;
+    skos:notation "WATER" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim/OBM_FILTRATE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/FormPressure_FluidTypePrelim> ;
+    skos:prefLabel "Filtrado de OBM (Oil-Based Mud)"@en ;
+    skos:notation "OBM_FILTRATE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> a skos:ConceptScheme ;
+    skos:prefLabel "Geostop_DecisionType"@en ;
+    skos:definition "Controlled vocabulary for GeostoppingEvent.Geostop_DecisionType."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType/CASING_POINT> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> ;
+    skos:prefLabel "Ponto de assentamento de revestimento"@en ;
+    skos:notation "CASING_POINT" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType/CORE_REQUEST> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> ;
+    skos:prefLabel "Solicitação de testemunhagem"@en ;
+    skos:notation "CORE_REQUEST" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType/WIRELINE_REQUEST> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> ;
+    skos:prefLabel "Solicitação de wireline"@en ;
+    skos:notation "WIRELINE_REQUEST" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType/TD> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> ;
+    skos:prefLabel "Total Depth"@en ;
+    skos:notation "TD" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType/SIDETRACK> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> ;
+    skos:prefLabel "Desvio (sidetrack)"@en ;
+    skos:notation "SIDETRACK" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType/ZONE_CHANGE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_DecisionType> ;
+    skos:prefLabel "Mudança de zona"@en ;
+    skos:notation "ZONE_CHANGE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend> a skos:ConceptScheme ;
+    skos:prefLabel "Geostop_MseTrend"@en ;
+    skos:definition "Controlled vocabulary for GeostoppingEvent.Geostop_MseTrend."@en .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend/INCREASING> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend> ;
+    skos:prefLabel "Crescente"@en ;
+    skos:notation "INCREASING" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend/STABLE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend> ;
+    skos:prefLabel "Estável"@en ;
+    skos:notation "STABLE" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend/DECREASING> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend> ;
+    skos:prefLabel "Decrescente"@en ;
+    skos:notation "DECREASING" .
+
+<https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend/SPIKE> a skos:Concept ;
+    skos:inScheme <https://geolytics.petrobras.com.br/dict/vocab/Geostop_MseTrend> ;
+    skos:prefLabel "Pico abrupto"@en ;
+    skos:notation "SPIKE" .
+

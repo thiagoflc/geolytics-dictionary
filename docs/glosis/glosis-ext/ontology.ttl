@@ -1,0 +1,1023 @@
+# ============================================================================
+# Geolytics ↔ GLOSIS integration layer
+# ============================================================================
+# Generated: 2026-05-01T11:56:49.050Z
+# Source artifacts:
+#   - data/glosis/lithology-crosswalk-cgi.json (88 mappings)
+#   - data/glosis/lithology-crosswalk-inspire-geomorph.json (16 mappings, 29 links)
+#   - data/pvt-dictionary.json (18 fields with QUDT annotations)
+#   - data/modules-extended.json (M7/M8/M9/M10 SOSA Property/Value pattern)
+#
+# Licença obrigatória — atribuição:
+#   GLOSIS v1.5.1 © SIEUSOIL/ISRIC/PSNC — CC BY-NC-SA 3.0 IGO
+#   CGI Simple Lithology — © IUGS-CGI — OGC public spec
+#   INSPIRE codelists — EU Public Domain
+#   QUDT — © NASA — CC BY 4.0
+# ============================================================================
+
+@prefix geo:       <https://geolytics.petrobras.com.br/dict/> .
+@prefix geox:      <https://geolytics.petrobras.com.br/dict/glosis-ext/> .
+
+# Domain ontologies imported
+@prefix glosis_ma:   <http://w3id.org/glosis/model/main/> .
+@prefix glosis_lh:   <http://w3id.org/glosis/model/layerhorizon/> .
+@prefix glosis_cm:   <http://w3id.org/glosis/model/common/> .
+@prefix glosis_cl:   <http://w3id.org/glosis/model/codelists/> .
+@prefix glosis_ob:   <http://w3id.org/glosis/model/observation/> .
+@prefix glosis_proc: <http://w3id.org/glosis/model/procedure/> .
+@prefix glosis_u:    <http://w3id.org/glosis/model/unit/> .
+@prefix iso28258:    <http://w3id.org/glosis/model/iso28258/2013/> .
+
+# Vocabulários SKOS-target para crosswalks
+@prefix cgi_litho: <http://resource.geosciml.org/classifier/cgi/lithology/> .
+@prefix cgi_lith2: <http://resource.geosciml.org/classifier/cgi/lithOntology/> .
+@prefix inspire_natgeom: <http://inspire.ec.europa.eu/codelist/NaturalGeomorphologicFeatureTypeValue/> .
+@prefix inspire_eventenv: <http://inspire.ec.europa.eu/codelist/EventEnvironmentValue/> .
+
+# Standard
+@prefix owl:    <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs:   <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos:   <http://www.w3.org/2004/02/skos/core#> .
+@prefix sosa:   <http://www.w3.org/ns/sosa/> .
+@prefix qudt:   <http://qudt.org/schema/qudt/> .
+@prefix quantitykind: <http://qudt.org/vocab/quantitykind/> .
+@prefix unit:   <http://qudt.org/vocab/unit/> .
+@prefix dct:    <http://purl.org/dc/terms/> .
+@prefix xsd:    <http://www.w3.org/2001/XMLSchema#> .
+
+# ============================================================================
+# Ontology declaration + imports
+# ============================================================================
+
+<https://geolytics.petrobras.com.br/dict/glosis-ext>
+    a              owl:Ontology ;
+    owl:versionIRI <https://geolytics.petrobras.com.br/dict/glosis-ext/1.0.0> ;
+    owl:versionInfo "1.0.0" ;
+    dct:title    "Geolytics Dictionary — GLOSIS Integration Layer"@en ;
+    dct:description "Camada de integração que declara owl:imports para módulos GLOSIS (codelists, ISO 28258 backbone, procedures, units), emite os crosswalks SKOS GLOSIS↔CGI e GLOSIS↔INSPIRE Geomorph, e materializa o padrão SOSA Property/Value sobre os campos quantitativos do PVT-Dictionary."@en ;
+    dct:creator "Thiago Lopes" ;
+    dct:license <https://creativecommons.org/licenses/by-nc-sa/3.0/igo/> ;
+    dct:rights "Compatível com CC BY-NC-SA 3.0 IGO devido à dependência GLOSIS — atribuir SIEUSOIL/ISRIC/PSNC e demais coautores."@en ;
+    rdfs:seeAlso <http://w3id.org/glosis/model/> ;
+    rdfs:seeAlso <https://glosis-ld.github.io/glosis/> ;
+    owl:imports  <http://w3id.org/glosis/model/codelists> ,
+                 <http://w3id.org/glosis/model/iso28258/2013> ,
+                 <http://w3id.org/glosis/model/procedure> ,
+                 <http://w3id.org/glosis/model/unit> .
+
+# ============================================================================
+# 1. SKOS mappings — GLOSIS lithology ↔ CGI Simple Lithology
+# ============================================================================
+# Source: data/glosis/lithology-crosswalk-cgi.json
+# Total: 88 mappings (19 exactMatch, 35 closeMatch, 19 noMatch, 14 broadMatch, 1 relatedMatch)
+#
+
+# igneous rock  →  igneous rock  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-I skos:exactMatch cgi_lith2:igneous_rock .
+
+# acid igneous  →  acidic igneous rock  [closeMatch, review:manual]
+# GLOSIS "acid igneous" ↔ CGI "acidic igneous rock".
+glosis_cl:lithologyValueCode-IA skos:closeMatch cgi_lith2:acidic_igneous_rock .
+
+# diorite  →  diorite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IA1 skos:exactMatch cgi_lith2:diorite .
+
+# grano-diorite  →  granodiorite  [closeMatch, review:manual]
+# GLOSIS "grano-diorite" (variante hifenizada).
+glosis_cl:lithologyValueCode-IA2 skos:closeMatch cgi_lith2:granodiorite .
+
+# quartz-diorite  →  quartz diorite  [closeMatch, review:manual]
+# CGI sem hífen; mesmo lithotype.
+glosis_cl:lithologyValueCode-IA3 skos:closeMatch cgi_lith2:quartz_diorite .
+
+# rhyolite  →  rhyolite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IA4 skos:exactMatch cgi_lith2:rhyolite .
+
+# basic igneous  →  basic igneous rock  [closeMatch, review:manual]
+# GLOSIS "basic igneous" ↔ CGI "basic igneous rock".
+glosis_cl:lithologyValueCode-IB skos:closeMatch cgi_lith2:basic_igneous_rock .
+
+# gabbro  →  gabbro  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IB1 skos:exactMatch cgi_lith2:gabbro .
+
+# basalt  →  basalt  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IB2 skos:exactMatch cgi_lith2:basalt .
+
+# intermediate igneous  →  intermediate composition igneous rock  [closeMatch, review:manual]
+# Equivalência semântica direta.
+glosis_cl:lithologyValueCode-II skos:closeMatch cgi_lith2:intermediate_composition_igneous_rock .
+
+# andesite, trachyte, phonolite  →  andesite  [closeMatch, review:manual]
+# GLOSIS agrupa "andesite, trachyte, phonolite" (intermediários efusivos); CGI tem só "andesite" rotulado individualmente — trachyte/phonolite existem como rótulos próprios em CGI: cf. trachytoid, phono
+glosis_cl:lithologyValueCode-II1 skos:closeMatch cgi_lith2:andesite .
+
+# diorite-syenite  →  syenitoid  [broadMatch, review:manual]
+# GLOSIS "diorite-syenite" — CGI separa em "syenitoid"/"dioritoid".
+glosis_cl:lithologyValueCode-II2 skos:broadMatch cgi_lith2:syenitoid .
+
+# pyroclastic  →  pyroclastic  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IP skos:exactMatch cgi_lith2:pyroclastic .
+
+# tuff, tuffite  →  tuffite  [closeMatch, review:manual]
+# GLOSIS aglutina "tuff, tuffite"; CGI separa.
+glosis_cl:lithologyValueCode-IP1 skos:closeMatch cgi_lith2:tuffite .
+
+# volcanic scoria/breccia  →  tuff-breccia, agglomerate, or pyroclastic breccia  [closeMatch, review:manual]
+# GLOSIS "volcanic scoria/breccia".
+glosis_cl:lithologyValueCode-IP2 skos:closeMatch cgi_lith2:tuff_breccia_agglomerate_or_pyroclastic_breccia .
+
+# volcanic ash  →  fineGrainedPyroclastic  [closeMatch, review:manual]
+# GLOSIS "volcanic ash" ↔ CGI fineGrainedPyroclastic.
+glosis_cl:lithologyValueCode-IP3 skos:closeMatch cgi_lith2:fineGrainedPyroclastic .
+
+# ignimbrite  →  pyroclastic rock  [broadMatch, review:manual]
+# GLOSIS "ignimbrite" ⊂ CGI pyroclastic rock; CGI sem termo individual.
+glosis_cl:lithologyValueCode-IP4 skos:broadMatch cgi_lith2:pyroclastic_rock .
+
+# ultrabasic igneous  →  ultrabasic igneous rock  [closeMatch, review:manual]
+# GLOSIS "ultrabasic igneous"; CGI usa "ultrabasic igneous rock" (sufixo "rock" explícito).
+glosis_cl:lithologyValueCode-IU skos:closeMatch cgi_lith2:ultrabasic_igneous_rock .
+
+# peridotite  →  peridotite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IU1 skos:exactMatch cgi_lith2:peridotite .
+
+# pyroxenite  →  pyroxenite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-IU2 skos:exactMatch cgi_lith2:pyroxenite .
+
+# ilmenite, magnetite, ironstone, serpentine  →  iron-rich sedimentary rock  [relatedMatch, review:manual]
+# GLOSIS "ilmenite, magnetite, ironstone, serpentine" — agrupamento heterogêneo; ironstone é o overlap.
+glosis_cl:lithologyValueCode-IU3 skos:relatedMatch cgi_lith2:iron_rich_sedimentary_rock .
+
+# metamorphic rock  →  metamorphic rock  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-M skos:exactMatch cgi_lith2:metamorphic_rock .
+
+# acid metamorphic  →  metamorphic rock  [broadMatch, review:manual]
+# GLOSIS "acid metamorphic" — CGI sem distinção ácido/básico.
+glosis_cl:lithologyValueCode-MA skos:broadMatch cgi_lith2:metamorphic_rock .
+
+# quartzite  →  quartzite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-MA1 skos:exactMatch cgi_lith2:quartzite .
+
+# gneiss, migmatite  →  gneiss  [closeMatch, review:manual]
+# GLOSIS agrupa "gneiss, migmatite"; CGI tem ambos como termos separados (gneiss, migmatite).
+glosis_cl:lithologyValueCode-MA2 skos:closeMatch cgi_lith2:gneiss .
+
+# slate, phyllite (pelitic rocks)  →  slate  [closeMatch, review:manual]
+# GLOSIS agrupa "slate, phyllite (pelitic rocks)"; CGI tem slate + phyllite separados.
+glosis_cl:lithologyValueCode-MA3 skos:closeMatch cgi_lith2:slate .
+
+# schist  →  schist  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-MA4 skos:exactMatch cgi_lith2:schist .
+
+# basic metamorphic  →  metamorphic rock  [broadMatch, review:manual]
+# GLOSIS "basic metamorphic" — idem.
+glosis_cl:lithologyValueCode-MB skos:broadMatch cgi_lith2:metamorphic_rock .
+
+# slate, phyllite (pelitic rocks)  →  slate  [closeMatch, review:manual]
+# GLOSIS agrupa "slate, phyllite" — duplicação em GLOSIS (MA3 e MB1 com mesmo rótulo).
+glosis_cl:lithologyValueCode-MB1 skos:closeMatch cgi_lith2:slate .
+
+# (green)schist  →  schist  [closeMatch, review:manual]
+# GLOSIS "(green)schist" ⊂ CGI schist; CGI não tem "greenschist".
+glosis_cl:lithologyValueCode-MB2 skos:closeMatch cgi_lith2:schist .
+
+# gneiss rich in Fe–Mg minerals  →  gneiss  [closeMatch, review:manual]
+# GLOSIS "gneiss rich in Fe–Mg minerals" ⊂ gneiss.
+glosis_cl:lithologyValueCode-MB3 skos:closeMatch cgi_lith2:gneiss .
+
+# metamorphic limestone (marble)  →  marble  [closeMatch, review:manual]
+# GLOSIS "metamorphic limestone (marble)" ↔ CGI marble.
+glosis_cl:lithologyValueCode-MB4 skos:closeMatch cgi_lith2:marble .
+
+# amphibolite  →  amphibolite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-MB5 skos:exactMatch cgi_lith2:amphibolite .
+
+# eclogite  →  eclogite  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-MB6 skos:exactMatch cgi_lith2:eclogite .
+
+# ultrabasic metamorphic  →  metamorphic rock  [broadMatch, review:manual]
+# GLOSIS "ultrabasic metamorphic" — CGI sem distinção.
+glosis_cl:lithologyValueCode-MU skos:broadMatch cgi_lith2:metamorphic_rock .
+
+# serpentinite, greenstone  →  serpentinite  [closeMatch, review:manual]
+# GLOSIS "serpentinite, greenstone"; CGI tem serpentinite, mas "greenstone" não é rótulo individual (subclasse de basic metamorphic rock).
+glosis_cl:lithologyValueCode-MU1 skos:closeMatch cgi_lith2:serpentinite .
+
+# sedimentary rock (consolidated)  →  sedimentary rock  [broadMatch, review:manual]
+# GLOSIS top-group "sedimentary rock (consolidated)".
+glosis_cl:lithologyValueCode-S skos:broadMatch cgi_lith2:sedimentary_rock .
+
+# clastic sediments  →  clastic sediment  [closeMatch, review:manual]
+# GLOSIS "clastic sediments" (consolidados).
+glosis_cl:lithologyValueCode-SC skos:closeMatch cgi_lith2:clastic_sediment .
+
+# conglomerate, breccia  →  generic conglomerate  [closeMatch, review:manual]
+# GLOSIS "conglomerate, breccia"; CGI tem ambos: generic conglomerate + clastic breccia (cf. mapeamento múltiplo).
+glosis_cl:lithologyValueCode-SC1 skos:closeMatch cgi_lith2:generic_conglomerate .
+
+# sandstone, greywacke, arkose  →  generic sandstone  [closeMatch, review:manual]
+# GLOSIS "sandstone, greywacke, arkose"; CGI tem generic sandstone + greywacke (litharenite) + arkose como narrower.
+glosis_cl:lithologyValueCode-SC2 skos:closeMatch cgi_lith2:generic_sandstone .
+
+# silt-, mud-, claystone  →  generic mudstone  [closeMatch, review:manual]
+# GLOSIS "silt-, mud-, claystone" agrega família de pelitos finos; CGI "generic mudstone" é o agregador equivalente (cf. siltstone, claystone como narrower).
+glosis_cl:lithologyValueCode-SC3 skos:closeMatch cgi_lith2:generic_mudstone .
+
+# shale  →  shale  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-SC4 skos:exactMatch cgi_lith2:shale .
+
+# ironstone  →  iron-rich sedimentary rock  [closeMatch, review:manual]
+# GLOSIS "ironstone" como sedimento clástico.
+glosis_cl:lithologyValueCode-SC5 skos:closeMatch cgi_lith2:iron_rich_sedimentary_rock .
+
+# evaporites  →  evaporite  [closeMatch, review:manual]
+# GLOSIS "evaporites" ↔ CGI evaporite.
+glosis_cl:lithologyValueCode-SE skos:closeMatch cgi_lith2:evaporite .
+
+# anhydrite, gypsum  →  gypsum or anhydrite  [closeMatch, review:manual]
+# GLOSIS "anhydrite, gypsum"; CGI rotula como "gypsum or anhydrite" — equivalente.
+glosis_cl:lithologyValueCode-SE1 skos:closeMatch cgi_lith2:rock_gypsum_or_anhydrite .
+
+# halite  →  evaporite  [broadMatch, review:manual]
+# GLOSIS "halite" — CGI Simple Lithology não tem mineral-level halite.
+glosis_cl:lithologyValueCode-SE2 skos:broadMatch cgi_lith2:evaporite .
+
+# carbonatic, organic  →  carbonate sedimentary rock  [closeMatch, review:manual]
+# GLOSIS "carbonatic, organic" — overlap principal com carbonate.
+glosis_cl:lithologyValueCode-SO skos:closeMatch cgi_lith2:carbonate_sedimentary_rock .
+
+# limestone, other carbonate rock  →  limestone  [closeMatch, review:manual]
+# GLOSIS "limestone, other carbonate rock"; CGI tem limestone + dolomite + outros sob carbonate sedimentary rock.
+glosis_cl:lithologyValueCode-SO1 skos:closeMatch cgi_lith2:limestone .
+
+# marl and other mixtures  →  carbonate sedimentary rock  [broadMatch, review:manual]
+# GLOSIS "marl and other mixtures" ⊂ carbonate sed. rock.
+glosis_cl:lithologyValueCode-SO2 skos:broadMatch cgi_lith2:carbonate_sedimentary_rock .
+
+# coals, bitumen and related rocks  →  coal  [closeMatch, review:manual]
+# GLOSIS "coals, bitumen and related rocks" ≈ CGI coal (lignite/anthracite são narrower).
+glosis_cl:lithologyValueCode-SO3 skos:closeMatch cgi_lith2:coal .
+
+# sedimentary rock (unconsolidated)  →  natural unconsolidated material  [closeMatch, review:manual]
+# GLOSIS "sedimentary rock (unconsolidated)".
+glosis_cl:lithologyValueCode-U skos:closeMatch cgi_lith2:natural_unconsolidated_material .
+
+# anthropogenic/technogenic  →  anthropogenic unconsolidated material  [closeMatch, review:manual]
+# GLOSIS "anthropogenic/technogenic".
+glosis_cl:lithologyValueCode-UA skos:closeMatch cgi_lith2:anthropogenic_unconsolidated_material .
+
+# redeposited natural material  →  anthropogenic material  [broadMatch, review:manual]
+# GLOSIS "redeposited natural material".
+glosis_cl:lithologyValueCode-UA1 skos:broadMatch cgi_lith2:anthropogenic_material .
+
+# industrial/artisanal deposits  →  anthropogenic material  [broadMatch, review:manual]
+# GLOSIS "industrial/artisanal deposits".
+glosis_cl:lithologyValueCode-UA2 skos:broadMatch cgi_lith2:anthropogenic_material .
+
+# sand  →  sand  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-UE2 skos:exactMatch cgi_lith2:sand .
+
+# sand and gravel  →  sand  [broadMatch, review:manual]
+# GLOSIS "sand and gravel" — CGI tem termos separados; mapping para sand é parcial.
+glosis_cl:lithologyValueCode-UF1 skos:broadMatch cgi_lith2:sand .
+
+# clay, silt and loam  →  clay  [closeMatch, review:manual]
+# GLOSIS agrupa "clay, silt and loam" como sedimentos finos fluviais; CGI tem termos separados — mapping para clay é parcial.
+glosis_cl:lithologyValueCode-UF2 skos:closeMatch cgi_lith2:clay .
+
+# UG2 glacio-fluvial sand  →  sand  [broadMatch, review:manual]
+# GLOSIS "glacio-fluvial sand" ⊂ sand.
+glosis_cl:lithologyValueCode-UG2 skos:broadMatch cgi_lith2:sand .
+
+# UG3 glacio-fluvial gravel  →  gravel  [broadMatch, review:manual]
+# GLOSIS "glacio-fluvial gravel" ⊂ gravel.
+glosis_cl:lithologyValueCode-UG3 skos:broadMatch cgi_lith2:gravel .
+
+# sand  →  sand  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-UL1 skos:exactMatch cgi_lith2:sand .
+
+# sand  →  sand  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-UM1 skos:exactMatch cgi_lith2:sand .
+
+# rainwater-fed moor peat  →  peat  [closeMatch, review:manual]
+# GLOSIS "rainwater-fed moor peat" ⊂ CGI peat (ombrotrófico).
+glosis_cl:lithologyValueCode-UO1 skos:closeMatch cgi_lith2:peat .
+
+# groundwater-fed bog peat  →  peat  [closeMatch, review:manual]
+# GLOSIS "groundwater-fed bog peat" ⊂ CGI peat (minerotrófico).
+glosis_cl:lithologyValueCode-UO2 skos:closeMatch cgi_lith2:peat .
+
+# weathered residuum  →  residual material  [closeMatch, review:manual]
+# GLOSIS "weathered residuum" ↔ CGI residual material.
+glosis_cl:lithologyValueCode-UR skos:closeMatch cgi_lith2:residual_material .
+
+# bauxite, laterite  →  bauxite  [closeMatch, review:manual]
+# GLOSIS "bauxite, laterite"; CGI tem bauxite + laterite separados.
+glosis_cl:lithologyValueCode-UR1 skos:closeMatch cgi_lith2:bauxite .
+
+# clay  →  clay  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-UU1 skos:exactMatch cgi_lith2:clay .
+
+# sand  →  sand  [exactMatch, review:auto]
+# Exact label match (case-insensitive).
+glosis_cl:lithologyValueCode-UU3 skos:exactMatch cgi_lith2:sand .
+
+# gravelly sand  →  sand  [broadMatch, review:manual]
+# GLOSIS "gravelly sand" ⊂ sand (mistura).
+glosis_cl:lithologyValueCode-UU4 skos:broadMatch cgi_lith2:sand .
+
+# gravel, broken rock  →  gravel  [closeMatch, review:manual]
+# GLOSIS "gravel, broken rock"; CGI tem gravel + rock fragments separados.
+glosis_cl:lithologyValueCode-UU5 skos:closeMatch cgi_lith2:gravel .
+
+
+# ============================================================================
+# 2. SKOS mappings — GLOSIS lithology (genesis) ↔ INSPIRE Geomorphology
+# ============================================================================
+# Source: data/glosis/lithology-crosswalk-inspire-geomorph.json
+# Cobre os 19 conceitos sem match em CGI Simple Lithology (genesis sedimentar / parent material).
+# 1:N mappings — múltiplos targets INSPIRE por conceito GLOSIS quando aplicável.
+#
+
+# colluvial  →  1 INSPIRE target(s)
+#   [closeMatch] slope and gravitational features  (GLOSIS "colluvial" ↔ INSPIRE "slope and gravitational features" (incluem coluviões e leques de detritos).)
+glosis_cl:lithologyValueCode-UC skos:closeMatch inspire_natgeom:slopeGravitational .
+
+# slope deposits  →  2 INSPIRE target(s)
+#   [closeMatch] slope and gravitational features  (GLOSIS "slope deposits" ⊂ INSPIRE slope and gravitational features.)
+glosis_cl:lithologyValueCode-UC1 skos:closeMatch inspire_natgeom:slopeGravitational .
+#   [relatedMatch] hillslope setting  (EventEnvironment hillslopeSetting representa o ambiente deposicional.)
+glosis_cl:lithologyValueCode-UC1 skos:relatedMatch inspire_eventenv:hillslopeSetting .
+
+# lahar  →  1 INSPIRE target(s)
+#   [broadMatch] volcanic features  (GLOSIS "lahar" — INSPIRE não tem termo individual; lahars são eventos de "volcanic features" (broadMatch).)
+glosis_cl:lithologyValueCode-UC2 skos:broadMatch inspire_natgeom:volcanic .
+
+# eolian  →  2 INSPIRE target(s)
+#   [exactMatch] eolian features  (GLOSIS "eolian" ↔ INSPIRE "eolian features" — equivalência semântica direta.)
+glosis_cl:lithologyValueCode-UE skos:exactMatch inspire_natgeom:eolian .
+#   [closeMatch] aeolian process setting  (EventEnvironment "aeolian process setting" para o ambiente de processo.)
+glosis_cl:lithologyValueCode-UE skos:closeMatch inspire_eventenv:aeolianProcessSetting .
+
+# loess  →  2 INSPIRE target(s)
+#   [closeMatch] dust accumulation setting  (GLOSIS "loess" — INSPIRE EventEnvironment "dust accumulation setting" descreve precisamente o ambiente de deposição eólica de silte.)
+glosis_cl:lithologyValueCode-UE1 skos:closeMatch inspire_eventenv:dustAccumulationSetting .
+#   [broadMatch] eolian features  (Alternativa: INSPIRE NaturalGeomorph "eolian features" (broader).)
+glosis_cl:lithologyValueCode-UE1 skos:broadMatch inspire_natgeom:eolian .
+
+# fluvial  →  2 INSPIRE target(s)
+#   [closeMatch] alluvial and fluvial features  (GLOSIS "fluvial" ↔ INSPIRE "alluvial and fluvial features" (combina os dois).)
+glosis_cl:lithologyValueCode-UF skos:closeMatch inspire_natgeom:alluvialFluvial .
+#   [closeMatch] river channel setting  (EventEnvironment "river channel setting" para canal fluvial; floodplainSetting para planície de inundação.)
+glosis_cl:lithologyValueCode-UF skos:closeMatch inspire_eventenv:riverChannelSetting .
+
+# glacial  →  1 INSPIRE target(s)
+#   [closeMatch] glacial, glaciofluvial, glaciolacustrine and glaciomarine features  (GLOSIS "glacial" ↔ INSPIRE "glacial, glaciofluvial, glaciolacustrine and glaciomarine features".)
+glosis_cl:lithologyValueCode-UG skos:closeMatch inspire_natgeom:glacial .
+
+# moraine  →  2 INSPIRE target(s)
+#   [broadMatch] glacial, glaciofluvial, glaciolacustrine and glaciomarine features  (GLOSIS "moraine" ⊂ INSPIRE glacial features (moraines são landforms-scale glaciais).)
+glosis_cl:lithologyValueCode-UG1 skos:broadMatch inspire_natgeom:glacial .
+#   [relatedMatch] glacier lateral setting  (EventEnvironment para morainas laterais; também glacierTerminusSetting para morainas frontais.)
+glosis_cl:lithologyValueCode-UG1 skos:relatedMatch inspire_eventenv:glacierLateralSetting .
+
+# kryogenic  →  1 INSPIRE target(s)
+#   [closeMatch] nival, periglacial and permafrost features  (GLOSIS "kryogenic" ↔ INSPIRE "nival, periglacial and permafrost features" (mesmo escopo conceitual).)
+glosis_cl:lithologyValueCode-UK skos:closeMatch inspire_natgeom:nivalPeriglacialPermafrost .
+
+# periglacial rock debris  →  2 INSPIRE target(s)
+#   [closeMatch] nival, periglacial and permafrost features  (GLOSIS "periglacial rock debris" ⊂ INSPIRE nivalPeriglacialPermafrost.)
+glosis_cl:lithologyValueCode-UK1 skos:closeMatch inspire_natgeom:nivalPeriglacialPermafrost .
+#   [relatedMatch] slope and gravitational features  (Detritos rochosos periglaciais também são gerados por processos gravitacionais.)
+glosis_cl:lithologyValueCode-UK1 skos:relatedMatch inspire_natgeom:slopeGravitational .
+
+# periglacial solifluction layer  →  2 INSPIRE target(s)
+#   [closeMatch] nival, periglacial and permafrost features  (GLOSIS "periglacial solifluction layer" — solifluxão é processo periglacial clássico.)
+glosis_cl:lithologyValueCode-UK2 skos:closeMatch inspire_natgeom:nivalPeriglacialPermafrost .
+#   [relatedMatch] slope and gravitational features  (Solifluxão é também movimento de massa em encosta.)
+glosis_cl:lithologyValueCode-UK2 skos:relatedMatch inspire_natgeom:slopeGravitational .
+
+# lacustrine  →  2 INSPIRE target(s)
+#   [exactMatch] lacustrine features  (GLOSIS "lacustrine" ↔ INSPIRE "lacustrine features" — equivalência direta.)
+glosis_cl:lithologyValueCode-UL skos:exactMatch inspire_natgeom:lacustrine .
+#   [exactMatch] lacustrine setting  (EventEnvironment "lacustrine setting" para o ambiente deposicional lacustre.)
+glosis_cl:lithologyValueCode-UL skos:exactMatch inspire_eventenv:lacustrineSetting .
+
+# silt and clay  →  2 INSPIRE target(s)
+#   [broadMatch] lacustrine features  (GLOSIS "silt and clay" (lacustrine) ⊂ INSPIRE lacustrine features.)
+glosis_cl:lithologyValueCode-UL2 skos:broadMatch inspire_natgeom:lacustrine .
+#   [broadMatch] lacustrine setting  (Sedimentos finos do ambiente lacustre.)
+glosis_cl:lithologyValueCode-UL2 skos:broadMatch inspire_eventenv:lacustrineSetting .
+
+# marine, estuarine  →  3 INSPIRE target(s)
+#   [closeMatch] marine, littoral and coastal wetlands features  (GLOSIS "marine, estuarine" ⊂ INSPIRE "marine, littoral and coastal wetlands features".)
+glosis_cl:lithologyValueCode-UM skos:closeMatch inspire_natgeom:marineLittoralCoastalWetland .
+#   [closeMatch] marine setting  (EventEnvironment marineSetting para ambiente marinho.)
+glosis_cl:lithologyValueCode-UM skos:closeMatch inspire_eventenv:marineSetting .
+#   [closeMatch] estuary setting  (EventEnvironment estuarySetting para componente estuarino.)
+glosis_cl:lithologyValueCode-UM skos:closeMatch inspire_eventenv:estuarySetting .
+
+# clay and silt  →  2 INSPIRE target(s)
+#   [broadMatch] marine, littoral and coastal wetlands features  (GLOSIS "clay and silt" (marine) ⊂ INSPIRE marine features.)
+glosis_cl:lithologyValueCode-UM2 skos:broadMatch inspire_natgeom:marineLittoralCoastalWetland .
+#   [broadMatch] marine setting  (Sedimentos finos do ambiente marinho.)
+glosis_cl:lithologyValueCode-UM2 skos:broadMatch inspire_eventenv:marineSetting .
+
+# organic  →  2 INSPIRE target(s)
+#   [broadMatch] bog setting  (GLOSIS "organic" (parent material) — INSPIRE EventEnvironment "bog setting" cobre turfeiras (ombrotróficas e minerotróficas).)
+glosis_cl:lithologyValueCode-UO skos:broadMatch inspire_eventenv:bogSetting .
+#   [relatedMatch] swamp or marsh setting  (Pântanos/brejos também produzem sedimentos orgânicos.)
+glosis_cl:lithologyValueCode-UO skos:relatedMatch inspire_eventenv:swampOrMarshSetting .
+
+
+# ============================================================================
+# 3. Backbone ISO 28258 — alias E&P sobre estrutura GLOSIS
+# ============================================================================
+# GLOSIS hierarchy: Site → Plot → Profile → ProfileElement(Layer|Horizon) → Surface
+# E&P alias:        Bloco → Locação → Poço → Intervalo → Camada (sedimentar/diagenética)
+#
+
+geox:Bloco       a owl:Class ; rdfs:subClassOf iso28258:Site     ; skos:prefLabel "Bloco"@pt , "Block"@en .
+geox:Locacao     a owl:Class ; rdfs:subClassOf iso28258:Plot     ; skos:prefLabel "Locação"@pt , "Well location"@en .
+geox:PerfilPoco  a owl:Class ; rdfs:subClassOf iso28258:Profile  ; skos:prefLabel "Perfil de Poço"@pt , "Well profile"@en .
+geox:Intervalo   a owl:Class ; rdfs:subClassOf iso28258:ProfileElement ; skos:prefLabel "Intervalo"@pt , "Interval"@en .
+geox:CamadaSedimentar a owl:Class ; rdfs:subClassOf iso28258:Layer    ; skos:prefLabel "Camada Sedimentar"@pt , "Sedimentary layer"@en .
+geox:UnidadeDiagenetica a owl:Class ; rdfs:subClassOf iso28258:Horizon ; skos:prefLabel "Unidade Diagenética"@pt , "Diagenetic unit"@en .
+
+# Reuso direto das 16 object properties ISO 28258 — não redeclarar; basta importar.
+# Para usar: ?perfilPoco iso28258:Profile.element ?intervalo .
+#           ?intervalo iso28258:ProfileElement.upperDepth ?topo .
+#           ?intervalo iso28258:ProfileElement.lowerDepth ?base .
+
+# ============================================================================
+# 4. SOSA Property/Value pattern — campos PVT do Dicionário Geolytics
+# ============================================================================
+# Padrão GLOSIS replicado: cada propriedade quantitativa vira par {Property, Value}
+# - <Name>Property a sosa:ObservableProperty
+# - <Name>Value    a qudt:Quantity ; qudt:unit ?u ; qudt:hasQuantityKind ?qk
+# Source: data/pvt-dictionary.json (18 campos anotados)
+#
+
+# Topo(m) — Topo do intervalo amostrado
+geo:Topo_mProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Topo(m)"@pt ;
+    geox:displayUnit "m" ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Length> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Topo_mValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Topo(m) value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Length> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/M> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Base(m) — Base do intervalo amostrado
+geo:Base_mProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Base(m)"@pt ;
+    geox:displayUnit "m" ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Length> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Base_mValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Base(m) value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Length> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/M> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Temperatura(°C) — Temperatura de reservatório
+geo:Temperatura_CProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Temperatura(°C)"@pt ;
+    geox:displayUnit "°C" ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Temperature> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Temperatura_CValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Temperatura(°C) value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Temperature> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/DEG_C> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Fa Tanque — Fator de encolhimento em tanque — campo raríssimo (<2%)
+geo:Fa_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Fa Tanque"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/DimensionlessRatio> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Fa_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Fa Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/DimensionlessRatio> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Dens. Liq Tanque — Densidade do líquido em tanque
+geo:Dens_Liq_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Dens. Liq Tanque"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Dens_Liq_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Dens. Liq Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# RGL Tanque — Razão Gás-Líquido em tanque
+geo:RGL_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "RGL Tanque"@pt ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:RGL_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "RGL Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Dg liberado Tanque — Densidade do gás liberado em tanque
+geo:Dg_liberado_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Dg liberado Tanque"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Dg_liberado_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Dg liberado Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Grau API Tanque — Grau API medido em condições de tanque (superfície)
+geo:Grau_API_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Grau API Tanque"@pt ;
+    geox:displayUnit "°API" ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Grau_API_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Grau API Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/APIGravity> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/DEG-API> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# RGO Tanque — Razão Gás-Óleo em condições de tanque
+geo:RGO_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "RGO Tanque"@pt ;
+    geox:displayUnit "scf/stb" ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:RGO_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "RGO Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Coef Exp Term Tanque — Coeficiente de expansão térmica do tanque
+geo:Coef_Exp_Term_TanqueProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Coef Exp Term Tanque"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Coef_Exp_Term_TanqueValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Coef Exp Term Tanque value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Dg Lab — Densidade do gás em laboratório — campo raríssimo
+geo:Dg_LabProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Dg Lab"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Dg_LabValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Dg Lab value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Z Lab — Fator Z (compressibilidade) em laboratório — raríssimo
+geo:Z_LabProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Z Lab"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/DimensionlessRatio> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Z_LabValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Z Lab value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/DimensionlessRatio> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# RGL Lab — Razão Gás-Líquido em laboratório — raríssimo
+geo:RGL_LabProperty a sosa:ObservableProperty ;
+    skos:prefLabel "RGL Lab"@pt ;
+    qudt:hasQuantityKind <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:RGL_LabValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "RGL Lab value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <https://geolytics.petrobras.com.br/dict/quantitykind/GasOilRatio> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/SCF-PER-STB> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Dg Média Lib. Dif — Densidade do gás média na liberação diferencial
+geo:Dg_Média_Lib_DifProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Dg Média Lib. Dif"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Dg_Média_Lib_DifValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Dg Média Lib. Dif value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Grau API Óleo Lib. Dif — Grau API do óleo residual na liberação diferencial
+geo:Grau_API_Óleo_Lib_DifProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Grau API Óleo Lib. Dif"@pt ;
+    geox:displayUnit "°API" ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Grau_API_Óleo_Lib_DifValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Grau API Óleo Lib. Dif value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Density> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <https://geolytics.petrobras.com.br/dict/unit/DEG-API> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Temperatura ºC Lib. Dif — Temperatura da liberação diferencial
+geo:Temperatura_C_Lib_DifProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Temperatura ºC Lib. Dif"@pt ;
+    geox:displayUnit "°C" ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Temperature> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Temperatura_C_Lib_DifValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Temperatura ºC Lib. Dif value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Temperature> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/DEG_C> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Coef. Exp. Term. Lib. Dif — Coef. expansão térmica na liberação diferencial
+geo:Coef_Exp_Term_Lib_DifProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Coef. Exp. Term. Lib. Dif"@pt ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Coef_Exp_Term_Lib_DifValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Coef. Exp. Term. Lib. Dif value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+# Press. do C.Exp.Term.Lib.Dif — Pressão do coef. expansão térmica — proxy Psat
+geo:Press_do_C_Exp_Term_Lib_DifProperty a sosa:ObservableProperty ;
+    skos:prefLabel "Press. do C.Exp.Term.Lib.Dif"@pt ;
+    geox:displayUnit "psi" ;
+    qudt:hasQuantityKind <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+geo:Press_do_C_Exp_Term_Lib_DifValue a owl:Class ; rdfs:subClassOf qudt:Quantity ;
+    skos:prefLabel "Press. do C.Exp.Term.Lib.Dif value"@en ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:hasQuantityKind ; owl:hasValue <http://qudt.org/vocab/quantitykind/Pressure> ] ;
+    rdfs:subClassOf [ a owl:Restriction ; owl:onProperty qudt:unit ; owl:hasValue <http://qudt.org/vocab/unit/PSI> ] ;
+    rdfs:isDefinedBy <https://geolytics.petrobras.com.br/dict/glosis-ext> .
+
+
+# ============================================================================
+# 5. SOSA Property/Value hints — módulos M7/M8/M9/M10 (modules-extended.json)
+# ============================================================================
+# Pattern declaration only — classes individuais ficam em arquivo geolytics-modules.ttl separado.
+#
+
+# Geoquímica Orgânica e Inorgânica (M7_geochem)
+geox:m7-geochem-pattern a owl:NamedIndividual ;
+    rdfs:label "Geoquímica Orgânica e Inorgânica"@pt ;
+    geox:quantityKindDefault <http://qudt.org/vocab/quantitykind/MassFraction> ;
+    rdfs:comment """Geochemistry: mass fractions, %, ppm, mg/g — use cmol/L (glosis_u:CentiMOL-PER-L) for cation exchange."""@pt .
+
+# Rocha e Petrofísica (M8_rock)
+geox:m8-rock-pattern a owl:NamedIndividual ;
+    rdfs:label "Rocha e Petrofísica"@pt ;
+    geox:quantityKindDefault <http://qudt.org/vocab/quantitykind/Porosity> ;
+    rdfs:comment """Rock physics: bulk density (g/cm3 or kg/m3), porosity (fraction), permeability (mD = milliDarcy)."""@pt .
+
+# Geomecânica de Reservatório (M9_geomec)
+geox:m9-geomec-pattern a owl:NamedIndividual ;
+    rdfs:label "Geomecânica de Reservatório"@pt ;
+    geox:quantityKindDefault <http://qudt.org/vocab/quantitykind/Pressure> ;
+    rdfs:comment """Geomechanics: stress (psi/MPa), Young modulus (GPa), Poisson ratio (dimensionless)."""@pt .
+
+# Fluidos — Geoquímica e PVT (M10_fluidos)
+geox:m10-fluidos-pattern a owl:NamedIndividual ;
+    rdfs:label "Fluidos — Geoquímica e PVT"@pt ;
+    geox:quantityKindDefault <http://qudt.org/vocab/quantitykind/Density> ;
+    rdfs:comment """PVT/fluids: pressure (psi), temperature (°C), density (g/cm3), GOR (scf/stb), Bo (rbbl/stb)."""@pt .
+
+
+# ============================================================================
+# 6. Sample SHACL-style hints (informational — full shapes em arquivo .shapes.ttl)
+# ============================================================================
+# Validações implícitas pelo padrão GLOSIS:
+#   - Cada qudt:Quantity DEVE ter qudt:numericValue + qudt:unit
+#   - Cada glosis_ob:GL_Observation DEVE ter sosa:hasResult + sosa:observedProperty
+#   - Cada iso28258:ProfileElement DEVE ter upperDepth ≤ lowerDepth (xsd:decimal, em metros)
+
+# ============================================================================
+# 7. INSPIRE LithologyValue (transitive via CGI 2016.01)
+# ============================================================================
+# Source: data/glosis/lithology-crosswalk-inspire-litho.json
+# Pattern: GLOSIS → CGI 2016.01 (skos:closeMatch) → INSPIRE LithologyValue
+#          (skos:exactMatch). Transitive composition yields skos:closeMatch.
+#
+# Scope: minimum (1 mapping). Documents the pattern; future expansion via
+# remapping GLOSIS aggregators to CGI 2016.01 can grow this section.
+#
+
+@prefix inspire_litho: <http://inspire.ec.europa.eu/codelist/LithologyValue/> .
+
+# IB3 dolerite → doleriticRock (closeMatch via CGI 2016.01 doleritic_rock)
+glosis_cl:lithologyValueCode-IB3 skos:closeMatch inspire_litho:doleriticRock .
+
+# ============================================================================
+# 8. Lithology i18n labels (PT/ES)
+# ============================================================================
+# Source: data/glosis/translations/lithology.{pt,es}.csv
+# 88 GLOSIS lithology concepts × 2 languages = 176 prefLabel triples
+# Regenerated each run — safe to re-execute.
+#
+
+glosis_cl:lithologyValueCode-I
+    skos:prefLabel "rocha ígnea"@pt , "roca ígnea"@es .
+
+glosis_cl:lithologyValueCode-IA
+    skos:prefLabel "ígnea ácida"@pt , "ígnea ácida"@es .
+
+glosis_cl:lithologyValueCode-IA1
+    skos:prefLabel "diorito"@pt , "diorita"@es .
+
+glosis_cl:lithologyValueCode-IA2
+    skos:prefLabel "granodiorito"@pt , "granodiorita"@es .
+
+glosis_cl:lithologyValueCode-IA3
+    skos:prefLabel "quartzo-diorito"@pt , "cuarzodiorita"@es .
+
+glosis_cl:lithologyValueCode-IA4
+    skos:prefLabel "riolito"@pt , "riolita"@es .
+
+glosis_cl:lithologyValueCode-IB
+    skos:prefLabel "ígnea básica"@pt , "ígnea básica"@es .
+
+glosis_cl:lithologyValueCode-IB1
+    skos:prefLabel "gabro"@pt , "gabro"@es .
+
+glosis_cl:lithologyValueCode-IB2
+    skos:prefLabel "basalto"@pt , "basalto"@es .
+
+glosis_cl:lithologyValueCode-IB3
+    skos:prefLabel "dolerito"@pt , "dolerita"@es .
+
+glosis_cl:lithologyValueCode-II
+    skos:prefLabel "ígnea intermediária"@pt , "ígnea intermedia"@es .
+
+glosis_cl:lithologyValueCode-II1
+    skos:prefLabel "andesito, traquito, fonolito"@pt , "andesita, traquita, fonolita"@es .
+
+glosis_cl:lithologyValueCode-II2
+    skos:prefLabel "diorito-sienito"@pt , "diorita-sienita"@es .
+
+glosis_cl:lithologyValueCode-IP
+    skos:prefLabel "piroclástico"@pt , "piroclástico"@es .
+
+glosis_cl:lithologyValueCode-IP1
+    skos:prefLabel "tufo, tufito"@pt , "toba, tobita"@es .
+
+glosis_cl:lithologyValueCode-IP2
+    skos:prefLabel "escória/brecha vulcânica"@pt , "escoria/brecha volcánica"@es .
+
+glosis_cl:lithologyValueCode-IP3
+    skos:prefLabel "cinza vulcânica"@pt , "ceniza volcánica"@es .
+
+glosis_cl:lithologyValueCode-IP4
+    skos:prefLabel "ignimbrito"@pt , "ignimbrita"@es .
+
+glosis_cl:lithologyValueCode-IU
+    skos:prefLabel "ígnea ultrabásica"@pt , "ígnea ultrabásica"@es .
+
+glosis_cl:lithologyValueCode-IU1
+    skos:prefLabel "peridotito"@pt , "peridotita"@es .
+
+glosis_cl:lithologyValueCode-IU2
+    skos:prefLabel "piroxenito"@pt , "piroxenita"@es .
+
+glosis_cl:lithologyValueCode-IU3
+    skos:prefLabel "ilmenita, magnetita, ironstone, serpentina"@pt , "ilmenita, magnetita, ironstone, serpentina"@es .
+
+glosis_cl:lithologyValueCode-M
+    skos:prefLabel "rocha metamórfica"@pt , "roca metamórfica"@es .
+
+glosis_cl:lithologyValueCode-MA
+    skos:prefLabel "metamórfica ácida"@pt , "metamórfica ácida"@es .
+
+glosis_cl:lithologyValueCode-MA1
+    skos:prefLabel "quartzito"@pt , "cuarcita"@es .
+
+glosis_cl:lithologyValueCode-MA2
+    skos:prefLabel "gnaisse, migmatito"@pt , "gneis, migmatita"@es .
+
+glosis_cl:lithologyValueCode-MA3
+    skos:prefLabel "ardósia, filito (rochas pelíticas)"@pt , "pizarra, filita (rocas pelíticas)"@es .
+
+glosis_cl:lithologyValueCode-MA4
+    skos:prefLabel "xisto"@pt , "esquisto"@es .
+
+glosis_cl:lithologyValueCode-MB
+    skos:prefLabel "metamórfica básica"@pt , "metamórfica básica"@es .
+
+glosis_cl:lithologyValueCode-MB1
+    skos:prefLabel "ardósia, filito (rochas pelíticas)"@pt , "pizarra, filita (rocas pelíticas)"@es .
+
+glosis_cl:lithologyValueCode-MB2
+    skos:prefLabel "xisto verde"@pt , "esquisto verde"@es .
+
+glosis_cl:lithologyValueCode-MB3
+    skos:prefLabel "gnaisse rico em minerais Fe–Mg"@pt , "gneis rico en minerales Fe–Mg"@es .
+
+glosis_cl:lithologyValueCode-MB4
+    skos:prefLabel "mármore (calcário metamórfico)"@pt , "mármol (caliza metamórfica)"@es .
+
+glosis_cl:lithologyValueCode-MB5
+    skos:prefLabel "anfibolito"@pt , "anfibolita"@es .
+
+glosis_cl:lithologyValueCode-MB6
+    skos:prefLabel "eclogito"@pt , "eclogita"@es .
+
+glosis_cl:lithologyValueCode-MU
+    skos:prefLabel "metamórfica ultrabásica"@pt , "metamórfica ultrabásica"@es .
+
+glosis_cl:lithologyValueCode-MU1
+    skos:prefLabel "serpentinito, rocha verde"@pt , "serpentinita, roca verde"@es .
+
+glosis_cl:lithologyValueCode-S
+    skos:prefLabel "rocha sedimentar (consolidada)"@pt , "roca sedimentaria (consolidada)"@es .
+
+glosis_cl:lithologyValueCode-SC
+    skos:prefLabel "sedimentos clásticos"@pt , "sedimentos clásticos"@es .
+
+glosis_cl:lithologyValueCode-SC1
+    skos:prefLabel "conglomerado, brecha"@pt , "conglomerado, brecha"@es .
+
+glosis_cl:lithologyValueCode-SC2
+    skos:prefLabel "arenito, grauvaca, arcósio"@pt , "arenisca, grauvaca, arcosa"@es .
+
+glosis_cl:lithologyValueCode-SC3
+    skos:prefLabel "siltito, lamito, argilito"@pt , "limolita, lutita, arcillita"@es .
+
+glosis_cl:lithologyValueCode-SC4
+    skos:prefLabel "folhelho"@pt , "lutita"@es .
+
+glosis_cl:lithologyValueCode-SC5
+    skos:prefLabel "ironstone (ferruginoso)"@pt , "roca ferruginosa"@es .
+
+glosis_cl:lithologyValueCode-SE
+    skos:prefLabel "evaporitos"@pt , "evaporitas"@es .
+
+glosis_cl:lithologyValueCode-SE1
+    skos:prefLabel "anidrita, gipsita"@pt , "anhidrita, yeso"@es .
+
+glosis_cl:lithologyValueCode-SE2
+    skos:prefLabel "halita"@pt , "halita"@es .
+
+glosis_cl:lithologyValueCode-SO
+    skos:prefLabel "carbonática, orgânica"@pt , "carbonática, orgánica"@es .
+
+glosis_cl:lithologyValueCode-SO1
+    skos:prefLabel "calcário, outras carbonáticas"@pt , "caliza, otras carbonatadas"@es .
+
+glosis_cl:lithologyValueCode-SO2
+    skos:prefLabel "marga e outras misturas"@pt , "marga y otras mezclas"@es .
+
+glosis_cl:lithologyValueCode-SO3
+    skos:prefLabel "carvões, betume e correlatas"@pt , "carbones, betún y rocas afines"@es .
+
+glosis_cl:lithologyValueCode-U
+    skos:prefLabel "sedimento (não consolidado)"@pt , "sedimento (no consolidado)"@es .
+
+glosis_cl:lithologyValueCode-UA
+    skos:prefLabel "antropogênico/tecnogênico"@pt , "antropogénico/tecnogénico"@es .
+
+glosis_cl:lithologyValueCode-UA1
+    skos:prefLabel "material natural redepositado"@pt , "material natural redepositado"@es .
+
+glosis_cl:lithologyValueCode-UA2
+    skos:prefLabel "depósitos industriais/artesanais"@pt , "depósitos industriales/artesanales"@es .
+
+glosis_cl:lithologyValueCode-UC
+    skos:prefLabel "coluvial"@pt , "coluvial"@es .
+
+glosis_cl:lithologyValueCode-UC1
+    skos:prefLabel "depósitos de encosta"@pt , "depósitos de ladera"@es .
+
+glosis_cl:lithologyValueCode-UC2
+    skos:prefLabel "lahar"@pt , "lahar"@es .
+
+glosis_cl:lithologyValueCode-UE
+    skos:prefLabel "eólico"@pt , "eólico"@es .
+
+glosis_cl:lithologyValueCode-UE1
+    skos:prefLabel "loess"@pt , "loess"@es .
+
+glosis_cl:lithologyValueCode-UE2
+    skos:prefLabel "areia"@pt , "arena"@es .
+
+glosis_cl:lithologyValueCode-UF
+    skos:prefLabel "fluvial"@pt , "fluvial"@es .
+
+glosis_cl:lithologyValueCode-UF1
+    skos:prefLabel "areia e cascalho"@pt , "arena y grava"@es .
+
+glosis_cl:lithologyValueCode-UF2
+    skos:prefLabel "argila, silte e franco"@pt , "arcilla, limo y franco"@es .
+
+glosis_cl:lithologyValueCode-UG
+    skos:prefLabel "glacial"@pt , "glacial"@es .
+
+glosis_cl:lithologyValueCode-UG1
+    skos:prefLabel "morrena"@pt , "morrena"@es .
+
+glosis_cl:lithologyValueCode-UG2
+    skos:prefLabel "areia glácio-fluvial"@pt , "arena glaciofluvial"@es .
+
+glosis_cl:lithologyValueCode-UG3
+    skos:prefLabel "cascalho glácio-fluvial"@pt , "grava glaciofluvial"@es .
+
+glosis_cl:lithologyValueCode-UK
+    skos:prefLabel "criogênico"@pt , "criogénico"@es .
+
+glosis_cl:lithologyValueCode-UK1
+    skos:prefLabel "detritos rochosos periglaciais"@pt , "detritos rocosos periglaciares"@es .
+
+glosis_cl:lithologyValueCode-UK2
+    skos:prefLabel "camada de solifluxão periglacial"@pt , "capa de solifluxión periglaciar"@es .
+
+glosis_cl:lithologyValueCode-UL
+    skos:prefLabel "lacustre"@pt , "lacustre"@es .
+
+glosis_cl:lithologyValueCode-UL1
+    skos:prefLabel "areia"@pt , "arena"@es .
+
+glosis_cl:lithologyValueCode-UL2
+    skos:prefLabel "silte e argila"@pt , "limo y arcilla"@es .
+
+glosis_cl:lithologyValueCode-UM
+    skos:prefLabel "marinho, estuarino"@pt , "marino, estuarino"@es .
+
+glosis_cl:lithologyValueCode-UM1
+    skos:prefLabel "areia"@pt , "arena"@es .
+
+glosis_cl:lithologyValueCode-UM2
+    skos:prefLabel "argila e silte"@pt , "arcilla y limo"@es .
+
+glosis_cl:lithologyValueCode-UO
+    skos:prefLabel "orgânico"@pt , "orgánico"@es .
+
+glosis_cl:lithologyValueCode-UO1
+    skos:prefLabel "turfa de pântano alimentada por chuva"@pt , "turba de páramo alimentada por lluvia"@es .
+
+glosis_cl:lithologyValueCode-UO2
+    skos:prefLabel "turfa de brejo alimentada por aquífero"@pt , "turba de ciénaga alimentada por acuífero"@es .
+
+glosis_cl:lithologyValueCode-UR
+    skos:prefLabel "resíduo de intemperismo"@pt , "residuo de meteorización"@es .
+
+glosis_cl:lithologyValueCode-UR1
+    skos:prefLabel "bauxita, laterita"@pt , "bauxita, laterita"@es .
+
+glosis_cl:lithologyValueCode-UU
+    skos:prefLabel "depósitos não especificados"@pt , "depósitos no especificados"@es .
+
+glosis_cl:lithologyValueCode-UU1
+    skos:prefLabel "argila"@pt , "arcilla"@es .
+
+glosis_cl:lithologyValueCode-UU2
+    skos:prefLabel "franco e silte"@pt , "franco y limo"@es .
+
+glosis_cl:lithologyValueCode-UU3
+    skos:prefLabel "areia"@pt , "arena"@es .
+
+glosis_cl:lithologyValueCode-UU4
+    skos:prefLabel "areia com cascalho"@pt , "arena con grava"@es .
+
+glosis_cl:lithologyValueCode-UU5
+    skos:prefLabel "cascalho, fragmentos de rocha"@pt , "grava, fragmentos de roca"@es .
+
+# === EOF ===
