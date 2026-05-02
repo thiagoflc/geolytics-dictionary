@@ -13,17 +13,33 @@ set -euo pipefail
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT"
 
-# Locate pylode binary (--user installs go to ~/Library/Python/.../bin on macOS)
-PYLODE_BIN="$(command -v pylode || true)"
-if [ -z "$PYLODE_BIN" ]; then
-  PYLODE_BIN="$HOME/Library/Python/3.9/bin/pylode"
+# Locate pylode in this priority order:
+#   1. pylode on PATH
+#   2. python3 -m pylode (works wherever pylode was pip-installed)
+#   3. ~/Library/Python/*/bin/pylode (macOS user-install fallback for any Python version)
+#   4. ~/.local/bin/pylode (Linux user-install fallback)
+PYLODE_CMD=""
+if command -v pylode >/dev/null 2>&1; then
+  PYLODE_CMD="pylode"
+else
+  # macOS / Linux user-install fallbacks across Python versions
+  for cand in $HOME/Library/Python/*/bin/pylode $HOME/.local/bin/pylode; do
+    if [ -x "$cand" ]; then
+      PYLODE_CMD="$cand"
+      break
+    fi
+  done
 fi
-if [ ! -x "$PYLODE_BIN" ]; then
+# Last resort: python3 -m pylode (works for pylode 3.x, NOT 2.x)
+if [ -z "$PYLODE_CMD" ] && python3 -c "import pylode; import sys; sys.exit(0 if int(pylode.__version__.split('.')[0]) >= 3 else 1)" 2>/dev/null; then
+  PYLODE_CMD="python3 -m pylode"
+fi
+if [ -z "$PYLODE_CMD" ]; then
   echo "ERROR: pylode not found. Install with: pip3 install --user 'pylode<3.0'"
   exit 1
 fi
-echo "Using pylode: $PYLODE_BIN"
-"$PYLODE_BIN" --version || true
+echo "Using pylode: $PYLODE_CMD"
+$PYLODE_CMD --version 2>/dev/null || true
 
 # TTL files to document (skip shapes.ttl — SHACL shapes don't render well)
 TTLS=(
@@ -54,7 +70,7 @@ for entry in "${TTLS[@]}"; do
   outdir="docs/glosis/$name"
   mkdir -p "$outdir"
   echo "  Building $name..."
-  "$PYLODE_BIN" -i "$ttl" -o "$outdir/index.html" 2>&1 | tail -2
+  $PYLODE_CMD -i "$ttl" -o "$outdir/index.html" 2>&1 | tail -2
 
   # Copy source TTL alongside HTML for content negotiation
   cp "$ttl" "$outdir/ontology.ttl"

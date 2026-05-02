@@ -107,6 +107,7 @@ const CGNT = new Map([
   ['moraine', ['morena', 'morrena']],
   ['ug2 glacio-fluvial sand', ['areia glácio-fluvial', 'arena glaciofluvial']],
   ['ug3 glacio-fluvial gravel', ['cascalho glácio-fluvial', 'grava glaciofluvial']],
+  ['moraine', ['morrena', 'morrena']],   // override: morena = "brunette" in PT (false cognate)
   ['kryogenic', ['criogênico', 'criogénico']],
   ['periglacial rock debris', ['detritos rochosos periglaciais', 'detritos rocosos periglaciares']],
   ['periglacial solifluction layer', ['camada de solifluxão periglacial', 'capa de solifluxión periglaciar']],
@@ -295,7 +296,18 @@ const CGNT = new Map([
   ['steep', ['íngreme', 'escarpada']]
 ]);
 
-function lookup(en) {
+// Context-specific overrides: when a label collides with another concept,
+// route by GLOSIS id prefix to disambiguate.
+const CTX_OVERRIDES = {
+  // 'Flat' as slope-gradient class means "level terrain", not "flattened shape"
+  'slopeGradientClassValueCode-1': { pt: 'plano', es: 'plano' }
+};
+
+function lookup(en, id = null) {
+  if (id && CTX_OVERRIDES[id]) {
+    const ov = CTX_OVERRIDES[id];
+    return [ov.pt, ov.es];
+  }
   return CGNT.get(en.toLowerCase()) || null;
 }
 
@@ -395,7 +407,7 @@ function seedLanguage(concepts, lang, outpath) {
 
     let suggestion = '';
     let source = '';
-    const cog = lookup(en);
+    const cog = lookup(en, id);
     if (cog) {
       suggestion = cog[langIdx];
       source = 'auto:cognate';
@@ -425,11 +437,21 @@ function seedLanguage(concepts, lang, outpath) {
 }
 
 // ── Run ─────────────────────────────────────────────────────────────────────
+// Resolve prefLabel from either pre-migration string form or post-migration
+// {en, pt, es} object. Prefer prefLabel_legacy (untouched original EN) when
+// present, else extract .en from object, else use string directly.
+function resolveEn(c) {
+  if (c.prefLabel_legacy) return c.prefLabel_legacy;
+  if (typeof c.prefLabel === 'string') return c.prefLabel;
+  if (c.prefLabel && typeof c.prefLabel === 'object' && c.prefLabel.en) return c.prefLabel.en;
+  return '';
+}
+
 function loadLithology() {
   const data = JSON.parse(fs.readFileSync(path.join(ROOT, 'data/glosis/lithology.json'), 'utf8')).data;
   return Object.values(data).map(c => ({
     id: c.id,
-    prefLabel: c.prefLabel
+    prefLabel: resolveEn(c)
   }));
 }
 
@@ -438,7 +460,7 @@ function loadPetrography() {
   const out = [];
   for (const [scheme, info] of Object.entries(data)) {
     for (const c of info.concepts) {
-      out.push({ id: c.id, prefLabel: c.prefLabel, scheme });
+      out.push({ id: c.id, prefLabel: resolveEn(c), scheme });
     }
   }
   return out;

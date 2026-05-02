@@ -62,14 +62,30 @@ function loadCsv(filename) {
   return rows;
 }
 
+// Accept these `source` values as approved for application:
+//   - auto:cognate-vetted  : auto-suggestion that was validated by reviewer
+//   - manual               : reviewer typed translation from scratch
+//   - CPRM:2018, ABNT:NBR-6502, IGME:diccionario, SLB:glossary  : sourced
+// Reject:
+//   - auto:cognate         : raw seeder output, not promoted (forces review)
+//   - empty                : reviewer didn't set the column
+const APPROVED_SOURCES = new Set([
+  'auto:cognate-vetted',
+  'manual',
+  'CPRM:2018',
+  'ABNT:NBR-6502',
+  'IGME:diccionario',
+  'SLB:glossary'
+]);
+
 function validateRows(rows, filename) {
   const errs = [];
   for (const r of rows) {
     if (!r.reviewed || r.reviewed.trim() === '') {
       errs.push(`${filename}: ${r.id} — reviewed is empty`);
     }
-    if (r.source === 'auto:cognate') {
-      errs.push(`${filename}: ${r.id} — source='auto:cognate' (not promoted to reviewed)`);
+    if (!APPROVED_SOURCES.has(r.source)) {
+      errs.push(`${filename}: ${r.id} — source='${r.source}' not in approved set (run promote step)`);
     }
   }
   return errs;
@@ -200,36 +216,42 @@ const petroTtlPath = path.join(ROOT, 'data/glosis/geolytics-petrography-i18n.ttl
 fs.writeFileSync(petroTtlPath, petroTtlLines.join('\n'));
 console.log(`geolytics-petrography-i18n.ttl: ${petroTtlCount} concepts × 2 lang = ${petroTtlCount*2} prefLabel triples`);
 
-// ── Append i18n labels to geolytics-glosis-ext.ttl ──────────────────────────
+// ── Append (or replace) i18n labels in geolytics-glosis-ext.ttl ─────────────
 const extPath = path.join(ROOT, 'data/glosis/geolytics-glosis-ext.ttl');
 let extTtl = fs.readFileSync(extPath, 'utf8');
 
-const i18nMarker = '# 8. Lithology i18n labels (PT/ES)';
-if (!extTtl.includes(i18nMarker)) {
-  // Strip trailing # === EOF === if present
-  extTtl = extTtl.replace(/# === EOF ===\s*$/, '').trimEnd() + '\n\n';
-  const i18nBlock = [
-    '# ============================================================================',
-    '# 8. Lithology i18n labels (PT/ES)',
-    '# ============================================================================',
-    '# Source: data/glosis/translations/lithology.{pt,es}.csv',
-    '# 88 GLOSIS lithology concepts × 2 languages = 176 prefLabel triples',
-    '#',
-    ''
-  ];
-  let lithoTtlCount = 0;
-  for (const [id, c] of Object.entries(lithoDoc.data)) {
-    if (!tr[id]) continue;
-    i18nBlock.push(`glosis_cl:${id}`);
-    i18nBlock.push(`    skos:prefLabel "${escTtl(tr[id].pt)}"@pt , "${escTtl(tr[id].es)}"@es .`);
-    i18nBlock.push('');
-    lithoTtlCount++;
-  }
-  i18nBlock.push('# === EOF ===', '');
-  fs.writeFileSync(extPath, extTtl + i18nBlock.join('\n'));
-  console.log(`geolytics-glosis-ext.ttl: appended ${lithoTtlCount} concepts × 2 = ${lithoTtlCount*2} prefLabel triples`);
+const i18nStart = '# 8. Lithology i18n labels (PT/ES)';
+const i18nHeader = '# ============================================================================\n' + i18nStart;
+// If the block exists, strip it (everything from its banner up to EOF)
+const i18nIdx = extTtl.indexOf(i18nHeader);
+if (i18nIdx !== -1) {
+  // Find the line right before the i18n banner — keep base content up to that point
+  const prefix = extTtl.slice(0, i18nIdx).replace(/[# =]+\n*$/, '').trimEnd() + '\n\n';
+  extTtl = prefix;
 } else {
-  console.log('geolytics-glosis-ext.ttl: i18n block already present — skipping');
+  extTtl = extTtl.replace(/# === EOF ===\s*$/, '').trimEnd() + '\n\n';
 }
+
+const i18nBlock = [
+  '# ============================================================================',
+  '# 8. Lithology i18n labels (PT/ES)',
+  '# ============================================================================',
+  '# Source: data/glosis/translations/lithology.{pt,es}.csv',
+  '# 88 GLOSIS lithology concepts × 2 languages = 176 prefLabel triples',
+  '# Regenerated each run — safe to re-execute.',
+  '#',
+  ''
+];
+let lithoTtlCount = 0;
+for (const [id, c] of Object.entries(lithoDoc.data)) {
+  if (!tr[id]) continue;
+  i18nBlock.push(`glosis_cl:${id}`);
+  i18nBlock.push(`    skos:prefLabel "${escTtl(tr[id].pt)}"@pt , "${escTtl(tr[id].es)}"@es .`);
+  i18nBlock.push('');
+  lithoTtlCount++;
+}
+i18nBlock.push('# === EOF ===', '');
+fs.writeFileSync(extPath, extTtl + i18nBlock.join('\n'));
+console.log(`geolytics-glosis-ext.ttl: ${i18nIdx === -1 ? 'appended' : 'replaced'} ${lithoTtlCount} concepts × 2 = ${lithoTtlCount*2} prefLabel triples`);
 
 console.log('\nApplied successfully. Run python3 scripts/validate.py --self-check to verify.');
