@@ -1692,6 +1692,10 @@ geo:KickEventShape a sh:NodeShape ;
         sh:message "KickEvent.ogeomec_row_id constraint."@en ;
     ] .
 
+# TODO: Array-valued fields below (collection_purpose, lithology_pct components)
+# lack element-level sh:in constraints. Current shapes constrain top-level type only.
+# To enforce vocab membership per element, add a nested sh:property with sh:nodeKind sh:Literal
+# inside an sh:qualifiedValueShape — defer until SHACL-SPARQL precedent is established.
 geo:CuttingsSampleDetailedShape a sh:NodeShape ;
     rdfs:label "CuttingsSampleDetailed Shape"@en ;
     sh:targetClass geo:CuttingsSampleDetailed ;
@@ -2137,6 +2141,9 @@ geo:SidewallCoreSampleShape a sh:NodeShape ;
         sh:message "SidewallCoreSample.remarks constraint."@en ;
     ] .
 
+# TODO: realtime_curves and memory_curves are arrays of mnemonics; the canonical
+# mnemonic dictionary lives in Oracle ACG.conf_trad_log_curva (still pending export).
+# Once available, add sh:property with sh:in over the canonical mnemonic ConceptScheme.
 geo:LWDRunShape a sh:NodeShape ;
     rdfs:label "LWDRun Shape"@en ;
     sh:targetClass geo:LWDRun ;
@@ -2238,6 +2245,10 @@ geo:LWDRunShape a sh:NodeShape ;
         """ ;
     ] .
 
+# TODO: curves_acquired array is constrained only at top-level type. Element-level
+# enforcement waits on the LAS/DLIS canonical mnemonic ConceptScheme (Oracle export).
+# Anomaly_reports array has no element constraints — should reference geo:ROA via sh:class
+# once individuals exist.
 geo:WirelineRunShape a sh:NodeShape ;
     rdfs:label "WirelineRun Shape"@en ;
     sh:targetClass geo:WirelineRun ;

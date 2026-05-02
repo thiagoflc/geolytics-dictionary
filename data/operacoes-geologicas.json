@@ -5,7 +5,11 @@
     "label_pt": "Operações Geológicas",
     "version": "1.0.0",
     "description": "Functional ontology for the Geological Operations discipline at Petrobras: planning, acquisition and evaluation of geological and petrophysical data along the well lifecycle. Covers disciplines, service lines (mudlogging, FRX/DRX, coring, MWD/LWD, wireline, formation testing, geostopping), well-journey phases, derived documents (IGP, BDP, RMG, OGEOMEC, ROP, RCSD) and supporting systems (EXATA, SIGEO, BDIEP, AIDA, GeoDO, GDA).",
-    "geocoverage": ["layer1", "layer2", "layer6"],
+    "geocoverage": [
+      "layer1",
+      "layer2",
+      "layer6"
+    ],
     "sources": [
       "Petrobras EXP/OGP — Macroprocesso Explorar, N3 'Prover planejamento, aquisição e avaliação de dados geológicos e petrofísicos'",
       "Petrobras Jornada do Poço (RAP-01)",
@@ -29,7 +33,12 @@
         "http://geosciml.org/def/gsmlbh#Borehole",
         "http://resource.geosciml.org/classifier/cgi/specimentype"
       ],
-      "witsml": ["mudLog", "log", "trajectory", "formationMarker"]
+      "witsml": [
+        "mudLog",
+        "log",
+        "trajectory",
+        "formationMarker"
+      ]
     },
     "class_count": 45,
     "property_count": 16,
@@ -42,10 +51,17 @@
         "standard": "ANP/SEP nomenclature",
         "joins_to": "entity-graph.json#poco.nome_anp",
         "regex_pattern": "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$",
-        "examples": ["1-RJS-685", "1-RJS-759A", "1-RJS-702-RJ", "3-BRSA-944-RJS"],
+        "examples": [
+          "1-RJS-685",
+          "1-RJS-759A",
+          "1-RJS-702-RJ",
+          "3-BRSA-944-RJS"
+        ],
         "join_alias": "ANP_well_name",
         "evidence_status": "documented",
-        "evidence_refs": ["ANP/SEP — Regulamento Técnico de Numeração de Poços"]
+        "evidence_refs": [
+          "ANP/SEP — Regulamento Técnico de Numeração de Poços"
+        ]
       },
       "field_identifier": {
         "standard": "ANP field name (uppercase canonical)",
@@ -72,7 +88,9 @@
       "description": "Functional discipline responsible for planning, acquiring and evaluating geological and petrophysical data along the well lifecycle, ensuring drilling projects fit exploratory needs while mitigating risk and reducing time/cost.",
       "description_pt": "Disciplina funcional responsável por planejar, adquirir e avaliar dados geológicos e petrofísicos ao longo do ciclo de vida do poço, garantindo a adequação dos projetos de perfuração às necessidades exploratórias e mitigando riscos.",
       "domain": "operacoes_geologicas",
-      "type": "discipline"
+      "type": "discipline",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "Geomechanics": {
       "id": "OG002",
@@ -83,7 +101,9 @@
       "description_pt": "Disciplina irmã focada em estabilidade de poço, geopressões e ocorrências geomecânicas.",
       "domain": "operacoes_geologicas",
       "type": "discipline",
-      "alignment": "geomechanics.json"
+      "alignment": "geomechanics.json",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "Petrophysics": {
       "id": "OG003",
@@ -93,7 +113,9 @@
       "description": "Discipline that performs formation evaluation from well logs and rock data.",
       "description_pt": "Disciplina de avaliação de formações a partir de perfis de poço e dados de rocha.",
       "domain": "operacoes_geologicas",
-      "type": "discipline"
+      "type": "discipline",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "DataAcquisitionTechnology": {
       "id": "OG004",
@@ -103,7 +125,9 @@
       "description": "TAG — innovation in tools, protocols and acquisition systems (MWD/LWD, wireline logging).",
       "description_pt": "TAG — inovação em ferramentas, protocolos e sistemas de aquisição (MWD/LWD, perfilagem a cabo).",
       "domain": "operacoes_geologicas",
-      "type": "discipline"
+      "type": "discipline",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "OperationalPlanning": {
       "id": "OG005",
@@ -113,7 +137,9 @@
       "description": "Defines the data acquisition program and per-phase strategies for the well.",
       "description_pt": "Define o programa de aquisição de dados e estratégias por fase do poço.",
       "domain": "operacoes_geologicas",
-      "type": "discipline"
+      "type": "discipline",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "WellDataConsolidation": {
       "id": "OG006",
@@ -123,9 +149,10 @@
       "description": "Integration, standardization and archival of acquired data (composite log, BDIEP).",
       "description_pt": "Integração, padronização e arquivamento dos dados adquiridos (perfil composto, BDIEP).",
       "domain": "operacoes_geologicas",
-      "type": "discipline"
+      "type": "discipline",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
-
     "ServiceLine": {
       "id": "OG010",
       "name": "ServiceLine",
@@ -134,7 +161,9 @@
       "description": "Abstract category for the technical activities executed by Geological Operations on a well.",
       "description_pt": "Categoria abstrata das atividades técnicas executadas por Operações Geológicas em um poço.",
       "domain": "operacoes_geologicas",
-      "abstract": true
+      "abstract": true,
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "Mudlogging": {
       "id": "OG011",
@@ -154,7 +183,10 @@
         "PE-2EXP-00059 — programa de amostragem: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536",
         "PE-2EXP-00061 — definição normativa de mudlogging: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
       ],
-      "sinpep_standards": ["PE-2EXP-00059", "PE-2EXP-00061"]
+      "sinpep_standards": [
+        "PE-2EXP-00059",
+        "PE-2EXP-00061"
+      ]
     },
     "CuttingsSampling": {
       "id": "OG012",
@@ -169,7 +201,10 @@
         "PE-2EXP-00059 — programa de amostragem: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536",
         "PE-2EXP-00061 — definição normativa de mudlogging: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
       ],
-      "sinpep_standards": ["PE-2EXP-00059", "PE-2EXP-00061"]
+      "sinpep_standards": [
+        "PE-2EXP-00059",
+        "PE-2EXP-00061"
+      ]
     },
     "DRX": {
       "id": "OG013",
@@ -182,7 +217,11 @@
       "domain": "operacoes_geologicas",
       "real_time": false,
       "complementary_to": "FRX",
-      "synonyms": ["XRD", "X-Ray Diffraction", "Difratometria de Raios X"],
+      "synonyms": [
+        "XRD",
+        "X-Ray Diffraction",
+        "Difratometria de Raios X"
+      ],
       "manager": "EXP/OGP/AQG",
       "stored_in": "TBD",
       "stored_in_note": "DRX é processado externamente (laboratório de calha ou laboratorio externo) — confirmado por PE-2EXP-00059. Diferente de FRX, que possui módulo dedicado no SIGEO. Não há módulo DRX no SIGEO.",
@@ -191,7 +230,9 @@
       "evidence_refs": [
         "PE-2EXP-00059 — Programa de Amostragem confirma processamento externo de DRX (sem módulo SIGEO dedicado): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19536"
       ],
-      "sinpep_standards": ["PE-2EXP-00059"],
+      "sinpep_standards": [
+        "PE-2EXP-00059"
+      ],
       "evidence_gaps": [
         "Pipeline de ingestão DRX → AIDA/Databricks não documentado",
         "Padronização de mnemônicos DRX no SIGEO não documentada na ontologia",
@@ -199,35 +240,150 @@
         "DRX não tem 'consumido por' explicitamente mapeado — provavelmente alimenta Avaliação de Formações e Consolidação de Dados (Perfil Composto), por analogia com FRX"
       ],
       "context_fields": [
-        {"name": "Pais", "type": "xsd:string"},
-        {"name": "Poco", "type": "xsd:string", "links_to": "poco", "join_via": "ANP_well_name"},
-        {"name": "Campo", "type": "xsd:string", "links_to": "campo", "join_via": "ANP_field_name"},
-        {"name": "Bacia", "type": "xsd:string", "links_to": "bacia-sedimentar", "join_via": "ANP_basin_name"},
-        {"name": "Prof", "type": "xsd:double", "unit": "m", "description": "Profundidade da amostra (MD)"}
+        {
+          "name": "Pais",
+          "type": "xsd:string"
+        },
+        {
+          "name": "Poco",
+          "type": "xsd:string",
+          "links_to": "poco",
+          "join_via": "ANP_well_name"
+        },
+        {
+          "name": "Campo",
+          "type": "xsd:string",
+          "links_to": "campo",
+          "join_via": "ANP_field_name"
+        },
+        {
+          "name": "Bacia",
+          "type": "xsd:string",
+          "links_to": "bacia-sedimentar",
+          "join_via": "ANP_basin_name"
+        },
+        {
+          "name": "Prof",
+          "type": "xsd:double",
+          "unit": "m",
+          "description": "Profundidade da amostra (MD)"
+        }
       ],
       "mineral_fields": [
-        {"mnemonic": "QTZ", "name": "Quartzo", "name_en": "Quartz", "unit": "%"},
-        {"mnemonic": "CAL", "name": "Calcita", "name_en": "Calcite", "unit": "%"},
-        {"mnemonic": "DOL", "name": "Dolomita", "name_en": "Dolomite", "unit": "%"},
-        {"mnemonic": "A_M", "name": "Argilominerais", "name_en": "Clay Minerals", "unit": "%", "note": "Soma de esmectita, ilita, caulinita e clorita; argilominerais reativos impactam estabilidade"},
-        {"mnemonic": "AND", "name": "Anidrita", "name_en": "Anhydrite", "unit": "%"},
-        {"mnemonic": "HAL", "name": "Halita", "name_en": "Halite", "unit": "%"},
-        {"mnemonic": "PLG", "name": "Plagioclasio", "name_en": "Plagioclase", "unit": "%"},
-        {"mnemonic": "KFD", "name": "K-Feldspato", "name_en": "K-Feldspar", "unit": "%"},
-        {"mnemonic": "PIR", "name": "Pirita", "name_en": "Pyrite", "unit": "%"},
-        {"mnemonic": "PRX", "name": "Piroxenio", "name_en": "Pyroxene", "unit": "%"},
-        {"mnemonic": "ANF", "name": "Anfibolio", "name_en": "Amphibole", "unit": "%"},
-        {"mnemonic": "OLI", "name": "Olivina", "name_en": "Olivine", "unit": "%"}
+        {
+          "mnemonic": "QTZ",
+          "name": "Quartzo",
+          "name_en": "Quartz",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "CAL",
+          "name": "Calcita",
+          "name_en": "Calcite",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "DOL",
+          "name": "Dolomita",
+          "name_en": "Dolomite",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "A_M",
+          "name": "Argilominerais",
+          "name_en": "Clay Minerals",
+          "unit": "%",
+          "note": "Soma de esmectita, ilita, caulinita e clorita; argilominerais reativos impactam estabilidade"
+        },
+        {
+          "mnemonic": "AND",
+          "name": "Anidrita",
+          "name_en": "Anhydrite",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "HAL",
+          "name": "Halita",
+          "name_en": "Halite",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "PLG",
+          "name": "Plagioclasio",
+          "name_en": "Plagioclase",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "KFD",
+          "name": "K-Feldspato",
+          "name_en": "K-Feldspar",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "PIR",
+          "name": "Pirita",
+          "name_en": "Pyrite",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "PRX",
+          "name": "Piroxenio",
+          "name_en": "Pyroxene",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "ANF",
+          "name": "Anfibolio",
+          "name_en": "Amphibole",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "OLI",
+          "name": "Olivina",
+          "name_en": "Olivine",
+          "unit": "%"
+        }
       ],
       "service_metadata": [
-        {"name": "Prestadora", "type": "xsd:string", "examples": ["GEOSERVICES"]},
-        {"name": "Equipamento", "type": "xsd:string", "examples": ["OLYMPUS BTX-III"]},
-        {"name": "TipoTubo", "type": "xsd:string", "examples": ["Cobre"]},
-        {"name": "TemperaturaSecagem", "type": "xsd:double", "unit": "C", "examples": [90]},
-        {"name": "MetodoQuantificacao", "type": "xsd:string", "examples": ["RIR"], "note": "Reference Intensity Ratio"}
+        {
+          "name": "Prestadora",
+          "type": "xsd:string",
+          "examples": [
+            "GEOSERVICES"
+          ]
+        },
+        {
+          "name": "Equipamento",
+          "type": "xsd:string",
+          "examples": [
+            "OLYMPUS BTX-III"
+          ]
+        },
+        {
+          "name": "TipoTubo",
+          "type": "xsd:string",
+          "examples": [
+            "Cobre"
+          ]
+        },
+        {
+          "name": "TemperaturaSecagem",
+          "type": "xsd:double",
+          "unit": "C",
+          "examples": [
+            90
+          ]
+        },
+        {
+          "name": "MetodoQuantificacao",
+          "type": "xsd:string",
+          "examples": [
+            "RIR"
+          ],
+          "note": "Reference Intensity Ratio"
+        }
       ]
     },
-
     "FRX": {
       "id": "OG013b",
       "name": "FRX",
@@ -239,7 +395,12 @@
       "domain": "operacoes_geologicas",
       "real_time": false,
       "complementary_to": "DRX",
-      "synonyms": ["XRF", "X-Ray Fluorescence", "Fluorescencia de Raios-X", "Analise de FRX"],
+      "synonyms": [
+        "XRF",
+        "X-Ray Fluorescence",
+        "Fluorescencia de Raios-X",
+        "Analise de FRX"
+      ],
       "manager": "EXP/OGP/AQG",
       "stored_in": "SIGEO",
       "stored_in_note": "SIGEO possui módulo dedicado 'Análise de Dados de FRX' (confirmado documentalmente). Dados disponibilizados via Exata e acessados pelo Sigeo.",
@@ -253,49 +414,297 @@
         "Integração ao pipeline text-to-SQL do GeoDO ausente"
       ],
       "context_fields": [
-        {"name": "Pais", "type": "xsd:string"},
-        {"name": "Poco", "type": "xsd:string", "links_to": "poco", "join_via": "ANP_well_name"},
-        {"name": "Campo", "type": "xsd:string", "links_to": "campo", "join_via": "ANP_field_name"},
-        {"name": "Bacia", "type": "xsd:string", "links_to": "bacia-sedimentar", "join_via": "ANP_basin_name"},
-        {"name": "Prof", "type": "xsd:double", "unit": "m"}
+        {
+          "name": "Pais",
+          "type": "xsd:string"
+        },
+        {
+          "name": "Poco",
+          "type": "xsd:string",
+          "links_to": "poco",
+          "join_via": "ANP_well_name"
+        },
+        {
+          "name": "Campo",
+          "type": "xsd:string",
+          "links_to": "campo",
+          "join_via": "ANP_field_name"
+        },
+        {
+          "name": "Bacia",
+          "type": "xsd:string",
+          "links_to": "bacia-sedimentar",
+          "join_via": "ANP_basin_name"
+        },
+        {
+          "name": "Prof",
+          "type": "xsd:double",
+          "unit": "m"
+        }
       ],
       "major_elements": [
-        {"mnemonic": "Na", "unit": "%"}, {"mnemonic": "Mg", "unit": "%"}, {"mnemonic": "Al", "unit": "%"},
-        {"mnemonic": "Si", "unit": "%"}, {"mnemonic": "P", "unit": "%"},  {"mnemonic": "S", "unit": "%"},
-        {"mnemonic": "K", "unit": "%"},  {"mnemonic": "Ca", "unit": "%"}, {"mnemonic": "Ti", "unit": "%"},
-        {"mnemonic": "Mn", "unit": "%"}, {"mnemonic": "Fe", "unit": "%"}
+        {
+          "mnemonic": "Na",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Mg",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Al",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Si",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "P",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "S",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "K",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Ca",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Ti",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Mn",
+          "unit": "%"
+        },
+        {
+          "mnemonic": "Fe",
+          "unit": "%"
+        }
       ],
       "trace_elements": [
-        {"mnemonic": "Cl", "unit": "ppm"}, {"mnemonic": "V",  "unit": "ppm"}, {"mnemonic": "Cr", "unit": "ppm"},
-        {"mnemonic": "Co", "unit": "ppm"}, {"mnemonic": "Ni", "unit": "ppm"}, {"mnemonic": "Cu", "unit": "ppm"},
-        {"mnemonic": "Zn", "unit": "ppm"}, {"mnemonic": "Ga", "unit": "ppm"}, {"mnemonic": "Ge", "unit": "ppm"},
-        {"mnemonic": "As", "unit": "ppm"}, {"mnemonic": "Se", "unit": "ppm"}, {"mnemonic": "Br", "unit": "ppm"},
-        {"mnemonic": "Rb", "unit": "ppm"}, {"mnemonic": "Sr", "unit": "ppm"}, {"mnemonic": "Y",  "unit": "ppm"},
-        {"mnemonic": "Zr", "unit": "ppm"}, {"mnemonic": "Nb", "unit": "ppm"}, {"mnemonic": "Mo", "unit": "ppm"},
-        {"mnemonic": "Ag", "unit": "ppm"}, {"mnemonic": "Cd", "unit": "ppm"}, {"mnemonic": "Sn", "unit": "ppm"},
-        {"mnemonic": "Sb", "unit": "ppm"}, {"mnemonic": "Te", "unit": "ppm"}, {"mnemonic": "I",  "unit": "ppm"},
-        {"mnemonic": "Cs", "unit": "ppm"}, {"mnemonic": "Ba", "unit": "ppm"}, {"mnemonic": "La", "unit": "ppm"},
-        {"mnemonic": "Ce", "unit": "ppm"}, {"mnemonic": "Hf", "unit": "ppm"}, {"mnemonic": "Ta", "unit": "ppm"},
-        {"mnemonic": "W",  "unit": "ppm"}, {"mnemonic": "Hg", "unit": "ppm"}, {"mnemonic": "Tl", "unit": "ppm"},
-        {"mnemonic": "Pb", "unit": "ppm"}, {"mnemonic": "Bi", "unit": "ppm"}, {"mnemonic": "Th", "unit": "ppm"},
-        {"mnemonic": "U",  "unit": "ppm"}
+        {
+          "mnemonic": "Cl",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "V",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Cr",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Co",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ni",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Cu",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Zn",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ga",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ge",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "As",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Se",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Br",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Rb",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Sr",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Y",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Zr",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Nb",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Mo",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ag",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Cd",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Sn",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Sb",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Te",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "I",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Cs",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ba",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "La",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ce",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Hf",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Ta",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "W",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Hg",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Tl",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Pb",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Bi",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "Th",
+          "unit": "ppm"
+        },
+        {
+          "mnemonic": "U",
+          "unit": "ppm"
+        }
       ],
       "service_metadata": [
-        {"name": "Prestadora", "type": "xsd:string", "examples": ["GEOSERVICES"]},
-        {"name": "Equipamento", "type": "xsd:string", "examples": ["SPECTRO XEPOS STANDARD"]},
-        {"name": "TipoTubo", "type": "xsd:string", "examples": ["Paladio"]},
-        {"name": "Atmosfera", "type": "xsd:string", "examples": ["Vacuo", "Helio"]},
-        {"name": "TipoAmostra", "type": "xsd:string", "examples": ["PRENSADA", "POEIRA"]}
+        {
+          "name": "Prestadora",
+          "type": "xsd:string",
+          "examples": [
+            "GEOSERVICES"
+          ]
+        },
+        {
+          "name": "Equipamento",
+          "type": "xsd:string",
+          "examples": [
+            "SPECTRO XEPOS STANDARD"
+          ]
+        },
+        {
+          "name": "TipoTubo",
+          "type": "xsd:string",
+          "examples": [
+            "Paladio"
+          ]
+        },
+        {
+          "name": "Atmosfera",
+          "type": "xsd:string",
+          "examples": [
+            "Vacuo",
+            "Helio"
+          ]
+        },
+        {
+          "name": "TipoAmostra",
+          "type": "xsd:string",
+          "examples": [
+            "PRENSADA",
+            "POEIRA"
+          ]
+        }
       ],
       "crossplot_methods": [
-        {"id": "FeBa",     "axes": "Fe x Ba",       "purpose": "Discriminacao de formacoes"},
-        {"id": "CaK",      "axes": "Ca/K",          "purpose": "Indicador carbonato vs siliciclastico"},
-        {"id": "RbSr",     "axes": "Rb/Sr",         "purpose": "Proxy de intemperismo e proveniencia"},
-        {"id": "ZrFe",     "axes": "Zr/Fe",         "purpose": "Indicador de aporte detritico"},
-        {"id": "PearceNbY","axes": "Nb/Y x Zr/Ti",  "purpose": "Pearce — classificacao de rochas igneas/vulcanoclasticas"}
+        {
+          "id": "FeBa",
+          "axes": "Fe x Ba",
+          "purpose": "Discriminacao de formacoes"
+        },
+        {
+          "id": "CaK",
+          "axes": "Ca/K",
+          "purpose": "Indicador carbonato vs siliciclastico"
+        },
+        {
+          "id": "RbSr",
+          "axes": "Rb/Sr",
+          "purpose": "Proxy de intemperismo e proveniencia"
+        },
+        {
+          "id": "ZrFe",
+          "axes": "Zr/Fe",
+          "purpose": "Indicador de aporte detritico"
+        },
+        {
+          "id": "PearceNbY",
+          "axes": "Nb/Y x Zr/Ti",
+          "purpose": "Pearce — classificacao de rochas igneas/vulcanoclasticas"
+        }
       ]
     },
-
     "DNAGeoquimico": {
       "id": "OG013c",
       "name": "DNAGeoquimico",
@@ -306,7 +715,9 @@
       "format": "derived",
       "structured": true,
       "manager": "EXP/OGP/AQG",
-      "fed_by": ["FRX"],
+      "fed_by": [
+        "FRX"
+      ],
       "evidence_status": "inferred",
       "evidence_note": "Termo emerge das razões elementares padronizadas de FRX, mas não foi encontrado como conceito formal em documentos internos da Petrobras. Pode ser jargão da equipe AQG. A confirmar nomenclatura oficial."
     },
@@ -317,7 +728,9 @@
       "superclass": "ServiceLine",
       "description": "Extraction of cylindrical rock cores for detailed laboratory analysis.",
       "description_pt": "Extração de cilindros de rocha para análise laboratorial detalhada.",
-      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/core"
+      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/core",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "SidewallSampling": {
       "id": "OG015",
@@ -330,7 +743,9 @@
       "evidence_refs": [
         "PE-2EXP-00065 — perfilagem a cabo (ROP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41813"
       ],
-      "sinpep_standards": ["PE-2EXP-00065"]
+      "sinpep_standards": [
+        "PE-2EXP-00065"
+      ]
     },
     "MWD_LWD": {
       "id": "OG016",
@@ -346,7 +761,9 @@
         "EXATA e GDA SharePoint — perfilagem LWD transmitida em tempo real",
         "PE-2EXP-00061 — definição normativa de MWD/LWD: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
       ],
-      "sinpep_standards": ["PE-2EXP-00061"]
+      "sinpep_standards": [
+        "PE-2EXP-00061"
+      ]
     },
     "WirelineLogging": {
       "id": "OG017",
@@ -361,7 +778,9 @@
       "evidence_refs": [
         "PE-2EXP-00065 — perfilagem a cabo (ROP): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41813"
       ],
-      "sinpep_standards": ["PE-2EXP-00065"]
+      "sinpep_standards": [
+        "PE-2EXP-00065"
+      ]
     },
     "FormationTesting": {
       "id": "OG018",
@@ -375,7 +794,9 @@
       "evidence_refs": [
         "PE-2E&P-00773 — DST (Drill Stem Test): https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=19855"
       ],
-      "sinpep_standards": ["PE-2E&P-00773"]
+      "sinpep_standards": [
+        "PE-2E&P-00773"
+      ]
     },
     "Geostopping": {
       "id": "OG019",
@@ -388,9 +809,10 @@
       "evidence_refs": [
         "PE-2EXP-00061 — definição normativa de geostopping: https://sinpep.petrobras.com.br/SINPEP_Padrao_Web/PadraoEditar?PadraoId=41812"
       ],
-      "sinpep_standards": ["PE-2EXP-00061"]
+      "sinpep_standards": [
+        "PE-2EXP-00061"
+      ]
     },
-
     "WellJourneyPhase": {
       "id": "OG020",
       "name": "WellJourneyPhase",
@@ -398,7 +820,9 @@
       "superclass": "owl:Thing",
       "description": "A phase of the well journey at which Geological Operations delivers value.",
       "description_pt": "Fase da jornada do poço na qual Operações Geológicas entrega valor.",
-      "abstract": true
+      "abstract": true,
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "RetroAnalysis": {
       "id": "OG021",
@@ -406,7 +830,9 @@
       "name_pt": "Retroanalise",
       "superclass": "WellJourneyPhase",
       "description": "Analysis of correlative wells data and lessons learned prior to project design.",
-      "description_pt": "Análise de dados de poços correlatos e lições aprendidas anteriores ao projeto."
+      "description_pt": "Análise de dados de poços correlatos e lições aprendidas anteriores ao projeto.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "InputElaboration": {
       "id": "OG022",
@@ -414,7 +840,9 @@
       "name_pt": "ElaboracaoInsumos",
       "superclass": "WellJourneyPhase",
       "description": "Elaboration of geological prognoses, geopressure models and operational windows.",
-      "description_pt": "Elaboração de prognósticos geológicos, modelos de geopressão e janelas operacionais."
+      "description_pt": "Elaboração de prognósticos geológicos, modelos de geopressão e janelas operacionais.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "OperationalMonitoring": {
       "id": "OG023",
@@ -422,7 +850,9 @@
       "name_pt": "MonitoramentoOperacional",
       "superclass": "WellJourneyPhase",
       "description": "Real-time monitoring of drilling (CGOR, CSD).",
-      "description_pt": "Acompanhamento em tempo real da perfuração (CGOR, CSD)."
+      "description_pt": "Acompanhamento em tempo real da perfuração (CGOR, CSD).",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "FormationEvaluation": {
       "id": "OG024",
@@ -430,7 +860,9 @@
       "name_pt": "AvaliacaoFormacoes",
       "superclass": "WellJourneyPhase",
       "description": "Analysis of acquired data for operational decisions during and after drilling.",
-      "description_pt": "Análise dos dados adquiridos para decisões operacionais durante e após a perfuração."
+      "description_pt": "Análise dos dados adquiridos para decisões operacionais durante e após a perfuração.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "LessonsLearned": {
       "id": "OG025",
@@ -438,9 +870,10 @@
       "name_pt": "LicoesAprendidas",
       "superclass": "WellJourneyPhase",
       "description": "Recording of occurrences, best practices and feedback into the next cycle.",
-      "description_pt": "Registro de ocorrências, boas práticas e retroalimentação."
+      "description_pt": "Registro de ocorrências, boas práticas e retroalimentação.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
-
     "GeologicalOperationsDocument": {
       "id": "OG030",
       "name": "GeologicalOperationsDocument",
@@ -448,7 +881,9 @@
       "superclass": "owl:Thing",
       "description": "Abstract class for documents/datasets produced by Geological Operations service lines.",
       "description_pt": "Classe abstrata dos documentos/datasets produzidos pelas linhas de serviço.",
-      "abstract": true
+      "abstract": true,
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "IGP": {
       "id": "OG031",
@@ -459,7 +894,9 @@
       "description_pt": "Informativo Geológico de Poço — relatório não estruturado (PDF/Word) consolidando a informação geológica do poço. Gestor: EXP/OGP/AQG.",
       "format": "PDF/DOCX",
       "structured": false,
-      "manager": "EXP/OGP/AQG"
+      "manager": "EXP/OGP/AQG",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "BDP": {
       "id": "OG032",
@@ -470,7 +907,9 @@
       "description_pt": "Boletim Diário de Perfuração — estruturado, disponível via API POÇOS (CSV).",
       "format": "CSV",
       "structured": true,
-      "manager": "POÇOS"
+      "manager": "POÇOS",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "RMG": {
       "id": "OG033",
@@ -514,55 +953,254 @@
       ],
       "row_count_observed": 898,
       "context_fields": [
-        {"name": "Pais",  "type": "xsd:string"},
-        {"name": "Poco",  "type": "xsd:string", "links_to": "poco", "fk": true, "join_via": "ANP_well_name"},
-        {"name": "Campo", "type": "xsd:string", "links_to": "campo", "join_via": "ANP_field_name"},
-        {"name": "Bacia", "type": "xsd:string", "links_to": "bacia-sedimentar", "join_via": "ANP_basin_name", "examples": ["SANTOS", "CAMPOS MAR", "POTIGUAR MAR"]}
+        {
+          "name": "Pais",
+          "type": "xsd:string"
+        },
+        {
+          "name": "Poco",
+          "type": "xsd:string",
+          "links_to": "poco",
+          "fk": true,
+          "join_via": "ANP_well_name"
+        },
+        {
+          "name": "Campo",
+          "type": "xsd:string",
+          "links_to": "campo",
+          "join_via": "ANP_field_name"
+        },
+        {
+          "name": "Bacia",
+          "type": "xsd:string",
+          "links_to": "bacia-sedimentar",
+          "join_via": "ANP_basin_name",
+          "examples": [
+            "SANTOS",
+            "CAMPOS MAR",
+            "POTIGUAR MAR"
+          ]
+        }
       ],
       "occurrence_fields": [
-        {"name": "DescricaoOcorrencia", "type": "xsd:string", "description": "Texto livre descrevendo a ocorrência. Insumo para NLP/text-to-SQL.", "free_text": true},
-        {"name": "TipoOcorrencia", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_TipoOcorrencia", "required": true},
-        {"name": "Data", "type": "xsd:date", "required": true},
-        {"name": "ProfundidadePerfuracao", "type": "xsd:double", "unit": "m", "description": "Profundidade total perfurada (MD) no momento da ocorrência"},
-        {"name": "TopoOcorrencia", "type": "xsd:double", "unit": "m", "description": "Topo do intervalo afetado (MD)"},
-        {"name": "BaseOcorrencia",  "type": "xsd:double", "unit": "m", "description": "Base do intervalo afetado (MD)"},
-        {"name": "ValorMinimoOcorrencia", "type": "xsd:double", "description": "Valor minimo da grandeza medida. Unidade DEPENDE do TipoOcorrencia — ver OGEOMEC_UnidadeValor. Adicionar campo 'unidade' por linha (PE-2RES-00009)."},
-        {"name": "ValorMaximoOcorrencia", "type": "xsd:double", "description": "Valor maximo da grandeza medida. Unidade DEPENDE do TipoOcorrencia."},
-        {"name": "UnidadeValor", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_UnidadeValor", "description": "Unidade dos campos ValorMinimo/ValorMaximo (klbf, bbl, m3, kN.m, psi, ton). Recomendado por PE-2RES-00009 que adverte: 'a quantificacao dos valores de arraste e torque sao de dificil analise, pois ha grande variacao com os equipamentos empregados'.", "recommended_addition": true}
+        {
+          "name": "DescricaoOcorrencia",
+          "type": "xsd:string",
+          "description": "Texto livre descrevendo a ocorrência. Insumo para NLP/text-to-SQL.",
+          "free_text": true
+        },
+        {
+          "name": "TipoOcorrencia",
+          "type": "xsd:string",
+          "controlled_vocabulary": "OGEOMEC_TipoOcorrencia",
+          "required": true
+        },
+        {
+          "name": "Data",
+          "type": "xsd:date",
+          "required": true
+        },
+        {
+          "name": "ProfundidadePerfuracao",
+          "type": "xsd:double",
+          "unit": "m",
+          "description": "Profundidade total perfurada (MD) no momento da ocorrência"
+        },
+        {
+          "name": "TopoOcorrencia",
+          "type": "xsd:double",
+          "unit": "m",
+          "description": "Topo do intervalo afetado (MD)"
+        },
+        {
+          "name": "BaseOcorrencia",
+          "type": "xsd:double",
+          "unit": "m",
+          "description": "Base do intervalo afetado (MD)"
+        },
+        {
+          "name": "ValorMinimoOcorrencia",
+          "type": "xsd:double",
+          "description": "Valor minimo da grandeza medida. Unidade DEPENDE do TipoOcorrencia — ver OGEOMEC_UnidadeValor. Adicionar campo 'unidade' por linha (PE-2RES-00009)."
+        },
+        {
+          "name": "ValorMaximoOcorrencia",
+          "type": "xsd:double",
+          "description": "Valor maximo da grandeza medida. Unidade DEPENDE do TipoOcorrencia."
+        },
+        {
+          "name": "UnidadeValor",
+          "type": "xsd:string",
+          "controlled_vocabulary": "OGEOMEC_UnidadeValor",
+          "description": "Unidade dos campos ValorMinimo/ValorMaximo (klbf, bbl, m3, kN.m, psi, ton). Recomendado por PE-2RES-00009 que adverte: 'a quantificacao dos valores de arraste e torque sao de dificil analise, pois ha grande variacao com os equipamentos empregados'.",
+          "recommended_addition": true
+        }
       ],
       "fluid_state_fields": [
-        {"name": "DensidadeEquivalente_ECD", "type": "xsd:double", "unit_canonical": "ppg", "description": "Equivalent Circulating Density no momento da ocorrencia. Unidade canonica: ppg (= lb/gal), padrao de fato da industria offshore brasileira (PE-2POC-00453, PE-2POC-00445, PE-2POC-00756). Liga a geomechanics:GM005 MudWindow."},
-        {"name": "PesoFluido", "type": "xsd:double", "unit_canonical": "ppg", "description": "Peso de lama estatico (mud weight). Unidade canonica: ppg. Conversao: 1 ppg = 0,1198 g/cm3."},
-        {"name": "PesoFluidoUnit", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_PesoFluidoUnit", "description": "Unidade original (auditoria). Coexistencia confirmada de ppg/lb/gal e g/cm3/sg em pocos terrestres ou internacionais. PE-2POC-00453 usa ppg; projetos legados usam g/cm3.", "recommended_addition": true},
-        {"name": "Fluido", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_Fluido"}
+        {
+          "name": "DensidadeEquivalente_ECD",
+          "type": "xsd:double",
+          "unit_canonical": "ppg",
+          "description": "Equivalent Circulating Density no momento da ocorrencia. Unidade canonica: ppg (= lb/gal), padrao de fato da industria offshore brasileira (PE-2POC-00453, PE-2POC-00445, PE-2POC-00756). Liga a geomechanics:GM005 MudWindow."
+        },
+        {
+          "name": "PesoFluido",
+          "type": "xsd:double",
+          "unit_canonical": "ppg",
+          "description": "Peso de lama estatico (mud weight). Unidade canonica: ppg. Conversao: 1 ppg = 0,1198 g/cm3."
+        },
+        {
+          "name": "PesoFluidoUnit",
+          "type": "xsd:string",
+          "controlled_vocabulary": "OGEOMEC_PesoFluidoUnit",
+          "description": "Unidade original (auditoria). Coexistencia confirmada de ppg/lb/gal e g/cm3/sg em pocos terrestres ou internacionais. PE-2POC-00453 usa ppg; projetos legados usam g/cm3.",
+          "recommended_addition": true
+        },
+        {
+          "name": "Fluido",
+          "type": "xsd:string",
+          "controlled_vocabulary": "OGEOMEC_Fluido"
+        }
       ],
       "operational_fields": [
-        {"name": "ProcedimentoPoco", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_ProcedimentoPoco", "required": true},
-        {"name": "DiametroNominal", "type": "xsd:string", "unit": "pol", "description": "Diametro do poco aberto (hole size). 16 valores observados (8 1/2, 12 1/4, 17 1/2, 26, 36, etc.). Inversamente correlacionado com FasePoco."},
-        {"name": "FasePoco", "type": "xsd:integer", "description": "Codigo cronologico da fase do poco (1..N). PE-2POC-00595 / PE-2RES-00009: fases baixas = mais rasas / maiores diametros / 'sem retorno'; fases altas = mais profundas / menores diametros / 'com retorno'. Tipico offshore: Fase 1 (>=26 pol, sem retorno) -> Fase 2 (~17 1/2 pol, sem retorno) -> Fase 3 (~12 1/4 pol, com retorno) -> ... Codigo NAO e padronizado globalmente — pocos terrestres podem ter 3-4 fases, pocos complexos passam de 8."},
-        {"name": "FaseTipo", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_FaseTipo", "description": "SEM_RETORNO (fases iniciais, sem retorno de fluido a superficie) ou COM_RETORNO (fases com circulacao fechada).", "recommended_addition": true},
-        {"name": "CodigoBroca", "type": "xsd:string"},
-        {"name": "ModeloBroca", "type": "xsd:string"},
-        {"name": "ColunaPerfuracao_BHA", "type": "xsd:string", "description": "Bottom Hole Assembly em uso"}
+        {
+          "name": "ProcedimentoPoco",
+          "type": "xsd:string",
+          "controlled_vocabulary": "OGEOMEC_ProcedimentoPoco",
+          "required": true
+        },
+        {
+          "name": "DiametroNominal",
+          "type": "xsd:string",
+          "unit": "pol",
+          "description": "Diametro do poco aberto (hole size). 16 valores observados (8 1/2, 12 1/4, 17 1/2, 26, 36, etc.). Inversamente correlacionado com FasePoco."
+        },
+        {
+          "name": "FasePoco",
+          "type": "xsd:integer",
+          "description": "Codigo cronologico da fase do poco (1..N). PE-2POC-00595 / PE-2RES-00009: fases baixas = mais rasas / maiores diametros / 'sem retorno'; fases altas = mais profundas / menores diametros / 'com retorno'. Tipico offshore: Fase 1 (>=26 pol, sem retorno) -> Fase 2 (~17 1/2 pol, sem retorno) -> Fase 3 (~12 1/4 pol, com retorno) -> ... Codigo NAO e padronizado globalmente — pocos terrestres podem ter 3-4 fases, pocos complexos passam de 8."
+        },
+        {
+          "name": "FaseTipo",
+          "type": "xsd:string",
+          "controlled_vocabulary": "OGEOMEC_FaseTipo",
+          "description": "SEM_RETORNO (fases iniciais, sem retorno de fluido a superficie) ou COM_RETORNO (fases com circulacao fechada).",
+          "recommended_addition": true
+        },
+        {
+          "name": "CodigoBroca",
+          "type": "xsd:string"
+        },
+        {
+          "name": "ModeloBroca",
+          "type": "xsd:string"
+        },
+        {
+          "name": "ColunaPerfuracao_BHA",
+          "type": "xsd:string",
+          "description": "Bottom Hole Assembly em uso"
+        }
       ],
       "controlled_vocabularies": {
         "OGEOMEC_TipoOcorrencia": [
-          {"value": "Kick",          "name_en": "Kick",            "description": "Influxo de fluido da formação (PorePressure > MudPressure). Viola limite inferior da janela de lama.", "geomechanics_link": "GM005_lower_bound", "category": "pressure",   "expected_unit": "bbl_or_psi"},
-          {"value": "Falso Kick",    "name_en": "False Kick",      "description": "Indício de influxo descartado após verificação (flow check).", "category": "pressure", "expected_unit": "bbl_or_psi"},
-          {"value": "Perda Din",     "name_en": "Dynamic Loss",    "description": "Perda de circulação durante bombeamento (perda dinâmica).", "geomechanics_link": "GM005_upper_bound", "category": "loss", "expected_unit": "volume"},
-          {"value": "Perda Est",     "name_en": "Static Loss",     "description": "Perda de circulação com bomba parada (perda estática).", "geomechanics_link": "GM005_upper_bound", "category": "loss", "expected_unit": "volume"},
-          {"value": "Perda Total",   "name_en": "Total Loss",      "description": "Perda total de retorno de fluido.", "geomechanics_link": "GM005_upper_bound", "category": "loss", "expected_unit": "volume"},
-          {"value": "Prisao",        "name_en": "Stuck Pipe",      "description": "Coluna presa — não pode ser movimentada.", "category": "mechanical", "expected_unit": "qualitative_or_time"},
-          {"value": "Ameaca Prisao", "name_en": "Stuck-Pipe Risk", "description": "Tendência de prisão detectada (drag/torque crescente).", "category": "mechanical", "expected_unit": "force_or_torque"},
-          {"value": "Arraste",       "name_en": "Drag",            "description": "Atrito anormal durante movimentação da coluna.", "category": "mechanical", "expected_unit": "force"},
-          {"value": "Topamento",     "name_en": "Tagging",         "description": "Coluna toca obstáculo no poço (cascalho, ledge, fundo falso).", "category": "mechanical", "expected_unit": "force"},
-          {"value": "Estolamento",   "name_en": "Stalling",        "description": "Parada de rotação do motor de fundo / top drive sob torque excessivo.", "category": "mechanical", "expected_unit": "torque"},
-          {"value": "Fundo Falso",   "name_en": "False Bottom",    "description": "Falso fundo por acúmulo de cascalho.", "category": "mechanical", "expected_unit": "depth_offset"},
-          {"value": "Gas Manobra",   "name_en": "Trip Gas",        "description": "Gás detectado após manobra — não é kick, mas indica permeabilidade.", "category": "pressure", "expected_unit": "gas_units_or_ppm"}
+          {
+            "value": "Kick",
+            "name_en": "Kick",
+            "description": "Influxo de fluido da formação (PorePressure > MudPressure). Viola limite inferior da janela de lama.",
+            "geomechanics_link": "GM005_lower_bound",
+            "category": "pressure",
+            "expected_unit": "bbl_or_psi"
+          },
+          {
+            "value": "Falso Kick",
+            "name_en": "False Kick",
+            "description": "Indício de influxo descartado após verificação (flow check).",
+            "category": "pressure",
+            "expected_unit": "bbl_or_psi"
+          },
+          {
+            "value": "Perda Din",
+            "name_en": "Dynamic Loss",
+            "description": "Perda de circulação durante bombeamento (perda dinâmica).",
+            "geomechanics_link": "GM005_upper_bound",
+            "category": "loss",
+            "expected_unit": "volume"
+          },
+          {
+            "value": "Perda Est",
+            "name_en": "Static Loss",
+            "description": "Perda de circulação com bomba parada (perda estática).",
+            "geomechanics_link": "GM005_upper_bound",
+            "category": "loss",
+            "expected_unit": "volume"
+          },
+          {
+            "value": "Perda Total",
+            "name_en": "Total Loss",
+            "description": "Perda total de retorno de fluido.",
+            "geomechanics_link": "GM005_upper_bound",
+            "category": "loss",
+            "expected_unit": "volume"
+          },
+          {
+            "value": "Prisao",
+            "name_en": "Stuck Pipe",
+            "description": "Coluna presa — não pode ser movimentada.",
+            "category": "mechanical",
+            "expected_unit": "qualitative_or_time"
+          },
+          {
+            "value": "Ameaca Prisao",
+            "name_en": "Stuck-Pipe Risk",
+            "description": "Tendência de prisão detectada (drag/torque crescente).",
+            "category": "mechanical",
+            "expected_unit": "force_or_torque"
+          },
+          {
+            "value": "Arraste",
+            "name_en": "Drag",
+            "description": "Atrito anormal durante movimentação da coluna.",
+            "category": "mechanical",
+            "expected_unit": "force"
+          },
+          {
+            "value": "Topamento",
+            "name_en": "Tagging",
+            "description": "Coluna toca obstáculo no poço (cascalho, ledge, fundo falso).",
+            "category": "mechanical",
+            "expected_unit": "force"
+          },
+          {
+            "value": "Estolamento",
+            "name_en": "Stalling",
+            "description": "Parada de rotação do motor de fundo / top drive sob torque excessivo.",
+            "category": "mechanical",
+            "expected_unit": "torque"
+          },
+          {
+            "value": "Fundo Falso",
+            "name_en": "False Bottom",
+            "description": "Falso fundo por acúmulo de cascalho.",
+            "category": "mechanical",
+            "expected_unit": "depth_offset"
+          },
+          {
+            "value": "Gas Manobra",
+            "name_en": "Trip Gas",
+            "description": "Gás detectado após manobra — não é kick, mas indica permeabilidade.",
+            "category": "pressure",
+            "expected_unit": "gas_units_or_ppm"
+          }
         ],
         "OGEOMEC_ProcedimentoPoco": [
-          "PERFURACAO", "DESCIDA DE COLUNA", "RETIRADA DE COLUNA", "CIMENTACAO",
-          "REVESTIMENTO", "PERFILAGEM A CABO", "TESTEMUNHAGEM", "OPERACOES SEM AVANCO"
+          "PERFURACAO",
+          "DESCIDA DE COLUNA",
+          "RETIRADA DE COLUNA",
+          "CIMENTACAO",
+          "REVESTIMENTO",
+          "PERFILAGEM A CABO",
+          "TESTEMUNHAGEM",
+          "OPERACOES SEM AVANCO"
         ],
         "OGEOMEC_Fluido": [
           "FLUIDO DE PERFURAÇÃO AQUOSO",
@@ -571,26 +1209,143 @@
           "AGUA DO MAR"
         ],
         "OGEOMEC_UnidadeValor": [
-          {"value": "klbf",   "name": "kilo libras-forca",       "applies_to": ["Arraste", "Topamento", "Ameaca Prisao"], "category": "force"},
-          {"value": "ton",    "name": "tonelada-forca",          "applies_to": ["Topamento"], "category": "force"},
-          {"value": "kN.m",   "name": "kilonewton-metro",        "applies_to": ["Estolamento", "Ameaca Prisao"], "category": "torque"},
-          {"value": "klbf.ft","name": "kilo libra-forca por pe", "applies_to": ["Estolamento"], "category": "torque"},
-          {"value": "bbl",    "name": "barril",                  "applies_to": ["Perda Din", "Perda Est", "Perda Total", "Kick", "Falso Kick"], "category": "volume"},
-          {"value": "m3",     "name": "metro cubico",            "applies_to": ["Perda Din", "Perda Est", "Perda Total", "Kick"], "category": "volume"},
-          {"value": "psi",    "name": "libra por polegada quadrada", "applies_to": ["Kick", "Falso Kick"], "category": "pressure"},
-          {"value": "ppm",    "name": "partes por milhao",       "applies_to": ["Gas Manobra"], "category": "concentration"},
-          {"value": "units",  "name": "gas units (mudlogger)",   "applies_to": ["Gas Manobra"], "category": "concentration"},
-          {"value": "min",    "name": "minutos (duracao)",       "applies_to": ["Prisao"], "category": "time"},
-          {"value": "m",      "name": "metros (offset)",         "applies_to": ["Fundo Falso"], "category": "length"}
+          {
+            "value": "klbf",
+            "name": "kilo libras-forca",
+            "applies_to": [
+              "Arraste",
+              "Topamento",
+              "Ameaca Prisao"
+            ],
+            "category": "force"
+          },
+          {
+            "value": "ton",
+            "name": "tonelada-forca",
+            "applies_to": [
+              "Topamento"
+            ],
+            "category": "force"
+          },
+          {
+            "value": "kN.m",
+            "name": "kilonewton-metro",
+            "applies_to": [
+              "Estolamento",
+              "Ameaca Prisao"
+            ],
+            "category": "torque"
+          },
+          {
+            "value": "klbf.ft",
+            "name": "kilo libra-forca por pe",
+            "applies_to": [
+              "Estolamento"
+            ],
+            "category": "torque"
+          },
+          {
+            "value": "bbl",
+            "name": "barril",
+            "applies_to": [
+              "Perda Din",
+              "Perda Est",
+              "Perda Total",
+              "Kick",
+              "Falso Kick"
+            ],
+            "category": "volume"
+          },
+          {
+            "value": "m3",
+            "name": "metro cubico",
+            "applies_to": [
+              "Perda Din",
+              "Perda Est",
+              "Perda Total",
+              "Kick"
+            ],
+            "category": "volume"
+          },
+          {
+            "value": "psi",
+            "name": "libra por polegada quadrada",
+            "applies_to": [
+              "Kick",
+              "Falso Kick"
+            ],
+            "category": "pressure"
+          },
+          {
+            "value": "ppm",
+            "name": "partes por milhao",
+            "applies_to": [
+              "Gas Manobra"
+            ],
+            "category": "concentration"
+          },
+          {
+            "value": "units",
+            "name": "gas units (mudlogger)",
+            "applies_to": [
+              "Gas Manobra"
+            ],
+            "category": "concentration"
+          },
+          {
+            "value": "min",
+            "name": "minutos (duracao)",
+            "applies_to": [
+              "Prisao"
+            ],
+            "category": "time"
+          },
+          {
+            "value": "m",
+            "name": "metros (offset)",
+            "applies_to": [
+              "Fundo Falso"
+            ],
+            "category": "length"
+          }
         ],
         "OGEOMEC_PesoFluidoUnit": [
-          {"value": "ppg",    "name": "pounds per gallon",       "synonyms": ["lb/gal"], "canonical": true, "note": "Padrao de fato offshore Brasil. Referencias: PE-2POC-00453, PE-2POC-00445, PE-2POC-00756."},
-          {"value": "g/cm3",  "name": "gramas por centimetro cubico", "synonyms": ["sg"], "conversion": "1 ppg = 0.1198 g/cm3", "note": "Comum em pocos terrestres e projetos legados."},
-          {"value": "sg",     "name": "specific gravity",        "synonyms": ["g/cm3"], "note": "Adimensional, equivale a g/cm3."}
+          {
+            "value": "ppg",
+            "name": "pounds per gallon",
+            "synonyms": [
+              "lb/gal"
+            ],
+            "canonical": true,
+            "note": "Padrao de fato offshore Brasil. Referencias: PE-2POC-00453, PE-2POC-00445, PE-2POC-00756."
+          },
+          {
+            "value": "g/cm3",
+            "name": "gramas por centimetro cubico",
+            "synonyms": [
+              "sg"
+            ],
+            "conversion": "1 ppg = 0.1198 g/cm3",
+            "note": "Comum em pocos terrestres e projetos legados."
+          },
+          {
+            "value": "sg",
+            "name": "specific gravity",
+            "synonyms": [
+              "g/cm3"
+            ],
+            "note": "Adimensional, equivale a g/cm3."
+          }
         ],
         "OGEOMEC_FaseTipo": [
-          {"value": "SEM_RETORNO", "description": "Fases iniciais (geralmente 1 e 2) — sem retorno de fluido a superficie. Tipico offshore: brocas >=17 1/2 pol. Ref: PE-2POC-00595."},
-          {"value": "COM_RETORNO", "description": "Fases com circulacao fechada via riser/revestimento — retorno de fluido a superficie. Tipico: fases 3+, brocas <= 12 1/4 pol."}
+          {
+            "value": "SEM_RETORNO",
+            "description": "Fases iniciais (geralmente 1 e 2) — sem retorno de fluido a superficie. Tipico offshore: brocas >=17 1/2 pol. Ref: PE-2POC-00595."
+          },
+          {
+            "value": "COM_RETORNO",
+            "description": "Fases com circulacao fechada via riser/revestimento — retorno de fluido a superficie. Tipico: fases 3+, brocas <= 12 1/4 pol."
+          }
         ]
       }
     },
@@ -603,7 +1358,9 @@
       "description_pt": "Relatório de Operações de Perfilagem — CSV via API EXATA.",
       "format": "CSV",
       "structured": true,
-      "manager": "EXP/OGP/TOGPR"
+      "manager": "EXP/OGP/TOGPR",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "QPG": {
       "id": "OG037",
@@ -623,7 +1380,10 @@
         "SIGEO wiki — Publicação e Recuperação de QPG",
         "Briefing Buscador de Análogos Geomec"
       ],
-      "synonyms": ["Quadro de Previsão Geológica", "Prognóstico Geológico"]
+      "synonyms": [
+        "Quadro de Previsão Geológica",
+        "Prognóstico Geológico"
+      ]
     },
     "PerfilComposto": {
       "id": "OG038",
@@ -638,8 +1398,18 @@
       "manager": "EXP/OGP",
       "stored_in": "SIGEO / BDIEP",
       "evidence_status": "documented",
-      "evidence_refs": ["SIGEO wiki — Perfil Composto"],
-      "fed_by": ["WirelineLogging", "MWD_LWD", "CuttingsSampling", "Mudlogging", "FRX", "DRX", "FormationTesting"]
+      "evidence_refs": [
+        "SIGEO wiki — Perfil Composto"
+      ],
+      "fed_by": [
+        "WirelineLogging",
+        "MWD_LWD",
+        "CuttingsSampling",
+        "Mudlogging",
+        "FRX",
+        "DRX",
+        "FormationTesting"
+      ]
     },
     "Litologia": {
       "id": "OG039",
@@ -654,7 +1424,9 @@
       "manager": "EXP/OGP/AQG",
       "stored_in": "SIGEO",
       "evidence_status": "documented",
-      "evidence_refs": ["SIGEO wiki — Interpretar Litologia (Usuário)"]
+      "evidence_refs": [
+        "SIGEO wiki — Interpretar Litologia (Usuário)"
+      ]
     },
     "RCSD": {
       "id": "OG036",
@@ -665,9 +1437,10 @@
       "description_pt": "Relatório do CSD de Operações — PPT semi-estruturado em SharePoint.",
       "format": "PPTX",
       "structured": "semi",
-      "manager": "SharePoint"
+      "manager": "SharePoint",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
-
     "GeologicalOperationsSystem": {
       "id": "OG040",
       "name": "GeologicalOperationsSystem",
@@ -675,56 +1448,72 @@
       "superclass": "owl:Thing",
       "description": "Abstract class for systems supporting Geological Operations workflows.",
       "description_pt": "Classe abstrata dos sistemas de suporte aos fluxos de Operações Geológicas.",
-      "abstract": true
+      "abstract": true,
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "EXATA": {
       "id": "OG041",
       "name": "EXATA",
       "superclass": "GeologicalOperationsSystem",
       "description": "Real-time well-data transmission and visualization platform.",
-      "description_pt": "Plataforma de transmissão e visualização de dados de poço em tempo real."
+      "description_pt": "Plataforma de transmissão e visualização de dados de poço em tempo real.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "SIGEO": {
       "id": "OG042",
       "name": "SIGEO",
       "superclass": "GeologicalOperationsSystem",
       "description": "Geology system — analysis, visualization and archival of geological data (logs, FRX, lithology, mineralogy).",
-      "description_pt": "Sistema de Geologia — análise, visualização e arquivamento de dados geológicos (perfis, FRX, litologia, mineralogia)."
+      "description_pt": "Sistema de Geologia — análise, visualização e arquivamento de dados geológicos (perfis, FRX, litologia, mineralogia).",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "BDIEP": {
       "id": "OG043",
       "name": "BDIEP",
       "superclass": "GeologicalOperationsSystem",
       "description": "Integrated E&P database (structured well data).",
-      "description_pt": "Base de Dados Integrada de E&P (dados estruturados de poço)."
+      "description_pt": "Base de Dados Integrada de E&P (dados estruturados de poço).",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "BDIAP": {
       "id": "OG044",
       "name": "BDIAP",
       "superclass": "GeologicalOperationsSystem",
       "description": "Integrated A&P database, sister to BDIEP.",
-      "description_pt": "Base de Dados Integrada A&P, irmã da BDIEP."
+      "description_pt": "Base de Dados Integrada A&P, irmã da BDIEP.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "AIDA": {
       "id": "OG045",
       "name": "AIDA",
       "superclass": "GeologicalOperationsSystem",
       "description": "Databricks-based analytics ingestion and integration platform.",
-      "description_pt": "Plataforma de dados analytics (Databricks) para ingestão e integração."
+      "description_pt": "Plataforma de dados analytics (Databricks) para ingestão e integração.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "GeoDO": {
       "id": "OG046",
       "name": "GeoDO",
       "superclass": "GeologicalOperationsSystem",
       "description": "Agentic workflow layer (multi-agent orchestrator) for queries and analyses across Geological Operations data.",
-      "description_pt": "Camada agentic de workflow (orquestrador multiagente) para consultas e análises."
+      "description_pt": "Camada agentic de workflow (orquestrador multiagente) para consultas e análises.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "GDA": {
       "id": "OG047",
       "name": "GDA",
       "superclass": "GeologicalOperationsSystem",
       "description": "Geoscience Data Analyst — automation of analyses and synthetic logs.",
-      "description_pt": "Geoscience Data Analyst — automação de análises e perfis sintéticos."
+      "description_pt": "Geoscience Data Analyst — automação de análises e perfis sintéticos.",
+      "evidence_status": "unverified",
+      "evidence_note": "Skeletal class — definition present but not yet validated against SINPEP standards or BDIEP DDL. Awaiting team review."
     },
     "CGOR": {
       "id": "OG048",
@@ -747,7 +1536,9 @@
       "description": "Centro de Suporte à Decisão de Operações — emits the RCSD (Relatório do CSD) consolidating operational status. Stored on SharePoint / Drive Científico CSD.",
       "description_pt": "Centro de Suporte à Decisão de Operações — emite o RCSD consolidando o status operacional. Armazenado em SharePoint / Drive Científico CSD.",
       "evidence_status": "documented",
-      "evidence_refs": ["PoC AWS Agente 1 OGEO — RCSD/CSD em SharePoint Drive Científico"]
+      "evidence_refs": [
+        "PoC AWS Agente 1 OGEO — RCSD/CSD em SharePoint Drive Científico"
+      ]
     },
     "BuscadorAnalogosGeomec": {
       "id": "OG050",
@@ -757,48 +1548,246 @@
       "description": "Internal tool that retrieves analog wells using QPG, Composite Log, geopressure model, LOTs and Geomechanical Occurrences as inputs.",
       "description_pt": "Ferramenta interna de busca de poços análogos usando QPG, Perfil Composto, modelo de geopressões, LOTs e Ocorrências Geomecânicas como insumos.",
       "evidence_status": "documented",
-      "evidence_refs": ["Briefing — Buscador de Análogos Geomec"]
+      "evidence_refs": [
+        "Briefing — Buscador de Análogos Geomec"
+      ]
     }
   },
-
   "properties": [
-    {"id": "OGP01", "name": "wellId", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "Identifier of the well the document refers to (ANP/SEP standard)."},
-    {"id": "OGP02", "name": "phase", "domain": "ServiceLine", "range": "WellJourneyPhase", "description": "Phase of the well journey in which the activity occurs."},
-    {"id": "OGP03", "name": "format", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "File/data format (PDF, DOCX, CSV, PPTX, SQL)."},
-    {"id": "OGP04", "name": "structured", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "Whether content is structured, semi-structured or unstructured."},
-    {"id": "OGP05", "name": "manager", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "Organizational owner / steward of the document."},
-    {"id": "OGP06", "name": "osdu_kind", "domain": "ServiceLine", "range": "xsd:anyURI", "description": "OSDU kind alignment for the produced work product component."},
-    {"id": "OGP07", "name": "witsml_object", "domain": "ServiceLine", "range": "xsd:string", "description": "WITSML 2.x object name for the activity output."},
-    {"id": "OGP08", "name": "geosciml_alignment", "domain": "ServiceLine", "range": "xsd:anyURI", "description": "GeoSciML/CGI vocabulary alignment for the specimen or feature produced."},
-    {"id": "OGP09", "name": "real_time", "domain": "ServiceLine", "range": "xsd:boolean", "description": "Whether the activity emits data in real time during drilling."},
-    {"id": "OGP10", "name": "depth_top_m", "domain": "ServiceLine", "range": "xsd:double", "description": "Top depth (MD, meters) of the acquired interval."},
-    {"id": "OGP11", "name": "depth_base_m", "domain": "ServiceLine", "range": "xsd:double", "description": "Base depth (MD, meters) of the acquired interval."},
-    {"id": "OGP12", "name": "system_of_record", "domain": "GeologicalOperationsDocument", "range": "GeologicalOperationsSystem", "description": "System where the document/data is persisted."},
-    {"id": "OGP13", "name": "discipline", "domain": "ServiceLine", "range": "ExplorationDiscipline", "description": "Discipline that owns the activity (default: GeologicalOperations)."},
-    {"id": "OGP14", "name": "lessonsLearnedRefs", "domain": "WellJourneyPhase", "range": "xsd:anyURI", "description": "Pointers to lessons learned entries fed back into RetroAnalysis."},
-    {"id": "OGP15", "name": "evidence_status", "domain": "owl:Thing", "range": "xsd:string", "description": "Quality of documentary evidence: 'documented' (direct evidence), 'partial' (some evidence + inference), 'inferred' (operational practice without explicit documentation), 'unverified' (placeholder).", "allowed_values": ["documented", "partial", "inferred", "unverified"]},
-    {"id": "OGP16", "name": "evidence_refs", "domain": "owl:Thing", "range": "xsd:string", "description": "Citations or pointers to source documents supporting the entity definition (SharePoint pages, internal docs, briefings)."}
+    {
+      "id": "OGP01",
+      "name": "wellId",
+      "domain": "GeologicalOperationsDocument",
+      "range": "xsd:string",
+      "description": "Identifier of the well the document refers to (ANP/SEP standard)."
+    },
+    {
+      "id": "OGP02",
+      "name": "phase",
+      "domain": "ServiceLine",
+      "range": "WellJourneyPhase",
+      "description": "Phase of the well journey in which the activity occurs."
+    },
+    {
+      "id": "OGP03",
+      "name": "format",
+      "domain": "GeologicalOperationsDocument",
+      "range": "xsd:string",
+      "description": "File/data format (PDF, DOCX, CSV, PPTX, SQL)."
+    },
+    {
+      "id": "OGP04",
+      "name": "structured",
+      "domain": "GeologicalOperationsDocument",
+      "range": "xsd:string",
+      "description": "Whether content is structured, semi-structured or unstructured."
+    },
+    {
+      "id": "OGP05",
+      "name": "manager",
+      "domain": "GeologicalOperationsDocument",
+      "range": "xsd:string",
+      "description": "Organizational owner / steward of the document."
+    },
+    {
+      "id": "OGP06",
+      "name": "osdu_kind",
+      "domain": "ServiceLine",
+      "range": "xsd:anyURI",
+      "description": "OSDU kind alignment for the produced work product component."
+    },
+    {
+      "id": "OGP07",
+      "name": "witsml_object",
+      "domain": "ServiceLine",
+      "range": "xsd:string",
+      "description": "WITSML 2.x object name for the activity output."
+    },
+    {
+      "id": "OGP08",
+      "name": "geosciml_alignment",
+      "domain": "ServiceLine",
+      "range": "xsd:anyURI",
+      "description": "GeoSciML/CGI vocabulary alignment for the specimen or feature produced."
+    },
+    {
+      "id": "OGP09",
+      "name": "real_time",
+      "domain": "ServiceLine",
+      "range": "xsd:boolean",
+      "description": "Whether the activity emits data in real time during drilling."
+    },
+    {
+      "id": "OGP10",
+      "name": "depth_top_m",
+      "domain": "ServiceLine",
+      "range": "xsd:double",
+      "description": "Top depth (MD, meters) of the acquired interval."
+    },
+    {
+      "id": "OGP11",
+      "name": "depth_base_m",
+      "domain": "ServiceLine",
+      "range": "xsd:double",
+      "description": "Base depth (MD, meters) of the acquired interval."
+    },
+    {
+      "id": "OGP12",
+      "name": "system_of_record",
+      "domain": "GeologicalOperationsDocument",
+      "range": "GeologicalOperationsSystem",
+      "description": "System where the document/data is persisted."
+    },
+    {
+      "id": "OGP13",
+      "name": "discipline",
+      "domain": "ServiceLine",
+      "range": "ExplorationDiscipline",
+      "description": "Discipline that owns the activity (default: GeologicalOperations)."
+    },
+    {
+      "id": "OGP14",
+      "name": "lessonsLearnedRefs",
+      "domain": "WellJourneyPhase",
+      "range": "xsd:anyURI",
+      "description": "Pointers to lessons learned entries fed back into RetroAnalysis."
+    },
+    {
+      "id": "OGP15",
+      "name": "evidence_status",
+      "domain": "owl:Thing",
+      "range": "xsd:string",
+      "description": "Quality of documentary evidence: 'documented' (direct evidence), 'partial' (some evidence + inference), 'inferred' (operational practice without explicit documentation), 'unverified' (placeholder).",
+      "allowed_values": [
+        "documented",
+        "partial",
+        "inferred",
+        "unverified"
+      ]
+    },
+    {
+      "id": "OGP16",
+      "name": "evidence_refs",
+      "domain": "owl:Thing",
+      "range": "xsd:string",
+      "description": "Citations or pointers to source documents supporting the entity definition (SharePoint pages, internal docs, briefings)."
+    }
   ],
-
   "relations": [
-    {"id": "OGR01", "name": "executes", "domain": "GeologicalOperations", "range": "ServiceLine", "description": "A discipline executes a service line on a well."},
-    {"id": "OGR02", "name": "produces", "domain": "ServiceLine", "range": "GeologicalOperationsDocument", "description": "A service line produces one or more documents/datasets."},
-    {"id": "OGR03", "name": "occurs_in", "domain": "ServiceLine", "range": "WellJourneyPhase", "description": "The activity occurs in a given well-journey phase."},
-    {"id": "OGR04", "name": "stored_in", "domain": "GeologicalOperationsDocument", "range": "GeologicalOperationsSystem", "description": "Document is persisted in a system."},
-    {"id": "OGR05", "name": "feeds", "domain": "GeologicalOperationsDocument", "range": "WellJourneyPhase", "description": "A document feeds a downstream phase (e.g., BDP feeds OperationalMonitoring)."},
-    {"id": "OGR06", "name": "performed_on", "domain": "ServiceLine", "range": "Wellbore", "description": "Activity performed on a wellbore (links to OSDU Wellbore)."},
-    {"id": "OGR07", "name": "calibrates", "domain": "ServiceLine", "range": "GM004", "description": "FormationTesting calibrates PorePressure (geomechanics:GM004)."},
-    {"id": "OGR08", "name": "supports", "domain": "GeologicalOperationsSystem", "range": "ServiceLine", "description": "System supports a service line (e.g., EXATA supports MWD/LWD streaming)."},
-    {"id": "OGR09", "name": "feeds_back_to", "domain": "LessonsLearned", "range": "RetroAnalysis", "description": "Lessons learned close the loop back to retro-analysis of the next well."},
-    {"id": "OGR10", "name": "complements", "domain": "ServiceLine", "range": "ServiceLine", "description": "Two service lines whose outputs are jointly required for a complete characterization (e.g., DRX + FRX)."},
-    {"id": "OGR11", "name": "supports_decision", "domain": "ServiceLine", "range": "GM005", "description": "DRX identification of reactive clay minerals supports MudWindow / wellbore stability decisions (geomechanics:GM005)."},
-    {"id": "OGR12", "name": "feeds_signature", "domain": "FRX", "range": "DNAGeoquimico", "description": "FRX elemental data feeds the geochemical signature (DNA Geoquimico) of a formation. Status: inferred (DNA Geoquímico nomenclature not formally documented)."},
-    {"id": "OGR13", "name": "consumes_prognosis", "domain": "ServiceLine", "range": "QPG", "description": "Wellsite acquisition activities consume the QPG (Quadro de Previsão Geológica) as planning input. Status: operationally_implied — practitioner workflow, not explicit documentation linking each service line to QPG consumption.", "evidence_status": "inferred"},
-    {"id": "OGR14", "name": "feeds_composite_log", "domain": "ServiceLine", "range": "PerfilComposto", "description": "Service line outputs are integrated into the well's Perfil Composto. Documented for: WirelineLogging, MWD/LWD, CuttingsSampling, Mudlogging, FormationTesting; inferred for FRX/DRX."},
-    {"id": "OGR15", "name": "violates_mud_window", "domain": "OGEOMEC", "range": "GM005", "description": "Specific OGEOMEC occurrence types (Kick, Perda Din/Est/Total) are operational manifestations of MudWindow (geomechanics:GM005) violations: Kick = lower bound (Pp > MW), Perdas = upper bound (MW > FractureGradient)."},
-    {"id": "OGR16", "name": "derived_from", "domain": "GeologicalOperationsDocument", "range": "GeologicalOperationsDocument", "description": "Document-to-document temporal/causal lineage: a downstream document is derived (in whole or in part) from one or more upstream documents produced earlier in the well journey. Captures provenance for 'what feeds X?' / 'what depends on X?' GraphRAG queries. Edges carry an `evidence_status` of 'documented' (direct evidence in Petrobras sources) or 'inferred' (operational practice, no explicit doc-to-doc link found)."}
+    {
+      "id": "OGR01",
+      "name": "executes",
+      "domain": "GeologicalOperations",
+      "range": "ServiceLine",
+      "description": "A discipline executes a service line on a well."
+    },
+    {
+      "id": "OGR02",
+      "name": "produces",
+      "domain": "ServiceLine",
+      "range": "GeologicalOperationsDocument",
+      "description": "A service line produces one or more documents/datasets."
+    },
+    {
+      "id": "OGR03",
+      "name": "occurs_in",
+      "domain": "ServiceLine",
+      "range": "WellJourneyPhase",
+      "description": "The activity occurs in a given well-journey phase."
+    },
+    {
+      "id": "OGR04",
+      "name": "stored_in",
+      "domain": "GeologicalOperationsDocument",
+      "range": "GeologicalOperationsSystem",
+      "description": "Document is persisted in a system."
+    },
+    {
+      "id": "OGR05",
+      "name": "feeds",
+      "domain": "GeologicalOperationsDocument",
+      "range": "WellJourneyPhase",
+      "description": "A document feeds a downstream phase (e.g., BDP feeds OperationalMonitoring)."
+    },
+    {
+      "id": "OGR06",
+      "name": "performed_on",
+      "domain": "ServiceLine",
+      "range": "Wellbore",
+      "description": "Activity performed on a wellbore (links to OSDU Wellbore)."
+    },
+    {
+      "id": "OGR07",
+      "name": "calibrates",
+      "domain": "ServiceLine",
+      "range": "GM004",
+      "description": "FormationTesting calibrates PorePressure (geomechanics:GM004)."
+    },
+    {
+      "id": "OGR08",
+      "name": "supports",
+      "domain": "GeologicalOperationsSystem",
+      "range": "ServiceLine",
+      "description": "System supports a service line (e.g., EXATA supports MWD/LWD streaming)."
+    },
+    {
+      "id": "OGR09",
+      "name": "feeds_back_to",
+      "domain": "LessonsLearned",
+      "range": "RetroAnalysis",
+      "description": "Lessons learned close the loop back to retro-analysis of the next well."
+    },
+    {
+      "id": "OGR10",
+      "name": "complements",
+      "domain": "ServiceLine",
+      "range": "ServiceLine",
+      "description": "Two service lines whose outputs are jointly required for a complete characterization (e.g., DRX + FRX)."
+    },
+    {
+      "id": "OGR11",
+      "name": "supports_decision",
+      "domain": "ServiceLine",
+      "range": "GM005",
+      "description": "DRX identification of reactive clay minerals supports MudWindow / wellbore stability decisions (geomechanics:GM005)."
+    },
+    {
+      "id": "OGR12",
+      "name": "feeds_signature",
+      "domain": "FRX",
+      "range": "DNAGeoquimico",
+      "description": "FRX elemental data feeds the geochemical signature (DNA Geoquimico) of a formation. Status: inferred (DNA Geoquímico nomenclature not formally documented)."
+    },
+    {
+      "id": "OGR13",
+      "name": "consumes_prognosis",
+      "domain": "ServiceLine",
+      "range": "QPG",
+      "description": "Wellsite acquisition activities consume the QPG (Quadro de Previsão Geológica) as planning input. Status: operationally_implied — practitioner workflow, not explicit documentation linking each service line to QPG consumption.",
+      "evidence_status": "inferred"
+    },
+    {
+      "id": "OGR14",
+      "name": "feeds_composite_log",
+      "domain": "ServiceLine",
+      "range": "PerfilComposto",
+      "description": "Service line outputs are integrated into the well's Perfil Composto. Documented for: WirelineLogging, MWD/LWD, CuttingsSampling, Mudlogging, FormationTesting; inferred for FRX/DRX."
+    },
+    {
+      "id": "OGR15",
+      "name": "violates_mud_window",
+      "domain": "OGEOMEC",
+      "range": "GM005",
+      "description": "Specific OGEOMEC occurrence types (Kick, Perda Din/Est/Total) are operational manifestations of MudWindow (geomechanics:GM005) violations: Kick = lower bound (Pp > MW), Perdas = upper bound (MW > FractureGradient)."
+    },
+    {
+      "id": "OGR16",
+      "name": "derived_from",
+      "domain": "GeologicalOperationsDocument",
+      "range": "GeologicalOperationsDocument",
+      "description": "Document-to-document temporal/causal lineage: a downstream document is derived (in whole or in part) from one or more upstream documents produced earlier in the well journey. Captures provenance for 'what feeds X?' / 'what depends on X?' GraphRAG queries. Edges carry an `evidence_status` of 'documented' (direct evidence in Petrobras sources) or 'inferred' (operational practice, no explicit doc-to-doc link found)."
+    }
   ],
-
   "instances": {
     "OG_FLOW_PRE_SALT": {
       "id": "OG_FLOW_PRE_SALT",
@@ -807,15 +1796,66 @@
       "class": "GeologicalOperations",
       "description": "Reference flow for a pre-salt exploratory well combining real-time mudlogging, MWD/LWD streaming via EXATA, geostopping at carbonate target, wireline logging suite, and core extraction at the reservoir.",
       "steps": [
-        {"order": 1, "phase": "RetroAnalysis", "service_line": null, "produces": null},
-        {"order": 2, "phase": "InputElaboration", "service_line": null, "produces": "IGP"},
-        {"order": 3, "phase": "OperationalMonitoring", "service_line": "Mudlogging", "produces": "BDP", "stored_in": "EXATA"},
-        {"order": 4, "phase": "OperationalMonitoring", "service_line": "MWD_LWD", "produces": "BDP", "stored_in": "EXATA"},
-        {"order": 5, "phase": "OperationalMonitoring", "service_line": "Geostopping", "produces": "RMG", "stored_in": "BDIEP"},
-        {"order": 6, "phase": "FormationEvaluation", "service_line": "WirelineLogging", "produces": "ROP_Logging", "stored_in": "SIGEO"},
-        {"order": 7, "phase": "FormationEvaluation", "service_line": "Coring", "produces": "IGP", "stored_in": "SIGEO"},
-        {"order": 8, "phase": "FormationEvaluation", "service_line": "FormationTesting", "produces": "RCSD"},
-        {"order": 9, "phase": "LessonsLearned", "service_line": null, "produces": "OGEOMEC", "stored_in": "BDIEP"}
+        {
+          "order": 1,
+          "phase": "RetroAnalysis",
+          "service_line": null,
+          "produces": null
+        },
+        {
+          "order": 2,
+          "phase": "InputElaboration",
+          "service_line": null,
+          "produces": "IGP"
+        },
+        {
+          "order": 3,
+          "phase": "OperationalMonitoring",
+          "service_line": "Mudlogging",
+          "produces": "BDP",
+          "stored_in": "EXATA"
+        },
+        {
+          "order": 4,
+          "phase": "OperationalMonitoring",
+          "service_line": "MWD_LWD",
+          "produces": "BDP",
+          "stored_in": "EXATA"
+        },
+        {
+          "order": 5,
+          "phase": "OperationalMonitoring",
+          "service_line": "Geostopping",
+          "produces": "RMG",
+          "stored_in": "BDIEP"
+        },
+        {
+          "order": 6,
+          "phase": "FormationEvaluation",
+          "service_line": "WirelineLogging",
+          "produces": "ROP_Logging",
+          "stored_in": "SIGEO"
+        },
+        {
+          "order": 7,
+          "phase": "FormationEvaluation",
+          "service_line": "Coring",
+          "produces": "IGP",
+          "stored_in": "SIGEO"
+        },
+        {
+          "order": 8,
+          "phase": "FormationEvaluation",
+          "service_line": "FormationTesting",
+          "produces": "RCSD"
+        },
+        {
+          "order": 9,
+          "phase": "LessonsLearned",
+          "service_line": null,
+          "produces": "OGEOMEC",
+          "stored_in": "BDIEP"
+        }
       ],
       "source": "Petrobras Jornada do Poço RAP-01; pre-salt operational practice"
     },
@@ -826,10 +1866,31 @@
       "class": "GeologicalOperations",
       "description": "Lean acquisition program for a development well: mudlogging + cuttings + LWD + sparse wireline; no coring; OGEOMEC populated only on event.",
       "steps": [
-        {"order": 1, "phase": "OperationalMonitoring", "service_line": "Mudlogging", "produces": "BDP"},
-        {"order": 2, "phase": "OperationalMonitoring", "service_line": "CuttingsSampling", "produces": "IGP"},
-        {"order": 3, "phase": "OperationalMonitoring", "service_line": "MWD_LWD", "produces": "BDP"},
-        {"order": 4, "phase": "FormationEvaluation", "service_line": "WirelineLogging", "produces": "ROP_Logging", "stored_in": "SIGEO"}
+        {
+          "order": 1,
+          "phase": "OperationalMonitoring",
+          "service_line": "Mudlogging",
+          "produces": "BDP"
+        },
+        {
+          "order": 2,
+          "phase": "OperationalMonitoring",
+          "service_line": "CuttingsSampling",
+          "produces": "IGP"
+        },
+        {
+          "order": 3,
+          "phase": "OperationalMonitoring",
+          "service_line": "MWD_LWD",
+          "produces": "BDP"
+        },
+        {
+          "order": 4,
+          "phase": "FormationEvaluation",
+          "service_line": "WirelineLogging",
+          "produces": "ROP_Logging",
+          "stored_in": "SIGEO"
+        }
       ],
       "source": "Petrobras EXP/OGP standard development-well acquisition"
     },
@@ -849,7 +1910,20 @@
         "tube": "Cobre",
         "drying_temperature_c": 90,
         "quantification_method": "RIR",
-        "minerals_measured": ["QTZ","CAL","DOL","A_M","AND","HAL","PLG","KFD","PIR","PRX","ANF","OLI"]
+        "minerals_measured": [
+          "QTZ",
+          "CAL",
+          "DOL",
+          "A_M",
+          "AND",
+          "HAL",
+          "PLG",
+          "KFD",
+          "PIR",
+          "PRX",
+          "ANF",
+          "OLI"
+        ]
       },
       "frx": {
         "service_provider": "GEOSERVICES",
@@ -857,12 +1931,23 @@
         "tube": "Paladio",
         "atmosphere": "Vacuo",
         "sample_type": "PRENSADA",
-        "major_elements": ["Na","Mg","Al","Si","P","S","K","Ca","Ti","Mn","Fe"],
+        "major_elements": [
+          "Na",
+          "Mg",
+          "Al",
+          "Si",
+          "P",
+          "S",
+          "K",
+          "Ca",
+          "Ti",
+          "Mn",
+          "Fe"
+        ],
         "trace_elements_count": 37
       },
       "source": "Operação_Geológica_-_DRX.xlsx; Operação_Geológica_-_FRX.xlsx (711 e 1133 amostras)"
     },
-
     "OG_OGEOMEC_EXAMPLE": {
       "id": "OG_OGEOMEC_EXAMPLE",
       "name": "OGEOMEC sample — well 1-RJS-685, Santos Basin",
@@ -878,14 +1963,41 @@
       "mud_weight": 8.7,
       "mud_weight_unit": "ppg",
       "events_observed": [
-        {"date": "2011-01-11", "type": "Topamento", "top_md": 791.0, "base_md": 791.0, "procedure": "DESCIDA DE COLUNA"},
-        {"date": "2011-01-11", "type": "Kick",      "top_md": 817.0, "base_md": 817.0, "procedure": "PERFURACAO", "geomechanics_link": "GM005_lower_bound"},
-        {"date": "2011-01-12", "type": "Topamento", "top_md": 922.0, "base_md": 922.0, "procedure": "RETIRADA DE COLUNA"},
-        {"date": "2011-01-16", "type": "Arraste",   "top_md": 899.0, "base_md": 899.0, "procedure": "RETIRADA DE COLUNA", "valor_min": 25.0, "valor_max": 25.0, "unidade": "klbf"}
+        {
+          "date": "2011-01-11",
+          "type": "Topamento",
+          "top_md": 791.0,
+          "base_md": 791.0,
+          "procedure": "DESCIDA DE COLUNA"
+        },
+        {
+          "date": "2011-01-11",
+          "type": "Kick",
+          "top_md": 817.0,
+          "base_md": 817.0,
+          "procedure": "PERFURACAO",
+          "geomechanics_link": "GM005_lower_bound"
+        },
+        {
+          "date": "2011-01-12",
+          "type": "Topamento",
+          "top_md": 922.0,
+          "base_md": 922.0,
+          "procedure": "RETIRADA DE COLUNA"
+        },
+        {
+          "date": "2011-01-16",
+          "type": "Arraste",
+          "top_md": 899.0,
+          "base_md": 899.0,
+          "procedure": "RETIRADA DE COLUNA",
+          "valor_min": 25.0,
+          "valor_max": 25.0,
+          "unidade": "klbf"
+        }
       ],
       "source": "Operações Geológicas - Ocorrências Geomecânicas.xlsx (898 occurrences total)"
     },
-
     "OG_DOC_FLOW": {
       "id": "OG_DOC_FLOW",
       "name": "Document → System mapping",
@@ -893,16 +2005,45 @@
       "class": "GeologicalOperations",
       "description": "Canonical persistence map for the six core Geological Operations documents.",
       "mappings": [
-        {"document": "IGP", "format": "PDF/DOCX", "system": "SIGEO", "structured": false},
-        {"document": "BDP", "format": "CSV", "system": "EXATA", "structured": true},
-        {"document": "RMG", "format": "PDF", "system": "BDIEP", "structured": false},
-        {"document": "OGEOMEC", "format": "SQL", "system": "BDIEP", "structured": true},
-        {"document": "ROP_Logging", "format": "CSV", "system": "EXATA", "structured": true},
-        {"document": "RCSD", "format": "PPTX", "system": "SharePoint", "structured": "semi"}
+        {
+          "document": "IGP",
+          "format": "PDF/DOCX",
+          "system": "SIGEO",
+          "structured": false
+        },
+        {
+          "document": "BDP",
+          "format": "CSV",
+          "system": "EXATA",
+          "structured": true
+        },
+        {
+          "document": "RMG",
+          "format": "PDF",
+          "system": "BDIEP",
+          "structured": false
+        },
+        {
+          "document": "OGEOMEC",
+          "format": "SQL",
+          "system": "BDIEP",
+          "structured": true
+        },
+        {
+          "document": "ROP_Logging",
+          "format": "CSV",
+          "system": "EXATA",
+          "structured": true
+        },
+        {
+          "document": "RCSD",
+          "format": "PPTX",
+          "system": "SharePoint",
+          "structured": "semi"
+        }
       ],
       "source": "Agente Geo cards (Loop) — IGP/BDP/RMG/OGEOMEC/ROP/RCSD"
     },
-
     "OG_DOC_LINEAGE": {
       "id": "OG_DOC_LINEAGE",
       "name": "Petrobras well-journey document lineage (canonical)",
@@ -914,21 +2055,176 @@
       "cross_module_note": "Entities prefixed OG- live in data/operacoes-geologicas.json; entities prefixed OGS- live in data/operacoes-geologicas-servicos.json. Query agents must resolve names across both modules when traversing this lineage.",
       "use_in_queries": "Resolve 'what feeds X?' / 'o que alimenta X?' / 'upstream of X' / 'downstream of X' against Geological Operations documents (cross-module: OG + OGS).",
       "edges": [
-        {"order": 1,  "source": "QPG",                    "target": null,                                                                                                              "relation": "lineage_root",   "evidence_status": "documented", "note": "Planning baseline — Quadro de Previsao Geologica is the upstream root of the well-journey document chain."},
-        {"order": 2,  "source": "BDP",                    "target": "QPG",                                                                                                             "relation": "derived_from",   "evidence_status": "documented", "note": "Daily drilling bulletin records execution against the QPG plan."},
-        {"order": 3,  "source": "IGP",                    "target": ["BDP", "QPG", "PAG"],                                                                                             "relation": "derived_from",   "evidence_status": "documented", "note": "Geological consolidation integrates daily BDP observations, the QPG prognosis, and the mudlogger's PAG (PE-2EXP-00061)."},
-        {"order": 4,  "source": "PerfilComposto",        "target": ["IGP", "WirelineRun", "LWDRun", "CuttingsSampleDetailed", "FRX", "DRX", "FormationPressurePoint", "DSTInterval", "CoreRun"], "relation": "derived_from", "evidence_status": "documented", "note": "Post-drilling integration — the composite log fuses geological consolidation (IGP) with all real acquisition outputs (wireline, LWD, cuttings, FRX/DRX, formation pressure, DST, cores)."},
-        {"order": 5,  "source": "RMG",                    "target": ["BDP", "ProvedimentoPoco_events", "OGEOMEC"],                                                                     "relation": "derived_from",   "evidence_status": "inferred",   "note": "Geomechanical synthesis report draws on daily operations (BDP), per-procedure events, and the OGEOMEC occurrence table."},
-        {"order": 6,  "source": "OGEOMEC",                "target": ["BDP", "KickEvent"],                                                                                              "relation": "derived_from",   "evidence_status": "documented", "note": "Linhas de tipo Kick em OGEOMEC correspondem a KickEvent; outras ocorrências (Perda, Prisão, Arraste) derivam da observação do BDP/EXATA."},
-        {"order": 7,  "source": "RCSD",                   "target": ["RMG", "OGEOMEC", "BDP", "GeostoppingEvent"],                                                                     "relation": "derived_from",   "evidence_status": "documented", "note": "RCSD narrates geostopping decisions per CSD/CGOR, alongside the geomechanical synthesis, the occurrence table, and the daily bulletin."},
-        {"order": 8,  "source": "LessonsLearned",         "target": ["RCSD", "OGEOMEC", "RMG"],                                                                                        "relation": "derived_from",   "evidence_status": "inferred",   "note": "LessonsLearned phase aggregates RCSD decisions, OGEOMEC events, and the RMG synthesis to feed the next well's RetroAnalysis."},
-        {"order": 9,  "source": "PAG",                    "target": ["MudloggingTimeSeries", "CuttingsSampleDetailed", "GasShowEvent"],                                                "relation": "derived_from",   "evidence_status": "documented", "note": "PAG é o documento operacional diário do mudlogger (PE-2EXP-00061), distinto do BDP (engenheiro fiscal)."},
-        {"order": 10, "source": "GeostoppingEvent",       "target": ["LWDRun", "GasShowEvent", "QPG"],                                                                                 "relation": "derived_from",   "evidence_status": "documented", "note": "Decisão de geostopping consome dados LWD em tempo real, eventos de gas show, e a previsão do QPG (PE-2EXP-00061)."},
-        {"order": 11, "source": "ROA",                    "target": ["WirelineRun", "LWDRun"],                                                                                         "relation": "derived_from",   "evidence_status": "documented", "note": "Relatório de Ocorrências Anômalas (PE-2EXP-00065) registra anomalias durante corridas de wireline ou LWD; sub-documento do ROP."},
-        {"order": 12, "source": "KickEvent",              "target": ["GasShowEvent", "MudloggingTimeSeries"],                                                                          "relation": "derived_from",   "evidence_status": "inferred",   "note": "KickEvent geralmente correlaciona com GasShowEvent prévio; ambos disparam ocorrência registrada em OGEOMEC."},
-        {"order": 13, "source": "FormationPressurePoint", "target": ["WirelineRun"],                                                                                                   "relation": "derived_from",   "evidence_status": "documented", "note": "Pontos RFT/MDT/MiniDST adquiridos via wireline (PE-2EXP-00065)."},
-        {"order": 14, "source": "DSTInterval",            "target": ["WirelineRun"],                                                                                                   "relation": "derived_from",   "evidence_status": "documented", "note": "DST registrado primariamente em SIRR (PE-2E&P-00773), com documentação operacional em BDIEP."},
-        {"order": 15, "source": "FRAME",                  "target": ["LWDRun", "WirelineRun"],                                                                                         "relation": "config_for",     "evidence_status": "documented", "note": "FRAME é documento de configuração (não derivado), mas é consumido por LWDRun e WirelineRun para garantir mnemônicos e taxa de aquisição. Relação registrada como 'config_for' para distinguir de derivações lineage."}
+        {
+          "order": 1,
+          "source": "QPG",
+          "target": null,
+          "relation": "lineage_root",
+          "evidence_status": "documented",
+          "note": "Planning baseline — Quadro de Previsao Geologica is the upstream root of the well-journey document chain."
+        },
+        {
+          "order": 2,
+          "source": "BDP",
+          "target": "QPG",
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Daily drilling bulletin records execution against the QPG plan."
+        },
+        {
+          "order": 3,
+          "source": "IGP",
+          "target": [
+            "BDP",
+            "QPG",
+            "PAG"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Geological consolidation integrates daily BDP observations, the QPG prognosis, and the mudlogger's PAG (PE-2EXP-00061)."
+        },
+        {
+          "order": 4,
+          "source": "PerfilComposto",
+          "target": [
+            "IGP",
+            "WirelineRun",
+            "LWDRun",
+            "CuttingsSampleDetailed",
+            "FRX",
+            "DRX",
+            "FormationPressurePoint",
+            "DSTInterval",
+            "CoreRun"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Post-drilling integration — the composite log fuses geological consolidation (IGP) with all real acquisition outputs (wireline, LWD, cuttings, FRX/DRX, formation pressure, DST, cores)."
+        },
+        {
+          "order": 5,
+          "source": "RMG",
+          "target": [
+            "BDP",
+            "OGEOMEC"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "inferred",
+          "note": "Geomechanical synthesis draws on daily operations (BDP) and the OGEOMEC occurrence table. Per-procedure events are already encoded in OGEOMEC via the ProcedimentoPoco column — no separate sentinel needed."
+        },
+        {
+          "order": 6,
+          "source": "OGEOMEC",
+          "target": [
+            "BDP",
+            "KickEvent"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Linhas de tipo Kick em OGEOMEC correspondem a KickEvent; outras ocorrências (Perda, Prisão, Arraste) derivam da observação do BDP/EXATA."
+        },
+        {
+          "order": 7,
+          "source": "RCSD",
+          "target": [
+            "RMG",
+            "OGEOMEC",
+            "BDP",
+            "GeostoppingEvent"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "RCSD narrates geostopping decisions per CSD/CGOR, alongside the geomechanical synthesis, the occurrence table, and the daily bulletin."
+        },
+        {
+          "order": 8,
+          "source": "LessonsLearned",
+          "target": [
+            "RCSD",
+            "OGEOMEC",
+            "RMG"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "inferred",
+          "note": "LessonsLearned phase aggregates RCSD decisions, OGEOMEC events, and the RMG synthesis to feed the next well's RetroAnalysis."
+        },
+        {
+          "order": 9,
+          "source": "PAG",
+          "target": [
+            "MudloggingTimeSeries",
+            "CuttingsSampleDetailed",
+            "GasShowEvent"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "PAG é o documento operacional diário do mudlogger (PE-2EXP-00061), distinto do BDP (engenheiro fiscal)."
+        },
+        {
+          "order": 10,
+          "source": "GeostoppingEvent",
+          "target": [
+            "LWDRun",
+            "GasShowEvent",
+            "QPG"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Decisão de geostopping consome dados LWD em tempo real, eventos de gas show, e a previsão do QPG (PE-2EXP-00061)."
+        },
+        {
+          "order": 11,
+          "source": "ROA",
+          "target": [
+            "WirelineRun",
+            "LWDRun"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Relatório de Ocorrências Anômalas (PE-2EXP-00065) registra anomalias durante corridas de wireline ou LWD; sub-documento do ROP."
+        },
+        {
+          "order": 12,
+          "source": "KickEvent",
+          "target": [
+            "GasShowEvent",
+            "MudloggingTimeSeries"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "inferred",
+          "note": "KickEvent geralmente correlaciona com GasShowEvent prévio; ambos disparam ocorrência registrada em OGEOMEC."
+        },
+        {
+          "order": 13,
+          "source": "FormationPressurePoint",
+          "target": [
+            "WirelineRun"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "Pontos RFT/MDT/MiniDST adquiridos via wireline (PE-2EXP-00065)."
+        },
+        {
+          "order": 14,
+          "source": "DSTInterval",
+          "target": [
+            "WirelineRun"
+          ],
+          "relation": "derived_from",
+          "evidence_status": "documented",
+          "note": "DST registrado primariamente em SIRR (PE-2E&P-00773), com documentação operacional em BDIEP."
+        },
+        {
+          "order": 15,
+          "source": "FRAME",
+          "target": [
+            "LWDRun",
+            "WirelineRun"
+          ],
+          "relation": "config_for",
+          "evidence_status": "documented",
+          "note": "FRAME é documento de configuração (não derivado), mas é consumido por LWDRun e WirelineRun para garantir mnemônicos e taxa de aquisição. Relação registrada como 'config_for' para distinguir de derivações lineage."
+        }
       ],
       "source": "Petrobras Jornada do Poco RAP-01; PE-2EXP-00059/00061/00065; PE-2E&P-00773; Agente Geo cards (Loop); operational practice synthesis"
     }

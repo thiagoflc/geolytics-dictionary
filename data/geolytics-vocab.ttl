@@ -1520,6 +1520,16 @@ geo:derivedFrom a owl:ObjectProperty ;
 # 21 classes: 12 wellsite acquisition records + 9 supporting systems/documents
 # ─────────────────────────────────────────────────────────────────────────────
 
+# Abstract parent for the service lines themselves (Mudlogging, Wireline, etc.)
+# Source: data/operacoes-geologicas.json#OG010
+geo:ServiceLine a owl:Class ;
+    rdfs:label "Linha de Serviço"@pt ;
+    rdfs:label "Service Line"@en ;
+    skos:prefLabel "Linha de Serviço"@pt ;
+    skos:prefLabel "Service Line"@en ;
+    skos:definition "Classe abstrata das atividades técnicas executadas por Operações Geológicas em um poço (mudlogging, amostragem de calha, testemunhagem, amostragem lateral, MWD/LWD, perfilagem a cabo, teste de formação, geostopping)."@pt ;
+    skos:definition "Abstract class for technical activities performed by Geological Operations on a well."@en .
+
 # Abstract parent for the 12 detailed wellsite acquisition records
 geo:WellsiteAcquisitionRecord a owl:Class ;
     rdfs:label "Registro de Aquisição em Poço"@pt ;
@@ -3067,8 +3077,8 @@ geo:bHALastUpdate a owl:DatatypeProperty ;
 geo:executesServico a owl:ObjectProperty ;
     rdfs:label "executa serviço"@pt ;
     rdfs:label "executesServico"@en ;
-    rdfs:comment "Service line parent executes a detailed acquisition record."@en ;
-    rdfs:domain geo:GeologicalOperationsDocument ;
+    rdfs:comment "A service line (e.g. Mudlogging) executes a detailed acquisition record (e.g. MudloggingTimeSeries)."@en ;
+    rdfs:domain geo:ServiceLine ;
     rdfs:range geo:WellsiteAcquisitionRecord .
 
 geo:acquiredDuring a owl:ObjectProperty ;
