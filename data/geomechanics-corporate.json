@@ -1253,6 +1253,16 @@
           "relation_type": "DEFINES_LOWER_BOUND",
           "target_label": "Janela Operacional de Lama",
           "_flipped_from": "GEOMEC003 LOWER_BOUND_DEFINED_BY→GEOMEC009"
+        },
+        {
+          "relation_type": "HAS_SUBTYPE",
+          "target_id": "GEOMEC009A",
+          "target_label": "Pressão de Colapso Inferior (Falha por Cisalhamento)"
+        },
+        {
+          "relation_type": "HAS_SUBTYPE",
+          "target_id": "GEOMEC009B",
+          "target_label": "Pressão de Colapso Superior (Perda de Circulação)"
         }
       ],
       "osdu_mapping": null,
@@ -1335,7 +1345,7 @@
         "Colapso Inferior",
         "PCOIPR"
       ],
-      "definition_pt": "Limite mínimo de peso de fluido abaixo do qual a formação falha por cisalhamento, gerando alargamento do poço (breakout) em rochas frígeis ou fechamento do diâmetro em rochas dúcteis. Calculado pelo critério de Mohr-Coulomb ou Drucker-Prager. É o limite inferior absoluto da Janela Operacional de Lama (GEOMEC003). Mnemonics BDIEP: PCOIPR (Provável Retroanálise).",
+      "definition_pt": "Limite mínimo de peso de fluido abaixo do qual a formação falha por cisalhamento, gerando alargamento do poço (breakout) em rochas frágeis ou fechamento do diâmetro em rochas dúcteis. Calculado pelo critério de Mohr-Coulomb ou Drucker-Prager. É o limite inferior absoluto da Janela Operacional de Lama (GEOMEC003). Mnemonics BDIEP: PCOIPR (Provável Retroanálise).",
       "definition_en": "Minimum mud weight below which the formation fails in shear, causing borehole enlargement (breakout) in brittle rocks or diameter closure in ductile rocks. Calculated via Mohr-Coulomb or Drucker-Prager criterion. Absolute lower bound of the Mud Weight Window (GEOMEC003). BDIEP mnemonic: PCOIPR.",
       "standard_unit": "ppg (lb/gal)",
       "category": "Property",
