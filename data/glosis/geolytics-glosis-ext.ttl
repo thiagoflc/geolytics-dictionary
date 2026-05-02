@@ -732,4 +732,20 @@ geox:m10-fluidos-pattern a owl:NamedIndividual ;
 #   - Cada glosis_ob:GL_Observation DEVE ter sosa:hasResult + sosa:observedProperty
 #   - Cada iso28258:ProfileElement DEVE ter upperDepth ≤ lowerDepth (xsd:decimal, em metros)
 
+# ============================================================================
+# 7. INSPIRE LithologyValue (transitive via CGI 2016.01)
+# ============================================================================
+# Source: data/glosis/lithology-crosswalk-inspire-litho.json
+# Pattern: GLOSIS → CGI 2016.01 (skos:closeMatch) → INSPIRE LithologyValue
+#          (skos:exactMatch). Transitive composition yields skos:closeMatch.
+#
+# Scope: minimum (1 mapping). Documents the pattern; future expansion via
+# remapping GLOSIS aggregators to CGI 2016.01 can grow this section.
+#
+
+@prefix inspire_litho: <http://inspire.ec.europa.eu/codelist/LithologyValue/> .
+
+# IB3 dolerite → doleriticRock (closeMatch via CGI 2016.01 doleritic_rock)
+glosis_cl:lithologyValueCode-IB3 skos:closeMatch inspire_litho:doleriticRock .
+
 # === EOF ===

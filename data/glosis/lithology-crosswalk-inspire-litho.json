@@ -1,0 +1,49 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generated": "2026-05-02T18:30:00.000Z",
+    "description": "Crosswalk transitivo entre GLOSIS lithologyValueCode e INSPIRE LithologyValue, derivado por composição GLOSIS → CGI 2016.01 SimpleLithology → INSPIRE LithologyValue. CGI 2016.01 carrega skos:exactMatch para INSPIRE em 265 dos seus 266 conceitos.",
+    "rationale": "INSPIRE LithologyValue é o vocabulário de litologia europeu (577 conceitos, EU Public Domain) usado por mapeamentos geológicos nacionais da UE e harmonizado com OGC GeoSciML. Ter ponte direta GLOSIS → INSPIRE viabiliza queries cruzadas com bases de dados geológicas europeias sem precisar passar por CGI.",
+    "transitive_pattern": "GLOSIS lithologyValueCode-X --[ via lithology-crosswalk-cgi.json ]→ CGI 2016.01 IRI --[ via skos:exactMatch in CGI ttl ]→ INSPIRE LithologyValue IRI",
+    "match_strength_rule": "Quando A skos:closeMatch B e B skos:exactMatch C, então A skos:closeMatch C (closeMatch é mais fraco que exactMatch; transitividade preserva o mais fraco).",
+    "scope": "minimum — apenas conceitos GLOSIS já mapeados a CGI 2016.01 (atualmente 1: IB3 dolerite). Expansão futura possível remapeando agregadores GLOSIS para CGI 2016.01.",
+    "sources": [
+      "GLOSIS v1.5.1 lithologyValueCode — http://w3id.org/glosis/model/codelists/lithologyValueCode",
+      "CGI 2016.01 SimpleLithology — http://resource.geosciml.org/classifierscheme/cgi/2016.01/simplelithology (cached: /tmp/cgi_simple.ttl)",
+      "INSPIRE LithologyValue v1 — http://inspire.ec.europa.eu/codelist/LithologyValue (cached: data/glosis/source-ttl/inspire-lithologyvalue.rdf)",
+      "Existing crosswalk: data/glosis/lithology-crosswalk-cgi.json (IB3 → doleritic_rock)"
+    ],
+    "license_note": "INSPIRE Registry é EU Public Domain. CGI Simple Lithology é OGC public spec. Ambos compatíveis com a licença CC BY-NC-SA 3.0 IGO da camada GLOSIS-ext.",
+    "summary": {
+      "mappings_total": 1,
+      "by_match_kind": { "closeMatch": 1 },
+      "expansion_candidates": 13,
+      "expansion_note": "13 GLOSIS aggregators (II1, MA2, MA3, MB1, MU1, SC1, SC2, SE1, SO1, UF2, UR1, UU5, IU) poderiam ser remapeados para CGI 2016.01 e herdar transitividade INSPIRE — escopo deferido."
+    }
+  },
+  "transitive_pattern_diagram": [
+    "                  skos:closeMatch                         skos:exactMatch",
+    "  GLOSIS:IB3  ─────────────────────────►  CGI:doleritic_rock  ─────────────────►  INSPIRE:doleriticRock",
+    "  (dolerite)        (closeMatch — narrower in CGI)              (exactMatch in CGI 2016.01 ttl)",
+    "                                                                                  ",
+    "  Resulting transitive triple:  GLOSIS:IB3  skos:closeMatch  INSPIRE:doleriticRock"
+  ],
+  "mappings": [
+    {
+      "glosis_id": "lithologyValueCode-IB3",
+      "glosis_iri": "http://w3id.org/glosis/model/codelists/lithologyValueCode-IB3",
+      "glosis_label": "dolerite",
+      "cgi_2016_iri": "http://resource.geosciml.org/classifier/cgi/lithology/doleritic_rock",
+      "cgi_2016_label": "doleritic rock",
+      "cgi_match_kind": "closeMatch",
+      "cgi_match_source": "data/glosis/lithology-crosswalk-cgi.json#lithologyValueCode-IB3",
+      "inspire_iri": "http://inspire.ec.europa.eu/codelist/LithologyValue/doleriticRock",
+      "inspire_label": "doleritic rock",
+      "inspire_match_kind": "exactMatch",
+      "inspire_match_source": "CGI 2016.01 simplelithology.ttl line 1756",
+      "transitive_match": "closeMatch",
+      "via": ["skos:closeMatch (GLOSIS→CGI)", "skos:exactMatch (CGI→INSPIRE)"],
+      "note": "GLOSIS IB3 'dolerite' é narrower que CGI 'doleritic rock' (que inclui dolerite/diabase/microdiorite/microgabbro como skos:example). Transitividade resulta em closeMatch para INSPIRE."
+    }
+  ]
+}

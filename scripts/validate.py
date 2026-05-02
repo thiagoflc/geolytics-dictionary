@@ -152,12 +152,43 @@ def crosswalk_audit() -> int:
         if m.get("match") not in valid_kinds:
             issues.append(f"  invalid match kind: {m.get('match')} on {m.get('glosis_id')}")
 
+    # 5. INSPIRE LithologyValue transitive crosswalk (if file present)
+    inspire_litho_path = ROOT / "data" / "glosis" / "lithology-crosswalk-inspire-litho.json"
+    inspire_litho_count = 0
+    if inspire_litho_path.exists():
+        cw_insp_litho = json.loads(inspire_litho_path.read_text())
+        for m in cw_insp_litho["mappings"]:
+            inspire_litho_count += 1
+            # Source GLOSIS code must exist
+            if m["glosis_id"] not in litho:
+                issues.append(f"  inspire-litho: unknown glosis_id '{m['glosis_id']}'")
+            # IRIs must be well-formed
+            for fld in ("glosis_iri", "cgi_2016_iri", "inspire_iri"):
+                v = m.get(fld, "")
+                if not v.startswith("http"):
+                    issues.append(f"  inspire-litho: malformed {fld} on {m['glosis_id']}: {v}")
+            if not m.get("inspire_iri", "").startswith("http://inspire.ec.europa.eu/codelist/LithologyValue/"):
+                issues.append(f"  inspire-litho: {m['glosis_id']} inspire_iri not in LithologyValue scheme")
+            # Transitive match strength must be ≤ weakest hop
+            order = ["exactMatch", "closeMatch", "broadMatch", "relatedMatch"]
+            cgi_k = m.get("cgi_match_kind", "exactMatch")
+            insp_k = m.get("inspire_match_kind", "exactMatch")
+            transitive = m.get("transitive_match", "")
+            if transitive in order and cgi_k in order and insp_k in order:
+                weakest = max(order.index(cgi_k), order.index(insp_k))
+                if order.index(transitive) < weakest:
+                    issues.append(
+                        f"  inspire-litho: {m['glosis_id']} transitive_match '{transitive}' "
+                        f"stronger than weakest hop ('{order[weakest]}')"
+                    )
+
     # Summary
     print(f"GLOSIS lithology concepts: {len(litho)}")
     print(f"CGI crosswalk mappings: {len(cw_cgi['mappings'])}")
     print(f"  of which noMatch: {sum(1 for m in cw_cgi['mappings'] if m['match']=='noMatch')}")
-    print(f"INSPIRE crosswalk mappings: {len(cw_insp['mappings'])}")
-    print(f"  with INSPIRE targets: {sum(1 for m in cw_insp['mappings'] if m.get('inspire_targets'))}")
+    print(f"INSPIRE Geomorph mappings: {len(cw_insp['mappings'])}")
+    print(f"  with targets: {sum(1 for m in cw_insp['mappings'] if m.get('inspire_targets'))}")
+    print(f"INSPIRE LithologyValue mappings (transitive): {inspire_litho_count}")
     print()
     if issues:
         print(f"FAIL — {len(issues)} issue(s):")

@@ -12,7 +12,8 @@ Análise completa: `../glosis-extraction.md`.
 | `petrography-codelists.json` | 22 codelists (cementação, weathering, porosidade, estrutura, granulometria, plasticidade, landform) — 166 conceitos | `glosis_cl.ttl` |
 | `inspire-geomorph-codelists.json` | 4 codelists INSPIRE Geomorphology/EventEnvironment — 227 conceitos (38 + 16 + 166 + 7) | INSPIRE Registry RDF |
 | `lithology-crosswalk-inspire-geomorph.json` | **Crosswalk dos 19 GLOSIS noMatch** contra INSPIRE Geomorph (1:N, 29 links totais — 2 exactMatch, 9 closeMatch, 5 broadMatch, 3 ainda noMatch) | manual |
-| `geolytics-glosis-ext.ttl` | **Ontologia OWL+SKOS** — 416 triples: 4 `owl:imports` (codelists, ISO 28258, procedures, units), 98 mappings SKOS, backbone E&P, par `*Property`/`*Value` para 18 campos PVT | gerado |
+| `lithology-crosswalk-inspire-litho.json` | Crosswalk transitivo GLOSIS → CGI 2016.01 → INSPIRE **LithologyValue** (mínimo: 1 mapeamento IB3, documenta o pattern) | derivado |
+| `geolytics-glosis-ext.ttl` | **Ontologia OWL+SKOS** — 417 triples: 4 `owl:imports` (codelists, ISO 28258, procedures, units), 99 mappings SKOS, backbone E&P, par `*Property`/`*Value` para 18 campos PVT | gerado |
 | `geolytics-modules.ttl` | M7/M8/M9/M10 modules serialization — 463 triples | gerado |
 | `geolytics-units.ttl` | Unidades petroleiras (BBL/D, MCF/D, SCF/STB, RB/STB, °API, psia, cP, mD…) — 123 triples, 13 unidades, 5 quantity kinds | manual |
 | `pvt-procedures.ttl` | 8 procedures PVT (flash/differential liberation, CCE, swelling, separator, viscosity, slim-tube, multi-contact) — 116 triples | manual |
