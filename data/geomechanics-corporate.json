@@ -13,10 +13,11 @@
       "v1.2",
       "v1.3",
       "v1.4",
-      "v1.5-consolidated"
+      "v1.5-consolidated",
+      "v1.6-1d-curves"
     ],
     "consolidated_at": "2026-05-02",
-    "entity_count": 47,
+    "entity_count": 71,
     "sources": [
       "PE-2RES-00009 - Avaliação de Riscos Geológicos e Geomecânicos para Poços de DP",
       "PE-2RES-00014 - Modelagem Geomecânica 1D",
@@ -429,7 +430,12 @@
         "1.3",
         "1.4"
       ]
-    }
+    },
+    "crosswalks": [
+      "geomechanics-1d-curves-crosswalk.json"
+    ],
+    "has_polysemy_cards": true,
+    "polysemy_count": 1
   },
   "entities": [
     {
@@ -544,6 +550,18 @@
           "section": "3.4.1 Testes de absorção e fraturamento",
           "citation": "As estimativas das pressões de poros nas fases com retorno de fluido para plataforma são insumo fundamental."
         }
+      ],
+      "mnemonic_curves": [
+        {
+          "mnemonic": "PPORPR",
+          "full_name_pt": "Pressão de Poros Provável – Retroanálise",
+          "full_name_en": "Probable Pore Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
+        }
       ]
     },
     {
@@ -642,6 +660,18 @@
           "doc_id": "PE-2RES-00014",
           "section": "3.4.1 Testes de absorção e fraturamento",
           "citation": "a estimativa da magnitude da tensão horizontal mínima é feita com base em uma operação que envolva a propagação de uma fratura na formação."
+        }
+      ],
+      "mnemonic_curves": [
+        {
+          "mnemonic": "PFRAPR",
+          "full_name_pt": "Pressão de Fratura Provável – Retroanálise",
+          "full_name_en": "Probable Fracture Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
         }
       ]
     },
@@ -1071,6 +1101,18 @@
           "section": "§3.5.2.5 Cálculo do Volume de Densidade",
           "citation": "Obtenção da tensão vertical a partir da integração do perfil de densidade."
         }
+      ],
+      "mnemonic_curves": [
+        {
+          "mnemonic": "SGEOPR",
+          "full_name_pt": "Tensão Geostática Provável – Retroanálise",
+          "full_name_en": "Probable Geostatic Stress — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
+        }
       ]
     },
     {
@@ -1156,6 +1198,18 @@
           "doc_id": "PE-2RES-00014",
           "section": "§3.3.3 Tensões horizontais máximas",
           "citation": "os trechos em que são encontradas feições nos fornecem a direção da tensão horizontal mínima (breakouts) e a direção da tensão horizontal máxima (fraturas induzidas)."
+        }
+      ],
+      "mnemonic_curves": [
+        {
+          "mnemonic": "SHMXPR",
+          "full_name_pt": "Tensão Horizontal Máxima Provável – Retroanálise",
+          "full_name_en": "Probable Maximum Horizontal Stress — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
         }
       ]
     },
@@ -1246,7 +1300,165 @@
           "section": "§3.4.3 Arraste, Estolamento, Prisão",
           "citation": "Colapso do poço significa que a formação perfurada não resistiu aos esforços e falhou mecanicamente."
         }
+      ],
+      "mnemonic_curves": [
+        {
+          "mnemonic": "PCOIPR",
+          "full_name_pt": "Pressão de Colapso Inferior Provável – Retroanálise",
+          "full_name_en": "Probable Lower Collapse Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP",
+          "sub_entity": "GEOMEC009A"
+        },
+        {
+          "mnemonic": "PCOSPR",
+          "full_name_pt": "Pressão de Colapso Superior Provável – Retroanálise",
+          "full_name_en": "Probable Upper Collapse Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP",
+          "sub_entity": "GEOMEC009B"
+        }
       ]
+    },
+    {
+      "id": "GEOMEC009A",
+      "label_pt": "Pressão de Colapso Inferior (Falha por Cisalhamento)",
+      "label_en": "Lower Collapse Pressure (Shear Failure)",
+      "acronym": [
+        "GCi",
+        "Colapso Inferior",
+        "PCOIPR"
+      ],
+      "definition_pt": "Limite mínimo de peso de fluido abaixo do qual a formação falha por cisalhamento, gerando alargamento do poço (breakout) em rochas frígeis ou fechamento do diâmetro em rochas dúcteis. Calculado pelo critério de Mohr-Coulomb ou Drucker-Prager. É o limite inferior absoluto da Janela Operacional de Lama (GEOMEC003). Mnemonics BDIEP: PCOIPR (Provável Retroanálise).",
+      "definition_en": "Minimum mud weight below which the formation fails in shear, causing borehole enlargement (breakout) in brittle rocks or diameter closure in ductile rocks. Calculated via Mohr-Coulomb or Drucker-Prager criterion. Absolute lower bound of the Mud Weight Window (GEOMEC003). BDIEP mnemonic: PCOIPR.",
+      "standard_unit": "ppg (lb/gal)",
+      "category": "Property",
+      "confidence": "high",
+      "parent_entity": "GEOMEC009",
+      "mnemonic_curves": [
+        {
+          "mnemonic": "PCOIPR",
+          "full_name_pt": "Pressão de Colapso Inferior Provável – Retroanálise",
+          "full_name_en": "Probable Lower Collapse Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
+        }
+      ],
+      "relationships": [
+        {
+          "relation_type": "IS_SUBTYPE_OF",
+          "target_id": "GEOMEC009",
+          "target_label": "Gradiente de Colapso"
+        },
+        {
+          "relation_type": "DEFINES_LOWER_BOUND",
+          "target_id": "GEOMEC003",
+          "target_label": "Janela Operacional de Lama"
+        },
+        {
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_id": "GEOMEC010",
+          "target_label": "Resistência à Compressão Uniaxial (UCS)"
+        },
+        {
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_id": "GEOMEC001",
+          "target_label": "Pressão de Poros"
+        },
+        {
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_id": "GEOMEC004",
+          "target_label": "Estado de Tensões In Situ (Geotensões)"
+        },
+        {
+          "relation_type": "IS_STORED_IN",
+          "target_id": "GEOMEC049",
+          "target_label": "BDIEP — Base de Dados Integrada de E&P"
+        }
+      ],
+      "units_observed": [
+        "ppg (lb/gal)",
+        "psi g",
+        "kgf/cm²/m"
+      ],
+      "_source_block": "1d-curves-2026",
+      "priority_tier": "corporate"
+    },
+    {
+      "id": "GEOMEC009B",
+      "label_pt": "Pressão de Colapso Superior (Perda de Circulação)",
+      "label_en": "Upper Collapse Pressure (Lost Circulation Threshold)",
+      "acronym": [
+        "GCs",
+        "Colapso Superior",
+        "PCOSPR"
+      ],
+      "definition_pt": "Limite máximo de peso de fluido acima do qual ocorre perda de circulação por fraturamento de fraturas naturais presentes na parede do poço. Operacionalmente distinto da Pressão de Fratura (GEOMEC002): GEOMEC009B é calculado como critério de colapso aplicado à parede do poço, enquanto o gradiente de fratura é a tensão mínima horizontal de campo distante. Mnemonics BDIEP: PCOSPR (Provável Retroanálise).",
+      "definition_en": "Maximum mud weight above which lost circulation occurs by reopening or propagating natural fractures at the borehole wall. Operationally distinct from Fracture Gradient (GEOMEC002): this is a wellbore-wall collapse criterion, while fracture gradient is the far-field minimum principal stress. BDIEP mnemonic: PCOSPR.",
+      "standard_unit": "ppg (lb/gal)",
+      "category": "Property",
+      "confidence": "high",
+      "parent_entity": "GEOMEC009",
+      "mnemonic_curves": [
+        {
+          "mnemonic": "PCOSPR",
+          "full_name_pt": "Pressão de Colapso Superior Provável – Retroanálise",
+          "full_name_en": "Probable Upper Collapse Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
+        }
+      ],
+      "relationships": [
+        {
+          "relation_type": "IS_SUBTYPE_OF",
+          "target_id": "GEOMEC009",
+          "target_label": "Gradiente de Colapso"
+        },
+        {
+          "relation_type": "DEFINES_UPPER_BOUND",
+          "target_id": "GEOMEC003",
+          "target_label": "Janela Operacional de Lama"
+        },
+        {
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_id": "GEOMEC001",
+          "target_label": "Pressão de Poros"
+        },
+        {
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_id": "GEOMEC004",
+          "target_label": "Estado de Tensões In Situ (Geotensões)"
+        },
+        {
+          "relation_type": "IS_RELATED_TO",
+          "target_id": "GEOMEC002",
+          "target_label": "Tensão Mínima Horizontal (Gradiente de Fratura)"
+        },
+        {
+          "relation_type": "IS_STORED_IN",
+          "target_id": "GEOMEC049",
+          "target_label": "BDIEP — Base de Dados Integrada de E&P"
+        }
+      ],
+      "units_observed": [
+        "ppg (lb/gal)",
+        "psi g",
+        "kgf/cm²/m"
+      ],
+      "_source_block": "1d-curves-2026",
+      "priority_tier": "corporate"
     },
     {
       "id": "GEOMEC010",
@@ -4075,7 +4287,50 @@
         "DDL nativo não publicado no SINPEP — solicitar ao TIC/US/EXP-RES-DC. Tabelas Oracle conhecidas: poco, log_perfuracao, curva_perfilagem, metadado_curva.",
         "Política de backup/DR e retenção operacional."
       ],
-      "relationships": [],
+      "relationships": [
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC001",
+          "target_label": "Pressão de Poros",
+          "mnemonic": "PPORPR"
+        },
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC007",
+          "target_label": "Tensão Vertical / Sobrecarga (Sv)",
+          "mnemonic": "SGEOPR"
+        },
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC002",
+          "target_label": "Tensão Mínima Horizontal (Gradiente de Fratura)",
+          "mnemonic": "PFRAPR"
+        },
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC008",
+          "target_label": "Tensão Horizontal Máxima (SHmax)",
+          "mnemonic": "SHMXPR"
+        },
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC009A",
+          "target_label": "Pressão de Colapso Inferior",
+          "mnemonic": "PCOIPR"
+        },
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC009B",
+          "target_label": "Pressão de Colapso Superior",
+          "mnemonic": "PCOSPR"
+        },
+        {
+          "relation_type": "STORES",
+          "target_id": "GEOMEC054",
+          "target_label": "Pressão de Quebra da Formação",
+          "mnemonic": "PQBFPR"
+        }
+      ],
       "sources": [
         {
           "doc_id": "PE-2EXP-00065",
@@ -4484,6 +4739,320 @@
       ]
     },
     {
+      "id": "GEOMEC054",
+      "label_pt": "Pressão de Quebra da Formação",
+      "label_en": "Formation Breakdown Pressure",
+      "acronym": [
+        "Pbkd",
+        "PQBF",
+        "Breakdown Pressure"
+      ],
+      "definition_pt": "Pressão máxima atingida durante um teste de fraturamento (xLOT, mini-frac ou fraturamento hidráulico) no instante em que ocorre a iniciação da fratura — isto é, quando a parede do poço rompe e a curva pressão×tempo atinge o pico antes da queda associada à propagação. Distinto da Pressão de Propagação de Fratura (GEOMEC053B), que é a pressão sustentada após o breakdown, e do Gradiente de Fratura / Shmin (GEOMEC002). Em formações íntegras, PQBF > FPP; em formações pré-fraturadas, PQBF ≈ FPP. Mnemônico BDIEP: PQBFPR (Provável Retroanálise).",
+      "definition_en": "Peak pressure during a fracturing test (xLOT, mini-frac or hydraulic fracturing) at the instant of fracture initiation — i.e., when the borehole wall breaks and the pressure-time curve reaches its peak before the drop associated with fracture propagation. Distinct from Fracture Propagation Pressure (GEOMEC053B), which is the sustained pressure after breakdown, and from Fracture Gradient / Shmin (GEOMEC002). In intact rock PQBF > FPP; in pre-fractured formations PQBF ≈ FPP. BDIEP mnemonic: PQBFPR (Probable Retroanalysis).",
+      "standard_unit": "psi",
+      "category": "Property",
+      "confidence": "high",
+      "mnemonic_curves": [
+        {
+          "mnemonic": "PQBFPR",
+          "full_name_pt": "Pressão de Quebra da Formação Provável – Retroanálise",
+          "full_name_en": "Probable Formation Breakdown Pressure — Retroanalysis",
+          "qualifier": "Provável",
+          "analysis_type": "RETROANÁLISE",
+          "unit_bdiep": "psi g",
+          "curve_type": "Perfis interpretados",
+          "system": "BDIEP"
+        }
+      ],
+      "relationships": [
+        {
+          "relation_type": "PRECEDES",
+          "target_id": "GEOMEC053B",
+          "target_label": "Pressão de Propagação de Fratura"
+        },
+        {
+          "relation_type": "IS_MEASURED_BY",
+          "target_id": "GEOMEC006",
+          "target_label": "Testes de Absorção e Fraturamento (LOT/xLOT/FIT)"
+        },
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC033",
+          "target_label": "Fraturamento Hidráulico (Estimulação)"
+        },
+        {
+          "relation_type": "IS_PART_OF",
+          "target_id": "GEOMEC031",
+          "target_label": "XLOT — Teste de Fraturamento Estendido"
+        },
+        {
+          "relation_type": "IS_STORED_IN",
+          "target_id": "GEOMEC049",
+          "target_label": "BDIEP — Base de Dados Integrada de E&P"
+        },
+        {
+          "relation_type": "IS_GREATER_THAN",
+          "target_id": "GEOMEC053B",
+          "target_label": "Pressão de Propagação de Fratura (em rocha íntegra)"
+        }
+      ],
+      "units_observed": [
+        "psi g",
+        "psi",
+        "kgf/cm²",
+        "MPa"
+      ],
+      "_source_block": "1d-curves-2026",
+      "priority_tier": "corporate",
+      "sources": [
+        {
+          "doc_id": "PE-2POC-01246",
+          "section": "Manual de Projeto de Fraturamento",
+          "citation": "A pressão de quebra da formação (breakdown) é o pico de pressão obtido durante a injeção antes da propagação da fratura."
+        },
+        {
+          "doc_id": "PE-2POC-01495",
+          "section": "Elaborar Projeto de Microfraturamento",
+          "citation": "No microfraturamento, registra-se a pressão de quebra e a pressão de propagação, que são grandezas distintas e complementares."
+        }
+      ]
+    },
+    {
+      "id": "GEOMEC_ROP_A",
+      "label_pt": "Taxa de Penetração",
+      "label_en": "Rate of Penetration",
+      "acronym": [
+        "ROP"
+      ],
+      "observed_variants": [
+        "ROP",
+        "taxa de penetração",
+        "taxa de perfuração",
+        "Rate of Penetration",
+        "velocidade de avanço",
+        "ROPm"
+      ],
+      "category": "Measurement",
+      "domain": [
+        "Perfuração",
+        "Hidráulica de Poços",
+        "Geomecânica Operacional",
+        "Geodrilling"
+      ],
+      "definition_pt": "Velocidade na qual a broca aprofunda o poço ao quebrar a rocha, geralmente expressa em metros por hora ou pés por minuto. No contexto operacional, a taxa de penetração influencia a geração de cascalhos no anular e pode afetar a ECD, a limpeza do poço, o risco de perda de circulação e a estabilidade operacional.",
+      "definition_en": "Speed at which the drill bit deepens the well by breaking rock, commonly expressed in metres per hour or feet per minute. Operationally, rate of penetration influences cuttings generation in the annulus and may affect ECD, hole cleaning, lost circulation risk and operational stability.",
+      "units_observed": [
+        "m/h",
+        "pés/min",
+        "ft/min"
+      ],
+      "preferred_unit": "m/h",
+      "standard_unit": "m/h",
+      "confidence": "high",
+      "osdu_mapping": null,
+      "owner_department": "POÇOS/SPO",
+      "official_datastore": [
+        "OpenWells",
+        "BDIEP",
+        "EXATA"
+      ],
+      "internal_tools": [
+        "SIMCARR",
+        "PWDa",
+        "RTO-LIVE",
+        "MWD/LWD"
+      ],
+      "polysemy_note": "A sigla ROP é polissêmica: neste módulo refere-se à grandeza física de perfuração. Para o documento operacional, ver GEOMEC_ROP_B.",
+      "relationships": [
+        {
+          "target_id": "GEOMEC019",
+          "target_label": "Densidade Equivalente de Circulação",
+          "relation_type": "AMPLIFIES",
+          "rationale": "Aumento de ROP pode elevar volume de cascalhos no anular e contribuir para aumento de ECD."
+        },
+        {
+          "target_id": "GEOMEC003",
+          "target_label": "Janela Operacional de Lama",
+          "relation_type": "CONSTRAINS",
+          "rationale": "ROP excessivo pode reduzir margem operacional se contribuir para ECD acima do limite superior da janela."
+        },
+        {
+          "target_id": "GEOMEC009",
+          "target_label": "Gradiente de Colapso",
+          "relation_type": "RELATED_TO",
+          "rationale": "ROP elevado associado a colapso pode indicar variação litológica ou instabilidade de poço."
+        },
+        {
+          "target_id": "GEOMEC044",
+          "target_label": "Washout",
+          "relation_type": "MAY_CONTRIBUTE_TO",
+          "rationale": "ROP excessivo com limpeza deficiente pode contribuir para alargamento e washout."
+        },
+        {
+          "target_id": "GEOMEC045",
+          "target_label": "Prisão de Coluna",
+          "relation_type": "MAY_CONTRIBUTE_TO",
+          "rationale": "ROP elevado, quando combinado com limpeza insuficiente, pode contribuir para eventos operacionais como arraste, topamento ou prisão."
+        }
+      ],
+      "graph_rag_behavior": {
+        "query_disambiguation_rule": "Se a pergunta mencionar broca, perfuração, WOB, RPM, torque, ECD, hidráulica, cascalhos, limpeza de poço ou taxa, resolver ROP como GEOMEC_ROP_A.",
+        "example_queries": [
+          "Qual foi o ROP médio da fase?",
+          "Como o ROP impacta o ECD?",
+          "ROP alto pode causar perda de circulação?",
+          "Compare ROP, WOB, RPM e torque em poços análogos."
+        ]
+      },
+      "evidence_gaps": [
+        "Confirmar se o datastore oficial primário para ROP físico será OpenWells, EXATA, RTO-LIVE ou outro produto de dado.",
+        "Confirmar granularidade esperada: instantâneo, média por fase, média por corrida, média por metro ou série temporal.",
+        "Confirmar se ROPm deve ser tratado como alias de ROP ou como métrica derivada normalizada."
+      ],
+      "sources": [
+        {
+          "doc_id": "PP-2POC-00341",
+          "section": "§5 Definições",
+          "support_type": "definition",
+          "quote": "ROP - Rate of Penetration...",
+          "source_status": "provided_by_user_from_SINPEP"
+        },
+        {
+          "doc_id": "PE-2POC-00453",
+          "section": "§3.2.2.1 ROP",
+          "support_type": "relationship_to_ECD",
+          "quote": "Um aumento na taxa de penetração tende a aumentar a quantidade de cascalhos no anular...",
+          "source_status": "provided_by_user_from_SINPEP"
+        },
+        {
+          "doc_id": "PE-2RES-00009",
+          "section": "§3.4.2 Perda de Circulação",
+          "support_type": "risk_context",
+          "quote": "ROP excessivo com sólidos.",
+          "source_status": "provided_by_user_from_SINPEP"
+        }
+      ],
+      "_source_block": "polysemy-rop-2026",
+      "priority_tier": "corporate"
+    },
+    {
+      "id": "GEOMEC_ROP_B",
+      "label_pt": "Relatório de Operações de Perfilagem",
+      "label_en": "Well Logging Operations Report",
+      "acronym": [
+        "ROP"
+      ],
+      "observed_variants": [
+        "ROP",
+        "Relatório de Operações de Perfilagem",
+        "Relatório de Operações de Perfilagens",
+        "ROP (documento)",
+        "logging operations report"
+      ],
+      "category": "Document",
+      "domain": [
+        "Operações Geológicas",
+        "Perfilagem",
+        "Aquisição de Dados de Poço",
+        "Documentos Operacionais"
+      ],
+      "definition_pt": "Relatório operacional que registra informações referentes às operações de perfilagem a cabo e LWD realizadas em um poço, incluindo ferramentas utilizadas, intervalos de aquisição, tempos, curvas adquiridas, amostras de rocha ou fluido eventualmente coletadas e ocorrências relevantes.",
+      "definition_en": "Operational report that records information on wireline and LWD logging operations performed in a well, including tools used, acquisition intervals, times, acquired curves, rock or fluid samples eventually collected and relevant events.",
+      "units_observed": [],
+      "preferred_unit": null,
+      "confidence": "high",
+      "osdu_mapping": null,
+      "owner_department": "EXP/OGP/AQG",
+      "official_datastore": [
+        "VGE",
+        "BDIEP",
+        "EXATA"
+      ],
+      "internal_tools": [
+        "EXATA",
+        "IVE",
+        "SIGEO 3",
+        "ROP"
+      ],
+      "known_content_groups": [
+        "Cabeçalho",
+        "Ferramentas de Perfilagem",
+        "Perfilagens",
+        "Ocorrências",
+        "Anomalias",
+        "Amostra Lateral",
+        "Registros de pressão",
+        "Amostragem de fluido"
+      ],
+      "polysemy_note": "A sigla ROP é polissêmica: neste módulo refere-se ao documento/sistema de operações de perfilagem. Para a grandeza física de perfuração, ver GEOMEC_ROP_A.",
+      "relationships": [
+        {
+          "target_id": "GEOMEC025",
+          "target_label": "CSD — Centro de Suporte à Decisão",
+          "relation_type": "IS_INPUT_FOR",
+          "rationale": "Dados do ROP-documento podem apoiar interpretação e monitoramento operacional/geomecânico."
+        },
+        {
+          "target_id": "GEOMEC026A",
+          "target_label": "QPG — Quadro de Previsões Geológicas",
+          "relation_type": "IS_INPUT_FOR",
+          "rationale": "Dados reais de perfilagem e ocorrências podem apoiar comparação com previsões geológicas."
+        },
+        {
+          "target_id": "GEOMEC023",
+          "target_label": "Breakouts e Fraturas Induzidas",
+          "relation_type": "MAY_REFERENCE",
+          "rationale": "Quando houver perfis de imagem ou informações de perfilagem associadas, o ROP-documento pode apoiar rastreabilidade dos intervalos perfilados."
+        },
+        {
+          "target_id": "GEOMEC015",
+          "target_label": "Estabilidade de Poço / Geohazards",
+          "relation_type": "SUPPORTS",
+          "rationale": "Ocorrências e anomalias registradas podem compor evidência operacional para análise de riscos."
+        }
+      ],
+      "graph_rag_behavior": {
+        "query_disambiguation_rule": "Se a pergunta mencionar relatório, perfilagem, LWD, cabo, ferramentas de perfilagem, amostras laterais, pré-testes, VGE, EXATA, IVE ou SIGEO, resolver ROP como GEOMEC_ROP_B.",
+        "example_queries": [
+          "Onde está o ROP do poço?",
+          "Quais ferramentas LWD constam no ROP?",
+          "Quais anomalias foram registradas no ROP?",
+          "O ROP possui amostragem de fluido ou pré-testes?"
+        ]
+      },
+      "evidence_gaps": [
+        "Confirmar schema completo da API EXATA/ROP.",
+        "Confirmar se o ROP-documento deve ficar no módulo geomechanics-corporate ou migrar para documents-corporate.",
+        "Confirmar chave primária oficial: poço, número da perfilagem, corrida, fase ou identificador ROP.",
+        "Confirmar campos obrigatórios e opcionais para ingestão no Knowledge Graph."
+      ],
+      "sources": [
+        {
+          "doc_id": "PE-2EXP-00067",
+          "section": "§5 Definições",
+          "support_type": "definition",
+          "quote": "ROP (Relatório de Operações de Perfilagem): Relatório contendo informações referentes às operações de perfilagem...",
+          "source_status": "provided_by_user_from_SINPEP"
+        },
+        {
+          "doc_id": "PE-2EXP-00074",
+          "section": "§4 Registros",
+          "support_type": "datastore",
+          "quote": "Relatório de Operações de Perfilagem (ROP): VGE...",
+          "source_status": "provided_by_user_from_SINPEP"
+        },
+        {
+          "doc_id": "ROP.aspx",
+          "section": "Descrição do sistema ROP",
+          "support_type": "system_description",
+          "quote": "O ROP - Relatório de Operações de Perfilagem - é o sistema corporativo de controle das operações de perfilagem.",
+          "source_status": "provided_by_user"
+        }
+      ],
+      "_source_block": "polysemy-rop-2026",
+      "priority_tier": "corporate"
+    },
+    {
       "id": "GEOMEC061",
       "label_pt": "Ensaio Triaxial",
       "label_en": "Triaxial Test",
@@ -4704,6 +5273,102 @@
           "target_id": "GEOMEC022",
           "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
         }
+      ]
+    }
+  ],
+  "polysemy_cards": [
+    {
+      "card_id": "CARD_POLYSEMY_ROP_2026_05_02",
+      "title": "ROP — Registro de Polissemia Ontológica",
+      "module": "geomechanics-corporate",
+      "layer": "Layer 6",
+      "status": "requires_architecture_decision_before_ingestion",
+      "created_at": "2026-05-02",
+      "disambiguation_required": true,
+      "critical_warning": {
+        "type": "acronym_polysemy",
+        "severity": "high",
+        "message": "A sigla ROP possui dois significados distintos e incompatíveis no corpus Petrobras. Não deve ser ingerida como entidade única sem discriminator ou sem separação de IDs."
+      },
+      "recommended_decision": {
+        "option": "separate_ids",
+        "recommendation": "Usar IDs separados para evitar ambiguidade em GraphRAG, NER, SHACL validation e respostas de agentes.",
+        "proposed_ids": [
+          "GEOMEC_ROP_A",
+          "GEOMEC_ROP_B"
+        ],
+        "rationale": "Rate of Penetration é uma grandeza física de perfuração; Relatório de Operações de Perfilagem é um documento/sistema operacional. As classes ontológicas, unidades, relações, ferramentas e fontes são distintas."
+      },
+      "alias_policy": {
+        "ambiguous_alias": "ROP",
+        "must_not_use_as_single_entity": true,
+        "resolution_rules": [
+          {
+            "if_context_contains": [
+              "broca",
+              "taxa",
+              "perfuração",
+              "WOB",
+              "RPM",
+              "torque",
+              "ECD",
+              "cascalhos",
+              "limpeza de poço",
+              "m/h"
+            ],
+            "resolve_to": "GEOMEC_ROP_A"
+          },
+          {
+            "if_context_contains": [
+              "relatório",
+              "perfilagem",
+              "LWD",
+              "cabo",
+              "ferramentas",
+              "amostra lateral",
+              "pré-teste",
+              "VGE",
+              "EXATA",
+              "IVE",
+              "SIGEO"
+            ],
+            "resolve_to": "GEOMEC_ROP_B"
+          }
+        ],
+        "fallback_behavior": "Quando o contexto não for suficiente, o GraphRAG deve retornar os dois sentidos com disambiguation_note e não escolher automaticamente."
+      },
+      "shacl_recommendation": {
+        "GEOMEC_ROP_A": {
+          "sh_class": "Measurement",
+          "required_properties": [
+            "preferred_unit",
+            "units_observed",
+            "domain",
+            "relationships"
+          ],
+          "forbidden_properties": [
+            "repositories",
+            "document_deadlines"
+          ]
+        },
+        "GEOMEC_ROP_B": {
+          "sh_class": "Document",
+          "required_properties": [
+            "official_datastore",
+            "owner_department",
+            "known_content_groups"
+          ],
+          "forbidden_properties": [
+            "preferred_unit_as_physical_measurement"
+          ]
+        }
+      },
+      "architecture_notes": [
+        "A sigla ROP é polissêmica no corpus Petrobras e deve ser tratada como colisão semântica formal.",
+        "GEOMEC_ROP_A deve ser ingerido como Measurement no módulo geomechanics-corporate.",
+        "GEOMEC_ROP_B deve ser ingerido como Document, preferencialmente no módulo documents-corporate ou como entidade cross-domain referenciada pelo módulo geomecânico.",
+        "Consultas por ROP devem ativar política de desambiguação antes de resposta final.",
+        "SHACL shape deve diferenciar Measurement e Document para impedir mistura de unidade física com metadados documentais."
       ]
     }
   ]
