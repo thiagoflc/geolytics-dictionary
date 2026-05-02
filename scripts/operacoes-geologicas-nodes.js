@@ -842,6 +842,176 @@ export const OG_NODES = [
     "superclass": "WellJourneyPhase",
     "synonyms_pt": ["Lições Aprendidas", "Lessons Learned"],
     "synonyms_en": ["lessons learned"]
+  },
+  {
+    "id": "retro-analysis",
+    "label": "Retroanálise",
+    "label_en": "Retro Analysis",
+    "type": "operational",
+    "color": "#378ADD",
+    "size": 20,
+    "definition": "Fase inicial da jornada do poço — análise dos dados históricos de poços análogos (OGEOMEC, RMG) para subsidiar o planejamento. Consumes lessons-learned de poços anteriores.",
+    "module": "data/operacoes-geologicas.json#OG021",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "WellJourneyPhase",
+    "synonyms_pt": ["retroanálise", "análise retrospectiva"],
+    "synonyms_en": ["retro analysis", "retrospective analysis"]
+  },
+  {
+    "id": "input-elaboration",
+    "label": "Elaboração de Insumos",
+    "label_en": "Input Elaboration",
+    "type": "operational",
+    "color": "#378ADD",
+    "size": 20,
+    "definition": "Fase de planejamento detalhado — elaboração do QPG e demais insumos técnicos (programas de aquisição, seleção de linhas de serviço). Upstream de todas as atividades de campo.",
+    "module": "data/operacoes-geologicas.json#OG022",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "WellJourneyPhase",
+    "synonyms_pt": ["elaboração de insumos", "planejamento de aquisição"],
+    "synonyms_en": ["input elaboration", "acquisition planning"]
+  },
+  {
+    "id": "operational-monitoring",
+    "label": "Acompanhamento Operacional",
+    "label_en": "Operational Monitoring",
+    "type": "operational",
+    "color": "#378ADD",
+    "size": 20,
+    "definition": "Fase de execução — acompanhamento em tempo real das linhas de serviço (mudlogging, MWD/LWD, geostopping) via EXATA. Produz BDP, PAG e eventos discretos (kick, gas show).",
+    "module": "data/operacoes-geologicas.json#OG023",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "WellJourneyPhase",
+    "synonyms_pt": ["acompanhamento operacional", "monitoramento de poço"],
+    "synonyms_en": ["operational monitoring", "well monitoring"]
+  },
+  {
+    "id": "formation-evaluation",
+    "label": "Avaliação de Formações",
+    "label_en": "Formation Evaluation",
+    "type": "operational",
+    "color": "#378ADD",
+    "size": 20,
+    "definition": "Fase pós-perfuração — interpretação integrada de wireline, LWD, FRX/DRX, testes e amostras para gerar IGP e Perfil Composto. Alimenta a consolidação de dados do poço.",
+    "module": "data/operacoes-geologicas.json#OG024",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "WellJourneyPhase",
+    "synonyms_pt": ["avaliação de formações", "avaliação petrofísica"],
+    "synonyms_en": ["formation evaluation", "petrophysical evaluation"]
+  },
+  {
+    "id": "exata",
+    "label": "EXATA",
+    "label_en": "EXATA (Real-time Acquisition System)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 22,
+    "definition": "Sistema Petrobras de aquisição e transmissão de dados em tempo real de poço — integra dados de mudlogging, MWD/LWD e geostopping via streaming. Backend Oracle (hot data) + Cassandra (séries temporais). Centro operacional: CGOR.",
+    "module": "data/operacoes-geologicas.json#OG041",
+    "evidence_status": "partial",
+    "evidence_refs": ["EXATA-WIKI — Mudlogging / Curvas de Tempo"],
+    "manager": "EXP/OGP",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["EXATA", "sistema de aquisição em tempo real"],
+    "synonyms_en": ["EXATA", "real-time well data acquisition system"]
+  },
+  {
+    "id": "sigeo",
+    "label": "SIGEO",
+    "label_en": "SIGEO (Geological Information System)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 22,
+    "definition": "Sistema de Informações Geológicas Petrobras — repositório canônico de QPG, Perfil Composto, FRX e dados geológicos de poço. Acesso via VGE (BDIEP). Principal sistema de gestão de dados geológicos pós-perfuração.",
+    "module": "data/operacoes-geologicas.json#OG042",
+    "evidence_status": "partial",
+    "evidence_refs": ["SIGEO wiki — Quadro de Previsão Geológica", "SIGEO wiki — Perfil Composto", "SIGEO wiki — Análise de Dados de FRX"],
+    "manager": "EXP/OGP",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["SIGEO"],
+    "synonyms_en": ["SIGEO", "geological information system"]
+  },
+  {
+    "id": "bdiep",
+    "label": "BDIEP",
+    "label_en": "BDIEP (Exploration and Production Well Database)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 22,
+    "definition": "Banco de Dados de Informações de Exploração e Produção — repositório primário de dados de poço Petrobras. Armazena OGEOMEC, QPG, dados de wireline/LWD e demais dados de aquisição. Acessado via VGE.",
+    "module": "data/operacoes-geologicas.json#OG043",
+    "evidence_status": "partial",
+    "evidence_refs": ["Workshop Geomecânica — 544 poços com Ocorrências Geomecânicas em BDIEP"],
+    "manager": "EXP/OGP",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["BDIEP"],
+    "synonyms_en": ["BDIEP", "E&P well information database"]
+  },
+  {
+    "id": "bdiap",
+    "label": "BDIAP",
+    "label_en": "BDIAP (Production Well Database)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 20,
+    "definition": "Banco de Dados de Informações de Avaliação e Produção — repositório de dados de poços em produção. Complementar ao BDIEP para fase de desenvolvimento e produção.",
+    "module": "data/operacoes-geologicas.json#OG044",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["BDIAP"],
+    "synonyms_en": ["BDIAP"]
+  },
+  {
+    "id": "aida",
+    "label": "AIDA",
+    "label_en": "AIDA (Analytical Platform / Databricks)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 22,
+    "definition": "Plataforma analítica Petrobras baseada em Databricks/Delta Lake — destino downstream dos dados de operações geológicas (DRX, FRX, OGEOMEC) para análise exploratória, ML e GraphRAG. Pipeline de ingestão BDIEP → AIDA não totalmente documentado (gap conhecido).",
+    "module": "data/operacoes-geologicas.json#OG045",
+    "evidence_status": "partial",
+    "evidence_refs": ["PoC AWS Agente 1 OGEO"],
+    "manager": "EXP/OGP (TI)",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["AIDA", "plataforma analítica", "Databricks"],
+    "synonyms_en": ["AIDA", "analytical platform", "Databricks"]
+  },
+  {
+    "id": "geodo",
+    "label": "GeoDO",
+    "label_en": "GeoDO (Geological Operations Data Orchestrator)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 20,
+    "definition": "Sistema de orquestração de dados de operações geológicas — inclui pipeline text-to-SQL para consultas em linguagem natural sobre dados de poço. Integração com DRX/FRX pendente (gap de documentação).",
+    "module": "data/operacoes-geologicas.json#OG046",
+    "evidence_status": "inferred",
+    "manager": "EXP/OGP",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["GeoDO"],
+    "synonyms_en": ["GeoDO"]
+  },
+  {
+    "id": "gda",
+    "label": "GDA",
+    "label_en": "GDA (Geological Data Access)",
+    "type": "instrument",
+    "color": "#888780",
+    "size": 20,
+    "definition": "Camada de acesso a dados geológicos — interface de consulta para dados de operações geológicas (mudlogging, EXATA). Referenciado em fontes de mudlogging (GDA SharePoint).",
+    "module": "data/operacoes-geologicas.json#OG047",
+    "evidence_status": "inferred",
+    "evidence_refs": ["EXATA e GDA (SharePoint); OGDA SIMGEO 2024"],
+    "manager": "EXP/OGP",
+    "superclass": "GeologicalOperationsSystem",
+    "synonyms_pt": ["GDA"],
+    "synonyms_en": ["GDA"]
   }
 ];
 
@@ -1462,6 +1632,126 @@ export const OG_EDGES = [
     "relation_label_en": "derived from",
     "style": "dashed",
     "evidence_status": "documented"
+  },
+  {
+    "source": "lessons-learned",
+    "target": "retro-analysis",
+    "relation": "feeds_back_to",
+    "relation_label": "alimenta retroanálise",
+    "relation_label_en": "feeds back to",
+    "style": "dashed"
+  },
+  {
+    "source": "retro-analysis",
+    "target": "input-elaboration",
+    "relation": "precedes",
+    "relation_label": "precede",
+    "relation_label_en": "precedes",
+    "style": "solid"
+  },
+  {
+    "source": "input-elaboration",
+    "target": "qpg",
+    "relation": "produces",
+    "relation_label": "produz",
+    "relation_label_en": "produces",
+    "style": "solid"
+  },
+  {
+    "source": "operational-monitoring",
+    "target": "bdp",
+    "relation": "produces",
+    "relation_label": "produz",
+    "relation_label_en": "produces",
+    "style": "solid"
+  },
+  {
+    "source": "formation-evaluation",
+    "target": "igp",
+    "relation": "produces",
+    "relation_label": "produz",
+    "relation_label_en": "produces",
+    "style": "solid"
+  },
+  {
+    "source": "formation-evaluation",
+    "target": "perfil-composto",
+    "relation": "produces",
+    "relation_label": "produz",
+    "relation_label_en": "produces",
+    "style": "solid"
+  },
+  {
+    "source": "mudlogging",
+    "target": "exata",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "solid"
+  },
+  {
+    "source": "mwd-lwd",
+    "target": "exata",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "solid"
+  },
+  {
+    "source": "frx",
+    "target": "sigeo",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "solid"
+  },
+  {
+    "source": "qpg",
+    "target": "sigeo",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "solid"
+  },
+  {
+    "source": "perfil-composto",
+    "target": "sigeo",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "solid"
+  },
+  {
+    "source": "ogeomec",
+    "target": "bdiep",
+    "relation": "stored_in",
+    "relation_label": "armazenado em",
+    "relation_label_en": "stored in",
+    "style": "solid"
+  },
+  {
+    "source": "exata",
+    "target": "aida",
+    "relation": "feeds",
+    "relation_label": "alimenta",
+    "relation_label_en": "feeds",
+    "style": "dashed"
+  },
+  {
+    "source": "bdiep",
+    "target": "aida",
+    "relation": "feeds",
+    "relation_label": "alimenta",
+    "relation_label_en": "feeds",
+    "style": "dashed"
+  },
+  {
+    "source": "sigeo",
+    "target": "bdiep",
+    "relation": "publishes_to",
+    "relation_label": "publica em",
+    "relation_label_en": "publishes to",
+    "style": "solid"
   }
 ];
 
