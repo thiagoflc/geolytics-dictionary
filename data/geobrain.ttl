@@ -8,8 +8,8 @@
 @prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-02T21:49:21.456Z
-# Nodes: 165  Edges: 249
+# Generated: 2026-05-02T22:29:26.978Z
+# Nodes: 170  Edges: 259
 
 #
 # Classes
@@ -182,6 +182,18 @@ geo:contrato-ep a owl:Class ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#ExplorationProductionContract> ;
     geo:geocoverage "layer5" .
 
+geo:pem a owl:Class ;
+    skos:prefLabel "PEM"@pt ;
+    skos:prefLabel "Minimum Exploratory Programme"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Conjunto mínimo de atividades exploratórias que o contratado se compromete a realizar como parte do contrato de concessão ou partilha de produção. A partir da 5ª Rodada (2003), o PEM do 1º período exploratório é expresso em Unidades de Trabalho (UTs) — parâmetro de oferta na licitação — e o do 2º período corresponde obrigatoriamente à perfuração de um poço exploratório. O cumprimento de cada período é garantido por garantia financeira prestada à ANP, devolvida após a entrega dos dados conforme padrões regulatórios."""@pt .
+
+geo:pte a owl:Class ;
+    skos:prefLabel "PTE"@pt ;
+    skos:prefLabel "Exploratory Work Plan"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Instrumento de acompanhamento e fiscalização das atividades exploratórias de cada bloco sob contrato de E&P, substituto do Programa Anual de Trabalho e Orçamento e do Plano de Exploração. Deve ser apresentado em até 90 dias da assinatura do contrato de concessão (ou 180 dias no caso de partilha de produção). Ao longo da vigência, o operador envia anualmente: o PTE previsto (outubro) e o PTE realizado (março). Revisões são permitidas conforme condições da Resolução ANP nº 876/2022. A ANP analisa e aprova cada remessa em até 30 dias. O envio é realizado pelo sistema DPP."""@pt .
+
 geo:pad a owl:Class ;
     skos:prefLabel "PAD"@pt ;
     skos:prefLabel "Discovery Evaluation Plan"@en ;
@@ -191,13 +203,19 @@ geo:pad a owl:Class ;
     skos:altLabel "Discovery Evaluation Plan"@en ;
     skos:altLabel "Appraisal Plan"@en ;
     skos:altLabel "DEP"@en ;
-    skos:definition """Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso."""@pt ;
+    skos:definition """Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. Elaborado e entregue à ANP conforme a Resolução ANP nº 845/2021, descreve a descoberta e apresenta programa de trabalho com atividades, prazos e investimentos para avaliação. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em RFAD; se a descoberta for comercial, o RFAD fundamenta a Declaração de Comercialidade."""@pt ;
     skos:example "PAD Búzios" ;
     skos:example "PAD Mero" ;
     skos:example "PAD Sépia" ;
     skos:example "PAD Atapu" ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#DiscoveryEvaluationPlan> ;
     geo:geocoverage "layer5" .
+
+geo:rfad a owl:Class ;
+    skos:prefLabel "RFAD"@pt ;
+    skos:prefLabel "Discovery Evaluation Final Report"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Documento de encerramento do PAD que consolida as atividades de avaliação realizadas e os resultados da interpretação dos dados. A aprovação do RFAD pela ANP é condição necessária para conferir efetividade a uma eventual Declaração de Comercialidade. Em caso de resultado negativo, encerra o PAD sem declaração."""@pt .
 
 geo:rodada-licitacao a owl:Class ;
     skos:prefLabel "Rodada de Licitação"@pt ;
@@ -348,7 +366,19 @@ geo:plano-desenvolvimento a owl:Class ;
     skos:prefLabel "Plano de Desenvolvimento"@pt ;
     skos:prefLabel "Development Plan"@en ;
     geo:entityType "contractual" ;
-    skos:definition """Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção."""@pt .
+    skos:definition """Documento técnico-econômico obrigatório entregue pelo concessionário à ANP em até 180 dias após a Declaração de Comercialidade. Agrupa informações técnicas, operacionais, econômicas e ambientais da explotação do campo, incluindo abandono. A ANP analisa o PD em até 180 dias; se solicitar modificações, o contratado tem 60 dias para apresentar o PD modificado. Após aprovação, o PD passa a vincular a atuação do concessionário. Em casos de jazidas compartilhadas, deve ser acompanhado do AIP ou do CIP."""@pt .
+
+geo:aip a owl:Class ;
+    skos:prefLabel "AIP"@pt ;
+    skos:prefLabel "Production Individualization Agreement"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Acordo celebrado entre concessionários de blocos distintos que compartilham a mesma jazida de hidrocarbonetos, estabelecendo os termos para a produção individualizada de cada parte. Deve ser submetido à ANP juntamente com o Plano de Desenvolvimento quando houver descoberta em jazida compartilhada. Em situações em que o AIP ainda não está concluído, o CIP pode ser apresentado em substituição provisória."""@pt .
+
+geo:cip a owl:Class ;
+    skos:prefLabel "CIP"@pt ;
+    skos:prefLabel "Production Individualization Commitment"@en ;
+    geo:entityType "contractual" ;
+    skos:definition """Instrumento provisório apresentado pelos concessionários à ANP quando o Acordo de Individualização da Produção (AIP) ainda não foi concluído, comprometendo-se a celebrá-lo em prazo definido. Acompanha o Plano de Desenvolvimento em casos de jazida compartilhada nos quais o AIP definitivo não está disponível."""@pt .
 
 geo:primeiro-oleo a owl:Class ;
     skos:prefLabel "Primeiro Óleo"@pt ;
@@ -1841,7 +1871,7 @@ geo:generates a owl:ObjectProperty ;
 geo:submitted_via a owl:ObjectProperty ;
     rdfs:label "enviado via"@pt ;
     rdfs:label "submitted via"@en ;
-    rdfs:domain geo:rftp ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rftp geo:pte ) ] ;
     rdfs:range geo:dpp .
 
 geo:manages_via a owl:ObjectProperty ;
@@ -1853,8 +1883,32 @@ geo:manages_via a owl:ObjectProperty ;
 geo:submitted_to a owl:ObjectProperty ;
     rdfs:label "enviado à"@pt ;
     rdfs:label "submitted to"@en ;
-    rdfs:domain geo:bmp ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bmp geo:pte ) ] ;
     rdfs:range geo:anp .
+
+geo:requires a owl:ObjectProperty ;
+    rdfs:label "exige"@pt ;
+    rdfs:label "requires"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:declaracao-comercialidade geo:ibama ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pem geo:plano-desenvolvimento geo:eia geo:rima ) ] .
+
+geo:monitored_via a owl:ObjectProperty ;
+    rdfs:label "acompanhado via"@pt ;
+    rdfs:label "monitored via"@en ;
+    rdfs:domain geo:contrato-ep ;
+    rdfs:range geo:pte .
+
+geo:measured_in a owl:ObjectProperty ;
+    rdfs:label "medido em"@pt ;
+    rdfs:label "measured in"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:pem geo:perfil-poco ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:uts geo:wellbore ) ] .
+
+geo:scoped_to a owl:ObjectProperty ;
+    rdfs:label "associado ao"@pt ;
+    rdfs:label "scoped to"@en ;
+    rdfs:domain geo:pem ;
+    rdfs:range geo:periodo-exploratorio .
 
 geo:evaluates a owl:ObjectProperty ;
     rdfs:label "avalia"@pt ;
@@ -1862,10 +1916,16 @@ geo:evaluates a owl:ObjectProperty ;
     rdfs:domain geo:pad ;
     rdfs:range geo:bloco .
 
+geo:closes_with a owl:ObjectProperty ;
+    rdfs:label "encerrado pelo"@pt ;
+    rdfs:label "closes with"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:rfad .
+
 geo:may_yield a owl:ObjectProperty ;
     rdfs:label "pode gerar"@pt ;
     rdfs:label "may yield"@en ;
-    rdfs:domain geo:pad ;
+    rdfs:domain geo:rfad ;
     rdfs:range geo:declaracao-comercialidade .
 
 geo:may_include a owl:ObjectProperty ;
@@ -1880,17 +1940,23 @@ geo:includes a owl:ObjectProperty ;
     rdfs:domain geo:pad ;
     rdfs:range geo:tld .
 
-geo:initiates a owl:ObjectProperty ;
-    rdfs:label "dá início a"@pt ;
-    rdfs:label "initiates"@en ;
-    rdfs:domain geo:declaracao-comercialidade ;
-    rdfs:range geo:area-desenvolvimento .
+geo:enables a owl:ObjectProperty ;
+    rdfs:label "habilita"@pt ;
+    rdfs:label "enables"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:biomarcador geo:completacao ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:correlacao-oleo-rocha geo:campo ) ] .
 
-geo:requires a owl:ObjectProperty ;
-    rdfs:label "exige"@pt ;
-    rdfs:label "requires"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:ibama ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:eia geo:rima ) ] .
+geo:accompanied_by a owl:ObjectProperty ;
+    rdfs:label "acompanhado por"@pt ;
+    rdfs:label "accompanied by"@en ;
+    rdfs:domain geo:plano-desenvolvimento ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:aip geo:cip ) ] .
+
+geo:approved_by a owl:ObjectProperty ;
+    rdfs:label "aprovado pela"@pt ;
+    rdfs:label "approved by"@en ;
+    rdfs:domain geo:plano-desenvolvimento ;
+    rdfs:range geo:anp .
 
 geo:ends_with a owl:ObjectProperty ;
     rdfs:label "encerrada pelo"@pt ;
@@ -2150,12 +2216,6 @@ geo:infers a owl:ObjectProperty ;
     rdfs:domain geo:perfil-poco ;
     rdfs:range geo:litologia .
 
-geo:enables a owl:ObjectProperty ;
-    rdfs:label "permite"@pt ;
-    rdfs:label "enables"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:biomarcador geo:completacao ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:correlacao-oleo-rocha geo:campo ) ] .
-
 geo:detects a owl:ObjectProperty ;
     rdfs:label "detecta"@pt ;
     rdfs:label "detects"@en ;
@@ -2233,12 +2293,6 @@ geo:has_top_at a owl:ObjectProperty ;
     rdfs:label "has top at"@en ;
     rdfs:domain geo:formacao ;
     rdfs:range geo:topo-formacional .
-
-geo:measured_in a owl:ObjectProperty ;
-    rdfs:label "medida em"@pt ;
-    rdfs:label "measured in"@en ;
-    rdfs:domain geo:perfil-poco ;
-    rdfs:range geo:wellbore .
 
 geo:qualified_by a owl:ObjectProperty ;
     rdfs:label "qualificada por"@pt ;
@@ -2608,12 +2662,22 @@ geo:tld geo:generates geo:bmp .
 geo:rftp geo:submitted_via geo:dpp .
 geo:anp geo:manages_via geo:i-engine .
 geo:bmp geo:submitted_to geo:anp .
+geo:contrato-ep geo:requires geo:pem .
+geo:contrato-ep geo:monitored_via geo:pte .
+geo:pem geo:measured_in geo:uts .
+geo:pem geo:scoped_to geo:periodo-exploratorio .
+geo:pte geo:submitted_to geo:anp .
+geo:pte geo:submitted_via geo:dpp .
 geo:pad geo:evaluates geo:bloco .
-geo:pad geo:may_yield geo:declaracao-comercialidade .
+geo:pad geo:closes_with geo:rfad .
+geo:rfad geo:may_yield geo:declaracao-comercialidade .
 geo:pad geo:may_include geo:teste-formacao .
 geo:pad geo:includes geo:tld .
-geo:declaracao-comercialidade geo:initiates geo:area-desenvolvimento .
-geo:area-desenvolvimento geo:requires geo:plano-desenvolvimento .
+geo:declaracao-comercialidade geo:requires geo:plano-desenvolvimento .
+geo:plano-desenvolvimento geo:enables geo:area-desenvolvimento .
+geo:plano-desenvolvimento geo:accompanied_by geo:aip .
+geo:plano-desenvolvimento geo:accompanied_by geo:cip .
+geo:plano-desenvolvimento geo:approved_by geo:anp .
 geo:area-desenvolvimento geo:ends_with geo:primeiro-oleo .
 geo:primeiro-oleo geo:inaugurates geo:campo .
 geo:declaracao-comercialidade geo:originates geo:campo .
