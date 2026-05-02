@@ -636,3 +636,2261 @@ FILTER ( ?s1 < ?s2 || ?s2 < ?s3 )
 }
 """ ;
     ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 23: DRXShape — validates geo:DRX instances
+# 12 mineral percent properties: xsd:double in [0, 100], maxCount 1
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:DRXShape a sh:NodeShape ;
+    rdfs:label "Forma de DRX"@pt ;
+    rdfs:label "XRD Shape"@en ;
+    sh:targetClass geo:DRX ;
+    rdfs:comment "Valida instâncias de DRX: cada percentual mineralógico deve ser xsd:double no intervalo [0, 100]."@pt ;
+
+    sh:property [
+        sh:path geo:drxQuartzPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxQuartzPercent (QTZ) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxCalcitePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxCalcitePercent (CAL) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxDolomitePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxDolomitePercent (DOL) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxClayMineralsPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxClayMineralsPercent (A_M) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxAnhydritePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxAnhydritePercent (AND) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxHalitePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxHalitePercent (HAL) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxPlagioclasePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxPlagioclasePercent (PLG) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxKFeldsparPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxKFeldsparPercent (KFD) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxPyritePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxPyritePercent (PIR) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxPyroxenePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxPyroxenePercent (PRX) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxAmphibolePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxAmphibolePercent (ANF) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxOlivinePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxOlivinePercent (OLI) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "DRX deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# TODO: cross-property sum constraint — soma dos 12 percentuais minerais DRX deve ser <= 100 + tolerância.
+# Existing shapes file has sh:sparql examples but no SUM aggregation pattern; deferred to a future iteration.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 24: FRXShape — validates geo:FRX instances
+# 11 major-element % properties in [0, 100]; 37 trace-element ppm properties >= 0
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:FRXShape a sh:NodeShape ;
+    rdfs:label "Forma de FRX"@pt ;
+    rdfs:label "XRF Shape"@en ;
+    sh:targetClass geo:FRX ;
+    rdfs:comment "Valida instâncias de FRX: elementos maiores em % no intervalo [0, 100]; elementos traço em ppm >= 0 (sem limite superior)."@pt ;
+
+    sh:property [
+        sh:path geo:frxNaMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxNaMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxMgMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxMgMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxAlMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxAlMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSiMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxSiMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxPMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxPMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxSMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxKMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxKMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCaMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxCaMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTiMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxTiMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxMnMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxMnMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxFeMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxFeMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxClTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxClTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxVTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxVTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCoTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCoTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxNiTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxNiTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCuTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCuTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxZnTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxZnTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxGaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxGaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxGeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxGeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxAsTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxAsTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxBrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxBrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxRbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxRbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxYTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxYTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxZrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxZrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxNbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxNbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxMoTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxMoTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxAgTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxAgTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCdTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCdTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSnTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSnTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxTeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxITracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxITracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCsTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCsTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxBaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxBaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxLaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxLaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxHfTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxHfTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxTaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxWTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxWTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxHgTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxHgTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTlTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxTlTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxPbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxPbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxBiTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxBiTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxThTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxThTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxUTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxUTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "FRX deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 25: DNAGeoquimicoShape — validates geo:DNAGeoquimico instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:DNAGeoquimicoShape a sh:NodeShape ;
+    rdfs:label "Forma de DNA Geoquímico"@pt ;
+    rdfs:label "Geochemical Signature Shape"@en ;
+    sh:targetClass geo:DNAGeoquimico ;
+    rdfs:comment "Valida assinaturas geoquímicas: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "DNAGeoquimico deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "DNAGeoquimico deve ter ao menos um skos:definition."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 26: OGEOMECShape — validates geo:OGEOMEC instances
+# 24 columns from data/operacoes-geologicas.json, 6 controlled vocabularies.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:OGEOMECShape a sh:NodeShape ;
+    rdfs:label "Forma de OGEOMEC"@pt ;
+    rdfs:label "OGEOMEC Shape"@en ;
+    sh:targetClass geo:OGEOMEC ;
+    rdfs:comment "Valida ocorrências geomecânicas: Poco no padrão ANP, TipoOcorrencia/Procedimento/Fluido/Unidade/PesoFluidoUnit/FaseTipo de vocabulário controlado, profundidades >= 0, FasePoco em [1,12], Data obrigatória."@pt ;
+
+    # Poco — ANP regex
+    sh:property [
+        sh:path geo:ogeomecPoco ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "ogeomecPoco deve seguir o padrão ANP (ex: 1-BRSA-1234-RJS)."@pt ;
+    ] ;
+
+    # TipoOcorrencia (12 values)
+    sh:property [
+        sh:path geo:ogeomecTipoOcorrencia ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "Kick" "Falso Kick" "Perda Din" "Perda Est" "Perda Total"
+            "Prisao" "Ameaca Prisao" "Arraste" "Topamento" "Estolamento"
+            "Fundo Falso" "Gas Manobra"
+        ) ;
+        sh:message "ogeomecTipoOcorrencia deve ser um dos 12 valores do vocabulário OGEOMEC_TipoOcorrencia."@pt ;
+    ] ;
+
+    # ProcedimentoPoco (8 values)
+    sh:property [
+        sh:path geo:ogeomecProcedimentoPoco ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "PERFURACAO" "DESCIDA DE COLUNA" "RETIRADA DE COLUNA" "CIMENTACAO"
+            "REVESTIMENTO" "PERFILAGEM A CABO" "TESTEMUNHAGEM" "OPERACOES SEM AVANCO"
+        ) ;
+        sh:message "ogeomecProcedimentoPoco deve ser um dos 8 valores do vocabulário OGEOMEC_ProcedimentoPoco."@pt ;
+    ] ;
+
+    # Fluido (4 values)
+    sh:property [
+        sh:path geo:ogeomecFluido ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "FLUIDO DE PERFURAÇÃO AQUOSO"
+            "FLUIDO DE PERFURAÇÃO NÃO AQUOSO"
+            "FLUIDO COMPLETAÇÃO AQUOSO"
+            "AGUA DO MAR"
+        ) ;
+        sh:message "ogeomecFluido deve ser um dos 4 valores do vocabulário OGEOMEC_Fluido."@pt ;
+    ] ;
+
+    # UnidadeValor (11 values)
+    sh:property [
+        sh:path geo:ogeomecUnidadeValor ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "klbf" "ton" "kN.m" "klbf.ft" "bbl" "m3" "psi" "ppm" "units" "min" "m"
+        ) ;
+        sh:message "ogeomecUnidadeValor deve ser um dos 11 valores do vocabulário OGEOMEC_UnidadeValor."@pt ;
+    ] ;
+
+    # PesoFluidoUnit (3 values)
+    sh:property [
+        sh:path geo:ogeomecPesoFluidoUnit ;
+        sh:datatype xsd:string ;
+        sh:in ( "ppg" "g/cm3" "sg" ) ;
+        sh:message "ogeomecPesoFluidoUnit deve ser ppg, g/cm3 ou sg."@pt ;
+    ] ;
+
+    # FaseTipo (2 values)
+    sh:property [
+        sh:path geo:ogeomecFaseTipo ;
+        sh:datatype xsd:string ;
+        sh:in ( "SEM_RETORNO" "COM_RETORNO" ) ;
+        sh:message "ogeomecFaseTipo deve ser SEM_RETORNO ou COM_RETORNO."@pt ;
+    ] ;
+
+    # Numeric depth fields >= 0
+    sh:property [
+        sh:path geo:ogeomecTopoOcorrencia ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecTopoOcorrencia deve ser xsd:double >= 0 (metros MD)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:ogeomecBaseOcorrencia ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecBaseOcorrencia deve ser xsd:double >= 0 (metros MD)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:ogeomecProfundidadePerfuracao ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecProfundidadePerfuracao deve ser xsd:double >= 0 (metros MD)."@pt ;
+    ] ;
+
+    # ECD and PesoFluido >= 0 (no upper bound — unit varies)
+    sh:property [
+        sh:path geo:ogeomecECD ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecECD deve ser xsd:double >= 0 (unidade canônica ppg)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:ogeomecPesoFluido ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "ogeomecPesoFluido deve ser xsd:double >= 0 (unidade auditada via ogeomecPesoFluidoUnit)."@pt ;
+    ] ;
+
+    # Data — required
+    sh:property [
+        sh:path geo:ogeomecData ;
+        sh:minCount 1 ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:date ;
+        sh:message "ogeomecData é obrigatório (xsd:date)."@pt ;
+    ] ;
+
+    # FasePoco — integer in [1, 12] (observed range)
+    sh:property [
+        sh:path geo:ogeomecFasePoco ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 1 ;
+        sh:maxInclusive 12 ;
+        sh:message "ogeomecFasePoco deve ser xsd:integer no intervalo [1, 12] (faixa observada)."@pt ;
+    ] ;
+
+    # SPARQL: TopoOcorrencia <= BaseOcorrencia
+    sh:sparql [
+        sh:message "ogeomecTopoOcorrencia deve ser <= ogeomecBaseOcorrencia (topo acima da base, MD crescente)."@pt ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this
+            WHERE {
+                $this geo:ogeomecTopoOcorrencia ?topo .
+                $this geo:ogeomecBaseOcorrencia ?base .
+                FILTER ( ?topo > ?base )
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 27: QPGShape — validates geo:QPG instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:QPGShape a sh:NodeShape ;
+    rdfs:label "Forma de QPG"@pt ;
+    rdfs:label "QPG Shape"@en ;
+    sh:targetClass geo:QPG ;
+    rdfs:comment "Valida Quadros de Previsão Geológica: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "QPG deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "QPG deve ter ao menos um skos:definition."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 28: PerfilCompostoShape — validates geo:PerfilComposto instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:PerfilCompostoShape a sh:NodeShape ;
+    rdfs:label "Forma de Perfil Composto"@pt ;
+    rdfs:label "Composite Log Shape"@en ;
+    sh:targetClass geo:PerfilComposto ;
+    rdfs:comment "Valida Perfis Compostos: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "PerfilComposto deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "PerfilComposto deve ter ao menos um skos:definition."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 29: LitologiaShape — validates geo:Litologia instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:LitologiaShape a sh:NodeShape ;
+    rdfs:label "Forma de Litologia"@pt ;
+    rdfs:label "Lithology Shape"@en ;
+    sh:targetClass geo:Litologia ;
+    rdfs:comment "Valida interpretações litológicas: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "Litologia deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "Litologia deve ter ao menos um skos:definition."@pt ;
+    ] .
+# ─────────────────────────────────────────────────────────────────────────────
+# Service Line Detailed Schemas — SHACL NodeShapes (21)
+# Source: data/operacoes-geologicas-servicos.json
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:MudloggingTimeSeriesShape a sh:NodeShape ;
+    rdfs:label "MudloggingTimeSeries Shape"@en ;
+    sh:targetClass geo:MudloggingTimeSeries ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "MudloggingTimeSeries.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesWellboreId ;
+        sh:datatype xsd:string ;
+        sh:message "MudloggingTimeSeries.wellbore_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesLogId ;
+        sh:datatype xsd:string ;
+        sh:message "MudloggingTimeSeries.log_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesTimestampUtc ;
+        sh:minCount 1 ;
+        sh:datatype xsd:dateTime ;
+        sh:message "MudloggingTimeSeries.timestamp_utc constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesDepthBitMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "MudloggingTimeSeries.depth_bit_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesLagDepthMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "MudloggingTimeSeries.lag_depth_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesRop ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.rop constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesWob ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.wob constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesRpm ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.rpm constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesTorque ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.torque constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesSpp ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.spp constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesFlowIn ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.flow_in constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesGasTotal ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.gas_total constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesC1 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.c1 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesC2 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.c2 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesC3 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.c3 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesIc4 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.ic4 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesNc4 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.nc4 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesIc5 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.ic5 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesNc5 ;
+        sh:datatype xsd:double ;
+        sh:message "MudloggingTimeSeries.nc5 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:mudloggingTimeSeriesSourceSystem ;
+        sh:datatype xsd:string ;
+        sh:message "MudloggingTimeSeries.source_system constraint."@en ;
+    ] .
+
+geo:GasShowEventShape a sh:NodeShape ;
+    rdfs:label "GasShowEvent Shape"@en ;
+    sh:targetClass geo:GasShowEvent ;
+    sh:property [
+        sh:path geo:gasShowEventEventId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "GasShowEvent.event_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "GasShowEvent.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventDepthTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GasShowEvent.depth_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventDepthBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GasShowEvent.depth_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventGasTotalPeak ;
+        sh:datatype xsd:double ;
+        sh:message "GasShowEvent.gas_total_peak constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventC1Peak ;
+        sh:datatype xsd:double ;
+        sh:message "GasShowEvent.c1_peak constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventWetnessRatio ;
+        sh:datatype xsd:double ;
+        sh:message "GasShowEvent.wetness_ratio constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventBalanceRatio ;
+        sh:datatype xsd:double ;
+        sh:message "GasShowEvent.balance_ratio constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventCharacterRatio ;
+        sh:datatype xsd:double ;
+        sh:message "GasShowEvent.character_ratio constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventVacutainerCollected ;
+        sh:datatype xsd:boolean ;
+        sh:message "GasShowEvent.vacutainer_collected constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventVacutainerCount ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "GasShowEvent.vacutainer_count constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventShowType ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:in ( "GAS" "OIL_CUT" "CONDENSATE" "NONE" ) ;
+        sh:message "GasShowEvent.show_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventRemarks ;
+        sh:datatype xsd:string ;
+        sh:message "GasShowEvent.remarks constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:gasShowEventRecordedBy ;
+        sh:datatype xsd:string ;
+        sh:message "GasShowEvent.recorded_by constraint."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "GasShowEvent: depth_top_md must be <= depth_base_md."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:gasShowEventDepthTopMd ?t . $this geo:gasShowEventDepthBaseMd ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] .
+
+geo:KickEventShape a sh:NodeShape ;
+    rdfs:label "KickEvent Shape"@en ;
+    sh:targetClass geo:KickEvent ;
+    sh:property [
+        sh:path geo:kickEventEventId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "KickEvent.event_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "KickEvent.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventDepthMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "KickEvent.depth_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventTimestampUtc ;
+        sh:datatype xsd:dateTime ;
+        sh:message "KickEvent.timestamp_utc constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventAssociatedGasShowId ;
+        sh:datatype xsd:string ;
+        sh:message "KickEvent.associated_gas_show_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventInfluxVolumeBbl ;
+        sh:datatype xsd:double ;
+        sh:message "KickEvent.influx_volume_bbl constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventShutinDrillpipePressurePsi ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "KickEvent.shutin_drillpipe_pressure_psi constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventShutinCasingPressurePsi ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "KickEvent.shutin_casing_pressure_psi constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventFluidType ;
+        sh:datatype xsd:string ;
+        sh:message "KickEvent.fluid_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:kickEventOgeomecRowId ;
+        sh:datatype xsd:string ;
+        sh:message "KickEvent.ogeomec_row_id constraint."@en ;
+    ] .
+
+# TODO: Array-valued fields below (collection_purpose, lithology_pct components)
+# lack element-level sh:in constraints. Current shapes constrain top-level type only.
+# To enforce vocab membership per element, add a nested sh:property with sh:nodeKind sh:Literal
+# inside an sh:qualifiedValueShape — defer until SHACL-SPARQL precedent is established.
+geo:CuttingsSampleDetailedShape a sh:NodeShape ;
+    rdfs:label "CuttingsSampleDetailed Shape"@en ;
+    sh:targetClass geo:CuttingsSampleDetailed ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedSampleId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.sample_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "CuttingsSampleDetailed.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedDepthTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CuttingsSampleDetailed.depth_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedDepthBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CuttingsSampleDetailed.depth_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedIntervalM ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CuttingsSampleDetailed.interval_m constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedRecordedBy ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.recorded_by constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedRecordedAt ;
+        sh:datatype xsd:dateTime ;
+        sh:message "CuttingsSampleDetailed.recorded_at constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedMainLithology ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.main_lithology constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedColor ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.color constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedTexture ;
+        sh:datatype xsd:string ;
+        sh:in ( "FINA" "MEDIA" "GROSSA" "MUITO_GROSSA" "ARGILOSA" ) ;
+        sh:message "CuttingsSampleDetailed.texture constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedGrainSizeMm ;
+        sh:datatype xsd:double ;
+        sh:message "CuttingsSampleDetailed.grain_size_mm constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedSorting ;
+        sh:datatype xsd:string ;
+        sh:in ( "BEM" "MOD" "MAL" "MUITO_MAL" ) ;
+        sh:message "CuttingsSampleDetailed.sorting constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedFolkClass ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.folk_class constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedDunhamClass ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.dunham_class constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedBioclastPct ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "CuttingsSampleDetailed.bioclast_pct constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedHardness ;
+        sh:datatype xsd:string ;
+        sh:in ( "FRIAVEL" "MODERADO" "DURO" "MUITO_DURO" ) ;
+        sh:message "CuttingsSampleDetailed.hardness constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedFluorescence ;
+        sh:datatype xsd:string ;
+        sh:in ( "AUSENTE" "FRACA" "MOD" "FORTE" "MUITO_FORTE" ) ;
+        sh:message "CuttingsSampleDetailed.fluorescence constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedFluorescenceColor ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.fluorescence_color constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedCutFluorescence ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.cut_fluorescence constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedOdor ;
+        sh:datatype xsd:string ;
+        sh:in ( "AUSENTE" "LEVE" "MOD" "FORTE" ) ;
+        sh:message "CuttingsSampleDetailed.odor constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedDrxRunId ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.drx_run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedFrxRunId ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.frx_run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedPaleoRunId ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.paleo_run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedSigeoId ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.sigeo_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:cuttingsSampleDetailedPagReference ;
+        sh:datatype xsd:string ;
+        sh:message "CuttingsSampleDetailed.pag_reference constraint."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "CuttingsSampleDetailed: depth_top_md must be <= depth_base_md."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:cuttingsSampleDetailedDepthTopMd ?t . $this geo:cuttingsSampleDetailedDepthBaseMd ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] .
+
+geo:CoreRunShape a sh:NodeShape ;
+    rdfs:label "CoreRun Shape"@en ;
+    sh:targetClass geo:CoreRun ;
+    sh:property [
+        sh:path geo:coreRunCoreId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.core_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "CoreRun.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunWellboreId ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.wellbore_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunRunNumber ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.run_number constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunDepthTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.depth_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunDepthBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.depth_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunDepthTopMdActual ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.depth_top_md_actual constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunDepthBaseMdActual ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.depth_base_md_actual constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunDrilledIntervalM ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.drilled_interval_m constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunRecoveredM ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.recovered_m constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunRecoveryPct ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "CoreRun.recovery_pct constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunBarrelType ;
+        sh:datatype xsd:string ;
+        sh:in ( "CONVENCIONAL" "ORIENTADO" "FICHA" "WIRELINE_CORE" ) ;
+        sh:message "CoreRun.barrel_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunCoreCatcher ;
+        sh:datatype xsd:boolean ;
+        sh:message "CoreRun.core_catcher constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunPlugCount ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.plug_count constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunPhotoCount ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "CoreRun.photo_count constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunCtScanAvailable ;
+        sh:datatype xsd:boolean ;
+        sh:message "CoreRun.ct_scan_available constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunOsduRockSampleId ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.osdu_rock_sample_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunGeoscimlSampleId ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.geosciml_sample_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunBdiepId ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.bdiep_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunSigeoId ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.sigeo_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunQpgReference ;
+        sh:datatype xsd:string ;
+        sh:message "CoreRun.qpg_reference constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:coreRunRecordedAt ;
+        sh:datatype xsd:dateTime ;
+        sh:message "CoreRun.recorded_at constraint."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "CoreRun: depth_top_md must be <= depth_base_md."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:coreRunDepthTopMd ?t . $this geo:coreRunDepthBaseMd ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        sh:message "CoreRun: depth_top_md_actual must be <= depth_base_md_actual."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:coreRunDepthTopMdActual ?t . $this geo:coreRunDepthBaseMdActual ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] .
+
+geo:CorePlugShape a sh:NodeShape ;
+    rdfs:label "CorePlug Shape"@en ;
+    sh:targetClass geo:CorePlug ;
+    sh:property [
+        sh:path geo:corePlugPlugId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "CorePlug.plug_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugCoreId ;
+        sh:datatype xsd:string ;
+        sh:message "CorePlug.core_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugPlugNumber ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "CorePlug.plug_number constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugDepthMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "CorePlug.depth_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugOrientationDeg ;
+        sh:datatype xsd:double ;
+        sh:message "CorePlug.orientation_deg constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugPlugType ;
+        sh:datatype xsd:string ;
+        sh:in ( "HORIZONTAL" "VERTICAL" "OBLIQUO" ) ;
+        sh:message "CorePlug.plug_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugIntegrity ;
+        sh:datatype xsd:string ;
+        sh:in ( "INTEGRO" "FRATURADO" "FRAGMENTADO" ) ;
+        sh:message "CorePlug.integrity constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:corePlugLabId ;
+        sh:datatype xsd:string ;
+        sh:message "CorePlug.lab_id constraint."@en ;
+    ] .
+
+geo:SidewallCoreSampleShape a sh:NodeShape ;
+    rdfs:label "SidewallCoreSample Shape"@en ;
+    sh:targetClass geo:SidewallCoreSample ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleSwcId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.swc_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "SidewallCoreSample.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleWirelineRunId ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.wireline_run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleSampleNumber ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "SidewallCoreSample.sample_number constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleDepthMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "SidewallCoreSample.depth_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleIntegrity ;
+        sh:datatype xsd:string ;
+        sh:in ( "INTEGRO" "FRATURADO" "PO" "PERDIDO" ) ;
+        sh:message "SidewallCoreSample.integrity constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleDiameterMm ;
+        sh:datatype xsd:double ;
+        sh:message "SidewallCoreSample.diameter_mm constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleLengthMm ;
+        sh:datatype xsd:double ;
+        sh:message "SidewallCoreSample.length_mm constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleLithology ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.lithology constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleOilShow ;
+        sh:datatype xsd:string ;
+        sh:in ( "AUSENTE" "LEVE" "MOD" "FORTE" ) ;
+        sh:message "SidewallCoreSample.oil_show constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleToolType ;
+        sh:datatype xsd:string ;
+        sh:in ( "ROTARY/RSCT" "PERCUSSION/CST" "MECHANICAL" ) ;
+        sh:message "SidewallCoreSample.tool_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleToolVendor ;
+        sh:datatype xsd:string ;
+        sh:in ( "SLB" "BHI" "HAL" ) ;
+        sh:message "SidewallCoreSample.tool_vendor constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleToolModel ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.tool_model constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleRopId ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.rop_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleBdiepId ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.bdiep_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleCollectedAt ;
+        sh:datatype xsd:dateTime ;
+        sh:message "SidewallCoreSample.collected_at constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:sidewallCoreSampleRemarks ;
+        sh:datatype xsd:string ;
+        sh:message "SidewallCoreSample.remarks constraint."@en ;
+    ] .
+
+# TODO: realtime_curves and memory_curves are arrays of mnemonics; the canonical
+# mnemonic dictionary lives in Oracle ACG.conf_trad_log_curva (still pending export).
+# Once available, add sh:property with sh:in over the canonical mnemonic ConceptScheme.
+geo:LWDRunShape a sh:NodeShape ;
+    rdfs:label "LWDRun Shape"@en ;
+    sh:targetClass geo:LWDRun ;
+    sh:property [
+        sh:path geo:lWDRunRunId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "LWDRun.run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "LWDRun.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunWellboreId ;
+        sh:datatype xsd:string ;
+        sh:message "LWDRun.wellbore_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunPhase ;
+        sh:datatype xsd:string ;
+        sh:in ( "FASE1" "FASE2" "FASE3" "FASE4" "PILOTO" ) ;
+        sh:message "LWDRun.phase constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunBhaId ;
+        sh:datatype xsd:string ;
+        sh:message "LWDRun.bha_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunDepthTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "LWDRun.depth_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunDepthBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "LWDRun.depth_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunServiceCompany ;
+        sh:datatype xsd:string ;
+        sh:in ( "SLB" "BHI" "HAL" ) ;
+        sh:message "LWDRun.service_company constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunWitsmlVersion ;
+        sh:datatype xsd:string ;
+        sh:in ( "1.3.1" "1.4.1" "2.0" ) ;
+        sh:message "LWDRun.witsml_version constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunExataLogId ;
+        sh:datatype xsd:string ;
+        sh:message "LWDRun.exata_log_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunRopId ;
+        sh:datatype xsd:string ;
+        sh:message "LWDRun.rop_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunBdiepId ;
+        sh:datatype xsd:string ;
+        sh:message "LWDRun.bdiep_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunAcquiredStart ;
+        sh:datatype xsd:dateTime ;
+        sh:message "LWDRun.acquired_start constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunAcquiredEnd ;
+        sh:datatype xsd:dateTime ;
+        sh:message "LWDRun.acquired_end constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunSampleRateM ;
+        sh:datatype xsd:double ;
+        sh:message "LWDRun.sample_rate_m constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:lWDRunSampleRateS ;
+        sh:datatype xsd:double ;
+        sh:message "LWDRun.sample_rate_s constraint."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "LWDRun: depth_top_md must be <= depth_base_md."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:lWDRunDepthTopMd ?t . $this geo:lWDRunDepthBaseMd ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] .
+
+# TODO: curves_acquired array is constrained only at top-level type. Element-level
+# enforcement waits on the LAS/DLIS canonical mnemonic ConceptScheme (Oracle export).
+# Anomaly_reports array has no element constraints — should reference geo:ROA via sh:class
+# once individuals exist.
+geo:WirelineRunShape a sh:NodeShape ;
+    rdfs:label "WirelineRun Shape"@en ;
+    sh:targetClass geo:WirelineRun ;
+    sh:property [
+        sh:path geo:wirelineRunRunId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "WirelineRun.run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "WirelineRun.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunWellboreId ;
+        sh:datatype xsd:string ;
+        sh:message "WirelineRun.wellbore_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunPhase ;
+        sh:datatype xsd:string ;
+        sh:in ( "FASE1" "FASE2" "FASE3" "FASE4" "PILOTO" ) ;
+        sh:message "WirelineRun.phase constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunRunNumber ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "WirelineRun.run_number constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunServiceCompany ;
+        sh:datatype xsd:string ;
+        sh:message "WirelineRun.service_company constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunDepthTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "WirelineRun.depth_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunDepthBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "WirelineRun.depth_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunRopId ;
+        sh:datatype xsd:string ;
+        sh:message "WirelineRun.rop_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunBdiepId ;
+        sh:datatype xsd:string ;
+        sh:message "WirelineRun.bdiep_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunAcquiredStart ;
+        sh:datatype xsd:dateTime ;
+        sh:message "WirelineRun.acquired_start constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunAcquiredEnd ;
+        sh:datatype xsd:dateTime ;
+        sh:message "WirelineRun.acquired_end constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunRecordedBy ;
+        sh:datatype xsd:string ;
+        sh:message "WirelineRun.recorded_by constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunRunType ;
+        sh:datatype xsd:string ;
+        sh:in ( "MAIN" "REPEAT" "CHECK_SHOT" "CASED_HOLE" ) ;
+        sh:message "WirelineRun.run_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunRepeatSectionTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "WirelineRun.repeat_section_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunRepeatSectionBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "WirelineRun.repeat_section_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunLoggingSpeedMH ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "WirelineRun.logging_speed_m_h constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunQualityFlag ;
+        sh:datatype xsd:string ;
+        sh:in ( "GOOD" "PARTIAL" "POOR" "FAILED" ) ;
+        sh:message "WirelineRun.quality_flag constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunEvalScore ;
+        sh:datatype xsd:integer ;
+        sh:message "WirelineRun.eval_score constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunLasFileUrl ;
+        sh:datatype xsd:anyURI ;
+        sh:message "WirelineRun.las_file_url constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunDlisFileUrl ;
+        sh:datatype xsd:anyURI ;
+        sh:message "WirelineRun.dlis_file_url constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunBhtC ;
+        sh:datatype xsd:double ;
+        sh:message "WirelineRun.bht_c constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:wirelineRunMudWeightKgM3 ;
+        sh:datatype xsd:double ;
+        sh:message "WirelineRun.mud_weight_kg_m3 constraint."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "WirelineRun: depth_top_md must be <= depth_base_md."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:wirelineRunDepthTopMd ?t . $this geo:wirelineRunDepthBaseMd ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] .
+
+geo:FormationPressurePointShape a sh:NodeShape ;
+    rdfs:label "FormationPressurePoint Shape"@en ;
+    sh:targetClass geo:FormationPressurePoint ;
+    sh:property [
+        sh:path geo:formationPressurePointPointId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "FormationPressurePoint.point_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "FormationPressurePoint.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointWirelineRunId ;
+        sh:datatype xsd:string ;
+        sh:message "FormationPressurePoint.wireline_run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointDepthMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "FormationPressurePoint.depth_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointDepthTvdss ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "FormationPressurePoint.depth_tvdss constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointRopId ;
+        sh:datatype xsd:string ;
+        sh:message "FormationPressurePoint.rop_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointBdiepId ;
+        sh:datatype xsd:string ;
+        sh:message "FormationPressurePoint.bdiep_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointSirrId ;
+        sh:datatype xsd:string ;
+        sh:message "FormationPressurePoint.sirr_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointRecordedAt ;
+        sh:datatype xsd:dateTime ;
+        sh:message "FormationPressurePoint.recorded_at constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointToolType ;
+        sh:datatype xsd:string ;
+        sh:in ( "RFT" "MDT" "XPT" "FMT" "MINIDST" ) ;
+        sh:message "FormationPressurePoint.tool_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointPressureKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "FormationPressurePoint.pressure_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointPressureStaticKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "FormationPressurePoint.pressure_static_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointTemperatureC ;
+        sh:datatype xsd:double ;
+        sh:message "FormationPressurePoint.temperature_c constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointMobilityMdCp ;
+        sh:datatype xsd:double ;
+        sh:message "FormationPressurePoint.mobility_md_cp constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointPretestQuality ;
+        sh:datatype xsd:string ;
+        sh:in ( "GOOD" "SUPERCHARGE" "TIGHT" "DRY" "MUDSPIKE" ) ;
+        sh:message "FormationPressurePoint.pretest_quality constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointPretestVolumeCc ;
+        sh:datatype xsd:double ;
+        sh:message "FormationPressurePoint.pretest_volume_cc constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointFluidSampleCollected ;
+        sh:datatype xsd:boolean ;
+        sh:message "FormationPressurePoint.fluid_sample_collected constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointFluidSampleId ;
+        sh:datatype xsd:string ;
+        sh:message "FormationPressurePoint.fluid_sample_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:formationPressurePointFluidTypePrelim ;
+        sh:datatype xsd:string ;
+        sh:in ( "GAS" "OIL" "CONDENSATE" "WATER" "OBM_FILTRATE" ) ;
+        sh:message "FormationPressurePoint.fluid_type_prelim constraint."@en ;
+    ] .
+
+geo:DSTIntervalShape a sh:NodeShape ;
+    rdfs:label "DSTInterval Shape"@en ;
+    sh:targetClass geo:DSTInterval ;
+    sh:property [
+        sh:path geo:dSTIntervalDstId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "DSTInterval.dst_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "DSTInterval.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalTestNumber ;
+        sh:datatype xsd:integer ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.test_number constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalDepthTopMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.depth_top_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalDepthBaseMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.depth_base_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalSirrId ;
+        sh:datatype xsd:string ;
+        sh:message "DSTInterval.sirr_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalBdiepId ;
+        sh:datatype xsd:string ;
+        sh:message "DSTInterval.bdiep_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalTestStart ;
+        sh:datatype xsd:dateTime ;
+        sh:message "DSTInterval.test_start constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalTestEnd ;
+        sh:datatype xsd:dateTime ;
+        sh:message "DSTInterval.test_end constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalFlowingPressureKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.flowing_pressure_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalShutinPressureKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.shutin_pressure_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalInitialShutinKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.initial_shutin_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalFinalShutinKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.final_shutin_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalStaticPressureKpa ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.static_pressure_kpa constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalFlowRateM3D ;
+        sh:datatype xsd:double ;
+        sh:message "DSTInterval.flow_rate_m3_d constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalGorM3M3 ;
+        sh:datatype xsd:double ;
+        sh:message "DSTInterval.gor_m3_m3 constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalWatercutPct ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "DSTInterval.watercut_pct constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalProductivityIndex ;
+        sh:datatype xsd:double ;
+        sh:message "DSTInterval.productivity_index constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalSkinFactor ;
+        sh:datatype xsd:double ;
+        sh:message "DSTInterval.skin_factor constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalTransmissibility ;
+        sh:datatype xsd:double ;
+        sh:message "DSTInterval.transmissibility constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalPermeabilityMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "DSTInterval.permeability_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalFt1FileUrl ;
+        sh:datatype xsd:anyURI ;
+        sh:message "DSTInterval.ft1_file_url constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalFt2FileUrl ;
+        sh:datatype xsd:anyURI ;
+        sh:message "DSTInterval.ft2_file_url constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalFt5FileUrl ;
+        sh:datatype xsd:anyURI ;
+        sh:message "DSTInterval.ft5_file_url constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:dSTIntervalSaphirFileUrl ;
+        sh:datatype xsd:anyURI ;
+        sh:message "DSTInterval.saphir_file_url constraint."@en ;
+    ] ;
+    sh:sparql [
+        sh:message "DSTInterval: depth_top_md must be <= depth_base_md."@en ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT $this WHERE {
+                $this geo:dSTIntervalDepthTopMd ?t . $this geo:dSTIntervalDepthBaseMd ?b . FILTER(?t > ?b)
+            }
+        """ ;
+    ] .
+
+geo:GeostoppingEventShape a sh:NodeShape ;
+    rdfs:label "GeostoppingEvent Shape"@en ;
+    sh:targetClass geo:GeostoppingEvent ;
+    sh:property [
+        sh:path geo:geostoppingEventEventId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.event_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "GeostoppingEvent.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventWellboreId ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.wellbore_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDepthDecisionMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GeostoppingEvent.depth_decision_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDepthPlannedMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GeostoppingEvent.depth_planned_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDepthDeltaM ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GeostoppingEvent.depth_delta_m constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventRcsdReference ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.rcsd_reference constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventQpgVersion ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.qpg_version constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventIgpIssueDate ;
+        sh:datatype xsd:date ;
+        sh:message "GeostoppingEvent.igp_issue_date constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventGeologistId ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.geologist_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventCsdSessionId ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.csd_session_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDecidedAt ;
+        sh:datatype xsd:dateTime ;
+        sh:message "GeostoppingEvent.decided_at constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDecisionType ;
+        sh:datatype xsd:string ;
+        sh:in ( "CASING_POINT" "CORE_REQUEST" "WIRELINE_REQUEST" "TD" "SIDETRACK" "ZONE_CHANGE" ) ;
+        sh:message "GeostoppingEvent.decision_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDecisionRationale ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.decision_rationale constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventLwdRunId ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.lwd_run_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventGasShowId ;
+        sh:datatype xsd:string ;
+        sh:message "GeostoppingEvent.gas_show_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventMseTrend ;
+        sh:datatype xsd:string ;
+        sh:in ( "INCREASING" "STABLE" "DECREASING" "SPIKE" ) ;
+        sh:message "GeostoppingEvent.mse_trend constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventFaciesChange ;
+        sh:datatype xsd:boolean ;
+        sh:message "GeostoppingEvent.facies_change constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventTargetReached ;
+        sh:datatype xsd:boolean ;
+        sh:message "GeostoppingEvent.target_reached constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventDecisionTimeH ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GeostoppingEvent.decision_time_h constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:geostoppingEventNptAvoidedH ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "GeostoppingEvent.npt_avoided_h constraint."@en ;
+    ] .
+
+geo:SIRRShape a sh:NodeShape ;
+    rdfs:label "SIRR Shape"@en ;
+    sh:targetClass geo:SIRR .
+
+geo:BDOCShape a sh:NodeShape ;
+    rdfs:label "BDOC Shape"@en ;
+    sh:targetClass geo:BDOC .
+
+geo:VGEShape a sh:NodeShape ;
+    rdfs:label "VGE Shape"@en ;
+    sh:targetClass geo:VGE .
+
+geo:ROAShape a sh:NodeShape ;
+    rdfs:label "ROA Shape"@en ;
+    sh:targetClass geo:ROA .
+
+geo:CassandraExataCurvaTempoShape a sh:NodeShape ;
+    rdfs:label "Cassandra_ExataCurvaTempo Shape"@en ;
+    sh:targetClass geo:CassandraExataCurvaTempo .
+
+geo:PAGShape a sh:NodeShape ;
+    rdfs:label "PAG Shape"@en ;
+    sh:targetClass geo:PAG .
+
+geo:FRAMEShape a sh:NodeShape ;
+    rdfs:label "FRAME Shape"@en ;
+    sh:targetClass geo:FRAME ;
+    sh:property [
+        sh:path geo:fRAMEMaxRopMH ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "FRAME.max_rop_m_h constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fRAMESampleRate ;
+        sh:datatype xsd:string ;
+        sh:message "FRAME.sample_rate constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fRAMETransmissionRate ;
+        sh:datatype xsd:string ;
+        sh:message "FRAME.transmission_rate constraint."@en ;
+    ] .
+
+geo:FluidSampleShape a sh:NodeShape ;
+    rdfs:label "FluidSample Shape"@en ;
+    sh:targetClass geo:FluidSample ;
+    sh:property [
+        sh:path geo:fluidSampleSampleId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "FluidSample.sample_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fluidSampleWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "FluidSample.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fluidSampleDepthMd ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "FluidSample.depth_md constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fluidSampleFluidType ;
+        sh:datatype xsd:string ;
+        sh:message "FluidSample.fluid_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fluidSampleSampleVolumeCc ;
+        sh:datatype xsd:double ;
+        sh:message "FluidSample.sample_volume_cc constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fluidSampleContainerType ;
+        sh:datatype xsd:string ;
+        sh:message "FluidSample.container_type constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:fluidSampleLabDestination ;
+        sh:datatype xsd:string ;
+        sh:message "FluidSample.lab_destination constraint."@en ;
+    ] .
+
+geo:BHAShape a sh:NodeShape ;
+    rdfs:label "BHA Shape"@en ;
+    sh:targetClass geo:BHA ;
+    sh:property [
+        sh:path geo:bHABhaId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message "BHA.bha_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:bHAWellId ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:pattern "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$" ;
+        sh:message "BHA.well_id constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:bHAPhase ;
+        sh:datatype xsd:string ;
+        sh:message "BHA.phase constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:bHATotalLengthM ;
+        sh:datatype xsd:double ;
+        sh:message "BHA.total_length_m constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:bHATotalWeightKg ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "BHA.total_weight_kg constraint."@en ;
+    ] ;
+    sh:property [
+        sh:path geo:bHALastUpdate ;
+        sh:datatype xsd:dateTime ;
+        sh:message "BHA.last_update constraint."@en ;
+    ] .
+
