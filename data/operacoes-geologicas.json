@@ -27,10 +27,11 @@
       ],
       "witsml": ["mudLog", "log", "trajectory", "formationMarker"]
     },
-    "class_count": 39,
-    "property_count": 14,
-    "relation_count": 12,
-    "instance_count": 3
+    "class_count": 45,
+    "property_count": 16,
+    "relation_count": 15,
+    "instance_count": 5,
+    "evidence_methodology": "Each entity carries an `evidence_status` field: 'documented' (direct doc evidence), 'partial' (some evidence + inference), 'inferred' (operational practice without explicit documentation), 'unverified' (placeholder/TBD). Validation pass against Petrobras SharePoint sources executed 2026-05."
   },
   "classes": {
     "GeologicalOperations": {
@@ -113,7 +114,14 @@
       "description": "Continuous monitoring of drilling parameters and real-time gas analysis at the rig.",
       "description_pt": "Monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real.",
       "osdu_kind": "opendes:osdu:work-product-component--MudLog:1.0.0",
-      "witsml_object": "mudLog"
+      "witsml_object": "mudLog",
+      "primary_system": "EXATA",
+      "primary_document_note": "Documento primário do mudlogging são os dados transmitidos em tempo real para o EXATA. O BDP (Boletim Diário de Perfuração) é alimentado parcialmente, mas é documento do engenheiro fiscal — não do mudlogger.",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "EXATA e GDA — Transformação Digital na aquisição geológica de poços (SharePoint)",
+        "OGDA — análise de gases e parâmetros de perfuração (SIMGEO 2024)"
+      ]
     },
     "CuttingsSampling": {
       "id": "OG012",
@@ -137,12 +145,16 @@
       "complementary_to": "FRX",
       "synonyms": ["XRD", "X-Ray Diffraction", "Difratometria de Raios X"],
       "manager": "EXP/OGP/AQG",
-      "stored_in": "SIGEO",
+      "stored_in": "TBD",
+      "stored_in_note": "Diferente do FRX (que tem módulo dedicado confirmado no SIGEO), não há evidência documental de módulo DRX no SIGEO. Dado pode ser processado fora do SIGEO. A confirmar com o time de DM.",
+      "evidence_status": "partial",
       "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/cuttings",
       "evidence_gaps": [
-        "Pipeline de ingestão DRX SIGEO/BDIEP → AIDA/Databricks não documentado",
+        "Módulo DRX no SIGEO não confirmado documentalmente (analogia com FRX é inferência)",
+        "Pipeline de ingestão DRX → AIDA/Databricks não documentado",
         "Padronização de mnemônicos DRX no SIGEO não documentada na ontologia",
-        "Integração ao pipeline text-to-SQL do GeoDO ausente"
+        "Integração ao pipeline text-to-SQL do GeoDO ausente",
+        "DRX não tem 'consumido por' explicitamente mapeado — provavelmente alimenta Avaliação de Formações e Consolidação de Dados (Perfil Composto), por analogia com FRX"
       ],
       "context_fields": [
         {"name": "Pais", "type": "xsd:string"},
@@ -188,10 +200,15 @@
       "synonyms": ["XRF", "X-Ray Fluorescence", "Fluorescencia de Raios-X", "Analise de FRX"],
       "manager": "EXP/OGP/AQG",
       "stored_in": "SIGEO",
+      "stored_in_note": "SIGEO possui módulo dedicado 'Análise de Dados de FRX' (confirmado documentalmente). Dados disponibilizados via Exata e acessados pelo Sigeo.",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "SIGEO — Análise de Dados de FRX (sigeo3wiki SharePoint)"
+      ],
       "evidence_gaps": [
         "Pipeline de ingestão FRX SIGEO → AIDA/Databricks não documentado",
-        "Padroes de rocha de referencia no modulo SIGEO de QC nao documentados na ontologia",
-        "Integracao ao pipeline text-to-SQL do GeoDO ausente"
+        "Padrões de rocha de referência no módulo SIGEO de QC não documentados na ontologia",
+        "Integração ao pipeline text-to-SQL do GeoDO ausente"
       ],
       "context_fields": [
         {"name": "Pais", "type": "xsd:string"},
@@ -247,7 +264,9 @@
       "format": "derived",
       "structured": true,
       "manager": "EXP/OGP/AQG",
-      "fed_by": ["FRX"]
+      "fed_by": ["FRX"],
+      "evidence_status": "inferred",
+      "evidence_note": "Termo emerge das razões elementares padronizadas de FRX, mas não foi encontrado como conceito formal em documentos internos da Petrobras. Pode ser jargão da equipe AQG. A confirmar nomenclatura oficial."
     },
     "Coring": {
       "id": "OG014",
@@ -271,9 +290,14 @@
       "name": "MWD_LWD",
       "name_pt": "MWD_LWD",
       "superclass": "ServiceLine",
-      "description": "Measurement and logging while drilling — real-time petrophysical and directional data.",
-      "description_pt": "Medição e perfilagem durante a perfuração — dados petrofísicos e direcionais em tempo real.",
-      "witsml_object": "log"
+      "description": "Measurement and logging while drilling — real-time petrophysical and directional data. Primary record is the log curve stream in EXATA, not the daily drilling bulletin (BDP).",
+      "description_pt": "Medição e perfilagem durante a perfuração — dados petrofísicos e direcionais em tempo real. O registro primário são as curvas de perfil transmitidas ao EXATA, não o BDP.",
+      "witsml_object": "log",
+      "primary_system": "EXATA",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "EXATA e GDA SharePoint — perfilagem LWD transmitida em tempo real"
+      ]
     },
     "WirelineLogging": {
       "id": "OG017",
@@ -389,22 +413,122 @@
       "name": "RMG",
       "name_pt": "RelatorioMonitoramentoGeomecanico",
       "superclass": "GeologicalOperationsDocument",
-      "description": "Relatório de Monitoramento Geomecânico — non-structured PDF, manager EXP/OGP/AQG/AIP-OGEO.",
-      "description_pt": "Relatório de Monitoramento Geomecânico — PDF não estruturado, gestor EXP/OGP/AQG/AIP-OGEO.",
+      "description": "Relatório de Monitoramento Geomecânico — non-structured PDF, manager EXP/OGP/AQG/AIP-OGEO. Stored in VGE / well folder.",
+      "description_pt": "Relatório de Monitoramento Geomecânico — PDF não estruturado, gestor EXP/OGP/AQG/AIP-OGEO. Armazenado em VGE / Pasta de Poço.",
       "format": "PDF",
       "structured": false,
-      "manager": "EXP/OGP/AQG/AIP-OGEO"
+      "manager": "EXP/OGP/AQG/AIP-OGEO",
+      "stored_in": "VGE / Pasta de Poço",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "PoC AWS Agente 1 OGEO — RMG em VGE/Pasta de poço",
+        "Workshop Geomecânica — 544 poços com Ocorrências Geomecânicas em BDIEP"
+      ]
     },
     "OGEOMEC": {
       "id": "OG034",
       "name": "OGEOMEC",
       "name_pt": "OcorrenciasGeomecanicas",
+      "label_pt": "Planilha de Ocorrências Geomecânicas",
       "superclass": "GeologicalOperationsDocument",
-      "description": "Geomechanical occurrences — relational SQL records inside BDIEP.",
-      "description_pt": "Ocorrências Geomecânicas — registros relacionais (SQL) na BDIEP.",
+      "description": "Relational table of geomechanical occurrences during drilling, persisted in BDIEP. Each row represents a single event (kick, lost circulation, stuck pipe, drag, tagging, etc.) with depth interval, fluid state (ECD, mud weight), drilling procedure, hole size and BHA. Primary structured source for retro-analysis and analog-well search.",
+      "description_pt": "Tabela relacional de ocorrências geomecânicas durante a perfuração, persistida na BDIEP. Cada linha representa um evento (kick, perda, prisão, arraste, topamento, etc.) com intervalo de profundidade, estado do fluido (ECD, peso de lama), procedimento, diâmetro e BHA. Fonte estruturada primária para retroanálise e busca de análogos.",
       "format": "SQL",
       "structured": true,
-      "manager": "EXP/OGP/AQG/AIP-OGEO"
+      "manager": "EXP/OGP/AQG/AIP-OGEO",
+      "stored_in": "BDIEP",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "Workshop Geomecânica de Poços — 544 poços com OGEOMEC em BDIEP",
+        "PoC AWS Agente 1 OGEO",
+        "Schema validado: Operações Geológicas - Ocorrências Geomecânicas.xlsx (898 ocorrências, 21 colunas)",
+        "PE-2RES-00009 — quantificacao de arraste/torque varia com equipamento; orienta campo unidade por linha",
+        "PE-2POC-00453 — formula ECD em ppg (lb/gal)",
+        "PE-2POC-00445 — densidade fluido em ppg",
+        "PE-2POC-00756 — densidade fluido em ppg ('acima de 11,5 ppg')",
+        "PE-2POC-00595 — fases iniciais pre-sal sem retorno (16 a 28 pol)"
+      ],
+      "row_count_observed": 898,
+      "context_fields": [
+        {"name": "Pais",  "type": "xsd:string"},
+        {"name": "Poco",  "type": "xsd:string", "links_to": "poco", "fk": true},
+        {"name": "Campo", "type": "xsd:string", "links_to": "campo"},
+        {"name": "Bacia", "type": "xsd:string", "links_to": "bacia-sedimentar", "examples": ["SANTOS", "CAMPOS MAR", "POTIGUAR MAR"]}
+      ],
+      "occurrence_fields": [
+        {"name": "DescricaoOcorrencia", "type": "xsd:string", "description": "Texto livre descrevendo a ocorrência. Insumo para NLP/text-to-SQL.", "free_text": true},
+        {"name": "TipoOcorrencia", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_TipoOcorrencia", "required": true},
+        {"name": "Data", "type": "xsd:date", "required": true},
+        {"name": "ProfundidadePerfuracao", "type": "xsd:double", "unit": "m", "description": "Profundidade total perfurada (MD) no momento da ocorrência"},
+        {"name": "TopoOcorrencia", "type": "xsd:double", "unit": "m", "description": "Topo do intervalo afetado (MD)"},
+        {"name": "BaseOcorrencia",  "type": "xsd:double", "unit": "m", "description": "Base do intervalo afetado (MD)"},
+        {"name": "ValorMinimoOcorrencia", "type": "xsd:double", "description": "Valor minimo da grandeza medida. Unidade DEPENDE do TipoOcorrencia — ver OGEOMEC_UnidadeValor. Adicionar campo 'unidade' por linha (PE-2RES-00009)."},
+        {"name": "ValorMaximoOcorrencia", "type": "xsd:double", "description": "Valor maximo da grandeza medida. Unidade DEPENDE do TipoOcorrencia."},
+        {"name": "UnidadeValor", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_UnidadeValor", "description": "Unidade dos campos ValorMinimo/ValorMaximo (klbf, bbl, m3, kN.m, psi, ton). Recomendado por PE-2RES-00009 que adverte: 'a quantificacao dos valores de arraste e torque sao de dificil analise, pois ha grande variacao com os equipamentos empregados'.", "recommended_addition": true}
+      ],
+      "fluid_state_fields": [
+        {"name": "DensidadeEquivalente_ECD", "type": "xsd:double", "unit_canonical": "ppg", "description": "Equivalent Circulating Density no momento da ocorrencia. Unidade canonica: ppg (= lb/gal), padrao de fato da industria offshore brasileira (PE-2POC-00453, PE-2POC-00445, PE-2POC-00756). Liga a geomechanics:GM005 MudWindow."},
+        {"name": "PesoFluido", "type": "xsd:double", "unit_canonical": "ppg", "description": "Peso de lama estatico (mud weight). Unidade canonica: ppg. Conversao: 1 ppg = 0,1198 g/cm3."},
+        {"name": "PesoFluidoUnit", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_PesoFluidoUnit", "description": "Unidade original (auditoria). Coexistencia confirmada de ppg/lb/gal e g/cm3/sg em pocos terrestres ou internacionais. PE-2POC-00453 usa ppg; projetos legados usam g/cm3.", "recommended_addition": true},
+        {"name": "Fluido", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_Fluido"}
+      ],
+      "operational_fields": [
+        {"name": "ProcedimentoPoco", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_ProcedimentoPoco", "required": true},
+        {"name": "DiametroNominal", "type": "xsd:string", "unit": "pol", "description": "Diametro do poco aberto (hole size). 16 valores observados (8 1/2, 12 1/4, 17 1/2, 26, 36, etc.). Inversamente correlacionado com FasePoco."},
+        {"name": "FasePoco", "type": "xsd:integer", "description": "Codigo cronologico da fase do poco (1..N). PE-2POC-00595 / PE-2RES-00009: fases baixas = mais rasas / maiores diametros / 'sem retorno'; fases altas = mais profundas / menores diametros / 'com retorno'. Tipico offshore: Fase 1 (>=26 pol, sem retorno) -> Fase 2 (~17 1/2 pol, sem retorno) -> Fase 3 (~12 1/4 pol, com retorno) -> ... Codigo NAO e padronizado globalmente — pocos terrestres podem ter 3-4 fases, pocos complexos passam de 8."},
+        {"name": "FaseTipo", "type": "xsd:string", "controlled_vocabulary": "OGEOMEC_FaseTipo", "description": "SEM_RETORNO (fases iniciais, sem retorno de fluido a superficie) ou COM_RETORNO (fases com circulacao fechada).", "recommended_addition": true},
+        {"name": "CodigoBroca", "type": "xsd:string"},
+        {"name": "ModeloBroca", "type": "xsd:string"},
+        {"name": "ColunaPerfuracao_BHA", "type": "xsd:string", "description": "Bottom Hole Assembly em uso"}
+      ],
+      "controlled_vocabularies": {
+        "OGEOMEC_TipoOcorrencia": [
+          {"value": "Kick",          "name_en": "Kick",            "description": "Influxo de fluido da formação (PorePressure > MudPressure). Viola limite inferior da janela de lama.", "geomechanics_link": "GM005_lower_bound", "category": "pressure",   "expected_unit": "bbl_or_psi"},
+          {"value": "Falso Kick",    "name_en": "False Kick",      "description": "Indício de influxo descartado após verificação (flow check).", "category": "pressure", "expected_unit": "bbl_or_psi"},
+          {"value": "Perda Din",     "name_en": "Dynamic Loss",    "description": "Perda de circulação durante bombeamento (perda dinâmica).", "geomechanics_link": "GM005_upper_bound", "category": "loss", "expected_unit": "volume"},
+          {"value": "Perda Est",     "name_en": "Static Loss",     "description": "Perda de circulação com bomba parada (perda estática).", "geomechanics_link": "GM005_upper_bound", "category": "loss", "expected_unit": "volume"},
+          {"value": "Perda Total",   "name_en": "Total Loss",      "description": "Perda total de retorno de fluido.", "geomechanics_link": "GM005_upper_bound", "category": "loss", "expected_unit": "volume"},
+          {"value": "Prisao",        "name_en": "Stuck Pipe",      "description": "Coluna presa — não pode ser movimentada.", "category": "mechanical", "expected_unit": "qualitative_or_time"},
+          {"value": "Ameaca Prisao", "name_en": "Stuck-Pipe Risk", "description": "Tendência de prisão detectada (drag/torque crescente).", "category": "mechanical", "expected_unit": "force_or_torque"},
+          {"value": "Arraste",       "name_en": "Drag",            "description": "Atrito anormal durante movimentação da coluna.", "category": "mechanical", "expected_unit": "force"},
+          {"value": "Topamento",     "name_en": "Tagging",         "description": "Coluna toca obstáculo no poço (cascalho, ledge, fundo falso).", "category": "mechanical", "expected_unit": "force"},
+          {"value": "Estolamento",   "name_en": "Stalling",        "description": "Parada de rotação do motor de fundo / top drive sob torque excessivo.", "category": "mechanical", "expected_unit": "torque"},
+          {"value": "Fundo Falso",   "name_en": "False Bottom",    "description": "Falso fundo por acúmulo de cascalho.", "category": "mechanical", "expected_unit": "depth_offset"},
+          {"value": "Gas Manobra",   "name_en": "Trip Gas",        "description": "Gás detectado após manobra — não é kick, mas indica permeabilidade.", "category": "pressure", "expected_unit": "gas_units_or_ppm"}
+        ],
+        "OGEOMEC_ProcedimentoPoco": [
+          "PERFURACAO", "DESCIDA DE COLUNA", "RETIRADA DE COLUNA", "CIMENTACAO",
+          "REVESTIMENTO", "PERFILAGEM A CABO", "TESTEMUNHAGEM", "OPERACOES SEM AVANCO"
+        ],
+        "OGEOMEC_Fluido": [
+          "FLUIDO DE PERFURAÇÃO AQUOSO",
+          "FLUIDO DE PERFURAÇÃO NÃO AQUOSO",
+          "FLUIDO COMPLETAÇÃO AQUOSO",
+          "AGUA DO MAR"
+        ],
+        "OGEOMEC_UnidadeValor": [
+          {"value": "klbf",   "name": "kilo libras-forca",       "applies_to": ["Arraste", "Topamento", "Ameaca Prisao"], "category": "force"},
+          {"value": "ton",    "name": "tonelada-forca",          "applies_to": ["Topamento"], "category": "force"},
+          {"value": "kN.m",   "name": "kilonewton-metro",        "applies_to": ["Estolamento", "Ameaca Prisao"], "category": "torque"},
+          {"value": "klbf.ft","name": "kilo libra-forca por pe", "applies_to": ["Estolamento"], "category": "torque"},
+          {"value": "bbl",    "name": "barril",                  "applies_to": ["Perda Din", "Perda Est", "Perda Total", "Kick", "Falso Kick"], "category": "volume"},
+          {"value": "m3",     "name": "metro cubico",            "applies_to": ["Perda Din", "Perda Est", "Perda Total", "Kick"], "category": "volume"},
+          {"value": "psi",    "name": "libra por polegada quadrada", "applies_to": ["Kick", "Falso Kick"], "category": "pressure"},
+          {"value": "ppm",    "name": "partes por milhao",       "applies_to": ["Gas Manobra"], "category": "concentration"},
+          {"value": "units",  "name": "gas units (mudlogger)",   "applies_to": ["Gas Manobra"], "category": "concentration"},
+          {"value": "min",    "name": "minutos (duracao)",       "applies_to": ["Prisao"], "category": "time"},
+          {"value": "m",      "name": "metros (offset)",         "applies_to": ["Fundo Falso"], "category": "length"}
+        ],
+        "OGEOMEC_PesoFluidoUnit": [
+          {"value": "ppg",    "name": "pounds per gallon",       "synonyms": ["lb/gal"], "canonical": true, "note": "Padrao de fato offshore Brasil. Referencias: PE-2POC-00453, PE-2POC-00445, PE-2POC-00756."},
+          {"value": "g/cm3",  "name": "gramas por centimetro cubico", "synonyms": ["sg"], "conversion": "1 ppg = 0.1198 g/cm3", "note": "Comum em pocos terrestres e projetos legados."},
+          {"value": "sg",     "name": "specific gravity",        "synonyms": ["g/cm3"], "note": "Adimensional, equivale a g/cm3."}
+        ],
+        "OGEOMEC_FaseTipo": [
+          {"value": "SEM_RETORNO", "description": "Fases iniciais (geralmente 1 e 2) — sem retorno de fluido a superficie. Tipico offshore: brocas >=17 1/2 pol. Ref: PE-2POC-00595."},
+          {"value": "COM_RETORNO", "description": "Fases com circulacao fechada via riser/revestimento — retorno de fluido a superficie. Tipico: fases 3+, brocas <= 12 1/4 pol."}
+        ]
+      }
     },
     "ROP_Logging": {
       "id": "OG035",
@@ -416,6 +540,57 @@
       "format": "CSV",
       "structured": true,
       "manager": "EXP/OGP/TOGPR"
+    },
+    "QPG": {
+      "id": "OG037",
+      "name": "QPG",
+      "name_pt": "QuadroDePrevisaoGeologica",
+      "label_pt": "Quadro de Previsão Geológica",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Geological prognosis published in SIGEO/BDIEP that consolidates the predicted geology of an upcoming well: lithology prediction, formation markers, faults, seismic time, drilling targets, and planned acquisition tools/techniques. Primary planning artifact consumed by all wellsite acquisition activities.",
+      "description_pt": "Quadro de Previsão Geológica — publicado no SIGEO/BDIEP, consolida a representação visual das possíveis características geológicas do poço: previsão litológica, marcadores, falhas, tempo sísmico, objetivos e previsões de ferramentas/técnicas de aquisição. Principal insumo de planejamento consumido pelas atividades de aquisição.",
+      "format": "structured + visualizations",
+      "structured": "semi",
+      "manager": "EXP/OGP",
+      "stored_in": "SIGEO / BDIEP",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "SIGEO wiki — Quadro de Previsão Geológica",
+        "SIGEO wiki — Publicação e Recuperação de QPG",
+        "Briefing Buscador de Análogos Geomec"
+      ],
+      "synonyms": ["Quadro de Previsão Geológica", "Prognóstico Geológico"]
+    },
+    "PerfilComposto": {
+      "id": "OG038",
+      "name": "PerfilComposto",
+      "name_pt": "PerfilComposto",
+      "label_pt": "Perfil Composto",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Composite log integrating, for a single well, well log curves, lithological descriptions, gas shows, formation tests, directional records and other acquired data — sourced from BDIEP via SIGEO. Canonical post-drilling product of the WellDataConsolidation discipline.",
+      "description_pt": "Perfil Composto — integra, para um único poço, curvas de perfis, descrições litológicas, indícios, testes de formação, registros direcionais e demais dados adquiridos — recuperados da BDIEP via SIGEO. Produto canônico pós-perfuração da disciplina de Consolidação de Dados de Poço.",
+      "format": "composite",
+      "structured": "semi",
+      "manager": "EXP/OGP",
+      "stored_in": "SIGEO / BDIEP",
+      "evidence_status": "documented",
+      "evidence_refs": ["SIGEO wiki — Perfil Composto"],
+      "fed_by": ["WirelineLogging", "MWD_LWD", "CuttingsSampling", "Mudlogging", "FRX", "DRX", "FormationTesting"]
+    },
+    "Litologia": {
+      "id": "OG039",
+      "name": "Litologia",
+      "name_pt": "Litologia",
+      "label_pt": "Litologia (interpretada)",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Lithology interpretation of the well — percentages and descriptions per cuttings sample, archived in SIGEO. Distinguished from raw cuttings data (which is the input).",
+      "description_pt": "Interpretação litológica do poço — porcentagens e descrições por amostra de calha, arquivada no SIGEO. Distinta do dado bruto da calha (insumo).",
+      "format": "structured",
+      "structured": true,
+      "manager": "EXP/OGP/AQG",
+      "stored_in": "SIGEO",
+      "evidence_status": "documented",
+      "evidence_refs": ["SIGEO wiki — Interpretar Litologia (Usuário)"]
     },
     "RCSD": {
       "id": "OG036",
@@ -486,6 +661,39 @@
       "superclass": "GeologicalOperationsSystem",
       "description": "Geoscience Data Analyst — automation of analyses and synthetic logs.",
       "description_pt": "Geoscience Data Analyst — automação de análises e perfis sintéticos."
+    },
+    "CGOR": {
+      "id": "OG048",
+      "name": "CGOR",
+      "label_pt": "Centro Geológico de Operação Remota",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Centro Geológico de Operação Remota — Petrobras remote operations center that monitors drilling wells in real time using EXATA data streams. Performs geostopping, formation evaluation and operational decisions remotely.",
+      "description_pt": "Centro Geológico de Operação Remota e Automação — opera em tempo real durante a perfuração, consumindo dados do EXATA. Realiza geostopping, avaliação e decisões operacionais remotas.",
+      "evidence_status": "documented",
+      "evidence_refs": [
+        "agencia.petrobras.com.br — Centro Geológico de Operação Remota",
+        "PE-2EXP-00074 Anexo A_2 Manual CGOR"
+      ]
+    },
+    "CSD": {
+      "id": "OG049",
+      "name": "CSD",
+      "label_pt": "CSD de Operações",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Centro de Suporte à Decisão de Operações — emits the RCSD (Relatório do CSD) consolidating operational status. Stored on SharePoint / Drive Científico CSD.",
+      "description_pt": "Centro de Suporte à Decisão de Operações — emite o RCSD consolidando o status operacional. Armazenado em SharePoint / Drive Científico CSD.",
+      "evidence_status": "documented",
+      "evidence_refs": ["PoC AWS Agente 1 OGEO — RCSD/CSD em SharePoint Drive Científico"]
+    },
+    "BuscadorAnalogosGeomec": {
+      "id": "OG050",
+      "name": "BuscadorAnalogosGeomec",
+      "label_pt": "Buscador de Análogos Geomecânicos",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Internal tool that retrieves analog wells using QPG, Composite Log, geopressure model, LOTs and Geomechanical Occurrences as inputs.",
+      "description_pt": "Ferramenta interna de busca de poços análogos usando QPG, Perfil Composto, modelo de geopressões, LOTs e Ocorrências Geomecânicas como insumos.",
+      "evidence_status": "documented",
+      "evidence_refs": ["Briefing — Buscador de Análogos Geomec"]
     }
   },
 
@@ -503,7 +711,9 @@
     {"id": "OGP11", "name": "depth_base_m", "domain": "ServiceLine", "range": "xsd:double", "description": "Base depth (MD, meters) of the acquired interval."},
     {"id": "OGP12", "name": "system_of_record", "domain": "GeologicalOperationsDocument", "range": "GeologicalOperationsSystem", "description": "System where the document/data is persisted."},
     {"id": "OGP13", "name": "discipline", "domain": "ServiceLine", "range": "ExplorationDiscipline", "description": "Discipline that owns the activity (default: GeologicalOperations)."},
-    {"id": "OGP14", "name": "lessonsLearnedRefs", "domain": "WellJourneyPhase", "range": "xsd:anyURI", "description": "Pointers to lessons learned entries fed back into RetroAnalysis."}
+    {"id": "OGP14", "name": "lessonsLearnedRefs", "domain": "WellJourneyPhase", "range": "xsd:anyURI", "description": "Pointers to lessons learned entries fed back into RetroAnalysis."},
+    {"id": "OGP15", "name": "evidence_status", "domain": "owl:Thing", "range": "xsd:string", "description": "Quality of documentary evidence: 'documented' (direct evidence), 'partial' (some evidence + inference), 'inferred' (operational practice without explicit documentation), 'unverified' (placeholder).", "allowed_values": ["documented", "partial", "inferred", "unverified"]},
+    {"id": "OGP16", "name": "evidence_refs", "domain": "owl:Thing", "range": "xsd:string", "description": "Citations or pointers to source documents supporting the entity definition (SharePoint pages, internal docs, briefings)."}
   ],
 
   "relations": [
@@ -518,7 +728,10 @@
     {"id": "OGR09", "name": "feeds_back_to", "domain": "LessonsLearned", "range": "RetroAnalysis", "description": "Lessons learned close the loop back to retro-analysis of the next well."},
     {"id": "OGR10", "name": "complements", "domain": "ServiceLine", "range": "ServiceLine", "description": "Two service lines whose outputs are jointly required for a complete characterization (e.g., DRX + FRX)."},
     {"id": "OGR11", "name": "supports_decision", "domain": "ServiceLine", "range": "GM005", "description": "DRX identification of reactive clay minerals supports MudWindow / wellbore stability decisions (geomechanics:GM005)."},
-    {"id": "OGR12", "name": "feeds_signature", "domain": "FRX", "range": "DNAGeoquimico", "description": "FRX elemental data feeds the geochemical signature (DNA Geoquimico) of a formation."}
+    {"id": "OGR12", "name": "feeds_signature", "domain": "FRX", "range": "DNAGeoquimico", "description": "FRX elemental data feeds the geochemical signature (DNA Geoquimico) of a formation. Status: inferred (DNA Geoquímico nomenclature not formally documented)."},
+    {"id": "OGR13", "name": "consumes_prognosis", "domain": "ServiceLine", "range": "QPG", "description": "Wellsite acquisition activities consume the QPG (Quadro de Previsão Geológica) as planning input. Status: operationally_implied — practitioner workflow, not explicit documentation linking each service line to QPG consumption.", "evidence_status": "inferred"},
+    {"id": "OGR14", "name": "feeds_composite_log", "domain": "ServiceLine", "range": "PerfilComposto", "description": "Service line outputs are integrated into the well's Perfil Composto. Documented for: WirelineLogging, MWD/LWD, CuttingsSampling, Mudlogging, FormationTesting; inferred for FRX/DRX."},
+    {"id": "OGR15", "name": "violates_mud_window", "domain": "OGEOMEC", "range": "GM005", "description": "Specific OGEOMEC occurrence types (Kick, Perda Din/Est/Total) are operational manifestations of MudWindow (geomechanics:GM005) violations: Kick = lower bound (Pp > MW), Perdas = upper bound (MW > FractureGradient)."}
   ],
 
   "instances": {
@@ -583,6 +796,29 @@
         "trace_elements_count": 37
       },
       "source": "Operação_Geológica_-_DRX.xlsx; Operação_Geológica_-_FRX.xlsx (711 e 1133 amostras)"
+    },
+
+    "OG_OGEOMEC_EXAMPLE": {
+      "id": "OG_OGEOMEC_EXAMPLE",
+      "name": "OGEOMEC sample — well 1-RJS-685, Santos Basin",
+      "name_pt": "Exemplo OGEOMEC — poco 1-RJS-685, Bacia de Santos",
+      "class": "OGEOMEC",
+      "description": "Reference OGEOMEC sequence on well 1-RJS-685: Topamento → Kick (água) → Topamento → Arraste — same drilling phase (3, 26\" hole), aqueous mud at 8.7 lb/gal, recorded in Jan/2011. Illustrates how a kick (GM005 lower-bound violation) and subsequent mechanical events propagate into the OGEOMEC table.",
+      "well": "1-RJS-685",
+      "basin": "SANTOS",
+      "phase_code": 3,
+      "phase_type": "COM_RETORNO",
+      "hole_size_in": "26\"",
+      "fluid": "FLUIDO DE PERFURAÇÃO AQUOSO",
+      "mud_weight": 8.7,
+      "mud_weight_unit": "ppg",
+      "events_observed": [
+        {"date": "2011-01-11", "type": "Topamento", "top_md": 791.0, "base_md": 791.0, "procedure": "DESCIDA DE COLUNA"},
+        {"date": "2011-01-11", "type": "Kick",      "top_md": 817.0, "base_md": 817.0, "procedure": "PERFURACAO", "geomechanics_link": "GM005_lower_bound"},
+        {"date": "2011-01-12", "type": "Topamento", "top_md": 922.0, "base_md": 922.0, "procedure": "RETIRADA DE COLUNA"},
+        {"date": "2011-01-16", "type": "Arraste",   "top_md": 899.0, "base_md": 899.0, "procedure": "RETIRADA DE COLUNA", "valor_min": 25.0, "valor_max": 25.0, "unidade": "klbf"}
+      ],
+      "source": "Operações Geológicas - Ocorrências Geomecânicas.xlsx (898 occurrences total)"
     },
 
     "OG_DOC_FLOW": {
