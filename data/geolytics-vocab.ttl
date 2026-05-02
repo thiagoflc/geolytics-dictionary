@@ -343,3 +343,500 @@ geo:inTrajectory a owl:ObjectProperty ;
     rdfs:label "in trajectory"@en ;
     rdfs:domain geo:TrajectoryStation ;
     rdfs:range geo:Trajectory .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Geochemical analysis classes (DRX, FRX, DNA Geoquimico) — ServiceLine layer
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:GeochemicalAnalysis a owl:Class ;
+    rdfs:label "Análise Geoquímica"@pt ;
+    rdfs:label "Geochemical Analysis"@en ;
+    rdfs:comment "Classe-mãe para análises geoquímicas de amostras de rocha (calha ou testemunho): mineralógicas (DRX) e elementares (FRX)."@pt ;
+    skos:definition "Parent class for rock-sample geochemical analyses (cuttings or core): mineralogical (XRD) and elemental (XRF)."@en ;
+    skos:definition "Classe-mãe para análises geoquímicas de amostras de rocha (calha ou testemunho)."@pt .
+
+geo:DRX a owl:Class ;
+    rdfs:label "Difração de Raios X"@pt ;
+    rdfs:label "X-Ray Diffraction"@en ;
+    rdfs:subClassOf geo:GeochemicalAnalysis ;
+    skos:prefLabel "Difração de Raios X"@pt ;
+    skos:prefLabel "X-Ray Diffraction"@en ;
+    skos:altLabel "XRD"@en ;
+    skos:altLabel "X-Ray Diffraction"@en ;
+    skos:altLabel "Difratometria de Raios X"@pt ;
+    skos:definition "X-Ray Diffraction analysis of cuttings or core samples, yielding qualitative and semi-quantitative mineralogical composition. Critical input for lithological classification, stratigraphic correlation and wellbore stability decisions (reactive clay identification)."@en ;
+    skos:definition "Análise por difração de raios X em amostras de calha ou testemunho, fornecendo composição mineralógica qualitativa e semi-quantitativa. Insumo crítico para classificação litológica, correlação estratigráfica e decisões de estabilidade de poço (identificação de argilominerais reativos)."@pt ;
+    rdfs:seeAlso <http://resource.geosciml.org/classifier/cgi/specimentype/cuttings> .
+
+geo:FRX a owl:Class ;
+    rdfs:label "Fluorescência de Raios X"@pt ;
+    rdfs:label "X-Ray Fluorescence"@en ;
+    rdfs:subClassOf geo:GeochemicalAnalysis ;
+    skos:prefLabel "Fluorescência de Raios X"@pt ;
+    skos:prefLabel "X-Ray Fluorescence"@en ;
+    skos:altLabel "XRF"@en ;
+    skos:altLabel "X-Ray Fluorescence"@en ;
+    skos:altLabel "Fluorescencia de Raios-X"@pt ;
+    skos:altLabel "Analise de FRX"@pt ;
+    skos:definition "X-Ray Fluorescence analysis of cuttings, yielding elemental composition (major + trace elements) of drilled rock. Enables lithological classification via elemental ratios, geochemical correlation across wells, and construction of formation geochemical signatures (DNA Geoquímico)."@en ;
+    skos:definition "Análise por fluorescência de raios X em amostras de calha, fornecendo composição elementar (elementos maiores e traço). Permite classificação litológica via razões elementares, correlação geoquímica entre poços e construção de assinaturas geoquímicas de formações (DNA Geoquímico)."@pt .
+
+geo:DNAGeoquimico a owl:Class ;
+    rdfs:label "DNA Geoquímico"@pt ;
+    rdfs:label "Geochemical DNA"@en ;
+    skos:prefLabel "DNA Geoquímico"@pt ;
+    skos:prefLabel "Geochemical Signature"@en ;
+    skos:altLabel "Assinatura Geoquímica"@pt ;
+    skos:altLabel "Geochemical Fingerprint"@en ;
+    skos:definition "Geochemical signature of a stratigraphic formation built from FRX elemental ratios across multiple wells. Used as a fingerprint for stratigraphic correlation and provenance analysis."@en ;
+    skos:definition "Assinatura geoquímica de uma formação construída a partir de razões elementares de FRX em múltiplos poços. Usada como impressão digital para correlação estratigráfica e análise de proveniência."@pt .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# DRX mineralogical percent properties (12 minerals, all xsd:double, unit %)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:drxQuartzPercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Quartzo (%)"@pt ;
+    rdfs:label "XRD Quartz (%)"@en ;
+    rdfs:comment "Percentual de Quartzo (mnemônico SIGEO: QTZ) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxCalcitePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Calcita (%)"@pt ;
+    rdfs:label "XRD Calcite (%)"@en ;
+    rdfs:comment "Percentual de Calcita (mnemônico SIGEO: CAL) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxDolomitePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Dolomita (%)"@pt ;
+    rdfs:label "XRD Dolomite (%)"@en ;
+    rdfs:comment "Percentual de Dolomita (mnemônico SIGEO: DOL) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxClayMineralsPercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Argilominerais (%)"@pt ;
+    rdfs:label "XRD Clay Minerals (%)"@en ;
+    rdfs:comment "Percentual de Argilominerais (mnemônico SIGEO: A_M) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxAnhydritePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Anidrita (%)"@pt ;
+    rdfs:label "XRD Anhydrite (%)"@en ;
+    rdfs:comment "Percentual de Anidrita (mnemônico SIGEO: AND) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxHalitePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Halita (%)"@pt ;
+    rdfs:label "XRD Halite (%)"@en ;
+    rdfs:comment "Percentual de Halita (mnemônico SIGEO: HAL) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxPlagioclasePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Plagioclasio (%)"@pt ;
+    rdfs:label "XRD Plagioclase (%)"@en ;
+    rdfs:comment "Percentual de Plagioclasio (mnemônico SIGEO: PLG) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxKFeldsparPercent a owl:DatatypeProperty ;
+    rdfs:label "DRX K-Feldspato (%)"@pt ;
+    rdfs:label "XRD K-Feldspar (%)"@en ;
+    rdfs:comment "Percentual de K-Feldspato (mnemônico SIGEO: KFD) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxPyritePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Pirita (%)"@pt ;
+    rdfs:label "XRD Pyrite (%)"@en ;
+    rdfs:comment "Percentual de Pirita (mnemônico SIGEO: PIR) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxPyroxenePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Piroxenio (%)"@pt ;
+    rdfs:label "XRD Pyroxene (%)"@en ;
+    rdfs:comment "Percentual de Piroxenio (mnemônico SIGEO: PRX) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxAmphibolePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Anfibolio (%)"@pt ;
+    rdfs:label "XRD Amphibole (%)"@en ;
+    rdfs:comment "Percentual de Anfibolio (mnemônico SIGEO: ANF) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+geo:drxOlivinePercent a owl:DatatypeProperty ;
+    rdfs:label "DRX Olivina (%)"@pt ;
+    rdfs:label "XRD Olivine (%)"@en ;
+    rdfs:comment "Percentual de Olivina (mnemônico SIGEO: OLI) determinado por DRX, unidade %."@pt ;
+    rdfs:domain geo:DRX ;
+    rdfs:range xsd:double .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FRX major-element percent properties (11 elements, xsd:double, unit %)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:frxNaMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Na maior (%)"@pt ;
+    rdfs:label "XRF Na major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Na determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxMgMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Mg maior (%)"@pt ;
+    rdfs:label "XRF Mg major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Mg determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxAlMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Al maior (%)"@pt ;
+    rdfs:label "XRF Al major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Al determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSiMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Si maior (%)"@pt ;
+    rdfs:label "XRF Si major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Si determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxPMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX P maior (%)"@pt ;
+    rdfs:label "XRF P major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior P determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX S maior (%)"@pt ;
+    rdfs:label "XRF S major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior S determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxKMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX K maior (%)"@pt ;
+    rdfs:label "XRF K major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior K determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCaMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Ca maior (%)"@pt ;
+    rdfs:label "XRF Ca major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Ca determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTiMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Ti maior (%)"@pt ;
+    rdfs:label "XRF Ti major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Ti determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxMnMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Mn maior (%)"@pt ;
+    rdfs:label "XRF Mn major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Mn determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxFeMajorPercent a owl:DatatypeProperty ;
+    rdfs:label "FRX Fe maior (%)"@pt ;
+    rdfs:label "XRF Fe major (%)"@en ;
+    rdfs:comment "Percentual do elemento maior Fe determinado por FRX, unidade %."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# FRX trace-element ppm properties (37 elements, xsd:double, unit ppm)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:frxClTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cl traço (ppm)"@pt ;
+    rdfs:label "XRF Cl trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cl determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxVTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX V traço (ppm)"@pt ;
+    rdfs:label "XRF V trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço V determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cr traço (ppm)"@pt ;
+    rdfs:label "XRF Cr trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cr determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCoTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Co traço (ppm)"@pt ;
+    rdfs:label "XRF Co trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Co determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxNiTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ni traço (ppm)"@pt ;
+    rdfs:label "XRF Ni trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ni determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCuTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cu traço (ppm)"@pt ;
+    rdfs:label "XRF Cu trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cu determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxZnTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Zn traço (ppm)"@pt ;
+    rdfs:label "XRF Zn trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Zn determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxGaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ga traço (ppm)"@pt ;
+    rdfs:label "XRF Ga trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ga determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxGeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ge traço (ppm)"@pt ;
+    rdfs:label "XRF Ge trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ge determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxAsTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX As traço (ppm)"@pt ;
+    rdfs:label "XRF As trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço As determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Se traço (ppm)"@pt ;
+    rdfs:label "XRF Se trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Se determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxBrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Br traço (ppm)"@pt ;
+    rdfs:label "XRF Br trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Br determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxRbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Rb traço (ppm)"@pt ;
+    rdfs:label "XRF Rb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Rb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Sr traço (ppm)"@pt ;
+    rdfs:label "XRF Sr trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Sr determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxYTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Y traço (ppm)"@pt ;
+    rdfs:label "XRF Y trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Y determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxZrTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Zr traço (ppm)"@pt ;
+    rdfs:label "XRF Zr trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Zr determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxNbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Nb traço (ppm)"@pt ;
+    rdfs:label "XRF Nb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Nb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxMoTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Mo traço (ppm)"@pt ;
+    rdfs:label "XRF Mo trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Mo determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxAgTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ag traço (ppm)"@pt ;
+    rdfs:label "XRF Ag trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ag determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCdTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cd traço (ppm)"@pt ;
+    rdfs:label "XRF Cd trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cd determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSnTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Sn traço (ppm)"@pt ;
+    rdfs:label "XRF Sn trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Sn determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxSbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Sb traço (ppm)"@pt ;
+    rdfs:label "XRF Sb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Sb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Te traço (ppm)"@pt ;
+    rdfs:label "XRF Te trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Te determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxITracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX I traço (ppm)"@pt ;
+    rdfs:label "XRF I trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço I determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCsTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Cs traço (ppm)"@pt ;
+    rdfs:label "XRF Cs trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Cs determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxBaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ba traço (ppm)"@pt ;
+    rdfs:label "XRF Ba trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ba determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxLaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX La traço (ppm)"@pt ;
+    rdfs:label "XRF La trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço La determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxCeTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ce traço (ppm)"@pt ;
+    rdfs:label "XRF Ce trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ce determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxHfTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Hf traço (ppm)"@pt ;
+    rdfs:label "XRF Hf trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Hf determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTaTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Ta traço (ppm)"@pt ;
+    rdfs:label "XRF Ta trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Ta determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxWTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX W traço (ppm)"@pt ;
+    rdfs:label "XRF W trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço W determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxHgTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Hg traço (ppm)"@pt ;
+    rdfs:label "XRF Hg trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Hg determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxTlTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Tl traço (ppm)"@pt ;
+    rdfs:label "XRF Tl trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Tl determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxPbTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Pb traço (ppm)"@pt ;
+    rdfs:label "XRF Pb trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Pb determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxBiTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Bi traço (ppm)"@pt ;
+    rdfs:label "XRF Bi trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Bi determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxThTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX Th traço (ppm)"@pt ;
+    rdfs:label "XRF Th trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço Th determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+geo:frxUTracePpm a owl:DatatypeProperty ;
+    rdfs:label "FRX U traço (ppm)"@pt ;
+    rdfs:label "XRF U trace (ppm)"@en ;
+    rdfs:comment "Concentração do elemento traço U determinada por FRX, unidade ppm."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range xsd:double .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Object properties linking DRX, FRX and DNA Geoquimico
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:complementsAnalysis a owl:ObjectProperty ;
+    rdfs:label "complementa análise"@pt ;
+    rdfs:label "complements analysis"@en ;
+    rdfs:comment "Liga DRX e FRX como análises geoquímicas complementares sobre as mesmas amostras."@pt ;
+    rdfs:domain geo:GeochemicalAnalysis ;
+    rdfs:range geo:GeochemicalAnalysis .
+
+geo:feedsSignature a owl:ObjectProperty ;
+    rdfs:label "alimenta assinatura"@pt ;
+    rdfs:label "feeds signature"@en ;
+    rdfs:comment "Liga uma análise FRX à assinatura DNAGeoquimico que ela alimenta com razões elementares."@pt ;
+    rdfs:domain geo:FRX ;
+    rdfs:range geo:DNAGeoquimico .

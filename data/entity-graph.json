@@ -5169,6 +5169,218 @@
         "@en": null
       },
       "skos_example": []
+    },
+    {
+      "id": "operacoes-geologicas",
+      "label": "Operações Geológicas",
+      "label_en": "Geological Operations",
+      "type": "operational",
+      "color": "#378ADD",
+      "size": 28,
+      "definition": "Disciplina que agrupa técnicas analíticas e operacionais de aquisição de dados geológicos (DRX, FRX, geoquímica) aplicadas a amostras de poço e formação. Detalhada no módulo data/operacoes-geologicas.json (OG001).",
+      "definition_en_canonical": "Discipline grouping analytical and operational geological data-acquisition techniques (XRD, XRF, geochemistry) applied to well and formation samples. Detailed in module data/operacoes-geologicas.json (OG001).",
+      "legal_source": "GDGEO / Operações Geológicas",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "Operações Geológicas",
+        "Aquisição de Dados Geológicos"
+      ],
+      "synonyms_en": [
+        "Geological Operations",
+        "Geological Data Acquisition"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "module": "data/operacoes-geologicas.json#OG001",
+      "skos_prefLabel": {
+        "@pt": "Operações Geológicas",
+        "@en": "Geological Operations"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "Operações Geológicas",
+          "Aquisição de Dados Geológicos"
+        ],
+        "@en": [
+          "Geological Operations",
+          "Geological Data Acquisition"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Disciplina que agrupa técnicas analíticas e operacionais de aquisição de dados geológicos (DRX, FRX, geoquímica) aplicadas a amostras de poço e formação. Detalhada no módulo data/operacoes-geologicas.json (OG001).",
+        "@en": "Discipline grouping analytical and operational geological data-acquisition techniques (XRD, XRF, geochemistry) applied to well and formation samples. Detailed in module data/operacoes-geologicas.json (OG001)."
+      },
+      "skos_example": []
+    },
+    {
+      "id": "drx",
+      "label": "Difração de Raios X",
+      "label_en": "X-Ray Diffraction",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Técnica analítica de identificação mineralógica baseada na difração de raios X em amostras de rocha. Permite caracterizar mineralogia e auxiliar a classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013).",
+      "definition_en_canonical": "Analytical technique for mineralogical identification based on X-ray diffraction patterns from rock samples. Supports mineralogy characterization and lithological classification. Detailed in data/operacoes-geologicas.json (OG013).",
+      "legal_source": "GDGEO / Operações Geológicas",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "DRX",
+        "Difratometria de Raios X",
+        "Difração de Raios X"
+      ],
+      "synonyms_en": [
+        "XRD",
+        "X-Ray Diffraction"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "module": "data/operacoes-geologicas.json#OG013",
+      "skos_prefLabel": {
+        "@pt": "Difração de Raios X",
+        "@en": "X-Ray Diffraction"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "DRX",
+          "Difratometria de Raios X",
+          "Difração de Raios X"
+        ],
+        "@en": [
+          "XRD",
+          "X-Ray Diffraction"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Técnica analítica de identificação mineralógica baseada na difração de raios X em amostras de rocha. Permite caracterizar mineralogia e auxiliar a classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013).",
+        "@en": "Analytical technique for mineralogical identification based on X-ray diffraction patterns from rock samples. Supports mineralogy characterization and lithological classification. Detailed in data/operacoes-geologicas.json (OG013)."
+      },
+      "skos_example": []
+    },
+    {
+      "id": "frx",
+      "label": "Fluorescência de Raios X",
+      "label_en": "X-Ray Fluorescence",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Técnica analítica de determinação da composição elementar de amostras de rocha por fluorescência de raios X. Gera assinatura geoquímica usada na caracterização e correlação de formações. Detalhada em data/operacoes-geologicas.json (OG013b).",
+      "definition_en_canonical": "Analytical technique to determine elemental composition of rock samples via X-ray fluorescence. Produces a geochemical signature used in formation characterization and correlation. Detailed in data/operacoes-geologicas.json (OG013b).",
+      "legal_source": "GDGEO / Operações Geológicas",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "FRX",
+        "Fluorescência de Raios-X",
+        "Análise de FRX"
+      ],
+      "synonyms_en": [
+        "XRF",
+        "X-Ray Fluorescence"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "module": "data/operacoes-geologicas.json#OG013b",
+      "skos_prefLabel": {
+        "@pt": "Fluorescência de Raios X",
+        "@en": "X-Ray Fluorescence"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "FRX",
+          "Fluorescência de Raios-X",
+          "Análise de FRX"
+        ],
+        "@en": [
+          "XRF",
+          "X-Ray Fluorescence"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Técnica analítica de determinação da composição elementar de amostras de rocha por fluorescência de raios X. Gera assinatura geoquímica usada na caracterização e correlação de formações. Detalhada em data/operacoes-geologicas.json (OG013b).",
+        "@en": "Analytical technique to determine elemental composition of rock samples via X-ray fluorescence. Produces a geochemical signature used in formation characterization and correlation. Detailed in data/operacoes-geologicas.json (OG013b)."
+      },
+      "skos_example": []
+    },
+    {
+      "id": "dna-geoquimico",
+      "label": "DNA Geoquímico",
+      "label_en": "Geochemical DNA",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Assinatura geoquímica de uma formação derivada de medidas de FRX, usada como impressão digital elementar para correlação estratigráfica e classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013c).",
+      "definition_en_canonical": "Geochemical signature of a formation derived from XRF measurements, used as an elemental fingerprint for stratigraphic correlation and lithological classification. Detailed in data/operacoes-geologicas.json (OG013c).",
+      "legal_source": "GDGEO / Operações Geológicas",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "DNA Geoquímico",
+        "Assinatura Geoquímica de Formação",
+        "Impressão Digital Geoquímica"
+      ],
+      "synonyms_en": [
+        "Geochemical DNA",
+        "Geochemical Formation Signature",
+        "Geochemical Fingerprint"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "module": "data/operacoes-geologicas.json#OG013c",
+      "skos_prefLabel": {
+        "@pt": "DNA Geoquímico",
+        "@en": "Geochemical DNA"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "DNA Geoquímico",
+          "Assinatura Geoquímica de Formação",
+          "Impressão Digital Geoquímica"
+        ],
+        "@en": [
+          "Geochemical DNA",
+          "Geochemical Formation Signature",
+          "Geochemical Fingerprint"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Assinatura geoquímica de uma formação derivada de medidas de FRX, usada como impressão digital elementar para correlação estratigráfica e classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013c).",
+        "@en": "Geochemical signature of a formation derived from XRF measurements, used as an elemental fingerprint for stratigraphic correlation and lithological classification. Detailed in data/operacoes-geologicas.json (OG013c)."
+      },
+      "skos_example": []
     }
   ],
   "edges": [
@@ -6363,6 +6575,78 @@
       "relation_label_pt": "restringe acesso para",
       "relation_label_en": "restricts access for",
       "style": "dashed"
+    },
+    {
+      "source": "operacoes-geologicas",
+      "target": "drx",
+      "relation": "executes",
+      "relation_label_pt": "executa",
+      "relation_label_en": "executes",
+      "style": "solid"
+    },
+    {
+      "source": "operacoes-geologicas",
+      "target": "frx",
+      "relation": "executes",
+      "relation_label_pt": "executa",
+      "relation_label_en": "executes",
+      "style": "solid"
+    },
+    {
+      "source": "drx",
+      "target": "frx",
+      "relation": "complements",
+      "relation_label_pt": "complementa",
+      "relation_label_en": "complements",
+      "style": "dashed"
+    },
+    {
+      "source": "frx",
+      "target": "drx",
+      "relation": "complements",
+      "relation_label_pt": "complementa",
+      "relation_label_en": "complements",
+      "style": "dashed"
+    },
+    {
+      "source": "frx",
+      "target": "dna-geoquimico",
+      "relation": "feeds_signature",
+      "relation_label_pt": "alimenta assinatura",
+      "relation_label_en": "feeds signature",
+      "style": "solid"
+    },
+    {
+      "source": "drx",
+      "target": "poco",
+      "relation": "performed_on",
+      "relation_label_pt": "realizado em",
+      "relation_label_en": "performed on",
+      "style": "solid"
+    },
+    {
+      "source": "frx",
+      "target": "poco",
+      "relation": "performed_on",
+      "relation_label_pt": "realizado em",
+      "relation_label_en": "performed on",
+      "style": "solid"
+    },
+    {
+      "source": "drx",
+      "target": "formacao",
+      "relation": "alimenta_classificacao_litologica",
+      "relation_label_pt": "alimenta classificação litológica",
+      "relation_label_en": "feeds lithological classification",
+      "style": "solid"
+    },
+    {
+      "source": "frx",
+      "target": "formacao",
+      "relation": "alimenta_classificacao_litologica",
+      "relation_label_pt": "alimenta classificação litológica",
+      "relation_label_en": "feeds lithological classification",
+      "style": "solid"
     }
   ]
 }

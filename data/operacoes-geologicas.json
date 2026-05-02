@@ -1,0 +1,605 @@
+{
+  "meta": {
+    "id": "operacoes_geologicas",
+    "label": "Geological Operations / Wellsite Geology",
+    "label_pt": "Operações Geológicas",
+    "version": "1.0.0",
+    "description": "Functional ontology for the Geological Operations discipline at Petrobras: planning, acquisition and evaluation of geological and petrophysical data along the well lifecycle. Covers disciplines, service lines (mudlogging, FRX/DRX, coring, MWD/LWD, wireline, formation testing, geostopping), well-journey phases, derived documents (IGP, BDP, RMG, OGEOMEC, ROP, RCSD) and supporting systems (EXATA, SIGEO, BDIEP, AIDA, GeoDO, GDA).",
+    "geocoverage": ["layer1", "layer2", "layer6"],
+    "sources": [
+      "Petrobras EXP/OGP — Macroprocesso Explorar, N3 'Prover planejamento, aquisição e avaliação de dados geológicos e petrofísicos'",
+      "Petrobras Jornada do Poço (RAP-01)",
+      "OSDU R3 Master & Work Product Component schemas (Well, Wellbore, WellLog, MudLog)",
+      "GeoSciML 4.1 — Borehole, Specimen",
+      "WITSML 2.1 — mudLog, log, trajectory, formationMarker",
+      "Petrobras BDIEP / BDIAP catalog"
+    ],
+    "alignments": {
+      "osdu": [
+        "opendes:osdu:master-data--Well:1.0.0",
+        "opendes:osdu:master-data--Wellbore:1.0.0",
+        "opendes:osdu:work-product-component--WellLog:1.0.0",
+        "opendes:osdu:work-product-component--MudLog:1.0.0"
+      ],
+      "geosciml": [
+        "http://geosciml.org/def/gsmlbh#Borehole",
+        "http://resource.geosciml.org/classifier/cgi/specimentype"
+      ],
+      "witsml": ["mudLog", "log", "trajectory", "formationMarker"]
+    },
+    "class_count": 39,
+    "property_count": 14,
+    "relation_count": 12,
+    "instance_count": 3
+  },
+  "classes": {
+    "GeologicalOperations": {
+      "id": "OG001",
+      "name": "GeologicalOperations",
+      "name_pt": "OperacoesGeologicas",
+      "superclass": "ExplorationDiscipline",
+      "description": "Functional discipline responsible for planning, acquiring and evaluating geological and petrophysical data along the well lifecycle, ensuring drilling projects fit exploratory needs while mitigating risk and reducing time/cost.",
+      "description_pt": "Disciplina funcional responsável por planejar, adquirir e avaliar dados geológicos e petrofísicos ao longo do ciclo de vida do poço, garantindo a adequação dos projetos de perfuração às necessidades exploratórias e mitigando riscos.",
+      "domain": "operacoes_geologicas",
+      "type": "discipline"
+    },
+    "Geomechanics": {
+      "id": "OG002",
+      "name": "Geomechanics",
+      "name_pt": "Geomecanica",
+      "superclass": "ExplorationDiscipline",
+      "description": "Sister discipline focused on wellbore stability, geopressure, and geomechanical occurrences. Shares the N3 process with GeologicalOperations.",
+      "description_pt": "Disciplina irmã focada em estabilidade de poço, geopressões e ocorrências geomecânicas.",
+      "domain": "operacoes_geologicas",
+      "type": "discipline",
+      "alignment": "geomechanics.json"
+    },
+    "Petrophysics": {
+      "id": "OG003",
+      "name": "Petrophysics",
+      "name_pt": "Petrofisica",
+      "superclass": "ExplorationDiscipline",
+      "description": "Discipline that performs formation evaluation from well logs and rock data.",
+      "description_pt": "Disciplina de avaliação de formações a partir de perfis de poço e dados de rocha.",
+      "domain": "operacoes_geologicas",
+      "type": "discipline"
+    },
+    "DataAcquisitionTechnology": {
+      "id": "OG004",
+      "name": "DataAcquisitionTechnology",
+      "name_pt": "TecnologiaAquisicaoDados",
+      "superclass": "ExplorationDiscipline",
+      "description": "TAG — innovation in tools, protocols and acquisition systems (MWD/LWD, wireline logging).",
+      "description_pt": "TAG — inovação em ferramentas, protocolos e sistemas de aquisição (MWD/LWD, perfilagem a cabo).",
+      "domain": "operacoes_geologicas",
+      "type": "discipline"
+    },
+    "OperationalPlanning": {
+      "id": "OG005",
+      "name": "OperationalPlanning",
+      "name_pt": "PlanejamentoOperacional",
+      "superclass": "ExplorationDiscipline",
+      "description": "Defines the data acquisition program and per-phase strategies for the well.",
+      "description_pt": "Define o programa de aquisição de dados e estratégias por fase do poço.",
+      "domain": "operacoes_geologicas",
+      "type": "discipline"
+    },
+    "WellDataConsolidation": {
+      "id": "OG006",
+      "name": "WellDataConsolidation",
+      "name_pt": "ConsolidacaoDadosPoco",
+      "superclass": "ExplorationDiscipline",
+      "description": "Integration, standardization and archival of acquired data (composite log, BDIEP).",
+      "description_pt": "Integração, padronização e arquivamento dos dados adquiridos (perfil composto, BDIEP).",
+      "domain": "operacoes_geologicas",
+      "type": "discipline"
+    },
+
+    "ServiceLine": {
+      "id": "OG010",
+      "name": "ServiceLine",
+      "name_pt": "LinhaDeServico",
+      "superclass": "owl:Thing",
+      "description": "Abstract category for the technical activities executed by Geological Operations on a well.",
+      "description_pt": "Categoria abstrata das atividades técnicas executadas por Operações Geológicas em um poço.",
+      "domain": "operacoes_geologicas",
+      "abstract": true
+    },
+    "Mudlogging": {
+      "id": "OG011",
+      "name": "Mudlogging",
+      "name_pt": "Mudlogging",
+      "superclass": "ServiceLine",
+      "description": "Continuous monitoring of drilling parameters and real-time gas analysis at the rig.",
+      "description_pt": "Monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real.",
+      "osdu_kind": "opendes:osdu:work-product-component--MudLog:1.0.0",
+      "witsml_object": "mudLog"
+    },
+    "CuttingsSampling": {
+      "id": "OG012",
+      "name": "CuttingsSampling",
+      "name_pt": "AmostrasDeCalha",
+      "superclass": "ServiceLine",
+      "description": "Collection, description and lithological classification of rock cuttings carried by the drilling fluid.",
+      "description_pt": "Coleta, descrição e classificação litológica dos cascalhos trazidos pelo fluido de perfuração.",
+      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/cuttings"
+    },
+    "DRX": {
+      "id": "OG013",
+      "name": "DRX",
+      "name_pt": "DifracaoRaiosX",
+      "label_pt": "Dados de Difração de Raios X",
+      "superclass": "ServiceLine",
+      "description": "X-Ray Diffraction analysis of cuttings or core samples, yielding qualitative and semi-quantitative mineralogical composition. Critical input for lithological classification, stratigraphic correlation and wellbore stability decisions (reactive clay identification).",
+      "description_pt": "Análise por difração de raios X em amostras de calha ou testemunho, fornecendo composição mineralógica qualitativa e semi-quantitativa. Insumo crítico para classificação litológica, correlação estratigráfica e decisões de estabilidade de poço (identificação de argilominerais reativos).",
+      "domain": "operacoes_geologicas",
+      "real_time": false,
+      "complementary_to": "FRX",
+      "synonyms": ["XRD", "X-Ray Diffraction", "Difratometria de Raios X"],
+      "manager": "EXP/OGP/AQG",
+      "stored_in": "SIGEO",
+      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/cuttings",
+      "evidence_gaps": [
+        "Pipeline de ingestão DRX SIGEO/BDIEP → AIDA/Databricks não documentado",
+        "Padronização de mnemônicos DRX no SIGEO não documentada na ontologia",
+        "Integração ao pipeline text-to-SQL do GeoDO ausente"
+      ],
+      "context_fields": [
+        {"name": "Pais", "type": "xsd:string"},
+        {"name": "Poco", "type": "xsd:string", "links_to": "poco"},
+        {"name": "Campo", "type": "xsd:string", "links_to": "campo"},
+        {"name": "Bacia", "type": "xsd:string", "links_to": "bacia-sedimentar"},
+        {"name": "Prof", "type": "xsd:double", "unit": "m", "description": "Profundidade da amostra (MD)"}
+      ],
+      "mineral_fields": [
+        {"mnemonic": "QTZ", "name": "Quartzo", "name_en": "Quartz", "unit": "%"},
+        {"mnemonic": "CAL", "name": "Calcita", "name_en": "Calcite", "unit": "%"},
+        {"mnemonic": "DOL", "name": "Dolomita", "name_en": "Dolomite", "unit": "%"},
+        {"mnemonic": "A_M", "name": "Argilominerais", "name_en": "Clay Minerals", "unit": "%", "note": "Soma de esmectita, ilita, caulinita e clorita; argilominerais reativos impactam estabilidade"},
+        {"mnemonic": "AND", "name": "Anidrita", "name_en": "Anhydrite", "unit": "%"},
+        {"mnemonic": "HAL", "name": "Halita", "name_en": "Halite", "unit": "%"},
+        {"mnemonic": "PLG", "name": "Plagioclasio", "name_en": "Plagioclase", "unit": "%"},
+        {"mnemonic": "KFD", "name": "K-Feldspato", "name_en": "K-Feldspar", "unit": "%"},
+        {"mnemonic": "PIR", "name": "Pirita", "name_en": "Pyrite", "unit": "%"},
+        {"mnemonic": "PRX", "name": "Piroxenio", "name_en": "Pyroxene", "unit": "%"},
+        {"mnemonic": "ANF", "name": "Anfibolio", "name_en": "Amphibole", "unit": "%"},
+        {"mnemonic": "OLI", "name": "Olivina", "name_en": "Olivine", "unit": "%"}
+      ],
+      "service_metadata": [
+        {"name": "Prestadora", "type": "xsd:string", "examples": ["GEOSERVICES"]},
+        {"name": "Equipamento", "type": "xsd:string", "examples": ["OLYMPUS BTX-III"]},
+        {"name": "TipoTubo", "type": "xsd:string", "examples": ["Cobre"]},
+        {"name": "TemperaturaSecagem", "type": "xsd:double", "unit": "C", "examples": [90]},
+        {"name": "MetodoQuantificacao", "type": "xsd:string", "examples": ["RIR"], "note": "Reference Intensity Ratio"}
+      ]
+    },
+
+    "FRX": {
+      "id": "OG013b",
+      "name": "FRX",
+      "name_pt": "FluorescenciaRaiosX",
+      "label_pt": "Dados de Fluorescencia de Raios X",
+      "superclass": "ServiceLine",
+      "description": "X-Ray Fluorescence analysis of cuttings, yielding elemental composition (major + trace elements) of drilled rock. Enables lithological classification via elemental ratios, geochemical correlation across wells, and construction of formation geochemical signatures (DNA Geoquímico).",
+      "description_pt": "Análise por fluorescência de raios X em amostras de calha, fornecendo composição elementar (elementos maiores e traço). Permite classificação litológica via razões elementares, correlação geoquímica entre poços e construção de assinaturas geoquímicas de formações (DNA Geoquímico).",
+      "domain": "operacoes_geologicas",
+      "real_time": false,
+      "complementary_to": "DRX",
+      "synonyms": ["XRF", "X-Ray Fluorescence", "Fluorescencia de Raios-X", "Analise de FRX"],
+      "manager": "EXP/OGP/AQG",
+      "stored_in": "SIGEO",
+      "evidence_gaps": [
+        "Pipeline de ingestão FRX SIGEO → AIDA/Databricks não documentado",
+        "Padroes de rocha de referencia no modulo SIGEO de QC nao documentados na ontologia",
+        "Integracao ao pipeline text-to-SQL do GeoDO ausente"
+      ],
+      "context_fields": [
+        {"name": "Pais", "type": "xsd:string"},
+        {"name": "Poco", "type": "xsd:string", "links_to": "poco"},
+        {"name": "Campo", "type": "xsd:string", "links_to": "campo"},
+        {"name": "Bacia", "type": "xsd:string", "links_to": "bacia-sedimentar"},
+        {"name": "Prof", "type": "xsd:double", "unit": "m"}
+      ],
+      "major_elements": [
+        {"mnemonic": "Na", "unit": "%"}, {"mnemonic": "Mg", "unit": "%"}, {"mnemonic": "Al", "unit": "%"},
+        {"mnemonic": "Si", "unit": "%"}, {"mnemonic": "P", "unit": "%"},  {"mnemonic": "S", "unit": "%"},
+        {"mnemonic": "K", "unit": "%"},  {"mnemonic": "Ca", "unit": "%"}, {"mnemonic": "Ti", "unit": "%"},
+        {"mnemonic": "Mn", "unit": "%"}, {"mnemonic": "Fe", "unit": "%"}
+      ],
+      "trace_elements": [
+        {"mnemonic": "Cl", "unit": "ppm"}, {"mnemonic": "V",  "unit": "ppm"}, {"mnemonic": "Cr", "unit": "ppm"},
+        {"mnemonic": "Co", "unit": "ppm"}, {"mnemonic": "Ni", "unit": "ppm"}, {"mnemonic": "Cu", "unit": "ppm"},
+        {"mnemonic": "Zn", "unit": "ppm"}, {"mnemonic": "Ga", "unit": "ppm"}, {"mnemonic": "Ge", "unit": "ppm"},
+        {"mnemonic": "As", "unit": "ppm"}, {"mnemonic": "Se", "unit": "ppm"}, {"mnemonic": "Br", "unit": "ppm"},
+        {"mnemonic": "Rb", "unit": "ppm"}, {"mnemonic": "Sr", "unit": "ppm"}, {"mnemonic": "Y",  "unit": "ppm"},
+        {"mnemonic": "Zr", "unit": "ppm"}, {"mnemonic": "Nb", "unit": "ppm"}, {"mnemonic": "Mo", "unit": "ppm"},
+        {"mnemonic": "Ag", "unit": "ppm"}, {"mnemonic": "Cd", "unit": "ppm"}, {"mnemonic": "Sn", "unit": "ppm"},
+        {"mnemonic": "Sb", "unit": "ppm"}, {"mnemonic": "Te", "unit": "ppm"}, {"mnemonic": "I",  "unit": "ppm"},
+        {"mnemonic": "Cs", "unit": "ppm"}, {"mnemonic": "Ba", "unit": "ppm"}, {"mnemonic": "La", "unit": "ppm"},
+        {"mnemonic": "Ce", "unit": "ppm"}, {"mnemonic": "Hf", "unit": "ppm"}, {"mnemonic": "Ta", "unit": "ppm"},
+        {"mnemonic": "W",  "unit": "ppm"}, {"mnemonic": "Hg", "unit": "ppm"}, {"mnemonic": "Tl", "unit": "ppm"},
+        {"mnemonic": "Pb", "unit": "ppm"}, {"mnemonic": "Bi", "unit": "ppm"}, {"mnemonic": "Th", "unit": "ppm"},
+        {"mnemonic": "U",  "unit": "ppm"}
+      ],
+      "service_metadata": [
+        {"name": "Prestadora", "type": "xsd:string", "examples": ["GEOSERVICES"]},
+        {"name": "Equipamento", "type": "xsd:string", "examples": ["SPECTRO XEPOS STANDARD"]},
+        {"name": "TipoTubo", "type": "xsd:string", "examples": ["Paladio"]},
+        {"name": "Atmosfera", "type": "xsd:string", "examples": ["Vacuo", "Helio"]},
+        {"name": "TipoAmostra", "type": "xsd:string", "examples": ["PRENSADA", "POEIRA"]}
+      ],
+      "crossplot_methods": [
+        {"id": "FeBa",     "axes": "Fe x Ba",       "purpose": "Discriminacao de formacoes"},
+        {"id": "CaK",      "axes": "Ca/K",          "purpose": "Indicador carbonato vs siliciclastico"},
+        {"id": "RbSr",     "axes": "Rb/Sr",         "purpose": "Proxy de intemperismo e proveniencia"},
+        {"id": "ZrFe",     "axes": "Zr/Fe",         "purpose": "Indicador de aporte detritico"},
+        {"id": "PearceNbY","axes": "Nb/Y x Zr/Ti",  "purpose": "Pearce — classificacao de rochas igneas/vulcanoclasticas"}
+      ]
+    },
+
+    "DNAGeoquimico": {
+      "id": "OG013c",
+      "name": "DNAGeoquimico",
+      "name_pt": "DNA Geoquimico",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Geochemical signature of a stratigraphic formation built from FRX elemental ratios across multiple wells. Used as a fingerprint for stratigraphic correlation and provenance analysis.",
+      "description_pt": "Assinatura geoquimica de uma formacao construida a partir de razoes elementares de FRX em multiplos pocos. Usado como impressao digital para correlacao estratigrafica e analise de proveniencia.",
+      "format": "derived",
+      "structured": true,
+      "manager": "EXP/OGP/AQG",
+      "fed_by": ["FRX"]
+    },
+    "Coring": {
+      "id": "OG014",
+      "name": "Coring",
+      "name_pt": "Testemunhagem",
+      "superclass": "ServiceLine",
+      "description": "Extraction of cylindrical rock cores for detailed laboratory analysis.",
+      "description_pt": "Extração de cilindros de rocha para análise laboratorial detalhada.",
+      "geosciml_alignment": "http://resource.geosciml.org/classifier/cgi/specimentype/core"
+    },
+    "SidewallSampling": {
+      "id": "OG015",
+      "name": "SidewallSampling",
+      "name_pt": "AmostragemLateral",
+      "superclass": "ServiceLine",
+      "description": "Collection of rock plugs via wireline tools after drilling a section.",
+      "description_pt": "Coleta de plugues de rocha via ferramentas de wireline."
+    },
+    "MWD_LWD": {
+      "id": "OG016",
+      "name": "MWD_LWD",
+      "name_pt": "MWD_LWD",
+      "superclass": "ServiceLine",
+      "description": "Measurement and logging while drilling — real-time petrophysical and directional data.",
+      "description_pt": "Medição e perfilagem durante a perfuração — dados petrofísicos e direcionais em tempo real.",
+      "witsml_object": "log"
+    },
+    "WirelineLogging": {
+      "id": "OG017",
+      "name": "WirelineLogging",
+      "name_pt": "PerfilagemACabo",
+      "superclass": "ServiceLine",
+      "description": "Acquisition of well logs after drilling each phase, lowered on cable.",
+      "description_pt": "Aquisição de perfis de poço após a perfuração de cada fase, descidos a cabo.",
+      "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+      "witsml_object": "log"
+    },
+    "FormationTesting": {
+      "id": "OG018",
+      "name": "FormationTesting",
+      "name_pt": "TesteDeFormacao",
+      "superclass": "ServiceLine",
+      "description": "Fluid sampling and pressure measurement in reservoirs (RFT/MDT/DST).",
+      "description_pt": "Amostragem de fluidos e medição de pressões em reservatórios (RFT/MDT/DST).",
+      "links_to": "teste-formacao"
+    },
+    "Geostopping": {
+      "id": "OG019",
+      "name": "Geostopping",
+      "name_pt": "Geostopping",
+      "superclass": "ServiceLine",
+      "description": "Real-time monitoring for precise stop at geological targets, especially in pre-salt operations.",
+      "description_pt": "Monitoramento em tempo real para parada precisa em alvos geológicos, especialmente no pré-sal."
+    },
+
+    "WellJourneyPhase": {
+      "id": "OG020",
+      "name": "WellJourneyPhase",
+      "name_pt": "FaseJornadaPoco",
+      "superclass": "owl:Thing",
+      "description": "A phase of the well journey at which Geological Operations delivers value.",
+      "description_pt": "Fase da jornada do poço na qual Operações Geológicas entrega valor.",
+      "abstract": true
+    },
+    "RetroAnalysis": {
+      "id": "OG021",
+      "name": "RetroAnalysis",
+      "name_pt": "Retroanalise",
+      "superclass": "WellJourneyPhase",
+      "description": "Analysis of correlative wells data and lessons learned prior to project design.",
+      "description_pt": "Análise de dados de poços correlatos e lições aprendidas anteriores ao projeto."
+    },
+    "InputElaboration": {
+      "id": "OG022",
+      "name": "InputElaboration",
+      "name_pt": "ElaboracaoInsumos",
+      "superclass": "WellJourneyPhase",
+      "description": "Elaboration of geological prognoses, geopressure models and operational windows.",
+      "description_pt": "Elaboração de prognósticos geológicos, modelos de geopressão e janelas operacionais."
+    },
+    "OperationalMonitoring": {
+      "id": "OG023",
+      "name": "OperationalMonitoring",
+      "name_pt": "MonitoramentoOperacional",
+      "superclass": "WellJourneyPhase",
+      "description": "Real-time monitoring of drilling (CGOR, CSD).",
+      "description_pt": "Acompanhamento em tempo real da perfuração (CGOR, CSD)."
+    },
+    "FormationEvaluation": {
+      "id": "OG024",
+      "name": "FormationEvaluation",
+      "name_pt": "AvaliacaoFormacoes",
+      "superclass": "WellJourneyPhase",
+      "description": "Analysis of acquired data for operational decisions during and after drilling.",
+      "description_pt": "Análise dos dados adquiridos para decisões operacionais durante e após a perfuração."
+    },
+    "LessonsLearned": {
+      "id": "OG025",
+      "name": "LessonsLearned",
+      "name_pt": "LicoesAprendidas",
+      "superclass": "WellJourneyPhase",
+      "description": "Recording of occurrences, best practices and feedback into the next cycle.",
+      "description_pt": "Registro de ocorrências, boas práticas e retroalimentação."
+    },
+
+    "GeologicalOperationsDocument": {
+      "id": "OG030",
+      "name": "GeologicalOperationsDocument",
+      "name_pt": "DocumentoOperacoesGeologicas",
+      "superclass": "owl:Thing",
+      "description": "Abstract class for documents/datasets produced by Geological Operations service lines.",
+      "description_pt": "Classe abstrata dos documentos/datasets produzidos pelas linhas de serviço.",
+      "abstract": true
+    },
+    "IGP": {
+      "id": "OG031",
+      "name": "IGP",
+      "name_pt": "InformativoGeologicoDePoco",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Informativo Geológico de Poço — non-structured PDF/Word report consolidating geological information of a well. Manager: EXP/OGP/AQG.",
+      "description_pt": "Informativo Geológico de Poço — relatório não estruturado (PDF/Word) consolidando a informação geológica do poço. Gestor: EXP/OGP/AQG.",
+      "format": "PDF/DOCX",
+      "structured": false,
+      "manager": "EXP/OGP/AQG"
+    },
+    "BDP": {
+      "id": "OG032",
+      "name": "BDP",
+      "name_pt": "BoletimDiarioPerfuracao",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Boletim Diário de Perfuração — structured CSV available via POÇOS API. Daily drilling bulletin.",
+      "description_pt": "Boletim Diário de Perfuração — estruturado, disponível via API POÇOS (CSV).",
+      "format": "CSV",
+      "structured": true,
+      "manager": "POÇOS"
+    },
+    "RMG": {
+      "id": "OG033",
+      "name": "RMG",
+      "name_pt": "RelatorioMonitoramentoGeomecanico",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Relatório de Monitoramento Geomecânico — non-structured PDF, manager EXP/OGP/AQG/AIP-OGEO.",
+      "description_pt": "Relatório de Monitoramento Geomecânico — PDF não estruturado, gestor EXP/OGP/AQG/AIP-OGEO.",
+      "format": "PDF",
+      "structured": false,
+      "manager": "EXP/OGP/AQG/AIP-OGEO"
+    },
+    "OGEOMEC": {
+      "id": "OG034",
+      "name": "OGEOMEC",
+      "name_pt": "OcorrenciasGeomecanicas",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Geomechanical occurrences — relational SQL records inside BDIEP.",
+      "description_pt": "Ocorrências Geomecânicas — registros relacionais (SQL) na BDIEP.",
+      "format": "SQL",
+      "structured": true,
+      "manager": "EXP/OGP/AQG/AIP-OGEO"
+    },
+    "ROP_Logging": {
+      "id": "OG035",
+      "name": "ROP_Logging",
+      "name_pt": "RelatorioOperacoesPerfilagem",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Relatório de Operações de Perfilagem — CSV exposed via EXATA API.",
+      "description_pt": "Relatório de Operações de Perfilagem — CSV via API EXATA.",
+      "format": "CSV",
+      "structured": true,
+      "manager": "EXP/OGP/TOGPR"
+    },
+    "RCSD": {
+      "id": "OG036",
+      "name": "RCSD",
+      "name_pt": "RelatorioCSDOperacoes",
+      "superclass": "GeologicalOperationsDocument",
+      "description": "Relatório do CSD de Operações — semi-structured PPT stored on SharePoint.",
+      "description_pt": "Relatório do CSD de Operações — PPT semi-estruturado em SharePoint.",
+      "format": "PPTX",
+      "structured": "semi",
+      "manager": "SharePoint"
+    },
+
+    "GeologicalOperationsSystem": {
+      "id": "OG040",
+      "name": "GeologicalOperationsSystem",
+      "name_pt": "SistemaOperacoesGeologicas",
+      "superclass": "owl:Thing",
+      "description": "Abstract class for systems supporting Geological Operations workflows.",
+      "description_pt": "Classe abstrata dos sistemas de suporte aos fluxos de Operações Geológicas.",
+      "abstract": true
+    },
+    "EXATA": {
+      "id": "OG041",
+      "name": "EXATA",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Real-time well-data transmission and visualization platform.",
+      "description_pt": "Plataforma de transmissão e visualização de dados de poço em tempo real."
+    },
+    "SIGEO": {
+      "id": "OG042",
+      "name": "SIGEO",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Geology system — analysis, visualization and archival of geological data (logs, FRX, lithology, mineralogy).",
+      "description_pt": "Sistema de Geologia — análise, visualização e arquivamento de dados geológicos (perfis, FRX, litologia, mineralogia)."
+    },
+    "BDIEP": {
+      "id": "OG043",
+      "name": "BDIEP",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Integrated E&P database (structured well data).",
+      "description_pt": "Base de Dados Integrada de E&P (dados estruturados de poço)."
+    },
+    "BDIAP": {
+      "id": "OG044",
+      "name": "BDIAP",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Integrated A&P database, sister to BDIEP.",
+      "description_pt": "Base de Dados Integrada A&P, irmã da BDIEP."
+    },
+    "AIDA": {
+      "id": "OG045",
+      "name": "AIDA",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Databricks-based analytics ingestion and integration platform.",
+      "description_pt": "Plataforma de dados analytics (Databricks) para ingestão e integração."
+    },
+    "GeoDO": {
+      "id": "OG046",
+      "name": "GeoDO",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Agentic workflow layer (multi-agent orchestrator) for queries and analyses across Geological Operations data.",
+      "description_pt": "Camada agentic de workflow (orquestrador multiagente) para consultas e análises."
+    },
+    "GDA": {
+      "id": "OG047",
+      "name": "GDA",
+      "superclass": "GeologicalOperationsSystem",
+      "description": "Geoscience Data Analyst — automation of analyses and synthetic logs.",
+      "description_pt": "Geoscience Data Analyst — automação de análises e perfis sintéticos."
+    }
+  },
+
+  "properties": [
+    {"id": "OGP01", "name": "wellId", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "Identifier of the well the document refers to (ANP/SEP standard)."},
+    {"id": "OGP02", "name": "phase", "domain": "ServiceLine", "range": "WellJourneyPhase", "description": "Phase of the well journey in which the activity occurs."},
+    {"id": "OGP03", "name": "format", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "File/data format (PDF, DOCX, CSV, PPTX, SQL)."},
+    {"id": "OGP04", "name": "structured", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "Whether content is structured, semi-structured or unstructured."},
+    {"id": "OGP05", "name": "manager", "domain": "GeologicalOperationsDocument", "range": "xsd:string", "description": "Organizational owner / steward of the document."},
+    {"id": "OGP06", "name": "osdu_kind", "domain": "ServiceLine", "range": "xsd:anyURI", "description": "OSDU kind alignment for the produced work product component."},
+    {"id": "OGP07", "name": "witsml_object", "domain": "ServiceLine", "range": "xsd:string", "description": "WITSML 2.x object name for the activity output."},
+    {"id": "OGP08", "name": "geosciml_alignment", "domain": "ServiceLine", "range": "xsd:anyURI", "description": "GeoSciML/CGI vocabulary alignment for the specimen or feature produced."},
+    {"id": "OGP09", "name": "real_time", "domain": "ServiceLine", "range": "xsd:boolean", "description": "Whether the activity emits data in real time during drilling."},
+    {"id": "OGP10", "name": "depth_top_m", "domain": "ServiceLine", "range": "xsd:double", "description": "Top depth (MD, meters) of the acquired interval."},
+    {"id": "OGP11", "name": "depth_base_m", "domain": "ServiceLine", "range": "xsd:double", "description": "Base depth (MD, meters) of the acquired interval."},
+    {"id": "OGP12", "name": "system_of_record", "domain": "GeologicalOperationsDocument", "range": "GeologicalOperationsSystem", "description": "System where the document/data is persisted."},
+    {"id": "OGP13", "name": "discipline", "domain": "ServiceLine", "range": "ExplorationDiscipline", "description": "Discipline that owns the activity (default: GeologicalOperations)."},
+    {"id": "OGP14", "name": "lessonsLearnedRefs", "domain": "WellJourneyPhase", "range": "xsd:anyURI", "description": "Pointers to lessons learned entries fed back into RetroAnalysis."}
+  ],
+
+  "relations": [
+    {"id": "OGR01", "name": "executes", "domain": "GeologicalOperations", "range": "ServiceLine", "description": "A discipline executes a service line on a well."},
+    {"id": "OGR02", "name": "produces", "domain": "ServiceLine", "range": "GeologicalOperationsDocument", "description": "A service line produces one or more documents/datasets."},
+    {"id": "OGR03", "name": "occurs_in", "domain": "ServiceLine", "range": "WellJourneyPhase", "description": "The activity occurs in a given well-journey phase."},
+    {"id": "OGR04", "name": "stored_in", "domain": "GeologicalOperationsDocument", "range": "GeologicalOperationsSystem", "description": "Document is persisted in a system."},
+    {"id": "OGR05", "name": "feeds", "domain": "GeologicalOperationsDocument", "range": "WellJourneyPhase", "description": "A document feeds a downstream phase (e.g., BDP feeds OperationalMonitoring)."},
+    {"id": "OGR06", "name": "performed_on", "domain": "ServiceLine", "range": "Wellbore", "description": "Activity performed on a wellbore (links to OSDU Wellbore)."},
+    {"id": "OGR07", "name": "calibrates", "domain": "ServiceLine", "range": "GM004", "description": "FormationTesting calibrates PorePressure (geomechanics:GM004)."},
+    {"id": "OGR08", "name": "supports", "domain": "GeologicalOperationsSystem", "range": "ServiceLine", "description": "System supports a service line (e.g., EXATA supports MWD/LWD streaming)."},
+    {"id": "OGR09", "name": "feeds_back_to", "domain": "LessonsLearned", "range": "RetroAnalysis", "description": "Lessons learned close the loop back to retro-analysis of the next well."},
+    {"id": "OGR10", "name": "complements", "domain": "ServiceLine", "range": "ServiceLine", "description": "Two service lines whose outputs are jointly required for a complete characterization (e.g., DRX + FRX)."},
+    {"id": "OGR11", "name": "supports_decision", "domain": "ServiceLine", "range": "GM005", "description": "DRX identification of reactive clay minerals supports MudWindow / wellbore stability decisions (geomechanics:GM005)."},
+    {"id": "OGR12", "name": "feeds_signature", "domain": "FRX", "range": "DNAGeoquimico", "description": "FRX elemental data feeds the geochemical signature (DNA Geoquimico) of a formation."}
+  ],
+
+  "instances": {
+    "OG_FLOW_PRE_SALT": {
+      "id": "OG_FLOW_PRE_SALT",
+      "name": "Pre-salt geostopping acquisition flow",
+      "name_pt": "Fluxo de aquisição com geostopping no pré-sal",
+      "class": "GeologicalOperations",
+      "description": "Reference flow for a pre-salt exploratory well combining real-time mudlogging, MWD/LWD streaming via EXATA, geostopping at carbonate target, wireline logging suite, and core extraction at the reservoir.",
+      "steps": [
+        {"order": 1, "phase": "RetroAnalysis", "service_line": null, "produces": null},
+        {"order": 2, "phase": "InputElaboration", "service_line": null, "produces": "IGP"},
+        {"order": 3, "phase": "OperationalMonitoring", "service_line": "Mudlogging", "produces": "BDP", "stored_in": "EXATA"},
+        {"order": 4, "phase": "OperationalMonitoring", "service_line": "MWD_LWD", "produces": "BDP", "stored_in": "EXATA"},
+        {"order": 5, "phase": "OperationalMonitoring", "service_line": "Geostopping", "produces": "RMG", "stored_in": "BDIEP"},
+        {"order": 6, "phase": "FormationEvaluation", "service_line": "WirelineLogging", "produces": "ROP_Logging", "stored_in": "SIGEO"},
+        {"order": 7, "phase": "FormationEvaluation", "service_line": "Coring", "produces": "IGP", "stored_in": "SIGEO"},
+        {"order": 8, "phase": "FormationEvaluation", "service_line": "FormationTesting", "produces": "RCSD"},
+        {"order": 9, "phase": "LessonsLearned", "service_line": null, "produces": "OGEOMEC", "stored_in": "BDIEP"}
+      ],
+      "source": "Petrobras Jornada do Poço RAP-01; pre-salt operational practice"
+    },
+    "OG_FLOW_DEV_WELL": {
+      "id": "OG_FLOW_DEV_WELL",
+      "name": "Development well minimal acquisition flow",
+      "name_pt": "Fluxo mínimo de aquisição em poço de desenvolvimento",
+      "class": "GeologicalOperations",
+      "description": "Lean acquisition program for a development well: mudlogging + cuttings + LWD + sparse wireline; no coring; OGEOMEC populated only on event.",
+      "steps": [
+        {"order": 1, "phase": "OperationalMonitoring", "service_line": "Mudlogging", "produces": "BDP"},
+        {"order": 2, "phase": "OperationalMonitoring", "service_line": "CuttingsSampling", "produces": "IGP"},
+        {"order": 3, "phase": "OperationalMonitoring", "service_line": "MWD_LWD", "produces": "BDP"},
+        {"order": 4, "phase": "FormationEvaluation", "service_line": "WirelineLogging", "produces": "ROP_Logging", "stored_in": "SIGEO"}
+      ],
+      "source": "Petrobras EXP/OGP standard development-well acquisition"
+    },
+    "OG_DRX_FRX_EXAMPLE": {
+      "id": "OG_DRX_FRX_EXAMPLE",
+      "name": "Joint DRX/FRX acquisition example — well 1-RJS-759A, Campos Basin",
+      "name_pt": "Exemplo de aquisicao conjunta DRX/FRX — poco 1-RJS-759A, Bacia de Campos",
+      "class": "GeologicalOperations",
+      "description": "Reference dataset showing complementary DRX and FRX runs on the same cuttings depths (2439–2493 m MD). DRX quantified by RIR on Olympus BTX-III (Cu tube); FRX quantified on Spectro Xepos (Pd tube, vacuum atmosphere, pressed pellet). Both stored in SIGEO and managed by EXP/OGP/AQG.",
+      "well": "1-RJS-759A",
+      "basin": "CAMPOS MAR",
+      "depth_top_m": 2439.0,
+      "depth_base_m": 2493.0,
+      "drx": {
+        "service_provider": "GEOSERVICES",
+        "equipment": "OLYMPUS BTX-III",
+        "tube": "Cobre",
+        "drying_temperature_c": 90,
+        "quantification_method": "RIR",
+        "minerals_measured": ["QTZ","CAL","DOL","A_M","AND","HAL","PLG","KFD","PIR","PRX","ANF","OLI"]
+      },
+      "frx": {
+        "service_provider": "GEOSERVICES",
+        "equipment": "SPECTRO XEPOS STANDARD",
+        "tube": "Paladio",
+        "atmosphere": "Vacuo",
+        "sample_type": "PRENSADA",
+        "major_elements": ["Na","Mg","Al","Si","P","S","K","Ca","Ti","Mn","Fe"],
+        "trace_elements_count": 37
+      },
+      "source": "Operação_Geológica_-_DRX.xlsx; Operação_Geológica_-_FRX.xlsx (711 e 1133 amostras)"
+    },
+
+    "OG_DOC_FLOW": {
+      "id": "OG_DOC_FLOW",
+      "name": "Document → System mapping",
+      "name_pt": "Mapeamento Documento → Sistema",
+      "class": "GeologicalOperations",
+      "description": "Canonical persistence map for the six core Geological Operations documents.",
+      "mappings": [
+        {"document": "IGP", "format": "PDF/DOCX", "system": "SIGEO", "structured": false},
+        {"document": "BDP", "format": "CSV", "system": "EXATA", "structured": true},
+        {"document": "RMG", "format": "PDF", "system": "BDIEP", "structured": false},
+        {"document": "OGEOMEC", "format": "SQL", "system": "BDIEP", "structured": true},
+        {"document": "ROP_Logging", "format": "CSV", "system": "EXATA", "structured": true},
+        {"document": "RCSD", "format": "PPTX", "system": "SharePoint", "structured": "semi"}
+      ],
+      "source": "Agente Geo cards (Loop) — IGP/BDP/RMG/OGEOMEC/ROP/RCSD"
+    }
+  }
+}

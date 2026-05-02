@@ -636,3 +636,565 @@ FILTER ( ?s1 < ?s2 || ?s2 < ?s3 )
 }
 """ ;
     ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 23: DRXShape — validates geo:DRX instances
+# 12 mineral percent properties: xsd:double in [0, 100], maxCount 1
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:DRXShape a sh:NodeShape ;
+    rdfs:label "Forma de DRX"@pt ;
+    rdfs:label "XRD Shape"@en ;
+    sh:targetClass geo:DRX ;
+    rdfs:comment "Valida instâncias de DRX: cada percentual mineralógico deve ser xsd:double no intervalo [0, 100]."@pt ;
+
+    sh:property [
+        sh:path geo:drxQuartzPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxQuartzPercent (QTZ) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxCalcitePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxCalcitePercent (CAL) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxDolomitePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxDolomitePercent (DOL) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxClayMineralsPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxClayMineralsPercent (A_M) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxAnhydritePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxAnhydritePercent (AND) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxHalitePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxHalitePercent (HAL) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxPlagioclasePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxPlagioclasePercent (PLG) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxKFeldsparPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxKFeldsparPercent (KFD) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxPyritePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxPyritePercent (PIR) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxPyroxenePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxPyroxenePercent (PRX) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxAmphibolePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxAmphibolePercent (ANF) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:drxOlivinePercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:drxOlivinePercent (OLI) deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "DRX deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# TODO: cross-property sum constraint — soma dos 12 percentuais minerais DRX deve ser <= 100 + tolerância.
+# Existing shapes file has sh:sparql examples but no SUM aggregation pattern; deferred to a future iteration.
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 24: FRXShape — validates geo:FRX instances
+# 11 major-element % properties in [0, 100]; 37 trace-element ppm properties >= 0
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:FRXShape a sh:NodeShape ;
+    rdfs:label "Forma de FRX"@pt ;
+    rdfs:label "XRF Shape"@en ;
+    sh:targetClass geo:FRX ;
+    rdfs:comment "Valida instâncias de FRX: elementos maiores em % no intervalo [0, 100]; elementos traço em ppm >= 0 (sem limite superior)."@pt ;
+
+    sh:property [
+        sh:path geo:frxNaMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxNaMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxMgMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxMgMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxAlMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxAlMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSiMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxSiMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxPMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxPMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxSMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxKMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxKMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCaMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxCaMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTiMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxTiMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxMnMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxMnMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxFeMajorPercent ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:maxInclusive 100 ;
+        sh:message "geo:frxFeMajorPercent deve ser xsd:double no intervalo [0, 100]."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxClTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxClTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxVTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxVTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCoTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCoTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxNiTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxNiTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCuTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCuTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxZnTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxZnTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxGaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxGaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxGeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxGeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxAsTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxAsTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxBrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxBrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxRbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxRbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxYTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxYTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxZrTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxZrTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxNbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxNbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxMoTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxMoTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxAgTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxAgTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCdTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCdTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSnTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSnTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxSbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxSbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxTeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxITracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxITracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCsTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCsTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxBaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxBaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxLaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxLaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxCeTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxCeTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxHfTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxHfTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTaTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxTaTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxWTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxWTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxHgTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxHgTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxTlTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxTlTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxPbTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxPbTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxBiTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxBiTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxThTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxThTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path geo:frxUTracePpm ;
+        sh:maxCount 1 ;
+        sh:datatype xsd:double ;
+        sh:minInclusive 0 ;
+        sh:message "geo:frxUTracePpm deve ser xsd:double >= 0 (ppm, sem limite superior)."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "FRX deve ter ao menos um skos:prefLabel."@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 25: DNAGeoquimicoShape — validates geo:DNAGeoquimico instances
+# ─────────────────────────────────────────────────────────────────────────────
+
+geo:DNAGeoquimicoShape a sh:NodeShape ;
+    rdfs:label "Forma de DNA Geoquímico"@pt ;
+    rdfs:label "Geochemical Signature Shape"@en ;
+    sh:targetClass geo:DNAGeoquimico ;
+    rdfs:comment "Valida assinaturas geoquímicas: prefLabel e definição obrigatórios."@pt ;
+
+    sh:property [
+        sh:path skos:prefLabel ;
+        sh:minCount 1 ;
+        sh:message "DNAGeoquimico deve ter ao menos um skos:prefLabel."@pt ;
+    ] ;
+
+    sh:property [
+        sh:path skos:definition ;
+        sh:minCount 1 ;
+        sh:message "DNAGeoquimico deve ter ao menos um skos:definition."@pt ;
+    ] .
