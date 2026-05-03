@@ -1,10 +1,14 @@
 """Regression tests for SHACL shapes 23-30 (Geomech Corporate L6).
 
-Run: python -m unittest python.tests.test_geomec_corporate_shacl
-or:  python -m pytest python/tests/test_geomec_corporate_shacl.py
+Run: python -m unittest tests.test_geomec_corporate_shacl
+or:  python -m pytest tests/test_geomec_corporate_shacl.py
 
 Verifies (1) the live module is conformant and (2) each shape fires on
 deliberate violations — guards against accidental shape regressions.
+
+Lives in tests/ (repo root), not python/tests/, because it is a live-data
+integration test — kept out of the python SDK test suite that runs in the
+test-python.yml matrix. Run on demand or as part of validate-ontology.yml.
 """
 
 from __future__ import annotations
@@ -14,8 +18,8 @@ import json
 import unittest
 from pathlib import Path
 
-# python/tests/<file>  →  parents[2] is the repo root.
-ROOT = Path(__file__).resolve().parents[2]
+# tests/<file>  →  parents[1] is the repo root.
+ROOT = Path(__file__).resolve().parents[1]
 SHAPES = ROOT / "data" / "geolytics-shapes.ttl"
 DATA = ROOT / "data" / "geomechanics-corporate.json"
 
