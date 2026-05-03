@@ -8,7 +8,7 @@ Mapa de navegacao para toda a documentacao do projeto.
 
 | Arquivo | Descricao |
 |---|---|
-| [ARCHITECTURE.md](ARCHITECTURE.md) | Arquitetura do sistema: diagrama das 7+ camadas semanticas, pipeline ETL multi-fonte → grafo → consumo downstream, sequencia de uma pergunta atravessando o agente GraphRAG |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Arquitetura do sistema: diagrama das 8 camadas semanticas, pipeline ETL multi-fonte → grafo → consumo downstream, sequencia de uma pergunta atravessando o agente GraphRAG |
 | [GRAPHRAG.md](GRAPHRAG.md) | Receita completa do agente LangGraph: topologia do DAG, descricao de cada no, validador como guardrail com exemplo trabalhado, tabela de decisao "quando usar o que" |
 | [ONTOLOGY.md](ONTOLOGY.md) | Referencia de classes e propriedades: tabelas geradas automaticamente de `data/ontopetro.json`, `data/geomechanics.json` e modulos sismicos P2.8. Regenerar com `node scripts/build-ontology-doc.js` |
 | [USE_CASES.md](USE_CASES.md) | Seis casos de uso concretos com perguntas, caminho no DAG e resposta esperada: regime ANP, WITSML TVD/MD, AVO Classe 4, janela mud weight MEM, disambiguacao SPE-PRMS vs ambiental, crosswalk OSDU |
@@ -42,7 +42,7 @@ Mapa de navegacao para toda a documentacao do projeto.
 
 ## Consultas de exemplo
 
-O diretorio `queries/` contem 6 consultas Cypher comentadas em PT-BR:
+O diretorio `queries/` contem 10 consultas Cypher comentadas em PT-BR:
 
 | Arquivo | Pergunta |
 |---|---|
@@ -52,6 +52,10 @@ O diretorio `queries/` contem 6 consultas Cypher comentadas em PT-BR:
 | [queries/04-caminho-mais-curto.cypher](queries/04-caminho-mais-curto.cypher) | Menor caminho entre quaisquer dois nos |
 | [queries/05-cascata-regulatoria.cypher](queries/05-cascata-regulatoria.cypher) | Cascata regulatoria Lei 9.478 → ANP → SIGEP |
 | [queries/06-desambiguacao-siglas.cypher](queries/06-desambiguacao-siglas.cypher) | Siglas com multiplos sentidos |
+| [queries/07-litologia-cgi-osdu-crosswalk.cypher](queries/07-litologia-cgi-osdu-crosswalk.cypher) | Litologias CGI com mapeamento OSDU LithologyType (crosswalk bilateral) |
+| [queries/08-escala-tempo-geologico-presal.cypher](queries/08-escala-tempo-geologico-presal.cypher) | Escala de tempo geológico e períodos com notas sobre Pré-sal brasileiro |
+| [queries/09-componentes-poco-gwml2.cypher](queries/09-componentes-poco-gwml2.cypher) | Componentes de construção de poço (GWML2 WellConstruction) |
+| [queries/10-sosa-observacoes-perfis.cypher](queries/10-sosa-observacoes-perfis.cypher) | Observações SOSA/SSN mapeadas a perfis de poço e mnemonicos QUDT |
 
 ---
 
