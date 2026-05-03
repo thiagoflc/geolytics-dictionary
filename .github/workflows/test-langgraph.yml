@@ -1,0 +1,46 @@
+name: Test (LangGraph agent)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "examples/langgraph-agent/**"
+      - ".github/workflows/test-langgraph.yml"
+  pull_request:
+    paths:
+      - "examples/langgraph-agent/**"
+      - ".github/workflows/test-langgraph.yml"
+
+concurrency:
+  group: test-langgraph-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  langgraph-tests:
+    name: LangGraph agent tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: examples/langgraph-agent/requirements.txt
+
+      - name: Install LangGraph agent deps (CPU-only, no embeddings)
+        run: |
+          python -m pip install --upgrade pip
+          # Install without optional heavy sentence-transformers / chromadb
+          grep -v "sentence-transformers" examples/langgraph-agent/requirements.txt \
+            | grep -v "chromadb" \
+            > /tmp/langgraph-requirements-ci.txt
+          pip install -r /tmp/langgraph-requirements-ci.txt
+          pip install pytest
+
+      - name: Run pytest
+        run: pytest examples/langgraph-agent/tests/ -q
+        env:
+          ANTHROPIC_API_KEY: "ci-offline-placeholder"
+          OPENAI_API_KEY: "ci-offline-placeholder"
