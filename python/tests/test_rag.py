@@ -92,7 +92,14 @@ def test_retriever_documents_have_nonempty_text(retriever):
 
 def test_cgi_vocab_chunks_have_text(retriever):
     """CGI vocabulary chunks must have non-empty text (fallback label used when definition absent)."""
-    cgi_types = {"lithology", "geologic_time", "fault_type", "deformation_style", "contact_type", "stratigraphic_rank"}
+    cgi_types = {
+        "lithology",
+        "geologic_time",
+        "fault_type",
+        "deformation_style",
+        "contact_type",
+        "stratigraphic_rank",
+    }
     cgi_docs = [d for d in retriever._documents if getattr(d, "type", None) in cgi_types]
     assert len(cgi_docs) > 0, "Expected CGI vocabulary chunks in corpus"
     for doc in cgi_docs:

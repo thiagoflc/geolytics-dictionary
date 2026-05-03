@@ -3752,7 +3752,8 @@ function buildCgiVocabChunks(filename, chunkType) {
   return items.map((item) => {
     const rawDef = item.definition ? item.definition.slice(0, 500) : null;
     /* Fallback: synthesise a minimal description when no definition is present */
-    const defText = rawDef || `Conceito ${chunkType.replace(/_/g, " ")} CGI: ${item.label_pt || item.label_en}.`;
+    const defText =
+      rawDef || `Conceito ${chunkType.replace(/_/g, " ")} CGI: ${item.label_pt || item.label_en}.`;
     const broaderStr = item.broader ? ` Broader: ${item.broader}.` : "";
     const relStr = item.related_entity ? ` Entidade relacionada: ${item.related_entity}.` : "";
     const parentsStr = (item.parents || []).length

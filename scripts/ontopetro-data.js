@@ -2696,8 +2696,18 @@ export const ONTOPETRO_ALIGNMENT = {
     gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
     layers: ["layer1b", "layer2", "layer3", "layer4"],
   },
-  play: { kg: "#Play", osdu: null, gsml: "http://geosciml.org/def/gsmlb#GeologicUnit", layers: ["layer1b", "layer3"] },
-  prospecto: { kg: "#Prospect", osdu: null, gsml: "http://geosciml.org/def/gsmlb#GeologicUnit", layers: ["layer1b", "layer3"] },
+  play: {
+    kg: "#Play",
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
+    layers: ["layer1b", "layer3"],
+  },
+  prospecto: {
+    kg: "#Prospect",
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
+    layers: ["layer1b", "layer3"],
+  },
   recurso: { kg: "#Resource", osdu: null, layers: ["layer3", "layer5"] },
   reserva: { kg: "#Reserve", osdu: null, layers: ["layer3", "layer5"] },
   falha: {
@@ -2736,7 +2746,12 @@ export const ONTOPETRO_ALIGNMENT = {
     gsml: "http://geosciml.org/def/gsmlb#RockMaterial",
     layers: ["layer1b", "layer3", "layer6"],
   },
-  "maturidade-termal": { kg: null, osdu: null, gsml: "http://geosciml.org/def/gsmlb#GeologicEvent", layers: ["layer1b", "layer3", "layer6"] },
+  "maturidade-termal": {
+    kg: null,
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicEvent",
+    layers: ["layer1b", "layer3", "layer6"],
+  },
   biomarcador: { kg: null, osdu: null, layers: ["layer6"] },
   "correlacao-oleo-rocha": { kg: null, osdu: null, layers: ["layer6"] },
   litologia: {
@@ -2754,7 +2769,12 @@ export const ONTOPETRO_ALIGNMENT = {
   "modelo-petrofisico": { kg: null, osdu: null, layers: ["layer6"] },
   "campo-tensional": { kg: null, osdu: null, layers: ["layer1b", "layer6"] },
   "janela-lama": { kg: null, osdu: null, layers: ["layer6"] },
-  "ocorrencia-geomec": { kg: null, osdu: null, gsml: "http://geosciml.org/def/gsmlb#GeologicEvent", layers: ["layer1b", "layer6"] },
+  "ocorrencia-geomec": {
+    kg: null,
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicEvent",
+    layers: ["layer1b", "layer6"],
+  },
   "potencial-selante": { kg: null, osdu: null, layers: ["layer1b", "layer6", "layer7"] },
   "amostra-fluido": {
     kg: null,
