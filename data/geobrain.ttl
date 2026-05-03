@@ -15,8 +15,8 @@
 @prefix qudt: <https://qudt.org/vocab/unit/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T18:56:23.422Z
-# Nodes: 221  Edges: 370
+# Generated: 2026-05-03T19:20:37.929Z
+# Nodes: 310  Edges: 651
 
 #
 # Classes
@@ -2637,6 +2637,1039 @@ geo:anm a owl:Class ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
 
+geo:GEOMEC001 a owl:Class ;
+    skos:prefLabel "Pressão de Poros"@pt ;
+    skos:prefLabel "Pore Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Pp"@pt ;
+    skos:altLabel "PP"@pt ;
+    skos:altLabel "Pporo"@pt ;
+    skos:altLabel "poropressão"@pt ;
+    skos:altLabel "Pore Pressure"@en ;
+    skos:definition """Pressão exercida pelo fluido contido nos poros das formações rochosas em subsuperfície. Quando igual à pressão hidrostática, denomina-se pressão de poros normal; quando superior, configura sobrepressão (geopressão). Para o reservatório, deve ser prevista via modelo de fluxo acoplado ao modelo geomecânico."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC002 a owl:Class ;
+    skos:prefLabel "Tensão Mínima Horizontal (Gradiente de Fratura)"@pt ;
+    skos:prefLabel "Minimum Horizontal Stress / Fracture Gradient"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Shmin"@pt ;
+    skos:altLabel "S3"@pt ;
+    skos:altLabel "GF"@pt ;
+    skos:altLabel "σhmin"@pt ;
+    skos:altLabel "Gradiente de Absorção"@pt ;
+    skos:altLabel "Minimum Horizontal Stress / Fracture Gradient"@en ;
+    skos:definition """Componente de menor magnitude das tensões horizontais in situ. Determina o limite superior da Janela Operacional de Lama, pois sua superação por pressão de fluido provoca fraturamento hidráulico da formação e perda de circulação. Medida por testes de fraturamento (xLOT, Mini-frac, SRT) e calibrada com LOTs."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC003 a owl:Class ;
+    skos:prefLabel "Janela Operacional de Lama"@pt ;
+    skos:prefLabel "Mud Weight Window / Drilling Operational Window"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "JOL"@pt ;
+    skos:altLabel "Mud Window"@pt ;
+    skos:altLabel "Janela Operacional"@pt ;
+    skos:altLabel "Mud Weight Window / Drilling Operational Window"@en ;
+    skos:definition """Intervalo de massa específica do fluido de perfuração compreendido entre o gradiente de colapso (limite inferior) e o gradiente de fratura (limite superior). O estreitamento da janela impacta diretamente o número de fases perfuradas e a extensão das fases. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas curvas de Pp e tensões in situ do RES."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC004 a owl:Class ;
+    skos:prefLabel "Estado de Tensões In Situ (Geotensões)"@pt ;
+    skos:prefLabel "In Situ Stress State (Geotensions)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Tensões In Situ"@pt ;
+    skos:altLabel "Geotensões"@pt ;
+    skos:altLabel "S1/S2/S3"@pt ;
+    skos:altLabel "S1"@pt ;
+    skos:altLabel "S2"@pt ;
+    skos:altLabel "S3"@pt ;
+    skos:altLabel "In Situ Stress State (Geotensions)"@en ;
+    skos:definition """Conjunto das três tensões principais que atuam nas formações rochosas em subsuperfície antes de qualquer perturbação: tensão maior (S1), tensão intermediária (S2) e tensão menor (S3). No contexto de perfuração, nos Laudos Geomecânicos da Petrobras são fornecidas as curvas de S1, S2 e S3 (Magnitude e Azimute) ao longo da trajetória do poço, calibradas aos testes de pressão disponíveis (LOT, XLOT, FIT) e ajustadas às profundidades previstas no QPG, em versão original e suavizada (média móvel), em psi e em lb/gal."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC005 a owl:Class ;
+    skos:prefLabel "Tensão Efetiva"@pt ;
+    skos:prefLabel "Effective Stress"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "σ'"@pt ;
+    skos:altLabel "Sv_ef"@pt ;
+    skos:altLabel "Tensão Efetiva Vertical"@pt ;
+    skos:altLabel "Effective Stress"@en ;
+    skos:definition """Tensão resultante após descontar a contribuição da pressão de poros, conforme o Princípio das Tensões Efetivas com representação adequada do coeficiente de Biot-Willis. É o parâmetro governante da deformação e da resistência das rochas em subsuperfície. A variação da pressão de poros por depleção ou injeção afeta diretamente a magnitude das tensões horizontais totais, na proporção definida pelo coeficiente de Biot e pelo coeficiente de Poisson."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC006 a owl:Class ;
+    skos:prefLabel "Testes de Absorção e Fraturamento (LOT/xLOT/FIT)"@pt ;
+    skos:prefLabel "Leak-Off / Extended Leak-Off / Formation Integrity Tests"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "LOT"@pt ;
+    skos:altLabel "xLOT"@pt ;
+    skos:altLabel "FIT"@pt ;
+    skos:altLabel "Mini-frac"@pt ;
+    skos:altLabel "MicroFrac"@pt ;
+    skos:altLabel "SRT"@pt ;
+    skos:altLabel "SDT"@pt ;
+    skos:altLabel "Micro-TI"@pt ;
+    skos:altLabel "DFIT"@pt ;
+    skos:altLabel "DPPT"@pt ;
+    skos:altLabel "MicroTI"@pt ;
+    skos:altLabel "Leak-Off / Extended Leak-Off / Formation Integrity Tests"@en ;
+    skos:definition """Conjunto de operações de campo realizadas para medição e calibração das tensões in situ, especialmente da tensão mínima horizontal. Classificação Petrobras (PE-2E&P-00984): (1) Baixo custo — FIT, LOT e xLOT com coluna de perfuração; (2) Alto custo — MicroFrac/Micro-TI com ferramenta dedicada a cabo ou coluna. Hierarquia de qualidade: Mini-frac/MicroFrac/xLOT (fornece pressão de reabertura/fechamento = estimativa direta de Shmin) > SRT/SDT/TI/MicroTI > LOT (pressão de absorção = limite inferior de Shmin). O DFIT é a versão dinâmica do FIT para poços com MPD (verificação da resistência da formação). O DPPT é o teste dinâmico para verificação do limite inferior da janela operacional."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC007 a owl:Class ;
+    skos:prefLabel "Tensão Vertical / Sobrecarga (Sv)"@pt ;
+    skos:prefLabel "Vertical Stress / Overburden"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Sv"@pt ;
+    skos:altLabel "GS"@pt ;
+    skos:altLabel "Gradiente de Sobrecarga"@pt ;
+    skos:altLabel "Sv total"@pt ;
+    skos:altLabel "Vertical Stress / Overburden"@en ;
+    skos:definition """Componente vertical do estado de tensões gerada pelo peso das formações rochosas sobrejacentes. Calculada pela integração do perfil de densidade ao longo da coluna de rocha. Em formações salinas, as tensões horizontais tendem a se igualar a Sv (regime hidrostático), de modo que o peso do fluido de perfuração deve se aproximar do gradiente de sobrecarga para reduzir a fluência do sal. É o dado mais fundamental para a definição do estado de tensões em subsuperfície."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC008 a owl:Class ;
+    skos:prefLabel "Tensão Horizontal Máxima (SHmax)"@pt ;
+    skos:prefLabel "Maximum Horizontal Stress"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "SHmax"@pt ;
+    skos:altLabel "S1"@pt ;
+    skos:altLabel "σHmax"@pt ;
+    skos:altLabel "SHmáx"@pt ;
+    skos:altLabel "Maximum Horizontal Stress"@en ;
+    skos:definition """Componente de maior magnitude entre as tensões horizontais in situ. Não pode ser medida diretamente — é estimada por retroanálise de breakouts e fraturas induzidas identificadas em perfis de imagem, ou por mecanismos focais de terremotos. A direção de SHmax é fornecida pelas fraturas induzidas (paralelas a SHmax) e a direção de Shmin pelos breakouts. A magnitude é calculada pelo modelo de integridade de poço proposto por Santos et al. (CT CMR 010/2015), usando UCS, Pp, peso do fluido (Mw) e Shmin."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC009 a owl:Class ;
+    skos:prefLabel "Gradiente de Colapso"@pt ;
+    skos:prefLabel "Collapse Gradient / Wellbore Collapse Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "GC"@pt ;
+    skos:altLabel "Gradiente de Colapso"@pt ;
+    skos:altLabel "Pressão de Colapso"@pt ;
+    skos:altLabel "Collapse Gradient / Wellbore Collapse Pressure"@en ;
+    skos:definition """Limite inferior da Janela Operacional de Lama, abaixo do qual a formação perfurada não resiste aos esforços e falha mecanicamente (colapso). Em rochas frágeis (arenitos, folhelhos), o colapso resulta em alargamento (washout, breakouts); em rochas dúcteis (sal, folhelhos argilosos), resulta em fechamento do diâmetro. É calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF e é a principal causa de eventos de arraste, estolamento, topamento, prisão de coluna e fundo falso."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC010 a owl:Class ;
+    skos:prefLabel "Resistência à Compressão Uniaxial (UCS)"@pt ;
+    skos:prefLabel "Unconfined Compressive Strength"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "UCS"@pt ;
+    skos:altLabel "RCU"@pt ;
+    skos:altLabel "Co"@pt ;
+    skos:altLabel "Unconfined Compressive Strength"@en ;
+    skos:definition """Tensão máxima suportada por uma amostra de rocha durante a aplicação de um carregamento uniaxial sem confinamento lateral. Obtida principalmente pelo Scratch Test (arranhamento contínuo do testemunho ao longo do eixo axial) ou por correlações com perfis de poços (DTC, DTS, densidade). É insumo fundamental para o cálculo do gradiente de colapso e para a retroanálise da magnitude de SHmax a partir de breakouts."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC011 a owl:Class ;
+    skos:prefLabel "Módulo de Young"@pt ;
+    skos:prefLabel "Young's Modulus"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "E"@pt ;
+    skos:altLabel "Edyn"@pt ;
+    skos:altLabel "Est"@pt ;
+    skos:altLabel "Módulo de Young"@pt ;
+    skos:altLabel "Young's Modulus"@en ;
+    skos:definition """Propriedade elástica que mede a rigidez da rocha, definida como a razão entre tensão e deformação axial em ensaio uniaxial. Na Petrobras, distinguem-se: módulo dinâmico (Edyn — obtido de perfis sônicos DTC e DTS) e módulo estático (Est — obtido em ensaios de laboratório). A conversão Edyn→Est referenciada internamente utiliza a correlação de Lacy (1996). Para zonas salinas sem DTS, aplica-se o fluxo Teixeira et al. (2019): Vp → Vs → E → densidade. Insumo obrigatório para análises de UV2/UV3 e para o cálculo de Biot-Willis."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC012 a owl:Class ;
+    skos:prefLabel "Coeficiente de Poisson"@pt ;
+    skos:prefLabel "Poisson's Ratio"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ν"@pt ;
+    skos:altLabel "nu"@pt ;
+    skos:altLabel "Poisson"@pt ;
+    skos:altLabel "n"@pt ;
+    skos:altLabel "Poisson's Ratio"@en ;
+    skos:definition """Razão entre a deformação lateral e a deformação axial de uma rocha sob carga uniaxial. O coeficiente dinâmico é calculado a partir das velocidades de ondas compressional (Vp) e cisalhante (Vs), usando as correlações de Castagna et al. (1993) quando não há perfil DTS disponível. Para o coeficiente de Poisson, não há correlação clara entre os valores dinâmico e estático, de modo que as estimativas dinâmicas são em geral empregadas nas simulações geomecânicas sem correções. É insumo fundamental para o cálculo da tensão mínima horizontal pelo método elástico."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC013 a owl:Class ;
+    skos:prefLabel "Coeficiente de Biot-Willis"@pt ;
+    skos:prefLabel "Biot-Willis Coefficient"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "α"@pt ;
+    skos:altLabel "Biot"@pt ;
+    skos:altLabel "Coef. Biot"@pt ;
+    skos:altLabel "Biot-Willis Coefficient"@en ;
+    skos:definition """Parâmetro poro-elástico que quantifica a fração da pressão de poros que contribui para a tensão efetiva. Calculado a partir da rigidez bulk da rocha (Kb) e da rigidez bulk dos grãos (Ks) — para Ks são utilizados valores tabelados da literatura (Tabela 5 do PE-2RES-00014). É elemento mandatório na modelagem do equilíbrio estrutural geomecânico, conforme PP-2E&P-00322. Em formações com coeficiente de Biot igual à unidade e Poisson de 0,25, a variação de uma tensão total horizontal é igual a 2/3 da depleção do reservatório."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC014 a owl:Class ;
+    skos:prefLabel "Compressibilidade de Poros"@pt ;
+    skos:prefLabel "Pore Volume Compressibility"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Cp"@pt ;
+    skos:altLabel "Cp_uni"@pt ;
+    skos:altLabel "Cp_hid"@pt ;
+    skos:altLabel "Compressibilidade de Poros"@pt ;
+    skos:altLabel "Pore Volume Compressibility"@en ;
+    skos:definition """Variação fracional do volume de poros por unidade de variação da pressão de poros. Na Petrobras, distinguem-se: Cp hidrostático (ensaio com tensões iguais em todas as direções — requer conversão para modo uniaxial) e Cp uniaxial (condição de campo, onde deformações laterais são restritas — produto primário para simulação de reservatórios). Metodologias oficiais: correlações (Hall, Newman, Correlação Petrobras para turbiditos), ensaios de laboratório e modelagem geomecânica numérica 3D. A Correlação Petrobras para turbiditos (Figura 9 do PP-2E&P-00322) relaciona Cp com a porosidade e é referência interna. O Cp é insumo crítico na interpretação de TLDs e para os simuladores de fluxo."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC015 a owl:Class ;
+    skos:prefLabel "Estabilidade de Poço / Análise de Geohazards"@pt ;
+    skos:prefLabel "Wellbore Stability / Geohazard Assessment"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Estabilidade de Poço"@pt ;
+    skos:altLabel "Geohazards"@pt ;
+    skos:altLabel "Geohazards de Poços"@pt ;
+    skos:altLabel "Laudo Geomecânico"@pt ;
+    skos:altLabel "Wellbore Stability / Geohazard Assessment"@en ;
+    skos:definition """Análise multidisciplinar e integrada que avalia os riscos geológicos e geomecânicos ao longo da trajetória de um poço (Geohazards), com o objetivo de emitir Laudos Geomecânicos para as locações e mitigar riscos de construção. Os principais eventos geomecânicos monitorados são: influxos de água, perdas de circulação severas, arrastes, topamentos, estolamentos e prisão de coluna. A análise contempla: tensões in situ, janela operacional, poropressão, perfil litológico e histórico de eventos em poços correlatos. Produto primário: QPG (Quadro de Previsão Geológica) e Laudo Geomecânico. Ferramentas internas: SIGEO, SEST TR (Simulador de Estabilidade), SEIDR, Wellsom, OpenWells."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC016 a owl:Class ;
+    skos:prefLabel "Subsidência e Compactação"@pt ;
+    skos:prefLabel "Subsidence and Compaction"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Subsidência"@pt ;
+    skos:altLabel "Compactação do Reservatório"@pt ;
+    skos:altLabel "Assentamento do Fundo Marinho"@pt ;
+    skos:altLabel "Subsidence and Compaction"@en ;
+    skos:definition """Deslocamento vertical do assoalho marinho ou da superfície terrestre causado pela compactação das rochas reservatório e sobrejacentes em resposta à queda de pressão de poros durante a produção. A compactação ocorre em nível do reservatório e a subsidência é medida na superfície ou fundo do mar. Na Petrobras, o PP-2E&P-00322 define três faixas de risco operacional: (i) < 40 cm — subsidência moderada, considerada segura; (ii) 40–100 cm — subsidência elevada, requer monitoramento ativo; (iii) > 100 cm — subsidência extrema, obriga monitoramento e revisão do projeto de explotação. O monitoramento é realizado por: GPS/InSAR (onshore ou plataformas fixas); medidas de pressão d'água de alta precisão (offshore profundo); tiltmeters e BTIs (Bases Torpedo Instrumentadas); levantamentos batimétricos com AUV (recomendados quando subsidência máxima prevista > 40 cm). O sistema computacional GeomecBR (Petrobras) e o simulador GERESIM são ferramentas internas para modelagem. O modelo geomecânico vigente deve ser calibrado se a relação entre subsidência constatada e prevista superar ±20%. Feições anômalas no sedimento marinho (identificadas por ROV) podem indicar escape de fluidos ou efeitos de subsidência. Painel de monitoramento disponível em: vigres.petrobras.com.br."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC017 a owl:Class ;
+    skos:prefLabel "Regime de Falhas"@pt ;
+    skos:prefLabel "Fault Regime / Stress Regime"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Regime de Falhas"@pt ;
+    skos:altLabel "Regime Tectônico"@pt ;
+    skos:altLabel "SED"@pt ;
+    skos:altLabel "Estilo Estrutural"@pt ;
+    skos:altLabel "Fault Regime / Stress Regime"@en ;
+    skos:definition """Classificação do estado de tensões in situ com base na relação de magnitude entre as três tensões principais (Sv, SHmax, Shmin), que determina o tipo predominante de falha geológica na área e controla a abertura e orientação de fraturas. Os três regimes clássicos são: (i) Normal (extensional): Sv > SHmax > Shmin — falhas normais predominam, tensão vertical é a maior; (ii) Strike-slip (transcorrente): SHmax > Sv > Shmin — falhas transcorrentes predominam; (iii) Reverso (compressional): SHmax > Shmin > Sv — falhas reversas predominam. Na Petrobras, os padrões PE-2RES-00016 e PP-2E&P-00322 descrevem a Análise Estrutural em três etapas: (I) Descritiva/Geométrica — orientação, mergulho, rejeito; (II) Cinemática — movimento relativo entre blocos; (III) Dinâmica/Paleotensorial — inversão do campo de tensões (Análise do Sistema Esforço-Deformação, SED). A inclinação da S1 com a vertical e o strike da S3 com o Norte Geográfico são reportados nos gráficos compostos dos Laudos Geomecânicos. A retroanálise de breakouts (elipse do poço) indica direção de SHmax (perpendicular); fraturas induzidas indicam a direção de SHmax (paralela). O regime de falhas também condiciona a metodologia de ajuste de tensões — no sal, regime é hidrostático (S1≈S2≈S3)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC018 a owl:Class ;
+    skos:prefLabel "Reativação de Falhas Geológicas"@pt ;
+    skos:prefLabel "Fault Reactivation"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Reativação de Falhas"@pt ;
+    skos:altLabel "Slip Tendency"@pt ;
+    skos:altLabel "Falha Criticamente Estressada"@pt ;
+    skos:altLabel "Fault Reactivation"@en ;
+    skos:definition """Processo pelo qual falhas geológicas preexistentes são remobilizadas em resposta à alteração do estado de tensões efetivas causada por injeção ou produção de fluidos no reservatório. A reativação compromete o selo hidráulico da rocha capeadora e pode provocar: escape de hidrocarbonetos para o leito marinho; sismicidade induzida; e danos à integridade de poços e equipamentos submarinos. Na Petrobras, o PP-2E&P-00322 define que toda atualização de modelo geomecânico submetida à GMR (RES/TR/GMR) deve obrigatoriamente incluir a análise de reativação de falhas como entregável, bem como os novos valores de pressão-limite de injeção. O critério para avaliar a iminência de reativação é verificar se as pressões de fluido estimadas nas falhas geológicas excedem a tensão normal nos planos de falha (Slip Tendency). Os movimentos de massa submarinos podem ocorrer como consequência de reativações de falhas associadas aos efeitos da produção, conforme descrito no PE-2RES-00009. O PE-2E&P-00878 classifica a reativação de falhas como uma das principais incertezas geomecânicas nas curvas de previsão de produção, juntamente com compressibilidade, estado de tensões e Pp. O monitoramento contínuo é feito via Sísmica 4D e pelo painel VIGRES (vigres.petrobras.com.br), com avaliação periódica de patologias estruturais pelo ROV. A análise de reativação deve considerar os cenários de depleção forçada (mínima injeção), não apenas o caso base."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC019 a owl:Class ;
+    skos:prefLabel "Densidade Equivalente de Circulação"@pt ;
+    skos:prefLabel "Equivalent Circulating Density"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ECD"@pt ;
+    skos:altLabel "Equivalent Circulating Density"@pt ;
+    skos:altLabel "Densidade de Circulação Equivalente"@pt ;
+    skos:altLabel "Equivalent Circulation Density"@pt ;
+    skos:altLabel "Equivalent Circulating Density"@en ;
+    skos:definition """Pressão dinâmica exercida numa determinada profundidade vertical do poço (L), expressa como massa específica equivalente do fluido de perfuração. É a soma da pressão hidrostática (Ph) e da perda de carga (ΔPa) ao escoamento do fluido desde aquela profundidade até a superfície. Fórmula interna: ECD (lb/gal) = [Ph(psi) + ΔPa(psi)] / [0,1704 × L(m)]. Monitorada em tempo real pelo PWDa e pelo SIMCARR. ECD acima da tensão mínima S3 induz fratura e perda de circulação; ECD abaixo da Pp provoca influxo."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC020 a owl:Class ;
+    skos:prefLabel "Perfuração com Controle de Pressão (MPD)"@pt ;
+    skos:prefLabel "Managed Pressure Drilling"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "MPD"@pt ;
+    skos:altLabel "Managed Pressure Drilling"@pt ;
+    skos:altLabel "SBP"@pt ;
+    skos:altLabel "Surface Back Pressure"@pt ;
+    skos:altLabel "AP"@pt ;
+    skos:altLabel "Anchor Point"@pt ;
+    skos:altLabel "PMCD"@pt ;
+    skos:altLabel "FMCD"@pt ;
+    skos:altLabel "MCD"@pt ;
+    skos:altLabel "Managed Pressure Drilling"@en ;
+    skos:definition """Conjunto de técnicas de perfuração (ou completação) adaptáveis utilizadas para controlar com precisão o perfil de pressão no anular do poço. A técnica principal é o SBP (Surface Back Pressure), que aplica contrapressão na superfície no Anchor Point (AP) — a profundidade na qual a pressão no anular deve ser mantida constante para todos os alinhamentos possíveis. Amplamente utilizada nos campos do Pré-Sal e em zonas com elevado potencial de perda de circulação."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC021 a owl:Class ;
+    skos:prefLabel "Pressão de Crescimento Anular (APB)"@pt ;
+    skos:prefLabel "Annular Pressure Buildup"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "APB"@pt ;
+    skos:altLabel "Annular Pressure Buildup"@pt ;
+    skos:altLabel "AFE"@pt ;
+    skos:altLabel "Annulus Fluid Expansion"@pt ;
+    skos:altLabel "APB Salino"@pt ;
+    skos:altLabel "Pressão Sustentada"@pt ;
+    skos:altLabel "Annular Pressure Buildup"@en ;
+    skos:definition """Variação de pressão no anular confinado de um poço oriunda do efeito de expansão/contração térmica do fluido (AFE — Annulus Fluid Expansion) gerada durante operações de produção ou injeção de fluidos quentes. Em poços submarinos HP/HT, os valores de APB podem ser elevados e levar à falha mecânica dos revestimentos e/ou da coluna. O APB reverso (negativo) resulta da contração térmica durante injeção de fluidos frios. Em zonas salinas, o sal ao fluir pressuriza adicionalmente o fluido anular."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC022 a owl:Class ;
+    skos:prefLabel "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"@pt ;
+    skos:prefLabel "Scratch Test / Rock Mechanics Laboratory Tests"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Scratch Test"@pt ;
+    skos:altLabel "UCS Lab"@pt ;
+    skos:altLabel "Ensaio Não Confinado"@pt ;
+    skos:altLabel "Ensaio Triaxial"@pt ;
+    skos:altLabel "Scratch Test / Rock Mechanics Laboratory Tests"@en ;
+    skos:definition """Conjunto de ensaios laboratoriais realizados em amostras de testemunho ou plugues extraídos de poços para determinação das propriedades mecânicas estáticas das rochas. O Scratch Test é o método preferencial na Petrobras para obtenção do UCS de forma contínua ao longo do eixo axial do testemunho: a resistência ao arranhamento do testemunho é correlacionável com as propriedades mecânicas, sendo o principal dado obtido a Resistência à Compressão Uniaxial (UCS) [PP-2E&P-00322]. Os ensaios de confinamento incluem: (i) Compressibilidade de Poros Hidrostático — carregamento igual em todas as direções; produto principal: módulo bulk; requer conversão para modo uniaxial antes de uso em simulação de reservatórios; (ii) Compressibilidade de Poros Uniaxial — tensão axial constante, variação da pressão de poros com restrição lateral; produto principal: Cp uniaxial, E e ν; (iii) Sensibilidade da Permeabilidade ao Confinamento — amostra confinada com medição simultânea de permeabilidade; produto principal: curva k × tensão. As trajetórias de tensões empregadas nos ensaios devem ser as mais próximas às esperadas no campo. A calibração da envoltória de resistência ao cisalhamento (Mohr-Coulomb) com dados de Scratch Test e ensaios triaxiais é descrita na CT CMR 010/2015 (CENPES). As amostras são gerenciadas pelo PROLAB e os resultados registrados no SIRR."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC023 a owl:Class ;
+    skos:prefLabel "Falhas de Poço em Perfil de Imagem"@pt ;
+    skos:prefLabel "Image-Based Wellbore Failures"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Breakouts e Fraturas Induzidas (Perfil de Imagem)"@pt ;
+    skos:altLabel "Image-Based Wellbore Failures (umbrella)"@pt ;
+    skos:altLabel "Breakout"@pt ;
+    skos:altLabel "FIT"@pt ;
+    skos:altLabel "Fraturas Induzidas"@pt ;
+    skos:altLabel "Perfil de Imagem"@pt ;
+    skos:altLabel "FMI"@pt ;
+    skos:altLabel "OBMI"@pt ;
+    skos:altLabel "Image-Based Wellbore Failures"@en ;
+    skos:definition """Feições geomecânicas identificadas em perfis de imagem (resistividade ou acústica, ex: FMI, OBMI) que permitem determinar a orientação e a magnitude das tensões horizontais in situ [PP-2E&P-00322, PE-2RES-00016]. Breakouts são elipses de colapso por cisalhamento (alargamento do poço) perpendiculares à SHmax — sua orientação indica a direção de Shmin. Fraturas Induzidas por Perfuração são fraturas de tração alinhadas com a direção de SHmax. A metodologia de Barton et al. (1988) e Zoback et al. (2003), referenciada internamente, utiliza o ângulo de abertura do breakout para calcular a magnitude de SHmax em função de UCS, Pp, Mw e Shmin. Norma interna mandatória [PP-2E&P-00322]: 100% dos perfis de imagem do campo devem ter análise de breakout; os dados devem ser carregados no BDIEP via VGE e incorporados no modelo geomecânico até o FEL2. A retroanálise de breakouts é uma das principais fontes para ajuste do modelo geomecânico 1D (CT CMR 010/2015 — Santos et al.) e é realizada nos sistemas Techlog e SEST TR. A interpretação deve distinguir breakouts de colapso mecânico (lavagem) dos causados por erosão química ou instabilidade hidráulica."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC024 a owl:Class ;
+    skos:prefLabel "Compressibilidade de Poros Uniaxial"@pt ;
+    skos:prefLabel "Uniaxial Pore Volume Compressibility"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Cp_uni"@pt ;
+    skos:altLabel "Cpc"@pt ;
+    skos:altLabel "Compressibilidade Uniaxial"@pt ;
+    skos:altLabel "Uniaxial Pore Volume Compressibility"@en ;
+    skos:definition """Variação fracional do volume de poros por unidade de variação da pressão de poros em condições de deformação uniaxial (deformações laterais restritas), que reproduz as condições in situ em campo onde as deformações são majoritariamente verticais. Distingue-se do Cp hidrostático obtido em laboratório, que deve ser convertido pela equação interna Petrobras: Cp_uni = Cp_hid × [(1+ν)(1-2ν)] / (1-ν)² [PP-2E&P-00322, equação (2)]. Métodos de obtenção na Petrobras: (1) Correlações empíricas — a Correlação Petrobras para turbiditos (Figura 9 do PP-2E&P-00322) relaciona Cp com porosidade, com curva de ajuste médio e limites superior e inferior; correlações de Hall, Newman e Van Der Knaap devem ser evitadas por resultados inapropriados; (2) Ensaios de laboratório com correção hidrostático→uniaxial; (3) Abordagem geomecânica analítica (Método 3a) ou numérica via GeomecBR acoplado ao simulador de fluxo (Método 3b — solução two-way, mais robusta). Na interpretação de TLDs (Testes de Longa Duração), o Cp impacta significativamente as interpretações de volumes in place, sendo crítico seu uso criterioso."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC025 a owl:Class ;
+    skos:prefLabel "CSD — Centro de Suporte à Decisão (Geomecânica)"@pt ;
+    skos:prefLabel "Decision Support Center — Geomechanics (CSD GEOMEC)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "CSD"@pt ;
+    skos:altLabel "CSD GEOMEC"@pt ;
+    skos:altLabel "CSD MPD"@pt ;
+    skos:altLabel "CGOR"@pt ;
+    skos:altLabel "Centro de Suporte à Decisão"@pt ;
+    skos:altLabel "Decision Support Center — Geomechanics (CSD GEOMEC)"@en ;
+    skos:definition """Ambiente integrado e multidisciplinar da Petrobras que opera 24h/7d em regime de TIR (Turno Ininterrupto de Revezamento) para monitorar em tempo real as operações geológicas, de geomecânica e de perfuração de poços. O CSD GEOMEC especificamente é responsável por: monitorar parâmetros de perfuração, perfis e informações pertinentes às operações de poços (SITOP) em tempo real via sistemas DCS, EXATA, PWDa, SIGEO 3, V3O2, Petrel e RTO-LIVE; prover prognóstico de curvas de geopressões e atualização dos modelos em tempo real (SEST 2.0 e Predict); gerar Modelo Geomecânico Atualizado, Relatório Geomecânico de Poços, Ocorrências Geomecânicas, Boletim Operacional e Alerta Operacional [PE-2EXP-00074]. Todos os eventos geomecânicos de poço (influxos, perdas, breakouts, arrastes, prisões, fundo falso) são relatados nos Boletins Diários de Perfuração (BDP) e gerenciados pela Halliburton via OpenWells, com acesso também via WELLSOM e SIGEO 3. O monitoramento geomecânico segue o padrão PE-2EXP-00066 (Realizar Monitoramento Geomecânico em Ambiente CSD). O CSD MPD é a variante especializada para operações com Managed Pressure Drilling. Existe também o CSD de Poços Marítimos (POCOS/SPO/SP/PAD), gerenciado pelo padrão PE-1PBR-01038."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC026A a owl:Class ;
+    skos:prefLabel "QPG — Quadro de Previsões Geológicas"@pt ;
+    skos:prefLabel "Geological Prognosis Chart"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "QPG"@pt ;
+    skos:altLabel "Quadro de Previsões Geológicas"@pt ;
+    skos:altLabel "QPG Preliminar"@pt ;
+    skos:altLabel "QPG Final"@pt ;
+    skos:altLabel "Geological Prognosis Chart"@en ;
+    skos:definition """Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572]."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC026B a owl:Class ;
+    skos:prefLabel "Laudo Geomecânico"@pt ;
+    skos:prefLabel "Geomechanical Report"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Laudo Geomecânico"@pt ;
+    skos:altLabel "Laudo de Geomecânica"@pt ;
+    skos:altLabel "Relatório Geomecânico"@pt ;
+    skos:altLabel "Geomechanical Report"@en ;
+    skos:definition """Documento técnico formal que compila a Análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3 — Magnitude e Azimute), gradiente de poropressão e dados de testes de pressão (LOT/XLOT/FIT), extraídas do modelo geomecânico 3D validado pelo RES/TR/GMR. É confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR, e deve conter obrigatoriamente: (i) trajetória final otimizada aprovada no Pré Kick-Off; (ii) riscos geológico-geomecânicos residuais na trajetória; (iii) poços correlatos com eventos geomecânicos; (iv) resultados dos estudos de shallow hazards (SUB/ES/GEO); (v) tensões in situ calibradas ao modelo geomecânico 3D aprovado; (vi) previsão de poropressão nas rochas não-reservatório; (vii) análise de Underground Venting (UV) quando aplicável [PE-2RES-00009]. As curvas fornecidas pelo RES incluem versão original e suavizada (média móvel), planilha em psi e figura em lb/gal. O Laudo é apresentado na reunião de Kick-Off (-120 dias antes da perfuração) e posteriormente emitido via ISA junto ao Prospecto (-60 dias). Armazenamento oficial: SIPLEX [PE-2EXP-00074]. Após a perfuração, o CSD GEOMEC emite o Relatório Geomecânico Final de Poço, que é arquivado no VGE [PE-2EXP-00074]."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC027 a owl:Class ;
+    skos:prefLabel "IMGR — Índice de Modelagem de Geomecânica de Reservatório"@pt ;
+    skos:prefLabel "Reservoir Geomechanics Modelling Index"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "IMGR"@pt ;
+    skos:altLabel "Índice de Modelagem Geomecânica"@pt ;
+    skos:altLabel "SIRR"@pt ;
+    skos:altLabel "Reservoir Geomechanics Modelling Index"@en ;
+    skos:definition """Indicador de governança corporativa que mede o nível de atualização e maturidade dos modelos geomecânicos dos campos da Petrobras. Define o prazo máximo de vigência de um modelo geomecânico: caso não sofra renovação por novos dados ou atualizações significativas do modelo de fluxo/geológico, o modelo geomecânico deve ser atualizado em no máximo 3 anos após sua última modificação [PP-2E&P-00322]. O modelo geomecânico vigente que suporta as decisões operacionais do campo deve estar registrado no SIRR (Sistema de Informação de Reservas e Reservatórios) — módulo de geomecânica [PP-2E&P-00322]. O fluxo de aprovação de atualização exige que o ativo envie para a RES/TR/GMR: motivação da atualização, dados utilizados, análise de reativação de falhas, novos valores de pressão-limite de injeção, mapa de compactação, histograma de compressibilidade e mapa de subsidência — com comparativo entre modelos anterior e atual. A validação é formalizada pela emissão de ISA pela GMR. O IMGR é também um critério de auditoria dos Grupos de Revisão de Reservatórios (FEL1, FEL2, FEL3). A gerência RES/TR/GMR é responsável pela validação de todos os modelos geomecânicos da companhia."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC028 a owl:Class ;
+    skos:prefLabel "GeomecBR — Simulador Geomecânico por Elementos Finitos (Petrobras)"@pt ;
+    skos:prefLabel "GeomecBR — Finite Element Geomechanical Simulator"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "GeomecBR"@pt ;
+    skos:altLabel "GEOMECBR"@pt ;
+    skos:altLabel "GeomecBR — Finite Element Geomechanical Simulator"@en ;
+    skos:definition """Sistema computacional interno da Petrobras baseado no Método dos Elementos Finitos (MEF) para solução da Equação de Balanço de Momento (Equação de Equilíbrio) em modelos geomecânicos 3D de reservatórios. Desenvolvido pelo CENPES e empregado em estudos de Reservatórios desde 2009 [PP-2E&P-00322]. Calcula tensões, deformações e deslocamentos no volume de rocha modelado, considerando reologia dos materiais (incluindo comportamento viscoplástico de evaporitos) e condições de contorno. Permite simulação acoplada com simuladores de fluxo de reservatórios (acoplamento two-way), capturando campos de saturação e poropressão ao longo da vida produtiva. A simulação divide-se em: (i) inicialização do estado de tensões (pré-produção) e (ii) explotação do reservatório. Produz como resultados: compressibilidade de poros por célula da malha, mapas de compactação, mapas de subsidência, análise de reativação de falhas, trajetórias de tensões e avaliações de integridade da rocha capeadora. O fluxo de dados de geomecânica usando GeomecBR em conjunto com SKUA-GOCAD (AspenTech) e Petrel está documentado na Comunidade de Interesse de Gestão e Governança de Dados. Os resultados são registrados no SIRR."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC029 a owl:Class ;
+    skos:prefLabel "GERESIM — Sistema de Gerenciamento de Simulações de Reservatórios"@pt ;
+    skos:prefLabel "GERESIM — Reservoir Simulation Management System"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "GERESIM"@pt ;
+    skos:altLabel "GERESIM 3D"@pt ;
+    skos:altLabel "GERESIM — Reservoir Simulation Management System"@en ;
+    skos:definition """Sistema computacional interno da Petrobras para gerenciamento e orquestração de simulações de reservatórios. No contexto geomecânico, o GERESIM possui aplicação específica para auxílio à construção do gráfico composto do Laudo Geomecânico, permitindo integrar o Modelo Geomecânico 3D de Reservatórios com a trajetória do poço e os dados geológicos [PE-2RES-00009]. Insumos requeridos: modelo geomecânico 3D validado, arquivo de trajetória do poço (ex: Trajetoria.txt), QPG (Quadro de Previsões Geológicas), planilha de dados medidos (tomadas de pressão, LOT, FIT, pressões de fechamento) e planilha de eventos de poço (perdas, fechamentos, breakouts, influxos). O GERESIM é referenciado em [PE-2RES-00009] como módulo para geração do gráfico composto de geotensões. É também usado para pré e pós-processamento em simulações de fluxo [PE-2E&P-00726], integrando modelos geológicos e geomecânicos para simulações acopladas. Os modelos geomecânicos vigentes devem ser cadastrados no GERESIM/SIRR após validação pela RES/TR/GMR via ISA."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC030 a owl:Class ;
+    skos:prefLabel "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço"@pt ;
+    skos:prefLabel "SIGEO and SEST TR — 1D Well Geomechanical Modeling Systems"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "SIGEO"@pt ;
+    skos:altLabel "SEST TR"@pt ;
+    skos:altLabel "SEST"@pt ;
+    skos:altLabel "SEST 2.0"@pt ;
+    skos:altLabel "Simulador de Estabilidade"@pt ;
+    skos:altLabel "SIGEO and SEST TR — 1D Well Geomechanical Modeling Systems"@en ;
+    skos:definition """Conjunto de sistemas computacionais internos da Petrobras para modelagem geomecânica 1D de poço, utilizados tanto no planejamento (SIGEO/SEST TR) quanto em tempo real durante a perfuração (SEST 2.0). O SIGEO (Sistema Integrado de Geologia e Geofísica) possui módulo de análise geomecânica 1D com acesso direto ao BDGEOL (banco de dados geológicos), permitindo refinamento de correlações por litologia. Contém módulo multipoços para calibração do volume de densidade pela equação de Gardner. O SEST TR (Simulador de Estabilidade — Tecnologia Reservatórios) é a ferramenta padrão para estimativa de tensões horizontais mínimas, integrado ao banco de dados da empresa; é usado na análise e calibração de LOT/FIT em conjunto com o SIGEO [PE-2RES-00014]. O SEST 2.0 é a versão de uso em tempo real no CSD GEOMEC, desenvolvida em parceria CENPES/PUC-RJ, para atualização dinâmica dos modelos de geopressão durante a perfuração [PE-2EXP-00074]. O Techlog (Schlumberger) é também referenciado para construção de modelos 1D em pós-perfuração [PE-2EXP-00074]. A metodologia de análise geomecânica de poços está descrita na CT CMR 010/2015 (CENPES)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC031 a owl:Class ;
+    skos:prefLabel "XLOT — Teste de Fraturamento Estendido (Metodologia Interna)"@pt ;
+    skos:prefLabel "Extended Leak-Off Test — Methodology"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "XLOT"@pt ;
+    skos:altLabel "xLOT"@pt ;
+    skos:altLabel "Microfraturamento com Coluna de Perfuração"@pt ;
+    skos:altLabel "Microfraturamento de Baixo Custo"@pt ;
+    skos:altLabel "Mini-frac"@pt ;
+    skos:altLabel "MicroFrac"@pt ;
+    skos:altLabel "Extended Leak-Off Test — Methodology"@en ;
+    skos:definition """Metodologia de aquisição de dados de tensão in situ de maior qualidade que o LOT convencional, pois envolve a propagação controlada de uma fratura na formação, permitindo a medição direta de pressões de reabertura, propagação e fechamento de fratura — indicadores diretos da tensão mínima horizontal (Shmin). Na Petrobras, é denominado internamente como 'Microfraturamento com Coluna de Perfuração' ou 'XLOT — Microfraturamento de Baixo Custo' [PP-2E&P-00322, PE-2E&P-00984]. Classificado como operação de baixo custo por ser realizado durante a perfuração após o assentamento da sapata, sem manobras dedicadas. O xLOT/Microfraturamento fornece: pressão de reabertura de fratura, pressão de propagação, ISIP (Instantaneous Shut-In Pressure = tensão mínima), e curva de declínio de pressão. Segundo o padrão [PE-2RES-00014], os procedimentos de análise seguem a hierarquia de qualidade: (1) Mini-frac/MicroFrac/xLOT com ciclos múltiplos — maior qualidade; (2) SRT/SDT/TI/MicroTI; (3) LOT com indicativos de absorção. O ISIP é a pressão estabilizada após o fechamento do bombeio e é o indicador de melhor qualidade para Shmin. A metodologia de ajuste das deformações horizontais a partir dos xLOTs está descrita na CT CMR 010/2015 (Santos et al.)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC032 a owl:Class ;
+    skos:prefLabel "Pulso de Pressão (Operação AGP)"@pt ;
+    skos:prefLabel "Pressure Pulse Operation"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Pulso de Pressão"@pt ;
+    skos:altLabel "Pressure Pulse"@pt ;
+    skos:altLabel "Pressure Pulse Operation"@en ;
+    skos:definition """Operação especializada realizada em poços injetores na Petrobras, descrita no padrão [PE-2AGP-00027], com o objetivo de realizar fraturamento controlado da rocha reservatório para otimização da injetividade. O procedimento consiste em: (i) reduzir a pressão de poros abaixo do nível normal (induzindo redução das tensões principais), e (ii) em seguida, realizar uma rápida elevação de pressão no poço até o fraturamento controlado. A pressão a ser utilizada no Pulso de Pressão e os tempos do esquema operacional devem ser determinados exclusivamente pela equipe de Geomecânica de Reservatórios da AGP (AGP/RES-EE/CTGI/CT-GGER). Este conceito é distinto do fraturamento hidráulico convencional (GEOMEC033) por ser uma operação de injeção com parâmetros definidos por estudo geomecânico específico, não por projeto de fraturamento de estimulação. É um dos mecanismos de gerenciamento geomecânico ativo de campos em produção."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC033 a owl:Class ;
+    skos:prefLabel "Fraturamento Hidráulico (Estimulação)"@pt ;
+    skos:prefLabel "Hydraulic Fracturing — Well Stimulation"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "HF — Hydraulic Fracturing (sub-vertical wells, WSM)"@pt ;
+    skos:altLabel "HFP — Hydraulic Test of Pre-existing Fractures (HTPF, WSM)"@pt ;
+    skos:altLabel "HFH — Hydraulic Fracturing in sub-horizontal wells (WSM)"@pt ;
+    skos:altLabel "HFS — Seismicity on hydraulic faults (WSM)"@pt ;
+    skos:altLabel "HTPF"@pt ;
+    skos:altLabel "Hydraulic Fracturing"@pt ;
+    skos:altLabel "Fraturamento Hidráulico"@pt ;
+    skos:altLabel "Frac"@pt ;
+    skos:altLabel "Fraturamento Propado"@pt ;
+    skos:altLabel "Fraturamento Ácido"@pt ;
+    skos:altLabel "Fracpack"@pt ;
+    skos:altLabel "Hydraulic Fracturing — Well Stimulation"@en ;
+    skos:definition """Técnica de estimulação de poços na qual um fluido é bombeado sob alta pressão para criar ou reabrir fraturas na formação rochosa, aumentando a produtividade ou injetividade do poço. Na Petrobras, o Manual de Projeto de Fraturamento [PE-2POC-01246] descreve dois tipos: (i) Fraturamento Propado — agente de sustentação granular (propante) é bombeado em gel reticulado para manter a fratura aberta após o fechamento; aplicado em arenitos; (ii) Fraturamento Ácido — ácido ataca as faces da fratura em carbonatos, gerando canais condutivos; indicado quando haja equivalência com o propado, por ser de menor risco operacional. O projeto de fraturamento requer: modelo geomecânico da formação, janela de fraturamento, parâmetros de resistência (UCS, RES — Rock Embedment Strength para fraturamento ácido), geometria da fratura e simulador Stimplan. A pressão de fechamento da fratura (ISIP) e a Net Pressure são parâmetros fundamentais. Os testes de calibração em ordem de preferência são: Micro-TI, SRT/SDT e Minifrac. O Fracpack é a técnica de contenção de areia amplamente aplicada na Bacia de Campos."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC034 a owl:Class ;
+    skos:prefLabel "DFIT / DPPT — Testes Dinâmicos de Integridade e Pressão de Poros"@pt ;
+    skos:prefLabel "DFIT / DPPT — Dynamic Formation Integrity and Pore Pressure Tests"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "DFIT"@pt ;
+    skos:altLabel "DPPT"@pt ;
+    skos:altLabel "DLOT"@pt ;
+    skos:altLabel "Dynamic Formation Integrity Test"@pt ;
+    skos:altLabel "Dynamic Pore Pressure Test"@pt ;
+    skos:altLabel "DFIT / DPPT — Dynamic Formation Integrity and Pore Pressure Tests"@en ;
+    skos:definition """Conjunto de testes dinâmicos de pressão realizados com o sistema MPD para determinação dos limites operacionais da janela de perfuração durante a perfuração de uma fase. São dois testes distintos e complementares, descritos no padrão [PP-2POC-00341] e padrão [PE-2POC-01232]: (i) DFIT (Dynamic Formation Integrity Test) — teste em condições dinâmicas (com circulação) para verificação da resistência da formação às pressões esperadas nas operações subsequentes — determina o limite superior da janela operacional (equivalente dinâmico do LOT); (ii) DPPT (Dynamic Pore Pressure Test) — teste em condições dinâmicas para verificação do limite inferior da janela operacional — confirma ou atualiza o gradiente de pressão de poros previsto. O DLOT (Dynamic Leak Off Test) é sinônimo de DFIT usado em alguns padrões. Esses testes são realizados durante o Fingerprint MPD [PE-1PBR-01326] e calibram o modelo hidráulico do sistema MPD antes da perfuração da fase. Os resultados são usados para ajuste em tempo real das curvas de Pp e Shmin no SEST 2.0 pelo CSD GEOMEC."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC035 a owl:Class ;
+    skos:prefLabel "Modelo Geomecânico 3D de Reservatórios"@pt ;
+    skos:prefLabel "3D Reservoir Geomechanical Model"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Modelo Geomecânico 3D"@pt ;
+    skos:altLabel "MG3D"@pt ;
+    skos:altLabel "Modelo Geomecânico de Reservatório"@pt ;
+    skos:altLabel "Modelo Geomecânico MEF"@pt ;
+    skos:altLabel "3D Reservoir Geomechanical Model"@en ;
+    skos:definition """Modelo numérico tridimensional que descreve a evolução do estado de tensões, deformações e deslocamentos em subsuperfície em função das propriedades mecânicas e estágios de carregamento (variações de poropressão), através de simulação pelo Método dos Elementos Finitos [PE-2RES-00009]. Compreende as formações rochosas e sedimentos desde a superfície (onshore) ou fundo do mar (offshore) até profundidades maiores que o próprio reservatório, incluindo volumes de rocha adjacentes para condições de contorno adequadas. Deve ser refinado no reservatório para capturar feições geomecânicas de interesse. A modelagem 3D é mandatória em casos geologicamente ou estruturalmente complexos — em casos simples pode ser substituída por modelos 1D [PE-2RES-00009]. As propriedades mecânicas devem ser distribuídas na malha representando todo o espectro de deformabilidade e resistência. O modelo deve estar aderente aos modelos geológico e de escoamento. Inclui obrigatoriamente: peso próprio das formações, pressão da lâmina d'água, poropressão, Princípio de Biot-Willis, propriedades elásticas, resistência ao cisalhamento, comportamento viscoplástico de evaporitos e deformações tectônicas [PE-2RES-00009]. O modelo vigente que suporta decisões operacionais do campo deve estar registrado no SIRR (IMGR ≤ 3 anos) e validado via ISA da RES/TR/GMR."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC036 a owl:Class ;
+    skos:prefLabel "Fórmula de ECD"@pt ;
+    skos:prefLabel "ECD Formula"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Fórmula ECD"@pt ;
+    skos:altLabel "Equação da ECD"@pt ;
+    skos:altLabel "ECD (lb/gal)"@pt ;
+    skos:altLabel "FORMULA_ECD001"@pt ;
+    skos:altLabel "ECD"@pt ;
+    skos:altLabel "ECD Formula"@en ;
+    skos:definition """Entidade computável que representa a equação documentada para cálculo da Densidade Equivalente de Circulação a partir da pressão hidrostática, perda de carga anular e profundidade vertical."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC037 a owl:Class ;
+    skos:prefLabel "Densidade Equivalente Estática"@pt ;
+    skos:prefLabel "Equivalent Static Density"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ESD"@pt ;
+    skos:altLabel "Equivalent Static Density"@pt ;
+    skos:altLabel "densidade equivalente estática"@pt ;
+    skos:altLabel "Equivalent Static Density"@en ;
+    skos:definition """Componente estática da densidade equivalente medida em condição sem circulação, distinguida da ECD dinâmica no contexto de leituras PWD e controle hidráulico."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC038 a owl:Class ;
+    skos:prefLabel "Pressão Hidrostática do Fluido de Perfuração"@pt ;
+    skos:prefLabel "Drilling Fluid Hydrostatic Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Pressão hidrostática"@pt ;
+    skos:altLabel "Ph"@pt ;
+    skos:altLabel "pressão hidrostática do fluido"@pt ;
+    skos:altLabel "hydrostatic pressure"@pt ;
+    skos:altLabel "Drilling Fluid Hydrostatic Pressure"@en ;
+    skos:definition """Parcela de pressão exercida pela coluna estática de fluido de perfuração em determinada profundidade, usada como componente do cálculo da ECD e da margem operacional contra influxo e perda."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC039 a owl:Class ;
+    skos:prefLabel "Perda de Carga Anular"@pt ;
+    skos:prefLabel "Annular Pressure Loss"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ΔPa"@pt ;
+    skos:altLabel "perda de carga"@pt ;
+    skos:altLabel "perda de carga anular"@pt ;
+    skos:altLabel "annular pressure loss"@pt ;
+    skos:altLabel "Annular Pressure Loss"@en ;
+    skos:definition """Parcela de pressão associada ao escoamento do fluido no anular entre a profundidade avaliada e a superfície, usada como componente dinâmica no cálculo da ECD."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC040 a owl:Class ;
+    skos:prefLabel "Anchor Point"@pt ;
+    skos:prefLabel "Anchor Point"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "AP"@pt ;
+    skos:altLabel "Anchor Point"@pt ;
+    skos:altLabel "ponto de ancoragem"@pt ;
+    skos:altLabel "profundidade de referência"@pt ;
+    skos:altLabel "Anchor Point"@en ;
+    skos:definition """Profundidade de referência usada em operações MPD para manter e controlar a pressão anular por meio de contrapressão de superfície."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC041 a owl:Class ;
+    skos:prefLabel "Contrapressão de Superfície"@pt ;
+    skos:prefLabel "Surface Back Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "SBP"@pt ;
+    skos:altLabel "Surface Back Pressure"@pt ;
+    skos:altLabel "contrapressão"@pt ;
+    skos:altLabel "contrapressão de superfície"@pt ;
+    skos:altLabel "Surface Back Pressure"@en ;
+    skos:definition """Contrapressão aplicada na superfície em operações MPD para controlar o perfil de pressão no anular e manter a pressão no Anchor Point."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC042 a owl:Class ;
+    skos:prefLabel "ISIP — Pressão Instantânea de Fechamento"@pt ;
+    skos:prefLabel "Instantaneous Shut-In Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ISIP"@pt ;
+    skos:altLabel "Instantaneous Shut-In Pressure"@pt ;
+    skos:altLabel "pressão de fechamento"@pt ;
+    skos:altLabel "pressão instantânea de fechamento"@pt ;
+    skos:altLabel "Instantaneous Shut-In Pressure"@en ;
+    skos:definition """Pressão registrada imediatamente após o fechamento do bombeio em testes de fraturamento, usada como indicador de qualidade para estimar a tensão horizontal mínima."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC043 a owl:Class ;
+    skos:prefLabel "Pressão de Fechamento de Fratura"@pt ;
+    skos:prefLabel "Fracture Closure Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Pc"@pt ;
+    skos:altLabel "pressão de fechamento"@pt ;
+    skos:altLabel "closure pressure"@pt ;
+    skos:altLabel "fracture closure pressure"@pt ;
+    skos:altLabel "Fracture Closure Pressure"@en ;
+    skos:definition """Pressão associada ao fechamento da fratura durante testes de fraturamento ou microfraturamento, usada na calibração da tensão mínima horizontal."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC044 a owl:Class ;
+    skos:prefLabel "Washout"@pt ;
+    skos:prefLabel "Washout"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Washout"@pt ;
+    skos:altLabel "washout"@pt ;
+    skos:altLabel "arrombamento"@pt ;
+    skos:altLabel "alargamento do poço"@pt ;
+    skos:altLabel "Washout"@en ;
+    skos:definition """Alargamento do poço observado por caliper ou perfil de imagem, associado à instabilidade da parede do poço, erosão ou colapso mecânico, com impacto na qualidade de perfis e estabilidade operacional."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC045 a owl:Class ;
+    skos:prefLabel "Prisão de Coluna"@pt ;
+    skos:prefLabel "Stuck Pipe"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "prisão de coluna"@pt ;
+    skos:altLabel "Stuck Pipe"@pt ;
+    skos:altLabel "prisões"@pt ;
+    skos:altLabel "arrastes"@pt ;
+    skos:altLabel "topamentos"@pt ;
+    skos:altLabel "estolamentos"@pt ;
+    skos:altLabel "Stuck Pipe"@en ;
+    skos:definition """Evento operacional de poço associado a instabilidade, colapso, cascalhos, diferencial de pressão ou geometria do poço, tratado como risco relevante em estabilidade e monitoramento geomecânico."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC046 a owl:Class ;
+    skos:prefLabel "Subsidência — Faixas de Risco"@pt ;
+    skos:prefLabel "Subsidence Risk Ranges"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Subsidence Risk Ranges"@en ;
+    skos:definition """Classificação do nível de subsidência de um campo de petróleo em três faixas de risco, conforme PP-2E&P-00322 §3.9.1.1: subsidência moderada (<40 cm, segura), elevada (40–100 cm, requer monitoramento por possíveis patologias estruturais) e extrema (>100 cm, danos estruturais frequentes, projeto deve evitar ou aplicar monitoramento obrigatório). Modelagem recomendada com cenário de depleção forçada (injeção mínima)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC047 a owl:Class ;
+    skos:prefLabel "SIMCARR"@pt ;
+    skos:prefLabel "SIMCARR — Cuttings Transport and Hydraulics Simulator"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "SIMCARR"@pt ;
+    skos:altLabel "Simcarr"@pt ;
+    skos:altLabel "simulador de carreamento"@pt ;
+    skos:altLabel "simulador de hidráulica"@pt ;
+    skos:altLabel "SIMCARR — Cuttings Transport and Hydraulics Simulator"@en ;
+    skos:definition """Simulador interno de carreamento e hidráulica da Petrobras, disponível a toda equipe própria e contratada via PETRONET (simcarr.ep.petrobras.com.br). Calcula perdas de carga, ECD, eficiência de limpeza de poço e parâmetros de bomba para projeto e acompanhamento de operações de perfuração."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC048 a owl:Class ;
+    skos:prefLabel "PWDa — Pressure While Drilling (annular)"@pt ;
+    skos:prefLabel "Pressure While Drilling — Annular"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "PWD"@pt ;
+    skos:altLabel "PWDa"@pt ;
+    skos:altLabel "medição de pressão de fundo"@pt ;
+    skos:altLabel "sensor de pressão anular"@pt ;
+    skos:altLabel "Pressure While Drilling — Annular"@en ;
+    skos:definition """Ferramenta MWD downhole que mede continuamente a pressão no anular durante a perfuração, gerando as grandezas ECD e ESD em tempo real. O sufixo "a" (annular) especifica leitura no espaço anular. Os dados são gravados em memória da ferramenta e/ou transmitidos em tempo real via pulso de pressão (WITSML/WITS). Modelada como entidade única (hardware + measurement inseparáveis no contexto do dicionário); sistema de superfície de aquisição PWD pode ser entidade separada em iteração futura se necessário."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC049 a owl:Class ;
+    skos:prefLabel "BDIEP — Base de Dados Integrada de E&P"@pt ;
+    skos:prefLabel "BDIEP — Integrated E&P Database"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "BDIEP"@pt ;
+    skos:altLabel "Base de Dados Integrada de E&P"@pt ;
+    skos:altLabel "base integrada E&P"@pt ;
+    skos:altLabel "BDIEP — Integrated E&P Database"@en ;
+    skos:definition """Repositório unificado de armazenamento de informações estruturadas e não estruturadas obtidas ou produzidas durante os processos técnicos da atividade de E&P da Petrobras. Acessado pela interface VGE para consulta e cadastro de arquivos. Retenção permanente; acesso protegido por chave e senha. Posicionamento vs. correlatos: BDIEP é repositório técnico corporativo (golden source para dados de poços exploratórios e explotatórios), enquanto OpenWells é fonte primária de dados operacionais (BDP, LOT, XLOT) que migram para BDIEP, e SIGEO armazena dados geológicos (calha, paleontologia, geoquímica)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC050 a owl:Class ;
+    skos:prefLabel "BDP — Boletim Diário da Perfuração"@pt ;
+    skos:prefLabel "BDP — Daily Drilling Report"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "BDP"@pt ;
+    skos:altLabel "Boletim Diário de Perfuração"@pt ;
+    skos:altLabel "Daily Drilling Report"@pt ;
+    skos:altLabel "DDR"@pt ;
+    skos:altLabel "BDP — Daily Drilling Report"@en ;
+    skos:definition """Relatório diário que registra todas as operações executadas no poço ao longo de um turno/dia de perfuração: atividades, profundidades atingidas, parâmetros de fluido, tempos produtivos e não produtivos (NPT), ocorrências e consumo de materiais. Documento operacional primário de rastreabilidade da execução do poço. Estrutura mista — combina campos estruturados (profundidade, tempos, parâmetros) com narrativa textual (ocorrências, observações). Preenchido pelo Fiscal RPB na sonda via OpenWells/Atlas; armazenamento permanente no BDIEP. Cardinalidade: 1 BDP por dia-turno por poço."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC051 a owl:Class ;
+    skos:prefLabel "OpenWells / Atlas"@pt ;
+    skos:prefLabel "OpenWells / Atlas — Well Operations Datastore"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "OpenWells"@pt ;
+    skos:altLabel "OpenWells/Atlas"@pt ;
+    skos:altLabel "Atlas"@pt ;
+    skos:altLabel "sistema de acompanhamento de poços"@pt ;
+    skos:altLabel "OpenWells / Atlas — Well Operations Datastore"@en ;
+    skos:definition """Sistema corporativo de registro e gestão de dados operacionais de poços (perfuração, avaliação e completação): entrada do BDP, LOT/XLOT/FIT, testes de formação e demais eventos de poço em tempo real ou pós-operação. Também referenciado como "OpenWells/Atlas" nos padrões mais recentes. Posicionamento: fonte primária para dados operacionais de execução; dados migram para BDIEP (repositório de destino permanente). Golden source via AUTHORITATIVE_FOR para: BDP, LOT/XLOT/FIT/MFRAC, NPT, eventos de poço em execução."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC052A a owl:Class ;
+    skos:prefLabel "PRV — Pressure Relief Valve"@pt ;
+    skos:prefLabel "Pressure Relief Valve (MPD hardware)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "PRV"@pt ;
+    skos:altLabel "Pressure Relief Valve"@pt ;
+    skos:altLabel "válvula de alívio MPD"@pt ;
+    skos:altLabel "Pressure Relief Valve (MPD hardware)"@en ;
+    skos:definition """Válvula de alívio de pressão física, instalada no manifold de superfície do sistema MPD. Pode ser mecânica (abre completamente e permanece aberta até fechamento manual) ou eletrônica (possui setpoints distintos de abertura e fechamento, com alarme visual e sonoro). Atua como dispositivo de proteção secundário contra sobrepressurização do poço. Ajuste de pressão de abertura/fechamento pode ser remoto."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC052B a owl:Class ;
+    skos:prefLabel "Setpoint MPD / SBP"@pt ;
+    skos:prefLabel "MPD Surface Back Pressure Setpoint"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Setpoint MPD"@pt ;
+    skos:altLabel "Surface Back Pressure setpoint"@pt ;
+    skos:altLabel "SPL (Halliburton)"@pt ;
+    skos:altLabel "Bias (SLB)"@pt ;
+    skos:altLabel "High Limit (Weatherford)"@pt ;
+    skos:altLabel "SBP"@pt ;
+    skos:altLabel "SPL"@pt ;
+    skos:altLabel "Bias"@pt ;
+    skos:altLabel "High Limit"@pt ;
+    skos:altLabel "MPD Surface Back Pressure Setpoint"@en ;
+    skos:definition """Valor lógico de pressão configurado no software do sistema MPD para controle ativo da contrapressão de superfície pelos chokes automatizados. É o alvo de controle do sistema (não a PRV física). Distintos por fornecedor: Secondary Pressure Limiter (Halliburton), Bias (SLB), High Limit (Weatherford). Limite operacional típico: 750 psi para perfuração; 900 psi para completação."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC053A a owl:Class ;
+    skos:prefLabel "Pressão de Reabertura de Fratura"@pt ;
+    skos:prefLabel "Fracture Reopening Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "FRP"@pt ;
+    skos:altLabel "pressão de reabertura"@pt ;
+    skos:altLabel "Fracture Reopening Pressure"@pt ;
+    skos:altLabel "MFRAC ABS ULT C"@pt ;
+    skos:altLabel "Fracture Reopening Pressure"@en ;
+    skos:definition """Pressão na qual uma fratura preexistente reaberta durante um segundo ciclo de bombeio (XLOT ou microfraturamento) começa a se propagar novamente. Obtida no 2º ciclo do teste pelo ponto de desvio da linearidade. A diferença entre a Pressão de Quebra (1º ciclo) e a Pressão de Reabertura é igual à resistência à tração da rocha. Sequência cronológica do teste: Pressão de Quebra (1º ciclo) > Pressão de Propagação ≥ Pressão de Reabertura (2º ciclo) > ISIP > Pc."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC053B a owl:Class ;
+    skos:prefLabel "Pressão de Propagação de Fratura"@pt ;
+    skos:prefLabel "Fracture Propagation Pressure"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "FPP"@pt ;
+    skos:altLabel "pressão de propagação"@pt ;
+    skos:altLabel "Fracture Propagation Pressure"@pt ;
+    skos:altLabel "XLOT ABS ULT C"@pt ;
+    skos:altLabel "MFRAC ABS ULT C"@pt ;
+    skos:altLabel "Fracture Propagation Pressure"@en ;
+    skos:definition """Patamar de pressão estabilizado durante bombeio contínuo no XLOT/microfraturamento, no qual a fratura já propagou e se mantém aberta. Registrada como `XLOT ABS ULT C` e `MFRAC ABS ULT C` no OpenWells/Atlas. Uso operacional: limite superior da janela operacional via XLOT (calibração de Shmin)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC061 a owl:Class ;
+    skos:prefLabel "Ensaio Triaxial"@pt ;
+    skos:prefLabel "Triaxial Test"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Triaxial"@pt ;
+    skos:altLabel "Triaxial Test"@en ;
+    skos:definition """Ensaio de compressão axial sob confinamento radial constante, executado em corpo de prova cilíndrico de rocha intacta. Permite obter resistência à compressão sob tensão de confinamento (UCS confinada), módulo de Young, coeficiente de Poisson e envoltória de ruptura (Mohr–Coulomb / Hoek–Brown). Aplicado em caracterização geomecânica de reservatório e capeadora para modelos 1D/3D MEM."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC062 a owl:Class ;
+    skos:prefLabel "Ensaio UCS (Uniaxial sem Confinamento)"@pt ;
+    skos:prefLabel "Unconfined Compression Test"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "UCS test"@pt ;
+    skos:altLabel "UCS"@pt ;
+    skos:altLabel "Unconfined Compression Test"@en ;
+    skos:definition """Compressão axial em corpo de prova cilíndrico de rocha sem aplicação de tensão de confinamento (σ3 = 0). Fornece a resistência à compressão uniaxial (UCS) — propriedade primária de resistência da rocha. Quando instrumentado com strain-gauges, permite estimar também módulo de Young e coeficiente de Poisson estáticos."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC063 a owl:Class ;
+    skos:prefLabel "Ensaio Hidrostático"@pt ;
+    skos:prefLabel "Hydrostatic Compression Test"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Hydrostat"@pt ;
+    skos:altLabel "Hydrostatic Compression Test"@en ;
+    skos:definition """Ensaio em que o corpo de prova é submetido a tensão isotrópica crescente (σ1 = σ2 = σ3) com medição da deformação volumétrica. Caracteriza a compressibilidade da rocha e dos poros, fornecendo Cbc e Cpc usadas em modelos de compactação/subsidência e em correções de porosidade in-situ."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC064 a owl:Class ;
+    skos:prefLabel "Ensaio Brasileiro (Tração)"@pt ;
+    skos:prefLabel "Brazilian Tensile Test"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "BR"@pt ;
+    skos:altLabel "Brazilian"@pt ;
+    skos:altLabel "Brazilian Tensile Test"@en ;
+    skos:definition """Ensaio de tração indireta no qual um disco de rocha é comprimido entre dois pratos diametralmente opostos, induzindo tração no plano central. A resistência à tração σt é calculada a partir da carga de ruptura e da geometria do corpo de prova (norma ISRM). Fornece dado primário para calibração de envoltórias de ruptura e cálculo de pressão de quebra em fraturamento."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC065 a owl:Class ;
+    skos:prefLabel "Ensaio Oedométrico"@pt ;
+    skos:prefLabel "Oedometric Test"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Oedo"@pt ;
+    skos:altLabel "Oedometric Test"@en ;
+    skos:definition """Compressão uniaxial sob deformação lateral nula (condição K0): o corpo de prova é confinado em um anel rígido e tensionado axialmente em estágios. Fornece a compressibilidade de poros uniaxial (Cpu/Cm), parâmetro chave para modelagem de compactação de reservatório e subsidência em campos clásticos."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC066 a owl:Class ;
+    skos:prefLabel "Ensaio TWC (Thick-Walled Cylinder)"@pt ;
+    skos:prefLabel "Thick-Walled Cylinder Test"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "TWC"@pt ;
+    skos:altLabel "Thick-Walled Cylinder Test"@en ;
+    skos:definition """Ensaio em corpo de prova cilíndrico oco submetido simultaneamente a pressão externa e (opcionalmente) interna, simulando o estado de tensões no entorno de um poço aberto. Mede a pressão crítica de colapso da parede interna e é o ensaio padrão de laboratório para avaliação de risco de produção de areia (sanding) em arenitos pouco consolidados."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC067 a owl:Class ;
+    skos:prefLabel "Ensaio de Volume Poroso"@pt ;
+    skos:prefLabel "Pore Volume Analysis"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "PVA"@pt ;
+    skos:altLabel "Pore Volume Analysis"@en ;
+    skos:definition """Conjunto de ensaios laboratoriais para determinação do volume de poros e porosidade efetiva de plug de rocha — tipicamente por porosimetria a hélio ou método de saturação. Fornece o volume poroso de referência usado em ensaios de compressibilidade, permeabilidade e correções petrofísicas. Escopo formal pertence à Petrofísica; mantido aqui pelo acoplamento direto com ensaios geomecânicos (Hidrostático, Oedométrico)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC_ROP_A a owl:Class ;
+    skos:prefLabel "Taxa de Penetração"@pt ;
+    skos:prefLabel "Rate of Penetration"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ROP"@pt ;
+    skos:altLabel "taxa de penetração"@pt ;
+    skos:altLabel "taxa de perfuração"@pt ;
+    skos:altLabel "Rate of Penetration"@pt ;
+    skos:altLabel "velocidade de avanço"@pt ;
+    skos:altLabel "ROPm"@pt ;
+    skos:altLabel "Rate of Penetration"@en ;
+    skos:definition """Velocidade na qual a broca aprofunda o poço ao quebrar a rocha, geralmente expressa em metros por hora ou pés por minuto. No contexto operacional, a taxa de penetração influencia a geração de cascalhos no anular e pode afetar a ECD, a limpeza do poço, o risco de perda de circulação e a estabilidade operacional."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC_ROP_B a owl:Class ;
+    skos:prefLabel "Relatório de Operações de Perfilagem"@pt ;
+    skos:prefLabel "Well Logging Operations Report"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "ROP"@pt ;
+    skos:altLabel "Relatório de Operações de Perfilagem"@pt ;
+    skos:altLabel "Relatório de Operações de Perfilagens"@pt ;
+    skos:altLabel "ROP (documento)"@pt ;
+    skos:altLabel "logging operations report"@pt ;
+    skos:altLabel "Well Logging Operations Report"@en ;
+    skos:definition """Relatório operacional que registra informações referentes às operações de perfilagem a cabo e LWD realizadas em um poço, incluindo ferramentas utilizadas, intervalos de aquisição, tempos, curvas adquiridas, amostras de rocha ou fluido eventualmente coletadas e ocorrências relevantes."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC023A a owl:Class ;
+    skos:prefLabel "Ovalização do Poço"@pt ;
+    skos:prefLabel "Borehole Breakout"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Arrombamento do Poço"@pt ;
+    skos:altLabel "Arrombamento"@pt ;
+    skos:altLabel "Borehole Breakout"@pt ;
+    skos:altLabel "Breakout"@pt ;
+    skos:altLabel "Ovalização Compressiva"@pt ;
+    skos:altLabel "Quebra de Poço"@pt ;
+    skos:altLabel "Borehole Breakout Analysis"@pt ;
+    skos:altLabel "BO"@pt ;
+    skos:altLabel "Borehole Breakout"@en ;
+    skos:definition """Processo de análise de feições de ovalização do poço (também chamado arrombamento do poço) em perfis de imagem (BOL). Identifica zonas onde a tensão circunferencial excede a resistência compressiva da parede, gerando alargamento elíptico bimodal cujo eixo longo é perpendicular a SHmax (paralelo a Shmin). Métricas: AZIE, abertura angular, comprimento total. Insumo para magnitude de SHmax via modelo de integridade de Santos et al. (CT CMR 010/2015)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC023B a owl:Class ;
+    skos:prefLabel "Fratura Induzida por Perfuração"@pt ;
+    skos:prefLabel "Drilling-Induced Tensile Fracture"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "DITF"@pt ;
+    skos:altLabel "Drilling-Induced Tensile Fracture"@pt ;
+    skos:altLabel "Drilling-Induced Fracture"@pt ;
+    skos:altLabel "DIF"@pt ;
+    skos:altLabel "Fratura Induzida de Tração"@pt ;
+    skos:altLabel "DITF Analysis"@pt ;
+    skos:altLabel "Fratura Induzida"@pt ;
+    skos:altLabel "FIP"@pt ;
+    skos:altLabel "Drilling-Induced Tensile Fracture"@en ;
+    skos:definition """Processo de análise de fraturas induzidas pela perfuração (DITF/FIP) em perfil de imagem. Estas fraturas se formam quando a tensão circunferencial torna-se trativa e excede a resistência à tração da parede do poço. São sub-paralelas ao eixo do poço em poços verticais e paralelas à direção de SHmax (oposto dos breakouts). Reportadas como pares condutivos estreitos separados por 180° em image logs."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC023C a owl:Class ;
+    skos:prefLabel "Fratura Natural em Perfil de Imagem"@pt ;
+    skos:prefLabel "Natural Fracture (Image-based)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Natural Fracture (Image-based)"@pt ;
+    skos:altLabel "Fratura Natural (imagem)"@pt ;
+    skos:altLabel "Natural Fracture Analysis (image-based)"@pt ;
+    skos:altLabel "Natural Fracture (Image-based)"@en ;
+    skos:definition """Processo de análise de fraturas naturais (pré-existentes) em perfil de imagem. Distintas das DITFs por: (a) tipicamente cortarem o eixo do poço em ângulo, (b) propriedades hidráulico-mecânicas (FractureState) e tipologia tectônica (FaultType). Insumo para modelos de fluxo, integridade de capa e reativação."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC068 a owl:Class ;
+    skos:prefLabel "Feição de Ovalização do Poço"@pt ;
+    skos:prefLabel "Borehole Breakout (Observation)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Feição de Arrombamento do Poço"@pt ;
+    skos:altLabel "Arrombamento (feição)"@pt ;
+    skos:altLabel "Feição Borehole Breakout"@pt ;
+    skos:altLabel "Breakout (feição)"@pt ;
+    skos:altLabel "BO"@pt ;
+    skos:altLabel "Borehole Breakout (Observation)"@en ;
+    skos:definition """Feição estrutural observada na parede do poço em BOL: alargamento elíptico bimodal causado por falha compressiva, com eixo longo aproximadamente perpendicular a SHmax. Objeto observado — distinto do processo de análise (GEOMEC023A) que o detecta e quantifica."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC069 a owl:Class ;
+    skos:prefLabel "Feição de Fratura Induzida por Perfuração"@pt ;
+    skos:prefLabel "Drilling-Induced Tensile Fracture (Observation)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Feição DITF"@pt ;
+    skos:altLabel "DITF (feição)"@pt ;
+    skos:altLabel "Fratura Induzida (feição)"@pt ;
+    skos:altLabel "DITF"@pt ;
+    skos:altLabel "FIP"@pt ;
+    skos:altLabel "Drilling-Induced Tensile Fracture (Observation)"@en ;
+    skos:definition """Feição estrutural observada na parede do poço em BOL: fratura induzida por excedência da resistência à tração circunferencial. Sub-paralela ao eixo do poço em poços verticais e paralela à direção de SHmax. Distinta do processo de análise (GEOMEC023B)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC070 a owl:Class ;
+    skos:prefLabel "Feição de Fratura Natural"@pt ;
+    skos:prefLabel "Natural Fracture (Observation, image-based)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Fratura Natural (feição)"@pt ;
+    skos:altLabel "Natural Fracture (Observation, image-based)"@en ;
+    skos:definition """Fratura pré-existente na rocha, observada em perfil de imagem. Não é induzida pela perfuração. Atributos hidráulico-mecânicos via FractureState (GEOMEC079); tipo estrutural via FaultType (GEOMEC079A). DIP/DIPAZ referenciados de GFP004/GFP003 (módulo geomechanics-fractures)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC071 a owl:Class ;
+    skos:prefLabel "Feição de Acamamento"@pt ;
+    skos:prefLabel "Bedding (Observation)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Acamamento (feição)"@pt ;
+    skos:altLabel "Estratificação (feição)"@pt ;
+    skos:altLabel "Bedding (Observation)"@en ;
+    skos:definition """Feição estrutural sedimentar primária — superfície de estratificação observada em BOL. Distinta de fraturas. Caracterizada por DIP e DIPAZ (referenciados de GFP004/GFP003). Insumo para análise de mergulho (dip analysis) e referencial para POSTEF de DITFs (Parallel_to_Bedding / Perpendicular_to_Bedding)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC072 a owl:Class ;
+    skos:prefLabel "Interpretação de Perfil de Imagem"@pt ;
+    skos:prefLabel "Image Log Interpretation"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Análise de Perfil de Imagem"@pt ;
+    skos:altLabel "Interpretação BOL"@pt ;
+    skos:altLabel "Image Log Interpretation"@en ;
+    skos:definition """Processo guarda-chuva de interpretação de BOL (resistividade, acústico, óptico, densidade LWD). Gera múltiplas feições estruturais: Ovalização do Poço (GEOMEC068), Fratura Induzida por Perfuração (GEOMEC069), Fratura Natural (GEOMEC070) e Acamamento (GEOMEC071). Especializa-se em GEOMEC023A/B/C para feições específicas. Realizado em Geolog (GEOMEC074), Techlog ou SEST TR."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC073 a owl:Class ;
+    skos:prefLabel "BOL — Borehole Oriented Log"@pt ;
+    skos:prefLabel "Borehole Oriented Log"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Perfil de Imagem Orientado"@pt ;
+    skos:altLabel "Borehole Image Log Oriented"@pt ;
+    skos:altLabel "BOL"@pt ;
+    skos:altLabel "Borehole Oriented Log"@en ;
+    skos:definition """Perfil de imagem orientado no referencial do poço, usado como insumo para interpretação de breakouts, DITFs, fraturas naturais e acamamento. Tipo: Data Artifact / Log / Curve. NÃO é Document, NÃO é Process. Atributos livres: ImageQuality (float [0,1]), Class_BOL_Intervals (vocab aberto)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC074 a owl:Class ;
+    skos:prefLabel "Geolog"@pt ;
+    skos:prefLabel "Geolog (Paradigm/Emerson)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Geolog Paradigm"@pt ;
+    skos:altLabel "Geolog Emerson"@pt ;
+    skos:altLabel "Geolog (Paradigm/Emerson)"@en ;
+    skos:definition """Software externo usado para interpretação de perfil de imagem e análise de feições estruturais. Modelado como Tool externa, não sistema corporativo."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC075 a owl:Class ;
+    skos:prefLabel "AZIE — Azimute da Excentricidade"@pt ;
+    skos:prefLabel "Azimuth of Eccentricity"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "AZIE"@pt ;
+    skos:altLabel "Azimuth of Eccentricity"@en ;
+    skos:definition """Azimute do alongamento elíptico da seção do poço (orientação do breakout). Distinto de HAZI (Hole Azimuth = trajetória do eixo do poço). Separação essencial para inferência correta de SHmax — eixo longo do BO é perpendicular a SHmax, então AZIE ≈ azimute de Shmin."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC076 a owl:Class ;
+    skos:prefLabel "HAZI — Azimute do Poço"@pt ;
+    skos:prefLabel "Hole Azimuth (Borehole Drift Azimuth)"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "HAZI"@pt ;
+    skos:altLabel "Hole Azimuth (Borehole Drift Azimuth)"@en ;
+    skos:definition """Azimute da trajetória do poço (direção da projeção horizontal do eixo). Campo nativo de four-arm caliper. Equação de conversão para azimute do pad 1: P1AZ = HAZI + atan(tan(RB)/cos(DEVI))."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC077 a owl:Class ;
+    skos:prefLabel "Abertura Angular do Breakout"@pt ;
+    skos:prefLabel "Breakout Angular Opening"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Breakout Angular Opening"@en ;
+    skos:definition """Ângulo de abertura azimutal do breakout (largura angular do alargamento elíptico medida na seção do poço). Insumo para o modelo de integridade de poço de Santos et al. (CT CMR 010/2015) na estimativa de magnitude de SHmax (GEOMEC008)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC078 a owl:Class ;
+    skos:prefLabel "POSTEF — Posição da Fratura Induzida"@pt ;
+    skos:prefLabel "POSTEF — Induced Fracture Position"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "POSTEF"@pt ;
+    skos:altLabel "POSTEF — Induced Fracture Position"@en ;
+    skos:definition """Atributo orientacional que registra a posição relativa da DITF ao acamamento ou eixo do poço. Não mistura orientação com abertura, amplitude ou tipo de falha."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC079 a owl:Class ;
+    skos:prefLabel "FractureState — Estado de Fratura"@pt ;
+    skos:prefLabel "FractureState"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "FractureState"@en ;
+    skos:definition """Estado hidráulico-mecânico/imagético da fratura natural. "Falha" foi removido deste enum (tipologia de falha vai para GEOMEC079A FaultType). Amplitude (Low/High) é atributo sísmico/imagético; abertura (Open/Partially_Open/Closed/Cemented) é hidráulico/mecânico — coexistem."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC079A a owl:Class ;
+    skos:prefLabel "FaultType — Tipologia de Falha"@pt ;
+    skos:prefLabel "FaultType"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "FaultType"@en ;
+    skos:definition """Tipologia tectônica da falha natural (substitui boolean N/Y de "indicador de falha"). Ligada a Regime de Falhas (GEOMEC017) e Reativação de Falhas (GEOMEC018). Compatível com WSM_REGIME via Normal↔NF, Reverse↔TF, StrikeSlip↔SS."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC080 a owl:Class ;
+    skos:prefLabel "Sobrefuração com Alívio de Tensão"@pt ;
+    skos:prefLabel "Overcoring / Strain-Relief Measurement"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Overcoring"@pt ;
+    skos:altLabel "Sobrefuração"@pt ;
+    skos:altLabel "Alívio de Tensão"@pt ;
+    skos:altLabel "OC"@pt ;
+    skos:altLabel "Overcoring / Strain-Relief Measurement"@en ;
+    skos:definition """Técnica de medição direta do tensor de tensões in situ por alívio mecânico — perfura-se um core central, mede-se a deformação resultante e calcula-se a tensão. Métodos: Flat Jack (FJ), Doorstopper (DS), Triaxial Cell (TR). Reportado pelo WSM via campos S1AZ/S1PL/S2AZ/S2PL/S3AZ/S3PL."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC081 a owl:Class ;
+    skos:prefLabel "Eixos Principais de Tensão (P/B/T ou S1/S2/S3)"@pt ;
+    skos:prefLabel "Principal Stress Axes"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "P"@pt ;
+    skos:altLabel "B"@pt ;
+    skos:altLabel "T"@pt ;
+    skos:altLabel "S1"@pt ;
+    skos:altLabel "S2"@pt ;
+    skos:altLabel "S3"@pt ;
+    skos:altLabel "Principal Stress Axes"@en ;
+    skos:definition """Trio ortogonal de eixos onde o tensor de tensões é diagonal. Para FMS/GF*: P (compressão, ≈S1), B (intermediário, ≈S2), T (extensão, ≈S3). Para FMF/OC: diretamente S1, S2, S3 com S1≥S2≥S3 (compressão positiva). Reportados como trend/plunge nos campos WSM S1AZ/S1PL/S2AZ/S2PL/S3AZ/S3PL."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC082 a owl:Class ;
+    skos:prefLabel "Mecanismo Focal de Terremoto"@pt ;
+    skos:prefLabel "Single Focal Mechanism Solution"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "FMS"@pt ;
+    skos:altLabel "FM"@pt ;
+    skos:altLabel "Single Focal Mechanism Solution"@en ;
+    skos:definition """Solução de mecanismo focal de um único terremoto, definindo dois planos nodais perpendiculares e os eixos P/T/B. Sem identificar o plano de ruptura real, P-axis é proxy para SHmax. Por convenção WSM, FMS recebe no máximo qualidade C (±25°). Métodos: first motions (FM), moment tensor inversion (MI), amplitude ratio (AR)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC083 a owl:Class ;
+    skos:prefLabel "Inversão Formal de Mecanismos Focais"@pt ;
+    skos:prefLabel "Formal Stress Inversion of Focal Mechanisms"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "FMF"@pt ;
+    skos:altLabel "Formal Stress Inversion of Focal Mechanisms"@en ;
+    skos:definition """Inversão estatística de múltiplos FMs em região com campo de tensões assumido homogêneo. Retorna S1/S2/S3 que minimizam o misfit angle entre slip e máxima cisalhamento (hipótese Wallace–Bott). Algoritmos: Gephart & Forsyth (1984), Angelier (1979), Michael (1987), Rivera & Cisternas (1990)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC084 a owl:Class ;
+    skos:prefLabel "Esquema de Qualidade WSM 2025"@pt ;
+    skos:prefLabel "WSM 2025 Quality Ranking Scheme"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "WSM 2025 Quality Ranking Scheme"@en ;
+    skos:definition """Classificação A/B/C/D/E + X (Xmi/Xru/Xne) que torna comparáveis indicadores heterogêneos (BO em poço vs FMS em terremoto vs OC em mina). Função de número, comprimento e desvio padrão das observações. Apenas A–C confiáveis para análise de padrão de tensão. Definido em Tab 5-2, 6-1, 6-2 do TR 25-01."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC085 a owl:Class ;
+    skos:prefLabel "Estatística Circular Bimodal"@pt ;
+    skos:prefLabel "Bimodal Circular Statistics for BO/DIF"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "Bimodal Circular Statistics for BO/DIF"@en ;
+    skos:definition """Como SHmax ∈ [0°,180°), orientações de breakouts e DIFs são duplicadas (θ*=2θ) antes do cálculo da média (Mardia & Jupp 2000). WSM 2025 prefere média ponderada por comprimento. Saída: azimute médio θm = ½ arctan(S/C); desvio padrão σ₀ = (360/2π)·√(−½ ln R), com R=√(C²+S²)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC086 a owl:Class ;
+    skos:prefLabel "Inversão de Slip de Falha Geológica"@pt ;
+    skos:prefLabel "Geologic Fault-Slip Inversion"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "GFI"@pt ;
+    skos:altLabel "GFM"@pt ;
+    skos:altLabel "Geologic Fault-Slip Inversion"@en ;
+    skos:definition """Inversão de estrias e direções de slip em famílias de falhas para recuperar o tensor de tensões paleotectônico (ou recente, conforme janela temporal). GFM é a variante paleo-FM (P-axis a 30° do plano de falha)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:GEOMEC087 a owl:Class ;
+    skos:prefLabel "Alinhamento de Vents Vulcânicos"@pt ;
+    skos:prefLabel "Geologic Volcanic Vent Alignment"@en ;
+    geo:entityType "geomec_corporate" ;
+    skos:altLabel "GVA"@pt ;
+    skos:altLabel "Geologic Volcanic Vent Alignment"@en ;
+    skos:definition """Inferência da orientação de SHmax pelo alinhamento de centros eruptivos / diques, assumindo que diques se propagam em planos perpendiculares a Shmin (paralelos a SHmax)."""@pt ;
+    geo:geocoverage "layer6" .
+
 #
 # Object properties
 #
@@ -2698,8 +3731,8 @@ geo:delimited_in a owl:ObjectProperty ;
 geo:governed_by a owl:ObjectProperty ;
     rdfs:label "regido por"@pt ;
     rdfs:label "governed by"@en ;
-    rdfs:domain geo:bloco ;
-    rdfs:range geo:contrato-ep .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bloco geo:GEOMEC004 geo:GEOMEC018 geo:GEOMEC035 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:GEOMEC027 geo:GEOMEC005 geo:GEOMEC029 ) ] .
 
 geo:may_have a owl:ObjectProperty ;
     rdfs:label "pode ter"@pt ;
@@ -2782,8 +3815,8 @@ geo:submitted_to a owl:ObjectProperty ;
 geo:requires a owl:ObjectProperty ;
     rdfs:label "exige"@pt ;
     rdfs:label "requires"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:declaracao-comercialidade geo:ibama ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pem geo:plano-desenvolvimento geo:eia geo:rima ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:declaracao-comercialidade geo:ibama geo:GEOMEC015 geo:GEOMEC016 geo:GEOMEC019 geo:GEOMEC025 geo:GEOMEC027 geo:GEOMEC032 geo:GEOMEC033 geo:GEOMEC036 geo:GEOMEC037 geo:GEOMEC023A geo:GEOMEC023B ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pem geo:plano-desenvolvimento geo:eia geo:rima geo:GEOMEC003 geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC010 geo:GEOMEC017 geo:GEOMEC024 geo:GEOMEC047 geo:GEOMEC048 geo:GEOMEC030 geo:GEOMEC018 geo:GEOMEC016 geo:GEOMEC027 geo:GEOMEC002 geo:GEOMEC085 ) ] .
 
 geo:monitored_via a owl:ObjectProperty ;
     rdfs:label "acompanhado via"@pt ;
@@ -2836,8 +3869,8 @@ geo:includes a owl:ObjectProperty ;
 geo:enables a owl:ObjectProperty ;
     rdfs:label "habilita"@pt ;
     rdfs:label "enables"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:biomarcador geo:completacao ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:correlacao-oleo-rocha geo:campo ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:biomarcador geo:completacao geo:GEOMEC026B geo:GEOMEC027 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:correlacao-oleo-rocha geo:campo geo:GEOMEC003 geo:GEOMEC026B ) ] .
 
 geo:accompanied_by a owl:ObjectProperty ;
     rdfs:label "acompanhado por"@pt ;
@@ -2938,8 +3971,8 @@ geo:lifts_from a owl:ObjectProperty ;
 geo:measures a owl:ObjectProperty ;
     rdfs:label "mede em"@pt ;
     rdfs:label "measures"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mwd geo:perfil-poco ) ] ;
-    rdfs:range geo:poco .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mwd geo:perfil-poco geo:GEOMEC006 geo:GEOMEC022 geo:GEOMEC031 geo:GEOMEC061 geo:GEOMEC062 geo:GEOMEC063 geo:GEOMEC065 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC080 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:poco geo:GEOMEC002 geo:GEOMEC024 geo:GEOMEC042 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC005 geo:GEOMEC014 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC004 ) ] .
 
 geo:logs a owl:ObjectProperty ;
     rdfs:label "perfila"@pt ;
@@ -3028,8 +4061,8 @@ geo:delivers a owl:ObjectProperty ;
 geo:contains a owl:ObjectProperty ;
     rdfs:label "contém"@pt ;
     rdfs:label "contains"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa geo:completacao ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao geo:dhsv ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa geo:completacao geo:GEOMEC026A geo:GEOMEC026B ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao geo:dhsv geo:GEOMEC001 geo:GEOMEC003 geo:GEOMEC004 ) ] .
 
 geo:characterizes a owl:ObjectProperty ;
     rdfs:label "caracteriza"@pt ;
@@ -3070,8 +4103,8 @@ geo:declares a owl:ObjectProperty ;
 geo:derived_from a owl:ObjectProperty ;
     rdfs:label "deriva de"@pt ;
     rdfs:label "derived from"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador geo:bdp geo:igp geo:perfil-composto geo:rmg geo:ogeomec geo:rcsd geo:lessons-learned geo:pag geo:laudo-geomecanico ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido geo:qpg geo:bdp geo:pag geo:igp geo:wireline-run geo:lwd-run geo:cuttings-sample-detailed geo:frx geo:drx geo:formation-pressure-point geo:dst-interval geo:core-run geo:ogeomec geo:rmg geo:rcsd geo:gas-show-event ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador geo:bdp geo:igp geo:perfil-composto geo:rmg geo:ogeomec geo:rcsd geo:lessons-learned geo:pag geo:laudo-geomecanico geo:GEOMEC005 geo:GEOMEC013 geo:GEOMEC019 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido geo:qpg geo:bdp geo:pag geo:igp geo:wireline-run geo:lwd-run geo:cuttings-sample-detailed geo:frx geo:drx geo:formation-pressure-point geo:dst-interval geo:core-run geo:ogeomec geo:rmg geo:rcsd geo:gas-show-event geo:GEOMEC013 geo:GEOMEC011 geo:GEOMEC020 geo:GEOMEC073 ) ] .
 
 geo:spawns a owl:ObjectProperty ;
     rdfs:label "gera"@pt ;
@@ -3346,8 +4379,8 @@ geo:measurement_for a owl:ObjectProperty ;
 geo:related_to a owl:ObjectProperty ;
     rdfs:label "relacionado a"@pt ;
     rdfs:label "related to"@en ;
-    rdfs:domain geo:annular-fluid-type ;
-    rdfs:range geo:janela-lama .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:annular-fluid-type geo:GEOMEC014 geo:GEOMEC016 geo:GEOMEC023 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC053A geo:GEOMEC_ROP_A geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC072 geo:GEOMEC078 geo:GEOMEC079A geo:GEOMEC083 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:janela-lama geo:GEOMEC013 geo:GEOMEC007 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC053A geo:GEOMEC053B geo:GEOMEC023 geo:GEOMEC049 geo:GEOMEC051 geo:GEOMEC009 geo:GEOMEC075 geo:GEOMEC077 geo:GEOMEC078 geo:GEOMEC079 geo:GEOMEC079A geo:GEOMEC071 geo:GEOMEC017 geo:GEOMEC018 geo:GEOMEC082 ) ] .
 
 geo:jurisdiction_of a owl:ObjectProperty ;
     rdfs:label "jurisdição de"@pt ;
@@ -3448,8 +4481,8 @@ geo:executes_servico a owl:ObjectProperty ;
 geo:produces a owl:ObjectProperty ;
     rdfs:label "produz"@pt ;
     rdfs:label "produces"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation geo:retro-analysis ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto geo:laudo-geomecanico ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation geo:retro-analysis geo:GEOMEC004 geo:GEOMEC022 geo:GEOMEC025 geo:GEOMEC029 geo:GEOMEC035 geo:GEOMEC072 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto geo:laudo-geomecanico geo:GEOMEC016 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC014 geo:GEOMEC026B geo:GEOMEC004 geo:GEOMEC018 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 ) ] .
 
 geo:recorded_in a owl:ObjectProperty ;
     rdfs:label "registrado em"@pt ;
@@ -3508,8 +4541,8 @@ geo:queries a owl:ObjectProperty ;
 geo:requires_input a owl:ObjectProperty ;
     rdfs:label "requer como insumo"@pt ;
     rdfs:label "requires input"@en ;
-    rdfs:domain geo:laudo-geomecanico ;
-    rdfs:range geo:qpg .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:laudo-geomecanico geo:GEOMEC026B geo:GEOMEC033 geo:GEOMEC036 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:qpg geo:GEOMEC026A geo:GEOMEC010 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC073 ) ] .
 
 geo:references a owl:ObjectProperty ;
     rdfs:label "referenciado a"@pt ;
@@ -3540,6 +4573,156 @@ geo:involves_equipment a owl:ObjectProperty ;
     rdfs:label "involves equipment"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:event_spurious_dhsv geo:event_quick_pck_restriction geo:event_scaling_pck geo:event_hydrate_production geo:event_hydrate_service ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:dhsv geo:pck geo:anm geo:sp_pump ) ] .
+
+geo:influences a owl:ObjectProperty ;
+    rdfs:label "Tensão Mínima Horizontal"@pt ;
+    rdfs:label "influences"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC006 geo:GEOMEC007 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC013 geo:GEOMEC017 geo:GEOMEC023 geo:GEOMEC032 geo:GEOMEC034 geo:GEOMEC037 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC041 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC052B geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC075 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC005 geo:GEOMEC016 geo:GEOMEC018 geo:GEOMEC004 geo:GEOMEC021 geo:GEOMEC009 geo:GEOMEC008 geo:GEOMEC013 geo:GEOMEC001 geo:GEOMEC020 geo:GEOMEC019 geo:GEOMEC033 geo:GEOMEC041 ) ] .
+
+geo:is_part_of a owl:ObjectProperty ;
+    rdfs:label "Janela Operacional de Lama"@pt ;
+    rdfs:label "is part of"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC007 geo:GEOMEC008 geo:GEOMEC009 geo:GEOMEC019 geo:GEOMEC020 geo:GEOMEC037 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC040 geo:GEOMEC041 geo:GEOMEC042 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC052A geo:GEOMEC052B geo:GEOMEC053A geo:GEOMEC053B geo:GEOMEC061 geo:GEOMEC062 geo:GEOMEC063 geo:GEOMEC064 geo:GEOMEC065 geo:GEOMEC066 geo:GEOMEC067 geo:GEOMEC075 geo:GEOMEC077 geo:GEOMEC078 geo:GEOMEC079 geo:GEOMEC079A ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC003 geo:GEOMEC007 geo:GEOMEC002 geo:GEOMEC008 geo:GEOMEC004 geo:GEOMEC019 geo:GEOMEC036 geo:GEOMEC020 geo:GEOMEC006 geo:GEOMEC031 geo:GEOMEC015 geo:GEOMEC022 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 ) ] .
+
+geo:constrains a owl:ObjectProperty ;
+    rdfs:label "Densidade Equivalente de Circulação"@pt ;
+    rdfs:label "constrains"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC003 geo:GEOMEC006 geo:GEOMEC019 geo:GEOMEC020 geo:GEOMEC021 geo:GEOMEC036 geo:GEOMEC040 geo:GEOMEC041 geo:GEOMEC_ROP_A ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC019 geo:GEOMEC003 geo:GEOMEC018 geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC040 geo:GEOMEC052B ) ] .
+
+geo:defines_lower_bound a owl:ObjectProperty ;
+    rdfs:label "Janela Operacional de Lama"@pt ;
+    rdfs:label "defines lower bound"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC003 geo:GEOMEC009 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC003 geo:GEOMEC033 ) ] .
+
+geo:influenced_by a owl:ObjectProperty ;
+    rdfs:label "Compressibilidade de Poros"@pt ;
+    rdfs:label "influenced by"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC007 geo:GEOMEC008 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC014 geo:GEOMEC017 ) ] .
+
+geo:is_calculated_from a owl:ObjectProperty ;
+    rdfs:label "Pressão de Poros"@pt ;
+    rdfs:label "is calculated from"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC004 geo:GEOMEC005 geo:GEOMEC008 geo:GEOMEC009 geo:GEOMEC016 geo:GEOMEC021 geo:GEOMEC024 geo:GEOMEC036 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC010 geo:GEOMEC002 geo:GEOMEC014 geo:GEOMEC007 geo:GEOMEC012 geo:GEOMEC019 ) ] .
+
+geo:defines_upper_bound a owl:ObjectProperty ;
+    rdfs:label "Janela Operacional de Lama"@pt ;
+    rdfs:label "defines upper bound"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC053B ) ] ;
+    rdfs:range geo:GEOMEC003 .
+
+geo:is_specialization_of a owl:ObjectProperty ;
+    rdfs:label "Regime de Falhas"@pt ;
+    rdfs:label "is specialization of"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC004 geo:GEOMEC024 geo:GEOMEC031 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC017 geo:GEOMEC014 geo:GEOMEC006 ) ] .
+
+geo:co_measured_with a owl:ObjectProperty ;
+    rdfs:label "Módulo de Young"@pt ;
+    rdfs:label "co measured with"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC010 geo:GEOMEC011 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC011 geo:GEOMEC012 ) ] .
+
+geo:may_trigger a owl:ObjectProperty ;
+    rdfs:label "Reativação de Falhas Geológicas"@pt ;
+    rdfs:label "may trigger"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC016 geo:GEOMEC018 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC018 geo:GEOMEC016 ) ] .
+
+geo:is_risk_for a owl:ObjectProperty ;
+    rdfs:label "Estabilidade de Poço / Geohazards (falhas ativas na trajetória)"@pt ;
+    rdfs:label "is risk for"@en ;
+    rdfs:domain geo:GEOMEC018 ;
+    rdfs:range geo:GEOMEC015 .
+
+geo:calibrates a owl:ObjectProperty ;
+    rdfs:label "Módulo de Young dinâmico → estático (conversão Edyn → Est)"@pt ;
+    rdfs:label "calibrates"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC022 geo:GEOMEC031 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC011 geo:GEOMEC030 ) ] .
+
+geo:estimates a owl:ObjectProperty ;
+    rdfs:label "Magnitude de SHmax (via retroanálise Barton-Zoback)"@pt ;
+    rdfs:label "estimates"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC023 geo:GEOMEC030 geo:GEOMEC042 geo:GEOMEC043 geo:GEOMEC053B geo:GEOMEC023A geo:GEOMEC082 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC008 geo:GEOMEC002 geo:GEOMEC001 geo:GEOMEC017 ) ] .
+
+geo:is_input_for a owl:ObjectProperty ;
+    rdfs:label "Estabilidade de Poço (calibração do modelo geomecânico)"@pt ;
+    rdfs:label "is input for"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC023 geo:GEOMEC026A geo:GEOMEC035 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC066 geo:GEOMEC_ROP_B geo:GEOMEC023C geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC073 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC017 geo:GEOMEC026B geo:GEOMEC036 geo:GEOMEC025 geo:GEOMEC026A geo:GEOMEC018 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 ) ] .
+
+geo:monitors a owl:ObjectProperty ;
+    rdfs:label "Estabilidade de Poço / Eventos Geomecânicos (em tempo real)"@pt ;
+    rdfs:label "monitors"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC025 geo:GEOMEC028 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC019 geo:GEOMEC045 geo:GEOMEC050 geo:GEOMEC018 ) ] .
+
+geo:supports a owl:ObjectProperty ;
+    rdfs:label "MPD — via CSD MPD dedicado"@pt ;
+    rdfs:label "supports"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC025 geo:GEOMEC_ROP_B ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC015 ) ] .
+
+geo:formalizes a owl:ObjectProperty ;
+    rdfs:label "Análise de Geohazards — documento formal para GEP e ANP"@pt ;
+    rdfs:label "formalizes"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC026B geo:GEOMEC031 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC027 ) ] .
+
+geo:computes a owl:ObjectProperty ;
+    rdfs:label "Estado de Tensões In Situ (solução numérica 3D)"@pt ;
+    rdfs:label "computes"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC028 geo:GEOMEC030 geo:GEOMEC080 geo:GEOMEC081 geo:GEOMEC082 geo:GEOMEC083 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC004 geo:GEOMEC016 geo:GEOMEC014 geo:GEOMEC081 geo:GEOMEC008 geo:GEOMEC002 geo:GEOMEC007 geo:GEOMEC017 ) ] .
+
+geo:used_with a owl:ObjectProperty ;
+    rdfs:label "GERESIM (pré/pós-processamento e interface com simulador de fluxo)"@pt ;
+    rdfs:label "used with"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC028 geo:GEOMEC029 geo:GEOMEC031 geo:GEOMEC052A geo:GEOMEC072 geo:GEOMEC074 geo:GEOMEC077 geo:GEOMEC085 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC029 geo:GEOMEC030 geo:GEOMEC028 geo:GEOMEC034 geo:GEOMEC052B geo:GEOMEC074 geo:GEOMEC072 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC008 ) ] .
+
+geo:storage_for a owl:ObjectProperty ;
+    rdfs:label "IMGR — repositório SIRR para modelos geomecânicos validados"@pt ;
+    rdfs:label "storage for"@en ;
+    rdfs:domain geo:GEOMEC029 ;
+    rdfs:range geo:GEOMEC027 .
+
+geo:preceded_by a owl:ObjectProperty ;
+    rdfs:label "XLOT / Mini-frac / Micro-TI — testes de calibração pré-fraturamento"@pt ;
+    rdfs:label "preceded by"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC033 geo:GEOMEC053A ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC031 geo:GEOMEC042 ) ] .
+
+geo:performed_by a owl:ObjectProperty ;
+    rdfs:label "MPD — testes realizados com o sistema de contrapressão MPD"@pt ;
+    rdfs:label "performed by"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC034 geo:GEOMEC035 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC028 ) ] .
+
+geo:amplifies a owl:ObjectProperty ;
+    rdfs:label "Densidade Equivalente de Circulação"@pt ;
+    rdfs:label "amplifies"@en ;
+    rdfs:domain geo:GEOMEC_ROP_A ;
+    rdfs:range geo:GEOMEC019 .
+
+geo:may_contribute_to a owl:ObjectProperty ;
+    rdfs:label "Prisão de Coluna"@pt ;
+    rdfs:label "may contribute to"@en ;
+    rdfs:domain geo:GEOMEC_ROP_A ;
+    rdfs:range geo:GEOMEC045 .
+
+geo:may_reference a owl:ObjectProperty ;
+    rdfs:label "Breakouts e Fraturas Induzidas"@pt ;
+    rdfs:label "may reference"@en ;
+    rdfs:domain geo:GEOMEC_ROP_B ;
+    rdfs:range geo:GEOMEC023 .
 
 #
 # Edges (instance-level relation triples)
@@ -3915,6 +5098,287 @@ geo:event_hydrate_production geo:occurs_in geo:poco .
 geo:event_hydrate_service geo:occurs_in geo:poco .
 geo:event_hydrate_production geo:involves_equipment geo:anm .
 geo:event_hydrate_service geo:involves_equipment geo:sp_pump .
+geo:GEOMEC001 geo:influences geo:GEOMEC002 .
+geo:GEOMEC001 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC001 geo:influences geo:GEOMEC005 .
+geo:GEOMEC001 geo:constrains geo:GEOMEC019 .
+geo:GEOMEC001 geo:defines_lower_bound geo:GEOMEC003 .
+geo:GEOMEC001 geo:influenced_by geo:GEOMEC014 .
+geo:GEOMEC001 geo:influences geo:GEOMEC016 .
+geo:GEOMEC001 geo:influences geo:GEOMEC018 .
+geo:GEOMEC002 geo:is_calculated_from geo:GEOMEC001 .
+geo:GEOMEC002 geo:constrains geo:GEOMEC003 .
+geo:GEOMEC002 geo:defines_upper_bound geo:GEOMEC003 .
+geo:GEOMEC002 geo:influenced_by geo:GEOMEC017 .
+geo:GEOMEC002 geo:constrains geo:GEOMEC018 .
+geo:GEOMEC003 geo:constrains geo:GEOMEC019 .
+geo:GEOMEC003 geo:defines_lower_bound geo:GEOMEC033 .
+geo:GEOMEC004 geo:is_calculated_from geo:GEOMEC001 .
+geo:GEOMEC004 geo:is_part_of geo:GEOMEC007 .
+geo:GEOMEC004 geo:is_part_of geo:GEOMEC002 .
+geo:GEOMEC004 geo:is_part_of geo:GEOMEC008 .
+geo:GEOMEC004 geo:influences geo:GEOMEC005 .
+geo:GEOMEC004 geo:produces geo:GEOMEC016 .
+geo:GEOMEC004 geo:is_specialization_of geo:GEOMEC017 .
+geo:GEOMEC004 geo:governed_by geo:GEOMEC027 .
+geo:GEOMEC005 geo:is_calculated_from geo:GEOMEC001 .
+geo:GEOMEC005 geo:is_calculated_from geo:GEOMEC004 .
+geo:GEOMEC005 geo:derived_from geo:GEOMEC013 .
+geo:GEOMEC006 geo:constrains geo:GEOMEC003 .
+geo:GEOMEC006 geo:influences geo:GEOMEC004 .
+geo:GEOMEC006 geo:measures geo:GEOMEC002 .
+geo:GEOMEC007 geo:is_part_of geo:GEOMEC004 .
+geo:GEOMEC007 geo:influences geo:GEOMEC005 .
+geo:GEOMEC007 geo:influences geo:GEOMEC021 .
+geo:GEOMEC007 geo:influenced_by geo:GEOMEC017 .
+geo:GEOMEC008 geo:is_part_of geo:GEOMEC004 .
+geo:GEOMEC008 geo:is_calculated_from geo:GEOMEC010 .
+geo:GEOMEC008 geo:is_calculated_from geo:GEOMEC001 .
+geo:GEOMEC008 geo:is_calculated_from geo:GEOMEC002 .
+geo:GEOMEC008 geo:influenced_by geo:GEOMEC017 .
+geo:GEOMEC009 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC009 geo:is_calculated_from geo:GEOMEC010 .
+geo:GEOMEC009 geo:is_calculated_from geo:GEOMEC001 .
+geo:GEOMEC009 geo:is_calculated_from geo:GEOMEC004 .
+geo:GEOMEC009 geo:defines_lower_bound geo:GEOMEC003 .
+geo:GEOMEC010 geo:influences geo:GEOMEC009 .
+geo:GEOMEC010 geo:influences geo:GEOMEC008 .
+geo:GEOMEC010 geo:co_measured_with geo:GEOMEC011 .
+geo:GEOMEC011 geo:influences geo:GEOMEC013 .
+geo:GEOMEC011 geo:co_measured_with geo:GEOMEC012 .
+geo:GEOMEC012 geo:influences geo:GEOMEC002 .
+geo:GEOMEC012 geo:influences geo:GEOMEC013 .
+geo:GEOMEC013 geo:influences geo:GEOMEC005 .
+geo:GEOMEC013 geo:derived_from geo:GEOMEC011 .
+geo:GEOMEC014 geo:related_to geo:GEOMEC013 .
+geo:GEOMEC015 geo:requires geo:GEOMEC003 .
+geo:GEOMEC015 geo:requires geo:GEOMEC001 .
+geo:GEOMEC015 geo:requires geo:GEOMEC004 .
+geo:GEOMEC015 geo:requires geo:GEOMEC010 .
+geo:GEOMEC015 geo:requires geo:GEOMEC017 .
+geo:GEOMEC016 geo:is_calculated_from geo:GEOMEC014 .
+geo:GEOMEC016 geo:related_to geo:GEOMEC007 .
+geo:GEOMEC016 geo:may_trigger geo:GEOMEC018 .
+geo:GEOMEC016 geo:requires geo:GEOMEC024 .
+geo:GEOMEC017 geo:influences geo:GEOMEC018 .
+geo:GEOMEC018 geo:governed_by geo:GEOMEC005 .
+geo:GEOMEC018 geo:may_trigger geo:GEOMEC016 .
+geo:GEOMEC018 geo:is_risk_for geo:GEOMEC015 .
+geo:GEOMEC019 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC019 geo:constrains geo:GEOMEC001 .
+geo:GEOMEC019 geo:constrains geo:GEOMEC002 .
+geo:GEOMEC019 geo:derived_from geo:GEOMEC020 .
+geo:GEOMEC019 geo:requires geo:GEOMEC047 .
+geo:GEOMEC019 geo:requires geo:GEOMEC048 .
+geo:GEOMEC020 geo:constrains geo:GEOMEC019 .
+geo:GEOMEC020 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC020 geo:constrains geo:GEOMEC001 .
+geo:GEOMEC020 geo:constrains geo:GEOMEC002 .
+geo:GEOMEC021 geo:is_calculated_from geo:GEOMEC007 .
+geo:GEOMEC021 geo:constrains geo:GEOMEC003 .
+geo:GEOMEC022 geo:produces geo:GEOMEC010 .
+geo:GEOMEC022 geo:produces geo:GEOMEC011 .
+geo:GEOMEC022 geo:produces geo:GEOMEC012 .
+geo:GEOMEC022 geo:produces geo:GEOMEC014 .
+geo:GEOMEC022 geo:calibrates geo:GEOMEC011 .
+geo:GEOMEC022 geo:measures geo:GEOMEC024 .
+geo:GEOMEC023 geo:influences geo:GEOMEC008 .
+geo:GEOMEC023 geo:influences geo:GEOMEC002 .
+geo:GEOMEC023 geo:estimates geo:GEOMEC008 .
+geo:GEOMEC023 geo:is_input_for geo:GEOMEC015 .
+geo:GEOMEC023 geo:is_input_for geo:GEOMEC017 .
+geo:GEOMEC023 geo:related_to geo:GEOMEC023A .
+geo:GEOMEC023 geo:related_to geo:GEOMEC023B .
+geo:GEOMEC023 geo:related_to geo:GEOMEC023C .
+geo:GEOMEC024 geo:is_specialization_of geo:GEOMEC014 .
+geo:GEOMEC024 geo:is_calculated_from geo:GEOMEC012 .
+geo:GEOMEC025 geo:monitors geo:GEOMEC015 .
+geo:GEOMEC025 geo:produces geo:GEOMEC026B .
+geo:GEOMEC025 geo:monitors geo:GEOMEC019 .
+geo:GEOMEC025 geo:supports geo:GEOMEC020 .
+geo:GEOMEC025 geo:monitors geo:GEOMEC045 .
+geo:GEOMEC025 geo:monitors geo:GEOMEC050 .
+geo:GEOMEC025 geo:requires geo:GEOMEC030 .
+geo:GEOMEC026A geo:is_input_for geo:GEOMEC026B .
+geo:GEOMEC026A geo:contains geo:GEOMEC001 .
+geo:GEOMEC026A geo:contains geo:GEOMEC003 .
+geo:GEOMEC026A geo:is_input_for geo:GEOMEC015 .
+geo:GEOMEC026B geo:requires_input geo:GEOMEC026A .
+geo:GEOMEC026B geo:contains geo:GEOMEC001 .
+geo:GEOMEC026B geo:contains geo:GEOMEC004 .
+geo:GEOMEC026B geo:enables geo:GEOMEC003 .
+geo:GEOMEC026B geo:formalizes geo:GEOMEC015 .
+geo:GEOMEC027 geo:requires geo:GEOMEC018 .
+geo:GEOMEC027 geo:requires geo:GEOMEC016 .
+geo:GEOMEC027 geo:enables geo:GEOMEC026B .
+geo:GEOMEC028 geo:computes geo:GEOMEC004 .
+geo:GEOMEC028 geo:computes geo:GEOMEC016 .
+geo:GEOMEC028 geo:computes geo:GEOMEC014 .
+geo:GEOMEC028 geo:monitors geo:GEOMEC018 .
+geo:GEOMEC028 geo:used_with geo:GEOMEC029 .
+geo:GEOMEC028 geo:used_with geo:GEOMEC030 .
+geo:GEOMEC029 geo:used_with geo:GEOMEC028 .
+geo:GEOMEC029 geo:produces geo:GEOMEC026B .
+geo:GEOMEC029 geo:storage_for geo:GEOMEC027 .
+geo:GEOMEC030 geo:computes geo:GEOMEC004 .
+geo:GEOMEC030 geo:estimates geo:GEOMEC002 .
+geo:GEOMEC030 geo:estimates geo:GEOMEC001 .
+geo:GEOMEC031 geo:measures geo:GEOMEC002 .
+geo:GEOMEC031 geo:is_specialization_of geo:GEOMEC006 .
+geo:GEOMEC031 geo:calibrates geo:GEOMEC030 .
+geo:GEOMEC031 geo:formalizes geo:GEOMEC027 .
+geo:GEOMEC031 geo:measures geo:GEOMEC042 .
+geo:GEOMEC031 geo:used_with geo:GEOMEC034 .
+geo:GEOMEC032 geo:influences geo:GEOMEC002 .
+geo:GEOMEC032 geo:influences geo:GEOMEC001 .
+geo:GEOMEC032 geo:requires geo:GEOMEC027 .
+geo:GEOMEC033 geo:requires geo:GEOMEC002 .
+geo:GEOMEC033 geo:preceded_by geo:GEOMEC031 .
+geo:GEOMEC033 geo:requires_input geo:GEOMEC010 .
+geo:GEOMEC034 geo:influences geo:GEOMEC001 .
+geo:GEOMEC034 geo:influences geo:GEOMEC002 .
+geo:GEOMEC034 geo:performed_by geo:GEOMEC020 .
+geo:GEOMEC035 geo:performed_by geo:GEOMEC028 .
+geo:GEOMEC035 geo:governed_by geo:GEOMEC029 .
+geo:GEOMEC035 geo:produces geo:GEOMEC004 .
+geo:GEOMEC035 geo:governed_by geo:GEOMEC027 .
+geo:GEOMEC035 geo:is_input_for geo:GEOMEC026B .
+geo:GEOMEC035 geo:produces geo:GEOMEC016 .
+geo:GEOMEC035 geo:produces geo:GEOMEC018 .
+geo:GEOMEC036 geo:is_calculated_from geo:GEOMEC019 .
+geo:GEOMEC036 geo:constrains geo:GEOMEC003 .
+geo:GEOMEC036 geo:requires geo:GEOMEC047 .
+geo:GEOMEC036 geo:requires_input geo:GEOMEC038 .
+geo:GEOMEC036 geo:requires_input geo:GEOMEC039 .
+geo:GEOMEC037 geo:is_part_of geo:GEOMEC019 .
+geo:GEOMEC037 geo:influences geo:GEOMEC020 .
+geo:GEOMEC037 geo:requires geo:GEOMEC048 .
+geo:GEOMEC038 geo:is_part_of geo:GEOMEC036 .
+geo:GEOMEC038 geo:influences geo:GEOMEC019 .
+geo:GEOMEC038 geo:is_input_for geo:GEOMEC036 .
+geo:GEOMEC039 geo:is_part_of geo:GEOMEC036 .
+geo:GEOMEC039 geo:influences geo:GEOMEC019 .
+geo:GEOMEC039 geo:is_input_for geo:GEOMEC036 .
+geo:GEOMEC040 geo:is_part_of geo:GEOMEC020 .
+geo:GEOMEC040 geo:constrains geo:GEOMEC019 .
+geo:GEOMEC041 geo:is_part_of geo:GEOMEC020 .
+geo:GEOMEC041 geo:influences geo:GEOMEC019 .
+geo:GEOMEC041 geo:constrains geo:GEOMEC040 .
+geo:GEOMEC041 geo:constrains geo:GEOMEC052B .
+geo:GEOMEC042 geo:is_part_of geo:GEOMEC006 .
+geo:GEOMEC042 geo:estimates geo:GEOMEC002 .
+geo:GEOMEC043 geo:is_part_of geo:GEOMEC031 .
+geo:GEOMEC043 geo:influences geo:GEOMEC033 .
+geo:GEOMEC043 geo:estimates geo:GEOMEC002 .
+geo:GEOMEC043 geo:related_to geo:GEOMEC053A .
+geo:GEOMEC043 geo:related_to geo:GEOMEC053B .
+geo:GEOMEC044 geo:influences geo:GEOMEC009 .
+geo:GEOMEC044 geo:is_part_of geo:GEOMEC015 .
+geo:GEOMEC044 geo:related_to geo:GEOMEC023 .
+geo:GEOMEC045 geo:is_part_of geo:GEOMEC015 .
+geo:GEOMEC045 geo:influences geo:GEOMEC009 .
+geo:GEOMEC045 geo:related_to geo:GEOMEC049 .
+geo:GEOMEC045 geo:related_to geo:GEOMEC051 .
+geo:GEOMEC052A geo:is_part_of geo:GEOMEC020 .
+geo:GEOMEC052A geo:used_with geo:GEOMEC052B .
+geo:GEOMEC052B geo:is_part_of geo:GEOMEC020 .
+geo:GEOMEC052B geo:influences geo:GEOMEC041 .
+geo:GEOMEC053A geo:is_part_of geo:GEOMEC006 .
+geo:GEOMEC053A geo:preceded_by geo:GEOMEC042 .
+geo:GEOMEC053A geo:related_to geo:GEOMEC053B .
+geo:GEOMEC053B geo:is_part_of geo:GEOMEC006 .
+geo:GEOMEC053B geo:estimates geo:GEOMEC002 .
+geo:GEOMEC053B geo:defines_upper_bound geo:GEOMEC003 .
+geo:GEOMEC061 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC061 geo:measures geo:GEOMEC010 .
+geo:GEOMEC061 geo:measures geo:GEOMEC011 .
+geo:GEOMEC061 geo:measures geo:GEOMEC012 .
+geo:GEOMEC061 geo:measures geo:GEOMEC005 .
+geo:GEOMEC062 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC062 geo:measures geo:GEOMEC010 .
+geo:GEOMEC063 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC063 geo:measures geo:GEOMEC014 .
+geo:GEOMEC064 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC065 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC065 geo:measures geo:GEOMEC024 .
+geo:GEOMEC066 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC066 geo:is_input_for geo:GEOMEC015 .
+geo:GEOMEC067 geo:is_part_of geo:GEOMEC022 .
+geo:GEOMEC_ROP_A geo:amplifies geo:GEOMEC019 .
+geo:GEOMEC_ROP_A geo:constrains geo:GEOMEC003 .
+geo:GEOMEC_ROP_A geo:related_to geo:GEOMEC009 .
+geo:GEOMEC_ROP_A geo:may_contribute_to geo:GEOMEC045 .
+geo:GEOMEC_ROP_B geo:is_input_for geo:GEOMEC025 .
+geo:GEOMEC_ROP_B geo:is_input_for geo:GEOMEC026A .
+geo:GEOMEC_ROP_B geo:may_reference geo:GEOMEC023 .
+geo:GEOMEC_ROP_B geo:supports geo:GEOMEC015 .
+geo:GEOMEC023A geo:measures geo:GEOMEC068 .
+geo:GEOMEC023A geo:requires_input geo:GEOMEC073 .
+geo:GEOMEC023A geo:estimates geo:GEOMEC008 .
+geo:GEOMEC023A geo:influences geo:GEOMEC002 .
+geo:GEOMEC023A geo:requires geo:GEOMEC085 .
+geo:GEOMEC023B geo:measures geo:GEOMEC069 .
+geo:GEOMEC023B geo:requires_input geo:GEOMEC073 .
+geo:GEOMEC023B geo:influences geo:GEOMEC008 .
+geo:GEOMEC023B geo:requires geo:GEOMEC085 .
+geo:GEOMEC023C geo:measures geo:GEOMEC070 .
+geo:GEOMEC023C geo:requires_input geo:GEOMEC073 .
+geo:GEOMEC023C geo:is_input_for geo:GEOMEC018 .
+geo:GEOMEC068 geo:is_input_for geo:GEOMEC023A .
+geo:GEOMEC068 geo:derived_from geo:GEOMEC073 .
+geo:GEOMEC068 geo:influences geo:GEOMEC002 .
+geo:GEOMEC068 geo:related_to geo:GEOMEC075 .
+geo:GEOMEC068 geo:related_to geo:GEOMEC077 .
+geo:GEOMEC069 geo:is_input_for geo:GEOMEC023B .
+geo:GEOMEC069 geo:derived_from geo:GEOMEC073 .
+geo:GEOMEC069 geo:influences geo:GEOMEC008 .
+geo:GEOMEC069 geo:related_to geo:GEOMEC078 .
+geo:GEOMEC070 geo:is_input_for geo:GEOMEC023C .
+geo:GEOMEC070 geo:derived_from geo:GEOMEC073 .
+geo:GEOMEC070 geo:related_to geo:GEOMEC079 .
+geo:GEOMEC070 geo:related_to geo:GEOMEC079A .
+geo:GEOMEC071 geo:is_input_for geo:GEOMEC072 .
+geo:GEOMEC071 geo:derived_from geo:GEOMEC073 .
+geo:GEOMEC071 geo:related_to geo:GEOMEC078 .
+geo:GEOMEC072 geo:requires_input geo:GEOMEC073 .
+geo:GEOMEC072 geo:produces geo:GEOMEC068 .
+geo:GEOMEC072 geo:produces geo:GEOMEC069 .
+geo:GEOMEC072 geo:produces geo:GEOMEC070 .
+geo:GEOMEC072 geo:produces geo:GEOMEC071 .
+geo:GEOMEC072 geo:related_to geo:GEOMEC023A .
+geo:GEOMEC072 geo:related_to geo:GEOMEC023B .
+geo:GEOMEC072 geo:related_to geo:GEOMEC023C .
+geo:GEOMEC072 geo:used_with geo:GEOMEC074 .
+geo:GEOMEC073 geo:is_input_for geo:GEOMEC072 .
+geo:GEOMEC073 geo:is_input_for geo:GEOMEC023A .
+geo:GEOMEC073 geo:is_input_for geo:GEOMEC023B .
+geo:GEOMEC073 geo:is_input_for geo:GEOMEC023C .
+geo:GEOMEC074 geo:used_with geo:GEOMEC072 .
+geo:GEOMEC074 geo:used_with geo:GEOMEC023A .
+geo:GEOMEC074 geo:used_with geo:GEOMEC023B .
+geo:GEOMEC074 geo:used_with geo:GEOMEC023C .
+geo:GEOMEC075 geo:is_part_of geo:GEOMEC068 .
+geo:GEOMEC075 geo:influences geo:GEOMEC002 .
+geo:GEOMEC077 geo:is_part_of geo:GEOMEC068 .
+geo:GEOMEC077 geo:used_with geo:GEOMEC008 .
+geo:GEOMEC078 geo:is_part_of geo:GEOMEC069 .
+geo:GEOMEC078 geo:related_to geo:GEOMEC071 .
+geo:GEOMEC079 geo:is_part_of geo:GEOMEC070 .
+geo:GEOMEC079A geo:is_part_of geo:GEOMEC070 .
+geo:GEOMEC079A geo:related_to geo:GEOMEC017 .
+geo:GEOMEC079A geo:related_to geo:GEOMEC018 .
+geo:GEOMEC080 geo:measures geo:GEOMEC004 .
+geo:GEOMEC080 geo:computes geo:GEOMEC081 .
+geo:GEOMEC081 geo:computes geo:GEOMEC008 .
+geo:GEOMEC081 geo:computes geo:GEOMEC002 .
+geo:GEOMEC081 geo:computes geo:GEOMEC007 .
+geo:GEOMEC081 geo:computes geo:GEOMEC017 .
+geo:GEOMEC082 geo:computes geo:GEOMEC081 .
+geo:GEOMEC082 geo:estimates geo:GEOMEC017 .
+geo:GEOMEC083 geo:computes geo:GEOMEC081 .
+geo:GEOMEC083 geo:related_to geo:GEOMEC082 .
+geo:GEOMEC085 geo:used_with geo:GEOMEC023A .
+geo:GEOMEC085 geo:used_with geo:GEOMEC023B .
 
 #
 # Layer1 (GeoCore) ↔ Layer1b (GeoSciML + CGI Simple Lithology) equivalences
