@@ -675,7 +675,7 @@ export const EXTENDED_TERMS = [
     apareceEm: [],
     petrokgraph_uri: null,
     osdu_kind: "opendes:osdu:reference-data--DrillingMethodType:1.0.0",
-    geosciml_uri: "http://geosciml.org/def/gsmlbh#drillingMethod",
+    geosciml_uri: null,
     geocoverage: ["layer1b", "layer4"],
     synonyms_pt: ["método de perfuração", "técnica de perfuração"],
     synonyms_en: ["drilling method", "drilling technique"],
@@ -761,6 +761,7 @@ export const ENTITY_ALIGNMENT = {
   "sistema-deposicional": {
     kg: "#DepositionalSystem",
     osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
     layers: ["layer1", "layer1b", "layer2"],
   },
 
@@ -810,6 +811,7 @@ export const ENTITY_ALIGNMENT = {
   presal: {
     kg: "#PresaltLayer",
     osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
     layers: ["layer1", "layer1b", "layer2", "layer3", "layer5"],
   },
   "bacias-agrupadas": {

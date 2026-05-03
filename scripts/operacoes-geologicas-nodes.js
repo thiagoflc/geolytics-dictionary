@@ -221,6 +221,7 @@ export const OG_NODES = [
     superclass: "Mudlogging",
     synonyms_pt: ["show de gás", "indício de hidrocarboneto"],
     synonyms_en: ["gas show", "hydrocarbon show"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -252,6 +253,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "CuttingsSampling",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -267,6 +269,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "Coring",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -281,6 +284,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "Coring",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
     synonyms_pt: ["plugue", "plug de testemunho"],
     synonyms_en: ["core plug"],
@@ -298,6 +302,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "SidewallSampling",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
     synonyms_pt: ["SWC", "amostra lateral"],
     synonyms_en: ["sidewall core", "SWC"],
@@ -317,6 +322,7 @@ export const OG_NODES = [
     superclass: "MWD_LWD",
     synonyms_pt: ["LWD", "MWD", "Corrida MWD/LWD"],
     synonyms_en: ["LWD", "MWD", "Logging While Drilling", "Measurement While Drilling"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -334,6 +340,7 @@ export const OG_NODES = [
     superclass: "WirelineLogging",
     synonyms_pt: ["perfilagem a cabo", "wireline"],
     synonyms_en: ["wireline logging", "open-hole wireline run"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -351,6 +358,7 @@ export const OG_NODES = [
     superclass: "FormationTesting",
     synonyms_pt: ["RFT", "MDT", "MiniDST"],
     synonyms_en: ["RFT point", "MDT pretest"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -368,6 +376,7 @@ export const OG_NODES = [
     superclass: "FormationTesting",
     synonyms_pt: ["DST"],
     synonyms_en: ["Drill Stem Test"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {

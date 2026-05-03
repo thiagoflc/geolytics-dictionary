@@ -2669,17 +2669,25 @@ export const ONTOPETRO_ALIGNMENT = {
   "rocha-geradora": {
     kg: "#SourceRock",
     osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#RockMaterial",
     layers: ["layer1", "layer1b", "layer2", "layer3", "layer6"],
   },
   "rocha-capacitante": {
     kg: "#CapRock",
     osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#RockMaterial",
     layers: ["layer1", "layer1b", "layer2", "layer3"],
   },
-  trapa: { kg: "#PetroleumTrap", osdu: null, layers: ["layer1", "layer1b", "layer3", "layer7"] },
+  trapa: {
+    kg: "#PetroleumTrap",
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicStructure",
+    layers: ["layer1", "layer1b", "layer3", "layer7"],
+  },
   "sistema-petrolifero": {
     kg: "#PetroleumSystem",
     osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
     layers: ["layer1", "layer1b", "layer3", "layer7"],
   },
   acumulacao: {
@@ -2691,25 +2699,57 @@ export const ONTOPETRO_ALIGNMENT = {
   prospecto: { kg: "#Prospect", osdu: null, layers: ["layer1b", "layer3"] },
   recurso: { kg: "#Resource", osdu: null, layers: ["layer3", "layer5"] },
   reserva: { kg: "#Reserve", osdu: null, layers: ["layer3", "layer5"] },
-  falha: { kg: "#GeologicalFault", osdu: null, layers: ["layer1", "layer1b", "layer3", "layer7"] },
-  "idade-geologica": { kg: null, osdu: null, layers: ["layer1", "layer1b", "layer3", "layer7"] },
-  "intervalo-estratigrafico": { kg: null, osdu: null, layers: ["layer1b", "layer4", "layer6"] },
-  testemunho: { kg: "#Core", osdu: null, layers: ["layer1b", "layer4", "layer6"] },
+  falha: {
+    kg: "#GeologicalFault",
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+    layers: ["layer1", "layer1b", "layer3", "layer7"],
+  },
+  "idade-geologica": {
+    kg: null,
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicEvent",
+    layers: ["layer1", "layer1b", "layer3", "layer7"],
+  },
+  "intervalo-estratigrafico": {
+    kg: null,
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
+    layers: ["layer1b", "layer4", "layer6"],
+  },
+  testemunho: {
+    kg: "#Core",
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
+    layers: ["layer1b", "layer4", "layer6"],
+  },
   "perfil-poco": {
     kg: "#WellLog",
     osdu: "opendes:osdu:work-product-component--WellLog:1.0.0",
+    gsml: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     layers: ["layer1b", "layer3", "layer4", "layer6"],
   },
-  "materia-organica": { kg: null, osdu: null, layers: ["layer1b", "layer3", "layer6"] },
+  "materia-organica": {
+    kg: null,
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#RockMaterial",
+    layers: ["layer1b", "layer3", "layer6"],
+  },
   "maturidade-termal": { kg: null, osdu: null, layers: ["layer1b", "layer3", "layer6"] },
   biomarcador: { kg: null, osdu: null, layers: ["layer6"] },
   "correlacao-oleo-rocha": { kg: null, osdu: null, layers: ["layer6"] },
   litologia: {
     kg: "#Lithology",
     osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#RockMaterial",
     layers: ["layer1", "layer1b", "layer2", "layer3", "layer6"],
   },
-  "facies-sedimentar": { kg: null, osdu: null, layers: ["layer1b", "layer2", "layer6"] },
+  "facies-sedimentar": {
+    kg: null,
+    osdu: null,
+    gsml: "http://geosciml.org/def/gsmlb#GeologicUnit",
+    layers: ["layer1b", "layer2", "layer6"],
+  },
   "modelo-petrofisico": { kg: null, osdu: null, layers: ["layer6"] },
   "campo-tensional": { kg: null, osdu: null, layers: ["layer1b", "layer6"] },
   "janela-lama": { kg: null, osdu: null, layers: ["layer6"] },
@@ -3069,16 +3109,19 @@ export const OSDU_ALIGNMENT_ADDITIONS = {
   wellbore: {
     kg: null,
     osdu: "opendes:osdu:master-data--Wellbore:1.0.0",
+    gsml: "http://geosciml.org/def/gsmlbh#Borehole",
     layers: ["layer1b", "layer2", "layer3", "layer4"],
   },
   "topo-formacional": {
     kg: null,
     osdu: "opendes:osdu:work-product-component--WellboreMarker:1.0.0",
+    gsml: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     layers: ["layer1b", "layer2", "layer3", "layer4"],
   },
   "trajetoria-poco": {
     kg: null,
     osdu: "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
+    gsml: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     layers: ["layer1b", "layer3", "layer4"],
   },
   "unidade-medida": {
@@ -3090,6 +3133,7 @@ export const OSDU_ALIGNMENT_ADDITIONS = {
   litologia: {
     kg: "#Lithology",
     osdu: "opendes:osdu:reference-data--LithologyType:1.0.0",
+    gsml: "http://geosciml.org/def/gsmlb#RockMaterial",
     layers: ["layer1", "layer1b", "layer2", "layer3", "layer4", "layer6"],
   },
   "classe-fluido": {
@@ -3105,6 +3149,7 @@ export const OSDU_ALIGNMENT_ADDITIONS = {
   "perfil-poco": {
     kg: "#WellLog",
     osdu: "opendes:osdu:work-product-component--WellLog:1.0.0",
+    gsml: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     layers: ["layer1b", "layer3", "layer4", "layer6"],
   },
 };
