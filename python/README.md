@@ -174,31 +174,31 @@ dictionary_tool = FunctionTool.from_defaults(
 
 The package ships with data bundled in `geobrain/_data/`:
 
-| File | Description |
-|------|-------------|
-| `full.json` | Complete dictionary: glossary, extended terms, acronyms, ontology map |
-| `entity-graph.json` | Knowledge graph nodes and edges |
-| `taxonomies.json` | Canonical taxonomies (SPE-PRMS, lithology, well types, etc.) |
-| `sweet-alignment.json` | SWEET ontology alignments for Geolytics terms |
-| `witsml-rdf-crosswalk.json` | WITSML to RDF crosswalk |
-| `prodml-rdf-crosswalk.json` | ProdML to RDF crosswalk |
-| `rag-corpus.jsonl` | BM25-indexed RAG corpus |
+| File                        | Description                                                           |
+| --------------------------- | --------------------------------------------------------------------- |
+| `full.json`                 | Complete dictionary: glossary, extended terms, acronyms, ontology map |
+| `entity-graph.json`         | Knowledge graph nodes and edges                                       |
+| `taxonomies.json`           | Canonical taxonomies (SPE-PRMS, lithology, well types, etc.)          |
+| `sweet-alignment.json`      | SWEET ontology alignments for Geolytics terms                         |
+| `witsml-rdf-crosswalk.json` | WITSML to RDF crosswalk                                               |
+| `prodml-rdf-crosswalk.json` | ProdML to RDF crosswalk                                               |
+| `rag-corpus.jsonl`          | BM25-indexed RAG corpus                                               |
 
 ## Validation Rules
 
 The `Validator` implements deterministic rules with parity to `scripts/semantic-validator.js`:
 
-| Rule ID | Severity | Description |
-|---------|----------|-------------|
-| `SPE_PRMS_INVALID_CATEGORY` | error | Flags non-standard categories (4P, 5P, etc.). Valid: 1P, 2P, 3P, C1C, C2C, C3C |
-| `RESERVA_AMBIGUITY` | warning | Detects mixed O&G and environmental reserve signals in the same text |
-| `REGIME_CONTRATUAL_INVALID` | error | Flags regimes other than Concessao, Partilha de Producao, Cessao Onerosa |
-| `TIPO_POCO_INVALID` | error | Validates ANP well code prefixes (1-, 2-, 3-, 4-, 6-, 7-) |
-| `LITOLOGIA_INVALID` | warning | Checks lithology values against CGI/GeoSciML taxonomy |
-| `JANELA_GERACAO_INVALID` | warning | Validates maturity window terms against the generation window taxonomy |
-| `ACRONYM_AMBIGUOUS` | warning | Flags known-ambiguous acronyms (PAD, UTS, GAS, BOP, etc.) without disambiguation context |
-| `OSDU_KIND_FORMAT` | error | Validates OSDU kind strings against `opendes:osdu:<domain>--<Type>:<semver>` |
-| `LAYER_COVERAGE_MISMATCH` | warning | Checks entity geocoverage against asserted ontology layer |
+| Rule ID                     | Severity | Description                                                                              |
+| --------------------------- | -------- | ---------------------------------------------------------------------------------------- |
+| `SPE_PRMS_INVALID_CATEGORY` | error    | Flags non-standard categories (4P, 5P, etc.). Valid: 1P, 2P, 3P, C1C, C2C, C3C           |
+| `RESERVA_AMBIGUITY`         | warning  | Detects mixed O&G and environmental reserve signals in the same text                     |
+| `REGIME_CONTRATUAL_INVALID` | error    | Flags regimes other than Concessao, Partilha de Producao, Cessao Onerosa                 |
+| `TIPO_POCO_INVALID`         | error    | Validates ANP well code prefixes (1-, 2-, 3-, 4-, 6-, 7-)                                |
+| `LITOLOGIA_INVALID`         | warning  | Checks lithology values against CGI/GeoSciML taxonomy                                    |
+| `JANELA_GERACAO_INVALID`    | warning  | Validates maturity window terms against the generation window taxonomy                   |
+| `ACRONYM_AMBIGUOUS`         | warning  | Flags known-ambiguous acronyms (PAD, UTS, GAS, BOP, etc.) without disambiguation context |
+| `OSDU_KIND_FORMAT`          | error    | Validates OSDU kind strings against `opendes:osdu:<domain>--<Type>:<semver>`             |
+| `LAYER_COVERAGE_MISMATCH`   | warning  | Checks entity geocoverage against asserted ontology layer                                |
 
 ## License
 

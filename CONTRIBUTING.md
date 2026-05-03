@@ -49,17 +49,20 @@ Use o template **Feature request**. Para mudan√ßas grandes (novas camadas ontol√
 ### Setup local
 
 **Python (SDK em `python/`):**
+
 ```
 cd python
 pip install -e ".[graph,rag,validator,dev]"
 ```
 
 **Node (scripts + MCP):**
+
 ```
 cd mcp/geobrain-mcp && npm ci
 ```
 
 **Pre-commit hooks:**
+
 ```
 pip install pre-commit
 pre-commit install

@@ -15,7 +15,7 @@ repos:
       - id: end-of-file-fixer
         exclude: ^(data/|api/v1/|build/)
       - id: check-yaml
-        args: ["--unsafe"]  # allow custom GH Actions tags
+        args: ["--unsafe"] # allow custom GH Actions tags
       - id: check-json
         exclude: ^(data/|api/v1/|ai/)
       - id: check-toml
@@ -31,8 +31,10 @@ repos:
     hooks:
       - id: ruff
         args: ["--fix", "--config=python/pyproject.toml"]
+        files: ^python/
       - id: ruff-format
         args: ["--config=python/pyproject.toml"]
+        files: ^python/
 
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v4.0.0-alpha.8

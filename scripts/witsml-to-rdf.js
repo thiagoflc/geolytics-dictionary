@@ -19,26 +19,26 @@
  *   const ttl = convert(xmlString, options);  // options.baseUri overrides default
  */
 
-'use strict';
+"use strict";
 
-const fs   = require('node:fs');
-const path = require('node:path');
+const fs = require("node:fs");
+const path = require("node:path");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Paths
 // ─────────────────────────────────────────────────────────────────────────────
 
-const ROOT         = path.resolve(__dirname, '..');
-const CROSSWALK_PATH = path.join(ROOT, 'data', 'witsml-rdf-crosswalk.json');
-const SAMPLE_PATH  = path.join(ROOT, 'data', 'witsml-sample.xml');
+const ROOT = path.resolve(__dirname, "..");
+const CROSSWALK_PATH = path.join(ROOT, "data", "witsml-rdf-crosswalk.json");
+const SAMPLE_PATH = path.join(ROOT, "data", "witsml-sample.xml");
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Default base URI for generated instances
 // ─────────────────────────────────────────────────────────────────────────────
 
-const DEFAULT_BASE_URI = 'https://geolytics.petrobras.com.br/dict/instance/';
-const GEO_PREFIX       = 'https://geolytics.petrobras.com.br/dict/';
-const ENERGISTICS_NS   = 'http://www.energistics.org/energyml/data/witsmlv2/2.0#';
+const DEFAULT_BASE_URI = "https://geolytics.petrobras.com.br/dict/instance/";
+const GEO_PREFIX = "https://geolytics.petrobras.com.br/dict/";
+const ENERGISTICS_NS = "http://www.energistics.org/energyml/data/witsmlv2/2.0#";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // Load crosswalk (lazy, cached)
@@ -51,7 +51,7 @@ function loadCrosswalk() {
   if (!fs.existsSync(CROSSWALK_PATH)) {
     throw new Error(`Crosswalk not found: ${CROSSWALK_PATH}`);
   }
-  _crosswalkCache = JSON.parse(fs.readFileSync(CROSSWALK_PATH, 'utf8'));
+  _crosswalkCache = JSON.parse(fs.readFileSync(CROSSWALK_PATH, "utf8"));
   return _crosswalkCache;
 }
 
@@ -81,7 +81,7 @@ function buildClassIndex(crosswalk) {
  */
 function extractChild(xml, name) {
   // Match <name ...>value</name> or <name ...>value</NAME> (case-sensitive tag)
-  const re = new RegExp(`<${name}(?:\\s[^>]*)?>(.*?)<\\/${name}>`, 's');
+  const re = new RegExp(`<${name}(?:\\s[^>]*)?>(.*?)<\\/${name}>`, "s");
   const m = re.exec(xml);
   if (!m) return null;
   return m[1].trim();
@@ -101,7 +101,7 @@ function extractUid(tag) {
  */
 function extractAllBlocks(xml, tagName) {
   const results = [];
-  const openTag = new RegExp(`<${tagName}(?:\\s[^>]*)?>`, 'g');
+  const openTag = new RegExp(`<${tagName}(?:\\s[^>]*)?>`, "g");
   const closeTag = `</${tagName}>`;
   let match;
   while ((match = openTag.exec(xml)) !== null) {
@@ -109,7 +109,11 @@ function extractAllBlocks(xml, tagName) {
     const innerStart = start + match[0].length;
     const end = xml.indexOf(closeTag, innerStart);
     if (end === -1) continue;
-    results.push({ outer: xml.slice(start, end + closeTag.length), inner: xml.slice(innerStart, end), openTag: match[0] });
+    results.push({
+      outer: xml.slice(start, end + closeTag.length),
+      inner: xml.slice(innerStart, end),
+      openTag: match[0],
+    });
   }
   return results;
 }
@@ -121,17 +125,34 @@ function extractAllBlocks(xml, tagName) {
 function parseTopLevelElements(xml) {
   // Strip XML declaration and root wrapper
   const stripped = xml
-    .replace(/<\?xml[^?]*\?>/g, '')
-    .replace(/<!--[\s\S]*?-->/g, '')
-    .replace(/<WitsmlObjects[^>]*>/, '')
-    .replace(/<\/WitsmlObjects>/, '');
+    .replace(/<\?xml[^?]*\?>/g, "")
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<WitsmlObjects[^>]*>/, "")
+    .replace(/<\/WitsmlObjects>/, "");
 
   const knownTopLevel = [
-    'Well', 'Wellbore', 'Trajectory', 'WellboreMarker', 'FormationMarker',
-    'MudLog', 'MudLogReport', 'LogCurve', 'Channel', 'ChannelSet',
-    'Rig', 'BhaRun', 'Tubular', 'BitRecord', 'CementJob',
-    'FluidsReport', 'OpsReport', 'DrillingActivity', 'Risk',
-    'SurveyProgram', 'WellTest', 'StimJob',
+    "Well",
+    "Wellbore",
+    "Trajectory",
+    "WellboreMarker",
+    "FormationMarker",
+    "MudLog",
+    "MudLogReport",
+    "LogCurve",
+    "Channel",
+    "ChannelSet",
+    "Rig",
+    "BhaRun",
+    "Tubular",
+    "BitRecord",
+    "CementJob",
+    "FluidsReport",
+    "OpsReport",
+    "DrillingActivity",
+    "Risk",
+    "SurveyProgram",
+    "WellTest",
+    "StimJob",
   ];
 
   const elements = [];
@@ -171,7 +192,7 @@ function extractScalars(innerXml) {
  */
 function parseTrajectoryStations(innerXml) {
   const stations = [];
-  const blocks = extractAllBlocks(innerXml, 'trajectoryStation');
+  const blocks = extractAllBlocks(innerXml, "trajectoryStation");
   for (const { inner, openTag } of blocks) {
     const uid = extractUid(openTag);
     const props = extractScalars(inner);
@@ -193,7 +214,7 @@ function ttlPrefixed(prefix, local) {
 }
 
 function ttlLiteral(value, datatype) {
-  const escaped = String(value).replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n');
+  const escaped = String(value).replace(/\\/g, "\\\\").replace(/"/g, '\\"').replace(/\n/g, "\\n");
   if (datatype) {
     return `"${escaped}"^^<${datatype}>`;
   }
@@ -203,8 +224,8 @@ function ttlLiteral(value, datatype) {
 function slug(str) {
   return String(str)
     .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-|-$/g, '');
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-|-$/g, "");
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -229,45 +250,45 @@ const PREFIXES = `@prefix geo:   <${GEO_PREFIX}> .
 
 const XSD_TYPE_HINTS = {
   // Depths and distances
-  md: 'http://www.w3.org/2001/XMLSchema#decimal',
-  tvd: 'http://www.w3.org/2001/XMLSchema#decimal',
-  tvdss: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdTop: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdBottom: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdMin: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdMax: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdCurrent: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdBitRun: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdMn: 'http://www.w3.org/2001/XMLSchema#decimal',
-  mdMx: 'http://www.w3.org/2001/XMLSchema#decimal',
-  waterDepth: 'http://www.w3.org/2001/XMLSchema#decimal',
-  groundElevation: 'http://www.w3.org/2001/XMLSchema#decimal',
+  md: "http://www.w3.org/2001/XMLSchema#decimal",
+  tvd: "http://www.w3.org/2001/XMLSchema#decimal",
+  tvdss: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdTop: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdBottom: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdMin: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdMax: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdCurrent: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdBitRun: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdMn: "http://www.w3.org/2001/XMLSchema#decimal",
+  mdMx: "http://www.w3.org/2001/XMLSchema#decimal",
+  waterDepth: "http://www.w3.org/2001/XMLSchema#decimal",
+  groundElevation: "http://www.w3.org/2001/XMLSchema#decimal",
   // Angles
-  incl: 'http://www.w3.org/2001/XMLSchema#decimal',
-  azi: 'http://www.w3.org/2001/XMLSchema#decimal',
-  dipAngle: 'http://www.w3.org/2001/XMLSchema#decimal',
-  dipDirection: 'http://www.w3.org/2001/XMLSchema#decimal',
-  dls: 'http://www.w3.org/2001/XMLSchema#decimal',
+  incl: "http://www.w3.org/2001/XMLSchema#decimal",
+  azi: "http://www.w3.org/2001/XMLSchema#decimal",
+  dipAngle: "http://www.w3.org/2001/XMLSchema#decimal",
+  dipDirection: "http://www.w3.org/2001/XMLSchema#decimal",
+  dls: "http://www.w3.org/2001/XMLSchema#decimal",
   // Displacements
-  dispNs: 'http://www.w3.org/2001/XMLSchema#decimal',
-  dispEw: 'http://www.w3.org/2001/XMLSchema#decimal',
-  dispNsEnd: 'http://www.w3.org/2001/XMLSchema#decimal',
-  dispEwEnd: 'http://www.w3.org/2001/XMLSchema#decimal',
-  vertSect: 'http://www.w3.org/2001/XMLSchema#decimal',
+  dispNs: "http://www.w3.org/2001/XMLSchema#decimal",
+  dispEw: "http://www.w3.org/2001/XMLSchema#decimal",
+  dispNsEnd: "http://www.w3.org/2001/XMLSchema#decimal",
+  dispEwEnd: "http://www.w3.org/2001/XMLSchema#decimal",
+  vertSect: "http://www.w3.org/2001/XMLSchema#decimal",
   // Boolean
-  isActive: 'http://www.w3.org/2001/XMLSchema#boolean',
-  finalTraj: 'http://www.w3.org/2001/XMLSchema#boolean',
+  isActive: "http://www.w3.org/2001/XMLSchema#boolean",
+  finalTraj: "http://www.w3.org/2001/XMLSchema#boolean",
   // DateTime
-  dTimSpud: 'http://www.w3.org/2001/XMLSchema#dateTime',
-  dTimPa: 'http://www.w3.org/2001/XMLSchema#dateTime',
-  dTimTrajStart: 'http://www.w3.org/2001/XMLSchema#dateTime',
-  dTimTrajEnd: 'http://www.w3.org/2001/XMLSchema#dateTime',
-  dTimStn: 'http://www.w3.org/2001/XMLSchema#dateTime',
-  dTimKickoff: 'http://www.w3.org/2001/XMLSchema#dateTime',
+  dTimSpud: "http://www.w3.org/2001/XMLSchema#dateTime",
+  dTimPa: "http://www.w3.org/2001/XMLSchema#dateTime",
+  dTimTrajStart: "http://www.w3.org/2001/XMLSchema#dateTime",
+  dTimTrajEnd: "http://www.w3.org/2001/XMLSchema#dateTime",
+  dTimStn: "http://www.w3.org/2001/XMLSchema#dateTime",
+  dTimKickoff: "http://www.w3.org/2001/XMLSchema#dateTime",
 };
 
 function xsdTypeFor(propName) {
-  return XSD_TYPE_HINTS[propName] || 'http://www.w3.org/2001/XMLSchema#string';
+  return XSD_TYPE_HINTS[propName] || "http://www.w3.org/2001/XMLSchema#string";
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -283,7 +304,7 @@ function elementToTriples(tag, uid, props, classIdx, parentLinks) {
   const clsDef = classIdx[tag];
   if (!clsDef) return [];
 
-  const instUri = `inst:${slug(tag)}-${slug(uid || Object.values(props).join('-').slice(0, 20) || 'x')}`;
+  const instUri = `inst:${slug(tag)}-${slug(uid || Object.values(props).join("-").slice(0, 20) || "x")}`;
   const rdfClass = `geo:${clsDef.witsml_class}`;
   const witsmlUri = clsDef.witsml_uri;
 
@@ -308,31 +329,33 @@ function elementToTriples(tag, uid, props, classIdx, parentLinks) {
   }
 
   // Additional explicit parent links (e.g. trajectory → wellbore)
-  for (const [predicate, targetUri] of (parentLinks || [])) {
+  for (const [predicate, targetUri] of parentLinks || []) {
     triples.push(`    ${predicate} ${targetUri} ;`);
   }
 
   // Primitive properties — use crosswalk type hints where available, else XSD_TYPE_HINTS
   const propMap = {};
-  for (const pp of (clsDef.primitive_properties || [])) {
-    propMap[pp.name] = pp.type || 'xsd:string';
+  for (const pp of clsDef.primitive_properties || []) {
+    propMap[pp.name] = pp.type || "xsd:string";
   }
 
   for (const [key, val] of Object.entries(props)) {
-    if (['name', 'uidWell', 'uidWellbore', 'uid'].includes(key)) continue;
-    const xsdType = XSD_TYPE_HINTS[key] || 'http://www.w3.org/2001/XMLSchema#string';
+    if (["name", "uidWell", "uidWellbore", "uid"].includes(key)) continue;
+    const xsdType = XSD_TYPE_HINTS[key] || "http://www.w3.org/2001/XMLSchema#string";
     triples.push(`    geo:${key} ${ttlLiteral(val, xsdType)} ;`);
   }
 
   // prov:generatedAtTime for dateTime props
   if (props.dTimSpud || props.dTimTrajStart || props.dTimStn) {
     const dt = props.dTimSpud || props.dTimTrajStart || props.dTimStn;
-    triples.push(`    prov:generatedAtTime ${ttlLiteral(dt, 'http://www.w3.org/2001/XMLSchema#dateTime')} ;`);
+    triples.push(
+      `    prov:generatedAtTime ${ttlLiteral(dt, "http://www.w3.org/2001/XMLSchema#dateTime")} ;`
+    );
   }
 
   // Replace last ';' with '.'
   if (triples.length > 1) {
-    triples[triples.length - 1] = triples[triples.length - 1].replace(/;$/, '.');
+    triples[triples.length - 1] = triples[triples.length - 1].replace(/;$/, ".");
   }
 
   return triples;
@@ -351,13 +374,13 @@ function stationsToTriples(stations, trajectoryUri) {
     lines.push(`    geo:inTrajectory ${trajectoryUri} ;`);
 
     for (const [key, val] of Object.entries(stn.props)) {
-      const xsdType = XSD_TYPE_HINTS[key] || 'http://www.w3.org/2001/XMLSchema#string';
+      const xsdType = XSD_TYPE_HINTS[key] || "http://www.w3.org/2001/XMLSchema#string";
       lines.push(`    geo:${key} ${ttlLiteral(val, xsdType)} ;`);
     }
 
     // Replace last ';' with '.'
-    lines[lines.length - 1] = lines[lines.length - 1].replace(/;$/, '.');
-    lines.push('');
+    lines[lines.length - 1] = lines[lines.length - 1].replace(/;$/, ".");
+    lines.push("");
   }
   return lines;
 }
@@ -376,7 +399,7 @@ function stationsToTriples(stations, trajectoryUri) {
  */
 function convert(xmlString, options = {}) {
   const crosswalk = loadCrosswalk();
-  const classIdx  = buildClassIndex(crosswalk);
+  const classIdx = buildClassIndex(crosswalk);
 
   const elements = parseTopLevelElements(xmlString);
 
@@ -384,7 +407,7 @@ function convert(xmlString, options = {}) {
   allLines.push(`# Generated by witsml-to-rdf.js — ${new Date().toISOString()}`);
   allLines.push(`# Source standard: WITSML 2.0 (Energistics)`);
   allLines.push(`# Crosswalk: data/witsml-rdf-crosswalk.json`);
-  allLines.push('');
+  allLines.push("");
 
   const trajectoryUidToUri = {};
 
@@ -392,10 +415,10 @@ function convert(xmlString, options = {}) {
     const props = extractScalars(innerXml);
     if (uid) props.uid = uid;
 
-    const instSlug = `${slug(tag)}-${slug(uid || props.name || 'x')}`;
-    const instUri  = `inst:${instSlug}`;
+    const instSlug = `${slug(tag)}-${slug(uid || props.name || "x")}`;
+    const instUri = `inst:${instSlug}`;
 
-    if (tag === 'Trajectory') {
+    if (tag === "Trajectory") {
       // Record uri for station linking
       trajectoryUidToUri[uid] = instUri;
     }
@@ -404,11 +427,11 @@ function convert(xmlString, options = {}) {
 
     if (tripleLines.length > 1) {
       allLines.push(...tripleLines);
-      allLines.push('');
+      allLines.push("");
     }
 
     // For Trajectory, also emit its TrajectoryStation children
-    if (tag === 'Trajectory') {
+    if (tag === "Trajectory") {
       const stations = parseTrajectoryStations(innerXml);
       if (stations.length > 0) {
         const stationLines = stationsToTriples(stations, instUri);
@@ -417,7 +440,7 @@ function convert(xmlString, options = {}) {
     }
   }
 
-  return allLines.join('\n');
+  return allLines.join("\n");
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -434,10 +457,10 @@ if (require.main === module) {
       console.error(`Error: file not found: ${xmlPath}`);
       process.exit(1);
     }
-    xmlString = fs.readFileSync(xmlPath, 'utf8');
+    xmlString = fs.readFileSync(xmlPath, "utf8");
     console.error(`[witsml-to-rdf] Converting: ${xmlPath}`);
   } else if (fs.existsSync(SAMPLE_PATH)) {
-    xmlString = fs.readFileSync(SAMPLE_PATH, 'utf8');
+    xmlString = fs.readFileSync(SAMPLE_PATH, "utf8");
     console.error(`[witsml-to-rdf] No input file given — using embedded sample: ${SAMPLE_PATH}`);
   } else {
     // Minimal inline fallback if neither is available
@@ -457,7 +480,7 @@ if (require.main === module) {
     <tvdCurrent uom="m">4100.0</tvdCurrent>
   </Wellbore>
 </WitsmlObjects>`;
-    console.error('[witsml-to-rdf] Using inline fallback sample.');
+    console.error("[witsml-to-rdf] Using inline fallback sample.");
   }
 
   const ttl = convert(xmlString);

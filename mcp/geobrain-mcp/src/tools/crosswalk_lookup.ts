@@ -18,19 +18,9 @@ export const schema = z.object({
         "geosciml_uri, gso_uri, owl_uri, or plain entity id (e.g. 'bacia-sedimentar')"
     ),
   target_layer: z
-    .enum([
-      "petrokgraph",
-      "osdu",
-      "geosciml",
-      "gso",
-      "owl",
-      "glossary",
-      "extended",
-    ])
+    .enum(["petrokgraph", "osdu", "geosciml", "gso", "owl", "glossary", "extended"])
     .optional()
-    .describe(
-      "Filter results to equivalents in a specific layer. Omit to return all."
-    ),
+    .describe("Filter results to equivalents in a specific layer. Omit to return all."),
 });
 
 type Input = z.infer<typeof schema>;
@@ -72,10 +62,7 @@ function buildCrosswalkEntry(node: EntityNode) {
   };
 }
 
-function layerPresent(
-  node: EntityNode,
-  target: string | undefined
-): boolean {
+function layerPresent(node: EntityNode, target: string | undefined): boolean {
   if (!target) return true;
   const uris = {
     petrokgraph: node.petrokgraph_uri,
@@ -90,9 +77,7 @@ function layerPresent(
 }
 
 export function execute(input: Input): string {
-  const matches = entityGraph.nodes.filter((n) =>
-    matchesUri(n, input.uri)
-  );
+  const matches = entityGraph.nodes.filter((n) => matchesUri(n, input.uri));
 
   if (matches.length === 0) {
     return JSON.stringify({

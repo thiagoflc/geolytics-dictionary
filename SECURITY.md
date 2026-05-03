@@ -4,10 +4,10 @@
 
 A última versão publicada em `main` recebe correções de segurança. Versões anteriores não recebem patches.
 
-| Versão           | Suporte |
-|------------------|---------|
-| `main` (HEAD)    | ✅      |
-| Tags anteriores  | ❌      |
+| Versão          | Suporte |
+| --------------- | ------- |
+| `main` (HEAD)   | ✅      |
+| Tags anteriores | ❌      |
 
 ## Reportando uma vulnerabilidade
 

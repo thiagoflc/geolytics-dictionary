@@ -14,51 +14,61 @@
  *   node scripts/build-ontology-doc.js --out docs/ONTOLOGY.md
  */
 
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const ROOT = path.resolve(__dirname, '..');
+const ROOT = path.resolve(__dirname, "..");
 
 function load(relPath) {
   const abs = path.join(ROOT, relPath);
-  return JSON.parse(fs.readFileSync(abs, 'utf8'));
+  return JSON.parse(fs.readFileSync(abs, "utf8"));
 }
 
 function outArg() {
-  const idx = process.argv.indexOf('--out');
+  const idx = process.argv.indexOf("--out");
   if (idx !== -1 && process.argv[idx + 1]) return process.argv[idx + 1];
-  return path.join(ROOT, 'docs', 'ONTOLOGY.md');
+  return path.join(ROOT, "docs", "ONTOLOGY.md");
 }
 
 // ---------------------------------------------------------------------------
 // Load sources
 // ---------------------------------------------------------------------------
 
-const ontopetro = load('data/ontopetro.json');
-const geomech = load('data/geomechanics.json');
-const seisAcq = load('data/seismic-acquisition.json');
-const seisProc = load('data/seismic-processing.json');
-const seisInv = load('data/seismic-inversion-attributes.json');
+const ontopetro = load("data/ontopetro.json");
+const geomech = load("data/geomechanics.json");
+const seisAcq = load("data/seismic-acquisition.json");
+const seisProc = load("data/seismic-processing.json");
+const seisInv = load("data/seismic-inversion-attributes.json");
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
 
 function tableHeader(cols) {
-  const header = '| ' + cols.join(' | ') + ' |';
-  const sep = '|' + cols.map(() => '---|').join('');
-  return header + '\n' + sep;
+  const header = "| " + cols.join(" | ") + " |";
+  const sep = "|" + cols.map(() => "---|").join("");
+  return header + "\n" + sep;
 }
 
 function row(cells) {
-  return '| ' + cells.map(c => String(c ?? '').replace(/\|/g, '\\|').replace(/\n/g, ' ')).join(' | ') + ' |';
+  return (
+    "| " +
+    cells
+      .map((c) =>
+        String(c ?? "")
+          .replace(/\|/g, "\\|")
+          .replace(/\n/g, " ")
+      )
+      .join(" | ") +
+    " |"
+  );
 }
 
 function safeSources(sources) {
-  if (!sources) return '';
-  if (Array.isArray(sources)) return sources.join(', ');
+  if (!sources) return "";
+  if (Array.isArray(sources)) return sources.join(", ");
   return String(sources);
 }
 
@@ -71,76 +81,82 @@ function toArray(val) {
 
 function classTable(classes) {
   const arr = toArray(classes);
-  if (arr.length === 0) return '_Nenhuma classe neste modulo._\n';
+  if (arr.length === 0) return "_Nenhuma classe neste modulo._\n";
   const lines = [
-    tableHeader(['ID', 'Nome PT', 'Nome EN', 'Superclasse', 'Dominio', 'Descricao (resumo)', 'Fontes']),
+    tableHeader([
+      "ID",
+      "Nome PT",
+      "Nome EN",
+      "Superclasse",
+      "Dominio",
+      "Descricao (resumo)",
+      "Fontes",
+    ]),
   ];
   for (const c of arr) {
-    lines.push(row([
-      c.id ?? '',
-      c.name_pt ?? c.name ?? '',
-      c.name_en ?? c.name ?? '',
-      c.superclass ?? '',
-      c.domain ?? '',
-      (c.description ?? '').substring(0, 80) + ((c.description ?? '').length > 80 ? '...' : ''),
-      safeSources(c.sources),
-    ]));
+    lines.push(
+      row([
+        c.id ?? "",
+        c.name_pt ?? c.name ?? "",
+        c.name_en ?? c.name ?? "",
+        c.superclass ?? "",
+        c.domain ?? "",
+        (c.description ?? "").substring(0, 80) + ((c.description ?? "").length > 80 ? "..." : ""),
+        safeSources(c.sources),
+      ])
+    );
   }
-  return lines.join('\n') + '\n';
+  return lines.join("\n") + "\n";
 }
 
 function propertyTable(props) {
   const arr = toArray(props);
-  if (arr.length === 0) return '_Nenhuma propriedade neste modulo._\n';
-  const lines = [
-    tableHeader(['ID', 'Nome', 'Tipo', 'Dominio', 'Range / Unidade', 'Obrigatorio']),
-  ];
+  if (arr.length === 0) return "_Nenhuma propriedade neste modulo._\n";
+  const lines = [tableHeader(["ID", "Nome", "Tipo", "Dominio", "Range / Unidade", "Obrigatorio"])];
   for (const p of arr) {
-    lines.push(row([
-      p.id ?? '',
-      p.name ?? p.label ?? '',
-      p.type ?? p.property_type ?? '',
-      p.domain ?? '',
-      p.range ?? p.unit ?? '',
-      p.required ? 'sim' : 'nao',
-    ]));
+    lines.push(
+      row([
+        p.id ?? "",
+        p.name ?? p.label ?? "",
+        p.type ?? p.property_type ?? "",
+        p.domain ?? "",
+        p.range ?? p.unit ?? "",
+        p.required ? "sim" : "nao",
+      ])
+    );
   }
-  return lines.join('\n') + '\n';
+  return lines.join("\n") + "\n";
 }
 
 function relationTable(rels) {
   const arr = toArray(rels);
-  if (arr.length === 0) return '_Nenhuma relacao neste modulo._\n';
+  if (arr.length === 0) return "_Nenhuma relacao neste modulo._\n";
   const lines = [
-    tableHeader(['ID', 'Nome', 'Dominio (classe)', 'Range (classe)', 'Cardinalidade']),
+    tableHeader(["ID", "Nome", "Dominio (classe)", "Range (classe)", "Cardinalidade"]),
   ];
   for (const r of arr) {
-    lines.push(row([
-      r.id ?? '',
-      r.name ?? r.label ?? '',
-      r.domain ?? '',
-      r.range ?? '',
-      r.cardinality ?? '',
-    ]));
+    lines.push(
+      row([r.id ?? "", r.name ?? r.label ?? "", r.domain ?? "", r.range ?? "", r.cardinality ?? ""])
+    );
   }
-  return lines.join('\n') + '\n';
+  return lines.join("\n") + "\n";
 }
 
 function instanceTable(insts) {
   const arr = toArray(insts);
-  if (arr.length === 0) return '_Nenhuma instancia neste modulo._\n';
-  const lines = [
-    tableHeader(['ID', 'Nome', 'Tipo (classe)', 'Descricao']),
-  ];
+  if (arr.length === 0) return "_Nenhuma instancia neste modulo._\n";
+  const lines = [tableHeader(["ID", "Nome", "Tipo (classe)", "Descricao"])];
   for (const i of arr) {
-    lines.push(row([
-      i.id ?? '',
-      i.name ?? i.label ?? '',
-      i.type ?? i.class ?? '',
-      (i.description ?? '').substring(0, 80),
-    ]));
+    lines.push(
+      row([
+        i.id ?? "",
+        i.name ?? i.label ?? "",
+        i.type ?? i.class ?? "",
+        (i.description ?? "").substring(0, 80),
+      ])
+    );
   }
-  return lines.join('\n') + '\n';
+  return lines.join("\n") + "\n";
 }
 
 function moduleSection(title, anchor, data, meta) {
@@ -150,7 +166,7 @@ function moduleSection(title, anchor, data, meta) {
   const insts = toArray(data.instances);
 
   let out = `\n## ${title}\n\n`;
-  if (meta) out += meta + '\n\n';
+  if (meta) out += meta + "\n\n";
   out += `**Totais**: ${classes.length} classes, ${props.length} propriedades, ${rels.length} relacoes, ${insts.length} instancias.\n\n`;
 
   out += `### Classes\n\n${classTable(classes)}\n`;
@@ -166,7 +182,7 @@ function moduleSection(title, anchor, data, meta) {
 // Build document
 // ---------------------------------------------------------------------------
 
-const now = new Date().toISOString().split('T')[0];
+const now = new Date().toISOString().split("T")[0];
 
 let doc = `# Referencia de Classes e Propriedades — Ontologia Geolytics
 
@@ -193,46 +209,45 @@ dos modulos de ontologia do GeoBrain, extraidas diretamente dos arquivos JSON ca
 
 // Ontopetro module — use architecture meta if present
 const ontopetroMeta = ontopetro.meta
-  ? `Versao: \`${ontopetro.meta.version}\`. Fontes: ${(ontopetro.meta.sources || []).join(', ')}.`
-  : '';
+  ? `Versao: \`${ontopetro.meta.version}\`. Fontes: ${(ontopetro.meta.sources || []).join(", ")}.`
+  : "";
 
 doc += moduleSection(
-  'Ontopetro — Ontologia Formal de Geociencias de Petroleo',
-  'ontopetro',
+  "Ontopetro — Ontologia Formal de Geociencias de Petroleo",
+  "ontopetro",
   ontopetro,
-  ontopetroMeta,
+  ontopetroMeta
 );
 
 doc += moduleSection(
-  'Geomecanica MEM (P2.7)',
-  'geomechanics',
+  "Geomecanica MEM (P2.7)",
+  "geomechanics",
   geomech,
-  'Modulo de Mecanica de Rochas e Modelo de Terra Mecanico (MEM 1D). ' +
-  'Ver `docs/GEOMECHANICS.md` para documentacao completa.',
+  "Modulo de Mecanica de Rochas e Modelo de Terra Mecanico (MEM 1D). " +
+    "Ver `docs/GEOMECHANICS.md` para documentacao completa."
 );
 
 doc += moduleSection(
-  'Sismico — Aquisicao (P2.8)',
-  'seismic-acquisition',
+  "Sismico — Aquisicao (P2.8)",
+  "seismic-acquisition",
   seisAcq,
-  'Referencias: Yilmaz (2001), Sheriff & Geldart (1995). ' +
-  'Ver `docs/SEISMIC.md` para documentacao completa.',
+  "Referencias: Yilmaz (2001), Sheriff & Geldart (1995). " +
+    "Ver `docs/SEISMIC.md` para documentacao completa."
 );
 
 doc += moduleSection(
-  'Sismico — Processamento (P2.8)',
-  'seismic-processing',
+  "Sismico — Processamento (P2.8)",
+  "seismic-processing",
   seisProc,
-  'Referencias: Yilmaz (2001). ' +
-  'Ver `docs/SEISMIC.md` para documentacao completa.',
+  "Referencias: Yilmaz (2001). " + "Ver `docs/SEISMIC.md` para documentacao completa."
 );
 
 doc += moduleSection(
-  'Sismico — Inversao e Atributos (P2.8)',
-  'seismic-inversion',
+  "Sismico — Inversao e Atributos (P2.8)",
+  "seismic-inversion",
   seisInv,
-  'Referencias: Russell (1988), Connolly (1999), Chopra & Marfurt (2007), Coleou et al. (2003). ' +
-  'Ver `docs/SEISMIC.md` para documentacao completa.',
+  "Referencias: Russell (1988), Connolly (1999), Chopra & Marfurt (2007), Coleou et al. (2003). " +
+    "Ver `docs/SEISMIC.md` para documentacao completa."
 );
 
 doc += `
@@ -257,5 +272,5 @@ node scripts/build-ontology-doc.js --out docs/ONTOLOGY.md
 
 const outPath = outArg();
 fs.mkdirSync(path.dirname(outPath), { recursive: true });
-fs.writeFileSync(outPath, doc, 'utf8');
-console.log(`Escrito: ${outPath} (${doc.length} bytes, ~${doc.split('\n').length} linhas)`);
+fs.writeFileSync(outPath, doc, "utf8");
+console.log(`Escrito: ${outPath} (${doc.length} bytes, ~${doc.split("\n").length} linhas)`);

@@ -96,7 +96,16 @@ addopts = [
 [tool.ruff]
 line-length = 100
 target-version = "py310"
-extend-exclude = ["geobrain/_data", "build", "dist"]
+# Scope ruff to the maintained SDK + tests. Legacy scripts/ and one-shot
+# migrations/ are checked for syntax only (see .github/workflows/lint.yml)
+# and intentionally exempt from the strict ruleset.
+extend-exclude = [
+  "geobrain/_data",
+  "build",
+  "dist",
+  "../scripts",
+  "../scripts/migrations",
+]
 
 [tool.ruff.lint]
 select = [

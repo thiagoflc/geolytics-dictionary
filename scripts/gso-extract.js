@@ -78,9 +78,7 @@ function parseBlock(block, prefixes) {
     if (!comments[lang]) comments[lang] = m[1];
   }
   const sources = [
-    ...new Set(
-      Array.from(block.matchAll(/dct:source\s+"([^"]+)"(?:@\w+)?/g)).map((m) => m[1]),
-    ),
+    ...new Set(Array.from(block.matchAll(/dct:source\s+"([^"]+)"(?:@\w+)?/g)).map((m) => m[1])),
   ];
   const parents = Array.from(block.matchAll(/rdfs:subClassOf\s+(\S+?)\s*[;\.\[]/g))
     .map((m) => m[1])
@@ -109,8 +107,7 @@ function toCard(parsed) {
       definition_en_canonical: parsed.definition_en,
       parents: parsed.parents,
       sources: parsed.sources,
-      attribution:
-        "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296",
+      attribution: "GSO v1.0 (Brodaric & Richard 2021), GSC OF 8796, CC BY 4.0, DOI 10.4095/328296",
     },
   ];
 }

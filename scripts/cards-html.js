@@ -17,44 +17,44 @@
 // ---------- Constants -----------------------------------------------------
 
 const TYPE_COLORS = {
-  operational:  '#378ADD',
-  contractual:  '#7F77DD',
-  actor:        '#D85A30',
-  instrument:   '#888780',
-  geological:   '#639922',
-  equipment:    '#C77B30',
-  analytical:   '#E67E22',
+  operational: "#378ADD",
+  contractual: "#7F77DD",
+  actor: "#D85A30",
+  instrument: "#888780",
+  geological: "#639922",
+  equipment: "#C77B30",
+  analytical: "#E67E22",
 };
 
 const TYPE_LABELS = {
-  operational:  'Operacional',
-  contractual:  'Contratual',
-  actor:        'Ator',
-  instrument:   'Instrumento',
-  geological:   'Geológico',
-  equipment:    'Equipamento',
-  analytical:   'Analítico',
+  operational: "Operacional",
+  contractual: "Contratual",
+  actor: "Ator",
+  instrument: "Instrumento",
+  geological: "Geológico",
+  equipment: "Equipamento",
+  analytical: "Analítico",
 };
 
 const LAYERS = {
-  layer1: { name: 'L1 GeoCore',     bg: '#EEEDFE', text: '#3C3489' },
-  layer2: { name: 'L2 O3PO',        bg: '#E1F5EE', text: '#085041' },
-  layer3: { name: 'L3 PetroKGraph', bg: '#E6F1FB', text: '#042C53' },
-  layer4: { name: 'L4 OSDU',        bg: '#F1EFE8', text: '#2C2C2A' },
-  layer5: { name: 'L5 ANP',         bg: '#EAF3DE', text: '#173404' },
-  layer6: { name: 'L6 Petrobras',   bg: '#FCEBDA', text: '#6B3208' },
+  layer1: { name: "L1 GeoCore", bg: "#EEEDFE", text: "#3C3489" },
+  layer2: { name: "L2 O3PO", bg: "#E1F5EE", text: "#085041" },
+  layer3: { name: "L3 PetroKGraph", bg: "#E6F1FB", text: "#042C53" },
+  layer4: { name: "L4 OSDU", bg: "#F1EFE8", text: "#2C2C2A" },
+  layer5: { name: "L5 ANP", bg: "#EAF3DE", text: "#173404" },
+  layer6: { name: "L6 Petrobras", bg: "#FCEBDA", text: "#6B3208" },
 };
 
 // ---------- Helpers -------------------------------------------------------
 
 function escapeHtml(value) {
-  if (value === null || value === undefined) return '';
+  if (value === null || value === undefined) return "";
   return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 }
 
 function escapeAttr(value) {
@@ -76,11 +76,11 @@ function groupBy(items, keyFn) {
 }
 
 function typeColor(type) {
-  return TYPE_COLORS[type] || '#777';
+  return TYPE_COLORS[type] || "#777";
 }
 
 function typeLabel(type) {
-  return TYPE_LABELS[type] || type || 'outro';
+  return TYPE_LABELS[type] || type || "outro";
 }
 
 // ---------- HTML fragments ------------------------------------------------
@@ -91,33 +91,29 @@ function renderTypePill(type) {
   return `<span class="pill" style="--pill-color:${color}">${escapeHtml(label)}</span>`;
 }
 
-function renderBadgeList(items, className = 'badge') {
-  if (!nonEmpty(items)) return '';
-  return items
-    .map(item => `<span class="${className}">${escapeHtml(item)}</span>`)
-    .join('');
+function renderBadgeList(items, className = "badge") {
+  if (!nonEmpty(items)) return "";
+  return items.map((item) => `<span class="${className}">${escapeHtml(item)}</span>`).join("");
 }
 
 function renderCodeChips(items) {
-  if (!nonEmpty(items)) return '';
-  return items
-    .map(item => `<code class="chip">${escapeHtml(item)}</code>`)
-    .join('');
+  if (!nonEmpty(items)) return "";
+  return items.map((item) => `<code class="chip">${escapeHtml(item)}</code>`).join("");
 }
 
 function renderLayerBadges(layers) {
-  if (!nonEmpty(layers)) return '';
+  if (!nonEmpty(layers)) return "";
   return layers
-    .map(key => {
+    .map((key) => {
       const meta = LAYERS[key];
       if (!meta) return `<span class="layer-badge">${escapeHtml(key)}</span>`;
       return `<span class="layer-badge" style="background:${meta.bg};color:${meta.text}">${escapeHtml(meta.name)}</span>`;
     })
-    .join('');
+    .join("");
 }
 
 function renderRow(label, html) {
-  if (!html) return '';
+  if (!html) return "";
   return `
         <div class="row">
           <div class="row-label">${escapeHtml(label)}</div>
@@ -126,49 +122,57 @@ function renderRow(label, html) {
 }
 
 function renderRelations(relations, direction, nodeIndex) {
-  if (!nonEmpty(relations)) return '';
-  const items = relations.map(rel => {
-    const otherId = direction === 'out' ? rel.target : rel.source;
-    const other = nodeIndex.get(otherId);
-    const otherLabel = other ? other.label : otherId;
-    const verbPt = rel.relation_label_pt || rel.relation || '';
-    const verbEn = rel.relation_label_en ? ` <em class="muted">(${escapeHtml(rel.relation_label_en)})</em>` : '';
-    const arrow = direction === 'out' ? '→' : '←';
-    const link = `<a href="#entity-${escapeAttr(otherId)}" class="rel-link">${escapeHtml(otherLabel)}</a>`;
-    return `<li><span class="rel-verb">${escapeHtml(verbPt)}</span>${verbEn} <span class="rel-arrow">${arrow}</span> ${link}</li>`;
-  }).join('');
+  if (!nonEmpty(relations)) return "";
+  const items = relations
+    .map((rel) => {
+      const otherId = direction === "out" ? rel.target : rel.source;
+      const other = nodeIndex.get(otherId);
+      const otherLabel = other ? other.label : otherId;
+      const verbPt = rel.relation_label_pt || rel.relation || "";
+      const verbEn = rel.relation_label_en
+        ? ` <em class="muted">(${escapeHtml(rel.relation_label_en)})</em>`
+        : "";
+      const arrow = direction === "out" ? "→" : "←";
+      const link = `<a href="#entity-${escapeAttr(otherId)}" class="rel-link">${escapeHtml(otherLabel)}</a>`;
+      return `<li><span class="rel-verb">${escapeHtml(verbPt)}</span>${verbEn} <span class="rel-arrow">${arrow}</span> ${link}</li>`;
+    })
+    .join("");
   return `<ul class="rel-list">${items}</ul>`;
 }
 
 function renderExternalLinks(node) {
   const parts = [];
   if (node.petrokgraph_uri) {
-    parts.push(`<li><span class="ext-label">PetroKGraph</span> <a href="${escapeAttr(node.petrokgraph_uri)}" target="_blank" rel="noopener">${escapeHtml(node.petrokgraph_uri)}</a></li>`);
+    parts.push(
+      `<li><span class="ext-label">PetroKGraph</span> <a href="${escapeAttr(node.petrokgraph_uri)}" target="_blank" rel="noopener">${escapeHtml(node.petrokgraph_uri)}</a></li>`
+    );
   }
   if (node.owl_uri) {
-    parts.push(`<li><span class="ext-label">OSDU OWL Class</span> <a href="${escapeAttr(node.owl_uri)}" target="_blank" rel="noopener">${escapeHtml(node.owl_uri)}</a></li>`);
+    parts.push(
+      `<li><span class="ext-label">OSDU OWL Class</span> <a href="${escapeAttr(node.owl_uri)}" target="_blank" rel="noopener">${escapeHtml(node.owl_uri)}</a></li>`
+    );
   }
   if (node.osdu_kind) {
-    parts.push(`<li><span class="ext-label">OSDU kind</span> <code class="chip">${escapeHtml(node.osdu_kind)}</code></li>`);
+    parts.push(
+      `<li><span class="ext-label">OSDU kind</span> <code class="chip">${escapeHtml(node.osdu_kind)}</code></li>`
+    );
   }
-  if (parts.length === 0) return '';
-  return `<ul class="ext-list">${parts.join('')}</ul>`;
+  if (parts.length === 0) return "";
+  return `<ul class="ext-list">${parts.join("")}</ul>`;
 }
 
 function renderCard(node, edgesOut, edgesIn, nodeIndex) {
   const id = `entity-${node.id}`;
   const labelEn = node.label_en
     ? ` <span class="label-en">${escapeHtml(node.label_en)}</span>`
-    : '';
+    : "";
   const defEn = node.definition_en_canonical
     ? `<p class="def-en">${escapeHtml(node.definition_en_canonical)}</p>`
-    : '';
-  const def = node.definition
-    ? `<p class="def">${escapeHtml(node.definition)}</p>`
-    : '';
+    : "";
+  const def = node.definition ? `<p class="def">${escapeHtml(node.definition)}</p>` : "";
   const legal = node.legal_source
     ? `<span class="legal-source">${escapeHtml(node.legal_source)}</span>`
-    : '';
+    : "";
 
   // Search index (lower-case haystack stored in a data attribute)
   const haystack = [
@@ -177,10 +181,13 @@ function renderCard(node, edgesOut, edgesIn, nodeIndex) {
     node.id,
     ...(node.synonyms_pt || []),
     ...(node.synonyms_en || []),
-  ].filter(Boolean).join(' ').toLowerCase();
+  ]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
 
   return `
-      <section class="card" id="${escapeAttr(id)}" data-type="${escapeAttr(node.type || '')}" data-search="${escapeAttr(haystack)}">
+      <section class="card" id="${escapeAttr(id)}" data-type="${escapeAttr(node.type || "")}" data-search="${escapeAttr(haystack)}">
         <header class="card-header">
           <h2 class="card-title">
             ${escapeHtml(node.label || node.id)}${labelEn}
@@ -194,35 +201,38 @@ function renderCard(node, edgesOut, edgesIn, nodeIndex) {
         ${def}
         ${defEn}
         <div class="rows">
-          ${renderRow('Sinônimos (PT)', renderBadgeList(node.synonyms_pt, 'badge'))}
-          ${renderRow('Sinônimos (EN)', renderBadgeList(node.synonyms_en, 'badge badge-en'))}
-          ${renderRow('Exemplos', renderCodeChips(node.examples))}
-          ${renderRow('Datasets', renderBadgeList(node.datasets, 'badge badge-dataset'))}
-          ${renderRow('Camadas semânticas', renderLayerBadges(node.geocoverage))}
-          ${renderRow('Relações de saída', renderRelations(edgesOut, 'out', nodeIndex))}
-          ${renderRow('Relações de entrada', renderRelations(edgesIn, 'in', nodeIndex))}
-          ${renderRow('Links externos', renderExternalLinks(node))}
+          ${renderRow("Sinônimos (PT)", renderBadgeList(node.synonyms_pt, "badge"))}
+          ${renderRow("Sinônimos (EN)", renderBadgeList(node.synonyms_en, "badge badge-en"))}
+          ${renderRow("Exemplos", renderCodeChips(node.examples))}
+          ${renderRow("Datasets", renderBadgeList(node.datasets, "badge badge-dataset"))}
+          ${renderRow("Camadas semânticas", renderLayerBadges(node.geocoverage))}
+          ${renderRow("Relações de saída", renderRelations(edgesOut, "out", nodeIndex))}
+          ${renderRow("Relações de entrada", renderRelations(edgesIn, "in", nodeIndex))}
+          ${renderRow("Links externos", renderExternalLinks(node))}
         </div>
       </section>`;
 }
 
 function renderSidebar(nodesByType) {
   const orderedTypes = Object.keys(TYPE_COLORS)
-    .filter(t => nodesByType.has(t))
-    .concat(
-      [...nodesByType.keys()].filter(t => !(t in TYPE_COLORS))
-    );
+    .filter((t) => nodesByType.has(t))
+    .concat([...nodesByType.keys()].filter((t) => !(t in TYPE_COLORS)));
 
-  const groups = orderedTypes.map(type => {
-    const nodes = nodesByType.get(type);
-    nodes.sort((a, b) => (a.label || a.id).localeCompare(b.label || b.id, 'pt'));
-    const items = nodes.map(n => `
+  const groups = orderedTypes
+    .map((type) => {
+      const nodes = nodesByType.get(type);
+      nodes.sort((a, b) => (a.label || a.id).localeCompare(b.label || b.id, "pt"));
+      const items = nodes
+        .map(
+          (n) => `
             <li>
-              <a href="#entity-${escapeAttr(n.id)}" data-search="${escapeAttr((n.label + ' ' + (n.label_en || '')).toLowerCase())}">
+              <a href="#entity-${escapeAttr(n.id)}" data-search="${escapeAttr((n.label + " " + (n.label_en || "")).toLowerCase())}">
                 <span class="dot" style="background:${typeColor(n.type)}"></span>${escapeHtml(n.label || n.id)}
               </a>
-            </li>`).join('');
-    return `
+            </li>`
+        )
+        .join("");
+      return `
         <div class="toc-group" data-type="${escapeAttr(type)}">
           <h3 class="toc-heading">
             <span class="dot" style="background:${typeColor(type)}"></span>${escapeHtml(typeLabel(type))}
@@ -231,7 +241,8 @@ function renderSidebar(nodesByType) {
           <ul class="toc-list">${items}
           </ul>
         </div>`;
-  }).join('');
+    })
+    .join("");
 
   return groups;
 }
@@ -594,36 +605,43 @@ const CLIENT_JS = `
 
 export function buildCardsHtml(graph) {
   const nodes = Array.isArray(graph?.nodes) ? graph.nodes.slice() : [];
-  const edges = Array.isArray(graph?.edges) ? graph.edges
-              : Array.isArray(graph?.links) ? graph.links
-              : [];
+  const edges = Array.isArray(graph?.edges)
+    ? graph.edges
+    : Array.isArray(graph?.links)
+      ? graph.links
+      : [];
 
   // Sort nodes by label for stable output
-  nodes.sort((a, b) => (a.label || a.id || '').localeCompare(b.label || b.id || '', 'pt'));
+  nodes.sort((a, b) => (a.label || a.id || "").localeCompare(b.label || b.id || "", "pt"));
 
   // Index for fast lookup, edges out/in per node
-  const nodeIndex = new Map(nodes.map(n => [n.id, n]));
+  const nodeIndex = new Map(nodes.map((n) => [n.id, n]));
   const outByNode = new Map();
-  const inByNode  = new Map();
-  for (const n of nodes) { outByNode.set(n.id, []); inByNode.set(n.id, []); }
+  const inByNode = new Map();
+  for (const n of nodes) {
+    outByNode.set(n.id, []);
+    inByNode.set(n.id, []);
+  }
   for (const e of edges) {
-    const s = typeof e.source === 'object' ? e.source.id : e.source;
-    const t = typeof e.target === 'object' ? e.target.id : e.target;
+    const s = typeof e.source === "object" ? e.source.id : e.source;
+    const t = typeof e.target === "object" ? e.target.id : e.target;
     if (outByNode.has(s)) outByNode.get(s).push({ ...e, source: s, target: t });
-    if (inByNode.has(t))  inByNode.get(t).push({ ...e, source: s, target: t });
+    if (inByNode.has(t)) inByNode.get(t).push({ ...e, source: s, target: t });
   }
 
   // Group nodes by type for sidebar
-  const byType = groupBy(nodes, n => n.type || 'other');
+  const byType = groupBy(nodes, (n) => n.type || "other");
 
   // Render
   // Collapse runs of whitespace between tags to keep the output compact
   // without changing rendered semantics.
-  const compact = (s) => s.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ');
+  const compact = (s) => s.replace(/>\s+</g, "><").replace(/\s{2,}/g, " ");
 
-  const cardsHtml = nodes.map(n =>
-    compact(renderCard(n, outByNode.get(n.id) || [], inByNode.get(n.id) || [], nodeIndex))
-  ).join('\n');
+  const cardsHtml = nodes
+    .map((n) =>
+      compact(renderCard(n, outByNode.get(n.id) || [], inByNode.get(n.id) || [], nodeIndex))
+    )
+    .join("\n");
 
   const sidebarHtml = compact(renderSidebar(byType));
 
@@ -692,51 +710,54 @@ export default buildCardsHtml;
  * ───────────────────────────────────────────────────────────── */
 
 const GSO_MODULE_LABELS = {
-  'GSO-Geologic_Structure_Fault':     'Falhas',
-  'GSO-Geologic_Structure_Fold':      'Dobras',
-  'GSO-Geologic_Structure_Foliation': 'Foliação',
-  'GSO-Geologic_Structure_Lineation': 'Lineação',
-  'GSO-Geologic_Structure_Contact':   'Contatos',
+  "GSO-Geologic_Structure_Fault": "Falhas",
+  "GSO-Geologic_Structure_Fold": "Dobras",
+  "GSO-Geologic_Structure_Foliation": "Foliação",
+  "GSO-Geologic_Structure_Lineation": "Lineação",
+  "GSO-Geologic_Structure_Contact": "Contatos",
 };
 
 const GSO_MODULE_COLORS = {
-  'GSO-Geologic_Structure_Fault':     '#D85A30',
-  'GSO-Geologic_Structure_Fold':      '#C77B30',
-  'GSO-Geologic_Structure_Foliation': '#7F77DD',
-  'GSO-Geologic_Structure_Lineation': '#378ADD',
-  'GSO-Geologic_Structure_Contact':   '#639922',
+  "GSO-Geologic_Structure_Fault": "#D85A30",
+  "GSO-Geologic_Structure_Fold": "#C77B30",
+  "GSO-Geologic_Structure_Foliation": "#7F77DD",
+  "GSO-Geologic_Structure_Lineation": "#378ADD",
+  "GSO-Geologic_Structure_Contact": "#639922",
 };
 
 function gsoModuleLabel(m) {
-  return GSO_MODULE_LABELS[m] || m.replace(/^GSO-Geologic_Structure_/, '');
+  return GSO_MODULE_LABELS[m] || m.replace(/^GSO-Geologic_Structure_/, "");
 }
 
 function gsoModuleColor(m) {
-  return GSO_MODULE_COLORS[m] || '#777';
+  return GSO_MODULE_COLORS[m] || "#777";
 }
 
 function renderGsoCard(c, moduleName, indexByCurie) {
   const id = `gso-${c.gso_class}`;
-  const titleFr = c.pref_label_fr ? ` <span class="label-en">${escapeHtml(c.pref_label_fr)} (fr)</span>` : '';
+  const titleFr = c.pref_label_fr
+    ? ` <span class="label-en">${escapeHtml(c.pref_label_fr)} (fr)</span>`
+    : "";
   const def = c.definition_en_canonical
     ? `<p class="def-en">${escapeHtml(c.definition_en_canonical)}</p>`
-    : '';
-  const parents = (c.parents || []).map(p => {
-    const localName = p.includes(':') ? p.split(':')[1] : p;
-    const target = indexByCurie.get(p) || indexByCurie.get(localName);
-    if (target) return `<a class="badge badge-rel" href="#gso-${escapeAttr(target.gso_class)}">${escapeHtml(p)}</a>`;
-    return `<span class="badge" title="External or unresolved CURIE">${escapeHtml(p)}</span>`;
-  }).join('');
-  const sources = renderBadgeList(c.sources || [], 'badge badge-dataset');
+    : "";
+  const parents = (c.parents || [])
+    .map((p) => {
+      const localName = p.includes(":") ? p.split(":")[1] : p;
+      const target = indexByCurie.get(p) || indexByCurie.get(localName);
+      if (target)
+        return `<a class="badge badge-rel" href="#gso-${escapeAttr(target.gso_class)}">${escapeHtml(p)}</a>`;
+      return `<span class="badge" title="External or unresolved CURIE">${escapeHtml(p)}</span>`;
+    })
+    .join("");
+  const sources = renderBadgeList(c.sources || [], "badge badge-dataset");
   const owlLink = c.owl_uri
     ? `<a class="badge badge-en" href="${escapeAttr(c.owl_uri)}" target="_blank" rel="noopener">${escapeHtml(c.owl_uri)}</a>`
-    : '';
-  const haystack = [
-    c.gso_class,
-    c.pref_label_en,
-    c.pref_label_fr,
-    ...(c.parents || []),
-  ].filter(Boolean).join(' ').toLowerCase();
+    : "";
+  const haystack = [c.gso_class, c.pref_label_en, c.pref_label_fr, ...(c.parents || [])]
+    .filter(Boolean)
+    .join(" ")
+    .toLowerCase();
 
   const color = gsoModuleColor(moduleName);
   const modLabel = gsoModuleLabel(moduleName);
@@ -755,28 +776,36 @@ function renderGsoCard(c, moduleName, indexByCurie) {
         </header>
         ${def}
         <div class="rows">
-          ${renderRow('GSO class', `<code>${escapeHtml(c.gso_class)}</code>`)}
-          ${renderRow('OWL URI', owlLink)}
-          ${renderRow('Subclasse de', parents)}
-          ${renderRow('Fonte original', sources)}
-          ${renderRow('Atribuição', `<span class="badge">${escapeHtml(c.attribution || '')}</span>`)}
+          ${renderRow("GSO class", `<code>${escapeHtml(c.gso_class)}</code>`)}
+          ${renderRow("OWL URI", owlLink)}
+          ${renderRow("Subclasse de", parents)}
+          ${renderRow("Fonte original", sources)}
+          ${renderRow("Atribuição", `<span class="badge">${escapeHtml(c.attribution || "")}</span>`)}
         </div>
       </section>`;
 }
 
 function renderGsoSidebar(byModule) {
-  const order = Object.keys(GSO_MODULE_LABELS).filter(m => byModule.has(m));
-  return order.map(m => {
-    const list = byModule.get(m).slice().sort((a, b) =>
-      (a.pref_label_en || a.gso_class).localeCompare(b.pref_label_en || b.gso_class, 'en')
-    );
-    const items = list.map(c => `
+  const order = Object.keys(GSO_MODULE_LABELS).filter((m) => byModule.has(m));
+  return order
+    .map((m) => {
+      const list = byModule
+        .get(m)
+        .slice()
+        .sort((a, b) =>
+          (a.pref_label_en || a.gso_class).localeCompare(b.pref_label_en || b.gso_class, "en")
+        );
+      const items = list
+        .map(
+          (c) => `
             <li>
               <a href="#gso-${escapeAttr(c.gso_class)}" data-search="${escapeAttr((c.pref_label_en || c.gso_class).toLowerCase())}">
                 <span class="dot" style="background:${gsoModuleColor(m)}"></span>${escapeHtml(c.pref_label_en || c.gso_class)}
               </a>
-            </li>`).join('');
-    return `
+            </li>`
+        )
+        .join("");
+      return `
         <div class="toc-group" data-type="${escapeAttr(m)}">
           <h3 class="toc-heading">
             <span class="dot" style="background:${gsoModuleColor(m)}"></span>${escapeHtml(gsoModuleLabel(m))}
@@ -785,7 +814,8 @@ function renderGsoSidebar(byModule) {
           <ul class="toc-list">${items}
           </ul>
         </div>`;
-  }).join('');
+    })
+    .join("");
 }
 
 export function buildGsoCardsHtml(modules) {
@@ -793,17 +823,24 @@ export function buildGsoCardsHtml(modules) {
   const indexByCurie = new Map();
   for (const mod of modules) {
     for (const [curie, c] of Object.entries(mod.classes)) {
-      const enriched = { ...c, _curie: curie, _module: mod.meta.module, attribution: mod.meta.attribution };
+      const enriched = {
+        ...c,
+        _curie: curie,
+        _module: mod.meta.module,
+        attribution: mod.meta.attribution,
+      };
       all.push(enriched);
       indexByCurie.set(curie, enriched);
       indexByCurie.set(c.gso_class, enriched);
     }
   }
-  all.sort((a, b) => (a.pref_label_en || a.gso_class).localeCompare(b.pref_label_en || b.gso_class, 'en'));
+  all.sort((a, b) =>
+    (a.pref_label_en || a.gso_class).localeCompare(b.pref_label_en || b.gso_class, "en")
+  );
 
-  const byModule = groupBy(all, c => c._module);
-  const compact = (s) => s.replace(/>\s+</g, '><').replace(/\s{2,}/g, ' ');
-  const cardsHtml = all.map(c => compact(renderGsoCard(c, c._module, indexByCurie))).join('\n');
+  const byModule = groupBy(all, (c) => c._module);
+  const compact = (s) => s.replace(/>\s+</g, "><").replace(/\s{2,}/g, " ");
+  const cardsHtml = all.map((c) => compact(renderGsoCard(c, c._module, indexByCurie))).join("\n");
   const sidebarHtml = compact(renderGsoSidebar(byModule));
   const generated = new Date().toISOString();
 
