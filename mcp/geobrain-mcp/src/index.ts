@@ -28,6 +28,7 @@ import * as searchRag from "./tools/search_rag.js";
 import * as listLayers from "./tools/list_layers.js";
 import * as crosswalkLookup from "./tools/crosswalk_lookup.js";
 import * as lookupLithology from "./tools/lookup_lithology.js";
+import * as lookupGeologicTime from "./tools/lookup_geologic_time.js";
 
 // Load all static data into memory before registering handlers.
 loadAll();
@@ -128,6 +129,16 @@ const tools = [
       "Examples: 'limestone', 'calcário', 'sandstone', 'igneous_material'.",
     inputSchema: zodToJsonSchema(lookupLithology.schema),
   },
+  {
+    name: "lookup_geologic_time",
+    description:
+      "Search the ICS 2023 International Chronostratigraphic Chart (52 units) by label " +
+      "(PT or EN), rank (eon/era/period/epoch/age), or concept id. Returns age bounds in Ma, " +
+      "duration, parent unit, and Brazil-specific stratigraphic notes (e.g. Aptian/Albian " +
+      "pre-salt context for Santos and Campos basins). " +
+      "Examples: 'cretáceo', 'Cretaceous', 'aptiano', 'Aptian', 'Cenozoic'.",
+    inputSchema: zodToJsonSchema(lookupGeologicTime.schema),
+  },
 ];
 
 // ---------- handlers ----------
@@ -172,6 +183,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         break;
       case "lookup_lithology":
         text = lookupLithology.execute(lookupLithology.schema.parse(args));
+        break;
+      case "lookup_geologic_time":
+        text = lookupGeologicTime.execute(lookupGeologicTime.schema.parse(args));
         break;
       default:
         return {

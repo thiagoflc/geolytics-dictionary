@@ -26,6 +26,7 @@ from ._version import __version__
 from .crosswalk import CrosswalkEntry, CrosswalkIndex
 from .dictionary import Acronym, Dictionary, Layer, Term
 from .graph import Entity, KnowledgeGraph
+from .lithology import LithologyDictionary
 from .sweet import Alignment, ExpansionResult, SweetExpander
 from .validator import Report, Validator, Violation
 
@@ -42,6 +43,8 @@ __all__ = [
     # graph
     "KnowledgeGraph",
     "Layer",
+    # lithology
+    "LithologyDictionary",
     "Report",
     # sweet
     "SweetExpander",
