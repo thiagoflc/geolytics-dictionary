@@ -58,9 +58,9 @@ def test_spe_prms_invalid_category_violations(v, text, expected_rule):
 )
 def test_spe_prms_valid_categories_no_violation(v, text):
     report = v.validate(text)
-    assert not has_violation(
-        report, "SPE_PRMS_INVALID_CATEGORY"
-    ), f"Should not flag valid category in: {text!r}"
+    assert not has_violation(report, "SPE_PRMS_INVALID_CATEGORY"), (
+        f"Should not flag valid category in: {text!r}"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -77,9 +77,9 @@ def test_spe_prms_valid_categories_no_violation(v, text):
 )
 def test_reserva_ambiguity_warning(v, text):
     report = v.validate(text)
-    assert has_warning(
-        report, "RESERVA_AMBIGUITY"
-    ), f"Expected RESERVA_AMBIGUITY warning in: {text!r}"
+    assert has_warning(report, "RESERVA_AMBIGUITY"), (
+        f"Expected RESERVA_AMBIGUITY warning in: {text!r}"
+    )
 
 
 @pytest.mark.parametrize(
@@ -122,9 +122,9 @@ def test_regime_contratual_invalid(v, text, expected_rule):
 )
 def test_regime_contratual_valid(v, text):
     report = v.validate(text)
-    assert not has_violation(
-        report, "REGIME_CONTRATUAL_INVALID"
-    ), f"Should accept valid regime in: {text!r}"
+    assert not has_violation(report, "REGIME_CONTRATUAL_INVALID"), (
+        f"Should accept valid regime in: {text!r}"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -154,9 +154,9 @@ def test_tipo_poco_invalid(v, text):
 )
 def test_tipo_poco_valid(v, text):
     report = v.validate(text)
-    assert not has_violation(
-        report, "TIPO_POCO_INVALID"
-    ), f"Should accept valid well code in: {text!r}"
+    assert not has_violation(report, "TIPO_POCO_INVALID"), (
+        f"Should accept valid well code in: {text!r}"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -166,9 +166,9 @@ def test_tipo_poco_valid(v, text):
 
 def test_litologia_invalid_unknown(v):
     report = v.validate("Litologia: xistosidade no intervalo 2000-2500m")
-    assert has_warning(
-        report, "LITOLOGIA_INVALID"
-    ), "Should warn for unknown lithology 'xistosidade'"
+    assert has_warning(report, "LITOLOGIA_INVALID"), (
+        "Should warn for unknown lithology 'xistosidade'"
+    )
 
 
 @pytest.mark.parametrize(
@@ -180,9 +180,9 @@ def test_litologia_invalid_unknown(v):
 )
 def test_litologia_valid_known(v, text):
     report = v.validate(text)
-    assert not has_warning(
-        report, "LITOLOGIA_INVALID"
-    ), f"Should not warn for known lithology in: {text!r}"
+    assert not has_warning(report, "LITOLOGIA_INVALID"), (
+        f"Should not warn for known lithology in: {text!r}"
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -256,9 +256,9 @@ def test_osdu_kind_valid_field(v):
 def test_layer_coverage_mismatch_invalid_layer(v):
     claim = {"value": "poco em layer9", "context": {"entity_id": "poco", "layer": "layer9"}}
     report = v.validate(claim)
-    assert has_warning(
-        report, "LAYER_COVERAGE_MISMATCH"
-    ), "Should warn for layer not in geocoverage"
+    assert has_warning(report, "LAYER_COVERAGE_MISMATCH"), (
+        "Should warn for layer not in geocoverage"
+    )
 
 
 def test_layer_coverage_mismatch_valid_layer(v):

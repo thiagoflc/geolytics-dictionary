@@ -148,6 +148,7 @@ def test_cypher_export_returns_string(kg):
 # Petrobras 3W entities
 # ---------------------------------------------------------------------------
 
+
 def test_3w_event_severe_slugging_found(kg):
     e = kg.entity("event_severe_slugging")
     assert e is not None

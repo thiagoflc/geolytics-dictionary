@@ -1,4 +1,5 @@
 """Tests for python/geobrain/crosswalk.py."""
+
 import pytest
 from geobrain.crosswalk import CrosswalkEntry, CrosswalkIndex
 
