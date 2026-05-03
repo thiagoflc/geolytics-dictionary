@@ -1,5 +1,15 @@
 # GeoBrain
 
+[![Lint](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/lint.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/lint.yml)
+[![Test (Python)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-python.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-python.yml)
+[![Test (Node)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-node.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-node.yml)
+[![Validate ontology](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/validate-ontology.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/validate-ontology.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 Ontologia semantica do dominio de **Exploracao & Producao (E&P) de petroleo e gas natural no Brasil**, derivada do modulo Dicionario da plataforma Geolytics. Dados oficiais da **ANP/SEP — SIGEP**, organizados como JSON estatico, grafo de entidades e corpus pronto para RAG.
 
 A motivacao central e que RAG vetorial puro falha em perguntas multi-hop de O&G (quatro saltos entre poco → bloco → bacia → regime contratual), em disambiguacoes estruturais (PAD como contrato ANP vs. drilling pad) e em verificacao de consistencia regulatoria (SPE-PRMS nao reconhece "4P"). Este repositorio prove a base semantica — ontologia em camadas, grafo tipado, SHACL shapes e agente LangGraph com validador deterministico — para superar essas limitacoes. Ver [docs/GRAPHRAG.md](docs/GRAPHRAG.md) para a receita completa.
