@@ -611,13 +611,16 @@ function _check3wInvalidLabel(structuredClaim) {
   const label = structuredClaim.context.threew_label;
   if (label === undefined || label === null) return [];
   if (!_3W_ALL_VALID_LABELS.has(Number(label))) {
-    return [{
-      rule: '3W_INVALID_LABEL',
-      severity: 'error',
-      evidence: `Rótulo 3W '${label}' não é uma classe canônica válida. Classes válidas: 0–9 (steady) e 101,102,105,106,107,108,109 (transient).`,
-      suggested_fix: 'Usar um dos 10 rótulos canônicos 3W (0–9) ou a variante transiente correspondente (base+100, exceto classes 3 e 4).',
-      source_layer: 'petrobras-3w',
-    }];
+    return [
+      {
+        rule: "3W_INVALID_LABEL",
+        severity: "error",
+        evidence: `Rótulo 3W '${label}' não é uma classe canônica válida. Classes válidas: 0–9 (steady) e 101,102,105,106,107,108,109 (transient).`,
+        suggested_fix:
+          "Usar um dos 10 rótulos canônicos 3W (0–9) ou a variante transiente correspondente (base+100, exceto classes 3 e 4).",
+        source_layer: "petrobras-3w",
+      },
+    ];
   }
   return [];
 }
@@ -633,13 +636,15 @@ function _check3wTransientForbiddenForSteady(structuredClaim) {
   if (label >= 100) {
     const baseClass = label - 100;
     if (_3W_STEADY_ONLY.has(baseClass)) {
-      return [{
-        rule: '3W_TRANSIENT_FORBIDDEN_FOR_STEADY',
-        severity: 'error',
-        evidence: `Rótulo transiente ${label} corresponde à classe ${baseClass}, que não tem variante transiente no 3W (classes 3=Severe Slugging e 4=Flow Instability são sempre steady).`,
-        suggested_fix: `Usar o rótulo steady ${baseClass} para esta classe de evento.`,
-        source_layer: 'petrobras-3w',
-      }];
+      return [
+        {
+          rule: "3W_TRANSIENT_FORBIDDEN_FOR_STEADY",
+          severity: "error",
+          evidence: `Rótulo transiente ${label} corresponde à classe ${baseClass}, que não tem variante transiente no 3W (classes 3=Severe Slugging e 4=Flow Instability são sempre steady).`,
+          suggested_fix: `Usar o rótulo steady ${baseClass} para esta classe de evento.`,
+          source_layer: "petrobras-3w",
+        },
+      ];
     }
   }
   return [];
@@ -655,13 +660,15 @@ function _check3wValveStateDomain(structuredClaim) {
   if (val === undefined || val === null) return [];
   const n = Number(val);
   if (n !== 0 && n !== 0.5 && n !== 1) {
-    return [{
-      rule: '3W_VALVE_STATE_DOMAIN',
-      severity: 'error',
-      evidence: `Valor de estado de válvula 3W '${val}' inválido. Apenas 0 (fechada), 0.5 (parcial) e 1 (aberta) são permitidos.`,
-      suggested_fix: 'Usar 0, 0.5 ou 1 para representar o estado de válvula ESTADO-* no 3W.',
-      source_layer: 'petrobras-3w',
-    }];
+    return [
+      {
+        rule: "3W_VALVE_STATE_DOMAIN",
+        severity: "error",
+        evidence: `Valor de estado de válvula 3W '${val}' inválido. Apenas 0 (fechada), 0.5 (parcial) e 1 (aberta) são permitidos.`,
+        suggested_fix: "Usar 0, 0.5 ou 1 para representar o estado de válvula ESTADO-* no 3W.",
+        source_layer: "petrobras-3w",
+      },
+    ];
   }
   return [];
 }

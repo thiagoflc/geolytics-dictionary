@@ -215,7 +215,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     // Single-module mode: parse and print to stdout (original behaviour)
     parseGsoModule(src)
       .then((out) => process.stdout.write(JSON.stringify(out, null, 2) + "\n"))
-      .catch((e) => { console.error(e); process.exit(1); });
+      .catch((e) => {
+        console.error(e);
+        process.exit(1);
+      });
   } else {
     // No args: extract all modules to data/
     extractGSO()
@@ -223,6 +226,9 @@ if (import.meta.url === `file://${process.argv[1]}`) {
         console.log(`\nDone. Written: ${written.length}, Errors: ${errors.length}`);
         if (errors.length) process.exit(1);
       })
-      .catch((e) => { console.error(e); process.exit(1); });
+      .catch((e) => {
+        console.error(e);
+        process.exit(1);
+      });
   }
 }

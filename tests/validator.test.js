@@ -300,47 +300,47 @@ describe("Invalid input", () => {
 // 3W Petrobras rules
 // ---------------------------------------------------------------------------
 
-describe('3W_INVALID_LABEL', () => {
-  test('rejects label 99 (not a canonical 3W class)', () => {
-    const claim = { type: 'event', value: 'evento 3W', context: { threew_label: 99 } };
+describe("3W_INVALID_LABEL", () => {
+  test("rejects label 99 (not a canonical 3W class)", () => {
+    const claim = { type: "event", value: "evento 3W", context: { threew_label: 99 } };
     const result = validate(claim);
     assert.equal(result.valid, false);
-    assert.ok(hasViolation(result, '3W_INVALID_LABEL'));
+    assert.ok(hasViolation(result, "3W_INVALID_LABEL"));
   });
 
-  test('accepts label 8 (event_hydrate_production, canonical steady)', () => {
-    const claim = { type: 'event', value: 'evento 3W', context: { threew_label: 8 } };
+  test("accepts label 8 (event_hydrate_production, canonical steady)", () => {
+    const claim = { type: "event", value: "evento 3W", context: { threew_label: 8 } };
     const result = validate(claim);
-    assert.ok(!hasViolation(result, '3W_INVALID_LABEL'));
+    assert.ok(!hasViolation(result, "3W_INVALID_LABEL"));
   });
 });
 
-describe('3W_TRANSIENT_FORBIDDEN_FOR_STEADY', () => {
-  test('rejects transient label 103 (class 3 = severe slugging, no transient)', () => {
-    const claim = { type: 'event', value: 'evento 3W', context: { threew_label: 103 } };
+describe("3W_TRANSIENT_FORBIDDEN_FOR_STEADY", () => {
+  test("rejects transient label 103 (class 3 = severe slugging, no transient)", () => {
+    const claim = { type: "event", value: "evento 3W", context: { threew_label: 103 } };
     const result = validate(claim);
     assert.equal(result.valid, false);
-    assert.ok(hasViolation(result, '3W_TRANSIENT_FORBIDDEN_FOR_STEADY'));
+    assert.ok(hasViolation(result, "3W_TRANSIENT_FORBIDDEN_FOR_STEADY"));
   });
 
-  test('accepts transient label 102 (class 2 = spurious DHSV, has transient variant)', () => {
-    const claim = { type: 'event', value: 'evento 3W', context: { threew_label: 102 } };
+  test("accepts transient label 102 (class 2 = spurious DHSV, has transient variant)", () => {
+    const claim = { type: "event", value: "evento 3W", context: { threew_label: 102 } };
     const result = validate(claim);
-    assert.ok(!hasViolation(result, '3W_TRANSIENT_FORBIDDEN_FOR_STEADY'));
+    assert.ok(!hasViolation(result, "3W_TRANSIENT_FORBIDDEN_FOR_STEADY"));
   });
 });
 
-describe('3W_VALVE_STATE_DOMAIN', () => {
-  test('rejects valve state 0.3 (not in {0, 0.5, 1})', () => {
-    const claim = { type: 'observation', value: 'estado válvula', context: { valve_state: 0.3 } };
+describe("3W_VALVE_STATE_DOMAIN", () => {
+  test("rejects valve state 0.3 (not in {0, 0.5, 1})", () => {
+    const claim = { type: "observation", value: "estado válvula", context: { valve_state: 0.3 } };
     const result = validate(claim);
     assert.equal(result.valid, false);
-    assert.ok(hasViolation(result, '3W_VALVE_STATE_DOMAIN'));
+    assert.ok(hasViolation(result, "3W_VALVE_STATE_DOMAIN"));
   });
 
-  test('accepts valve state 0.5 (partial open)', () => {
-    const claim = { type: 'observation', value: 'estado válvula', context: { valve_state: 0.5 } };
+  test("accepts valve state 0.5 (partial open)", () => {
+    const claim = { type: "observation", value: "estado válvula", context: { valve_state: 0.5 } };
     const result = validate(claim);
-    assert.ok(!hasViolation(result, '3W_VALVE_STATE_DOMAIN'));
+    assert.ok(!hasViolation(result, "3W_VALVE_STATE_DOMAIN"));
   });
 });
