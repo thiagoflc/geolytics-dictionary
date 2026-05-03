@@ -93,3 +93,7 @@ Sistema Petrolífero → Trapa → Acumulação → Campo → Reserva (1P/2P/3P)
 Cada elo é uma entidade do dicionário (`data/entity-graph.json`). Use ao raciocinar sobre "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
 
 Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1-L6), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3.
+
+## 8. Dataset 3W — Eventos operacionais em poços offshore (Petrobras, CC-BY 4.0)
+
+O GeoBrain incorpora o esquema semântico do **Petrobras 3W Dataset v2.0.0** (Vargas et al. 2019, DOI 10.1016/j.petrol.2019.106223): **10 classes de eventos** indesejáveis (0=Normal, 1=Aumento BSW, 2=Fechamento Espúrio DHSV, 3=Severe Slugging, 4=Instabilidade de Fluxo, 5=Queda Rápida de Produção, 6=Restrição Rápida PCK, 7=Incrustação PCK, 8=Hidrato em Linha de Produção, 9=Hidrato em Linha de Serviço), **27 variáveis de sensores** (pressão, temperatura, abertura de válvulas, estado de válvulas, vazão), e **14 equipamentos da Árvore de Natal Molhada** (ANM, DHSV, PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK, TPT, PDG). Classes transientes: base+100 (exceto classes 3 e 4, que não têm variante transiente). Polissemias críticas: **PCK** (choke de produção no 3W) ≠ pilot-operated check valve; **BSW** (propriedade do fluido) vs. **event_bsw_increase** (evento classe 1); **state** (3W) vs. **well_state** (taxonomia ANP).

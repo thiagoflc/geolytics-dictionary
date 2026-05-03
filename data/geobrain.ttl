@@ -8,8 +8,8 @@
 @prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T10:27:13.577Z
-# Nodes: 170  Edges: 259
+# Generated: 2026-05-03T11:27:39.462Z
+# Nodes: 221  Edges: 370
 
 #
 # Classes
@@ -502,8 +502,20 @@ geo:dhsv a owl:Class ;
     skos:prefLabel "DHSV"@pt ;
     skos:prefLabel "Downhole Safety Valve"@en ;
     geo:entityType "equipment" ;
+    skos:altLabel "válvula de segurança de subsuperfície"@pt ;
+    skos:altLabel "SSSV"@pt ;
+    skos:altLabel "SCSSV"@pt ;
+    skos:altLabel "downhole safety valve"@en ;
+    skos:altLabel "subsurface safety valve"@en ;
+    skos:altLabel "surface-controlled subsurface safety valve"@en ;
+    skos:altLabel "SSSV"@en ;
+    skos:altLabel "SCSSV"@en ;
     skos:definition """Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície."""@pt ;
-    geo:geocoverage "layer4" .
+    skos:example "DHSV fecha automaticamente quando a pressão de controle hidráulico cai" ;
+    skos:example "Fechamento espúrio da DHSV (classe 2 do 3W) causa queda de P-PDG" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:bha a owl:Class ;
     skos:prefLabel "BHA"@pt ;
@@ -1744,6 +1756,741 @@ geo:laudo-geomecanico a owl:Class ;
     skos:altLabel "Geomechanical Report"@en ;
     skos:definition """Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal para subsidiar o projeto e o acompanhamento do poço. Produzido pelo CSD Geomecânica (RES/GMR ou área responsável). Distinto do QPG (prognóstico geológico) — não inferir existência para todos os poços."""@pt .
 
+geo:sensor_aber_ckgl a owl:Class ;
+    skos:prefLabel "ABER-CKGL"@pt ;
+    skos:prefLabel "Gas-Lift Choke Opening"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "abertura GLCK"@pt ;
+    skos:altLabel "abertura choke gas-lift"@pt ;
+    skos:altLabel "GLCK opening"@en ;
+    skos:altLabel "gas-lift choke opening"@en ;
+    skos:definition """Abertura do GLCK (gas-lift choke), variável 3W em percentual. Indica o grau de abertura da válvula de estrangulamento da linha de gas-lift."""@pt ;
+    skos:example "ABER-CKGL=0 indica GLCK fechado" ;
+    skos:example "ABER-CKGL=100 indica GLCK totalmente aberto" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_aber_ckp a owl:Class ;
+    skos:prefLabel "ABER-CKP"@pt ;
+    skos:prefLabel "Production Choke Opening"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "abertura PCK"@pt ;
+    skos:altLabel "abertura choke produção"@pt ;
+    skos:altLabel "PCK opening"@en ;
+    skos:altLabel "production choke opening"@en ;
+    skos:definition """Abertura do PCK (production choke), variável 3W em percentual. Queda brusca de ABER-CKP pode indicar restrição rápida (classe 6) ou incrustação (classe 7)."""@pt ;
+    skos:example "ABER-CKP caindo rapidamente indica classe 6 ou 7" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_dhsv a owl:Class ;
+    skos:prefLabel "ESTADO-DHSV"@pt ;
+    skos:prefLabel "DHSV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado DHSV"@pt ;
+    skos:altLabel "estado válvula de segurança"@pt ;
+    skos:altLabel "DHSV state"@en ;
+    skos:altLabel "safety valve state"@en ;
+    skos:definition """Estado da DHSV (válvula de segurança de subsuperfície): 0=fechada, 0.5=parcial, 1=aberta. Fechamento espúrio (classe 2) é detectado por queda abrupta de ESTADO-DHSV."""@pt ;
+    skos:example "ESTADO-DHSV=0 confirma fechamento da DHSV" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_m1 a owl:Class ;
+    skos:prefLabel "ESTADO-M1"@pt ;
+    skos:prefLabel "PMV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado PMV"@pt ;
+    skos:altLabel "estado válvula mestra produção"@pt ;
+    skos:altLabel "PMV state"@en ;
+    skos:altLabel "production master valve state"@en ;
+    skos:definition "Estado da PMV (production master valve / válvula mestra de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_m2 a owl:Class ;
+    skos:prefLabel "ESTADO-M2"@pt ;
+    skos:prefLabel "AMV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado AMV"@pt ;
+    skos:altLabel "estado válvula mestra anular"@pt ;
+    skos:altLabel "AMV state"@en ;
+    skos:altLabel "annulus master valve state"@en ;
+    skos:definition "Estado da AMV (annulus master valve / válvula mestra de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_pxo a owl:Class ;
+    skos:prefLabel "ESTADO-PXO"@pt ;
+    skos:prefLabel "PXO Valve State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado PXO"@pt ;
+    skos:altLabel "estado válvula pig-crossover"@pt ;
+    skos:altLabel "PXO state"@en ;
+    skos:altLabel "pig-crossover valve state"@en ;
+    skos:definition "Estado da PXO (pig-crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_sdv_gl a owl:Class ;
+    skos:prefLabel "ESTADO-SDV-GL"@pt ;
+    skos:prefLabel "Gas-Lift SDV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado SDV-GL"@pt ;
+    skos:altLabel "estado válvula bloqueio gas-lift"@pt ;
+    skos:altLabel "SDV-GL state"@en ;
+    skos:altLabel "gas-lift shutdown valve state"@en ;
+    skos:definition "Estado da SDV-GL (válvula de bloqueio de gas-lift): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_sdv_p a owl:Class ;
+    skos:prefLabel "ESTADO-SDV-P"@pt ;
+    skos:prefLabel "Production SDV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado SDV-P"@pt ;
+    skos:altLabel "estado válvula bloqueio produção"@pt ;
+    skos:altLabel "SDV-P state"@en ;
+    skos:altLabel "production shutdown valve state"@en ;
+    skos:definition "Estado da SDV-P (válvula de bloqueio de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_w1 a owl:Class ;
+    skos:prefLabel "ESTADO-W1"@pt ;
+    skos:prefLabel "PWV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado PWV"@pt ;
+    skos:altLabel "estado válvula asa produção"@pt ;
+    skos:altLabel "PWV state"@en ;
+    skos:altLabel "production wing valve state"@en ;
+    skos:definition "Estado da PWV (production wing valve / válvula asa de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_w2 a owl:Class ;
+    skos:prefLabel "ESTADO-W2"@pt ;
+    skos:prefLabel "AWV State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado AWV"@pt ;
+    skos:altLabel "estado válvula asa anular"@pt ;
+    skos:altLabel "AWV state"@en ;
+    skos:altLabel "annulus wing valve state"@en ;
+    skos:definition "Estado da AWV (annulus wing valve / válvula asa de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_estado_xo a owl:Class ;
+    skos:prefLabel "ESTADO-XO"@pt ;
+    skos:prefLabel "XO Valve State"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "estado XO"@pt ;
+    skos:altLabel "estado válvula crossover"@pt ;
+    skos:altLabel "XO state"@en ;
+    skos:altLabel "crossover valve state"@en ;
+    skos:definition "Estado da XO (crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_anular a owl:Class ;
+    skos:prefLabel "P-ANULAR"@pt ;
+    skos:prefLabel "Annulus Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão anular"@pt ;
+    skos:altLabel "pressão do anular"@pt ;
+    skos:altLabel "annulus pressure"@en ;
+    skos:altLabel "casing-tubing annulus pressure"@en ;
+    skos:definition """Pressão no anular do poço [Pa]. Variável 3W. Monitorada para detectar vazamentos de válvulas e comunicação de pressão entre anular e coluna de produção."""@pt ;
+    skos:example "P-ANULAR elevado pode indicar comunicação entre anular e coluna" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propPressure/Pressure> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_jus_bs a owl:Class ;
+    skos:prefLabel "P-JUS-BS"@pt ;
+    skos:prefLabel "Service Pump Downstream Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão jusante bomba serviço"@pt ;
+    skos:altLabel "P-JUS-BS"@pt ;
+    skos:altLabel "service pump downstream pressure"@en ;
+    skos:altLabel "BS downstream pressure"@en ;
+    skos:definition """Pressão a jusante da SP (bomba de serviço) [Pa]. Variável 3W. Relevante para detecção de hidrato em linha de serviço (classe 9)."""@pt ;
+    skos:example "P-JUS-BS cai em caso de hidrato na linha de serviço" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_jus_ckgl a owl:Class ;
+    skos:prefLabel "P-JUS-CKGL"@pt ;
+    skos:prefLabel "Gas-Lift Choke Downstream Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão jusante GLCK"@pt ;
+    skos:altLabel "pressão jusante choke gas-lift"@pt ;
+    skos:altLabel "GLCK downstream pressure"@en ;
+    skos:altLabel "gas-lift choke downstream pressure"@en ;
+    skos:definition """Pressão a jusante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de injeção de gas-lift após o estrangulamento."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_jus_ckp a owl:Class ;
+    skos:prefLabel "P-JUS-CKP"@pt ;
+    skos:prefLabel "Production Choke Downstream Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão jusante PCK"@pt ;
+    skos:altLabel "pressão jusante choke produção"@pt ;
+    skos:altLabel "PCK downstream pressure"@en ;
+    skos:altLabel "production choke downstream pressure"@en ;
+    skos:definition """Pressão a jusante do PCK (production choke) [Pa]. Variável 3W. Junto com P-MON-CKP e ABER-CKP, caracteriza o diferencial de pressão no choke de produção."""@pt ;
+    skos:example "Diferencial P-MON-CKP - P-JUS-CKP indica grau de restrição do choke" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propPressure/Pressure> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_mon_ckgl a owl:Class ;
+    skos:prefLabel "P-MON-CKGL"@pt ;
+    skos:prefLabel "Gas-Lift Choke Upstream Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão montante GLCK"@pt ;
+    skos:altLabel "pressão montante choke gas-lift"@pt ;
+    skos:altLabel "GLCK upstream pressure"@en ;
+    skos:altLabel "gas-lift choke upstream pressure"@en ;
+    skos:definition """Pressão a montante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de entrada de gas-lift antes do estrangulamento."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_mon_ckp a owl:Class ;
+    skos:prefLabel "P-MON-CKP"@pt ;
+    skos:prefLabel "Production Choke Upstream Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão montante PCK"@pt ;
+    skos:altLabel "pressão montante choke produção"@pt ;
+    skos:altLabel "PCK upstream pressure"@en ;
+    skos:altLabel "production choke upstream pressure"@en ;
+    skos:definition """Pressão a montante do PCK (production choke) [Pa]. Variável 3W. Usada em conjunto com P-JUS-CKP para calcular diferencial de pressão no choke."""@pt ;
+    skos:example "P-MON-CKP crescente com ABER-CKP constante pode indicar incrustação" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propPressure/Pressure> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_mon_sdv_p a owl:Class ;
+    skos:prefLabel "P-MON-SDV-P"@pt ;
+    skos:prefLabel "Production SDV Upstream Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão montante SDV-P"@pt ;
+    skos:altLabel "SDV-P upstream pressure"@en ;
+    skos:altLabel "production SDV upstream pressure"@en ;
+    skos:definition "Pressão a montante da SDV-P (válvula de bloqueio de produção) [Pa]. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_pdg a owl:Class ;
+    skos:prefLabel "P-PDG"@pt ;
+    skos:prefLabel "PDG Downhole Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão downhole"@pt ;
+    skos:altLabel "pressão PDG"@pt ;
+    skos:altLabel "pressão de fundo"@pt ;
+    skos:altLabel "downhole pressure"@en ;
+    skos:altLabel "PDG pressure"@en ;
+    skos:altLabel "bottomhole pressure"@en ;
+    skos:definition """Pressão downhole medida pelo PDG (Permanent Downhole Gauge) [Pa]. Variável 3W fundamental para detectar golfadas severas (classe 3), instabilidade de fluxo (classe 4) e perda de produtividade (classe 5)."""@pt ;
+    skos:example "P-PDG oscilante é assinatura de severe slugging" ;
+    skos:example "P-PDG declinando rapidamente indica perda de produtividade" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propPressure/Pressure> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_pt_p a owl:Class ;
+    skos:prefLabel "PT-P"@pt ;
+    skos:prefLabel "Xmas-Tree Production Line Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão ANM linha produção"@pt ;
+    skos:altLabel "pressão jusante PWV"@pt ;
+    skos:altLabel "Xmas-tree production pressure"@en ;
+    skos:altLabel "subsea tree production line pressure"@en ;
+    skos:definition "Pressão na linha de produção da ANM (árvore de natal subsea), a jusante da PWV [Pa]. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_p_tpt a owl:Class ;
+    skos:prefLabel "P-TPT"@pt ;
+    skos:prefLabel "TPT Pressure"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "pressão TPT"@pt ;
+    skos:altLabel "pressão transdutor ANM"@pt ;
+    skos:altLabel "TPT pressure"@en ;
+    skos:altLabel "subsea tree pressure transducer pressure"@en ;
+    skos:definition """Pressão medida pelo TPT (Temperature and Pressure Transducer) na ANM [Pa]. Variável 3W. Principal sensor de superfície do poço subsea para detecção de golfadas severas."""@pt ;
+    skos:example "P-TPT oscilando em ciclos indica severe slugging" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propPressure/Pressure> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_qbs a owl:Class ;
+    skos:prefLabel "QBS"@pt ;
+    skos:prefLabel "Service Pump Flow Rate"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "vazão bomba serviço"@pt ;
+    skos:altLabel "QBS"@pt ;
+    skos:altLabel "service pump flow rate"@en ;
+    skos:altLabel "BS flow"@en ;
+    skos:definition "Vazão na bomba de serviço (SP) [m³/s]. Variável 3W. Usada para detectar hidrato em linha de serviço (classe 9)."@pt ;
+    skos:example "QBS reduzindo junto com P-JUS-BS indica hidrato na linha de serviço" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propFluid/FlowRate> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_qgl a owl:Class ;
+    skos:prefLabel "QGL"@pt ;
+    skos:prefLabel "Gas-Lift Flow Rate"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "vazão gas-lift"@pt ;
+    skos:altLabel "QGL"@pt ;
+    skos:altLabel "injeção gas-lift"@pt ;
+    skos:altLabel "gas-lift flow rate"@en ;
+    skos:altLabel "GL injection rate"@en ;
+    skos:definition """Vazão de injeção de gas-lift [m³/s]. Variável 3W. Queda abrupta de QGL pode indicar instabilidade de fluxo ou perda de produtividade."""@pt ;
+    skos:example "QGL reduzindo rapidamente pode indicar classe 5 ou problema no compressor" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propFluid/FlowRate> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_t_jus_ckp a owl:Class ;
+    skos:prefLabel "T-JUS-CKP"@pt ;
+    skos:prefLabel "Production Choke Downstream Temperature"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "temperatura jusante PCK"@pt ;
+    skos:altLabel "temperatura choke produção"@pt ;
+    skos:altLabel "PCK downstream temperature"@en ;
+    skos:altLabel "production choke downstream temperature"@en ;
+    skos:definition """Temperatura a jusante do PCK (production choke) [°C]. Variável 3W. Efeito Joule-Thomson causa queda de temperatura no estrangulamento; anomalia pode indicar hidrato."""@pt ;
+    skos:example "T-JUS-CKP muito baixa pode indicar formação de hidrato no choke" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_t_mon_ckp a owl:Class ;
+    skos:prefLabel "T-MON-CKP"@pt ;
+    skos:prefLabel "Production Choke Upstream Temperature"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "temperatura montante PCK"@pt ;
+    skos:altLabel "PCK upstream temperature"@en ;
+    skos:altLabel "production choke upstream temperature"@en ;
+    skos:definition """Temperatura a montante do PCK (production choke) [°C]. Variável 3W. Usada em conjunto com T-JUS-CKP para monitorar diferencial de temperatura no choke."""@pt ;
+    skos:example "Diferencial T-MON-CKP - T-JUS-CKP indica severidade de expansão no choke" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propTemperature/Temperature> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_t_pdg a owl:Class ;
+    skos:prefLabel "T-PDG"@pt ;
+    skos:prefLabel "PDG Downhole Temperature"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "temperatura downhole"@pt ;
+    skos:altLabel "temperatura PDG"@pt ;
+    skos:altLabel "temperatura de fundo"@pt ;
+    skos:altLabel "downhole temperature"@en ;
+    skos:altLabel "PDG temperature"@en ;
+    skos:altLabel "bottomhole temperature"@en ;
+    skos:definition """Temperatura downhole medida pelo PDG (Permanent Downhole Gauge) [°C]. Variável 3W. Queda persistente pode indicar hidrato ou redução de fluxo."""@pt ;
+    skos:example "T-PDG declinando progressivamente em poço com gas-lift pode indicar hidrato na linha de produção" ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propTemperature/Temperature> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sensor_t_tpt a owl:Class ;
+    skos:prefLabel "T-TPT"@pt ;
+    skos:prefLabel "TPT Temperature"@en ;
+    geo:entityType "instrument" ;
+    skos:altLabel "temperatura TPT"@pt ;
+    skos:altLabel "temperatura transdutor ANM"@pt ;
+    skos:altLabel "TPT temperature"@en ;
+    skos:altLabel "subsea tree temperature"@en ;
+    skos:definition "Temperatura medida pelo TPT (Temperature and Pressure Transducer) na ANM [°C]. Variável 3W."@pt ;
+    owl:sameAs <https://w3id.org/osdu#TimeSeriesData> ;
+    skos:closeMatch <http://sweetontology.net/propTemperature/Temperature> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_normal a owl:Class ;
+    skos:prefLabel "Operação Normal"@pt ;
+    skos:prefLabel "Normal Operation"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "operação normal"@pt ;
+    skos:altLabel "estado normal"@pt ;
+    skos:altLabel "normal operation"@en ;
+    skos:altLabel "normal state"@en ;
+    skos:definition """Estado de referência do poço: produção estável, todas as variáveis dentro da faixa operacional nominal. Rótulo 3W classe 0."""@pt ;
+    skos:example "Classe 0 é o baseline para treinamento de modelos de detecção de anomalias" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_bsw_increase a owl:Class ;
+    skos:prefLabel "Aumento Abrupto de BSW"@pt ;
+    skos:prefLabel "Abrupt Increase of BSW"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "aumento BSW"@pt ;
+    skos:altLabel "surgência de água"@pt ;
+    skos:altLabel "irrupção de água"@pt ;
+    skos:altLabel "BSW increase"@en ;
+    skos:altLabel "water breakthrough"@en ;
+    skos:altLabel "water influx"@en ;
+    skos:definition """Aumento súbito do BSW (Basic Sediment and Water — fração de água e sedimentos na produção). Indica influxo de água de formação ou quebra de barreira de óleo/água. Rótulo 3W classe 1 (transiente: 101)."""@pt ;
+    skos:example "BSW abrupto indica comunicação com aquífero ou falha de barreira" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_spurious_dhsv a owl:Class ;
+    skos:prefLabel "Fechamento Espúrio de DHSV"@pt ;
+    skos:prefLabel "Spurious Closure of DHSV"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "fechamento espúrio DHSV"@pt ;
+    skos:altLabel "fechamento não-intencional DHSV"@pt ;
+    skos:altLabel "spurious DHSV closure"@en ;
+    skos:altLabel "unintended DHSV closure"@en ;
+    skos:definition """Fechamento não-intencional da DHSV (válvula de segurança de subsuperfície) sem causa operacional justificada. Causa queda abrupta de P-PDG e P-TPT. Rótulo 3W classe 2 (transiente: 102). Janela de análise: 180 s, passo: 15 s."""@pt ;
+    skos:example "ESTADO-DHSV=0 com queda de P-PDG confirma fechamento espúrio" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_severe_slugging a owl:Class ;
+    skos:prefLabel "Golfadas Severas"@pt ;
+    skos:prefLabel "Severe Slugging"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "golfadas severas"@pt ;
+    skos:altLabel "slugging severo"@pt ;
+    skos:altLabel "padrão de golfadas"@pt ;
+    skos:altLabel "severe slugging"@en ;
+    skos:altLabel "riser slugging"@en ;
+    skos:altLabel "terrain slugging"@en ;
+    skos:definition """Padrão de fluxo bifásico instável caracterizado por golfadas longas de líquido alternadas com bolsões de gás na linha de produção riser. Causa oscilações cíclicas em P-TPT e P-PDG. Rótulo 3W classe 3 (sem transiente)."""@pt ;
+    skos:example "Ciclo de golfada severa: bloqueio de gás → acúmulo de líquido → irrupção → blow-out" ;
+    skos:example "P-TPT e P-PDG oscilatórios são assinatura de severe slugging" ;
+    skos:relatedMatch <http://sweetontology.net/phenFluidDynamics/FlowInstability> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_flow_instability a owl:Class ;
+    skos:prefLabel "Instabilidade de Fluxo"@pt ;
+    skos:prefLabel "Flow Instability"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "instabilidade de fluxo"@pt ;
+    skos:altLabel "fluxo instável"@pt ;
+    skos:altLabel "oscilação de fluxo"@pt ;
+    skos:altLabel "flow instability"@en ;
+    skos:altLabel "flow oscillation"@en ;
+    skos:altLabel "unstable flow"@en ;
+    skos:definition """Instabilidade de fluxo multifásico no poço, com oscilações irregulares de pressão e vazão. Diferencia-se de golfadas severas por padrão menos periódico. Rótulo 3W classe 4 (sem transiente)."""@pt ;
+    skos:example "Instabilidade de fluxo pode anteceder golfadas severas" ;
+    skos:relatedMatch <http://sweetontology.net/phenFluidDynamics/FlowInstability> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_rapid_prod_loss a owl:Class ;
+    skos:prefLabel "Perda Rápida de Produtividade"@pt ;
+    skos:prefLabel "Rapid Productivity Loss"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "perda produtividade"@pt ;
+    skos:altLabel "declínio rápido"@pt ;
+    skos:altLabel "queda de produção"@pt ;
+    skos:altLabel "rapid productivity loss"@en ;
+    skos:altLabel "productivity decline"@en ;
+    skos:altLabel "production drop"@en ;
+    skos:definition """Queda rápida e persistente da produtividade do poço, indicada por redução de P-PDG e QGL sem ação operacional. Pode ser causada por dano à formação, incrustação de fundo ou mudança na permeabilidade efetiva. Rótulo 3W classe 5 (transiente: 105)."""@pt ;
+    skos:example "P-PDG declining faster than expected pode indicar skin damage" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_quick_pck_restriction a owl:Class ;
+    skos:prefLabel "Restrição Rápida no PCK"@pt ;
+    skos:prefLabel "Quick Restriction in PCK"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "restrição rápida PCK"@pt ;
+    skos:altLabel "obstrução rápida choke"@pt ;
+    skos:altLabel "quick PCK restriction"@en ;
+    skos:altLabel "rapid choke restriction"@en ;
+    skos:altLabel "choke obstruction"@en ;
+    skos:definition """Redução rápida e abrupta da abertura do PCK (production choke) ou da seção de passagem, causando aumento do diferencial de pressão. Pode ser causada por objeto sólido, wax ou hidrato parcial. Rótulo 3W classe 6 (transiente: 106)."""@pt ;
+    skos:example "ABER-CKP caindo abruptamente com diferencial de pressão crescente é assinatura de classe 6" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_scaling_pck a owl:Class ;
+    skos:prefLabel "Incrustação no PCK"@pt ;
+    skos:prefLabel "Scaling in PCK"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "incrustação PCK"@pt ;
+    skos:altLabel "scaling choke"@pt ;
+    skos:altLabel "deposição mineral choke"@pt ;
+    skos:altLabel "PCK scaling"@en ;
+    skos:altLabel "choke scaling"@en ;
+    skos:altLabel "mineral deposition in choke"@en ;
+    skos:definition """Deposição progressiva de incrustações minerais (carbonato de cálcio, barita, etc.) no PCK (production choke), causando redução gradual da abertura efetiva. Distingue-se de restrição rápida pelo ritmo de crescimento do diferencial de pressão. Rótulo 3W classe 7 (transiente: 107)."""@pt ;
+    skos:example "T-MON-CKP elevada com diferencial crescente ao longo do tempo é assinatura de scaling" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_hydrate_production a owl:Class ;
+    skos:prefLabel "Hidrato na Linha de Produção"@pt ;
+    skos:prefLabel "Hydrate in Production Line"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "hidrato linha produção"@pt ;
+    skos:altLabel "obstrução por hidrato"@pt ;
+    skos:altLabel "plug de hidrato produção"@pt ;
+    skos:altLabel "production line hydrate"@en ;
+    skos:altLabel "hydrate plug in production"@en ;
+    skos:altLabel "gas hydrate blockage"@en ;
+    skos:definition """Formação de hidrato de gás na linha de produção subsea, causando obstrução parcial ou total. Ocorre em condições de alta pressão e baixa temperatura. Detectado por queda de P-PDG, P-TPT e QGL com T-PDG decrescente. Rótulo 3W classe 8 (transiente: 108)."""@pt ;
+    skos:example "Queda simultânea de P-PDG + T-PDG + QGL indica hidrato na linha de produção" ;
+    skos:closeMatch <http://sweetontology.net/phenFluidInstability/HydrateFormation> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:event_hydrate_service a owl:Class ;
+    skos:prefLabel "Hidrato na Linha de Serviço"@pt ;
+    skos:prefLabel "Hydrate in Service Line"@en ;
+    geo:entityType "operational" ;
+    skos:altLabel "hidrato linha serviço"@pt ;
+    skos:altLabel "obstrução por hidrato serviço"@pt ;
+    skos:altLabel "plug de hidrato serviço"@pt ;
+    skos:altLabel "service line hydrate"@en ;
+    skos:altLabel "hydrate in service line"@en ;
+    skos:altLabel "intervention line hydrate"@en ;
+    skos:definition """Formação de hidrato de gás na linha de serviço (injeção de inibidor ou fluido de intervenção) subsea. Detectado por queda de P-JUS-BS e QBS. Rótulo 3W classe 9 (transiente: 109)."""@pt ;
+    skos:example "QBS reduzindo com P-JUS-BS crescente indica obstrução por hidrato na linha de serviço" ;
+    skos:closeMatch <http://sweetontology.net/phenFluidInstability/HydrateFormation> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:pmv a owl:Class ;
+    skos:prefLabel "PMV"@pt ;
+    skos:prefLabel "Production Master Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula mestra produção"@pt ;
+    skos:altLabel "M1"@pt ;
+    skos:altLabel "production master valve"@en ;
+    skos:altLabel "PMV"@en ;
+    skos:altLabel "M1"@en ;
+    skos:definition """Válvula mestra de produção (Production Master Valve, M1) da ANM subsea. Controla o fluxo na linha principal de produção do poço. Parte da árvore de natal (ANM)."""@pt ;
+    skos:example "PMV fechada indica shutdown do poço pelo lado de produção" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:amv a owl:Class ;
+    skos:prefLabel "AMV"@pt ;
+    skos:prefLabel "Annulus Master Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula mestra anular"@pt ;
+    skos:altLabel "M2"@pt ;
+    skos:altLabel "annulus master valve"@en ;
+    skos:altLabel "AMV"@en ;
+    skos:altLabel "M2"@en ;
+    skos:definition """Válvula mestra de anular (Annulus Master Valve, M2) da ANM subsea. Controla o acesso ao espaço anular do poço. Parte da árvore de natal (ANM)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:pwv a owl:Class ;
+    skos:prefLabel "PWV"@pt ;
+    skos:prefLabel "Production Wing Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula asa produção"@pt ;
+    skos:altLabel "W1"@pt ;
+    skos:altLabel "production wing valve"@en ;
+    skos:altLabel "PWV"@en ;
+    skos:altLabel "W1"@en ;
+    skos:definition """Válvula asa de produção (Production Wing Valve, W1) da ANM subsea. Válvula de isolamento da linha de produção. Parte da árvore de natal (ANM)."""@pt ;
+    skos:example "PWV fechada isola o poço da linha de produção" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:awv a owl:Class ;
+    skos:prefLabel "AWV"@pt ;
+    skos:prefLabel "Annulus Wing Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula asa anular"@pt ;
+    skos:altLabel "W2"@pt ;
+    skos:altLabel "annulus wing valve"@en ;
+    skos:altLabel "AWV"@en ;
+    skos:altLabel "W2"@en ;
+    skos:definition """Válvula asa de anular (Annulus Wing Valve, W2) da ANM subsea. Válvula de isolamento da linha de anular. Parte da árvore de natal (ANM)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:pxo a owl:Class ;
+    skos:prefLabel "PXO"@pt ;
+    skos:prefLabel "Pig-Crossover Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula pig-crossover"@pt ;
+    skos:altLabel "PXO"@pt ;
+    skos:altLabel "pig-crossover valve"@en ;
+    skos:altLabel "PXO"@en ;
+    skos:definition """Válvula de pig-crossover da ANM subsea. Permite desvio de linha para passagem de pig de limpeza. Parte da árvore de natal (ANM)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:xo a owl:Class ;
+    skos:prefLabel "XO"@pt ;
+    skos:prefLabel "Crossover Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula crossover"@pt ;
+    skos:altLabel "XO"@pt ;
+    skos:altLabel "crossover valve"@en ;
+    skos:altLabel "XO"@en ;
+    skos:definition """Válvula crossover da ANM subsea. Permite comunicação entre linhas de produção e anular no leito marinho. Parte da árvore de natal (ANM)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sdv_p a owl:Class ;
+    skos:prefLabel "SDV-P"@pt ;
+    skos:prefLabel "Production Shutdown Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula bloqueio produção"@pt ;
+    skos:altLabel "SDV-P"@pt ;
+    skos:altLabel "válvula de shutdown produção"@pt ;
+    skos:altLabel "production shutdown valve"@en ;
+    skos:altLabel "SDV-P"@en ;
+    skos:definition """Válvula de bloqueio da linha de produção (Production Shutdown Valve) da ANM subsea. Actua como elemento de segurança em caso de ESD. Parte da árvore de natal (ANM)."""@pt ;
+    skos:example "SDV-P fecha automaticamente em caso de ESD ou alta pressão" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sdv_gl a owl:Class ;
+    skos:prefLabel "SDV-GL"@pt ;
+    skos:prefLabel "Gas-Lift Shutdown Valve"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "válvula bloqueio gas-lift"@pt ;
+    skos:altLabel "SDV-GL"@pt ;
+    skos:altLabel "válvula shutdown gas-lift"@pt ;
+    skos:altLabel "gas-lift shutdown valve"@en ;
+    skos:altLabel "SDV-GL"@en ;
+    skos:definition """Válvula de bloqueio da linha de gas-lift (Gas-Lift Shutdown Valve) da ANM subsea. Actua como elemento de segurança. Parte da árvore de natal (ANM)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:glck a owl:Class ;
+    skos:prefLabel "GLCK"@pt ;
+    skos:prefLabel "Gas-Lift Choke"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "choke gas-lift"@pt ;
+    skos:altLabel "GLCK"@pt ;
+    skos:altLabel "estrangulador gas-lift"@pt ;
+    skos:altLabel "gas-lift choke"@en ;
+    skos:altLabel "GLCK"@en ;
+    skos:definition """Choke (estrangulador) da linha de gas-lift (GLCK) da ANM subsea. Controla a taxa de injeção de gas-lift no poço. Parte da árvore de natal (ANM)."""@pt ;
+    skos:example "ABER-CKGL e pressões P-MON-CKGL/P-JUS-CKGL monitoram o GLCK" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:pck a owl:Class ;
+    skos:prefLabel "PCK"@pt ;
+    skos:prefLabel "Production Choke"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "choke produção"@pt ;
+    skos:altLabel "PCK"@pt ;
+    skos:altLabel "estrangulador produção"@pt ;
+    skos:altLabel "production choke"@en ;
+    skos:altLabel "PCK"@en ;
+    skos:definition """Choke de produção (PCK) da ANM subsea. Controla a vazão da linha de produção do poço; principal ponto de incrustação (scaling, classe 7) e restrição rápida (classe 6). Parte da árvore de natal (ANM). ATENÇÃO: PCK no contexto 3W é o Production Choke — não confundir com "pilot-operated check valve" em contextos genéricos de tubulação."""@pt ;
+    skos:example "Incrustação no PCK detectada por queda de ABER-CKP com diferencial crescente de pressão" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:tpt a owl:Class ;
+    skos:prefLabel "TPT"@pt ;
+    skos:prefLabel "Temperature and Pressure Transducer"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "transdutor temperatura pressão"@pt ;
+    skos:altLabel "TPT"@pt ;
+    skos:altLabel "transdutor ANM"@pt ;
+    skos:altLabel "temperature pressure transducer"@en ;
+    skos:altLabel "TPT"@en ;
+    skos:definition """Transdutor de temperatura e pressão (TPT) instalado na ANM subsea. Fornece as variáveis P-TPT e T-TPT. Parte da árvore de natal (ANM)."""@pt ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:pdg a owl:Class ;
+    skos:prefLabel "PDG"@pt ;
+    skos:prefLabel "Permanent Downhole Gauge"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "medidor downhole"@pt ;
+    skos:altLabel "PDG"@pt ;
+    skos:altLabel "medidor permanente fundo"@pt ;
+    skos:altLabel "permanent downhole gauge"@en ;
+    skos:altLabel "PDG"@en ;
+    skos:altLabel "downhole gauge"@en ;
+    skos:definition """Medidor permanente de fundo de poço (Permanent Downhole Gauge, PDG). Instalado na coluna de produção dentro do poço (downhole). Fornece P-PDG e T-PDG. Sensor crítico para detecção de golfadas severas e perda de produtividade."""@pt ;
+    skos:example "PDG mede pressão e temperatura na coluna de produção em profundidade" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:sp_pump a owl:Class ;
+    skos:prefLabel "SP"@pt ;
+    skos:prefLabel "Service Pump"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "bomba serviço"@pt ;
+    skos:altLabel "SP"@pt ;
+    skos:altLabel "service pump"@en ;
+    skos:altLabel "SP"@en ;
+    skos:definition """Bomba de serviço (SP) usada em operações de intervenção ou injeção de fluidos no poço. Fornece as variáveis QBS (vazão) e P-JUS-BS (pressão a jusante). Relevante para detecção de hidrato em linha de serviço (classe 9)."""@pt ;
+    skos:example "QBS + P-JUS-BS monitoram hidrato na linha de serviço" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:anm a owl:Class ;
+    skos:prefLabel "ANM"@pt ;
+    skos:prefLabel "Subsea Xmas-Tree"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "árvore de natal molhada"@pt ;
+    skos:altLabel "ANM"@pt ;
+    skos:altLabel "árvore de natal subsea"@pt ;
+    skos:altLabel "Christmas tree subsea"@pt ;
+    skos:altLabel "subsea Xmas-tree"@en ;
+    skos:altLabel "ANM"@en ;
+    skos:altLabel "wet Christmas tree"@en ;
+    skos:altLabel "subsea tree"@en ;
+    skos:definition """Árvore de natal molhada (ANM) — conjunto de válvulas e equipamentos instalado no leito marinho no topo do poço offshore. Inclui PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK e TPT. Componente central da completação subsea."""@pt ;
+    skos:example "A ANM é o principal conjunto de controle de fluxo em poços offshore" ;
+    owl:sameAs <https://w3id.org/osdu#EquipmentType> ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
 #
 # Object properties
 #
@@ -1769,8 +2516,8 @@ geo:undergoes a owl:ObjectProperty ;
 geo:located_in a owl:ObjectProperty ;
     rdfs:label "localizado em"@pt ;
     rdfs:label "located in"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:campo ) ] ;
-    rdfs:range geo:bacia-sedimentar .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:poco geo:campo geo:sensor_aber_ckgl geo:sensor_aber_ckp geo:sensor_estado_dhsv geo:sensor_estado_m1 geo:sensor_estado_m2 geo:sensor_estado_pxo geo:sensor_estado_sdv_gl geo:sensor_estado_sdv_p geo:sensor_estado_w1 geo:sensor_estado_w2 geo:sensor_estado_xo geo:sensor_p_jus_bs geo:sensor_p_jus_ckgl geo:sensor_p_jus_ckp geo:sensor_p_mon_ckgl geo:sensor_p_mon_ckp geo:sensor_p_mon_sdv_p geo:sensor_p_pdg geo:sensor_pt_p geo:sensor_p_tpt geo:sensor_qbs geo:sensor_t_jus_ckp geo:sensor_t_mon_ckp geo:sensor_t_pdg geo:sensor_t_tpt ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:bacia-sedimentar geo:poco ) ] .
 
 geo:operated_by a owl:ObjectProperty ;
     rdfs:label "operado por"@pt ;
@@ -1901,8 +2648,8 @@ geo:monitored_via a owl:ObjectProperty ;
 geo:measured_in a owl:ObjectProperty ;
     rdfs:label "medido em"@pt ;
     rdfs:label "measured in"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:pem geo:perfil-poco ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:uts geo:wellbore ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:pem geo:perfil-poco geo:sensor_p_anular geo:sensor_qgl ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:uts geo:wellbore geo:poco ) ] .
 
 geo:scoped_to a owl:ObjectProperty ;
     rdfs:label "associado ao"@pt ;
@@ -2021,7 +2768,7 @@ geo:installed_on a owl:ObjectProperty ;
 geo:installed_in a owl:ObjectProperty ;
     rdfs:label "instalado em"@pt ;
     rdfs:label "installed in"@en ;
-    rdfs:domain geo:dhsv ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:dhsv geo:pdg ) ] ;
     rdfs:range geo:poco .
 
 geo:controls a owl:ObjectProperty ;
@@ -2063,8 +2810,8 @@ geo:produces_at a owl:ObjectProperty ;
 geo:connects a owl:ObjectProperty ;
     rdfs:label "conecta"@pt ;
     rdfs:label "connects"@en ;
-    rdfs:domain geo:riser ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:anm-eq geo:fpso ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:riser geo:sp_pump ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:anm-eq geo:fpso geo:poco ) ] .
 
 geo:operates a owl:ObjectProperty ;
     rdfs:label "opera"@pt ;
@@ -2237,7 +2984,7 @@ geo:guides_drilling_of a owl:ObjectProperty ;
 geo:occurs_in a owl:ObjectProperty ;
     rdfs:label "ocorre em"@pt ;
     rdfs:label "occurs in"@en ;
-    rdfs:domain geo:ocorrencia-geomec ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:ocorrencia-geomec geo:event_normal geo:event_bsw_increase geo:event_spurious_dhsv geo:event_severe_slugging geo:event_flow_instability geo:event_rapid_prod_loss geo:event_quick_pck_restriction geo:event_scaling_pck geo:event_hydrate_production geo:event_hydrate_service ) ] ;
     rdfs:range geo:poco .
 
 geo:allocated_to a owl:ObjectProperty ;
@@ -2381,8 +3128,8 @@ geo:describes_structure_of a owl:ObjectProperty ;
 geo:part_of a owl:ObjectProperty ;
     rdfs:label "parte de"@pt ;
     rdfs:label "part of"@en ;
-    rdfs:domain geo:casing-design ;
-    rdfs:range geo:wellbore-architecture .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:casing-design geo:pmv geo:amv geo:pwv geo:awv geo:pxo geo:xo geo:sdv_p geo:sdv_gl geo:glck geo:pck geo:tpt geo:anm ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:wellbore-architecture geo:anm geo:poco ) ] .
 
 geo:positions a owl:ObjectProperty ;
     rdfs:label "posiciona"@pt ;
@@ -2629,6 +3376,24 @@ geo:subsidizes a owl:ObjectProperty ;
     rdfs:label "subsidizes"@en ;
     rdfs:domain geo:laudo-geomecanico ;
     rdfs:range geo:input-elaboration .
+
+geo:measured_at a owl:ObjectProperty ;
+    rdfs:label "medido em"@pt ;
+    rdfs:label "measured at"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:sensor_aber_ckgl geo:sensor_aber_ckp geo:sensor_estado_dhsv geo:sensor_estado_m1 geo:sensor_estado_m2 geo:sensor_estado_pxo geo:sensor_estado_sdv_gl geo:sensor_estado_sdv_p geo:sensor_estado_w1 geo:sensor_estado_w2 geo:sensor_estado_xo geo:sensor_p_jus_bs geo:sensor_p_jus_ckgl geo:sensor_p_jus_ckp geo:sensor_p_mon_ckgl geo:sensor_p_mon_ckp geo:sensor_p_mon_sdv_p geo:sensor_p_pdg geo:sensor_pt_p geo:sensor_p_tpt geo:sensor_qbs geo:sensor_t_jus_ckp geo:sensor_t_mon_ckp geo:sensor_t_pdg geo:sensor_t_tpt ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:glck geo:pck geo:dhsv geo:pmv geo:amv geo:pxo geo:sdv_gl geo:sdv_p geo:pwv geo:awv geo:xo geo:sp_pump geo:pdg geo:anm geo:tpt ) ] .
+
+geo:detected_via a owl:ObjectProperty ;
+    rdfs:label "detectado via"@pt ;
+    rdfs:label "detected via"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:event_bsw_increase geo:event_spurious_dhsv geo:event_severe_slugging geo:event_flow_instability geo:event_rapid_prod_loss geo:event_quick_pck_restriction geo:event_scaling_pck geo:event_hydrate_production geo:event_hydrate_service ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:sensor_qbs geo:sensor_qgl geo:sensor_p_pdg geo:sensor_estado_dhsv geo:sensor_p_tpt geo:sensor_aber_ckp geo:sensor_p_mon_ckp geo:sensor_p_jus_ckp geo:sensor_t_mon_ckp geo:sensor_t_pdg geo:sensor_p_jus_bs geo:sensor_t_jus_ckp ) ] .
+
+geo:involves_equipment a owl:ObjectProperty ;
+    rdfs:label "envolve equipamento"@pt ;
+    rdfs:label "involves equipment"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:event_spurious_dhsv geo:event_quick_pck_restriction geo:event_scaling_pck geo:event_hydrate_production geo:event_hydrate_service ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:dhsv geo:pck geo:anm geo:sp_pump ) ] .
 
 #
 # Edges (instance-level relation triples)
@@ -2893,3 +3658,114 @@ geo:laudo-geomecanico geo:subsidizes geo:input-elaboration .
 geo:laudo-geomecanico geo:derived_from geo:rmg .
 geo:laudo-geomecanico geo:derived_from geo:ogeomec .
 geo:laudo-geomecanico geo:stored_in geo:vge .
+geo:sensor_aber_ckgl geo:measured_at geo:glck .
+geo:sensor_aber_ckp geo:measured_at geo:pck .
+geo:sensor_estado_dhsv geo:measured_at geo:dhsv .
+geo:sensor_estado_m1 geo:measured_at geo:pmv .
+geo:sensor_estado_m2 geo:measured_at geo:amv .
+geo:sensor_estado_pxo geo:measured_at geo:pxo .
+geo:sensor_estado_sdv_gl geo:measured_at geo:sdv_gl .
+geo:sensor_estado_sdv_p geo:measured_at geo:sdv_p .
+geo:sensor_estado_w1 geo:measured_at geo:pwv .
+geo:sensor_estado_w2 geo:measured_at geo:awv .
+geo:sensor_estado_xo geo:measured_at geo:xo .
+geo:sensor_p_anular geo:measured_in geo:poco .
+geo:sensor_p_jus_bs geo:measured_at geo:sp_pump .
+geo:sensor_p_jus_ckgl geo:measured_at geo:glck .
+geo:sensor_p_jus_ckp geo:measured_at geo:pck .
+geo:sensor_p_mon_ckgl geo:measured_at geo:glck .
+geo:sensor_p_mon_ckp geo:measured_at geo:pck .
+geo:sensor_p_mon_sdv_p geo:measured_at geo:sdv_p .
+geo:sensor_p_pdg geo:measured_at geo:pdg .
+geo:sensor_pt_p geo:measured_at geo:anm .
+geo:sensor_p_tpt geo:measured_at geo:tpt .
+geo:sensor_qbs geo:measured_at geo:sp_pump .
+geo:sensor_qgl geo:measured_in geo:poco .
+geo:sensor_t_jus_ckp geo:measured_at geo:pck .
+geo:sensor_t_mon_ckp geo:measured_at geo:pck .
+geo:sensor_t_pdg geo:measured_at geo:pdg .
+geo:sensor_t_tpt geo:measured_at geo:tpt .
+geo:sensor_aber_ckgl geo:located_in geo:poco .
+geo:sensor_aber_ckp geo:located_in geo:poco .
+geo:sensor_estado_dhsv geo:located_in geo:poco .
+geo:sensor_estado_m1 geo:located_in geo:poco .
+geo:sensor_estado_m2 geo:located_in geo:poco .
+geo:sensor_estado_pxo geo:located_in geo:poco .
+geo:sensor_estado_sdv_gl geo:located_in geo:poco .
+geo:sensor_estado_sdv_p geo:located_in geo:poco .
+geo:sensor_estado_w1 geo:located_in geo:poco .
+geo:sensor_estado_w2 geo:located_in geo:poco .
+geo:sensor_estado_xo geo:located_in geo:poco .
+geo:sensor_p_jus_bs geo:located_in geo:poco .
+geo:sensor_p_jus_ckgl geo:located_in geo:poco .
+geo:sensor_p_jus_ckp geo:located_in geo:poco .
+geo:sensor_p_mon_ckgl geo:located_in geo:poco .
+geo:sensor_p_mon_ckp geo:located_in geo:poco .
+geo:sensor_p_mon_sdv_p geo:located_in geo:poco .
+geo:sensor_p_pdg geo:located_in geo:poco .
+geo:sensor_pt_p geo:located_in geo:poco .
+geo:sensor_p_tpt geo:located_in geo:poco .
+geo:sensor_qbs geo:located_in geo:poco .
+geo:sensor_t_jus_ckp geo:located_in geo:poco .
+geo:sensor_t_mon_ckp geo:located_in geo:poco .
+geo:sensor_t_pdg geo:located_in geo:poco .
+geo:sensor_t_tpt geo:located_in geo:poco .
+geo:pmv geo:part_of geo:anm .
+geo:amv geo:part_of geo:anm .
+geo:pwv geo:part_of geo:anm .
+geo:awv geo:part_of geo:anm .
+geo:pxo geo:part_of geo:anm .
+geo:xo geo:part_of geo:anm .
+geo:sdv_p geo:part_of geo:anm .
+geo:sdv_gl geo:part_of geo:anm .
+geo:glck geo:part_of geo:anm .
+geo:pck geo:part_of geo:anm .
+geo:tpt geo:part_of geo:anm .
+geo:anm geo:part_of geo:poco .
+geo:dhsv geo:installed_in geo:poco .
+geo:pdg geo:installed_in geo:poco .
+geo:sp_pump geo:connects geo:poco .
+geo:event_bsw_increase geo:detected_via geo:sensor_qbs .
+geo:event_bsw_increase geo:detected_via geo:sensor_qgl .
+geo:event_bsw_increase geo:detected_via geo:sensor_p_pdg .
+geo:event_spurious_dhsv geo:detected_via geo:sensor_estado_dhsv .
+geo:event_spurious_dhsv geo:detected_via geo:sensor_p_pdg .
+geo:event_spurious_dhsv geo:detected_via geo:sensor_p_tpt .
+geo:event_spurious_dhsv geo:involves_equipment geo:dhsv .
+geo:event_severe_slugging geo:detected_via geo:sensor_p_tpt .
+geo:event_severe_slugging geo:detected_via geo:sensor_p_pdg .
+geo:event_severe_slugging geo:detected_via geo:sensor_qgl .
+geo:event_flow_instability geo:detected_via geo:sensor_p_tpt .
+geo:event_flow_instability geo:detected_via geo:sensor_p_pdg .
+geo:event_flow_instability geo:detected_via geo:sensor_qgl .
+geo:event_rapid_prod_loss geo:detected_via geo:sensor_p_pdg .
+geo:event_rapid_prod_loss geo:detected_via geo:sensor_p_tpt .
+geo:event_rapid_prod_loss geo:detected_via geo:sensor_qgl .
+geo:event_quick_pck_restriction geo:detected_via geo:sensor_aber_ckp .
+geo:event_quick_pck_restriction geo:detected_via geo:sensor_p_mon_ckp .
+geo:event_quick_pck_restriction geo:detected_via geo:sensor_p_jus_ckp .
+geo:event_quick_pck_restriction geo:involves_equipment geo:pck .
+geo:event_scaling_pck geo:detected_via geo:sensor_aber_ckp .
+geo:event_scaling_pck geo:detected_via geo:sensor_p_mon_ckp .
+geo:event_scaling_pck geo:detected_via geo:sensor_p_jus_ckp .
+geo:event_scaling_pck geo:detected_via geo:sensor_t_mon_ckp .
+geo:event_scaling_pck geo:involves_equipment geo:pck .
+geo:event_hydrate_production geo:detected_via geo:sensor_p_pdg .
+geo:event_hydrate_production geo:detected_via geo:sensor_p_tpt .
+geo:event_hydrate_production geo:detected_via geo:sensor_qgl .
+geo:event_hydrate_production geo:detected_via geo:sensor_t_pdg .
+geo:event_hydrate_service geo:detected_via geo:sensor_p_jus_bs .
+geo:event_hydrate_service geo:detected_via geo:sensor_qbs .
+geo:event_hydrate_service geo:detected_via geo:sensor_t_jus_ckp .
+geo:event_normal geo:occurs_in geo:poco .
+geo:event_bsw_increase geo:occurs_in geo:poco .
+geo:event_spurious_dhsv geo:occurs_in geo:poco .
+geo:event_severe_slugging geo:occurs_in geo:poco .
+geo:event_flow_instability geo:occurs_in geo:poco .
+geo:event_rapid_prod_loss geo:occurs_in geo:poco .
+geo:event_quick_pck_restriction geo:occurs_in geo:poco .
+geo:event_scaling_pck geo:occurs_in geo:poco .
+geo:event_hydrate_production geo:occurs_in geo:poco .
+geo:event_hydrate_service geo:occurs_in geo:poco .
+geo:event_hydrate_production geo:involves_equipment geo:anm .
+geo:event_hydrate_service geo:involves_equipment geo:sp_pump .

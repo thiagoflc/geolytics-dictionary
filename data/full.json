@@ -1,15 +1,15 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-03T10:27:13.557Z",
+    "generated": "2026-05-03T11:27:39.442Z",
     "description": "GeoBrain — complete merged dataset",
     "counts": {
       "glossary_terms": 47,
       "extended_terms": 20,
       "total_terms": 67,
-      "datasets": 8,
-      "entity_nodes": 170,
-      "entity_edges": 259,
+      "datasets": 9,
+      "entity_nodes": 221,
+      "entity_edges": 370,
       "domains": 4,
       "ontology_layers": 8,
       "ontopetro_classes": 20,
@@ -45,7 +45,8 @@
       "Petrobras/Geolytics internal (Layer 6)",
       "GSO/Loop3D (Layer 7, CC BY 4.0)",
       "Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)",
-      "Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)"
+      "Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)",
+      "Petrobras 3W v2.0.0 (CC-BY 4.0, Vargas et al. 2019, DOI:10.1016/j.petrol.2019.106223)"
     ]
   },
   "glossary": [
@@ -1873,8 +1874,8 @@
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-05-03T10:27:13.557Z",
-    "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
+    "generated": "2026-05-03T11:27:39.442Z",
+    "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W",
     "nodes": [
       {
         "id": "poco",
@@ -3901,19 +3902,35 @@
         "color": "#C77B30",
         "size": 22,
         "definition": "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
-        "definition_en_canonical": null,
-        "legal_source": "Siglário O&G",
-        "datasets": [],
+        "definition_en_canonical": "Downhole Safety Valve (DHSV / SSSV / SCSSV). Installed in the production tubing inside the well; closes automatically in case of catastrophic surface failure. 3W event class 2 (Spurious Closure of DHSV) involves this valve.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
         "petrokgraph_uri": null,
-        "osdu_kind": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:DownholeSafetyValve:1.0.0",
         "geosciml_uri": null,
         "owl_uri": null,
         "geocoverage": [
-          "layer4"
+          "layer4",
+          "layer6"
         ],
-        "synonyms_pt": [],
-        "synonyms_en": [],
-        "examples": [],
+        "synonyms_pt": [
+          "válvula de segurança de subsuperfície",
+          "SSSV",
+          "SCSSV"
+        ],
+        "synonyms_en": [
+          "downhole safety valve",
+          "subsurface safety valve",
+          "surface-controlled subsurface safety valve",
+          "SSSV",
+          "SCSSV"
+        ],
+        "examples": [
+          "DHSV fecha automaticamente quando a pressão de controle hidráulico cai",
+          "Fechamento espúrio da DHSV (classe 2 do 3W) causa queda de P-PDG"
+        ],
         "glossary_id": null,
         "extended_id": null,
         "skos_prefLabel": {
@@ -3928,7 +3945,17 @@
           "@pt": "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "threew_equipment_subtype": "safety_valve",
+        "threew_failure_modes": [
+          "spurious_closure",
+          "failure_to_close",
+          "seal_leak"
+        ],
+        "threew_monitored_by": [
+          "sensor_estado_dhsv",
+          "sensor_p_pdg"
+        ]
       },
       {
         "id": "bha",
@@ -8515,6 +8542,3176 @@
           "@pt": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica para subsidiar o projeto e o acompanhamento do poço.",
           "@en": "Technical document that consolidates the geomechanical analysis associated with a well location or well, bringing together geological, structural, seismic and operational context, as well as geomechanical risks, geopressure curves/models and stress information when available."
         }
+      },
+      {
+        "id": "sensor_aber_ckgl",
+        "label": "ABER-CKGL",
+        "label_en": "Gas-Lift Choke Opening",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Abertura do GLCK (gas-lift choke), variável 3W em percentual. Indica o grau de abertura da válvula de estrangulamento da linha de gas-lift.",
+        "definition_en_canonical": "Opening percentage of the GLCK (gas-lift choke). 3W variable [%].",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ABER-CKGL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "abertura GLCK",
+          "abertura choke gas-lift"
+        ],
+        "synonyms_en": [
+          "GLCK opening",
+          "gas-lift choke opening"
+        ],
+        "examples": [
+          "ABER-CKGL=0 indica GLCK fechado",
+          "ABER-CKGL=100 indica GLCK totalmente aberto"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW001",
+        "threew_tag": "ABER-CKGL",
+        "threew_unit": "%",
+        "threew_quantity_kind": "ValveOpening",
+        "threew_signal_role": "valve_opening",
+        "threew_measured_at": "glck",
+        "skos_prefLabel": {
+          "@pt": "ABER-CKGL",
+          "@en": "Gas-Lift Choke Opening"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "abertura GLCK",
+            "abertura choke gas-lift"
+          ],
+          "@en": [
+            "GLCK opening",
+            "gas-lift choke opening"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Abertura do GLCK (gas-lift choke), variável 3W em percentual. Indica o grau de abertura da válvula de estrangulamento da linha de gas-lift.",
+          "@en": "Opening percentage of the GLCK (gas-lift choke). 3W variable [%]."
+        },
+        "skos_example": [
+          "ABER-CKGL=0 indica GLCK fechado",
+          "ABER-CKGL=100 indica GLCK totalmente aberto"
+        ]
+      },
+      {
+        "id": "sensor_aber_ckp",
+        "label": "ABER-CKP",
+        "label_en": "Production Choke Opening",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Abertura do PCK (production choke), variável 3W em percentual. Queda brusca de ABER-CKP pode indicar restrição rápida (classe 6) ou incrustação (classe 7).",
+        "definition_en_canonical": "Opening percentage of the PCK (production choke). 3W variable [%]. Sudden drop can indicate quick restriction (class 6) or scaling (class 7).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ABER-CKP",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "abertura PCK",
+          "abertura choke produção"
+        ],
+        "synonyms_en": [
+          "PCK opening",
+          "production choke opening"
+        ],
+        "examples": [
+          "ABER-CKP caindo rapidamente indica classe 6 ou 7"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW002",
+        "threew_tag": "ABER-CKP",
+        "threew_unit": "%",
+        "threew_quantity_kind": "ValveOpening",
+        "threew_signal_role": "valve_opening",
+        "threew_measured_at": "pck",
+        "skos_prefLabel": {
+          "@pt": "ABER-CKP",
+          "@en": "Production Choke Opening"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "abertura PCK",
+            "abertura choke produção"
+          ],
+          "@en": [
+            "PCK opening",
+            "production choke opening"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Abertura do PCK (production choke), variável 3W em percentual. Queda brusca de ABER-CKP pode indicar restrição rápida (classe 6) ou incrustação (classe 7).",
+          "@en": "Opening percentage of the PCK (production choke). 3W variable [%]. Sudden drop can indicate quick restriction (class 6) or scaling (class 7)."
+        },
+        "skos_example": [
+          "ABER-CKP caindo rapidamente indica classe 6 ou 7"
+        ]
+      },
+      {
+        "id": "sensor_estado_dhsv",
+        "label": "ESTADO-DHSV",
+        "label_en": "DHSV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da DHSV (válvula de segurança de subsuperfície): 0=fechada, 0.5=parcial, 1=aberta. Fechamento espúrio (classe 2) é detectado por queda abrupta de ESTADO-DHSV.",
+        "definition_en_canonical": "State of the DHSV (downhole safety valve): 0=closed, 0.5=partial, 1=open. Spurious closure (class 2) is detected by an abrupt drop in ESTADO-DHSV.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-DHSV",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado DHSV",
+          "estado válvula de segurança"
+        ],
+        "synonyms_en": [
+          "DHSV state",
+          "safety valve state"
+        ],
+        "examples": [
+          "ESTADO-DHSV=0 confirma fechamento da DHSV"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW003",
+        "threew_tag": "ESTADO-DHSV",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "dhsv",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-DHSV",
+          "@en": "DHSV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado DHSV",
+            "estado válvula de segurança"
+          ],
+          "@en": [
+            "DHSV state",
+            "safety valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da DHSV (válvula de segurança de subsuperfície): 0=fechada, 0.5=parcial, 1=aberta. Fechamento espúrio (classe 2) é detectado por queda abrupta de ESTADO-DHSV.",
+          "@en": "State of the DHSV (downhole safety valve): 0=closed, 0.5=partial, 1=open. Spurious closure (class 2) is detected by an abrupt drop in ESTADO-DHSV."
+        },
+        "skos_example": [
+          "ESTADO-DHSV=0 confirma fechamento da DHSV"
+        ]
+      },
+      {
+        "id": "sensor_estado_m1",
+        "label": "ESTADO-M1",
+        "label_en": "PMV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da PMV (production master valve / válvula mestra de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the PMV (production master valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-M1",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado PMV",
+          "estado válvula mestra produção"
+        ],
+        "synonyms_en": [
+          "PMV state",
+          "production master valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW004",
+        "threew_tag": "ESTADO-M1",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "pmv",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-M1",
+          "@en": "PMV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado PMV",
+            "estado válvula mestra produção"
+          ],
+          "@en": [
+            "PMV state",
+            "production master valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da PMV (production master valve / válvula mestra de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the PMV (production master valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_m2",
+        "label": "ESTADO-M2",
+        "label_en": "AMV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da AMV (annulus master valve / válvula mestra de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the AMV (annulus master valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-M2",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado AMV",
+          "estado válvula mestra anular"
+        ],
+        "synonyms_en": [
+          "AMV state",
+          "annulus master valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW005",
+        "threew_tag": "ESTADO-M2",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "amv",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-M2",
+          "@en": "AMV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado AMV",
+            "estado válvula mestra anular"
+          ],
+          "@en": [
+            "AMV state",
+            "annulus master valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da AMV (annulus master valve / válvula mestra de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the AMV (annulus master valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_pxo",
+        "label": "ESTADO-PXO",
+        "label_en": "PXO Valve State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da PXO (pig-crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the PXO (pig-crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-PXO",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado PXO",
+          "estado válvula pig-crossover"
+        ],
+        "synonyms_en": [
+          "PXO state",
+          "pig-crossover valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW006",
+        "threew_tag": "ESTADO-PXO",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "pxo",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-PXO",
+          "@en": "PXO Valve State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado PXO",
+            "estado válvula pig-crossover"
+          ],
+          "@en": [
+            "PXO state",
+            "pig-crossover valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da PXO (pig-crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the PXO (pig-crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_sdv_gl",
+        "label": "ESTADO-SDV-GL",
+        "label_en": "Gas-Lift SDV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da SDV-GL (válvula de bloqueio de gas-lift): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the gas-lift SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-SDV-GL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado SDV-GL",
+          "estado válvula bloqueio gas-lift"
+        ],
+        "synonyms_en": [
+          "SDV-GL state",
+          "gas-lift shutdown valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW007",
+        "threew_tag": "ESTADO-SDV-GL",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "sdv_gl",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-SDV-GL",
+          "@en": "Gas-Lift SDV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado SDV-GL",
+            "estado válvula bloqueio gas-lift"
+          ],
+          "@en": [
+            "SDV-GL state",
+            "gas-lift shutdown valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da SDV-GL (válvula de bloqueio de gas-lift): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the gas-lift SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_sdv_p",
+        "label": "ESTADO-SDV-P",
+        "label_en": "Production SDV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da SDV-P (válvula de bloqueio de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the production SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-SDV-P",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado SDV-P",
+          "estado válvula bloqueio produção"
+        ],
+        "synonyms_en": [
+          "SDV-P state",
+          "production shutdown valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW008",
+        "threew_tag": "ESTADO-SDV-P",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "sdv_p",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-SDV-P",
+          "@en": "Production SDV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado SDV-P",
+            "estado válvula bloqueio produção"
+          ],
+          "@en": [
+            "SDV-P state",
+            "production shutdown valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da SDV-P (válvula de bloqueio de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the production SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_w1",
+        "label": "ESTADO-W1",
+        "label_en": "PWV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da PWV (production wing valve / válvula asa de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the PWV (production wing valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-W1",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado PWV",
+          "estado válvula asa produção"
+        ],
+        "synonyms_en": [
+          "PWV state",
+          "production wing valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW009",
+        "threew_tag": "ESTADO-W1",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "pwv",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-W1",
+          "@en": "PWV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado PWV",
+            "estado válvula asa produção"
+          ],
+          "@en": [
+            "PWV state",
+            "production wing valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da PWV (production wing valve / válvula asa de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the PWV (production wing valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_w2",
+        "label": "ESTADO-W2",
+        "label_en": "AWV State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da AWV (annulus wing valve / válvula asa de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the AWV (annulus wing valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-W2",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado AWV",
+          "estado válvula asa anular"
+        ],
+        "synonyms_en": [
+          "AWV state",
+          "annulus wing valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW010",
+        "threew_tag": "ESTADO-W2",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "awv",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-W2",
+          "@en": "AWV State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado AWV",
+            "estado válvula asa anular"
+          ],
+          "@en": [
+            "AWV state",
+            "annulus wing valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da AWV (annulus wing valve / válvula asa de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the AWV (annulus wing valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_estado_xo",
+        "label": "ESTADO-XO",
+        "label_en": "XO Valve State",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Estado da XO (crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+        "definition_en_canonical": "State of the XO (crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ESTADO-XO",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "estado XO",
+          "estado válvula crossover"
+        ],
+        "synonyms_en": [
+          "XO state",
+          "crossover valve state"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW011",
+        "threew_tag": "ESTADO-XO",
+        "threew_unit": "0/0.5/1",
+        "threew_quantity_kind": "ValveState",
+        "threew_signal_role": "valve_state",
+        "threew_measured_at": "xo",
+        "skos_prefLabel": {
+          "@pt": "ESTADO-XO",
+          "@en": "XO Valve State"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "estado XO",
+            "estado válvula crossover"
+          ],
+          "@en": [
+            "XO state",
+            "crossover valve state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado da XO (crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
+          "@en": "State of the XO (crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_p_anular",
+        "label": "P-ANULAR",
+        "label_en": "Annulus Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão no anular do poço [Pa]. Variável 3W. Monitorada para detectar vazamentos de válvulas e comunicação de pressão entre anular e coluna de produção.",
+        "definition_en_canonical": "Pressure in the well annulus [Pa]. 3W variable. Monitored for valve leaks and pressure communication between annulus and tubing.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-ANULAR",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão anular",
+          "pressão do anular"
+        ],
+        "synonyms_en": [
+          "annulus pressure",
+          "casing-tubing annulus pressure"
+        ],
+        "examples": [
+          "P-ANULAR elevado pode indicar comunicação entre anular e coluna"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW012",
+        "threew_tag": "P-ANULAR",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_annulus",
+        "threew_measured_at": "poco",
+        "skos_prefLabel": {
+          "@pt": "P-ANULAR",
+          "@en": "Annulus Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão anular",
+            "pressão do anular"
+          ],
+          "@en": [
+            "annulus pressure",
+            "casing-tubing annulus pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão no anular do poço [Pa]. Variável 3W. Monitorada para detectar vazamentos de válvulas e comunicação de pressão entre anular e coluna de produção.",
+          "@en": "Pressure in the well annulus [Pa]. 3W variable. Monitored for valve leaks and pressure communication between annulus and tubing."
+        },
+        "skos_example": [
+          "P-ANULAR elevado pode indicar comunicação entre anular e coluna"
+        ]
+      },
+      {
+        "id": "sensor_p_jus_bs",
+        "label": "P-JUS-BS",
+        "label_en": "Service Pump Downstream Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão a jusante da SP (bomba de serviço) [Pa]. Variável 3W. Relevante para detecção de hidrato em linha de serviço (classe 9).",
+        "definition_en_canonical": "Downstream pressure of the SP (service pump) [Pa]. 3W variable. Key for hydrate detection in service line (class 9).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-JUS-BS",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão jusante bomba serviço",
+          "P-JUS-BS"
+        ],
+        "synonyms_en": [
+          "service pump downstream pressure",
+          "BS downstream pressure"
+        ],
+        "examples": [
+          "P-JUS-BS cai em caso de hidrato na linha de serviço"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW013",
+        "threew_tag": "P-JUS-BS",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_service",
+        "threew_measured_at": "sp_pump",
+        "skos_prefLabel": {
+          "@pt": "P-JUS-BS",
+          "@en": "Service Pump Downstream Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão jusante bomba serviço",
+            "P-JUS-BS"
+          ],
+          "@en": [
+            "service pump downstream pressure",
+            "BS downstream pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão a jusante da SP (bomba de serviço) [Pa]. Variável 3W. Relevante para detecção de hidrato em linha de serviço (classe 9).",
+          "@en": "Downstream pressure of the SP (service pump) [Pa]. 3W variable. Key for hydrate detection in service line (class 9)."
+        },
+        "skos_example": [
+          "P-JUS-BS cai em caso de hidrato na linha de serviço"
+        ]
+      },
+      {
+        "id": "sensor_p_jus_ckgl",
+        "label": "P-JUS-CKGL",
+        "label_en": "Gas-Lift Choke Downstream Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão a jusante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de injeção de gas-lift após o estrangulamento.",
+        "definition_en_canonical": "Downstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable. Represents gas-lift injection pressure after the choke.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-JUS-CKGL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão jusante GLCK",
+          "pressão jusante choke gas-lift"
+        ],
+        "synonyms_en": [
+          "GLCK downstream pressure",
+          "gas-lift choke downstream pressure"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW014",
+        "threew_tag": "P-JUS-CKGL",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_choke_down",
+        "threew_measured_at": "glck",
+        "skos_prefLabel": {
+          "@pt": "P-JUS-CKGL",
+          "@en": "Gas-Lift Choke Downstream Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão jusante GLCK",
+            "pressão jusante choke gas-lift"
+          ],
+          "@en": [
+            "GLCK downstream pressure",
+            "gas-lift choke downstream pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão a jusante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de injeção de gas-lift após o estrangulamento.",
+          "@en": "Downstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable. Represents gas-lift injection pressure after the choke."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_p_jus_ckp",
+        "label": "P-JUS-CKP",
+        "label_en": "Production Choke Downstream Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão a jusante do PCK (production choke) [Pa]. Variável 3W. Junto com P-MON-CKP e ABER-CKP, caracteriza o diferencial de pressão no choke de produção.",
+        "definition_en_canonical": "Downstream pressure of the PCK (production choke) [Pa]. 3W variable. Together with P-MON-CKP and ABER-CKP characterizes the choke differential pressure.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-JUS-CKP",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão jusante PCK",
+          "pressão jusante choke produção"
+        ],
+        "synonyms_en": [
+          "PCK downstream pressure",
+          "production choke downstream pressure"
+        ],
+        "examples": [
+          "Diferencial P-MON-CKP - P-JUS-CKP indica grau de restrição do choke"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW015",
+        "threew_tag": "P-JUS-CKP",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_choke_down",
+        "threew_measured_at": "pck",
+        "skos_prefLabel": {
+          "@pt": "P-JUS-CKP",
+          "@en": "Production Choke Downstream Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão jusante PCK",
+            "pressão jusante choke produção"
+          ],
+          "@en": [
+            "PCK downstream pressure",
+            "production choke downstream pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão a jusante do PCK (production choke) [Pa]. Variável 3W. Junto com P-MON-CKP e ABER-CKP, caracteriza o diferencial de pressão no choke de produção.",
+          "@en": "Downstream pressure of the PCK (production choke) [Pa]. 3W variable. Together with P-MON-CKP and ABER-CKP characterizes the choke differential pressure."
+        },
+        "skos_example": [
+          "Diferencial P-MON-CKP - P-JUS-CKP indica grau de restrição do choke"
+        ]
+      },
+      {
+        "id": "sensor_p_mon_ckgl",
+        "label": "P-MON-CKGL",
+        "label_en": "Gas-Lift Choke Upstream Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão a montante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de entrada de gas-lift antes do estrangulamento.",
+        "definition_en_canonical": "Upstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-MON-CKGL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão montante GLCK",
+          "pressão montante choke gas-lift"
+        ],
+        "synonyms_en": [
+          "GLCK upstream pressure",
+          "gas-lift choke upstream pressure"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW016",
+        "threew_tag": "P-MON-CKGL",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_choke_up",
+        "threew_measured_at": "glck",
+        "skos_prefLabel": {
+          "@pt": "P-MON-CKGL",
+          "@en": "Gas-Lift Choke Upstream Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão montante GLCK",
+            "pressão montante choke gas-lift"
+          ],
+          "@en": [
+            "GLCK upstream pressure",
+            "gas-lift choke upstream pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão a montante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de entrada de gas-lift antes do estrangulamento.",
+          "@en": "Upstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_p_mon_ckp",
+        "label": "P-MON-CKP",
+        "label_en": "Production Choke Upstream Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão a montante do PCK (production choke) [Pa]. Variável 3W. Usada em conjunto com P-JUS-CKP para calcular diferencial de pressão no choke.",
+        "definition_en_canonical": "Upstream pressure of the PCK (production choke) [Pa]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-MON-CKP",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão montante PCK",
+          "pressão montante choke produção"
+        ],
+        "synonyms_en": [
+          "PCK upstream pressure",
+          "production choke upstream pressure"
+        ],
+        "examples": [
+          "P-MON-CKP crescente com ABER-CKP constante pode indicar incrustação"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW017",
+        "threew_tag": "P-MON-CKP",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_choke_up",
+        "threew_measured_at": "pck",
+        "skos_prefLabel": {
+          "@pt": "P-MON-CKP",
+          "@en": "Production Choke Upstream Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão montante PCK",
+            "pressão montante choke produção"
+          ],
+          "@en": [
+            "PCK upstream pressure",
+            "production choke upstream pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão a montante do PCK (production choke) [Pa]. Variável 3W. Usada em conjunto com P-JUS-CKP para calcular diferencial de pressão no choke.",
+          "@en": "Upstream pressure of the PCK (production choke) [Pa]. 3W variable."
+        },
+        "skos_example": [
+          "P-MON-CKP crescente com ABER-CKP constante pode indicar incrustação"
+        ]
+      },
+      {
+        "id": "sensor_p_mon_sdv_p",
+        "label": "P-MON-SDV-P",
+        "label_en": "Production SDV Upstream Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão a montante da SDV-P (válvula de bloqueio de produção) [Pa]. Variável 3W.",
+        "definition_en_canonical": "Upstream pressure of the production SDV (shutdown valve) [Pa]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-MON-SDV-P",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão montante SDV-P"
+        ],
+        "synonyms_en": [
+          "SDV-P upstream pressure",
+          "production SDV upstream pressure"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW018",
+        "threew_tag": "P-MON-SDV-P",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_choke_up",
+        "threew_measured_at": "sdv_p",
+        "skos_prefLabel": {
+          "@pt": "P-MON-SDV-P",
+          "@en": "Production SDV Upstream Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão montante SDV-P"
+          ],
+          "@en": [
+            "SDV-P upstream pressure",
+            "production SDV upstream pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão a montante da SDV-P (válvula de bloqueio de produção) [Pa]. Variável 3W.",
+          "@en": "Upstream pressure of the production SDV (shutdown valve) [Pa]. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_p_pdg",
+        "label": "P-PDG",
+        "label_en": "PDG Downhole Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão downhole medida pelo PDG (Permanent Downhole Gauge) [Pa]. Variável 3W fundamental para detectar golfadas severas (classe 3), instabilidade de fluxo (classe 4) e perda de produtividade (classe 5).",
+        "definition_en_canonical": "Downhole pressure measured at the PDG (Permanent Downhole Gauge) [Pa]. 3W key variable for severe slugging (class 3), flow instability (class 4), and rapid productivity loss (class 5).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-PDG",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão downhole",
+          "pressão PDG",
+          "pressão de fundo"
+        ],
+        "synonyms_en": [
+          "downhole pressure",
+          "PDG pressure",
+          "bottomhole pressure"
+        ],
+        "examples": [
+          "P-PDG oscilante é assinatura de severe slugging",
+          "P-PDG declinando rapidamente indica perda de produtividade"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW019",
+        "threew_tag": "P-PDG",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_downhole",
+        "threew_measured_at": "pdg",
+        "skos_prefLabel": {
+          "@pt": "P-PDG",
+          "@en": "PDG Downhole Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão downhole",
+            "pressão PDG",
+            "pressão de fundo"
+          ],
+          "@en": [
+            "downhole pressure",
+            "PDG pressure",
+            "bottomhole pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão downhole medida pelo PDG (Permanent Downhole Gauge) [Pa]. Variável 3W fundamental para detectar golfadas severas (classe 3), instabilidade de fluxo (classe 4) e perda de produtividade (classe 5).",
+          "@en": "Downhole pressure measured at the PDG (Permanent Downhole Gauge) [Pa]. 3W key variable for severe slugging (class 3), flow instability (class 4), and rapid productivity loss (class 5)."
+        },
+        "skos_example": [
+          "P-PDG oscilante é assinatura de severe slugging",
+          "P-PDG declinando rapidamente indica perda de produtividade"
+        ]
+      },
+      {
+        "id": "sensor_pt_p",
+        "label": "PT-P",
+        "label_en": "Xmas-Tree Production Line Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão na linha de produção da ANM (árvore de natal subsea), a jusante da PWV [Pa]. Variável 3W.",
+        "definition_en_canonical": "Subsea Xmas-tree pressure downstream of the PWV in the production line [Pa]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#PT-P",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão ANM linha produção",
+          "pressão jusante PWV"
+        ],
+        "synonyms_en": [
+          "Xmas-tree production pressure",
+          "subsea tree production line pressure"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW020",
+        "threew_tag": "PT-P",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_subsea_xt",
+        "threew_measured_at": "anm",
+        "skos_prefLabel": {
+          "@pt": "PT-P",
+          "@en": "Xmas-Tree Production Line Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão ANM linha produção",
+            "pressão jusante PWV"
+          ],
+          "@en": [
+            "Xmas-tree production pressure",
+            "subsea tree production line pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão na linha de produção da ANM (árvore de natal subsea), a jusante da PWV [Pa]. Variável 3W.",
+          "@en": "Subsea Xmas-tree pressure downstream of the PWV in the production line [Pa]. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sensor_p_tpt",
+        "label": "P-TPT",
+        "label_en": "TPT Pressure",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Pressão medida pelo TPT (Temperature and Pressure Transducer) na ANM [Pa]. Variável 3W. Principal sensor de superfície do poço subsea para detecção de golfadas severas.",
+        "definition_en_canonical": "Pressure at the TPT (Temperature and Pressure Transducer) on the subsea Xmas-tree [Pa]. 3W variable. Primary subsea wellhead sensor for severe slugging detection.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#P-TPT",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "pressão TPT",
+          "pressão transdutor ANM"
+        ],
+        "synonyms_en": [
+          "TPT pressure",
+          "subsea tree pressure transducer pressure"
+        ],
+        "examples": [
+          "P-TPT oscilando em ciclos indica severe slugging"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW021",
+        "threew_tag": "P-TPT",
+        "threew_unit": "Pa",
+        "threew_quantity_kind": "Pressure",
+        "threew_signal_role": "pressure_subsea_xt",
+        "threew_measured_at": "tpt",
+        "skos_prefLabel": {
+          "@pt": "P-TPT",
+          "@en": "TPT Pressure"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "pressão TPT",
+            "pressão transdutor ANM"
+          ],
+          "@en": [
+            "TPT pressure",
+            "subsea tree pressure transducer pressure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Pressão medida pelo TPT (Temperature and Pressure Transducer) na ANM [Pa]. Variável 3W. Principal sensor de superfície do poço subsea para detecção de golfadas severas.",
+          "@en": "Pressure at the TPT (Temperature and Pressure Transducer) on the subsea Xmas-tree [Pa]. 3W variable. Primary subsea wellhead sensor for severe slugging detection."
+        },
+        "skos_example": [
+          "P-TPT oscilando em ciclos indica severe slugging"
+        ]
+      },
+      {
+        "id": "sensor_qbs",
+        "label": "QBS",
+        "label_en": "Service Pump Flow Rate",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Vazão na bomba de serviço (SP) [m³/s]. Variável 3W. Usada para detectar hidrato em linha de serviço (classe 9).",
+        "definition_en_canonical": "Flow rate at the SP (service pump) [m³/s]. 3W variable. Used to detect hydrate in service line (class 9).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#QBS",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "vazão bomba serviço",
+          "QBS"
+        ],
+        "synonyms_en": [
+          "service pump flow rate",
+          "BS flow"
+        ],
+        "examples": [
+          "QBS reduzindo junto com P-JUS-BS indica hidrato na linha de serviço"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW022",
+        "threew_tag": "QBS",
+        "threew_unit": "m³/s",
+        "threew_quantity_kind": "VolumeRate",
+        "threew_signal_role": "flow_rate",
+        "threew_measured_at": "sp_pump",
+        "skos_prefLabel": {
+          "@pt": "QBS",
+          "@en": "Service Pump Flow Rate"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "vazão bomba serviço",
+            "QBS"
+          ],
+          "@en": [
+            "service pump flow rate",
+            "BS flow"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Vazão na bomba de serviço (SP) [m³/s]. Variável 3W. Usada para detectar hidrato em linha de serviço (classe 9).",
+          "@en": "Flow rate at the SP (service pump) [m³/s]. 3W variable. Used to detect hydrate in service line (class 9)."
+        },
+        "skos_example": [
+          "QBS reduzindo junto com P-JUS-BS indica hidrato na linha de serviço"
+        ]
+      },
+      {
+        "id": "sensor_qgl",
+        "label": "QGL",
+        "label_en": "Gas-Lift Flow Rate",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Vazão de injeção de gas-lift [m³/s]. Variável 3W. Queda abrupta de QGL pode indicar instabilidade de fluxo ou perda de produtividade.",
+        "definition_en_canonical": "Gas-lift injection flow rate [m³/s]. 3W variable. Sudden drop may indicate flow instability or productivity loss.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#QGL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "vazão gas-lift",
+          "QGL",
+          "injeção gas-lift"
+        ],
+        "synonyms_en": [
+          "gas-lift flow rate",
+          "GL injection rate"
+        ],
+        "examples": [
+          "QGL reduzindo rapidamente pode indicar classe 5 ou problema no compressor"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW023",
+        "threew_tag": "QGL",
+        "threew_unit": "m³/s",
+        "threew_quantity_kind": "VolumeRate",
+        "threew_signal_role": "flow_rate",
+        "threew_measured_at": "poco",
+        "skos_prefLabel": {
+          "@pt": "QGL",
+          "@en": "Gas-Lift Flow Rate"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "vazão gas-lift",
+            "QGL",
+            "injeção gas-lift"
+          ],
+          "@en": [
+            "gas-lift flow rate",
+            "GL injection rate"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Vazão de injeção de gas-lift [m³/s]. Variável 3W. Queda abrupta de QGL pode indicar instabilidade de fluxo ou perda de produtividade.",
+          "@en": "Gas-lift injection flow rate [m³/s]. 3W variable. Sudden drop may indicate flow instability or productivity loss."
+        },
+        "skos_example": [
+          "QGL reduzindo rapidamente pode indicar classe 5 ou problema no compressor"
+        ]
+      },
+      {
+        "id": "sensor_t_jus_ckp",
+        "label": "T-JUS-CKP",
+        "label_en": "Production Choke Downstream Temperature",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Temperatura a jusante do PCK (production choke) [°C]. Variável 3W. Efeito Joule-Thomson causa queda de temperatura no estrangulamento; anomalia pode indicar hidrato.",
+        "definition_en_canonical": "Downstream temperature of the PCK (production choke) [°C]. 3W variable. Joule-Thomson effect causes temperature drop; anomaly may indicate hydrate.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#T-JUS-CKP",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "temperatura jusante PCK",
+          "temperatura choke produção"
+        ],
+        "synonyms_en": [
+          "PCK downstream temperature",
+          "production choke downstream temperature"
+        ],
+        "examples": [
+          "T-JUS-CKP muito baixa pode indicar formação de hidrato no choke"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW024",
+        "threew_tag": "T-JUS-CKP",
+        "threew_unit": "°C",
+        "threew_quantity_kind": "Temperature",
+        "threew_signal_role": "temperature_choke",
+        "threew_measured_at": "pck",
+        "skos_prefLabel": {
+          "@pt": "T-JUS-CKP",
+          "@en": "Production Choke Downstream Temperature"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "temperatura jusante PCK",
+            "temperatura choke produção"
+          ],
+          "@en": [
+            "PCK downstream temperature",
+            "production choke downstream temperature"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Temperatura a jusante do PCK (production choke) [°C]. Variável 3W. Efeito Joule-Thomson causa queda de temperatura no estrangulamento; anomalia pode indicar hidrato.",
+          "@en": "Downstream temperature of the PCK (production choke) [°C]. 3W variable. Joule-Thomson effect causes temperature drop; anomaly may indicate hydrate."
+        },
+        "skos_example": [
+          "T-JUS-CKP muito baixa pode indicar formação de hidrato no choke"
+        ]
+      },
+      {
+        "id": "sensor_t_mon_ckp",
+        "label": "T-MON-CKP",
+        "label_en": "Production Choke Upstream Temperature",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Temperatura a montante do PCK (production choke) [°C]. Variável 3W. Usada em conjunto com T-JUS-CKP para monitorar diferencial de temperatura no choke.",
+        "definition_en_canonical": "Upstream temperature of the PCK (production choke) [°C]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#T-MON-CKP",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "temperatura montante PCK"
+        ],
+        "synonyms_en": [
+          "PCK upstream temperature",
+          "production choke upstream temperature"
+        ],
+        "examples": [
+          "Diferencial T-MON-CKP - T-JUS-CKP indica severidade de expansão no choke"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW025",
+        "threew_tag": "T-MON-CKP",
+        "threew_unit": "°C",
+        "threew_quantity_kind": "Temperature",
+        "threew_signal_role": "temperature_choke",
+        "threew_measured_at": "pck",
+        "skos_prefLabel": {
+          "@pt": "T-MON-CKP",
+          "@en": "Production Choke Upstream Temperature"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "temperatura montante PCK"
+          ],
+          "@en": [
+            "PCK upstream temperature",
+            "production choke upstream temperature"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Temperatura a montante do PCK (production choke) [°C]. Variável 3W. Usada em conjunto com T-JUS-CKP para monitorar diferencial de temperatura no choke.",
+          "@en": "Upstream temperature of the PCK (production choke) [°C]. 3W variable."
+        },
+        "skos_example": [
+          "Diferencial T-MON-CKP - T-JUS-CKP indica severidade de expansão no choke"
+        ]
+      },
+      {
+        "id": "sensor_t_pdg",
+        "label": "T-PDG",
+        "label_en": "PDG Downhole Temperature",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Temperatura downhole medida pelo PDG (Permanent Downhole Gauge) [°C]. Variável 3W. Queda persistente pode indicar hidrato ou redução de fluxo.",
+        "definition_en_canonical": "Downhole temperature measured at the PDG (Permanent Downhole Gauge) [°C]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#T-PDG",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "temperatura downhole",
+          "temperatura PDG",
+          "temperatura de fundo"
+        ],
+        "synonyms_en": [
+          "downhole temperature",
+          "PDG temperature",
+          "bottomhole temperature"
+        ],
+        "examples": [
+          "T-PDG declinando progressivamente em poço com gas-lift pode indicar hidrato na linha de produção"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW026",
+        "threew_tag": "T-PDG",
+        "threew_unit": "°C",
+        "threew_quantity_kind": "Temperature",
+        "threew_signal_role": "temperature_downhole",
+        "threew_measured_at": "pdg",
+        "skos_prefLabel": {
+          "@pt": "T-PDG",
+          "@en": "PDG Downhole Temperature"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "temperatura downhole",
+            "temperatura PDG",
+            "temperatura de fundo"
+          ],
+          "@en": [
+            "downhole temperature",
+            "PDG temperature",
+            "bottomhole temperature"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Temperatura downhole medida pelo PDG (Permanent Downhole Gauge) [°C]. Variável 3W. Queda persistente pode indicar hidrato ou redução de fluxo.",
+          "@en": "Downhole temperature measured at the PDG (Permanent Downhole Gauge) [°C]. 3W variable."
+        },
+        "skos_example": [
+          "T-PDG declinando progressivamente em poço com gas-lift pode indicar hidrato na linha de produção"
+        ]
+      },
+      {
+        "id": "sensor_t_tpt",
+        "label": "T-TPT",
+        "label_en": "TPT Temperature",
+        "type": "instrument",
+        "color": "#888780",
+        "size": 18,
+        "definition": "Temperatura medida pelo TPT (Temperature and Pressure Transducer) na ANM [°C]. Variável 3W.",
+        "definition_en_canonical": "Temperature at the TPT on the subsea Xmas-tree [°C]. 3W variable.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#T-TPT",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "temperatura TPT",
+          "temperatura transdutor ANM"
+        ],
+        "synonyms_en": [
+          "TPT temperature",
+          "subsea tree temperature"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW027",
+        "threew_tag": "T-TPT",
+        "threew_unit": "°C",
+        "threew_quantity_kind": "Temperature",
+        "threew_signal_role": "temperature_subsea_xt",
+        "threew_measured_at": "tpt",
+        "skos_prefLabel": {
+          "@pt": "T-TPT",
+          "@en": "TPT Temperature"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "temperatura TPT",
+            "temperatura transdutor ANM"
+          ],
+          "@en": [
+            "TPT temperature",
+            "subsea tree temperature"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Temperatura medida pelo TPT (Temperature and Pressure Transducer) na ANM [°C]. Variável 3W.",
+          "@en": "Temperature at the TPT on the subsea Xmas-tree [°C]. 3W variable."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "event_normal",
+        "label": "Operação Normal",
+        "label_en": "Normal Operation",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Estado de referência do poço: produção estável, todas as variáveis dentro da faixa operacional nominal. Rótulo 3W classe 0.",
+        "definition_en_canonical": "Well reference state: stable production, all variables within nominal operating range. 3W label class 0.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_NORMAL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "operação normal",
+          "estado normal"
+        ],
+        "synonyms_en": [
+          "normal operation",
+          "normal state"
+        ],
+        "examples": [
+          "Classe 0 é o baseline para treinamento de modelos de detecção de anomalias"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW042",
+        "threew_label": 0,
+        "threew_transient": false,
+        "threew_transient_label": null,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [],
+        "threew_event_class": "normal",
+        "skos_prefLabel": {
+          "@pt": "Operação Normal",
+          "@en": "Normal Operation"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "operação normal",
+            "estado normal"
+          ],
+          "@en": [
+            "normal operation",
+            "normal state"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Estado de referência do poço: produção estável, todas as variáveis dentro da faixa operacional nominal. Rótulo 3W classe 0.",
+          "@en": "Well reference state: stable production, all variables within nominal operating range. 3W label class 0."
+        },
+        "skos_example": [
+          "Classe 0 é o baseline para treinamento de modelos de detecção de anomalias"
+        ]
+      },
+      {
+        "id": "event_bsw_increase",
+        "label": "Aumento Abrupto de BSW",
+        "label_en": "Abrupt Increase of BSW",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Aumento súbito do BSW (Basic Sediment and Water — fração de água e sedimentos na produção). Indica influxo de água de formação ou quebra de barreira de óleo/água. Rótulo 3W classe 1 (transiente: 101).",
+        "definition_en_canonical": "Sudden increase in BSW (Basic Sediment and Water fraction in production). Indicates formation water influx or oil/water barrier breakthrough. 3W label class 1 (transient: 101).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_BSW_INCREASE",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "aumento BSW",
+          "surgência de água",
+          "irrupção de água"
+        ],
+        "synonyms_en": [
+          "BSW increase",
+          "water breakthrough",
+          "water influx"
+        ],
+        "examples": [
+          "BSW abrupto indica comunicação com aquífero ou falha de barreira"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW043",
+        "threew_label": 1,
+        "threew_transient": true,
+        "threew_transient_label": 101,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_qbs",
+          "sensor_qgl",
+          "sensor_p_pdg"
+        ],
+        "threew_event_class": "fluid_property_change",
+        "skos_prefLabel": {
+          "@pt": "Aumento Abrupto de BSW",
+          "@en": "Abrupt Increase of BSW"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "aumento BSW",
+            "surgência de água",
+            "irrupção de água"
+          ],
+          "@en": [
+            "BSW increase",
+            "water breakthrough",
+            "water influx"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Aumento súbito do BSW (Basic Sediment and Water — fração de água e sedimentos na produção). Indica influxo de água de formação ou quebra de barreira de óleo/água. Rótulo 3W classe 1 (transiente: 101).",
+          "@en": "Sudden increase in BSW (Basic Sediment and Water fraction in production). Indicates formation water influx or oil/water barrier breakthrough. 3W label class 1 (transient: 101)."
+        },
+        "skos_example": [
+          "BSW abrupto indica comunicação com aquífero ou falha de barreira"
+        ]
+      },
+      {
+        "id": "event_spurious_dhsv",
+        "label": "Fechamento Espúrio de DHSV",
+        "label_en": "Spurious Closure of DHSV",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Fechamento não-intencional da DHSV (válvula de segurança de subsuperfície) sem causa operacional justificada. Causa queda abrupta de P-PDG e P-TPT. Rótulo 3W classe 2 (transiente: 102). Janela de análise: 180 s, passo: 15 s.",
+        "definition_en_canonical": "Unintentional closure of the DHSV (downhole safety valve) without justified operational cause. Causes abrupt drop in P-PDG and P-TPT. 3W label class 2 (transient: 102). Analysis window: 180 s, step: 15 s.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_SPURIOUS_DHSV",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "fechamento espúrio DHSV",
+          "fechamento não-intencional DHSV"
+        ],
+        "synonyms_en": [
+          "spurious DHSV closure",
+          "unintended DHSV closure"
+        ],
+        "examples": [
+          "ESTADO-DHSV=0 com queda de P-PDG confirma fechamento espúrio"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW044",
+        "threew_label": 2,
+        "threew_transient": true,
+        "threew_transient_label": 102,
+        "threew_window": 180,
+        "threew_step": 15,
+        "threew_signature_tags": [
+          "sensor_estado_dhsv",
+          "sensor_p_pdg",
+          "sensor_p_tpt"
+        ],
+        "threew_event_class": "safety_event",
+        "skos_prefLabel": {
+          "@pt": "Fechamento Espúrio de DHSV",
+          "@en": "Spurious Closure of DHSV"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "fechamento espúrio DHSV",
+            "fechamento não-intencional DHSV"
+          ],
+          "@en": [
+            "spurious DHSV closure",
+            "unintended DHSV closure"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Fechamento não-intencional da DHSV (válvula de segurança de subsuperfície) sem causa operacional justificada. Causa queda abrupta de P-PDG e P-TPT. Rótulo 3W classe 2 (transiente: 102). Janela de análise: 180 s, passo: 15 s.",
+          "@en": "Unintentional closure of the DHSV (downhole safety valve) without justified operational cause. Causes abrupt drop in P-PDG and P-TPT. 3W label class 2 (transient: 102). Analysis window: 180 s, step: 15 s."
+        },
+        "skos_example": [
+          "ESTADO-DHSV=0 com queda de P-PDG confirma fechamento espúrio"
+        ]
+      },
+      {
+        "id": "event_severe_slugging",
+        "label": "Golfadas Severas",
+        "label_en": "Severe Slugging",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Padrão de fluxo bifásico instável caracterizado por golfadas longas de líquido alternadas com bolsões de gás na linha de produção riser. Causa oscilações cíclicas em P-TPT e P-PDG. Rótulo 3W classe 3 (sem transiente).",
+        "definition_en_canonical": "Unstable two-phase flow regime characterized by long liquid slugs alternating with gas pockets in the production riser. Causes cyclic oscillations in P-TPT and P-PDG. 3W label class 3 (no transient).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_SEVERE_SLUGGING",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "golfadas severas",
+          "slugging severo",
+          "padrão de golfadas"
+        ],
+        "synonyms_en": [
+          "severe slugging",
+          "riser slugging",
+          "terrain slugging"
+        ],
+        "examples": [
+          "Ciclo de golfada severa: bloqueio de gás → acúmulo de líquido → irrupção → blow-out",
+          "P-TPT e P-PDG oscilatórios são assinatura de severe slugging"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW045",
+        "threew_label": 3,
+        "threew_transient": false,
+        "threew_transient_label": null,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_p_tpt",
+          "sensor_p_pdg",
+          "sensor_qgl"
+        ],
+        "threew_event_class": "flow_regime",
+        "skos_prefLabel": {
+          "@pt": "Golfadas Severas",
+          "@en": "Severe Slugging"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "golfadas severas",
+            "slugging severo",
+            "padrão de golfadas"
+          ],
+          "@en": [
+            "severe slugging",
+            "riser slugging",
+            "terrain slugging"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Padrão de fluxo bifásico instável caracterizado por golfadas longas de líquido alternadas com bolsões de gás na linha de produção riser. Causa oscilações cíclicas em P-TPT e P-PDG. Rótulo 3W classe 3 (sem transiente).",
+          "@en": "Unstable two-phase flow regime characterized by long liquid slugs alternating with gas pockets in the production riser. Causes cyclic oscillations in P-TPT and P-PDG. 3W label class 3 (no transient)."
+        },
+        "skos_example": [
+          "Ciclo de golfada severa: bloqueio de gás → acúmulo de líquido → irrupção → blow-out",
+          "P-TPT e P-PDG oscilatórios são assinatura de severe slugging"
+        ]
+      },
+      {
+        "id": "event_flow_instability",
+        "label": "Instabilidade de Fluxo",
+        "label_en": "Flow Instability",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Instabilidade de fluxo multifásico no poço, com oscilações irregulares de pressão e vazão. Diferencia-se de golfadas severas por padrão menos periódico. Rótulo 3W classe 4 (sem transiente).",
+        "definition_en_canonical": "Multiphase flow instability in the well with irregular oscillations of pressure and flow rate. Differs from severe slugging by a less periodic pattern. 3W label class 4 (no transient).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_FLOW_INSTABILITY",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "instabilidade de fluxo",
+          "fluxo instável",
+          "oscilação de fluxo"
+        ],
+        "synonyms_en": [
+          "flow instability",
+          "flow oscillation",
+          "unstable flow"
+        ],
+        "examples": [
+          "Instabilidade de fluxo pode anteceder golfadas severas"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW046",
+        "threew_label": 4,
+        "threew_transient": false,
+        "threew_transient_label": null,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_p_tpt",
+          "sensor_p_pdg",
+          "sensor_qgl"
+        ],
+        "threew_event_class": "flow_regime",
+        "skos_prefLabel": {
+          "@pt": "Instabilidade de Fluxo",
+          "@en": "Flow Instability"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "instabilidade de fluxo",
+            "fluxo instável",
+            "oscilação de fluxo"
+          ],
+          "@en": [
+            "flow instability",
+            "flow oscillation",
+            "unstable flow"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Instabilidade de fluxo multifásico no poço, com oscilações irregulares de pressão e vazão. Diferencia-se de golfadas severas por padrão menos periódico. Rótulo 3W classe 4 (sem transiente).",
+          "@en": "Multiphase flow instability in the well with irregular oscillations of pressure and flow rate. Differs from severe slugging by a less periodic pattern. 3W label class 4 (no transient)."
+        },
+        "skos_example": [
+          "Instabilidade de fluxo pode anteceder golfadas severas"
+        ]
+      },
+      {
+        "id": "event_rapid_prod_loss",
+        "label": "Perda Rápida de Produtividade",
+        "label_en": "Rapid Productivity Loss",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Queda rápida e persistente da produtividade do poço, indicada por redução de P-PDG e QGL sem ação operacional. Pode ser causada por dano à formação, incrustação de fundo ou mudança na permeabilidade efetiva. Rótulo 3W classe 5 (transiente: 105).",
+        "definition_en_canonical": "Rapid and persistent decline in well productivity indicated by reduction in P-PDG and QGL without operational intervention. May be caused by formation damage, downhole scaling, or effective permeability change. 3W label class 5 (transient: 105).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_RAPID_PROD_LOSS",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "perda produtividade",
+          "declínio rápido",
+          "queda de produção"
+        ],
+        "synonyms_en": [
+          "rapid productivity loss",
+          "productivity decline",
+          "production drop"
+        ],
+        "examples": [
+          "P-PDG declining faster than expected pode indicar skin damage"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW047",
+        "threew_label": 5,
+        "threew_transient": true,
+        "threew_transient_label": 105,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_p_pdg",
+          "sensor_p_tpt",
+          "sensor_qgl"
+        ],
+        "threew_event_class": "productivity_event",
+        "skos_prefLabel": {
+          "@pt": "Perda Rápida de Produtividade",
+          "@en": "Rapid Productivity Loss"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "perda produtividade",
+            "declínio rápido",
+            "queda de produção"
+          ],
+          "@en": [
+            "rapid productivity loss",
+            "productivity decline",
+            "production drop"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Queda rápida e persistente da produtividade do poço, indicada por redução de P-PDG e QGL sem ação operacional. Pode ser causada por dano à formação, incrustação de fundo ou mudança na permeabilidade efetiva. Rótulo 3W classe 5 (transiente: 105).",
+          "@en": "Rapid and persistent decline in well productivity indicated by reduction in P-PDG and QGL without operational intervention. May be caused by formation damage, downhole scaling, or effective permeability change. 3W label class 5 (transient: 105)."
+        },
+        "skos_example": [
+          "P-PDG declining faster than expected pode indicar skin damage"
+        ]
+      },
+      {
+        "id": "event_quick_pck_restriction",
+        "label": "Restrição Rápida no PCK",
+        "label_en": "Quick Restriction in PCK",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Redução rápida e abrupta da abertura do PCK (production choke) ou da seção de passagem, causando aumento do diferencial de pressão. Pode ser causada por objeto sólido, wax ou hidrato parcial. Rótulo 3W classe 6 (transiente: 106).",
+        "definition_en_canonical": "Rapid and abrupt reduction in PCK (production choke) opening or flow section, causing increased differential pressure. May be caused by a solid object, wax, or partial hydrate. 3W label class 6 (transient: 106).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_QUICK_PCK_RESTRICTION",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "restrição rápida PCK",
+          "obstrução rápida choke"
+        ],
+        "synonyms_en": [
+          "quick PCK restriction",
+          "rapid choke restriction",
+          "choke obstruction"
+        ],
+        "examples": [
+          "ABER-CKP caindo abruptamente com diferencial de pressão crescente é assinatura de classe 6"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW048",
+        "threew_label": 6,
+        "threew_transient": true,
+        "threew_transient_label": 106,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_aber_ckp",
+          "sensor_p_mon_ckp",
+          "sensor_p_jus_ckp"
+        ],
+        "threew_event_class": "choke_anomaly",
+        "skos_prefLabel": {
+          "@pt": "Restrição Rápida no PCK",
+          "@en": "Quick Restriction in PCK"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "restrição rápida PCK",
+            "obstrução rápida choke"
+          ],
+          "@en": [
+            "quick PCK restriction",
+            "rapid choke restriction",
+            "choke obstruction"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Redução rápida e abrupta da abertura do PCK (production choke) ou da seção de passagem, causando aumento do diferencial de pressão. Pode ser causada por objeto sólido, wax ou hidrato parcial. Rótulo 3W classe 6 (transiente: 106).",
+          "@en": "Rapid and abrupt reduction in PCK (production choke) opening or flow section, causing increased differential pressure. May be caused by a solid object, wax, or partial hydrate. 3W label class 6 (transient: 106)."
+        },
+        "skos_example": [
+          "ABER-CKP caindo abruptamente com diferencial de pressão crescente é assinatura de classe 6"
+        ]
+      },
+      {
+        "id": "event_scaling_pck",
+        "label": "Incrustação no PCK",
+        "label_en": "Scaling in PCK",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Deposição progressiva de incrustações minerais (carbonato de cálcio, barita, etc.) no PCK (production choke), causando redução gradual da abertura efetiva. Distingue-se de restrição rápida pelo ritmo de crescimento do diferencial de pressão. Rótulo 3W classe 7 (transiente: 107).",
+        "definition_en_canonical": "Progressive deposition of mineral scale (calcium carbonate, barium sulfate, etc.) in the PCK (production choke), causing gradual reduction of effective opening. Distinguished from quick restriction by the rate of differential pressure growth. 3W label class 7 (transient: 107).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_SCALING_PCK",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "incrustação PCK",
+          "scaling choke",
+          "deposição mineral choke"
+        ],
+        "synonyms_en": [
+          "PCK scaling",
+          "choke scaling",
+          "mineral deposition in choke"
+        ],
+        "examples": [
+          "T-MON-CKP elevada com diferencial crescente ao longo do tempo é assinatura de scaling"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW049",
+        "threew_label": 7,
+        "threew_transient": true,
+        "threew_transient_label": 107,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_aber_ckp",
+          "sensor_p_mon_ckp",
+          "sensor_p_jus_ckp",
+          "sensor_t_mon_ckp"
+        ],
+        "threew_event_class": "choke_anomaly",
+        "skos_prefLabel": {
+          "@pt": "Incrustação no PCK",
+          "@en": "Scaling in PCK"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "incrustação PCK",
+            "scaling choke",
+            "deposição mineral choke"
+          ],
+          "@en": [
+            "PCK scaling",
+            "choke scaling",
+            "mineral deposition in choke"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Deposição progressiva de incrustações minerais (carbonato de cálcio, barita, etc.) no PCK (production choke), causando redução gradual da abertura efetiva. Distingue-se de restrição rápida pelo ritmo de crescimento do diferencial de pressão. Rótulo 3W classe 7 (transiente: 107).",
+          "@en": "Progressive deposition of mineral scale (calcium carbonate, barium sulfate, etc.) in the PCK (production choke), causing gradual reduction of effective opening. Distinguished from quick restriction by the rate of differential pressure growth. 3W label class 7 (transient: 107)."
+        },
+        "skos_example": [
+          "T-MON-CKP elevada com diferencial crescente ao longo do tempo é assinatura de scaling"
+        ]
+      },
+      {
+        "id": "event_hydrate_production",
+        "label": "Hidrato na Linha de Produção",
+        "label_en": "Hydrate in Production Line",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Formação de hidrato de gás na linha de produção subsea, causando obstrução parcial ou total. Ocorre em condições de alta pressão e baixa temperatura. Detectado por queda de P-PDG, P-TPT e QGL com T-PDG decrescente. Rótulo 3W classe 8 (transiente: 108).",
+        "definition_en_canonical": "Gas hydrate formation in the subsea production line, causing partial or total blockage. Occurs under high pressure and low temperature conditions. Detected by drops in P-PDG, P-TPT, and QGL with decreasing T-PDG. 3W label class 8 (transient: 108).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_HYDRATE_PRODUCTION",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "hidrato linha produção",
+          "obstrução por hidrato",
+          "plug de hidrato produção"
+        ],
+        "synonyms_en": [
+          "production line hydrate",
+          "hydrate plug in production",
+          "gas hydrate blockage"
+        ],
+        "examples": [
+          "Queda simultânea de P-PDG + T-PDG + QGL indica hidrato na linha de produção"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW050",
+        "threew_label": 8,
+        "threew_transient": true,
+        "threew_transient_label": 108,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_p_pdg",
+          "sensor_p_tpt",
+          "sensor_qgl",
+          "sensor_t_pdg"
+        ],
+        "threew_event_class": "flow_assurance",
+        "skos_prefLabel": {
+          "@pt": "Hidrato na Linha de Produção",
+          "@en": "Hydrate in Production Line"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "hidrato linha produção",
+            "obstrução por hidrato",
+            "plug de hidrato produção"
+          ],
+          "@en": [
+            "production line hydrate",
+            "hydrate plug in production",
+            "gas hydrate blockage"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Formação de hidrato de gás na linha de produção subsea, causando obstrução parcial ou total. Ocorre em condições de alta pressão e baixa temperatura. Detectado por queda de P-PDG, P-TPT e QGL com T-PDG decrescente. Rótulo 3W classe 8 (transiente: 108).",
+          "@en": "Gas hydrate formation in the subsea production line, causing partial or total blockage. Occurs under high pressure and low temperature conditions. Detected by drops in P-PDG, P-TPT, and QGL with decreasing T-PDG. 3W label class 8 (transient: 108)."
+        },
+        "skos_example": [
+          "Queda simultânea de P-PDG + T-PDG + QGL indica hidrato na linha de produção"
+        ]
+      },
+      {
+        "id": "event_hydrate_service",
+        "label": "Hidrato na Linha de Serviço",
+        "label_en": "Hydrate in Service Line",
+        "type": "operational",
+        "subtype": "event",
+        "color": "#378ADD",
+        "size": 22,
+        "definition": "Formação de hidrato de gás na linha de serviço (injeção de inibidor ou fluido de intervenção) subsea. Detectado por queda de P-JUS-BS e QBS. Rótulo 3W classe 9 (transiente: 109).",
+        "definition_en_canonical": "Gas hydrate formation in the subsea service line (inhibitor injection or intervention fluid). Detected by drops in P-JUS-BS and QBS. 3W label class 9 (transient: 109).",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#EVENT_HYDRATE_SERVICE",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "hidrato linha serviço",
+          "obstrução por hidrato serviço",
+          "plug de hidrato serviço"
+        ],
+        "synonyms_en": [
+          "service line hydrate",
+          "hydrate in service line",
+          "intervention line hydrate"
+        ],
+        "examples": [
+          "QBS reduzindo com P-JUS-BS crescente indica obstrução por hidrato na linha de serviço"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW051",
+        "threew_label": 9,
+        "threew_transient": true,
+        "threew_transient_label": 109,
+        "threew_window": null,
+        "threew_step": null,
+        "threew_signature_tags": [
+          "sensor_p_jus_bs",
+          "sensor_qbs",
+          "sensor_t_jus_ckp"
+        ],
+        "threew_event_class": "flow_assurance",
+        "skos_prefLabel": {
+          "@pt": "Hidrato na Linha de Serviço",
+          "@en": "Hydrate in Service Line"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "hidrato linha serviço",
+            "obstrução por hidrato serviço",
+            "plug de hidrato serviço"
+          ],
+          "@en": [
+            "service line hydrate",
+            "hydrate in service line",
+            "intervention line hydrate"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Formação de hidrato de gás na linha de serviço (injeção de inibidor ou fluido de intervenção) subsea. Detectado por queda de P-JUS-BS e QBS. Rótulo 3W classe 9 (transiente: 109).",
+          "@en": "Gas hydrate formation in the subsea service line (inhibitor injection or intervention fluid). Detected by drops in P-JUS-BS and QBS. 3W label class 9 (transient: 109)."
+        },
+        "skos_example": [
+          "QBS reduzindo com P-JUS-BS crescente indica obstrução por hidrato na linha de serviço"
+        ]
+      },
+      {
+        "id": "pmv",
+        "label": "PMV",
+        "label_en": "Production Master Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula mestra de produção (Production Master Valve, M1) da ANM subsea. Controla o fluxo na linha principal de produção do poço. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Production master valve (M1) of the subsea Xmas-tree. Controls flow in the main production line. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:ProductionMasterValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#PMV",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula mestra produção",
+          "M1"
+        ],
+        "synonyms_en": [
+          "production master valve",
+          "PMV",
+          "M1"
+        ],
+        "examples": [
+          "PMV fechada indica shutdown do poço pelo lado de produção"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW028",
+        "threew_equipment_subtype": "production_master_valve",
+        "skos_prefLabel": {
+          "@pt": "PMV",
+          "@en": "Production Master Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula mestra produção",
+            "M1"
+          ],
+          "@en": [
+            "production master valve",
+            "PMV",
+            "M1"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula mestra de produção (Production Master Valve, M1) da ANM subsea. Controla o fluxo na linha principal de produção do poço. Parte da árvore de natal (ANM).",
+          "@en": "Production master valve (M1) of the subsea Xmas-tree. Controls flow in the main production line. Part of the ANM assembly."
+        },
+        "skos_example": [
+          "PMV fechada indica shutdown do poço pelo lado de produção"
+        ]
+      },
+      {
+        "id": "amv",
+        "label": "AMV",
+        "label_en": "Annulus Master Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula mestra de anular (Annulus Master Valve, M2) da ANM subsea. Controla o acesso ao espaço anular do poço. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Annulus master valve (M2) of the subsea Xmas-tree. Controls access to the well annulus. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:AnnulusMasterValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#AMV",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula mestra anular",
+          "M2"
+        ],
+        "synonyms_en": [
+          "annulus master valve",
+          "AMV",
+          "M2"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW029",
+        "threew_equipment_subtype": "annulus_master_valve",
+        "skos_prefLabel": {
+          "@pt": "AMV",
+          "@en": "Annulus Master Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula mestra anular",
+            "M2"
+          ],
+          "@en": [
+            "annulus master valve",
+            "AMV",
+            "M2"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula mestra de anular (Annulus Master Valve, M2) da ANM subsea. Controla o acesso ao espaço anular do poço. Parte da árvore de natal (ANM).",
+          "@en": "Annulus master valve (M2) of the subsea Xmas-tree. Controls access to the well annulus. Part of the ANM assembly."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "pwv",
+        "label": "PWV",
+        "label_en": "Production Wing Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula asa de produção (Production Wing Valve, W1) da ANM subsea. Válvula de isolamento da linha de produção. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Production wing valve (W1) of the subsea Xmas-tree. Isolation valve for the production flowline. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:ProductionWingValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#PWV",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula asa produção",
+          "W1"
+        ],
+        "synonyms_en": [
+          "production wing valve",
+          "PWV",
+          "W1"
+        ],
+        "examples": [
+          "PWV fechada isola o poço da linha de produção"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW030",
+        "threew_equipment_subtype": "production_wing_valve",
+        "skos_prefLabel": {
+          "@pt": "PWV",
+          "@en": "Production Wing Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula asa produção",
+            "W1"
+          ],
+          "@en": [
+            "production wing valve",
+            "PWV",
+            "W1"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula asa de produção (Production Wing Valve, W1) da ANM subsea. Válvula de isolamento da linha de produção. Parte da árvore de natal (ANM).",
+          "@en": "Production wing valve (W1) of the subsea Xmas-tree. Isolation valve for the production flowline. Part of the ANM assembly."
+        },
+        "skos_example": [
+          "PWV fechada isola o poço da linha de produção"
+        ]
+      },
+      {
+        "id": "awv",
+        "label": "AWV",
+        "label_en": "Annulus Wing Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula asa de anular (Annulus Wing Valve, W2) da ANM subsea. Válvula de isolamento da linha de anular. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Annulus wing valve (W2) of the subsea Xmas-tree. Isolation valve for the annulus flowline. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:AnnulusWingValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#AWV",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula asa anular",
+          "W2"
+        ],
+        "synonyms_en": [
+          "annulus wing valve",
+          "AWV",
+          "W2"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW031",
+        "threew_equipment_subtype": "annulus_wing_valve",
+        "skos_prefLabel": {
+          "@pt": "AWV",
+          "@en": "Annulus Wing Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula asa anular",
+            "W2"
+          ],
+          "@en": [
+            "annulus wing valve",
+            "AWV",
+            "W2"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula asa de anular (Annulus Wing Valve, W2) da ANM subsea. Válvula de isolamento da linha de anular. Parte da árvore de natal (ANM).",
+          "@en": "Annulus wing valve (W2) of the subsea Xmas-tree. Isolation valve for the annulus flowline. Part of the ANM assembly."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "pxo",
+        "label": "PXO",
+        "label_en": "Pig-Crossover Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula de pig-crossover da ANM subsea. Permite desvio de linha para passagem de pig de limpeza. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Pig-crossover valve of the subsea Xmas-tree. Allows line bypass for pig launching/receiving. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:PigCrossoverValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#PXO",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula pig-crossover",
+          "PXO"
+        ],
+        "synonyms_en": [
+          "pig-crossover valve",
+          "PXO"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW032",
+        "threew_equipment_subtype": "pig_crossover_valve",
+        "skos_prefLabel": {
+          "@pt": "PXO",
+          "@en": "Pig-Crossover Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula pig-crossover",
+            "PXO"
+          ],
+          "@en": [
+            "pig-crossover valve",
+            "PXO"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula de pig-crossover da ANM subsea. Permite desvio de linha para passagem de pig de limpeza. Parte da árvore de natal (ANM).",
+          "@en": "Pig-crossover valve of the subsea Xmas-tree. Allows line bypass for pig launching/receiving. Part of the ANM assembly."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "xo",
+        "label": "XO",
+        "label_en": "Crossover Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula crossover da ANM subsea. Permite comunicação entre linhas de produção e anular no leito marinho. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Crossover valve of the subsea Xmas-tree. Enables communication between production and annulus lines on the seabed. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:CrossoverValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#XO",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula crossover",
+          "XO"
+        ],
+        "synonyms_en": [
+          "crossover valve",
+          "XO"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW033",
+        "threew_equipment_subtype": "crossover_valve",
+        "skos_prefLabel": {
+          "@pt": "XO",
+          "@en": "Crossover Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula crossover",
+            "XO"
+          ],
+          "@en": [
+            "crossover valve",
+            "XO"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula crossover da ANM subsea. Permite comunicação entre linhas de produção e anular no leito marinho. Parte da árvore de natal (ANM).",
+          "@en": "Crossover valve of the subsea Xmas-tree. Enables communication between production and annulus lines on the seabed. Part of the ANM assembly."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "sdv_p",
+        "label": "SDV-P",
+        "label_en": "Production Shutdown Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula de bloqueio da linha de produção (Production Shutdown Valve) da ANM subsea. Actua como elemento de segurança em caso de ESD. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Production shutdown valve of the subsea Xmas-tree. Acts as a safety element in case of ESD. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:ProductionShutdownValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#SDV_P",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula bloqueio produção",
+          "SDV-P",
+          "válvula de shutdown produção"
+        ],
+        "synonyms_en": [
+          "production shutdown valve",
+          "SDV-P"
+        ],
+        "examples": [
+          "SDV-P fecha automaticamente em caso de ESD ou alta pressão"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW034",
+        "threew_equipment_subtype": "production_shutdown_valve",
+        "skos_prefLabel": {
+          "@pt": "SDV-P",
+          "@en": "Production Shutdown Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula bloqueio produção",
+            "SDV-P",
+            "válvula de shutdown produção"
+          ],
+          "@en": [
+            "production shutdown valve",
+            "SDV-P"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula de bloqueio da linha de produção (Production Shutdown Valve) da ANM subsea. Actua como elemento de segurança em caso de ESD. Parte da árvore de natal (ANM).",
+          "@en": "Production shutdown valve of the subsea Xmas-tree. Acts as a safety element in case of ESD. Part of the ANM assembly."
+        },
+        "skos_example": [
+          "SDV-P fecha automaticamente em caso de ESD ou alta pressão"
+        ]
+      },
+      {
+        "id": "sdv_gl",
+        "label": "SDV-GL",
+        "label_en": "Gas-Lift Shutdown Valve",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Válvula de bloqueio da linha de gas-lift (Gas-Lift Shutdown Valve) da ANM subsea. Actua como elemento de segurança. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Gas-lift shutdown valve of the subsea Xmas-tree. Acts as a safety element for gas-lift injection line. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:GasLiftShutdownValve:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#SDV_GL",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "válvula bloqueio gas-lift",
+          "SDV-GL",
+          "válvula shutdown gas-lift"
+        ],
+        "synonyms_en": [
+          "gas-lift shutdown valve",
+          "SDV-GL"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW035",
+        "threew_equipment_subtype": "gas_lift_shutdown_valve",
+        "skos_prefLabel": {
+          "@pt": "SDV-GL",
+          "@en": "Gas-Lift Shutdown Valve"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "válvula bloqueio gas-lift",
+            "SDV-GL",
+            "válvula shutdown gas-lift"
+          ],
+          "@en": [
+            "gas-lift shutdown valve",
+            "SDV-GL"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Válvula de bloqueio da linha de gas-lift (Gas-Lift Shutdown Valve) da ANM subsea. Actua como elemento de segurança. Parte da árvore de natal (ANM).",
+          "@en": "Gas-lift shutdown valve of the subsea Xmas-tree. Acts as a safety element for gas-lift injection line. Part of the ANM assembly."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "glck",
+        "label": "GLCK",
+        "label_en": "Gas-Lift Choke",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Choke (estrangulador) da linha de gas-lift (GLCK) da ANM subsea. Controla a taxa de injeção de gas-lift no poço. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Gas-lift choke (GLCK) of the subsea Xmas-tree. Controls gas-lift injection rate into the well. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:GasLiftChoke:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#GLCK",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "choke gas-lift",
+          "GLCK",
+          "estrangulador gas-lift"
+        ],
+        "synonyms_en": [
+          "gas-lift choke",
+          "GLCK"
+        ],
+        "examples": [
+          "ABER-CKGL e pressões P-MON-CKGL/P-JUS-CKGL monitoram o GLCK"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW036",
+        "threew_equipment_subtype": "gas_lift_choke",
+        "skos_prefLabel": {
+          "@pt": "GLCK",
+          "@en": "Gas-Lift Choke"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "choke gas-lift",
+            "GLCK",
+            "estrangulador gas-lift"
+          ],
+          "@en": [
+            "gas-lift choke",
+            "GLCK"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Choke (estrangulador) da linha de gas-lift (GLCK) da ANM subsea. Controla a taxa de injeção de gas-lift no poço. Parte da árvore de natal (ANM).",
+          "@en": "Gas-lift choke (GLCK) of the subsea Xmas-tree. Controls gas-lift injection rate into the well. Part of the ANM assembly."
+        },
+        "skos_example": [
+          "ABER-CKGL e pressões P-MON-CKGL/P-JUS-CKGL monitoram o GLCK"
+        ]
+      },
+      {
+        "id": "pck",
+        "label": "PCK",
+        "label_en": "Production Choke",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Choke de produção (PCK) da ANM subsea. Controla a vazão da linha de produção do poço; principal ponto de incrustação (scaling, classe 7) e restrição rápida (classe 6). Parte da árvore de natal (ANM). ATENÇÃO: PCK no contexto 3W é o Production Choke — não confundir com \"pilot-operated check valve\" em contextos genéricos de tubulação.",
+        "definition_en_canonical": "Production choke (PCK) of the subsea Xmas-tree. Controls production flowline rate; main point of scaling (class 7) and quick restriction (class 6). Part of the ANM assembly. NOTE: PCK in 3W context is the Production Choke — do not confuse with \"pilot-operated check valve\" in generic piping contexts.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:ProductionChoke:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#PCK",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "choke produção",
+          "PCK",
+          "estrangulador produção"
+        ],
+        "synonyms_en": [
+          "production choke",
+          "PCK"
+        ],
+        "examples": [
+          "Incrustação no PCK detectada por queda de ABER-CKP com diferencial crescente de pressão"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW037",
+        "threew_equipment_subtype": "production_choke",
+        "skos_prefLabel": {
+          "@pt": "PCK",
+          "@en": "Production Choke"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "choke produção",
+            "PCK",
+            "estrangulador produção"
+          ],
+          "@en": [
+            "production choke",
+            "PCK"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Choke de produção (PCK) da ANM subsea. Controla a vazão da linha de produção do poço; principal ponto de incrustação (scaling, classe 7) e restrição rápida (classe 6). Parte da árvore de natal (ANM). ATENÇÃO: PCK no contexto 3W é o Production Choke — não confundir com \"pilot-operated check valve\" em contextos genéricos de tubulação.",
+          "@en": "Production choke (PCK) of the subsea Xmas-tree. Controls production flowline rate; main point of scaling (class 7) and quick restriction (class 6). Part of the ANM assembly. NOTE: PCK in 3W context is the Production Choke — do not confuse with \"pilot-operated check valve\" in generic piping contexts."
+        },
+        "skos_example": [
+          "Incrustação no PCK detectada por queda de ABER-CKP com diferencial crescente de pressão"
+        ]
+      },
+      {
+        "id": "tpt",
+        "label": "TPT",
+        "label_en": "Temperature and Pressure Transducer",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Transdutor de temperatura e pressão (TPT) instalado na ANM subsea. Fornece as variáveis P-TPT e T-TPT. Parte da árvore de natal (ANM).",
+        "definition_en_canonical": "Temperature and Pressure Transducer (TPT) installed on the subsea Xmas-tree. Provides P-TPT and T-TPT variables. Part of the ANM assembly.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:TemperaturePressureTransducer:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#TPT",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "transdutor temperatura pressão",
+          "TPT",
+          "transdutor ANM"
+        ],
+        "synonyms_en": [
+          "temperature pressure transducer",
+          "TPT"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW038",
+        "threew_equipment_subtype": "temperature_pressure_transducer",
+        "skos_prefLabel": {
+          "@pt": "TPT",
+          "@en": "Temperature and Pressure Transducer"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "transdutor temperatura pressão",
+            "TPT",
+            "transdutor ANM"
+          ],
+          "@en": [
+            "temperature pressure transducer",
+            "TPT"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Transdutor de temperatura e pressão (TPT) instalado na ANM subsea. Fornece as variáveis P-TPT e T-TPT. Parte da árvore de natal (ANM).",
+          "@en": "Temperature and Pressure Transducer (TPT) installed on the subsea Xmas-tree. Provides P-TPT and T-TPT variables. Part of the ANM assembly."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "pdg",
+        "label": "PDG",
+        "label_en": "Permanent Downhole Gauge",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Medidor permanente de fundo de poço (Permanent Downhole Gauge, PDG). Instalado na coluna de produção dentro do poço (downhole). Fornece P-PDG e T-PDG. Sensor crítico para detecção de golfadas severas e perda de produtividade.",
+        "definition_en_canonical": "Permanent downhole gauge (PDG) installed in the production tubing inside the well. Provides P-PDG and T-PDG. Critical sensor for severe slugging and productivity loss detection.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:PermanentDownholeGauge:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#PDG",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "medidor downhole",
+          "PDG",
+          "medidor permanente fundo"
+        ],
+        "synonyms_en": [
+          "permanent downhole gauge",
+          "PDG",
+          "downhole gauge"
+        ],
+        "examples": [
+          "PDG mede pressão e temperatura na coluna de produção em profundidade"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW039",
+        "threew_equipment_subtype": "permanent_downhole_gauge",
+        "skos_prefLabel": {
+          "@pt": "PDG",
+          "@en": "Permanent Downhole Gauge"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "medidor downhole",
+            "PDG",
+            "medidor permanente fundo"
+          ],
+          "@en": [
+            "permanent downhole gauge",
+            "PDG",
+            "downhole gauge"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Medidor permanente de fundo de poço (Permanent Downhole Gauge, PDG). Instalado na coluna de produção dentro do poço (downhole). Fornece P-PDG e T-PDG. Sensor crítico para detecção de golfadas severas e perda de produtividade.",
+          "@en": "Permanent downhole gauge (PDG) installed in the production tubing inside the well. Provides P-PDG and T-PDG. Critical sensor for severe slugging and productivity loss detection."
+        },
+        "skos_example": [
+          "PDG mede pressão e temperatura na coluna de produção em profundidade"
+        ]
+      },
+      {
+        "id": "sp_pump",
+        "label": "SP",
+        "label_en": "Service Pump",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Bomba de serviço (SP) usada em operações de intervenção ou injeção de fluidos no poço. Fornece as variáveis QBS (vazão) e P-JUS-BS (pressão a jusante). Relevante para detecção de hidrato em linha de serviço (classe 9).",
+        "definition_en_canonical": "Service pump (SP) used for well intervention or fluid injection operations. Provides QBS (flow rate) and P-JUS-BS (downstream pressure). Relevant for hydrate in service line (class 9) detection.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:ServicePump:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#SP_PUMP",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "bomba serviço",
+          "SP"
+        ],
+        "synonyms_en": [
+          "service pump",
+          "SP"
+        ],
+        "examples": [
+          "QBS + P-JUS-BS monitoram hidrato na linha de serviço"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW040",
+        "threew_equipment_subtype": "service_pump",
+        "skos_prefLabel": {
+          "@pt": "SP",
+          "@en": "Service Pump"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "bomba serviço",
+            "SP"
+          ],
+          "@en": [
+            "service pump",
+            "SP"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Bomba de serviço (SP) usada em operações de intervenção ou injeção de fluidos no poço. Fornece as variáveis QBS (vazão) e P-JUS-BS (pressão a jusante). Relevante para detecção de hidrato em linha de serviço (classe 9).",
+          "@en": "Service pump (SP) used for well intervention or fluid injection operations. Provides QBS (flow rate) and P-JUS-BS (downstream pressure). Relevant for hydrate in service line (class 9) detection."
+        },
+        "skos_example": [
+          "QBS + P-JUS-BS monitoram hidrato na linha de serviço"
+        ]
+      },
+      {
+        "id": "anm",
+        "label": "ANM",
+        "label_en": "Subsea Xmas-Tree",
+        "type": "equipment",
+        "color": "#C77B30",
+        "size": 20,
+        "definition": "Árvore de natal molhada (ANM) — conjunto de válvulas e equipamentos instalado no leito marinho no topo do poço offshore. Inclui PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK e TPT. Componente central da completação subsea.",
+        "definition_en_canonical": "Subsea Xmas-tree (ANM) — assembly of valves and equipment installed on the seabed at the top of an offshore well. Includes PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK and TPT. Central component of subsea completion.",
+        "legal_source": "Petrobras 3W v2.0.0",
+        "datasets": [
+          "dataset-3w"
+        ],
+        "petrokgraph_uri": null,
+        "osdu_kind": "opendes:osdu:reference-data--EquipmentType:SubseaXmasTree:1.0.0",
+        "geosciml_uri": null,
+        "owl_uri": "https://github.com/petrobras/3W#ANM",
+        "geocoverage": [
+          "layer4",
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "árvore de natal molhada",
+          "ANM",
+          "árvore de natal subsea",
+          "Christmas tree subsea"
+        ],
+        "synonyms_en": [
+          "subsea Xmas-tree",
+          "ANM",
+          "wet Christmas tree",
+          "subsea tree"
+        ],
+        "examples": [
+          "A ANM é o principal conjunto de controle de fluxo em poços offshore"
+        ],
+        "glossary_id": null,
+        "extended_id": null,
+        "module": "data/threew.json#TW041",
+        "threew_equipment_subtype": "subsea_xmas_tree",
+        "skos_prefLabel": {
+          "@pt": "ANM",
+          "@en": "Subsea Xmas-Tree"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "árvore de natal molhada",
+            "ANM",
+            "árvore de natal subsea",
+            "Christmas tree subsea"
+          ],
+          "@en": [
+            "subsea Xmas-tree",
+            "ANM",
+            "wet Christmas tree",
+            "subsea tree"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Árvore de natal molhada (ANM) — conjunto de válvulas e equipamentos instalado no leito marinho no topo do poço offshore. Inclui PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK e TPT. Componente central da completação subsea.",
+          "@en": "Subsea Xmas-tree (ANM) — assembly of valves and equipment installed on the seabed at the top of an offshore well. Includes PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK and TPT. Central component of subsea completion."
+        },
+        "skos_example": [
+          "A ANM é o principal conjunto de controle de fluxo em poços offshore"
+        ]
       }
     ],
     "edges": [
@@ -10589,6 +13786,894 @@
         "relation_label_pt": "armazenado em",
         "relation_label_en": "stored in",
         "style": "dashed"
+      },
+      {
+        "source": "sensor_aber_ckgl",
+        "target": "glck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_aber_ckp",
+        "target": "pck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_dhsv",
+        "target": "dhsv",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_m1",
+        "target": "pmv",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_m2",
+        "target": "amv",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_pxo",
+        "target": "pxo",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_sdv_gl",
+        "target": "sdv_gl",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_sdv_p",
+        "target": "sdv_p",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_w1",
+        "target": "pwv",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_w2",
+        "target": "awv",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_estado_xo",
+        "target": "xo",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_anular",
+        "target": "poco",
+        "relation": "measured_in",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured in",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_jus_bs",
+        "target": "sp_pump",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_jus_ckgl",
+        "target": "glck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_jus_ckp",
+        "target": "pck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_mon_ckgl",
+        "target": "glck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_mon_ckp",
+        "target": "pck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_mon_sdv_p",
+        "target": "sdv_p",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_pdg",
+        "target": "pdg",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_pt_p",
+        "target": "anm",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_p_tpt",
+        "target": "tpt",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_qbs",
+        "target": "sp_pump",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_qgl",
+        "target": "poco",
+        "relation": "measured_in",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured in",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_t_jus_ckp",
+        "target": "pck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_t_mon_ckp",
+        "target": "pck",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_t_pdg",
+        "target": "pdg",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_t_tpt",
+        "target": "tpt",
+        "relation": "measured_at",
+        "relation_label_pt": "medido em",
+        "relation_label_en": "measured at",
+        "style": "solid"
+      },
+      {
+        "source": "sensor_aber_ckgl",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_aber_ckp",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_dhsv",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_m1",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_m2",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_pxo",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_sdv_gl",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_sdv_p",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_w1",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_w2",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_estado_xo",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_jus_bs",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_jus_ckgl",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_jus_ckp",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_mon_ckgl",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_mon_ckp",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_mon_sdv_p",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_pdg",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_pt_p",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_p_tpt",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_qbs",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_t_jus_ckp",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_t_mon_ckp",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_t_pdg",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "sensor_t_tpt",
+        "target": "poco",
+        "relation": "located_in",
+        "relation_label_pt": "localizado em",
+        "relation_label_en": "located in",
+        "style": "dashed"
+      },
+      {
+        "source": "pmv",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "amv",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "pwv",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "awv",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "pxo",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "xo",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "sdv_p",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "sdv_gl",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "glck",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "pck",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "tpt",
+        "target": "anm",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "anm",
+        "target": "poco",
+        "relation": "part_of",
+        "relation_label_pt": "parte de",
+        "relation_label_en": "part of",
+        "style": "solid"
+      },
+      {
+        "source": "dhsv",
+        "target": "poco",
+        "relation": "installed_in",
+        "relation_label_pt": "instalado em",
+        "relation_label_en": "installed in",
+        "style": "solid"
+      },
+      {
+        "source": "pdg",
+        "target": "poco",
+        "relation": "installed_in",
+        "relation_label_pt": "instalado em",
+        "relation_label_en": "installed in",
+        "style": "solid"
+      },
+      {
+        "source": "sp_pump",
+        "target": "poco",
+        "relation": "connects",
+        "relation_label_pt": "conectado a",
+        "relation_label_en": "connects to",
+        "style": "dashed"
+      },
+      {
+        "source": "event_bsw_increase",
+        "target": "sensor_qbs",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_bsw_increase",
+        "target": "sensor_qgl",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_bsw_increase",
+        "target": "sensor_p_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_spurious_dhsv",
+        "target": "sensor_estado_dhsv",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_spurious_dhsv",
+        "target": "sensor_p_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_spurious_dhsv",
+        "target": "sensor_p_tpt",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_spurious_dhsv",
+        "target": "dhsv",
+        "relation": "involves_equipment",
+        "relation_label_pt": "envolve equipamento",
+        "relation_label_en": "involves equipment",
+        "style": "dashed"
+      },
+      {
+        "source": "event_severe_slugging",
+        "target": "sensor_p_tpt",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_severe_slugging",
+        "target": "sensor_p_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_severe_slugging",
+        "target": "sensor_qgl",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_flow_instability",
+        "target": "sensor_p_tpt",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_flow_instability",
+        "target": "sensor_p_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_flow_instability",
+        "target": "sensor_qgl",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_rapid_prod_loss",
+        "target": "sensor_p_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_rapid_prod_loss",
+        "target": "sensor_p_tpt",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_rapid_prod_loss",
+        "target": "sensor_qgl",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_quick_pck_restriction",
+        "target": "sensor_aber_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_quick_pck_restriction",
+        "target": "sensor_p_mon_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_quick_pck_restriction",
+        "target": "sensor_p_jus_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_quick_pck_restriction",
+        "target": "pck",
+        "relation": "involves_equipment",
+        "relation_label_pt": "envolve equipamento",
+        "relation_label_en": "involves equipment",
+        "style": "dashed"
+      },
+      {
+        "source": "event_scaling_pck",
+        "target": "sensor_aber_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_scaling_pck",
+        "target": "sensor_p_mon_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_scaling_pck",
+        "target": "sensor_p_jus_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_scaling_pck",
+        "target": "sensor_t_mon_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_scaling_pck",
+        "target": "pck",
+        "relation": "involves_equipment",
+        "relation_label_pt": "envolve equipamento",
+        "relation_label_en": "involves equipment",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_production",
+        "target": "sensor_p_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_production",
+        "target": "sensor_p_tpt",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_production",
+        "target": "sensor_qgl",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_production",
+        "target": "sensor_t_pdg",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_service",
+        "target": "sensor_p_jus_bs",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_service",
+        "target": "sensor_qbs",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_service",
+        "target": "sensor_t_jus_ckp",
+        "relation": "detected_via",
+        "relation_label_pt": "detectado via",
+        "relation_label_en": "detected via",
+        "style": "dashed"
+      },
+      {
+        "source": "event_normal",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_bsw_increase",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_spurious_dhsv",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_severe_slugging",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_flow_instability",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_rapid_prod_loss",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_quick_pck_restriction",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_scaling_pck",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_production",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_service",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_production",
+        "target": "anm",
+        "relation": "involves_equipment",
+        "relation_label_pt": "envolve equipamento",
+        "relation_label_en": "involves equipment",
+        "style": "dashed"
+      },
+      {
+        "source": "event_hydrate_service",
+        "target": "sp_pump",
+        "relation": "involves_equipment",
+        "relation_label_pt": "envolve equipamento",
+        "relation_label_en": "involves equipment",
+        "style": "dashed"
       }
     ]
   },
@@ -11115,6 +15200,170 @@
           "tipo": "DATE"
         }
       ]
+    },
+    {
+      "id": "dataset-3w",
+      "titulo": "3W Dataset v2.0.0 — Eventos Indesejáveis em Poços Offshore",
+      "descricao": "Primeiro dataset público realista com eventos raros e indesejáveis em poços de petróleo offshore. 1798 instâncias (922 reais, 878 simuladas/manuais), 10 classes de evento, 27 variáveis de sensores. Referência: DOI 10.1016/j.petrol.2019.106223.",
+      "fonte": "Petrobras / petrobras/3W (GitHub, CC-BY 4.0)",
+      "licenca": "CC-BY 4.0",
+      "doi": "10.1016/j.petrol.2019.106223",
+      "formato": "Parquet (PyArrow + Brotli)",
+      "frequencia": "snapshot por release (atual: 2.0.0, 2024-07-25)",
+      "url": "https://github.com/petrobras/3W",
+      "contato": "https://github.com/petrobras/3W/issues",
+      "colunas": [
+        {
+          "nome": "timestamp",
+          "descricao": "Instante da observação",
+          "tipo": "DATETIME"
+        },
+        {
+          "nome": "ABER-CKGL",
+          "descricao": "Abertura do GLCK (gas-lift choke) [%]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ABER-CKP",
+          "descricao": "Abertura do PCK (production choke) [%]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-DHSV",
+          "descricao": "Estado da DHSV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-M1",
+          "descricao": "Estado da PMV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-M2",
+          "descricao": "Estado da AMV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-PXO",
+          "descricao": "Estado da PXO (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-SDV-GL",
+          "descricao": "Estado da SDV-GL (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-SDV-P",
+          "descricao": "Estado da SDV-P (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-W1",
+          "descricao": "Estado da PWV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-W2",
+          "descricao": "Estado da AWV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-XO",
+          "descricao": "Estado da XO (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-ANULAR",
+          "descricao": "Pressão no anular do poço [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-JUS-BS",
+          "descricao": "Pressão a jusante da bomba de serviço [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-JUS-CKGL",
+          "descricao": "Pressão a jusante do GLCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-JUS-CKP",
+          "descricao": "Pressão a jusante do PCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-MON-CKGL",
+          "descricao": "Pressão a montante do GLCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-MON-CKP",
+          "descricao": "Pressão a montante do PCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-MON-SDV-P",
+          "descricao": "Pressão a montante da SDV-P [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-PDG",
+          "descricao": "Pressão downhole PDG [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "PT-P",
+          "descricao": "Pressão ANM linha produção [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-TPT",
+          "descricao": "Pressão no TPT [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "QBS",
+          "descricao": "Vazão bomba de serviço [m³/s]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "QGL",
+          "descricao": "Vazão de injeção de gas-lift [m³/s]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-JUS-CKP",
+          "descricao": "Temperatura a jusante do PCK [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-MON-CKP",
+          "descricao": "Temperatura a montante do PCK [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-PDG",
+          "descricao": "Temperatura downhole PDG [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-TPT",
+          "descricao": "Temperatura no TPT [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "class",
+          "descricao": "Rótulo da observação (0–9 estacionário, 101–109 transiente)",
+          "tipo": "INTEGER"
+        },
+        {
+          "nome": "state",
+          "descricao": "Status operacional do poço (3W interno)",
+          "tipo": "INTEGER"
+        }
+      ]
     }
   ],
   "ontology_types": {
@@ -11205,7 +15454,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-05-03T10:27:13.557Z",
+    "generated": "2026-05-03T11:27:39.442Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -11532,7 +15781,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-03T10:27:13.557Z",
+      "generated": "2026-05-03T11:27:39.442Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -12592,6 +16841,123 @@
         "fracture",
         "overburden"
       ]
+    },
+    "operational_event_class_3w": {
+      "label": "Classe de Evento Operacional (3W)",
+      "label_en": "Operational Event Class (3W)",
+      "description": "Enumeração canônica das 10 classes de evento do dataset Petrobras 3W v2.0.0. Rótulos transientes = base + 100.",
+      "rag_alert": "Não confundir com ROA (Registro de Ocorrência Anormal, documento ANP). Os rótulos 3W são para modelos de ML, não documentos regulatórios.",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "0": {
+          "label": "Normal",
+          "transient": false,
+          "transient_label": null
+        },
+        "1": {
+          "label": "Abrupt Increase of BSW",
+          "transient": true,
+          "transient_label": 101
+        },
+        "2": {
+          "label": "Spurious Closure of DHSV",
+          "transient": true,
+          "transient_label": 102,
+          "window": 180,
+          "step": 15
+        },
+        "3": {
+          "label": "Severe Slugging",
+          "transient": false,
+          "transient_label": null
+        },
+        "4": {
+          "label": "Flow Instability",
+          "transient": false,
+          "transient_label": null
+        },
+        "5": {
+          "label": "Rapid Productivity Loss",
+          "transient": true,
+          "transient_label": 105
+        },
+        "6": {
+          "label": "Quick Restriction in PCK",
+          "transient": true,
+          "transient_label": 106
+        },
+        "7": {
+          "label": "Scaling in PCK",
+          "transient": true,
+          "transient_label": 107
+        },
+        "8": {
+          "label": "Hydrate in Production Line",
+          "transient": true,
+          "transient_label": 108
+        },
+        "9": {
+          "label": "Hydrate in Service Line",
+          "transient": true,
+          "transient_label": 109
+        }
+      }
+    },
+    "instance_origin_3w": {
+      "label": "Origem da Instância (3W)",
+      "label_en": "Instance Origin (3W)",
+      "description": "Tipo de origem das instâncias do dataset 3W: REAL (poços reais, prefixo WELL_), SIMULATED (simuladas), DRAWN (manuais).",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "real": {
+          "prefix": "WELL_",
+          "description": "Série temporal de poço real Petrobras"
+        },
+        "simulated": {
+          "prefix": "SIMULATED_",
+          "description": "Série temporal simulada com modelo de poço"
+        },
+        "drawn": {
+          "prefix": "DRAWN_",
+          "description": "Série temporal construída manualmente"
+        }
+      }
+    },
+    "event_phase_3w": {
+      "label": "Fase de Rótulo (3W)",
+      "label_en": "Event Label Phase (3W)",
+      "description": "Indicador de fase transiente/estacionário. TRANSIENT_OFFSET=100: rótulo transiente = rótulo base + 100. Classes 3 e 4 não possuem transiente.",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "steady": {
+          "offset": 0,
+          "description": "Estado estacionário ou normal"
+        },
+        "transient": {
+          "offset": 100,
+          "description": "Fase inicial do evento (onset), antes de atingir estado estacionário anormal"
+        }
+      }
+    },
+    "valve_state_3w": {
+      "label": "Estado de Válvula (3W)",
+      "label_en": "Valve State (3W)",
+      "description": "Valores canônicos para variáveis ESTADO-* do dataset 3W. Valores fora de {0, 0.5, 1} são inválidos.",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "0": {
+          "label": "Fechada",
+          "label_en": "Closed"
+        },
+        "1": {
+          "label": "Aberta",
+          "label_en": "Open"
+        },
+        "0.5": {
+          "label": "Parcial",
+          "label_en": "Partial"
+        }
+      }
     }
   },
   "modules_extended": {
@@ -25689,7 +30055,7 @@
   "seismic": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-03T10:27:13.557Z",
+      "generated": "2026-05-03T11:27:39.442Z",
       "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       "module_count": 3,
       "class_count": 64,

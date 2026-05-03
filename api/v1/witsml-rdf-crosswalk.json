@@ -11,7 +11,8 @@
       "GeoCore — https://www.ufrgs.br/geocore"
     ],
     "rdf_prefix_geo": "https://geolytics.petrobras.com.br/dict/",
-    "energistics_prefix": "http://www.energistics.org/energyml/data/witsmlv2/2.0#"
+    "energistics_prefix": "http://www.energistics.org/energyml/data/witsmlv2/2.0#",
+    "total_classes": 30
   },
   "classes": [
     {
@@ -25,23 +26,85 @@
       "description_pt": "Poço de petróleo ou gás — entidade raiz que agrupa todos os furos associados a uma única locação de superfície.",
       "description_en": "Oil or gas well — root entity grouping all boreholes from a single surface location.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do poço"},
-        {"name": "nameLegal", "type": "xsd:string", "description_pt": "Nome legal / ANP"},
-        {"name": "numAPI", "type": "xsd:string", "description_pt": "Número API do poço"},
-        {"name": "country", "type": "xsd:string", "description_pt": "País"},
-        {"name": "state", "type": "xsd:string", "description_pt": "Estado ou provincia"},
-        {"name": "county", "type": "xsd:string", "description_pt": "Município / condado"},
-        {"name": "statusWell", "type": "xsd:string", "description_pt": "Status do poço (ativo, abandonado, etc.)"},
-        {"name": "purposeWell", "type": "xsd:string", "description_pt": "Finalidade do poço (exploratório, produtor, injetor)"},
-        {"name": "dTimSpud", "type": "xsd:dateTime", "description_pt": "Data de início de perfuração (spud)"},
-        {"name": "dTimPa", "type": "xsd:dateTime", "description_pt": "Data de abandono definitivo"},
-        {"name": "waterDepth", "type": "xsd:decimal", "unit": "m", "description_pt": "Lâmina d'água"},
-        {"name": "groundElevation", "type": "xsd:decimal", "unit": "m", "description_pt": "Elevação do terreno (onshore)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do poço"
+        },
+        {
+          "name": "nameLegal",
+          "type": "xsd:string",
+          "description_pt": "Nome legal / ANP"
+        },
+        {
+          "name": "numAPI",
+          "type": "xsd:string",
+          "description_pt": "Número API do poço"
+        },
+        {
+          "name": "country",
+          "type": "xsd:string",
+          "description_pt": "País"
+        },
+        {
+          "name": "state",
+          "type": "xsd:string",
+          "description_pt": "Estado ou provincia"
+        },
+        {
+          "name": "county",
+          "type": "xsd:string",
+          "description_pt": "Município / condado"
+        },
+        {
+          "name": "statusWell",
+          "type": "xsd:string",
+          "description_pt": "Status do poço (ativo, abandonado, etc.)"
+        },
+        {
+          "name": "purposeWell",
+          "type": "xsd:string",
+          "description_pt": "Finalidade do poço (exploratório, produtor, injetor)"
+        },
+        {
+          "name": "dTimSpud",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de início de perfuração (spud)"
+        },
+        {
+          "name": "dTimPa",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de abandono definitivo"
+        },
+        {
+          "name": "waterDepth",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Lâmina d'água"
+        },
+        {
+          "name": "groundElevation",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Elevação do terreno (onshore)"
+        }
       ],
       "object_properties": [
-        {"name": "hasWellbore", "range": "geo:Wellbore", "description_pt": "Poço possui furo(s) associado(s)"},
-        {"name": "operatedBy", "range": "geo:Operador", "description_pt": "Poço operado por empresa"},
-        {"name": "locatedInField", "range": "geo:Campo", "description_pt": "Poço localizado em campo"}
+        {
+          "name": "hasWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Poço possui furo(s) associado(s)"
+        },
+        {
+          "name": "operatedBy",
+          "range": "geo:Operador",
+          "description_pt": "Poço operado por empresa"
+        },
+        {
+          "name": "locatedInField",
+          "range": "geo:Campo",
+          "description_pt": "Poço localizado em campo"
+        }
       ],
       "sparql_path": "geo:Well",
       "cypher_label": "Well"
@@ -57,22 +120,81 @@
       "description_pt": "Furo de sondagem dentro de um poço — cada desvio ou sidetrack cria um novo Wellbore.",
       "description_en": "Borehole within a well — each deviation or sidetrack creates a distinct Wellbore.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do wellbore"},
-        {"name": "number", "type": "xsd:string", "description_pt": "Número sequencial do wellbore"},
-        {"name": "suffixAPI", "type": "xsd:string", "description_pt": "Sufixo API do wellbore"},
-        {"name": "statusWellbore", "type": "xsd:string", "description_pt": "Status atual do wellbore"},
-        {"name": "purposeWellbore", "type": "xsd:string", "description_pt": "Objetivo do wellbore"},
-        {"name": "isActive", "type": "xsd:boolean", "description_pt": "Indica se o wellbore está ativo"},
-        {"name": "mdCurrent", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida atual"},
-        {"name": "tvdCurrent", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade vertical verdadeira atual"},
-        {"name": "mdBitRun", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade da broca atual"},
-        {"name": "dTimKickoff", "type": "xsd:dateTime", "description_pt": "Data do kickoff point"},
-        {"name": "shape", "type": "xsd:string", "description_pt": "Geometria do poço (vertical, direcional, horizontal)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do wellbore"
+        },
+        {
+          "name": "number",
+          "type": "xsd:string",
+          "description_pt": "Número sequencial do wellbore"
+        },
+        {
+          "name": "suffixAPI",
+          "type": "xsd:string",
+          "description_pt": "Sufixo API do wellbore"
+        },
+        {
+          "name": "statusWellbore",
+          "type": "xsd:string",
+          "description_pt": "Status atual do wellbore"
+        },
+        {
+          "name": "purposeWellbore",
+          "type": "xsd:string",
+          "description_pt": "Objetivo do wellbore"
+        },
+        {
+          "name": "isActive",
+          "type": "xsd:boolean",
+          "description_pt": "Indica se o wellbore está ativo"
+        },
+        {
+          "name": "mdCurrent",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida atual"
+        },
+        {
+          "name": "tvdCurrent",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade vertical verdadeira atual"
+        },
+        {
+          "name": "mdBitRun",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade da broca atual"
+        },
+        {
+          "name": "dTimKickoff",
+          "type": "xsd:dateTime",
+          "description_pt": "Data do kickoff point"
+        },
+        {
+          "name": "shape",
+          "type": "xsd:string",
+          "description_pt": "Geometria do poço (vertical, direcional, horizontal)"
+        }
       ],
       "object_properties": [
-        {"name": "parentWell", "range": "geo:Well", "description_pt": "Wellbore pertence a um poço"},
-        {"name": "parentWellbore", "range": "geo:Wellbore", "description_pt": "Wellbore pai (sidetrack)"},
-        {"name": "hasTrajectory", "range": "geo:Trajectory", "description_pt": "Wellbore possui trajetória direcional"}
+        {
+          "name": "parentWell",
+          "range": "geo:Well",
+          "description_pt": "Wellbore pertence a um poço"
+        },
+        {
+          "name": "parentWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Wellbore pai (sidetrack)"
+        },
+        {
+          "name": "hasTrajectory",
+          "range": "geo:Trajectory",
+          "description_pt": "Wellbore possui trajetória direcional"
+        }
       ],
       "sparql_path": "geo:Wellbore",
       "cypher_label": "Wellbore"
@@ -88,20 +210,75 @@
       "description_pt": "Topo de formação — interseção do wellbore com um horizonte geológico, com profundidade medida e inclinação estrutural.",
       "description_en": "Formation top — intersection of the wellbore with a geological horizon, with measured depth and structural dip.",
       "primitive_properties": [
-        {"name": "md", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade Medida do topo"},
-        {"name": "tvd", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade Vertical Verdadeira"},
-        {"name": "tvdss", "type": "xsd:decimal", "unit": "m", "description_pt": "TVD abaixo do nível do mar (TVDSS)"},
-        {"name": "dipAngle", "type": "xsd:decimal", "unit": "deg", "description_pt": "Ângulo de mergulho da camada"},
-        {"name": "dipDirection", "type": "xsd:decimal", "unit": "deg", "description_pt": "Direção do mergulho (azimute 0–360)"},
-        {"name": "chrono", "type": "xsd:string", "description_pt": "Unidade cronoestratigráfica"},
-        {"name": "litho", "type": "xsd:string", "description_pt": "Unidade litoestratigráfica"},
-        {"name": "showRating", "type": "xsd:string", "description_pt": "Avaliação de indícios de hidrocarbonetos"},
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida do topo do intervalo"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida da base do intervalo"}
+        {
+          "name": "md",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade Medida do topo"
+        },
+        {
+          "name": "tvd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade Vertical Verdadeira"
+        },
+        {
+          "name": "tvdss",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "TVD abaixo do nível do mar (TVDSS)"
+        },
+        {
+          "name": "dipAngle",
+          "type": "xsd:decimal",
+          "unit": "deg",
+          "description_pt": "Ângulo de mergulho da camada"
+        },
+        {
+          "name": "dipDirection",
+          "type": "xsd:decimal",
+          "unit": "deg",
+          "description_pt": "Direção do mergulho (azimute 0–360)"
+        },
+        {
+          "name": "chrono",
+          "type": "xsd:string",
+          "description_pt": "Unidade cronoestratigráfica"
+        },
+        {
+          "name": "litho",
+          "type": "xsd:string",
+          "description_pt": "Unidade litoestratigráfica"
+        },
+        {
+          "name": "showRating",
+          "type": "xsd:string",
+          "description_pt": "Avaliação de indícios de hidrocarbonetos"
+        },
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida do topo do intervalo"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida da base do intervalo"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Marcador pertence a um wellbore"},
-        {"name": "intersectsFormation", "range": "geo:Formacao", "description_pt": "Marcador intersecta formação geológica"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Marcador pertence a um wellbore"
+        },
+        {
+          "name": "intersectsFormation",
+          "range": "geo:Formacao",
+          "description_pt": "Marcador intersecta formação geológica"
+        }
       ],
       "shacl_shape": "geo:WellboreMarkerShape",
       "sparql_path": "geo:WellboreMarker",
@@ -118,20 +295,73 @@
       "description_pt": "Trajetória direcional do wellbore — conjunto de estações de survey que descrevem o caminho 3D do furo.",
       "description_en": "Directional trajectory of a wellbore — set of survey stations describing the 3D path of the borehole.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome ou identificador da trajetória"},
-        {"name": "dTimTrajStart", "type": "xsd:dateTime", "description_pt": "Data de início do survey"},
-        {"name": "dTimTrajEnd", "type": "xsd:dateTime", "description_pt": "Data de fim do survey"},
-        {"name": "mdMn", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida mínima"},
-        {"name": "mdMx", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida máxima"},
-        {"name": "serviceCompany", "type": "xsd:string", "description_pt": "Empresa de survey direcional"},
-        {"name": "finalTraj", "type": "xsd:boolean", "description_pt": "Indica trajetória final (definitiva)"},
-        {"name": "dispNsEnd", "type": "xsd:decimal", "unit": "m", "description_pt": "Deslocamento Norte-Sul final"},
-        {"name": "dispEwEnd", "type": "xsd:decimal", "unit": "m", "description_pt": "Deslocamento Leste-Oeste final"},
-        {"name": "aziVertSect", "type": "xsd:decimal", "unit": "deg", "description_pt": "Azimute da seção vertical de referência"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome ou identificador da trajetória"
+        },
+        {
+          "name": "dTimTrajStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de início do survey"
+        },
+        {
+          "name": "dTimTrajEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de fim do survey"
+        },
+        {
+          "name": "mdMn",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida mínima"
+        },
+        {
+          "name": "mdMx",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida máxima"
+        },
+        {
+          "name": "serviceCompany",
+          "type": "xsd:string",
+          "description_pt": "Empresa de survey direcional"
+        },
+        {
+          "name": "finalTraj",
+          "type": "xsd:boolean",
+          "description_pt": "Indica trajetória final (definitiva)"
+        },
+        {
+          "name": "dispNsEnd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Deslocamento Norte-Sul final"
+        },
+        {
+          "name": "dispEwEnd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Deslocamento Leste-Oeste final"
+        },
+        {
+          "name": "aziVertSect",
+          "type": "xsd:decimal",
+          "unit": "deg",
+          "description_pt": "Azimute da seção vertical de referência"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Trajetória pertence a um wellbore"},
-        {"name": "hasStation", "range": "geo:TrajectoryStation", "description_pt": "Trajetória composta por estações de survey"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Trajetória pertence a um wellbore"
+        },
+        {
+          "name": "hasStation",
+          "range": "geo:TrajectoryStation",
+          "description_pt": "Trajetória composta por estações de survey"
+        }
       ],
       "sparql_path": "geo:Trajectory",
       "cypher_label": "Trajectory"
@@ -147,19 +377,71 @@
       "description_pt": "Estação de survey direcional — ponto de medição com MD, inclinação e azimute.",
       "description_en": "Directional survey station — measurement point with MD, inclination and azimuth.",
       "primitive_properties": [
-        {"name": "md", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade Medida da estação"},
-        {"name": "incl", "type": "xsd:decimal", "unit": "deg", "description_pt": "Inclinação [0..180 graus]"},
-        {"name": "azi", "type": "xsd:decimal", "unit": "deg", "description_pt": "Azimute [0..360 graus]"},
-        {"name": "tvd", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade Vertical Verdadeira"},
-        {"name": "dispNs", "type": "xsd:decimal", "unit": "m", "description_pt": "Deslocamento Norte-Sul acumulado"},
-        {"name": "dispEw", "type": "xsd:decimal", "unit": "m", "description_pt": "Deslocamento Leste-Oeste acumulado"},
-        {"name": "vertSect", "type": "xsd:decimal", "unit": "m", "description_pt": "Seção vertical acumulada"},
-        {"name": "dls", "type": "xsd:decimal", "unit": "deg/30m", "description_pt": "Dog Leg Severity"},
-        {"name": "typeSurveyTool", "type": "xsd:string", "description_pt": "Tipo de ferramenta de survey (MWD, gyro, etc.)"},
-        {"name": "dTimStn", "type": "xsd:dateTime", "description_pt": "Data/hora da medição"}
+        {
+          "name": "md",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade Medida da estação"
+        },
+        {
+          "name": "incl",
+          "type": "xsd:decimal",
+          "unit": "deg",
+          "description_pt": "Inclinação [0..180 graus]"
+        },
+        {
+          "name": "azi",
+          "type": "xsd:decimal",
+          "unit": "deg",
+          "description_pt": "Azimute [0..360 graus]"
+        },
+        {
+          "name": "tvd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade Vertical Verdadeira"
+        },
+        {
+          "name": "dispNs",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Deslocamento Norte-Sul acumulado"
+        },
+        {
+          "name": "dispEw",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Deslocamento Leste-Oeste acumulado"
+        },
+        {
+          "name": "vertSect",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Seção vertical acumulada"
+        },
+        {
+          "name": "dls",
+          "type": "xsd:decimal",
+          "unit": "deg/30m",
+          "description_pt": "Dog Leg Severity"
+        },
+        {
+          "name": "typeSurveyTool",
+          "type": "xsd:string",
+          "description_pt": "Tipo de ferramenta de survey (MWD, gyro, etc.)"
+        },
+        {
+          "name": "dTimStn",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora da medição"
+        }
       ],
       "object_properties": [
-        {"name": "inTrajectory", "range": "geo:Trajectory", "description_pt": "Estação pertence a uma trajetória"}
+        {
+          "name": "inTrajectory",
+          "range": "geo:Trajectory",
+          "description_pt": "Estação pertence a uma trajetória"
+        }
       ],
       "shacl_shape": "geo:TrajectoryStationShape",
       "sparql_path": "geo:TrajectoryStation",
@@ -176,16 +458,50 @@
       "description_pt": "Registro de amostras de cascalhos e gás no fluido de perfuração durante a perfuração.",
       "description_en": "Record of drill cuttings and gas samples from the drilling fluid during drilling.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Identificador do mud log"},
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Data de início"},
-        {"name": "dTimEnd", "type": "xsd:dateTime", "description_pt": "Data de término"},
-        {"name": "mdStart", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade inicial"},
-        {"name": "mdEnd", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade final"},
-        {"name": "mudLogCompany", "type": "xsd:string", "description_pt": "Empresa responsável pelo mud log"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Identificador do mud log"
+        },
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de início"
+        },
+        {
+          "name": "dTimEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de término"
+        },
+        {
+          "name": "mdStart",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade inicial"
+        },
+        {
+          "name": "mdEnd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade final"
+        },
+        {
+          "name": "mudLogCompany",
+          "type": "xsd:string",
+          "description_pt": "Empresa responsável pelo mud log"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Mud log associado a um wellbore"},
-        {"name": "hasReport", "range": "geo:MudLogReport", "description_pt": "Mud log contém relatório de intervalo"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Mud log associado a um wellbore"
+        },
+        {
+          "name": "hasReport",
+          "range": "geo:MudLogReport",
+          "description_pt": "Mud log contém relatório de intervalo"
+        }
       ],
       "sparql_path": "geo:MudLog",
       "cypher_label": "MudLog"
@@ -201,17 +517,59 @@
       "description_pt": "Relatório de intervalo do mud log com descrição litológica, porcentagem de cascalho e shows de hidrocarbonetos.",
       "description_en": "Mud log interval report with lithological description, cuttings percentage, and hydrocarbon shows.",
       "primitive_properties": [
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Topo do intervalo reportado"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Base do intervalo reportado"},
-        {"name": "lithology", "type": "xsd:string", "description_pt": "Litologia predominante (GeoSciML CGI)"},
-        {"name": "cuttings", "type": "xsd:decimal", "unit": "%", "description_pt": "Percentual de cascalho"},
-        {"name": "gas", "type": "xsd:decimal", "unit": "ppm", "description_pt": "Concentração de gás total"},
-        {"name": "c1", "type": "xsd:decimal", "unit": "ppm", "description_pt": "Metano (C1)"},
-        {"name": "c2", "type": "xsd:decimal", "unit": "ppm", "description_pt": "Etano (C2)"},
-        {"name": "showRating", "type": "xsd:string", "description_pt": "Avaliação do show (nenhum, traços, bom, excelente)"}
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Topo do intervalo reportado"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Base do intervalo reportado"
+        },
+        {
+          "name": "lithology",
+          "type": "xsd:string",
+          "description_pt": "Litologia predominante (GeoSciML CGI)"
+        },
+        {
+          "name": "cuttings",
+          "type": "xsd:decimal",
+          "unit": "%",
+          "description_pt": "Percentual de cascalho"
+        },
+        {
+          "name": "gas",
+          "type": "xsd:decimal",
+          "unit": "ppm",
+          "description_pt": "Concentração de gás total"
+        },
+        {
+          "name": "c1",
+          "type": "xsd:decimal",
+          "unit": "ppm",
+          "description_pt": "Metano (C1)"
+        },
+        {
+          "name": "c2",
+          "type": "xsd:decimal",
+          "unit": "ppm",
+          "description_pt": "Etano (C2)"
+        },
+        {
+          "name": "showRating",
+          "type": "xsd:string",
+          "description_pt": "Avaliação do show (nenhum, traços, bom, excelente)"
+        }
       ],
       "object_properties": [
-        {"name": "partOfMudLog", "range": "geo:MudLog", "description_pt": "Relatório pertence ao mud log"}
+        {
+          "name": "partOfMudLog",
+          "range": "geo:MudLog",
+          "description_pt": "Relatório pertence ao mud log"
+        }
       ],
       "sparql_path": "geo:MudLogReport",
       "cypher_label": "MudLogReport"
@@ -227,17 +585,55 @@
       "description_pt": "Curva de perfil geofísico — sequência de valores de uma propriedade em função da profundidade medida.",
       "description_en": "Well log curve — sequence of values for a physical property as a function of measured depth.",
       "primitive_properties": [
-        {"name": "mnemonic", "type": "xsd:string", "description_pt": "Mnemônico da curva (GR, RHOB, NPHI, RT, CALI)"},
-        {"name": "unit", "type": "xsd:string", "description_pt": "Unidade de medida da curva"},
-        {"name": "typeLogData", "type": "xsd:string", "description_pt": "Tipo de dado (double, string, int)"},
-        {"name": "nullValue", "type": "xsd:string", "description_pt": "Valor nulo codificado (ex: -9999.25)"},
-        {"name": "minIndex", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade inicial da curva"},
-        {"name": "maxIndex", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade final da curva"},
-        {"name": "minDateTimeIndex", "type": "xsd:dateTime", "description_pt": "Tempo inicial (curvas tempo-profundidade)"},
-        {"name": "maxDateTimeIndex", "type": "xsd:dateTime", "description_pt": "Tempo final"}
+        {
+          "name": "mnemonic",
+          "type": "xsd:string",
+          "description_pt": "Mnemônico da curva (GR, RHOB, NPHI, RT, CALI)"
+        },
+        {
+          "name": "unit",
+          "type": "xsd:string",
+          "description_pt": "Unidade de medida da curva"
+        },
+        {
+          "name": "typeLogData",
+          "type": "xsd:string",
+          "description_pt": "Tipo de dado (double, string, int)"
+        },
+        {
+          "name": "nullValue",
+          "type": "xsd:string",
+          "description_pt": "Valor nulo codificado (ex: -9999.25)"
+        },
+        {
+          "name": "minIndex",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade inicial da curva"
+        },
+        {
+          "name": "maxIndex",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade final da curva"
+        },
+        {
+          "name": "minDateTimeIndex",
+          "type": "xsd:dateTime",
+          "description_pt": "Tempo inicial (curvas tempo-profundidade)"
+        },
+        {
+          "name": "maxDateTimeIndex",
+          "type": "xsd:dateTime",
+          "description_pt": "Tempo final"
+        }
       ],
       "object_properties": [
-        {"name": "describedBy", "range": "geo:LogCurveInfo", "description_pt": "Curva descrita por metadados LogCurveInfo"}
+        {
+          "name": "describedBy",
+          "range": "geo:LogCurveInfo",
+          "description_pt": "Curva descrita por metadados LogCurveInfo"
+        }
       ],
       "sparql_path": "geo:LogCurve",
       "cypher_label": "LogCurve"
@@ -253,15 +649,45 @@
       "description_pt": "Metadados de uma curva de perfil: mnemônico, unidade, fonte, empresa de aquisição.",
       "description_en": "Metadata for a well log curve: mnemonic, unit, source, acquisition company.",
       "primitive_properties": [
-        {"name": "mnemonic", "type": "xsd:string", "description_pt": "Mnemônico padronizado (API)"},
-        {"name": "classCurve", "type": "xsd:string", "description_pt": "Classe da curva (continuumProp, discreteProp)"},
-        {"name": "unit", "type": "xsd:string", "description_pt": "Unidade canônica"},
-        {"name": "mnemAlias", "type": "xsd:string", "description_pt": "Alias do mnemônico no sistema de origem"},
-        {"name": "sensorOffset", "type": "xsd:decimal", "unit": "m", "description_pt": "Offset do sensor relativo ao bit"},
-        {"name": "dataDensity", "type": "xsd:decimal", "unit": "samples/m", "description_pt": "Densidade de amostragem"}
+        {
+          "name": "mnemonic",
+          "type": "xsd:string",
+          "description_pt": "Mnemônico padronizado (API)"
+        },
+        {
+          "name": "classCurve",
+          "type": "xsd:string",
+          "description_pt": "Classe da curva (continuumProp, discreteProp)"
+        },
+        {
+          "name": "unit",
+          "type": "xsd:string",
+          "description_pt": "Unidade canônica"
+        },
+        {
+          "name": "mnemAlias",
+          "type": "xsd:string",
+          "description_pt": "Alias do mnemônico no sistema de origem"
+        },
+        {
+          "name": "sensorOffset",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Offset do sensor relativo ao bit"
+        },
+        {
+          "name": "dataDensity",
+          "type": "xsd:decimal",
+          "unit": "samples/m",
+          "description_pt": "Densidade de amostragem"
+        }
       ],
       "object_properties": [
-        {"name": "curveForLog", "range": "geo:LogCurve", "description_pt": "Metadados associados a curva de perfil"}
+        {
+          "name": "curveForLog",
+          "range": "geo:LogCurve",
+          "description_pt": "Metadados associados a curva de perfil"
+        }
       ],
       "sparql_path": "geo:LogCurveInfo",
       "cypher_label": "LogCurveInfo"
@@ -277,18 +703,60 @@
       "description_pt": "Canal de dados em tempo real de MWD/LWD — fluxo contínuo de amostras indexadas por tempo ou profundidade.",
       "description_en": "Real-time MWD/LWD data channel — continuous stream of samples indexed by time or depth.",
       "primitive_properties": [
-        {"name": "mnemonic", "type": "xsd:string", "description_pt": "Mnemônico do canal"},
-        {"name": "dataType", "type": "xsd:string", "description_pt": "Tipo de dado (double, string, dateTime)"},
-        {"name": "uom", "type": "xsd:string", "description_pt": "Unidade de medida"},
-        {"name": "source", "type": "xsd:string", "description_pt": "Fonte do canal (MWD, LWD, surface)"},
-        {"name": "startIndex", "type": "xsd:decimal", "unit": "m", "description_pt": "Índice inicial"},
-        {"name": "endIndex", "type": "xsd:decimal", "unit": "m", "description_pt": "Índice final"},
-        {"name": "startTimeIndex", "type": "xsd:dateTime", "description_pt": "Início temporal do canal"},
-        {"name": "endTimeIndex", "type": "xsd:dateTime", "description_pt": "Fim temporal do canal"},
-        {"name": "sampleCount", "type": "xsd:integer", "description_pt": "Total de amostras no canal"}
+        {
+          "name": "mnemonic",
+          "type": "xsd:string",
+          "description_pt": "Mnemônico do canal"
+        },
+        {
+          "name": "dataType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de dado (double, string, dateTime)"
+        },
+        {
+          "name": "uom",
+          "type": "xsd:string",
+          "description_pt": "Unidade de medida"
+        },
+        {
+          "name": "source",
+          "type": "xsd:string",
+          "description_pt": "Fonte do canal (MWD, LWD, surface)"
+        },
+        {
+          "name": "startIndex",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Índice inicial"
+        },
+        {
+          "name": "endIndex",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Índice final"
+        },
+        {
+          "name": "startTimeIndex",
+          "type": "xsd:dateTime",
+          "description_pt": "Início temporal do canal"
+        },
+        {
+          "name": "endTimeIndex",
+          "type": "xsd:dateTime",
+          "description_pt": "Fim temporal do canal"
+        },
+        {
+          "name": "sampleCount",
+          "type": "xsd:integer",
+          "description_pt": "Total de amostras no canal"
+        }
       ],
       "object_properties": [
-        {"name": "partOfChannelSet", "range": "geo:ChannelSet", "description_pt": "Canal pertence a um ChannelSet"}
+        {
+          "name": "partOfChannelSet",
+          "range": "geo:ChannelSet",
+          "description_pt": "Canal pertence a um ChannelSet"
+        }
       ],
       "sparql_path": "geo:Channel",
       "cypher_label": "Channel"
@@ -304,17 +772,55 @@
       "description_pt": "Conjunto de canais de dados com o mesmo índice (MD ou tempo) — agrupa channels de um mesmo run.",
       "description_en": "Set of data channels sharing the same index (MD or time) — groups channels from the same run.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do ChannelSet"},
-        {"name": "indexType", "type": "xsd:string", "description_pt": "Tipo de índice (measured depth, date time)"},
-        {"name": "indexCurve", "type": "xsd:string", "description_pt": "Mnemônico do canal índice (DEPT ou TIME)"},
-        {"name": "startIndex", "type": "xsd:decimal", "unit": "m", "description_pt": "Início do índice"},
-        {"name": "endIndex", "type": "xsd:decimal", "unit": "m", "description_pt": "Fim do índice"},
-        {"name": "timeZone", "type": "xsd:string", "description_pt": "Fuso horário dos timestamps"},
-        {"name": "dataGroup", "type": "xsd:string", "description_pt": "Grupo de dados (ex: LWD, mud)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do ChannelSet"
+        },
+        {
+          "name": "indexType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de índice (measured depth, date time)"
+        },
+        {
+          "name": "indexCurve",
+          "type": "xsd:string",
+          "description_pt": "Mnemônico do canal índice (DEPT ou TIME)"
+        },
+        {
+          "name": "startIndex",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Início do índice"
+        },
+        {
+          "name": "endIndex",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Fim do índice"
+        },
+        {
+          "name": "timeZone",
+          "type": "xsd:string",
+          "description_pt": "Fuso horário dos timestamps"
+        },
+        {
+          "name": "dataGroup",
+          "type": "xsd:string",
+          "description_pt": "Grupo de dados (ex: LWD, mud)"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "ChannelSet pertence a um wellbore"},
-        {"name": "hasChannel", "range": "geo:Channel", "description_pt": "ChannelSet contém canais de dados"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "ChannelSet pertence a um wellbore"
+        },
+        {
+          "name": "hasChannel",
+          "range": "geo:Channel",
+          "description_pt": "ChannelSet contém canais de dados"
+        }
       ],
       "sparql_path": "geo:ChannelSet",
       "cypher_label": "ChannelSet"
@@ -330,18 +836,60 @@
       "description_pt": "Sonda de perfuração — plataforma, FPSS ou sonda terrestre com características operacionais.",
       "description_en": "Drilling rig — platform, FPSS or land rig with operational characteristics.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome da sonda"},
-        {"name": "owner", "type": "xsd:string", "description_pt": "Proprietário da sonda"},
-        {"name": "typeRig", "type": "xsd:string", "description_pt": "Tipo de sonda (land, jackup, semisub, drillship)"},
-        {"name": "manufacturer", "type": "xsd:string", "description_pt": "Fabricante"},
-        {"name": "yearEntService", "type": "xsd:gYear", "description_pt": "Ano de entrada em serviço"},
-        {"name": "classRig", "type": "xsd:string", "description_pt": "Classe de sonda (ex: 6a geração)"},
-        {"name": "ratingDrillDepth", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade máxima de perfuração"},
-        {"name": "ratingWaterDepth", "type": "xsd:decimal", "unit": "m", "description_pt": "Lâmina d'água máxima operacional"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome da sonda"
+        },
+        {
+          "name": "owner",
+          "type": "xsd:string",
+          "description_pt": "Proprietário da sonda"
+        },
+        {
+          "name": "typeRig",
+          "type": "xsd:string",
+          "description_pt": "Tipo de sonda (land, jackup, semisub, drillship)"
+        },
+        {
+          "name": "manufacturer",
+          "type": "xsd:string",
+          "description_pt": "Fabricante"
+        },
+        {
+          "name": "yearEntService",
+          "type": "xsd:gYear",
+          "description_pt": "Ano de entrada em serviço"
+        },
+        {
+          "name": "classRig",
+          "type": "xsd:string",
+          "description_pt": "Classe de sonda (ex: 6a geração)"
+        },
+        {
+          "name": "ratingDrillDepth",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade máxima de perfuração"
+        },
+        {
+          "name": "ratingWaterDepth",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Lâmina d'água máxima operacional"
+        }
       ],
       "object_properties": [
-        {"name": "assignedToWellbore", "range": "geo:Wellbore", "description_pt": "Sonda alocada para um wellbore"},
-        {"name": "operatedBy", "range": "geo:Operador", "description_pt": "Sonda operada por empresa"}
+        {
+          "name": "assignedToWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Sonda alocada para um wellbore"
+        },
+        {
+          "name": "operatedBy",
+          "range": "geo:Operador",
+          "description_pt": "Sonda operada por empresa"
+        }
       ],
       "sparql_path": "geo:Rig",
       "cypher_label": "Rig"
@@ -357,18 +905,61 @@
       "description_pt": "Corrida de BHA (Bottom Hole Assembly) — período de uso de um conjunto de ferramentas de fundo de poço.",
       "description_en": "BHA run — period of use of a bottom hole assembly configuration.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Identificador da corrida"},
-        {"name": "numStringRun", "type": "xsd:integer", "description_pt": "Número sequencial da corrida"},
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Data de início da corrida"},
-        {"name": "dTimStop", "type": "xsd:dateTime", "description_pt": "Data de término da corrida"},
-        {"name": "mdHoleStart", "type": "xsd:decimal", "unit": "m", "description_pt": "MD de início da perfuração nesta corrida"},
-        {"name": "mdHoleStop", "type": "xsd:decimal", "unit": "m", "description_pt": "MD de fim da perfuração nesta corrida"},
-        {"name": "hrsInHole", "type": "xsd:decimal", "unit": "h", "description_pt": "Horas efetivas no fundo"},
-        {"name": "reasonTrip", "type": "xsd:string", "description_pt": "Motivo da viagem de retirada"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Identificador da corrida"
+        },
+        {
+          "name": "numStringRun",
+          "type": "xsd:integer",
+          "description_pt": "Número sequencial da corrida"
+        },
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de início da corrida"
+        },
+        {
+          "name": "dTimStop",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de término da corrida"
+        },
+        {
+          "name": "mdHoleStart",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "MD de início da perfuração nesta corrida"
+        },
+        {
+          "name": "mdHoleStop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "MD de fim da perfuração nesta corrida"
+        },
+        {
+          "name": "hrsInHole",
+          "type": "xsd:decimal",
+          "unit": "h",
+          "description_pt": "Horas efetivas no fundo"
+        },
+        {
+          "name": "reasonTrip",
+          "type": "xsd:string",
+          "description_pt": "Motivo da viagem de retirada"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Corrida associada ao wellbore"},
-        {"name": "usedTubular", "range": "geo:Tubular", "description_pt": "Corrida usou conjunto tubular específico"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Corrida associada ao wellbore"
+        },
+        {
+          "name": "usedTubular",
+          "range": "geo:Tubular",
+          "description_pt": "Corrida usou conjunto tubular específico"
+        }
       ],
       "sparql_path": "geo:BhaRun",
       "cypher_label": "BhaRun"
@@ -384,15 +975,46 @@
       "description_pt": "Conjunto tubular de fundo de poço (BHA) — descrição dos componentes empilhados: broca, motor, estabilizadores, MWD/LWD.",
       "description_en": "Bottom hole assembly — description of stacked components: bit, motor, stabilizers, MWD/LWD.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome ou código do conjunto tubular"},
-        {"name": "typeTubularAssy", "type": "xsd:string", "description_pt": "Tipo do conjunto (BHA, casing, liner, tubing)"},
-        {"name": "nominalOd", "type": "xsd:decimal", "unit": "in", "description_pt": "Diâmetro externo nominal"},
-        {"name": "id", "type": "xsd:decimal", "unit": "in", "description_pt": "Diâmetro interno"},
-        {"name": "len", "type": "xsd:decimal", "unit": "m", "description_pt": "Comprimento total do conjunto"},
-        {"name": "numComponents", "type": "xsd:integer", "description_pt": "Número de componentes na montagem"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome ou código do conjunto tubular"
+        },
+        {
+          "name": "typeTubularAssy",
+          "type": "xsd:string",
+          "description_pt": "Tipo do conjunto (BHA, casing, liner, tubing)"
+        },
+        {
+          "name": "nominalOd",
+          "type": "xsd:decimal",
+          "unit": "in",
+          "description_pt": "Diâmetro externo nominal"
+        },
+        {
+          "name": "id",
+          "type": "xsd:decimal",
+          "unit": "in",
+          "description_pt": "Diâmetro interno"
+        },
+        {
+          "name": "len",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Comprimento total do conjunto"
+        },
+        {
+          "name": "numComponents",
+          "type": "xsd:integer",
+          "description_pt": "Número de componentes na montagem"
+        }
       ],
       "object_properties": [
-        {"name": "partOfBhaRun", "range": "geo:BhaRun", "description_pt": "Conjunto tubular usado em corrida de BHA"}
+        {
+          "name": "partOfBhaRun",
+          "range": "geo:BhaRun",
+          "description_pt": "Conjunto tubular usado em corrida de BHA"
+        }
       ],
       "sparql_path": "geo:Tubular",
       "cypher_label": "Tubular"
@@ -408,15 +1030,47 @@
       "description_pt": "Coluna de perfuração — conjunto de tubos de perfuração, drill collars e BHA.",
       "description_en": "Drill string — assembly of drill pipe, drill collars, and BHA.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Identificador da coluna"},
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida do topo da coluna"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida da base"},
-        {"name": "wtMud", "type": "xsd:decimal", "unit": "kg/m3", "description_pt": "Peso do fluido de perfuração"},
-        {"name": "eTimOpBit", "type": "xsd:decimal", "unit": "h", "description_pt": "Horas de operação na broca"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Identificador da coluna"
+        },
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida do topo da coluna"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida da base"
+        },
+        {
+          "name": "wtMud",
+          "type": "xsd:decimal",
+          "unit": "kg/m3",
+          "description_pt": "Peso do fluido de perfuração"
+        },
+        {
+          "name": "eTimOpBit",
+          "type": "xsd:decimal",
+          "unit": "h",
+          "description_pt": "Horas de operação na broca"
+        }
       ],
       "object_properties": [
-        {"name": "hasBit", "range": "geo:BitRecord", "description_pt": "Coluna possui registro de broca"},
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Coluna posicionada no wellbore"}
+        {
+          "name": "hasBit",
+          "range": "geo:BitRecord",
+          "description_pt": "Coluna possui registro de broca"
+        },
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Coluna posicionada no wellbore"
+        }
       ],
       "sparql_path": "geo:Drillstring",
       "cypher_label": "Drillstring"
@@ -432,18 +1086,62 @@
       "description_pt": "Registro de broca de perfuração — histórico de uso, diâmetro, tipo IADC e desgaste.",
       "description_en": "Drill bit record — usage history, diameter, IADC type, and wear grading.",
       "primitive_properties": [
-        {"name": "numBit", "type": "xsd:integer", "description_pt": "Número sequencial da broca na seção"},
-        {"name": "diaBit", "type": "xsd:decimal", "unit": "in", "description_pt": "Diâmetro da broca"},
-        {"name": "typeBit", "type": "xsd:string", "description_pt": "Tipo de broca (PDC, tricone, impregnado)"},
-        {"name": "codeIADC", "type": "xsd:string", "description_pt": "Código IADC do tipo de broca"},
-        {"name": "manufacturer", "type": "xsd:string", "description_pt": "Fabricante da broca"},
-        {"name": "mdOutBit", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida na retirada da broca"},
-        {"name": "dullCode", "type": "xsd:string", "description_pt": "Código de desgaste (IADC dull grade)"},
-        {"name": "hrsInBit", "type": "xsd:decimal", "unit": "h", "description_pt": "Horas de operação da broca"},
-        {"name": "distBit", "type": "xsd:decimal", "unit": "m", "description_pt": "Metragem perfurada com esta broca"}
+        {
+          "name": "numBit",
+          "type": "xsd:integer",
+          "description_pt": "Número sequencial da broca na seção"
+        },
+        {
+          "name": "diaBit",
+          "type": "xsd:decimal",
+          "unit": "in",
+          "description_pt": "Diâmetro da broca"
+        },
+        {
+          "name": "typeBit",
+          "type": "xsd:string",
+          "description_pt": "Tipo de broca (PDC, tricone, impregnado)"
+        },
+        {
+          "name": "codeIADC",
+          "type": "xsd:string",
+          "description_pt": "Código IADC do tipo de broca"
+        },
+        {
+          "name": "manufacturer",
+          "type": "xsd:string",
+          "description_pt": "Fabricante da broca"
+        },
+        {
+          "name": "mdOutBit",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida na retirada da broca"
+        },
+        {
+          "name": "dullCode",
+          "type": "xsd:string",
+          "description_pt": "Código de desgaste (IADC dull grade)"
+        },
+        {
+          "name": "hrsInBit",
+          "type": "xsd:decimal",
+          "unit": "h",
+          "description_pt": "Horas de operação da broca"
+        },
+        {
+          "name": "distBit",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Metragem perfurada com esta broca"
+        }
       ],
       "object_properties": [
-        {"name": "partOfDrillstring", "range": "geo:Drillstring", "description_pt": "Registro de broca pertence à coluna"}
+        {
+          "name": "partOfDrillstring",
+          "range": "geo:Drillstring",
+          "description_pt": "Registro de broca pertence à coluna"
+        }
       ],
       "sparql_path": "geo:BitRecord",
       "cypher_label": "BitRecord"
@@ -459,16 +1157,50 @@
       "description_pt": "Trabalho de cimentação — bombeio de calda de cimento no espaço anular para isolar zonas produtoras.",
       "description_en": "Cement job — slurry pumping into annular space to isolate productive zones.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Identificador do trabalho de cimentação"},
-        {"name": "typeCementJob", "type": "xsd:string", "description_pt": "Tipo de cimentação (primária, remedial, squeeze)"},
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Data de início do bombeio"},
-        {"name": "dTimEnd", "type": "xsd:dateTime", "description_pt": "Data de fim do bombeio"},
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Topo do cimento projetado"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Base do cimento (sapata do revestimento)"},
-        {"name": "cementReturns", "type": "xsd:boolean", "description_pt": "Retorno de cimento confirmado na superfície"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Identificador do trabalho de cimentação"
+        },
+        {
+          "name": "typeCementJob",
+          "type": "xsd:string",
+          "description_pt": "Tipo de cimentação (primária, remedial, squeeze)"
+        },
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de início do bombeio"
+        },
+        {
+          "name": "dTimEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de fim do bombeio"
+        },
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Topo do cimento projetado"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Base do cimento (sapata do revestimento)"
+        },
+        {
+          "name": "cementReturns",
+          "type": "xsd:boolean",
+          "description_pt": "Retorno de cimento confirmado na superfície"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Cimentação realizada no wellbore"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Cimentação realizada no wellbore"
+        }
       ],
       "sparql_path": "geo:CementJob",
       "cypher_label": "CementJob"
@@ -484,21 +1216,82 @@
       "description_pt": "Relatório de fluido de perfuração — propriedades reológicas e composição medidas no campo.",
       "description_en": "Drilling fluid report — rheological properties and composition measured in field.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data/hora da medição"},
-        {"name": "md", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida na amostragem"},
-        {"name": "mudClass", "type": "xsd:string", "description_pt": "Classe do fluido (base água, base óleo, sintético)"},
-        {"name": "density", "type": "xsd:decimal", "unit": "kg/m3", "description_pt": "Densidade do fluido"},
-        {"name": "visFunnel", "type": "xsd:decimal", "unit": "s", "description_pt": "Viscosidade de funil (Marsh funnel)"},
-        {"name": "pv", "type": "xsd:decimal", "unit": "mPa.s", "description_pt": "Viscosidade plástica (PV)"},
-        {"name": "yp", "type": "xsd:decimal", "unit": "Pa", "description_pt": "Yield Point (YP)"},
-        {"name": "gel10Sec", "type": "xsd:decimal", "unit": "Pa", "description_pt": "Gel em 10 segundos"},
-        {"name": "gel10Min", "type": "xsd:decimal", "unit": "Pa", "description_pt": "Gel em 10 minutos"},
-        {"name": "ph", "type": "xsd:decimal", "description_pt": "pH do fluido"},
-        {"name": "tempHthp", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura do teste HTHP"},
-        {"name": "pressHthp", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão do teste HTHP"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora da medição"
+        },
+        {
+          "name": "md",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida na amostragem"
+        },
+        {
+          "name": "mudClass",
+          "type": "xsd:string",
+          "description_pt": "Classe do fluido (base água, base óleo, sintético)"
+        },
+        {
+          "name": "density",
+          "type": "xsd:decimal",
+          "unit": "kg/m3",
+          "description_pt": "Densidade do fluido"
+        },
+        {
+          "name": "visFunnel",
+          "type": "xsd:decimal",
+          "unit": "s",
+          "description_pt": "Viscosidade de funil (Marsh funnel)"
+        },
+        {
+          "name": "pv",
+          "type": "xsd:decimal",
+          "unit": "mPa.s",
+          "description_pt": "Viscosidade plástica (PV)"
+        },
+        {
+          "name": "yp",
+          "type": "xsd:decimal",
+          "unit": "Pa",
+          "description_pt": "Yield Point (YP)"
+        },
+        {
+          "name": "gel10Sec",
+          "type": "xsd:decimal",
+          "unit": "Pa",
+          "description_pt": "Gel em 10 segundos"
+        },
+        {
+          "name": "gel10Min",
+          "type": "xsd:decimal",
+          "unit": "Pa",
+          "description_pt": "Gel em 10 minutos"
+        },
+        {
+          "name": "ph",
+          "type": "xsd:decimal",
+          "description_pt": "pH do fluido"
+        },
+        {
+          "name": "tempHthp",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura do teste HTHP"
+        },
+        {
+          "name": "pressHthp",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão do teste HTHP"
+        }
       ],
       "object_properties": [
-        {"name": "reportedInWellbore", "range": "geo:Wellbore", "description_pt": "Relatório de fluido de um wellbore"}
+        {
+          "name": "reportedInWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Relatório de fluido de um wellbore"
+        }
       ],
       "sparql_path": "geo:FluidsReport",
       "cypher_label": "FluidsReport"
@@ -514,18 +1307,63 @@
       "description_pt": "Relatório diário de operações (DDR — Daily Drilling Report) — resumo das atividades em 24h.",
       "description_en": "Daily Drilling Report — 24-hour operational summary.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data/hora do relatório (fim do período)"},
-        {"name": "md", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade ao fim do período"},
-        {"name": "mdBit", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade da broca ao fim do período"},
-        {"name": "hrsOnProd", "type": "xsd:decimal", "unit": "h", "description_pt": "Horas produtivas no período"},
-        {"name": "distDrillRot", "type": "xsd:decimal", "unit": "m", "description_pt": "Metragem perfurada com rotação"},
-        {"name": "distDrillSlid", "type": "xsd:decimal", "unit": "m", "description_pt": "Metragem perfurada em deslizamento"},
-        {"name": "numMudLosses", "type": "xsd:integer", "description_pt": "Número de ocorrências de perda de fluido"},
-        {"name": "remarks", "type": "xsd:string", "description_pt": "Observações gerais do dia"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora do relatório (fim do período)"
+        },
+        {
+          "name": "md",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade ao fim do período"
+        },
+        {
+          "name": "mdBit",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade da broca ao fim do período"
+        },
+        {
+          "name": "hrsOnProd",
+          "type": "xsd:decimal",
+          "unit": "h",
+          "description_pt": "Horas produtivas no período"
+        },
+        {
+          "name": "distDrillRot",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Metragem perfurada com rotação"
+        },
+        {
+          "name": "distDrillSlid",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Metragem perfurada em deslizamento"
+        },
+        {
+          "name": "numMudLosses",
+          "type": "xsd:integer",
+          "description_pt": "Número de ocorrências de perda de fluido"
+        },
+        {
+          "name": "remarks",
+          "type": "xsd:string",
+          "description_pt": "Observações gerais do dia"
+        }
       ],
       "object_properties": [
-        {"name": "forWellbore", "range": "geo:Wellbore", "description_pt": "Relatório de operações de um wellbore"},
-        {"name": "hasDrillingActivity", "range": "geo:DrillingActivity", "description_pt": "Relatório contém atividades de perfuração"}
+        {
+          "name": "forWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Relatório de operações de um wellbore"
+        },
+        {
+          "name": "hasDrillingActivity",
+          "range": "geo:DrillingActivity",
+          "description_pt": "Relatório contém atividades de perfuração"
+        }
       ],
       "sparql_path": "geo:OpsReport",
       "cypher_label": "OpsReport"
@@ -541,17 +1379,56 @@
       "description_pt": "Atividade de perfuração codificada — intervalo de tempo com tipo de operação (rotação, MWD, NPT, etc.).",
       "description_en": "Coded drilling activity — time interval with operation type (rotation, MWD, NPT, etc.).",
       "primitive_properties": [
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Início da atividade"},
-        {"name": "dTimEnd", "type": "xsd:dateTime", "description_pt": "Fim da atividade"},
-        {"name": "typeActivity", "type": "xsd:string", "description_pt": "Tipo de atividade (conforme código IADC)"},
-        {"name": "mdHoleStart", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade no início"},
-        {"name": "mdHoleEnd", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade no fim"},
-        {"name": "eTimAct", "type": "xsd:decimal", "unit": "h", "description_pt": "Duração da atividade"},
-        {"name": "state", "type": "xsd:string", "description_pt": "Estado produtivo (productive, non-productive)"},
-        {"name": "itemState", "type": "xsd:string", "description_pt": "Estado do item no WITSML (actual, plan)"}
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Início da atividade"
+        },
+        {
+          "name": "dTimEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Fim da atividade"
+        },
+        {
+          "name": "typeActivity",
+          "type": "xsd:string",
+          "description_pt": "Tipo de atividade (conforme código IADC)"
+        },
+        {
+          "name": "mdHoleStart",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade no início"
+        },
+        {
+          "name": "mdHoleEnd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade no fim"
+        },
+        {
+          "name": "eTimAct",
+          "type": "xsd:decimal",
+          "unit": "h",
+          "description_pt": "Duração da atividade"
+        },
+        {
+          "name": "state",
+          "type": "xsd:string",
+          "description_pt": "Estado produtivo (productive, non-productive)"
+        },
+        {
+          "name": "itemState",
+          "type": "xsd:string",
+          "description_pt": "Estado do item no WITSML (actual, plan)"
+        }
       ],
       "object_properties": [
-        {"name": "partOfOpsReport", "range": "geo:OpsReport", "description_pt": "Atividade reportada no DDR"}
+        {
+          "name": "partOfOpsReport",
+          "range": "geo:OpsReport",
+          "description_pt": "Atividade reportada no DDR"
+        }
       ],
       "sparql_path": "geo:DrillingActivity",
       "cypher_label": "DrillingActivity"
@@ -567,21 +1444,75 @@
       "description_pt": "Registro de risco operacional — evento potencial com probabilidade, impacto e medidas de mitigação.",
       "description_en": "Operational risk record — potential event with probability, impact, and mitigation measures.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do risco"},
-        {"name": "type", "type": "xsd:string", "description_pt": "Tipo de risco (técnico, HSE, operacional)"},
-        {"name": "category", "type": "xsd:string", "description_pt": "Categoria do risco (drilling, formation, equipment)"},
-        {"name": "subCategory", "type": "xsd:string", "description_pt": "Subcategoria"},
-        {"name": "extendCategory", "type": "xsd:string", "description_pt": "Categoria estendida"},
-        {"name": "affectedPersonnel", "type": "xsd:integer", "description_pt": "Pessoal potencialmente afetado"},
-        {"name": "probability", "type": "xsd:integer", "description_pt": "Probabilidade (escala 1-5)"},
-        {"name": "severityLevel", "type": "xsd:integer", "description_pt": "Nível de severidade (escala 1-5)"},
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade do topo da zona de risco"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade da base da zona de risco"},
-        {"name": "summary", "type": "xsd:string", "description_pt": "Sumário descritivo do risco"},
-        {"name": "mitigation", "type": "xsd:string", "description_pt": "Medidas de mitigação previstas"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do risco"
+        },
+        {
+          "name": "type",
+          "type": "xsd:string",
+          "description_pt": "Tipo de risco (técnico, HSE, operacional)"
+        },
+        {
+          "name": "category",
+          "type": "xsd:string",
+          "description_pt": "Categoria do risco (drilling, formation, equipment)"
+        },
+        {
+          "name": "subCategory",
+          "type": "xsd:string",
+          "description_pt": "Subcategoria"
+        },
+        {
+          "name": "extendCategory",
+          "type": "xsd:string",
+          "description_pt": "Categoria estendida"
+        },
+        {
+          "name": "affectedPersonnel",
+          "type": "xsd:integer",
+          "description_pt": "Pessoal potencialmente afetado"
+        },
+        {
+          "name": "probability",
+          "type": "xsd:integer",
+          "description_pt": "Probabilidade (escala 1-5)"
+        },
+        {
+          "name": "severityLevel",
+          "type": "xsd:integer",
+          "description_pt": "Nível de severidade (escala 1-5)"
+        },
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade do topo da zona de risco"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade da base da zona de risco"
+        },
+        {
+          "name": "summary",
+          "type": "xsd:string",
+          "description_pt": "Sumário descritivo do risco"
+        },
+        {
+          "name": "mitigation",
+          "type": "xsd:string",
+          "description_pt": "Medidas de mitigação previstas"
+        }
       ],
       "object_properties": [
-        {"name": "assessedForWellbore", "range": "geo:Wellbore", "description_pt": "Risco avaliado para um wellbore"}
+        {
+          "name": "assessedForWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Risco avaliado para um wellbore"
+        }
       ],
       "sparql_path": "geo:Risk",
       "cypher_label": "Risk"
@@ -597,12 +1528,29 @@
       "description_pt": "Programa de survey direcional — especifica a sequência de ferramentas de survey por intervalo de profundidade.",
       "description_en": "Directional survey program — specifies the sequence of survey tools per depth interval.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do programa de survey"},
-        {"name": "finalTraj", "type": "xsd:boolean", "description_pt": "Indica programa para trajetória final"},
-        {"name": "mdDestination", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade alvo final"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do programa de survey"
+        },
+        {
+          "name": "finalTraj",
+          "type": "xsd:boolean",
+          "description_pt": "Indica programa para trajetória final"
+        },
+        {
+          "name": "mdDestination",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade alvo final"
+        }
       ],
       "object_properties": [
-        {"name": "forWellbore", "range": "geo:Wellbore", "description_pt": "Programa de survey para o wellbore"}
+        {
+          "name": "forWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Programa de survey para o wellbore"
+        }
       ],
       "sparql_path": "geo:SurveyProgram",
       "cypher_label": "SurveyProgram"
@@ -618,19 +1566,71 @@
       "description_pt": "Teste de poço — medição de pressão e vazão de fluidos para caracterização do reservatório.",
       "description_en": "Well test — pressure and flow rate measurement for reservoir characterization.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data do teste"},
-        {"name": "testType", "type": "xsd:string", "description_pt": "Tipo de teste (DST, RFT, produção)"},
-        {"name": "md", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade testada"},
-        {"name": "oilRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de óleo"},
-        {"name": "gasRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de gás"},
-        {"name": "waterRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de água"},
-        {"name": "gor", "type": "xsd:decimal", "unit": "m3/m3", "description_pt": "Razão Gás-Óleo (GOR)"},
-        {"name": "chokeOrifice", "type": "xsd:decimal", "unit": "in", "description_pt": "Diâmetro do choke"},
-        {"name": "presShutIn", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão de fechamento"},
-        {"name": "tempBottomHole", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura de fundo de poço"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data do teste"
+        },
+        {
+          "name": "testType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de teste (DST, RFT, produção)"
+        },
+        {
+          "name": "md",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade testada"
+        },
+        {
+          "name": "oilRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de óleo"
+        },
+        {
+          "name": "gasRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de gás"
+        },
+        {
+          "name": "waterRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de água"
+        },
+        {
+          "name": "gor",
+          "type": "xsd:decimal",
+          "unit": "m3/m3",
+          "description_pt": "Razão Gás-Óleo (GOR)"
+        },
+        {
+          "name": "chokeOrifice",
+          "type": "xsd:decimal",
+          "unit": "in",
+          "description_pt": "Diâmetro do choke"
+        },
+        {
+          "name": "presShutIn",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão de fechamento"
+        },
+        {
+          "name": "tempBottomHole",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura de fundo de poço"
+        }
       ],
       "object_properties": [
-        {"name": "testedInWellbore", "range": "geo:Wellbore", "description_pt": "Teste realizado no wellbore"}
+        {
+          "name": "testedInWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Teste realizado no wellbore"
+        }
       ],
       "sparql_path": "geo:WellTest",
       "cypher_label": "WellTest"
@@ -646,18 +1646,63 @@
       "description_pt": "Trabalho de estimulação de poço — fraturamento hidráulico, acidificação ou injeção de solvente.",
       "description_en": "Well stimulation job — hydraulic fracturing, acidizing, or solvent injection.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Identificador do trabalho de estimulação"},
-        {"name": "stimJobType", "type": "xsd:string", "description_pt": "Tipo de estimulação (fracturing, acidizing)"},
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Data de início"},
-        {"name": "dTimEnd", "type": "xsd:dateTime", "description_pt": "Data de término"},
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Topo do intervalo estimulado"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Base do intervalo estimulado"},
-        {"name": "maxTreatPres", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão máxima de tratamento"},
-        {"name": "avgTreatRate", "type": "xsd:decimal", "unit": "bbl/min", "description_pt": "Vazão média de bombeio"},
-        {"name": "totalVolume", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume total bombeado"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Identificador do trabalho de estimulação"
+        },
+        {
+          "name": "stimJobType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de estimulação (fracturing, acidizing)"
+        },
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de início"
+        },
+        {
+          "name": "dTimEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de término"
+        },
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Topo do intervalo estimulado"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Base do intervalo estimulado"
+        },
+        {
+          "name": "maxTreatPres",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão máxima de tratamento"
+        },
+        {
+          "name": "avgTreatRate",
+          "type": "xsd:decimal",
+          "unit": "bbl/min",
+          "description_pt": "Vazão média de bombeio"
+        },
+        {
+          "name": "totalVolume",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume total bombeado"
+        }
       ],
       "object_properties": [
-        {"name": "stimulatedWellbore", "range": "geo:Wellbore", "description_pt": "Wellbore estimulado"}
+        {
+          "name": "stimulatedWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Wellbore estimulado"
+        }
       ],
       "sparql_path": "geo:StimJob",
       "cypher_label": "StimJob"
@@ -673,21 +1718,119 @@
       "description_pt": "Marcador de formação geológica — topo ou base de uma unidade estratigráfica identificada no wellbore.",
       "description_en": "Geological formation marker — top or base of a stratigraphic unit identified in the wellbore.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do marcador"},
-        {"name": "md", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida do marcador"},
-        {"name": "tvd", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade Vertical Verdadeira"},
-        {"name": "tvdss", "type": "xsd:decimal", "unit": "m", "description_pt": "TVDSS (abaixo do nível do mar)"},
-        {"name": "description", "type": "xsd:string", "description_pt": "Descrição litológica ou estratigráfica"},
-        {"name": "interpretation", "type": "xsd:string", "description_pt": "Interpretação geológica (topo/base de formação)"},
-        {"name": "chrono", "type": "xsd:string", "description_pt": "Período cronoestratigráfico"},
-        {"name": "litho", "type": "xsd:string", "description_pt": "Litologia predominante (GeoSciML CGI)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do marcador"
+        },
+        {
+          "name": "md",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida do marcador"
+        },
+        {
+          "name": "tvd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade Vertical Verdadeira"
+        },
+        {
+          "name": "tvdss",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "TVDSS (abaixo do nível do mar)"
+        },
+        {
+          "name": "description",
+          "type": "xsd:string",
+          "description_pt": "Descrição litológica ou estratigráfica"
+        },
+        {
+          "name": "interpretation",
+          "type": "xsd:string",
+          "description_pt": "Interpretação geológica (topo/base de formação)"
+        },
+        {
+          "name": "chrono",
+          "type": "xsd:string",
+          "description_pt": "Período cronoestratigráfico"
+        },
+        {
+          "name": "litho",
+          "type": "xsd:string",
+          "description_pt": "Litologia predominante (GeoSciML CGI)"
+        }
       ],
       "object_properties": [
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Marcador de formação no wellbore"},
-        {"name": "sameHorizonAs", "range": "geo:WellboreMarker", "description_pt": "Correlação com marcador de wellbore adjacente"}
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Marcador de formação no wellbore"
+        },
+        {
+          "name": "sameHorizonAs",
+          "range": "geo:WellboreMarker",
+          "description_pt": "Correlação com marcador de wellbore adjacente"
+        }
       ],
       "sparql_path": "geo:FormationMarker",
       "cypher_label": "FormationMarker"
+    },
+    {
+      "witsml_class": "ChannelSet/Channel[P-PDG]",
+      "witsml_uri": "http://www.energistics.org/energyml/data/witsmlv2/2.0#Channel",
+      "rdf_class": "geo:Sensor3W",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/sensor_p_pdg",
+      "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Canal de pressão downhole PDG no WITSML 2.0 (ChannelSet). Equivalente 3W: P-PDG [Pa].",
+      "description_en": "WITSML 2.0 Channel for downhole PDG pressure. 3W equivalent: P-PDG [Pa].",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "ChannelSet/Channel[T-PDG]",
+      "witsml_uri": "http://www.energistics.org/energyml/data/witsmlv2/2.0#Channel",
+      "rdf_class": "geo:Sensor3W",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/sensor_t_pdg",
+      "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Canal de temperatura downhole PDG no WITSML 2.0.",
+      "description_en": "WITSML 2.0 Channel for downhole PDG temperature.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "ChannelSet/Channel[CHOKE_POSITION]",
+      "witsml_uri": "http://www.energistics.org/energyml/data/witsmlv2/2.0#Channel",
+      "rdf_class": "geo:Sensor3W",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/sensor_aber_ckp",
+      "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Posição do choke de produção. Equivalente 3W: ABER-CKP [%].",
+      "description_en": "Production choke position. 3W equivalent: ABER-CKP [%].",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "DownholeComponent[SafetyValve]",
+      "witsml_uri": "http://www.energistics.org/energyml/data/witsmlv2/2.0#DownholeComponent",
+      "rdf_class": "geo:Equipment",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/dhsv",
+      "osdu_kind": "opendes:osdu:reference-data--EquipmentType:DownholeSafetyValve:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Válvula de segurança de subsuperfície (DHSV/SSSV).",
+      "description_en": "Downhole safety valve (DHSV/SSSV).",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "DownholeComponent[Gauge]",
+      "witsml_uri": "http://www.energistics.org/energyml/data/witsmlv2/2.0#DownholeComponent",
+      "rdf_class": "geo:Equipment",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/pdg",
+      "osdu_kind": "opendes:osdu:reference-data--EquipmentType:PermanentDownholeGauge:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Medidor permanente de fundo (PDG).",
+      "description_en": "Permanent downhole gauge (PDG).",
+      "legal_source": "Petrobras 3W v2.0.0"
     }
   ]
 }
