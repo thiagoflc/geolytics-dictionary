@@ -27,6 +27,9 @@ const PREFIXES = [
   ["gsmlb", "http://geosciml.org/def/gsmlb#"],
   ["gsmlbh", "http://geosciml.org/def/gsmlbh#"],
   ["cgi", "http://resource.geosciml.org/classifier/cgi/lithOntology/"],
+  ["sosa", "http://www.w3.org/ns/sosa/"],
+  ["ssn", "http://www.w3.org/ns/ssn/"],
+  ["qudt", "https://qudt.org/vocab/unit/"],
 ];
 
 // Load SWEET alignment data from data/sweet-alignment.json.
@@ -334,6 +337,71 @@ export function buildTtl(graph, options = {}) {
     }
     out.push("");
   }
+
+  // ---- SHACL property shapes for geo:Poco — gsmlbh borehole properties (T10) ----
+  // Source: data/gsmlbh-properties.json  — layer1b
+  // Emits sh:PropertyShape blocks for boreholeDiameter, dateOfDrilling,
+  // drillingMethod and inclinationType as required by T10.
+  out.push("#");
+  out.push("# SHACL property shapes — geo:Poco (gsmlbh borehole properties, layer1b)");
+  out.push("# Source: GeoSciML Borehole (gsmlbh) Module");
+  out.push("#");
+  out.push("");
+  out.push("@prefix sh:     <http://www.w3.org/ns/shacl#> .");
+  out.push("@prefix gsmlbh: <http://geosciml.org/def/gsmlbh#> .");
+  out.push("");
+  out.push("geo:PocoShape a sh:NodeShape ;");
+  out.push("    sh:targetClass geo:Poco ;");
+  out.push(`    rdfs:label ${lit("Forma de Poço — Propriedades gsmlbh", "pt")} ;`);
+  out.push(`    rdfs:label ${lit("Well Shape — gsmlbh borehole properties", "en")} ;`);
+  out.push("    sh:property [");
+  out.push("        sh:path gsmlbh:boreholeDiameter ;");
+  out.push("        sh:datatype xsd:decimal ;");
+  out.push("        sh:maxCount 1 ;");
+  out.push(`        rdfs:label ${lit("Diâmetro do Poço", "pt")} ;`);
+  out.push("    ] ;");
+  out.push("    sh:property [");
+  out.push("        sh:path gsmlbh:dateOfDrilling ;");
+  out.push("        sh:datatype xsd:date ;");
+  out.push("        sh:maxCount 1 ;");
+  out.push(`        rdfs:label ${lit("Data de Perfuração", "pt")} ;`);
+  out.push("    ] ;");
+  out.push("    sh:property [");
+  out.push("        sh:path gsmlbh:drillingMethod ;");
+  out.push("        sh:datatype xsd:string ;");
+  out.push("        sh:maxCount 1 ;");
+  out.push(`        rdfs:label ${lit("Método de Perfuração", "pt")} ;`);
+  out.push("    ] ;");
+  out.push("    sh:property [");
+  out.push("        sh:path gsmlbh:inclinationType ;");
+  out.push("        sh:datatype xsd:string ;");
+  out.push("        sh:maxCount 1 ;");
+  out.push(`        sh:in ( "vertical" "deviated" "horizontal" ) ;`);
+  out.push(`        rdfs:label ${lit("Tipo de Inclinação", "pt")} ;`);
+  out.push("    ] .");
+  out.push("");
+
+  // ---- W3C SOSA/SSN + QUDT minimal alignment (T11) ----
+  out.push("#");
+  out.push("# W3C SOSA/SSN + QUDT minimal alignment");
+  out.push("# Source: data/sosa-qudt-alignment.json");
+  out.push("#");
+  out.push("");
+  out.push("geo:WellLog rdfs:subClassOf sosa:ObservationCollection .");
+  out.push("geo:WellLog rdfs:comment \"A well log is a collection of SOSA observations on a geological formation.\" .");
+  out.push("");
+  out.push("geo:PorePressureObservation rdfs:subClassOf sosa:Observation .");
+  out.push("geo:PorePressureObservation rdfs:comment \"A formation pore pressure measurement; direct SOSA observation with qudt:Pressure result.\" .");
+  out.push("");
+  out.push("geo:CoreSample rdfs:subClassOf ssn:Sample .");
+  out.push("geo:CoreSample rdfs:comment \"A physical core plug retrieved from the borehole; maps to ssn:Sample per W3C SSN.\" .");
+  out.push("");
+  out.push("geo:poco rdfs:subClassOf sosa:FeatureOfInterest .");
+  out.push("geo:formacao rdfs:subClassOf sosa:FeatureOfInterest .");
+  out.push("");
+  out.push("geo:lwd-run rdfs:subClassOf sosa:Sampling .");
+  out.push("geo:wireline-run rdfs:subClassOf sosa:Sampling .");
+  out.push("");
 
   return out.join("\n");
 }

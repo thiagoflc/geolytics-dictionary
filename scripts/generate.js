@@ -925,7 +925,7 @@ function buildModulesExtended() {
       generated: NOW,
       description: 'Módulos analíticos internos Geolytics/Petrobras — apenas conteúdo público/conceitual',
       petrobras_namespace: 'https://petrobras.com.br/geolytics/ontology/',
-      modules: ['M7_geochem', 'M8_rock', 'M9_geomec', 'M10_fluidos'],
+      modules: ['M7_geochem', 'M8_rock', 'M9_geomec', 'M10_fluidos', 'M-WellIntegrity'],
       publication_policy: 'Apenas definições conceituais. Não inclui dados Sigilo=Interno.',
     },
     ...MODULES_EXTENDED,
@@ -2176,7 +2176,7 @@ console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OS
 console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
-console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);
+console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10 + M-WellIntegrity)`);
 console.log(`  PVT fields: ${PVT_FIELDS.length}`);
 console.log(`  Systems: ${SYSTEMS.length}`);
 console.log(`  REGIS NER mappings: ${REGIS_NER_MAPPINGS.length}`);
@@ -2191,6 +2191,7 @@ console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicS
     { src: 'data/witsml-rdf-crosswalk.json',        dst: 'api/v1/witsml-rdf-crosswalk.json' },
     { src: 'data/prodml-rdf-crosswalk.json',         dst: 'api/v1/prodml-rdf-crosswalk.json' },
     { src: 'data/anp-osdu-wellstatus-map.json',      dst: 'api/v1/anp-osdu-wellstatus-map.json' },
+    { src: 'data/sosa-qudt-alignment.json',          dst: 'api/v1/sosa-qudt-alignment.json' },
   ];
   let totalChunks = 0;
   const ragLines = [];

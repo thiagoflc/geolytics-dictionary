@@ -451,7 +451,7 @@ export const EXTENDED_TERMS = [
 
 export const ENTITY_ALIGNMENT = {
   /* operational */
-  'poco':              { kg: '#Well',                  osdu: 'opendes:osdu:master-data--Well:1.0.0',         gsml: 'http://geosciml.org/def/gsmlbh#Borehole', layers: ['layer1','layer1b','layer2','layer3','layer4','layer5'] },
+  'poco':              { kg: '#Well',                  osdu: 'opendes:osdu:master-data--Well:1.0.0',         gsml: 'http://geosciml.org/def/gsmlbh#Borehole', layers: ['layer1','layer1b','layer2','layer3','layer4','layer5'], gsmlbh_properties: ['boreholeDiameter','dateOfDrilling','drillingMethod','inclinationType'] },
   'bloco':             { kg: '#ExplorationBlock',      osdu: 'opendes:osdu:master-data--AcquisitionSurvey:1.0.0', layers: ['layer4','layer5'] },
   'campo':             { kg: '#Field',                 osdu: 'opendes:osdu:master-data--Field:1.0.0',        layers: ['layer4','layer5'] },
   'bacia-sedimentar':  { kg: '#SedimentaryBasin',      osdu: 'opendes:osdu:master-data--Basin:1.0.0',        gsml: 'http://geosciml.org/def/gsmlb#GeologicUnit', layers: ['layer1','layer1b','layer2','layer3','layer4','layer5'] },

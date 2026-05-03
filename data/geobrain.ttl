@@ -10,9 +10,12 @@
 @prefix gsmlb: <http://geosciml.org/def/gsmlb#> .
 @prefix gsmlbh: <http://geosciml.org/def/gsmlbh#> .
 @prefix cgi: <http://resource.geosciml.org/classifier/cgi/lithOntology/> .
+@prefix sosa: <http://www.w3.org/ns/sosa/> .
+@prefix ssn: <http://www.w3.org/ns/ssn/> .
+@prefix qudt: <https://qudt.org/vocab/unit/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T11:29:27.758Z
+# Generated: 2026-05-03T11:37:03.177Z
 # Nodes: 170  Edges: 259
 
 #
@@ -3002,3 +3005,61 @@ geo:laudo-geomecanico geo:stored_in geo:vge .
 <http://loop3d.org/GKO/geocore#GeologicFeature> skos:broadMatch <http://geosciml.org/def/gsmlb#MappedFeature> .
 <http://loop3d.org/GKO/geocore#GeologicEvent> skos:exactMatch <http://geosciml.org/def/gsmlb#GeologicEvent> .
 <http://loop3d.org/GKO/geocore#EarthMaterial> skos:exactMatch <http://geosciml.org/def/gsmlb#EarthMaterial> .
+
+#
+# SHACL property shapes — geo:Poco (gsmlbh borehole properties, layer1b)
+# Source: GeoSciML Borehole (gsmlbh) Module
+#
+
+@prefix sh:     <http://www.w3.org/ns/shacl#> .
+@prefix gsmlbh: <http://geosciml.org/def/gsmlbh#> .
+
+geo:PocoShape a sh:NodeShape ;
+    sh:targetClass geo:Poco ;
+    rdfs:label "Forma de Poço — Propriedades gsmlbh"@pt ;
+    rdfs:label "Well Shape — gsmlbh borehole properties"@en ;
+    sh:property [
+        sh:path gsmlbh:boreholeDiameter ;
+        sh:datatype xsd:decimal ;
+        sh:maxCount 1 ;
+        rdfs:label "Diâmetro do Poço"@pt ;
+    ] ;
+    sh:property [
+        sh:path gsmlbh:dateOfDrilling ;
+        sh:datatype xsd:date ;
+        sh:maxCount 1 ;
+        rdfs:label "Data de Perfuração"@pt ;
+    ] ;
+    sh:property [
+        sh:path gsmlbh:drillingMethod ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        rdfs:label "Método de Perfuração"@pt ;
+    ] ;
+    sh:property [
+        sh:path gsmlbh:inclinationType ;
+        sh:datatype xsd:string ;
+        sh:maxCount 1 ;
+        sh:in ( "vertical" "deviated" "horizontal" ) ;
+        rdfs:label "Tipo de Inclinação"@pt ;
+    ] .
+
+#
+# W3C SOSA/SSN + QUDT minimal alignment
+# Source: data/sosa-qudt-alignment.json
+#
+
+geo:WellLog rdfs:subClassOf sosa:ObservationCollection .
+geo:WellLog rdfs:comment "A well log is a collection of SOSA observations on a geological formation." .
+
+geo:PorePressureObservation rdfs:subClassOf sosa:Observation .
+geo:PorePressureObservation rdfs:comment "A formation pore pressure measurement; direct SOSA observation with qudt:Pressure result." .
+
+geo:CoreSample rdfs:subClassOf ssn:Sample .
+geo:CoreSample rdfs:comment "A physical core plug retrieved from the borehole; maps to ssn:Sample per W3C SSN." .
+
+geo:poco rdfs:subClassOf sosa:FeatureOfInterest .
+geo:formacao rdfs:subClassOf sosa:FeatureOfInterest .
+
+geo:lwd-run rdfs:subClassOf sosa:Sampling .
+geo:wireline-run rdfs:subClassOf sosa:Sampling .

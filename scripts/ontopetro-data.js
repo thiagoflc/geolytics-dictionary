@@ -345,6 +345,28 @@ export const MODULES_EXTENDED = {
       { journey: 'Correlacionar', question: 'O que se relaciona com o quê (óleo-óleo, óleo-rocha)?' },
     ],
   },
+
+  'M-WellIntegrity': {
+    label: 'Integridade de Poço',
+    label_en: 'Well Integrity',
+    system_origin: 'OGC GWML2 2.2',
+    layer: 'layer1b',
+    source: 'OGC GWML2 2.2',
+    cross_links: ['gsmlbh:Borehole', 'poco', 'wellbore'],
+    namespace: 'http://www.opengis.net/gwml-well/2.2/',
+    classes: [
+      { id: 'W01', name: 'WellConstruction',    superclass: null,              description: 'Material utilizado para construir um poço (classe abstrata pai GWML2)' },
+      { id: 'W02', name: 'CasingComponent',     superclass: 'WellConstruction', description: 'Elemento individual de uma coluna de revestimento de poço' },
+      { id: 'W03', name: 'Screen',              superclass: 'WellConstruction', description: 'Intervalo perfurado ou tela instalada na porção produtora do poço' },
+      { id: 'W04', name: 'SealingComponent',    superclass: 'WellConstruction', description: 'Componente de cimento ou selo entre o revestimento e a parede do poço' },
+      { id: 'W05', name: 'FiltrationComponent', superclass: 'WellConstruction', description: 'Camada de cascalho ou material filtrante ao redor da tela' },
+      { id: 'W06', name: 'BoreCollar',          superclass: 'WellConstruction', description: 'Topo do poço — ponto de referência para medições de profundidade' },
+      { id: 'W07', name: 'BoreInterval',        superclass: 'WellConstruction', description: 'Intervalo definido ao longo do poço com características homogêneas' },
+      { id: 'W08', name: 'WellPump',            superclass: 'WellConstruction', description: 'Equipamento de bombeamento instalado no poço' },
+      { id: 'W09', name: 'CasingString',        superclass: 'WellConstruction', description: 'Conjunto completo de tubos de revestimento (aggregação de CasingComponents)' },
+    ],
+    key_properties: [],
+  },
 };
 
 /* ─────────────────────────────────────────────────────────────

@@ -1,0 +1,33 @@
+name: Validate Entity Graph
+
+on:
+  push:
+    paths:
+      - 'data/entity-graph.json'
+      - 'scripts/validate-entity-graph.js'
+      - 'ai/ontology-map.json'
+  pull_request:
+    paths:
+      - 'data/entity-graph.json'
+      - 'scripts/validate-entity-graph.js'
+      - 'ai/ontology-map.json'
+
+concurrency:
+  group: validate-entity-graph-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Entity graph lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm ci
+      - name: Validate entity graph
+        run: node scripts/validate-entity-graph.js
+      - name: Run semantic validator
+        run: node scripts/semantic-validator.js || true
