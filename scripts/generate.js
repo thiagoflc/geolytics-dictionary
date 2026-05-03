@@ -2807,7 +2807,8 @@ function buildFull() {
       counts: {
         glossary_terms: GLOSSARIO.length + OG_GLOSSARY.length + GPP_GLOSSARY.length,
         extended_terms: EXTENDED_TERMS.length,
-        total_terms: GLOSSARIO.length + OG_GLOSSARY.length + GPP_GLOSSARY.length + EXTENDED_TERMS.length,
+        total_terms:
+          GLOSSARIO.length + OG_GLOSSARY.length + GPP_GLOSSARY.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
         entity_nodes:
           ENTITY_NODES.length +

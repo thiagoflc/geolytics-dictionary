@@ -275,8 +275,7 @@ export const GPP_NODES = [
     color: "#34495E",
     definition_pt:
       "Grupo técnico de pré-análise de decisões de Bloco antes do COMEXP. Garante due diligence técnica.",
-    definition_en_canonical:
-      "Technical pre-review group for Block decisions, feeding COMEXP.",
+    definition_en_canonical: "Technical pre-review group for Block decisions, feeding COMEXP.",
     module: "data/gestao-projetos-parcerias.json#GPP019",
     corporate_internal: true,
     evidence_refs: ["Curso PROPEX 2024/2025"],
@@ -290,8 +289,7 @@ export const GPP_NODES = [
     color: "#34495E",
     definition_pt:
       "Grupo técnico que apoia os PEXPs com revisão de aspectos geológicos, de engenharia e econômicos.",
-    definition_en_canonical:
-      "Technical group supporting PEXPs with subject-matter review.",
+    definition_en_canonical: "Technical group supporting PEXPs with subject-matter review.",
     module: "data/gestao-projetos-parcerias.json#GPP020",
     corporate_internal: true,
     evidence_refs: ["Curso PROPEX 2024/2025"],
@@ -431,34 +429,122 @@ function edge(source, target, relation, label, label_en, style = "solid") {
 }
 
 export const GPP_EDGES = [
-  edge("bloco-anchor", "contrato-ep", "is_subject_to_contract", "está sob contrato", "is subject to contract"),
+  edge(
+    "bloco-anchor",
+    "contrato-ep",
+    "is_subject_to_contract",
+    "está sob contrato",
+    "is subject to contract"
+  ),
   edge("contrato-ep", "pem", "has_minimum_program", "possui PEM", "has minimum program"),
   edge("pem", "obrigacao-exploratoria", "decomposes_into", "decompõe-se em", "decomposes into"),
-  edge("bloco-anchor", "bloco-exploratorio-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
-  edge("bloco-anchor", "bloco-em-avaliacao-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
-  edge("bloco-anchor", "area-em-pad-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
-  edge("bloco-anchor", "campo-em-desenvolvimento-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
-  edge("bloco-anchor", "campo-producao-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
-  edge("bloco-exploratorio-state", "bloco-em-avaliacao-state", "transitions_to", "transita para", "transitions to", "dashed"),
-  edge("bloco-em-avaliacao-state", "area-em-pad-state", "transitions_to", "transita para", "transitions to", "dashed"),
-  edge("area-em-pad-state", "campo-em-desenvolvimento-state", "transitions_to", "transita para", "transitions to", "dashed"),
-  edge("campo-em-desenvolvimento-state", "campo-producao-state", "transitions_to", "transita para", "transitions to", "dashed"),
-  edge("projeto-exploratorio", "propex", "is_governed_by_program", "é governado pelo Programa", "is governed by program"),
+  edge(
+    "bloco-anchor",
+    "bloco-exploratorio-state",
+    "has_lifecycle_state",
+    "tem estado",
+    "has lifecycle state"
+  ),
+  edge(
+    "bloco-anchor",
+    "bloco-em-avaliacao-state",
+    "has_lifecycle_state",
+    "tem estado",
+    "has lifecycle state"
+  ),
+  edge(
+    "bloco-anchor",
+    "area-em-pad-state",
+    "has_lifecycle_state",
+    "tem estado",
+    "has lifecycle state"
+  ),
+  edge(
+    "bloco-anchor",
+    "campo-em-desenvolvimento-state",
+    "has_lifecycle_state",
+    "tem estado",
+    "has lifecycle state"
+  ),
+  edge(
+    "bloco-anchor",
+    "campo-producao-state",
+    "has_lifecycle_state",
+    "tem estado",
+    "has lifecycle state"
+  ),
+  edge(
+    "bloco-exploratorio-state",
+    "bloco-em-avaliacao-state",
+    "transitions_to",
+    "transita para",
+    "transitions to",
+    "dashed"
+  ),
+  edge(
+    "bloco-em-avaliacao-state",
+    "area-em-pad-state",
+    "transitions_to",
+    "transita para",
+    "transitions to",
+    "dashed"
+  ),
+  edge(
+    "area-em-pad-state",
+    "campo-em-desenvolvimento-state",
+    "transitions_to",
+    "transita para",
+    "transitions to",
+    "dashed"
+  ),
+  edge(
+    "campo-em-desenvolvimento-state",
+    "campo-producao-state",
+    "transitions_to",
+    "transita para",
+    "transitions to",
+    "dashed"
+  ),
+  edge(
+    "projeto-exploratorio",
+    "propex",
+    "is_governed_by_program",
+    "é governado pelo Programa",
+    "is governed by program"
+  ),
   edge("propex", "pexp", "has_decision_gate", "tem portões decisórios", "has decision gate"),
   edge("pexp", "projeto-exploratorio", "evaluates_project", "avalia projeto", "evaluates project"),
-  edge("pgp", "projeto-exploratorio", "documents_project", "documenta projeto", "documents project"),
+  edge(
+    "pgp",
+    "projeto-exploratorio",
+    "documents_project",
+    "documenta projeto",
+    "documents project"
+  ),
   edge("pgp", "pad", "documents_pad", "documenta PAD", "documents PAD"),
   edge("pad", "area-em-pad-state", "triggers_state", "dispara estado", "triggers state"),
   edge("pad", "declaracao-comercialidade", "leads_to", "leva à", "leads to"),
   edge("declaracao-comercialidade", "pd-pdp", "triggers_doc", "dispara documento", "triggers doc"),
-  edge("declaracao-comercialidade", "campo-em-desenvolvimento-state", "marks_field_transition", "marca transição para Campo", "marks field transition"),
+  edge(
+    "declaracao-comercialidade",
+    "campo-em-desenvolvimento-state",
+    "marks_field_transition",
+    "marca transição para Campo",
+    "marks field transition"
+  ),
   edge("tep", "projeto-exploratorio", "closes_project", "encerra projeto", "closes project"),
   edge("isa", "campo-producao-state", "marks_transition", "marca transição", "marks transition"),
   edge("comexp", "pexp", "deliberates_at", "delibera em", "deliberates at"),
   edge("grbloc", "comexp", "feeds_committee", "alimenta comitê", "feeds committee"),
   edge("grt", "pexp", "supports_gate", "apoia portão", "supports gate"),
   edge("rodada", "contrato-ep", "produces_contract", "produz contrato", "produces contract"),
-  edge("bloco-anchor", "working-interest", "has_partnership_share", "tem participação societária", "has partnership share"),
+  edge(
+    "bloco-anchor",
+    "working-interest",
+    "has_partnership_share",
+    "tem participação societária",
+    "has partnership share"
+  ),
   edge("working-interest", "operador-role", "designates", "designa", "designates"),
   edge("portfolio-exploratorio", "bloco-anchor", "aggregates", "agrega", "aggregates"),
   edge("vme", "bloco-anchor", "scores", "pontua", "scores"),
@@ -512,7 +598,12 @@ export const GPP_GLOSSARY = [
     definicao:
       "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e decisórios (portfólio, ranking, devolução). É objeto regulatório, técnico e decisório simultaneamente — fonte de muitas ambiguidades quando o termo 'Bloco' é usado para significar estado, área, contrato ou campo.",
     fonte: "Lei nº 9.478/1997; Curso PROPEX 2024/2025",
-    apareceEm: ["blocos-contrato", "pads-andamento", "pads-concluidos", "declaracoes-comercialidade"],
+    apareceEm: [
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+    ],
   },
   {
     id: "propex",
