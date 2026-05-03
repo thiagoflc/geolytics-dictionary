@@ -1339,7 +1339,16 @@ function buildApiIndex() {
       regis_ner:       `${BASE_URL_PLACEHOLDER}/data/regis-ner-schema.json`,
       acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
       acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
-      cgi_lithology:   `${BASE_URL_PLACEHOLDER}/data/cgi-lithology.json`,
+      cgi_lithology:             `${BASE_URL_PLACEHOLDER}/api/v1/cgi-lithology.json`,
+      cgi_osdu_lithology_map:    `${BASE_URL_PLACEHOLDER}/api/v1/cgi-osdu-lithology-map.json`,
+      cgi_geologic_time:         `${BASE_URL_PLACEHOLDER}/api/v1/cgi-geologic-time.json`,
+      cgi_fault_type:            `${BASE_URL_PLACEHOLDER}/api/v1/cgi-fault-type.json`,
+      cgi_deformation_style:     `${BASE_URL_PLACEHOLDER}/api/v1/cgi-deformation-style.json`,
+      cgi_contact_type:          `${BASE_URL_PLACEHOLDER}/api/v1/cgi-contact-type.json`,
+      cgi_stratigraphic_rank:    `${BASE_URL_PLACEHOLDER}/api/v1/cgi-stratigraphic-rank.json`,
+      gwml2:                     `${BASE_URL_PLACEHOLDER}/api/v1/gwml2.json`,
+      layer1_layer1b_equivalence:`${BASE_URL_PLACEHOLDER}/api/v1/layer1-layer1b-equivalence.json`,
+      gsmlbh_properties:         `${BASE_URL_PLACEHOLDER}/api/v1/gsmlbh-properties.json`,
       geomechanics:    `${BASE_URL_PLACEHOLDER}/api/v1/geomechanics.json`,
       geomechanics_data: `${BASE_URL_PLACEHOLDER}/data/geomechanics.json`,
       geomechanics_fractures: `${BASE_URL_PLACEHOLDER}/data/geomechanics-fractures.json`,
@@ -2082,13 +2091,13 @@ const SYSTEM_PROMPT_PT = `# Contexto de Domínio: Exploração e Produção de P
 
 A Exploração e Produção (E&P) de petróleo e gás natural no Brasil é regulada pela **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)**, autarquia federal vinculada ao Ministério de Minas e Energia, criada pela **Lei nº 9.478/1997** (Lei do Petróleo). A ANP contrata, fiscaliza e regula todas as atividades exploratórias e produtivas do país. Os dados oficiais são publicados pela **Superintendência de Exploração (SEP)** através do **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
 
-Este dicionário cobre 6 camadas semânticas: BFO+GeoCore (UFRGS), O3PO+GeoReservoir (UFRGS), Petro KGraph (PUC-Rio, 539 conceitos PT-BR), OSDU (industry standard), ANP/SIGEP (regulatório brasileiro) e Geolytics/Petrobras Internal (módulos M7-M10).
+Este dicionário cobre 8 camadas semânticas: BFO+GeoCore (UFRGS), GeoSciML+CGI (OGC/IUGS — padrão internacional de boreholes e litologias), O3PO+GeoReservoir (UFRGS), Petro KGraph (PUC-Rio, 539 conceitos PT-BR), OSDU (industry standard), ANP/SIGEP (regulatório brasileiro), Geolytics/Petrobras Internal (módulos M7-M10) e GSO/Loop3D (geologia estrutural).
 
 Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997), o concessionário assume todos os riscos, detém o petróleo produzido e paga tributos (royalties, participação especial). Na **Partilha de Produção** (Lei 12.351/2010, aplicável ao polígono do pré-sal e áreas estratégicas), o petróleo é dividido entre contratado e União, e a **Petrobras é operadora obrigatória** nos blocos do pré-sal.
 
 ## 2. Entidades-chave
 
-- **Poço (ANP)** — identificador padronizado de poço de óleo/gás (ex.: 1-RJS-702-RJ).
+- **Poço (ANP)** — identificador padronizado de poço de óleo/gás (ex.: 1-RJS-702-RJ). No modelo GeoSciML (gsmlbh), o poço é representado pela classe **Borehole** com propriedades boreholeDiameter, dateOfDrilling e inclinationType; componentes de construção (revestimento, cimentação, tela, filtro) são modelados pelo módulo **GWML2 WellConstruction** (9 classes).
 - **Bloco** — prisma vertical numa bacia sedimentar onde se realiza E&P; arrematado em rodada.
 - **Bacia Sedimentar** — depressão crustal com rochas sedimentares (Campos, Santos, Recôncavo).
 - **Campo / Área de Desenvolvimento** — área produtora resultante de Declaração de Comercialidade.
@@ -2114,7 +2123,8 @@ Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997),
 - **Campo ≠ Bloco ≠ Bacia**: três entidades distintas — Campo (produção), Bloco (contrato), Bacia (geologia).
 - **Reservatório ≠ Campo**: reservatório é corpo rochoso; campo é delimitação econômico-administrativa.
 - **Reserva ≠ Reservatório ≠ Reserva Ambiental**: tripla polissemia. Reserva (SPE-PRMS) é volume econômico (1P/2P/3P); reservatório é geológico; reserva ambiental é REBIO/RPPN.
-- **Formação ≠ litologia**: erro NER mais comum em PT-BR. *Formação Barra Velha* (FOR) é nome próprio de unidade litoestratigráfica; *calcário microbialítico* (ROC) é o tipo petrográfico que a compõe.
+- **Formação ≠ litologia**: erro NER mais comum em PT-BR. *Formação Barra Velha* (FOR) é nome próprio de unidade litoestratigráfica; *calcário microbialítico* (ROC) é o tipo petrográfico que a compõe. O vocabulário canônico de litologias é o **CGI Simple Lithology** (437 conceitos, disponível em PT e EN, adotado pelo OSDU como referência para LithologyType). Exemplos: limestone, dolostone, arenite, rock_salt, anhydrite — sempre verificar o termo CGI antes de mapear litologia OSDU.
+- **CGI vocabulários estruturais**: além de litologias, CGI/GeoSciML define vocabulários para tipos de falha, estilos de deformação, tipos de contato e ranques estratigráficos — use ao descrever geologia estrutural no contexto GeoSciML (gsmlb).
 - **Campo (polissemia)**: pode ser Campo (ANP — Búzios), campo (atributo de dado), campo (geográfico), Campo Tensional (M9). Sempre desambiguar.
 - **Intervalo ≠ Idade**: NER PetroGold INT (intervalo 2100-2450m) ≠ IDA (Aptiano). Um intervalo *tem* uma idade, mas não é a idade.
 
@@ -2127,7 +2137,7 @@ Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997),
 ### 3.4 Geomecânica (M9) e Petrofísica (M8)
 - **UCS estático ≠ UCS dinâmico**: estático = lab (verdadeiro); dinâmico = derivado de DTC/DTS via correlação GDA/Petrobras. Diferença típica 20–40%. Não usar dinâmico para projeto sem calibração.
 - **Sv / Shmin / SHmax**: três tensores distintos do CampoTensionalInSitu. Em regime extensional Sv > SHmax > Shmin (regime normal); compressional inverte a ordem.
-- **Porosidade NMR / Den / Neu / Son**: não é única. NMR é mais precisa em carbonatos pré-sal; Den assume densidade da matriz; Neu é sensível ao hidrogênio total; Son subestima em carbonatos.
+- **Porosidade NMR / Den / Neu / Son**: não é única. NMR é mais precisa em carbonatos pré-sal; Den assume densidade da matriz; Neu é sensível ao hidrogênio total; Son subestima em carbonatos. Perfis de poço (curvas GR, RHOB, NPHI, DTC, DTS etc.) são modelados como **sosa:Observation** (W3C SOSA/SSN) com unidades QUDT — padrão adotado pelo OSDU e pelo GSO/Loop3D; o dicionário mapeia 17 mnemônicos de perfis com suas unidades QUDT.
 - **kH ≠ kV**: permeabilidade NÃO é escalar. Razão kV/kH varia de 0.001 (folhelhos) a 1.0 (isotrópicas). Crítico em águas profundas.
 - **Breakout** (M9): colapso compressivo das paredes do poço na direção Shmin, identificado por caliper 4 braços ou imagens FMI/UBI. Usado para orientar SHmax.
 - **SGR (Shale Gouge Ratio)**: proxy de potencial selante de falhas (TrapTester). SGR > 18–20% = falha selante; < 18% = condutiva. Não confundir com SAR (saturados/aromáticos/resinas) nem com SGR de gás.
@@ -2170,7 +2180,7 @@ Sistema Petrolífero → Trapa → Acumulação → Campo → Reserva (1P/2P/3P)
 
 Cada elo é uma entidade do dicionário (\`data/entity-graph.json\`). Use ao raciocinar sobre "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
 
-Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1-L6), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3.
+Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1, L1b-GeoSciML/CGI, L2-L7), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3. Para litologias, prefira termos CGI Simple Lithology (437 conceitos); para estrutura de poço, use modelo gsmlbh/GWML2; para medições de perfil, referencie SOSA/QUDT.
 `;
 
 const SYSTEM_PROMPT_EN = `# Domain context — Brazilian Oil & Gas (E&P)
@@ -2376,6 +2386,16 @@ console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicS
     { src: 'data/prodml-rdf-crosswalk.json',         dst: 'api/v1/prodml-rdf-crosswalk.json' },
     { src: 'data/anp-osdu-wellstatus-map.json',      dst: 'api/v1/anp-osdu-wellstatus-map.json' },
     { src: 'data/sosa-qudt-alignment.json',          dst: 'api/v1/sosa-qudt-alignment.json' },
+    { src: 'data/cgi-lithology.json',                dst: 'api/v1/cgi-lithology.json' },
+    { src: 'data/cgi-osdu-lithology-map.json',       dst: 'api/v1/cgi-osdu-lithology-map.json' },
+    { src: 'data/cgi-geologic-time.json',            dst: 'api/v1/cgi-geologic-time.json' },
+    { src: 'data/cgi-fault-type.json',               dst: 'api/v1/cgi-fault-type.json' },
+    { src: 'data/cgi-deformation-style.json',        dst: 'api/v1/cgi-deformation-style.json' },
+    { src: 'data/cgi-contact-type.json',             dst: 'api/v1/cgi-contact-type.json' },
+    { src: 'data/cgi-stratigraphic-rank.json',       dst: 'api/v1/cgi-stratigraphic-rank.json' },
+    { src: 'data/gwml2.json',                        dst: 'api/v1/gwml2.json' },
+    { src: 'data/layer1-layer1b-equivalence.json',   dst: 'api/v1/layer1-layer1b-equivalence.json' },
+    { src: 'data/gsmlbh-properties.json',            dst: 'api/v1/gsmlbh-properties.json' },
   ];
   let totalChunks = 0;
   const ragLines = [];
