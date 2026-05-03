@@ -346,17 +346,51 @@ function loadFractureToGso() {
   return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
+/**
+ * Loads the L6 corporate Petrobras geomechanics ontology
+ * (data/geomechanics-corporate.json — 92 entities, 281 relations as of v1.6.2).
+ * Returns null if file is absent.
+ */
+function loadGeomechanicsCorporate() {
+  const dataDir = path.resolve(__dirname, "..", "data");
+  const p = path.join(dataDir, "geomechanics-corporate.json");
+  if (!fs.existsSync(p)) return null;
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
+function loadGeomechanicsCorporateCrosswalk() {
+  const dataDir = path.resolve(__dirname, "..", "data");
+  const p = path.join(dataDir, "geomechanics-corporate-crosswalk.json");
+  if (!fs.existsSync(p)) return null;
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
 function buildGeomechanicsApi() {
   const gm = loadGeomechanics();
   const gmf = loadGeomechanicsFractures();
   const ftg = loadFractureToGso();
+  const gmCorp = loadGeomechanicsCorporate();
+  const gmCorpCw = loadGeomechanicsCorporateCrosswalk();
   if (!gm)
     return { meta: { version: VERSION, generated: NOW, error: "geomechanics.json not found" } };
+
+  // Corporate L6 entities exposed at top level — DFIT, Breakout/Ovalização, BOL,
+  // Geolog, AZIE, HAZI, etc. become directly queryable via the API endpoint.
+  const corporate = gmCorp
+    ? {
+        meta: gmCorp.meta,
+        entities: (gmCorp.entities || []).filter((e) => !e.deprecated),
+        polysemy_cards: gmCorp.polysemy_cards || [],
+        crosswalk_l2_l6: gmCorpCw ? { meta: gmCorpCw.meta, mappings: gmCorpCw.mappings } : null,
+      }
+    : null;
+
   return {
     meta: {
       version: VERSION,
       generated: NOW,
-      source: "data/geomechanics.json + data/geomechanics-fractures.json",
+      source:
+        "data/geomechanics.json + data/geomechanics-fractures.json + data/geomechanics-corporate.json (L6) + data/geomechanics-corporate-crosswalk.json",
       counts: {
         classes: gm.classes ? gm.classes.length : 0,
         properties: gm.properties ? gm.properties.length : 0,
@@ -364,12 +398,116 @@ function buildGeomechanicsApi() {
         instances: gm.instances ? gm.instances.length : 0,
         fracture_classes: gmf && gmf.classes ? gmf.classes.length : 0,
         fracture_to_gso_mappings: ftg && ftg.mappings ? ftg.mappings.length : 0,
+        corporate_entities: corporate ? corporate.entities.length : 0,
+        corporate_polysemy_cards: corporate ? corporate.polysemy_cards.length : 0,
+        corporate_crosswalk_mappings:
+          corporate && corporate.crosswalk_l2_l6 ? corporate.crosswalk_l2_l6.mappings.length : 0,
       },
     },
     geomechanics: gm,
     fractures: gmf,
     fracture_to_gso_crosswalk: ftg,
+    corporate,
   };
+}
+
+/**
+ * Converts L6 corporate entities (GEOMEC*) into entity-graph nodes.
+ * Preserves label_pt as canonical; exposes acronym + observed_variants
+ * as synonyms_pt; label_en as English variant. Category drives node color.
+ *
+ * Edges come from each entity's relationships array; only edges whose
+ * target_id is another GEOMEC* node or a known graph node are emitted
+ * (avoids dangling edges to entities outside the visible graph).
+ *
+ * @param {Set<string>} allowedTargetIds - IDs of non-corporate nodes that
+ *   corporate edges may target (e.g. "poco" if cross-domain relations exist).
+ * @returns {{nodes: Object[], edges: Object[]}}
+ */
+function buildGeomecCorporateGraph(allowedTargetIds) {
+  const gmCorp = loadGeomechanicsCorporate();
+  if (!gmCorp) return { nodes: [], edges: [] };
+
+  const COLOR_BY_CATEGORY = {
+    Process: "#0F9D9D",
+    Property: "#6B5BFF",
+    Tool: "#E8833A",
+    Document: "#475569",
+    Measurement: "#9333EA",
+    Model: "#64748B",
+    Formula: "#64748B",
+    Risk: "#DC2626",
+    Classifier: "#64748B",
+    GovernanceKPI: "#15803D",
+    LabTest: "#9333EA",
+  };
+
+  const nodes = (gmCorp.entities || [])
+    .filter((e) => !e.deprecated)
+    .map((e) => {
+      const synonymsPt = []
+        .concat(e.label_pt_synonyms_pt || [])
+        .concat(e.observed_variants || [])
+        .concat(e.acronym || [])
+        .filter((v, i, arr) => v && arr.indexOf(v) === i);
+      const synonymsEn = e.label_en ? [e.label_en] : [];
+      return {
+        id: e.id,
+        label: e.label_pt || e.label || e.id,
+        label_en: e.label_en || null,
+        type: "geomec_corporate",
+        color: COLOR_BY_CATEGORY[e.category] || "#64748B",
+        size: 22,
+        definition: e.definition_pt || e.definition || null,
+        definition_en_canonical: e.definition_en || null,
+        category: e.category,
+        layer: "L6",
+        acronym: e.acronym || [],
+        owner_department: e.owner_department || null,
+        official_datastore: e.official_datastore || null,
+        internal_tools: e.internal_tools || null,
+        internal_standards: e.internal_standards || null,
+        osdu_kind: null,
+        osdu_mapping: e.osdu_mapping || null,
+        geocoverage: ["layer6"],
+        synonyms_pt: synonymsPt,
+        synonyms_en: synonymsEn,
+        examples: [],
+        glossary_id: null,
+        extended_id: null,
+        skos_prefLabel: { "@pt": e.label_pt || e.label, "@en": e.label_en || null },
+        skos_altLabel: { "@pt": synonymsPt, "@en": synonymsEn },
+        skos_definition: {
+          "@pt": e.definition_pt || e.definition || null,
+          "@en": e.definition_en || null,
+        },
+        skos_example: [],
+        wsm_type_code: e.wsm_type_code || null,
+        _semantic_category: e._semantic_category || null,
+      };
+    });
+
+  const corpIds = new Set(nodes.map((n) => n.id));
+  const validTargets = new Set([...corpIds, ...(allowedTargetIds || [])]);
+
+  const edges = [];
+  for (const e of gmCorp.entities || []) {
+    if (e.deprecated) continue;
+    for (const r of e.relationships || []) {
+      const target = r.target_id;
+      if (!target || !validTargets.has(target)) continue;
+      const relation = r.relation_type || "RELATED_TO";
+      edges.push({
+        source: e.id,
+        target,
+        relation: relation.toLowerCase(),
+        relation_label_pt: r.target_label || relation,
+        relation_label_en: relation.replace(/_/g, " ").toLowerCase(),
+        style: "geomec_corporate",
+      });
+    }
+  }
+  return { nodes, edges };
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -2613,10 +2751,20 @@ function buildEntityGraph() {
     relation_label_en: e.relation_label_en || e.relation.replace(/_/g, " "),
     style: e.style,
   }));
+
+  /* L6 corporate Petrobras geomechanics — 92 entities (GEOMEC*) including
+     DFIT, Breakout/Ovalização, BOL, Geolog, AZIE, HAZI, etc. Adds nodes and
+     intra-corporate edges to the entity-graph so GraphRAG agents and
+     Neo4j visualizations can resolve these concepts directly. */
+  const corpGraph = buildGeomecCorporateGraph(new Set(nodes.map((n) => n.id)));
+  nodes.push(...corpGraph.nodes);
+  edges.push(...corpGraph.edges);
+
   return {
     version: VERSION,
     generated: NOW,
-    source: "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W",
+    source:
+      "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate",
     nodes,
     edges,
   };
