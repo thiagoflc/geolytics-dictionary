@@ -1195,8 +1195,14 @@ function buildEntityGraph() {
     ...[...baseNodes, ...ontopetroNodes, ...osduNodes, ...osduExtraNodes].map(withSkosAliases),
     /* OG nodes are stored fully-baked (skos aliases inlined where appropriate) and
        are NOT re-mapped through withSkosAliases — that would add empty aliases to
-       the 30 OG nodes that intentionally do not carry them. */
-    ...OG_NODES,
+       the 30 OG nodes that intentionally do not carry them.
+       Geocoverage fallback: if an OG node has no geocoverage field, look it up from
+       ENTITY_ALIGNMENT so all 170 nodes have at least one layer tag. */
+    ...OG_NODES.map((n) => {
+      if (n.geocoverage && n.geocoverage.length) return n;
+      const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
+      return align.geocoverage.length ? { ...n, geocoverage: align.geocoverage } : n;
+    }),
   ];
   /* deriva relation_label_en a partir do snake_case do campo relation, exceto
      quando a aresta já traz relation_label_en explícito (caso OG_EDGES, onde

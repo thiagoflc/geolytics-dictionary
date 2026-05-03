@@ -580,6 +580,62 @@ export const ENTITY_ALIGNMENT = {
   'mwd':                { kg: null, osdu: null, layers: ['layer4'] },
   'lwd':                { kg: null, osdu: null, layers: ['layer4'] },
   'manifold-submarino': { kg: null, osdu: null, layers: ['layer4'] },
+
+  /* contractual — ANP/SIGEP regulatory milestones and documents (layer5) */
+  'pem':                { kg: null, osdu: null, layers: ['layer5'] },
+  'pte':                { kg: null, osdu: null, layers: ['layer5'] },
+  'rfad':               { kg: null, osdu: null, layers: ['layer5'] },
+  'plano-desenvolvimento': { kg: null, osdu: null, layers: ['layer5'] },
+  'aip':                { kg: null, osdu: null, layers: ['layer5'] },
+  'cip':                { kg: null, osdu: null, layers: ['layer5'] },
+  'teste-formacao':     { kg: null, osdu: 'opendes:osdu:master-data--WellboreTest:1.0.0', layers: ['layer4','layer5'] },
+  'tld':                { kg: null, osdu: 'opendes:osdu:master-data--WellboreTest:1.0.0', layers: ['layer4','layer5'] },
+  'roa':                { kg: null, osdu: null, layers: ['layer5'] },
+  'pag':                { kg: null, osdu: null, layers: ['layer5'] },
+  'frame':              { kg: null, osdu: null, layers: ['layer5'] },
+  'rcsd':               { kg: null, osdu: null, layers: ['layer5'] },
+  'qpg':                { kg: null, osdu: null, layers: ['layer5'] },
+  'bdp':                { kg: null, osdu: null, layers: ['layer5'] },
+  'igp':                { kg: null, osdu: null, layers: ['layer5'] },
+  'rmg':                { kg: null, osdu: null, layers: ['layer5'] },
+  'laudo-geomecanico':  { kg: null, osdu: null, layers: ['layer5','layer6'] },
+  'perfil-composto':    { kg: null, osdu: 'opendes:osdu:work-product-component--WellLog:1.0.0', layers: ['layer4','layer6'] },
+
+  /* contractual — Petrobras-internal geomechanics programs (layer6) */
+  'ogeomec':            { kg: null, osdu: null, layers: ['layer6'] },
+
+  /* operational — ANP milestone */
+  'primeiro-oleo':      { kg: null, osdu: null, layers: ['layer5','layer6'] },
+
+  /* operational — Petrobras internal workflow nodes (layer6) */
+  'lessons-learned':       { kg: null, osdu: null, layers: ['layer6'] },
+  'retro-analysis':        { kg: null, osdu: null, layers: ['layer6'] },
+  'input-elaboration':     { kg: null, osdu: null, layers: ['layer6'] },
+  'operational-monitoring':{ kg: null, osdu: null, layers: ['layer6'] },
+  'formation-evaluation':  { kg: null, osdu: 'opendes:osdu:work-product-component--WellLog:1.0.0', layers: ['layer4','layer6'] },
+
+  /* instrument — ANP official systems (layer5) */
+  'rftp':    { kg: null, osdu: null, layers: ['layer5'] },
+  'i-engine':{ kg: null, osdu: null, layers: ['layer5'] },
+  'dpp':     { kg: null, osdu: null, layers: ['layer5'] },
+  'bmp':     { kg: null, osdu: null, layers: ['layer5'] },
+
+  /* instrument — Petrobras proprietary systems (layer6) */
+  'sirr':                     { kg: null, osdu: null, layers: ['layer6'] },
+  'bdoc':                     { kg: null, osdu: null, layers: ['layer6'] },
+  'vge':                      { kg: null, osdu: null, layers: ['layer6'] },
+  'cassandra-exata-curva-tempo': { kg: null, osdu: null, layers: ['layer6'] },
+  'exata':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'sigeo':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'bdiep':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'bdiap':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'aida':                     { kg: null, osdu: null, layers: ['layer6'] },
+  'geodo':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'gda':                      { kg: null, osdu: null, layers: ['layer6'] },
+
+  /* analytical — well control events (layer6 geomechanics domain) */
+  'kick-event':               { kg: null, osdu: null, layers: ['layer6'] },
+  'geostopping-event':        { kg: null, osdu: null, layers: ['layer6'] },
 };
 
 /* ─────────────────────────────────────────────────────────────
