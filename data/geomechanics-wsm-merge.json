@@ -1,0 +1,685 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "id": "geomechanics-wsm-merge",
+  "label": "Geomechanics — WSM 2025 ↔ Petrobras Corporate Merge",
+  "label_pt": "Geomecânica — Merge WSM 2025 ↔ Corporativo Petrobras",
+  "version": "1.1.0",
+  "layer": "L2 (academic/global) ↔ L6 (Petrobras corporate)",
+  "description": "Integração entre o esquema do World Stress Map Database Release 2025 (WSM TR 25-01, GFZ Potsdam, 100.842 registros, 40 campos) e a ontologia corporativa Petrobras (geomechanics-corporate.json, 68 entidades GEOMEC*). v1.1 incorpora 13 novas entidades L6 (GEOMEC068–079 + 079A) decididas pela área de gestão de dados em 2026-05-03: feições estruturais explícitas separadas dos processos de análise, BOL como Data Artifact, Geolog como Tool externa, propriedades-entidade para POSTEF/FractureState/FaultType, e renomeação de GEOMEC023A/B/C para refletir natureza de processo.",
+  "consolidates": [
+    "geomechanics-corporate.json v1.5.0 (Petrobras, 68 GEOMEC* entities)",
+    "WSM Database Release 2025 (Heidbach et al. 2025, 40-field schema)",
+    "WSM Technical Report 25-01 (Rajabi, Lammers, Heidbach 2025)",
+    "geomechanics-fractures.json (GFP* properties — referenced, not duplicated)"
+  ],
+  "consolidated_at": "2026-05-03",
+  "changelog": {
+    "v1.1.0": [
+      "Added GEOMEC068–079 + 079A (13 entities) — Petrobras user splits per data-governance decisions Q-A..Q-F",
+      "Renumbered WSM additions to GEOMEC080–087 (BOL/AZIE/HAZI/Geolog moved to 068–079 range)",
+      "Recommended addition of EN synonyms (observed_variants) on GEOMEC023/023A/B/C reflecting process aspect — PT canonical labels preserved intact",
+      "Decision: DIP/DIPAZ not duplicated — reference GFP003/GFP004 from geomechanics-fractures.json",
+      "Decision: Classe (BOL Intervalos) and ImageQuality kept as free attributes, not entities"
+    ],
+    "v1.0.0": "Initial merge (12 WSM entities GEOMEC080–091, 9 controlled vocabs, 35-field crosswalk)"
+  },
+  "sources": [
+    {"doc_id": "WSM-TR-25-01", "title": "WSM database description and guidelines for analysis of horizontal stress orientation from borehole logging", "doi": "10.48440/wsm.2025.001", "authors": ["Rajabi, M.", "Lammers, S.", "Heidbach, O."], "year": 2025},
+    {"doc_id": "WSM-DB-2025", "title": "World Stress Map Database Release 2025", "doi": "10.5880/WSM.2025.001", "year": 2025},
+    {"doc_id": "Zoback-1992", "title": "First- and Second-Order Patterns of Stress in the Lithosphere", "doi": "10.1029/92JB00132"},
+    {"doc_id": "Plumb-Hickman-1985", "title": "Stress-induced borehole elongation: a comparison between four-arm dipmeter and televiewer", "doi": "10.1029/JB090iB07p05513"},
+    {"doc_id": "Bird-2003-PB2002", "title": "An updated digital model of plate boundaries"},
+    {"doc_id": "Szwillus-2019", "title": "Global Crustal Thickness and Velocity Structure", "doi": "10.1029/2018jb016593"},
+    {"doc_id": "PP-2E&P-00322", "section": "§3.5.1.4 Análise de Perfil de Imagem"}
+  ],
+
+  "naming_policy": {
+    "canonical_language": "pt-BR",
+    "rule": "label_pt é sempre canônico e preservado. label_en e observed_variants podem acumular sinônimos para refletir nuances semânticas (ex: feição vs processo, vendor naming, padrão internacional) sem alterar a PT.",
+    "applies_to": ["GEOMEC*", "GEOMEC sub-IDs (023A/B/C, 026A/B, 052A/B, 053A/B, 079A)"]
+  },
+
+  "merge_policy": {
+    "petrobras_authoritative_for": [
+      "Process governance (CSD, QPG, Laudo, Interpretação de Perfil de Imagem)",
+      "Internal tools (GeomecBR, GERESIM, SIGEO, SEST TR, BDIEP, OpenWells, SIMCARR)",
+      "External-but-Petrobras-managed tools (Geolog vendor, contracts, SLAs)",
+      "Internal standards (PE-2RES-00009/00014/00016, PP-2E&P-00322, PE-2POC-01246/01495)",
+      "Brazilian regulatory anchors (ANP, AGP)",
+      "Operational measurements (XLOT methodology, ECD, APB, BDP)",
+      "Lab tests (GEOMEC061-067)",
+      "Image-log structural features as observations (Breakout, DITF, Fratura Natural, Acamamento)"
+    ],
+    "wsm_authoritative_for": [
+      "Stress indicator typology and quality ranking (global, peer-reviewed)",
+      "Tectonic stress regime cut-offs (Zoback 1992)",
+      "Plate model PB2002, crustal model Szwillus 2019",
+      "Earthquake focal mechanism inversion methodology",
+      "ISC global focal mechanism catalogue 1964-2024",
+      "Database field schema (40 fields, *.csv/*.xlsx interchange format)"
+    ],
+    "academic_l1_l2_authoritative_for": [
+      "Generic structural properties (DIP, DIPAZ, fracture aperture/spacing) — see geomechanics-fractures.json GFP001..GFP00n"
+    ],
+    "ontology_alignment": {
+      "WSM_AZI_field": "GEOMEC008 (SHmax orientation)",
+      "WSM_REGIME_field": "GEOMEC017 (Regime de Falhas)",
+      "WSM_TYPE=BO_observation": "GEOMEC068 (Feição Borehole Breakout)",
+      "WSM_TYPE=BO_process":     "GEOMEC023A (Análise de Borehole Breakout, relabeled)",
+      "WSM_TYPE=DIF_observation":"GEOMEC069 (Feição DITF)",
+      "WSM_TYPE=DIF_process":    "GEOMEC023B (Análise de DITF, relabeled)",
+      "WSM_TYPE=HF/HFP/HFH":     "GEOMEC033 (Hydraulic Fracturing) + GEOMEC031 (XLOT)",
+      "WSM_TYPE=OC":             "GEOMEC080 (Overcoring)",
+      "WSM_TYPE=FMS/FMF":        "GEOMEC082/GEOMEC083",
+      "WSM_QUALITY":             "GEOMEC084 (WSM Quality Ranking vocabulary)",
+      "WSM_S1/S2/S3 axes":       "GEOMEC081 (Principal stress axes)"
+    }
+  },
+
+  "controlled_vocabularies": {
+    "WSM_StressIndicatorType": {
+      "id": "vocab:WSM_TYPE",
+      "label": "WSM Stress Indicator Type (TYPE field)",
+      "field": "TYPE",
+      "values": [
+        {"code": "BO",  "label": "Borehole Breakout",                                 "petrobras_feature_id": "GEOMEC068", "petrobras_process_id": "GEOMEC023A"},
+        {"code": "DIF", "label": "Drilling-Induced Tensile Fracture (DITF, incl. petal centerlines)", "petrobras_feature_id": "GEOMEC069", "petrobras_process_id": "GEOMEC023B"},
+        {"code": "BS",  "label": "Borehole Slotter (rarely used)",                    "x_quality_default": "Xru"},
+        {"code": "FMS", "label": "Single Focal Mechanism Solution",                   "petrobras_id": "GEOMEC082"},
+        {"code": "FMF", "label": "Formal Inversion of Focal Mechanisms",              "petrobras_id": "GEOMEC083"},
+        {"code": "FMA", "label": "Average of Focal Mechanisms (rarely used)",         "x_quality_default": "Xru"},
+        {"code": "GFI", "label": "Geologic Fault-Slip Inversion",                     "petrobras_id": "GEOMEC086"},
+        {"code": "GFM", "label": "Paleo Focal Mechanism (P-axis at 30° to fault)"},
+        {"code": "GVA", "label": "Geologic Volcanic Vent Alignment",                  "petrobras_id": "GEOMEC087"},
+        {"code": "HF",  "label": "Hydraulic Fracturing — sub-vertical wells",         "petrobras_id": "GEOMEC033"},
+        {"code": "HFP", "label": "Testing of pre-existing fractures (HTPF)",          "petrobras_id": "GEOMEC031"},
+        {"code": "HFH", "label": "Hydraulic Fracturing — sub-horizontal wells",       "petrobras_id": "GEOMEC033"},
+        {"code": "HFS", "label": "Seismicity on hydraulic faults",                    "petrobras_id": "GEOMEC033"},
+        {"code": "OC",  "label": "Overcoring or other strain-relief measurement",     "petrobras_id": "GEOMEC080"},
+        {"code": "SWB", "label": "Anisotropy of seismic waves in boreholes (sonic)",  "x_quality_default": "Xne"},
+        {"code": "SWL", "label": "Anisotropy of seismic waves in laboratory",         "x_quality_default": "Xne"},
+        {"code": "SWS", "label": "Anisotropy of seismic waves in seismology",         "x_quality_default": "Xne"}
+      ]
+    },
+
+    "WSM_QualityRanking": {
+      "id": "vocab:WSM_QUALITY",
+      "label": "WSM Quality Ranking Scheme 2025",
+      "field": "QUALITY",
+      "petrobras_alignment": "Aplica-se a entidades GEOMEC008/002 quando o registro é proveniente de um indicador WSM.",
+      "values": [
+        {"code": "A",   "label": "A-quality", "shmax_uncertainty_deg": 15, "reliable_for_stress_pattern": true},
+        {"code": "B",   "label": "B-quality", "shmax_uncertainty_deg": 20, "reliable_for_stress_pattern": true},
+        {"code": "C",   "label": "C-quality", "shmax_uncertainty_deg": 25, "reliable_for_stress_pattern": true},
+        {"code": "D",   "label": "D-quality", "shmax_uncertainty_deg": 40, "reliable_for_stress_pattern": false},
+        {"code": "E",   "label": "E-quality", "shmax_uncertainty_deg_gt": 40},
+        {"code": "Xmi", "label": "Missing information"},
+        {"code": "Xru", "label": "Rarely used indicator (FMA, BS, PC, HFG, HFM)"},
+        {"code": "Xne", "label": "Not established (e.g., SWB)"}
+      ]
+    },
+
+    "WSM_StressRegime": {
+      "id": "vocab:WSM_REGIME",
+      "label": "WSM Tectonic Stress Regime",
+      "field": "REGIME",
+      "petrobras_id": "GEOMEC017",
+      "andersonian_basis": "Anderson 1951; Zoback 1992",
+      "values": [
+        {"code": "NF", "label": "Normal Faulting",                "magnitude_order": "SV > SHmax > Shmin",    "shmax_axis": "azimuth(B-axis)"},
+        {"code": "NS", "label": "Normal with Strike-Slip (transtension)", "magnitude_order": "≈ NF/SS hybrid", "shmax_axis": "azimuth(T-axis) + 90°"},
+        {"code": "SS", "label": "Strike-Slip Faulting",           "magnitude_order": "SHmax > SV > Shmin",    "shmax_axis": "azimuth(P-axis) or azimuth(T-axis)+90° (case-dependent)"},
+        {"code": "TS", "label": "Thrust with Strike-Slip (transpression)","magnitude_order": "≈ TF/SS hybrid", "shmax_axis": "azimuth(P-axis)"},
+        {"code": "TF", "label": "Thrust Faulting",                "magnitude_order": "SHmax > Shmin > SV",    "shmax_axis": "azimuth(P-axis)"},
+        {"code": "U",  "label": "Unknown",                        "quality_default": "E"}
+      ],
+      "regime_cutoff_table_zoback_1992": [
+        {"P_S1_pl_gt": 52,                       "T_S3_pl_lt": 35, "regime": "NF", "shmax": "azim(B)"},
+        {"P_S1_pl_range": [40, 52],              "T_S3_pl_lt": 20, "regime": "NS", "shmax": "azim(T)+90"},
+        {"P_S1_pl_lt": 40, "B_S2_pl_gt": 45,     "T_S3_pl_lt": 20, "regime": "SS", "shmax": "azim(T)+90"},
+        {"P_S1_pl_lt": 20, "B_S2_pl_gt": 45,     "T_S3_pl_lt": 40, "regime": "SS", "shmax": "azim(P)"},
+        {"P_S1_pl_lt": 20,                       "T_S3_pl_range": [40, 52], "regime": "TS", "shmax": "azim(P)"},
+        {"P_S1_pl_lt": 35,                       "T_S3_pl_gt": 52, "regime": "TF", "shmax": "azim(P)"}
+      ]
+    },
+
+    "PETROBRAS_POSTEF": {
+      "id": "vocab:POSTEF",
+      "label": "Posição da Fratura Induzida (decisão de modelagem)",
+      "category": "Orientational attribute (NOT structural, NOT state)",
+      "values": [
+        {"code": "Parallel_to_Bedding"},
+        {"code": "Perpendicular_to_Bedding"},
+        {"code": "Oblique"},
+        {"code": "Subvertical"},
+        {"code": "Subhorizontal"}
+      ],
+      "carrier_entity": "GEOMEC078"
+    },
+
+    "PETROBRAS_FractureState": {
+      "id": "vocab:FractureState",
+      "label": "Estado de Fratura Natural (\"Falha\" REMOVIDO deste enum)",
+      "values": [
+        {"code": "Open"},
+        {"code": "Partially_Open"},
+        {"code": "Closed"},
+        {"code": "Cemented"},
+        {"code": "Low_Amplitude",  "note": "Atributo sísmico/imagético — coexiste com Open/Closed"},
+        {"code": "High_Amplitude", "note": "Atributo sísmico/imagético — coexiste com Open/Closed"}
+      ],
+      "carrier_entity": "GEOMEC079"
+    },
+
+    "PETROBRAS_FaultType": {
+      "id": "vocab:FaultType",
+      "label": "Tipologia de Falha (substitui boolean N/Y)",
+      "values": [
+        {"code": "Normal",     "wsm_regime": "NF"},
+        {"code": "Reverse",    "wsm_regime": "TF"},
+        {"code": "StrikeSlip", "wsm_regime": "SS"}
+      ],
+      "carrier_entity": "GEOMEC079A",
+      "linked_to": ["GEOMEC017", "GEOMEC018"]
+    },
+
+    "WSM_FocalMechanismMethod": {
+      "id": "vocab:WSM_METHOD_FM",
+      "field": "METHOD (when TYPE=FM*)",
+      "values": [
+        {"code": "FM", "label": "First motions"},
+        {"code": "MI", "label": "Moment tensor inversion"},
+        {"code": "AR", "label": "Amplitude ratio"}
+      ]
+    },
+
+    "WSM_BO_Method": {
+      "id": "vocab:WSM_METHOD_BO",
+      "field": "METHOD (when TYPE=BO)",
+      "values": [
+        {"code": "CAL", "label": "Four-arm caliper log"},
+        {"code": "IMG", "label": "Borehole image log (resistivity, acoustic, optical, density LWD)"}
+      ],
+      "petrobras_alignment": "GEOMEC023A — IMG é o caso predominante; CAL é histórico."
+    },
+
+    "WSM_OC_Method": {
+      "id": "vocab:WSM_METHOD_OC",
+      "field": "METHOD (when TYPE=OC)",
+      "values": [
+        {"code": "FJ", "label": "Flat jack"},
+        {"code": "DS", "label": "Doorstopper"},
+        {"code": "TR", "label": "Triaxial cell"}
+      ]
+    }
+  },
+
+  "wsm_field_to_petrobras_crosswalk": [
+    {"wsm_field": "ID",         "type": "string",  "petrobras_concept": "Record identifier (assigned by MaRS)"},
+    {"wsm_field": "ISC_ID",     "type": "string",  "petrobras_concept": "External: ISC earthquake event ID (FMS only)"},
+    {"wsm_field": "SITE",       "type": "string",  "petrobras_concept": "Local code / well name → maps to Well/Site entity"},
+    {"wsm_field": "LAT",        "type": "decimal", "range": [-90, 90]},
+    {"wsm_field": "LON",        "type": "decimal", "range": [-180, 180]},
+    {"wsm_field": "AZI",        "type": "decimal", "range": [0, 180], "sentinel": 999, "petrobras_id": "GEOMEC008", "concept": "Orientation of SHmax (clockwise from North)"},
+    {"wsm_field": "TYPE",       "type": "enum",    "vocab": "vocab:WSM_TYPE"},
+    {"wsm_field": "DEPTH",      "type": "decimal", "unit": "km",     "petrobras_concept": "Mean measurement depth"},
+    {"wsm_field": "QUALITY",    "type": "enum",    "vocab": "vocab:WSM_QUALITY"},
+    {"wsm_field": "REGIME",     "type": "enum",    "vocab": "vocab:WSM_REGIME", "petrobras_id": "GEOMEC017"},
+    {"wsm_field": "LOCALITY",   "type": "string"},
+    {"wsm_field": "COUNTRY",    "type": "string"},
+    {"wsm_field": "DATE",       "type": "date"},
+    {"wsm_field": "TIME",       "type": "time",    "applies_to": ["FMS"]},
+    {"wsm_field": "NUMBER",     "type": "int",     "petrobras_concept": "Count of breakouts / DIFs / FMs / vent alignments"},
+    {"wsm_field": "SD",         "type": "decimal", "unit": "deg",    "concept": "Standard deviation of SHmax orientations or misfit angle (FMF)"},
+    {"wsm_field": "TOT_LEN",    "type": "decimal", "unit": "m",      "concept": "Total length of breakouts/DIFs", "petrobras_id": ["GEOMEC068", "GEOMEC069"]},
+    {"wsm_field": "VENT",       "type": "int",     "applies_to": ["GVA"]},
+    {"wsm_field": "TOP",        "type": "decimal", "unit": "m",      "concept": "Top of breakout/DIF/HF interval"},
+    {"wsm_field": "BOT",        "type": "decimal", "unit": "m",      "concept": "Bottom of breakout/DIF/HF interval"},
+    {"wsm_field": "ANISOTROPY", "type": "decimal", "unit": "%",      "applies_to": ["SW*"]},
+    {"wsm_field": "METHOD",     "type": "enum",    "vocab_per_type": {"FM*": "vocab:WSM_METHOD_FM", "BO": "vocab:WSM_METHOD_BO", "OC": "vocab:WSM_METHOD_OC"}},
+    {"wsm_field": "S1AZ",       "type": "decimal", "unit": "deg",    "petrobras_id": "GEOMEC081", "concept": "Trend of P-axis (FMS/GF*) or S1-axis (FMF/OC)"},
+    {"wsm_field": "S1PL",       "type": "decimal", "unit": "deg",    "concept": "Plunge of P/S1 axis"},
+    {"wsm_field": "S2AZ",       "type": "decimal", "unit": "deg",    "concept": "Trend of B-axis or S2-axis"},
+    {"wsm_field": "S2PL",       "type": "decimal", "unit": "deg",    "concept": "Plunge of B/S2 axis"},
+    {"wsm_field": "S3AZ",       "type": "decimal", "unit": "deg",    "concept": "Trend of T-axis or S3-axis"},
+    {"wsm_field": "S3PL",       "type": "decimal", "unit": "deg",    "concept": "Plunge of T/S3 axis"},
+    {"wsm_field": "MAG_TYPE",   "type": "string",  "concept": "Earthquake magnitude type (Mw preferred)"},
+    {"wsm_field": "EQ_MAG",     "type": "decimal", "range": [0, 10]},
+    {"wsm_field": "CRUST",      "type": "boolean", "concept": "True if hypocentre in crust per Szwillus et al. 2019"},
+    {"wsm_field": "REF1..REF6", "type": "string",  "concept": "Reference codes (REF1 = primary)"},
+    {"wsm_field": "COMMENT",    "type": "string"},
+    {"wsm_field": "PLATE",      "type": "string",  "vocab": "PB2002 (Bird 2003) — 56 plates"},
+    {"wsm_field": "DIST",       "type": "decimal", "unit": "km",     "concept": "Distance to nearest PB2002 plate boundary"}
+  ],
+
+  "petrobras_external_property_references": {
+    "comment": "Decisão Q-C (opção γ): DIP/DIPAZ não duplicados. Reusar GFP* da camada acadêmica.",
+    "DIP":    {"reference_id": "GFP004", "reference_file": "data/geomechanics-fractures.json", "name": "fractureDipDeg",    "unit": "degrees"},
+    "DIPAZ":  {"reference_id": "GFP003", "reference_file": "data/geomechanics-fractures.json", "name": "fractureStrikeDeg", "unit": "degrees"},
+    "Aperture": {"reference_id": "GFP001", "reference_file": "data/geomechanics-fractures.json", "name": "fractureAperture", "unit": "mm"},
+    "Spacing":  {"reference_id": "GFP002", "reference_file": "data/geomechanics-fractures.json", "name": "fractureSpacing", "unit": "m"},
+    "rule": "Criar entidade corporativa GEOMEC* apenas se houver semântica operacional distinta (convenção, tolerância, origem). Senão, referenciar e linkar via EQUIVALENT_TO."
+  },
+
+  "free_attributes_no_entity": {
+    "comment": "Decisões Q-7 e Q-F: atributos abertos, sem entidade dedicada.",
+    "ImageQuality":          {"type": "float", "range": [0, 1]},
+    "Quality_0_1":           {"type": "float", "range": [0, 1]},
+    "Class_BOL_Intervals":   {"type": "controlled_vocab_open", "note": "Pode evoluir para vocabulário formal se padronização ocorrer"}
+  },
+
+  "geomec023_pt_genuine_proposal": {
+    "decision_ref": "PT genuíno como label canônico; sigla e termo EN preservados no card do conceito (acronym + label_en + observed_variants).",
+    "policy": "label_pt = termo em português corrente da indústria/academia BR. acronym = sigla original (mantida). label_en = termo internacional. observed_variants = forma híbrida (PT + sigla) e variantes históricas.",
+    "proposed_changes": {
+      "GEOMEC023": {
+        "label_pt_new":         "Falhas de Poço em Perfil de Imagem",
+        "label_pt_legacy":      "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
+        "label_en":             "Image-Based Wellbore Failures",
+        "observed_variants":    ["Breakouts e Fraturas Induzidas (Perfil de Imagem)", "Image-Based Wellbore Failures (umbrella)"]
+      },
+      "GEOMEC023A": {
+        "label_pt_new":         "Ovalização do Poço",
+        "label_pt_synonyms_pt": ["Arrombamento do Poço"],
+        "label_pt_legacy":      "Borehole Breakout",
+        "label_en":             "Borehole Breakout",
+        "acronym":              ["BO", "Breakout"],
+        "observed_variants":    ["Arrombamento do Poço", "Arrombamento", "Borehole Breakout", "Breakout", "Ovalização Compressiva", "Quebra de Poço", "Borehole Breakout Analysis"]
+      },
+      "GEOMEC023B": {
+        "label_pt_new":         "Fratura Induzida por Perfuração",
+        "label_pt_legacy":      "DITF",
+        "label_en":             "Drilling-Induced Tensile Fracture",
+        "acronym":              ["DITF", "FIP"],
+        "observed_variants":    ["DITF", "Drilling-Induced Tensile Fracture", "Drilling-Induced Fracture", "DIF", "Fratura Induzida de Tração", "DITF Analysis"]
+      },
+      "GEOMEC023C": {
+        "label_pt_new":         "Fratura Natural em Perfil de Imagem",
+        "label_pt_legacy":      "Natural Fracture (Image-based)",
+        "label_en":             "Natural Fracture (Image-based)",
+        "observed_variants":    ["Natural Fracture (Image-based)", "Fratura Natural (imagem)", "Natural Fracture Analysis (image-based)"]
+      }
+    },
+    "implementation_note": "Patch v1.6.0 ao geomechanics-corporate.json: (1) atualizar label_pt para o termo PT genuíno; (2) preservar label_pt antigo dentro de _legacy.label_pt; (3) garantir que sigla e termo EN estejam em acronym e label_en; (4) acrescentar variantes em observed_variants. Card do conceito final mostra: PT genuíno em destaque, sigla e EN logo abaixo."
+  },
+
+  "_my_petrobras_splits_pt_alignment": {
+    "comment": "Aplicar a mesma política PT-canônica nas entidades novas GEOMEC068–071 que criei: PT genuíno no label_pt, sigla e EN no card.",
+    "GEOMEC068": {
+      "label_pt": "Feição de Ovalização do Poço",
+      "label_pt_synonyms_pt": ["Feição de Arrombamento do Poço"],
+      "label_en": "Borehole Breakout (Observation)",
+      "acronym": ["BO"],
+      "observed_variants": ["Feição de Arrombamento do Poço", "Arrombamento (feição)", "Feição Borehole Breakout", "Breakout (feição)"]
+    },
+    "GEOMEC069": {
+      "label_pt": "Feição de Fratura Induzida por Perfuração",
+      "label_en": "Drilling-Induced Tensile Fracture (Observation)",
+      "acronym": ["DITF", "FIP"],
+      "observed_variants": ["Feição DITF", "DITF (feição)", "Fratura Induzida (feição)"]
+    },
+    "GEOMEC070": {
+      "label_pt": "Feição de Fratura Natural",
+      "label_en": "Natural Fracture (Observation, image-based)",
+      "observed_variants": ["Fratura Natural (feição)"]
+    },
+    "GEOMEC071": {
+      "label_pt": "Feição de Acamamento",
+      "label_en": "Bedding (Observation)",
+      "observed_variants": ["Acamamento (feição)", "Estratificação (feição)"]
+    }
+  },
+
+  "geomec023_synonym_recommendation": {
+    "decision_ref": "Q-A opção β — sub-IDs são processos, não feições. Mantém PT canônico intacto; aspecto de processo entra apenas como SINÔNIMO EN (observed_variants).",
+    "naming_policy": "PT é sempre o label canônico. EN pode acumular sinônimos para refletir nuances semânticas (ex: aspecto de processo) sem alterar a PT.",
+    "current_state_preserved": {
+      "GEOMEC023":  {"category": "Process", "label_pt": "Breakouts e Fraturas Induzidas (Perfil de Imagem)", "preserve": true},
+      "GEOMEC023A": {"category": "Process", "label_pt": "Borehole Breakout",                                  "preserve": true},
+      "GEOMEC023B": {"category": "Process", "label_pt": "DITF",                                               "preserve": true},
+      "GEOMEC023C": {"category": "Process", "label_pt": "Natural Fracture (Image-based)",                     "preserve": true}
+    },
+    "english_synonyms_to_add": {
+      "GEOMEC023":  {"observed_variants_en_add": ["Image-Based Wellbore Failures (umbrella)"]},
+      "GEOMEC023A": {"observed_variants_en_add": ["Borehole Breakout Analysis"], "observes": "GEOMEC068"},
+      "GEOMEC023B": {"observed_variants_en_add": ["DITF Analysis"],              "observes": "GEOMEC069"},
+      "GEOMEC023C": {"observed_variants_en_add": ["Natural Fracture Analysis (image-based)"], "observes": "GEOMEC070"}
+    },
+    "implementation_note": "Aplicar como patch aditivo ao geomechanics-corporate.json em release v1.6.0: NÃO mexer em label_pt nem label_en principais; apenas append nos arrays observed_variants (EN). Adicionar relação OBSERVES → GEOMEC068/069/070."
+  },
+
+  "petrobras_user_splits_GEOMEC068_079": [
+    {
+      "id": "GEOMEC068",
+      "label_pt": "Feição Borehole Breakout",
+      "label_en": "Borehole Breakout (Observation)",
+      "category": "Feature",
+      "definition_pt": "Feição estrutural observada na parede do poço: alargamento elíptico bimodal causado por falha compressiva, com eixo longo aproximadamente perpendicular a SHmax. É o objeto observado — distinto do processo de análise (GEOMEC023A) que o detecta e quantifica.",
+      "wsm_type_code": "BO",
+      "observed_by_process": "GEOMEC023A",
+      "observed_via_data_artifact": "GEOMEC073",
+      "key_attributes": ["GEOMEC075 (AZIE)", "GEOMEC077 (BreakoutAngularOpening)", "TOP/BOT/TOT_LEN (WSM)", "ImageQuality (free)"],
+      "indicates": [{"target_id": "GEOMEC002", "relation": "long_axis_perpendicular_to", "target_label": "Shmin direction (eixo longo ⊥ SHmax)"}],
+      "source": "Bell & Gough 1979; Plumb & Hickman 1985; Zoback et al. 1985"
+    },
+    {
+      "id": "GEOMEC069",
+      "label_pt": "Feição DITF",
+      "label_en": "Drilling-Induced Tensile Fracture (Observation)",
+      "category": "Feature",
+      "definition_pt": "Feição estrutural observada na parede do poço: fratura induzida por excedência da resistência à tração circunferencial, sub-paralela ao eixo do poço em poços verticais e paralela à direção de SHmax. Distinta do processo de análise (GEOMEC023B).",
+      "wsm_type_code": "DIF",
+      "observed_by_process": "GEOMEC023B",
+      "observed_via_data_artifact": "GEOMEC073",
+      "key_attributes": ["GEOMEC078 (POSTEF)", "TOP/BOT/TOT_LEN (WSM)", "ImageQuality (free)"],
+      "indicates": [{"target_id": "GEOMEC008", "relation": "parallel_to", "target_label": "SHmax direction"}],
+      "source": "Aadnoy & Bell 1998"
+    },
+    {
+      "id": "GEOMEC070",
+      "label_pt": "Feição Fratura Natural",
+      "label_en": "Natural Fracture (Observation, image-based)",
+      "category": "Feature",
+      "definition_pt": "Fratura pré-existente na rocha, observada em perfil de imagem. Não é induzida pela perfuração. Atributos hidráulico-mecânicos via FractureState; tipo estrutural via FaultType.",
+      "wsm_type_code": null,
+      "observed_by_process": "GEOMEC023C",
+      "observed_via_data_artifact": "GEOMEC073",
+      "key_attributes": ["GEOMEC079 (FractureState)", "GEOMEC079A (FaultType)", "GFP004 DIP", "GFP003 DIPAZ", "GFP001 Aperture"],
+      "external_property_refs": ["GFP001", "GFP002", "GFP003", "GFP004"]
+    },
+    {
+      "id": "GEOMEC071",
+      "label_pt": "Feição Acamamento",
+      "label_en": "Bedding (Observation)",
+      "category": "Feature",
+      "definition_pt": "Feição estrutural sedimentar primária — superfície de estratificação observada em BOL. Distinta de fraturas. Caracterizada por DIP e DIPAZ (referenciados de GFP003/GFP004). Insumo para análise de mergulho (dip analysis) e para POSTEF de DITFs (referencial 'parallel_to_bedding' / 'perpendicular_to_bedding').",
+      "decision_ref": "Q-B opção α — feição estrutural própria, mesmo nível de Breakout/DITF",
+      "observed_by_process": "GEOMEC072",
+      "observed_via_data_artifact": "GEOMEC073",
+      "key_attributes": ["GFP004 DIP", "GFP003 DIPAZ"],
+      "external_property_refs": ["GFP003", "GFP004"]
+    },
+    {
+      "id": "GEOMEC072",
+      "label_pt": "Interpretação de Perfil de Imagem",
+      "label_en": "Image Log Interpretation",
+      "category": "Process",
+      "definition_pt": "Processo guarda-chuva de interpretação de BOL (resistividade, acústico, óptico, densidade LWD). Gera múltiplas feições estruturais: Breakout (GEOMEC068), DITF (GEOMEC069), Fratura Natural (GEOMEC070) e Acamamento (GEOMEC071). Especializa-se em GEOMEC023A (Análise de Breakout) para métricas específicas.",
+      "decision_ref": "Q-D — processo guarda-chuva único, não 1 processo por feição",
+      "produces_features": ["GEOMEC068", "GEOMEC069", "GEOMEC070", "GEOMEC071"],
+      "specializations": ["GEOMEC023A", "GEOMEC023B", "GEOMEC023C"],
+      "input_artifact": "GEOMEC073",
+      "tools_used": ["GEOMEC074 (Geolog)"],
+      "source": "PP-2E&P-00322 §3.5.1.4"
+    },
+    {
+      "id": "GEOMEC073",
+      "label_pt": "BOL — Borehole Oriented Log",
+      "label_en": "Borehole Oriented Log",
+      "category": "DataArtifact",
+      "definition_pt": "Perfil de imagem orientado no referencial do poço, usado como insumo para interpretação de breakouts, DITFs, fraturas naturais e acamamento. Não é Document, não é Process. Tipo correto: Data Artifact / Log / Curve.",
+      "decision_ref": "Q1+Q2 (BOL = Borehole Oriented Log; Data Artifact)",
+      "is_input_to": ["GEOMEC023", "GEOMEC023A", "GEOMEC023B", "GEOMEC023C", "GEOMEC072"],
+      "carries_features": ["GEOMEC068", "GEOMEC069", "GEOMEC070", "GEOMEC071"],
+      "free_attributes": ["ImageQuality", "Class_BOL_Intervals"]
+    },
+    {
+      "id": "GEOMEC074",
+      "label_pt": "Geolog",
+      "label_en": "Geolog (Paradigm/Emerson)",
+      "category": "Tool",
+      "external_origin": true,
+      "vendor": "Paradigm / Emerson",
+      "definition_pt": "Software externo (vendor Paradigm/Emerson) usado para interpretação de perfil de imagem e análise de feições estruturais. Modelado como Tool externa, não como sistema corporativo.",
+      "decision_ref": "Q10 (Geolog como Tool externa)",
+      "used_in_process": ["GEOMEC072", "GEOMEC023A", "GEOMEC023B", "GEOMEC023C"]
+    },
+    {
+      "id": "GEOMEC075",
+      "label_pt": "AZIE — Azimuth of Eccentricity",
+      "label_en": "Azimuth of Eccentricity",
+      "category": "Property",
+      "domain": "GEOMEC068",
+      "range": "xsd:decimal",
+      "unit": "degrees",
+      "value_range": [0, 360],
+      "definition_pt": "Azimute do alongamento elíptico da seção do poço (orientação do breakout). Distinto de HAZI (GEOMEC076 = Hole Azimuth = trajetória do eixo do poço). Separação essencial para inferência correta de SHmax.",
+      "decision_ref": "Q8 (AZIE vs HAZI)",
+      "indicates": [{"target_id": "GEOMEC002", "relation": "perpendicular_to", "target_label": "SHmax (eixo longo do BO ⊥ SHmax ⇒ AZIE ≈ azimute de Shmin)"}]
+    },
+    {
+      "id": "GEOMEC076",
+      "label_pt": "HAZI — Hole Azimuth",
+      "label_en": "Hole Azimuth (Borehole Drift Azimuth)",
+      "category": "Property",
+      "domain": "Wellbore",
+      "range": "xsd:decimal",
+      "unit": "degrees",
+      "value_range": [0, 360],
+      "definition_pt": "Azimute da trajetória do poço (direção da projeção horizontal do eixo). Campo nativo de four-arm caliper. Equação de conversão para azimute do pad 1: P1AZ = HAZI + atan(tan(RB)/cos(DEVI)).",
+      "decision_ref": "Q8 (AZIE vs HAZI)"
+    },
+    {
+      "id": "GEOMEC077",
+      "label_pt": "Abertura Angular do Breakout",
+      "label_en": "Breakout Angular Opening",
+      "category": "Property",
+      "domain": "GEOMEC068",
+      "range": "xsd:decimal",
+      "unit": "degrees",
+      "value_range": [0, 180],
+      "definition_pt": "Ângulo de abertura azimutal do breakout (largura angular do alargamento elíptico, medida na seção do poço). Insumo para o modelo de integridade de poço de Santos et al. (CT CMR 010/2015) na estimativa de magnitude de SHmax (GEOMEC008).",
+      "decision_ref": "Q-F (criar entidade dedicada)",
+      "source": "PP-2E&P-00322 §3.5.1.4",
+      "used_by": ["GEOMEC008"]
+    },
+    {
+      "id": "GEOMEC078",
+      "label_pt": "POSTEF — Posição da Fratura Induzida",
+      "label_en": "POSTEF — Induced Fracture Position",
+      "category": "Property",
+      "subcategory": "Property-Entity (range: enum)",
+      "domain": "GEOMEC069",
+      "range": "vocab:POSTEF",
+      "definition_pt": "Atributo orientacional que registra a posição relativa da DITF em relação ao acamamento ou eixo do poço. Não mistura orientação com abertura, amplitude ou tipo de falha.",
+      "decision_ref": "Q3 + Q-E (entidade-propriedade com range enum)",
+      "enum_values": ["Parallel_to_Bedding", "Perpendicular_to_Bedding", "Oblique", "Subvertical", "Subhorizontal"],
+      "related_to": ["GEOMEC071 (Acamamento — referencial)"]
+    },
+    {
+      "id": "GEOMEC079",
+      "label_pt": "FractureState — Estado de Fratura",
+      "label_en": "FractureState",
+      "category": "Property",
+      "subcategory": "Property-Entity (range: enum)",
+      "domain": "GEOMEC070",
+      "range": "vocab:FractureState",
+      "definition_pt": "Estado hidráulico-mecânico/imagético da fratura natural. \"Falha\" foi explicitamente removido deste enum (tipologia de falha vai para GEOMEC079A FaultType). Amplitude (low/high) é atributo sísmico/imagético; abertura (open/partially_open/closed/cemented) é atributo hidráulico/mecânico — coexistem.",
+      "decision_ref": "Q4 + Q-E",
+      "enum_values": ["Open", "Partially_Open", "Closed", "Cemented", "Low_Amplitude", "High_Amplitude"]
+    },
+    {
+      "id": "GEOMEC079A",
+      "label_pt": "FaultType — Tipologia de Falha",
+      "label_en": "FaultType",
+      "category": "Property",
+      "subcategory": "Property-Entity (range: enum)",
+      "domain": "GEOMEC070",
+      "range": "vocab:FaultType",
+      "definition_pt": "Tipologia tectônica da falha natural (substitui boolean N/Y de \"indicador de falha\"). Ligada diretamente ao Regime de Falhas (GEOMEC017) e à Reativação de Falhas (GEOMEC018). Compatível com WSM_REGIME via mapeamento Normal↔NF, Reverse↔TF, StrikeSlip↔SS.",
+      "decision_ref": "Q5 + Q-E (entidade-propriedade ligada a GEOMEC017/018)",
+      "enum_values": ["Normal", "Reverse", "StrikeSlip"],
+      "linked_to": ["GEOMEC017", "GEOMEC018"]
+    }
+  ],
+
+  "wsm_additions_GEOMEC080_087": [
+    {
+      "id": "GEOMEC080",
+      "label_pt": "Overcoring (Alívio de Tensão)",
+      "label_en": "Overcoring / Strain-Relief Measurement",
+      "category": "Process",
+      "wsm_type_codes": ["OC"],
+      "definition_pt": "Técnica de medição direta do tensor de tensões in situ por alívio mecânico — perfura-se um core central, mede-se a deformação resultante e calcula-se a tensão. Métodos: Flat Jack (FJ), Doorstopper (DS), Triaxial Cell (TR). Reportado pelo WSM via campos S1AZ/S1PL/S2AZ/S2PL/S3AZ/S3PL.",
+      "wsm_method_vocab": "vocab:WSM_METHOD_OC",
+      "relationships": [
+        {"relation_type": "MEASURES", "target_id": "GEOMEC004", "target_label": "Estado de Tensões In Situ"},
+        {"relation_type": "PROVIDES_AXES_FOR", "target_id": "GEOMEC081"}
+      ]
+    },
+    {
+      "id": "GEOMEC081",
+      "label_pt": "Eixos Principais de Tensão (P/B/T ou S1/S2/S3)",
+      "label_en": "Principal Stress Axes",
+      "category": "Property",
+      "definition_pt": "Trio ortogonal de eixos onde o tensor de tensões é diagonal. Para FMS/GF*: P (compressão, ≈S1), B (intermediário, ≈S2), T (extensão, ≈S3). Para FMF/OC: diretamente S1, S2, S3 com S1≥S2≥S3 (compressão positiva). Reportados como trend/plunge nos campos WSM S1AZ/S1PL/S2AZ/S2PL/S3AZ/S3PL.",
+      "axis_naming": {
+        "fms_gf_paleo": ["P", "B", "T"],
+        "fmf_oc_inversion": ["S1", "S2", "S3"]
+      },
+      "relationships": [
+        {"relation_type": "DETERMINES", "target_id": "GEOMEC008", "target_label": "SHmax"},
+        {"relation_type": "DETERMINES", "target_id": "GEOMEC002", "target_label": "Shmin"},
+        {"relation_type": "DETERMINES", "target_id": "GEOMEC007", "target_label": "Sv"},
+        {"relation_type": "DETERMINES", "target_id": "GEOMEC017", "target_label": "Regime de Falhas"}
+      ]
+    },
+    {
+      "id": "GEOMEC082",
+      "label_pt": "Mecanismo Focal de Terremoto (FMS)",
+      "label_en": "Single Focal Mechanism Solution",
+      "category": "Process",
+      "wsm_type_codes": ["FMS"],
+      "definition_pt": "Solução de mecanismo focal de um único terremoto, definindo dois planos nodais perpendiculares e os eixos P/T/B. Sem identificar o plano de ruptura real, P-axis é usado como proxy para SHmax. Por convenção WSM, FMS recebe no máximo qualidade C (±25°). Métodos: first motions (FM), moment tensor inversion (MI), amplitude ratio (AR).",
+      "max_quality": "C",
+      "min_magnitude_for_C": 2.5,
+      "below_2_5_quality": "D",
+      "relationships": [
+        {"relation_type": "PROVIDES_AXES_FOR", "target_id": "GEOMEC081"},
+        {"relation_type": "INFERS_REGIME", "target_id": "GEOMEC017"}
+      ]
+    },
+    {
+      "id": "GEOMEC083",
+      "label_pt": "Inversão Formal de Mecanismos Focais (FMF)",
+      "label_en": "Formal Stress Inversion of Focal Mechanisms",
+      "category": "Process",
+      "wsm_type_codes": ["FMF"],
+      "definition_pt": "Inversão estatística de múltiplos FMs em uma região assumida com campo de tensões homogêneo, retornando S1/S2/S3 que minimizam o misfit angle entre slip e máxima cisalhamento (hipótese Wallace–Bott). Algoritmos clássicos: Gephart & Forsyth (1984), Angelier (1979), Michael (1987), Rivera & Cisternas (1990).",
+      "assumptions": [
+        "Bin homogêneo no espaço/tempo",
+        "Wallace-Bott: slip na direção da máxima tensão de cisalhamento"
+      ],
+      "max_quality": "A",
+      "relationships": [
+        {"relation_type": "PROVIDES_AXES_FOR", "target_id": "GEOMEC081"},
+        {"relation_type": "AGGREGATES", "target_id": "GEOMEC082"}
+      ]
+    },
+    {
+      "id": "GEOMEC084",
+      "label_pt": "Esquema de Qualidade WSM 2025",
+      "label_en": "WSM 2025 Quality Ranking Scheme",
+      "category": "Classifier",
+      "vocab_id": "vocab:WSM_QUALITY",
+      "definition_pt": "Classificação A/B/C/D/E + X (Xmi/Xru/Xne) que torna comparáveis indicadores muito heterogêneos (BO em poço vs FMS em terremoto vs OC em mina). A qualidade é função do número, comprimento e desvio padrão (s.d.) das observações. Apenas A–C são considerados confiáveis para análise de padrão de tensão.",
+      "applies_to_indicators_via": "Tab 5-2, Tab 6-1, Tab 6-2 do TR 25-01"
+    },
+    {
+      "id": "GEOMEC085",
+      "label_pt": "Estatística Circular Bimodal (BO/DIF)",
+      "label_en": "Bimodal Circular Statistics for BO/DIF",
+      "category": "Method",
+      "definition_pt": "Como SHmax ∈ [0°,180°), orientações de breakouts e DIFs são duplicadas (θ*=2θ) antes do cálculo da média (Mardia & Jupp 2000). WSM 2025 prefere a média ponderada por comprimento. Saída: azimute médio θm = ½ arctan(S/C); desvio padrão σ₀ = (360/2π)·√(−½ ln R), com R=√(C²+S²).",
+      "preferred_method": "length_weighted",
+      "formulas": {
+        "C_length_weighted": "(1/L) Σ l_i cos(2θ_i)",
+        "S_length_weighted": "(1/L) Σ l_i sin(2θ_i)",
+        "mean_azimuth": "0.5 * atan2(S, C)",
+        "R": "sqrt(C^2 + S^2)",
+        "sigma": "(360/(2π)) * sqrt(-0.5 * ln(R))"
+      },
+      "relationships": [
+        {"relation_type": "USED_BY", "target_id": "GEOMEC023A"},
+        {"relation_type": "USED_BY", "target_id": "GEOMEC023B"},
+        {"relation_type": "AGGREGATES", "target_id": "GEOMEC068"},
+        {"relation_type": "AGGREGATES", "target_id": "GEOMEC069"}
+      ]
+    },
+    {
+      "id": "GEOMEC086",
+      "label_pt": "Inversão de Slip de Falha Geológica (GFI)",
+      "label_en": "Geologic Fault-Slip Inversion",
+      "category": "Process",
+      "wsm_type_codes": ["GFI", "GFM"],
+      "definition_pt": "Inversão de estrias e direções de slip em famílias de falhas para recuperar o tensor de tensões paleotectônico (ou recente, conforme janela temporal). GFM é a variante paleo-FM (P-axis a 30° do plano de falha)."
+    },
+    {
+      "id": "GEOMEC087",
+      "label_pt": "Alinhamento de Vents Vulcânicos (GVA)",
+      "label_en": "Geologic Volcanic Vent Alignment",
+      "category": "Process",
+      "wsm_type_codes": ["GVA"],
+      "definition_pt": "Inferência da orientação de SHmax pelo alinhamento de centros eruptivos / diques, assumindo que diques se propagam em planos perpendiculares a Shmin (paralelos a SHmax)."
+    }
+  ],
+
+  "image_quality_attributes": {
+    "decision_ref": "Q7 — atributos livres, não entidade",
+    "ImageQuality": {"type": "float", "range": [0, 1]},
+    "Quality_0_1":  {"type": "float", "range": [0, 1]},
+    "Class_BOL_Intervals": {"type": "controlled_vocab_open", "note": "Não há enum canônico fixo; pode evoluir"}
+  },
+
+  "data_governance": {
+    "decision_ref": "Q9 (Privacidade / dados no repositório)",
+    "repository_contains": ["schemas", "entities", "properties", "enums", "relations"],
+    "repository_excludes": ["operational rows", "well-level measurements", "lab-test rows"],
+    "consistent_with": ["Acamamento", "Fraturas Naturais", "lab tests GEOMEC061-067"]
+  },
+
+  "estimated_growth": {
+    "decision_ref": "Q12 (estimativa de novas entidades)",
+    "petrobras_user_splits_GEOMEC068_079": {
+      "feicoes": ["GEOMEC068 Breakout", "GEOMEC069 DITF", "GEOMEC070 Fratura Natural", "GEOMEC071 Acamamento"],
+      "processos": ["GEOMEC072 Interpretação de Perfil de Imagem (NEW umbrella)", "GEOMEC023A com sinônimo EN 'Borehole Breakout Analysis' (PT preservado)"],
+      "data_artifact": ["GEOMEC073 BOL"],
+      "tool_externa": ["GEOMEC074 Geolog"],
+      "propriedades_tecnicas": ["GEOMEC075 AZIE", "GEOMEC076 HAZI", "GEOMEC077 BreakoutAngularOpening", "GEOMEC078 POSTEF (property-entity)", "GEOMEC079 FractureState (property-entity)", "GEOMEC079A FaultType (property-entity)"],
+      "total_new_entities": 12,
+      "total_with_subid": 13
+    },
+    "wsm_merge_additions_GEOMEC080_087": {
+      "indicadores_processo": ["GEOMEC080 OC", "GEOMEC082 FMS", "GEOMEC083 FMF", "GEOMEC086 GFI", "GEOMEC087 GVA"],
+      "metadados_propriedade": ["GEOMEC081 Eixos Principais"],
+      "classifiers_methods": ["GEOMEC084 WSM Quality Scheme", "GEOMEC085 Estatística Circular"],
+      "total": 8
+    },
+    "grand_total_new_entities": 21,
+    "id_range_used": "GEOMEC068–GEOMEC087 + GEOMEC079A"
+  },
+
+  "answers_to_questions_1_to_12": {
+    "Q1_BOL_acronym": "Borehole Oriented Log → GEOMEC073",
+    "Q2_BOL_classification": "Data Artifact / Log / Curve (NOT Document, NOT Process) → GEOMEC073",
+    "Q3_POSTEF": "vocab:POSTEF carried by GEOMEC078 (Property-Entity)",
+    "Q4_FractureState": "vocab:FractureState carried by GEOMEC079 — \"Falha\" REMOVED",
+    "Q5_FaultIndicator": "vocab:FaultType carried by GEOMEC079A (linked to GEOMEC017/018)",
+    "Q6_GEOMEC023": "Option B — umbrella with 023A/023B/023C; PT labels preserved, EN synonyms added to reflect process aspect",
+    "Q7_ImageQuality": "Free attribute (float [0,1]); Class_BOL: open vocab; not entities",
+    "Q8_AZIE_vs_HAZI": "GEOMEC075 (AZIE = breakout/eccentricity azimuth) ≠ GEOMEC076 (HAZI = hole drift azimuth)",
+    "Q9_Privacy": "Repository = schemas only; rows excluded",
+    "Q10_Geolog": "GEOMEC074 — Tool externa (Paradigm/Emerson)",
+    "Q11_Splits_Impact": "Within standard; semantic gain justifies graph growth",
+    "Q12_New_Entities_Estimate": "12 user splits (068–079) + 1 sub-ID (079A) + 8 WSM (080–087) = 21 new entities total"
+  },
+
+  "answers_to_questions_A_to_F": {
+    "QA_Feature_vs_Process": "Option β — GEOMEC023A/B/C are PROCESSES; new feature entities GEOMEC068–071 created",
+    "QB_Acamamento": "Option α — primary structural feature (GEOMEC071), same level as Breakout/DITF",
+    "QC_DIP_DIPAZ": "Option γ — reference GFP003/GFP004; do NOT duplicate (rule documented)",
+    "QD_Two_Processes": "GEOMEC072 (Interpretação de Perfil de Imagem, umbrella) + GEOMEC023A relabeled (Análise de Breakout, specialization)",
+    "QE_Property_Entities": "POSTEF (GEOMEC078), FractureState (GEOMEC079), FaultType (GEOMEC079A) — all Property-Entity with range:enum",
+    "QF_Angular_Opening_and_Class": "GEOMEC077 BreakoutAngularOpening = entity; Class_BOL_Intervals = free attribute (not entity)"
+  }
+}

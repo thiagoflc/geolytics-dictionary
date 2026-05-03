@@ -8,7 +8,7 @@ This documentation covers three artifacts:
 
 - `data/geomechanics.json` (26 classes, 22 properties, 12 relations, 6 instances) — **academic L1-L2 backbone** (Fjaer/Zoback/Hoek/ISRM).
 - `data/geomechanics-fractures.json` (17 fracture classes, 7 properties, 8 GSO crosswalk mappings) — fractures sub-module.
-- `data/geomechanics-corporate.json` (47 entities, 170 relations) + `data/geomechanics-corporate-crosswalk.json` — **corporate L6 module** (Petrobras-internal standards). See [Layer 6 — Petrobras Corporate Module](#layer-6--petrobras-corporate-module) below.
+- `data/geomechanics-corporate.json` (92 entities, 281 relations) + `data/geomechanics-corporate-crosswalk.json` — **corporate L6 module** (Petrobras-internal standards). See [Layer 6 — Petrobras Corporate Module](#layer-6--petrobras-corporate-module) below.
 
 ---
 
@@ -168,7 +168,7 @@ flowchart LR
         GMx["GM* / GP* / GR*<br/>26 classes + 22 props + 12 rels<br/>Source: Fjaer/Zoback/Hoek/ISRM"]
     end
     subgraph L6["Layer 6 — Corporate Petrobras"]
-        GEOMECx["GEOMEC*<br/>47 entities + 170 relations<br/>Source: PE-2RES/POC standards"]
+        GEOMECx["GEOMEC*<br/>92 entities + 281 relations<br/>Source: PE-2RES/POC standards"]
     end
     GMx <-- "geomechanics-corporate-<br/>crosswalk.json<br/>(SKOS exact/close/related)" --> GEOMECx
     GEOMECx --> SHACL["SHACL shapes 23-30<br/>(geolytics-shapes.ttl)"]
@@ -180,7 +180,7 @@ flowchart LR
 
 | Path | Content |
 |---|---|
-| `data/geomechanics-corporate.json` | 47 entities (GEOMEC001-045 + 026A/B), 170 relations, schema-normalized snake_case, deprecation handled |
+| `data/geomechanics-corporate.json` | 92 entities (GEOMEC001-087 + sub-IDs), 281 relations, schema-normalized snake_case, deprecation handled |
 | `data/geomechanics-corporate-crosswalk.json` | 47 SKOS mappings to L1-L2: 8 exactMatch + 4 closeMatch + 12 relatedMatch + 23 noMatch |
 | `data/sources/geomechanics-corporate/` | Original raw inputs preserved for audit (5 concatenated JSON blocks v1.0-1.4 + patch v1.5) |
 | `scripts/geomec-corporate-to-ttl.py` | JSON → Turtle serializer for SHACL validation |
@@ -293,9 +293,55 @@ Tracked inside `data/geomechanics-corporate.json` under `meta.recommended_next_b
 
 ---
 
+## Changelog — Corporate L6 (`data/geomechanics-corporate.json`)
+
+### v1.6.0 — WSM 2025 merge + Image-log feature/process split (2026-05-03)
+
+**Context**: integrated World Stress Map Database Release 2025 (WSM TR 25-01, GFZ Potsdam) with Petrobras corporate ontology. Decisions taken with data-governance team: features and analysis processes separated explicitly; PT-canonical naming with EN/acronym preserved in concept cards.
+
+**24 new entities** (range GEOMEC068–GEOMEC087 + GEOMEC079A + GEOMEC023A/B/C):
+
+| Group | IDs | Description |
+|---|---|---|
+| Image-log features (observation entities) | GEOMEC068–071 | Ovalização do Poço (Arrombamento), Fratura Induzida por Perfuração (DITF/FIP), Fratura Natural, Acamamento |
+| Image-log processes | GEOMEC023A/B/C, GEOMEC072 | Ovalização (process), DITF (process), Fratura Natural (process), Interpretação de Perfil de Imagem (umbrella) |
+| Data artifact | GEOMEC073 | BOL — Borehole Oriented Log |
+| External tool | GEOMEC074 | Geolog (Paradigm/Emerson) |
+| Properties | GEOMEC075–077 | AZIE, HAZI, Abertura Angular do Breakout |
+| Property-Entities (controlled vocabularies) | GEOMEC078, 079, 079A | POSTEF, FractureState, FaultType |
+| WSM stress indicators | GEOMEC080, 082, 083, 086, 087 | Sobrefuração (OC), FMS, FMF, GFI, GVA |
+| WSM metadata | GEOMEC081, 084, 085 | Eixos Principais (P/B/T or S1/S2/S3), Quality Scheme A-E+X, Estatística Circular Bimodal |
+
+**Naming policy adopted**: `label_pt` is canonical and primary; `label_en`, `acronym`, and `observed_variants` carry international/historical synonyms in the concept card. Example: GEOMEC023A `label_pt = "Ovalização do Poço"`, `label_pt_synonyms_pt = ["Arrombamento do Poço"]`, `label_en = "Borehole Breakout"`, `acronym = ["BO", "Breakout"]`.
+
+**GEOMEC023 update**: `label_pt` migrated from "Breakouts e Fraturas Induzidas (Perfil de Imagem)" → "Falhas de Poço em Perfil de Imagem". Old label preserved in `_legacy.label_pt_v1_5_0`. Three sub-IDs added with `HAS_SUBPROCESS` relations.
+
+**GEOMEC033 augmented**: `observed_variants` now covers WSM HF/HFP/HFH/HFS subtypes; `wsm_alignment` block documents Petrobras↔WSM mapping (GEOMEC031 XLOT ↔ WSM HFP).
+
+**Polysemy cards added** (3): Breakout (feature/process/acronym), DITF/DIF/FIP (acronym equivalence), BOL (Borehole Oriented Log scoped to geomechanics).
+
+**Crosswalk L2↔L6 v1.1.0**: 24 new mappings; GEOMEC081 ↔ GM002 PrincipalStress = `exactMatch` (rare clean alignment); GEOMEC079A ↔ GM025 AndersonStressRegime = `relatedMatch`. Most others noMatch with documented reason (L2 lacks formal classes for BoreholeBreakout, DITF, FocalMechanism, Overcoring).
+
+**WSM merge spec**: `data/geomechanics-wsm-merge.json` v1.1.0 — 9 controlled vocabularies (TYPE, QUALITY, REGIME, METHOD_FM/BO/OC, POSTEF, FractureState, FaultType), 35-field crosswalk to WSM 2025 schema.
+
+**Backup**: `data/geomechanics-corporate.v1.5.0.bak.json` (pre-patch snapshot).
+
+**Deferred to future patches**:
+- SHACL shapes for new property-entities (POSTEF, FractureState, FaultType) and property entities (AZIE, HAZI, BreakoutAngularOpening)
+- Pre-existing IS_PART_OF cycles in GEOMEC004↔008/007 (modeling inversion, out of scope)
+- HFS as standalone entity if microsísmica de fraturamento becomes a separate capability
+- DIP/DIPAZ corporate-specific entities — currently referenced from GFP003/GFP004 (geomechanics-fractures.json)
+
+---
+
 ## Sources
 
 - Fjaer E., Holt R.M., Horsrud P., Raaen A.M., Risnes R. — *Petroleum Related Rock Mechanics*, 2nd ed. Elsevier 2008 (ISBN 978-0-444-50260-5)
+- Rajabi M., Lammers S., Heidbach O. — *WSM database description and guidelines for analysis of horizontal stress orientation from borehole logging*. World Stress Map Technical Report 25-01, GFZ 2025 (DOI 10.48440/wsm.2025.001)
+- Heidbach O. et al. — *World Stress Map Database Release 2025*. GFZ Data Services (DOI 10.5880/WSM.2025.001)
+- Zoback M.-L. — First- and Second-Order Patterns of Stress in the Lithosphere: The World Stress Map Project. *J. Geophys. Res.* 97:11703-11728, 1992 (DOI 10.1029/92JB00132)
+- Plumb R.A., Hickman S.H. — Stress-induced borehole elongation: a comparison between the four-arm dipmeter and the borehole televiewer in the Auburn Geothermal Well. *J. Geophys. Res.* 90:5513-5521, 1985
+- Aadnoy B.S., Bell J.S. — Classification of Drilling-Induced Fractures and Their Relationship to In-Situ Stress Directions. *The Log Analyst*, 1998
 - Zoback M.D. — *Reservoir Geomechanics*, Cambridge University Press 2010 (ISBN 978-0-521-14619-7)
 - Hoek E., Brown E.T. — The Hoek-Brown Failure Criterion and GSI: 2018 Edition. *Journal of Rock Mechanics and Geotechnical Engineering* 11(3):445-463, 2019
 - Anderson E.M. — *The Dynamics of Faulting*, Oliver & Boyd 1951
