@@ -80,6 +80,7 @@ export const OG_NODES = [
     "geosciml_uri": null,
     "owl_uri": null,
     "geocoverage": [
+      "layer1b",
       "layer4",
       "layer6"
     ],
@@ -135,6 +136,7 @@ export const OG_NODES = [
     "geosciml_uri": null,
     "owl_uri": null,
     "geocoverage": [
+      "layer1b",
       "layer4",
       "layer6"
     ],
@@ -190,6 +192,7 @@ export const OG_NODES = [
     "geosciml_uri": null,
     "owl_uri": null,
     "geocoverage": [
+      "layer1b",
       "layer4",
       "layer6"
     ],
@@ -242,7 +245,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas-servicos.json#OGS001",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "Mudlogging"
+    "superclass": "Mudlogging",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "gas-show-event",
@@ -263,7 +267,8 @@ export const OG_NODES = [
     "synonyms_en": [
       "gas show",
       "hydrocarbon show"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "kick-event",
@@ -296,7 +301,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas-servicos.json#OGS004",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "CuttingsSampling"
+    "superclass": "CuttingsSampling",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "core-run",
@@ -309,7 +315,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas-servicos.json#OGS005",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "Coring"
+    "superclass": "Coring",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "core-plug",
@@ -323,6 +330,7 @@ export const OG_NODES = [
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
     "superclass": "Coring",
+    "geocoverage": ["layer1b","layer4","layer6"],
     "synonyms_pt": [
       "plugue",
       "plug de testemunho"
@@ -343,6 +351,7 @@ export const OG_NODES = [
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
     "superclass": "SidewallSampling",
+    "geocoverage": ["layer1b","layer4","layer6"],
     "synonyms_pt": [
       "SWC",
       "amostra lateral"
@@ -374,7 +383,8 @@ export const OG_NODES = [
       "MWD",
       "Logging While Drilling",
       "Measurement While Drilling"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "wireline-run",
@@ -395,7 +405,8 @@ export const OG_NODES = [
     "synonyms_en": [
       "wireline logging",
       "open-hole wireline run"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "formation-pressure-point",
@@ -417,7 +428,8 @@ export const OG_NODES = [
     "synonyms_en": [
       "RFT point",
       "MDT pretest"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "dst-interval",
@@ -436,7 +448,8 @@ export const OG_NODES = [
     ],
     "synonyms_en": [
       "Drill Stem Test"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "geostopping-event",
@@ -580,7 +593,8 @@ export const OG_NODES = [
     ],
     "synonyms_en": [
       "fluid sample"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "mudlogging",
@@ -593,7 +607,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas.json#OG011",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "ServiceLine"
+    "superclass": "ServiceLine",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "cuttings-sampling",
@@ -613,7 +628,8 @@ export const OG_NODES = [
     ],
     "synonyms_en": [
       "cuttings sample collection"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "coring",
@@ -626,7 +642,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas.json#OG014",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "ServiceLine"
+    "superclass": "ServiceLine",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "sidewall-sampling",
@@ -646,7 +663,8 @@ export const OG_NODES = [
     "synonyms_en": [
       "sidewall core",
       "SWC"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "mwd-lwd",
@@ -659,7 +677,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas.json#OG016",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "ServiceLine"
+    "superclass": "ServiceLine",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "wireline-logging",
@@ -672,7 +691,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas.json#OG017",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG",
-    "superclass": "ServiceLine"
+    "superclass": "ServiceLine",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "formation-testing",
@@ -696,7 +716,8 @@ export const OG_NODES = [
       "RFT",
       "MDT",
       "DST"
-    ]
+    ],
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "geostopping",
@@ -709,7 +730,8 @@ export const OG_NODES = [
     "module": "data/operacoes-geologicas.json#OG019",
     "evidence_status": "documented",
     "manager": "EXP/OGP/AQG (CGOR)",
-    "superclass": "ServiceLine"
+    "superclass": "ServiceLine",
+    "geocoverage": ["layer1b","layer4","layer6"]
   },
   {
     "id": "ogeomec",

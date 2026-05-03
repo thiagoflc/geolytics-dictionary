@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "source": "CGI Geoscience Vocabularies — DeformationStyle",
+    "namespace": "http://resource.geosciml.org/classifier/cgi/deformationstyle/",
+    "version": "201202",
+    "total": 12,
+    "description": "CGI/IUGS controlled vocabulary describing the style of deformation observed in rock bodies. Characterizes the mechanical and kinematic nature of deformation, from brittle through ductile. Used in GeoSciML GeologicStructure descriptions.",
+    "skos_scheme": "http://resource.geosciml.org/classifierScheme/cgi/deformationstyle/201202",
+    "related_entities": ["falha", "dobra", "foliacao"]
+  },
+  "concepts": [
+    {
+      "id": "deformation_style",
+      "label_en": "deformation style",
+      "label_pt": "estilo de deformação",
+      "definition": "The characterization of the style of deformation of a rock body. Top concept of the deformation style vocabulary.",
+      "parents": [],
+      "broader": null,
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/deformation_style",
+      "related_entities": ["falha", "dobra", "foliacao"]
+    },
+    {
+      "id": "brittle",
+      "label_en": "brittle",
+      "label_pt": "frágil (rúptil)",
+      "definition": "Deformation characterized by fracturing and faulting with minimal or no plastic flow. Rock fails by loss of cohesion rather than by continuous deformation. Dominant at shallow crustal levels and low temperatures.",
+      "parents": ["deformation_style"],
+      "broader": "deformation_style",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/brittle",
+      "related_entities": ["falha"]
+    },
+    {
+      "id": "cataclastic",
+      "label_en": "cataclastic",
+      "label_pt": "cataclástico",
+      "definition": "Brittle deformation producing a fault rock in which the original grain structure is disrupted by fracturing, crushing and comminution of grains. Includes fault breccia and cataclasite.",
+      "parents": ["brittle"],
+      "broader": "brittle",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/cataclastic",
+      "related_entities": ["falha"]
+    },
+    {
+      "id": "fractured",
+      "label_en": "fractured",
+      "label_pt": "fraturado",
+      "definition": "Rock pervasively cut by fractures (joints, veins, or faults) without significant displacement. Fracturing enhances secondary porosity and permeability in reservoir rocks.",
+      "parents": ["brittle"],
+      "broader": "brittle",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/fractured",
+      "related_entities": ["falha"]
+    },
+    {
+      "id": "fault_breccia",
+      "label_en": "fault breccia",
+      "label_pt": "brecha de falha",
+      "definition": "A fault rock containing angular fragments (clasts) greater than 2 mm set in a finer-grained matrix, formed by brittle crushing along a fault zone. Indicates cataclastic deformation at shallow crustal levels.",
+      "parents": ["cataclastic"],
+      "broader": "cataclastic",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/fault_breccia",
+      "related_entities": ["falha"]
+    },
+    {
+      "id": "mylonite",
+      "label_en": "mylonite",
+      "label_pt": "milonito",
+      "definition": "A ductile fault rock with a well-developed foliation and fine-grained matrix formed by crystal-plastic deformation mechanisms. Indicates high-temperature, deep-crustal shear zones.",
+      "parents": ["ductile"],
+      "broader": "ductile",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/mylonite",
+      "related_entities": ["falha", "foliacao"]
+    },
+    {
+      "id": "ductile",
+      "label_en": "ductile",
+      "label_pt": "dúctil",
+      "definition": "Deformation characterized by flow and plastic deformation without fracturing, producing continuous structures such as folds and foliations. Dominant at high temperatures and pressures (deep crustal levels).",
+      "parents": ["deformation_style"],
+      "broader": "deformation_style",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/ductile",
+      "related_entities": ["dobra", "foliacao"]
+    },
+    {
+      "id": "foliation",
+      "label_en": "foliation",
+      "label_pt": "foliação (estilo)",
+      "definition": "Ductile deformation producing a pervasive planar fabric in the rock, including schistosity, cleavage, banding, or gneissic layering. Indicates sustained ductile shear or metamorphic recrystallization.",
+      "parents": ["ductile"],
+      "broader": "ductile",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/foliation",
+      "related_entities": ["foliacao"]
+    },
+    {
+      "id": "boudinage",
+      "label_en": "boudinage",
+      "label_pt": "boudinage",
+      "definition": "Ductile deformation producing sausage-shaped segments (boudins) of a competent layer within a less competent matrix, resulting from layer-parallel extension. Indicates ductile stretching.",
+      "parents": ["ductile"],
+      "broader": "ductile",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/boudinage",
+      "related_entities": ["foliacao"]
+    },
+    {
+      "id": "brittle_ductile_transition",
+      "label_en": "brittle-ductile transition",
+      "label_pt": "transição rúptil-dúctil",
+      "definition": "Deformation occurring at conditions intermediate between purely brittle and purely ductile, where both fracturing and crystal-plastic deformation mechanisms operate. Corresponds to seismogenic zone base in continental crust (~15–25 km depth).",
+      "parents": ["deformation_style"],
+      "broader": "deformation_style",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/brittle_ductile_transition",
+      "related_entities": ["falha", "foliacao"]
+    },
+    {
+      "id": "folded",
+      "label_en": "folded",
+      "label_pt": "dobrado",
+      "definition": "Deformation producing folds — curviplanar structures in originally planar features (bedding, foliation). Includes anticlines, synclines, chevron folds, and recumbent folds. Formed by layer-parallel shortening.",
+      "parents": ["ductile"],
+      "broader": "ductile",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/folded",
+      "related_entities": ["dobra"]
+    },
+    {
+      "id": "undeformed",
+      "label_en": "undeformed",
+      "label_pt": "não deformado",
+      "definition": "Rock body that has not undergone significant deformation after its original formation. Retains primary depositional or crystallization structures without overprinting by tectonic deformation.",
+      "parents": ["deformation_style"],
+      "broader": "deformation_style",
+      "uri": "http://resource.geosciml.org/classifier/cgi/deformationstyle/undeformed",
+      "related_entities": []
+    }
+  ]
+}

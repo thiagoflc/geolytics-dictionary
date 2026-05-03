@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "source": "OGC GroundWaterML2 (GWML2) WellConstruction Module",
+    "namespace": "http://www.opengis.net/gwml-well/2.2/",
+    "version": "2.2",
+    "total_classes": 9,
+    "layers": ["layer1b"],
+    "module": "M-WellIntegrity",
+    "description": "GWML2 classes for borehole/well construction components"
+  },
+  "classes": [
+    {
+      "id": "WellConstruction",
+      "label_en": "Well Construction",
+      "label_pt": "Construção de Poço",
+      "definition": "Material utilizado para construir um poço, incluindo componentes de revestimento, vedação, tela e filtro. Classe abstrata pai de todos os componentes de construção.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/WellConstruction",
+      "parent": null,
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "CasingComponent",
+      "label_en": "Casing Component",
+      "label_pt": "Componente de Revestimento",
+      "definition": "Elemento individual de uma coluna de revestimento de poço; segmento tubular metálico instalado para estabilizar as paredes do poço e isolar zonas de pressão.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/CasingComponent",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "Screen",
+      "label_en": "Screen",
+      "label_pt": "Tela de Filtração",
+      "definition": "Intervalo perfurado ou tela instalada na porção produtora do poço para permitir a entrada de fluidos enquanto impede a passagem de sedimentos.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/Screen",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "SealingComponent",
+      "label_en": "Sealing Component",
+      "label_pt": "Componente de Vedação",
+      "definition": "Componente de cimento ou selo colocado entre o revestimento e a parede do poço para isolar zonas de pressão e prevenir migração de fluidos.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/SealingComponent",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "FiltrationComponent",
+      "label_en": "Filtration Component",
+      "label_pt": "Componente de Filtração",
+      "definition": "Camada de cascalho ou material filtrante instalado ao redor da tela para prevenir a migração de finos e melhorar a eficiência de produção.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/FiltrationComponent",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "BoreCollar",
+      "label_en": "Bore Collar",
+      "label_pt": "Cabeça do Poço",
+      "definition": "Elemento estrutural que representa o topo do poço; ponto de referência para medições de profundidade e ponto de conexão com a infraestrutura de superfície.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/BoreCollar",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "BoreInterval",
+      "label_en": "Bore Interval",
+      "label_pt": "Intervalo do Poço",
+      "definition": "Intervalo definido ao longo do poço com características homogêneas de construção ou geológicas; usado para zonação e correlação de perfis.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/BoreInterval",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "WellPump",
+      "label_en": "Well Pump",
+      "label_pt": "Bomba de Poço",
+      "definition": "Equipamento de bombeamento instalado no poço para elevar fluidos da formação à superfície; inclui bombas submersas e bombas de hastes.",
+      "uri": "http://www.opengis.net/gwml-well/2.2/WellPump",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    },
+    {
+      "id": "CasingString",
+      "label_en": "Casing String",
+      "label_pt": "Coluna de Revestimento",
+      "definition": "Conjunto completo de tubos de revestimento conectados que formam uma coluna contínua ao longo do poço; agregação de CasingComponents (ex: revestimento condutor, superficial, intermediário, produtor).",
+      "uri": "http://www.opengis.net/gwml-well/2.2/CasingString",
+      "parent": "WellConstruction",
+      "related_gsmlbh": "gsmlbh:Borehole",
+      "related_entity": "poco"
+    }
+  ]
+}

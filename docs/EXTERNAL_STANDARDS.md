@@ -113,6 +113,46 @@ OSDU define schemas de dados (como os campos de um registro JSON devem ser estru
 
 ---
 
+## GeoSciML e CGI Simple Lithology (layer1b)
+
+**GeoSciML** é o padrão OGC para intercâmbio de dados geociêntificos. **CGI Simple Lithology** é um vocabulário OWL/SKOS do IUGS/CGI com 437 conceitos litológicos.
+
+**Módulos GeoSciML usados**:
+- `gsmlb` — geologia básica (GeologicUnit, Contact, Fold, Foliation, ShearDisplacementStructure)
+- `gsmlbh` — sondagens/poços (Borehole, boreholeDiameter, dateOfDrilling, inclinationType)
+- `gwml2` — construção de poços (9 classes: Casing, Screen, Sealing, Filtration, BoreCollar...)
+- `CGI Simple Lithology` — 437 conceitos com tradução PT-BR e mapeamento OSDU LithologyType
+
+**No Geolytics**: campo `geosciml_uri` em 50+ nós do entity-graph. Arquivo `data/cgi-lithology.json` com 437 conceitos; `data/cgi-osdu-lithology-map.json` com 152 mapeamentos CGI↔OSDU.
+
+**Referências**:
+- http://geosciml.org/
+- http://resource.geosciml.org/classifier/cgi/lithology/
+
+---
+
+## GWML2 — GroundWaterML2
+
+**GWML2** é o padrão OGC para modelagem de dados de poços/aquíferos. O módulo WellConstruction define 9 classes para componentes físicos de poços.
+
+**Classes no Geolytics** (`data/gwml2.json`): WellConstruction, CasingComponent, Screen, SealingComponent, FiltrationComponent, BoreCollar, BoreInterval, WellPump, CasingString.
+
+**Módulo**: M-WellIntegrity. **Referência**: http://www.opengis.net/gwml-well/2.2/
+
+---
+
+## W3C SOSA/SSN e QUDT
+
+**SOSA** (Sensor, Observation, Sample, Actuator) e **SSN** (Semantic Sensor Network) são ontologias W3C para modelagem de observações e sensores.
+
+**No Geolytics** (`data/sosa-qudt-alignment.json`): 17 mnemonics de perfis de poço (GR, RHOB, NPHI, DT, UCS, etc.) mapeados a `sosa:Observation` + unidades QUDT. 7 entidades do entity-graph alinhadas a `sosa:FeatureOfInterest`, `sosa:Sampling`, `ssn:Sample`.
+
+**Triples emitidos** em `data/geobrain.ttl`: `geo:WellLog rdfs:subClassOf sosa:ObservationCollection`, `geo:poco rdfs:subClassOf sosa:FeatureOfInterest`, etc.
+
+**Referências**: https://www.w3.org/TR/vocab-ssn/ | https://qudt.org/
+
+---
+
 ## Regras de deduplicacao entre padroes
 
 - **Petro KGraph e construido sobre GeoCore** — nao sao duplicatas. Use `petrokgraph_uri` como referencia primaria para RAG em portugues.

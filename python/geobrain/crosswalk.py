@@ -75,9 +75,7 @@ class CrosswalkIndex:
     @cached_property
     def _all_entries(self) -> list[CrosswalkEntry]:
         self._ensure_loaded()
-        entries = [
-            _entry_from_dict(d, "witsml") for d in self._witsml_data
-        ] + [
+        entries = [_entry_from_dict(d, "witsml") for d in self._witsml_data] + [
             _entry_from_dict(d, "prodml") for d in self._prodml_data
         ]
         return entries

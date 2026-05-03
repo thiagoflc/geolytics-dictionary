@@ -39,10 +39,26 @@ graph = [
 rag = [
   "rank-bm25>=0.2.2",
 ]
+validator = [
+  "pyshacl>=0.25.0",
+  "rdflib>=7.0.0",
+  "owlrl>=6.0.2",
+]
+scripts = [
+  "pyshacl>=0.25.0",
+  "rdflib>=7.0.0",
+  "owlrl>=6.0.2",
+]
 dev = [
   "pytest>=7.0",
+  "pytest-cov>=4.1",
   "networkx>=3.0",
   "rank-bm25>=0.2.2",
+  "pyshacl>=0.25.0",
+  "rdflib>=7.0.0",
+  "owlrl>=6.0.2",
+  "pre-commit>=3.5",
+  "ruff>=0.7.0",
 ]
 
 [project.scripts]
@@ -71,3 +87,59 @@ include = [
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = [
+  "-q",
+  "--strict-markers",
+  "--strict-config",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+# Scope ruff to the maintained SDK + tests. Legacy scripts/ and one-shot
+# migrations/ are checked for syntax only (see .github/workflows/lint.yml)
+# and intentionally exempt from the strict ruleset.
+extend-exclude = [
+  "geobrain/_data",
+  "build",
+  "dist",
+  "../scripts",
+  "../scripts/migrations",
+]
+
+[tool.ruff.lint]
+select = [
+  "E",   # pycodestyle errors
+  "F",   # pyflakes
+  "W",   # pycodestyle warnings
+  "I",   # isort
+  "B",   # flake8-bugbear
+  "UP",  # pyupgrade
+  "SIM", # flake8-simplify
+  "RUF", # ruff-specific
+]
+ignore = [
+  "E501",  # line-length handled by formatter
+  "B008",  # function calls in defaults are common in this codebase
+]
+
+[tool.ruff.lint.per-file-ignores]
+"**/tests/**/*.py" = ["B011", "E402"]  # importorskip pattern requires late imports
+"**/__init__.py" = ["F401"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.coverage.run]
+source = ["geobrain"]
+omit = ["geobrain/_data/*", "geobrain/_version.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]

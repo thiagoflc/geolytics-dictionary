@@ -118,11 +118,13 @@ If `cypher_query` is called without Neo4j configured, it returns a helpful error
 Search glossary, extended-terms and ontopetro classes by name (PT or EN).
 
 **Input:**
+
 ```json
 { "term": "bacia", "fuzzy": false }
 ```
 
 **Response shape:**
+
 ```json
 {
   "found": true,
@@ -157,11 +159,13 @@ Search glossary, extended-terms and ontopetro classes by name (PT or EN).
 Expand an O&G sigla. Excludes `it_generic` entries by default.
 
 **Input:**
+
 ```json
 { "sigla": "ANP" }
 ```
 
 **Response shape:**
+
 ```json
 {
   "found": true,
@@ -183,6 +187,7 @@ Expand an O&G sigla. Excludes `it_generic` entries by default.
 ```
 
 **Disambiguation example** — `BOP` has multiple senses:
+
 ```json
 { "sigla": "BOP" }
 // -> disambiguation_needed: true, hint lists categories, all senses returned
@@ -195,11 +200,13 @@ Expand an O&G sigla. Excludes `it_generic` entries by default.
 Fetch a single entity node with all outgoing and incoming relations resolved.
 
 **Input:**
+
 ```json
 { "id": "poco" }
 ```
 
 **Response shape:**
+
 ```json
 {
   "found": true,
@@ -232,11 +239,13 @@ Fetch a single entity node with all outgoing and incoming relations resolved.
 Multi-hop BFS traversal of the entity graph.
 
 **Input:**
+
 ```json
 { "id": "poco", "hops": 2, "edge_types": ["drilled_in", "classified_by"] }
 ```
 
 **Response shape:**
+
 ```json
 {
   "found": true,
@@ -265,11 +274,13 @@ Multi-hop BFS traversal of the entity graph.
 Validate a natural-language claim against the ontology (requires P1.4 `scripts/semantic-validator.js`).
 
 **Input:**
+
 ```json
 { "text": "O poco perfurado na bacia sedimentar produziu oleo" }
 ```
 
 **Response shape (validator present):**
+
 ```json
 {
   "valid": true,
@@ -279,6 +290,7 @@ Validate a natural-language claim against the ontology (requires P1.4 `scripts/s
 ```
 
 **Response shape (validator absent):**
+
 ```json
 {
   "valid": null,
@@ -294,22 +306,23 @@ Validate a natural-language claim against the ontology (requires P1.4 `scripts/s
 Execute a Cypher query. Only active when `NEO4J_URI` is set.
 
 **Input:**
+
 ```json
 { "query": "MATCH (p:Entity {id:'poco'})-[r]->(b:Entity) RETURN p.label, type(r), b.label LIMIT 5" }
 ```
 
 **Response shape (Neo4j available):**
+
 ```json
 {
   "ok": true,
   "records_count": 5,
-  "records": [
-    { "p.label": "Poço", "type(r)": "DRILLED_IN", "b.label": "Bloco" }
-  ]
+  "records": [{ "p.label": "Poço", "type(r)": "DRILLED_IN", "b.label": "Bloco" }]
 }
 ```
 
 **Response shape (Neo4j not configured):**
+
 ```json
 {
   "error": "Neo4j not configured",
@@ -324,11 +337,13 @@ Execute a Cypher query. Only active when `NEO4J_URI` is set.
 BM25 full-text search over `ai/rag-corpus.jsonl`. No external dependencies.
 
 **Input:**
+
 ```json
 { "query": "reservatorio poroso permeavel hidrocarbonetos", "k": 3 }
 ```
 
 **Response shape:**
+
 ```json
 {
   "query": "reservatorio poroso permeavel hidrocarbonetos",
@@ -354,11 +369,13 @@ BM25 full-text search over `ai/rag-corpus.jsonl`. No external dependencies.
 List all semantic layers. No input parameters required.
 
 **Input:**
+
 ```json
 {}
 ```
 
 **Response shape:**
+
 ```json
 {
   "count": 7,
@@ -384,11 +401,13 @@ List all semantic layers. No input parameters required.
 Find equivalent terms across ontology layers.
 
 **Input:**
+
 ```json
 { "uri": "bacia-sedimentar", "target_layer": "osdu" }
 ```
 
 **Response shape:**
+
 ```json
 {
   "found": true,
@@ -415,6 +434,7 @@ Find equivalent terms across ontology layers.
 ```
 
 Also accepts OSDU kinds as input:
+
 ```json
 { "uri": "opendes:osdu:master-data--Well:1.0.0" }
 // finds the entity that has this osdu_kind and returns all its cross-layer URIs

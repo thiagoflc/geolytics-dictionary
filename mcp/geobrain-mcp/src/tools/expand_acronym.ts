@@ -14,8 +14,8 @@ export const schema = z.object({
     .optional()
     .describe(
       "Filter by category (standard_body, measurement, general, process, fluid, contract, " +
-      "equipment, environmental, it_generic, regulator, lithology, unit, geophysics, " +
-      "organization, well_state). Pass 'it_generic' to include generic IT acronyms."
+        "equipment, environmental, it_generic, regulator, lithology, unit, geophysics, " +
+        "organization, well_state). Pass 'it_generic' to include generic IT acronyms."
     ),
 });
 
@@ -25,23 +25,18 @@ export function execute(input: Input): string {
   const needle = input.sigla.toUpperCase().trim();
   const includeItGeneric = input.category === "it_generic";
 
-  let matches: Acronym[] = acronyms.filter(
-    (a) => a.sigla.toUpperCase() === needle
-  );
+  let matches: Acronym[] = acronyms.filter((a) => a.sigla.toUpperCase() === needle);
 
   if (matches.length === 0) {
     return JSON.stringify({
       found: false,
       sigla: input.sigla,
-      suggestion:
-        "No exact match. Try a partial search via lookup_term or check spelling.",
+      suggestion: "No exact match. Try a partial search via lookup_term or check spelling.",
     });
   }
 
   // filter out it_generic unless explicitly requested
-  const filtered = includeItGeneric
-    ? matches
-    : matches.filter((a) => !a.it_generic);
+  const filtered = includeItGeneric ? matches : matches.filter((a) => !a.it_generic);
 
   if (input.category && input.category !== "it_generic") {
     const byCat = filtered.filter((a) => a.category === input.category);

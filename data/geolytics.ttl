@@ -6,6 +6,10 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix sweet: <http://sweetontology.net/> .
+@prefix geocore: <http://loop3d.org/GKO/geocore#> .
+@prefix gsmlb: <http://geosciml.org/def/gsmlb#> .
+@prefix gsmlbh: <http://geosciml.org/def/gsmlbh#> .
+@prefix cgi: <http://resource.geosciml.org/classifier/cgi/lithOntology/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
 # Generated: 2026-05-02T21:40:13.040Z
@@ -2533,3 +2537,24 @@ geo:kick-event geo:recorded_in geo:ogeomec .
 geo:geostopping-event geo:narrated_in geo:rcsd .
 geo:mwd-lwd geo:uses_tool geo:mwd .
 geo:mwd-lwd geo:uses_tool geo:lwd .
+
+#
+# Layer1 (GeoCore) ↔ Layer1b (GeoSciML + CGI Simple Lithology) equivalences
+# Source: data/layer1-layer1b-equivalence.json
+# Generated: 2026-05-03
+#
+
+geocore:GeologicUnit skos:exactMatch gsmlb:GeologicUnit .
+geocore:GeologicBody owl:equivalentClass gsmlb:GeologicUnit .
+geocore:Borehole owl:equivalentClass gsmlbh:Borehole .
+geocore:GeologicStructure skos:exactMatch gsmlb:GeologicStructure .
+geocore:FaultZone skos:broadMatch gsmlb:ShearDisplacementStructure .
+geocore:Contact skos:exactMatch gsmlb:Contact .
+geocore:Fold skos:exactMatch gsmlb:Fold .
+geocore:Foliation skos:exactMatch gsmlb:Foliation .
+geocore:Lineation skos:exactMatch gsmlb:Lineation .
+geocore:RockMaterial skos:exactMatch gsmlb:RockMaterial .
+geocore:RockMaterial skos:narrowMatch cgi:sedimentary_material .
+geocore:GeologicFeature skos:broadMatch gsmlb:MappedFeature .
+geocore:GeologicEvent skos:exactMatch gsmlb:GeologicEvent .
+geocore:EarthMaterial skos:exactMatch gsmlb:EarthMaterial .

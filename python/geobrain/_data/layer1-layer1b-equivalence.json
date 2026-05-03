@@ -1,0 +1,136 @@
+{
+  "meta": {
+    "description": "Semantic equivalences between layer1 (BFO+GeoCore) and layer1b (GeoSciML+CGI Simple Lithology)",
+    "generated": "2026-05-03",
+    "geocore_namespace": "http://loop3d.org/GKO/geocore#",
+    "geosciml_gsmlb_namespace": "http://geosciml.org/def/gsmlb#",
+    "geosciml_gsmlbh_namespace": "http://geosciml.org/def/gsmlbh#",
+    "cgi_lithology_namespace": "http://resource.geosciml.org/classifier/cgi/lithOntology/",
+    "mapping_types": [
+      "owl:equivalentClass",
+      "skos:exactMatch",
+      "skos:broadMatch",
+      "skos:narrowMatch"
+    ],
+    "sources": [
+      "GeoCore Ontology (GKO) — Loop3D/GSC — https://loop3d.org/GKO",
+      "GeoSciML Basic (gsmlb) — OGC — https://github.com/opengeospatial/GeoSciML",
+      "GeoSciML Borehole (gsmlbh) — OGC — https://github.com/opengeospatial/GeoSciML",
+      "CGI Simple Lithology 2012-11 — CGI/IUGS — http://resource.geosciml.org/classifier/cgi/lithOntology/"
+    ]
+  },
+  "mappings": [
+    {
+      "geocore_id": "GeologicUnit",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#GeologicUnit",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicUnit",
+      "geosciml_label": "GeologicUnit",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent a volume of rock with distinct lithological character and defined extent; GeoCore GeologicUnit and GeoSciML GeologicUnit share the same conceptual scope and are used interchangeably in cross-standard alignment"
+    },
+    {
+      "geocore_id": "GeologicBody",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#GeologicBody",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicUnit",
+      "geosciml_label": "GeologicUnit",
+      "mapping_type": "owl:equivalentClass",
+      "rationale": "GeoCore GeologicBody (a body of rock with defined extent and lithological character) is the functional equivalent of GeoSciML GeologicUnit; both are used in the Geolytics entity-graph for bacia-sedimentar, reservatorio, and formacao nodes"
+    },
+    {
+      "geocore_id": "Borehole",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#Borehole",
+      "geosciml_uri": "http://geosciml.org/def/gsmlbh#Borehole",
+      "geosciml_label": "Borehole",
+      "mapping_type": "owl:equivalentClass",
+      "rationale": "Both represent a drilled hole in the earth; GeoSciML gsmlbh:Borehole extends the GeoCore concept with detailed observation intervals, drilling method, and origin position — fully interchangeable at the class level"
+    },
+    {
+      "geocore_id": "GeologicStructure",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#GeologicStructure",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicStructure",
+      "geosciml_label": "GeologicStructure",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both are the abstract superclass for all geological structures (faults, folds, foliations, lineations, contacts); direct conceptual equivalence"
+    },
+    {
+      "geocore_id": "FaultZone",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#FaultZone",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+      "geosciml_label": "ShearDisplacementStructure",
+      "mapping_type": "skos:broadMatch",
+      "rationale": "GeoCore FaultZone (a zone of sheared rock along a fault plane) is narrower than GeoSciML ShearDisplacementStructure, which also encompasses ductile shear zones, thrust sheets, and detachments beyond brittle fault zones"
+    },
+    {
+      "geocore_id": "Contact",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#Contact",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Contact",
+      "geosciml_label": "Contact",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent the surface or narrow zone separating two geologic units; identical conceptual scope across GeoCore and GeoSciML"
+    },
+    {
+      "geocore_id": "Fold",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#Fold",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Fold",
+      "geosciml_label": "Fold",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent a curvilinear structure produced by ductile deformation of rock layers; identical conceptual scope"
+    },
+    {
+      "geocore_id": "Foliation",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#Foliation",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Foliation",
+      "geosciml_label": "Foliation",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent a planar penetrative fabric in rock (schistosity, cleavage, banding); identical conceptual scope"
+    },
+    {
+      "geocore_id": "Lineation",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#Lineation",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#Lineation",
+      "geosciml_label": "Lineation",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent a linear penetrative fabric in rock (stretching lineation, mineral lineation, crenulation lineation); identical conceptual scope"
+    },
+    {
+      "geocore_id": "RockMaterial",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#RockMaterial",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#RockMaterial",
+      "geosciml_label": "RockMaterial",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent the material composition of a rock body; direct counterparts in the two ontologies"
+    },
+    {
+      "geocore_id": "RockMaterial",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#RockMaterial",
+      "geosciml_uri": "http://resource.geosciml.org/classifier/cgi/lithOntology/sedimentary_material",
+      "geosciml_label": "sedimentary_material",
+      "mapping_type": "skos:narrowMatch",
+      "rationale": "CGI sedimentary_material is a specific subtype of GeoCore RockMaterial; the CGI vocabulary provides the canonical enumeration of lithology classes that GeoCore defines abstractly"
+    },
+    {
+      "geocore_id": "GeologicFeature",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#GeologicFeature",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#MappedFeature",
+      "geosciml_label": "MappedFeature",
+      "mapping_type": "skos:broadMatch",
+      "rationale": "GeoCore GeologicFeature is the abstract geological concept; GeoSciML MappedFeature is specifically the cartographic representation of that concept at a given map scale — broader in GeoCore, narrower and more concrete in GeoSciML"
+    },
+    {
+      "geocore_id": "GeologicEvent",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#GeologicEvent",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#GeologicEvent",
+      "geosciml_label": "GeologicEvent",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both represent a discrete event in geological time (e.g. a phase of deformation, intrusion, or deposition); identical conceptual scope"
+    },
+    {
+      "geocore_id": "EarthMaterial",
+      "geocore_uri": "http://loop3d.org/GKO/geocore#EarthMaterial",
+      "geosciml_uri": "http://geosciml.org/def/gsmlb#EarthMaterial",
+      "geosciml_label": "EarthMaterial",
+      "mapping_type": "skos:exactMatch",
+      "rationale": "Both are the top-level class for any naturally occurring solid material forming the Earth; direct equivalents"
+    }
+  ]
+}

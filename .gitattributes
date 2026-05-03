@@ -1,0 +1,27 @@
+# Normalize line endings across platforms.
+* text=auto eol=lf
+
+# Binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.zip binary
+
+# Generated artifacts — collapsed in GitHub diffs and excluded from
+# language statistics. Source of truth lives in the generators.
+data/full.json                 linguist-generated=true
+data/entity-graph.json         linguist-generated=true
+api/v1/**                      linguist-generated=true
+build/**                       linguist-generated=true
+*-cards.html                   linguist-generated=true
+ai/rag-corpus.jsonl            linguist-generated=true
+ai/text2sparql-fewshot.jsonl   linguist-generated=true
+ai/text2cypher-fewshot.jsonl   linguist-generated=true
+
+# Languages — exclude bulk data from "languages" pie chart.
+data/**     linguist-detectable=false
+ai/**       linguist-detectable=false
+docs/**     linguist-documentation=true
+notebooks/* linguist-documentation=true

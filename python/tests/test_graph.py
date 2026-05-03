@@ -4,7 +4,7 @@ import pytest
 
 pytest.importorskip("networkx", reason="networkx required for graph tests")
 
-from geobrain import KnowledgeGraph, Entity
+from geobrain import Entity, KnowledgeGraph
 
 
 @pytest.fixture(scope="module")
@@ -15,6 +15,7 @@ def kg():
 # ---------------------------------------------------------------------------
 # Construction
 # ---------------------------------------------------------------------------
+
 
 def test_from_local_returns_knowledge_graph(kg):
     assert isinstance(kg, KnowledgeGraph)
@@ -31,6 +32,7 @@ def test_edge_count_positive(kg):
 # ---------------------------------------------------------------------------
 # entity()
 # ---------------------------------------------------------------------------
+
 
 def test_entity_poco_found(kg):
     e = kg.entity("poco")
@@ -64,6 +66,7 @@ def test_entity_has_type(kg):
 # neighbors()
 # ---------------------------------------------------------------------------
 
+
 def test_neighbors_poco_returns_entities(kg):
     neighbors = kg.neighbors("poco", hops=1)
     assert len(neighbors) >= 1
@@ -90,6 +93,7 @@ def test_neighbors_does_not_include_start_node(kg):
 # ---------------------------------------------------------------------------
 # shortest_path()
 # ---------------------------------------------------------------------------
+
 
 def test_shortest_path_poco_to_reservatorio(kg):
     path = kg.shortest_path("poco", "reservatorio")
@@ -122,6 +126,7 @@ def test_shortest_path_no_path_returns_empty(kg):
 # all_entities()
 # ---------------------------------------------------------------------------
 
+
 def test_all_entities_non_empty(kg):
     entities = kg.all_entities()
     assert len(entities) > 0
@@ -131,6 +136,7 @@ def test_all_entities_non_empty(kg):
 # ---------------------------------------------------------------------------
 # cypher_export()
 # ---------------------------------------------------------------------------
+
 
 def test_cypher_export_returns_string(kg):
     cypher = kg.cypher_export()

@@ -5,14 +5,21 @@ or:  python -m pytest tests/test_geomec_corporate_shacl.py
 
 Verifies (1) the live module is conformant and (2) each shape fires on
 deliberate violations — guards against accidental shape regressions.
+
+Lives in tests/ (repo root), not python/tests/, because it is a live-data
+integration test — kept out of the python SDK test suite that runs in the
+test-python.yml matrix. Run on demand or as part of validate-ontology.yml.
 """
+
 from __future__ import annotations
+
 import importlib.util
 import json
 import unittest
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
+# tests/<file>  →  parents[1] is the repo root.
+ROOT = Path(__file__).resolve().parents[1]
 SHAPES = ROOT / "data" / "geolytics-shapes.ttl"
 DATA = ROOT / "data" / "geomechanics-corporate.json"
 
@@ -35,8 +42,8 @@ def _validate(data_graph):
         abort_on_first=False,
         allow_warnings=True,
     )
-    from rdflib.namespace import RDF
     from rdflib import Namespace
+    from rdflib.namespace import RDF
 
     SH = Namespace("http://www.w3.org/ns/shacl#")
     msgs = []
@@ -98,12 +105,13 @@ class TestShapesFireOnViolations(unittest.TestCase):
         self.g.add((bn, self.GEO.targetEntity, self.GEO.GEOMEC003))
         conforms, msgs = _validate(self.g)
         self.assertFalse(conforms)
-        self.assertTrue(any("enum corporativo aprovado" in m for m in msgs),
-                        f"Expected enum-rejection message, got: {msgs}")
+        self.assertTrue(
+            any("enum corporativo aprovado" in m for m in msgs),
+            f"Expected enum-rejection message, got: {msgs}",
+        )
 
     def test_shape25_low_confidence_without_gap_fires(self):
         """If a low-confidence entity loses its gaps it must fail."""
-        from rdflib import Literal
 
         # GEOMEC037 has confidence=low; remove all evidence_gaps
         for o in list(self.g.objects(self.GEO.GEOMEC037, self.GEO.evidenceGap)):
@@ -168,19 +176,23 @@ class TestLabTestCategoryAcceptance(unittest.TestCase):
 
     def test_labtest_is_a_valid_category(self):
         from rdflib import Literal
+
         g = _live_graph()
         # GEOMEC061 should exist with category=LabTest. If not, this test is N/A
         # but if present, must validate cleanly.
         from rdflib import Namespace
+
         GEO = Namespace("https://geolytics.petrobras.com.br/dict/")
         labtests = list(g.subjects(GEO.category, Literal("LabTest")))
         if not labtests:
             self.skipTest("No LabTest entities yet (Frente 1 not applied)")
         conforms, msgs = _validate(g)
         # If conforms is False because of category, the enum wasn't updated
-        category_violations = [m for m in msgs if "category" in m.lower() and "LabTest" in str(g)]
-        self.assertTrue(conforms or not any("category" in m.lower() for m in msgs),
-                        f"LabTest category should be accepted by enum. Messages: {msgs}")
+        [m for m in msgs if "category" in m.lower() and "LabTest" in str(g)]
+        self.assertTrue(
+            conforms or not any("category" in m.lower() for m in msgs),
+            f"LabTest category should be accepted by enum. Messages: {msgs}",
+        )
 
 
 if __name__ == "__main__":

@@ -15,7 +15,8 @@ export const OSDU_CANONICAL = {
   "opendes:osdu:master-data--Wellbore:1.0.0": {
     owl_uri: "https://w3id.org/osdu#Wellbore",
     osdu_class: "Wellbore",
-    definition_en_canonical: "A hole in the ground extending from a point at the earth's surface to the maximum point of penetration.",
+    definition_en_canonical:
+      "A hole in the ground extending from a point at the earth's surface to the maximum point of penetration.",
     parents: ["MasterData", "AbstractCommonResources", "AbstractMaster", "AbstractFacility"],
     pref_label: null,
   },
@@ -36,14 +37,16 @@ export const OSDU_CANONICAL = {
   "opendes:osdu:master-data--Organisation:1.0.0": {
     owl_uri: "https://w3id.org/osdu#Organisation",
     osdu_class: "Organisation",
-    definition_en_canonical: "A legal or administrative body, institution, or company, or any of its divisions.",
+    definition_en_canonical:
+      "A legal or administrative body, institution, or company, or any of its divisions.",
     parents: ["MasterData", "AbstractCommonResources", "AbstractMaster"],
     pref_label: null,
   },
   "opendes:osdu:master-data--GeologicalFormation:1.0.0": {
     owl_uri: "https://w3id.org/osdu#GeologicalFormation",
     osdu_class: "GeologicalFormation",
-    definition_en_canonical: "The name given to a body of rock having a consistent set of physical (litho-stratigraphic), temporal (chrono-stratigraphic) or fossil (bio-stratigraphic) characteristics that distinguishes it from adjacent bodies of rock, and which occupies a particular position in the layers of rock in a geographical region.",
+    definition_en_canonical:
+      "The name given to a body of rock having a consistent set of physical (litho-stratigraphic), temporal (chrono-stratigraphic) or fossil (bio-stratigraphic) characteristics that distinguishes it from adjacent bodies of rock, and which occupies a particular position in the layers of rock in a geographical region.",
     parents: ["ReferenceData", "AbstractCommonResources", "AbstractReferenceType"],
     pref_label: null,
   },
@@ -66,7 +69,8 @@ export const OSDU_CANONICAL = {
   "opendes:osdu:master-data--Sample:1.0.0": {
     owl_uri: "https://w3id.org/osdu#RockSample",
     osdu_class: "RockSample",
-    definition_en_canonical: "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc.",
+    definition_en_canonical:
+      "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc.",
     parents: ["MasterData", "AbstractCommonResources", "AbstractMaster"],
     pref_label: null,
     note: "No plain Sample class; using RockSample as closest",
@@ -74,7 +78,8 @@ export const OSDU_CANONICAL = {
   "opendes:osdu:reference-data--WellStatus:1.0.0": {
     owl_uri: "https://w3id.org/osdu#WellStatusSummary",
     osdu_class: "WellStatusSummary",
-    definition_en_canonical: "Identifies the status of a well component in a way that may combine and-or summarize concepts found in other status facets. For example, a Well Status Summary of Gas Injector Shut-in, which contains commonly desired business information, combines concepts from Product Type, Fluid Direction, and Condition.",
+    definition_en_canonical:
+      "Identifies the status of a well component in a way that may combine and-or summarize concepts found in other status facets. For example, a Well Status Summary of Gas Injector Shut-in, which contains commonly desired business information, combines concepts from Product Type, Fluid Direction, and Condition.",
     parents: ["ReferenceData", "AbstractCommonResources", "AbstractReferenceType"],
     pref_label: null,
     note: "No plain WellStatus reference type; closest is WellStatusSummary",
@@ -82,7 +87,8 @@ export const OSDU_CANONICAL = {
   "opendes:osdu:reference-data--WellType:1.0.0": {
     owl_uri: "https://w3id.org/osdu#WellProductType",
     osdu_class: "WellProductType",
-    definition_en_canonical: "Product Type [Well Product Type] is the physical product(s) that can be attributed to any well component.",
+    definition_en_canonical:
+      "Product Type [Well Product Type] is the physical product(s) that can be attributed to any well component.",
     parents: ["ReferenceData", "AbstractCommonResources", "AbstractReferenceType"],
     pref_label: null,
     note: "No plain WellType class; closest is WellProductType",
@@ -119,23 +125,41 @@ export const OSDU_CANONICAL = {
   "opendes:osdu:work-product-component--WellLog:1.0.0": {
     owl_uri: "https://w3id.org/osdu#WellLog",
     osdu_class: "WellLog",
-    definition_en_canonical: "A well log is a data type that correlates a particular measurement or multiple measurements in a wellbore against depth and/or time within that wellbore. When plotted visually, well logs are typically long line graphs (called curves) but may sometimes be discrete points or intervals. This schema object is intended for digital well logs, not raster log files or raster calibration files, but may be used for the latter in the absence of a defined OSDU schema for these use cases.",
-    parents: ["WorkProductComponent", "AbstractCommonResources", "AbstractWPCGroupType", "AbstractWorkProductComponent"],
+    definition_en_canonical:
+      "A well log is a data type that correlates a particular measurement or multiple measurements in a wellbore against depth and/or time within that wellbore. When plotted visually, well logs are typically long line graphs (called curves) but may sometimes be discrete points or intervals. This schema object is intended for digital well logs, not raster log files or raster calibration files, but may be used for the latter in the absence of a defined OSDU schema for these use cases.",
+    parents: [
+      "WorkProductComponent",
+      "AbstractCommonResources",
+      "AbstractWPCGroupType",
+      "AbstractWorkProductComponent",
+    ],
     pref_label: null,
   },
   "opendes:osdu:work-product-component--WellboreMarker:1.0.0": {
     owl_uri: "https://w3id.org/osdu#WellboreMarkerSet",
     osdu_class: "WellboreMarkerSet",
-    definition_en_canonical: "Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation, which is usually a change in the rock that intersects that wellbore. Formation Marker data includes attributes/properties that put these depths in context. Formation Markers are sometimes known as picks or formation tops.",
-    parents: ["WorkProductComponent", "AbstractCommonResources", "AbstractWPCGroupType", "AbstractWorkProductComponent"],
+    definition_en_canonical:
+      "Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation, which is usually a change in the rock that intersects that wellbore. Formation Marker data includes attributes/properties that put these depths in context. Formation Markers are sometimes known as picks or formation tops.",
+    parents: [
+      "WorkProductComponent",
+      "AbstractCommonResources",
+      "AbstractWPCGroupType",
+      "AbstractWorkProductComponent",
+    ],
     pref_label: null,
     note: "Class is WellboreMarkerSet",
   },
   "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0": {
     owl_uri: "https://w3id.org/osdu#WellboreTrajectory",
     osdu_class: "WellboreTrajectory",
-    definition_en_canonical: "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space.",
-    parents: ["WorkProductComponent", "AbstractCommonResources", "AbstractWPCGroupType", "AbstractWorkProductComponent"],
+    definition_en_canonical:
+      "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space.",
+    parents: [
+      "WorkProductComponent",
+      "AbstractCommonResources",
+      "AbstractWPCGroupType",
+      "AbstractWorkProductComponent",
+    ],
     pref_label: null,
   },
   "opendes:osdu:work-product-component--WellborePressure:1.0.0": {
@@ -146,4 +170,30 @@ export const OSDU_CANONICAL = {
     pref_label: null,
     note: "Not present in OSDU.ttl",
   },
+};
+
+/* ANP → OSDU WellStatus crosswalk (T8)
+ * Source: data/anp-osdu-wellstatus-map.json
+ * Full machine-readable mapping is in that file; this table mirrors the
+ * most important entries for inline use by other scripts.
+ */
+export const ANP_WELL_STATUS = {
+  EM_PRODUCAO:       { osdu_value: "Producing",            match_kind: "exactMatch" },
+  ABANDONADO:        { osdu_value: "Abandoned",            match_kind: "exactMatch" },
+  TAMPONADO:         { osdu_value: "Plugged and Abandoned", match_kind: "exactMatch" },
+  SUSPENSO:          { osdu_value: "Suspended",            match_kind: "exactMatch" },
+  EM_OBSERVACAO:     { osdu_value: "Temporarily Abandoned", match_kind: "closeMatch" },
+  CONVERTIDO_INJECAO:{ osdu_value: "Injection",            match_kind: "exactMatch" },
+  INATIVO:           { osdu_value: "Shut-In",              match_kind: "closeMatch" },
+  EM_PERFURACAO:     { osdu_value: "Active",               match_kind: "closeMatch" },
+  EM_COMPLETACAO:    { osdu_value: "Active",               match_kind: "closeMatch" },
+  "1_PRO":           { osdu_value: "Producing",            match_kind: "closeMatch" },
+  "2_INJ":           { osdu_value: "Injection",            match_kind: "exactMatch" },
+  "3_TES":           { osdu_value: "Active",               match_kind: "closeMatch" },
+  "4_EXP":           { osdu_value: "Active",               match_kind: "closeMatch" },
+  "5_SEC":           { osdu_value: "Injection",            match_kind: "closeMatch" },
+  EM_ABANDONO:       { osdu_value: "Temporarily Abandoned", match_kind: "closeMatch" },
+  SECO:              { osdu_value: "Dry",                  match_kind: "exactMatch" },
+  CONVERTENDO:       { osdu_value: "Converting",           match_kind: "exactMatch" },
+  FECHADO:           { osdu_value: "Shut-In",              match_kind: "exactMatch" },
 };

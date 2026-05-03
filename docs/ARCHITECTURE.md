@@ -6,12 +6,12 @@ Documentacao da arquitetura semantica, pipeline ETL e topologia do agente GraphR
 
 ## Visao geral das camadas semanticas
 
-O GeoBrain organiza o conhecimento de E&P em 7+ camadas independentes e complementares. Cada termo carrega o campo `geocoverage` indicando em quais camadas possui cobertura formal.
+O GeoBrain organiza o conhecimento de E&P em 8 camadas semânticas independentes e complementares. Cada termo carrega o campo `geocoverage` indicando em quais camadas possui cobertura formal.
 
 ```mermaid
 graph TD
     L1["Layer 1 — BFO + GeoCore<br/>(UFRGS/BDI + Geosiris)<br/>ontologia formal OWL/BFO"]
-    L1B["Layer 1b — GeoSciML / CGI<br/>Simple Lithology<br/>303 classes litologicas"]
+    L1B["Layer 1b — GeoSciML / CGI<br/>Simple Lithology<br/>437 conceitos CGI Simple Lithology"]
     L2["Layer 2 — O3PO + GeoReservoir<br/>(UFRGS/BDI)<br/>ontologia de dominio"]
     L3["Layer 3 — Petro KGraph<br/>(PUC-Rio / PetroNLP)<br/>539 conceitos PT-BR"]
     L4["Layer 4 — OSDU<br/>(The Open Group)<br/>schema de dados IT"]
@@ -28,8 +28,8 @@ graph TD
     L6 --> KG
     L7 --> KG
 
-    KG --> API["API REST estatica<br/>api/v1/"]
-    KG --> RAG["RAG Corpus<br/>ai/rag-corpus.jsonl<br/>2.212 chunks"]
+    KG --> API["API REST estatica<br/>api/v1/<br/>23 endpoints"]
+    KG --> RAG["RAG Corpus<br/>ai/rag-corpus.jsonl"]
     KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
     KG --> TTL["RDF / SHACL<br/>data/geolytics.ttl<br/>data/geolytics-shapes.ttl<br/>48 NodeShapes"]
 
@@ -51,8 +51,8 @@ O script `scripts/generate.js` executa o pipeline de transformacao completo:
 graph LR
     subgraph Extracao["Extracao multi-fonte"]
         S1["GLOSSARIO<br/>(23 termos ANP)"]
-        S2["ENTITY_NODES<br/>(75 nos tipados)"]
-        S3["EDGES<br/>(80 relacoes)"]
+        S2["ENTITY_NODES<br/>(170 nos tipados)"]
+        S3["EDGES<br/>(259 relacoes)"]
         S4["ONTOLOGY<br/>(ontopetro + SWEET)"]
         S5["Modulos sismicos<br/>P2.8 acquisition/<br/>processing/inversion"]
         S6["Modulos geomecanicos<br/>P2.7 MEM + fraturas"]
@@ -155,3 +155,11 @@ sequenceDiagram
 | Vocabulario OWL | `data/geolytics-vocab.ttl` |
 
 Veja tambem: [GRAPHRAG.md](GRAPHRAG.md) — receita completa do agente GraphRAG.
+
+---
+
+## Notas de extensao recentes
+
+**GWML2 WellConstruction (layer1b)**: o modulo `gwml2` adiciona 9 classes para componentes fisicos de pocos (Casing, Screen, Sealing, Filtration, BoreCollar, BoreInterval, WellPump, CasingString, WellConstruction). Arquivo `data/gwml2.json`.
+
+**SOSA/QUDT alignment**: 17 mnemonics de perfis de poco (GR, RHOB, NPHI, DT, UCS, etc.) mapeados a `sosa:Observation` com unidades QUDT em `data/sosa-qudt-alignment.json`. Triples emitidos em `data/geobrain.ttl`.

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-03T11:36:55.036Z",
+    "generated": "2026-05-03T17:11:59.786Z",
     "count": 56
   },
   "terms": [
@@ -912,6 +912,15 @@
       "apareceEm": [],
       "petrokgraph_uri": "https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFormation",
       "osdu_kind": "opendes:osdu:master-data--GeologicalFormation:1.0.0",
+      "cgi_vocab": "cgi-stratigraphic-rank",
+      "cgi_types": [
+        "formation",
+        "member",
+        "bed",
+        "lithostratigraphic_unit",
+        "group",
+        "subgroup"
+      ],
       "geocoverage": [
         "layer1",
         "layer2",
@@ -1392,6 +1401,21 @@
         "http://geosciml.org/def/gsmlb#Contact",
         "https://w3id.org/gso/1.0/geologiccontact/Contact"
       ],
+      "cgi_vocab": "cgi-contact-type",
+      "cgi_types": [
+        "contact",
+        "lithological_contact",
+        "stratigraphic_contact",
+        "conformable_contact",
+        "unconformable_contact",
+        "angular_unconformity",
+        "disconformity",
+        "nonconformity",
+        "paraconformity",
+        "intrusive_contact",
+        "metamorphic_contact",
+        "faulted_contact"
+      ],
       "geocoverage": [
         "layer1",
         "layer1b",
@@ -1432,6 +1456,12 @@
       "skos_exactMatch": [
         "http://geosciml.org/def/gsmlb#Fold",
         "https://w3id.org/gso/1.0/geologicfold/Fold"
+      ],
+      "cgi_vocab": "cgi-deformation-style",
+      "cgi_types": [
+        "folded",
+        "ductile",
+        "brittle_ductile_transition"
       ],
       "geocoverage": [
         "layer1",
@@ -1476,6 +1506,14 @@
         "http://geosciml.org/def/gsmlb#Foliation",
         "https://w3id.org/gso/1.0/geologicstructure/Foliation"
       ],
+      "cgi_vocab": "cgi-deformation-style",
+      "cgi_types": [
+        "foliation",
+        "mylonite",
+        "boudinage",
+        "ductile",
+        "brittle_ductile_transition"
+      ],
       "geocoverage": [
         "layer1",
         "layer1b",
@@ -1517,6 +1555,21 @@
       "skos_exactMatch": [
         "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
         "https://w3id.org/gso/1.0/geologicfault/Fault"
+      ],
+      "cgi_vocab": "cgi-fault-type",
+      "cgi_types": [
+        "normal_fault",
+        "reverse_fault",
+        "thrust_fault",
+        "strike_slip_fault",
+        "oblique_slip_fault",
+        "listric_fault",
+        "detachment_fault",
+        "transform_fault",
+        "transcurrent_fault",
+        "growth_fault",
+        "transfer_fault",
+        "blind_fault"
       ],
       "geocoverage": [
         "layer1",

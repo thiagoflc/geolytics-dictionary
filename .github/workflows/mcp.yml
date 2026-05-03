@@ -1,0 +1,39 @@
+name: MCP build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "mcp/geobrain-mcp/**"
+      - ".github/workflows/mcp.yml"
+  pull_request:
+    paths:
+      - "mcp/geobrain-mcp/**"
+      - ".github/workflows/mcp.yml"
+
+concurrency:
+  group: mcp-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: TypeScript build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: mcp/geobrain-mcp
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: mcp/geobrain-mcp/package-lock.json
+
+      - name: Install MCP deps
+        run: npm ci
+
+      - name: TypeScript type check
+        run: npx tsc --noEmit

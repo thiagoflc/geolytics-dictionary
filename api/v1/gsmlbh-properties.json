@@ -1,0 +1,60 @@
+{
+  "meta": {
+    "source": "GeoSciML Borehole (gsmlbh) Module",
+    "namespace": "http://geosciml.org/def/gsmlbh#",
+    "layer": "layer1b",
+    "entity": "poco"
+  },
+  "properties": [
+    {
+      "id": "boreholeDiameter",
+      "label_en": "Borehole Diameter",
+      "label_pt": "Diâmetro do Poço",
+      "uri": "http://geosciml.org/def/gsmlbh#boreholeDiameter",
+      "range": "xsd:decimal",
+      "unit": "qudt:MilliMeter",
+      "shacl_shape": "sh:PropertyShape",
+      "minCount": 0,
+      "maxCount": 1,
+      "definition": "O diâmetro do poço em um determinado intervalo de profundidade, expresso em milímetros."
+    },
+    {
+      "id": "dateOfDrilling",
+      "label_en": "Date of Drilling",
+      "label_pt": "Data de Perfuração",
+      "uri": "http://geosciml.org/def/gsmlbh#dateOfDrilling",
+      "range": "xsd:date",
+      "unit": null,
+      "shacl_shape": "sh:PropertyShape",
+      "minCount": 0,
+      "maxCount": 1,
+      "definition": "Data em que a perfuração do poço teve início, expressa no formato ISO 8601 (AAAA-MM-DD)."
+    },
+    {
+      "id": "drillingMethod",
+      "label_en": "Drilling Method",
+      "label_pt": "Método de Perfuração",
+      "uri": "http://geosciml.org/def/gsmlbh#drillingMethod",
+      "range": "xsd:string",
+      "unit": null,
+      "shacl_shape": "sh:PropertyShape",
+      "minCount": 0,
+      "maxCount": 1,
+      "vocab": "gsmlbh:DrillingMethod",
+      "definition": "Método utilizado para perfurar o poço (ex: rotativo, percussão, rotativo a ar, cable tool). Vinculado ao vocabulário controlado gsmlbh:DrillingMethod."
+    },
+    {
+      "id": "inclinationType",
+      "label_en": "Inclination Type",
+      "label_pt": "Tipo de Inclinação",
+      "uri": "http://geosciml.org/def/gsmlbh#inclinationType",
+      "range": "xsd:string",
+      "unit": null,
+      "shacl_shape": "sh:PropertyShape",
+      "minCount": 0,
+      "maxCount": 1,
+      "allowed_values": ["vertical", "deviated", "horizontal"],
+      "definition": "Tipo de inclinação do poço: vertical (inclinação < 5°), desviado (inclinação entre 5° e 85°) ou horizontal (inclinação > 85°)."
+    }
+  ]
+}

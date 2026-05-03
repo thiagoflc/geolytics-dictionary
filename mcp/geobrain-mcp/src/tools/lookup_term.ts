@@ -25,11 +25,7 @@ export const schema = z.object({
 type Input = z.infer<typeof schema>;
 
 function normalize(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "")
-    .trim();
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").trim();
 }
 
 function matchesTerm(term: GlossaryTerm, needle: string, fuzzy: boolean): boolean {
@@ -60,21 +56,13 @@ function matchesOntopetro(cls: OntopetroClass, needle: string, fuzzy: boolean): 
 }
 
 export function execute(input: Input): string {
-  const glossaryHits = glossaryTerms.filter((t) =>
-    matchesTerm(t, input.term, input.fuzzy)
-  );
-  const extendedHits = extendedTerms.filter((t) =>
-    matchesTerm(t, input.term, input.fuzzy)
-  );
+  const glossaryHits = glossaryTerms.filter((t) => matchesTerm(t, input.term, input.fuzzy));
+  const extendedHits = extendedTerms.filter((t) => matchesTerm(t, input.term, input.fuzzy));
   const ontopetroHits = ontopetroClasses.filter((c) =>
     matchesOntopetro(c, input.term, input.fuzzy)
   );
 
-  if (
-    glossaryHits.length === 0 &&
-    extendedHits.length === 0 &&
-    ontopetroHits.length === 0
-  ) {
+  if (glossaryHits.length === 0 && extendedHits.length === 0 && ontopetroHits.length === 0) {
     return JSON.stringify({
       found: false,
       query: input.term,

@@ -1,0 +1,68 @@
+name: Test (Node)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "data/**"
+      - "api/**"
+      - "package*.json"
+      - ".github/workflows/test-node.yml"
+  pull_request:
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - "data/**"
+      - "api/**"
+      - "package*.json"
+      - ".github/workflows/test-node.yml"
+
+concurrency:
+  group: test-node-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  node-tests:
+    name: Node tests + regen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Cache npm (root)
+        if: hashFiles('package.json') != ''
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: npm-root-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-root-
+
+      - name: Install root npm deps (if any)
+        if: hashFiles('package.json') != ''
+        run: npm ci --ignore-scripts
+
+      - name: Run Node tests
+        run: node --test tests/validator.test.js
+
+      - name: Verify regen is reproducible
+        run: |
+          node scripts/generate.js
+          # Ignore timestamp-only diffs in the "generated" field.
+          if git diff data/full.json api/v1/ \
+              | grep '^[+-]' \
+              | grep -v '^---' \
+              | grep -v '^+++' \
+              | grep -v '"generated":' \
+              | grep -q .; then
+            echo "FAIL: regen produced structural changes beyond timestamps."
+            git diff data/full.json api/v1/
+            exit 1
+          else
+            echo "OK: only timestamp changes detected (expected)."
+          fi

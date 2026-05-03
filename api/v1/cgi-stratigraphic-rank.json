@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "source": "CGI Geoscience Vocabularies — StratigraphicRank",
+    "namespace": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/",
+    "version": "201202",
+    "total": 28,
+    "description": "CGI/IUGS controlled vocabulary of stratigraphic rank terms covering chronostratigraphic, lithostratigraphic, and biostratigraphic units according to the International Stratigraphic Guide (ICS). Used in GeoSciML GeologicUnit rank descriptions.",
+    "skos_scheme": "http://resource.geosciml.org/classifierScheme/cgi/stratigraphicrank/201202",
+    "related_entities": ["formacao", "intervalo-estratigrafico", "bacia-sedimentar"]
+  },
+  "concepts": [
+    {
+      "id": "stratigraphic_unit",
+      "label_en": "stratigraphic unit",
+      "label_pt": "unidade estratigráfica",
+      "definition": "A body of rock established as a distinct entity in the classification of the Earth's rocks based on any of the various stratigraphic procedures (lithostratigraphic, chronostratigraphic, biostratigraphic, etc.). Top concept.",
+      "parents": [],
+      "broader": null,
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/stratigraphic_unit",
+      "related_entities": ["formacao", "intervalo-estratigrafico"]
+    },
+    {
+      "id": "eon",
+      "label_en": "eon",
+      "label_pt": "éon",
+      "definition": "The largest division of geologic time, defined by the International Commission on Stratigraphy. The Phanerozoic and Proterozoic are eons. The corresponding chronostratigraphic unit is eonothem.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/eon",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "supereon",
+      "label_en": "supereon",
+      "label_pt": "superéon",
+      "definition": "A subdivision of geologic time larger than an eon. The Precambrian is informally used as a supereon. Rarely used in formal stratigraphic classification.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/supereon",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "era",
+      "label_en": "era",
+      "label_pt": "era",
+      "definition": "A division of geologic time that is a subdivision of an eon. Examples include the Paleozoic, Mesozoic, and Cenozoic eras. The corresponding chronostratigraphic unit is erathem.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/era",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "period",
+      "label_en": "period",
+      "label_pt": "período",
+      "definition": "A subdivision of geologic time that is a subdivision of an era. Examples include the Cretaceous, Jurassic, and Triassic periods. The corresponding chronostratigraphic unit is system.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/period",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "epoch",
+      "label_en": "epoch",
+      "label_pt": "época",
+      "definition": "A subdivision of geologic time that is a subdivision of a period. Examples include the Early Cretaceous, Late Jurassic. The corresponding chronostratigraphic unit is series.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/epoch",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "age",
+      "label_en": "age",
+      "label_pt": "idade",
+      "definition": "The smallest subdivision of geologic time in formal chronostratigraphic classification, subdividing an epoch. The corresponding chronostratigraphic unit is stage. Examples: Aptian, Albian, Cenomanian.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/age",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "subage",
+      "label_en": "subage",
+      "label_pt": "subidade",
+      "definition": "A subdivision of an age in geochronologic classification. Rarely used formally. Corresponds to substage in chronostratigraphy.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/subage",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "zone",
+      "label_en": "zone",
+      "label_pt": "zona",
+      "definition": "A body of strata characterized by a particular fossil taxon or assemblage, or by a geochemical signature. Used in biostratigraphic, chemostratigraphic, and magnetostratigraphic classification.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/zone",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "chronozone",
+      "label_en": "chronozone",
+      "label_pt": "cronozona",
+      "definition": "The body of rocks formed during the time represented by a polarity chron or biozone; the smallest formal unit of chronostratigraphic classification above the bed level.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/chronozone",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "stage",
+      "label_en": "stage",
+      "label_pt": "andar",
+      "definition": "The fundamental unit of chronostratigraphic classification, representing rock formed during an age. Examples: Aptian Stage, Albian Stage. Defined by boundary stratotype sections (GSSPs).",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/stage",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "substage",
+      "label_en": "substage",
+      "label_pt": "subandar",
+      "definition": "A subdivision of a stage in chronostratigraphic classification. Corresponds to subage in geochronologic terminology.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/substage",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "supersystem",
+      "label_en": "supersystem",
+      "label_pt": "supersistema",
+      "definition": "A chronostratigraphic unit larger than a system, corresponding to an erathem. Rarely used in current practice.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/supersystem",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "system",
+      "label_en": "system",
+      "label_pt": "sistema",
+      "definition": "A chronostratigraphic unit corresponding to a period in geochronology. The fundamental unit of the geological time scale. Examples: Cretaceous System, Jurassic System.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/system",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "subsystem",
+      "label_en": "subsystem",
+      "label_pt": "subsistema",
+      "definition": "A subdivision of a system in chronostratigraphic classification. Corresponds to a subdivision of a period. Used in some regional stratigraphic schemes.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/subsystem",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "superseries",
+      "label_en": "superseries",
+      "label_pt": "superseries",
+      "definition": "A chronostratigraphic unit larger than a series, grouping two or more series. Corresponds to a subdivision of an erathem.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/superseries",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "series",
+      "label_en": "series",
+      "label_pt": "séries",
+      "definition": "A chronostratigraphic unit corresponding to an epoch in geochronology. Represents rock deposited during an epoch. Examples: Lower Cretaceous Series, Upper Jurassic Series.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/series",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "subseries",
+      "label_en": "subseries",
+      "label_pt": "subséries",
+      "definition": "A subdivision of a series in chronostratigraphic classification. Corresponds to a subdivision of an epoch.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/subseries",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "supergroup",
+      "label_en": "supergroup",
+      "label_pt": "supergrupo",
+      "definition": "A lithostratigraphic unit comprising two or more groups with significant lithological or genetic unity. Used for major basin-filling sequences. Examples: Gondwana Supergroup.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/supergroup",
+      "related_entities": ["formacao", "bacia-sedimentar"]
+    },
+    {
+      "id": "group",
+      "label_en": "group",
+      "label_pt": "grupo",
+      "definition": "A lithostratigraphic unit comprising two or more associated formations with significant lithological unity. Defines a major depositional cycle or phase within a basin.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/group",
+      "related_entities": ["formacao", "bacia-sedimentar"]
+    },
+    {
+      "id": "subgroup",
+      "label_en": "subgroup",
+      "label_pt": "subgrupo",
+      "definition": "A lithostratigraphic unit that is a subdivision of a group, comprising two or more formations. Used when a group needs further subdivision.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/subgroup",
+      "related_entities": ["formacao", "bacia-sedimentar"]
+    },
+    {
+      "id": "formation",
+      "label_en": "formation",
+      "label_pt": "formação",
+      "definition": "The fundamental unit of lithostratigraphic classification. A body of rock strata with consistent lithological characteristics that make it possible to recognize and map it at the surface or in the subsurface. Examples: Barra Velha Formation, Carapebus Formation.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/formation",
+      "related_entities": ["formacao", "bacia-sedimentar"]
+    },
+    {
+      "id": "member",
+      "label_en": "member",
+      "label_pt": "membro",
+      "definition": "A lithostratigraphic unit that is a named subdivision of a formation, distinguished by a particular lithological character. Not all formations are divided into members; a member occurs only within a single formation.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/member",
+      "related_entities": ["formacao"]
+    },
+    {
+      "id": "bed",
+      "label_en": "bed",
+      "label_pt": "camada",
+      "definition": "The smallest lithostratigraphic unit, representing a single layer of rock with observable internal physical homogeneity. Beds are the fundamental units of sedimentary sequences.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/bed",
+      "related_entities": ["formacao"]
+    },
+    {
+      "id": "lithostratigraphic_unit",
+      "label_en": "lithostratigraphic unit",
+      "label_pt": "unidade litoestratigráfica",
+      "definition": "A body of rock that is defined and characterized on the basis of its lithological properties and stratigraphic position. The hierarchy includes supergroup, group, subgroup, formation, member, and bed.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/lithostratigraphic_unit",
+      "related_entities": ["formacao", "bacia-sedimentar"]
+    },
+    {
+      "id": "biostratigraphic_unit",
+      "label_en": "biostratigraphic unit",
+      "label_pt": "unidade bioestratigráfica",
+      "definition": "A body of rock defined by its fossil content (biozone), characterized by the occurrence of one or more particular taxa. Biozones are the fundamental biostratigraphic units used for correlation.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/biostratigraphic_unit",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "chemostratigraphic_unit",
+      "label_en": "chemostratigraphic unit",
+      "label_pt": "unidade quimioestratigráfica",
+      "definition": "A body of rock characterized by a distinctive geochemical signature (isotopic ratios, trace element concentrations) used for correlation and paleoenvironmental reconstruction. Examples: carbon isotope excursion units, strontium isotope zones.",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/chemostratigraphic_unit",
+      "related_entities": ["intervalo-estratigrafico"]
+    },
+    {
+      "id": "magnetostratigraphic_unit",
+      "label_en": "magnetostratigraphic unit",
+      "label_pt": "unidade magnetoestratigráfica",
+      "definition": "A body of rock defined by its remanent magnetization polarity. Magnetic polarity zones (magnetozones) are used for correlation with the global geomagnetic polarity timescale (GPTS).",
+      "parents": ["stratigraphic_unit"],
+      "broader": "stratigraphic_unit",
+      "uri": "http://resource.geosciml.org/classifier/cgi/stratigraphicrank/magnetostratigraphic_unit",
+      "related_entities": ["intervalo-estratigrafico"]
+    }
+  ]
+}

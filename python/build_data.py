@@ -50,6 +50,17 @@ DATA_FILES = [
     "osdu-gso-crosswalk.json",
     "fracture_to_gso.json",
     "cgi-lithology.json",
+    "cgi-osdu-lithology-map.json",
+    "cgi-geologic-time.json",
+    "cgi-fault-type.json",
+    "cgi-deformation-style.json",
+    "cgi-contact-type.json",
+    "cgi-stratigraphic-rank.json",
+    "gwml2.json",
+    "gsmlbh-properties.json",
+    "layer1-layer1b-equivalence.json",
+    "sosa-qudt-alignment.json",
+    "anp-osdu-wellstatus-map.json",
 ]
 
 # Files to copy from ai/

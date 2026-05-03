@@ -128,6 +128,28 @@ export interface RagChunk {
   metadata?: Record<string, unknown>;
 }
 
+export interface CgiLithologyConcept {
+  id: string;
+  label_en: string;
+  label_pt?: string;
+  parents?: string[];
+  definition_en?: string;
+  uri?: string;
+  [key: string]: unknown;
+}
+
+export interface CgiGeologicTimeUnit {
+  id: string;
+  rank: string;
+  label_en: string;
+  label_pt?: string;
+  start_ma?: number;
+  end_ma?: number;
+  parent?: string | null;
+  brazil_notes?: string;
+  uri?: string;
+}
+
 // ---------- loaded data (singleton) ----------
 
 let _loaded = false;
@@ -139,6 +161,19 @@ export let entityGraph: EntityGraph = { nodes: [], edges: [] };
 export let ontopetroClasses: OntopetroClass[] = [];
 export let ontologyLayers: OntologyLayer[] = [];
 export let ragChunks: RagChunk[] = [];
+
+// Eagerly loaded at module evaluation time so tools can import them directly.
+export const cgiLithology: CgiLithologyConcept[] = (() => {
+  const data = loadJson<{ meta: unknown; concepts?: CgiLithologyConcept[] }>(
+    "data/cgi-lithology.json"
+  );
+  return data.concepts ?? [];
+})();
+
+export const cgiGeologicTime: CgiGeologicTimeUnit[] = (() => {
+  const data = loadJson<{ units: CgiGeologicTimeUnit[] }>("data/cgi-geologic-time.json");
+  return data.units ?? [];
+})();
 
 export function loadAll(): void {
   if (_loaded) return;

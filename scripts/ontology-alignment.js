@@ -6,6 +6,16 @@
  * facilmente revisáveis por especialistas de domínio.
  */
 
+/**
+ * Base URL for the Petro KGraph public OWL ontology hosted on GitHub.
+ * All PetroKGraph URIs in alignment tables are formed by appending a fragment
+ * identifier (e.g. `#Well`) to this base.
+ *
+ * @type {string}
+ * @example
+ * // PETROKGRAPH_BASE + '#Well'
+ * // → 'https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Well'
+ */
 export const PETROKGRAPH_BASE =
   'https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl';
 
@@ -14,6 +24,17 @@ export const PETROKGRAPH_BASE =
  * Tabela hardcoded para evitar invenções — null quando não há mapeamento.
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Alignment table mapping the 23 ANP glossary term IDs to their
+ * corresponding concepts in the Petro KGraph (`kg`), OSDU (`osdu`), and the
+ * semantic layers (`layers`) they appear in. Null values indicate that no
+ * mapping exists for that layer.
+ *
+ * @type {Object.<string, {kg: string|null, osdu: string|null, layers: string[]}>}
+ * @example
+ * // TERM_ALIGNMENT['poco-anp']
+ * // → { kg: '#Well', osdu: 'opendes:osdu:master-data--Well:1.0.0', layers: ['layer1', ..., 'layer5'] }
+ */
 export const TERM_ALIGNMENT = {
   /* id-glossario: { petrokgraph_fragment, osdu_kind, geocoverage } */
   'bloco':                     { kg: '#ExplorationBlock',          osdu: 'opendes:osdu:master-data--AcquisitionSurvey:1.0.0', layers: ['layer4','layer5'] },
@@ -46,6 +67,16 @@ export const TERM_ALIGNMENT = {
  * Apenas os 10 termos de alta ambiguidade têm conteúdo; demais ficam vazios.
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Enrichment data for the 10 highest-ambiguity ANP glossary terms, providing
+ * English equivalents, Portuguese/English synonyms, and real-world examples
+ * for use in NLP disambiguation and RAG corpus generation. Terms not listed
+ * here have no entry (handled gracefully by `enrichmentFor()`).
+ *
+ * @type {Object.<string, {termo_en: string, synonyms_pt: string[], synonyms_en: string[], examples: string[]}>}
+ * @example
+ * // TERM_ENRICHMENT['bloco'].synonyms_en → ['block', 'exploration block', 'lease block', 'concession block']
+ */
 export const TERM_ENRICHMENT = {
   'bloco': {
     termo_en: 'Exploration Block',
@@ -115,6 +146,28 @@ export const TERM_ENRICHMENT = {
  * mas não definia formalmente.
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Extended geological concepts sourced from GeoCore, O3PO, GeoReservoir, and
+ * GeoSciML that the Geolytics system uses but that are not formally defined in
+ * the ANP glossary. Each entry includes ontology URIs (PetroKGraph, OSDU, GeoSciML),
+ * CGI vocabulary types, synonyms, and real-world examples for RAG enrichment.
+ *
+ * @type {Array<{
+ *   id: string,
+ *   termo: string,
+ *   termo_en: string,
+ *   categoria: string,
+ *   definicao: string,
+ *   legal_source: string,
+ *   petrokgraph_uri: string|null,
+ *   osdu_kind: string|null,
+ *   geosciml_uri?: string,
+ *   geocoverage: string[],
+ *   synonyms_pt: string[],
+ *   synonyms_en: string[],
+ *   examples: string[]
+ * }>}
+ */
 export const EXTENDED_TERMS = [
   {
     id: 'formacao-geologica',
@@ -126,6 +179,8 @@ export const EXTENDED_TERMS = [
     apareceEm: [],
     petrokgraph_uri: `${PETROKGRAPH_BASE}#GeologicalFormation`,
     osdu_kind: 'opendes:osdu:master-data--GeologicalFormation:1.0.0',
+    cgi_vocab: 'cgi-stratigraphic-rank',
+    cgi_types: ['formation','member','bed','lithostratigraphic_unit','group','subgroup'],
     geocoverage: ['layer1','layer2','layer3','layer4'],
     synonyms_pt: ['formação', 'unidade litoestratigráfica', 'unidade geológica'],
     synonyms_en: ['formation', 'geological formation', 'lithostratigraphic unit'],
@@ -340,6 +395,8 @@ export const EXTENDED_TERMS = [
     geosciml_uri: 'http://geosciml.org/def/gsmlb#Contact',
     gso_uri: 'https://w3id.org/gso/1.0/geologiccontact/Contact',
     skos_exactMatch: ['http://geosciml.org/def/gsmlb#Contact', 'https://w3id.org/gso/1.0/geologiccontact/Contact'],
+    cgi_vocab: 'cgi-contact-type',
+    cgi_types: ['contact','lithological_contact','stratigraphic_contact','conformable_contact','unconformable_contact','angular_unconformity','disconformity','nonconformity','paraconformity','intrusive_contact','metamorphic_contact','faulted_contact'],
     geocoverage: ['layer1','layer1b','layer2','layer7'],
     synonyms_pt: ['contato geológico', 'limite estratigráfico', 'superfície de contato'],
     synonyms_en: ['geological contact', 'geologic contact', 'stratigraphic boundary'],
@@ -358,6 +415,8 @@ export const EXTENDED_TERMS = [
     geosciml_uri: 'http://geosciml.org/def/gsmlb#Fold',
     gso_uri: 'https://w3id.org/gso/1.0/geologicfold/Fold',
     skos_exactMatch: ['http://geosciml.org/def/gsmlb#Fold', 'https://w3id.org/gso/1.0/geologicfold/Fold'],
+    cgi_vocab: 'cgi-deformation-style',
+    cgi_types: ['folded','ductile','brittle_ductile_transition'],
     geocoverage: ['layer1','layer1b','layer2','layer7'],
     synonyms_pt: ['dobra', 'flexura', 'anticlinal', 'sinclinal'],
     synonyms_en: ['fold', 'anticline', 'syncline', 'flexure'],
@@ -376,6 +435,8 @@ export const EXTENDED_TERMS = [
     geosciml_uri: 'http://geosciml.org/def/gsmlb#Foliation',
     gso_uri: 'https://w3id.org/gso/1.0/geologicstructure/Foliation',
     skos_exactMatch: ['http://geosciml.org/def/gsmlb#Foliation', 'https://w3id.org/gso/1.0/geologicstructure/Foliation'],
+    cgi_vocab: 'cgi-deformation-style',
+    cgi_types: ['foliation','mylonite','boudinage','ductile','brittle_ductile_transition'],
     geocoverage: ['layer1','layer1b','layer7'],
     synonyms_pt: ['foliação', 'xistosidade', 'clivagem', 'bandamento'],
     synonyms_en: ['foliation', 'schistosity', 'cleavage', 'banding'],
@@ -394,6 +455,8 @@ export const EXTENDED_TERMS = [
     geosciml_uri: 'http://geosciml.org/def/gsmlb#ShearDisplacementStructure',
     gso_uri: 'https://w3id.org/gso/1.0/geologicfault/Fault',
     skos_exactMatch: ['http://geosciml.org/def/gsmlb#ShearDisplacementStructure', 'https://w3id.org/gso/1.0/geologicfault/Fault'],
+    cgi_vocab: 'cgi-fault-type',
+    cgi_types: ['normal_fault','reverse_fault','thrust_fault','strike_slip_fault','oblique_slip_fault','listric_fault','detachment_fault','transform_fault','transcurrent_fault','growth_fault','transfer_fault','blind_fault'],
     geocoverage: ['layer1','layer1b','layer2','layer7'],
     synonyms_pt: ['falha', 'estrutura de cisalhamento', 'falha geológica', 'plano de falha'],
     synonyms_en: ['fault', 'shear displacement structure', 'fault zone'],
@@ -439,17 +502,36 @@ export const EXTENDED_TERMS = [
  * o nó coincide com um termo do glossário; entidades novas têm entradas próprias.
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Ontology alignment for entity-graph nodes, covering operational, geological,
+ * contractual, actor, instrument, and equipment entities. Entries share keys
+ * with TERM_ALIGNMENT where the node matches a glossary term; new entities have
+ * their own entries. `gsml` holds a GeoSciML URI where applicable.
+ *
+ * @type {Object.<string, {
+ *   kg: string|null,
+ *   osdu: string|null,
+ *   gsml?: string,
+ *   layers: string[],
+ *   gsmlbh_properties?: string[]
+ * }>}
+ * @example
+ * // ENTITY_ALIGNMENT['poco']
+ * // → { kg: '#Well', osdu: 'opendes:osdu:master-data--Well:1.0.0',
+ * //     gsml: 'http://geosciml.org/def/gsmlbh#Borehole', layers: [...] }
+ */
 export const ENTITY_ALIGNMENT = {
   /* operational */
-  'poco':              { kg: '#Well',                  osdu: 'opendes:osdu:master-data--Well:1.0.0',         gsml: 'http://geosciml.org/def/gsmlbh#Borehole', layers: ['layer1','layer1b','layer2','layer3','layer4','layer5'] },
+  'poco':              { kg: '#Well',                  osdu: 'opendes:osdu:master-data--Well:1.0.0',         gsml: 'http://geosciml.org/def/gsmlbh#Borehole', layers: ['layer1','layer1b','layer2','layer3','layer4','layer5'], gsmlbh_properties: ['boreholeDiameter','dateOfDrilling','drillingMethod','inclinationType'] },
   'bloco':             { kg: '#ExplorationBlock',      osdu: 'opendes:osdu:master-data--AcquisitionSurvey:1.0.0', layers: ['layer4','layer5'] },
   'campo':             { kg: '#Field',                 osdu: 'opendes:osdu:master-data--Field:1.0.0',        layers: ['layer4','layer5'] },
   'bacia-sedimentar':  { kg: '#SedimentaryBasin',      osdu: 'opendes:osdu:master-data--Basin:1.0.0',        gsml: 'http://geosciml.org/def/gsmlb#GeologicUnit', layers: ['layer1','layer1b','layer2','layer3','layer4','layer5'] },
 
   /* geological extension (novos) */
   'reservatorio':      { kg: '#Reservoir',             osdu: 'opendes:osdu:master-data--Reservoir:1.0.0',    gsml: 'http://geosciml.org/def/gsmlb#GeologicUnit', layers: ['layer1','layer1b','layer2','layer3','layer4'] },
-  'formacao':          { kg: '#GeologicalFormation',   osdu: 'opendes:osdu:master-data--GeologicalFormation:1.0.0', gsml: 'http://geosciml.org/def/gsmlb#GeologicUnit', layers: ['layer1','layer1b','layer2','layer3','layer4'] },
-  'sistema-deposicional': { kg: '#DepositionalSystem', osdu: null,                                           layers: ['layer1','layer2'] },
+  'formacao':          { kg: '#GeologicalFormation',   osdu: 'opendes:osdu:master-data--GeologicalFormation:1.0.0', gsml: 'http://geosciml.org/def/gsmlb#GeologicUnit', cgi_time_scale: 'data/cgi-geologic-time.json', layers: ['layer1','layer1b','layer2','layer3','layer4'] },
+  'intervalo-estratigrafico': { kg: '#StratigraphicInterval', osdu: null, gsml: 'http://geosciml.org/def/gsmlb#GeologicUnit', cgi_time_scale: 'data/cgi-geologic-time.json', layers: ['layer1b','layer3'] },
+  'sistema-deposicional': { kg: '#DepositionalSystem', osdu: null,                                           layers: ['layer1','layer1b','layer2'] },
 
   /* contractual */
   'contrato-ep':                { kg: '#ExplorationProductionContract', osdu: null, layers: ['layer5'] },
@@ -482,7 +564,7 @@ export const ENTITY_ALIGNMENT = {
   'epc':                    { kg: null, osdu: null, layers: ['layer5'] },
 
   /* geological pure */
-  'presal':            { kg: '#PresaltLayer',        osdu: null, layers: ['layer1','layer2','layer3','layer5'] },
+  'presal':            { kg: '#PresaltLayer',        osdu: null, layers: ['layer1','layer1b','layer2','layer3','layer5'] },
   'bacias-agrupadas':  { kg: '#BasinGroup',          osdu: 'opendes:osdu:master-data--Basin:1.0.0', layers: ['layer3','layer5'] },
   'ambiente':          { kg: '#OperationalEnvironment', osdu: null, layers: ['layer3','layer5'] },
 
@@ -498,12 +580,84 @@ export const ENTITY_ALIGNMENT = {
   'mwd':                { kg: null, osdu: null, layers: ['layer4'] },
   'lwd':                { kg: null, osdu: null, layers: ['layer4'] },
   'manifold-submarino': { kg: null, osdu: null, layers: ['layer4'] },
+
+  /* contractual — ANP/SIGEP regulatory milestones and documents (layer5) */
+  'pem':                { kg: null, osdu: null, layers: ['layer5'] },
+  'pte':                { kg: null, osdu: null, layers: ['layer5'] },
+  'rfad':               { kg: null, osdu: null, layers: ['layer5'] },
+  'plano-desenvolvimento': { kg: null, osdu: null, layers: ['layer5'] },
+  'aip':                { kg: null, osdu: null, layers: ['layer5'] },
+  'cip':                { kg: null, osdu: null, layers: ['layer5'] },
+  'teste-formacao':     { kg: null, osdu: 'opendes:osdu:master-data--WellboreTest:1.0.0', layers: ['layer4','layer5'] },
+  'tld':                { kg: null, osdu: 'opendes:osdu:master-data--WellboreTest:1.0.0', layers: ['layer4','layer5'] },
+  'roa':                { kg: null, osdu: null, layers: ['layer5'] },
+  'pag':                { kg: null, osdu: null, layers: ['layer5'] },
+  'frame':              { kg: null, osdu: null, layers: ['layer5'] },
+  'rcsd':               { kg: null, osdu: null, layers: ['layer5'] },
+  'qpg':                { kg: null, osdu: null, layers: ['layer5'] },
+  'bdp':                { kg: null, osdu: null, layers: ['layer5'] },
+  'igp':                { kg: null, osdu: null, layers: ['layer5'] },
+  'rmg':                { kg: null, osdu: null, layers: ['layer5'] },
+  'laudo-geomecanico':  { kg: null, osdu: null, layers: ['layer5','layer6'] },
+  'perfil-composto':    { kg: null, osdu: 'opendes:osdu:work-product-component--WellLog:1.0.0', layers: ['layer4','layer6'] },
+
+  /* contractual — Petrobras-internal geomechanics programs (layer6) */
+  'ogeomec':            { kg: null, osdu: null, layers: ['layer6'] },
+
+  /* operational — ANP milestone */
+  'primeiro-oleo':      { kg: null, osdu: null, layers: ['layer5','layer6'] },
+
+  /* operational — Petrobras internal workflow nodes (layer6) */
+  'lessons-learned':       { kg: null, osdu: null, layers: ['layer6'] },
+  'retro-analysis':        { kg: null, osdu: null, layers: ['layer6'] },
+  'input-elaboration':     { kg: null, osdu: null, layers: ['layer6'] },
+  'operational-monitoring':{ kg: null, osdu: null, layers: ['layer6'] },
+  'formation-evaluation':  { kg: null, osdu: 'opendes:osdu:work-product-component--WellLog:1.0.0', layers: ['layer4','layer6'] },
+
+  /* instrument — ANP official systems (layer5) */
+  'rftp':    { kg: null, osdu: null, layers: ['layer5'] },
+  'i-engine':{ kg: null, osdu: null, layers: ['layer5'] },
+  'dpp':     { kg: null, osdu: null, layers: ['layer5'] },
+  'bmp':     { kg: null, osdu: null, layers: ['layer5'] },
+
+  /* instrument — Petrobras proprietary systems (layer6) */
+  'sirr':                     { kg: null, osdu: null, layers: ['layer6'] },
+  'bdoc':                     { kg: null, osdu: null, layers: ['layer6'] },
+  'vge':                      { kg: null, osdu: null, layers: ['layer6'] },
+  'cassandra-exata-curva-tempo': { kg: null, osdu: null, layers: ['layer6'] },
+  'exata':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'sigeo':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'bdiep':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'bdiap':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'aida':                     { kg: null, osdu: null, layers: ['layer6'] },
+  'geodo':                    { kg: null, osdu: null, layers: ['layer6'] },
+  'gda':                      { kg: null, osdu: null, layers: ['layer6'] },
+
+  /* analytical — well control events (layer6 geomechanics domain) */
+  'kick-event':               { kg: null, osdu: null, layers: ['layer6'] },
+  'geostopping-event':        { kg: null, osdu: null, layers: ['layer6'] },
 };
 
 /* ─────────────────────────────────────────────────────────────
  * Definição completa das 5 camadas (ontology-map.json)
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Ordered array describing all 8 ontology layers used by the Geolytics system,
+ * from formal upper ontology (BFO/GeoCore) through international standards
+ * (GeoSciML, OSDU) to Brazilian regulatory framework (ANP) and the internal
+ * Petrobras/Geolytics layer. Each entry includes maintainer, URIs, concept
+ * counts, and the subset of Geolytics concepts covered by that layer.
+ *
+ * @type {Array<{
+ *   id: string,
+ *   name: string,
+ *   maintainer: string,
+ *   type: string,
+ *   description: string,
+ *   geolytics_coverage: string[]|string
+ * }>}
+ */
 export const LAYER_DEFINITIONS = [
   {
     id: 'layer1',
@@ -687,6 +841,13 @@ export const LAYER_DEFINITIONS = [
   },
 ];
 
+/**
+ * Deduplication rules clarifying how the ontology layers relate to each other
+ * and when two mappings in different layers represent the same concept vs.
+ * genuinely distinct artifacts. Used in `buildOntologyMap()` to guide consumers.
+ *
+ * @type {Object.<string, string>}
+ */
 export const DEDUP_RULES = {
   petrokgraph_vs_geocore: 'NÃO são duplicatas. Petro KGraph É CONSTRUÍDO sobre GeoCore. Petro KGraph URIs referenciam GeoCore implicitamente. Use petrokgraph_uri como referência primária para RAG em português.',
   osdu_vs_others: 'OSDU é schema de dados IT, não ontologia filosófica. Complementar a todos os outros. Use osdu_kind para interoperabilidade com sistemas Petrobras.',
@@ -694,6 +855,13 @@ export const DEDUP_RULES = {
   layer6_vs_all: 'Camada 6 (Geolytics/Petrobras Internal) é o ATIVO TÉCNICO mais valioso — representa anos de ontologização interna (M7/M8/M9/M10). Não duplica camadas externas; estende com namespace próprio (geo:) e ligação a sistemas corporativos (GEOQWIN, SIRR, GDA, etc.). Apenas definições conceituais são publicadas; dados Sigilo=Interno NUNCA.',
 };
 
+/**
+ * Recommended usage guidance for the four primary consumer patterns: RAG/AI
+ * agents, IT integration via OSDU, ontology reasoning with OWL, and system
+ * prompt grounding. Surfaced in `buildOntologyMap()` output.
+ *
+ * @type {Object.<string, string>}
+ */
 export const RECOMMENDED_USAGE = {
   ai_agent_rag: 'Use rag-corpus.jsonl com todos os chunks. Priorize chunks type=term e type=entity. O campo text já está otimizado para embedding.',
   ai_agent_grounding: 'Use system-prompt-ptbr.md ou system-prompt-en.md como bloco de contexto no system prompt. ~900 tokens.',

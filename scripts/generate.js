@@ -14,6 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { extractGSO } from './gso-extract.js';
 import {
   PETROKGRAPH_BASE,
   TERM_ALIGNMENT,
@@ -64,6 +65,13 @@ const DRY_RUN = process.argv.includes('--dry-run');
 
 /* SWEET alignment — load synchronously from data/sweet-alignment.json.
    Returns a Map<geolytics_id, alignment[]> used by buildTtl. */
+/**
+ * Loads the SWEET ontology alignment file (`data/sweet-alignment.json`)
+ * synchronously and returns a Map keyed by `geolytics_id`. Returns an empty
+ * Map if the file does not exist or cannot be parsed.
+ *
+ * @returns {Map<string, Array<{sweet_uris: string[], alignment_type: string, sweet_module: string}>>}
+ */
 function loadSweetAlignmentSync() {
   try {
     const candidate = path.join(ROOT, 'data', 'sweet-alignment.json');
@@ -83,6 +91,16 @@ function loadSweetAlignmentSync() {
   }
 }
 
+/**
+ * Returns the ontology alignment data for a given entity-graph node ID,
+ * resolving the Petro KGraph fragment to a full URI and normalising absent
+ * fields to null. Falls back to all-null when the ID is not present in
+ * the supplied table.
+ *
+ * @param {Object.<string, {kg: string|null, osdu: string|null, gsml?: string, layers?: string[]}>} table - Alignment table (e.g. ENTITY_ALIGNMENT, ONTOPETRO_ALIGNMENT)
+ * @param {string} id - Entity-graph node identifier (e.g. 'poco', 'formacao')
+ * @returns {{petrokgraph_uri: string|null, osdu_kind: string|null, geosciml_uri: string|null, geocoverage: string[]}}
+ */
 function alignmentFor(table, id) {
   const a = table[id];
   if (!a) return { petrokgraph_uri: null, osdu_kind: null, geosciml_uri: null, geocoverage: [] };
@@ -94,8 +112,15 @@ function alignmentFor(table, id) {
   };
 }
 
-/* OSDU canonical enrichment — pulls owl_uri + canonical EN definition
-   from Accenture OSDU.ttl via scripts/osdu-canonical.js */
+/**
+ * Looks up OSDU canonical metadata (OWL URI and English definition) for a
+ * given OSDU kind string using the OSDU_CANONICAL lookup table from
+ * `scripts/osdu-canonical.js`. Returns null fields when the kind is absent
+ * or null.
+ *
+ * @param {string|null} kind - OSDU kind string (e.g. 'opendes:osdu:master-data--Well:1.0.0')
+ * @returns {{owl_uri: string|null, definition_en_canonical: string|null, osdu_class?: string, osdu_canonical_note?: string}}
+ */
 function osduCanonical(kind) {
   if (!kind) return { owl_uri: null, definition_en_canonical: null };
   const c = OSDU_CANONICAL[kind];
@@ -108,8 +133,14 @@ function osduCanonical(kind) {
   };
 }
 
-/* SKOS aliases — every node ALSO carries the SKOS-named equivalent fields
-   for direct interop with rdflib / Protégé / GraphDB consumers. */
+/**
+ * Augments an entity-graph node object with SKOS-named alias fields
+ * (`skos_prefLabel`, `skos_altLabel`, `skos_definition`, `skos_example`) for
+ * direct interoperability with rdflib, Protégé, and GraphDB consumers.
+ *
+ * @param {{label: string, label_en: string, definition: string, definition_en_canonical?: string, synonyms_pt?: string[], synonyms_en?: string[], examples?: string[]}} node
+ * @returns {Object} The input node extended with SKOS alias fields
+ */
 function withSkosAliases(node) {
   return {
     ...node,
@@ -124,8 +155,14 @@ function enrichmentFor(id) {
   return TERM_ENRICHMENT[id] || { termo_en: null, synonyms_pt: [], synonyms_en: [], examples: [] };
 }
 
-/* GSO (Loop3D Geoscience Ontology) — Layer 7. Loaded from data/gso-*.json,
-   produced by scripts/gso-extract.js. CC BY 4.0; cite Brodaric & Richard 2021. */
+/**
+ * Loads all GSO (Loop3D Geoscience Ontology) JSON files from the `data/`
+ * directory. Files are matched by the pattern `gso-<name>.json` and were
+ * produced by `scripts/gso-extract.js`. Returns an empty array when the
+ * data directory does not exist.
+ *
+ * @returns {Array<{file: string, meta: Object, classes: Object}>} Parsed GSO module objects
+ */
 function loadGsoModules() {
   const dataDir = path.resolve(__dirname, '..', 'data');
   if (!fs.existsSync(dataDir)) return [];
@@ -159,6 +196,14 @@ function loadSeismicModules() {
     .filter(Boolean);
 }
 
+/**
+ * Consolidates all seismic module JSON files into a single object for
+ * `api/v1/seismic.json`. Merges classes, properties, relations, and instances
+ * from `data/seismic-acquisition.json`, `data/seismic-processing.json`, and
+ * `data/seismic-inversion-attributes.json`.
+ *
+ * @returns {{meta: Object, modules: Object[], classes: Object, properties: Object, relations: Object, instances: Object}}
+ */
 function buildSeismicConsolidated() {
   const modules = loadSeismicModules();
   const allClasses = {};
@@ -199,6 +244,14 @@ function buildSeismicConsolidated() {
   };
 }
 
+/**
+ * Produces RAG corpus chunks for seismic acquisition, processing, and
+ * inversion/attribute modules. Emits `seismic_class`, `seismic_attribute`,
+ * and `seismic_property` chunk types. High-priority properties and
+ * DHI/AVO attribute subclasses receive dedicated chunks.
+ *
+ * @returns {Array<{id: string, type: string, text: string, metadata: Object}>}
+ */
 function buildSeismicRagChunks() {
   const modules = loadSeismicModules();
   const lines = [];
@@ -935,7 +988,7 @@ function buildModulesExtended() {
       generated: NOW,
       description: 'Módulos analíticos internos Geolytics/Petrobras — apenas conteúdo público/conceitual',
       petrobras_namespace: 'https://petrobras.com.br/geolytics/ontology/',
-      modules: ['M7_geochem', 'M8_rock', 'M9_geomec', 'M10_fluidos'],
+      modules: ['M7_geochem', 'M8_rock', 'M9_geomec', 'M10_fluidos', 'M-WellIntegrity'],
       publication_policy: 'Apenas definições conceituais. Não inclui dados Sigilo=Interno.',
     },
     ...MODULES_EXTENDED,
@@ -1015,6 +1068,16 @@ function buildOntologyTypes() {
   };
 }
 
+/**
+ * Builds the complete entity-graph JSON object by merging base ENTITY_NODES,
+ * OntoPetro/M7-M10 nodes, OSDU Layer-4 nodes, OSDU extra nodes, and
+ * OG (operacoes-geologicas) nodes. Each node is enriched with ontology
+ * alignment (PetroKGraph, OSDU, GeoSciML), OSDU canonical definitions, SKOS
+ * aliases, and synonyms/examples from the enrichment tables. Edges are
+ * collected from all edge arrays and normalised with bilingual relation labels.
+ *
+ * @returns {{version: string, generated: string, source: string, nodes: Object[], edges: Object[]}}
+ */
 function buildEntityGraph() {
   const ext = (id) => EXTENDED_TERMS.find((t) => t.id === id);
   const baseNodes = ENTITY_NODES.map((n) => {
@@ -1143,9 +1206,15 @@ function buildEntityGraph() {
     ...[...baseNodes, ...ontopetroNodes, ...osduNodes, ...osduExtraNodes].map(withSkosAliases),
     /* OG nodes are stored fully-baked (skos aliases inlined where appropriate) and
        are NOT re-mapped through withSkosAliases — that would add empty aliases to
-       the 30 OG nodes that intentionally do not carry them. */
-    ...OG_NODES,
-    /* 3W nodes: 27 sensors + 10 events + 13 equipment — fully-baked, skos fields inlined */
+       the 30 OG nodes that intentionally do not carry them.
+       Geocoverage fallback: if an OG node has no geocoverage field, look it up from
+       ENTITY_ALIGNMENT so all nodes have at least one layer tag. */
+    ...OG_NODES.map((n) => {
+      if (n.geocoverage && n.geocoverage.length) return n;
+      const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
+      return align.geocoverage.length ? { ...n, geocoverage: align.geocoverage } : n;
+    }),
+    /* 3W nodes: 27 sensors + 10 events + 14 equipment — fully-baked, skos fields inlined */
     ...THREEW_VARIABLES, ...THREEW_EVENTS, ...THREEW_EQUIPMENT,
   ];
   /* Apply 3W equipment patches (enriches existing nodes like dhsv in-place) */
@@ -1255,6 +1324,13 @@ function buildFull() {
 
 const BASE_URL_PLACEHOLDER = 'https://thiagoflc.github.io/geobrain';
 
+/**
+ * Builds the API index JSON object listing all public API and data file
+ * endpoints for the GeoBrain deployment. Each endpoint is an absolute URL
+ * formed from `BASE_URL_PLACEHOLDER`. Written to `api/v1/index.json`.
+ *
+ * @returns {{meta: {version: string, generated: string, base_url: string}, endpoints: Object.<string, string>}}
+ */
 function buildApiIndex() {
   return {
     meta: { version: VERSION, generated: NOW, base_url: BASE_URL_PLACEHOLDER },
@@ -1287,7 +1363,16 @@ function buildApiIndex() {
       regis_ner:       `${BASE_URL_PLACEHOLDER}/data/regis-ner-schema.json`,
       acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
       acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
-      cgi_lithology:   `${BASE_URL_PLACEHOLDER}/data/cgi-lithology.json`,
+      cgi_lithology:             `${BASE_URL_PLACEHOLDER}/api/v1/cgi-lithology.json`,
+      cgi_osdu_lithology_map:    `${BASE_URL_PLACEHOLDER}/api/v1/cgi-osdu-lithology-map.json`,
+      cgi_geologic_time:         `${BASE_URL_PLACEHOLDER}/api/v1/cgi-geologic-time.json`,
+      cgi_fault_type:            `${BASE_URL_PLACEHOLDER}/api/v1/cgi-fault-type.json`,
+      cgi_deformation_style:     `${BASE_URL_PLACEHOLDER}/api/v1/cgi-deformation-style.json`,
+      cgi_contact_type:          `${BASE_URL_PLACEHOLDER}/api/v1/cgi-contact-type.json`,
+      cgi_stratigraphic_rank:    `${BASE_URL_PLACEHOLDER}/api/v1/cgi-stratigraphic-rank.json`,
+      gwml2:                     `${BASE_URL_PLACEHOLDER}/api/v1/gwml2.json`,
+      layer1_layer1b_equivalence:`${BASE_URL_PLACEHOLDER}/api/v1/layer1-layer1b-equivalence.json`,
+      gsmlbh_properties:         `${BASE_URL_PLACEHOLDER}/api/v1/gsmlbh-properties.json`,
       geomechanics:    `${BASE_URL_PLACEHOLDER}/api/v1/geomechanics.json`,
       geomechanics_data: `${BASE_URL_PLACEHOLDER}/data/geomechanics.json`,
       geomechanics_fractures: `${BASE_URL_PLACEHOLDER}/data/geomechanics-fractures.json`,
@@ -1388,6 +1473,14 @@ function tokenize(s) {
     .filter((w) => w.length > 2);
 }
 
+/**
+ * Builds a client-side full-text search index covering glossary terms,
+ * datasets, and entity-graph nodes. Each item carries a pre-tokenised
+ * `tokens` array (normalised, accent-stripped, deduplicated) for offline
+ * token-match search in the browser. Written to `api/v1/search-index.json`.
+ *
+ * @returns {{meta: {version: string, generated: string, count: number}, items: Array<{id: string, type: string, title: string, text: string, tokens: string[]}>}}
+ */
 function buildSearchIndex() {
   const items = [];
   for (const t of GLOSSARIO) {
@@ -1425,6 +1518,115 @@ function buildSearchIndex() {
     text: 'OSDU kind mapping with master/reference/wpc tripartition, Well/Wellbore disambiguation and ANP→OSDU lineage.',
     tokens: Array.from(new Set(tokenize('OSDU kind mapping master-data reference-data work-product-component Well Wellbore Field Basin tripartição ANP'))),
   });
+
+  // CGI Simple Lithology
+  const cgiLithPath = path.join(ROOT, 'data', 'cgi-lithology.json');
+  if (fs.existsSync(cgiLithPath)) {
+    const lithData = JSON.parse(fs.readFileSync(cgiLithPath, 'utf8'));
+    const concepts = lithData.concepts || (Array.isArray(lithData) ? lithData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-lith:${c.id}`,
+        type: 'lithology',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition_en].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition_en].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Geologic Time
+  const cgiTimePath = path.join(ROOT, 'data', 'cgi-geologic-time.json');
+  if (fs.existsSync(cgiTimePath)) {
+    const timeData = JSON.parse(fs.readFileSync(cgiTimePath, 'utf8'));
+    const units = timeData.units || (Array.isArray(timeData) ? timeData.filter(x => x.id) : []);
+    for (const u of units) {
+      items.push({
+        id: `cgi-time:${u.id}`,
+        type: 'geologic_time',
+        title: u.label_pt || u.label_en || u.id,
+        title_en: u.label_en,
+        text: [u.label_pt, u.label_en, u.rank, u.brazil_notes].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([u.label_pt, u.label_en, u.id, u.rank, u.brazil_notes].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Fault Type
+  const cgiFaultPath = path.join(ROOT, 'data', 'cgi-fault-type.json');
+  if (fs.existsSync(cgiFaultPath)) {
+    const faultData = JSON.parse(fs.readFileSync(cgiFaultPath, 'utf8'));
+    const concepts = faultData.concepts || (Array.isArray(faultData) ? faultData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-fault:${c.id}`,
+        type: 'fault_type',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Deformation Style
+  const cgiDeformPath = path.join(ROOT, 'data', 'cgi-deformation-style.json');
+  if (fs.existsSync(cgiDeformPath)) {
+    const deformData = JSON.parse(fs.readFileSync(cgiDeformPath, 'utf8'));
+    const concepts = deformData.concepts || (Array.isArray(deformData) ? deformData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-deform:${c.id}`,
+        type: 'deformation_style',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Contact Type
+  const cgiContactPath = path.join(ROOT, 'data', 'cgi-contact-type.json');
+  if (fs.existsSync(cgiContactPath)) {
+    const contactData = JSON.parse(fs.readFileSync(cgiContactPath, 'utf8'));
+    const concepts = contactData.concepts || (Array.isArray(contactData) ? contactData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-contact:${c.id}`,
+        type: 'contact_type',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Stratigraphic Rank
+  const cgiStratPath = path.join(ROOT, 'data', 'cgi-stratigraphic-rank.json');
+  if (fs.existsSync(cgiStratPath)) {
+    const stratData = JSON.parse(fs.readFileSync(cgiStratPath, 'utf8'));
+    const concepts = stratData.concepts || (Array.isArray(stratData) ? stratData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-strat:${c.id}`,
+        type: 'stratigraphic_rank',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
   return { meta: { version: VERSION, generated: NOW, count: items.length }, items };
 }
 
@@ -1451,6 +1653,18 @@ function loadAcronyms() {
   return data;
 }
 
+/**
+ * Builds the full RAG (Retrieval-Augmented Generation) corpus as an array of
+ * JSONL-serialisable chunk objects. Combines chunks of types: term (ANP
+ * glossary + extended terms), ontology_layer, column (dataset schema), entity,
+ * domain, typology, processing level, OntoPetro classes/properties/relations/
+ * instances, taxonomies, systems, module M7-M10 summaries and per-class chunks,
+ * ambiguity alerts, PVT fields, NER mappings, GSO classes, seismic chunks,
+ * geomechanics chunks, and OSDU tripartition RAG chunks. Written to
+ * `ai/rag-corpus.jsonl`.
+ *
+ * @returns {Array<{id: string, type: string, text: string, metadata: Object}>}
+ */
 function buildRagCorpus() {
   const lines = [];
 
@@ -1856,12 +2070,161 @@ function buildRagCorpus() {
     }
   }
 
+  /* type=lithology — CGI Simple Lithology 2021 (layer1b) */
+  for (const chunk of buildLithologyRagChunks()) {
+    lines.push(chunk);
+  }
+
+  /* type=geologic_time — ICS/CGI Geologic Time 2023 (layer3) */
+  for (const chunk of buildGeologicTimeRagChunks()) {
+    lines.push(chunk);
+  }
+
+  /* type=fault_type / deformation_style / contact_type / stratigraphic_rank — T6 structural vocabs */
+  for (const chunk of buildCgiVocabChunks('cgi-fault-type.json', 'fault_type')) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks('cgi-deformation-style.json', 'deformation_style')) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks('cgi-contact-type.json', 'contact_type')) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks('cgi-stratigraphic-rank.json', 'stratigraphic_rank')) {
+    lines.push(chunk);
+  }
+
   /* type=threew_event — 3W Petrobras operational event classes */
   for (const chunk of THREEW_RAG_CHUNKS) {
     lines.push(chunk);
   }
 
   return lines.map((l) => JSON.stringify(l)).join('\n') + '\n';
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * CGI SIMPLE LITHOLOGY — RAG chunks (layer1b)
+ * Source: data/cgi-lithology.json + data/cgi-osdu-lithology-map.json
+ * ───────────────────────────────────────────────────────────── */
+
+/**
+ * Builds RAG corpus chunks for the CGI Simple Lithology vocabulary by loading
+ * `data/cgi-lithology.json` and `data/cgi-osdu-lithology-map.json`. Each
+ * of the ~437 CGI lithology concepts becomes a chunk with its OSDU
+ * LithologyType mapping, preferred labels, and SKOS hierarchy. Returns an
+ * empty array and emits a warning when the source files are absent.
+ *
+ * @returns {Array<{id: string, type: string, text: string, metadata: Object}>}
+ */
+function buildLithologyRagChunks() {
+  const lithPath = path.join(ROOT, 'data', 'cgi-lithology.json');
+  const mapPath  = path.join(ROOT, 'data', 'cgi-osdu-lithology-map.json');
+  if (!fs.existsSync(lithPath) || !fs.existsSync(mapPath)) {
+    console.warn('  [warn] CGI lithology data files not found, skipping lithology chunks');
+    return [];
+  }
+
+  const lithData = JSON.parse(fs.readFileSync(lithPath, 'utf8'));
+  const mapData  = JSON.parse(fs.readFileSync(mapPath, 'utf8'));
+
+  /* Build lookup: cgi_id -> { value, match_kind } */
+  const osduLookup = new Map();
+  for (const m of (mapData.mappings || [])) {
+    if (m.cgi_id && !osduLookup.has(m.cgi_id)) {
+      osduLookup.set(m.cgi_id, { value: m.osdu_value, match_kind: m.match_kind });
+    }
+  }
+
+  const chunks = [];
+  for (const concept of (lithData.concepts || [])) {
+    const def = concept.definition_en
+      ? (concept.definition_en.length > 500
+          ? concept.definition_en.slice(0, 497) + '...'
+          : concept.definition_en)
+      : null;
+    const osduMapping = osduLookup.get(concept.id) || null;
+    chunks.push({
+      id: `cgi-lith-${concept.id}`,
+      type: 'lithology',
+      layer: 'layer1b',
+      label_pt: concept.label_pt || null,
+      label_en: concept.label_en || null,
+      definition: def,
+      parents: concept.parents || [],
+      osdu_mapping: osduMapping,
+      uri: concept.uri || null,
+      source: 'CGI_SimpleLithology_2021',
+    });
+  }
+  console.log(`  ✓ CGI lithology chunks: ${chunks.length}`);
+  return chunks;
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * CGI GEOLOGIC TIME — RAG chunks (layer3)
+ * Source: data/cgi-geologic-time.json
+ * ───────────────────────────────────────────────────────────── */
+
+/**
+ * Builds RAG chunks for the ICS 2023 Geologic Time Scale.
+ * Emits one chunk per unit (eon/era/period/epoch/age) with PT-BR labels,
+ * time bounds (Ma), parent, and Brazil-specific stratigraphic notes.
+ *
+ * @returns {Array<Object>} RAG chunks with type='geologic_time', layer='layer3'
+ */
+function buildGeologicTimeRagChunks() {
+  const filePath = path.join(ROOT, 'data', 'cgi-geologic-time.json');
+  if (!fs.existsSync(filePath)) {
+    console.warn('  [warn] cgi-geologic-time.json not found, skipping geologic time chunks');
+    return [];
+  }
+  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  return (data.units || []).map(unit => ({
+    id: `cgi-time-${unit.id}`,
+    type: 'geologic_time',
+    layer: 'layer3',
+    label_pt: unit.label_pt || null,
+    label_en: unit.label_en || null,
+    rank: unit.rank || null,
+    start_ma: unit.start_ma ?? null,
+    end_ma: unit.end_ma ?? null,
+    parent: unit.parent || null,
+    brazil_notes: unit.brazil_notes || null,
+    uri: unit.uri || null,
+    source: 'ICS_2023',
+  }));
+}
+
+/**
+ * Generic builder for CGI vocabulary RAG chunks.
+ * Reads a CGI vocab JSON file (with `concepts` or `units` array) and
+ * emits one chunk per concept with labels, definition, hierarchy, and entity link.
+ *
+ * @param {string} filename - Basename of the JSON file in data/ (e.g. 'cgi-fault-type.json')
+ * @param {string} chunkType - Value for the chunk's `type` field (e.g. 'fault_type')
+ * @returns {Array<Object>} RAG chunks for the vocabulary
+ */
+function buildCgiVocabChunks(filename, chunkType) {
+  const filePath = path.join(ROOT, 'data', filename);
+  if (!fs.existsSync(filePath)) {
+    console.warn(`  [warn] ${filename} not found, skipping ${chunkType} chunks`);
+    return [];
+  }
+  const data = JSON.parse(fs.readFileSync(filePath, 'utf8'));
+  const items = data.concepts || data.units || [];
+  return items.map(item => ({
+    id: `${chunkType}-${item.id}`,
+    type: chunkType,
+    layer: 'layer1b',
+    label_pt: item.label_pt || null,
+    label_en: item.label_en || null,
+    definition: item.definition ? item.definition.slice(0, 500) : null,
+    broader: item.broader || null,
+    parents: item.parents || [],
+    related_entity: item.related_entity || null,
+    uri: item.uri || null,
+    source: (data.meta && data.meta.source) || 'CGI',
+  }));
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1874,13 +2237,13 @@ const SYSTEM_PROMPT_PT = `# Contexto de Domínio: Exploração e Produção de P
 
 A Exploração e Produção (E&P) de petróleo e gás natural no Brasil é regulada pela **Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP)**, autarquia federal vinculada ao Ministério de Minas e Energia, criada pela **Lei nº 9.478/1997** (Lei do Petróleo). A ANP contrata, fiscaliza e regula todas as atividades exploratórias e produtivas do país. Os dados oficiais são publicados pela **Superintendência de Exploração (SEP)** através do **SIGEP — Sistema de Informações Gerenciais de Exploração e Produção**.
 
-Este dicionário cobre 6 camadas semânticas: BFO+GeoCore (UFRGS), O3PO+GeoReservoir (UFRGS), Petro KGraph (PUC-Rio, 539 conceitos PT-BR), OSDU (industry standard), ANP/SIGEP (regulatório brasileiro) e Geolytics/Petrobras Internal (módulos M7-M10).
+Este dicionário cobre 8 camadas semânticas: BFO+GeoCore (UFRGS), GeoSciML+CGI (OGC/IUGS — padrão internacional de boreholes e litologias), O3PO+GeoReservoir (UFRGS), Petro KGraph (PUC-Rio, 539 conceitos PT-BR), OSDU (industry standard), ANP/SIGEP (regulatório brasileiro), Geolytics/Petrobras Internal (módulos M7-M10) e GSO/Loop3D (geologia estrutural).
 
 Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997), o concessionário assume todos os riscos, detém o petróleo produzido e paga tributos (royalties, participação especial). Na **Partilha de Produção** (Lei 12.351/2010, aplicável ao polígono do pré-sal e áreas estratégicas), o petróleo é dividido entre contratado e União, e a **Petrobras é operadora obrigatória** nos blocos do pré-sal.
 
 ## 2. Entidades-chave
 
-- **Poço (ANP)** — identificador padronizado de poço de óleo/gás (ex.: 1-RJS-702-RJ).
+- **Poço (ANP)** — identificador padronizado de poço de óleo/gás (ex.: 1-RJS-702-RJ). No modelo GeoSciML (gsmlbh), o poço é representado pela classe **Borehole** com propriedades boreholeDiameter, dateOfDrilling e inclinationType; componentes de construção (revestimento, cimentação, tela, filtro) são modelados pelo módulo **GWML2 WellConstruction** (9 classes).
 - **Bloco** — prisma vertical numa bacia sedimentar onde se realiza E&P; arrematado em rodada.
 - **Bacia Sedimentar** — depressão crustal com rochas sedimentares (Campos, Santos, Recôncavo).
 - **Campo / Área de Desenvolvimento** — área produtora resultante de Declaração de Comercialidade.
@@ -1906,7 +2269,8 @@ Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997),
 - **Campo ≠ Bloco ≠ Bacia**: três entidades distintas — Campo (produção), Bloco (contrato), Bacia (geologia).
 - **Reservatório ≠ Campo**: reservatório é corpo rochoso; campo é delimitação econômico-administrativa.
 - **Reserva ≠ Reservatório ≠ Reserva Ambiental**: tripla polissemia. Reserva (SPE-PRMS) é volume econômico (1P/2P/3P); reservatório é geológico; reserva ambiental é REBIO/RPPN.
-- **Formação ≠ litologia**: erro NER mais comum em PT-BR. *Formação Barra Velha* (FOR) é nome próprio de unidade litoestratigráfica; *calcário microbialítico* (ROC) é o tipo petrográfico que a compõe.
+- **Formação ≠ litologia**: erro NER mais comum em PT-BR. *Formação Barra Velha* (FOR) é nome próprio de unidade litoestratigráfica; *calcário microbialítico* (ROC) é o tipo petrográfico que a compõe. O vocabulário canônico de litologias é o **CGI Simple Lithology** (437 conceitos, disponível em PT e EN, adotado pelo OSDU como referência para LithologyType). Exemplos: limestone, dolostone, arenite, rock_salt, anhydrite — sempre verificar o termo CGI antes de mapear litologia OSDU.
+- **CGI vocabulários estruturais**: além de litologias, CGI/GeoSciML define vocabulários para tipos de falha, estilos de deformação, tipos de contato e ranques estratigráficos — use ao descrever geologia estrutural no contexto GeoSciML (gsmlb).
 - **Campo (polissemia)**: pode ser Campo (ANP — Búzios), campo (atributo de dado), campo (geográfico), Campo Tensional (M9). Sempre desambiguar.
 - **Intervalo ≠ Idade**: NER PetroGold INT (intervalo 2100-2450m) ≠ IDA (Aptiano). Um intervalo *tem* uma idade, mas não é a idade.
 
@@ -1919,7 +2283,7 @@ Existem dois regimes contratuais principais. Na **Concessão** (Lei 9.478/1997),
 ### 3.4 Geomecânica (M9) e Petrofísica (M8)
 - **UCS estático ≠ UCS dinâmico**: estático = lab (verdadeiro); dinâmico = derivado de DTC/DTS via correlação GDA/Petrobras. Diferença típica 20–40%. Não usar dinâmico para projeto sem calibração.
 - **Sv / Shmin / SHmax**: três tensores distintos do CampoTensionalInSitu. Em regime extensional Sv > SHmax > Shmin (regime normal); compressional inverte a ordem.
-- **Porosidade NMR / Den / Neu / Son**: não é única. NMR é mais precisa em carbonatos pré-sal; Den assume densidade da matriz; Neu é sensível ao hidrogênio total; Son subestima em carbonatos.
+- **Porosidade NMR / Den / Neu / Son**: não é única. NMR é mais precisa em carbonatos pré-sal; Den assume densidade da matriz; Neu é sensível ao hidrogênio total; Son subestima em carbonatos. Perfis de poço (curvas GR, RHOB, NPHI, DTC, DTS etc.) são modelados como **sosa:Observation** (W3C SOSA/SSN) com unidades QUDT — padrão adotado pelo OSDU e pelo GSO/Loop3D; o dicionário mapeia 17 mnemônicos de perfis com suas unidades QUDT.
 - **kH ≠ kV**: permeabilidade NÃO é escalar. Razão kV/kH varia de 0.001 (folhelhos) a 1.0 (isotrópicas). Crítico em águas profundas.
 - **Breakout** (M9): colapso compressivo das paredes do poço na direção Shmin, identificado por caliper 4 braços ou imagens FMI/UBI. Usado para orientar SHmax.
 - **SGR (Shale Gouge Ratio)**: proxy de potencial selante de falhas (TrapTester). SGR > 18–20% = falha selante; < 18% = condutiva. Não confundir com SAR (saturados/aromáticos/resinas) nem com SGR de gás.
@@ -1962,7 +2326,7 @@ Sistema Petrolífero → Trapa → Acumulação → Campo → Reserva (1P/2P/3P)
 
 Cada elo é uma entidade do dicionário (\`data/entity-graph.json\`). Use ao raciocinar sobre "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
 
-Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1-L6), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3.
+Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1, L1b-GeoSciML/CGI, L2-L7), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3. Para litologias, prefira termos CGI Simple Lithology (437 conceitos); para estrutura de poço, use modelo gsmlbh/GWML2; para medições de perfil, referencie SOSA/QUDT.
 
 ## 8. Dataset 3W — Eventos operacionais em poços offshore (Petrobras, CC-BY 4.0)
 
@@ -2043,6 +2407,48 @@ function writeText(rel, content) {
   console.log(`  ✓ ${rel}`);
 }
 
+/* ── GSO extraction — mtime-based cache check ─────────────────────────────
+ * Re-extract only when any gso-*.json is missing OR when a sentinel file
+ * (.gso-extract-stamp) is older than 24 h.  Network errors are non-fatal:
+ * the pipeline continues with whatever JSON files already exist on disk.
+ * ─────────────────────────────────────────────────────────────────────────── */
+await (async () => {
+  const DATA_DIR = path.join(ROOT, 'data');
+  const GSO_FILES = [
+    'gso-faults.json',
+    'gso-contacts.json',
+    'gso-folds.json',
+    'gso-foliations.json',
+    'gso-lineations.json',
+  ];
+  const stampFile = path.join(DATA_DIR, '.gso-extract-stamp');
+  const TTL_24H = 24 * 60 * 60 * 1000;
+
+  const anyMissing = GSO_FILES.some((f) => !fs.existsSync(path.join(DATA_DIR, f)));
+  const stampAge = fs.existsSync(stampFile)
+    ? Date.now() - fs.statSync(stampFile).mtimeMs
+    : Infinity;
+  const needsExtract = anyMissing || stampAge > TTL_24H;
+
+  if (!needsExtract) {
+    console.log('[generate] GSO data up-to-date, skipping extraction.');
+  } else {
+    console.log('[generate] extracting GSO data...');
+    try {
+      const { written, errors } = await extractGSO();
+      if (written.length > 0) {
+        // Update stamp so we skip network calls for the next 24 h
+        fs.writeFileSync(stampFile, new Date().toISOString() + '\n', 'utf8');
+      }
+      if (errors.length > 0) {
+        console.warn(`  [warn] GSO extraction had ${errors.length} error(s); pipeline continues with cached data.`);
+      }
+    } catch (err) {
+      console.warn(`  [warn] GSO extraction failed (${err.message}); pipeline continues with cached data.`);
+    }
+  }
+})();
+
 if (DRY_RUN) console.log('=== DRY RUN — no files will be written ===');
 console.log('Generating data/...');
 writeJson('data/glossary.json',        buildGlossary());
@@ -2118,7 +2524,7 @@ console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OS
 console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length + THREEW_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
-console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);
+console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10 + M-WellIntegrity)`);
 console.log(`  PVT fields: ${PVT_FIELDS.length}`);
 console.log(`  Systems: ${SYSTEMS.length}`);
 console.log(`  REGIS NER mappings: ${REGIS_NER_MAPPINGS.length}`);
@@ -2130,8 +2536,20 @@ console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicS
 // Idempotent: overwrites on each generate run.
 (function copyCrosswalks() {
   const crosswalkFiles = [
-    { src: 'data/witsml-rdf-crosswalk.json', dst: 'api/v1/witsml-rdf-crosswalk.json' },
-    { src: 'data/prodml-rdf-crosswalk.json',  dst: 'api/v1/prodml-rdf-crosswalk.json' },
+    { src: 'data/witsml-rdf-crosswalk.json',        dst: 'api/v1/witsml-rdf-crosswalk.json' },
+    { src: 'data/prodml-rdf-crosswalk.json',         dst: 'api/v1/prodml-rdf-crosswalk.json' },
+    { src: 'data/anp-osdu-wellstatus-map.json',      dst: 'api/v1/anp-osdu-wellstatus-map.json' },
+    { src: 'data/sosa-qudt-alignment.json',          dst: 'api/v1/sosa-qudt-alignment.json' },
+    { src: 'data/cgi-lithology.json',                dst: 'api/v1/cgi-lithology.json' },
+    { src: 'data/cgi-osdu-lithology-map.json',       dst: 'api/v1/cgi-osdu-lithology-map.json' },
+    { src: 'data/cgi-geologic-time.json',            dst: 'api/v1/cgi-geologic-time.json' },
+    { src: 'data/cgi-fault-type.json',               dst: 'api/v1/cgi-fault-type.json' },
+    { src: 'data/cgi-deformation-style.json',        dst: 'api/v1/cgi-deformation-style.json' },
+    { src: 'data/cgi-contact-type.json',             dst: 'api/v1/cgi-contact-type.json' },
+    { src: 'data/cgi-stratigraphic-rank.json',       dst: 'api/v1/cgi-stratigraphic-rank.json' },
+    { src: 'data/gwml2.json',                        dst: 'api/v1/gwml2.json' },
+    { src: 'data/layer1-layer1b-equivalence.json',   dst: 'api/v1/layer1-layer1b-equivalence.json' },
+    { src: 'data/gsmlbh-properties.json',            dst: 'api/v1/gsmlbh-properties.json' },
   ];
   let totalChunks = 0;
   const ragLines = [];

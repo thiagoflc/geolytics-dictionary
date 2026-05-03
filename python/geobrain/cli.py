@@ -14,7 +14,6 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from typing import NoReturn
 
 
 def _build_parser() -> argparse.ArgumentParser:
@@ -29,10 +28,7 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument(
         "claim",
         nargs="?",
-        help=(
-            "Text claim to validate. Use '-' to read from stdin. "
-            "If omitted, reads from stdin."
-        ),
+        help=("Text claim to validate. Use '-' to read from stdin. If omitted, reads from stdin."),
     )
     p.add_argument(
         "--json",
@@ -56,6 +52,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.version:
         from geobrain._version import __version__
+
         print(__version__)
         return 0
 

@@ -12,10 +12,7 @@
 
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import {
-  CallToolRequestSchema,
-  ListToolsRequestSchema,
-} from "@modelcontextprotocol/sdk/types.js";
+import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
 import { zodToJsonSchema } from "zod-to-json-schema";
 
 import { loadAll } from "./data.js";
@@ -30,6 +27,8 @@ import * as cypherQuery from "./tools/cypher_query.js";
 import * as searchRag from "./tools/search_rag.js";
 import * as listLayers from "./tools/list_layers.js";
 import * as crosswalkLookup from "./tools/crosswalk_lookup.js";
+import * as lookupLithology from "./tools/lookup_lithology.js";
+import * as lookupGeologicTime from "./tools/lookup_geologic_time.js";
 
 // Load all static data into memory before registering handlers.
 loadAll();
@@ -121,6 +120,25 @@ const tools = [
       "Example: what is OSDU's term for GeoCore's Bacia?",
     inputSchema: zodToJsonSchema(crosswalkLookup.schema),
   },
+  {
+    name: "lookup_lithology",
+    description:
+      "Search the CGI Simple Lithology vocabulary (437 concepts, IUGS/CGI 2021) by " +
+      "label in English or Portuguese, parent class, or concept id. Returns matching " +
+      "concepts with definitions, hierarchy parents, and GeoSciML URIs. " +
+      "Examples: 'limestone', 'calcário', 'sandstone', 'igneous_material'.",
+    inputSchema: zodToJsonSchema(lookupLithology.schema),
+  },
+  {
+    name: "lookup_geologic_time",
+    description:
+      "Search the ICS 2023 International Chronostratigraphic Chart (52 units) by label " +
+      "(PT or EN), rank (eon/era/period/epoch/age), or concept id. Returns age bounds in Ma, " +
+      "duration, parent unit, and Brazil-specific stratigraphic notes (e.g. Aptian/Albian " +
+      "pre-salt context for Santos and Campos basins). " +
+      "Examples: 'cretáceo', 'Cretaceous', 'aptiano', 'Aptian', 'Cenozoic'.",
+    inputSchema: zodToJsonSchema(lookupGeologicTime.schema),
+  },
 ];
 
 // ---------- handlers ----------
@@ -162,6 +180,12 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         break;
       case "crosswalk_lookup":
         text = crosswalkLookup.execute(crosswalkLookup.schema.parse(args));
+        break;
+      case "lookup_lithology":
+        text = lookupLithology.execute(lookupLithology.schema.parse(args));
+        break;
+      case "lookup_geologic_time":
+        text = lookupGeologicTime.execute(lookupGeologicTime.schema.parse(args));
         break;
       default:
         return {

@@ -22,8 +22,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dirname, "../../../..");
 const VALIDATOR_PATH = resolve(REPO_ROOT, "scripts/semantic-validator.js");
 
-let _validatorModule: { validate?: (text: string) => unknown } | null | undefined =
-  undefined;
+let _validatorModule: { validate?: (text: string) => unknown } | null | undefined = undefined;
 
 async function loadValidator(): Promise<typeof _validatorModule> {
   if (_validatorModule !== undefined) return _validatorModule;
@@ -32,9 +31,9 @@ async function loadValidator(): Promise<typeof _validatorModule> {
     return null;
   }
   try {
-    _validatorModule = await import(
-      /* @vite-ignore */ `file://${VALIDATOR_PATH}`
-    ) as { validate?: (text: string) => unknown };
+    _validatorModule = (await import(/* @vite-ignore */ `file://${VALIDATOR_PATH}`)) as {
+      validate?: (text: string) => unknown;
+    };
     return _validatorModule;
   } catch {
     _validatorModule = null;
@@ -49,8 +48,7 @@ export async function execute(input: Input): Promise<string> {
     return JSON.stringify({
       valid: null,
       error: "validator unavailable",
-      detail:
-        "scripts/semantic-validator.js not found. This tool requires P1.4 to be implemented.",
+      detail: "scripts/semantic-validator.js not found. This tool requires P1.4 to be implemented.",
     });
   }
 

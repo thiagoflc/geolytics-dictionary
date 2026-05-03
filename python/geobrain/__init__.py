@@ -23,31 +23,34 @@ Core exports::
 """
 
 from ._version import __version__
-from .dictionary import Dictionary, Term, Acronym, Layer
-from .graph import KnowledgeGraph, Entity
-from .validator import Validator, Violation, Report
-from .sweet import SweetExpander, Alignment, ExpansionResult
-from .crosswalk import CrosswalkIndex, CrosswalkEntry
+from .crosswalk import CrosswalkEntry, CrosswalkIndex
+from .dictionary import Acronym, Dictionary, Layer, Term
+from .graph import Entity, KnowledgeGraph
+from .lithology import LithologyDictionary
+from .sweet import Alignment, ExpansionResult, SweetExpander
+from .validator import Report, Validator, Violation
 
 __all__ = [
-    "__version__",
+    "Acronym",
+    "Alignment",
+    "CrosswalkEntry",
+    # crosswalk
+    "CrosswalkIndex",
     # dictionary
     "Dictionary",
-    "Term",
-    "Acronym",
-    "Layer",
+    "Entity",
+    "ExpansionResult",
     # graph
     "KnowledgeGraph",
-    "Entity",
-    # validator
-    "Validator",
-    "Violation",
+    "Layer",
+    # lithology
+    "LithologyDictionary",
     "Report",
     # sweet
     "SweetExpander",
-    "Alignment",
-    "ExpansionResult",
-    # crosswalk
-    "CrosswalkIndex",
-    "CrosswalkEntry",
+    "Term",
+    # validator
+    "Validator",
+    "Violation",
+    "__version__",
 ]

@@ -1,0 +1,163 @@
+{
+  "meta": {
+    "source": "CGI Geoscience Vocabularies — FaultType",
+    "namespace": "http://resource.geosciml.org/classifier/cgi/faulttype/",
+    "version": "201202",
+    "total": 15,
+    "description": "CGI/IUGS controlled vocabulary of fault types used in GeoSciML ShearDisplacementStructure descriptions. Concepts are arranged in a SKOS hierarchy with 'fault' as the top concept.",
+    "skos_scheme": "http://resource.geosciml.org/classifierScheme/cgi/faulttype/201202",
+    "related_entity": "falha"
+  },
+  "concepts": [
+    {
+      "id": "fault",
+      "label_en": "fault",
+      "label_pt": "falha",
+      "definition": "A discrete surface or zone of discrete surfaces, with some thickness, separating two rock masses across which one mass has slid past the other, and characterized by brittle deformation.",
+      "parents": [],
+      "broader": null,
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "normal_fault",
+      "label_en": "normal fault",
+      "label_pt": "falha normal",
+      "definition": "A fault with a dip-slip movement where the hanging wall has moved downward relative to the footwall. Normal faults are associated with extensional tectonic settings.",
+      "parents": ["fault"],
+      "broader": "fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/normal_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "reverse_fault",
+      "label_en": "reverse fault",
+      "label_pt": "falha reversa",
+      "definition": "A fault with reverse-slip movement where the hanging wall moves upward relative to the footwall. Dip of fault plane is greater than 45 degrees. Associated with compressional tectonic regimes.",
+      "parents": ["fault"],
+      "broader": "fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/reverse_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "thrust_fault",
+      "label_en": "thrust fault",
+      "label_pt": "falha de empurrão",
+      "definition": "A reverse fault with a shallow dip (typically less than 45 degrees) along which older rocks are thrust over younger rocks. Characteristic of fold-and-thrust belts.",
+      "parents": ["reverse_fault"],
+      "broader": "reverse_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/thrust_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "strike_slip_fault",
+      "label_en": "strike-slip fault",
+      "label_pt": "falha transcorrente",
+      "definition": "A fault where displacement is predominantly parallel to the strike of the fault surface (horizontal movement). Divided into dextral and sinistral varieties based on sense of movement.",
+      "parents": ["fault"],
+      "broader": "fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/strike_slip_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "dextral_strike_slip_fault",
+      "label_en": "dextral strike-slip fault",
+      "label_pt": "falha transcorrente dextral",
+      "definition": "A strike-slip fault where the block on the opposite side of the fault moves to the right when viewed across the fault plane.",
+      "parents": ["strike_slip_fault"],
+      "broader": "strike_slip_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/dextral_strike_slip_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "sinistral_strike_slip_fault",
+      "label_en": "sinistral strike-slip fault",
+      "label_pt": "falha transcorrente sinistral",
+      "definition": "A strike-slip fault where the block on the opposite side of the fault moves to the left when viewed across the fault plane.",
+      "parents": ["strike_slip_fault"],
+      "broader": "strike_slip_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/sinistral_strike_slip_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "oblique_slip_fault",
+      "label_en": "oblique-slip fault",
+      "label_pt": "falha oblíqua",
+      "definition": "A fault that has significant components of both dip-slip and strike-slip displacement. Net slip vector is oblique to both strike and dip of the fault surface.",
+      "parents": ["fault"],
+      "broader": "fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/oblique_slip_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "listric_fault",
+      "label_en": "listric fault",
+      "label_pt": "falha lístrica",
+      "definition": "A normal fault that is curved in cross-section, becoming less steep with depth. The fault plane is concave upward, typically flattening into a detachment horizon. Common in rifted continental margins.",
+      "parents": ["normal_fault"],
+      "broader": "normal_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/listric_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "detachment_fault",
+      "label_en": "detachment fault",
+      "label_pt": "falha de descolamento",
+      "definition": "A large-displacement, low-angle normal fault that forms the base of an extended terrain. The detachment surface separates an upper plate from a lower plate and may expose metamorphic core complexes.",
+      "parents": ["normal_fault"],
+      "broader": "normal_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/detachment_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "transform_fault",
+      "label_en": "transform fault",
+      "label_pt": "falha transformante",
+      "definition": "A strike-slip fault that is a plate boundary, connecting two other plate boundaries (typically mid-ocean ridges or subduction zones). Movement is parallel to the plate boundary.",
+      "parents": ["strike_slip_fault"],
+      "broader": "strike_slip_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/transform_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "transcurrent_fault",
+      "label_en": "transcurrent fault",
+      "label_pt": "falha transcorrente (crustal)",
+      "definition": "A large-scale, steeply dipping strike-slip fault that cuts through the crust and may be hundreds of kilometers long. A continental-scale strike-slip fault that crosses structural trends.",
+      "parents": ["strike_slip_fault"],
+      "broader": "strike_slip_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/transcurrent_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "blind_fault",
+      "label_en": "blind fault",
+      "label_pt": "falha cega",
+      "definition": "A fault that does not reach the Earth's surface. The fault terminates below the surface and its displacement is accommodated by folding of the overlying strata, forming a detachment fold.",
+      "parents": ["fault"],
+      "broader": "fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/blind_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "growth_fault",
+      "label_en": "growth fault",
+      "label_pt": "falha de crescimento",
+      "definition": "A syn-sedimentary fault that was active during deposition, resulting in thicker strata on the downthrown (hanging wall) side. Common in deltaic and passive margin settings; forms rollover anticlines.",
+      "parents": ["normal_fault"],
+      "broader": "normal_fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/growth_fault",
+      "related_entity": "falha"
+    },
+    {
+      "id": "transfer_fault",
+      "label_en": "transfer fault",
+      "label_pt": "falha de transferência",
+      "definition": "A fault that transfers displacement between two sub-parallel extensional or contractional fault systems. In rift settings, transfer faults are often strike-slip and connect normal fault segments.",
+      "parents": ["fault"],
+      "broader": "fault",
+      "uri": "http://resource.geosciml.org/classifier/cgi/faulttype/transfer_fault",
+      "related_entity": "falha"
+    }
+  ]
+}
