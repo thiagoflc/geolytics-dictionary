@@ -8,7 +8,7 @@
 @prefix sweet: <http://sweetontology.net/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T10:29:47.630Z
+# Generated: 2026-05-03T11:21:26.990Z
 # Nodes: 170  Edges: 259
 
 #
@@ -163,6 +163,7 @@ geo:sistema-deposicional a owl:Class ;
     skos:relatedMatch <http://sweetontology.net/procGeo/Sedimentation> ;
     skos:relatedMatch <http://sweetontology.net/realmGeolBasin/SedimentaryBasin> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" .
 
 geo:contrato-ep a owl:Class ;
@@ -440,6 +441,7 @@ geo:presal a owl:Class ;
     skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
     skos:relatedMatch <http://sweetontology.net/matrRockSedimentary/SaltRock> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer5" .
@@ -617,6 +619,7 @@ geo:rocha-geradora a owl:Class ;
     skos:definition """Rocha rica em matéria orgânica (COT > 1%) capaz de gerar HC quando submetida à temperatura adequada. Equivale a C005 em ontopetro."""@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#SourceRock> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer6" .
@@ -628,6 +631,7 @@ geo:rocha-capacitante a owl:Class ;
     skos:definition """Rocha de baixa permeabilidade que sela o reservatório, impedindo migração de HC para fora da trapa. Equivale a C004 em ontopetro."""@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#CapRock> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" .
 
@@ -638,6 +642,7 @@ geo:trapa a owl:Class ;
     skos:definition "Configuração geológica (estrutural, estratigráfica ou combinada) que permite acúmulo de HC. C006 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumTrap> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" .
 
 geo:sistema-petrolifero a owl:Class ;
@@ -647,6 +652,7 @@ geo:sistema-petrolifero a owl:Class ;
     skos:definition "Conjunto integrado de rocha geradora, migração, reservatório, capa e trapa. C007 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#PetroleumSystem> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" .
 
 geo:acumulacao a owl:Class ;
@@ -657,6 +663,7 @@ geo:acumulacao a owl:Class ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#HydrocarbonAccumulation> ;
     skos:relatedMatch <http://sweetontology.net/realmGeol/GeologicFeature> ;
     skos:relatedMatch <http://sweetontology.net/matrOrganics/Hydrocarbon> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
@@ -667,6 +674,7 @@ geo:play a owl:Class ;
     geo:entityType "operational" ;
     skos:definition "Combinação de elementos petrolíferos com potencial exploratório regional. C017 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Play> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" .
 
 geo:prospecto a owl:Class ;
@@ -675,6 +683,7 @@ geo:prospecto a owl:Class ;
     geo:entityType "operational" ;
     skos:definition "Área específica com potencial para acumulação, dentro de um play. C018 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Prospect> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" .
 
 geo:recurso a owl:Class ;
@@ -702,6 +711,7 @@ geo:falha a owl:Class ;
     skos:definition "Descontinuidade tectônica com deslocamento relativo das camadas. C016 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#GeologicalFault> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" .
 
 geo:idade-geologica a owl:Class ;
@@ -710,6 +720,7 @@ geo:idade-geologica a owl:Class ;
     geo:entityType "geological" ;
     skos:definition "Período/época formal segundo ICS GTS2020. Ex.: Aptiano, Albiano, Cretáceo Superior. Tipo NER PetroGold IDA."@pt ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" .
 
 geo:intervalo-estratigrafico a owl:Class ;
@@ -717,6 +728,7 @@ geo:intervalo-estratigrafico a owl:Class ;
     skos:prefLabel "Stratigraphic Interval"@en ;
     geo:entityType "geological" ;
     skos:definition """Seção de poço delimitada por dois marcos (topo/base). Usado em testagem, completação e avaliação. NÃO confundir com Idade. Tipo NER PetroGold INT."""@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
 
@@ -726,6 +738,7 @@ geo:testemunho a owl:Class ;
     geo:entityType "analytical" ;
     skos:definition "Amostra cilíndrica de rocha extraída durante perfuração. C012 em ontopetro."@pt ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#Core> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
 
@@ -736,6 +749,7 @@ geo:perfil-poco a owl:Class ;
     skos:definition "Medição contínua de propriedades físicas ao longo do poço (gamma, densidade, sônico, neutron, NMR). C013 em ontopetro."@pt ;
     owl:sameAs <https://w3id.org/osdu#WellLog> ;
     rdfs:seeAlso <https://raw.githubusercontent.com/Petroles/PetroNLP/main/Petro%20KGraph%20public.owl#WellLog> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
@@ -745,6 +759,7 @@ geo:materia-organica a owl:Class ;
     skos:prefLabel "Organic Matter"@en ;
     geo:entityType "analytical" ;
     skos:definition """Substância orgânica preservada na rocha geradora com potencial de gerar HC. Caracterizada por Rock-Eval e tipo de querogênio (I/II/IIS/III/IV). M7 C103."""@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer6" .
 
@@ -753,6 +768,7 @@ geo:maturidade-termal a owl:Class ;
     skos:prefLabel "Thermal Maturity"@en ;
     geo:entityType "analytical" ;
     skos:definition "Estado de evolução termal medido por Ro% (vitrinita) e Tmax (Rock-Eval). Janela óleo: Ro 0.5–1.0%, Tmax ~435°C. M7 C104."@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer6" .
 
@@ -780,6 +796,7 @@ geo:litologia a owl:Class ;
     skos:closeMatch <http://sweetontology.net/matrRock/Rock> ;
     skos:closeMatch <http://sweetontology.net/matrMineral/Mineral> ;
     geo:geocoverage "layer1" ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" ;
@@ -790,6 +807,7 @@ geo:facies-sedimentar a owl:Class ;
     skos:prefLabel "Sedimentary Facies"@en ;
     geo:entityType "analytical" ;
     skos:definition "Unidade rochosa com características físicas e biológicas distintas — base de classificação de reservatório. M8 C203."@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer6" .
 
@@ -805,6 +823,7 @@ geo:campo-tensional a owl:Class ;
     skos:prefLabel "In-Situ Stress Field"@en ;
     geo:entityType "analytical" ;
     skos:definition "Conjunto Sv (vertical), SHmax (horizontal máximo), Shmin (horizontal mínimo). Base do modelo geomecânico. M9 C303."@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer6" .
 
 geo:janela-lama a owl:Class ;
@@ -819,6 +838,7 @@ geo:ocorrencia-geomec a owl:Class ;
     skos:prefLabel "Geomechanical Event"@en ;
     geo:entityType "analytical" ;
     skos:definition "Eventos: breakouts, kick zones, lost circulation, stuck pipe. Indicadores de problemas operacionais. M9 C317."@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer6" .
 
 geo:potencial-selante a owl:Class ;
@@ -826,6 +846,7 @@ geo:potencial-selante a owl:Class ;
     skos:prefLabel "Fault Sealing Potential"@en ;
     geo:entityType "analytical" ;
     skos:definition """Capacidade de falha reter HC — calculado por SGR (Shale Gouge Ratio), CSP e SSF no TrapTester. SGR > 18–20% = potencial selante. M9 C313."""@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer6" .
 
 geo:amostra-fluido a owl:Class ;
@@ -884,6 +905,7 @@ geo:wellbore a owl:Class ;
     skos:example "1-RJS-702-RJ (wellbore único)" ;
     skos:example "3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)" ;
     owl:sameAs <https://w3id.org/osdu#Wellbore> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
@@ -905,6 +927,7 @@ geo:topo-formacional a owl:Class ;
     skos:example "Topo Fm. Macaé a 2890m MD" ;
     skos:example "Base do Sal a 3410m TVD" ;
     owl:sameAs <https://w3id.org/osdu#WellboreMarker> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer2" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
@@ -925,6 +948,7 @@ geo:trajetoria-poco a owl:Class ;
     skos:example "Poço horizontal pré-sal: 60° inclinação em 2800m TVD" ;
     skos:example "Poço vertical 1-RJS-702-RJ: inclinação < 3°" ;
     owl:sameAs <https://w3id.org/osdu#WellboreTrajectory> ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer3" ;
     geo:geocoverage "layer4" .
 
@@ -1289,6 +1313,7 @@ geo:drx a owl:Class ;
     skos:altLabel "XRD"@en ;
     skos:altLabel "X-Ray Diffraction"@en ;
     skos:definition """Técnica analítica de identificação mineralógica baseada na difração de raios X em amostras de rocha. Permite caracterizar mineralogia e auxiliar a classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013)."""@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
 
@@ -1302,6 +1327,7 @@ geo:frx a owl:Class ;
     skos:altLabel "XRF"@en ;
     skos:altLabel "X-Ray Fluorescence"@en ;
     skos:definition """Técnica analítica de determinação da composição elementar de amostras de rocha por fluorescência de raios X. Gera assinatura geoquímica usada na caracterização e correlação de formações. Detalhada em data/operacoes-geologicas.json (OG013b)."""@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
 
@@ -1316,6 +1342,7 @@ geo:dna-geoquimico a owl:Class ;
     skos:altLabel "Geochemical Formation Signature"@en ;
     skos:altLabel "Geochemical Fingerprint"@en ;
     skos:definition """Assinatura geoquímica de uma formação derivada de medidas de FRX, usada como impressão digital elementar para correlação estratigráfica e classificação litológica. Detalhada em data/operacoes-geologicas.json (OG013c)."""@pt ;
+    geo:geocoverage "layer1b" ;
     geo:geocoverage "layer4" ;
     geo:geocoverage "layer6" .
 
@@ -1323,7 +1350,10 @@ geo:mudlogging-time-series a owl:Class ;
     skos:prefLabel "Curvas de Tempo de Mudlogging"@pt ;
     skos:prefLabel "Mudlogging Time Series"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Fluxo contínuo de parâmetros de perfuração e análise de gás transmitido da sonda ao EXATA. Esquema detalhado do registro temporal produzido pela Mudlogging."""@pt .
+    skos:definition """Fluxo contínuo de parâmetros de perfuração e análise de gás transmitido da sonda ao EXATA. Esquema detalhado do registro temporal produzido pela Mudlogging."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:gas-show-event a owl:Class ;
     skos:prefLabel "Evento Discreto de Indício de Hidrocarboneto"@pt ;
@@ -1333,7 +1363,10 @@ geo:gas-show-event a owl:Class ;
     skos:altLabel "indício de hidrocarboneto"@pt ;
     skos:altLabel "gas show"@en ;
     skos:altLabel "hydrocarbon show"@en ;
-    skos:definition """Evento discreto de indício de gás/óleo detectado durante o mudlogging. Complementa a série temporal contínua com valores de pico, análise de razões (wetness/balance/character) e metadados de coleta em vacutainer."""@pt .
+    skos:definition """Evento discreto de indício de gás/óleo detectado durante o mudlogging. Complementa a série temporal contínua com valores de pico, análise de razões (wetness/balance/character) e metadados de coleta em vacutainer."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:kick-event a owl:Class ;
     skos:prefLabel "Evento Discreto de Kick"@pt ;
@@ -1348,13 +1381,19 @@ geo:cuttings-sample-detailed a owl:Class ;
     skos:prefLabel "Amostra de Calha (Esquema Detalhado)"@pt ;
     skos:prefLabel "Cuttings Sample (Detailed)"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Esquema detalhado de amostra de calha conforme PE-2EXP-00059, superando o stub leve do módulo pai. Registra intervalo, classificação litológica, observações petrofísicas, percentuais de litologia (componentes independentes, NÃO somam 100%) e FKs para análises laboratoriais."""@pt .
+    skos:definition """Esquema detalhado de amostra de calha conforme PE-2EXP-00059, superando o stub leve do módulo pai. Registra intervalo, classificação litológica, observações petrofísicas, percentuais de litologia (componentes independentes, NÃO somam 100%) e FKs para análises laboratoriais."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:core-run a owl:Class ;
     skos:prefLabel "Corrida de Testemunho"@pt ;
     skos:prefLabel "Core Run"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Corrida única de testemunhagem em um wellbore — intervalos programado e recuperado, percentual de recuperação, tipo de tubo, contagens de plugues e FKs para OSDU/GeoSciML/BDIEP/SIGEO/QPG."""@pt .
+    skos:definition """Corrida única de testemunhagem em um wellbore — intervalos programado e recuperado, percentual de recuperação, tipo de tubo, contagens de plugues e FKs para OSDU/GeoSciML/BDIEP/SIGEO/QPG."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:core-plug a owl:Class ;
     skos:prefLabel "Plugue de Testemunho"@pt ;
@@ -1363,7 +1402,10 @@ geo:core-plug a owl:Class ;
     skos:altLabel "plugue"@pt ;
     skos:altLabel "plug de testemunho"@pt ;
     skos:altLabel "core plug"@en ;
-    skos:definition "Plugue cilíndrico extraído de uma CoreRun para análise laboratorial."@pt .
+    skos:definition "Plugue cilíndrico extraído de uma CoreRun para análise laboratorial."@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:sidewall-core-sample a owl:Class ;
     skos:prefLabel "Amostra Lateral (SWC)"@pt ;
@@ -1373,7 +1415,10 @@ geo:sidewall-core-sample a owl:Class ;
     skos:altLabel "amostra lateral"@pt ;
     skos:altLabel "sidewall core"@en ;
     skos:altLabel "SWC"@en ;
-    skos:definition """Amostra lateral (SWC) adquirida durante corrida wireline — ferramentas rotativas (RSCT), de percussão (CST) ou mecânicas."""@pt .
+    skos:definition """Amostra lateral (SWC) adquirida durante corrida wireline — ferramentas rotativas (RSCT), de percussão (CST) ou mecânicas."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:lwd-run a owl:Class ;
     skos:prefLabel "Corrida LWD/MWD"@pt ;
@@ -1386,7 +1431,10 @@ geo:lwd-run a owl:Class ;
     skos:altLabel "MWD"@en ;
     skos:altLabel "Logging While Drilling"@en ;
     skos:altLabel "Measurement While Drilling"@en ;
-    skos:definition """Corrida única LWD/MWD — fase, BHA, prestadora, stack de ferramentas, curvas em tempo real vs memória, versão WITSML, taxas de amostragem e ID do log no EXATA. Distinção MWD (medidas direcionais/perfuração) vs LWD (avaliação de formação durante perfuração) per PE-2EXP-00061."""@pt .
+    skos:definition """Corrida única LWD/MWD — fase, BHA, prestadora, stack de ferramentas, curvas em tempo real vs memória, versão WITSML, taxas de amostragem e ID do log no EXATA. Distinção MWD (medidas direcionais/perfuração) vs LWD (avaliação de formação durante perfuração) per PE-2EXP-00061."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:wireline-run a owl:Class ;
     skos:prefLabel "Corrida de Perfilagem a Cabo"@pt ;
@@ -1396,7 +1444,10 @@ geo:wireline-run a owl:Class ;
     skos:altLabel "wireline"@pt ;
     skos:altLabel "wireline logging"@en ;
     skos:altLabel "open-hole wireline run"@en ;
-    skos:definition """Corrida única de perfilagem a cabo conforme PE-2EXP-00065. Inclui fase, número da corrida, tipo, intervalo de seção repetida (mínimo 60m por PE-2EXP-00065), ferramentas, mnemônicos, BHT e peso de lama, FKs para amostras de fluido e SWCs, e flag de qualidade."""@pt .
+    skos:definition """Corrida única de perfilagem a cabo conforme PE-2EXP-00065. Inclui fase, número da corrida, tipo, intervalo de seção repetida (mínimo 60m por PE-2EXP-00065), ferramentas, mnemônicos, BHT e peso de lama, FKs para amostras de fluido e SWCs, e flag de qualidade."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:formation-pressure-point a owl:Class ;
     skos:prefLabel "Ponto de Pressão de Formação (RFT/MDT/MiniDST)"@pt ;
@@ -1407,7 +1458,10 @@ geo:formation-pressure-point a owl:Class ;
     skos:altLabel "MiniDST"@pt ;
     skos:altLabel "RFT point"@en ;
     skos:altLabel "MDT pretest"@en ;
-    skos:definition """Medida única de pressão de formação (pretest) — RFT/MDT/XPT/FMT/MiniDST. Inclui pressão estática/fluxo, mobilidade, qualidade do pretest e coleta de amostra."""@pt .
+    skos:definition """Medida única de pressão de formação (pretest) — RFT/MDT/XPT/FMT/MiniDST. Inclui pressão estática/fluxo, mobilidade, qualidade do pretest e coleta de amostra."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:dst-interval a owl:Class ;
     skos:prefLabel "Intervalo de Teste de Formação (DST)"@pt ;
@@ -1415,7 +1469,10 @@ geo:dst-interval a owl:Class ;
     geo:entityType "analytical" ;
     skos:altLabel "DST"@pt ;
     skos:altLabel "Drill Stem Test"@en ;
-    skos:definition """Intervalo de DST conforme PE-2E&P-00773. Interpretação definitiva da produtividade do poço. CRÍTICO: dados DST armazenados no SIRR (NÃO BDIEP). Gestor é RES/TR/AR (Reservatórios), NÃO EXP/OGP/AQG. Arquivos (FT1/2/5, Saphir, PanSystem) ficam em BDOC."""@pt .
+    skos:definition """Intervalo de DST conforme PE-2E&P-00773. Interpretação definitiva da produtividade do poço. CRÍTICO: dados DST armazenados no SIRR (NÃO BDIEP). Gestor é RES/TR/AR (Reservatórios), NÃO EXP/OGP/AQG. Arquivos (FT1/2/5, Saphir, PanSystem) ficam em BDOC."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:geostopping-event a owl:Class ;
     skos:prefLabel "Evento de Geostopping"@pt ;
@@ -1478,13 +1535,19 @@ geo:fluid-sample a owl:Class ;
     geo:entityType "analytical" ;
     skos:altLabel "amostra de fluido"@pt ;
     skos:altLabel "fluid sample"@en ;
-    skos:definition """Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST. Destino de FK de FormationPressurePoint e DSTInterval."""@pt .
+    skos:definition """Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST. Destino de FK de FormationPressurePoint e DSTInterval."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:mudlogging a owl:Class ;
     skos:prefLabel "Mudlogging"@pt ;
     skos:prefLabel "Mudlogging"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Linha de serviço de Operações Geológicas: monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real, transmitidos da sonda ao EXATA. Documento primário são os dados em tempo real (não o BDP). Normado por PE-2EXP-00059 e PE-2EXP-00061."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real, transmitidos da sonda ao EXATA. Documento primário são os dados em tempo real (não o BDP). Normado por PE-2EXP-00059 e PE-2EXP-00061."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:cuttings-sampling a owl:Class ;
     skos:prefLabel "Coleta de Calha"@pt ;
@@ -1493,13 +1556,19 @@ geo:cuttings-sampling a owl:Class ;
     skos:altLabel "amostragem de calha"@pt ;
     skos:altLabel "amostras de calha"@pt ;
     skos:altLabel "cuttings sample collection"@en ;
-    skos:definition """Linha de serviço de Operações Geológicas: coleta, descrição e classificação litológica dos cascalhos trazidos pelo fluido de perfuração. Insumo para classificação litológica e correlação. Normado por PE-2EXP-00059 e PE-2EXP-00061."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: coleta, descrição e classificação litológica dos cascalhos trazidos pelo fluido de perfuração. Insumo para classificação litológica e correlação. Normado por PE-2EXP-00059 e PE-2EXP-00061."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:coring a owl:Class ;
     skos:prefLabel "Testemunhagem"@pt ;
     skos:prefLabel "Coring"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Linha de serviço de Operações Geológicas: extração de cilindros de rocha (testemunhos) para análise laboratorial detalhada. Alinhada ao GeoSciML (specimentype/core). Insumo direto para IGP e caracterização de reservatório."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: extração de cilindros de rocha (testemunhos) para análise laboratorial detalhada. Alinhada ao GeoSciML (specimentype/core). Insumo direto para IGP e caracterização de reservatório."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:sidewall-sampling a owl:Class ;
     skos:prefLabel "Amostragem Lateral (SWC)"@pt ;
@@ -1508,19 +1577,28 @@ geo:sidewall-sampling a owl:Class ;
     skos:altLabel "SWC"@pt ;
     skos:altLabel "sidewall core"@en ;
     skos:altLabel "SWC"@en ;
-    skos:definition """Linha de serviço de Operações Geológicas: coleta de plugues laterais de rocha por ferramentas de wireline após a perfuração de uma seção. Normado por PE-2EXP-00065."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: coleta de plugues laterais de rocha por ferramentas de wireline após a perfuração de uma seção. Normado por PE-2EXP-00065."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:mwd-lwd a owl:Class ;
     skos:prefLabel "MWD/LWD"@pt ;
     skos:prefLabel "MWD/LWD"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Linha de serviço de Operações Geológicas: medição e perfilagem durante a perfuração — dados petrofísicos e direcionais em tempo real. Registro primário são as curvas transmitidas ao EXATA, não o BDP. Normado por PE-2EXP-00061."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: medição e perfilagem durante a perfuração — dados petrofísicos e direcionais em tempo real. Registro primário são as curvas transmitidas ao EXATA, não o BDP. Normado por PE-2EXP-00061."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:wireline-logging a owl:Class ;
     skos:prefLabel "Perfilagem a Cabo"@pt ;
     skos:prefLabel "Wireline Logging"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Linha de serviço de Operações Geológicas: aquisição de perfis de poço descidos a cabo após a perfuração de cada fase. Alinhada ao OSDU (work-product-component--WellLog). Normado por PE-2EXP-00065."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: aquisição de perfis de poço descidos a cabo após a perfuração de cada fase. Alinhada ao OSDU (work-product-component--WellLog). Normado por PE-2EXP-00065."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:formation-testing a owl:Class ;
     skos:prefLabel "Teste de Formação"@pt ;
@@ -1533,13 +1611,19 @@ geo:formation-testing a owl:Class ;
     skos:altLabel "RFT"@en ;
     skos:altLabel "MDT"@en ;
     skos:altLabel "DST"@en ;
-    skos:definition """Linha de serviço de Operações Geológicas: amostragem de fluidos e medição de pressões em reservatórios (RFT/MDT/DST). DST normado por PE-2E&P-00773. Calibra modelos de pressão de poros (geomechanics:GM004)."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: amostragem de fluidos e medição de pressões em reservatórios (RFT/MDT/DST). DST normado por PE-2E&P-00773. Calibra modelos de pressão de poros (geomechanics:GM004)."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:geostopping a owl:Class ;
     skos:prefLabel "Geostopping"@pt ;
     skos:prefLabel "Geostopping"@en ;
     geo:entityType "analytical" ;
-    skos:definition """Linha de serviço de Operações Geológicas: monitoramento em tempo real para parada precisa em alvos geológicos, especialmente no pré-sal. Decisões baseadas em curvas LWD, indícios de gás, MSE e mudanças de fácies. Normado por PE-2EXP-00061."""@pt .
+    skos:definition """Linha de serviço de Operações Geológicas: monitoramento em tempo real para parada precisa em alvos geológicos, especialmente no pré-sal. Decisões baseadas em curvas LWD, indícios de gás, MSE e mudanças de fácies. Normado por PE-2EXP-00061."""@pt ;
+    geo:geocoverage "layer1b" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
 
 geo:ogeomec a owl:Class ;
     skos:prefLabel "Ocorrências Geomecânicas"@pt ;
