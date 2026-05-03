@@ -3648,23 +3648,36 @@ function buildLithologyRagChunks() {
 
   const chunks = [];
   for (const concept of lithData.concepts || []) {
-    const def = concept.definition_en
+    const rawDef = concept.definition_en
       ? concept.definition_en.length > 500
         ? concept.definition_en.slice(0, 497) + "..."
         : concept.definition_en
       : null;
+    /* Fall back to label when no formal definition is available (412/437 QAPF concepts) */
+    const defText = rawDef || `Conceito litológico CGI: ${concept.label_pt || concept.label_en}.`;
     const osduMapping = osduLookup.get(concept.id) || null;
+    const parents = concept.parents || [];
+    const parentStr = parents.length ? ` Hierarquia: ${parents.join(" > ")}.` : "";
+    const osduStr = osduMapping
+      ? ` OSDU LithologyType: ${osduMapping.value} (${osduMapping.match_kind || "match"}).`
+      : "";
+    const text =
+      `${concept.label_en} (${concept.label_pt || concept.label_en}): ${defText}${parentStr}${osduStr} URI: ${concept.uri || ""}.`.trim();
     chunks.push({
       id: `cgi-lith-${concept.id}`,
       type: "lithology",
-      layer: "layer1b",
-      label_pt: concept.label_pt || null,
-      label_en: concept.label_en || null,
-      definition: def,
-      parents: concept.parents || [],
-      osdu_mapping: osduMapping,
-      uri: concept.uri || null,
-      source: "CGI_SimpleLithology_2021",
+      text,
+      metadata: {
+        id: concept.id,
+        label_pt: concept.label_pt || null,
+        label_en: concept.label_en || null,
+        definition: rawDef,
+        parents,
+        osdu_mapping: osduMapping,
+        uri: concept.uri || null,
+        layer: "layer1b",
+        source: "CGI_SimpleLithology_2021",
+      },
     });
   }
   console.log(`  ✓ CGI lithology chunks: ${chunks.length}`);
@@ -3690,20 +3703,32 @@ function buildGeologicTimeRagChunks() {
     return [];
   }
   const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
-  return (data.units || []).map((unit) => ({
-    id: `cgi-time-${unit.id}`,
-    type: "geologic_time",
-    layer: "layer3",
-    label_pt: unit.label_pt || null,
-    label_en: unit.label_en || null,
-    rank: unit.rank || null,
-    start_ma: unit.start_ma ?? null,
-    end_ma: unit.end_ma ?? null,
-    parent: unit.parent || null,
-    brazil_notes: unit.brazil_notes || null,
-    uri: unit.uri || null,
-    source: "ICS_2023",
-  }));
+  return (data.units || []).map((unit) => {
+    const maStr =
+      unit.start_ma != null && unit.end_ma != null ? ` ${unit.start_ma}–${unit.end_ma} Ma.` : "";
+    const brazilStr = unit.brazil_notes ? ` Brasil: ${unit.brazil_notes}.` : "";
+    const parentStr = unit.parent ? ` Pertence a: ${unit.parent}.` : "";
+    const text =
+      `${unit.label_en} (${unit.label_pt || unit.label_en}): Unidade cronoestratigráfica ${unit.rank || "geológica"}.${maStr}${brazilStr}${parentStr} URI: ${unit.uri || ""}.`.trim();
+    return {
+      id: `cgi-time-${unit.id}`,
+      type: "geologic_time",
+      text,
+      metadata: {
+        id: unit.id,
+        label_pt: unit.label_pt || null,
+        label_en: unit.label_en || null,
+        rank: unit.rank || null,
+        start_ma: unit.start_ma ?? null,
+        end_ma: unit.end_ma ?? null,
+        parent: unit.parent || null,
+        brazil_notes: unit.brazil_notes || null,
+        uri: unit.uri || null,
+        layer: "layer3",
+        source: "ICS_2023",
+      },
+    };
+  });
 }
 
 /**
@@ -3723,19 +3748,36 @@ function buildCgiVocabChunks(filename, chunkType) {
   }
   const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
   const items = data.concepts || data.units || [];
-  return items.map((item) => ({
-    id: `${chunkType}-${item.id}`,
-    type: chunkType,
-    layer: "layer1b",
-    label_pt: item.label_pt || null,
-    label_en: item.label_en || null,
-    definition: item.definition ? item.definition.slice(0, 500) : null,
-    broader: item.broader || null,
-    parents: item.parents || [],
-    related_entity: item.related_entity || null,
-    uri: item.uri || null,
-    source: (data.meta && data.meta.source) || "CGI",
-  }));
+  const source = (data.meta && data.meta.source) || "CGI";
+  return items.map((item) => {
+    const rawDef = item.definition ? item.definition.slice(0, 500) : null;
+    /* Fallback: synthesise a minimal description when no definition is present */
+    const defText = rawDef || `Conceito ${chunkType.replace(/_/g, " ")} CGI: ${item.label_pt || item.label_en}.`;
+    const broaderStr = item.broader ? ` Broader: ${item.broader}.` : "";
+    const relStr = item.related_entity ? ` Entidade relacionada: ${item.related_entity}.` : "";
+    const parentsStr = (item.parents || []).length
+      ? ` Hierarquia: ${item.parents.join(" > ")}.`
+      : "";
+    const text =
+      `${item.label_en} (${item.label_pt || item.label_en}): ${defText}${broaderStr}${parentsStr}${relStr} URI: ${item.uri || ""}.`.trim();
+    return {
+      id: `${chunkType}-${item.id}`,
+      type: chunkType,
+      text,
+      metadata: {
+        id: item.id,
+        label_pt: item.label_pt || null,
+        label_en: item.label_en || null,
+        definition: rawDef,
+        broader: item.broader || null,
+        parents: item.parents || [],
+        related_entity: item.related_entity || null,
+        uri: item.uri || null,
+        layer: "layer1b",
+        source,
+      },
+    };
+  });
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -4110,6 +4152,14 @@ console.log(
     }
     const standard = cw.meta && cw.meta.standard ? cw.meta.standard : "Energistics";
     for (const cls of cw.classes || []) {
+      /* Skip malformed entries where class name or RDF class resolved to "undefined" */
+      if (
+        !cls.witsml_class ||
+        cls.witsml_class === "undefined" ||
+        !cls.rdf_class ||
+        cls.rdf_class === "undefined"
+      )
+        continue;
       const primitiveNames = (cls.primitive_properties || [])
         .map((p) => `${p.name} (${p.type}${p.unit ? ", " + p.unit : ""})`)
         .join(", ");
