@@ -440,6 +440,76 @@ Also accepts OSDU kinds as input:
 // finds the entity that has this osdu_kind and returns all its cross-layer URIs
 ```
 
+### 10. `lookup_lithology`
+
+Search the 437-concept CGI Simple Lithology vocabulary (Layer 1b — GeoSciML/IUGS).
+
+**Input:**
+
+```json
+{ "query": "sandstone", "lang": "en", "parent": "clastic_sedimentary_rock", "max_results": 5 }
+```
+
+- `query` — search term (matches `label_en`, `label_pt`, or concept `id`)
+- `lang` — `"en"` (default) or `"pt"`
+- `parent` — optional CGI parent ID to restrict search within a subtree
+- `max_results` — defaults to 10
+
+**Response shape:**
+
+```json
+{
+  "query": "sandstone",
+  "count": 2,
+  "results": [
+    {
+      "id": "sandstone",
+      "label_en": "sandstone",
+      "label_pt": "arenito",
+      "definition": "Clastic sedimentary rock...",
+      "parents": ["clastic_sedimentary_rock"],
+      "uri": "http://resource.geosciml.org/classifier/cgi/lithology/sandstone"
+    }
+  ]
+}
+```
+
+---
+
+### 11. `lookup_geologic_time`
+
+Search the 52-unit ICS 2023 geologic time scale (Layer 1b — CGI/GeoSciML).
+
+**Input:**
+
+```json
+{ "query": "Cretaceous", "rank": "Period" }
+```
+
+- `query` — search term (matches unit name or abbreviation)
+- `rank` — optional filter: `"Eon"`, `"Era"`, `"Period"`, `"Epoch"`, `"Age"`
+
+**Response shape:**
+
+```json
+{
+  "query": "Cretaceous",
+  "count": 1,
+  "results": [
+    {
+      "id": "Cretaceous",
+      "label": "Cretaceous",
+      "rank": "Period",
+      "start_ma": 145.0,
+      "end_ma": 66.0,
+      "duration_ma": 79.0,
+      "uri": "http://resource.geosciml.org/classifier/ics/ischart/Cretaceous",
+      "brazil_notes": "Período com maior geração de HC no pré-sal (Aptiano-Albiano)"
+    }
+  ]
+}
+```
+
 ---
 
 ## Development
