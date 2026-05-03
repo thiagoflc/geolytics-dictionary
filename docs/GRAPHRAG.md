@@ -73,11 +73,11 @@ Decompoe em:
 
 Converte sub-questoes em queries Cypher e as executa contra o Neo4j (quando `NEO4J_URI` esta configurado) ou faz lookup direto em `data/entity-graph.json`. Retorna `graph_results: list[dict]` no estado.
 
-Usa os few-shots de `ai/text2cypher-fewshot.jsonl` (45 exemplos) como contexto para a conversao Text2Cypher.
+Usa os few-shots de `ai/text2cypher-fewshot.jsonl` (80 exemplos) como contexto para a conversao Text2Cypher.
 
 ### RAGRetrieve (`nodes/rag_retrieve.py`)
 
-Recupera chunks relevantes de `ai/rag-corpus.jsonl` (1.245 entradas) usando BM25. Os resultados do grafo sao concatenados como contexto adicional. Quando `use_embeddings=True`, usa sentence-transformers para recuperacao densa.
+Recupera chunks relevantes de `ai/rag-corpus.jsonl` (2.683 entradas) usando BM25. Os resultados do grafo sao concatenados como contexto adicional. Quando `use_embeddings=True`, usa sentence-transformers para recuperacao densa.
 
 Escreve `retrieved_chunks: list[str]` no estado.
 

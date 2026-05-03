@@ -27,7 +27,7 @@ O dicionario Geolytics serializa seu grafo de entidades em `data/geolytics.ttl` 
 
 | Arquivo | Descricao |
 |---|---|
-| `data/geolytics-shapes.ttl` | 48 NodeShapes SHACL |
+| `data/geolytics-shapes.ttl` | 65 NodeShapes SHACL |
 | `data/geolytics-vocab.ttl` | Vocabulario OWL minimo de apoio (classes + propriedades) |
 | `scripts/validate-shacl.py` | Validador Python (pyshacl) — recomendado |
 | `scripts/validate-shacl.js` | Wrapper Node.js (rdf-validate-shacl ou delega ao Python) |

@@ -29,7 +29,7 @@ graph TD
     KG --> API["API REST estatica<br/>api/v1/"]
     KG --> RAG["RAG Corpus<br/>2.212 chunks"]
     KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
-    KG --> TTL["RDF / SHACL<br/>48 NodeShapes"]
+    KG --> TTL["RDF / SHACL<br/>65 NodeShapes"]
 
     API --> MCP["MCP Server<br/>9 ferramentas AI"]
     RAG --> AGENT["LangGraph Agent<br/>Router-Decomposer-GraphQuery-RAG-Validator-Synthesizer"]
@@ -45,34 +45,35 @@ A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente esta
 
 ## Estrutura do repositorio
 
-| Caminho | Conteudo |
-|---|---|
-| `data/glossary.json` | 23 termos ANP enriquecidos |
-| `data/entity-graph.json` | Grafo de 221 entidades + 370 relacoes |
-| `data/ontopetro.json` | Ontologia formal — 6 modulos |
-| `data/taxonomies.json` | 17 enumeracoes canonicas (litologia, SPE-PRMS, AVO... + 4 enums 3W) |
-| `data/full.json` | Merge de todos os modulos |
-| `data/geomechanics*.json` | Modulo MEM P2.7 + fraturas |
-| `data/seismic-*.json` | Modulo sismico P2.8 — aquisicao, processamento, inversao |
-| `data/sources/threew/` | Snapshot CC-BY 4.0 do dataset Petrobras 3W v2.0.0 (proveniencia) |
-| `data/witsml-rdf-crosswalk.json` | 30 classes WITSML 2.0 mapeadas para `geo:` |
-| `data/prodml-rdf-crosswalk.json` | 19 classes PRODML 2.x mapeadas para `geo:` |
-| `data/geolytics-shapes.ttl` | 48 NodeShapes SHACL |
-| `data/sweet-alignment.json` | 83 alinhamentos SKOS com SWEET (NASA/ESIPFed) |
-| `data/gso-*.json` | 213 classes GSO/Loop3D (Layer 7) |
-| `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas |
-| `data/systems.json` | 8 sistemas corporativos Petrobras |
-| `api/v1/` | Endpoints publicos (GitHub Pages) |
-| `ai/rag-corpus.jsonl` | 2.212 chunks para embedding |
-| `ai/system-prompt-ptbr.md` | System prompt PT-BR (~900 tokens) |
-| `ai/text2cypher-fewshot.jsonl` | 50 exemplos few-shot Text2Cypher |
-| `scripts/generate.js` | Pipeline ETL: regenera `data/`, `api/`, `ai/` |
-| `scripts/semantic-validator.js` | Validador semantico deterministico |
-| `mcp/geolytics-mcp/` | MCP Server TypeScript (9 ferramentas) |
-| `examples/langgraph-agent/` | Agente LangGraph multi-no |
-| `notebooks/` | 4 notebooks Jupyter didaticos |
-| `python/` | Pacote Python `geobrain` |
-| `docs/` | Documentacao completa — ver [docs/INDEX.md](docs/INDEX.md) |
+| Caminho                                 | Conteudo                                                          |
+| --------------------------------------- | ----------------------------------------------------------------- |
+| `data/glossary.json`                    | 23 termos ANP enriquecidos                                        |
+| `data/entity-graph.json`               | Grafo de 170 entidades + 80 relacoes                              |
+| `data/ontopetro.json`                   | Ontologia formal — 6 modulos                                      |
+| `data/taxonomies.json`                  | 13 enumeracoes canonicas (litologia, SPE-PRMS, AVO...)            |
+| `data/full.json`                        | Merge de todos os modulos                                         |
+| `data/geomechanics*.json`               | Modulo MEM P2.7 + fraturas                                        |
+| `data/seismic-*.json`                   | Modulo sismico P2.8 — aquisicao, processamento, inversao          |
+| `data/cgi-lithology.json`               | 437 conceitos CGI Simple Lithology (GeoSciML OWL, Layer 1b)       |
+| `data/cgi-osdu-lithology-map.json`      | Crosswalk bilateral CGI ↔ OSDU LithologyType (152 mapeamentos)    |
+| `data/witsml-rdf-crosswalk.json`        | 25 classes WITSML 2.0 mapeadas para `geo:`                        |
+| `data/prodml-rdf-crosswalk.json`        | 15 classes PRODML 2.x mapeadas para `geo:`                        |
+| `data/geolytics-shapes.ttl`             | 65 NodeShapes SHACL                                               |
+| `data/sweet-alignment.json`             | 66 alinhamentos SKOS com SWEET (NASA/ESIPFed)                     |
+| `data/gso-*.json`                       | 213 classes GSO/Loop3D (Layer 7)                                  |
+| `data/acronyms.json`                    | 1.102 siglas O&G PT/EN categorizadas                              |
+| `data/systems.json`                     | 8 sistemas corporativos Petrobras                                 |
+| `api/v1/`                               | Endpoints publicos (GitHub Pages)                                 |
+| `ai/rag-corpus.jsonl`                   | 2.683 chunks para embedding                                       |
+| `ai/system-prompt-ptbr.md`              | System prompt PT-BR (~800 tokens)                                 |
+| `ai/text2cypher-fewshot.jsonl`          | 80 exemplos few-shot Text2Cypher                                  |
+| `scripts/generate.js`                   | Pipeline ETL: regenera `data/`, `api/`, `ai/`                     |
+| `scripts/semantic-validator.js`         | Validador semantico deterministico                                |
+| `mcp/geobrain-mcp/`                    | MCP Server TypeScript (11 ferramentas)                            |
+| `examples/langgraph-agent/`             | Agente LangGraph multi-no                                         |
+| `notebooks/`                            | 4 notebooks Jupyter didaticos                                     |
+| `python/`                               | Pacote Python `geobrain`                                          |
+| `docs/`                                 | Documentacao completa — ver [docs/INDEX.md](docs/INDEX.md)        |
 
 ---
 
@@ -122,10 +123,10 @@ O modelo de entidades completo esta em [docs/ENTITIES.md](docs/ENTITIES.md).
 ## MCP Server
 
 ```bash
-cd mcp/geolytics-mcp && npm install && npm run build
+cd mcp/geobrain-mcp && npm install && npm run build
 ```
 
-9 ferramentas AI: `lookup_term`, `expand_acronym`, `get_entity`, `get_entity_neighbors`, `validate_claim`, `cypher_query`, `search_rag`, `list_layers`, `crosswalk_lookup`. Ver `mcp/geolytics-mcp/README.md`.
+11 ferramentas AI: `lookup_term`, `expand_acronym`, `get_entity`, `get_entity_neighbors`, `validate_claim`, `cypher_query`, `search_rag`, `list_layers`, `crosswalk_lookup`, `lookup_lithology`, `lookup_geologic_time`. Ver `mcp/geobrain-mcp/README.md`.
 
 ---
 
@@ -143,7 +144,7 @@ python scripts/validate-shacl.py
 node --test tests/validator.test.js
 ```
 
-Ver [docs/SHACL.md](docs/SHACL.md) para as 30 NodeShapes e como adicionar novas.
+Ver [docs/SHACL.md](docs/SHACL.md) para as 65 NodeShapes e como adicionar novas.
 
 ---
 

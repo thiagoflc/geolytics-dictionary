@@ -6,10 +6,11 @@ Python SDK for the [Geolytics O&G Domain Dictionary](https://github.com/thiagofl
 
 - **Dictionary** — look up terms, acronyms, and ontology layers from the bundled dataset
 - **KnowledgeGraph** — NetworkX-backed graph with entity lookup, neighborhood traversal, and shortest-path queries
-- **Validator** — deterministic semantic validator with rule parity to `scripts/semantic-validator.js`; catches invalid SPE-PRMS categories, malformed ANP well codes, invalid regime contratual, and more
+- **Validator** — deterministic semantic validator; catches invalid SPE-PRMS categories, malformed ANP well codes, invalid regime contratual, and more
+- **LithologyDictionary** — 437-concept CGI Simple Lithology vocabulary (Layer 1b) with PT-BR labels and OSDU crosswalk
 - **SweetExpander** — SWEET ontology URI expansion for Geolytics terms
 - **CrosswalkIndex** — WITSML/ProdML RDF crosswalk lookup
-- **BM25Retriever** — BM25 full-text retrieval over the RAG corpus
+- **BM25Retriever** — BM25 full-text retrieval over the 2,683-chunk RAG corpus
 - **CLI** — `geolytics-validate` command for pipeline integration
 
 ## Installation
@@ -100,6 +101,34 @@ print(report.valid)  # True
 # Valid case
 report = v.validate("Reservas 2P certificadas do Campo de Santos")
 print(report.valid)  # True
+```
+
+### Lithology Dictionary
+
+Access the 437-concept **CGI Simple Lithology** vocabulary (Layer 1b — GeoSciML) with full PT-BR labels and OSDU LithologyType mappings.
+
+```python
+from geobrain import LithologyDictionary
+
+ld = LithologyDictionary()
+
+# Search by English or Portuguese label (case-insensitive)
+ld.lookup("limestone")          # → [LithologyConcept(id='limestone', label_en='limestone', label_pt='calcário', ...)]
+ld.lookup("arenito")            # → Portuguese label search
+
+# Get a concept by its CGI ID
+ld.by_id("sandstone")           # → LithologyConcept(...)
+
+# Hierarchy traversal
+ld.roots()                      # → 236 root concepts
+ld.children("sedimentary_material")  # → direct children
+
+# OSDU LithologyType crosswalk (152 mappings)
+ld.osdu_mapping("limestone")    # → LithologyMapping(cgi_id='limestone', osdu_value='Limestone', match_kind='exactMatch')
+
+# Iterate all 437 concepts
+for c in ld.all_concepts():
+    print(c.id, c.label_en, c.label_pt)
 ```
 
 ### SWEET Expander
