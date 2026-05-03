@@ -1,13 +1,13 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "generated": "2026-05-01T00:00:00.000Z",
     "description": "SWEET (Semantic Web for Earth and Environmental Terminology) URI cross-walks for Geolytics terms. Alignments enable agents to expand semantic search via genuine ontological synonymy.",
     "sweet_base": "http://sweetontology.net/",
     "sweet_repo": "https://github.com/ESIPFed/sweet",
     "skos_prefix": "http://www.w3.org/2004/02/skos/core#",
     "verification_note": "URIs follow official ESIPFed SWEET v3.6 module and class naming conventions. Alignments marked 'to-be-verified' require human review against the live Turtle files.",
-    "total_alignments": 66
+    "total_alignments": 83
   },
   "alignments": [
     {
@@ -696,6 +696,146 @@
       "alignment_type": "skos:broadMatch",
       "sweet_module": "realmGeol",
       "rationale_pt": "Feição Mapeada é uma representação espacial de GeologicFeature (SWEET). broadMatch pois SWEET define a entidade conceitual, não a representação cartográfica."
+    },
+    {
+      "geolytics_id": "sensor_p_pdg",
+      "sweet_uris": [
+        "http://sweetontology.net/propPressure/Pressure"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propPressure",
+      "rationale_pt": "P-PDG mede pressão de fluido downhole, mapeando diretamente para propPressure/Pressure.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_p_tpt",
+      "sweet_uris": [
+        "http://sweetontology.net/propPressure/Pressure"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propPressure",
+      "rationale_pt": "P-TPT mede pressão na ANM.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_p_anular",
+      "sweet_uris": [
+        "http://sweetontology.net/propPressure/Pressure"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propPressure",
+      "rationale_pt": "P-ANULAR mede pressão no espaço anular do poço.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_p_mon_ckp",
+      "sweet_uris": [
+        "http://sweetontology.net/propPressure/Pressure"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propPressure",
+      "rationale_pt": "P-MON-CKP mede pressão a montante do choke.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_p_jus_ckp",
+      "sweet_uris": [
+        "http://sweetontology.net/propPressure/Pressure"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propPressure",
+      "rationale_pt": "P-JUS-CKP mede pressão a jusante do choke.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_t_pdg",
+      "sweet_uris": [
+        "http://sweetontology.net/propTemperature/Temperature"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propTemperature",
+      "rationale_pt": "T-PDG mede temperatura downhole.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_t_tpt",
+      "sweet_uris": [
+        "http://sweetontology.net/propTemperature/Temperature"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propTemperature",
+      "rationale_pt": "T-TPT mede temperatura na ANM.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_t_mon_ckp",
+      "sweet_uris": [
+        "http://sweetontology.net/propTemperature/Temperature"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propTemperature",
+      "rationale_pt": "T-MON-CKP mede temperatura a montante do choke.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_qgl",
+      "sweet_uris": [
+        "http://sweetontology.net/propFluid/FlowRate"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propFluid",
+      "rationale_pt": "QGL mede vazão volumétrica de gas-lift.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "sensor_qbs",
+      "sweet_uris": [
+        "http://sweetontology.net/propFluid/FlowRate"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "propFluid",
+      "rationale_pt": "QBS mede vazão da bomba de serviço.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "event_severe_slugging",
+      "sweet_uris": [
+        "http://sweetontology.net/phenFluidDynamics/FlowInstability"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "phenFluidDynamics",
+      "rationale_pt": "Golfadas severas são instabilidade de fluxo bifásico em riser.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "event_flow_instability",
+      "sweet_uris": [
+        "http://sweetontology.net/phenFluidDynamics/FlowInstability"
+      ],
+      "alignment_type": "skos:relatedMatch",
+      "sweet_module": "phenFluidDynamics",
+      "rationale_pt": "Instabilidade de fluxo multifásico no poço.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "event_hydrate_production",
+      "sweet_uris": [
+        "http://sweetontology.net/phenFluidInstability/HydrateFormation"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "phenFluidInstability",
+      "rationale_pt": "Formação de hidrato de gás na linha de produção subsea.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "geolytics_id": "event_hydrate_service",
+      "sweet_uris": [
+        "http://sweetontology.net/phenFluidInstability/HydrateFormation"
+      ],
+      "alignment_type": "skos:closeMatch",
+      "sweet_module": "phenFluidInstability",
+      "rationale_pt": "Formação de hidrato de gás na linha de serviço subsea.",
+      "legal_source": "Petrobras 3W v2.0.0"
     }
   ]
 }

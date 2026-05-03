@@ -3,7 +3,6 @@
 import pytest
 from geobrain.rag import RAGDocument, SearchResult, _norm, _tokenize
 
-
 # ---------------------------------------------------------------------------
 # _norm and _tokenize helpers
 # ---------------------------------------------------------------------------

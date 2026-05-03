@@ -1,24 +1,24 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "generated": "2026-04-30T12:31:32.773Z",
     "source": "Siglário comunitário O&G (PT/EN) — comunidade técnica brasileira",
-    "total": 1102,
+    "total": 1117,
     "by_category": {
       "standard_body": 51,
-      "measurement": 122,
+      "measurement": 124,
       "general": 294,
-      "process": 74,
+      "process": 79,
       "fluid": 113,
       "contract": 47,
-      "equipment": 180,
+      "equipment": 181,
       "environmental": 53,
-      "it_generic": 23,
+      "it_generic": 25,
       "regulator": 14,
       "lithology": 39,
       "unit": 40,
       "geophysics": 33,
-      "organization": 5,
+      "organization": 10,
       "well_state": 14
     },
     "parse_failures": 0
@@ -670,7 +670,8 @@
       "expansion_pt": "Boletim Diário de Perfuração",
       "expansion_en": "Daily Drilling Report",
       "category": "process",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
     },
     {
       "id": "bdv",
@@ -734,7 +735,8 @@
       "expansion_pt": "Composição de Fundo de Poço",
       "expansion_en": "Bottom-Hole Assembly",
       "category": "equipment",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas / perfuracao"
     },
     {
       "id": "bhc",
@@ -2358,7 +2360,8 @@
       "expansion_pt": "Teste de Formação",
       "expansion_en": "Drill Stem Test",
       "category": "equipment",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas / perfuracao"
     },
     {
       "id": "dsv",
@@ -2462,7 +2465,8 @@
       "expansion_pt": "Densidade Equivalente de Circulação",
       "expansion_en": "Equivalent Circulating Density",
       "category": "process",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "geomecanica / perfuracao"
     },
     {
       "id": "ecos",
@@ -4622,7 +4626,8 @@
       "expansion_pt": "Perfilagem Durante a Perfuração",
       "expansion_en": "Logging While Drilling",
       "category": "equipment",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas / perfuracao"
     },
     {
       "id": "lwi",
@@ -5206,7 +5211,8 @@
       "expansion_pt": "Medição Durante a Perfuração",
       "expansion_en": "Measure While Drilling",
       "category": "equipment",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas / perfuracao"
     },
     {
       "id": "nb",
@@ -6566,7 +6572,8 @@
       "expansion_pt": "Teste de Formação Repetido",
       "expansion_en": "Repeat Formation Test",
       "category": "process",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas / petrofisica"
     },
     {
       "id": "rg",
@@ -6686,7 +6693,9 @@
       "expansion_pt": "Velocidade de Penetração",
       "expansion_en": "Rate of Penetration",
       "category": "general",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas",
+      "disambiguation": "ROP can mean: (1) Rate of Penetration / Velocidade de Penetração (general drilling KPI — current expansion), or (2) Relatório de Operações de Perfilagem / Logging Operations Report (Petrobras Geological Operations document, CSV via EXATA API, manager EXP/OGP/TOGPR — see operacoes-geologicas.json#ROP_Logging)."
     },
     {
       "id": "ros",
@@ -7630,7 +7639,8 @@
       "expansion_pt": "Testemunho Lateral",
       "expansion_en": "Sidewall Core",
       "category": "lithology",
-      "it_generic": false
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
     },
     {
       "id": "t_srb",
@@ -8839,6 +8849,141 @@
       "expansion_en": "Coastal Ecological-Economic Zoning",
       "category": "environmental",
       "it_generic": false
+    },
+    {
+      "id": "igp",
+      "sigla": "IGP",
+      "expansion_pt": "Informativo Geológico de Poço",
+      "expansion_en": "Well Geological Report",
+      "category": "process",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "rmg",
+      "sigla": "RMG",
+      "expansion_pt": "Relatório de Monitoramento Geomecânico",
+      "expansion_en": "Geomechanical Monitoring Report",
+      "category": "process",
+      "it_generic": false,
+      "domain": "operacoes_geologicas / geomecanica"
+    },
+    {
+      "id": "ogeomec",
+      "sigla": "OGEOMEC",
+      "expansion_pt": "Ocorrências Geomecânicas",
+      "expansion_en": "Geomechanical Occurrences",
+      "category": "process",
+      "it_generic": false,
+      "domain": "geomecanica"
+    },
+    {
+      "id": "qpg",
+      "sigla": "QPG",
+      "expansion_pt": "Quadro de Previsão Geológica",
+      "expansion_en": "Geological Prognosis Chart",
+      "category": "process",
+      "it_generic": false,
+      "domain": "operacoes_geologicas / planejamento"
+    },
+    {
+      "id": "rcsd",
+      "sigla": "RCSD",
+      "expansion_pt": "Relatório do CSD de Operações",
+      "expansion_en": "CSD Operations Report",
+      "category": "process",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "cgor",
+      "sigla": "CGOR",
+      "expansion_pt": "Centro Geológico de Operação Remota",
+      "expansion_en": "Remote Geological Operations Center",
+      "category": "organization",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "csd",
+      "sigla": "CSD",
+      "expansion_pt": "Centro de Suporte à Decisão de Operações",
+      "expansion_en": "Operations Decision Support Center",
+      "category": "organization",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "aqg",
+      "sigla": "AQG",
+      "expansion_pt": "Aquisição Geológica (gerência EXP/OGP/AQG)",
+      "expansion_en": "Geological Acquisition (EXP/OGP/AQG management)",
+      "category": "organization",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "togpr",
+      "sigla": "TOGPR",
+      "expansion_pt": "Tecnologia de OGP (gerência EXP/OGP/TOGPR)",
+      "expansion_en": "OGP Technology (EXP/OGP/TOGPR management)",
+      "category": "organization",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "aip-ogeo",
+      "sigla": "AIP-OGEO",
+      "expansion_pt": "Acrônimo organizacional (gerência AIP-OGEO em EXP/OGP/AQG)",
+      "expansion_en": "Organizational acronym (AIP-OGEO management within EXP/OGP/AQG)",
+      "category": "organization",
+      "it_generic": false,
+      "domain": "operacoes_geologicas"
+    },
+    {
+      "id": "frx",
+      "sigla": "FRX",
+      "expansion_pt": "Fluorescência de Raios X",
+      "expansion_en": "X-Ray Fluorescence",
+      "category": "measurement",
+      "it_generic": false,
+      "domain": "operacoes_geologicas / geoquimica"
+    },
+    {
+      "id": "drx",
+      "sigla": "DRX",
+      "expansion_pt": "Difração de Raios X",
+      "expansion_en": "X-Ray Diffraction",
+      "category": "measurement",
+      "it_generic": false,
+      "domain": "operacoes_geologicas / geoquimica"
+    },
+    {
+      "id": "mdt",
+      "sigla": "MDT",
+      "expansion_pt": "Modular Formation Dynamics Tester",
+      "expansion_en": "Modular Formation Dynamics Tester",
+      "category": "equipment",
+      "it_generic": false,
+      "domain": "operacoes_geologicas / petrofisica"
+    },
+    {
+      "id": "bdiep",
+      "sigla": "BDIEP",
+      "expansion_pt": "Base de Dados Integrada de E&P",
+      "expansion_en": "Integrated E&P Database",
+      "category": "it_generic",
+      "it_generic": true,
+      "domain": "sistemas"
+    },
+    {
+      "id": "bdiap",
+      "sigla": "BDIAP",
+      "expansion_pt": "Base de Dados Integrada de A&P",
+      "expansion_en": "Integrated A&P Database",
+      "category": "it_generic",
+      "it_generic": true,
+      "domain": "sistemas"
     }
   ]
 }

@@ -6,13 +6,15 @@ Verifies that each new 3W NodeShape accepts valid data and rejects
 deliberate violations.
 """
 from __future__ import annotations
+
 import unittest
 from pathlib import Path
 
 try:
     import pyshacl
-    from rdflib import Graph, Literal, URIRef, Namespace, BNode
-    from rdflib.namespace import RDF, XSD
+    from rdflib import Graph, Namespace
+    from rdflib.namespace import RDF
+
     PYSHACL_AVAILABLE = True
 except ImportError:
     PYSHACL_AVAILABLE = False
@@ -42,6 +44,7 @@ def _validate_ttl(ttl_str: str):
         allow_warnings=True,
     )
     from rdflib.namespace import SH
+
     violations = list(results_g.subjects(RDF.type, SH.ValidationResult))
     return conforms, violations
 
@@ -73,11 +76,11 @@ geo:event_bad_transient a geo:OperationalEvent ;
         self.assertTrue(conforms, f"Expected conformance; violations: {violations}")
 
     def test_invalid_label_fires(self):
-        conforms, violations = _validate_ttl(self.INVALID_LABEL_TTL)
+        conforms, _violations = _validate_ttl(self.INVALID_LABEL_TTL)
         self.assertFalse(conforms, "Expected violation for label=99")
 
     def test_transient_forbidden_for_steady_fires(self):
-        conforms, violations = _validate_ttl(self.INVALID_TRANSIENT_TTL)
+        conforms, _violations = _validate_ttl(self.INVALID_TRANSIENT_TTL)
         self.assertFalse(conforms, "Expected violation for label=103 (class 3 is steady-only)")
 
 
@@ -110,11 +113,11 @@ geo:sensor_bad2 a geo:Sensor3W ;
         self.assertTrue(conforms, f"Expected conformance; violations: {violations}")
 
     def test_missing_unit_fires(self):
-        conforms, violations = _validate_ttl(self.MISSING_UNIT_TTL)
+        conforms, _violations = _validate_ttl(self.MISSING_UNIT_TTL)
         self.assertFalse(conforms, "Expected violation for missing threewUnit")
 
     def test_invalid_kind_fires(self):
-        conforms, violations = _validate_ttl(self.INVALID_KIND_TTL)
+        conforms, _violations = _validate_ttl(self.INVALID_KIND_TTL)
         self.assertFalse(conforms, "Expected violation for threewQuantityKind='Energy'")
 
 
@@ -149,7 +152,7 @@ geo:obs_dhsv_bad a geo:ValveStateObservation ;
         self.assertTrue(conforms, f"Expected conformance for value=0.5; violations: {violations}")
 
     def test_invalid_value_fires(self):
-        conforms, violations = _validate_ttl(self.INVALID_VALUE_TTL)
+        conforms, _violations = _validate_ttl(self.INVALID_VALUE_TTL)
         self.assertFalse(conforms, "Expected violation for value=0.3")
 
 

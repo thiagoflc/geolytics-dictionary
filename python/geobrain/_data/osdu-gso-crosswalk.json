@@ -139,5 +139,96 @@
     "gso_only_concepts": 8,
     "total": 14,
     "interpretation": "OSDU e GSO se complementam — OSDU tem cobertura operacional E&P (Well, Wellbore, Reservoir) que GSO não cobre; GSO tem cobertura estrutural detalhada (faults, folds, foliation, contacts) que OSDU trata superficialmente. Importação L7 GSO preenche gaps estruturais sem conflitar com L4 OSDU."
+  },
+  "glosis_reuse": {
+    "added_at": "2026-05-01T11:35:08.815Z",
+    "source": "http://w3id.org/glosis/model/ — v1.5.1",
+    "license_note": "GLOSIS é CC BY-NC-SA 3.0 IGO (uso não comercial). Atribuição obrigatória: SIEUSOIL, ISRIC, Palma R., Janiak B., Reznik T., Schleidt K. (2020).",
+    "reusable_components": {
+      "iso28258_backbone": {
+        "iri": "http://w3id.org/glosis/model/iso28258/2013/",
+        "description": "Hierarquia Site→Plot→Profile→ProfileElement(Layer|Horizon)→Surface com 16 object properties (samplingPlot, plotInSite, profile, element, elementOfProfile, upperDepth, lowerDepth, order, developedHorizon, horizonInLayer…). Reuso direto como template para Bloco→Locação→Poço→Intervalo→Camada."
+      },
+      "skos_codelists": {
+        "iri_base": "http://w3id.org/glosis/model/codelists/",
+        "total_schemes": 95,
+        "reused_in_geolytics": [
+          {
+            "scheme": "lithologyValueCode",
+            "size": 88,
+            "target": "data/glosis/lithology.json + lithology-crosswalk-cgi.json"
+          },
+          {
+            "scheme": "cementationDegreeValueCode",
+            "size": 6,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "cementationNatureValueCode",
+            "size": 13,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "cementationFabricValueCode",
+            "size": 4,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "weatheringValueCode",
+            "size": 3,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "porosityClassValueCode",
+            "size": 5,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "structureGradeValueCode",
+            "size": 5,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "rockSizeValueCode",
+            "size": 18,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "rockShapeValueCode",
+            "size": 4,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "plasticityValueCode",
+            "size": 6,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "stickinessValueCode",
+            "size": 6,
+            "target": "data/glosis/petrography-codelists.json"
+          },
+          {
+            "scheme": "majorLandFormValueCode",
+            "size": 16,
+            "target": "data/glosis/petrography-codelists.json"
+          }
+        ]
+      },
+      "sosa_property_value_pattern": {
+        "description": "GLOSIS pareia toda propriedade física com uma classe *Property (sosa:ObservableProperty) e uma classe *Value (qudt:Quantity com qudt:numericValue + qudt:unit). Aplicado em data/pvt-dictionary.json (campos QUDT) e data/modules-extended.json (M7/M8/M9/M10).",
+        "reference_class_in_glosis": "glosis_lh:BulkDensityFineEarth + glosis_lh:BulkDensityFineEarthValue"
+      },
+      "sosa_procedure_codelists": {
+        "iri_base": "http://w3id.org/glosis/model/procedure/",
+        "total_schemes": 27,
+        "pattern": "Cada procedure é simultaneamente skos:Concept ∧ sosa:Procedure. Replicar para procedimentos PVT (flashLiberationProcedure, differentialLiberationProcedure, swellingTestProcedure, constantCompositionExpansionProcedure, …)."
+      },
+      "qudt_unit_extension": {
+        "iri": "http://w3id.org/glosis/model/unit/",
+        "license": "CC BY 4.0",
+        "description": "Módulo separado para unidades ausentes em QUDT (ex.: cmol/L, g/100g, m3/100m3). Padrão a ser replicado para unidades petroleiras: bbl/d, Mcf/d, RB/STB, scf/STB."
+      }
+    }
   }
 }

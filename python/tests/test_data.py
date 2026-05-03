@@ -6,7 +6,6 @@ from pathlib import Path
 import pytest
 from geobrain.data import data_dir, load_json, load_jsonl
 
-
 # ---------------------------------------------------------------------------
 # data_dir()
 # ---------------------------------------------------------------------------

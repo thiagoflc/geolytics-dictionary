@@ -1,6 +1,6 @@
 """Tests for python/geobrain/crosswalk.py."""
 import pytest
-from geobrain.crosswalk import CrosswalkIndex, CrosswalkEntry
+from geobrain.crosswalk import CrosswalkEntry, CrosswalkIndex
 
 
 @pytest.fixture(scope="module")

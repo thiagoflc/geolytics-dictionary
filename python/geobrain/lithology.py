@@ -53,10 +53,7 @@ class LithologyDictionary:
     def _concepts(self) -> list[LithologyConcept]:
         raw = load_json("cgi-lithology.json")
         # cgi-lithology.json may be a dict with a 'concepts' key or a plain array
-        if isinstance(raw, dict):
-            items_raw = raw.get("concepts", [])
-        else:
-            items_raw = raw
+        items_raw = raw.get("concepts", []) if isinstance(raw, dict) else raw
         items = [x for x in items_raw if isinstance(x, dict) and "id" in x and isinstance(x.get("id"), str)]
         return [
             LithologyConcept(
@@ -75,10 +72,7 @@ class LithologyDictionary:
     def _osdu_map(self) -> dict[str, LithologyMapping]:
         raw = load_json("cgi-osdu-lithology-map.json")
         # file may be a dict with a 'mappings' key or a plain array
-        if isinstance(raw, dict):
-            entries = raw.get("mappings", [])
-        else:
-            entries = raw
+        entries = raw.get("mappings", []) if isinstance(raw, dict) else raw
         result = {}
         for entry in entries:
             if isinstance(entry, dict) and "cgi_id" in entry:
