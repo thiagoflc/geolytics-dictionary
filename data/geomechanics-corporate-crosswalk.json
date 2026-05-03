@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "id": "geomechanics-corporate-crosswalk",
     "label": "Crosswalk L2 ↔ L6 — Geomechanics Academic ↔ Petrobras Corporate",
     "label_pt": "Crosswalk L2 ↔ L6 — Geomecânica Acadêmica ↔ Corporativa Petrobras",
@@ -18,11 +18,11 @@
       "noMatch": "Conceito existe apenas em uma camada (corporativo-puro: ferramentas, sistemas, KPIs, documentos; ou acadêmico-puro: classes formais sem operacionalização documentada)."
     },
     "summary": {
-      "total_l6_entities": 47,
-      "exactMatch": 8,
-      "closeMatch": 4,
-      "relatedMatch": 12,
-      "noMatch": 23,
+      "total_l6_entities": 71,
+      "exactMatch": 9,
+      "closeMatch": 5,
+      "relatedMatch": 15,
+      "noMatch": 41,
       "l2_classes_total": 26,
       "l2_classes_with_l6_counterpart": 11,
       "l2_classes_unmapped": 15,
@@ -35,13 +35,24 @@
         "deprecated_audit_only": 1,
         "formula_or_variable_not_modelled_in_l2": 4,
         "operational_concept_no_l2_class": 1
-      }
+      },
+      "narrowMatch": 1,
+      "broadMatch": 0
     },
     "next_steps": [
       "Adicionar GP* property-level matches como atributo bidirecional (e.g. GEOMEC001 hasProperty GP004 porePressureGradient)",
       "Quando módulo Geologia de Locação Exploratória existir, mover crosswalk de GEOMEC026A para lá",
       "Considerar enriquecer L2 com classes para Subsidence, FaultReactivation, BoreholeBreakout — atualmente discutidas em docs/GEOMECHANICS.md mas sem classe formal"
-    ]
+    ],
+    "changelog": {
+      "v1.1.0": [
+        "Added 0 new mappings for GEOMEC023A/B/C + 068-087 + 079A (WSM 2025 merge alignment)",
+        "Most new entities are noMatch — L2 lacks formal classes for BoreholeBreakout/DITF/FocalMechanism/Overcoring/Bedding",
+        "GEOMEC081 ↔ GM002 PrincipalStress = exactMatch (rare clean alignment)",
+        "GEOMEC079A FaultType ↔ GM025 AndersonStressRegime = relatedMatch (Anderson dynamics correlation)",
+        "GEOMEC023C and GEOMEC070 link to FractureType class in geomechanics-fractures.json"
+      ]
+    }
   },
   "mappings": [
     {
@@ -428,6 +439,246 @@
       "academic_class": "affects_wellbore_stability",
       "match": "relatedMatch",
       "note": "Evento operacional consequente de instabilidade (GEOMEC015). L2 modela apenas a relação genérica GR004; L6 acrescenta evento monitorável (BDIEP/OpenWells/BDP)."
+    },
+    {
+      "corporate_id": "GEOMEC023A",
+      "corporate_label_pt": "Ovalização do Poço",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "corporate_processes_no_l2_class",
+      "note": "L2 não tem classe formal para BoreholeBreakout. Próximo: criar classe BoreholeBreakout em L2 e mapear como exactMatch (already in next_steps)."
+    },
+    {
+      "corporate_id": "GEOMEC023B",
+      "corporate_label_pt": "Fratura Induzida por Perfuração",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "corporate_processes_no_l2_class",
+      "note": "L2 não tem classe formal para DrillingInducedTensileFracture. Conceito relacionado em GFP* (geomechanics-fractures) só cobre fratura genérica."
+    },
+    {
+      "corporate_id": "GEOMEC023C",
+      "corporate_label_pt": "Fratura Natural em Perfil de Imagem",
+      "academic_id": "FractureType",
+      "academic_class": "FractureType",
+      "academic_property": "GFP001:fractureAperture, GFP003:fractureStrikeDeg, GFP004:fractureDipDeg",
+      "match": "narrowMatch",
+      "match_reason": "L6_more_specific",
+      "note": "L2 (geomechanics-fractures.json) tem FractureType genérico; L6 GEOMEC023C especializa para o caso 'observado em image log'."
+    },
+    {
+      "corporate_id": "GEOMEC068",
+      "corporate_label_pt": "Feição de Ovalização do Poço",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "corporate_observation_no_l2_class",
+      "note": "Feição BO observada — L2 não tem entidade-observação formal. WSM 2025 alinha como TYPE='BO'."
+    },
+    {
+      "corporate_id": "GEOMEC069",
+      "corporate_label_pt": "Feição de Fratura Induzida por Perfuração",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "corporate_observation_no_l2_class",
+      "note": "Feição DITF observada. WSM 2025 alinha como TYPE='DIF'."
+    },
+    {
+      "corporate_id": "GEOMEC070",
+      "corporate_label_pt": "Feição de Fratura Natural",
+      "academic_id": "FractureType",
+      "academic_class": "FractureType",
+      "academic_property": "GFP001/GFP002/GFP003/GFP004",
+      "match": "closeMatch",
+      "match_reason": "feature_observation_vs_class",
+      "note": "L2 FractureType é a classe abstrata; L6 GEOMEC070 é instância-observação em image log com FractureState e FaultType associados."
+    },
+    {
+      "corporate_id": "GEOMEC071",
+      "corporate_label_pt": "Feição de Acamamento",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": "GFP003 (Strike), GFP004 (Dip)",
+      "match": "relatedMatch",
+      "match_reason": "structural_feature_no_l2_class",
+      "note": "L2 não tem classe Bedding; reusa GFP003/GFP004 (strike/dip) por compatibilidade geométrica."
+    },
+    {
+      "corporate_id": "GEOMEC072",
+      "corporate_label_pt": "Interpretação de Perfil de Imagem",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "corporate_processes_no_l2_class",
+      "note": "Processo de workflow — L2 não modela processos."
+    },
+    {
+      "corporate_id": "GEOMEC073",
+      "corporate_label_pt": "BOL — Borehole Oriented Log",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "data_artifact_no_l2_class",
+      "note": "Data artifact (log curve) — fora do escopo conceitual L2."
+    },
+    {
+      "corporate_id": "GEOMEC074",
+      "corporate_label_pt": "Geolog",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "corporate_tools_systems",
+      "note": "Vendor tool externa (Paradigm/Emerson) — não tem contraparte acadêmica."
+    },
+    {
+      "corporate_id": "GEOMEC075",
+      "corporate_label_pt": "AZIE — Azimute da Excentricidade",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "operational_property_no_l2",
+      "note": "Propriedade operacional de breakout em image log. L2 não modela atributos de feição operacional."
+    },
+    {
+      "corporate_id": "GEOMEC076",
+      "corporate_label_pt": "HAZI — Azimute do Poço",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "wellbore_geometry_out_of_l2_scope",
+      "note": "Geometria do poço — fora do escopo L2 (geomecânica de tensão/falha)."
+    },
+    {
+      "corporate_id": "GEOMEC077",
+      "corporate_label_pt": "Abertura Angular do Breakout",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "operational_property_no_l2",
+      "note": "Propriedade da feição BO usada na retroanálise de SHmax (Santos et al. CT CMR 010/2015)."
+    },
+    {
+      "corporate_id": "GEOMEC078",
+      "corporate_label_pt": "POSTEF — Posição da Fratura Induzida",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "controlled_vocabulary_no_l2",
+      "note": "Vocabulário controlado de orientação relativa — não tem contraparte L2."
+    },
+    {
+      "corporate_id": "GEOMEC079",
+      "corporate_label_pt": "FractureState — Estado de Fratura",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "controlled_vocabulary_no_l2",
+      "note": "Estado hidráulico-mecânico/imagético — relacionado a GFP001 (aperture) sem ser exatamente equivalente."
+    },
+    {
+      "corporate_id": "GEOMEC079A",
+      "corporate_label_pt": "FaultType — Tipologia de Falha",
+      "academic_id": "GM025",
+      "academic_class": "AndersonStressRegime",
+      "academic_property": null,
+      "match": "relatedMatch",
+      "match_reason": "fault_type_correlates_with_stress_regime",
+      "note": "FaultType (Normal/Reverse/StrikeSlip) correlaciona-se com AndersonStressRegime (NF/TF/SS) via dinâmica andersoniana."
+    },
+    {
+      "corporate_id": "GEOMEC080",
+      "corporate_label_pt": "Sobrefuração com Alívio de Tensão",
+      "academic_id": "GM001",
+      "academic_class": "StressTensor",
+      "academic_property": null,
+      "match": "relatedMatch",
+      "match_reason": "measures_stress_tensor",
+      "note": "Overcoring mede o tensor de tensões — relação MEASURES, não equivalência."
+    },
+    {
+      "corporate_id": "GEOMEC081",
+      "corporate_label_pt": "Eixos Principais de Tensão",
+      "academic_id": "GM002",
+      "academic_class": "PrincipalStress",
+      "academic_property": null,
+      "match": "exactMatch",
+      "match_reason": "direct_concept_match",
+      "note": "PrincipalStress (L2) ↔ Eixos Principais de Tensão (L6) — conceitualmente idênticos. L6 acrescenta convenções WSM (P/B/T para FMS, S1/S2/S3 para FMF/OC)."
+    },
+    {
+      "corporate_id": "GEOMEC082",
+      "corporate_label_pt": "Mecanismo Focal de Terremoto",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "seismology_concept_out_of_l2",
+      "note": "Mecanismo focal — L2 atual cobre rock mechanics; sismologia tectônica pode justificar enriquecimento futuro."
+    },
+    {
+      "corporate_id": "GEOMEC083",
+      "corporate_label_pt": "Inversão Formal de Mecanismos Focais",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "seismology_concept_out_of_l2",
+      "note": "Método de inversão estatística — fora do escopo L2 atual."
+    },
+    {
+      "corporate_id": "GEOMEC084",
+      "corporate_label_pt": "Esquema de Qualidade WSM 2025",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "wsm_classifier_external",
+      "note": "Classificador WSM (A-E + X) — vocabulário externo (GFZ Potsdam), não pertence a L2 local."
+    },
+    {
+      "corporate_id": "GEOMEC085",
+      "corporate_label_pt": "Estatística Circular Bimodal",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "statistical_method_out_of_l2",
+      "note": "Método estatístico de Mardia & Jupp — fora do escopo conceitual L2."
+    },
+    {
+      "corporate_id": "GEOMEC086",
+      "corporate_label_pt": "Inversão de Slip de Falha Geológica",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "geologic_method_out_of_l2",
+      "note": "Inversão de slip em famílias de falhas — método paleotectônico, fora do escopo L2 atual."
+    },
+    {
+      "corporate_id": "GEOMEC087",
+      "corporate_label_pt": "Alinhamento de Vents Vulcânicos",
+      "academic_id": null,
+      "academic_class": null,
+      "academic_property": null,
+      "match": "noMatch",
+      "match_reason": "geologic_indicator_out_of_l2",
+      "note": "Indicador geológico (alinhamento de vents) — fora do escopo L2 (relevante para vulcanologia, não O&G típico)."
     }
   ],
   "l2_unmapped_in_l6": [
