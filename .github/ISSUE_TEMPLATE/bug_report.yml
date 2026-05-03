@@ -1,0 +1,77 @@
+name: 🐛 Bug report
+description: Report a defect in the ontology, SDK, MCP, or tooling.
+title: "bug: <short description>"
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug! Please fill in the fields below.
+        Tip: search existing issues first — your bug may already be tracked.
+
+  - type: input
+    id: version
+    attributes:
+      label: GeoBrain version / commit
+      description: Output of `python -c "import geobrain; print(geobrain.__version__)"` or git SHA.
+      placeholder: "0.x.y or 7c4f1a2"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Python SDK (geobrain.*)
+        - MCP server (mcp/geobrain-mcp)
+        - Ontology / data
+        - SHACL validation
+        - LangGraph agent
+        - Eval harness
+        - CI / build
+        - Documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Minimal, runnable steps. Include code/commands.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+      render: bash
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include full error message / traceback if any.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: Environment
+      description: OS, Python version, Node version (if relevant).
+      placeholder: "macOS 14.5, Python 3.11.7, Node 20.11"
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: Logs, screenshots, related issues.

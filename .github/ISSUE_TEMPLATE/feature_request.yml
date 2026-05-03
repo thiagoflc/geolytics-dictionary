@@ -1,0 +1,52 @@
+name: 💡 Feature request
+description: Propose a new capability, ontology extension, or improvement.
+title: "feat: <short description>"
+labels: ["enhancement", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For large changes (new ontology layers, breaking API changes, new
+        validators), please open this issue **before** starting a PR so we can
+        align on direction.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What is the user/developer pain this solves?
+      placeholder: "When I try to ..., I cannot ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: What would the API / data / behavior look like?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Other approaches and why they were rejected.
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - Additive (no breaking change)
+        - Breaking change (requires major version bump)
+        - Tooling / CI only
+        - Documentation only
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional context
+      description: References, prior art, related issues, mockups.

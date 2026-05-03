@@ -8,10 +8,7 @@
 import { z } from "zod";
 
 export const schema = z.object({
-  query: z
-    .string()
-    .min(1)
-    .describe("Cypher query to run (e.g. MATCH (n:Entity) RETURN n LIMIT 5)"),
+  query: z.string().min(1).describe("Cypher query to run (e.g. MATCH (n:Entity) RETURN n LIMIT 5)"),
 });
 
 type Input = z.infer<typeof schema>;
@@ -44,7 +41,10 @@ export async function execute(input: Input): Promise<string> {
   const password = process.env["NEO4J_PASSWORD"] ?? "";
 
   let neo4j: {
-    driver: (uri: string, auth: unknown) => {
+    driver: (
+      uri: string,
+      auth: unknown
+    ) => {
       session: () => {
         run: (q: string) => Promise<{ records: Array<{ toObject: () => unknown }> }>;
         close: () => Promise<void>;

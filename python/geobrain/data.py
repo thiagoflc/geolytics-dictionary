@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 from pathlib import Path
 from typing import Any
 
@@ -34,8 +33,7 @@ def load_jsonl(filename: str) -> list[dict[str, Any]]:
     p = _local_path(filename)
     if not p.exists():
         raise FileNotFoundError(
-            f"Bundled data file not found: {p}. "
-            "Run python/build_data.py to copy data files."
+            f"Bundled data file not found: {p}. Run python/build_data.py to copy data files."
         )
     lines = []
     with p.open(encoding="utf-8") as fh:
@@ -55,8 +53,7 @@ def fetch_json(path: str) -> Any:
         import requests  # type: ignore[import]
     except ImportError as exc:
         raise ImportError(
-            "requests is required for remote loading. "
-            "Install it with: pip install requests"
+            "requests is required for remote loading. Install it with: pip install requests"
         ) from exc
 
     url = f"{_REMOTE_BASE}/{path}"

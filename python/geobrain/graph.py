@@ -5,7 +5,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
-from .data import load_json, fetch_json
+from .data import fetch_json, load_json
 
 
 @dataclass(frozen=True)
@@ -78,31 +78,39 @@ class KnowledgeGraph:
         for node_dict in nodes:
             entity = _entity_from_dict(node_dict)
             self._entities[entity.id] = entity
-            self._G.add_node(entity.id, entity=entity, **{
-                "label": entity.label,
-                "label_en": entity.label_en,
-                "type": entity.type,
-            })
+            self._G.add_node(
+                entity.id,
+                entity=entity,
+                **{
+                    "label": entity.label,
+                    "label_en": entity.label_en,
+                    "type": entity.type,
+                },
+            )
 
         for edge_dict in edges:
             src = edge_dict.get("source", edge_dict.get("from", ""))
             tgt = edge_dict.get("target", edge_dict.get("to", ""))
             if not src or not tgt:
                 continue
-            self._G.add_edge(src, tgt, **{
-                "relation": edge_dict.get("relation", ""),
-                "relation_label_pt": edge_dict.get("relation_label_pt", ""),
-                "relation_label_en": edge_dict.get("relation_label_en", ""),
-            })
+            self._G.add_edge(
+                src,
+                tgt,
+                **{
+                    "relation": edge_dict.get("relation", ""),
+                    "relation_label_pt": edge_dict.get("relation_label_pt", ""),
+                    "relation_label_en": edge_dict.get("relation_label_en", ""),
+                },
+            )
 
     @classmethod
-    def from_local(cls) -> "KnowledgeGraph":
+    def from_local(cls) -> KnowledgeGraph:
         """Build a KnowledgeGraph from the bundled entity-graph.json."""
         data = load_json("entity-graph.json")
         return cls(data)
 
     @classmethod
-    def from_remote(cls) -> "KnowledgeGraph":
+    def from_remote(cls) -> KnowledgeGraph:
         """Build a KnowledgeGraph by fetching entity-graph.json from GitHub.
 
         Requires ``requests``.
@@ -123,9 +131,9 @@ class KnowledgeGraph:
         if entity_id not in self._G:
             return []
         G_undirected = self._G.to_undirected()
-        reachable = set(self._nx.single_source_shortest_path_length(
-            G_undirected, entity_id, cutoff=hops
-        ).keys())
+        reachable = set(
+            self._nx.single_source_shortest_path_length(G_undirected, entity_id, cutoff=hops).keys()
+        )
         reachable.discard(entity_id)
         return [self._entities[nid] for nid in reachable if nid in self._entities]
 
@@ -166,7 +174,9 @@ class KnowledgeGraph:
         lines.append("")
         lines.append("// --- Relationships ---")
         for src, tgt, edata in self._G.edges(data=True):
-            rel = (edata.get("relation") or "RELATED_TO").upper().replace(" ", "_").replace("-", "_")
+            rel = (
+                (edata.get("relation") or "RELATED_TO").upper().replace(" ", "_").replace("-", "_")
+            )
             rel_label_pt = edata.get("relation_label_pt", "").replace("'", "\\'")
             lines.append(
                 f"MATCH (a:Entity {{id: '{src}'}}), (b:Entity {{id: '{tgt}'}}) "

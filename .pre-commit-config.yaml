@@ -1,0 +1,74 @@
+# Pre-commit hooks — https://pre-commit.com
+# Install: pip install pre-commit && pre-commit install
+# Run on demand: pre-commit run --all-files
+
+minimum_pre_commit_version: "3.5.0"
+default_language_version:
+  python: python3.11
+
+# Files this repo intentionally treats as untouchable for whitespace/format
+# normalization — generated artifacts, raw data, eval snapshots, notebooks,
+# vendored HTML.
+exclude: |
+  (?x)^(
+    data/(?!raw/README\.md$).*|
+    api/v1/.*|
+    ai/.*\.jsonl|
+    ai/ontology-map\.json|
+    build/.*|
+    docs/glosis/.*|
+    eval/baseline\.json|
+    eval/results/.*|
+    notebooks/.*|
+    python/geobrain/_data/.*|
+    .*-cards\.html|
+    index\.html|
+    gso-cards\.html|
+    index-cards\.html|
+    package-lock\.json
+  )$
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        exclude: \.md$ # markdown line breaks use trailing whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        args: ["--unsafe"] # allow custom GH Actions tags
+      - id: check-json
+      - id: check-toml
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=500"]
+      - id: mixed-line-ending
+        args: ["--fix=lf"]
+      - id: detect-private-key
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.7.4
+    hooks:
+      - id: ruff
+        args: ["--fix", "--config=python/pyproject.toml"]
+        files: ^python/
+      - id: ruff-format
+        args: ["--config=python/pyproject.toml"]
+        files: ^python/
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v4.0.0-alpha.8
+    hooks:
+      - id: prettier
+        types_or: [javascript, ts, json, yaml, markdown]
+        # Stay in sync with .prettierignore — only format what we maintain
+        # to high standards.
+        files: ^(scripts/(?!migrations/).*\.js|tests/.*\.js|mcp/geobrain-mcp/src/.*\.ts|README\.md|CONTRIBUTING\.md|SECURITY\.md|CODE_OF_CONDUCT\.md|python/README\.md|mcp/geobrain-mcp/README\.md|scripts/migrations/.*/README\.md|data/raw/README\.md|docs/CI\.md|\.prettierrc\.json|\.prettierignore|\.markdownlint\.json|package\.json|tsconfig\.json|.*\.ya?ml)$
+
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.42.0
+    hooks:
+      - id: markdownlint
+        args: ["--config", ".markdownlint.json"]
+        # Lint only the docs we curate to high standards.
+        files: ^(README\.md|CONTRIBUTING\.md|SECURITY\.md|CODE_OF_CONDUCT\.md|docs/CI\.md|scripts/migrations/.*/README\.md|data/raw/README\.md)$

@@ -1,5 +1,15 @@
 # GeoBrain
 
+[![Lint](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/lint.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/lint.yml)
+[![Test (Python)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-python.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-python.yml)
+[![Test (Node)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-node.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/test-node.yml)
+[![Validate ontology](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/validate-ontology.yml/badge.svg)](https://github.com/thiagoflc/geolytics-dictionary/actions/workflows/validate-ontology.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+
 Ontologia semantica do dominio de **Exploracao & Producao (E&P) de petroleo e gas natural no Brasil**, derivada do modulo Dicionario da plataforma Geolytics. Dados oficiais da **ANP/SEP — SIGEP**, organizados como JSON estatico, grafo de entidades e corpus pronto para RAG.
 
 A motivacao central e que RAG vetorial puro falha em perguntas multi-hop de O&G (quatro saltos entre poco → bloco → bacia → regime contratual), em disambiguacoes estruturais (PAD como contrato ANP vs. drilling pad) e em verificacao de consistencia regulatoria (SPE-PRMS nao reconhece "4P"). Este repositorio prove a base semantica — ontologia em camadas, grafo tipado, SHACL shapes e agente LangGraph com validador deterministico — para superar essas limitacoes. Ver [docs/GRAPHRAG.md](docs/GRAPHRAG.md) para a receita completa.
@@ -45,33 +55,33 @@ A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente esta
 
 ## Estrutura do repositorio
 
-| Caminho | Conteudo |
-|---|---|
-| `data/glossary.json` | 23 termos ANP enriquecidos |
-| `data/entity-graph.json` | Grafo de 75 entidades + 80 relacoes |
-| `data/ontopetro.json` | Ontologia formal — 6 modulos |
-| `data/taxonomies.json` | 13 enumeracoes canonicas (litologia, SPE-PRMS, AVO...) |
-| `data/full.json` | Merge de todos os modulos |
-| `data/geomechanics*.json` | Modulo MEM P2.7 + fraturas |
-| `data/seismic-*.json` | Modulo sismico P2.8 — aquisicao, processamento, inversao |
-| `data/witsml-rdf-crosswalk.json` | 25 classes WITSML 2.0 mapeadas para `geo:` |
-| `data/prodml-rdf-crosswalk.json` | 15 classes PRODML 2.x mapeadas para `geo:` |
-| `data/geolytics-shapes.ttl` | 30 NodeShapes SHACL |
-| `data/sweet-alignment.json` | 66 alinhamentos SKOS com SWEET (NASA/ESIPFed) |
-| `data/gso-*.json` | 213 classes GSO/Loop3D (Layer 7) |
-| `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas |
-| `data/systems.json` | 8 sistemas corporativos Petrobras |
-| `api/v1/` | Endpoints publicos (GitHub Pages) |
-| `ai/rag-corpus.jsonl` | 1.245 chunks para embedding |
-| `ai/system-prompt-ptbr.md` | System prompt PT-BR (~800 tokens) |
-| `ai/text2cypher-fewshot.jsonl` | 45 exemplos few-shot Text2Cypher |
-| `scripts/generate.js` | Pipeline ETL: regenera `data/`, `api/`, `ai/` |
-| `scripts/semantic-validator.js` | Validador semantico deterministico |
-| `mcp/geolytics-mcp/` | MCP Server TypeScript (9 ferramentas) |
-| `examples/langgraph-agent/` | Agente LangGraph multi-no |
-| `notebooks/` | 4 notebooks Jupyter didaticos |
-| `python/` | Pacote Python `geobrain` |
-| `docs/` | Documentacao completa — ver [docs/INDEX.md](docs/INDEX.md) |
+| Caminho                          | Conteudo                                                   |
+| -------------------------------- | ---------------------------------------------------------- |
+| `data/glossary.json`             | 23 termos ANP enriquecidos                                 |
+| `data/entity-graph.json`         | Grafo de 75 entidades + 80 relacoes                        |
+| `data/ontopetro.json`            | Ontologia formal — 6 modulos                               |
+| `data/taxonomies.json`           | 13 enumeracoes canonicas (litologia, SPE-PRMS, AVO...)     |
+| `data/full.json`                 | Merge de todos os modulos                                  |
+| `data/geomechanics*.json`        | Modulo MEM P2.7 + fraturas                                 |
+| `data/seismic-*.json`            | Modulo sismico P2.8 — aquisicao, processamento, inversao   |
+| `data/witsml-rdf-crosswalk.json` | 25 classes WITSML 2.0 mapeadas para `geo:`                 |
+| `data/prodml-rdf-crosswalk.json` | 15 classes PRODML 2.x mapeadas para `geo:`                 |
+| `data/geolytics-shapes.ttl`      | 30 NodeShapes SHACL                                        |
+| `data/sweet-alignment.json`      | 66 alinhamentos SKOS com SWEET (NASA/ESIPFed)              |
+| `data/gso-*.json`                | 213 classes GSO/Loop3D (Layer 7)                           |
+| `data/acronyms.json`             | 1.102 siglas O&G PT/EN categorizadas                       |
+| `data/systems.json`              | 8 sistemas corporativos Petrobras                          |
+| `api/v1/`                        | Endpoints publicos (GitHub Pages)                          |
+| `ai/rag-corpus.jsonl`            | 1.245 chunks para embedding                                |
+| `ai/system-prompt-ptbr.md`       | System prompt PT-BR (~800 tokens)                          |
+| `ai/text2cypher-fewshot.jsonl`   | 45 exemplos few-shot Text2Cypher                           |
+| `scripts/generate.js`            | Pipeline ETL: regenera `data/`, `api/`, `ai/`              |
+| `scripts/semantic-validator.js`  | Validador semantico deterministico                         |
+| `mcp/geolytics-mcp/`             | MCP Server TypeScript (9 ferramentas)                      |
+| `examples/langgraph-agent/`      | Agente LangGraph multi-no                                  |
+| `notebooks/`                     | 4 notebooks Jupyter didaticos                              |
+| `python/`                        | Pacote Python `geobrain`                                   |
+| `docs/`                          | Documentacao completa — ver [docs/INDEX.md](docs/INDEX.md) |
 
 ---
 
@@ -135,7 +145,7 @@ cd mcp/geolytics-mcp && npm install && npm run build
 node scripts/validate-cli.js "Reserva 4P do Campo de Buzios"
 
 # SHACL formal (Python + pyshacl)
-pip install -r scripts/requirements.txt
+pip install -e "python/[scripts]"
 python scripts/validate-shacl.py
 
 # Testes
@@ -159,12 +169,14 @@ bash scripts/check-regen.sh        # verifica se ha diff apos regen
 ## Como usar os dados
 
 Via raw GitHub:
+
 ```
 https://raw.githubusercontent.com/thiagoflc/geobrain/main/data/glossary.json
 https://raw.githubusercontent.com/thiagoflc/geobrain/main/ai/rag-corpus.jsonl
 ```
 
 Via GitHub Pages:
+
 ```
 https://thiagoflc.github.io/geobrain/api/v1/index.json
 https://thiagoflc.github.io/geobrain/data/full.json

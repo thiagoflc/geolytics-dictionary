@@ -63,6 +63,7 @@ class BM25Retriever:
     def __init__(self) -> None:
         try:
             from rank_bm25 import BM25Okapi  # type: ignore[import]
+
             self._BM25Okapi = BM25Okapi
         except ImportError as exc:
             raise ImportError(
@@ -104,7 +105,7 @@ class BM25Retriever:
         docs = self._documents
 
         ranked = sorted(
-            zip(scores, docs),
+            zip(scores, docs, strict=False),
             key=lambda x: x[0],
             reverse=True,
         )

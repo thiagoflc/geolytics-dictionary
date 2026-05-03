@@ -18,9 +18,7 @@ export const schema = z.object({
   edge_types: z
     .array(z.string())
     .optional()
-    .describe(
-      "Filter by relation type (e.g. ['drilled_in', 'classified_by']). Omit for all."
-    ),
+    .describe("Filter by relation type (e.g. ['drilled_in', 'classified_by']). Omit for all."),
 });
 
 type Input = z.infer<typeof schema>;

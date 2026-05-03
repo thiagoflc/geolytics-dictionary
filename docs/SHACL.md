@@ -31,7 +31,7 @@ O dicionario Geolytics serializa seu grafo de entidades em `data/geolytics.ttl` 
 | `data/geolytics-vocab.ttl` | Vocabulario OWL minimo de apoio (classes + propriedades) |
 | `scripts/validate-shacl.py` | Validador Python (pyshacl) — recomendado |
 | `scripts/validate-shacl.js` | Wrapper Node.js (rdf-validate-shacl ou delega ao Python) |
-| `scripts/requirements.txt` | Dependencias Python (`pyshacl>=0.25.0`, `rdflib>=7.0.0`) |
+| `python/pyproject.toml` | Dependencias Python via extra `[scripts]` (`pyshacl`, `rdflib`, `owlrl`) |
 
 ## Como rodar
 
@@ -39,9 +39,9 @@ O dicionario Geolytics serializa seu grafo de entidades em `data/geolytics.ttl` 
 
 ```bash
 # Instalar dependencias (uma vez)
-pip install -r scripts/requirements.txt
+pip install -e "python/[scripts]"
 # ou
-python3 -m pip install --user pyshacl rdflib
+python3 -m pip install --user pyshacl rdflib owlrl
 
 # Validar
 python scripts/validate-shacl.py

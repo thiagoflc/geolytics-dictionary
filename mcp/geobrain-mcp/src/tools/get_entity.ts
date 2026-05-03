@@ -30,9 +30,10 @@ export function execute(input: Input): string {
 
   if (!node) {
     const candidates = entityGraph.nodes
-      .filter((n) =>
-        (n.id ?? "").toLowerCase().includes(input.id.toLowerCase()) ||
-        (n.label ?? "").toLowerCase().includes(input.id.toLowerCase())
+      .filter(
+        (n) =>
+          (n.id ?? "").toLowerCase().includes(input.id.toLowerCase()) ||
+          (n.label ?? "").toLowerCase().includes(input.id.toLowerCase())
       )
       .slice(0, 5)
       .map((n) => ({ id: n.id, label: n.label }));
@@ -44,8 +45,18 @@ export function execute(input: Input): string {
     });
   }
 
-  const outgoing: Array<{ relation: string; relation_label_pt?: string; relation_label_en?: string; target: EntityNode }> = [];
-  const incoming: Array<{ relation: string; relation_label_pt?: string; relation_label_en?: string; source: EntityNode }> = [];
+  const outgoing: Array<{
+    relation: string;
+    relation_label_pt?: string;
+    relation_label_en?: string;
+    target: EntityNode;
+  }> = [];
+  const incoming: Array<{
+    relation: string;
+    relation_label_pt?: string;
+    relation_label_en?: string;
+    source: EntityNode;
+  }> = [];
 
   for (const edge of entityGraph.edges) {
     if (edge.source === node.id) {

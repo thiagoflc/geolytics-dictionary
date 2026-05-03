@@ -7,17 +7,16 @@ two validators produce the same output for the same inputs.
 from __future__ import annotations
 
 import re
-import unicodedata
 from dataclasses import dataclass, field
 from functools import cached_property
 from typing import Any
 
 from .data import load_json
 
-
 # ---------------------------------------------------------------------------
 # Public return types
 # ---------------------------------------------------------------------------
+
 
 @dataclass(frozen=True)
 class Violation:
@@ -49,46 +48,87 @@ class Report:
 _VALID_SPE_PRMS_RESERVES: frozenset[str] = frozenset({"1P", "2P", "3P"})
 _VALID_SPE_PRMS_CONTINGENT: frozenset[str] = frozenset({"C1C", "C2C", "C3C"})
 
-_VALID_REGIMES: frozenset[str] = frozenset({
-    "concessão",
-    "concessao",
-    "partilha de produção",
-    "partilha de producao",
-    "partilha",
-    "cessão onerosa",
-    "cessao onerosa",
-})
+_VALID_REGIMES: frozenset[str] = frozenset(
+    {
+        "concessão",
+        "concessao",
+        "partilha de produção",
+        "partilha de producao",
+        "partilha",
+        "cessão onerosa",
+        "cessao onerosa",
+    }
+)
 
 _AMBIENTAL_SIGNALS: list[str] = [
-    "rebio", "rppn", "apa ", " apa", "reserva ambiental",
-    "reserva biologica", "reserva biológica", "reserva particular",
-    "area de protecao", "área de proteção",
-    "unidade de conservacao", "unidade de conservação", "snuc",
+    "rebio",
+    "rppn",
+    "apa ",
+    " apa",
+    "reserva ambiental",
+    "reserva biologica",
+    "reserva biológica",
+    "reserva particular",
+    "area de protecao",
+    "área de proteção",
+    "unidade de conservacao",
+    "unidade de conservação",
+    "snuc",
 ]
 
 _OIL_GAS_KEYWORDS: list[str] = [
-    "campo", "bloco", "petroleo", "petróleo", "gas", "gás",
-    "boe", "mboe", "bboe", "spe", "prms", "oleo", "óleo",
-    "barris", "hidrocarboneto", "producao", "produção", "1p", "2p", "3p",
-    "c1c", "c2c", "c3c", "provadas", "provaveis", "contingentes",
-    "mmb", "bcf", "reservatorio", "reservatório",
+    "campo",
+    "bloco",
+    "petroleo",
+    "petróleo",
+    "gas",
+    "gás",
+    "boe",
+    "mboe",
+    "bboe",
+    "spe",
+    "prms",
+    "oleo",
+    "óleo",
+    "barris",
+    "hidrocarboneto",
+    "producao",
+    "produção",
+    "1p",
+    "2p",
+    "3p",
+    "c1c",
+    "c2c",
+    "c3c",
+    "provadas",
+    "provaveis",
+    "contingentes",
+    "mmb",
+    "bcf",
+    "reservatorio",
+    "reservatório",
 ]
 
 _ANP_WELL_PREFIXES: frozenset[str] = frozenset({"1", "2", "3", "4", "6", "7"})
 
 # Regex mirrors JS: /^opendes:osdu:[a-z-]+--[A-Z][a-zA-Z]+:\d+\.\d+\.\d+$/
-_OSDU_KIND_REGEX = re.compile(
-    r"^opendes:osdu:[a-z-]+--[A-Z][a-zA-Z]+:\d+\.\d+\.\d+$"
+_OSDU_KIND_REGEX = re.compile(r"^opendes:osdu:[a-z-]+--[A-Z][a-zA-Z]+:\d+\.\d+\.\d+$")
+
+_KNOWN_AMBIGUOUS: frozenset[str] = frozenset(
+    {"PAD", "UTS", "GAS", "GÁS", "APA", "BOP", "API", "LWD", "MWD"}
 )
 
-_KNOWN_AMBIGUOUS: frozenset[str] = frozenset({
-    "PAD", "UTS", "GAS", "GÁS", "APA", "BOP", "API", "LWD", "MWD"
-})
-
 _DISAMBIGUATION_CONTEXTS: list[str] = [
-    "plano de avaliacao", "plano de avaliação", "drilling pad", "pad explorat",
-    "unidades de trabalho", "unidade territorial", "api gravity", "api grau",
-    "bloqueador de poc", "blowout preventer",
+    "plano de avaliacao",
+    "plano de avaliação",
+    "drilling pad",
+    "pad explorat",
+    "unidades de trabalho",
+    "unidade territorial",
+    "api gravity",
+    "api grau",
+    "bloqueador de poc",
+    "blowout preventer",
 ]
 
 _BOUNDARY_RE = re.compile(
@@ -97,25 +137,39 @@ _BOUNDARY_RE = re.compile(
 )
 
 _LIT_KEYWORDS: list[str] = [
-    "litologia", "litológic", "litologic", "rocha",
-    "lithology", "tipo de rocha", "fácies",
+    "litologia",
+    "litológic",
+    "litologic",
+    "rocha",
+    "lithology",
+    "tipo de rocha",
+    "fácies",
 ]
 
 _JANELA_KEYWORDS: list[str] = [
-    "janela de geração", "janela de geracao",
-    "janela de maturação", "maturidade termica", "maturidade térmica",
-    "vitrinita", "querogênio", "querogênio",
+    "janela de geração",
+    "janela de geracao",
+    "janela de maturação",
+    "maturidade termica",
+    "maturidade térmica",
+    "vitrinita",
+    "querogênio",
+    "querogênio",
 ]
 
 _REGIME_KEYWORDS: list[str] = [
-    "regime contratual", "regime de", "modalidade contratual",
-    "regime explorat", "contrato de",
+    "regime contratual",
+    "regime de",
+    "modalidade contratual",
+    "regime explorat",
+    "contrato de",
 ]
 
 
 # ---------------------------------------------------------------------------
 # Data loading (lazy, loaded once per Validator instance)
 # ---------------------------------------------------------------------------
+
 
 class _DataStore:
     """Cached data loaded from bundled JSON files."""
@@ -165,10 +219,19 @@ def _build_lithology_set() -> frozenset[str]:
     taxonomies = _store.taxonomies
     tipo = taxonomies.get("taxonomies", taxonomies).get("tipo_litologia")
     if not tipo:
-        return frozenset({
-            "arenito", "conglomerado", "folhelho", "argilito",
-            "calcario", "dolomito", "marga", "siliciclastico", "carbonatico",
-        })
+        return frozenset(
+            {
+                "arenito",
+                "conglomerado",
+                "folhelho",
+                "argilito",
+                "calcario",
+                "dolomito",
+                "marga",
+                "siliciclastico",
+                "carbonatico",
+            }
+        )
     values = tipo.get("values", {})
     result: set[str] = set()
     for key, cat in values.items():
@@ -182,10 +245,19 @@ def _build_kerogen_set() -> frozenset[str]:
     taxonomies = _store.taxonomies
     tipo = taxonomies.get("taxonomies", taxonomies).get("tipo_querogeno")
     if not tipo:
-        return frozenset({
-            "tipo_i", "tipo_ii", "tipo_iis", "tipo_iii", "tipo_iv",
-            "tipo i", "tipo ii", "tipo iii", "tipo iv",
-        })
+        return frozenset(
+            {
+                "tipo_i",
+                "tipo_ii",
+                "tipo_iis",
+                "tipo_iii",
+                "tipo_iv",
+                "tipo i",
+                "tipo ii",
+                "tipo iii",
+                "tipo iv",
+            }
+        )
     values = tipo.get("values", {})
     result: set[str] = set()
     for key in values:
@@ -198,10 +270,16 @@ def _build_window_set() -> frozenset[str]:
     taxonomies = _store.taxonomies
     tipo = taxonomies.get("taxonomies", taxonomies).get("janela_geracao")
     if not tipo:
-        return frozenset({
-            "imaturo", "janela_oleo", "janela de óleo",
-            "gas_umido", "gas_seco", "sobrematuro",
-        })
+        return frozenset(
+            {
+                "imaturo",
+                "janela_oleo",
+                "janela de óleo",
+                "gas_umido",
+                "gas_seco",
+                "sobrematuro",
+            }
+        )
     values = tipo.get("values", [])
     result: set[str] = set()
     if isinstance(values, list):
@@ -235,11 +313,13 @@ def _build_acronym_map() -> dict[str, list[dict[str, Any]]]:
         sigla = a.get("sigla", "").upper()
         if sigla not in result:
             result[sigla] = []
-        result[sigla].append({
-            "expansion_pt": a.get("expansion_pt", ""),
-            "expansion_en": a.get("expansion_en", ""),
-            "category": a.get("category", ""),
-        })
+        result[sigla].append(
+            {
+                "expansion_pt": a.get("expansion_pt", ""),
+                "expansion_en": a.get("expansion_en", ""),
+                "category": a.get("category", ""),
+            }
+        )
     return result
 
 
@@ -247,34 +327,39 @@ def _build_acronym_map() -> dict[str, list[dict[str, Any]]]:
 # Rule implementations — mirror JS function names
 # ---------------------------------------------------------------------------
 
+
 def _check_spe_prms_invalid_category(text: str) -> list[Violation]:
     violations: list[Violation] = []
 
     if re.search(r"\b4\s*[Pp]\b", text):
-        violations.append(Violation(
-            rule="SPE_PRMS_INVALID_CATEGORY",
-            severity="error",
-            evidence="Menção a '4P' no texto.",
-            suggested_fix=(
-                "A classificação SPE-PRMS não reconhece '4P'. "
-                "Categorias válidas para Reservas: 1P (Provadas), 2P (Prováveis), 3P (Possíveis). "
-                "Para Recursos Contingentes: C1C, C2C, C3C."
-            ),
-            source_layer="taxonomies/categoria_recurso_spe_prms",
-        ))
+        violations.append(
+            Violation(
+                rule="SPE_PRMS_INVALID_CATEGORY",
+                severity="error",
+                evidence="Menção a '4P' no texto.",
+                suggested_fix=(
+                    "A classificação SPE-PRMS não reconhece '4P'. "
+                    "Categorias válidas para Reservas: 1P (Provadas), 2P (Prováveis), 3P (Possíveis). "
+                    "Para Recursos Contingentes: C1C, C2C, C3C."
+                ),
+                source_layer="taxonomies/categoria_recurso_spe_prms",
+            )
+        )
 
     for m in re.finditer(r"\b([5-9][Pp]|[1-9][0-9]+[Pp])\b", text):
         label = m.group(1).upper()
-        violations.append(Violation(
-            rule="SPE_PRMS_INVALID_CATEGORY",
-            severity="error",
-            evidence=f"Menção a '{label}' no texto.",
-            suggested_fix=(
-                f"'{label}' não é uma categoria SPE-PRMS válida. "
-                "Categorias válidas para Reservas: 1P, 2P, 3P."
-            ),
-            source_layer="taxonomies/categoria_recurso_spe_prms",
-        ))
+        violations.append(
+            Violation(
+                rule="SPE_PRMS_INVALID_CATEGORY",
+                severity="error",
+                evidence=f"Menção a '{label}' no texto.",
+                suggested_fix=(
+                    f"'{label}' não é uma categoria SPE-PRMS válida. "
+                    "Categorias válidas para Reservas: 1P, 2P, 3P."
+                ),
+                source_layer="taxonomies/categoria_recurso_spe_prms",
+            )
+        )
 
     return violations
 
@@ -286,21 +371,23 @@ def _check_reserva_ambiguity(text: str) -> list[Violation]:
     has_ambiental = any(sig in lower for sig in _AMBIENTAL_SIGNALS)
 
     if has_reserva and has_ambiental and has_oil_context:
-        return [Violation(
-            rule="RESERVA_AMBIGUITY",
-            severity="warning",
-            evidence=(
-                "O texto menciona 'reserva' em contexto de petróleo/gás "
-                "mas também contém termos de reserva ambiental (REBIO, RPPN, APA, etc.)."
-            ),
-            suggested_fix=(
-                "Desambiguar: 'Reserva' no contexto SPE-PRMS refere-se a volumes de hidrocarbonetos "
-                "tecnicamente recuperáveis e comercialmente viáveis (1P/2P/3P). "
-                "'Reserva Ambiental' (REBIO/RPPN/APA) é uma área de proteção ambiental "
-                "regulada pelo SNUC (Lei 9.985/2000) e não tem relação com volumes petrolíferos."
-            ),
-            source_layer="taxonomies/categoria_recurso_spe_prms",
-        )]
+        return [
+            Violation(
+                rule="RESERVA_AMBIGUITY",
+                severity="warning",
+                evidence=(
+                    "O texto menciona 'reserva' em contexto de petróleo/gás "
+                    "mas também contém termos de reserva ambiental (REBIO, RPPN, APA, etc.)."
+                ),
+                suggested_fix=(
+                    "Desambiguar: 'Reserva' no contexto SPE-PRMS refere-se a volumes de hidrocarbonetos "
+                    "tecnicamente recuperáveis e comercialmente viáveis (1P/2P/3P). "
+                    "'Reserva Ambiental' (REBIO/RPPN/APA) é uma área de proteção ambiental "
+                    "regulada pelo SNUC (Lei 9.985/2000) e não tem relação com volumes petrolíferos."
+                ),
+                source_layer="taxonomies/categoria_recurso_spe_prms",
+            )
+        ]
     return []
 
 
@@ -325,18 +412,20 @@ def _check_regime_contratual(text: str) -> list[Violation]:
 
     candidate = trimmed.lower()
     if candidate and candidate not in _VALID_REGIMES:
-        return [Violation(
-            rule="REGIME_CONTRATUAL_INVALID",
-            severity="error",
-            evidence=f"Regime contratual mencionado: '{candidate}'.",
-            suggested_fix=(
-                "Regimes contratuais válidos no Brasil: "
-                "Concessão (Lei 9.478/1997), "
-                "Partilha de Produção (Lei 12.351/2010), "
-                "Cessão Onerosa (Lei 12.276/2010)."
-            ),
-            source_layer="entity-graph/regime-contratual",
-        )]
+        return [
+            Violation(
+                rule="REGIME_CONTRATUAL_INVALID",
+                severity="error",
+                evidence=f"Regime contratual mencionado: '{candidate}'.",
+                suggested_fix=(
+                    "Regimes contratuais válidos no Brasil: "
+                    "Concessão (Lei 9.478/1997), "
+                    "Partilha de Produção (Lei 12.351/2010), "
+                    "Cessão Onerosa (Lei 12.276/2010)."
+                ),
+                source_layer="entity-graph/regime-contratual",
+            )
+        ]
     return []
 
 
@@ -346,17 +435,19 @@ def _check_tipo_poco_invalid(text: str) -> list[Violation]:
         full_code = m.group(0)
         prefix = m.group(1)
         if prefix not in _ANP_WELL_PREFIXES:
-            violations.append(Violation(
-                rule="TIPO_POCO_INVALID",
-                severity="error",
-                evidence=f"Código de poço ANP '{full_code}' com prefixo '{prefix}-' desconhecido.",
-                suggested_fix=(
-                    "Prefixos ANP válidos: "
-                    "1- (Exploratório), 2- (Avaliação), "
-                    "3- ou 7- (Desenvolvimento), 4- ou 6- (Especial)."
-                ),
-                source_layer="taxonomies/tipo_poco",
-            ))
+            violations.append(
+                Violation(
+                    rule="TIPO_POCO_INVALID",
+                    severity="error",
+                    evidence=f"Código de poço ANP '{full_code}' com prefixo '{prefix}-' desconhecido.",
+                    suggested_fix=(
+                        "Prefixos ANP válidos: "
+                        "1- (Exploratório), 2- (Avaliação), "
+                        "3- ou 7- (Desenvolvimento), 4- ou 6- (Especial)."
+                    ),
+                    source_layer="taxonomies/tipo_poco",
+                )
+            )
     return violations
 
 
@@ -373,15 +464,17 @@ def _check_litologia_invalid(text: str, valid_lithologies: frozenset[str]) -> li
         candidate = m.group(1).strip()
         candidate_underscored = candidate.replace(" ", "_")
         if candidate not in valid_lithologies and candidate_underscored not in valid_lithologies:
-            violations.append(Violation(
-                rule="LITOLOGIA_INVALID",
-                severity="warning",
-                evidence=f"Litologia '{candidate}' não reconhecida na taxonomia canônica.",
-                suggested_fix=(
-                    f"Litologias válidas (taxonomia CGI/GeoSciML): {', '.join(sorted(valid_lithologies))}."
-                ),
-                source_layer="taxonomies/tipo_litologia",
-            ))
+            violations.append(
+                Violation(
+                    rule="LITOLOGIA_INVALID",
+                    severity="warning",
+                    evidence=f"Litologia '{candidate}' não reconhecida na taxonomia canônica.",
+                    suggested_fix=(
+                        f"Litologias válidas (taxonomia CGI/GeoSciML): {', '.join(sorted(valid_lithologies))}."
+                    ),
+                    source_layer="taxonomies/tipo_litologia",
+                )
+            )
     return violations
 
 
@@ -404,16 +497,18 @@ def _check_janela_geracao_invalid(text: str, valid_windows: frozenset[str]) -> l
                 candidate = two_words
         window_label = f"janela de {candidate}"
         if candidate not in valid_windows and window_label not in valid_windows:
-            violations.append(Violation(
-                rule="JANELA_GERACAO_INVALID",
-                severity="warning",
-                evidence=f"Janela de geração '{candidate}' não reconhecida.",
-                suggested_fix=(
-                    f"Janelas válidas: {', '.join(sorted(valid_windows))}. "
-                    "Baseadas na reflectância da vitrinita (Ro%)."
-                ),
-                source_layer="taxonomies/janela_geracao",
-            ))
+            violations.append(
+                Violation(
+                    rule="JANELA_GERACAO_INVALID",
+                    severity="warning",
+                    evidence=f"Janela de geração '{candidate}' não reconhecida.",
+                    suggested_fix=(
+                        f"Janelas válidas: {', '.join(sorted(valid_windows))}. "
+                        "Baseadas na reflectância da vitrinita (Ro%)."
+                    ),
+                    source_layer="taxonomies/janela_geracao",
+                )
+            )
     return violations
 
 
@@ -440,22 +535,26 @@ def _check_acronym_ambiguous(
         if is_ambiguous or is_known_ambiguous:
             has_context = any(ctx in lower for ctx in _DISAMBIGUATION_CONTEXTS)
             if not has_context:
-                meanings = " / ".join(
-                    filter(None, (
-                        e.get("expansion_pt") or e.get("expansion_en")
-                        for e in entries
-                    ))
-                ) or "(múltiplos sentidos)"
-                violations.append(Violation(
-                    rule="ACRONYM_AMBIGUOUS",
-                    severity="warning",
-                    evidence=f"Sigla '{sigla}' tem múltiplos sentidos no domínio O&G: {meanings}.",
-                    suggested_fix=(
-                        f"Incluir contexto de desambiguação ao usar '{sigla}'. "
-                        "Exemplo: especificar se é o sentido regulatório (ANP), operacional ou geomecânico."
-                    ),
-                    source_layer="acronyms",
-                ))
+                meanings = (
+                    " / ".join(
+                        filter(
+                            None, (e.get("expansion_pt") or e.get("expansion_en") for e in entries)
+                        )
+                    )
+                    or "(múltiplos sentidos)"
+                )
+                violations.append(
+                    Violation(
+                        rule="ACRONYM_AMBIGUOUS",
+                        severity="warning",
+                        evidence=f"Sigla '{sigla}' tem múltiplos sentidos no domínio O&G: {meanings}.",
+                        suggested_fix=(
+                            f"Incluir contexto de desambiguação ao usar '{sigla}'. "
+                            "Exemplo: especificar se é o sentido regulatório (ANP), operacional ou geomecânico."
+                        ),
+                        source_layer="acronyms",
+                    )
+                )
     return violations
 
 
@@ -464,16 +563,18 @@ def _check_osdu_kind_format(text: str) -> list[Violation]:
     for m in re.finditer(r"\bopendes:[^\s,;'\"]+|osdu:[a-z-]+--[A-Za-z][^\s,;'\"]+", text):
         candidate = m.group(0)
         if not _OSDU_KIND_REGEX.match(candidate):
-            violations.append(Violation(
-                rule="OSDU_KIND_FORMAT",
-                severity="error",
-                evidence=f"OSDU kind '{candidate}' não segue o padrão canônico.",
-                suggested_fix=(
-                    "Formato correto: 'opendes:osdu:<domain>--<Type>:<major>.<minor>.<patch>'. "
-                    "Exemplo: 'opendes:osdu:master-data--Well:1.0.0'."
-                ),
-                source_layer="entity-graph/osdu_kind",
-            ))
+            violations.append(
+                Violation(
+                    rule="OSDU_KIND_FORMAT",
+                    severity="error",
+                    evidence=f"OSDU kind '{candidate}' não segue o padrão canônico.",
+                    suggested_fix=(
+                        "Formato correto: 'opendes:osdu:<domain>--<Type>:<major>.<minor>.<patch>'. "
+                        "Exemplo: 'opendes:osdu:master-data--Well:1.0.0'."
+                    ),
+                    source_layer="entity-graph/osdu_kind",
+                )
+            )
     return violations
 
 
@@ -498,25 +599,28 @@ def _check_layer_coverage_mismatch(
         return []
 
     if asserted_layer not in coverage:
-        return [Violation(
-            rule="LAYER_COVERAGE_MISMATCH",
-            severity="warning",
-            evidence=(
-                f"Entidade '{entity_id_norm}' não tem cobertura na camada '{asserted_layer}'. "
-                f"Camadas cobertas: {', '.join(sorted(coverage))}."
-            ),
-            suggested_fix=(
-                f"Verificar a cobertura da entidade '{entity_id_norm}' no entity-graph.json. "
-                f"A camada '{asserted_layer}' não está no campo geocoverage desta entidade."
-            ),
-            source_layer="entity-graph/geocoverage",
-        )]
+        return [
+            Violation(
+                rule="LAYER_COVERAGE_MISMATCH",
+                severity="warning",
+                evidence=(
+                    f"Entidade '{entity_id_norm}' não tem cobertura na camada '{asserted_layer}'. "
+                    f"Camadas cobertas: {', '.join(sorted(coverage))}."
+                ),
+                suggested_fix=(
+                    f"Verificar a cobertura da entidade '{entity_id_norm}' no entity-graph.json. "
+                    f"A camada '{asserted_layer}' não está no campo geocoverage desta entidade."
+                ),
+                source_layer="entity-graph/geocoverage",
+            )
+        ]
     return []
 
 
 # ---------------------------------------------------------------------------
 # Public API
 # ---------------------------------------------------------------------------
+
 
 class Validator:
     """Semantic validator for Geolytics domain claims.
@@ -571,13 +675,15 @@ class Validator:
         else:
             return Report(
                 valid=False,
-                violations=[Violation(
-                    rule="INVALID_INPUT",
-                    severity="error",
-                    evidence="claim must be a string or object with .value",
-                    suggested_fix="Pass a string or { type, value, context }.",
-                    source_layer="validator",
-                )],
+                violations=[
+                    Violation(
+                        rule="INVALID_INPUT",
+                        severity="error",
+                        evidence="claim must be a string or object with .value",
+                        suggested_fix="Pass a string or { type, value, context }.",
+                        source_layer="validator",
+                    )
+                ],
             )
 
         all_violations = (

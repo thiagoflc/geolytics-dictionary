@@ -1,0 +1,37 @@
+# --- Generated artifacts ----------------------------------------------------
+data/
+api/v1/
+ai/*.jsonl
+ai/ontology-map.json
+build/
+*-cards.html
+index.html
+gso-cards.html
+index-cards.html
+
+# Mirrored / regenerated copies
+python/geobrain/_data/
+docs/glosis/
+
+# --- Hand-authored long-form content (do NOT auto-reformat) ------------------
+# These files are tuned by hand (LLM prompts, eval baselines, large docs). The
+# noise from prettier rewriting tables/wrap is not worth the formatting win.
+docs/
+ai/
+eval/baseline.json
+eval/results/
+eval/README.md
+notebooks/
+examples/
+
+# --- Migration history (preserve as-is) -------------------------------------
+scripts/migrations/
+
+# --- Lock & vendored ---------------------------------------------------------
+node_modules/
+mcp/geobrain-mcp/node_modules/
+package-lock.json
+*.lock
+
+# CHANGELOG follows Keep-a-Changelog spacing
+CHANGELOG.md

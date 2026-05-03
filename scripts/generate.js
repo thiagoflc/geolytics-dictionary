@@ -11,9 +11,9 @@
  * Uso: node scripts/generate.js
  */
 
-import fs from 'node:fs';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 import {
   PETROKGRAPH_BASE,
   TERM_ALIGNMENT,
@@ -23,12 +23,12 @@ import {
   LAYER_DEFINITIONS,
   DEDUP_RULES,
   RECOMMENDED_USAGE,
-} from './ontology-alignment.js';
-import { OSDU_CANONICAL } from './osdu-canonical.js';
-import { buildTtl } from './ttl-serializer.js';
-import { buildCardsHtml, buildGsoCardsHtml } from './cards-html.js';
-import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from './osdu-extra-nodes.js';
-import { OG_NODES, OG_EDGES, OG_GLOSSARY } from './operacoes-geologicas-nodes.js';
+} from "./ontology-alignment.js";
+import { OSDU_CANONICAL } from "./osdu-canonical.js";
+import { buildTtl } from "./ttl-serializer.js";
+import { buildCardsHtml, buildGsoCardsHtml } from "./cards-html.js";
+import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from "./osdu-extra-nodes.js";
+import { OG_NODES, OG_EDGES, OG_GLOSSARY } from "./operacoes-geologicas-nodes.js";
 import {
   ONTOPETRO_CLASSES,
   ONTOPETRO_PROPERTIES,
@@ -48,19 +48,19 @@ import {
   OSDU_EDGES,
   OSDU_ALIGNMENT_ADDITIONS,
   OSDU_RAG_CHUNKS,
-} from './ontopetro-data.js';
+} from "./ontopetro-data.js";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, '..');
-const DRY_RUN = process.argv.includes('--dry-run');
+const ROOT = path.resolve(__dirname, "..");
+const DRY_RUN = process.argv.includes("--dry-run");
 
 /* SWEET alignment — load synchronously from data/sweet-alignment.json.
    Returns a Map<geolytics_id, alignment[]> used by buildTtl. */
 function loadSweetAlignmentSync() {
   try {
-    const candidate = path.join(ROOT, 'data', 'sweet-alignment.json');
+    const candidate = path.join(ROOT, "data", "sweet-alignment.json");
     if (!fs.existsSync(candidate)) return new Map();
-    const data = JSON.parse(fs.readFileSync(candidate, 'utf8'));
+    const data = JSON.parse(fs.readFileSync(candidate, "utf8"));
     const alignments = Array.isArray(data?.alignments) ? data.alignments : [];
     const map = new Map();
     for (const a of alignments) {
@@ -105,10 +105,10 @@ function osduCanonical(kind) {
 function withSkosAliases(node) {
   return {
     ...node,
-    skos_prefLabel:  { '@pt': node.label, '@en': node.label_en },
-    skos_altLabel:   { '@pt': node.synonyms_pt || [], '@en': node.synonyms_en || [] },
-    skos_definition: { '@pt': node.definition, '@en': node.definition_en_canonical || null },
-    skos_example:    node.examples || [],
+    skos_prefLabel: { "@pt": node.label, "@en": node.label_en },
+    skos_altLabel: { "@pt": node.synonyms_pt || [], "@en": node.synonyms_en || [] },
+    skos_definition: { "@pt": node.definition, "@en": node.definition_en_canonical || null },
+    skos_example: node.examples || [],
   };
 }
 
@@ -119,13 +119,13 @@ function enrichmentFor(id) {
 /* GSO (Loop3D Geoscience Ontology) — Layer 7. Loaded from data/gso-*.json,
    produced by scripts/gso-extract.js. CC BY 4.0; cite Brodaric & Richard 2021. */
 function loadGsoModules() {
-  const dataDir = path.resolve(__dirname, '..', 'data');
+  const dataDir = path.resolve(__dirname, "..", "data");
   if (!fs.existsSync(dataDir)) return [];
   return fs
     .readdirSync(dataDir)
     .filter((f) => /^gso-[a-z]+\.json$/.test(f))
     .map((f) => {
-      const json = JSON.parse(fs.readFileSync(path.join(dataDir, f), 'utf8'));
+      const json = JSON.parse(fs.readFileSync(path.join(dataDir, f), "utf8"));
       return { file: f, ...json };
     });
 }
@@ -136,17 +136,20 @@ function loadGsoModules() {
  * ───────────────────────────────────────────────────────────── */
 
 function loadSeismicModules() {
-  const dataDir = path.resolve(__dirname, '..', 'data');
+  const dataDir = path.resolve(__dirname, "..", "data");
   const files = [
-    'seismic-acquisition.json',
-    'seismic-processing.json',
-    'seismic-inversion-attributes.json',
+    "seismic-acquisition.json",
+    "seismic-processing.json",
+    "seismic-inversion-attributes.json",
   ];
   return files
     .map((f) => {
       const p = path.join(dataDir, f);
-      if (!fs.existsSync(p)) { console.warn(`  [warn] Seismic file not found, skipping: ${f}`); return null; }
-      return JSON.parse(fs.readFileSync(p, 'utf8'));
+      if (!fs.existsSync(p)) {
+        console.warn(`  [warn] Seismic file not found, skipping: ${f}`);
+        return null;
+      }
+      return JSON.parse(fs.readFileSync(p, "utf8"));
     })
     .filter(Boolean);
 }
@@ -165,22 +168,23 @@ function buildSeismicConsolidated() {
   }
   return {
     meta: {
-      version: '1.0.0',
+      version: "1.0.0",
       generated: NOW,
-      description: 'Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes',
+      description:
+        "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       module_count: modules.length,
       class_count: Object.keys(allClasses).length,
       property_count: Object.keys(allProperties).length,
       relation_count: Object.keys(allRelations).length,
       instance_count: Object.keys(allInstances).length,
       sources: [
-        'Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.',
-        'Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology. Cambridge University Press.',
-        'Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.',
-        'Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.',
-        'Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes. SEG.',
-        'Coleou, T. et al. (2003). Unsupervised seismic facies classification. The Leading Edge.',
-        'OSDU SeismicAcquisitionSurvey / SeismicProcessingProject / SeismicTraceData schemas v1.0.0',
+        "Yilmaz, O. (2001). Seismic Data Analysis. SEG Investigations in Geophysics No. 10.",
+        "Sheriff, R.E. & Geldart, L.P. (1995). Exploration Seismology. Cambridge University Press.",
+        "Russell, B.H. (1988). Introduction to Seismic Inversion Methods. SEG Course Notes.",
+        "Connolly, P. (1999). Elastic Impedance. The Leading Edge, 18(4), 438-452.",
+        "Chopra, S. & Marfurt, K.J. (2007). Seismic Attributes. SEG.",
+        "Coleou, T. et al. (2003). Unsupervised seismic facies classification. The Leading Edge.",
+        "OSDU SeismicAcquisitionSurvey / SeismicProcessingProject / SeismicTraceData schemas v1.0.0",
       ],
     },
     modules: modules.map((m) => m.meta),
@@ -197,40 +201,50 @@ function buildSeismicRagChunks() {
   for (const m of modules) {
     const moduleName = m.meta.module;
     for (const [key, c] of Object.entries(m.classes || {})) {
-      const text = `Seismic class "${c.name}" (${c.name_pt || c.name}, superclass ${c.superclass || 'owl:Thing'}): ${c.description || ''}${c.osdu_kind ? ` OSDU kind: ${c.osdu_kind}.` : ''} Sources: ${(c.sources || []).join(', ')}.`;
+      const text = `Seismic class "${c.name}" (${c.name_pt || c.name}, superclass ${c.superclass || "owl:Thing"}): ${c.description || ""}${c.osdu_kind ? ` OSDU kind: ${c.osdu_kind}.` : ""} Sources: ${(c.sources || []).join(", ")}.`;
       lines.push({
         id: `seismic_class_${moduleName}_${key}`,
-        type: 'seismic_class',
+        type: "seismic_class",
         text,
-        metadata: { id: key, name: c.name, module: moduleName, superclass: c.superclass || 'owl:Thing', osdu_kind: c.osdu_kind || null },
+        metadata: {
+          id: key,
+          name: c.name,
+          module: moduleName,
+          superclass: c.superclass || "owl:Thing",
+          osdu_kind: c.osdu_kind || null,
+        },
       });
     }
     for (const [key, c] of Object.entries(m.classes || {})) {
-      if (!c.superclass || !['SeismicAttribute', 'DHI', 'AVOAnomaly'].includes(c.superclass)) continue;
-      const text = `Seismic attribute "${c.name}" (${c.name_pt || c.name}): ${c.description || ''} Sources: ${(c.sources || []).join(', ')}.`;
+      if (!c.superclass || !["SeismicAttribute", "DHI", "AVOAnomaly"].includes(c.superclass))
+        continue;
+      const text = `Seismic attribute "${c.name}" (${c.name_pt || c.name}): ${c.description || ""} Sources: ${(c.sources || []).join(", ")}.`;
       lines.push({
         id: `seismic_attribute_${moduleName}_${key}`,
-        type: 'seismic_attribute',
+        type: "seismic_attribute",
         text,
         metadata: { id: key, name: c.name, module: moduleName, attribute_superclass: c.superclass },
       });
     }
     for (const [key, p] of Object.entries(m.properties || {})) {
-      if (p.rag_priority !== 'high') continue;
-      const text = `Seismic property "${p.name}" (${p.name_pt || p.name}): ${p.description || ''} Unit: ${p.unit || 'n/a'}.`;
+      if (p.rag_priority !== "high") continue;
+      const text = `Seismic property "${p.name}" (${p.name_pt || p.name}): ${p.description || ""} Unit: ${p.unit || "n/a"}.`;
       lines.push({
         id: `seismic_property_${moduleName}_${key}`,
-        type: 'seismic_class',
+        type: "seismic_class",
         text,
         metadata: { id: key, name: p.name, unit: p.unit, module: moduleName },
       });
     }
     for (const [key, i] of Object.entries(m.instances || {})) {
-      const attrs = Object.entries(i.attributes || {}).slice(0, 8).map(([k, v]) => `${k}: ${v}`).join('; ');
-      const text = `Seismic instance (${i.id}) "${i.name}" — class ${i.class}. ${i.description || ''}${attrs ? ` Attributes: ${attrs}.` : ''} Source: ${i.source || ''}.`;
+      const attrs = Object.entries(i.attributes || {})
+        .slice(0, 8)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("; ");
+      const text = `Seismic instance (${i.id}) "${i.name}" — class ${i.class}. ${i.description || ""}${attrs ? ` Attributes: ${attrs}.` : ""} Source: ${i.source || ""}.`;
       lines.push({
         id: `seismic_instance_${moduleName}_${key}`,
-        type: 'seismic_class',
+        type: "seismic_class",
         text,
         metadata: { id: key, name: i.name, class: i.class, module: moduleName },
       });
@@ -245,36 +259,37 @@ function buildSeismicRagChunks() {
  * ───────────────────────────────────────────────────────────── */
 
 function loadGeomechanics() {
-  const dataDir = path.resolve(__dirname, '..', 'data');
-  const gmPath = path.join(dataDir, 'geomechanics.json');
+  const dataDir = path.resolve(__dirname, "..", "data");
+  const gmPath = path.join(dataDir, "geomechanics.json");
   if (!fs.existsSync(gmPath)) return null;
-  return JSON.parse(fs.readFileSync(gmPath, 'utf8'));
+  return JSON.parse(fs.readFileSync(gmPath, "utf8"));
 }
 
 function loadGeomechanicsFractures() {
-  const dataDir = path.resolve(__dirname, '..', 'data');
-  const gmfPath = path.join(dataDir, 'geomechanics-fractures.json');
+  const dataDir = path.resolve(__dirname, "..", "data");
+  const gmfPath = path.join(dataDir, "geomechanics-fractures.json");
   if (!fs.existsSync(gmfPath)) return null;
-  return JSON.parse(fs.readFileSync(gmfPath, 'utf8'));
+  return JSON.parse(fs.readFileSync(gmfPath, "utf8"));
 }
 
 function loadFractureToGso() {
-  const dataDir = path.resolve(__dirname, '..', 'data');
-  const p = path.join(dataDir, 'fracture_to_gso.json');
+  const dataDir = path.resolve(__dirname, "..", "data");
+  const p = path.join(dataDir, "fracture_to_gso.json");
   if (!fs.existsSync(p)) return null;
-  return JSON.parse(fs.readFileSync(p, 'utf8'));
+  return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
 function buildGeomechanicsApi() {
   const gm = loadGeomechanics();
   const gmf = loadGeomechanicsFractures();
   const ftg = loadFractureToGso();
-  if (!gm) return { meta: { version: VERSION, generated: NOW, error: 'geomechanics.json not found' } };
+  if (!gm)
+    return { meta: { version: VERSION, generated: NOW, error: "geomechanics.json not found" } };
   return {
     meta: {
       version: VERSION,
       generated: NOW,
-      source: 'data/geomechanics.json + data/geomechanics-fractures.json',
+      source: "data/geomechanics.json + data/geomechanics-fractures.json",
       counts: {
         classes: gm.classes ? gm.classes.length : 0,
         properties: gm.properties ? gm.properties.length : 0,
@@ -295,312 +310,802 @@ function buildGeomechanicsApi() {
  * ───────────────────────────────────────────────────────────── */
 
 const GLOSSARIO = [
-  { id: 'bloco', termo: 'Bloco', categoria: 'geologia',
-    definicao: 'Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.',
-    fonte: 'Lei nº 9478, de 06/08/1997',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade', 'ranp-708', 'ranp-815'] },
-  { id: 'bacia-sedimentar', termo: 'Bacia Sedimentar', categoria: 'geologia',
-    definicao: 'Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não.',
-    fonte: 'Lei nº 9478, de 06/08/1997',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'bacias-agrupadas', termo: 'Bacias Agrupadas', categoria: 'geologia',
-    definicao: 'Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos'] },
-  { id: 'ambiente', termo: 'Ambiente', categoria: 'geologia',
-    definicao: 'Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'presal', termo: 'Pré-sal', categoria: 'geologia',
-    definicao: 'Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pocos-exploratorios'] },
-  { id: 'operador', termo: 'Operador', categoria: 'contratos',
-    definicao: 'Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade', 'ranp-708', 'ranp-815'] },
-  { id: 'contratados', termo: 'Contratados', categoria: 'contratos',
-    definicao: 'Empresas contratadas e sua participação, em porcentagem, no contrato de E&P. Inclui o operador e eventuais parceiros do consórcio, com suas respectivas parcelas de participação.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['blocos-contrato', 'pads-andamento'] },
-  { id: 'contrato-ep', termo: 'Contrato de E&P', categoria: 'contratos',
-    definicao: 'Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['blocos-contrato', 'ranp-708', 'ranp-815'] },
-  { id: 'pem', termo: 'PEM — Programa Exploratório Mínimo', categoria: 'contratos',
-    definicao: 'Conjunto mínimo de atividades exploratórias que o contratado se compromete a realizar como parte do contrato de concessão ou partilha de produção. A partir da 5ª Rodada (2003), o PEM do 1º período exploratório é expresso em Unidades de Trabalho (UTs) — parâmetro de oferta na licitação — e o do 2º período corresponde obrigatoriamente à perfuração de um poço exploratório. O cumprimento de cada período é garantido por garantia financeira prestada à ANP, devolvida após a entrega dos dados conforme padrões regulatórios.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['blocos-contrato'] },
-  { id: 'pte', termo: 'PTE — Plano de Trabalho Exploratório', categoria: 'contratos',
-    definicao: 'Instrumento de acompanhamento e fiscalização das atividades exploratórias de cada bloco sob contrato de E&P, substituto do Programa Anual de Trabalho e Orçamento e do Plano de Exploração. Deve ser apresentado em até 90 dias da assinatura do contrato de concessão (ou 180 dias no caso de partilha de produção). Ao longo da vigência, o operador envia anualmente: o PTE previsto (outubro) e o PTE realizado (março). Revisões são permitidas conforme condições da Resolução ANP nº 876/2022. A ANP analisa e aprova cada remessa em até 30 dias. O envio é realizado pelo sistema DPP.',
-    fonte: 'Resolução ANP nº 876/2022',
-    apareceEm: ['blocos-contrato'] },
-  { id: 'periodo-exploratorio', termo: 'Período Exploratório', categoria: 'contratos',
-    definicao: 'Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['blocos-contrato'] },
-  { id: 'uts', termo: 'UTS — Unidades de Trabalho', categoria: 'contratos',
-    definicao: 'Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['blocos-contrato'] },
-  { id: 'fase-exploratoria', termo: 'Fase Exploratória', categoria: 'contratos',
-    definicao: 'Período total da fase de exploração do bloco contratado. O vencimento da fase exploratória pode ser igual ao vencimento do último período exploratório ou ao vencimento do último PAD, quando a fase estiver prorrogada por plano de avaliação de descobertas.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['blocos-contrato'] },
-  { id: 'etapa-prorrogada', termo: 'Etapa Prorrogada', categoria: 'contratos',
-    definicao: 'Identifica a etapa do período exploratório que foi prorrogada com base em resolução específica da ANP. Pode ser: período único, 1º e 2º PE conjuntamente, ou apenas o 2º PE.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['ranp-708', 'ranp-815'] },
-  { id: 'regime-contratual', termo: 'Regime Contratual', categoria: 'contratos',
-    definicao: 'Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'pad', termo: 'PAD — Plano de Avaliação de Descobertas', categoria: 'operacoes',
-    definicao: 'Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. Elaborado e entregue à ANP conforme a Resolução ANP nº 845/2021, descreve a descoberta e apresenta programa de trabalho com atividades, prazos e investimentos para avaliação. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em RFAD; se a descoberta for comercial, o RFAD fundamenta a Declaração de Comercialidade.',
-    fonte: 'ANP/SEP — SIGEP; Resolução ANP nº 845/2021',
-    apareceEm: ['pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade', 'ranp-815'] },
-  { id: 'rfad', termo: 'RFAD — Relatório Final de Avaliação de Descobertas', categoria: 'operacoes',
-    definicao: 'Documento de encerramento do PAD que consolida as atividades de avaliação realizadas e os resultados da interpretação dos dados. A aprovação do RFAD pela ANP é condição necessária para conferir efetividade a uma eventual Declaração de Comercialidade. Em caso de resultado negativo, encerra o PAD sem declaração.',
-    fonte: 'Resolução ANP nº 845/2021',
-    apareceEm: ['pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'poco-anp', termo: 'Poço ANP', categoria: 'operacoes',
-    definicao: 'Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato'] },
-  { id: 'notificacao-descoberta', termo: 'Notificação de Descoberta', categoria: 'operacoes',
-    definicao: 'Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.',
-    fonte: 'ANP/SEP — SIGEP',
-    apareceEm: ['pocos-exploratorios'] },
-  { id: 'declaracao-comercialidade', termo: 'Declaração de Comercialidade', categoria: 'operacoes',
-    definicao: 'Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.',
-    fonte: 'ANP/SEP — SIGEP',
-    apareceEm: ['pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'area-desenvolvimento', termo: 'Área de Desenvolvimento da Produção', categoria: 'operacoes',
-    definicao: 'Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado "em desenvolvimento" enquanto a produção comercial ainda não se iniciou.',
-    fonte: 'Lei nº 9.478/1997; RANP 810/2020',
-    apareceEm: ['pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'plano-desenvolvimento', termo: 'Plano de Desenvolvimento', categoria: 'operacoes',
-    definicao: 'Documento técnico-econômico obrigatório entregue pelo concessionário à ANP em até 180 dias após a Declaração de Comercialidade. Agrupa informações técnicas, operacionais, econômicas e ambientais da explotação do campo, incluindo abandono. A ANP analisa o PD em até 180 dias; se solicitar modificações, o contratado tem 60 dias para apresentar o PD modificado. Após aprovação, o PD passa a vincular a atuação do concessionário. Em casos de jazidas compartilhadas, deve ser acompanhado do AIP ou do CIP.',
-    fonte: 'Resolução ANP nº 17/2015',
-    apareceEm: ['declaracoes-comercialidade'] },
-  { id: 'aip', termo: 'AIP — Acordo de Individualização da Produção', categoria: 'operacoes',
-    definicao: 'Acordo celebrado entre concessionários de blocos distintos que compartilham a mesma jazida de hidrocarbonetos, estabelecendo os termos para a produção individualizada de cada parte. Deve ser submetido à ANP juntamente com o Plano de Desenvolvimento quando houver descoberta em jazida compartilhada. Em situações em que o AIP ainda não está concluído, o CIP pode ser apresentado em substituição provisória.',
-    fonte: 'Lei nº 9.478/1997; Resolução ANP nº 17/2015',
-    apareceEm: ['declaracoes-comercialidade'] },
-  { id: 'cip', termo: 'CIP — Compromisso de Individualização da Produção', categoria: 'operacoes',
-    definicao: 'Instrumento provisório apresentado pelos concessionários à ANP quando o Acordo de Individualização da Produção (AIP) ainda não foi concluído, comprometendo-se a celebrá-lo em prazo definido. Acompanha o Plano de Desenvolvimento em casos de jazida compartilhada nos quais o AIP definitivo não está disponível.',
-    fonte: 'Lei nº 9.478/1997; Resolução ANP nº 17/2015',
-    apareceEm: ['declaracoes-comercialidade'] },
-  { id: 'primeiro-oleo', termo: 'Primeiro Óleo', categoria: 'operacoes',
-    definicao: 'Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.',
-    fonte: 'ANP/SEP',
-    apareceEm: [] },
-  { id: 'teste-formacao', termo: 'Teste de Formação', categoria: 'operacoes',
-    definicao: 'Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.',
-    fonte: 'ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014',
-    apareceEm: ['pads-andamento', 'pads-concluidos'] },
-  { id: 'tld', termo: 'TLD', categoria: 'operacoes',
-    definicao: 'Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).',
-    fonte: 'ANP — Norma de Testes de Poço (TLD)',
-    apareceEm: ['pads-andamento', 'pads-concluidos'] },
-  { id: 'rftp', termo: 'RFTP', categoria: 'regulatorio',
-    definicao: 'Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.',
-    fonte: 'ANP — Norma de Testes de Poço',
-    apareceEm: [] },
-  { id: 'i-engine', termo: 'i-Engine', categoria: 'sistemas',
-    definicao: 'Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.',
-    fonte: 'ANP/SEP — Resolução nº 880/2022',
-    apareceEm: ['pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'dpp', termo: 'DPP', categoria: 'sistemas',
-    definicao: 'Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.',
-    fonte: 'ANP/SEP',
-    apareceEm: [] },
-  { id: 'bmp', termo: 'BMP', categoria: 'regulatorio',
-    definicao: 'Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['declaracoes-comercialidade'] },
-  { id: 'rodada-licitacao', termo: 'Rodada de Licitação', categoria: 'regulatorio',
-    definicao: 'Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.',
-    fonte: 'Dicionário enciclopédico inglês-português de geofísica e geologia',
-    apareceEm: ['pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade'] },
-  { id: 'processo-sancionador', termo: 'Processo Sancionador', categoria: 'regulatorio',
-    definicao: 'Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['processos-sancionadores'] },
-  { id: 'anp', termo: 'ANP', categoria: 'regulatorio',
-    definicao: 'Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.',
-    fonte: 'Lei nº 9478/1997',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade', 'processos-sancionadores', 'ranp-708', 'ranp-815'] },
-  { id: 'sigep', termo: 'SIGEP', categoria: 'sistemas',
-    definicao: 'Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.',
-    fonte: 'ANP/SEP',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos'] },
-  { id: 'sep', termo: 'SEP', categoria: 'sistemas',
-    definicao: 'Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.',
-    fonte: 'ANP',
-    apareceEm: ['pocos-exploratorios', 'blocos-contrato', 'pads-andamento', 'pads-concluidos', 'declaracoes-comercialidade', 'processos-sancionadores', 'ranp-708', 'ranp-815'] },
+  {
+    id: "bloco",
+    termo: "Bloco",
+    categoria: "geologia",
+    definicao:
+      "Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.",
+    fonte: "Lei nº 9478, de 06/08/1997",
+    apareceEm: [
+      "pocos-exploratorios",
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+      "ranp-708",
+      "ranp-815",
+    ],
+  },
+  {
+    id: "bacia-sedimentar",
+    termo: "Bacia Sedimentar",
+    categoria: "geologia",
+    definicao:
+      "Depressão da crosta terrestre onde se acumulam rochas sedimentares que podem ser portadoras de petróleo ou gás, associados ou não.",
+    fonte: "Lei nº 9478, de 06/08/1997",
+    apareceEm: [
+      "pocos-exploratorios",
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+    ],
+  },
+  {
+    id: "bacias-agrupadas",
+    termo: "Bacias Agrupadas",
+    categoria: "geologia",
+    definicao:
+      "Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).",
+    fonte: "ANP/SEP",
+    apareceEm: ["pocos-exploratorios", "blocos-contrato", "pads-andamento", "pads-concluidos"],
+  },
+  {
+    id: "ambiente",
+    termo: "Ambiente",
+    categoria: "geologia",
+    definicao:
+      "Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.",
+    fonte: "ANP/SEP",
+    apareceEm: [
+      "pocos-exploratorios",
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+    ],
+  },
+  {
+    id: "presal",
+    termo: "Pré-sal",
+    categoria: "geologia",
+    definicao:
+      "Camada geológica localizada abaixo de uma extensa camada de sal no subsolo marítimo e terrestre. Identificar se um poço atingiu o pré-sal é informação estratégica para avaliar o potencial exploratório e enquadrar o regime contratual aplicável.",
+    fonte: "ANP/SEP",
+    apareceEm: ["pocos-exploratorios"],
+  },
+  {
+    id: "operador",
+    termo: "Operador",
+    categoria: "contratos",
+    definicao:
+      "Empresa legalmente designada pelos consorciados para conduzir e executar todas as operações e atividades na área sob contrato, de acordo com o estabelecido no contrato de E&P celebrado entre a contratante e o contratado.",
+    fonte: "ANP/SEP",
+    apareceEm: [
+      "pocos-exploratorios",
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+      "ranp-708",
+      "ranp-815",
+    ],
+  },
+  {
+    id: "contratados",
+    termo: "Contratados",
+    categoria: "contratos",
+    definicao:
+      "Empresas contratadas e sua participação, em porcentagem, no contrato de E&P. Inclui o operador e eventuais parceiros do consórcio, com suas respectivas parcelas de participação.",
+    fonte: "ANP/SEP",
+    apareceEm: ["blocos-contrato", "pads-andamento"],
+  },
+  {
+    id: "contrato-ep",
+    termo: "Contrato de E&P",
+    categoria: "contratos",
+    definicao:
+      "Contrato de Exploração e Produção assinado entre o agente econômico e a ANP. Estabelece os direitos e obrigações das partes para exploração de petróleo e gás natural em um bloco específico, incluindo o Programa Exploratório Mínimo (PEM) e as condições de produção.",
+    fonte: "ANP/SEP",
+    apareceEm: ["blocos-contrato", "ranp-708", "ranp-815"],
+  },
+  {
+    id: "pem",
+    termo: "PEM — Programa Exploratório Mínimo",
+    categoria: "contratos",
+    definicao:
+      "Conjunto mínimo de atividades exploratórias que o contratado se compromete a realizar como parte do contrato de concessão ou partilha de produção. A partir da 5ª Rodada (2003), o PEM do 1º período exploratório é expresso em Unidades de Trabalho (UTs) — parâmetro de oferta na licitação — e o do 2º período corresponde obrigatoriamente à perfuração de um poço exploratório. O cumprimento de cada período é garantido por garantia financeira prestada à ANP, devolvida após a entrega dos dados conforme padrões regulatórios.",
+    fonte: "ANP/SEP",
+    apareceEm: ["blocos-contrato"],
+  },
+  {
+    id: "pte",
+    termo: "PTE — Plano de Trabalho Exploratório",
+    categoria: "contratos",
+    definicao:
+      "Instrumento de acompanhamento e fiscalização das atividades exploratórias de cada bloco sob contrato de E&P, substituto do Programa Anual de Trabalho e Orçamento e do Plano de Exploração. Deve ser apresentado em até 90 dias da assinatura do contrato de concessão (ou 180 dias no caso de partilha de produção). Ao longo da vigência, o operador envia anualmente: o PTE previsto (outubro) e o PTE realizado (março). Revisões são permitidas conforme condições da Resolução ANP nº 876/2022. A ANP analisa e aprova cada remessa em até 30 dias. O envio é realizado pelo sistema DPP.",
+    fonte: "Resolução ANP nº 876/2022",
+    apareceEm: ["blocos-contrato"],
+  },
+  {
+    id: "periodo-exploratorio",
+    termo: "Período Exploratório",
+    categoria: "contratos",
+    definicao:
+      "Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.",
+    fonte: "ANP/SEP",
+    apareceEm: ["blocos-contrato"],
+  },
+  {
+    id: "uts",
+    termo: "UTS — Unidades de Trabalho",
+    categoria: "contratos",
+    definicao:
+      "Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.",
+    fonte: "ANP/SEP",
+    apareceEm: ["blocos-contrato"],
+  },
+  {
+    id: "fase-exploratoria",
+    termo: "Fase Exploratória",
+    categoria: "contratos",
+    definicao:
+      "Período total da fase de exploração do bloco contratado. O vencimento da fase exploratória pode ser igual ao vencimento do último período exploratório ou ao vencimento do último PAD, quando a fase estiver prorrogada por plano de avaliação de descobertas.",
+    fonte: "ANP/SEP",
+    apareceEm: ["blocos-contrato"],
+  },
+  {
+    id: "etapa-prorrogada",
+    termo: "Etapa Prorrogada",
+    categoria: "contratos",
+    definicao:
+      "Identifica a etapa do período exploratório que foi prorrogada com base em resolução específica da ANP. Pode ser: período único, 1º e 2º PE conjuntamente, ou apenas o 2º PE.",
+    fonte: "ANP/SEP",
+    apareceEm: ["ranp-708", "ranp-815"],
+  },
+  {
+    id: "regime-contratual",
+    termo: "Regime Contratual",
+    categoria: "contratos",
+    definicao:
+      "Modalidade contratual do bloco exploratório. Concessão: o concessionário assume todos os riscos e detém o petróleo produzido mediante pagamento de tributos. Partilha de produção: o petróleo produzido é dividido entre o contratado e a União, sendo a Petrobras operadora obrigatória nos blocos do pré-sal.",
+    fonte: "ANP/SEP",
+    apareceEm: ["pads-andamento", "pads-concluidos", "declaracoes-comercialidade"],
+  },
+  {
+    id: "pad",
+    termo: "PAD — Plano de Avaliação de Descobertas",
+    categoria: "operacoes",
+    definicao:
+      "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. Elaborado e entregue à ANP conforme a Resolução ANP nº 845/2021, descreve a descoberta e apresenta programa de trabalho com atividades, prazos e investimentos para avaliação. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em RFAD; se a descoberta for comercial, o RFAD fundamenta a Declaração de Comercialidade.",
+    fonte: "ANP/SEP — SIGEP; Resolução ANP nº 845/2021",
+    apareceEm: ["pads-andamento", "pads-concluidos", "declaracoes-comercialidade", "ranp-815"],
+  },
+  {
+    id: "rfad",
+    termo: "RFAD — Relatório Final de Avaliação de Descobertas",
+    categoria: "operacoes",
+    definicao:
+      "Documento de encerramento do PAD que consolida as atividades de avaliação realizadas e os resultados da interpretação dos dados. A aprovação do RFAD pela ANP é condição necessária para conferir efetividade a uma eventual Declaração de Comercialidade. Em caso de resultado negativo, encerra o PAD sem declaração.",
+    fonte: "Resolução ANP nº 845/2021",
+    apareceEm: ["pads-concluidos", "declaracoes-comercialidade"],
+  },
+  {
+    id: "poco-anp",
+    termo: "Poço ANP",
+    categoria: "operacoes",
+    definicao:
+      "Identificador padronizado atribuído a um poço de petróleo ou gás no Brasil, conforme as regras da Agência Nacional do Petróleo, Gás Natural e Biocombustíveis (ANP). Permite a identificação única em documentos técnicos, sistemas oficiais e comunicações regulatórias.",
+    fonte: "ANP/SEP",
+    apareceEm: ["pocos-exploratorios", "blocos-contrato"],
+  },
+  {
+    id: "notificacao-descoberta",
+    termo: "Notificação de Descoberta",
+    categoria: "operacoes",
+    definicao:
+      "Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.",
+    fonte: "ANP/SEP — SIGEP",
+    apareceEm: ["pocos-exploratorios"],
+  },
+  {
+    id: "declaracao-comercialidade",
+    termo: "Declaração de Comercialidade",
+    categoria: "operacoes",
+    definicao:
+      "Declaração formal do concessionário à ANP de que uma descoberta de hidrocarbonetos possui viabilidade econômica para produção. Encerra o PAD com resultado positivo e dá início ao planejamento da área de desenvolvimento.",
+    fonte: "ANP/SEP — SIGEP",
+    apareceEm: ["pads-concluidos", "declaracoes-comercialidade"],
+  },
+  {
+    id: "area-desenvolvimento",
+    termo: "Área de Desenvolvimento da Produção",
+    categoria: "operacoes",
+    definicao:
+      'Fase intermediária do ciclo de E&P entre a Declaração de Comercialidade e o Primeiro Óleo. Durante essa etapa, o concessionário executa o Plano de Desenvolvimento (PD) aprovado pela ANP: contratação de plataformas, perfuração de poços produtores, instalação de sistemas submarinos e gasodutos. O campo é considerado "em desenvolvimento" enquanto a produção comercial ainda não se iniciou.',
+    fonte: "Lei nº 9.478/1997; RANP 810/2020",
+    apareceEm: ["pads-concluidos", "declaracoes-comercialidade"],
+  },
+  {
+    id: "plano-desenvolvimento",
+    termo: "Plano de Desenvolvimento",
+    categoria: "operacoes",
+    definicao:
+      "Documento técnico-econômico obrigatório entregue pelo concessionário à ANP em até 180 dias após a Declaração de Comercialidade. Agrupa informações técnicas, operacionais, econômicas e ambientais da explotação do campo, incluindo abandono. A ANP analisa o PD em até 180 dias; se solicitar modificações, o contratado tem 60 dias para apresentar o PD modificado. Após aprovação, o PD passa a vincular a atuação do concessionário. Em casos de jazidas compartilhadas, deve ser acompanhado do AIP ou do CIP.",
+    fonte: "Resolução ANP nº 17/2015",
+    apareceEm: ["declaracoes-comercialidade"],
+  },
+  {
+    id: "aip",
+    termo: "AIP — Acordo de Individualização da Produção",
+    categoria: "operacoes",
+    definicao:
+      "Acordo celebrado entre concessionários de blocos distintos que compartilham a mesma jazida de hidrocarbonetos, estabelecendo os termos para a produção individualizada de cada parte. Deve ser submetido à ANP juntamente com o Plano de Desenvolvimento quando houver descoberta em jazida compartilhada. Em situações em que o AIP ainda não está concluído, o CIP pode ser apresentado em substituição provisória.",
+    fonte: "Lei nº 9.478/1997; Resolução ANP nº 17/2015",
+    apareceEm: ["declaracoes-comercialidade"],
+  },
+  {
+    id: "cip",
+    termo: "CIP — Compromisso de Individualização da Produção",
+    categoria: "operacoes",
+    definicao:
+      "Instrumento provisório apresentado pelos concessionários à ANP quando o Acordo de Individualização da Produção (AIP) ainda não foi concluído, comprometendo-se a celebrá-lo em prazo definido. Acompanha o Plano de Desenvolvimento em casos de jazida compartilhada nos quais o AIP definitivo não está disponível.",
+    fonte: "Lei nº 9.478/1997; Resolução ANP nº 17/2015",
+    apareceEm: ["declaracoes-comercialidade"],
+  },
+  {
+    id: "primeiro-oleo",
+    termo: "Primeiro Óleo",
+    categoria: "operacoes",
+    definicao:
+      "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
+    fonte: "ANP/SEP",
+    apareceEm: [],
+  },
+  {
+    id: "teste-formacao",
+    termo: "Teste de Formação",
+    categoria: "operacoes",
+    definicao:
+      "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+    fonte: "ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014",
+    apareceEm: ["pads-andamento", "pads-concluidos"],
+  },
+  {
+    id: "tld",
+    termo: "TLD",
+    categoria: "operacoes",
+    definicao:
+      "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+    fonte: "ANP — Norma de Testes de Poço (TLD)",
+    apareceEm: ["pads-andamento", "pads-concluidos"],
+  },
+  {
+    id: "rftp",
+    termo: "RFTP",
+    categoria: "regulatorio",
+    definicao:
+      "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+    fonte: "ANP — Norma de Testes de Poço",
+    apareceEm: [],
+  },
+  {
+    id: "i-engine",
+    termo: "i-Engine",
+    categoria: "sistemas",
+    definicao:
+      "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+    fonte: "ANP/SEP — Resolução nº 880/2022",
+    apareceEm: ["pads-andamento", "pads-concluidos", "declaracoes-comercialidade"],
+  },
+  {
+    id: "dpp",
+    termo: "DPP",
+    categoria: "sistemas",
+    definicao:
+      "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+    fonte: "ANP/SEP",
+    apareceEm: [],
+  },
+  {
+    id: "bmp",
+    termo: "BMP",
+    categoria: "regulatorio",
+    definicao:
+      "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+    fonte: "ANP/SEP",
+    apareceEm: ["declaracoes-comercialidade"],
+  },
+  {
+    id: "rodada-licitacao",
+    termo: "Rodada de Licitação",
+    categoria: "regulatorio",
+    definicao:
+      "Ato pelo qual o governo leiloa áreas específicas do seu território para fins de exploração mineral. Identifica em qual rodada o bloco exploratório foi arrematado, permitindo rastrear o histórico de concessões e partilhas no Brasil.",
+    fonte: "Dicionário enciclopédico inglês-português de geofísica e geologia",
+    apareceEm: ["pads-andamento", "pads-concluidos", "declaracoes-comercialidade"],
+  },
+  {
+    id: "processo-sancionador",
+    termo: "Processo Sancionador",
+    categoria: "regulatorio",
+    definicao:
+      "Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.",
+    fonte: "ANP/SEP",
+    apareceEm: ["processos-sancionadores"],
+  },
+  {
+    id: "anp",
+    termo: "ANP",
+    categoria: "regulatorio",
+    definicao:
+      "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.",
+    fonte: "Lei nº 9478/1997",
+    apareceEm: [
+      "pocos-exploratorios",
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+      "processos-sancionadores",
+      "ranp-708",
+      "ranp-815",
+    ],
+  },
+  {
+    id: "sigep",
+    termo: "SIGEP",
+    categoria: "sistemas",
+    definicao:
+      "Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.",
+    fonte: "ANP/SEP",
+    apareceEm: ["pocos-exploratorios", "blocos-contrato", "pads-andamento", "pads-concluidos"],
+  },
+  {
+    id: "sep",
+    termo: "SEP",
+    categoria: "sistemas",
+    definicao:
+      "Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.",
+    fonte: "ANP",
+    apareceEm: [
+      "pocos-exploratorios",
+      "blocos-contrato",
+      "pads-andamento",
+      "pads-concluidos",
+      "declaracoes-comercialidade",
+      "processos-sancionadores",
+      "ranp-708",
+      "ranp-815",
+    ],
+  },
 ];
 
 const CONJUNTOS = [
-  { id: 'pocos-exploratorios', titulo: 'Poços Exploratórios em Blocos',
-    descricao: 'Dados gerais sobre os poços exploratórios que tiveram a perfuração iniciada a partir do ano de 1998.',
-    fonte: 'ANP/SEP — SIGEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+  {
+    id: "pocos-exploratorios",
+    titulo: "Poços Exploratórios em Blocos",
+    descricao:
+      "Dados gerais sobre os poços exploratórios que tiveram a perfuração iniciada a partir do ano de 1998.",
+    fonte: "ANP/SEP — SIGEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'POÇO ANP', descricao: 'Identificador padronizado do poço conforme regras da ANP', tipo: 'TEXT' },
-      { nome: 'BLOCO', descricao: 'Nome do bloco onde o poço foi perfurado', tipo: 'TEXT' },
-      { nome: 'BACIA', descricao: 'Nome da bacia sedimentar', tipo: 'TEXT' },
-      { nome: 'BACIAS AGRUPADAS', descricao: 'Agrupamento regional das bacias sedimentares', tipo: 'TEXT' },
-      { nome: 'ESTADO', descricao: 'Unidade da Federação', tipo: 'TEXT' },
-      { nome: 'AMBIENTE', descricao: 'Localização por ambiente: terra ou mar', tipo: 'TEXT' },
-      { nome: 'OPERADOR', descricao: 'Empresa operadora do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'INÍCIO DA PERFURAÇÃO', descricao: 'Data em que a perfuração do poço teve início', tipo: 'DATE' },
-      { nome: 'CONCLUSÃO DA PERFURAÇÃO', descricao: 'Data em que foi concluída a perfuração', tipo: 'DATE' },
-      { nome: 'PROFUNDIDADE FINAL (m)', descricao: 'Profundidade final alcançada pelo poço, em metros', tipo: 'INTEGER' },
-      { nome: 'ATINGIU PRÉ-SAL?', descricao: 'Identifica se o poço atingiu o pré-sal', tipo: 'TEXT' },
-      { nome: 'NOTIFICAÇÃO DE DESCOBERTA?', descricao: 'Identifica se ocorreu indícios de hidrocarbonetos durante a perfuração', tipo: 'TEXT' },
-      { nome: 'DATA DA 1ª DESCOBERTA', descricao: 'Data da primeira descoberta de hidrocarbonetos notificada à ANP', tipo: 'DATE' },
-      { nome: 'FLUIDO NOTIFICAÇÃO DE DESCOBERTA', descricao: 'Hidrocarboneto que foi notificada a descoberta à ANP', tipo: 'TEXT' },
-    ] },
-  { id: 'blocos-contrato', titulo: 'Blocos sob Contrato',
-    descricao: 'Dados gerais sobre os blocos exploratórios sob contrato: operador, contratados, bacia, período exploratório, prazos de vencimento e dados técnicos sobre poços e UTS.',
-    fonte: 'ANP/SEP — SIGEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      {
+        nome: "POÇO ANP",
+        descricao: "Identificador padronizado do poço conforme regras da ANP",
+        tipo: "TEXT",
+      },
+      { nome: "BLOCO", descricao: "Nome do bloco onde o poço foi perfurado", tipo: "TEXT" },
+      { nome: "BACIA", descricao: "Nome da bacia sedimentar", tipo: "TEXT" },
+      {
+        nome: "BACIAS AGRUPADAS",
+        descricao: "Agrupamento regional das bacias sedimentares",
+        tipo: "TEXT",
+      },
+      { nome: "ESTADO", descricao: "Unidade da Federação", tipo: "TEXT" },
+      { nome: "AMBIENTE", descricao: "Localização por ambiente: terra ou mar", tipo: "TEXT" },
+      { nome: "OPERADOR", descricao: "Empresa operadora do contrato de E&P", tipo: "TEXT" },
+      {
+        nome: "INÍCIO DA PERFURAÇÃO",
+        descricao: "Data em que a perfuração do poço teve início",
+        tipo: "DATE",
+      },
+      {
+        nome: "CONCLUSÃO DA PERFURAÇÃO",
+        descricao: "Data em que foi concluída a perfuração",
+        tipo: "DATE",
+      },
+      {
+        nome: "PROFUNDIDADE FINAL (m)",
+        descricao: "Profundidade final alcançada pelo poço, em metros",
+        tipo: "INTEGER",
+      },
+      {
+        nome: "ATINGIU PRÉ-SAL?",
+        descricao: "Identifica se o poço atingiu o pré-sal",
+        tipo: "TEXT",
+      },
+      {
+        nome: "NOTIFICAÇÃO DE DESCOBERTA?",
+        descricao: "Identifica se ocorreu indícios de hidrocarbonetos durante a perfuração",
+        tipo: "TEXT",
+      },
+      {
+        nome: "DATA DA 1ª DESCOBERTA",
+        descricao: "Data da primeira descoberta de hidrocarbonetos notificada à ANP",
+        tipo: "DATE",
+      },
+      {
+        nome: "FLUIDO NOTIFICAÇÃO DE DESCOBERTA",
+        descricao: "Hidrocarboneto que foi notificada a descoberta à ANP",
+        tipo: "TEXT",
+      },
+    ],
+  },
+  {
+    id: "blocos-contrato",
+    titulo: "Blocos sob Contrato",
+    descricao:
+      "Dados gerais sobre os blocos exploratórios sob contrato: operador, contratados, bacia, período exploratório, prazos de vencimento e dados técnicos sobre poços e UTS.",
+    fonte: "ANP/SEP — SIGEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'BLOCO', descricao: 'Nome do bloco exploratório', tipo: 'TEXT' },
-      { nome: 'CONTRATO', descricao: 'Código do contrato de E&P assinado com a ANP', tipo: 'INTEGER' },
-      { nome: 'OPERADOR', descricao: 'Concessionário designado para conduzir as operações', tipo: 'TEXT' },
-      { nome: 'CONTRATADOS', descricao: 'Empresas contratadas e sua participação percentual', tipo: 'TEXT' },
-      { nome: 'AMBIENTE', descricao: 'Localização por ambiente: terra ou mar', tipo: 'TEXT' },
-      { nome: 'BACIAS AGRUPADAS', descricao: 'Agrupamento regional das bacias sedimentares', tipo: 'TEXT' },
-      { nome: 'BACIA', descricao: 'Nome da bacia sedimentar', tipo: 'TEXT' },
-      { nome: 'ÁREA (MIL km²)', descricao: 'Área do bloco em mil quilômetros quadrados', tipo: 'DECIMAL' },
-      { nome: 'RODADA', descricao: 'Identificação da rodada de licitação', tipo: 'TEXT' },
-      { nome: 'PERÍODO', descricao: 'Identificação do período exploratório: 1º, 2º, 3º ou único', tipo: 'TEXT' },
-      { nome: 'PRESENÇA PAD', descricao: 'Indica se há ou houve Plano de Avaliação de Descobertas', tipo: 'TEXT' },
-      { nome: 'DATA DA ASSINATURA CONTRATO', descricao: 'Data de assinatura do contrato de E&P', tipo: 'DATE' },
-      { nome: 'DATA INÍCIO SUSPENSÃO', descricao: 'Data de início da suspensão do contrato', tipo: 'DATE' },
-      { nome: '1º PE VENCIMENTO', descricao: 'Data de vencimento do 1º período exploratório', tipo: 'DATE' },
-      { nome: '2º PE VENCIMENTO', descricao: 'Data de vencimento do 2º período exploratório', tipo: 'DATE' },
-      { nome: '3º PE VENCIMENTO', descricao: 'Data de vencimento do 3º período exploratório', tipo: 'DATE' },
-      { nome: 'ÚLTIMO PAD VENCIMENTO', descricao: 'Data de vencimento do último PAD', tipo: 'DATE' },
-      { nome: 'FASE EXPLORATÓRIA VENCIMENTO', descricao: 'Data de vencimento da fase exploratória do bloco', tipo: 'DATE' },
-      { nome: 'UTS COMPROMISSADAS', descricao: 'Unidades de Trabalho comprometidas no Programa Exploratório Mínimo', tipo: 'DECIMAL' },
-      { nome: 'QTD DE POÇOS PERFURADOS', descricao: 'Número de poços perfurados na área contratada', tipo: 'INTEGER' },
-      { nome: 'POÇOS PERFURADOS', descricao: 'Nome(s) dos poços ANP perfurados na área contratada', tipo: 'TEXT' },
-    ] },
-  { id: 'pads-andamento', titulo: 'PADs em Andamento',
-    descricao: 'Dados gerais sobre os Planos de Avaliação de Descobertas (PADs) atualmente em andamento na fase de exploração.',
-    fonte: 'ANP/SEP — SIGEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      { nome: "BLOCO", descricao: "Nome do bloco exploratório", tipo: "TEXT" },
+      {
+        nome: "CONTRATO",
+        descricao: "Código do contrato de E&P assinado com a ANP",
+        tipo: "INTEGER",
+      },
+      {
+        nome: "OPERADOR",
+        descricao: "Concessionário designado para conduzir as operações",
+        tipo: "TEXT",
+      },
+      {
+        nome: "CONTRATADOS",
+        descricao: "Empresas contratadas e sua participação percentual",
+        tipo: "TEXT",
+      },
+      { nome: "AMBIENTE", descricao: "Localização por ambiente: terra ou mar", tipo: "TEXT" },
+      {
+        nome: "BACIAS AGRUPADAS",
+        descricao: "Agrupamento regional das bacias sedimentares",
+        tipo: "TEXT",
+      },
+      { nome: "BACIA", descricao: "Nome da bacia sedimentar", tipo: "TEXT" },
+      {
+        nome: "ÁREA (MIL km²)",
+        descricao: "Área do bloco em mil quilômetros quadrados",
+        tipo: "DECIMAL",
+      },
+      { nome: "RODADA", descricao: "Identificação da rodada de licitação", tipo: "TEXT" },
+      {
+        nome: "PERÍODO",
+        descricao: "Identificação do período exploratório: 1º, 2º, 3º ou único",
+        tipo: "TEXT",
+      },
+      {
+        nome: "PRESENÇA PAD",
+        descricao: "Indica se há ou houve Plano de Avaliação de Descobertas",
+        tipo: "TEXT",
+      },
+      {
+        nome: "DATA DA ASSINATURA CONTRATO",
+        descricao: "Data de assinatura do contrato de E&P",
+        tipo: "DATE",
+      },
+      {
+        nome: "DATA INÍCIO SUSPENSÃO",
+        descricao: "Data de início da suspensão do contrato",
+        tipo: "DATE",
+      },
+      {
+        nome: "1º PE VENCIMENTO",
+        descricao: "Data de vencimento do 1º período exploratório",
+        tipo: "DATE",
+      },
+      {
+        nome: "2º PE VENCIMENTO",
+        descricao: "Data de vencimento do 2º período exploratório",
+        tipo: "DATE",
+      },
+      {
+        nome: "3º PE VENCIMENTO",
+        descricao: "Data de vencimento do 3º período exploratório",
+        tipo: "DATE",
+      },
+      {
+        nome: "ÚLTIMO PAD VENCIMENTO",
+        descricao: "Data de vencimento do último PAD",
+        tipo: "DATE",
+      },
+      {
+        nome: "FASE EXPLORATÓRIA VENCIMENTO",
+        descricao: "Data de vencimento da fase exploratória do bloco",
+        tipo: "DATE",
+      },
+      {
+        nome: "UTS COMPROMISSADAS",
+        descricao: "Unidades de Trabalho comprometidas no Programa Exploratório Mínimo",
+        tipo: "DECIMAL",
+      },
+      {
+        nome: "QTD DE POÇOS PERFURADOS",
+        descricao: "Número de poços perfurados na área contratada",
+        tipo: "INTEGER",
+      },
+      {
+        nome: "POÇOS PERFURADOS",
+        descricao: "Nome(s) dos poços ANP perfurados na área contratada",
+        tipo: "TEXT",
+      },
+    ],
+  },
+  {
+    id: "pads-andamento",
+    titulo: "PADs em Andamento",
+    descricao:
+      "Dados gerais sobre os Planos de Avaliação de Descobertas (PADs) atualmente em andamento na fase de exploração.",
+    fonte: "ANP/SEP — SIGEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'CÓDIGO DO PAD', descricao: 'Nome do PAD — corresponde à acumulação principal da área', tipo: 'TEXT' },
-      { nome: 'BLOCO', descricao: 'Nome do bloco exploratório', tipo: 'TEXT' },
-      { nome: 'BACIA', descricao: 'Nome da bacia sedimentar', tipo: 'TEXT' },
-      { nome: 'BACIAS AGRUPADAS', descricao: 'Agrupamento regional das bacias sedimentares', tipo: 'TEXT' },
-      { nome: 'AMBIENTE', descricao: 'Localização por ambiente: terra ou mar', tipo: 'TEXT' },
-      { nome: 'OPERADOR', descricao: 'Empresa operadora do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'CONTRATADOS', descricao: 'Empresas contratadas e sua participação percentual', tipo: 'TEXT' },
-      { nome: 'RODADA', descricao: 'Identificação da rodada de licitação', tipo: 'TEXT' },
-      { nome: 'REGIME CONTRATUAL', descricao: 'Modalidade contratual: Concessão ou Partilha', tipo: 'TEXT' },
-      { nome: 'SITUAÇÃO', descricao: 'Situação atual do PAD', tipo: 'TEXT' },
-      { nome: 'INÍCIO EFETIVO', descricao: 'Data do início efetivo do PAD', tipo: 'DATE' },
-      { nome: 'TÉRMINO PREVISTO', descricao: 'Data do término previsto do PAD', tipo: 'DATE' },
-    ] },
-  { id: 'pads-concluidos', titulo: 'PADs Concluídos',
-    descricao: 'Dados gerais sobre os Planos de Avaliação de Descobertas (PADs) concluídos na fase de exploração, incluindo resultado de comercialidade e área de desenvolvimento.',
-    fonte: 'ANP/SEP — SIGEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      {
+        nome: "CÓDIGO DO PAD",
+        descricao: "Nome do PAD — corresponde à acumulação principal da área",
+        tipo: "TEXT",
+      },
+      { nome: "BLOCO", descricao: "Nome do bloco exploratório", tipo: "TEXT" },
+      { nome: "BACIA", descricao: "Nome da bacia sedimentar", tipo: "TEXT" },
+      {
+        nome: "BACIAS AGRUPADAS",
+        descricao: "Agrupamento regional das bacias sedimentares",
+        tipo: "TEXT",
+      },
+      { nome: "AMBIENTE", descricao: "Localização por ambiente: terra ou mar", tipo: "TEXT" },
+      { nome: "OPERADOR", descricao: "Empresa operadora do contrato de E&P", tipo: "TEXT" },
+      {
+        nome: "CONTRATADOS",
+        descricao: "Empresas contratadas e sua participação percentual",
+        tipo: "TEXT",
+      },
+      { nome: "RODADA", descricao: "Identificação da rodada de licitação", tipo: "TEXT" },
+      {
+        nome: "REGIME CONTRATUAL",
+        descricao: "Modalidade contratual: Concessão ou Partilha",
+        tipo: "TEXT",
+      },
+      { nome: "SITUAÇÃO", descricao: "Situação atual do PAD", tipo: "TEXT" },
+      { nome: "INÍCIO EFETIVO", descricao: "Data do início efetivo do PAD", tipo: "DATE" },
+      { nome: "TÉRMINO PREVISTO", descricao: "Data do término previsto do PAD", tipo: "DATE" },
+    ],
+  },
+  {
+    id: "pads-concluidos",
+    titulo: "PADs Concluídos",
+    descricao:
+      "Dados gerais sobre os Planos de Avaliação de Descobertas (PADs) concluídos na fase de exploração, incluindo resultado de comercialidade e área de desenvolvimento.",
+    fonte: "ANP/SEP — SIGEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'CÓDIGO DO PAD', descricao: 'Nome do PAD — corresponde à acumulação principal da área', tipo: 'TEXT' },
-      { nome: 'BLOCO', descricao: 'Nome do bloco exploratório', tipo: 'TEXT' },
-      { nome: 'BACIA', descricao: 'Nome da bacia sedimentar', tipo: 'TEXT' },
-      { nome: 'AMBIENTE', descricao: 'Localização por ambiente: terra ou mar', tipo: 'TEXT' },
-      { nome: 'OPERADOR', descricao: 'Empresa operadora do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'RODADA', descricao: 'Identificação da rodada de licitação', tipo: 'TEXT' },
-      { nome: 'REGIME CONTRATUAL', descricao: 'Modalidade contratual: Concessão ou Partilha', tipo: 'TEXT' },
-      { nome: 'INÍCIO EFETIVO', descricao: 'Data do início efetivo do PAD', tipo: 'DATE' },
-      { nome: 'TÉRMINO EFETIVO', descricao: 'Data do término efetivo do PAD', tipo: 'DATE' },
-      { nome: 'DECLAROU COMERCIALIDADE', descricao: 'Identifica se ocorreu declaração de comercialidade: Sim ou Não', tipo: 'TEXT' },
-      { nome: 'ÁREA DE DESENVOLVIMENTO', descricao: 'Nome da área de desenvolvimento resultante', tipo: 'TEXT' },
-    ] },
-  { id: 'declaracoes-comercialidade', titulo: 'Declarações de Comercialidade',
-    descricao: 'Dados gerais sobre as Declarações de Comercialidade nos blocos sob contrato na fase de exploração.',
-    fonte: 'ANP/SEP — SIGEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      {
+        nome: "CÓDIGO DO PAD",
+        descricao: "Nome do PAD — corresponde à acumulação principal da área",
+        tipo: "TEXT",
+      },
+      { nome: "BLOCO", descricao: "Nome do bloco exploratório", tipo: "TEXT" },
+      { nome: "BACIA", descricao: "Nome da bacia sedimentar", tipo: "TEXT" },
+      { nome: "AMBIENTE", descricao: "Localização por ambiente: terra ou mar", tipo: "TEXT" },
+      { nome: "OPERADOR", descricao: "Empresa operadora do contrato de E&P", tipo: "TEXT" },
+      { nome: "RODADA", descricao: "Identificação da rodada de licitação", tipo: "TEXT" },
+      {
+        nome: "REGIME CONTRATUAL",
+        descricao: "Modalidade contratual: Concessão ou Partilha",
+        tipo: "TEXT",
+      },
+      { nome: "INÍCIO EFETIVO", descricao: "Data do início efetivo do PAD", tipo: "DATE" },
+      { nome: "TÉRMINO EFETIVO", descricao: "Data do término efetivo do PAD", tipo: "DATE" },
+      {
+        nome: "DECLAROU COMERCIALIDADE",
+        descricao: "Identifica se ocorreu declaração de comercialidade: Sim ou Não",
+        tipo: "TEXT",
+      },
+      {
+        nome: "ÁREA DE DESENVOLVIMENTO",
+        descricao: "Nome da área de desenvolvimento resultante",
+        tipo: "TEXT",
+      },
+    ],
+  },
+  {
+    id: "declaracoes-comercialidade",
+    titulo: "Declarações de Comercialidade",
+    descricao:
+      "Dados gerais sobre as Declarações de Comercialidade nos blocos sob contrato na fase de exploração.",
+    fonte: "ANP/SEP — SIGEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'CÓDIGO DO PAD', descricao: 'Nome do PAD — corresponde à acumulação principal da área', tipo: 'TEXT' },
-      { nome: 'BLOCO(S)', descricao: 'Nome(s) do(s) bloco(s) relacionado(s) à declaração', tipo: 'TEXT' },
-      { nome: 'BACIA', descricao: 'Nome da bacia sedimentar', tipo: 'TEXT' },
-      { nome: 'AMBIENTE', descricao: 'Localização por ambiente: terra ou mar', tipo: 'TEXT' },
-      { nome: 'OPERADOR', descricao: 'Empresa operadora do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'RODADA', descricao: 'Identificação da rodada de licitação', tipo: 'TEXT' },
-      { nome: 'REGIME CONTRATUAL', descricao: 'Modalidade contratual: Concessão ou Partilha', tipo: 'TEXT' },
-      { nome: 'DATA DA DECLARAÇÃO DE COMERCIALIDADE', descricao: 'Data da declaração de comercialidade', tipo: 'DATE' },
-      { nome: 'ÁREA DE DESENVOLVIMENTO', descricao: 'Nome da área de desenvolvimento resultante', tipo: 'TEXT' },
-    ] },
-  { id: 'processos-sancionadores', titulo: 'Processos Sancionadores',
-    descricao: 'Dados gerais referente à situação dos Processos Sancionadores de exploração de petróleo e gás natural em trâmite na SEP.',
-    fonte: 'ANP/SEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      {
+        nome: "CÓDIGO DO PAD",
+        descricao: "Nome do PAD — corresponde à acumulação principal da área",
+        tipo: "TEXT",
+      },
+      {
+        nome: "BLOCO(S)",
+        descricao: "Nome(s) do(s) bloco(s) relacionado(s) à declaração",
+        tipo: "TEXT",
+      },
+      { nome: "BACIA", descricao: "Nome da bacia sedimentar", tipo: "TEXT" },
+      { nome: "AMBIENTE", descricao: "Localização por ambiente: terra ou mar", tipo: "TEXT" },
+      { nome: "OPERADOR", descricao: "Empresa operadora do contrato de E&P", tipo: "TEXT" },
+      { nome: "RODADA", descricao: "Identificação da rodada de licitação", tipo: "TEXT" },
+      {
+        nome: "REGIME CONTRATUAL",
+        descricao: "Modalidade contratual: Concessão ou Partilha",
+        tipo: "TEXT",
+      },
+      {
+        nome: "DATA DA DECLARAÇÃO DE COMERCIALIDADE",
+        descricao: "Data da declaração de comercialidade",
+        tipo: "DATE",
+      },
+      {
+        nome: "ÁREA DE DESENVOLVIMENTO",
+        descricao: "Nome da área de desenvolvimento resultante",
+        tipo: "TEXT",
+      },
+    ],
+  },
+  {
+    id: "processos-sancionadores",
+    titulo: "Processos Sancionadores",
+    descricao:
+      "Dados gerais referente à situação dos Processos Sancionadores de exploração de petróleo e gás natural em trâmite na SEP.",
+    fonte: "ANP/SEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'EMPRESA', descricao: 'Nome da empresa autuada', tipo: 'TEXT' },
-      { nome: 'CNPJ/CPF', descricao: 'Número do CNPJ ou CPF do contratado', tipo: 'TEXT' },
-      { nome: 'Nº PROCESSO', descricao: 'Número do processo administrativo', tipo: 'TEXT' },
-      { nome: 'Nº DF', descricao: 'Número do documento de fiscalização', tipo: 'TEXT' },
-      { nome: 'DATA DO AUTO', descricao: 'Data do auto de infração', tipo: 'DATE' },
-      { nome: 'MOTIVO', descricao: 'Fundamentação que deu ensejo à autuação', tipo: 'TEXT' },
-      { nome: 'SITUAÇÃO PROCESSUAL', descricao: 'Situação do andamento do processo administrativo', tipo: 'TEXT' },
-      { nome: 'MULTA APLICADA', descricao: 'Valor da multa aplicada como resultado do processo', tipo: 'DECIMAL' },
-      { nome: 'RECURSO', descricao: 'Indica se houve recurso ao processo', tipo: 'TEXT' },
-    ] },
-  { id: 'ranp-708', titulo: 'Resolução ANP nº 708/2017',
-    descricao: 'Dados sobre blocos exploratórios com período exploratório prorrogado pela Resolução ANP nº 708/2017.',
-    fonte: 'ANP/SEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      { nome: "EMPRESA", descricao: "Nome da empresa autuada", tipo: "TEXT" },
+      { nome: "CNPJ/CPF", descricao: "Número do CNPJ ou CPF do contratado", tipo: "TEXT" },
+      { nome: "Nº PROCESSO", descricao: "Número do processo administrativo", tipo: "TEXT" },
+      { nome: "Nº DF", descricao: "Número do documento de fiscalização", tipo: "TEXT" },
+      { nome: "DATA DO AUTO", descricao: "Data do auto de infração", tipo: "DATE" },
+      { nome: "MOTIVO", descricao: "Fundamentação que deu ensejo à autuação", tipo: "TEXT" },
+      {
+        nome: "SITUAÇÃO PROCESSUAL",
+        descricao: "Situação do andamento do processo administrativo",
+        tipo: "TEXT",
+      },
+      {
+        nome: "MULTA APLICADA",
+        descricao: "Valor da multa aplicada como resultado do processo",
+        tipo: "DECIMAL",
+      },
+      { nome: "RECURSO", descricao: "Indica se houve recurso ao processo", tipo: "TEXT" },
+    ],
+  },
+  {
+    id: "ranp-708",
+    titulo: "Resolução ANP nº 708/2017",
+    descricao:
+      "Dados sobre blocos exploratórios com período exploratório prorrogado pela Resolução ANP nº 708/2017.",
+    fonte: "ANP/SEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'BLOCO', descricao: 'Nome do bloco exploratório', tipo: 'TEXT' },
-      { nome: 'CONTRATO', descricao: 'Nome fantasia do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'OPERADOR', descricao: 'Empresa operadora do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'ETAPA PRORROGADA', descricao: 'Etapa prorrogada: período único, 1º e 2º PE, ou 2º PE', tipo: 'TEXT' },
-      { nome: 'DATA DE ADESÃO À RESOLUÇÃO', descricao: 'Data na qual se deu a adesão à Resolução nº 708/2017', tipo: 'DATE' },
-    ] },
-  { id: 'ranp-815', titulo: 'Resolução ANP nº 815/2020',
-    descricao: 'Dados sobre blocos exploratórios com período exploratório prorrogado pela Resolução ANP nº 815/2020.',
-    fonte: 'ANP/SEP', formato: 'CSV', frequencia: 'Mensal', contato: 'sigep_sep@anp.gov.br',
+      { nome: "BLOCO", descricao: "Nome do bloco exploratório", tipo: "TEXT" },
+      { nome: "CONTRATO", descricao: "Nome fantasia do contrato de E&P", tipo: "TEXT" },
+      { nome: "OPERADOR", descricao: "Empresa operadora do contrato de E&P", tipo: "TEXT" },
+      {
+        nome: "ETAPA PRORROGADA",
+        descricao: "Etapa prorrogada: período único, 1º e 2º PE, ou 2º PE",
+        tipo: "TEXT",
+      },
+      {
+        nome: "DATA DE ADESÃO À RESOLUÇÃO",
+        descricao: "Data na qual se deu a adesão à Resolução nº 708/2017",
+        tipo: "DATE",
+      },
+    ],
+  },
+  {
+    id: "ranp-815",
+    titulo: "Resolução ANP nº 815/2020",
+    descricao:
+      "Dados sobre blocos exploratórios com período exploratório prorrogado pela Resolução ANP nº 815/2020.",
+    fonte: "ANP/SEP",
+    formato: "CSV",
+    frequencia: "Mensal",
+    contato: "sigep_sep@anp.gov.br",
     colunas: [
-      { nome: 'BLOCO', descricao: 'Nome do bloco exploratório', tipo: 'TEXT' },
-      { nome: 'CONTRATO', descricao: 'Nome fantasia do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'OPERADOR', descricao: 'Empresa operadora do contrato de E&P', tipo: 'TEXT' },
-      { nome: 'ETAPA PRORROGADA', descricao: 'Etapa prorrogada: período único, 1º e 2º PE, ou 2º PE', tipo: 'TEXT' },
-      { nome: 'PAD', descricao: 'Nome do Plano de Avaliação de Descobertas associado à prorrogação', tipo: 'TEXT' },
-      { nome: 'DATA DE ADESÃO À RESOLUÇÃO', descricao: 'Data na qual se deu a adesão à Resolução nº 815/2020', tipo: 'DATE' },
-    ] },
+      { nome: "BLOCO", descricao: "Nome do bloco exploratório", tipo: "TEXT" },
+      { nome: "CONTRATO", descricao: "Nome fantasia do contrato de E&P", tipo: "TEXT" },
+      { nome: "OPERADOR", descricao: "Empresa operadora do contrato de E&P", tipo: "TEXT" },
+      {
+        nome: "ETAPA PRORROGADA",
+        descricao: "Etapa prorrogada: período único, 1º e 2º PE, ou 2º PE",
+        tipo: "TEXT",
+      },
+      {
+        nome: "PAD",
+        descricao: "Nome do Plano de Avaliação de Descobertas associado à prorrogação",
+        tipo: "TEXT",
+      },
+      {
+        nome: "DATA DE ADESÃO À RESOLUÇÃO",
+        descricao: "Data na qual se deu a adesão à Resolução nº 815/2020",
+        tipo: "DATE",
+      },
+    ],
+  },
 ];
 
 const ONTOLOGY_TYPES = {
   tipologia: {
-    label: 'Tipologia do Dado',
-    desc: 'O que o dado representa quimicamente/operacionalmente',
+    label: "Tipologia do Dado",
+    desc: "O que o dado representa quimicamente/operacionalmente",
     items: [
-      { id: 'geo_org', label: 'Geoquímica Orgânica', desc: 'TOC, pirólise, biomarcadores, maturidade' },
-      { id: 'geo_inorg', label: 'Geoquímica Inorgânica', desc: 'Isótopos, traços inorgânicos' },
-      { id: 'geo_hidro', label: 'Hidrogeoquímica', desc: 'Análise de água de formação' },
-      { id: 'pvt', label: 'PVT', desc: 'Propriedades pressão-volume-temperatura' },
-      { id: 'show', label: 'Show de Fluido', desc: 'Observação visual em perfuração' },
-      { id: 'teste', label: 'Teste de Formação', desc: 'DST, teste de produção' },
-      { id: 'composicao', label: 'Composição Molecular', desc: 'GC, GC-MS, espectrometria' },
+      {
+        id: "geo_org",
+        label: "Geoquímica Orgânica",
+        desc: "TOC, pirólise, biomarcadores, maturidade",
+      },
+      { id: "geo_inorg", label: "Geoquímica Inorgânica", desc: "Isótopos, traços inorgânicos" },
+      { id: "geo_hidro", label: "Hidrogeoquímica", desc: "Análise de água de formação" },
+      { id: "pvt", label: "PVT", desc: "Propriedades pressão-volume-temperatura" },
+      { id: "show", label: "Show de Fluido", desc: "Observação visual em perfuração" },
+      { id: "teste", label: "Teste de Formação", desc: "DST, teste de produção" },
+      { id: "composicao", label: "Composição Molecular", desc: "GC, GC-MS, espectrometria" },
     ],
   },
   nivel: {
-    label: 'Nível de Processamento',
-    desc: 'Grau de transformação do dado bruto ao produto analítico',
+    label: "Nível de Processamento",
+    desc: "Grau de transformação do dado bruto ao produto analítico",
     items: [
-      { id: 'primario', label: 'Dado Primário', desc: 'Medida direta de amostra ou análise laboratorial' },
-      { id: 'interpretado', label: 'Dado Interpretado', desc: 'Classificação, mapa ou modelo derivado das medidas' },
-      { id: 'curado', label: 'Produto Curado', desc: 'Dataset validado, harmonizado e versionado' },
+      {
+        id: "primario",
+        label: "Dado Primário",
+        desc: "Medida direta de amostra ou análise laboratorial",
+      },
+      {
+        id: "interpretado",
+        label: "Dado Interpretado",
+        desc: "Classificação, mapa ou modelo derivado das medidas",
+      },
+      { id: "curado", label: "Produto Curado", desc: "Dataset validado, harmonizado e versionado" },
     ],
   },
 };
 
 const DOMAINS = [
-  { id: 'ativos',      label: 'Ativos',      desc: 'Blocos, campos, concessões, PADs, regulatório ANP' },
-  { id: 'fluidos',     label: 'Fluidos',     desc: 'Produção e injeção — óleo, gás, água, condensado, CO2, vapor' },
-  { id: 'rocha',       label: 'Rocha',       desc: 'Bacias sedimentares, formações, estratigrafia, ambiente deposicional' },
-  { id: 'geomecanica', label: 'Geomecânica', desc: 'Profundidade, estratificação, stress in-situ (em roadmap)' },
+  { id: "ativos", label: "Ativos", desc: "Blocos, campos, concessões, PADs, regulatório ANP" },
+  {
+    id: "fluidos",
+    label: "Fluidos",
+    desc: "Produção e injeção — óleo, gás, água, condensado, CO2, vapor",
+  },
+  {
+    id: "rocha",
+    label: "Rocha",
+    desc: "Bacias sedimentares, formações, estratigrafia, ambiente deposicional",
+  },
+  {
+    id: "geomecanica",
+    label: "Geomecânica",
+    desc: "Profundidade, estratificação, stress in-situ (em roadmap)",
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -608,226 +1113,1060 @@ const DOMAINS = [
  * ───────────────────────────────────────────────────────────── */
 
 const COLORS = {
-  operational: '#378ADD',
-  contractual: '#7F77DD',
-  actor:       '#D85A30',
-  instrument:  '#888780',
-  geological:  '#639922',
-  equipment:   '#C77B30',
-  analytical:  '#E67E22',
+  operational: "#378ADD",
+  contractual: "#7F77DD",
+  actor: "#D85A30",
+  instrument: "#888780",
+  geological: "#639922",
+  equipment: "#C77B30",
+  analytical: "#E67E22",
 };
-const SIZES = { operational: 28, contractual: 24, actor: 24, instrument: 20, geological: 20, equipment: 22, analytical: 20 };
+const SIZES = {
+  operational: 28,
+  contractual: 24,
+  actor: 24,
+  instrument: 20,
+  geological: 20,
+  equipment: 22,
+  analytical: 20,
+};
 
 /* Mapa: id-entidade-grafo → glossario_id (quando existe) */
 const ENTITY_NODES = [
   /* operational */
-  { id: 'poco',  label: 'Poço',             label_en: 'Well',                type: 'operational', glossId: 'poco-anp',
-    primary_key: 'nome_anp',
-    primary_key_standard: 'ANP/SEP nomenclature',
-    primary_key_pattern: '^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$',
+  {
+    id: "poco",
+    label: "Poço",
+    label_en: "Well",
+    type: "operational",
+    glossId: "poco-anp",
+    primary_key: "nome_anp",
+    primary_key_standard: "ANP/SEP nomenclature",
+    primary_key_pattern: "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$",
     joined_by_modules: [
-      'data/operacoes-geologicas.json#OGEOMEC.Poco',
-      'data/operacoes-geologicas.json#FRX.Poco',
-      'data/operacoes-geologicas.json#DRX.Poco',
-    ] },
-  { id: 'bloco', label: 'Bloco',            label_en: 'Block',               type: 'operational', glossId: 'bloco' },
-  { id: 'campo', label: 'Campo',            label_en: 'Field',               type: 'operational', glossId: null,
-    definicaoOverride: 'Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.',
-    fonte: 'ANP/SEP' },
-  { id: 'bacia-sedimentar', label: 'Bacia Sedimentar', label_en: 'Sedimentary Basin', type: 'operational', glossId: 'bacia-sedimentar' },
+      "data/operacoes-geologicas.json#OGEOMEC.Poco",
+      "data/operacoes-geologicas.json#FRX.Poco",
+      "data/operacoes-geologicas.json#DRX.Poco",
+    ],
+  },
+  { id: "bloco", label: "Bloco", label_en: "Block", type: "operational", glossId: "bloco" },
+  {
+    id: "campo",
+    label: "Campo",
+    label_en: "Field",
+    type: "operational",
+    glossId: null,
+    definicaoOverride:
+      "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.",
+    fonte: "ANP/SEP",
+  },
+  {
+    id: "bacia-sedimentar",
+    label: "Bacia Sedimentar",
+    label_en: "Sedimentary Basin",
+    type: "operational",
+    glossId: "bacia-sedimentar",
+  },
 
   /* geological extension (extended-terms) */
-  { id: 'reservatorio', label: 'Reservatório', label_en: 'Reservoir', type: 'operational', glossId: null, extendedId: 'reservatorio' },
-  { id: 'formacao',     label: 'Formação',     label_en: 'Geological Formation', type: 'geological', glossId: null, extendedId: 'formacao-geologica' },
-  { id: 'sistema-deposicional', label: 'Sistema Deposicional', label_en: 'Depositional System', type: 'geological', glossId: null, extendedId: 'sistema-deposicional' },
+  {
+    id: "reservatorio",
+    label: "Reservatório",
+    label_en: "Reservoir",
+    type: "operational",
+    glossId: null,
+    extendedId: "reservatorio",
+  },
+  {
+    id: "formacao",
+    label: "Formação",
+    label_en: "Geological Formation",
+    type: "geological",
+    glossId: null,
+    extendedId: "formacao-geologica",
+  },
+  {
+    id: "sistema-deposicional",
+    label: "Sistema Deposicional",
+    label_en: "Depositional System",
+    type: "geological",
+    glossId: null,
+    extendedId: "sistema-deposicional",
+  },
 
   /* contractual */
-  { id: 'contrato-ep',              label: 'Contrato E&P',                 label_en: 'E&P Contract',             type: 'contractual', glossId: 'contrato-ep' },
-  { id: 'pem',                      label: 'PEM',                          label_en: 'Minimum Exploratory Programme', type: 'contractual', glossId: 'pem' },
-  { id: 'pte',                      label: 'PTE',                          label_en: 'Exploratory Work Plan',    type: 'contractual', glossId: 'pte' },
-  { id: 'pad',                      label: 'PAD',                          label_en: 'Discovery Evaluation Plan', type: 'contractual', glossId: 'pad' },
-  { id: 'rfad',                     label: 'RFAD',                         label_en: 'Discovery Evaluation Final Report', type: 'contractual', glossId: 'rfad' },
-  { id: 'rodada-licitacao',         label: 'Rodada de Licitação',          label_en: 'Bid Round',                type: 'contractual', glossId: 'rodada-licitacao' },
-  { id: 'declaracao-comercialidade',label: 'Declaração de Comercialidade', label_en: 'Commerciality Declaration', type: 'contractual', glossId: 'declaracao-comercialidade' },
+  {
+    id: "contrato-ep",
+    label: "Contrato E&P",
+    label_en: "E&P Contract",
+    type: "contractual",
+    glossId: "contrato-ep",
+  },
+  {
+    id: "pem",
+    label: "PEM",
+    label_en: "Minimum Exploratory Programme",
+    type: "contractual",
+    glossId: "pem",
+  },
+  {
+    id: "pte",
+    label: "PTE",
+    label_en: "Exploratory Work Plan",
+    type: "contractual",
+    glossId: "pte",
+  },
+  {
+    id: "pad",
+    label: "PAD",
+    label_en: "Discovery Evaluation Plan",
+    type: "contractual",
+    glossId: "pad",
+  },
+  {
+    id: "rfad",
+    label: "RFAD",
+    label_en: "Discovery Evaluation Final Report",
+    type: "contractual",
+    glossId: "rfad",
+  },
+  {
+    id: "rodada-licitacao",
+    label: "Rodada de Licitação",
+    label_en: "Bid Round",
+    type: "contractual",
+    glossId: "rodada-licitacao",
+  },
+  {
+    id: "declaracao-comercialidade",
+    label: "Declaração de Comercialidade",
+    label_en: "Commerciality Declaration",
+    type: "contractual",
+    glossId: "declaracao-comercialidade",
+  },
 
   /* actor */
-  { id: 'operador', label: 'Operador', label_en: 'Operator', type: 'actor', glossId: 'operador' },
-  { id: 'anp',      label: 'ANP',      label_en: 'ANP (Brazilian Oil & Gas Regulator)', type: 'actor', glossId: 'anp' },
+  { id: "operador", label: "Operador", label_en: "Operator", type: "actor", glossId: "operador" },
+  {
+    id: "anp",
+    label: "ANP",
+    label_en: "ANP (Brazilian Oil & Gas Regulator)",
+    type: "actor",
+    glossId: "anp",
+  },
 
   /* instrument */
-  { id: 'sigep',                  label: 'SIGEP',                  label_en: 'SIGEP (E&P Information System)', type: 'instrument', glossId: 'sigep' },
-  { id: 'sep',                    label: 'SEP',                    label_en: 'SEP (ANP Exploration Office)',   type: 'instrument', glossId: 'sep' },
-  { id: 'uts',                    label: 'UTS',                    label_en: 'Work Units',                     type: 'instrument', glossId: 'uts' },
-  { id: 'regime-contratual',      label: 'Regime Contratual',      label_en: 'Contract Regime',                type: 'instrument', glossId: 'regime-contratual' },
-  { id: 'periodo-exploratorio',   label: 'Período Exploratório',   label_en: 'Exploratory Period',             type: 'instrument', glossId: 'periodo-exploratorio' },
-  { id: 'processo-sancionador',   label: 'Processo Sancionador',   label_en: 'Sanctioning Proceeding',         type: 'instrument', glossId: 'processo-sancionador' },
-  { id: 'notificacao-descoberta', label: 'Notificação Descoberta', label_en: 'Discovery Notification',         type: 'instrument', glossId: 'notificacao-descoberta' },
-  { id: 'area-desenvolvimento',   label: 'Área de Desenvolvimento da Produção', label_en: 'Production Development Phase', type: 'contractual', glossId: 'area-desenvolvimento' },
-  { id: 'plano-desenvolvimento',  label: 'Plano de Desenvolvimento', label_en: 'Development Plan',              type: 'contractual', glossId: 'plano-desenvolvimento' },
-  { id: 'aip',                    label: 'AIP',                      label_en: 'Production Individualization Agreement', type: 'contractual', glossId: 'aip' },
-  { id: 'cip',                    label: 'CIP',                      label_en: 'Production Individualization Commitment', type: 'contractual', glossId: 'cip' },
-  { id: 'primeiro-oleo',          label: 'Primeiro Óleo',            label_en: 'First Oil',                     type: 'operational', glossId: 'primeiro-oleo' },
+  {
+    id: "sigep",
+    label: "SIGEP",
+    label_en: "SIGEP (E&P Information System)",
+    type: "instrument",
+    glossId: "sigep",
+  },
+  {
+    id: "sep",
+    label: "SEP",
+    label_en: "SEP (ANP Exploration Office)",
+    type: "instrument",
+    glossId: "sep",
+  },
+  { id: "uts", label: "UTS", label_en: "Work Units", type: "instrument", glossId: "uts" },
+  {
+    id: "regime-contratual",
+    label: "Regime Contratual",
+    label_en: "Contract Regime",
+    type: "instrument",
+    glossId: "regime-contratual",
+  },
+  {
+    id: "periodo-exploratorio",
+    label: "Período Exploratório",
+    label_en: "Exploratory Period",
+    type: "instrument",
+    glossId: "periodo-exploratorio",
+  },
+  {
+    id: "processo-sancionador",
+    label: "Processo Sancionador",
+    label_en: "Sanctioning Proceeding",
+    type: "instrument",
+    glossId: "processo-sancionador",
+  },
+  {
+    id: "notificacao-descoberta",
+    label: "Notificação Descoberta",
+    label_en: "Discovery Notification",
+    type: "instrument",
+    glossId: "notificacao-descoberta",
+  },
+  {
+    id: "area-desenvolvimento",
+    label: "Área de Desenvolvimento da Produção",
+    label_en: "Production Development Phase",
+    type: "contractual",
+    glossId: "area-desenvolvimento",
+  },
+  {
+    id: "plano-desenvolvimento",
+    label: "Plano de Desenvolvimento",
+    label_en: "Development Plan",
+    type: "contractual",
+    glossId: "plano-desenvolvimento",
+  },
+  {
+    id: "aip",
+    label: "AIP",
+    label_en: "Production Individualization Agreement",
+    type: "contractual",
+    glossId: "aip",
+  },
+  {
+    id: "cip",
+    label: "CIP",
+    label_en: "Production Individualization Commitment",
+    type: "contractual",
+    glossId: "cip",
+  },
+  {
+    id: "primeiro-oleo",
+    label: "Primeiro Óleo",
+    label_en: "First Oil",
+    type: "operational",
+    glossId: "primeiro-oleo",
+  },
 
   /* ANP regulatory test events */
-  { id: 'teste-formacao', label: 'Teste de Formação', label_en: 'Formation Test (TF/TFR/TFRE)', type: 'contractual', glossId: 'teste-formacao' },
-  { id: 'tld',            label: 'TLD',               label_en: 'Extended Well Test (EWT)',      type: 'contractual', glossId: 'tld' },
-  { id: 'rftp',           label: 'RFTP',              label_en: 'Well Test Final Report',        type: 'instrument',  glossId: 'rftp' },
-  { id: 'i-engine',       label: 'i-Engine',          label_en: 'ANP i-Engine System',           type: 'instrument',  glossId: 'i-engine' },
-  { id: 'dpp',            label: 'DPP',               label_en: 'ANP Data Portal (DPP)',         type: 'instrument',  glossId: 'dpp' },
-  { id: 'bmp',            label: 'BMP',               label_en: 'Monthly Production Report',     type: 'instrument',  glossId: 'bmp' },
+  {
+    id: "teste-formacao",
+    label: "Teste de Formação",
+    label_en: "Formation Test (TF/TFR/TFRE)",
+    type: "contractual",
+    glossId: "teste-formacao",
+  },
+  {
+    id: "tld",
+    label: "TLD",
+    label_en: "Extended Well Test (EWT)",
+    type: "contractual",
+    glossId: "tld",
+  },
+  {
+    id: "rftp",
+    label: "RFTP",
+    label_en: "Well Test Final Report",
+    type: "instrument",
+    glossId: "rftp",
+  },
+  {
+    id: "i-engine",
+    label: "i-Engine",
+    label_en: "ANP i-Engine System",
+    type: "instrument",
+    glossId: "i-engine",
+  },
+  {
+    id: "dpp",
+    label: "DPP",
+    label_en: "ANP Data Portal (DPP)",
+    type: "instrument",
+    glossId: "dpp",
+  },
+  {
+    id: "bmp",
+    label: "BMP",
+    label_en: "Monthly Production Report",
+    type: "instrument",
+    glossId: "bmp",
+  },
 
   /* geological */
-  { id: 'presal',           label: 'Pré-sal',         label_en: 'Pre-salt',         type: 'geological', glossId: 'presal' },
-  { id: 'bacias-agrupadas', label: 'Bacias Agrupadas',label_en: 'Grouped Basins',   type: 'geological', glossId: 'bacias-agrupadas' },
-  { id: 'ambiente',         label: 'Ambiente',        label_en: 'Environment',      type: 'geological', glossId: 'ambiente' },
+  { id: "presal", label: "Pré-sal", label_en: "Pre-salt", type: "geological", glossId: "presal" },
+  {
+    id: "bacias-agrupadas",
+    label: "Bacias Agrupadas",
+    label_en: "Grouped Basins",
+    type: "geological",
+    glossId: "bacias-agrupadas",
+  },
+  {
+    id: "ambiente",
+    label: "Ambiente",
+    label_en: "Environment",
+    type: "geological",
+    glossId: "ambiente",
+  },
 
   /* equipment (curado a partir do siglário — siglas tier-1 do domínio) */
-  { id: 'bop',  label: 'BOP',  label_en: 'Blowout Preventer', type: 'equipment', glossId: null,
-    definicaoOverride: 'Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.', fonte: 'Siglário O&G / API' },
-  { id: 'fpso', label: 'FPSO', label_en: 'Floating Production, Storage and Offloading', type: 'equipment', glossId: null,
-    definicaoOverride: 'Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.', fonte: 'Siglário O&G' },
-  { id: 'anm-eq', label: 'ANM', label_en: 'Wet Christmas Tree (Árvore de Natal Molhada)', type: 'equipment', glossId: null,
-    definicaoOverride: 'Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.', fonte: 'Siglário O&G' },
-  { id: 'riser', label: 'Riser', label_en: 'Riser', type: 'equipment', glossId: null,
-    definicaoOverride: 'Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).', fonte: 'Siglário O&G' },
-  { id: 'rov',  label: 'ROV',  label_en: 'Remotely Operated Vehicle', type: 'equipment', glossId: null,
-    definicaoOverride: 'Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.', fonte: 'Siglário O&G' },
-  { id: 'dhsv', label: 'DHSV', label_en: 'Downhole Safety Valve', type: 'equipment', glossId: null,
-    definicaoOverride: 'Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.', fonte: 'Siglário O&G' },
-  { id: 'bha',  label: 'BHA',  label_en: 'Bottom-Hole Assembly', type: 'equipment', glossId: null,
-    definicaoOverride: 'Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).', fonte: 'Siglário O&G' },
-  { id: 'esp-eq', label: 'ESP/BCS', label_en: 'Electrical Submersible Pump', type: 'equipment', glossId: null,
-    definicaoOverride: 'Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.', fonte: 'Siglário O&G' },
-  { id: 'mwd',  label: 'MWD',  label_en: 'Measure While Drilling', type: 'equipment', glossId: null,
-    definicaoOverride: 'Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.', fonte: 'Siglário O&G' },
-  { id: 'lwd',  label: 'LWD',  label_en: 'Logging While Drilling', type: 'equipment', glossId: null,
-    definicaoOverride: 'Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.', fonte: 'Siglário O&G' },
-  { id: 'manifold-submarino', label: 'Manifold Submarino', label_en: 'Subsea Manifold', type: 'equipment', glossId: null,
-    definicaoOverride: 'Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.', fonte: 'Siglário O&G' },
+  {
+    id: "bop",
+    label: "BOP",
+    label_en: "Blowout Preventer",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.",
+    fonte: "Siglário O&G / API",
+  },
+  {
+    id: "fpso",
+    label: "FPSO",
+    label_en: "Floating Production, Storage and Offloading",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "anm-eq",
+    label: "ANM",
+    label_en: "Wet Christmas Tree (Árvore de Natal Molhada)",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "riser",
+    label: "Riser",
+    label_en: "Riser",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "rov",
+    label: "ROV",
+    label_en: "Remotely Operated Vehicle",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "dhsv",
+    label: "DHSV",
+    label_en: "Downhole Safety Valve",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Válvula de Segurança de Subsuperfície (Downhole Safety Valve / SSSV / SCSSV). Instalada na coluna de produção dentro do poço; fecha automaticamente em caso de falha catastrófica na superfície.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "bha",
+    label: "BHA",
+    label_en: "Bottom-Hole Assembly",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "esp-eq",
+    label: "ESP/BCS",
+    label_en: "Electrical Submersible Pump",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "mwd",
+    label: "MWD",
+    label_en: "Measure While Drilling",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "lwd",
+    label: "LWD",
+    label_en: "Logging While Drilling",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "manifold-submarino",
+    label: "Manifold Submarino",
+    label_en: "Subsea Manifold",
+    type: "equipment",
+    glossId: null,
+    definicaoOverride:
+      "Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.",
+    fonte: "Siglário O&G",
+  },
 
   /* actor (atores adicionais do ecossistema regulatório/financeiro brasileiro) */
-  { id: 'ibama', label: 'IBAMA', label_en: 'Brazilian Institute of Environment', type: 'actor', glossId: null,
-    definicaoOverride: 'Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.', fonte: 'Siglário O&G / Lei 7.735/1989' },
-  { id: 'conama', label: 'CONAMA', label_en: 'National Environmental Council', type: 'actor', glossId: null,
-    definicaoOverride: 'Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.', fonte: 'Siglário O&G / Lei 6.938/1981' },
-  { id: 'ana-agencia', label: 'ANA', label_en: 'National Water Agency', type: 'actor', glossId: null,
-    definicaoOverride: 'Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).', fonte: 'Siglário O&G' },
-  { id: 'ibp', label: 'IBP', label_en: 'Brazilian Petroleum Institute', type: 'actor', glossId: null,
-    definicaoOverride: 'Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.', fonte: 'Siglário O&G' },
-  { id: 'bndes', label: 'BNDES', label_en: 'National Development Bank', type: 'actor', glossId: null,
-    definicaoOverride: 'Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.', fonte: 'Siglário O&G' },
+  {
+    id: "ibama",
+    label: "IBAMA",
+    label_en: "Brazilian Institute of Environment",
+    type: "actor",
+    glossId: null,
+    definicaoOverride:
+      "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.",
+    fonte: "Siglário O&G / Lei 7.735/1989",
+  },
+  {
+    id: "conama",
+    label: "CONAMA",
+    label_en: "National Environmental Council",
+    type: "actor",
+    glossId: null,
+    definicaoOverride:
+      "Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.",
+    fonte: "Siglário O&G / Lei 6.938/1981",
+  },
+  {
+    id: "ana-agencia",
+    label: "ANA",
+    label_en: "National Water Agency",
+    type: "actor",
+    glossId: null,
+    definicaoOverride:
+      "Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "ibp",
+    label: "IBP",
+    label_en: "Brazilian Petroleum Institute",
+    type: "actor",
+    glossId: null,
+    definicaoOverride:
+      "Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "bndes",
+    label: "BNDES",
+    label_en: "National Development Bank",
+    type: "actor",
+    glossId: null,
+    definicaoOverride:
+      "Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.",
+    fonte: "Siglário O&G",
+  },
 
   /* instrument (instrumentos contratuais e ambientais adicionais) */
-  { id: 'eia', label: 'EIA', label_en: 'Environmental Impact Study', type: 'instrument', glossId: null,
-    definicaoOverride: 'Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).', fonte: 'Siglário O&G / Resolução CONAMA 1/1986' },
-  { id: 'rima', label: 'RIMA', label_en: 'Environmental Impact Report', type: 'instrument', glossId: null,
-    definicaoOverride: 'Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.', fonte: 'Siglário O&G' },
-  { id: 'afe', label: 'AFE', label_en: 'Approval for Expenditure', type: 'instrument', glossId: null,
-    definicaoOverride: 'Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.', fonte: 'Siglário O&G' },
-  { id: 'joa', label: 'JOA', label_en: 'Joint Operating Agreement', type: 'instrument', glossId: null,
-    definicaoOverride: 'Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.', fonte: 'Siglário O&G' },
-  { id: 'epc', label: 'EPC', label_en: 'Engineering, Procurement, Construction', type: 'instrument', glossId: null,
-    definicaoOverride: 'Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).', fonte: 'Siglário O&G' },
+  {
+    id: "eia",
+    label: "EIA",
+    label_en: "Environmental Impact Study",
+    type: "instrument",
+    glossId: null,
+    definicaoOverride:
+      "Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).",
+    fonte: "Siglário O&G / Resolução CONAMA 1/1986",
+  },
+  {
+    id: "rima",
+    label: "RIMA",
+    label_en: "Environmental Impact Report",
+    type: "instrument",
+    glossId: null,
+    definicaoOverride:
+      "Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "afe",
+    label: "AFE",
+    label_en: "Approval for Expenditure",
+    type: "instrument",
+    glossId: null,
+    definicaoOverride:
+      "Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "joa",
+    label: "JOA",
+    label_en: "Joint Operating Agreement",
+    type: "instrument",
+    glossId: null,
+    definicaoOverride:
+      "Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.",
+    fonte: "Siglário O&G",
+  },
+  {
+    id: "epc",
+    label: "EPC",
+    label_en: "Engineering, Procurement, Construction",
+    type: "instrument",
+    glossId: null,
+    definicaoOverride:
+      "Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).",
+    fonte: "Siglário O&G",
+  },
 ];
 
 const EDGES = [
-  { source: 'poco',  target: 'bloco',            relation: 'drilled_in',    relation_label: 'perfurado em',         style: 'solid' },
-  { source: 'poco',  target: 'ambiente',         relation: 'classified_by', relation_label: 'classificado por',     style: 'dashed' },
-  { source: 'poco',  target: 'teste-formacao',   relation: 'undergoes',     relation_label: 'realiza',              style: 'solid' },
-  { source: 'poco',  target: 'tld',              relation: 'undergoes',     relation_label: 'realiza',              style: 'solid' },
-  { source: 'poco',  target: 'bacia-sedimentar', relation: 'located_in',    relation_label: 'localizado em',        style: 'solid' },
-  { source: 'poco',  target: 'operador',         relation: 'operated_by',   relation_label: 'operado por',          style: 'solid' },
-  { source: 'poco',  target: 'notificacao-descoberta', relation: 'may_register', relation_label: 'pode registrar', style: 'dashed' },
-  { source: 'poco',  target: 'presal',           relation: 'may_reach',     relation_label: 'pode atingir',         style: 'dashed' },
-  { source: 'poco',  target: 'formacao',         relation: 'traverses',     relation_label: 'atravessa',            style: 'dashed' },
+  {
+    source: "poco",
+    target: "bloco",
+    relation: "drilled_in",
+    relation_label: "perfurado em",
+    style: "solid",
+  },
+  {
+    source: "poco",
+    target: "ambiente",
+    relation: "classified_by",
+    relation_label: "classificado por",
+    style: "dashed",
+  },
+  {
+    source: "poco",
+    target: "teste-formacao",
+    relation: "undergoes",
+    relation_label: "realiza",
+    style: "solid",
+  },
+  {
+    source: "poco",
+    target: "tld",
+    relation: "undergoes",
+    relation_label: "realiza",
+    style: "solid",
+  },
+  {
+    source: "poco",
+    target: "bacia-sedimentar",
+    relation: "located_in",
+    relation_label: "localizado em",
+    style: "solid",
+  },
+  {
+    source: "poco",
+    target: "operador",
+    relation: "operated_by",
+    relation_label: "operado por",
+    style: "solid",
+  },
+  {
+    source: "poco",
+    target: "notificacao-descoberta",
+    relation: "may_register",
+    relation_label: "pode registrar",
+    style: "dashed",
+  },
+  {
+    source: "poco",
+    target: "presal",
+    relation: "may_reach",
+    relation_label: "pode atingir",
+    style: "dashed",
+  },
+  {
+    source: "poco",
+    target: "formacao",
+    relation: "traverses",
+    relation_label: "atravessa",
+    style: "dashed",
+  },
 
-  { source: 'bloco', target: 'bacia-sedimentar', relation: 'delimited_in',   relation_label: 'delimitado em',        style: 'solid' },
-  { source: 'bloco', target: 'contrato-ep',      relation: 'governed_by',    relation_label: 'regido por',           style: 'solid' },
-  { source: 'bloco', target: 'operador',         relation: 'operated_by',    relation_label: 'operado por',          style: 'solid' },
-  { source: 'bloco', target: 'pad',              relation: 'may_have',       relation_label: 'pode ter',             style: 'dashed' },
-  { source: 'bloco', target: 'rodada-licitacao', relation: 'originated_in',  relation_label: 'originado em',         style: 'solid' },
-  { source: 'bloco', target: 'ambiente',         relation: 'classified_by',  relation_label: 'classificado por',     style: 'dashed' },
+  {
+    source: "bloco",
+    target: "bacia-sedimentar",
+    relation: "delimited_in",
+    relation_label: "delimitado em",
+    style: "solid",
+  },
+  {
+    source: "bloco",
+    target: "contrato-ep",
+    relation: "governed_by",
+    relation_label: "regido por",
+    style: "solid",
+  },
+  {
+    source: "bloco",
+    target: "operador",
+    relation: "operated_by",
+    relation_label: "operado por",
+    style: "solid",
+  },
+  {
+    source: "bloco",
+    target: "pad",
+    relation: "may_have",
+    relation_label: "pode ter",
+    style: "dashed",
+  },
+  {
+    source: "bloco",
+    target: "rodada-licitacao",
+    relation: "originated_in",
+    relation_label: "originado em",
+    style: "solid",
+  },
+  {
+    source: "bloco",
+    target: "ambiente",
+    relation: "classified_by",
+    relation_label: "classificado por",
+    style: "dashed",
+  },
 
-  { source: 'contrato-ep', target: 'anp',                  relation: 'signed_with',  relation_label: 'celebrado com',  style: 'solid' },
-  { source: 'contrato-ep', target: 'regime-contratual',    relation: 'defines',      relation_label: 'define',         style: 'solid' },
-  { source: 'contrato-ep', target: 'periodo-exploratorio', relation: 'organized_in', relation_label: 'organizado em',  style: 'solid' },
-  { source: 'contrato-ep', target: 'uts',                  relation: 'measured_via', relation_label: 'mede via',       style: 'solid' },
+  {
+    source: "contrato-ep",
+    target: "anp",
+    relation: "signed_with",
+    relation_label: "celebrado com",
+    style: "solid",
+  },
+  {
+    source: "contrato-ep",
+    target: "regime-contratual",
+    relation: "defines",
+    relation_label: "define",
+    style: "solid",
+  },
+  {
+    source: "contrato-ep",
+    target: "periodo-exploratorio",
+    relation: "organized_in",
+    relation_label: "organizado em",
+    style: "solid",
+  },
+  {
+    source: "contrato-ep",
+    target: "uts",
+    relation: "measured_via",
+    relation_label: "mede via",
+    style: "solid",
+  },
 
   /* ANP regulatory test event chain */
-  { source: 'teste-formacao', target: 'amostra-fluido', relation: 'yields',          relation_label: 'gera amostra de', style: 'solid' },
-  { source: 'tld',            target: 'amostra-fluido', relation: 'yields',          relation_label: 'gera amostra de', style: 'solid' },
-  { source: 'teste-formacao', target: 'rftp',           relation: 'requires_report', relation_label: 'exige relatório', style: 'solid' },
-  { source: 'tld',            target: 'rftp',           relation: 'requires_report', relation_label: 'exige relatório', style: 'solid' },
-  { source: 'tld',            target: 'i-engine',       relation: 'reported_via',    relation_label: 'reportado via',   style: 'solid' },
-  { source: 'tld',            target: 'bmp',            relation: 'generates',       relation_label: 'gera',            style: 'solid' },
-  { source: 'rftp',           target: 'dpp',            relation: 'submitted_via',   relation_label: 'enviado via',     style: 'solid' },
-  { source: 'anp',            target: 'i-engine',       relation: 'manages_via',     relation_label: 'gerencia via',    style: 'solid' },
-  { source: 'bmp',            target: 'anp',            relation: 'submitted_to',    relation_label: 'enviado à',       style: 'solid' },
+  {
+    source: "teste-formacao",
+    target: "amostra-fluido",
+    relation: "yields",
+    relation_label: "gera amostra de",
+    style: "solid",
+  },
+  {
+    source: "tld",
+    target: "amostra-fluido",
+    relation: "yields",
+    relation_label: "gera amostra de",
+    style: "solid",
+  },
+  {
+    source: "teste-formacao",
+    target: "rftp",
+    relation: "requires_report",
+    relation_label: "exige relatório",
+    style: "solid",
+  },
+  {
+    source: "tld",
+    target: "rftp",
+    relation: "requires_report",
+    relation_label: "exige relatório",
+    style: "solid",
+  },
+  {
+    source: "tld",
+    target: "i-engine",
+    relation: "reported_via",
+    relation_label: "reportado via",
+    style: "solid",
+  },
+  { source: "tld", target: "bmp", relation: "generates", relation_label: "gera", style: "solid" },
+  {
+    source: "rftp",
+    target: "dpp",
+    relation: "submitted_via",
+    relation_label: "enviado via",
+    style: "solid",
+  },
+  {
+    source: "anp",
+    target: "i-engine",
+    relation: "manages_via",
+    relation_label: "gerencia via",
+    style: "solid",
+  },
+  {
+    source: "bmp",
+    target: "anp",
+    relation: "submitted_to",
+    relation_label: "enviado à",
+    style: "solid",
+  },
 
-  { source: 'contrato-ep', target: 'pem',  relation: 'requires',      relation_label: 'exige',           style: 'solid' },
-  { source: 'contrato-ep', target: 'pte',  relation: 'monitored_via', relation_label: 'acompanhado via', style: 'solid' },
-  { source: 'pem',  target: 'uts',                relation: 'measured_in',   relation_label: 'medido em',       style: 'solid' },
-  { source: 'pem',  target: 'periodo-exploratorio', relation: 'scoped_to',    relation_label: 'associado ao',    style: 'solid' },
-  { source: 'pte',  target: 'anp',                relation: 'submitted_to',  relation_label: 'enviado à',       style: 'solid' },
-  { source: 'pte',  target: 'dpp',                relation: 'submitted_via', relation_label: 'enviado via',     style: 'solid' },
+  {
+    source: "contrato-ep",
+    target: "pem",
+    relation: "requires",
+    relation_label: "exige",
+    style: "solid",
+  },
+  {
+    source: "contrato-ep",
+    target: "pte",
+    relation: "monitored_via",
+    relation_label: "acompanhado via",
+    style: "solid",
+  },
+  {
+    source: "pem",
+    target: "uts",
+    relation: "measured_in",
+    relation_label: "medido em",
+    style: "solid",
+  },
+  {
+    source: "pem",
+    target: "periodo-exploratorio",
+    relation: "scoped_to",
+    relation_label: "associado ao",
+    style: "solid",
+  },
+  {
+    source: "pte",
+    target: "anp",
+    relation: "submitted_to",
+    relation_label: "enviado à",
+    style: "solid",
+  },
+  {
+    source: "pte",
+    target: "dpp",
+    relation: "submitted_via",
+    relation_label: "enviado via",
+    style: "solid",
+  },
 
-  { source: 'pad', target: 'bloco',                       relation: 'evaluates',    relation_label: 'avalia',         style: 'solid' },
-  { source: 'pad', target: 'rfad',                        relation: 'closes_with',  relation_label: 'encerrado pelo', style: 'solid' },
-  { source: 'rfad', target: 'declaracao-comercialidade',  relation: 'may_yield',    relation_label: 'pode gerar',     style: 'dashed' },
-  { source: 'pad', target: 'teste-formacao',              relation: 'may_include',  relation_label: 'pode incluir',   style: 'dashed' },
-  { source: 'pad', target: 'tld',                         relation: 'includes',     relation_label: 'inclui',         style: 'solid' },
+  {
+    source: "pad",
+    target: "bloco",
+    relation: "evaluates",
+    relation_label: "avalia",
+    style: "solid",
+  },
+  {
+    source: "pad",
+    target: "rfad",
+    relation: "closes_with",
+    relation_label: "encerrado pelo",
+    style: "solid",
+  },
+  {
+    source: "rfad",
+    target: "declaracao-comercialidade",
+    relation: "may_yield",
+    relation_label: "pode gerar",
+    style: "dashed",
+  },
+  {
+    source: "pad",
+    target: "teste-formacao",
+    relation: "may_include",
+    relation_label: "pode incluir",
+    style: "dashed",
+  },
+  { source: "pad", target: "tld", relation: "includes", relation_label: "inclui", style: "solid" },
 
-  { source: 'declaracao-comercialidade', target: 'plano-desenvolvimento', relation: 'requires',       relation_label: 'exige (180 dias)',    style: 'solid' },
-  { source: 'plano-desenvolvimento',     target: 'area-desenvolvimento', relation: 'enables',        relation_label: 'habilita',            style: 'solid' },
-  { source: 'plano-desenvolvimento',     target: 'aip',                  relation: 'accompanied_by', relation_label: 'acompanhado por',     style: 'dashed' },
-  { source: 'plano-desenvolvimento',     target: 'cip',                  relation: 'accompanied_by', relation_label: 'acompanhado por',     style: 'dashed' },
-  { source: 'plano-desenvolvimento',     target: 'anp',                  relation: 'approved_by',    relation_label: 'aprovado pela',       style: 'solid' },
-  { source: 'area-desenvolvimento',      target: 'primeiro-oleo',        relation: 'ends_with',      relation_label: 'encerrada pelo',      style: 'dashed' },
-  { source: 'primeiro-oleo',             target: 'campo',                 relation: 'inaugurates', relation_label: 'inaugura',       style: 'solid' },
+  {
+    source: "declaracao-comercialidade",
+    target: "plano-desenvolvimento",
+    relation: "requires",
+    relation_label: "exige (180 dias)",
+    style: "solid",
+  },
+  {
+    source: "plano-desenvolvimento",
+    target: "area-desenvolvimento",
+    relation: "enables",
+    relation_label: "habilita",
+    style: "solid",
+  },
+  {
+    source: "plano-desenvolvimento",
+    target: "aip",
+    relation: "accompanied_by",
+    relation_label: "acompanhado por",
+    style: "dashed",
+  },
+  {
+    source: "plano-desenvolvimento",
+    target: "cip",
+    relation: "accompanied_by",
+    relation_label: "acompanhado por",
+    style: "dashed",
+  },
+  {
+    source: "plano-desenvolvimento",
+    target: "anp",
+    relation: "approved_by",
+    relation_label: "aprovado pela",
+    style: "solid",
+  },
+  {
+    source: "area-desenvolvimento",
+    target: "primeiro-oleo",
+    relation: "ends_with",
+    relation_label: "encerrada pelo",
+    style: "dashed",
+  },
+  {
+    source: "primeiro-oleo",
+    target: "campo",
+    relation: "inaugurates",
+    relation_label: "inaugura",
+    style: "solid",
+  },
 
-  { source: 'declaracao-comercialidade', target: 'campo', relation: 'originates', relation_label: 'origina', style: 'solid' },
-  { source: 'campo',    target: 'bacia-sedimentar', relation: 'located_in',  relation_label: 'localizado em', style: 'solid' },
-  { source: 'campo',    target: 'ambiente',         relation: 'classified_by', relation_label: 'classificado por', style: 'dashed' },
-  { source: 'campo',           target: 'reservatorio',         relation: 'sustained_by',       relation_label: 'sustentado por',     style: 'solid' },
-  { source: 'reservatorio',    target: 'bacia-sedimentar',     relation: 'contained_in',       relation_label: 'contido em',         style: 'solid' },
-  { source: 'reservatorio',    target: 'sistema-deposicional', relation: 'characterized_by',   relation_label: 'caracterizado por',  style: 'solid' },
-  { source: 'reservatorio',    target: 'formacao',             relation: 'hosted_in',          relation_label: 'hospedado em',       style: 'solid' },
+  {
+    source: "declaracao-comercialidade",
+    target: "campo",
+    relation: "originates",
+    relation_label: "origina",
+    style: "solid",
+  },
+  {
+    source: "campo",
+    target: "bacia-sedimentar",
+    relation: "located_in",
+    relation_label: "localizado em",
+    style: "solid",
+  },
+  {
+    source: "campo",
+    target: "ambiente",
+    relation: "classified_by",
+    relation_label: "classificado por",
+    style: "dashed",
+  },
+  {
+    source: "campo",
+    target: "reservatorio",
+    relation: "sustained_by",
+    relation_label: "sustentado por",
+    style: "solid",
+  },
+  {
+    source: "reservatorio",
+    target: "bacia-sedimentar",
+    relation: "contained_in",
+    relation_label: "contido em",
+    style: "solid",
+  },
+  {
+    source: "reservatorio",
+    target: "sistema-deposicional",
+    relation: "characterized_by",
+    relation_label: "caracterizado por",
+    style: "solid",
+  },
+  {
+    source: "reservatorio",
+    target: "formacao",
+    relation: "hosted_in",
+    relation_label: "hospedado em",
+    style: "solid",
+  },
 
-  { source: 'operador', target: 'processo-sancionador', relation: 'may_have', relation_label: 'pode ter', style: 'dashed' },
+  {
+    source: "operador",
+    target: "processo-sancionador",
+    relation: "may_have",
+    relation_label: "pode ter",
+    style: "dashed",
+  },
 
-  { source: 'anp', target: 'sigep', relation: 'manages_via',   relation_label: 'gerencia via',  style: 'solid' },
-  { source: 'anp', target: 'sep',   relation: 'oversees_via',  relation_label: 'fiscaliza via', style: 'solid' },
+  {
+    source: "anp",
+    target: "sigep",
+    relation: "manages_via",
+    relation_label: "gerencia via",
+    style: "solid",
+  },
+  {
+    source: "anp",
+    target: "sep",
+    relation: "oversees_via",
+    relation_label: "fiscaliza via",
+    style: "solid",
+  },
 
-  { source: 'bacias-agrupadas', target: 'bacia-sedimentar', relation: 'classifies', relation_label: 'classifica (ANP)', style: 'dashed' },
+  {
+    source: "bacias-agrupadas",
+    target: "bacia-sedimentar",
+    relation: "classifies",
+    relation_label: "classifica (ANP)",
+    style: "dashed",
+  },
 
   /* equipment → poço/campo */
-  { source: 'bop',                 target: 'poco',  relation: 'installed_on',  relation_label: 'instalado em',         style: 'solid' },
-  { source: 'dhsv',                target: 'poco',  relation: 'installed_in',  relation_label: 'instalado em',         style: 'solid' },
-  { source: 'anm-eq',              target: 'poco',  relation: 'controls',      relation_label: 'controla',             style: 'solid' },
-  { source: 'bha',                 target: 'poco',  relation: 'composes',      relation_label: 'compõe coluna',        style: 'dashed' },
-  { source: 'esp-eq',              target: 'poco',  relation: 'lifts_from',    relation_label: 'eleva fluido em',      style: 'dashed' },
-  { source: 'mwd',                 target: 'poco',  relation: 'measures',      relation_label: 'mede em',              style: 'dashed' },
-  { source: 'lwd',                 target: 'poco',  relation: 'logs',          relation_label: 'perfila',              style: 'dashed' },
-  { source: 'fpso',                target: 'campo', relation: 'produces_at',   relation_label: 'produz em',            style: 'solid' },
-  { source: 'riser',               target: 'anm-eq',relation: 'connects',      relation_label: 'conecta',              style: 'solid' },
-  { source: 'riser',               target: 'fpso',  relation: 'connects',      relation_label: 'conecta',              style: 'solid' },
-  { source: 'rov',                 target: 'anm-eq',relation: 'operates',      relation_label: 'opera',                style: 'dashed' },
-  { source: 'manifold-submarino',  target: 'poco',  relation: 'gathers_from',  relation_label: 'agrega fluxo de',      style: 'dashed' },
-  { source: 'manifold-submarino',  target: 'fpso',  relation: 'feeds',         relation_label: 'alimenta',             style: 'solid' },
+  {
+    source: "bop",
+    target: "poco",
+    relation: "installed_on",
+    relation_label: "instalado em",
+    style: "solid",
+  },
+  {
+    source: "dhsv",
+    target: "poco",
+    relation: "installed_in",
+    relation_label: "instalado em",
+    style: "solid",
+  },
+  {
+    source: "anm-eq",
+    target: "poco",
+    relation: "controls",
+    relation_label: "controla",
+    style: "solid",
+  },
+  {
+    source: "bha",
+    target: "poco",
+    relation: "composes",
+    relation_label: "compõe coluna",
+    style: "dashed",
+  },
+  {
+    source: "esp-eq",
+    target: "poco",
+    relation: "lifts_from",
+    relation_label: "eleva fluido em",
+    style: "dashed",
+  },
+  {
+    source: "mwd",
+    target: "poco",
+    relation: "measures",
+    relation_label: "mede em",
+    style: "dashed",
+  },
+  { source: "lwd", target: "poco", relation: "logs", relation_label: "perfila", style: "dashed" },
+  {
+    source: "fpso",
+    target: "campo",
+    relation: "produces_at",
+    relation_label: "produz em",
+    style: "solid",
+  },
+  {
+    source: "riser",
+    target: "anm-eq",
+    relation: "connects",
+    relation_label: "conecta",
+    style: "solid",
+  },
+  {
+    source: "riser",
+    target: "fpso",
+    relation: "connects",
+    relation_label: "conecta",
+    style: "solid",
+  },
+  {
+    source: "rov",
+    target: "anm-eq",
+    relation: "operates",
+    relation_label: "opera",
+    style: "dashed",
+  },
+  {
+    source: "manifold-submarino",
+    target: "poco",
+    relation: "gathers_from",
+    relation_label: "agrega fluxo de",
+    style: "dashed",
+  },
+  {
+    source: "manifold-submarino",
+    target: "fpso",
+    relation: "feeds",
+    relation_label: "alimenta",
+    style: "solid",
+  },
 
   /* atores ambientais e financeiros */
-  { source: 'ibama',               target: 'operador', relation: 'oversees_environment_of', relation_label: 'fiscaliza ambientalmente', style: 'solid' },
-  { source: 'ibama',               target: 'eia',      relation: 'requires',  relation_label: 'exige',                  style: 'solid' },
-  { source: 'ibama',               target: 'rima',     relation: 'requires',  relation_label: 'exige',                  style: 'solid' },
-  { source: 'conama',              target: 'ibama',    relation: 'guides',    relation_label: 'orienta normativamente', style: 'solid' },
-  { source: 'ana-agencia',         target: 'operador', relation: 'regulates_water_use_of', relation_label: 'regula uso de água', style: 'dashed' },
-  { source: 'ibp',                 target: 'operador', relation: 'represents',relation_label: 'representa',             style: 'solid' },
-  { source: 'bndes',               target: 'bloco',    relation: 'finances',  relation_label: 'financia',               style: 'dashed' },
+  {
+    source: "ibama",
+    target: "operador",
+    relation: "oversees_environment_of",
+    relation_label: "fiscaliza ambientalmente",
+    style: "solid",
+  },
+  { source: "ibama", target: "eia", relation: "requires", relation_label: "exige", style: "solid" },
+  {
+    source: "ibama",
+    target: "rima",
+    relation: "requires",
+    relation_label: "exige",
+    style: "solid",
+  },
+  {
+    source: "conama",
+    target: "ibama",
+    relation: "guides",
+    relation_label: "orienta normativamente",
+    style: "solid",
+  },
+  {
+    source: "ana-agencia",
+    target: "operador",
+    relation: "regulates_water_use_of",
+    relation_label: "regula uso de água",
+    style: "dashed",
+  },
+  {
+    source: "ibp",
+    target: "operador",
+    relation: "represents",
+    relation_label: "representa",
+    style: "solid",
+  },
+  {
+    source: "bndes",
+    target: "bloco",
+    relation: "finances",
+    relation_label: "financia",
+    style: "dashed",
+  },
 
   /* instrumentos contratuais adicionais */
-  { source: 'afe',                 target: 'poco',         relation: 'authorizes_spending_for', relation_label: 'autoriza gasto em', style: 'solid' },
-  { source: 'joa',                 target: 'contrato-ep',  relation: 'complements',             relation_label: 'complementa',       style: 'solid' },
-  { source: 'epc',                 target: 'fpso',         relation: 'delivers',                relation_label: 'entrega',           style: 'dashed' },
+  {
+    source: "afe",
+    target: "poco",
+    relation: "authorizes_spending_for",
+    relation_label: "autoriza gasto em",
+    style: "solid",
+  },
+  {
+    source: "joa",
+    target: "contrato-ep",
+    relation: "complements",
+    relation_label: "complementa",
+    style: "solid",
+  },
+  {
+    source: "epc",
+    target: "fpso",
+    relation: "delivers",
+    relation_label: "entrega",
+    style: "dashed",
+  },
 ];
 
 /* ─────────────────────────────────────────────────────────────
@@ -835,9 +2174,11 @@ const EDGES = [
  * ───────────────────────────────────────────────────────────── */
 
 const NOW = new Date().toISOString();
-const VERSION = '1.0.0';
+const VERSION = "1.0.0";
 
-function gloss(id) { return GLOSSARIO.find((t) => t.id === id); }
+function gloss(id) {
+  return GLOSSARIO.find((t) => t.id === id);
+}
 
 function enrichTerm(t) {
   const align = alignmentFor(TERM_ALIGNMENT, t.id);
@@ -885,7 +2226,8 @@ function buildExtendedTerms() {
       version: VERSION,
       generated: NOW,
       count: terms.length,
-      description: 'Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP.',
+      description:
+        "Termos geológicos derivados de GeoCore/O3PO/GeoReservoir que o Geolytics usa mas não definia formalmente no glossário ANP.",
     },
     terms,
   };
@@ -896,25 +2238,36 @@ function buildOntopetro() {
     meta: {
       version: VERSION,
       generated: NOW,
-      description: 'Ontologia de Geociências de Petróleo — 6 módulos formais',
-      sources: ['GeoCore', 'PPDM', 'GDGEO', 'SPE-PRMS', 'ANP', 'OSDU'],
+      description: "Ontologia de Geociências de Petróleo — 6 módulos formais",
+      sources: ["GeoCore", "PPDM", "GDGEO", "SPE-PRMS", "ANP", "OSDU"],
     },
     architecture: {
       layers: [
-        { id: 'camada1', name: 'Foundational',       desc: 'Upper Ontology — UFO/BFO' },
-        { id: 'camada2', name: 'Domain Ontology',    desc: 'Geociências de Petróleo (Geológico, Geofísico, Reservatório, Poços, Bacia)' },
-        { id: 'camada3', name: 'Application Ontology', desc: 'E&P Operacional — Exploração, Avaliação, Produção' },
+        { id: "camada1", name: "Foundational", desc: "Upper Ontology — UFO/BFO" },
+        {
+          id: "camada2",
+          name: "Domain Ontology",
+          desc: "Geociências de Petróleo (Geológico, Geofísico, Reservatório, Poços, Bacia)",
+        },
+        {
+          id: "camada3",
+          name: "Application Ontology",
+          desc: "E&P Operacional — Exploração, Avaliação, Produção",
+        },
       ],
     },
-    classes:    ONTOPETRO_CLASSES,
+    classes: ONTOPETRO_CLASSES,
     properties: ONTOPETRO_PROPERTIES,
-    relations:  ONTOPETRO_RELATIONS,
-    instances:  ONTOPETRO_INSTANCES,
+    relations: ONTOPETRO_RELATIONS,
+    instances: ONTOPETRO_INSTANCES,
   };
 }
 
 function buildTaxonomies() {
-  return { meta: { version: VERSION, generated: NOW, count: Object.keys(TAXONOMIES).length }, taxonomies: TAXONOMIES };
+  return {
+    meta: { version: VERSION, generated: NOW, count: Object.keys(TAXONOMIES).length },
+    taxonomies: TAXONOMIES,
+  };
 }
 
 function buildModulesExtended() {
@@ -922,10 +2275,11 @@ function buildModulesExtended() {
     meta: {
       version: VERSION,
       generated: NOW,
-      description: 'Módulos analíticos internos Geolytics/Petrobras — apenas conteúdo público/conceitual',
-      petrobras_namespace: 'https://petrobras.com.br/geolytics/ontology/',
-      modules: ['M7_geochem', 'M8_rock', 'M9_geomec', 'M10_fluidos'],
-      publication_policy: 'Apenas definições conceituais. Não inclui dados Sigilo=Interno.',
+      description:
+        "Módulos analíticos internos Geolytics/Petrobras — apenas conteúdo público/conceitual",
+      petrobras_namespace: "https://petrobras.com.br/geolytics/ontology/",
+      modules: ["M7_geochem", "M8_rock", "M9_geomec", "M10_fluidos"],
+      publication_policy: "Apenas definições conceituais. Não inclui dados Sigilo=Interno.",
     },
     ...MODULES_EXTENDED,
   };
@@ -933,21 +2287,24 @@ function buildModulesExtended() {
 
 function buildPvtDictionary() {
   const high = PVT_FIELDS.filter((f) => f.completeness_pct >= 90).map((f) => f.name);
-  const medium = PVT_FIELDS.filter((f) => f.completeness_pct >= 50 && f.completeness_pct < 90).map((f) => f.name);
+  const medium = PVT_FIELDS.filter((f) => f.completeness_pct >= 50 && f.completeness_pct < 90).map(
+    (f) => f.name
+  );
   const low = PVT_FIELDS.filter((f) => f.completeness_pct < 10).map((f) => f.name);
   return {
     meta: {
-      source: 'SIRR — Sistema Integrado de Reservatórios Petrobras',
-      description: 'Dicionário de campos PVT com completude real da base corporativa',
+      source: "SIRR — Sistema Integrado de Reservatórios Petrobras",
+      description: "Dicionário de campos PVT com completude real da base corporativa",
       total_fields: PVT_FIELDS.length,
-      note: 'Completude medida na base SIRR. Campos com < 10% são raridade analítica, não ausência de definição.',
+      note: "Completude medida na base SIRR. Campos com < 10% são raridade analítica, não ausência de definição.",
     },
     fields: PVT_FIELDS,
     completeness_notes: {
       high_completeness: high,
       medium_completeness: medium,
       low_completeness_expected: low,
-      rag_note: 'Campos com baixa completude são dados de ensaios especiais — não indicam lacuna de dado, indicam raridade de análise. Um agente RAG deve interpretar "Fa Tanque disponível" como sinal de análise avançada.',
+      rag_note:
+        'Campos com baixa completude são dados de ensaios especiais — não indicam lacuna de dado, indicam raridade de análise. Um agente RAG deve interpretar "Fa Tanque disponível" como sinal de análise avançada.',
     },
   };
 }
@@ -956,8 +2313,8 @@ function buildSystems() {
   return {
     version: VERSION,
     generated: NOW,
-    description: 'Sistemas corporativos Petrobras que alimentam o GeoBrain',
-    note: 'Sistemas = proveniência, não acesso. Estes IDs são metadado de origem dos dados, não endpoints conectáveis.',
+    description: "Sistemas corporativos Petrobras que alimentam o GeoBrain",
+    note: "Sistemas = proveniência, não acesso. Estes IDs são metadado de origem dos dados, não endpoints conectáveis.",
     systems: SYSTEMS,
   };
 }
@@ -966,10 +2323,11 @@ function buildRegisNer() {
   return {
     meta: {
       version: VERSION,
-      source_corpus: 'PetroGold',
-      source_repo: 'https://github.com/Petroles/regis-collection',
-      source_paper: 'Petroles / PUC-Rio — gold-standard NER corpus for Portuguese petroleum domain',
-      description: 'Mapeamento de tipos de entidade NER (PetroGold) para nós do entity-graph Geolytics. Use para NLP pipelines, fine-tuning de modelos e enriquecimento automático do dicionário.',
+      source_corpus: "PetroGold",
+      source_repo: "https://github.com/Petroles/regis-collection",
+      source_paper: "Petroles / PUC-Rio — gold-standard NER corpus for Portuguese petroleum domain",
+      description:
+        "Mapeamento de tipos de entidade NER (PetroGold) para nós do entity-graph Geolytics. Use para NLP pipelines, fine-tuning de modelos e enriquecimento automático do dicionário.",
       relation_types_petro_re: REGIS_RELATION_TYPES,
       generated: NOW,
     },
@@ -981,7 +2339,8 @@ function buildOntologyMap() {
   return {
     version: VERSION,
     generated: NOW,
-    description: 'Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.',
+    description:
+      "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     layers: LAYER_DEFINITIONS,
     deduplication_rules: DEDUP_RULES,
     recommended_usage: RECOMMENDED_USAGE,
@@ -1010,7 +2369,9 @@ function buildEntityGraph() {
     const g = n.glossId ? gloss(n.glossId) : null;
     const e = n.extendedId ? ext(n.extendedId) : null;
     const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
-    const enrich = n.glossId ? enrichmentFor(n.glossId) : { synonyms_pt: [], synonyms_en: [], examples: [] };
+    const enrich = n.glossId
+      ? enrichmentFor(n.glossId)
+      : { synonyms_pt: [], synonyms_en: [], examples: [] };
     const canon = osduCanonical(align.osdu_kind);
     return {
       id: n.id,
@@ -1019,9 +2380,9 @@ function buildEntityGraph() {
       type: n.type,
       color: COLORS[n.type],
       size: SIZES[n.type],
-      definition: n.definicaoOverride || (g ? g.definicao : (e ? e.definicao : '')),
+      definition: n.definicaoOverride || (g ? g.definicao : e ? e.definicao : ""),
       definition_en_canonical: canon.definition_en_canonical,
-      legal_source: n.fonte || (g ? g.fonte : (e ? e.legal_source : null)),
+      legal_source: n.fonte || (g ? g.fonte : e ? e.legal_source : null),
       ...(n.primary_key ? { primary_key: n.primary_key } : {}),
       ...(n.primary_key_standard ? { primary_key_standard: n.primary_key_standard } : {}),
       ...(n.primary_key_pattern ? { primary_key_pattern: n.primary_key_pattern } : {}),
@@ -1041,7 +2402,11 @@ function buildEntityGraph() {
   });
   /* Ontopetro/M7-M10 nodes — alignment via ONTOPETRO_ALIGNMENT, com merge OSDU
      (incluindo as 25 classes OSDU extras vindas do osdu-extra-nodes.js). */
-  const MERGED_ALIGNMENT = { ...ONTOPETRO_ALIGNMENT, ...OSDU_ALIGNMENT_ADDITIONS, ...OSDU_EXTRA_ALIGNMENT };
+  const MERGED_ALIGNMENT = {
+    ...ONTOPETRO_ALIGNMENT,
+    ...OSDU_ALIGNMENT_ADDITIONS,
+    ...OSDU_EXTRA_ALIGNMENT,
+  };
   const ontopetroNodes = ONTOPETRO_NODES.map((n) => {
     const align = alignmentFor(MERGED_ALIGNMENT, n.id);
     const canon = osduCanonical(align.osdu_kind);
@@ -1138,18 +2503,20 @@ function buildEntityGraph() {
   /* deriva relation_label_en a partir do snake_case do campo relation, exceto
      quando a aresta já traz relation_label_en explícito (caso OG_EDGES, onde
      os labels foram traduzidos manualmente). */
-  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES, ...OG_EDGES].map((e) => ({
-    source: e.source,
-    target: e.target,
-    relation: e.relation,
-    relation_label_pt: e.relation_label,
-    relation_label_en: e.relation_label_en || e.relation.replace(/_/g, ' '),
-    style: e.style,
-  }));
+  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES, ...OG_EDGES].map(
+    (e) => ({
+      source: e.source,
+      target: e.target,
+      relation: e.relation,
+      relation_label_pt: e.relation_label,
+      relation_label_en: e.relation_label_en || e.relation.replace(/_/g, " "),
+      style: e.style,
+    })
+  );
   return {
     version: VERSION,
     generated: NOW,
-    source: 'Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU',
+    source: "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     nodes,
     edges,
   };
@@ -1168,14 +2535,24 @@ function buildFull() {
     meta: {
       version: VERSION,
       generated: NOW,
-      description: 'GeoBrain — complete merged dataset',
+      description: "GeoBrain — complete merged dataset",
       counts: {
         glossary_terms: GLOSSARIO.length + OG_GLOSSARY.length,
         extended_terms: EXTENDED_TERMS.length,
         total_terms: GLOSSARIO.length + OG_GLOSSARY.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length,
-        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length,
+        entity_nodes:
+          ENTITY_NODES.length +
+          ONTOPETRO_NODES.length +
+          OSDU_NODES.length +
+          OSDU_EXTRA_NODES.length +
+          OG_NODES.length,
+        entity_edges:
+          EDGES.length +
+          ONTOPETRO_EDGES.length +
+          OSDU_EDGES.length +
+          OSDU_EXTRA_EDGES.length +
+          OG_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
         ontopetro_classes: ONTOPETRO_CLASSES.length,
@@ -1201,13 +2578,28 @@ function buildFull() {
         fracture_classes: gmf ? (gmf.classes || []).length : 0,
         fracture_to_gso_mappings: ftg ? (ftg.mappings || []).length : 0,
       },
-      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)', 'Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)', 'Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)'],
+      sources: [
+        "ANP/SEP",
+        "Lei 9478/1997",
+        "GeoCore (UFRGS)",
+        "Petro KGraph (PUC-Rio)",
+        "O3PO (UFRGS)",
+        "OSDU",
+        "Petrobras/Geolytics internal (Layer 6)",
+        "GSO/Loop3D (Layer 7, CC BY 4.0)",
+        "Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)",
+        "Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)",
+      ],
     },
     glossary: [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY],
     extended_terms: EXTENDED_TERMS,
     entity_graph: graph,
     datasets: CONJUNTOS,
-    ontology_types: { domains: DOMAINS, typology: ONTOLOGY_TYPES.tipologia, processing_levels: ONTOLOGY_TYPES.nivel },
+    ontology_types: {
+      domains: DOMAINS,
+      typology: ONTOLOGY_TYPES.tipologia,
+      processing_levels: ONTOLOGY_TYPES.nivel,
+    },
     ontology_map: buildOntologyMap(),
     ontopetro: buildOntopetro(),
     taxonomies: TAXONOMIES,
@@ -1235,48 +2627,48 @@ function buildFull() {
  * API v1
  * ───────────────────────────────────────────────────────────── */
 
-const BASE_URL_PLACEHOLDER = 'https://thiagoflc.github.io/geobrain';
+const BASE_URL_PLACEHOLDER = "https://thiagoflc.github.io/geobrain";
 
 function buildApiIndex() {
   return {
     meta: { version: VERSION, generated: NOW, base_url: BASE_URL_PLACEHOLDER },
     endpoints: {
-      terms:        `${BASE_URL_PLACEHOLDER}/api/v1/terms.json`,
-      entities:     `${BASE_URL_PLACEHOLDER}/api/v1/entities.json`,
-      datasets:     `${BASE_URL_PLACEHOLDER}/api/v1/datasets.json`,
+      terms: `${BASE_URL_PLACEHOLDER}/api/v1/terms.json`,
+      entities: `${BASE_URL_PLACEHOLDER}/api/v1/entities.json`,
+      datasets: `${BASE_URL_PLACEHOLDER}/api/v1/datasets.json`,
       search_index: `${BASE_URL_PLACEHOLDER}/api/v1/search-index.json`,
-      glossary:        `${BASE_URL_PLACEHOLDER}/data/glossary.json`,
-      extended_terms:  `${BASE_URL_PLACEHOLDER}/data/extended-terms.json`,
-      entity_graph:    `${BASE_URL_PLACEHOLDER}/data/entity-graph.json`,
-      ontology:        `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
-      ontology_map:    `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
-      ontopetro:       `${BASE_URL_PLACEHOLDER}/data/ontopetro.json`,
-      osdu_mapping:    `${BASE_URL_PLACEHOLDER}/data/osdu-mapping.json`,
-      geolytics_ttl:   `${BASE_URL_PLACEHOLDER}/data/geobrain.ttl`,
-      webvowl_view:    `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geobrain.ttl`,
-      cards_view:      `${BASE_URL_PLACEHOLDER}/index-cards.html`,
-      gso_cards_view:  `${BASE_URL_PLACEHOLDER}/gso-cards.html`,
-      gso_crosswalk:   `${BASE_URL_PLACEHOLDER}/data/osdu-gso-crosswalk.json`,
-      gso_faults:      `${BASE_URL_PLACEHOLDER}/data/gso-faults.json`,
-      gso_folds:       `${BASE_URL_PLACEHOLDER}/data/gso-folds.json`,
-      gso_foliations:  `${BASE_URL_PLACEHOLDER}/data/gso-foliations.json`,
-      gso_lineations:  `${BASE_URL_PLACEHOLDER}/data/gso-lineations.json`,
-      gso_contacts:    `${BASE_URL_PLACEHOLDER}/data/gso-contacts.json`,
-      taxonomies:      `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
-      modules_extended:`${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
-      pvt_dictionary:  `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
-      systems:         `${BASE_URL_PLACEHOLDER}/data/systems.json`,
-      regis_ner:       `${BASE_URL_PLACEHOLDER}/data/regis-ner-schema.json`,
-      acronyms:        `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
-      acronyms_api:    `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
-      cgi_lithology:   `${BASE_URL_PLACEHOLDER}/data/cgi-lithology.json`,
-      geomechanics:    `${BASE_URL_PLACEHOLDER}/api/v1/geomechanics.json`,
+      glossary: `${BASE_URL_PLACEHOLDER}/data/glossary.json`,
+      extended_terms: `${BASE_URL_PLACEHOLDER}/data/extended-terms.json`,
+      entity_graph: `${BASE_URL_PLACEHOLDER}/data/entity-graph.json`,
+      ontology: `${BASE_URL_PLACEHOLDER}/data/ontology-types.json`,
+      ontology_map: `${BASE_URL_PLACEHOLDER}/ai/ontology-map.json`,
+      ontopetro: `${BASE_URL_PLACEHOLDER}/data/ontopetro.json`,
+      osdu_mapping: `${BASE_URL_PLACEHOLDER}/data/osdu-mapping.json`,
+      geolytics_ttl: `${BASE_URL_PLACEHOLDER}/data/geobrain.ttl`,
+      webvowl_view: `https://service.tib.eu/webvowl/#iri=${BASE_URL_PLACEHOLDER}/data/geobrain.ttl`,
+      cards_view: `${BASE_URL_PLACEHOLDER}/index-cards.html`,
+      gso_cards_view: `${BASE_URL_PLACEHOLDER}/gso-cards.html`,
+      gso_crosswalk: `${BASE_URL_PLACEHOLDER}/data/osdu-gso-crosswalk.json`,
+      gso_faults: `${BASE_URL_PLACEHOLDER}/data/gso-faults.json`,
+      gso_folds: `${BASE_URL_PLACEHOLDER}/data/gso-folds.json`,
+      gso_foliations: `${BASE_URL_PLACEHOLDER}/data/gso-foliations.json`,
+      gso_lineations: `${BASE_URL_PLACEHOLDER}/data/gso-lineations.json`,
+      gso_contacts: `${BASE_URL_PLACEHOLDER}/data/gso-contacts.json`,
+      taxonomies: `${BASE_URL_PLACEHOLDER}/data/taxonomies.json`,
+      modules_extended: `${BASE_URL_PLACEHOLDER}/data/modules-extended.json`,
+      pvt_dictionary: `${BASE_URL_PLACEHOLDER}/data/pvt-dictionary.json`,
+      systems: `${BASE_URL_PLACEHOLDER}/data/systems.json`,
+      regis_ner: `${BASE_URL_PLACEHOLDER}/data/regis-ner-schema.json`,
+      acronyms: `${BASE_URL_PLACEHOLDER}/data/acronyms.json`,
+      acronyms_api: `${BASE_URL_PLACEHOLDER}/api/v1/acronyms.json`,
+      cgi_lithology: `${BASE_URL_PLACEHOLDER}/data/cgi-lithology.json`,
+      geomechanics: `${BASE_URL_PLACEHOLDER}/api/v1/geomechanics.json`,
       geomechanics_data: `${BASE_URL_PLACEHOLDER}/data/geomechanics.json`,
       geomechanics_fractures: `${BASE_URL_PLACEHOLDER}/data/geomechanics-fractures.json`,
       fracture_to_gso: `${BASE_URL_PLACEHOLDER}/data/fracture_to_gso.json`,
-      full:            `${BASE_URL_PLACEHOLDER}/data/full.json`,
-      seismic:         `${BASE_URL_PLACEHOLDER}/api/v1/seismic.json`,
-      rag_corpus:      `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
+      full: `${BASE_URL_PLACEHOLDER}/data/full.json`,
+      seismic: `${BASE_URL_PLACEHOLDER}/api/v1/seismic.json`,
+      rag_corpus: `${BASE_URL_PLACEHOLDER}/ai/rag-corpus.jsonl`,
       system_prompt_pt: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-ptbr.md`,
       system_prompt_en: `${BASE_URL_PLACEHOLDER}/ai/system-prompt-en.md`,
     },
@@ -1317,14 +2709,14 @@ function buildApiTerms() {
         synonyms_pt: enr.synonyms_pt,
         synonyms_en: enr.synonyms_en,
         examples: enr.examples,
-        source: 'glossary',
+        source: "glossary",
       };
     }),
     ...EXTENDED_TERMS.map((t) => ({
       ...t,
       datasets: t.apareceEm,
       fonte: t.legal_source,
-      source: 'extended',
+      source: "extended",
     })),
   ];
   return { meta: { version: VERSION, generated: NOW, count: all.length }, terms: all };
@@ -1332,8 +2724,24 @@ function buildApiTerms() {
 
 function buildApiEntities() {
   const graph = buildEntityGraph();
-  const inEdges = (id) => graph.edges.filter((e) => e.target === id).map((e) => ({ from: e.source, relation: e.relation, label: e.relation_label, style: e.style }));
-  const outEdges = (id) => graph.edges.filter((e) => e.source === id).map((e) => ({ to: e.target, relation: e.relation, label: e.relation_label, style: e.style }));
+  const inEdges = (id) =>
+    graph.edges
+      .filter((e) => e.target === id)
+      .map((e) => ({
+        from: e.source,
+        relation: e.relation,
+        label: e.relation_label,
+        style: e.style,
+      }));
+  const outEdges = (id) =>
+    graph.edges
+      .filter((e) => e.source === id)
+      .map((e) => ({
+        to: e.target,
+        relation: e.relation,
+        label: e.relation_label,
+        style: e.style,
+      }));
   return {
     meta: { version: VERSION, generated: NOW, count: graph.nodes.length },
     entities: graph.nodes.map((n) => ({
@@ -1355,17 +2763,19 @@ function buildApiDatasets() {
       frequencia: c.frequencia,
       contato: c.contato,
       colunas: c.colunas,
-      terms_referenced: GLOSSARIO.filter((t) => Array.isArray(t.apareceEm) && t.apareceEm.includes(c.id)).map((t) => t.id),
+      terms_referenced: GLOSSARIO.filter(
+        (t) => Array.isArray(t.apareceEm) && t.apareceEm.includes(c.id)
+      ).map((t) => t.id),
     })),
   };
 }
 
 function tokenize(s) {
-  return (s || '')
+  return (s || "")
     .toLowerCase()
-    .normalize('NFD')
-    .replace(/[̀-ͯ]/g, '')
-    .replace(/[^a-z0-9 ]+/g, ' ')
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "")
+    .replace(/[^a-z0-9 ]+/g, " ")
     .split(/\s+/)
     .filter((w) => w.length > 2);
 }
@@ -1375,7 +2785,7 @@ function buildSearchIndex() {
   for (const t of GLOSSARIO) {
     items.push({
       id: `term:${t.id}`,
-      type: 'term',
+      type: "term",
       title: t.termo,
       text: `${t.termo}. ${t.definicao} Fonte: ${t.fonte}.`,
       tokens: Array.from(new Set(tokenize(`${t.termo} ${t.definicao} ${t.fonte}`))),
@@ -1384,7 +2794,7 @@ function buildSearchIndex() {
   for (const c of CONJUNTOS) {
     items.push({
       id: `dataset:${c.id}`,
-      type: 'dataset',
+      type: "dataset",
       title: c.titulo,
       text: `${c.titulo}. ${c.descricao} Fonte: ${c.fonte}.`,
       tokens: Array.from(new Set(tokenize(`${c.titulo} ${c.descricao} ${c.fonte}`))),
@@ -1393,19 +2803,31 @@ function buildSearchIndex() {
   for (const n of buildEntityGraph().nodes) {
     items.push({
       id: `entity:${n.id}`,
-      type: 'entity',
+      type: "entity",
       title: n.label,
       text: `${n.label} (${n.label_en}). ${n.definition}`,
-      tokens: Array.from(new Set(tokenize(`${n.label} ${n.label_en} ${n.definition} ${(n.synonyms_pt || []).join(' ')} ${(n.synonyms_en || []).join(' ')}`))),
+      tokens: Array.from(
+        new Set(
+          tokenize(
+            `${n.label} ${n.label_en} ${n.definition} ${(n.synonyms_pt || []).join(" ")} ${(n.synonyms_en || []).join(" ")}`
+          )
+        )
+      ),
     });
   }
   /* OSDU mapping reference */
   items.push({
-    id: 'dataset:osdu-mapping',
-    type: 'dataset',
-    title: 'OSDU Kind Mapping Table',
-    text: 'OSDU kind mapping with master/reference/wpc tripartition, Well/Wellbore disambiguation and ANP→OSDU lineage.',
-    tokens: Array.from(new Set(tokenize('OSDU kind mapping master-data reference-data work-product-component Well Wellbore Field Basin tripartição ANP'))),
+    id: "dataset:osdu-mapping",
+    type: "dataset",
+    title: "OSDU Kind Mapping Table",
+    text: "OSDU kind mapping with master/reference/wpc tripartition, Well/Wellbore disambiguation and ANP→OSDU lineage.",
+    tokens: Array.from(
+      new Set(
+        tokenize(
+          "OSDU kind mapping master-data reference-data work-product-component Well Wellbore Field Basin tripartição ANP"
+        )
+      )
+    ),
   });
   return { meta: { version: VERSION, generated: NOW, count: items.length }, items };
 }
@@ -1420,9 +2842,9 @@ function datasetTitle(id) {
 }
 
 function loadAcronyms() {
-  const p = path.join(ROOT, 'data/acronyms.json');
+  const p = path.join(ROOT, "data/acronyms.json");
   if (!fs.existsSync(p)) return null;
-  return JSON.parse(fs.readFileSync(p, 'utf8'));
+  return JSON.parse(fs.readFileSync(p, "utf8"));
 }
 
 function buildRagCorpus() {
@@ -1432,18 +2854,16 @@ function buildRagCorpus() {
   for (const t of GLOSSARIO) {
     const enrich = enrichmentFor(t.id);
     const align = alignmentFor(TERM_ALIGNMENT, t.id);
-    const datasetTitles = (t.apareceEm || []).map(datasetTitle).join(', ');
+    const datasetTitles = (t.apareceEm || []).map(datasetTitle).join(", ");
     const synLine = enrich.synonyms_pt.length
-      ? ` Sinônimos: ${[...enrich.synonyms_pt, ...enrich.synonyms_en].join(', ')}.`
-      : '';
-    const exLine = enrich.examples.length
-      ? ` Exemplos: ${enrich.examples.join('; ')}.`
-      : '';
-    const enLine = enrich.termo_en ? ` (${enrich.termo_en})` : '';
-    const text = `${t.termo}${enLine}: ${t.definicao}${synLine}${exLine}${datasetTitles ? ` Aparece nos datasets: ${datasetTitles}.` : ''} Fonte: ${t.fonte}.`;
+      ? ` Sinônimos: ${[...enrich.synonyms_pt, ...enrich.synonyms_en].join(", ")}.`
+      : "";
+    const exLine = enrich.examples.length ? ` Exemplos: ${enrich.examples.join("; ")}.` : "";
+    const enLine = enrich.termo_en ? ` (${enrich.termo_en})` : "";
+    const text = `${t.termo}${enLine}: ${t.definicao}${synLine}${exLine}${datasetTitles ? ` Aparece nos datasets: ${datasetTitles}.` : ""} Fonte: ${t.fonte}.`;
     lines.push({
       id: `term_${t.id}`,
-      type: 'term',
+      type: "term",
       text,
       metadata: {
         id: t.id,
@@ -1460,13 +2880,13 @@ function buildRagCorpus() {
   /* type=term — extended-terms (geologia formal) */
   for (const t of EXTENDED_TERMS) {
     const synLine = t.synonyms_pt.length
-      ? ` Sinônimos: ${[...t.synonyms_pt, ...t.synonyms_en].join(', ')}.`
-      : '';
-    const exLine = t.examples.length ? ` Exemplos: ${t.examples.join('; ')}.` : '';
+      ? ` Sinônimos: ${[...t.synonyms_pt, ...t.synonyms_en].join(", ")}.`
+      : "";
+    const exLine = t.examples.length ? ` Exemplos: ${t.examples.join("; ")}.` : "";
     const text = `${t.termo} (${t.termo_en}): ${t.definicao}${synLine}${exLine} Fonte: ${t.legal_source}.`;
     lines.push({
       id: `term_${t.id}`,
-      type: 'term',
+      type: "term",
       text,
       metadata: {
         id: t.id,
@@ -1482,11 +2902,13 @@ function buildRagCorpus() {
 
   /* type=ontology_layer — descreve cada uma das 5 camadas semânticas */
   for (const layer of LAYER_DEFINITIONS) {
-    const coverageList = Array.isArray(layer.geolytics_coverage) ? layer.geolytics_coverage.join(', ') : layer.geolytics_coverage;
-    const text = `${layer.name} (${layer.id}, mantida por ${layer.maintainer}): ${layer.description}${layer.relationship_to_geocore ? ` Relação com GeoCore: ${layer.relationship_to_geocore}.` : ''} Cobertura no GeoBrain: ${coverageList}.`;
+    const coverageList = Array.isArray(layer.geolytics_coverage)
+      ? layer.geolytics_coverage.join(", ")
+      : layer.geolytics_coverage;
+    const text = `${layer.name} (${layer.id}, mantida por ${layer.maintainer}): ${layer.description}${layer.relationship_to_geocore ? ` Relação com GeoCore: ${layer.relationship_to_geocore}.` : ""} Cobertura no GeoBrain: ${coverageList}.`;
     lines.push({
       id: `ontology_layer_${layer.id}`,
-      type: 'ontology_layer',
+      type: "ontology_layer",
       text,
       metadata: {
         layer: layer.id,
@@ -1502,8 +2924,11 @@ function buildRagCorpus() {
     for (const col of c.colunas) {
       const text = `Coluna "${col.nome}" do dataset "${c.titulo}" (${c.id}): ${col.descricao}. Tipo: ${col.tipo}. Fonte do dataset: ${c.fonte}. Frequência: ${c.frequencia}.`;
       lines.push({
-        id: `column_${c.id}_${col.nome.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`,
-        type: 'column',
+        id: `column_${c.id}_${col.nome
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "_")
+          .replace(/^_|_$/g, "")}`,
+        type: "column",
         text,
         metadata: {
           dataset_id: c.id,
@@ -1518,11 +2943,13 @@ function buildRagCorpus() {
 
   /* type=entity */
   for (const n of buildEntityGraph().nodes) {
-    const outRels = EDGES.filter((e) => e.source === n.id).map((e) => `${e.relation_label} ${ENTITY_NODES.find((x) => x.id === e.target)?.label || e.target}`);
-    const text = `Entidade "${n.label}" (${n.label_en}), tipo ${n.type}. ${n.definition}${outRels.length ? ` Relações: ${outRels.join('; ')}.` : ''}${n.legal_source ? ` Fonte: ${n.legal_source}.` : ''}`;
+    const outRels = EDGES.filter((e) => e.source === n.id).map(
+      (e) => `${e.relation_label} ${ENTITY_NODES.find((x) => x.id === e.target)?.label || e.target}`
+    );
+    const text = `Entidade "${n.label}" (${n.label_en}), tipo ${n.type}. ${n.definition}${outRels.length ? ` Relações: ${outRels.join("; ")}.` : ""}${n.legal_source ? ` Fonte: ${n.legal_source}.` : ""}`;
     lines.push({
       id: `entity_${n.id}`,
-      type: 'entity',
+      type: "entity",
       text,
       metadata: {
         id: n.id,
@@ -1538,7 +2965,7 @@ function buildRagCorpus() {
   for (const d of DOMAINS) {
     lines.push({
       id: `domain_${d.id}`,
-      type: 'domain',
+      type: "domain",
       text: `Domínio Geolytics "${d.label}": ${d.desc}. Os domínios organizam os termos do dicionário ANP em quatro grupos primários: Ativos (ciclo contratual e regulatório), Fluidos (produção e injeção), Rocha (geologia sedimentar) e Geomecânica (estrutura física dos poços).`,
       metadata: { id: d.id, label: d.label },
     });
@@ -1548,58 +2975,72 @@ function buildRagCorpus() {
   for (const item of ONTOLOGY_TYPES.tipologia.items) {
     lines.push({
       id: `type_typology_${item.id}`,
-      type: 'type',
+      type: "type",
       text: `Tipologia geoquímica "${item.label}": ${item.desc}. Categoria que classifica o que o dado representa quimicamente ou operacionalmente, dentro da ontologia de dados geoquímicos do Geolytics.`,
-      metadata: { id: item.id, group: 'typology', label: item.label },
+      metadata: { id: item.id, group: "typology", label: item.label },
     });
   }
   /* type=type — níveis de processamento */
   for (const item of ONTOLOGY_TYPES.nivel.items) {
     lines.push({
       id: `type_processing_${item.id}`,
-      type: 'type',
+      type: "type",
       text: `Nível de processamento "${item.label}": ${item.desc}. Indica o grau de transformação do dado bruto até o produto analítico final.`,
-      metadata: { id: item.id, group: 'processing_level', label: item.label },
+      metadata: { id: item.id, group: "processing_level", label: item.label },
     });
   }
 
   /* type=ontopetro_class — 20 classes do Módulo 1 */
   for (const c of ONTOPETRO_CLASSES) {
-    const text = `Classe ontopetro "${c.name}" (${c.name_en}, superclasse ${c.superclass}): ${c.description}. Domínio: ${c.domain}. Fontes: ${c.sources.join(', ')}.${c.entity_graph_id ? ` Mapeada ao nó do grafo: ${c.entity_graph_id}.` : ''}`;
+    const text = `Classe ontopetro "${c.name}" (${c.name_en}, superclasse ${c.superclass}): ${c.description}. Domínio: ${c.domain}. Fontes: ${c.sources.join(", ")}.${c.entity_graph_id ? ` Mapeada ao nó do grafo: ${c.entity_graph_id}.` : ""}`;
     lines.push({
       id: `ontopetro_class_${c.id}`,
-      type: 'ontopetro_class',
+      type: "ontopetro_class",
       text,
-      metadata: { id: c.id, name: c.name, superclass: c.superclass, sources: c.sources, entity_graph_id: c.entity_graph_id },
+      metadata: {
+        id: c.id,
+        name: c.name,
+        superclass: c.superclass,
+        sources: c.sources,
+        entity_graph_id: c.entity_graph_id,
+      },
     });
   }
   /* type=ontopetro_property — propriedades com unidade (alta prioridade RAG) */
-  for (const p of ONTOPETRO_PROPERTIES.filter((x) => x.rag_priority === 'high')) {
-    const text = `Propriedade ontopetro "${p.name}" (${p.name_en || p.name}): ${p.description}. Domínio: ${p.domain_class}. Range: ${p.range}.${p.unit ? ` Unidade: ${p.unit}.` : ''}`;
+  for (const p of ONTOPETRO_PROPERTIES.filter((x) => x.rag_priority === "high")) {
+    const text = `Propriedade ontopetro "${p.name}" (${p.name_en || p.name}): ${p.description}. Domínio: ${p.domain_class}. Range: ${p.range}.${p.unit ? ` Unidade: ${p.unit}.` : ""}`;
     lines.push({
       id: `ontopetro_property_${p.id}`,
-      type: 'ontopetro_property',
+      type: "ontopetro_property",
       text,
       metadata: { id: p.id, name: p.name, unit: p.unit, domain_class: p.domain_class },
     });
   }
   /* type=ontopetro_relation */
   for (const r of ONTOPETRO_RELATIONS) {
-    const text = `Relação ontopetro "${r.name}" (${r.name_en}): ${r.description}. ${r.domain} → ${r.range} (cardinalidade ${r.cardinality}). Inversa: ${r.inverse || 'sem'}.`;
+    const text = `Relação ontopetro "${r.name}" (${r.name_en}): ${r.description}. ${r.domain} → ${r.range} (cardinalidade ${r.cardinality}). Inversa: ${r.inverse || "sem"}.`;
     lines.push({
       id: `ontopetro_relation_${r.id}`,
-      type: 'ontopetro_relation',
+      type: "ontopetro_relation",
       text,
-      metadata: { id: r.id, name: r.name, domain: r.domain, range: r.range, cardinality: r.cardinality },
+      metadata: {
+        id: r.id,
+        name: r.name,
+        domain: r.domain,
+        range: r.range,
+        cardinality: r.cardinality,
+      },
     });
   }
   /* type=instance_ref — instâncias I001-I010 */
   for (const i of ONTOPETRO_INSTANCES) {
-    const attrs = Object.entries(i.attributes || {}).map(([k, v]) => `${k}: ${v}`).join('; ');
-    const text = `Instância de referência (${i.id}) "${i.name}" — classe ${i.class}.${attrs ? ` Atributos: ${attrs}.` : ''} Fonte: ${i.source}.`;
+    const attrs = Object.entries(i.attributes || {})
+      .map(([k, v]) => `${k}: ${v}`)
+      .join("; ");
+    const text = `Instância de referência (${i.id}) "${i.name}" — classe ${i.class}.${attrs ? ` Atributos: ${attrs}.` : ""} Fonte: ${i.source}.`;
     lines.push({
       id: `instance_${i.id}`,
-      type: 'instance_ref',
+      type: "instance_ref",
       text,
       metadata: { id: i.id, class: i.class, name: i.name, source: i.source },
     });
@@ -1608,13 +3049,13 @@ function buildRagCorpus() {
   /* type=taxonomy — 9 enumerações do ontopetro M5 */
   for (const [key, t] of Object.entries(TAXONOMIES)) {
     const valuesDesc = Array.isArray(t.values)
-      ? t.values.join(', ')
-      : Object.keys(t.values).join(', ');
-    const alert = t.rag_alert ? ` ALERTA: ${t.rag_alert}` : '';
+      ? t.values.join(", ")
+      : Object.keys(t.values).join(", ");
+    const alert = t.rag_alert ? ` ALERTA: ${t.rag_alert}` : "";
     const text = `Taxonomia "${t.label}" (${t.label_en || t.label}): ${t.description || `Enumeração canônica de ${t.label}`}. Valores: ${valuesDesc}.${alert}`;
     lines.push({
       id: `taxonomy_${key}`,
-      type: 'taxonomy',
+      type: "taxonomy",
       text,
       metadata: { key, label: t.label, has_alert: !!t.rag_alert },
     });
@@ -1622,10 +3063,10 @@ function buildRagCorpus() {
 
   /* type=system_ref — 8 sistemas corporativos Petrobras */
   for (const s of SYSTEMS) {
-    const text = `Sistema corporativo Petrobras "${s.name}" (${s.id}, tipo ${s.type}, domínio ${s.domain}): ${s.description} Objetos de dados: ${s.data_objects.join(', ')}. NOTA: este é metadado de proveniência, não de acesso — agentes não devem tentar conectar.`;
+    const text = `Sistema corporativo Petrobras "${s.name}" (${s.id}, tipo ${s.type}, domínio ${s.domain}): ${s.description} Objetos de dados: ${s.data_objects.join(", ")}. NOTA: este é metadado de proveniência, não de acesso — agentes não devem tentar conectar.`;
     lines.push({
       id: `system_${s.id}`,
-      type: 'system_ref',
+      type: "system_ref",
       text,
       metadata: { id: s.id, type: s.type, domain: s.domain },
     });
@@ -1633,13 +3074,21 @@ function buildRagCorpus() {
 
   /* type=module_extended — M7/M8/M9/M10 visão geral + classes-chave */
   for (const [key, m] of Object.entries(MODULES_EXTENDED)) {
-    const classList = m.classes.slice(0, 8).map((c) => `${c.id}=${c.name}`).join('; ');
-    const propList = (m.key_properties || []).slice(0, 6).map((p) => `${p.name}${p.unit ? ` [${p.unit}]` : ''}`).join('; ');
-    const cross = m.cross_module_connections ? ` Conexões cross-módulo: ${m.cross_module_connections.map((c) => `${c.from}→${c.to}: ${c.connection}`).join('. ')}.` : '';
+    const classList = m.classes
+      .slice(0, 8)
+      .map((c) => `${c.id}=${c.name}`)
+      .join("; ");
+    const propList = (m.key_properties || [])
+      .slice(0, 6)
+      .map((p) => `${p.name}${p.unit ? ` [${p.unit}]` : ""}`)
+      .join("; ");
+    const cross = m.cross_module_connections
+      ? ` Conexões cross-módulo: ${m.cross_module_connections.map((c) => `${c.from}→${c.to}: ${c.connection}`).join(". ")}.`
+      : "";
     const text = `Módulo ${key} — ${m.label} (${m.label_en}). Sistemas-fonte: ${m.system_origin}. Classes principais: ${classList}. Propriedades-chave: ${propList}.${cross}`;
     lines.push({
       id: `module_${key}`,
-      type: 'module_extended',
+      type: "module_extended",
       text,
       metadata: { module: key, label: m.label, system_origin: m.system_origin },
     });
@@ -1647,31 +3096,42 @@ function buildRagCorpus() {
     for (const c of m.classes) {
       lines.push({
         id: `class_${key}_${c.id}`,
-        type: `module_class_${key.split('_')[0]}`, /* module_class_M7, module_class_M8, etc. */
+        type: `module_class_${key.split("_")[0]}` /* module_class_M7, module_class_M8, etc. */,
         text: `Classe ${c.id} "${c.name}" do módulo ${m.label} (${m.label_en}, sistema-fonte ${m.system_origin}). Superclasse: ${c.superclass}. ${c.description}`,
-        metadata: { id: c.id, name: c.name, module: key, superclass: c.superclass, system_origin: m.system_origin },
+        metadata: {
+          id: c.id,
+          name: c.name,
+          module: key,
+          superclass: c.superclass,
+          system_origin: m.system_origin,
+        },
       });
     }
     /* Chunks por propriedade-chave — recall por unidade/sigla técnica */
-    for (const p of (m.key_properties || [])) {
+    for (const p of m.key_properties || []) {
       lines.push({
         id: `prop_${key}_${p.id}`,
-        type: `module_property_${key.split('_')[0]}`,
-        text: `Propriedade ${p.id} "${p.name}"${p.name_en ? ` (${p.name_en})` : ''} do módulo ${m.label}. ${p.description}${p.unit ? ` Unidade: ${p.unit}.` : ''} Sistema-fonte: ${m.system_origin}.`,
+        type: `module_property_${key.split("_")[0]}`,
+        text: `Propriedade ${p.id} "${p.name}"${p.name_en ? ` (${p.name_en})` : ""} do módulo ${m.label}. ${p.description}${p.unit ? ` Unidade: ${p.unit}.` : ""} Sistema-fonte: ${m.system_origin}.`,
         metadata: { id: p.id, name: p.name, unit: p.unit, module: key },
       });
     }
   }
 
   /* type=pvt_property — campos PVT com completude real (top 10 por relevância) */
-  const pvtImportant = PVT_FIELDS.filter((f) => /API|RGO|Psat|Press|Bacia|Poço|Campo|Temperatura|Fluido/i.test(f.name)).slice(0, 12);
+  const pvtImportant = PVT_FIELDS.filter((f) =>
+    /API|RGO|Psat|Press|Bacia|Poço|Campo|Temperatura|Fluido/i.test(f.name)
+  ).slice(0, 12);
   for (const f of pvtImportant) {
-    const text = `Campo PVT do sistema SIRR "${f.name}" (tipo ${f.type}): ${f.description}.${f.unit ? ` Unidade: ${f.unit}.` : ''} Completude na base corporativa: ${f.completeness_pct.toFixed(1)}%.`;
+    const text = `Campo PVT do sistema SIRR "${f.name}" (tipo ${f.type}): ${f.description}.${f.unit ? ` Unidade: ${f.unit}.` : ""} Completude na base corporativa: ${f.completeness_pct.toFixed(1)}%.`;
     lines.push({
-      id: `pvt_${f.name.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`,
-      type: 'pvt_property',
+      id: `pvt_${f.name
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "_")
+        .replace(/^_|_$/g, "")}`,
+      type: "pvt_property",
       text,
-      metadata: { name: f.name, completeness_pct: f.completeness_pct, source: 'SIRR' },
+      metadata: { name: f.name, completeness_pct: f.completeness_pct, source: "SIRR" },
     });
   }
 
@@ -1679,18 +3139,18 @@ function buildRagCorpus() {
   for (const a of AMBIGUITY_ALERTS) {
     lines.push({
       id: a.id,
-      type: 'ambiguity_alert',
+      type: "ambiguity_alert",
       text: a.text,
-      metadata: { terms: a.terms, priority: 'high' },
+      metadata: { terms: a.terms, priority: "high" },
     });
   }
 
   /* type=ner_mapping — schema PetroGold */
   for (const m of REGIS_NER_MAPPINGS) {
-    const text = `Mapeamento NER PetroGold tipo "${m.petrogold_type}" (${m.petrogold_label}) → nós do Geolytics: ${m.geolytics_nodes.join(', ')}. ${m.disambiguation_note} Exemplos: ${m.example_entities.join('; ')}.`;
+    const text = `Mapeamento NER PetroGold tipo "${m.petrogold_type}" (${m.petrogold_label}) → nós do Geolytics: ${m.geolytics_nodes.join(", ")}. ${m.disambiguation_note} Exemplos: ${m.example_entities.join("; ")}.`;
     lines.push({
       id: `ner_mapping_${m.petrogold_type.toLowerCase()}`,
-      type: 'ner_mapping',
+      type: "ner_mapping",
       text,
       metadata: { petrogold_type: m.petrogold_type, geolytics_nodes: m.geolytics_nodes },
     });
@@ -1710,11 +3170,13 @@ function buildRagCorpus() {
         `${a.sigla}`,
         a.expansion_pt ? `(${a.expansion_pt})` : null,
         a.expansion_en ? `— ${a.expansion_en}` : null,
-      ].filter(Boolean).join(' ');
+      ]
+        .filter(Boolean)
+        .join(" ");
       const text = `Sigla "${a.sigla}" do domínio O&G, categoria ${a.category}. ${parts}.`;
       lines.push({
         id: `acronym_${a.id}`,
-        type: 'acronym',
+        type: "acronym",
         text,
         metadata: {
           sigla: a.sigla,
@@ -1729,22 +3191,22 @@ function buildRagCorpus() {
   /* type=ontology_class — GSO (Layer 7, Loop3D Geoscience Ontology) */
   for (const mod of loadGsoModules()) {
     for (const [key, c] of Object.entries(mod.classes)) {
-      const labels = [c.pref_label_en, c.pref_label_fr].filter(Boolean).join(' / ');
-      const parents = (c.parents || []).join(', ');
-      const sources = (c.sources || []).join('; ');
-      const text = `${labels || c.gso_class} (GSO ${c.gso_class}): ${c.definition_en_canonical || '(no definition)'}${parents ? ` Subclasse de: ${parents}.` : ''}${sources ? ` Fonte: ${sources}.` : ''} Camada 7 (GSO/Loop3D, CC BY 4.0).`;
+      const labels = [c.pref_label_en, c.pref_label_fr].filter(Boolean).join(" / ");
+      const parents = (c.parents || []).join(", ");
+      const sources = (c.sources || []).join("; ");
+      const text = `${labels || c.gso_class} (GSO ${c.gso_class}): ${c.definition_en_canonical || "(no definition)"}${parents ? ` Subclasse de: ${parents}.` : ""}${sources ? ` Fonte: ${sources}.` : ""} Camada 7 (GSO/Loop3D, CC BY 4.0).`;
       lines.push({
-        id: `gso_${mod.meta.module.replace(/^GSO-/, '').toLowerCase()}_${c.gso_class}`,
-        type: 'ontology_class',
+        id: `gso_${mod.meta.module.replace(/^GSO-/, "").toLowerCase()}_${c.gso_class}`,
+        type: "ontology_class",
         text,
         metadata: {
           gso_class: c.gso_class,
           owl_uri: c.owl_uri,
           parents: c.parents,
           sources: c.sources,
-          layer: 'layer7',
+          layer: "layer7",
           module: mod.meta.module,
-          license: 'CC BY 4.0',
+          license: "CC BY 4.0",
           attribution: mod.meta.attribution,
         },
       });
@@ -1759,37 +3221,48 @@ function buildRagCorpus() {
   /* type=geomec_class / geomec_property / geomec_instance — P2.7 MEM module */
   const gm = loadGeomechanics();
   if (gm) {
-    for (const c of (gm.classes || [])) {
-      const alert = c.rag_alert ? ` ALERTA RAG: ${c.rag_alert}` : '';
-      const sweet = c.sweet_alignment ? ` SWEET: ${c.sweet_alignment}.` : '';
-      const sources = Array.isArray(c.sources) ? ` Fontes: ${c.sources.join('; ')}.` : '';
-      const geo = c.geocoverage ? ` Cobertura geográfica: ${c.geocoverage}.` : '';
+    for (const c of gm.classes || []) {
+      const alert = c.rag_alert ? ` ALERTA RAG: ${c.rag_alert}` : "";
+      const sweet = c.sweet_alignment ? ` SWEET: ${c.sweet_alignment}.` : "";
+      const sources = Array.isArray(c.sources) ? ` Fontes: ${c.sources.join("; ")}.` : "";
+      const geo = c.geocoverage ? ` Cobertura geográfica: ${c.geocoverage}.` : "";
       const text = `Classe geomecânica ${c.id} "${c.name}" (${c.name_en || c.name}): ${c.definition}${sweet}${sources}${geo}${alert}`;
       lines.push({
         id: `geomec_class_${c.id}`,
-        type: 'geomec_class',
+        type: "geomec_class",
         text,
-        metadata: { id: c.id, name: c.name, sweet_alignment: c.sweet_alignment, geocoverage: c.geocoverage, has_alert: !!c.rag_alert },
+        metadata: {
+          id: c.id,
+          name: c.name,
+          sweet_alignment: c.sweet_alignment,
+          geocoverage: c.geocoverage,
+          has_alert: !!c.rag_alert,
+        },
       });
     }
-    for (const p of (gm.properties || [])) {
-      const unitStr = p.unit ? ` Unidade: ${p.unit}.` : '';
-      const rangeStr = (p.min_value !== undefined && p.max_value !== undefined) ? ` Faixa válida: ${p.min_value}–${p.max_value}.` : '';
-      const alert = p.rag_alert ? ` ALERTA RAG: ${p.rag_alert}` : '';
+    for (const p of gm.properties || []) {
+      const unitStr = p.unit ? ` Unidade: ${p.unit}.` : "";
+      const rangeStr =
+        p.min_value !== undefined && p.max_value !== undefined
+          ? ` Faixa válida: ${p.min_value}–${p.max_value}.`
+          : "";
+      const alert = p.rag_alert ? ` ALERTA RAG: ${p.rag_alert}` : "";
       const text = `Propriedade geomecânica ${p.id} "${p.name}" (${p.name_en || p.name}): ${p.description}${unitStr}${rangeStr}${alert}`;
       lines.push({
         id: `geomec_property_${p.id}`,
-        type: 'geomec_property',
+        type: "geomec_property",
         text,
         metadata: { id: p.id, name: p.name, unit: p.unit || null, has_alert: !!p.rag_alert },
       });
     }
-    for (const inst of (gm.instances || [])) {
-      const attrs = Object.entries(inst.attributes || {}).map(([k, v]) => `${k}: ${v}`).join('; ');
-      const text = `Instância geomecânica "${inst.id}" — classe ${inst.class} (${inst.name}).${attrs ? ` Atributos: ${attrs}.` : ''} Fonte: ${inst.source}.`;
+    for (const inst of gm.instances || []) {
+      const attrs = Object.entries(inst.attributes || {})
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("; ");
+      const text = `Instância geomecânica "${inst.id}" — classe ${inst.class} (${inst.name}).${attrs ? ` Atributos: ${attrs}.` : ""} Fonte: ${inst.source}.`;
       lines.push({
         id: `geomec_instance_${inst.id}`,
-        type: 'geomec_instance',
+        type: "geomec_instance",
         text,
         metadata: { id: inst.id, class: inst.class, name: inst.name, source: inst.source },
       });
@@ -1797,40 +3270,43 @@ function buildRagCorpus() {
   }
 
   /* type=geomec_corporate_entity — L6 corporate module (P2.10) */
-  const gmCorpPath = path.resolve(__dirname, '..', 'data', 'geomechanics-corporate.json');
+  const gmCorpPath = path.resolve(__dirname, "..", "data", "geomechanics-corporate.json");
   if (fs.existsSync(gmCorpPath)) {
-    const gmCorp = JSON.parse(fs.readFileSync(gmCorpPath, 'utf8'));
-    for (const e of (gmCorp.entities || [])) {
+    const gmCorp = JSON.parse(fs.readFileSync(gmCorpPath, "utf8"));
+    for (const e of gmCorp.entities || []) {
       if (e.deprecated) continue;
-      const conf = e.confidence ? ` [confiança: ${e.confidence}]` : '';
-      const def = e.definition_pt || e.definition || '';
-      const formulaStr = e.formula ? ` Fórmula: ${e.formula}.` : '';
-      const gapStr = (e.evidence_gaps && e.evidence_gaps.length)
-        ? ` Lacunas de evidência: ${e.evidence_gaps.join('; ')}.` : '';
-      const oosStr = e.out_of_scope_flag ? ' [OUT_OF_SCOPE]' : '';
+      const conf = e.confidence ? ` [confiança: ${e.confidence}]` : "";
+      const def = e.definition_pt || e.definition || "";
+      const formulaStr = e.formula ? ` Fórmula: ${e.formula}.` : "";
+      const gapStr =
+        e.evidence_gaps && e.evidence_gaps.length
+          ? ` Lacunas de evidência: ${e.evidence_gaps.join("; ")}.`
+          : "";
+      const oosStr = e.out_of_scope_flag ? " [OUT_OF_SCOPE]" : "";
       const provStr = (e.obtained_from_lab_tests || [])
-        .map((p) => `${p.test_label}${p.primary ? ' (primário)' : ''}: ${p.method_note}`)
-        .join(' | ');
-      const provBlock = provStr ? ` Métodos de obtenção: ${provStr}.` : '';
+        .map((p) => `${p.test_label}${p.primary ? " (primário)" : ""}: ${p.method_note}`)
+        .join(" | ");
+      const provBlock = provStr ? ` Métodos de obtenção: ${provStr}.` : "";
       const text = `Entidade corporativa ${e.id} "${e.label_pt || e.label}"${conf}: ${def}${formulaStr}${gapStr}${provBlock}${oosStr}`;
       lines.push({
         id: `geomec_corporate_entity_${e.id}`,
-        type: 'geomec_corporate_entity',
+        type: "geomec_corporate_entity",
         text,
         metadata: {
           id: e.id,
           category: e.category,
           confidence: e.confidence || null,
-          layer: 'L6',
+          layer: "L6",
           out_of_scope: !!e.out_of_scope_flag,
           lab_test_method_count: (e.obtained_from_lab_tests || []).length,
-          primary_lab_test: ((e.obtained_from_lab_tests || []).find((p) => p.primary) || {}).test_id || null,
+          primary_lab_test:
+            ((e.obtained_from_lab_tests || []).find((p) => p.primary) || {}).test_id || null,
         },
       });
     }
   }
 
-  return lines.map((l) => JSON.stringify(l)).join('\n') + '\n';
+  return lines.map((l) => JSON.stringify(l)).join("\n") + "\n";
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -1989,62 +3465,71 @@ When users ask about these concepts in any other context (e.g., "is this concept
  * ───────────────────────────────────────────────────────────── */
 
 function writeJson(rel, obj) {
-  if (DRY_RUN) { console.log(`  [dry-run] would write ${rel} (${JSON.stringify(obj).length} bytes)`); return; }
+  if (DRY_RUN) {
+    console.log(`  [dry-run] would write ${rel} (${JSON.stringify(obj).length} bytes)`);
+    return;
+  }
   const p = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(p), { recursive: true });
-  fs.writeFileSync(p, JSON.stringify(obj, null, 2) + '\n', 'utf8');
+  fs.writeFileSync(p, JSON.stringify(obj, null, 2) + "\n", "utf8");
   console.log(`  ✓ ${rel}`);
 }
 
 function writeText(rel, content) {
-  if (DRY_RUN) { console.log(`  [dry-run] would write ${rel} (${content.length} bytes)`); return; }
+  if (DRY_RUN) {
+    console.log(`  [dry-run] would write ${rel} (${content.length} bytes)`);
+    return;
+  }
   const p = path.join(ROOT, rel);
   fs.mkdirSync(path.dirname(p), { recursive: true });
-  fs.writeFileSync(p, content, 'utf8');
+  fs.writeFileSync(p, content, "utf8");
   console.log(`  ✓ ${rel}`);
 }
 
-if (DRY_RUN) console.log('=== DRY RUN — no files will be written ===');
-console.log('Generating data/...');
-writeJson('data/glossary.json',        buildGlossary());
-writeJson('data/extended-terms.json',  buildExtendedTerms());
-writeJson('data/datasets.json',        buildDatasets());
-writeJson('data/entity-graph.json',    buildEntityGraph());
-writeText('data/geobrain.ttl',        buildTtl(buildEntityGraph(), { sweetAlignment: loadSweetAlignmentSync() }));
-writeText('index-cards.html',          buildCardsHtml(buildEntityGraph()));
-writeText('gso-cards.html',            buildGsoCardsHtml(loadGsoModules()));
-writeJson('data/ontology-types.json',  buildOntologyTypes());
-writeJson('data/ontopetro.json',       buildOntopetro());
-writeJson('data/taxonomies.json',      buildTaxonomies());
-writeJson('data/modules-extended.json', buildModulesExtended());
-writeJson('data/pvt-dictionary.json',  buildPvtDictionary());
-writeJson('data/systems.json',         buildSystems());
-writeJson('data/regis-ner-schema.json', buildRegisNer());
-writeJson('data/full.json',            buildFull());
+if (DRY_RUN) console.log("=== DRY RUN — no files will be written ===");
+console.log("Generating data/...");
+writeJson("data/glossary.json", buildGlossary());
+writeJson("data/extended-terms.json", buildExtendedTerms());
+writeJson("data/datasets.json", buildDatasets());
+writeJson("data/entity-graph.json", buildEntityGraph());
+writeText(
+  "data/geobrain.ttl",
+  buildTtl(buildEntityGraph(), { sweetAlignment: loadSweetAlignmentSync() })
+);
+writeText("index-cards.html", buildCardsHtml(buildEntityGraph()));
+writeText("gso-cards.html", buildGsoCardsHtml(loadGsoModules()));
+writeJson("data/ontology-types.json", buildOntologyTypes());
+writeJson("data/ontopetro.json", buildOntopetro());
+writeJson("data/taxonomies.json", buildTaxonomies());
+writeJson("data/modules-extended.json", buildModulesExtended());
+writeJson("data/pvt-dictionary.json", buildPvtDictionary());
+writeJson("data/systems.json", buildSystems());
+writeJson("data/regis-ner-schema.json", buildRegisNer());
+writeJson("data/full.json", buildFull());
 
-console.log('Generating api/v1/...');
-writeJson('api/v1/index.json',        buildApiIndex());
-writeJson('api/v1/terms.json',        buildApiTerms());
-writeJson('api/v1/entities.json',     buildApiEntities());
-writeJson('api/v1/datasets.json',     buildApiDatasets());
-writeJson('api/v1/search-index.json', buildSearchIndex());
-writeJson('api/v1/acronyms.json',     buildApiAcronyms());
-writeJson('api/v1/seismic.json',      buildSeismicConsolidated());
-writeJson('api/v1/geomechanics.json', buildGeomechanicsApi());
+console.log("Generating api/v1/...");
+writeJson("api/v1/index.json", buildApiIndex());
+writeJson("api/v1/terms.json", buildApiTerms());
+writeJson("api/v1/entities.json", buildApiEntities());
+writeJson("api/v1/datasets.json", buildApiDatasets());
+writeJson("api/v1/search-index.json", buildSearchIndex());
+writeJson("api/v1/acronyms.json", buildApiAcronyms());
+writeJson("api/v1/seismic.json", buildSeismicConsolidated());
+writeJson("api/v1/geomechanics.json", buildGeomechanicsApi());
 
-console.log('Generating ai/...');
-writeText('ai/rag-corpus.jsonl',       buildRagCorpus());
-writeText('ai/system-prompt-ptbr.md',  SYSTEM_PROMPT_PT);
-writeText('ai/system-prompt-en.md',    SYSTEM_PROMPT_EN);
-writeJson('ai/ontology-map.json',      buildOntologyMap());
+console.log("Generating ai/...");
+writeText("ai/rag-corpus.jsonl", buildRagCorpus());
+writeText("ai/system-prompt-ptbr.md", SYSTEM_PROMPT_PT);
+writeText("ai/system-prompt-en.md", SYSTEM_PROMPT_EN);
+writeJson("ai/ontology-map.json", buildOntologyMap());
 
 // Defensive: generate validate-rules manifest only if the builder is present.
 (function generateValidateManifest() {
-  const manifestScript = path.resolve(__dirname, 'build-validate-manifest.js');
+  const manifestScript = path.resolve(__dirname, "build-validate-manifest.js");
   if (!fs.existsSync(manifestScript)) return;
   try {
-    const { buildManifest } = require('./build-validate-manifest.js');
-    writeJson('api/v1/validate-rules.json', buildManifest());
+    const { buildManifest } = require("./build-validate-manifest.js");
+    writeJson("api/v1/validate-rules.json", buildManifest());
   } catch (err) {
     console.warn(`  [warn] Could not generate validate-rules.json: ${err.message}`);
   }
@@ -2054,8 +3539,8 @@ writeJson('ai/ontology-map.json',      buildOntologyMap());
 // Idempotent: overwrites on each generate run.
 (function copyShacl() {
   const shaclFiles = [
-    { src: 'data/geobrain-shapes.ttl', dst: 'api/v1/geobrain-shapes.ttl' },
-    { src: 'data/geobrain-vocab.ttl',  dst: 'api/v1/geobrain-vocab.ttl' },
+    { src: "data/geobrain-shapes.ttl", dst: "api/v1/geobrain-shapes.ttl" },
+    { src: "data/geobrain-vocab.ttl", dst: "api/v1/geobrain-vocab.ttl" },
   ];
   for (const { src, dst } of shaclFiles) {
     const srcPath = path.join(ROOT, src);
@@ -2071,28 +3556,38 @@ writeJson('ai/ontology-map.json',      buildOntologyMap());
   }
 })();
 
-console.log('\n✓ Done.');
-console.log(`  Glossary terms: ${GLOSSARIO.length + OG_GLOSSARY.length} (${GLOSSARIO.length} base + ${OG_GLOSSARY.length} OG)`);
+console.log("\n✓ Done.");
+console.log(
+  `  Glossary terms: ${GLOSSARIO.length + OG_GLOSSARY.length} (${GLOSSARIO.length} base + ${OG_GLOSSARY.length} OG)`
+);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
-console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG)`);
-console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length}`);
+console.log(
+  `  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG)`
+);
+console.log(
+  `  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length}`
+);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
-console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
+console.log(
+  `  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`
+);
 console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);
 console.log(`  PVT fields: ${PVT_FIELDS.length}`);
 console.log(`  Systems: ${SYSTEMS.length}`);
 console.log(`  REGIS NER mappings: ${REGIS_NER_MAPPINGS.length}`);
 console.log(`  Ambiguity alerts: ${AMBIGUITY_ALERTS.length}`);
 const _seismicSummary = buildSeismicConsolidated();
-console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicSummary.meta.property_count} properties, ${_seismicSummary.meta.relation_count} relations, ${_seismicSummary.meta.instance_count} instances`);
+console.log(
+  `  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicSummary.meta.property_count} properties, ${_seismicSummary.meta.relation_count} relations, ${_seismicSummary.meta.instance_count} instances`
+);
 
 // Copy WITSML/PRODML crosswalk JSONs into api/v1/ and append RAG chunks (P2.9).
 // Idempotent: overwrites on each generate run.
 (function copyCrosswalks() {
   const crosswalkFiles = [
-    { src: 'data/witsml-rdf-crosswalk.json', dst: 'api/v1/witsml-rdf-crosswalk.json' },
-    { src: 'data/prodml-rdf-crosswalk.json',  dst: 'api/v1/prodml-rdf-crosswalk.json' },
+    { src: "data/witsml-rdf-crosswalk.json", dst: "api/v1/witsml-rdf-crosswalk.json" },
+    { src: "data/prodml-rdf-crosswalk.json", dst: "api/v1/prodml-rdf-crosswalk.json" },
   ];
   let totalChunks = 0;
   const ragLines = [];
@@ -2110,54 +3605,62 @@ console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicS
 
     let cw;
     try {
-      cw = JSON.parse(fs.readFileSync(srcPath, 'utf8'));
+      cw = JSON.parse(fs.readFileSync(srcPath, "utf8"));
     } catch (e) {
       console.warn(`  [warn] Could not parse crosswalk for RAG: ${src}: ${e.message}`);
       continue;
     }
-    const standard = cw.meta && cw.meta.standard ? cw.meta.standard : 'Energistics';
-    for (const cls of (cw.classes || [])) {
+    const standard = cw.meta && cw.meta.standard ? cw.meta.standard : "Energistics";
+    for (const cls of cw.classes || []) {
       const primitiveNames = (cls.primitive_properties || [])
-        .map((p) => `${p.name} (${p.type}${p.unit ? ', ' + p.unit : ''})`)
-        .join(', ');
+        .map((p) => `${p.name} (${p.type}${p.unit ? ", " + p.unit : ""})`)
+        .join(", ");
       const objectNames = (cls.object_properties || [])
         .map((p) => `${p.name} -> ${p.range}`)
-        .join(', ');
+        .join(", ");
       const text = [
         `${cls.witsml_class} (${standard}):`,
-        cls.description_en || cls.description_pt || '',
+        cls.description_en || cls.description_pt || "",
         `WITSML URI: ${cls.witsml_uri || cls.prodml_uri}.`,
         `Maps to: ${cls.rdf_class} (geo: namespace).`,
-        cls.osdu_kind ? `OSDU kind: ${cls.osdu_kind}.` : '',
-        cls.geocore_alignment ? `GeoCore alignment: ${cls.geocore_alignment}.` : '',
-        primitiveNames ? `Properties: ${primitiveNames}.` : '',
-        objectNames ? `Relationships: ${objectNames}.` : '',
-      ].filter(Boolean).join(' ');
-      ragLines.push(JSON.stringify({
-        id: `crosswalk_${standard.toLowerCase().replace(/[^a-z0-9]+/g, '_')}_${cls.witsml_class}`,
-        type: 'witsml_class',
-        text,
-        metadata: {
-          witsml_class: cls.witsml_class,
-          rdf_class: cls.rdf_class,
-          osdu_kind: cls.osdu_kind || null,
-          layer: cls.layer || 'layer4',
-          standard,
-          source: src,
-        },
-      }));
+        cls.osdu_kind ? `OSDU kind: ${cls.osdu_kind}.` : "",
+        cls.geocore_alignment ? `GeoCore alignment: ${cls.geocore_alignment}.` : "",
+        primitiveNames ? `Properties: ${primitiveNames}.` : "",
+        objectNames ? `Relationships: ${objectNames}.` : "",
+      ]
+        .filter(Boolean)
+        .join(" ");
+      ragLines.push(
+        JSON.stringify({
+          id: `crosswalk_${standard.toLowerCase().replace(/[^a-z0-9]+/g, "_")}_${cls.witsml_class}`,
+          type: "witsml_class",
+          text,
+          metadata: {
+            witsml_class: cls.witsml_class,
+            rdf_class: cls.rdf_class,
+            osdu_kind: cls.osdu_kind || null,
+            layer: cls.layer || "layer4",
+            standard,
+            source: src,
+          },
+        })
+      );
       totalChunks++;
     }
   }
   if (!DRY_RUN && ragLines.length > 0) {
-    const ragPath = path.join(ROOT, 'ai', 'rag-corpus.jsonl');
+    const ragPath = path.join(ROOT, "ai", "rag-corpus.jsonl");
     if (fs.existsSync(ragPath)) {
-      const existing = fs.readFileSync(ragPath, 'utf8');
-      const kept = existing.split('\n').filter((line) => {
+      const existing = fs.readFileSync(ragPath, "utf8");
+      const kept = existing.split("\n").filter((line) => {
         if (!line.trim()) return false;
-        try { return JSON.parse(line).type !== 'witsml_class'; } catch { return true; }
+        try {
+          return JSON.parse(line).type !== "witsml_class";
+        } catch {
+          return true;
+        }
       });
-      fs.writeFileSync(ragPath, kept.join('\n') + '\n' + ragLines.join('\n') + '\n', 'utf8');
+      fs.writeFileSync(ragPath, kept.join("\n") + "\n" + ragLines.join("\n") + "\n", "utf8");
       console.log(`  ✓ ai/rag-corpus.jsonl updated (+${totalChunks} witsml_class chunks)`);
     }
   } else if (DRY_RUN) {

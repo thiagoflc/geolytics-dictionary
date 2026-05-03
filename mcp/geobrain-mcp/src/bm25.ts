@@ -11,14 +11,16 @@ export interface ScoredDoc {
 }
 
 function tokenize(text: string): string[] {
-  return text
-    .toLowerCase()
-    .normalize("NFD")
-    // strip combining diacritics (accents) so "bacia" matches "Bacia"
-    .replace(/[̀-ͯ]/g, "")
-    .replace(/[^a-z0-9]+/g, " ")
-    .split(" ")
-    .filter(Boolean);
+  return (
+    text
+      .toLowerCase()
+      .normalize("NFD")
+      // strip combining diacritics (accents) so "bacia" matches "Bacia"
+      .replace(/[̀-ͯ]/g, "")
+      .replace(/[^a-z0-9]+/g, " ")
+      .split(" ")
+      .filter(Boolean)
+  );
 }
 
 export class BM25 {
@@ -51,10 +53,7 @@ export class BM25 {
     // IDF — Robertson IDF: log((N - df + 0.5) / (df + 0.5) + 1)
     this.idf = new Map();
     for (const [term, df] of this.df) {
-      this.idf.set(
-        term,
-        Math.log((this.N - df + 0.5) / (df + 0.5) + 1)
-      );
+      this.idf.set(term, Math.log((this.N - df + 0.5) / (df + 0.5) + 1));
     }
   }
 
@@ -75,8 +74,7 @@ export class BM25 {
         if (tf === 0) continue;
 
         const numerator = tf * (this.k1 + 1);
-        const denominator =
-          tf + this.k1 * (1 - this.b + this.b * (dl / this.avgdl));
+        const denominator = tf + this.k1 * (1 - this.b + this.b * (dl / this.avgdl));
         scores[i] += idf * (numerator / denominator);
       }
     }

@@ -1,8 +1,7 @@
 """test_dictionary.py — Tests for the Dictionary class."""
 
 import pytest
-
-from geobrain import Dictionary, Term, Acronym, Layer
+from geobrain import Acronym, Dictionary, Layer, Term
 
 
 @pytest.fixture(scope="module")
@@ -13,6 +12,7 @@ def d():
 # ---------------------------------------------------------------------------
 # lookup()
 # ---------------------------------------------------------------------------
+
 
 def test_lookup_presal_returns_results(d):
     results = d.lookup("Pré-sal")
@@ -52,6 +52,7 @@ def test_lookup_partial_match(d):
 # acronym()
 # ---------------------------------------------------------------------------
 
+
 def test_acronym_bop_returns_results(d):
     results = d.acronym("BOP")
     assert len(results) >= 1, "Expected at least 1 sense for 'BOP'"
@@ -82,6 +83,7 @@ def test_acronym_unknown_returns_empty(d):
 # layers()
 # ---------------------------------------------------------------------------
 
+
 def test_layers_returns_at_least_seven(d):
     layers = d.layers()
     assert len(layers) >= 7, f"Expected >=7 layers, got {len(layers)}"
@@ -106,6 +108,7 @@ def test_layers_have_names(d):
 # meta()
 # ---------------------------------------------------------------------------
 
+
 def test_meta_returns_dict(d):
     meta = d.meta()
     assert isinstance(meta, dict)
@@ -114,6 +117,7 @@ def test_meta_returns_dict(d):
 # ---------------------------------------------------------------------------
 # all_terms() / all_acronyms()
 # ---------------------------------------------------------------------------
+
 
 def test_all_terms_non_empty(d):
     terms = d.all_terms()

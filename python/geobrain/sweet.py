@@ -8,113 +8,471 @@ from typing import Any
 
 from .data import load_json
 
-
 # Embedded SWEET hierarchy (mirrors sweet-expand.js SWEET_HIERARCHY).
 # Each tuple: (uri, parent_uri | None, module, label)
 _SWEET_HIERARCHY_RAW: list[tuple[str, str | None, str, str]] = [
     # matr
     ("http://sweetontology.net/matr/Matter", None, "matr", "Matter"),
-    ("http://sweetontology.net/matr/Substance", "http://sweetontology.net/matr/Matter", "matr", "Substance"),
-    ("http://sweetontology.net/matr/Water", "http://sweetontology.net/matr/Substance", "matr", "Water"),
+    (
+        "http://sweetontology.net/matr/Substance",
+        "http://sweetontology.net/matr/Matter",
+        "matr",
+        "Substance",
+    ),
+    (
+        "http://sweetontology.net/matr/Water",
+        "http://sweetontology.net/matr/Substance",
+        "matr",
+        "Water",
+    ),
     ("http://sweetontology.net/matr/Brine", "http://sweetontology.net/matr/Water", "matr", "Brine"),
-    ("http://sweetontology.net/matr/SalineWater", "http://sweetontology.net/matr/Water", "matr", "SalineWater"),
+    (
+        "http://sweetontology.net/matr/SalineWater",
+        "http://sweetontology.net/matr/Water",
+        "matr",
+        "SalineWater",
+    ),
     # matrOrganics
-    ("http://sweetontology.net/matrOrganics/OrganicCompound", "http://sweetontology.net/matr/Substance", "matrOrganics", "OrganicCompound"),
-    ("http://sweetontology.net/matrOrganics/Hydrocarbon", "http://sweetontology.net/matrOrganics/OrganicCompound", "matrOrganics", "Hydrocarbon"),
-    ("http://sweetontology.net/matrOrganics/Oil", "http://sweetontology.net/matrOrganics/Hydrocarbon", "matrOrganics", "Oil"),
-    ("http://sweetontology.net/matrOrganics/NaturalGas", "http://sweetontology.net/matrOrganics/Hydrocarbon", "matrOrganics", "NaturalGas"),
-    ("http://sweetontology.net/matrOrganics/Condensate", "http://sweetontology.net/matrOrganics/Hydrocarbon", "matrOrganics", "Condensate"),
-    ("http://sweetontology.net/matrOrganics/Methane", "http://sweetontology.net/matrOrganics/NaturalGas", "matrOrganics", "Methane"),
-    ("http://sweetontology.net/matrOrganics/Kerogen", "http://sweetontology.net/matrOrganics/OrganicCompound", "matrOrganics", "Kerogen"),
+    (
+        "http://sweetontology.net/matrOrganics/OrganicCompound",
+        "http://sweetontology.net/matr/Substance",
+        "matrOrganics",
+        "OrganicCompound",
+    ),
+    (
+        "http://sweetontology.net/matrOrganics/Hydrocarbon",
+        "http://sweetontology.net/matrOrganics/OrganicCompound",
+        "matrOrganics",
+        "Hydrocarbon",
+    ),
+    (
+        "http://sweetontology.net/matrOrganics/Oil",
+        "http://sweetontology.net/matrOrganics/Hydrocarbon",
+        "matrOrganics",
+        "Oil",
+    ),
+    (
+        "http://sweetontology.net/matrOrganics/NaturalGas",
+        "http://sweetontology.net/matrOrganics/Hydrocarbon",
+        "matrOrganics",
+        "NaturalGas",
+    ),
+    (
+        "http://sweetontology.net/matrOrganics/Condensate",
+        "http://sweetontology.net/matrOrganics/Hydrocarbon",
+        "matrOrganics",
+        "Condensate",
+    ),
+    (
+        "http://sweetontology.net/matrOrganics/Methane",
+        "http://sweetontology.net/matrOrganics/NaturalGas",
+        "matrOrganics",
+        "Methane",
+    ),
+    (
+        "http://sweetontology.net/matrOrganics/Kerogen",
+        "http://sweetontology.net/matrOrganics/OrganicCompound",
+        "matrOrganics",
+        "Kerogen",
+    ),
     # matrRock
-    ("http://sweetontology.net/matrRock/Rock", "http://sweetontology.net/matr/Substance", "matrRock", "Rock"),
+    (
+        "http://sweetontology.net/matrRock/Rock",
+        "http://sweetontology.net/matr/Substance",
+        "matrRock",
+        "Rock",
+    ),
     # matrRockIgneous
-    ("http://sweetontology.net/matrRockIgneous/IgneousRock", "http://sweetontology.net/matrRock/Rock", "matrRockIgneous", "IgneousRock"),
-    ("http://sweetontology.net/matrRockIgneous/IntrusiveRock", "http://sweetontology.net/matrRockIgneous/IgneousRock", "matrRockIgneous", "IntrusiveRock"),
-    ("http://sweetontology.net/matrRockIgneous/ExtrusiveRock", "http://sweetontology.net/matrRockIgneous/IgneousRock", "matrRockIgneous", "ExtrusiveRock"),
-    ("http://sweetontology.net/matrRockIgneous/Granite", "http://sweetontology.net/matrRockIgneous/IntrusiveRock", "matrRockIgneous", "Granite"),
-    ("http://sweetontology.net/matrRockIgneous/Basalt", "http://sweetontology.net/matrRockIgneous/ExtrusiveRock", "matrRockIgneous", "Basalt"),
+    (
+        "http://sweetontology.net/matrRockIgneous/IgneousRock",
+        "http://sweetontology.net/matrRock/Rock",
+        "matrRockIgneous",
+        "IgneousRock",
+    ),
+    (
+        "http://sweetontology.net/matrRockIgneous/IntrusiveRock",
+        "http://sweetontology.net/matrRockIgneous/IgneousRock",
+        "matrRockIgneous",
+        "IntrusiveRock",
+    ),
+    (
+        "http://sweetontology.net/matrRockIgneous/ExtrusiveRock",
+        "http://sweetontology.net/matrRockIgneous/IgneousRock",
+        "matrRockIgneous",
+        "ExtrusiveRock",
+    ),
+    (
+        "http://sweetontology.net/matrRockIgneous/Granite",
+        "http://sweetontology.net/matrRockIgneous/IntrusiveRock",
+        "matrRockIgneous",
+        "Granite",
+    ),
+    (
+        "http://sweetontology.net/matrRockIgneous/Basalt",
+        "http://sweetontology.net/matrRockIgneous/ExtrusiveRock",
+        "matrRockIgneous",
+        "Basalt",
+    ),
     # matrRockSedimentary
-    ("http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "http://sweetontology.net/matrRock/Rock", "matrRockSedimentary", "SedimentaryRock"),
-    ("http://sweetontology.net/matrRockSedimentary/Sandstone", "http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "matrRockSedimentary", "Sandstone"),
-    ("http://sweetontology.net/matrRockSedimentary/Limestone", "http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "matrRockSedimentary", "Limestone"),
-    ("http://sweetontology.net/matrRockSedimentary/Shale", "http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "matrRockSedimentary", "Shale"),
-    ("http://sweetontology.net/matrRockSedimentary/Dolostone", "http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "matrRockSedimentary", "Dolostone"),
-    ("http://sweetontology.net/matrRockSedimentary/EvaporiteRock", "http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "matrRockSedimentary", "EvaporiteRock"),
-    ("http://sweetontology.net/matrRockSedimentary/SaltRock", "http://sweetontology.net/matrRockSedimentary/EvaporiteRock", "matrRockSedimentary", "SaltRock"),
-    ("http://sweetontology.net/matrRockSedimentary/CarbonatiteRock", "http://sweetontology.net/matrRockSedimentary/SedimentaryRock", "matrRockSedimentary", "CarbonatiteRock"),
+    (
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "http://sweetontology.net/matrRock/Rock",
+        "matrRockSedimentary",
+        "SedimentaryRock",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/Sandstone",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "matrRockSedimentary",
+        "Sandstone",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/Limestone",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "matrRockSedimentary",
+        "Limestone",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/Shale",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "matrRockSedimentary",
+        "Shale",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/Dolostone",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "matrRockSedimentary",
+        "Dolostone",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/EvaporiteRock",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "matrRockSedimentary",
+        "EvaporiteRock",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/SaltRock",
+        "http://sweetontology.net/matrRockSedimentary/EvaporiteRock",
+        "matrRockSedimentary",
+        "SaltRock",
+    ),
+    (
+        "http://sweetontology.net/matrRockSedimentary/CarbonatiteRock",
+        "http://sweetontology.net/matrRockSedimentary/SedimentaryRock",
+        "matrRockSedimentary",
+        "CarbonatiteRock",
+    ),
     # matrRockMetamorphic
-    ("http://sweetontology.net/matrRockMetamorphic/MetamorphicRock", "http://sweetontology.net/matrRock/Rock", "matrRockMetamorphic", "MetamorphicRock"),
+    (
+        "http://sweetontology.net/matrRockMetamorphic/MetamorphicRock",
+        "http://sweetontology.net/matrRock/Rock",
+        "matrRockMetamorphic",
+        "MetamorphicRock",
+    ),
     # matrMineral
-    ("http://sweetontology.net/matrMineral/Mineral", "http://sweetontology.net/matr/Substance", "matrMineral", "Mineral"),
-    ("http://sweetontology.net/matrMineral/Quartz", "http://sweetontology.net/matrMineral/Mineral", "matrMineral", "Quartz"),
-    ("http://sweetontology.net/matrMineral/Calcite", "http://sweetontology.net/matrMineral/Mineral", "matrMineral", "Calcite"),
-    ("http://sweetontology.net/matrMineral/Dolomite", "http://sweetontology.net/matrMineral/Mineral", "matrMineral", "Dolomite"),
-    ("http://sweetontology.net/matrMineral/Pyrite", "http://sweetontology.net/matrMineral/Mineral", "matrMineral", "Pyrite"),
-    ("http://sweetontology.net/matrMineral/Magnetite", "http://sweetontology.net/matrMineral/Mineral", "matrMineral", "Magnetite"),
+    (
+        "http://sweetontology.net/matrMineral/Mineral",
+        "http://sweetontology.net/matr/Substance",
+        "matrMineral",
+        "Mineral",
+    ),
+    (
+        "http://sweetontology.net/matrMineral/Quartz",
+        "http://sweetontology.net/matrMineral/Mineral",
+        "matrMineral",
+        "Quartz",
+    ),
+    (
+        "http://sweetontology.net/matrMineral/Calcite",
+        "http://sweetontology.net/matrMineral/Mineral",
+        "matrMineral",
+        "Calcite",
+    ),
+    (
+        "http://sweetontology.net/matrMineral/Dolomite",
+        "http://sweetontology.net/matrMineral/Mineral",
+        "matrMineral",
+        "Dolomite",
+    ),
+    (
+        "http://sweetontology.net/matrMineral/Pyrite",
+        "http://sweetontology.net/matrMineral/Mineral",
+        "matrMineral",
+        "Pyrite",
+    ),
+    (
+        "http://sweetontology.net/matrMineral/Magnetite",
+        "http://sweetontology.net/matrMineral/Mineral",
+        "matrMineral",
+        "Magnetite",
+    ),
     # procGeo
     ("http://sweetontology.net/proc/Process", None, "proc", "Process"),
-    ("http://sweetontology.net/procGeo/GeologicProcess", "http://sweetontology.net/proc/Process", "procGeo", "GeologicProcess"),
-    ("http://sweetontology.net/procGeo/TectonicProcess", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "TectonicProcess"),
-    ("http://sweetontology.net/procGeo/Sedimentation", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "Sedimentation"),
-    ("http://sweetontology.net/procGeo/Diagenesis", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "Diagenesis"),
-    ("http://sweetontology.net/procGeo/Erosion", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "Erosion"),
-    ("http://sweetontology.net/procGeo/Faulting", "http://sweetontology.net/procGeo/TectonicProcess", "procGeo", "Faulting"),
-    ("http://sweetontology.net/procGeo/Folding", "http://sweetontology.net/procGeo/TectonicProcess", "procGeo", "Folding"),
-    ("http://sweetontology.net/procGeo/Rifting", "http://sweetontology.net/procGeo/TectonicProcess", "procGeo", "Rifting"),
-    ("http://sweetontology.net/procGeo/Metamorphism", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "Metamorphism"),
-    ("http://sweetontology.net/procGeo/Magmatism", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "Magmatism"),
-    ("http://sweetontology.net/procGeo/FluidMigration", "http://sweetontology.net/procGeo/GeologicProcess", "procGeo", "FluidMigration"),
-    ("http://sweetontology.net/procGeo/Deformation", "http://sweetontology.net/procGeo/TectonicProcess", "procGeo", "Deformation"),
+    (
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "http://sweetontology.net/proc/Process",
+        "procGeo",
+        "GeologicProcess",
+    ),
+    (
+        "http://sweetontology.net/procGeo/TectonicProcess",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "TectonicProcess",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Sedimentation",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "Sedimentation",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Diagenesis",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "Diagenesis",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Erosion",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "Erosion",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Faulting",
+        "http://sweetontology.net/procGeo/TectonicProcess",
+        "procGeo",
+        "Faulting",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Folding",
+        "http://sweetontology.net/procGeo/TectonicProcess",
+        "procGeo",
+        "Folding",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Rifting",
+        "http://sweetontology.net/procGeo/TectonicProcess",
+        "procGeo",
+        "Rifting",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Metamorphism",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "Metamorphism",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Magmatism",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "Magmatism",
+    ),
+    (
+        "http://sweetontology.net/procGeo/FluidMigration",
+        "http://sweetontology.net/procGeo/GeologicProcess",
+        "procGeo",
+        "FluidMigration",
+    ),
+    (
+        "http://sweetontology.net/procGeo/Deformation",
+        "http://sweetontology.net/procGeo/TectonicProcess",
+        "procGeo",
+        "Deformation",
+    ),
     # realmGeol
     ("http://sweetontology.net/realm/PlanetaryRealm", None, "realm", "PlanetaryRealm"),
-    ("http://sweetontology.net/realmGeol/Lithosphere", "http://sweetontology.net/realm/PlanetaryRealm", "realmGeol", "Lithosphere"),
-    ("http://sweetontology.net/realmGeol/Crust", "http://sweetontology.net/realmGeol/Lithosphere", "realmGeol", "Crust"),
-    ("http://sweetontology.net/realmGeol/Mantle", "http://sweetontology.net/realmGeol/Lithosphere", "realmGeol", "Mantle"),
+    (
+        "http://sweetontology.net/realmGeol/Lithosphere",
+        "http://sweetontology.net/realm/PlanetaryRealm",
+        "realmGeol",
+        "Lithosphere",
+    ),
+    (
+        "http://sweetontology.net/realmGeol/Crust",
+        "http://sweetontology.net/realmGeol/Lithosphere",
+        "realmGeol",
+        "Crust",
+    ),
+    (
+        "http://sweetontology.net/realmGeol/Mantle",
+        "http://sweetontology.net/realmGeol/Lithosphere",
+        "realmGeol",
+        "Mantle",
+    ),
     ("http://sweetontology.net/realmGeol/GeologicFeature", None, "realmGeol", "GeologicFeature"),
-    ("http://sweetontology.net/realmGeol/Unconformity", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeol", "Unconformity"),
-    ("http://sweetontology.net/realmGeol/GeologicContact", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeol", "GeologicContact"),
-    ("http://sweetontology.net/realmGeol/Borehole", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeol", "Borehole"),
+    (
+        "http://sweetontology.net/realmGeol/Unconformity",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeol",
+        "Unconformity",
+    ),
+    (
+        "http://sweetontology.net/realmGeol/GeologicContact",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeol",
+        "GeologicContact",
+    ),
+    (
+        "http://sweetontology.net/realmGeol/Borehole",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeol",
+        "Borehole",
+    ),
     # realmGeolTectonic
-    ("http://sweetontology.net/realmGeolTectonic/Fault", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeolTectonic", "Fault"),
-    ("http://sweetontology.net/realmGeolTectonic/FaultZone", "http://sweetontology.net/realmGeolTectonic/Fault", "realmGeolTectonic", "FaultZone"),
-    ("http://sweetontology.net/realmGeolTectonic/Fold", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeolTectonic", "Fold"),
-    ("http://sweetontology.net/realmGeolTectonic/Anticline", "http://sweetontology.net/realmGeolTectonic/Fold", "realmGeolTectonic", "Anticline"),
-    ("http://sweetontology.net/realmGeolTectonic/Syncline", "http://sweetontology.net/realmGeolTectonic/Fold", "realmGeolTectonic", "Syncline"),
-    ("http://sweetontology.net/realmGeolTectonic/Foliation", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeolTectonic", "Foliation"),
+    (
+        "http://sweetontology.net/realmGeolTectonic/Fault",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeolTectonic",
+        "Fault",
+    ),
+    (
+        "http://sweetontology.net/realmGeolTectonic/FaultZone",
+        "http://sweetontology.net/realmGeolTectonic/Fault",
+        "realmGeolTectonic",
+        "FaultZone",
+    ),
+    (
+        "http://sweetontology.net/realmGeolTectonic/Fold",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeolTectonic",
+        "Fold",
+    ),
+    (
+        "http://sweetontology.net/realmGeolTectonic/Anticline",
+        "http://sweetontology.net/realmGeolTectonic/Fold",
+        "realmGeolTectonic",
+        "Anticline",
+    ),
+    (
+        "http://sweetontology.net/realmGeolTectonic/Syncline",
+        "http://sweetontology.net/realmGeolTectonic/Fold",
+        "realmGeolTectonic",
+        "Syncline",
+    ),
+    (
+        "http://sweetontology.net/realmGeolTectonic/Foliation",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeolTectonic",
+        "Foliation",
+    ),
     # realmGeolBasin
-    ("http://sweetontology.net/realmGeolBasin/SedimentaryBasin", "http://sweetontology.net/realmGeol/GeologicFeature", "realmGeolBasin", "SedimentaryBasin"),
-    ("http://sweetontology.net/realmGeolBasin/RiftBasin", "http://sweetontology.net/realmGeolBasin/SedimentaryBasin", "realmGeolBasin", "RiftBasin"),
+    (
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin",
+        "http://sweetontology.net/realmGeol/GeologicFeature",
+        "realmGeolBasin",
+        "SedimentaryBasin",
+    ),
+    (
+        "http://sweetontology.net/realmGeolBasin/RiftBasin",
+        "http://sweetontology.net/realmGeolBasin/SedimentaryBasin",
+        "realmGeolBasin",
+        "RiftBasin",
+    ),
     # realmHydro
-    ("http://sweetontology.net/realmHydro/Hydrosphere", "http://sweetontology.net/realm/PlanetaryRealm", "realmHydro", "Hydrosphere"),
-    ("http://sweetontology.net/realmHydro/Ocean", "http://sweetontology.net/realmHydro/Hydrosphere", "realmHydro", "Ocean"),
-    ("http://sweetontology.net/realmHydro/HydrospherePart", "http://sweetontology.net/realmHydro/Hydrosphere", "realmHydro", "HydrospherePart"),
+    (
+        "http://sweetontology.net/realmHydro/Hydrosphere",
+        "http://sweetontology.net/realm/PlanetaryRealm",
+        "realmHydro",
+        "Hydrosphere",
+    ),
+    (
+        "http://sweetontology.net/realmHydro/Ocean",
+        "http://sweetontology.net/realmHydro/Hydrosphere",
+        "realmHydro",
+        "Ocean",
+    ),
+    (
+        "http://sweetontology.net/realmHydro/HydrospherePart",
+        "http://sweetontology.net/realmHydro/Hydrosphere",
+        "realmHydro",
+        "HydrospherePart",
+    ),
     # prop
     ("http://sweetontology.net/prop/PhysicalProperty", None, "prop", "PhysicalProperty"),
-    ("http://sweetontology.net/propPressure/Pressure", "http://sweetontology.net/prop/PhysicalProperty", "propPressure", "Pressure"),
-    ("http://sweetontology.net/propTemperature/Temperature", "http://sweetontology.net/prop/PhysicalProperty", "propTemperature", "Temperature"),
-    ("http://sweetontology.net/propMass/Density", "http://sweetontology.net/prop/PhysicalProperty", "propMass", "Density"),
-    ("http://sweetontology.net/propFluidTransport/Viscosity", "http://sweetontology.net/prop/PhysicalProperty", "propFluidTransport", "Viscosity"),
-    ("http://sweetontology.net/propFluidTransport/Permeability", "http://sweetontology.net/prop/PhysicalProperty", "propFluidTransport", "Permeability"),
-    ("http://sweetontology.net/propSpaceMultidimensional/Porosity", "http://sweetontology.net/prop/PhysicalProperty", "propSpaceMultidimensional", "Porosity"),
-    ("http://sweetontology.net/propSpaceDistance/Depth", "http://sweetontology.net/prop/PhysicalProperty", "propSpaceDistance", "Depth"),
+    (
+        "http://sweetontology.net/propPressure/Pressure",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propPressure",
+        "Pressure",
+    ),
+    (
+        "http://sweetontology.net/propTemperature/Temperature",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propTemperature",
+        "Temperature",
+    ),
+    (
+        "http://sweetontology.net/propMass/Density",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propMass",
+        "Density",
+    ),
+    (
+        "http://sweetontology.net/propFluidTransport/Viscosity",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propFluidTransport",
+        "Viscosity",
+    ),
+    (
+        "http://sweetontology.net/propFluidTransport/Permeability",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propFluidTransport",
+        "Permeability",
+    ),
+    (
+        "http://sweetontology.net/propSpaceMultidimensional/Porosity",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propSpaceMultidimensional",
+        "Porosity",
+    ),
+    (
+        "http://sweetontology.net/propSpaceDistance/Depth",
+        "http://sweetontology.net/prop/PhysicalProperty",
+        "propSpaceDistance",
+        "Depth",
+    ),
     # reprSciUnits
     ("http://sweetontology.net/reprSciUnits/Pascal", None, "reprSciUnits", "Pascal"),
     ("http://sweetontology.net/reprSciUnits/Kelvin", None, "reprSciUnits", "Kelvin"),
     ("http://sweetontology.net/reprSciUnits/Meter", None, "reprSciUnits", "Meter"),
     ("http://sweetontology.net/reprSciUnits/Darcy", None, "reprSciUnits", "Darcy"),
     # reprTimeGeologic
-    ("http://sweetontology.net/reprTimeGeologic/GeochronologicEra", None, "reprTimeGeologic", "GeochronologicEra"),
-    ("http://sweetontology.net/reprTimeGeologic/Mesozoic", "http://sweetontology.net/reprTimeGeologic/GeochronologicEra", "reprTimeGeologic", "Mesozoic"),
-    ("http://sweetontology.net/reprTimeGeologic/Cretaceous", "http://sweetontology.net/reprTimeGeologic/GeochronologicEra", "reprTimeGeologic", "Cretaceous"),
-    ("http://sweetontology.net/reprTimeGeologic/Aptian", "http://sweetontology.net/reprTimeGeologic/Cretaceous", "reprTimeGeologic", "Aptian"),
-    ("http://sweetontology.net/reprTimeGeologic/Albian", "http://sweetontology.net/reprTimeGeologic/Cretaceous", "reprTimeGeologic", "Albian"),
+    (
+        "http://sweetontology.net/reprTimeGeologic/GeochronologicEra",
+        None,
+        "reprTimeGeologic",
+        "GeochronologicEra",
+    ),
+    (
+        "http://sweetontology.net/reprTimeGeologic/Mesozoic",
+        "http://sweetontology.net/reprTimeGeologic/GeochronologicEra",
+        "reprTimeGeologic",
+        "Mesozoic",
+    ),
+    (
+        "http://sweetontology.net/reprTimeGeologic/Cretaceous",
+        "http://sweetontology.net/reprTimeGeologic/GeochronologicEra",
+        "reprTimeGeologic",
+        "Cretaceous",
+    ),
+    (
+        "http://sweetontology.net/reprTimeGeologic/Aptian",
+        "http://sweetontology.net/reprTimeGeologic/Cretaceous",
+        "reprTimeGeologic",
+        "Aptian",
+    ),
+    (
+        "http://sweetontology.net/reprTimeGeologic/Albian",
+        "http://sweetontology.net/reprTimeGeologic/Cretaceous",
+        "reprTimeGeologic",
+        "Albian",
+    ),
 ]
 
 # Build lookup dicts
 _HIERARCHY_BY_URI: dict[str, tuple[str | None, str, str]] = {
-    uri: (parent, module, label)
-    for uri, parent, module, label in _SWEET_HIERARCHY_RAW
+    uri: (parent, module, label) for uri, parent, module, label in _SWEET_HIERARCHY_RAW
 }
 
 
@@ -222,8 +580,7 @@ class SweetExpander:
             # Accept both "closeMatch" and "skos:closeMatch"
             norm = strategy.replace("skos:", "")
             term_alignments = [
-                a for a in term_alignments
-                if a.alignment_type.replace("skos:", "") == norm
+                a for a in term_alignments if a.alignment_type.replace("skos:", "") == norm
             ]
         uris: list[str] = []
         seen: set[str] = set()
@@ -274,9 +631,7 @@ class SweetExpander:
                 child_uris = self._children(uri)
                 sibling_uris: list[str] = []
                 if include_siblings and entry and entry[0]:
-                    sibling_uris = [
-                        u for u in self._children(entry[0]) if u != uri
-                    ]
+                    sibling_uris = [u for u in self._children(entry[0]) if u != uri]
                 hierarchy[uri] = {
                     "label": entry[2] if entry else None,
                     "module": entry[1] if entry else None,
