@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "source": "Resolução ANP nº 699/2017 — art. 4º §4º (Tipo de Poço)",
+    "source_url": "https://atosoficiais.com.br/anp/resolucao-n-699-2017",
+    "namespace": "https://geolytics.com.br/ontology/anp/poco-tipo/",
+    "version": "699/2017",
+    "total": 6,
+    "description": "Vocabulário controlado dos 6 tipos de poço definidos pela ANP, segundo a trajetória e outros aspectos do poço (Resolução ANP nº 699/2017, art. 4º §4º). O Tipo aparece como letra contígua à Numeração no Nome do Poço, sem hífen (ex.: '1-RJS-685D' indica direcional). Vertical é o caso default e não recebe identificação específica, exceto quando é repetido.",
+    "layer": "layer4",
+    "related_entities": ["poco"],
+    "evidence_refs": ["ANP-699/2017"],
+    "naming_rule": "Letras D, H, I, P são reservadas — não usadas para indicar repetição. Repetições usam A, B, C, ... (sequencial)."
+  },
+  "concepts": [
+    {
+      "id": "vertical",
+      "anp_code": "",
+      "label_pt": "Poço Vertical",
+      "label_en": "Vertical Well",
+      "definition": "Poço projetado para atingir alvos ou objetivos colimados na vertical que passa pelo centro da mesa rotativa. Esse tipo não recebe identificação específica no Nome do Poço, a não ser quando é repetido.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-tipo/vertical",
+      "evidence_refs": ["ANP-699/2017 art.4º §4º I"]
+    },
+    {
+      "id": "direcional",
+      "anp_code": "D",
+      "label_pt": "Poço Direcional",
+      "label_en": "Directional Well",
+      "definition": "Poço intencionalmente projetado para desviar-se da trajetória vertical, a fim de assegurar que objetivos em subsuperfície sejam atingidos.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-tipo/direcional",
+      "evidence_refs": ["ANP-699/2017 art.4º §4º II"]
+    },
+    {
+      "id": "horizontal",
+      "anp_code": "H",
+      "label_pt": "Poço Horizontal",
+      "label_en": "Horizontal Well",
+      "definition": "Poço direcional com grande ângulo de inclinação, geralmente maior que 85º, perfurado com a finalidade de penetrar e permanecer no objetivo ou alvo horizontalmente ou sub-horizontalmente.",
+      "parents": ["direcional"],
+      "broader": "direcional",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-tipo/horizontal",
+      "evidence_refs": ["ANP-699/2017 art.4º §4º III"]
+    },
+    {
+      "id": "partilhado",
+      "anp_code": "P",
+      "label_pt": "Poço Partilhado / Multilateral",
+      "label_en": "Multilateral Well",
+      "definition": "Poço que aproveita um poço já perfurado, ou parte dele, que tem objetivos ou alvos diferentes do poço aproveitado.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-tipo/partilhado",
+      "evidence_refs": ["ANP-699/2017 art.4º §4º IV"]
+    },
+    {
+      "id": "repetido",
+      "anp_code": "A",
+      "label_pt": "Poço Repetido",
+      "label_en": "Re-drilled Well",
+      "definition": "Poço (re)perfurado em função da perda do poço original, visando aos mesmos objetivos geológicos. Tem a mesma numeração do poço original, com letras sequenciais (A, B, C, ...) no Tipo, exceto D, H, I, P.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-tipo/repetido",
+      "evidence_refs": ["ANP-699/2017 art.4º §4º V"],
+      "note": "Casos onde a perfuração foi impedida por obstáculo intransponível e foi necessário desvio também caracterizam poço repetido."
+    },
+    {
+      "id": "investigacao",
+      "anp_code": "i",
+      "label_pt": "Poço de Investigação",
+      "label_en": "Investigation Well",
+      "definition": "Poço (letra 'i' minúsculo) perfurado especificamente visando a conhecer riscos geológicos rasos em relação aos objetivos do prospecto, a fim de obter informações que tornem as operações de perfuração de outro poço mais seguras e otimizadas. Esse poço terá o mesmo sequencial do poço definitivo.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-tipo/investigacao",
+      "evidence_refs": ["ANP-699/2017 art.4º §4º VI"]
+    }
+  ]
+}

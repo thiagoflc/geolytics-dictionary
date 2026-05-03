@@ -1,0 +1,135 @@
+{
+  "meta": {
+    "source": "Resolução ANP nº 699/2017 — Tabela 1 (Categorias de Poços)",
+    "source_url": "https://atosoficiais.com.br/anp/resolucao-n-699-2017",
+    "namespace": "https://geolytics.com.br/ontology/anp/poco-categoria/",
+    "version": "699/2017",
+    "total": 10,
+    "description": "Vocabulário controlado das 10 categorias de poço definidas pela ANP, segundo a finalidade principal original do poço (Resolução ANP nº 699/2017, art. 4º §1º). A categoria define o primeiro algarismo do Nome do Poço (ex.: '1-' para Pioneiro, '7-' para Produção).",
+    "layer": "layer4",
+    "related_entities": ["poco", "bloco", "campo"],
+    "evidence_refs": ["ANP-699/2017"]
+  },
+  "concepts": [
+    {
+      "id": "1-pioneiro",
+      "anp_code": "1",
+      "label_pt": "Poço Exploratório Pioneiro",
+      "label_en": "Wildcat Exploratory Well",
+      "definition": "Poço que visa a testar a ocorrência de petróleo ou gás natural em um ou mais objetivos de um prospecto geológico ainda não perfurado.",
+      "parents": ["exploratorio"],
+      "broader": "exploratorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/1-pioneiro",
+      "related_entities": ["bloco-exploratorio", "prospecto"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º I"]
+    },
+    {
+      "id": "2-estratigrafico",
+      "anp_code": "2",
+      "label_pt": "Poço Exploratório Estratigráfico",
+      "label_en": "Stratigraphic Exploratory Well",
+      "definition": "Poço que visa a conhecer a coluna estratigráfica e obter outras informações geológicas de subsuperfície em uma bacia ou região pouco explorada.",
+      "parents": ["exploratorio"],
+      "broader": "exploratorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/2-estratigrafico",
+      "related_entities": ["bacia-sedimentar", "coluna-estratigrafica"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º II"]
+    },
+    {
+      "id": "3-extensao",
+      "anp_code": "3",
+      "label_pt": "Poço Exploratório de Extensão",
+      "label_en": "Appraisal/Extension Well",
+      "definition": "Poço que visa a delimitar a acumulação de petróleo ou gás natural e/ou investigar contato entre fluidos, comunicação entre regiões de um reservatório, e propriedades que permitam caracterizá-lo.",
+      "parents": ["exploratorio"],
+      "broader": "exploratorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/3-extensao",
+      "related_entities": ["acumulacao", "pad", "bloco-em-avaliacao"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º III"]
+    },
+    {
+      "id": "4-pioneiro-adjacente",
+      "anp_code": "4",
+      "label_pt": "Poço Exploratório Pioneiro Adjacente",
+      "label_en": "Adjacent Wildcat Well",
+      "definition": "Poço que visa a testar a ocorrência de petróleo ou gás natural em área adjacente a uma descoberta, em prospecto com similaridade geológica e proximidade geográfica, porém sem conectividade hidráulica àquela descoberta.",
+      "parents": ["exploratorio"],
+      "broader": "exploratorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/4-pioneiro-adjacente",
+      "related_entities": ["descoberta", "prospecto"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º IV"]
+    },
+    {
+      "id": "5-prospecto-mais-raso",
+      "anp_code": "5",
+      "label_pt": "Poço Exploratório para Prospecto Mais Raso",
+      "label_en": "Shallower Prospect Exploratory Well",
+      "definition": "Poço que visa a testar a ocorrência de acumulações ou condições geológicas favoráveis mais rasas em determinada área sob Plano de Avaliação de Descoberta ou na Fase de Produção, em relação às jazidas já descobertas.",
+      "parents": ["exploratorio"],
+      "broader": "exploratorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/5-prospecto-mais-raso",
+      "related_entities": ["pad", "jazida"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º V"]
+    },
+    {
+      "id": "6-prospecto-mais-profundo",
+      "anp_code": "6",
+      "label_pt": "Poço Exploratório para Prospecto Mais Profundo",
+      "label_en": "Deeper Prospect Exploratory Well",
+      "definition": "Poço que visa a testar a ocorrência de acumulações ou condições geológicas favoráveis mais profundas em determinada área sob Plano de Avaliação de Descoberta ou na Fase de Produção, em relação às jazidas já descobertas.",
+      "parents": ["exploratorio"],
+      "broader": "exploratorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/6-prospecto-mais-profundo",
+      "related_entities": ["pad", "jazida"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º VI"]
+    },
+    {
+      "id": "7-producao",
+      "anp_code": "7",
+      "label_pt": "Poço Explotatório de Produção",
+      "label_en": "Production Well",
+      "definition": "Poço que visa a drenar uma ou mais jazidas de um campo.",
+      "parents": ["explotatorio"],
+      "broader": "explotatorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/7-producao",
+      "related_entities": ["campo-de-producao", "jazida"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º VII"]
+    },
+    {
+      "id": "8-injecao",
+      "anp_code": "8",
+      "label_pt": "Poço Explotatório de Injeção",
+      "label_en": "Injection Well",
+      "definition": "Poço que visa à injeção de fluidos no reservatório com o objetivo de melhorar a recuperação de hidrocarbonetos.",
+      "parents": ["explotatorio"],
+      "broader": "explotatorio",
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/8-injecao",
+      "related_entities": ["reservatorio", "ior", "eor"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º VIII"]
+    },
+    {
+      "id": "9-especial",
+      "anp_code": "9",
+      "label_pt": "Poço Especial",
+      "label_en": "Special-Purpose Well",
+      "definition": "Poço que visa a objetivos específicos que não se enquadram nas finalidades anteriormente definidas, tais como poço piloto para horizontal, poço para captação ou descarte de água, controle de blow-out, e de observação.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/9-especial",
+      "related_entities": ["captacao-agua", "descarte", "controle-blowout"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º IX"]
+    },
+    {
+      "id": "10-estocagem",
+      "anp_code": "10",
+      "label_pt": "Poço de Estocagem",
+      "label_en": "Storage Well",
+      "definition": "Poço que visa a permitir operações de estocagem de gás natural, incluindo injeção, retirada e monitoramento.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-categoria/10-estocagem",
+      "related_entities": ["estocagem-gas-natural"],
+      "evidence_refs": ["ANP-699/2017 art.4º §1º X"]
+    }
+  ]
+}

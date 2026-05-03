@@ -15,8 +15,8 @@
 @prefix qudt: <https://qudt.org/vocab/unit/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T19:20:37.929Z
-# Nodes: 310  Edges: 651
+# Generated: 2026-05-03T20:22:54.272Z
+# Nodes: 334  Edges: 684
 
 #
 # Classes
@@ -1901,6 +1901,203 @@ geo:laudo-geomecanico a owl:Class ;
     skos:definition """Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal para subsidiar o projeto e o acompanhamento do poço. Produzido pelo CSD Geomecânica (RES/GMR ou área responsável). Distinto do QPG (prognóstico geológico) — não inferir existência para todos os poços."""@pt ;
     geo:geocoverage "layer5" ;
     geo:geocoverage "layer6" .
+
+geo:bloco-anchor a owl:Class ;
+    skos:prefLabel "Bloco (entidade-âncora)"@pt ;
+    skos:prefLabel "Block (anchor entity)"@en ;
+    geo:entityType "regulatory_anchor" ;
+    skos:altLabel "Bloco"@pt ;
+    skos:altLabel "Bloco Exploratório"@pt ;
+    skos:altLabel "Área Concedida"@pt ;
+    skos:altLabel "Exploration Block"@en ;
+    skos:altLabel "Lease Block"@en ;
+    skos:example "BM-S-11 (Lula)" ;
+    skos:example "BCAM-40 (Búzios)" ;
+    skos:example "BS-4 (Atlanta)" ;
+    skos:example "BM-C-33" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:bloco-exploratorio-state a owl:Class ;
+    skos:prefLabel "Bloco Exploratório (estado)"@pt ;
+    skos:prefLabel "Exploratory Block (state)"@en ;
+    geo:entityType "lifecycle_state" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:bloco-em-avaliacao-state a owl:Class ;
+    skos:prefLabel "Bloco em Avaliação"@pt ;
+    skos:prefLabel "Block under Evaluation"@en ;
+    geo:entityType "lifecycle_state" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:area-em-pad-state a owl:Class ;
+    skos:prefLabel "Área em PAD"@pt ;
+    skos:prefLabel "Area under Discovery Evaluation Plan"@en ;
+    geo:entityType "lifecycle_state" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:campo-em-desenvolvimento-state a owl:Class ;
+    skos:prefLabel "Campo em Desenvolvimento"@pt ;
+    skos:prefLabel "Field under Development"@en ;
+    geo:entityType "lifecycle_state" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:campo-producao-state a owl:Class ;
+    skos:prefLabel "Campo de Produção"@pt ;
+    skos:prefLabel "Production Field"@en ;
+    geo:entityType "lifecycle_state" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:propex a owl:Class ;
+    skos:prefLabel "PROPEX (Programa Exploratório)"@pt ;
+    skos:prefLabel "PROPEX — Exploratory Program"@en ;
+    geo:entityType "governance_program" ;
+    skos:altLabel "PROPEX"@pt ;
+    skos:altLabel "Programa Exploratório"@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:projeto-exploratorio a owl:Class ;
+    skos:prefLabel "Projeto Exploratório"@pt ;
+    skos:prefLabel "Exploratory Project"@en ;
+    geo:entityType "project" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:pexp a owl:Class ;
+    skos:prefLabel "PEXP — Portões Decisórios PROPEX"@pt ;
+    skos:prefLabel "PEXP — PROPEX Decision Gates"@en ;
+    geo:entityType "decision_event" ;
+    skos:altLabel "PEXP"@pt ;
+    skos:altLabel "PEXP1"@pt ;
+    skos:altLabel "PEXP2"@pt ;
+    skos:altLabel "PEXP2A"@pt ;
+    skos:altLabel "PEXP3"@pt ;
+    skos:altLabel "PEXP3A"@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:pgp a owl:Class ;
+    skos:prefLabel "PGP — Plano de Gerenciamento de Projetos"@pt ;
+    skos:prefLabel "PGP — Project Management Plan"@en ;
+    geo:entityType "governance_doc" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:pd-pdp a owl:Class ;
+    skos:prefLabel "PD/PDP — Plano de Desenvolvimento (da Produção)"@pt ;
+    skos:prefLabel "PD/PDP — Production Development Plan"@en ;
+    geo:entityType "regulatory_doc" ;
+    skos:altLabel "PD"@pt ;
+    skos:altLabel "PDP"@pt ;
+    skos:altLabel "Plano de Desenvolvimento"@pt ;
+    skos:altLabel "Plano de Desenvolvimento da Produção"@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:tep a owl:Class ;
+    skos:prefLabel "TEP — Termo de Encerramento do Projeto"@pt ;
+    skos:prefLabel "TEP — Project Closure Term"@en ;
+    geo:entityType "governance_doc" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:isa a owl:Class ;
+    skos:prefLabel "ISA — Instrumento de Situação do Ativo"@pt ;
+    skos:prefLabel "ISA — Asset Status Instrument"@en ;
+    geo:entityType "governance_doc" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:comexp a owl:Class ;
+    skos:prefLabel "COMEXP"@pt ;
+    skos:prefLabel "COMEXP — Exploration Management Committee"@en ;
+    geo:entityType "governance_committee" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:grbloc a owl:Class ;
+    skos:prefLabel "GRBLOC"@pt ;
+    skos:prefLabel "GRBLOC — Block Technical Review Group"@en ;
+    geo:entityType "governance_committee" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:grt a owl:Class ;
+    skos:prefLabel "GRT — Grupo de Revisão Técnica"@pt ;
+    skos:prefLabel "GRT — Technical Review Group"@en ;
+    geo:entityType "governance_committee" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:working-interest a owl:Class ;
+    skos:prefLabel "Participação (Working Interest)"@pt ;
+    skos:prefLabel "Working Interest (WI)"@en ;
+    geo:entityType "portfolio_concept" ;
+    skos:altLabel "WI"@pt ;
+    skos:altLabel "Working Interest"@pt ;
+    skos:altLabel "Participação"@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:operador-role a owl:Class ;
+    skos:prefLabel "Operador / Não-Operador"@pt ;
+    skos:prefLabel "Operator / Non-Operator Role"@en ;
+    geo:entityType "portfolio_concept" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:rodada a owl:Class ;
+    skos:prefLabel "Rodada (Leilão de Blocos)"@pt ;
+    skos:prefLabel "Bidding Round"@en ;
+    geo:entityType "regulatory_event" ;
+    skos:altLabel "Rodada"@pt ;
+    skos:altLabel "Leilão de Blocos"@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:area-retida a owl:Class ;
+    skos:prefLabel "Área Retida"@pt ;
+    skos:prefLabel "Retained Area"@en ;
+    geo:entityType "lifecycle_outcome" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:area-devolvida a owl:Class ;
+    skos:prefLabel "Área Devolvida"@pt ;
+    skos:prefLabel "Relinquished Area"@en ;
+    geo:entityType "lifecycle_outcome" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:portfolio-exploratorio a owl:Class ;
+    skos:prefLabel "Portfólio Exploratório"@pt ;
+    skos:prefLabel "Exploration Portfolio"@en ;
+    geo:entityType "portfolio_concept" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:vme a owl:Class ;
+    skos:prefLabel "VME — Valor Monetário Esperado"@pt ;
+    skos:prefLabel "VME — Expected Monetary Value (EMV)"@en ;
+    geo:entityType "portfolio_concept" ;
+    skos:altLabel "VME"@pt ;
+    skos:altLabel "EMV"@en ;
+    skos:altLabel "Expected Monetary Value"@en ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
+
+geo:obrigacao-exploratoria a owl:Class ;
+    skos:prefLabel "Obrigação Exploratória"@pt ;
+    skos:prefLabel "Exploratory Obligation"@en ;
+    geo:entityType "regulatory_obligation" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" .
 
 geo:sensor_aber_ckgl a owl:Class ;
     skos:prefLabel "ABER-CKGL"@pt ;
@@ -4556,6 +4753,156 @@ geo:subsidizes a owl:ObjectProperty ;
     rdfs:domain geo:laudo-geomecanico ;
     rdfs:range geo:input-elaboration .
 
+geo:is_subject_to_contract a owl:ObjectProperty ;
+    rdfs:label "está sob contrato"@pt ;
+    rdfs:label "is subject to contract"@en ;
+    rdfs:domain geo:bloco-anchor ;
+    rdfs:range geo:contrato-ep .
+
+geo:has_minimum_program a owl:ObjectProperty ;
+    rdfs:label "possui PEM"@pt ;
+    rdfs:label "has minimum program"@en ;
+    rdfs:domain geo:contrato-ep ;
+    rdfs:range geo:pem .
+
+geo:decomposes_into a owl:ObjectProperty ;
+    rdfs:label "decompõe-se em"@pt ;
+    rdfs:label "decomposes into"@en ;
+    rdfs:domain geo:pem ;
+    rdfs:range geo:obrigacao-exploratoria .
+
+geo:has_lifecycle_state a owl:ObjectProperty ;
+    rdfs:label "tem estado"@pt ;
+    rdfs:label "has lifecycle state"@en ;
+    rdfs:domain geo:bloco-anchor ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:bloco-exploratorio-state geo:bloco-em-avaliacao-state geo:area-em-pad-state geo:campo-em-desenvolvimento-state geo:campo-producao-state ) ] .
+
+geo:transitions_to a owl:ObjectProperty ;
+    rdfs:label "transita para"@pt ;
+    rdfs:label "transitions to"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bloco-exploratorio-state geo:bloco-em-avaliacao-state geo:area-em-pad-state geo:campo-em-desenvolvimento-state ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:bloco-em-avaliacao-state geo:area-em-pad-state geo:campo-em-desenvolvimento-state geo:campo-producao-state ) ] .
+
+geo:is_governed_by_program a owl:ObjectProperty ;
+    rdfs:label "é governado pelo Programa"@pt ;
+    rdfs:label "is governed by program"@en ;
+    rdfs:domain geo:projeto-exploratorio ;
+    rdfs:range geo:propex .
+
+geo:has_decision_gate a owl:ObjectProperty ;
+    rdfs:label "tem portões decisórios"@pt ;
+    rdfs:label "has decision gate"@en ;
+    rdfs:domain geo:propex ;
+    rdfs:range geo:pexp .
+
+geo:evaluates_project a owl:ObjectProperty ;
+    rdfs:label "avalia projeto"@pt ;
+    rdfs:label "evaluates project"@en ;
+    rdfs:domain geo:pexp ;
+    rdfs:range geo:projeto-exploratorio .
+
+geo:documents_project a owl:ObjectProperty ;
+    rdfs:label "documenta projeto"@pt ;
+    rdfs:label "documents project"@en ;
+    rdfs:domain geo:pgp ;
+    rdfs:range geo:projeto-exploratorio .
+
+geo:documents_pad a owl:ObjectProperty ;
+    rdfs:label "documenta PAD"@pt ;
+    rdfs:label "documents PAD"@en ;
+    rdfs:domain geo:pgp ;
+    rdfs:range geo:pad .
+
+geo:triggers_state a owl:ObjectProperty ;
+    rdfs:label "dispara estado"@pt ;
+    rdfs:label "triggers state"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:area-em-pad-state .
+
+geo:leads_to a owl:ObjectProperty ;
+    rdfs:label "leva à"@pt ;
+    rdfs:label "leads to"@en ;
+    rdfs:domain geo:pad ;
+    rdfs:range geo:declaracao-comercialidade .
+
+geo:triggers_doc a owl:ObjectProperty ;
+    rdfs:label "dispara documento"@pt ;
+    rdfs:label "triggers doc"@en ;
+    rdfs:domain geo:declaracao-comercialidade ;
+    rdfs:range geo:pd-pdp .
+
+geo:marks_field_transition a owl:ObjectProperty ;
+    rdfs:label "marca transição para Campo"@pt ;
+    rdfs:label "marks field transition"@en ;
+    rdfs:domain geo:declaracao-comercialidade ;
+    rdfs:range geo:campo-em-desenvolvimento-state .
+
+geo:closes_project a owl:ObjectProperty ;
+    rdfs:label "encerra projeto"@pt ;
+    rdfs:label "closes project"@en ;
+    rdfs:domain geo:tep ;
+    rdfs:range geo:projeto-exploratorio .
+
+geo:marks_transition a owl:ObjectProperty ;
+    rdfs:label "marca transição"@pt ;
+    rdfs:label "marks transition"@en ;
+    rdfs:domain geo:isa ;
+    rdfs:range geo:campo-producao-state .
+
+geo:deliberates_at a owl:ObjectProperty ;
+    rdfs:label "delibera em"@pt ;
+    rdfs:label "deliberates at"@en ;
+    rdfs:domain geo:comexp ;
+    rdfs:range geo:pexp .
+
+geo:feeds_committee a owl:ObjectProperty ;
+    rdfs:label "alimenta comitê"@pt ;
+    rdfs:label "feeds committee"@en ;
+    rdfs:domain geo:grbloc ;
+    rdfs:range geo:comexp .
+
+geo:supports_gate a owl:ObjectProperty ;
+    rdfs:label "apoia portão"@pt ;
+    rdfs:label "supports gate"@en ;
+    rdfs:domain geo:grt ;
+    rdfs:range geo:pexp .
+
+geo:produces_contract a owl:ObjectProperty ;
+    rdfs:label "produz contrato"@pt ;
+    rdfs:label "produces contract"@en ;
+    rdfs:domain geo:rodada ;
+    rdfs:range geo:contrato-ep .
+
+geo:has_partnership_share a owl:ObjectProperty ;
+    rdfs:label "tem participação societária"@pt ;
+    rdfs:label "has partnership share"@en ;
+    rdfs:domain geo:bloco-anchor ;
+    rdfs:range geo:working-interest .
+
+geo:designates a owl:ObjectProperty ;
+    rdfs:label "designa"@pt ;
+    rdfs:label "designates"@en ;
+    rdfs:domain geo:working-interest ;
+    rdfs:range geo:operador-role .
+
+geo:aggregates a owl:ObjectProperty ;
+    rdfs:label "agrega"@pt ;
+    rdfs:label "aggregates"@en ;
+    rdfs:domain geo:portfolio-exploratorio ;
+    rdfs:range geo:bloco-anchor .
+
+geo:scores a owl:ObjectProperty ;
+    rdfs:label "pontua"@pt ;
+    rdfs:label "scores"@en ;
+    rdfs:domain geo:vme ;
+    rdfs:range geo:bloco-anchor .
+
+geo:is_outcome_of a owl:ObjectProperty ;
+    rdfs:label "é desfecho de"@pt ;
+    rdfs:label "is outcome of"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:area-retida geo:area-devolvida ) ] ;
+    rdfs:range geo:bloco-anchor .
+
 geo:measured_at a owl:ObjectProperty ;
     rdfs:label "medido em"@pt ;
     rdfs:label "measured at"@en ;
@@ -4987,6 +5334,39 @@ geo:laudo-geomecanico geo:subsidizes geo:input-elaboration .
 geo:laudo-geomecanico geo:derived_from geo:rmg .
 geo:laudo-geomecanico geo:derived_from geo:ogeomec .
 geo:laudo-geomecanico geo:stored_in geo:vge .
+geo:bloco-anchor geo:is_subject_to_contract geo:contrato-ep .
+geo:contrato-ep geo:has_minimum_program geo:pem .
+geo:pem geo:decomposes_into geo:obrigacao-exploratoria .
+geo:bloco-anchor geo:has_lifecycle_state geo:bloco-exploratorio-state .
+geo:bloco-anchor geo:has_lifecycle_state geo:bloco-em-avaliacao-state .
+geo:bloco-anchor geo:has_lifecycle_state geo:area-em-pad-state .
+geo:bloco-anchor geo:has_lifecycle_state geo:campo-em-desenvolvimento-state .
+geo:bloco-anchor geo:has_lifecycle_state geo:campo-producao-state .
+geo:bloco-exploratorio-state geo:transitions_to geo:bloco-em-avaliacao-state .
+geo:bloco-em-avaliacao-state geo:transitions_to geo:area-em-pad-state .
+geo:area-em-pad-state geo:transitions_to geo:campo-em-desenvolvimento-state .
+geo:campo-em-desenvolvimento-state geo:transitions_to geo:campo-producao-state .
+geo:projeto-exploratorio geo:is_governed_by_program geo:propex .
+geo:propex geo:has_decision_gate geo:pexp .
+geo:pexp geo:evaluates_project geo:projeto-exploratorio .
+geo:pgp geo:documents_project geo:projeto-exploratorio .
+geo:pgp geo:documents_pad geo:pad .
+geo:pad geo:triggers_state geo:area-em-pad-state .
+geo:pad geo:leads_to geo:declaracao-comercialidade .
+geo:declaracao-comercialidade geo:triggers_doc geo:pd-pdp .
+geo:declaracao-comercialidade geo:marks_field_transition geo:campo-em-desenvolvimento-state .
+geo:tep geo:closes_project geo:projeto-exploratorio .
+geo:isa geo:marks_transition geo:campo-producao-state .
+geo:comexp geo:deliberates_at geo:pexp .
+geo:grbloc geo:feeds_committee geo:comexp .
+geo:grt geo:supports_gate geo:pexp .
+geo:rodada geo:produces_contract geo:contrato-ep .
+geo:bloco-anchor geo:has_partnership_share geo:working-interest .
+geo:working-interest geo:designates geo:operador-role .
+geo:portfolio-exploratorio geo:aggregates geo:bloco-anchor .
+geo:vme geo:scores geo:bloco-anchor .
+geo:area-retida geo:is_outcome_of geo:bloco-anchor .
+geo:area-devolvida geo:is_outcome_of geo:bloco-anchor .
 geo:sensor_aber_ckgl geo:measured_at geo:glck .
 geo:sensor_aber_ckp geo:measured_at geo:pck .
 geo:sensor_estado_dhsv geo:measured_at geo:dhsv .
