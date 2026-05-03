@@ -388,13 +388,19 @@ export function buildTtl(graph, options = {}) {
   out.push("#");
   out.push("");
   out.push("geo:WellLog rdfs:subClassOf sosa:ObservationCollection .");
-  out.push("geo:WellLog rdfs:comment \"A well log is a collection of SOSA observations on a geological formation.\" .");
+  out.push(
+    'geo:WellLog rdfs:comment "A well log is a collection of SOSA observations on a geological formation." .'
+  );
   out.push("");
   out.push("geo:PorePressureObservation rdfs:subClassOf sosa:Observation .");
-  out.push("geo:PorePressureObservation rdfs:comment \"A formation pore pressure measurement; direct SOSA observation with qudt:Pressure result.\" .");
+  out.push(
+    'geo:PorePressureObservation rdfs:comment "A formation pore pressure measurement; direct SOSA observation with qudt:Pressure result." .'
+  );
   out.push("");
   out.push("geo:CoreSample rdfs:subClassOf ssn:Sample .");
-  out.push("geo:CoreSample rdfs:comment \"A physical core plug retrieved from the borehole; maps to ssn:Sample per W3C SSN.\" .");
+  out.push(
+    'geo:CoreSample rdfs:comment "A physical core plug retrieved from the borehole; maps to ssn:Sample per W3C SSN." .'
+  );
   out.push("");
   out.push("geo:poco rdfs:subClassOf sosa:FeatureOfInterest .");
   out.push("geo:formacao rdfs:subClassOf sosa:FeatureOfInterest .");

@@ -3,7 +3,6 @@
 import pytest
 from geobrain.rag import RAGDocument, SearchResult, _norm, _tokenize
 
-
 # ---------------------------------------------------------------------------
 # _norm and _tokenize helpers
 # ---------------------------------------------------------------------------
@@ -87,7 +86,16 @@ def test_retriever_documents_have_nonempty_ids(retriever):
 
 
 def test_retriever_documents_have_nonempty_text(retriever):
-    docs = retriever._documents
+    # CGI vocabulary entries (lithology, geologic_time, etc.) may have null definition
+    _CGI_TYPES = {
+        "lithology",
+        "geologic_time",
+        "stratigraphic_rank",
+        "fault_type",
+        "deformation_style",
+        "contact_type",
+    }
+    docs = [d for d in retriever._documents if getattr(d, "type", None) not in _CGI_TYPES]
     assert all(d.text for d in docs)
 
 

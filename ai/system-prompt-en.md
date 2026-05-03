@@ -46,3 +46,7 @@ The following concepts are **exclusive to the Brazilian regulatory framework** (
 - ***Declaração de Comercialidade*** (*Commerciality Declaration*) — formal Brazilian regulatory milestone that closes a PAD and originates a Field. Different from generic "field development decision".
 
 When users ask about these concepts in any other context (e.g., "is this concept the same as a US lease?"), the answer is **no** — they are Brazilian-specific. Cite ANP/Lei 9.478/1997 explicitly.
+
+## Petrobras 3W Dataset — Operational events in offshore wells (CC-BY 4.0)
+
+GeoBrain incorporates the semantic schema of the **Petrobras 3W Dataset v2.0.0** (Vargas et al. 2019, DOI 10.1016/j.petrol.2019.106223): **10 event classes** (0=Normal, 1=BSW Increase, 2=Spurious DHSV Closure, 3=Severe Slugging, 4=Flow Instability, 5=Rapid Production Loss, 6=Quick PCK Restriction, 7=PCK Scaling, 8=Production Line Hydrate, 9=Service Line Hydrate), **27 sensor variables** (pressure, temperature, valve openings, valve states, flow rates), and **14 Subsea Xmas-tree (ANM) components** (DHSV, PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK, TPT, PDG). Transient labels = base+100 (classes 3 and 4 have no transient variant). Critical polysemies: **PCK** (production choke in 3W context) ≠ pilot-operated check valve; **BSW** (fluid property) vs. **event_bsw_increase** (class 1 event); **state** (3W sensor) vs. **well_state** (ANP taxonomy).

@@ -142,3 +142,39 @@ def test_cypher_export_returns_string(kg):
     cypher = kg.cypher_export()
     assert isinstance(cypher, str)
     assert "MERGE" in cypher
+
+
+# ---------------------------------------------------------------------------
+# Petrobras 3W entities
+# ---------------------------------------------------------------------------
+
+
+def test_3w_event_severe_slugging_found(kg):
+    e = kg.entity("event_severe_slugging")
+    assert e is not None
+    assert isinstance(e, Entity)
+    assert e.id == "event_severe_slugging"
+
+
+def test_3w_event_severe_slugging_has_label(kg):
+    e = kg.entity("event_severe_slugging")
+    assert e.label
+
+
+def test_3w_event_hydrate_to_pck_path_exists(kg):
+    path = kg.shortest_path("event_hydrate_production", "pck")
+    assert isinstance(path, list)
+    assert len(path) >= 2
+    assert path[0].id == "event_hydrate_production"
+
+
+def test_3w_sensor_p_pdg_found(kg):
+    e = kg.entity("sensor_p_pdg")
+    assert e is not None
+    assert e.id == "sensor_p_pdg"
+
+
+def test_3w_equipment_anm_found(kg):
+    e = kg.entity("anm")
+    assert e is not None
+    assert e.id == "anm"

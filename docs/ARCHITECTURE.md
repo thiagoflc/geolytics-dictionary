@@ -16,10 +16,10 @@ graph TD
     L3["Layer 3 — Petro KGraph<br/>(PUC-Rio / PetroNLP)<br/>539 conceitos PT-BR"]
     L4["Layer 4 — OSDU<br/>(The Open Group)<br/>schema de dados IT"]
     L5["Layer 5 — ANP / SIGEP<br/>marco regulatorio brasileiro<br/>Lei 9.478/1997"]
-    L6["Layer 6 — Geolytics / Petrobras<br/>ontologia corporativa interna<br/>modulos M7-M10"]
+    L6["Layer 6 — Geolytics / Petrobras<br/>ontologia corporativa interna<br/>modulos M7-M10 + 3W v2.0.0 (CC-BY 4.0)"]
     L7["Layer 7 — GSO / Loop3D<br/>(ARDC / GeoScience Australia)<br/>213 classes estruturais"]
 
-    L1 --> KG["Knowledge Graph<br/>data/entity-graph.json<br/>170 nos + 259 relacoes"]
+    L1 --> KG["Knowledge Graph<br/>data/entity-graph.json<br/>221 nos + 370 relacoes"]
     L1B --> KG
     L2 --> KG
     L3 --> KG
@@ -29,9 +29,9 @@ graph TD
     L7 --> KG
 
     KG --> API["API REST estatica<br/>api/v1/<br/>23 endpoints"]
-    KG --> RAG["RAG Corpus<br/>ai/rag-corpus.jsonl<br/>2.674 chunks"]
+    KG --> RAG["RAG Corpus<br/>ai/rag-corpus.jsonl"]
     KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
-    KG --> TTL["RDF / SHACL<br/>data/geolytics.ttl<br/>data/geolytics-shapes.ttl"]
+    KG --> TTL["RDF / SHACL<br/>data/geolytics.ttl<br/>data/geolytics-shapes.ttl<br/>48 NodeShapes"]
 
     API --> MCP["MCP Server<br/>mcp/geobrain-mcp/<br/>11 ferramentas AI"]
     RAG --> AGENT["LangGraph Agent<br/>examples/langgraph-agent/"]
@@ -58,6 +58,7 @@ graph LR
         S6["Modulos geomecanicos<br/>P2.7 MEM + fraturas"]
         S7["GSO L7<br/>(scripts/gso-extract.js)"]
         S8["WITSML/PRODML<br/>crosswalks RDF"]
+        S9["Petrobras 3W v2.0.0<br/>27 sensores + 10 eventos<br/>14 equipamentos Xmas-tree"]
     end
 
     subgraph Harmonizacao["Harmonizacao"]
@@ -74,7 +75,7 @@ graph LR
         C4["build/neo4j/ — Cypher loader"]
     end
 
-    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 --> H1
+    S1 & S2 & S3 & S4 & S5 & S6 & S7 & S8 & S9 --> H1
     H1 --> H2 --> H3 --> H4
     H4 --> C1
     C1 --> C2
@@ -94,7 +95,7 @@ graph TD
     KG --> LG["LangGraph Agent<br/>(Router-Decomposer-GraphQuery-RAG-Validator-Synthesizer)"]
     KG --> NB["Notebooks Jupyter<br/>(notebooks/01-04)"]
     KG --> PY["Python Package<br/>geobrain<br/>(Dictionary, KnowledgeGraph, Validator, SweetExpander)"]
-    KG --> SHACL["SHACL Validator<br/>(pyshacl)<br/>22 NodeShapes"]
+    KG --> SHACL["SHACL Validator<br/>(pyshacl)<br/>48 NodeShapes"]
     KG --> T2C["Text2Cypher / Text2SPARQL<br/>(ai/text2cypher-fewshot.jsonl<br/>ai/text2sparql-fewshot.jsonl)"]
 
     MCP --> CLAUDE["Agentes Claude"]

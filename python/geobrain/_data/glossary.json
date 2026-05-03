@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "generated": "2026-05-01T16:05:20.772Z",
-    "count": 25
+    "version": "1.1.0",
+    "generated": "2026-05-03T17:12:14.049Z",
+    "count": 47
   },
   "terms": [
     {
@@ -262,6 +262,40 @@
       ]
     },
     {
+      "id": "pem",
+      "termo": "PEM — Programa Exploratório Mínimo",
+      "categoria": "contratos",
+      "definicao": "Conjunto mínimo de atividades exploratórias que o contratado se compromete a realizar como parte do contrato de concessão ou partilha de produção. A partir da 5ª Rodada (2003), o PEM do 1º período exploratório é expresso em Unidades de Trabalho (UTs) — parâmetro de oferta na licitação — e o do 2º período corresponde obrigatoriamente à perfuração de um poço exploratório. O cumprimento de cada período é garantido por garantia financeira prestada à ANP, devolvida após a entrega dos dados conforme padrões regulatórios.",
+      "fonte": "ANP/SEP",
+      "apareceEm": [
+        "blocos-contrato"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "pte",
+      "termo": "PTE — Plano de Trabalho Exploratório",
+      "categoria": "contratos",
+      "definicao": "Instrumento de acompanhamento e fiscalização das atividades exploratórias de cada bloco sob contrato de E&P, substituto do Programa Anual de Trabalho e Orçamento e do Plano de Exploração. Deve ser apresentado em até 90 dias da assinatura do contrato de concessão (ou 180 dias no caso de partilha de produção). Ao longo da vigência, o operador envia anualmente: o PTE previsto (outubro) e o PTE realizado (março). Revisões são permitidas conforme condições da Resolução ANP nº 876/2022. A ANP analisa e aprova cada remessa em até 30 dias. O envio é realizado pelo sistema DPP.",
+      "fonte": "Resolução ANP nº 876/2022",
+      "apareceEm": [
+        "blocos-contrato"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
       "id": "periodo-exploratorio",
       "termo": "Período Exploratório",
       "categoria": "contratos",
@@ -375,8 +409,8 @@
       "id": "pad",
       "termo": "PAD — Plano de Avaliação de Descobertas",
       "categoria": "operacoes",
-      "definicao": "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em declaração de comercialidade ou encerramento sem sucesso.",
-      "fonte": "ANP/SEP — SIGEP",
+      "definicao": "Instrumento pelo qual o concessionário avalia tecnicamente uma descoberta de hidrocarbonetos para determinar sua viabilidade comercial. Elaborado e entregue à ANP conforme a Resolução ANP nº 845/2021, descreve a descoberta e apresenta programa de trabalho com atividades, prazos e investimentos para avaliação. O código do PAD corresponde ao nome da acumulação principal da área avaliada. Após a conclusão, o PAD resulta em RFAD; se a descoberta for comercial, o RFAD fundamenta a Declaração de Comercialidade.",
+      "fonte": "ANP/SEP — SIGEP; Resolução ANP nº 845/2021",
       "apareceEm": [
         "pads-andamento",
         "pads-concluidos",
@@ -404,6 +438,24 @@
         "PAD Sépia",
         "PAD Atapu"
       ]
+    },
+    {
+      "id": "rfad",
+      "termo": "RFAD — Relatório Final de Avaliação de Descobertas",
+      "categoria": "operacoes",
+      "definicao": "Documento de encerramento do PAD que consolida as atividades de avaliação realizadas e os resultados da interpretação dos dados. A aprovação do RFAD pela ANP é condição necessária para conferir efetividade a uma eventual Declaração de Comercialidade. Em caso de resultado negativo, encerra o PAD sem declaração.",
+      "fonte": "Resolução ANP nº 845/2021",
+      "apareceEm": [
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
     },
     {
       "id": "poco-anp",
@@ -523,8 +575,42 @@
       "id": "plano-desenvolvimento",
       "termo": "Plano de Desenvolvimento",
       "categoria": "operacoes",
-      "definicao": "Documento técnico-econômico obrigatório que o concessionário deve submeter à ANP após a Declaração de Comercialidade. Detalha o número e tipo de poços a perfurar, sistemas de produção (FPSO, plataforma fixa, etc.), infraestrutura de escoamento, cronograma e estimativa de investimentos. Sua aprovação pela ANP autoriza o início formal da Fase de Desenvolvimento da Produção.",
-      "fonte": "RANP 810/2020",
+      "definicao": "Documento técnico-econômico obrigatório entregue pelo concessionário à ANP em até 180 dias após a Declaração de Comercialidade. Agrupa informações técnicas, operacionais, econômicas e ambientais da explotação do campo, incluindo abandono. A ANP analisa o PD em até 180 dias; se solicitar modificações, o contratado tem 60 dias para apresentar o PD modificado. Após aprovação, o PD passa a vincular a atuação do concessionário. Em casos de jazidas compartilhadas, deve ser acompanhado do AIP ou do CIP.",
+      "fonte": "Resolução ANP nº 17/2015",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "aip",
+      "termo": "AIP — Acordo de Individualização da Produção",
+      "categoria": "operacoes",
+      "definicao": "Acordo celebrado entre concessionários de blocos distintos que compartilham a mesma jazida de hidrocarbonetos, estabelecendo os termos para a produção individualizada de cada parte. Deve ser submetido à ANP juntamente com o Plano de Desenvolvimento quando houver descoberta em jazida compartilhada. Em situações em que o AIP ainda não está concluído, o CIP pode ser apresentado em substituição provisória.",
+      "fonte": "Lei nº 9.478/1997; Resolução ANP nº 17/2015",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "cip",
+      "termo": "CIP — Compromisso de Individualização da Produção",
+      "categoria": "operacoes",
+      "definicao": "Instrumento provisório apresentado pelos concessionários à ANP quando o Acordo de Individualização da Produção (AIP) ainda não foi concluído, comprometendo-se a celebrá-lo em prazo definido. Acompanha o Plano de Desenvolvimento em casos de jazida compartilhada nos quais o AIP definitivo não está disponível.",
+      "fonte": "Lei nº 9.478/1997; Resolução ANP nº 17/2015",
       "apareceEm": [
         "declaracoes-comercialidade"
       ],
@@ -543,6 +629,108 @@
       "definicao": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
       "fonte": "ANP/SEP",
       "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "teste-formacao",
+      "termo": "Teste de Formação",
+      "categoria": "operacoes",
+      "definicao": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
+      "fonte": "ANP — Norma de Testes de Poço; Resolução ANP nº 71/2014",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "tld",
+      "termo": "TLD",
+      "categoria": "operacoes",
+      "definicao": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
+      "fonte": "ANP — Norma de Testes de Poço (TLD)",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "rftp",
+      "termo": "RFTP",
+      "categoria": "regulatorio",
+      "definicao": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
+      "fonte": "ANP — Norma de Testes de Poço",
+      "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "i-engine",
+      "termo": "i-Engine",
+      "categoria": "sistemas",
+      "definicao": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
+      "fonte": "ANP/SEP — Resolução nº 880/2022",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "dpp",
+      "termo": "DPP",
+      "categoria": "sistemas",
+      "definicao": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
+      "fonte": "ANP/SEP",
+      "apareceEm": [],
+      "termo_en": null,
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": []
+    },
+    {
+      "id": "bmp",
+      "termo": "BMP",
+      "categoria": "regulatorio",
+      "definicao": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
+      "fonte": "ANP/SEP",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ],
       "termo_en": null,
       "petrokgraph_uri": null,
       "osdu_kind": null,
@@ -677,6 +865,319 @@
       "synonyms_pt": [],
       "synonyms_en": [],
       "examples": []
+    },
+    {
+      "id": "drx",
+      "termo": "DRX — Difração de Raios X",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Análise por difração de raios X em amostras de calha ou testemunho, fornecendo composição mineralógica qualitativa e semi-quantitativa. Insumo crítico para classificação litológica, correlação estratigráfica e decisões de estabilidade de poço (identificação de argilominerais reativos). Complementar ao FRX. Gestão: EXP/OGP/AQG.",
+      "fonte": "Petrobras EXP/OGP — Operações Geológicas",
+      "source": "data/operacoes-geologicas.json#DRX",
+      "apareceEm": [],
+      "termo_en": "X-Ray Diffraction",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "DRX",
+        "Difração de Raios X",
+        "Difratometria de Raios X"
+      ],
+      "synonyms_en": [
+        "XRD",
+        "X-Ray Diffraction"
+      ],
+      "examples": [
+        "QTZ (Quartzo)",
+        "CAL (Calcita)",
+        "DOL (Dolomita)",
+        "Argilominerais (esmectita, ilita, caulinita, clorita)"
+      ]
+    },
+    {
+      "id": "frx",
+      "termo": "FRX — Fluorescência de Raios X",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Análise por fluorescência de raios X em amostras de calha, fornecendo composição elementar (elementos maiores e traço). Permite classificação litológica via razões elementares, correlação geoquímica entre poços e construção de assinaturas geoquímicas de formações (DNA Geoquímico). Armazenado no SIGEO em módulo dedicado. Gestão: EXP/OGP/AQG.",
+      "fonte": "Petrobras EXP/OGP — SIGEO Análise de Dados de FRX",
+      "source": "data/operacoes-geologicas.json#FRX",
+      "apareceEm": [],
+      "termo_en": "X-Ray Fluorescence",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "FRX",
+        "Fluorescência de Raios X",
+        "Análise de FRX"
+      ],
+      "synonyms_en": [
+        "XRF",
+        "X-Ray Fluorescence"
+      ],
+      "examples": [
+        "Razões Fe/Ba para discriminação de formações",
+        "Razão Ca/K (carbonato vs siliciclástico)",
+        "Pearce Nb/Y x Zr/Ti (rochas ígneas)"
+      ]
+    },
+    {
+      "id": "dna-geoquimico",
+      "termo": "DNA Geoquímico",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Assinatura geoquímica de uma formação construída a partir de razões elementares de FRX em múltiplos poços. Usado como impressão digital para correlação estratigráfica e análise de proveniência. Termo emerge das razões elementares padronizadas de FRX; nomenclatura interna da equipe AQG (status: inferido).",
+      "fonte": "Petrobras EXP/OGP/AQG (jargão operacional)",
+      "source": "data/operacoes-geologicas.json#DNAGeoquimico",
+      "apareceEm": [],
+      "termo_en": "Geochemical Signature",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "assinatura geoquímica",
+        "fingerprint geoquímico"
+      ],
+      "synonyms_en": [
+        "geochemical signature",
+        "geochemical fingerprint"
+      ],
+      "examples": []
+    },
+    {
+      "id": "ogeomec",
+      "termo": "OGEOMEC — Ocorrências Geomecânicas",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Tabela relacional de ocorrências geomecânicas durante a perfuração, persistida na BDIEP. Cada linha representa um evento (kick, perda, prisão, arraste, topamento, estolamento, etc.) com intervalo de profundidade, estado do fluido (ECD, peso de lama), procedimento de poço, diâmetro e BHA. Fonte estruturada primária para retroanálise e busca de análogos. Gestão: EXP/OGP/AQG/AIP-OGEO.",
+      "fonte": "Petrobras — Workshop Geomecânica de Poços; Schema OGEOMEC.xlsx",
+      "source": "data/operacoes-geologicas.json#OGEOMEC",
+      "apareceEm": [],
+      "termo_en": "Geomechanical Occurrences",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "Ocorrências Geomecânicas",
+        "Planilha de Ocorrências Geomecânicas"
+      ],
+      "synonyms_en": [
+        "Geomechanical Occurrences",
+        "drilling incident table"
+      ],
+      "examples": [
+        "Kick",
+        "Perda Din/Est/Total",
+        "Prisão",
+        "Arraste",
+        "Topamento",
+        "Estolamento",
+        "Gas Manobra"
+      ]
+    },
+    {
+      "id": "qpg",
+      "termo": "QPG — Quadro de Previsão Geológica",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Quadro de Previsão Geológica — publicado no SIGEO/BDIEP, consolida a representação visual das possíveis características geológicas do poço: previsão litológica, marcadores, falhas, tempo sísmico, objetivos e previsões de ferramentas/técnicas de aquisição. Principal insumo de planejamento consumido pelas atividades de aquisição. Gestão: EXP/OGP.",
+      "fonte": "Petrobras — SIGEO wiki (Quadro de Previsão Geológica)",
+      "source": "data/operacoes-geologicas.json#QPG",
+      "apareceEm": [],
+      "termo_en": "Geological Prognosis Chart",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer1",
+        "layer2"
+      ],
+      "synonyms_pt": [
+        "Quadro de Previsão Geológica",
+        "Prognóstico Geológico"
+      ],
+      "synonyms_en": [
+        "geological prognosis",
+        "predicted geology chart"
+      ],
+      "examples": []
+    },
+    {
+      "id": "perfil-composto",
+      "termo": "Perfil Composto",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Perfil Composto — integra, para um único poço, curvas de perfis (wireline e MWD/LWD), descrições litológicas, indícios, testes de formação, registros direcionais e demais dados adquiridos — recuperados da BDIEP via SIGEO. Produto canônico pós-perfuração da disciplina de Consolidação de Dados de Poço (WellDataConsolidation). Gestão: EXP/OGP.",
+      "fonte": "Petrobras — SIGEO wiki (Perfil Composto)",
+      "source": "data/operacoes-geologicas.json#PerfilComposto",
+      "apareceEm": [],
+      "termo_en": "Composite Log",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "Perfil Composto",
+        "perfil consolidado de poço"
+      ],
+      "synonyms_en": [
+        "composite log",
+        "well composite log"
+      ],
+      "examples": []
+    },
+    {
+      "id": "geostopping",
+      "termo": "Geostopping",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Monitoramento em tempo real para parada precisa em alvos geológicos durante a perfuração, especialmente no pré-sal. Linha de serviço de Operações Geológicas executada pelo CGOR usando dados streaming do EXATA (mudlogging + MWD/LWD).",
+      "fonte": "Petrobras — Centro Geológico de Operação Remota (CGOR)",
+      "source": "data/operacoes-geologicas.json#Geostopping",
+      "apareceEm": [],
+      "termo_en": "Geostopping",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "geostopping",
+        "parada geológica"
+      ],
+      "synonyms_en": [
+        "geostopping",
+        "geological stop"
+      ],
+      "examples": [
+        "Parada precisa no topo de carbonato pré-sal"
+      ]
+    },
+    {
+      "id": "mudlogging",
+      "termo": "Mudlogging",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real na sonda. Documento primário são os dados transmitidos em tempo real para o EXATA (não o BDP, que é do engenheiro fiscal). Alinhamento OSDU: opendes:osdu:work-product-component--MudLog:1.0.0. Objeto WITSML: mudLog.",
+      "fonte": "Petrobras — EXATA e GDA (SharePoint); OGDA SIMGEO 2024",
+      "source": "data/operacoes-geologicas.json#Mudlogging",
+      "apareceEm": [],
+      "termo_en": "Mudlogging",
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:work-product-component--MudLog:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "mudlogging",
+        "perfilagem de lama"
+      ],
+      "synonyms_en": [
+        "mudlogging",
+        "mud logging"
+      ],
+      "examples": [
+        "Análise de gases em tempo real",
+        "Monitoramento de ROP, WOB, torque"
+      ]
+    },
+    {
+      "id": "cuttings",
+      "termo": "Cuttings (Amostra de Calha)",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Coleta, descrição e classificação litológica dos cascalhos (cuttings) trazidos à superfície pelo fluido de perfuração. Linha de serviço base para descrição litológica do poço, FRX e DRX. Alinhamento GeoSciML/CGI: specimentype/cuttings.",
+      "fonte": "Petrobras — Operações Geológicas; GeoSciML CGI specimentype",
+      "source": "data/operacoes-geologicas.json#CuttingsSampling",
+      "apareceEm": [],
+      "termo_en": "Cuttings",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "amostra de calha",
+        "calha",
+        "cascalho de perfuração",
+        "cuttings"
+      ],
+      "synonyms_en": [
+        "cuttings",
+        "drill cuttings",
+        "rock cuttings"
+      ],
+      "examples": []
+    },
+    {
+      "id": "testemunho",
+      "termo": "Testemunho (Coring)",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Extração de cilindros de rocha (testemunhos) durante a perfuração para análise laboratorial detalhada. Linha de serviço de Operações Geológicas. Alinhamento GeoSciML/CGI: specimentype/core.",
+      "fonte": "Petrobras — Operações Geológicas; GeoSciML CGI specimentype",
+      "source": "data/operacoes-geologicas.json#Coring",
+      "apareceEm": [],
+      "termo_en": "Core / Coring",
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "testemunho",
+        "testemunhagem",
+        "core"
+      ],
+      "synonyms_en": [
+        "core",
+        "coring",
+        "rock core"
+      ],
+      "examples": [
+        "Testemunhagem em reservatório carbonático pré-sal"
+      ]
+    },
+    {
+      "id": "wireline",
+      "termo": "Wireline (Perfilagem a Cabo)",
+      "categoria": "operacoes_geologicas",
+      "definicao": "Aquisição de perfis de poço (well logs) após a perfuração de cada fase, com ferramentas descidas a cabo. Linha de serviço de Operações Geológicas. Alimenta o Perfil Composto. Alinhamento OSDU: opendes:osdu:work-product-component--WellLog:1.0.0. Objeto WITSML: log.",
+      "fonte": "Petrobras — Operações Geológicas; OSDU R3 WellLog",
+      "source": "data/operacoes-geologicas.json#WirelineLogging",
+      "apareceEm": [],
+      "termo_en": "Wireline Logging",
+      "petrokgraph_uri": null,
+      "osdu_kind": "opendes:osdu:work-product-component--WellLog:1.0.0",
+      "geocoverage": [
+        "layer2",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "perfilagem a cabo",
+        "wireline",
+        "perfilagem por cabo"
+      ],
+      "synonyms_en": [
+        "wireline logging",
+        "wireline",
+        "open-hole logging"
+      ],
+      "examples": [
+        "Suite básica: GR, resistividade, neutrão, densidade",
+        "Suite especial: NMR, dipmeter, image log"
+      ]
     }
   ]
 }

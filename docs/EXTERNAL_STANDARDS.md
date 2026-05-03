@@ -161,3 +161,52 @@ OSDU define schemas de dados (como os campos de um registro JSON devem ser estru
 - **Camada 6 (Petrobras Internal) e o ativo tecnico mais valioso** — namespace `https://petrobras.com.br/geolytics/ontology/`. Apenas definicoes conceituais publicas sao publicadas.
 
 Ver `ai/ontology-map.json` para a documentacao completa de cada camada com URLs OWL, GitHub e regras de uso.
+
+---
+
+## Petrobras 3W v2.0.0
+
+**URL canônica**: https://github.com/petrobras/3W  
+**DOI**: 10.1016/j.petrol.2019.106223  
+**Licença**: Creative Commons Attribution 4.0 (CC-BY 4.0)  
+**Versão absorvida**: 2.0.0 (capturada em 2026-05-03)
+
+### Escopo
+
+O dataset 3W (Three-W) é o primeiro dataset público realista com eventos raros e indesejáveis em poços offshore de petróleo. Contém 1798 instâncias em formato Parquet com 27 variáveis de sensores e 10 classes de eventos operacionais.
+
+O GeoBrain absorve apenas o **schema semântico** — nenhuma instância `.parquet` é incluída.
+
+### Itens absorvidos
+
+| Categoria | Quantidade | Campo `legal_source` |
+|---|---|---|
+| Variáveis de sensores | 27 nós `type: "instrument"` | `"Petrobras 3W v2.0.0"` |
+| Classes de evento | 10 nós `type: "operational"` | `"Petrobras 3W v2.0.0"` |
+| Equipamentos Xmas-tree | 13 nós novos + 1 enriquecido (`dhsv`) | `"Petrobras 3W v2.0.0"` |
+| Taxonomias | 4 novas em `data/taxonomies.json` | — |
+| Dataset registry | 1 entry em `data/datasets.json` | — |
+
+### Mnemônico disciplinar
+
+`TW` (Three-W). Códigos `TW001..TW051` no campo `module`. IDs de entidades: snake_case natural sem prefixo (`event_severe_slugging`, `sensor_p_pdg`, `pck`).
+
+### Namespace RDF
+
+`threew:` → `https://github.com/petrobras/3W#`
+
+### TRANSIENT_OFFSET
+
+Conforme `dataset.ini`: rótulos transientes = rótulo base + 100. Classes 3 (Severe Slugging) e 4 (Flow Instability) não possuem variante transiente.
+
+### Atribuição obrigatória
+
+> Vargas et al. (2019). A realistic and public dataset with rare undesirable real events in oil wells. *Journal of Petroleum Science and Engineering*, 181, 106223.
+
+### Arquivos de proveniência
+
+`data/sources/threew/PROVENANCE.md` — SHA-256 dos arquivos-fonte, data de captura, autores.
+
+### Regras de desambiguação
+
+Três polissemias identificadas: **PCK** (choke 3W vs check valve genérico), **BSW** (propriedade de fluido vs evento classe 1), **state** (status operacional 3W vs `well_state` ANP). Ver `polysemy_cards` em `data/threew.json`.

@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.1.0",
     "standard": "PRODML 2.x (Energistics)",
     "namespace": "http://www.energistics.org/energyml/data/prodmlv2/2.x#",
     "description": "Crosswalk from PRODML 2.x classes to Geolytics RDF ontology, GeoCore alignment, and OSDU kinds. Enables SPARQL/Cypher reasoning over Energistics production and fiber-optic sensing data.",
@@ -11,7 +11,8 @@
       "GeoCore — https://www.ufrgs.br/geocore"
     ],
     "rdf_prefix_geo": "https://geolytics.petrobras.com.br/dict/",
-    "energistics_prefix": "http://www.energistics.org/energyml/data/prodmlv2/2.x#"
+    "energistics_prefix": "http://www.energistics.org/energyml/data/prodmlv2/2.x#",
+    "total_classes": 19
   },
   "classes": [
     {
@@ -25,18 +26,61 @@
       "description_pt": "Poço em fase de produção — representa um poço produtor ou injetor no contexto de gestão de produção PRODML.",
       "description_en": "Production well — a producer or injector well in the PRODML production management context.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do poço produtor"},
-        {"name": "fluidType", "type": "xsd:string", "description_pt": "Tipo de fluido produzido (oil, gas, water)"},
-        {"name": "productionMethod", "type": "xsd:string", "description_pt": "Método de elevação (natural flow, ESP, gas lift, rod pump)"},
-        {"name": "statusWell", "type": "xsd:string", "description_pt": "Status (producing, shut-in, abandoned)"},
-        {"name": "dTimFirstProduction", "type": "xsd:dateTime", "description_pt": "Data do primeiro óleo"},
-        {"name": "cumOil", "type": "xsd:decimal", "unit": "m3", "description_pt": "Produção acumulada de óleo"},
-        {"name": "cumGas", "type": "xsd:decimal", "unit": "m3", "description_pt": "Produção acumulada de gás"},
-        {"name": "cumWater", "type": "xsd:decimal", "unit": "m3", "description_pt": "Produção acumulada de água"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do poço produtor"
+        },
+        {
+          "name": "fluidType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de fluido produzido (oil, gas, water)"
+        },
+        {
+          "name": "productionMethod",
+          "type": "xsd:string",
+          "description_pt": "Método de elevação (natural flow, ESP, gas lift, rod pump)"
+        },
+        {
+          "name": "statusWell",
+          "type": "xsd:string",
+          "description_pt": "Status (producing, shut-in, abandoned)"
+        },
+        {
+          "name": "dTimFirstProduction",
+          "type": "xsd:dateTime",
+          "description_pt": "Data do primeiro óleo"
+        },
+        {
+          "name": "cumOil",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Produção acumulada de óleo"
+        },
+        {
+          "name": "cumGas",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Produção acumulada de gás"
+        },
+        {
+          "name": "cumWater",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Produção acumulada de água"
+        }
       ],
       "object_properties": [
-        {"name": "hasFlowMeasurement", "range": "geo:FlowMeasurement", "description_pt": "Poço possui medições de vazão"},
-        {"name": "locatedInField", "range": "geo:Campo", "description_pt": "Poço localizado em campo"}
+        {
+          "name": "hasFlowMeasurement",
+          "range": "geo:FlowMeasurement",
+          "description_pt": "Poço possui medições de vazão"
+        },
+        {
+          "name": "locatedInField",
+          "range": "geo:Campo",
+          "description_pt": "Poço localizado em campo"
+        }
       ],
       "sparql_path": "geo:ProductionWell",
       "cypher_label": "ProductionWell"
@@ -52,21 +96,82 @@
       "description_pt": "Medição de vazão — registro de taxa de produção de óleo, gás e água com carimbo temporal.",
       "description_en": "Flow measurement — production rate record for oil, gas, and water with timestamp.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data/hora da medição"},
-        {"name": "oilRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de óleo em condições padrão"},
-        {"name": "gasRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de gás em condições padrão"},
-        {"name": "waterRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de água"},
-        {"name": "gor", "type": "xsd:decimal", "unit": "m3/m3", "description_pt": "Razão Gás-Óleo"},
-        {"name": "wor", "type": "xsd:decimal", "unit": "m3/m3", "description_pt": "Razão Água-Óleo"},
-        {"name": "bsw", "type": "xsd:decimal", "unit": "%", "description_pt": "BS&W (basic sediment and water)"},
-        {"name": "chokeSize", "type": "xsd:decimal", "unit": "in", "description_pt": "Abertura do choke"},
-        {"name": "whp", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão na cabeça do poço (WHP)"},
-        {"name": "wht", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura na cabeça do poço (WHT)"},
-        {"name": "measurementType", "type": "xsd:string", "description_pt": "Tipo de medição (test separator, allocation, metered)"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora da medição"
+        },
+        {
+          "name": "oilRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de óleo em condições padrão"
+        },
+        {
+          "name": "gasRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de gás em condições padrão"
+        },
+        {
+          "name": "waterRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de água"
+        },
+        {
+          "name": "gor",
+          "type": "xsd:decimal",
+          "unit": "m3/m3",
+          "description_pt": "Razão Gás-Óleo"
+        },
+        {
+          "name": "wor",
+          "type": "xsd:decimal",
+          "unit": "m3/m3",
+          "description_pt": "Razão Água-Óleo"
+        },
+        {
+          "name": "bsw",
+          "type": "xsd:decimal",
+          "unit": "%",
+          "description_pt": "BS&W (basic sediment and water)"
+        },
+        {
+          "name": "chokeSize",
+          "type": "xsd:decimal",
+          "unit": "in",
+          "description_pt": "Abertura do choke"
+        },
+        {
+          "name": "whp",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão na cabeça do poço (WHP)"
+        },
+        {
+          "name": "wht",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura na cabeça do poço (WHT)"
+        },
+        {
+          "name": "measurementType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de medição (test separator, allocation, metered)"
+        }
       ],
       "object_properties": [
-        {"name": "measuredAtWell", "range": "geo:ProductionWell", "description_pt": "Medição realizada no poço produtor"},
-        {"name": "qualifiedBy", "range": "geo:FlowQualifier", "description_pt": "Medição qualificada por atributo"}
+        {
+          "name": "measuredAtWell",
+          "range": "geo:ProductionWell",
+          "description_pt": "Medição realizada no poço produtor"
+        },
+        {
+          "name": "qualifiedBy",
+          "range": "geo:FlowQualifier",
+          "description_pt": "Medição qualificada por atributo"
+        }
       ],
       "sparql_path": "geo:FlowMeasurement",
       "cypher_label": "FlowMeasurement"
@@ -82,13 +187,35 @@
       "description_pt": "Catálogo de componentes de fluido — tabela de propriedades termodinâmicas dos constituintes do fluido de reservatório.",
       "description_en": "Fluid component catalog — thermodynamic property table for reservoir fluid constituents.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do catálogo"},
-        {"name": "referenceTemperature", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura de referência das propriedades"},
-        {"name": "referencePressure", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão de referência das propriedades"},
-        {"name": "fluidSystem", "type": "xsd:string", "description_pt": "Tipo de sistema de fluido (black oil, compositional, dry gas)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do catálogo"
+        },
+        {
+          "name": "referenceTemperature",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura de referência das propriedades"
+        },
+        {
+          "name": "referencePressure",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão de referência das propriedades"
+        },
+        {
+          "name": "fluidSystem",
+          "type": "xsd:string",
+          "description_pt": "Tipo de sistema de fluido (black oil, compositional, dry gas)"
+        }
       ],
       "object_properties": [
-        {"name": "describedInWellTest", "range": "geo:WellTest", "description_pt": "Catálogo obtido de análise de teste de poço"}
+        {
+          "name": "describedInWellTest",
+          "range": "geo:WellTest",
+          "description_pt": "Catálogo obtido de análise de teste de poço"
+        }
       ],
       "sparql_path": "geo:FluidComponentCatalog",
       "cypher_label": "FluidComponentCatalog"
@@ -104,20 +231,74 @@
       "description_pt": "Medição DTS (Distributed Temperature Sensing) — perfil contínuo de temperatura ao longo da fibra óptica.",
       "description_en": "DTS Measurement — continuous temperature profile along a fiber optic cable.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data/hora da medição DTS"},
-        {"name": "depthReferencePoint", "type": "xsd:string", "description_pt": "Ponto de referência de profundidade (kelly bushing, sea floor)"},
-        {"name": "depthMin", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade mínima medida"},
-        {"name": "depthMax", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade máxima medida"},
-        {"name": "temperatureMin", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura mínima registrada"},
-        {"name": "temperatureMax", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura máxima registrada"},
-        {"name": "spatialSamplingInterval", "type": "xsd:decimal", "unit": "m", "description_pt": "Intervalo de amostragem espacial"},
-        {"name": "measurementDuration", "type": "xsd:decimal", "unit": "s", "description_pt": "Duração de cada aquisição"},
-        {"name": "numberOfAverages", "type": "xsd:integer", "description_pt": "Número de médias para redução de ruído"},
-        {"name": "facilityType", "type": "xsd:string", "description_pt": "Tipo de instalação (wellbore, flowline, riser)"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora da medição DTS"
+        },
+        {
+          "name": "depthReferencePoint",
+          "type": "xsd:string",
+          "description_pt": "Ponto de referência de profundidade (kelly bushing, sea floor)"
+        },
+        {
+          "name": "depthMin",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade mínima medida"
+        },
+        {
+          "name": "depthMax",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade máxima medida"
+        },
+        {
+          "name": "temperatureMin",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura mínima registrada"
+        },
+        {
+          "name": "temperatureMax",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura máxima registrada"
+        },
+        {
+          "name": "spatialSamplingInterval",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Intervalo de amostragem espacial"
+        },
+        {
+          "name": "measurementDuration",
+          "type": "xsd:decimal",
+          "unit": "s",
+          "description_pt": "Duração de cada aquisição"
+        },
+        {
+          "name": "numberOfAverages",
+          "type": "xsd:integer",
+          "description_pt": "Número de médias para redução de ruído"
+        },
+        {
+          "name": "facilityType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de instalação (wellbore, flowline, riser)"
+        }
       ],
       "object_properties": [
-        {"name": "acquiredViaPath", "range": "geo:FiberOpticPath", "description_pt": "Medição DTS adquirida via caminho de fibra óptica"},
-        {"name": "associatedWithWellbore", "range": "geo:Wellbore", "description_pt": "Medição DTS associada ao wellbore"}
+        {
+          "name": "acquiredViaPath",
+          "range": "geo:FiberOpticPath",
+          "description_pt": "Medição DTS adquirida via caminho de fibra óptica"
+        },
+        {
+          "name": "associatedWithWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Medição DTS associada ao wellbore"
+        }
       ],
       "sparql_path": "geo:DtsMeasurement",
       "cypher_label": "DtsMeasurement"
@@ -133,19 +314,71 @@
       "description_pt": "Medição DAS (Distributed Acoustic Sensing) — sinal acústico distribuído ao longo da fibra óptica.",
       "description_en": "DAS Measurement — distributed acoustic signal along the fiber optic cable.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data/hora da aquisição DAS"},
-        {"name": "pulseRepetitionFrequency", "type": "xsd:decimal", "unit": "Hz", "description_pt": "Frequência de repetição do pulso óptico"},
-        {"name": "gaugeLength", "type": "xsd:decimal", "unit": "m", "description_pt": "Comprimento de gauge do sensor DAS"},
-        {"name": "spatialSamplingInterval", "type": "xsd:decimal", "unit": "m", "description_pt": "Intervalo de amostragem espacial"},
-        {"name": "frequencyBandMin", "type": "xsd:decimal", "unit": "Hz", "description_pt": "Frequência mínima da banda adquirida"},
-        {"name": "frequencyBandMax", "type": "xsd:decimal", "unit": "Hz", "description_pt": "Frequência máxima da banda adquirida"},
-        {"name": "acquisitionSampleRate", "type": "xsd:decimal", "unit": "Hz", "description_pt": "Taxa de amostragem de aquisição"},
-        {"name": "depthMin", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade mínima monitorada"},
-        {"name": "depthMax", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade máxima monitorada"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora da aquisição DAS"
+        },
+        {
+          "name": "pulseRepetitionFrequency",
+          "type": "xsd:decimal",
+          "unit": "Hz",
+          "description_pt": "Frequência de repetição do pulso óptico"
+        },
+        {
+          "name": "gaugeLength",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Comprimento de gauge do sensor DAS"
+        },
+        {
+          "name": "spatialSamplingInterval",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Intervalo de amostragem espacial"
+        },
+        {
+          "name": "frequencyBandMin",
+          "type": "xsd:decimal",
+          "unit": "Hz",
+          "description_pt": "Frequência mínima da banda adquirida"
+        },
+        {
+          "name": "frequencyBandMax",
+          "type": "xsd:decimal",
+          "unit": "Hz",
+          "description_pt": "Frequência máxima da banda adquirida"
+        },
+        {
+          "name": "acquisitionSampleRate",
+          "type": "xsd:decimal",
+          "unit": "Hz",
+          "description_pt": "Taxa de amostragem de aquisição"
+        },
+        {
+          "name": "depthMin",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade mínima monitorada"
+        },
+        {
+          "name": "depthMax",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade máxima monitorada"
+        }
       ],
       "object_properties": [
-        {"name": "acquiredViaPath", "range": "geo:FiberOpticPath", "description_pt": "Medição DAS adquirida via caminho de fibra óptica"},
-        {"name": "associatedWithWellbore", "range": "geo:Wellbore", "description_pt": "Medição DAS associada ao wellbore"}
+        {
+          "name": "acquiredViaPath",
+          "range": "geo:FiberOpticPath",
+          "description_pt": "Medição DAS adquirida via caminho de fibra óptica"
+        },
+        {
+          "name": "associatedWithWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Medição DAS associada ao wellbore"
+        }
       ],
       "sparql_path": "geo:DasMeasurement",
       "cypher_label": "DasMeasurement"
@@ -161,19 +394,66 @@
       "description_pt": "Caminho de fibra óptica instalado no poço — descreve a rota física do cabo do sensor ao interrogador.",
       "description_en": "Fiber optic path installed in the well — describes the physical cable route from sensor to interrogator.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do caminho de fibra"},
-        {"name": "fiberType", "type": "xsd:string", "description_pt": "Tipo de fibra (single-mode, multi-mode)"},
-        {"name": "cableType", "type": "xsd:string", "description_pt": "Tipo de cabo (control line, flatpack)"},
-        {"name": "installationMethod", "type": "xsd:string", "description_pt": "Método de instalação (control line, coiled tubing)"},
-        {"name": "lengthFiber", "type": "xsd:decimal", "unit": "m", "description_pt": "Comprimento total da fibra"},
-        {"name": "mdStart", "type": "xsd:decimal", "unit": "m", "description_pt": "MD de início do percurso de fibra"},
-        {"name": "mdEnd", "type": "xsd:decimal", "unit": "m", "description_pt": "MD de fim do percurso de fibra"},
-        {"name": "correctionFactor", "type": "xsd:decimal", "description_pt": "Fator de correção profundidade óptica para MD real"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do caminho de fibra"
+        },
+        {
+          "name": "fiberType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de fibra (single-mode, multi-mode)"
+        },
+        {
+          "name": "cableType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de cabo (control line, flatpack)"
+        },
+        {
+          "name": "installationMethod",
+          "type": "xsd:string",
+          "description_pt": "Método de instalação (control line, coiled tubing)"
+        },
+        {
+          "name": "lengthFiber",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Comprimento total da fibra"
+        },
+        {
+          "name": "mdStart",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "MD de início do percurso de fibra"
+        },
+        {
+          "name": "mdEnd",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "MD de fim do percurso de fibra"
+        },
+        {
+          "name": "correctionFactor",
+          "type": "xsd:decimal",
+          "description_pt": "Fator de correção profundidade óptica para MD real"
+        }
       ],
       "object_properties": [
-        {"name": "installedInWellbore", "range": "geo:Wellbore", "description_pt": "Fibra instalada no wellbore"},
-        {"name": "hasDtsMeasurement", "range": "geo:DtsMeasurement", "description_pt": "Caminho de fibra produz medições DTS"},
-        {"name": "hasDasMeasurement", "range": "geo:DasMeasurement", "description_pt": "Caminho de fibra produz medições DAS"}
+        {
+          "name": "installedInWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Fibra instalada no wellbore"
+        },
+        {
+          "name": "hasDtsMeasurement",
+          "range": "geo:DtsMeasurement",
+          "description_pt": "Caminho de fibra produz medições DTS"
+        },
+        {
+          "name": "hasDasMeasurement",
+          "range": "geo:DasMeasurement",
+          "description_pt": "Caminho de fibra produz medições DAS"
+        }
       ],
       "sparql_path": "geo:FiberOpticPath",
       "cypher_label": "FiberOpticPath"
@@ -189,19 +469,70 @@
       "description_pt": "Teste de produção PRODML — medição de vazão e amostragem de fluido para alocação de produção.",
       "description_en": "PRODML well test — flow rate measurement and fluid sampling for production allocation.",
       "primitive_properties": [
-        {"name": "dTim", "type": "xsd:dateTime", "description_pt": "Data/hora do teste"},
-        {"name": "testDuration", "type": "xsd:decimal", "unit": "h", "description_pt": "Duração do teste"},
-        {"name": "oilRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de óleo medida"},
-        {"name": "gasRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de gás medida"},
-        {"name": "waterRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de água medida"},
-        {"name": "reservoirPressure", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão estática do reservatório"},
-        {"name": "bubblePointPressure", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão de bolha"},
-        {"name": "apiGravity", "type": "xsd:decimal", "unit": "degAPI", "description_pt": "Gravidade API do óleo"},
-        {"name": "gasSg", "type": "xsd:decimal", "description_pt": "Densidade específica do gás"}
+        {
+          "name": "dTim",
+          "type": "xsd:dateTime",
+          "description_pt": "Data/hora do teste"
+        },
+        {
+          "name": "testDuration",
+          "type": "xsd:decimal",
+          "unit": "h",
+          "description_pt": "Duração do teste"
+        },
+        {
+          "name": "oilRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de óleo medida"
+        },
+        {
+          "name": "gasRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de gás medida"
+        },
+        {
+          "name": "waterRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de água medida"
+        },
+        {
+          "name": "reservoirPressure",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão estática do reservatório"
+        },
+        {
+          "name": "bubblePointPressure",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão de bolha"
+        },
+        {
+          "name": "apiGravity",
+          "type": "xsd:decimal",
+          "unit": "degAPI",
+          "description_pt": "Gravidade API do óleo"
+        },
+        {
+          "name": "gasSg",
+          "type": "xsd:decimal",
+          "description_pt": "Densidade específica do gás"
+        }
       ],
       "object_properties": [
-        {"name": "testedWell", "range": "geo:ProductionWell", "description_pt": "Teste realizado no poço produtor"},
-        {"name": "characterizesFluid", "range": "geo:FluidComponentCatalog", "description_pt": "Teste caracteriza composição de fluido"}
+        {
+          "name": "testedWell",
+          "range": "geo:ProductionWell",
+          "description_pt": "Teste realizado no poço produtor"
+        },
+        {
+          "name": "characterizesFluid",
+          "range": "geo:FluidComponentCatalog",
+          "description_pt": "Teste caracteriza composição de fluido"
+        }
       ],
       "sparql_path": "geo:ProdWellTest",
       "cypher_label": "ProdWellTest"
@@ -217,17 +548,59 @@
       "description_pt": "Intervalo de profundidade — segmento entre duas profundidades medidas com atributos associados.",
       "description_en": "Depth interval — segment between two measured depths with associated attributes.",
       "primitive_properties": [
-        {"name": "mdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida do topo"},
-        {"name": "mdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "Profundidade medida da base"},
-        {"name": "tvdTop", "type": "xsd:decimal", "unit": "m", "description_pt": "TVD do topo"},
-        {"name": "tvdBottom", "type": "xsd:decimal", "unit": "m", "description_pt": "TVD da base"},
-        {"name": "datum", "type": "xsd:string", "description_pt": "Datum de referência de profundidade (KB, rotary table, sea level)"},
-        {"name": "thickness", "type": "xsd:decimal", "unit": "m", "description_pt": "Espessura medida do intervalo"},
-        {"name": "netPay", "type": "xsd:decimal", "unit": "m", "description_pt": "Net pay (espessura net pay) do intervalo"}
+        {
+          "name": "mdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida do topo"
+        },
+        {
+          "name": "mdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Profundidade medida da base"
+        },
+        {
+          "name": "tvdTop",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "TVD do topo"
+        },
+        {
+          "name": "tvdBottom",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "TVD da base"
+        },
+        {
+          "name": "datum",
+          "type": "xsd:string",
+          "description_pt": "Datum de referência de profundidade (KB, rotary table, sea level)"
+        },
+        {
+          "name": "thickness",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Espessura medida do intervalo"
+        },
+        {
+          "name": "netPay",
+          "type": "xsd:decimal",
+          "unit": "m",
+          "description_pt": "Net pay (espessura net pay) do intervalo"
+        }
       ],
       "object_properties": [
-        {"name": "qualifiesProduction", "range": "geo:ProductionVolume", "description_pt": "Intervalo associado a volume de produção"},
-        {"name": "inWellbore", "range": "geo:Wellbore", "description_pt": "Intervalo de profundidade no wellbore"}
+        {
+          "name": "qualifiesProduction",
+          "range": "geo:ProductionVolume",
+          "description_pt": "Intervalo associado a volume de produção"
+        },
+        {
+          "name": "inWellbore",
+          "range": "geo:Wellbore",
+          "description_pt": "Intervalo de profundidade no wellbore"
+        }
       ],
       "sparql_path": "geo:DepthInterval",
       "cypher_label": "DepthInterval"
@@ -243,11 +616,23 @@
       "description_pt": "Tipo de instalação de produção — classifica a natureza da instalação: poço, flowline, plataforma, terminal.",
       "description_en": "Facility kind — classifies the nature of a production facility: well, flowline, platform, terminal.",
       "primitive_properties": [
-        {"name": "kind", "type": "xsd:string", "description_pt": "Código do tipo de instalação (well, wellbore, flowline, separator, platform, pipeline, terminal)"},
-        {"name": "description", "type": "xsd:string", "description_pt": "Descrição textual do tipo de instalação"}
+        {
+          "name": "kind",
+          "type": "xsd:string",
+          "description_pt": "Código do tipo de instalação (well, wellbore, flowline, separator, platform, pipeline, terminal)"
+        },
+        {
+          "name": "description",
+          "type": "xsd:string",
+          "description_pt": "Descrição textual do tipo de instalação"
+        }
       ],
       "object_properties": [
-        {"name": "usedInProductFlowModel", "range": "geo:ProductFlowModel", "description_pt": "Tipo de instalação usado no modelo de fluxo"}
+        {
+          "name": "usedInProductFlowModel",
+          "range": "geo:ProductFlowModel",
+          "description_pt": "Tipo de instalação usado no modelo de fluxo"
+        }
       ],
       "sparql_path": "geo:FacilityKind",
       "cypher_label": "FacilityKind"
@@ -263,16 +648,48 @@
       "description_pt": "Modelo de fluxo de produção — representa a rede de instalações de produção e suas conexões para alocação.",
       "description_en": "Product flow model — represents the production facility network and connections for allocation.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do modelo de fluxo"},
-        {"name": "version", "type": "xsd:string", "description_pt": "Versão do modelo"},
-        {"name": "dTimActivated", "type": "xsd:dateTime", "description_pt": "Data de ativação do modelo"},
-        {"name": "dTimDeactivated", "type": "xsd:dateTime", "description_pt": "Data de desativação do modelo"},
-        {"name": "existenceKind", "type": "xsd:string", "description_pt": "Existência do modelo (actual, model, planned)"},
-        {"name": "context", "type": "xsd:string", "description_pt": "Contexto do modelo (production, injection, allocation)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do modelo de fluxo"
+        },
+        {
+          "name": "version",
+          "type": "xsd:string",
+          "description_pt": "Versão do modelo"
+        },
+        {
+          "name": "dTimActivated",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de ativação do modelo"
+        },
+        {
+          "name": "dTimDeactivated",
+          "type": "xsd:dateTime",
+          "description_pt": "Data de desativação do modelo"
+        },
+        {
+          "name": "existenceKind",
+          "type": "xsd:string",
+          "description_pt": "Existência do modelo (actual, model, planned)"
+        },
+        {
+          "name": "context",
+          "type": "xsd:string",
+          "description_pt": "Contexto do modelo (production, injection, allocation)"
+        }
       ],
       "object_properties": [
-        {"name": "hasFacility", "range": "geo:FacilityKind", "description_pt": "Modelo contém instalações"},
-        {"name": "generatesVolume", "range": "geo:ProductionVolume", "description_pt": "Modelo gera volumes de produção"}
+        {
+          "name": "hasFacility",
+          "range": "geo:FacilityKind",
+          "description_pt": "Modelo contém instalações"
+        },
+        {
+          "name": "generatesVolume",
+          "range": "geo:ProductionVolume",
+          "description_pt": "Modelo gera volumes de produção"
+        }
       ],
       "sparql_path": "geo:ProductFlowModel",
       "cypher_label": "ProductFlowModel"
@@ -288,20 +705,74 @@
       "description_pt": "Volume de produção — volume acumulado ou de período de fluido produzido em uma instalação.",
       "description_en": "Production volume — accumulated or period volume of produced fluid at a facility.",
       "primitive_properties": [
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Início do período de produção"},
-        {"name": "dTimEnd", "type": "xsd:dateTime", "description_pt": "Fim do período de produção"},
-        {"name": "reportingEntity", "type": "xsd:string", "description_pt": "Entidade responsável pelo relatorio (poço, campo, campo)"},
-        {"name": "oilVolume", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume de óleo produzido no período"},
-        {"name": "gasVolume", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume de gás produzido no período"},
-        {"name": "waterVolume", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume de água produzido no período"},
-        {"name": "condensateVolume", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume de condensado"},
-        {"name": "reportingPhase", "type": "xsd:string", "description_pt": "Fase relatada (oil, gas, water, condensate)"},
-        {"name": "conditionTemperature", "type": "xsd:decimal", "unit": "degC", "description_pt": "Temperatura das condições padrão"},
-        {"name": "conditionPressure", "type": "xsd:decimal", "unit": "bar", "description_pt": "Pressão das condições padrão (1.01325 bar)"}
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Início do período de produção"
+        },
+        {
+          "name": "dTimEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Fim do período de produção"
+        },
+        {
+          "name": "reportingEntity",
+          "type": "xsd:string",
+          "description_pt": "Entidade responsável pelo relatorio (poço, campo, campo)"
+        },
+        {
+          "name": "oilVolume",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume de óleo produzido no período"
+        },
+        {
+          "name": "gasVolume",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume de gás produzido no período"
+        },
+        {
+          "name": "waterVolume",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume de água produzido no período"
+        },
+        {
+          "name": "condensateVolume",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume de condensado"
+        },
+        {
+          "name": "reportingPhase",
+          "type": "xsd:string",
+          "description_pt": "Fase relatada (oil, gas, water, condensate)"
+        },
+        {
+          "name": "conditionTemperature",
+          "type": "xsd:decimal",
+          "unit": "degC",
+          "description_pt": "Temperatura das condições padrão"
+        },
+        {
+          "name": "conditionPressure",
+          "type": "xsd:decimal",
+          "unit": "bar",
+          "description_pt": "Pressão das condições padrão (1.01325 bar)"
+        }
       ],
       "object_properties": [
-        {"name": "producedByFacility", "range": "geo:ProductFlowModel", "description_pt": "Volume gerado pelo modelo de fluxo"},
-        {"name": "reportedForWell", "range": "geo:ProductionWell", "description_pt": "Volume relatado para o poço produtor"}
+        {
+          "name": "producedByFacility",
+          "range": "geo:ProductFlowModel",
+          "description_pt": "Volume gerado pelo modelo de fluxo"
+        },
+        {
+          "name": "reportedForWell",
+          "range": "geo:ProductionWell",
+          "description_pt": "Volume relatado para o poço produtor"
+        }
       ],
       "sparql_path": "geo:ProductionVolume",
       "cypher_label": "ProductionVolume"
@@ -317,12 +788,28 @@
       "description_pt": "Qualificador de fluxo — atributo que qualifica o tipo ou condição de uma medição de vazão.",
       "description_en": "Flow qualifier — attribute qualifying the type or condition of a flow measurement.",
       "primitive_properties": [
-        {"name": "qualifier", "type": "xsd:string", "description_pt": "Código do qualificador (allocated, measured, estimated, fiscal, test)"},
-        {"name": "subQualifier", "type": "xsd:string", "description_pt": "Sub-qualificador de precisão ou método"},
-        {"name": "context", "type": "xsd:string", "description_pt": "Contexto do qualificador (production, injection, fiscal)"}
+        {
+          "name": "qualifier",
+          "type": "xsd:string",
+          "description_pt": "Código do qualificador (allocated, measured, estimated, fiscal, test)"
+        },
+        {
+          "name": "subQualifier",
+          "type": "xsd:string",
+          "description_pt": "Sub-qualificador de precisão ou método"
+        },
+        {
+          "name": "context",
+          "type": "xsd:string",
+          "description_pt": "Contexto do qualificador (production, injection, fiscal)"
+        }
       ],
       "object_properties": [
-        {"name": "appliesTo", "range": "geo:FlowMeasurement", "description_pt": "Qualificador aplicado à medição de vazão"}
+        {
+          "name": "appliesTo",
+          "range": "geo:FlowMeasurement",
+          "description_pt": "Qualificador aplicado à medição de vazão"
+        }
       ],
       "sparql_path": "geo:FlowQualifier",
       "cypher_label": "FlowQualifier"
@@ -338,15 +825,43 @@
       "description_pt": "Série temporal de dados de produção — conjunto ordenado de medições de uma propriedade ao longo do tempo.",
       "description_en": "Production time series — ordered set of measurements of a property over time.",
       "primitive_properties": [
-        {"name": "key", "type": "xsd:string", "description_pt": "Chave identificadora da série temporal"},
-        {"name": "unit", "type": "xsd:string", "description_pt": "Unidade de medida da série"},
-        {"name": "measureClass", "type": "xsd:string", "description_pt": "Classe de medição (pressure, flow rate, temperature)"},
-        {"name": "startDateTimePeriod", "type": "xsd:dateTime", "description_pt": "Início da série temporal"},
-        {"name": "endDateTimePeriod", "type": "xsd:dateTime", "description_pt": "Fim da série temporal"},
-        {"name": "sampleCount", "type": "xsd:integer", "description_pt": "Número de amostras na série"}
+        {
+          "name": "key",
+          "type": "xsd:string",
+          "description_pt": "Chave identificadora da série temporal"
+        },
+        {
+          "name": "unit",
+          "type": "xsd:string",
+          "description_pt": "Unidade de medida da série"
+        },
+        {
+          "name": "measureClass",
+          "type": "xsd:string",
+          "description_pt": "Classe de medição (pressure, flow rate, temperature)"
+        },
+        {
+          "name": "startDateTimePeriod",
+          "type": "xsd:dateTime",
+          "description_pt": "Início da série temporal"
+        },
+        {
+          "name": "endDateTimePeriod",
+          "type": "xsd:dateTime",
+          "description_pt": "Fim da série temporal"
+        },
+        {
+          "name": "sampleCount",
+          "type": "xsd:integer",
+          "description_pt": "Número de amostras na série"
+        }
       ],
       "object_properties": [
-        {"name": "associatedWithWell", "range": "geo:ProductionWell", "description_pt": "Série temporal de produção do poço"}
+        {
+          "name": "associatedWithWell",
+          "range": "geo:ProductionWell",
+          "description_pt": "Série temporal de produção do poço"
+        }
       ],
       "sparql_path": "geo:TimeSeriesData",
       "cypher_label": "TimeSeriesData"
@@ -362,16 +877,50 @@
       "description_pt": "Operação de produção — registro de evento operacional com impacto na produção (shutdown, startup, choke change).",
       "description_en": "Production operation — operational event record with production impact (shutdown, startup, choke change).",
       "primitive_properties": [
-        {"name": "dTimStart", "type": "xsd:dateTime", "description_pt": "Início da operação"},
-        {"name": "dTimEnd", "type": "xsd:dateTime", "description_pt": "Fim da operação"},
-        {"name": "operationType", "type": "xsd:string", "description_pt": "Tipo de operação (planned shutdown, unplanned shutdown, well service)"},
-        {"name": "prodLostOil", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume de óleo diferido"},
-        {"name": "prodLostGas", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume de gás diferido"},
-        {"name": "causeOfDowntime", "type": "xsd:string", "description_pt": "Causa do tempo de parada (HSE, maintenance, formation)"},
-        {"name": "remarks", "type": "xsd:string", "description_pt": "Observações operacionais"}
+        {
+          "name": "dTimStart",
+          "type": "xsd:dateTime",
+          "description_pt": "Início da operação"
+        },
+        {
+          "name": "dTimEnd",
+          "type": "xsd:dateTime",
+          "description_pt": "Fim da operação"
+        },
+        {
+          "name": "operationType",
+          "type": "xsd:string",
+          "description_pt": "Tipo de operação (planned shutdown, unplanned shutdown, well service)"
+        },
+        {
+          "name": "prodLostOil",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume de óleo diferido"
+        },
+        {
+          "name": "prodLostGas",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume de gás diferido"
+        },
+        {
+          "name": "causeOfDowntime",
+          "type": "xsd:string",
+          "description_pt": "Causa do tempo de parada (HSE, maintenance, formation)"
+        },
+        {
+          "name": "remarks",
+          "type": "xsd:string",
+          "description_pt": "Observações operacionais"
+        }
       ],
       "object_properties": [
-        {"name": "affectsWell", "range": "geo:ProductionWell", "description_pt": "Operação afeta o poço produtor"}
+        {
+          "name": "affectsWell",
+          "range": "geo:ProductionWell",
+          "description_pt": "Operação afeta o poço produtor"
+        }
       ],
       "sparql_path": "geo:ProductionOperation",
       "cypher_label": "ProductionOperation"
@@ -387,18 +936,97 @@
       "description_pt": "Poço injetor — poço utilizado para injeção de água, gás ou CO2 para manutenção de pressão ou recuperação secundária.",
       "description_en": "Injection well — well used for water, gas, or CO2 injection for pressure maintenance or EOR.",
       "primitive_properties": [
-        {"name": "name", "type": "xsd:string", "description_pt": "Nome do poço injetor"},
-        {"name": "injectionFluid", "type": "xsd:string", "description_pt": "Fluido injetado (water, gas, CO2, polymer)"},
-        {"name": "injectionRate", "type": "xsd:decimal", "unit": "m3/d", "description_pt": "Vazão de injeção"},
-        {"name": "injectionPressure", "type": "xsd:decimal", "unit": "psi", "description_pt": "Pressão de injeção na cabeça"},
-        {"name": "cumulativeInjection", "type": "xsd:decimal", "unit": "m3", "description_pt": "Volume acumulado injetado"},
-        {"name": "statusWell", "type": "xsd:string", "description_pt": "Status atual (injecting, shut-in, abandoned)"}
+        {
+          "name": "name",
+          "type": "xsd:string",
+          "description_pt": "Nome do poço injetor"
+        },
+        {
+          "name": "injectionFluid",
+          "type": "xsd:string",
+          "description_pt": "Fluido injetado (water, gas, CO2, polymer)"
+        },
+        {
+          "name": "injectionRate",
+          "type": "xsd:decimal",
+          "unit": "m3/d",
+          "description_pt": "Vazão de injeção"
+        },
+        {
+          "name": "injectionPressure",
+          "type": "xsd:decimal",
+          "unit": "psi",
+          "description_pt": "Pressão de injeção na cabeça"
+        },
+        {
+          "name": "cumulativeInjection",
+          "type": "xsd:decimal",
+          "unit": "m3",
+          "description_pt": "Volume acumulado injetado"
+        },
+        {
+          "name": "statusWell",
+          "type": "xsd:string",
+          "description_pt": "Status atual (injecting, shut-in, abandoned)"
+        }
       ],
       "object_properties": [
-        {"name": "supportsReservoir", "range": "geo:Reservatorio", "description_pt": "Poço injetor suporta a pressão do reservatório"}
+        {
+          "name": "supportsReservoir",
+          "range": "geo:Reservatorio",
+          "description_pt": "Poço injetor suporta a pressão do reservatório"
+        }
       ],
       "sparql_path": "geo:InjectionWell",
       "cypher_label": "InjectionWell"
+    },
+    {
+      "witsml_class": "ProductionOperation/Well",
+      "prodml_uri": "http://www.energistics.org/energyml/data/prodmlv2#ProductionOperation",
+      "rdf_class": "geo:OperationalEvent",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/event_normal",
+      "geocore_alignment": null,
+      "osdu_kind": null,
+      "layer": "layer4",
+      "description_pt": "Operação de produção normal no PRODML. Equivalente 3W: event_normal.",
+      "description_en": "Normal production operation in PRODML. 3W equivalent: event_normal.",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "FlowMeasurement/GasLift",
+      "prodml_uri": "http://www.energistics.org/energyml/data/prodmlv2#FlowMeasurement",
+      "rdf_class": "geo:Sensor3W",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/sensor_qgl",
+      "geocore_alignment": null,
+      "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Medição de fluxo de gas-lift. Equivalente 3W: QGL [m³/s].",
+      "description_en": "Gas-lift flow measurement. 3W equivalent: QGL [m³/s].",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "ProductionEvent/HydrateBlockage",
+      "prodml_uri": "http://www.energistics.org/energyml/data/prodmlv2#ProductionEvent",
+      "rdf_class": "geo:OperationalEvent",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/event_hydrate_production",
+      "geocore_alignment": null,
+      "osdu_kind": null,
+      "layer": "layer6",
+      "description_pt": "Evento de obstrução por hidrato na linha de produção. Equivalente 3W: event_hydrate_production (classe 8).",
+      "description_en": "Hydrate blockage event in production line. 3W equivalent: event_hydrate_production (class 8).",
+      "legal_source": "Petrobras 3W v2.0.0"
+    },
+    {
+      "witsml_class": "WellTest/DownholePressure",
+      "prodml_uri": "http://www.energistics.org/energyml/data/prodmlv2#WellTest",
+      "rdf_class": "geo:Sensor3W",
+      "rdf_uri": "https://geolytics.petrobras.com.br/dict/sensor_p_pdg",
+      "geocore_alignment": null,
+      "osdu_kind": "opendes:osdu:work-product-component--TimeSeriesData:1.0.0",
+      "layer": "layer4",
+      "description_pt": "Pressão de fundo em teste de poço. Equivalente 3W: P-PDG [Pa].",
+      "description_en": "Downhole pressure in well test. 3W equivalent: P-PDG [Pa].",
+      "legal_source": "Petrobras 3W v2.0.0"
     }
   ]
 }

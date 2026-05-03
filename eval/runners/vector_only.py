@@ -45,7 +45,7 @@ def _load_corpus(corpus_path: Path) -> tuple[list[dict], BM25Okapi]:
             if line:
                 docs.append(json.loads(line))
 
-    tokenized = [_tokenize(d["text"]) for d in docs]
+    tokenized = [_tokenize(d.get("text") or "") for d in docs]
     _corpus = docs
     _bm25 = BM25Okapi(tokenized)
     return _corpus, _bm25
@@ -89,8 +89,8 @@ def run(question: str, top_k: int = 5, corpus_path: Path | None = None) -> Answe
     top_indices = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:top_k]
     top_docs = [corpus[i] for i in top_indices]
 
-    # Build answer text from retrieved passages
-    passages = [doc["text"] for doc in top_docs]
+    # Build answer text from retrieved passages (skip entries with no text)
+    passages = [doc["text"] for doc in top_docs if doc.get("text")]
     answer_text = "\n\n".join(passages)
 
     entities = _extract_entities(top_docs)

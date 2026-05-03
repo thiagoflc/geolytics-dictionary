@@ -1,6 +1,7 @@
 """Tests for python/geobrain/lithology.py."""
+
 import pytest
-from geobrain.lithology import LithologyDictionary, LithologyConcept, LithologyMapping
+from geobrain.lithology import LithologyConcept, LithologyDictionary, LithologyMapping
 
 
 @pytest.fixture(scope="module")

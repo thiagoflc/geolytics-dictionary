@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "generated": "2026-05-03T17:05:27.656Z",
-    "count": 8
+    "version": "1.1.0",
+    "generated": "2026-05-03T17:12:14.049Z",
+    "count": 9
   },
   "datasets": [
     {
@@ -635,6 +635,168 @@
         "anp",
         "sep"
       ]
+    },
+    {
+      "id": "dataset-3w",
+      "titulo": "3W Dataset v2.0.0 — Eventos Indesejáveis em Poços Offshore",
+      "descricao": "Primeiro dataset público realista com eventos raros e indesejáveis em poços de petróleo offshore. 1798 instâncias (922 reais, 878 simuladas/manuais), 10 classes de evento, 27 variáveis de sensores. Referência: DOI 10.1016/j.petrol.2019.106223.",
+      "fonte": "Petrobras / petrobras/3W (GitHub, CC-BY 4.0)",
+      "formato": "Parquet (PyArrow + Brotli)",
+      "frequencia": "snapshot por release (atual: 2.0.0, 2024-07-25)",
+      "contato": "https://github.com/petrobras/3W/issues",
+      "colunas": [
+        {
+          "nome": "timestamp",
+          "descricao": "Instante da observação",
+          "tipo": "DATETIME"
+        },
+        {
+          "nome": "ABER-CKGL",
+          "descricao": "Abertura do GLCK (gas-lift choke) [%]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ABER-CKP",
+          "descricao": "Abertura do PCK (production choke) [%]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-DHSV",
+          "descricao": "Estado da DHSV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-M1",
+          "descricao": "Estado da PMV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-M2",
+          "descricao": "Estado da AMV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-PXO",
+          "descricao": "Estado da PXO (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-SDV-GL",
+          "descricao": "Estado da SDV-GL (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-SDV-P",
+          "descricao": "Estado da SDV-P (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-W1",
+          "descricao": "Estado da PWV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-W2",
+          "descricao": "Estado da AWV (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "ESTADO-XO",
+          "descricao": "Estado da XO (0=fechada, 0.5=parcial, 1=aberta)",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-ANULAR",
+          "descricao": "Pressão no anular do poço [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-JUS-BS",
+          "descricao": "Pressão a jusante da bomba de serviço [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-JUS-CKGL",
+          "descricao": "Pressão a jusante do GLCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-JUS-CKP",
+          "descricao": "Pressão a jusante do PCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-MON-CKGL",
+          "descricao": "Pressão a montante do GLCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-MON-CKP",
+          "descricao": "Pressão a montante do PCK [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-MON-SDV-P",
+          "descricao": "Pressão a montante da SDV-P [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-PDG",
+          "descricao": "Pressão downhole PDG [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "PT-P",
+          "descricao": "Pressão ANM linha produção [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "P-TPT",
+          "descricao": "Pressão no TPT [Pa]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "QBS",
+          "descricao": "Vazão bomba de serviço [m³/s]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "QGL",
+          "descricao": "Vazão de injeção de gas-lift [m³/s]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-JUS-CKP",
+          "descricao": "Temperatura a jusante do PCK [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-MON-CKP",
+          "descricao": "Temperatura a montante do PCK [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-PDG",
+          "descricao": "Temperatura downhole PDG [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "T-TPT",
+          "descricao": "Temperatura no TPT [°C]",
+          "tipo": "FLOAT"
+        },
+        {
+          "nome": "class",
+          "descricao": "Rótulo da observação (0–9 estacionário, 101–109 transiente)",
+          "tipo": "INTEGER"
+        },
+        {
+          "nome": "state",
+          "descricao": "Status operacional do poço (3W interno)",
+          "tipo": "INTEGER"
+        }
+      ],
+      "terms_referenced": []
     }
   ]
 }

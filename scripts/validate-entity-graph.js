@@ -25,14 +25,14 @@ const path = require("node:path");
 // ---------------------------------------------------------------------------
 // ANSI colour helpers
 // ---------------------------------------------------------------------------
-const GREEN  = "\x1b[32m";
-const RED    = "\x1b[31m";
+const GREEN = "\x1b[32m";
+const RED = "\x1b[31m";
 const YELLOW = "\x1b[33m";
-const RESET  = "\x1b[0m";
-const BOLD   = "\x1b[1m";
+const RESET = "\x1b[0m";
+const BOLD = "\x1b[1m";
 
-const ok   = (msg) => `${GREEN}✓${RESET} ${msg}`;
-const err  = (msg) => `${RED}✗${RESET} ${msg}`;
+const ok = (msg) => `${GREEN}✓${RESET} ${msg}`;
+const err = (msg) => `${RED}✗${RESET} ${msg}`;
 const warn = (msg) => `${YELLOW}⚠${RESET} ${msg}`;
 
 // ---------------------------------------------------------------------------
@@ -72,10 +72,7 @@ function buildValidLayers(ontologyMap) {
 
 /** 1. Orphan nodes — nodes with no incoming or outgoing edges */
 function checkOrphanNodes(nodes, edges) {
-  const connected = new Set([
-    ...edges.map((e) => e.source),
-    ...edges.map((e) => e.target),
-  ]);
+  const connected = new Set([...edges.map((e) => e.source), ...edges.map((e) => e.target)]);
   return nodes.filter((n) => !connected.has(n.id));
 }
 
@@ -114,9 +111,7 @@ function checkDuplicateIds(nodes) {
 
 /** 6. GeoSciML URI format — must start with http://geosciml.org/ if present */
 function checkGeoscimlUris(nodes) {
-  return nodes.filter(
-    (n) => n.geosciml_uri && !n.geosciml_uri.startsWith("http://geosciml.org/")
-  );
+  return nodes.filter((n) => n.geosciml_uri && !n.geosciml_uri.startsWith("http://geosciml.org/"));
 }
 
 // ---------------------------------------------------------------------------
@@ -147,7 +142,7 @@ function main() {
   console.log("─".repeat(50));
 
   // Load data
-  const graph      = loadJson("data/entity-graph.json");
+  const graph = loadJson("data/entity-graph.json");
   const ontologyMap = loadJson("ai/ontology-map.json");
 
   let nodes = graph.nodes || [];
@@ -160,9 +155,9 @@ function main() {
   console.log(`  Valid layers  : ${[...validLayers].sort().join(", ")}`);
   console.log("");
 
-  let hasErrors   = false;
+  let hasErrors = false;
   let totalErrors = 0;
-  let totalWarns  = 0;
+  let totalWarns = 0;
 
   // ── 1. Orphan nodes ──────────────────────────────────────────────────────
   const orphans = checkOrphanNodes(nodes, edges);
@@ -186,9 +181,15 @@ function main() {
     totalErrors += broken.length;
     console.log(err(`Broken edges       : ${broken.length} edge(s) reference missing nodes`));
     for (const e of broken) {
-      const srcOk = new Set(nodes.map((n) => n.id)).has(e.source) ? "" : ` ${RED}(missing source)${RESET}`;
-      const tgtOk = new Set(nodes.map((n) => n.id)).has(e.target) ? "" : ` ${RED}(missing target)${RESET}`;
-      console.log(`   ${RED}→${RESET} ${e.source}${srcOk} → ${e.target}${tgtOk} [${e.relation || "?"}]`);
+      const srcOk = new Set(nodes.map((n) => n.id)).has(e.source)
+        ? ""
+        : ` ${RED}(missing source)${RESET}`;
+      const tgtOk = new Set(nodes.map((n) => n.id)).has(e.target)
+        ? ""
+        : ` ${RED}(missing target)${RESET}`;
+      console.log(
+        `   ${RED}→${RESET} ${e.source}${srcOk} → ${e.target}${tgtOk} [${e.relation || "?"}]`
+      );
     }
   }
 
@@ -199,7 +200,9 @@ function main() {
   } else {
     hasErrors = true;
     totalErrors += badLayers.length;
-    console.log(err(`Invalid layers     : ${badLayers.length} node(s) reference unknown layer IDs`));
+    console.log(
+      err(`Invalid layers     : ${badLayers.length} node(s) reference unknown layer IDs`)
+    );
     for (const b of badLayers) {
       console.log(`   ${RED}→${RESET} ${b.node}: [${b.invalid_layers.join(", ")}]`);
     }
@@ -215,10 +218,12 @@ function main() {
     console.log(err(`Missing fields     : ${missing.length} node(s) lack id, label, or type`));
     for (const n of missing) {
       const missing_fields = [];
-      if (!n.id)    missing_fields.push("id");
+      if (!n.id) missing_fields.push("id");
       if (!n.label) missing_fields.push("label");
-      if (!n.type)  missing_fields.push("type");
-      console.log(`   ${RED}→${RESET} ${n.id || "(no id)"}: missing [${missing_fields.join(", ")}]`);
+      if (!n.type) missing_fields.push("type");
+      console.log(
+        `   ${RED}→${RESET} ${n.id || "(no id)"}: missing [${missing_fields.join(", ")}]`
+      );
     }
   }
 
@@ -237,7 +242,9 @@ function main() {
         "utf8"
       );
       totalWarns += dupes.length;
-      console.log(warn(`Duplicate IDs      : ${dupes.length} duplicate(s) auto-removed (--fix applied)`));
+      console.log(
+        warn(`Duplicate IDs      : ${dupes.length} duplicate(s) auto-removed (--fix applied)`)
+      );
     } else {
       hasErrors = true;
       totalErrors += dupes.length;
@@ -266,14 +273,10 @@ function main() {
   // ── Summary ───────────────────────────────────────────────────────────────
   console.log("\n" + "─".repeat(50));
   if (hasErrors) {
-    console.log(
-      `${RED}${BOLD}FAILED${RESET}  ${totalErrors} error(s), ${totalWarns} warning(s)`
-    );
+    console.log(`${RED}${BOLD}FAILED${RESET}  ${totalErrors} error(s), ${totalWarns} warning(s)`);
     process.exit(1);
   } else if (totalWarns > 0) {
-    console.log(
-      `${YELLOW}${BOLD}PASSED with warnings${RESET}  0 errors, ${totalWarns} warning(s)`
-    );
+    console.log(`${YELLOW}${BOLD}PASSED with warnings${RESET}  0 errors, ${totalWarns} warning(s)`);
     process.exit(0);
   } else {
     console.log(`${GREEN}${BOLD}PASSED${RESET}  All checks passed.`);

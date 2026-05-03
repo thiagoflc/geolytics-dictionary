@@ -12,6 +12,7 @@ from .data import load_json
 @dataclass(frozen=True)
 class LithologyConcept:
     """A single CGI Simple Lithology concept."""
+
     id: str
     label_en: str
     label_pt: str | None
@@ -29,6 +30,7 @@ class LithologyConcept:
 @dataclass(frozen=True)
 class LithologyMapping:
     """A CGI ↔ OSDU LithologyType mapping entry."""
+
     cgi_id: str
     cgi_label: str
     osdu_value: str
@@ -53,11 +55,12 @@ class LithologyDictionary:
     def _concepts(self) -> list[LithologyConcept]:
         raw = load_json("cgi-lithology.json")
         # cgi-lithology.json may be a dict with a 'concepts' key or a plain array
-        if isinstance(raw, dict):
-            items_raw = raw.get("concepts", [])
-        else:
-            items_raw = raw
-        items = [x for x in items_raw if isinstance(x, dict) and "id" in x and isinstance(x.get("id"), str)]
+        items_raw = raw.get("concepts", []) if isinstance(raw, dict) else raw
+        items = [
+            x
+            for x in items_raw
+            if isinstance(x, dict) and "id" in x and isinstance(x.get("id"), str)
+        ]
         return [
             LithologyConcept(
                 id=x["id"],
@@ -75,10 +78,7 @@ class LithologyDictionary:
     def _osdu_map(self) -> dict[str, LithologyMapping]:
         raw = load_json("cgi-osdu-lithology-map.json")
         # file may be a dict with a 'mappings' key or a plain array
-        if isinstance(raw, dict):
-            entries = raw.get("mappings", [])
-        else:
-            entries = raw
+        entries = raw.get("mappings", []) if isinstance(raw, dict) else raw
         result = {}
         for entry in entries:
             if isinstance(entry, dict) and "cgi_id" in entry:
@@ -110,8 +110,9 @@ class LithologyDictionary:
         for c in self._concepts:
             if c.id.lower() == q or c.id.lower().replace("_", " ") == q:
                 results.insert(0, c)  # exact ID match first
-            elif (lang in ("en", "both") and q in c.label_en.lower()) or \
-                 (lang in ("pt", "both") and c.label_pt and q in c.label_pt.lower()):
+            elif (lang in ("en", "both") and q in c.label_en.lower()) or (
+                lang in ("pt", "both") and c.label_pt and q in c.label_pt.lower()
+            ):
                 results.append(c)
         return results
 

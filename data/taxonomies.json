@@ -1,8 +1,8 @@
 {
   "meta": {
-    "version": "1.0.0",
-    "generated": "2026-05-03T17:05:27.656Z",
-    "count": 12
+    "version": "1.1.0",
+    "generated": "2026-05-03T17:12:14.049Z",
+    "count": 16
   },
   "taxonomies": {
     "tipo_litologia": {
@@ -265,6 +265,123 @@
         "fracture",
         "overburden"
       ]
+    },
+    "operational_event_class_3w": {
+      "label": "Classe de Evento Operacional (3W)",
+      "label_en": "Operational Event Class (3W)",
+      "description": "Enumeração canônica das 10 classes de evento do dataset Petrobras 3W v2.0.0. Rótulos transientes = base + 100.",
+      "rag_alert": "Não confundir com ROA (Registro de Ocorrência Anormal, documento ANP). Os rótulos 3W são para modelos de ML, não documentos regulatórios.",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "0": {
+          "label": "Normal",
+          "transient": false,
+          "transient_label": null
+        },
+        "1": {
+          "label": "Abrupt Increase of BSW",
+          "transient": true,
+          "transient_label": 101
+        },
+        "2": {
+          "label": "Spurious Closure of DHSV",
+          "transient": true,
+          "transient_label": 102,
+          "window": 180,
+          "step": 15
+        },
+        "3": {
+          "label": "Severe Slugging",
+          "transient": false,
+          "transient_label": null
+        },
+        "4": {
+          "label": "Flow Instability",
+          "transient": false,
+          "transient_label": null
+        },
+        "5": {
+          "label": "Rapid Productivity Loss",
+          "transient": true,
+          "transient_label": 105
+        },
+        "6": {
+          "label": "Quick Restriction in PCK",
+          "transient": true,
+          "transient_label": 106
+        },
+        "7": {
+          "label": "Scaling in PCK",
+          "transient": true,
+          "transient_label": 107
+        },
+        "8": {
+          "label": "Hydrate in Production Line",
+          "transient": true,
+          "transient_label": 108
+        },
+        "9": {
+          "label": "Hydrate in Service Line",
+          "transient": true,
+          "transient_label": 109
+        }
+      }
+    },
+    "instance_origin_3w": {
+      "label": "Origem da Instância (3W)",
+      "label_en": "Instance Origin (3W)",
+      "description": "Tipo de origem das instâncias do dataset 3W: REAL (poços reais, prefixo WELL_), SIMULATED (simuladas), DRAWN (manuais).",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "real": {
+          "prefix": "WELL_",
+          "description": "Série temporal de poço real Petrobras"
+        },
+        "simulated": {
+          "prefix": "SIMULATED_",
+          "description": "Série temporal simulada com modelo de poço"
+        },
+        "drawn": {
+          "prefix": "DRAWN_",
+          "description": "Série temporal construída manualmente"
+        }
+      }
+    },
+    "event_phase_3w": {
+      "label": "Fase de Rótulo (3W)",
+      "label_en": "Event Label Phase (3W)",
+      "description": "Indicador de fase transiente/estacionário. TRANSIENT_OFFSET=100: rótulo transiente = rótulo base + 100. Classes 3 e 4 não possuem transiente.",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "steady": {
+          "offset": 0,
+          "description": "Estado estacionário ou normal"
+        },
+        "transient": {
+          "offset": 100,
+          "description": "Fase inicial do evento (onset), antes de atingir estado estacionário anormal"
+        }
+      }
+    },
+    "valve_state_3w": {
+      "label": "Estado de Válvula (3W)",
+      "label_en": "Valve State (3W)",
+      "description": "Valores canônicos para variáveis ESTADO-* do dataset 3W. Valores fora de {0, 0.5, 1} são inválidos.",
+      "source": "Petrobras 3W v2.0.0",
+      "values": {
+        "0": {
+          "label": "Fechada",
+          "label_en": "Closed"
+        },
+        "1": {
+          "label": "Aberta",
+          "label_en": "Open"
+        },
+        "0.5": {
+          "label": "Parcial",
+          "label_en": "Partial"
+        }
+      }
     }
   }
 }

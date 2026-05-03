@@ -152,6 +152,45 @@ SuggestedFix: "Desambiguar: 'Reserva' no contexto SPE-PRMS refere-se
 
 ---
 
+## UC-07: Deteccao semantica de hidrato — multi-hop (sensor → evento → equipamento)
+
+**Contexto**: Um engenheiro de flow assurance precisa identificar quais sensores e equipamentos sao monitorados quando ha suspeita de formacao de hidrato na linha de producao de um poco offshore com arvore de natal submersa (ANM).
+
+**Pergunta**:
+> "Quais sensores do dataset 3W indicam hidrato em linha de producao, e quais equipamentos estao envolvidos?"
+
+**Caminho no DAG**: Router classifica como `multi_hop` -> GraphQuery (Cypher multi-hop) -> RAGRetrieve -> Synthesizer
+
+**Cypher executado**:
+
+```cypher
+MATCH (e:OperationalEvent)-[:DETECTED_VIA]->(s:Instrument)
+WHERE e.id = 'event_hydrate_production'
+RETURN e.label AS evento, collect(s.label) AS sensores
+
+UNION
+
+MATCH (e:OperationalEvent)-[:INVOLVES_EQUIPMENT]->(eq)
+WHERE e.id = 'event_hydrate_production'
+RETURN e.label AS evento, collect(eq.label) AS equipamentos
+```
+
+**Resultado do grafo** (3 saltos: poco → sensor → evento → equipamento):
+
+```
+event_hydrate_production
+  detected_via → P-TPT, T-TPT, P-MON-CKP, QGL
+  involves_equipment → PCK (pck), SDV-P (sdv_p)
+  occurs_in → poco
+  part_of_assembly → ANM
+```
+
+**Chunks RAG recuperados**: trecho do corpus com `type: "threew_event"`, id `threew_event_hydrate_production`, descricao bilingual PT/EN sobre assinatura de pressao e temperatura do hidrato.
+
+**Resposta esperada do agente**: O agente retorna que `event_hydrate_production` (classe 8, transiente 108) e detectado principalmente por queda de pressao em P-TPT e reducao de Q-GL, com elevacao de T-TPT. Os equipamentos envolvidos sao PCK (choke de producao, onde o hidrato se deposita primeiro) e SDV-P (valvula de shutoff de producao). Recomenda monitorar a razao P-MON-CKP/P-JUS-CKP (diferencial de pressao no choke) como indicador precoce. Nota que o evento nao tem variante steady-only (threew_transient=true, label base=8, transiente=108).
+
+---
+
 ## Executando os casos de uso
 
 ```bash
