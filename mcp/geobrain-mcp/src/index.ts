@@ -27,6 +27,7 @@ import * as cypherQuery from "./tools/cypher_query.js";
 import * as searchRag from "./tools/search_rag.js";
 import * as listLayers from "./tools/list_layers.js";
 import * as crosswalkLookup from "./tools/crosswalk_lookup.js";
+import * as lookupLithology from "./tools/lookup_lithology.js";
 
 // Load all static data into memory before registering handlers.
 loadAll();
@@ -118,6 +119,15 @@ const tools = [
       "Example: what is OSDU's term for GeoCore's Bacia?",
     inputSchema: zodToJsonSchema(crosswalkLookup.schema),
   },
+  {
+    name: "lookup_lithology",
+    description:
+      "Search the CGI Simple Lithology vocabulary (437 concepts, IUGS/CGI 2021) by " +
+      "label in English or Portuguese, parent class, or concept id. Returns matching " +
+      "concepts with definitions, hierarchy parents, and GeoSciML URIs. " +
+      "Examples: 'limestone', 'calcário', 'sandstone', 'igneous_material'.",
+    inputSchema: zodToJsonSchema(lookupLithology.schema),
+  },
 ];
 
 // ---------- handlers ----------
@@ -159,6 +169,9 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         break;
       case "crosswalk_lookup":
         text = crosswalkLookup.execute(crosswalkLookup.schema.parse(args));
+        break;
+      case "lookup_lithology":
+        text = lookupLithology.execute(lookupLithology.schema.parse(args));
         break;
       default:
         return {
