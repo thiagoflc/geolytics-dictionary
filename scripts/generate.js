@@ -846,7 +846,7 @@ const EDGES = [
  * ───────────────────────────────────────────────────────────── */
 
 const NOW = new Date().toISOString();
-const VERSION = '1.0.0';
+const VERSION = '1.1.0';
 
 function gloss(id) { return GLOSSARIO.find((t) => t.id === id); }
 

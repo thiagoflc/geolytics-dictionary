@@ -20,16 +20,16 @@ graph TD
         L3["Petro KGraph (L3)"]
         L4["OSDU (L4)"]
         L5["ANP / SIGEP (L5)"]
-        L6["Geolytics / Petrobras (L6)"]
+        L6["Geolytics / Petrobras (L6)<br/>+ Petrobras 3W v2.0.0 (CC-BY 4.0)"]
         L7["GSO / Loop3D (L7)"]
     end
 
-    Fontes --> KG["Knowledge Graph<br/>75 nos + 80 relacoes"]
+    Fontes --> KG["Knowledge Graph<br/>221 nos + 370 relacoes"]
 
     KG --> API["API REST estatica<br/>api/v1/"]
-    KG --> RAG["RAG Corpus<br/>1.245 chunks"]
+    KG --> RAG["RAG Corpus<br/>2.212 chunks"]
     KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
-    KG --> TTL["RDF / SHACL<br/>30 NodeShapes"]
+    KG --> TTL["RDF / SHACL<br/>48 NodeShapes"]
 
     API --> MCP["MCP Server<br/>9 ferramentas AI"]
     RAG --> AGENT["LangGraph Agent<br/>Router-Decomposer-GraphQuery-RAG-Validator-Synthesizer"]
@@ -48,23 +48,24 @@ A arquitetura de camadas, o pipeline ETL e o fluxo de perguntas pelo agente esta
 | Caminho | Conteudo |
 |---|---|
 | `data/glossary.json` | 23 termos ANP enriquecidos |
-| `data/entity-graph.json` | Grafo de 75 entidades + 80 relacoes |
+| `data/entity-graph.json` | Grafo de 221 entidades + 370 relacoes |
 | `data/ontopetro.json` | Ontologia formal — 6 modulos |
-| `data/taxonomies.json` | 13 enumeracoes canonicas (litologia, SPE-PRMS, AVO...) |
+| `data/taxonomies.json` | 17 enumeracoes canonicas (litologia, SPE-PRMS, AVO... + 4 enums 3W) |
 | `data/full.json` | Merge de todos os modulos |
 | `data/geomechanics*.json` | Modulo MEM P2.7 + fraturas |
 | `data/seismic-*.json` | Modulo sismico P2.8 — aquisicao, processamento, inversao |
-| `data/witsml-rdf-crosswalk.json` | 25 classes WITSML 2.0 mapeadas para `geo:` |
-| `data/prodml-rdf-crosswalk.json` | 15 classes PRODML 2.x mapeadas para `geo:` |
-| `data/geolytics-shapes.ttl` | 30 NodeShapes SHACL |
-| `data/sweet-alignment.json` | 66 alinhamentos SKOS com SWEET (NASA/ESIPFed) |
+| `data/sources/threew/` | Snapshot CC-BY 4.0 do dataset Petrobras 3W v2.0.0 (proveniencia) |
+| `data/witsml-rdf-crosswalk.json` | 30 classes WITSML 2.0 mapeadas para `geo:` |
+| `data/prodml-rdf-crosswalk.json` | 19 classes PRODML 2.x mapeadas para `geo:` |
+| `data/geolytics-shapes.ttl` | 48 NodeShapes SHACL |
+| `data/sweet-alignment.json` | 83 alinhamentos SKOS com SWEET (NASA/ESIPFed) |
 | `data/gso-*.json` | 213 classes GSO/Loop3D (Layer 7) |
 | `data/acronyms.json` | 1.102 siglas O&G PT/EN categorizadas |
 | `data/systems.json` | 8 sistemas corporativos Petrobras |
 | `api/v1/` | Endpoints publicos (GitHub Pages) |
-| `ai/rag-corpus.jsonl` | 1.245 chunks para embedding |
-| `ai/system-prompt-ptbr.md` | System prompt PT-BR (~800 tokens) |
-| `ai/text2cypher-fewshot.jsonl` | 45 exemplos few-shot Text2Cypher |
+| `ai/rag-corpus.jsonl` | 2.212 chunks para embedding |
+| `ai/system-prompt-ptbr.md` | System prompt PT-BR (~900 tokens) |
+| `ai/text2cypher-fewshot.jsonl` | 50 exemplos few-shot Text2Cypher |
 | `scripts/generate.js` | Pipeline ETL: regenera `data/`, `api/`, `ai/` |
 | `scripts/semantic-validator.js` | Validador semantico deterministico |
 | `mcp/geolytics-mcp/` | MCP Server TypeScript (9 ferramentas) |
