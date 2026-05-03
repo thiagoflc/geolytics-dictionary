@@ -58,8 +58,10 @@ jobs:
       - uses: astral-sh/ruff-action@v3
         with:
           src: "python"
+          version: "0.7.4"  # keep in sync with .pre-commit-config.yaml
           args: "check --config python/pyproject.toml"
       - uses: astral-sh/ruff-action@v3
         with:
           src: "python"
+          version: "0.7.4"
           args: "format --check --config python/pyproject.toml"
