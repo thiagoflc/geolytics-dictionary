@@ -1494,6 +1494,115 @@ function buildSearchIndex() {
     text: 'OSDU kind mapping with master/reference/wpc tripartition, Well/Wellbore disambiguation and ANP→OSDU lineage.',
     tokens: Array.from(new Set(tokenize('OSDU kind mapping master-data reference-data work-product-component Well Wellbore Field Basin tripartição ANP'))),
   });
+
+  // CGI Simple Lithology
+  const cgiLithPath = path.join(ROOT, 'data', 'cgi-lithology.json');
+  if (fs.existsSync(cgiLithPath)) {
+    const lithData = JSON.parse(fs.readFileSync(cgiLithPath, 'utf8'));
+    const concepts = lithData.concepts || (Array.isArray(lithData) ? lithData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-lith:${c.id}`,
+        type: 'lithology',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition_en].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition_en].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Geologic Time
+  const cgiTimePath = path.join(ROOT, 'data', 'cgi-geologic-time.json');
+  if (fs.existsSync(cgiTimePath)) {
+    const timeData = JSON.parse(fs.readFileSync(cgiTimePath, 'utf8'));
+    const units = timeData.units || (Array.isArray(timeData) ? timeData.filter(x => x.id) : []);
+    for (const u of units) {
+      items.push({
+        id: `cgi-time:${u.id}`,
+        type: 'geologic_time',
+        title: u.label_pt || u.label_en || u.id,
+        title_en: u.label_en,
+        text: [u.label_pt, u.label_en, u.rank, u.brazil_notes].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([u.label_pt, u.label_en, u.id, u.rank, u.brazil_notes].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Fault Type
+  const cgiFaultPath = path.join(ROOT, 'data', 'cgi-fault-type.json');
+  if (fs.existsSync(cgiFaultPath)) {
+    const faultData = JSON.parse(fs.readFileSync(cgiFaultPath, 'utf8'));
+    const concepts = faultData.concepts || (Array.isArray(faultData) ? faultData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-fault:${c.id}`,
+        type: 'fault_type',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Deformation Style
+  const cgiDeformPath = path.join(ROOT, 'data', 'cgi-deformation-style.json');
+  if (fs.existsSync(cgiDeformPath)) {
+    const deformData = JSON.parse(fs.readFileSync(cgiDeformPath, 'utf8'));
+    const concepts = deformData.concepts || (Array.isArray(deformData) ? deformData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-deform:${c.id}`,
+        type: 'deformation_style',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Contact Type
+  const cgiContactPath = path.join(ROOT, 'data', 'cgi-contact-type.json');
+  if (fs.existsSync(cgiContactPath)) {
+    const contactData = JSON.parse(fs.readFileSync(cgiContactPath, 'utf8'));
+    const concepts = contactData.concepts || (Array.isArray(contactData) ? contactData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-contact:${c.id}`,
+        type: 'contact_type',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
+  // CGI Stratigraphic Rank
+  const cgiStratPath = path.join(ROOT, 'data', 'cgi-stratigraphic-rank.json');
+  if (fs.existsSync(cgiStratPath)) {
+    const stratData = JSON.parse(fs.readFileSync(cgiStratPath, 'utf8'));
+    const concepts = stratData.concepts || (Array.isArray(stratData) ? stratData.filter(x => x.id) : []);
+    for (const c of concepts) {
+      items.push({
+        id: `cgi-strat:${c.id}`,
+        type: 'stratigraphic_rank',
+        title: c.label_pt || c.label_en || c.id,
+        title_en: c.label_en,
+        text: [c.label_pt, c.label_en, c.definition].filter(Boolean).join('. '),
+        tokens: Array.from(new Set(tokenize([c.label_pt, c.label_en, c.id, c.definition].join(' ')))),
+        layer: 'layer1b',
+      });
+    }
+  }
+
   return { meta: { version: VERSION, generated: NOW, count: items.length }, items };
 }
 
