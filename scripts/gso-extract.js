@@ -20,7 +20,17 @@ const DATA_DIR = path.resolve(__dirname, "..", "data");
 const DEFAULT_SRC =
   "https://raw.githubusercontent.com/Loop3D/GKM/master/Loop3D-GSO/Modules/GSO-Geologic_Structure_Fault.ttl";
 
-/* All GSO modules to extract when called as a pipeline step */
+/**
+ * Default list of GSO (Geoscience Ontology) Turtle modules to extract when
+ * `extractGSO()` is called without arguments. Each entry specifies the remote
+ * Turtle source URL and the local output filename under `data/`. Covers five
+ * structural geology modules: faults, contacts, folds, foliations, and
+ * lineations.
+ *
+ * @type {Array<{src: string, out: string}>}
+ * @example
+ * // GSO_MODULES[0].out → 'gso-faults.json'
+ */
 const GSO_MODULES = [
   {
     src: "https://raw.githubusercontent.com/Loop3D/GKM/master/Loop3D-GSO/Modules/GSO-Geologic_Structure_Fault.ttl",

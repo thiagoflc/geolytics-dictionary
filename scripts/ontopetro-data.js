@@ -15,6 +15,15 @@
  * SPEC 15 — ontopetro.json
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Twenty core classes of the OntoPetro domain ontology (Spec 15), covering
+ * geological objects (basins, formations, reservoirs, traps), operational
+ * entities (wells, fields), exploration objects (plays, prospects), and
+ * economic categories (resources, reserves). Each entry maps to an
+ * `entity_graph_id` for cross-referencing with the entity-graph.
+ *
+ * @type {Array<{id: string, name: string, name_en: string, superclass: string, description: string, domain: string, sources: string[], entity_graph_id: string|null}>}
+ */
 export const ONTOPETRO_CLASSES = [
   { id: 'C001', name: 'BaciaSedimentar',     name_en: 'Sedimentary Basin',  superclass: 'GeologicalObject',     description: 'Depressão crustal onde sedimentos se acumulam ao longo do tempo geológico',                              domain: 'Geologia Estrutural',   sources: ['GeoCore'],          entity_graph_id: 'bacia-sedimentar' },
   { id: 'C002', name: 'FormacaoGeologica',   name_en: 'Geological Formation',superclass: 'GeologicalObject',    description: 'Unidade litoestratigráfica nomeada e mapeável',                                                          domain: 'Estratigrafia',         sources: ['PPDM','GeoCore'],   entity_graph_id: 'formacao' },
@@ -38,6 +47,15 @@ export const ONTOPETRO_CLASSES = [
   { id: 'C020', name: 'Reserva',             name_en: 'Reserve',             superclass: 'EconomicObject',       description: 'Volume de HC tecnicamente recuperável e economicamente viável',                                          domain: 'Reservas/Recursos',     sources: ['ANP','SPE-PRMS'],   entity_graph_id: 'reserva' },
 ];
 
+/**
+ * Twenty OWL datatype properties for OntoPetro classes (Spec 15), covering
+ * petrophysical (porosity, permeability, oil saturation), geospatial
+ * (latitude, longitude, datum), geochemical (TOC, API gravity), and well
+ * descriptor (well name, well type) attributes. High-priority properties are
+ * flagged for RAG corpus inclusion.
+ *
+ * @type {Array<{id: string, name: string, name_en: string, type: string, domain_class: string, range: string, unit: string|null, description: string, rag_priority: string}>}
+ */
 export const ONTOPETRO_PROPERTIES = [
   { id: 'P001', name: 'nomeFormacao',              name_en: 'formationName',            type: 'DatatypeProperty', domain_class: 'FormacaoGeologica',   range: 'xsd:string', unit: null,           description: 'Nome oficial da formação',                              rag_priority: 'medium' },
   { id: 'P002', name: 'idadeCronoestratigrafica',  name_en: 'chronostratigraphicAge',   type: 'DatatypeProperty', domain_class: 'FormacaoGeologica',   range: 'xsd:string', unit: 'Ma',           description: 'Período geológico (Cretáceo, Aptiano, Albiano…)',        rag_priority: 'medium' },
@@ -61,6 +79,15 @@ export const ONTOPETRO_PROPERTIES = [
   { id: 'P020', name: 'tipoPoco',                  name_en: 'wellType',                 type: 'DatatypeProperty', domain_class: 'Poco',                range: 'xsd:string', unit: null,           description: 'Exploratório / Avaliação / Desenvolvimento / Injetor',  rag_priority: 'medium' },
 ];
 
+/**
+ * Twenty OWL object-property relations between OntoPetro classes (Spec 15),
+ * encoding the petroleum-system topology: formation–basin containment,
+ * reservoir–cap-rock sealing, trap–accumulation containment, well–formation
+ * intersection, and regulatory (block–ANP) relationships. Each entry includes
+ * inverse property and cardinality.
+ *
+ * @type {Array<{id: string, name: string, name_en: string, domain: string, range: string, inverse: string|null, cardinality: string, description: string}>}
+ */
 export const ONTOPETRO_RELATIONS = [
   { id: 'R001', name: 'pertenceA',         name_en: 'belongsTo',          domain: 'FormacaoGeologica',   range: 'BaciaSedimentar',       inverse: 'contemFormacao',     cardinality: 'N:1', description: 'Formação pertence a uma bacia sedimentar' },
   { id: 'R002', name: 'compostoPor',       name_en: 'composedOf',         domain: 'BaciaSedimentar',     range: 'FormacaoGeologica',     inverse: 'pertenceA',          cardinality: '1:N', description: 'Bacia é composta por múltiplas formações' },
@@ -84,6 +111,14 @@ export const ONTOPETRO_RELATIONS = [
   { id: 'R020', name: 'reguladoPor',       name_en: 'regulatedBy',        domain: 'Bloco',               range: 'ANP',                   inverse: 'regula',             cardinality: 'N:1', description: 'Bloco regulado pela ANP' },
 ];
 
+/**
+ * Ten canonical reference instances for OntoPetro classes (Spec 15), sourced
+ * from ANP, Petrobras, and GDGEO. These are real named entities (basins, fields,
+ * formations, petroleum systems) used to ground RAG responses and validate
+ * ontology population.
+ *
+ * @type {Array<{id: string, class: string, name: string, attributes: Object, source: string}>}
+ */
 export const ONTOPETRO_INSTANCES = [
   { id: 'I001', class: 'BaciaSedimentar',    name: 'Bacia de Santos',          attributes: { area_km2: 352000 },                                            source: 'ANP' },
   { id: 'I002', class: 'BaciaSedimentar',    name: 'Bacia de Campos',          attributes: { area_km2: 115000 },                                            source: 'ANP' },
@@ -101,6 +136,20 @@ export const ONTOPETRO_INSTANCES = [
  * SPEC 16 — taxonomies.json
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Canonical controlled vocabularies (Spec 16) for the petroleum domain,
+ * covering lithology types, trap types, ANP well type prefixes, SPE-PRMS
+ * resource categories (1P/2P/3P), reservoir fluid types, kerogen types,
+ * hydrocarbon generation windows (Ro%), data quality statuses,
+ * confidentiality levels, rock failure modes, Anderson stress regimes, and
+ * mud weight window zones. Some entries carry `rag_alert` flags to help
+ * disambiguation in NLP pipelines.
+ *
+ * @type {Object.<string, {label: string, label_en?: string, description?: string, rag_alert?: string, values: Object|string[]}>}
+ * @example
+ * // TAXONOMIES['tipo_poco'].values.exploratorio.examples
+ * // → ['1-RJS-702-RJ', '1-BRSA-944-RJS']
+ */
 export const TAXONOMIES = {
   tipo_litologia: {
     label: 'Tipo de Litologia', label_en: 'Lithology Type',
@@ -203,6 +252,21 @@ export const TAXONOMIES = {
  * SPEC 17 — modules-extended.json (M7-M10)
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Internal Petrobras/Geolytics analytical modules M7–M10 and M-WellIntegrity
+ * (Spec 17). Each module defines domain classes, key measured properties with
+ * units, and cross-module connections. Only conceptual/public definitions are
+ * included — no Sigilo=Interno operational data.
+ *
+ * Modules:
+ * - M7_geochem: Organic geochemistry (Rock-Eval, TOC, Ro%, GC-MS, biomarkers)
+ * - M8_rock: Petrophysics and lithology (porosity, permeability, Archie, RockFinder)
+ * - M9_geomec: Reservoir geomechanics (in-situ stress, mud window, fractures, TrapTester)
+ * - M10_fluidos: Fluids and PVT (SARA, GC-FID, API, RGO, fluid classification)
+ * - M-WellIntegrity: Well construction components from OGC GWML2
+ *
+ * @type {Object.<string, {label: string, label_en: string, system_origin: string, classes: Array, key_properties: Array}>}
+ */
 export const MODULES_EXTENDED = {
   M7_geochem: {
     label: 'Geoquímica Orgânica e Inorgânica', label_en: 'Organic & Inorganic Geochemistry',
@@ -373,6 +437,17 @@ export const MODULES_EXTENDED = {
  * SPEC 18 — pvt-dictionary.json (do CSV real do SIRR)
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Schema and real-world completeness statistics for the 35 PVT fields in the
+ * SIRR (Sistema Integrado de Reservatórios) corporate Petrobras database
+ * (Spec 18). Completeness percentages reflect actual data availability and are
+ * used by RAG agents to set expectations about field presence. Fields with
+ * <10% completeness represent rare specialist analyses, not absent definitions.
+ *
+ * @type {Array<{name: string, type: string, completeness_pct: number, unit?: string, description: string}>}
+ * @example
+ * // PVT_FIELDS.find(f => f.name === 'Grau API Tanque').completeness_pct → 63.2
+ */
 export const PVT_FIELDS = [
   { name: 'Poço',                          type: 'text',  completeness_pct: 100.0, description: 'Identificador do poço ANP' },
   { name: 'Campo',                         type: 'text',  completeness_pct: 92.9,  description: 'Nome do campo de produção' },
@@ -414,6 +489,16 @@ export const PVT_FIELDS = [
  * SPEC 19 — systems.json
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Eight Petrobras corporate systems that are provenance sources for Geolytics
+ * data (Spec 19). These are metadata identifiers, not live endpoints — RAG
+ * agents should treat them as data-origin labels, not connectable services.
+ * Covers GEOQWIN (geochemistry), SIRR (PVT), LIMS (samples), AIDA (fluid
+ * classification), GDA (petrophysics/geomechanics 1D), GEOMECBR, GERESIM,
+ * and TrapTester.
+ *
+ * @type {Array<{id: string, name: string, type: string, domain: string, description: string, data_objects: string[]}>}
+ */
 export const SYSTEMS = [
   { id: 'GEOQWIN',   name: 'GEOQWIN',                                  type: 'Banco de dados analítico', domain: 'M7 Geoquímica + M10 Fluidos',
     description: 'Banco de dados da Geoquímica Petrobras. Cromatografia (GC-FID, GC-MS), Rock-Eval, SARA, biomarcadores, isótopos e controle de amostras/oleoteca.',
@@ -445,6 +530,16 @@ export const SYSTEMS = [
  * SPEC 20 — regis-ner-schema.json
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Mapping from PetroGold NER entity types (Spec 20) to Geolytics entity-graph
+ * node IDs, with disambiguation notes critical for Portuguese-language O&G NLP.
+ * Covers 10 PetroGold types: ROC, FOR, BAC, CAM, POC, FLU, PRP, IDA, INT, ORG.
+ * Each entry includes real-world examples and common confusion points.
+ *
+ * @type {Array<{petrogold_type: string, petrogold_label: string, geolytics_nodes: string[], disambiguation_note: string, example_entities: string[]}>}
+ * @example
+ * // REGIS_NER_MAPPINGS.find(m => m.petrogold_type === 'POC').geolytics_nodes → ['poco']
+ */
 export const REGIS_NER_MAPPINGS = [
   { petrogold_type: 'ROC', petrogold_label: 'Rocha',
     geolytics_nodes: ['litologia','facies-sedimentar','rocha-geradora','rocha-capacitante','reservatorio'],
@@ -488,6 +583,13 @@ export const REGIS_NER_MAPPINGS = [
     example_entities: ['Petrobras','Shell','TotalEnergies','ANP','PPSA'] },
 ];
 
+/**
+ * Relation types used in the PetroRE (PetroGold relation extraction) corpus,
+ * representing directed semantic relationships between NER entities in
+ * Portuguese petroleum texts.
+ *
+ * @type {string[]}
+ */
 export const REGIS_RELATION_TYPES = [
   'has_age', 'deposited_in', 'found_in', 'prod_from',
   'correlates_with', 'identified_by', 'has_property',
@@ -497,6 +599,14 @@ export const REGIS_RELATION_TYPES = [
  * Layer 6 — Geolytics / Petrobras Internal
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Definition of the Geolytics/Petrobras internal ontology layer (Layer 6),
+ * encompassing modules M7–M10 and linking to corporate systems. Only
+ * conceptual definitions are published here; Sigilo=Interno operational data
+ * is never included.
+ *
+ * @type {{id: string, name: string, maintainer: string, type: string, namespace: string, prefix: string, modules: string[], systems: string[], description: string, status: string, publication_policy: string, geolytics_coverage: string}}
+ */
 export const LAYER6_DEFINITION = {
   id: 'layer6',
   name: 'Geolytics / Petrobras Internal',
@@ -518,6 +628,15 @@ export const LAYER6_DEFINITION = {
  * (curado para preservar legibilidade do grafo)
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Entity-graph node extensions from OntoPetro and analytical modules M7–M10.
+ * These nodes augment the base ENTITY_NODES in generate.js with petroleum
+ * system concepts (trap, source rock, petroleum system), analytical objects
+ * (thermal maturity, biomarkers, petrophysical model), and geomechanics
+ * (stress field, mud window). Aligned to ONTOPETRO_ALIGNMENT.
+ *
+ * @type {Array<{id: string, label: string, label_en: string, type: string, definition: string, fonte: string}>}
+ */
 export const ONTOPETRO_NODES = [
   /* operational/geological extensions */
   { id: 'rocha-geradora',     label: 'Rocha Geradora',     label_en: 'Source Rock',     type: 'geological',
@@ -620,6 +739,15 @@ export const ONTOPETRO_NODES = [
     fonte: 'GEOQWIN' },
 ];
 
+/**
+ * Directed edges connecting ONTOPETRO_NODES to each other and to existing
+ * entity-graph nodes. Encodes the petroleum-system topology (source rock →
+ * petroleum system → basin), analytical workflows (biomarker → oil-source
+ * correlation), geomechanics (stress field → mud window → well), and
+ * resources/reserves lifecycle (accumulation → field → reserve).
+ *
+ * @type {Array<{source: string, target: string, relation: string, relation_label: string, style: string}>}
+ */
 export const ONTOPETRO_EDGES = [
   /* Sistema petrolífero — relações fundamentais */
   { source: 'rocha-geradora',     target: 'materia-organica',   relation: 'contains',         relation_label: 'contém',                  style: 'solid' },
@@ -665,7 +793,14 @@ export const ONTOPETRO_EDGES = [
   { source: 'operador',           target: 'recurso',            relation: 'reports',          relation_label: 'reporta',                 style: 'solid' },
 ];
 
-/* Alinhamento ontológico para os novos nós (subset) */
+/**
+ * Ontology alignment for ONTOPETRO_NODES, mapping each node ID to its
+ * Petro KGraph fragment (`kg`), OSDU kind (`osdu`), and semantic layer
+ * coverage. Merged with OSDU_ALIGNMENT_ADDITIONS and OSDU_EXTRA_ALIGNMENT
+ * in generate.js before use.
+ *
+ * @type {Object.<string, {kg: string|null, osdu: string|null, layers: string[]}>}
+ */
 export const ONTOPETRO_ALIGNMENT = {
   'rocha-geradora':           { kg: '#SourceRock',        osdu: null, layers: ['layer1','layer1b','layer2','layer3','layer6'] },
   'rocha-capacitante':        { kg: '#CapRock',           osdu: null, layers: ['layer1','layer1b','layer2','layer3'] },
@@ -703,6 +838,16 @@ export const ONTOPETRO_ALIGNMENT = {
  * Ambiguity alerts (chunks RAG críticos)
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * Critical RAG disambiguation chunks for the most common terminology
+ * confusions in Portuguese-language petroleum NLP: RGO/GOR synonymy, mud
+ * window vs. generation window, static vs. dynamic UCS, porosity method
+ * differences, SARA fractions, polysemous terms (reserva, campo), and the
+ * OSDU Well/Wellbore distinction. Each alert carries the conflicting term
+ * pair(s) and a full explanatory text optimised for embedding and retrieval.
+ *
+ * @type {Array<{id: string, terms: string[], text: string}>}
+ */
 export const AMBIGUITY_ALERTS = [
   { id: 'ambig_rgo_gor',                terms: ['RGO','GOR'],
     text: 'RGO (Razão Gás-Óleo, em PT-BR) ≡ GOR (Gas-Oil Ratio, em EN). São SINÔNIMOS, não conceitos diferentes. Unidade típica: scf/stb (EN) ou m³/m³ (PT/SI). Nas bases corporativas Petrobras (SIRR), o campo é "RGO Tanque" com 61.2% de completude. Use os dois termos como equivalentes em qualquer pipeline NLP.' },
@@ -740,6 +885,15 @@ export const AMBIGUITY_ALERTS = [
  *   O ambiguity_alert OSDU já está em AMBIGUITY_ALERTS acima.
  * ───────────────────────────────────────────────────────────── */
 
+/**
+ * OSDU Layer-4 entity-graph nodes introduced in increment v2: Wellbore,
+ * Formation Top (WellboreMarker), Wellbore Trajectory, Well Completion, and
+ * Unit of Measure. Each node carries `osdu_kind_override` and
+ * `layers_override` that supersede the ONTOPETRO_ALIGNMENT lookup in
+ * `buildEntityGraph()`.
+ *
+ * @type {Array<{id: string, label: string, label_en: string, type: string, definition: string, fonte: string, osdu_kind_override: string, layers_override: string[], synonyms_pt: string[], synonyms_en: string[], examples: string[], size: number}>}
+ */
 export const OSDU_NODES = [
   { id: 'wellbore', label: 'Trecho Perfurado', label_en: 'Wellbore', type: 'operational',
     definition: "Trecho físico perfurado de um poço. Um poço ANP (registro superficial + legal) pode ter múltiplos wellbores em caso de sidetrack ou completação multilateral. Na prática, 1 poço ANP sem sidetrack = 1 wellbore. OSDU separa formalmente Well (registro de superfície) de Wellbore (trecho perfurado físico). O número ANP POCO_NUM corresponde ao Well.WellID no OSDU; o wellbore é gerado automaticamente.",
@@ -797,6 +951,14 @@ export const OSDU_NODES = [
     size: 14 },
 ];
 
+/**
+ * Directed edges connecting OSDU Layer-4 nodes to existing entity-graph nodes,
+ * encoding well-wellbore-completion hierarchy, trajectory and marker links, and
+ * unit-of-measure qualification chains for fluid samples, PVT analyses, and the
+ * ANP i-Engine reporting system.
+ *
+ * @type {Array<{source: string, target: string, relation: string, relation_label: string, style: string}>}
+ */
 export const OSDU_EDGES = [
   { source: 'poco',         target: 'wellbore',         relation: 'has_wellbore',     relation_label: 'tem wellbore',     style: 'solid' },
   { source: 'wellbore',     target: 'poco',             relation: 'belongs_to',       relation_label: 'pertence a',       style: 'solid' },
@@ -817,7 +979,13 @@ export const OSDU_EDGES = [
   { source: 'reservatorio',   target: 'unidade-medida', relation: 'characterized_with', relation_label: 'caracterizado em', style: 'dashed' },
 ];
 
-/* Alinhamento OSDU para os nós novos + alguns existentes que ainda têm null */
+/**
+ * Additional ontology alignment entries that patch or extend ONTOPETRO_ALIGNMENT
+ * for OSDU Layer-4 nodes and previously unmapped analytical nodes. Merged at
+ * runtime in `buildEntityGraph()` with the higher-specificity `OSDU_EXTRA_ALIGNMENT`.
+ *
+ * @type {Object.<string, {kg: string|null, osdu: string|null, layers: string[]}>}
+ */
 export const OSDU_ALIGNMENT_ADDITIONS = {
   'wellbore':         { kg: null, osdu: 'opendes:osdu:master-data--Wellbore:1.0.0',                    layers: ['layer1b','layer2','layer3','layer4'] },
   'topo-formacional': { kg: null, osdu: 'opendes:osdu:work-product-component--WellboreMarker:1.0.0',   layers: ['layer1b','layer2','layer3','layer4'] },
@@ -830,8 +998,14 @@ export const OSDU_ALIGNMENT_ADDITIONS = {
   'perfil-poco':      { kg: '#WellLog', osdu: 'opendes:osdu:work-product-component--WellLog:1.0.0',    layers: ['layer1b','layer3','layer4','layer6'] },
 };
 
-/* RAG chunks específicos do increment OSDU v2 (excluindo o ambiguity_alert
-   já incluído em AMBIGUITY_ALERTS acima) */
+/**
+ * Pre-built RAG chunks specific to OSDU Layer-4 concepts (increment v2).
+ * Covers the three-way OSDU data tripartition (Master, Reference, WPC),
+ * and the ANP→OSDU field-level mapping for wells. These are ingested directly
+ * into the RAG corpus by `buildRagCorpus()` without further transformation.
+ *
+ * @type {Array<{id: string, type: string, text: string, metadata: Object}>}
+ */
 export const OSDU_RAG_CHUNKS = [
   {
     id: 'osdu_tripartition_master',
