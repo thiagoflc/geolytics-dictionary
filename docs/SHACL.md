@@ -27,7 +27,7 @@ O dicionario Geolytics serializa seu grafo de entidades em `data/geolytics.ttl` 
 
 | Arquivo | Descricao |
 |---|---|
-| `data/geolytics-shapes.ttl` | 30 NodeShapes SHACL |
+| `data/geolytics-shapes.ttl` | 48 NodeShapes SHACL |
 | `data/geolytics-vocab.ttl` | Vocabulario OWL minimo de apoio (classes + propriedades) |
 | `scripts/validate-shacl.py` | Validador Python (pyshacl) — recomendado |
 | `scripts/validate-shacl.js` | Wrapper Node.js (rdf-validate-shacl ou delega ao Python) |
@@ -122,6 +122,10 @@ O script retorna **codigo de saida 0** se conforme, **1** se houver violacoes.
 | `geo:GeomechFormulaCategoryShape` | `geo:GeomechCorporateEntity` | `category=Formula` ⇒ `formulaExpression` presente (SPARQL) |
 | `geo:GeomechRelationTargetExistsShape` | `geo:GeomechCorporateRelation` | targetEntity deve ser uma `GeomechCorporateEntity` declarada (SPARQL) |
 | `geo:GeomechOutOfScopeShape` | `geo:GeomechCorporateEntity` | `isOutOfScope true` ⇒ `inScopeForModule` declarado (SPARQL) |
+| **Petrobras 3W (shapes 31-33)** | | **Modulo 3W v2.0.0 CC-BY 4.0 — Eventos operacionais e sensores subsea** |
+| `geo:OperationalEventShape` | `geo:OperationalEvent` | `geo:threewLabel` in {0-9, 101, 102, 105-109}; classes 3 e 4 sem variante transiente |
+| `geo:Sensor3WShape` | `geo:Sensor3W` | `geo:threewUnit` obrigatorio (xsd:string); `geo:threewQuantityKind` in {Pressure, Temperature, VolumeRate, ValveOpening, ValveState} |
+| `geo:ValveStateShape` | `geo:ValveStateObservation` | `geo:value` in {0, 0.5, 1} — estado de valvula ESTADO-* |
 
 Para validar especificamente o modulo L6 Corporate de geomecanica:
 

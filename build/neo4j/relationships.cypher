@@ -1,5 +1,5 @@
-// Geolytics Dictionary — Neo4j relationship import
-// Generated: 2026-05-01T12:08:19.625Z
+// GeoBrain — Neo4j relationship import
+// Generated: 2026-05-03T11:36:51.346Z
 // Run AFTER nodes.cypher
 // Run with: cypher-shell -u neo4j -p <password> --file build/neo4j/relationships.cypher
 MATCH (n_poco {id: 'poco'}), (n_bloco {id: 'bloco'})
@@ -7,6 +7,12 @@ MERGE (n_poco)-[:DRILLED_IN {label_pt: 'perfurado em', label_en: 'drilled in', s
 
 MATCH (n_poco {id: 'poco'}), (n_ambiente {id: 'ambiente'})
 MERGE (n_poco)-[:CLASSIFIED_BY {label_pt: 'classificado por', label_en: 'classified by', style: 'dashed'}]->(n_ambiente)
+
+MATCH (n_poco {id: 'poco'}), (n_teste_formacao {id: 'teste-formacao'})
+MERGE (n_poco)-[:UNDERGOES {label_pt: 'realiza', label_en: 'undergoes', style: 'solid'}]->(n_teste_formacao)
+
+MATCH (n_poco {id: 'poco'}), (n_tld {id: 'tld'})
+MERGE (n_poco)-[:UNDERGOES {label_pt: 'realiza', label_en: 'undergoes', style: 'solid'}]->(n_tld)
 
 MATCH (n_poco {id: 'poco'}), (n_bacia_sedimentar {id: 'bacia-sedimentar'})
 MERGE (n_poco)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'solid'}]->(n_bacia_sedimentar)
@@ -53,17 +59,80 @@ MERGE (n_contrato_ep)-[:ORGANIZED_IN {label_pt: 'organizado em', label_en: 'orga
 MATCH (n_contrato_ep {id: 'contrato-ep'}), (n_uts {id: 'uts'})
 MERGE (n_contrato_ep)-[:MEASURED_VIA {label_pt: 'mede via', label_en: 'measured via', style: 'solid'}]->(n_uts)
 
+MATCH (n_teste_formacao {id: 'teste-formacao'}), (n_amostra_fluido {id: 'amostra-fluido'})
+MERGE (n_teste_formacao)-[:YIELDS {label_pt: 'gera amostra de', label_en: 'yields', style: 'solid'}]->(n_amostra_fluido)
+
+MATCH (n_tld {id: 'tld'}), (n_amostra_fluido {id: 'amostra-fluido'})
+MERGE (n_tld)-[:YIELDS {label_pt: 'gera amostra de', label_en: 'yields', style: 'solid'}]->(n_amostra_fluido)
+
+MATCH (n_teste_formacao {id: 'teste-formacao'}), (n_rftp {id: 'rftp'})
+MERGE (n_teste_formacao)-[:REQUIRES_REPORT {label_pt: 'exige relatório', label_en: 'requires report', style: 'solid'}]->(n_rftp)
+
+MATCH (n_tld {id: 'tld'}), (n_rftp {id: 'rftp'})
+MERGE (n_tld)-[:REQUIRES_REPORT {label_pt: 'exige relatório', label_en: 'requires report', style: 'solid'}]->(n_rftp)
+
+MATCH (n_tld {id: 'tld'}), (n_i_engine {id: 'i-engine'})
+MERGE (n_tld)-[:REPORTED_VIA {label_pt: 'reportado via', label_en: 'reported via', style: 'solid'}]->(n_i_engine)
+
+MATCH (n_tld {id: 'tld'}), (n_bmp {id: 'bmp'})
+MERGE (n_tld)-[:GENERATES {label_pt: 'gera', label_en: 'generates', style: 'solid'}]->(n_bmp)
+
+MATCH (n_rftp {id: 'rftp'}), (n_dpp {id: 'dpp'})
+MERGE (n_rftp)-[:SUBMITTED_VIA {label_pt: 'enviado via', label_en: 'submitted via', style: 'solid'}]->(n_dpp)
+
+MATCH (n_anp {id: 'anp'}), (n_i_engine {id: 'i-engine'})
+MERGE (n_anp)-[:MANAGES_VIA {label_pt: 'gerencia via', label_en: 'manages via', style: 'solid'}]->(n_i_engine)
+
+MATCH (n_bmp {id: 'bmp'}), (n_anp {id: 'anp'})
+MERGE (n_bmp)-[:SUBMITTED_TO {label_pt: 'enviado à', label_en: 'submitted to', style: 'solid'}]->(n_anp)
+
+MATCH (n_contrato_ep {id: 'contrato-ep'}), (n_pem {id: 'pem'})
+MERGE (n_contrato_ep)-[:REQUIRES {label_pt: 'exige', label_en: 'requires', style: 'solid'}]->(n_pem)
+
+MATCH (n_contrato_ep {id: 'contrato-ep'}), (n_pte {id: 'pte'})
+MERGE (n_contrato_ep)-[:MONITORED_VIA {label_pt: 'acompanhado via', label_en: 'monitored via', style: 'solid'}]->(n_pte)
+
+MATCH (n_pem {id: 'pem'}), (n_uts {id: 'uts'})
+MERGE (n_pem)-[:MEASURED_IN {label_pt: 'medido em', label_en: 'measured in', style: 'solid'}]->(n_uts)
+
+MATCH (n_pem {id: 'pem'}), (n_periodo_exploratorio {id: 'periodo-exploratorio'})
+MERGE (n_pem)-[:SCOPED_TO {label_pt: 'associado ao', label_en: 'scoped to', style: 'solid'}]->(n_periodo_exploratorio)
+
+MATCH (n_pte {id: 'pte'}), (n_anp {id: 'anp'})
+MERGE (n_pte)-[:SUBMITTED_TO {label_pt: 'enviado à', label_en: 'submitted to', style: 'solid'}]->(n_anp)
+
+MATCH (n_pte {id: 'pte'}), (n_dpp {id: 'dpp'})
+MERGE (n_pte)-[:SUBMITTED_VIA {label_pt: 'enviado via', label_en: 'submitted via', style: 'solid'}]->(n_dpp)
+
 MATCH (n_pad {id: 'pad'}), (n_bloco {id: 'bloco'})
 MERGE (n_pad)-[:EVALUATES {label_pt: 'avalia', label_en: 'evaluates', style: 'solid'}]->(n_bloco)
 
-MATCH (n_pad {id: 'pad'}), (n_declaracao_comercialidade {id: 'declaracao-comercialidade'})
-MERGE (n_pad)-[:MAY_YIELD {label_pt: 'pode gerar', label_en: 'may yield', style: 'dashed'}]->(n_declaracao_comercialidade)
+MATCH (n_pad {id: 'pad'}), (n_rfad {id: 'rfad'})
+MERGE (n_pad)-[:CLOSES_WITH {label_pt: 'encerrado pelo', label_en: 'closes with', style: 'solid'}]->(n_rfad)
 
-MATCH (n_declaracao_comercialidade {id: 'declaracao-comercialidade'}), (n_area_desenvolvimento {id: 'area-desenvolvimento'})
-MERGE (n_declaracao_comercialidade)-[:INITIATES {label_pt: 'dá início a', label_en: 'initiates', style: 'solid'}]->(n_area_desenvolvimento)
+MATCH (n_rfad {id: 'rfad'}), (n_declaracao_comercialidade {id: 'declaracao-comercialidade'})
+MERGE (n_rfad)-[:MAY_YIELD {label_pt: 'pode gerar', label_en: 'may yield', style: 'dashed'}]->(n_declaracao_comercialidade)
 
-MATCH (n_area_desenvolvimento {id: 'area-desenvolvimento'}), (n_plano_desenvolvimento {id: 'plano-desenvolvimento'})
-MERGE (n_area_desenvolvimento)-[:REQUIRES {label_pt: 'exige', label_en: 'requires', style: 'solid'}]->(n_plano_desenvolvimento)
+MATCH (n_pad {id: 'pad'}), (n_teste_formacao {id: 'teste-formacao'})
+MERGE (n_pad)-[:MAY_INCLUDE {label_pt: 'pode incluir', label_en: 'may include', style: 'dashed'}]->(n_teste_formacao)
+
+MATCH (n_pad {id: 'pad'}), (n_tld {id: 'tld'})
+MERGE (n_pad)-[:INCLUDES {label_pt: 'inclui', label_en: 'includes', style: 'solid'}]->(n_tld)
+
+MATCH (n_declaracao_comercialidade {id: 'declaracao-comercialidade'}), (n_plano_desenvolvimento {id: 'plano-desenvolvimento'})
+MERGE (n_declaracao_comercialidade)-[:REQUIRES {label_pt: 'exige (180 dias)', label_en: 'requires', style: 'solid'}]->(n_plano_desenvolvimento)
+
+MATCH (n_plano_desenvolvimento {id: 'plano-desenvolvimento'}), (n_area_desenvolvimento {id: 'area-desenvolvimento'})
+MERGE (n_plano_desenvolvimento)-[:ENABLES {label_pt: 'habilita', label_en: 'enables', style: 'solid'}]->(n_area_desenvolvimento)
+
+MATCH (n_plano_desenvolvimento {id: 'plano-desenvolvimento'}), (n_aip {id: 'aip'})
+MERGE (n_plano_desenvolvimento)-[:ACCOMPANIED_BY {label_pt: 'acompanhado por', label_en: 'accompanied by', style: 'dashed'}]->(n_aip)
+
+MATCH (n_plano_desenvolvimento {id: 'plano-desenvolvimento'}), (n_cip {id: 'cip'})
+MERGE (n_plano_desenvolvimento)-[:ACCOMPANIED_BY {label_pt: 'acompanhado por', label_en: 'accompanied by', style: 'dashed'}]->(n_cip)
+
+MATCH (n_plano_desenvolvimento {id: 'plano-desenvolvimento'}), (n_anp {id: 'anp'})
+MERGE (n_plano_desenvolvimento)-[:APPROVED_BY {label_pt: 'aprovado pela', label_en: 'approved by', style: 'solid'}]->(n_anp)
 
 MATCH (n_area_desenvolvimento {id: 'area-desenvolvimento'}), (n_primeiro_oleo {id: 'primeiro-oleo'})
 MERGE (n_area_desenvolvimento)-[:ENDS_WITH {label_pt: 'encerrada pelo', label_en: 'ends with', style: 'dashed'}]->(n_primeiro_oleo)
@@ -233,6 +302,9 @@ MERGE (n_perfil_poco)-[:INFERS {label_pt: 'infere', label_en: 'infers', style: '
 MATCH (n_biomarcador {id: 'biomarcador'}), (n_correlacao_oleo_rocha {id: 'correlacao-oleo-rocha'})
 MERGE (n_biomarcador)-[:ENABLES {label_pt: 'permite', label_en: 'enables', style: 'solid'}]->(n_correlacao_oleo_rocha)
 
+MATCH (n_biomarcador {id: 'biomarcador'}), (n_amostra_fluido {id: 'amostra-fluido'})
+MERGE (n_biomarcador)-[:DERIVED_FROM {label_pt: 'extraído de', label_en: 'derived from', style: 'dashed'}]->(n_amostra_fluido)
+
 MATCH (n_gc_ms {id: 'gc-ms'}), (n_biomarcador {id: 'biomarcador'})
 MERGE (n_gc_ms)-[:DETECTS {label_pt: 'detecta', label_en: 'detects', style: 'solid'}]->(n_biomarcador)
 
@@ -244,6 +316,15 @@ MERGE (n_amostra_fluido)-[:UNDERGOES {label_pt: 'submetida a', label_en: 'underg
 
 MATCH (n_pvt {id: 'pvt'}), (n_classe_fluido {id: 'classe-fluido'})
 MERGE (n_pvt)-[:CLASSIFIES {label_pt: 'classifica', label_en: 'classifies', style: 'solid'}]->(n_classe_fluido)
+
+MATCH (n_pvt {id: 'pvt'}), (n_reservatorio {id: 'reservatorio'})
+MERGE (n_pvt)-[:CHARACTERIZES {label_pt: 'caracteriza fluido de', label_en: 'characterizes', style: 'solid'}]->(n_reservatorio)
+
+MATCH (n_correlacao_oleo_rocha {id: 'correlacao-oleo-rocha'}), (n_rocha_geradora {id: 'rocha-geradora'})
+MERGE (n_correlacao_oleo_rocha)-[:LINKS_TO {label_pt: 'traça origem em', label_en: 'links to', style: 'solid'}]->(n_rocha_geradora)
+
+MATCH (n_classe_fluido {id: 'classe-fluido'}), (n_reservatorio {id: 'reservatorio'})
+MERGE (n_classe_fluido)-[:CHARACTERIZES {label_pt: 'caracteriza', label_en: 'characterizes', style: 'dashed'}]->(n_reservatorio)
 
 MATCH (n_modelo_petrofisico {id: 'modelo-petrofisico'}), (n_reservatorio {id: 'reservatorio'})
 MERGE (n_modelo_petrofisico)-[:CHARACTERIZES {label_pt: 'caracteriza', label_en: 'characterizes', style: 'solid'}]->(n_reservatorio)
@@ -295,6 +376,21 @@ MERGE (n_formacao)-[:HAS_TOP_AT {label_pt: 'tem topo em', label_en: 'has top at'
 
 MATCH (n_perfil_poco {id: 'perfil-poco'}), (n_wellbore {id: 'wellbore'})
 MERGE (n_perfil_poco)-[:MEASURED_IN {label_pt: 'medida em', label_en: 'measured in', style: 'solid'}]->(n_wellbore)
+
+MATCH (n_amostra_fluido {id: 'amostra-fluido'}), (n_unidade_medida {id: 'unidade-medida'})
+MERGE (n_amostra_fluido)-[:QUALIFIED_BY {label_pt: 'qualificada por', label_en: 'qualified by', style: 'solid'}]->(n_unidade_medida)
+
+MATCH (n_pvt {id: 'pvt'}), (n_unidade_medida {id: 'unidade-medida'})
+MERGE (n_pvt)-[:EXPRESSED_IN {label_pt: 'expresso em', label_en: 'expressed in', style: 'solid'}]->(n_unidade_medida)
+
+MATCH (n_i_engine {id: 'i-engine'}), (n_unidade_medida {id: 'unidade-medida'})
+MERGE (n_i_engine)-[:ENFORCES {label_pt: 'valida e impõe', label_en: 'enforces', style: 'solid'}]->(n_unidade_medida)
+
+MATCH (n_bmp {id: 'bmp'}), (n_unidade_medida {id: 'unidade-medida'})
+MERGE (n_bmp)-[:STANDARDIZED_BY {label_pt: 'padronizado em', label_en: 'standardized by', style: 'dashed'}]->(n_unidade_medida)
+
+MATCH (n_reservatorio {id: 'reservatorio'}), (n_unidade_medida {id: 'unidade-medida'})
+MERGE (n_reservatorio)-[:CHARACTERIZED_WITH {label_pt: 'caracterizado em', label_en: 'characterized with', style: 'dashed'}]->(n_unidade_medida)
 
 MATCH (n_activity_plan {id: 'activity-plan'}), (n_poco {id: 'poco'})
 MERGE (n_activity_plan)-[:PLANS_ACTIVITY_FOR {label_pt: 'planeja atividade em', label_en: 'plans activity for', style: 'dashed'}]->(n_poco)
@@ -382,6 +478,639 @@ MERGE (n_geo_political_entity)-[:JURISDICTION_OF {label_pt: 'jurisdição de', l
 
 MATCH (n_acl {id: 'acl'}), (n_operador {id: 'operador'})
 MERGE (n_acl)-[:RESTRICTS_ACCESS_FOR {label_pt: 'restringe acesso para', label_en: 'restricts access for', style: 'dashed'}]->(n_operador)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_drx {id: 'drx'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_drx)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_frx {id: 'frx'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_frx)
+
+MATCH (n_drx {id: 'drx'}), (n_frx {id: 'frx'})
+MERGE (n_drx)-[:COMPLEMENTS {label_pt: 'complementa', label_en: 'complements', style: 'dashed'}]->(n_frx)
+
+MATCH (n_frx {id: 'frx'}), (n_drx {id: 'drx'})
+MERGE (n_frx)-[:COMPLEMENTS {label_pt: 'complementa', label_en: 'complements', style: 'dashed'}]->(n_drx)
+
+MATCH (n_frx {id: 'frx'}), (n_dna_geoquimico {id: 'dna-geoquimico'})
+MERGE (n_frx)-[:FEEDS_SIGNATURE {label_pt: 'alimenta assinatura', label_en: 'feeds signature', style: 'solid'}]->(n_dna_geoquimico)
+
+MATCH (n_drx {id: 'drx'}), (n_poco {id: 'poco'})
+MERGE (n_drx)-[:PERFORMED_ON {label_pt: 'realizado em', label_en: 'performed on', style: 'solid'}]->(n_poco)
+
+MATCH (n_frx {id: 'frx'}), (n_poco {id: 'poco'})
+MERGE (n_frx)-[:PERFORMED_ON {label_pt: 'realizado em', label_en: 'performed on', style: 'solid'}]->(n_poco)
+
+MATCH (n_drx {id: 'drx'}), (n_litologia {id: 'litologia'})
+MERGE (n_drx)-[:ALIMENTA_CLASSIFICACAO_LITOLOGICA {label_pt: 'alimenta classificação litológica', label_en: 'feeds lithological classification', style: 'solid'}]->(n_litologia)
+
+MATCH (n_frx {id: 'frx'}), (n_litologia {id: 'litologia'})
+MERGE (n_frx)-[:ALIMENTA_CLASSIFICACAO_LITOLOGICA {label_pt: 'alimenta classificação litológica', label_en: 'feeds lithological classification', style: 'solid'}]->(n_litologia)
+
+MATCH (n_sidewall_core_sample {id: 'sidewall-core-sample'}), (n_wireline_run {id: 'wireline-run'})
+MERGE (n_sidewall_core_sample)-[:ACQUIRED_DURING {label_pt: 'adquirido durante', label_en: 'acquired during', style: 'solid'}]->(n_wireline_run)
+
+MATCH (n_core_run {id: 'core-run'}), (n_core_plug {id: 'core-plug'})
+MERGE (n_core_run)-[:HAS_PLUG {label_pt: 'tem plugue', label_en: 'has plug', style: 'solid'}]->(n_core_plug)
+
+MATCH (n_gas_show_event {id: 'gas-show-event'}), (n_geostopping_event {id: 'geostopping-event'})
+MERGE (n_gas_show_event)-[:FEEDS_DECISION {label_pt: 'alimenta decisão', label_en: 'feeds decision', style: 'solid'}]->(n_geostopping_event)
+
+MATCH (n_lwd_run {id: 'lwd-run'}), (n_geostopping_event {id: 'geostopping-event'})
+MERGE (n_lwd_run)-[:FEEDS_DECISION {label_pt: 'alimenta decisão', label_en: 'feeds decision', style: 'solid'}]->(n_geostopping_event)
+
+MATCH (n_dst_interval {id: 'dst-interval'}), (n_sirr {id: 'sirr'})
+MERGE (n_dst_interval)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_sirr)
+
+MATCH (n_wireline_run {id: 'wireline-run'}), (n_bdoc {id: 'bdoc'})
+MERGE (n_wireline_run)-[:FILES_STORED_IN {label_pt: 'arquivos armazenados em', label_en: 'files stored in', style: 'solid'}]->(n_bdoc)
+
+MATCH (n_lwd_run {id: 'lwd-run'}), (n_bdoc {id: 'bdoc'})
+MERGE (n_lwd_run)-[:FILES_STORED_IN {label_pt: 'arquivos armazenados em', label_en: 'files stored in', style: 'solid'}]->(n_bdoc)
+
+MATCH (n_core_run {id: 'core-run'}), (n_bdoc {id: 'bdoc'})
+MERGE (n_core_run)-[:PHOTOS_STORED_IN {label_pt: 'fotos armazenadas em', label_en: 'photos stored in', style: 'solid'}]->(n_bdoc)
+
+MATCH (n_wireline_run {id: 'wireline-run'}), (n_roa {id: 'roa'})
+MERGE (n_wireline_run)-[:DOCUMENTS_ANOMALY {label_pt: 'documenta anomalia', label_en: 'documents anomaly', style: 'solid'}]->(n_roa)
+
+MATCH (n_frame {id: 'frame'}), (n_lwd_run {id: 'lwd-run'})
+MERGE (n_frame)-[:CONFIGURES {label_pt: 'configura', label_en: 'configures', style: 'solid'}]->(n_lwd_run)
+
+MATCH (n_frame {id: 'frame'}), (n_wireline_run {id: 'wireline-run'})
+MERGE (n_frame)-[:CONFIGURES {label_pt: 'configura', label_en: 'configures', style: 'solid'}]->(n_wireline_run)
+
+MATCH (n_formation_pressure_point {id: 'formation-pressure-point'}), (n_fluid_sample {id: 'fluid-sample'})
+MERGE (n_formation_pressure_point)-[:COLLECTS {label_pt: 'coleta', label_en: 'collects', style: 'solid'}]->(n_fluid_sample)
+
+MATCH (n_dst_interval {id: 'dst-interval'}), (n_fluid_sample {id: 'fluid-sample'})
+MERGE (n_dst_interval)-[:COLLECTS {label_pt: 'coleta', label_en: 'collects', style: 'solid'}]->(n_fluid_sample)
+
+MATCH (n_lwd_run {id: 'lwd-run'}), (n_bha {id: 'bha'})
+MERGE (n_lwd_run)-[:USES {label_pt: 'usa', label_en: 'uses', style: 'solid'}]->(n_bha)
+
+MATCH (n_wireline_run {id: 'wireline-run'}), (n_bha {id: 'bha'})
+MERGE (n_wireline_run)-[:USES {label_pt: 'usa', label_en: 'uses', style: 'solid'}]->(n_bha)
+
+MATCH (n_mudlogging_time_series {id: 'mudlogging-time-series'}), (n_cassandra_exata_curva_tempo {id: 'cassandra-exata-curva-tempo'})
+MERGE (n_mudlogging_time_series)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_cassandra_exata_curva_tempo)
+
+MATCH (n_kick_event {id: 'kick-event'}), (n_gas_show_event {id: 'gas-show-event'})
+MERGE (n_kick_event)-[:CORRELATES_WITH {label_pt: 'correlaciona com', label_en: 'correlates with', style: 'solid'}]->(n_gas_show_event)
+
+MATCH (n_mudlogging {id: 'mudlogging'}), (n_mudlogging_time_series {id: 'mudlogging-time-series'})
+MERGE (n_mudlogging)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_mudlogging_time_series)
+
+MATCH (n_mudlogging {id: 'mudlogging'}), (n_gas_show_event {id: 'gas-show-event'})
+MERGE (n_mudlogging)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_gas_show_event)
+
+MATCH (n_mudlogging {id: 'mudlogging'}), (n_pag {id: 'pag'})
+MERGE (n_mudlogging)-[:PRODUCES {label_pt: 'produz', label_en: 'produces', style: 'solid'}]->(n_pag)
+
+MATCH (n_cuttings_sampling {id: 'cuttings-sampling'}), (n_cuttings_sample_detailed {id: 'cuttings-sample-detailed'})
+MERGE (n_cuttings_sampling)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_cuttings_sample_detailed)
+
+MATCH (n_coring {id: 'coring'}), (n_core_run {id: 'core-run'})
+MERGE (n_coring)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_core_run)
+
+MATCH (n_sidewall_sampling {id: 'sidewall-sampling'}), (n_sidewall_core_sample {id: 'sidewall-core-sample'})
+MERGE (n_sidewall_sampling)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_sidewall_core_sample)
+
+MATCH (n_mwd_lwd {id: 'mwd-lwd'}), (n_lwd_run {id: 'lwd-run'})
+MERGE (n_mwd_lwd)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_lwd_run)
+
+MATCH (n_wireline_logging {id: 'wireline-logging'}), (n_wireline_run {id: 'wireline-run'})
+MERGE (n_wireline_logging)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_wireline_run)
+
+MATCH (n_formation_testing {id: 'formation-testing'}), (n_formation_pressure_point {id: 'formation-pressure-point'})
+MERGE (n_formation_testing)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_formation_pressure_point)
+
+MATCH (n_formation_testing {id: 'formation-testing'}), (n_dst_interval {id: 'dst-interval'})
+MERGE (n_formation_testing)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_dst_interval)
+
+MATCH (n_geostopping {id: 'geostopping'}), (n_geostopping_event {id: 'geostopping-event'})
+MERGE (n_geostopping)-[:EXECUTES_SERVICO {label_pt: 'executa serviço', label_en: 'executes service', style: 'solid'}]->(n_geostopping_event)
+
+MATCH (n_kick_event {id: 'kick-event'}), (n_ogeomec {id: 'ogeomec'})
+MERGE (n_kick_event)-[:RECORDED_IN {label_pt: 'registrado em', label_en: 'recorded in', style: 'solid'}]->(n_ogeomec)
+
+MATCH (n_geostopping_event {id: 'geostopping-event'}), (n_rcsd {id: 'rcsd'})
+MERGE (n_geostopping_event)-[:NARRATED_IN {label_pt: 'narrado em', label_en: 'narrated in', style: 'solid'}]->(n_rcsd)
+
+MATCH (n_mwd_lwd {id: 'mwd-lwd'}), (n_mwd {id: 'mwd'})
+MERGE (n_mwd_lwd)-[:USES_TOOL {label_pt: 'usa ferramenta', label_en: 'uses tool', style: 'solid'}]->(n_mwd)
+
+MATCH (n_mwd_lwd {id: 'mwd-lwd'}), (n_lwd {id: 'lwd'})
+MERGE (n_mwd_lwd)-[:USES_TOOL {label_pt: 'usa ferramenta', label_en: 'uses tool', style: 'solid'}]->(n_lwd)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_mudlogging {id: 'mudlogging'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_mudlogging)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_cuttings_sampling {id: 'cuttings-sampling'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_cuttings_sampling)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_coring {id: 'coring'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_coring)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_sidewall_sampling {id: 'sidewall-sampling'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_sidewall_sampling)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_mwd_lwd {id: 'mwd-lwd'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_mwd_lwd)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_wireline_logging {id: 'wireline-logging'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_wireline_logging)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_formation_testing {id: 'formation-testing'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_formation_testing)
+
+MATCH (n_operacoes_geologicas {id: 'operacoes-geologicas'}), (n_geostopping {id: 'geostopping'})
+MERGE (n_operacoes_geologicas)-[:EXECUTES {label_pt: 'executa', label_en: 'executes', style: 'solid'}]->(n_geostopping)
+
+MATCH (n_bdp {id: 'bdp'}), (n_qpg {id: 'qpg'})
+MERGE (n_bdp)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_qpg)
+
+MATCH (n_igp {id: 'igp'}), (n_bdp {id: 'bdp'})
+MERGE (n_igp)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_bdp)
+
+MATCH (n_igp {id: 'igp'}), (n_qpg {id: 'qpg'})
+MERGE (n_igp)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_qpg)
+
+MATCH (n_igp {id: 'igp'}), (n_pag {id: 'pag'})
+MERGE (n_igp)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_pag)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_igp {id: 'igp'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_igp)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_wireline_run {id: 'wireline-run'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_wireline_run)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_lwd_run {id: 'lwd-run'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_lwd_run)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_cuttings_sample_detailed {id: 'cuttings-sample-detailed'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_cuttings_sample_detailed)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_frx {id: 'frx'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_frx)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_drx {id: 'drx'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_drx)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_formation_pressure_point {id: 'formation-pressure-point'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_formation_pressure_point)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_dst_interval {id: 'dst-interval'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_dst_interval)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_core_run {id: 'core-run'})
+MERGE (n_perfil_composto)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_core_run)
+
+MATCH (n_rmg {id: 'rmg'}), (n_bdp {id: 'bdp'})
+MERGE (n_rmg)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_bdp)
+
+MATCH (n_rmg {id: 'rmg'}), (n_ogeomec {id: 'ogeomec'})
+MERGE (n_rmg)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_ogeomec)
+
+MATCH (n_ogeomec {id: 'ogeomec'}), (n_bdp {id: 'bdp'})
+MERGE (n_ogeomec)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_bdp)
+
+MATCH (n_rcsd {id: 'rcsd'}), (n_rmg {id: 'rmg'})
+MERGE (n_rcsd)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_rmg)
+
+MATCH (n_rcsd {id: 'rcsd'}), (n_ogeomec {id: 'ogeomec'})
+MERGE (n_rcsd)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_ogeomec)
+
+MATCH (n_rcsd {id: 'rcsd'}), (n_bdp {id: 'bdp'})
+MERGE (n_rcsd)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_bdp)
+
+MATCH (n_lessons_learned {id: 'lessons-learned'}), (n_rcsd {id: 'rcsd'})
+MERGE (n_lessons_learned)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_rcsd)
+
+MATCH (n_lessons_learned {id: 'lessons-learned'}), (n_ogeomec {id: 'ogeomec'})
+MERGE (n_lessons_learned)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_ogeomec)
+
+MATCH (n_lessons_learned {id: 'lessons-learned'}), (n_rmg {id: 'rmg'})
+MERGE (n_lessons_learned)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_rmg)
+
+MATCH (n_geostopping_event {id: 'geostopping-event'}), (n_qpg {id: 'qpg'})
+MERGE (n_geostopping_event)-[:INFORMED_BY {label_pt: 'informado por', label_en: 'informed by', style: 'dashed'}]->(n_qpg)
+
+MATCH (n_pag {id: 'pag'}), (n_cuttings_sample_detailed {id: 'cuttings-sample-detailed'})
+MERGE (n_pag)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_cuttings_sample_detailed)
+
+MATCH (n_pag {id: 'pag'}), (n_gas_show_event {id: 'gas-show-event'})
+MERGE (n_pag)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_gas_show_event)
+
+MATCH (n_lessons_learned {id: 'lessons-learned'}), (n_retro_analysis {id: 'retro-analysis'})
+MERGE (n_lessons_learned)-[:FEEDS_BACK_TO {label_pt: 'alimenta retroanálise', label_en: 'feeds back to', style: 'dashed'}]->(n_retro_analysis)
+
+MATCH (n_retro_analysis {id: 'retro-analysis'}), (n_input_elaboration {id: 'input-elaboration'})
+MERGE (n_retro_analysis)-[:PRECEDES {label_pt: 'precede', label_en: 'precedes', style: 'solid'}]->(n_input_elaboration)
+
+MATCH (n_input_elaboration {id: 'input-elaboration'}), (n_qpg {id: 'qpg'})
+MERGE (n_input_elaboration)-[:PRODUCES {label_pt: 'produz', label_en: 'produces', style: 'solid'}]->(n_qpg)
+
+MATCH (n_operational_monitoring {id: 'operational-monitoring'}), (n_bdp {id: 'bdp'})
+MERGE (n_operational_monitoring)-[:PRODUCES {label_pt: 'produz', label_en: 'produces', style: 'solid'}]->(n_bdp)
+
+MATCH (n_formation_evaluation {id: 'formation-evaluation'}), (n_igp {id: 'igp'})
+MERGE (n_formation_evaluation)-[:PRODUCES {label_pt: 'produz', label_en: 'produces', style: 'solid'}]->(n_igp)
+
+MATCH (n_formation_evaluation {id: 'formation-evaluation'}), (n_perfil_composto {id: 'perfil-composto'})
+MERGE (n_formation_evaluation)-[:PRODUCES {label_pt: 'produz', label_en: 'produces', style: 'solid'}]->(n_perfil_composto)
+
+MATCH (n_mudlogging {id: 'mudlogging'}), (n_exata {id: 'exata'})
+MERGE (n_mudlogging)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_exata)
+
+MATCH (n_mwd_lwd {id: 'mwd-lwd'}), (n_exata {id: 'exata'})
+MERGE (n_mwd_lwd)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_exata)
+
+MATCH (n_frx {id: 'frx'}), (n_sigeo {id: 'sigeo'})
+MERGE (n_frx)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_sigeo)
+
+MATCH (n_qpg {id: 'qpg'}), (n_sigeo {id: 'sigeo'})
+MERGE (n_qpg)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_sigeo)
+
+MATCH (n_perfil_composto {id: 'perfil-composto'}), (n_sigeo {id: 'sigeo'})
+MERGE (n_perfil_composto)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_sigeo)
+
+MATCH (n_ogeomec {id: 'ogeomec'}), (n_bdiep {id: 'bdiep'})
+MERGE (n_ogeomec)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'solid'}]->(n_bdiep)
+
+MATCH (n_exata {id: 'exata'}), (n_aida {id: 'aida'})
+MERGE (n_exata)-[:FEEDS {label_pt: 'alimenta', label_en: 'feeds', style: 'dashed'}]->(n_aida)
+
+MATCH (n_bdiep {id: 'bdiep'}), (n_aida {id: 'aida'})
+MERGE (n_bdiep)-[:FEEDS {label_pt: 'alimenta', label_en: 'feeds', style: 'dashed'}]->(n_aida)
+
+MATCH (n_sigeo {id: 'sigeo'}), (n_bdiep {id: 'bdiep'})
+MERGE (n_sigeo)-[:PUBLISHES_TO {label_pt: 'publica em', label_en: 'publishes to', style: 'solid'}]->(n_bdiep)
+
+MATCH (n_vge {id: 'vge'}), (n_bdiep {id: 'bdiep'})
+MERGE (n_vge)-[:PROVIDES_ACCESS_TO {label_pt: 'provê acesso a', label_en: 'provides access to', style: 'solid'}]->(n_bdiep)
+
+MATCH (n_bdiap {id: 'bdiap'}), (n_bdiep {id: 'bdiep'})
+MERGE (n_bdiap)-[:COMPLEMENTS {label_pt: 'complementa', label_en: 'complements', style: 'dashed'}]->(n_bdiep)
+
+MATCH (n_geodo {id: 'geodo'}), (n_aida {id: 'aida'})
+MERGE (n_geodo)-[:QUERIES {label_pt: 'consulta', label_en: 'queries', style: 'dashed'}]->(n_aida)
+
+MATCH (n_gda {id: 'gda'}), (n_exata {id: 'exata'})
+MERGE (n_gda)-[:PROVIDES_ACCESS_TO {label_pt: 'provê acesso a', label_en: 'provides access to', style: 'solid'}]->(n_exata)
+
+MATCH (n_retro_analysis {id: 'retro-analysis'}), (n_laudo_geomecanico {id: 'laudo-geomecanico'})
+MERGE (n_retro_analysis)-[:PRODUCES {label_pt: 'produz', label_en: 'produces', style: 'solid'}]->(n_laudo_geomecanico)
+
+MATCH (n_laudo_geomecanico {id: 'laudo-geomecanico'}), (n_qpg {id: 'qpg'})
+MERGE (n_laudo_geomecanico)-[:REQUIRES_INPUT {label_pt: 'requer como insumo', label_en: 'requires input', style: 'dashed'}]->(n_qpg)
+
+MATCH (n_laudo_geomecanico {id: 'laudo-geomecanico'}), (n_poco {id: 'poco'})
+MERGE (n_laudo_geomecanico)-[:REFERENCES {label_pt: 'referenciado a', label_en: 'references', style: 'solid'}]->(n_poco)
+
+MATCH (n_laudo_geomecanico {id: 'laudo-geomecanico'}), (n_input_elaboration {id: 'input-elaboration'})
+MERGE (n_laudo_geomecanico)-[:SUBSIDIZES {label_pt: 'subsidia', label_en: 'subsidizes', style: 'solid'}]->(n_input_elaboration)
+
+MATCH (n_laudo_geomecanico {id: 'laudo-geomecanico'}), (n_rmg {id: 'rmg'})
+MERGE (n_laudo_geomecanico)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_rmg)
+
+MATCH (n_laudo_geomecanico {id: 'laudo-geomecanico'}), (n_ogeomec {id: 'ogeomec'})
+MERGE (n_laudo_geomecanico)-[:DERIVED_FROM {label_pt: 'derivado de', label_en: 'derived from', style: 'dashed'}]->(n_ogeomec)
+
+MATCH (n_laudo_geomecanico {id: 'laudo-geomecanico'}), (n_vge {id: 'vge'})
+MERGE (n_laudo_geomecanico)-[:STORED_IN {label_pt: 'armazenado em', label_en: 'stored in', style: 'dashed'}]->(n_vge)
+
+MATCH (n_sensor_aber_ckgl {id: 'sensor_aber_ckgl'}), (n_glck {id: 'glck'})
+MERGE (n_sensor_aber_ckgl)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_glck)
+
+MATCH (n_sensor_aber_ckp {id: 'sensor_aber_ckp'}), (n_pck {id: 'pck'})
+MERGE (n_sensor_aber_ckp)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pck)
+
+MATCH (n_sensor_estado_dhsv {id: 'sensor_estado_dhsv'}), (n_dhsv {id: 'dhsv'})
+MERGE (n_sensor_estado_dhsv)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_dhsv)
+
+MATCH (n_sensor_estado_m1 {id: 'sensor_estado_m1'}), (n_pmv {id: 'pmv'})
+MERGE (n_sensor_estado_m1)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pmv)
+
+MATCH (n_sensor_estado_m2 {id: 'sensor_estado_m2'}), (n_amv {id: 'amv'})
+MERGE (n_sensor_estado_m2)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_amv)
+
+MATCH (n_sensor_estado_pxo {id: 'sensor_estado_pxo'}), (n_pxo {id: 'pxo'})
+MERGE (n_sensor_estado_pxo)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pxo)
+
+MATCH (n_sensor_estado_sdv_gl {id: 'sensor_estado_sdv_gl'}), (n_sdv_gl {id: 'sdv_gl'})
+MERGE (n_sensor_estado_sdv_gl)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_sdv_gl)
+
+MATCH (n_sensor_estado_sdv_p {id: 'sensor_estado_sdv_p'}), (n_sdv_p {id: 'sdv_p'})
+MERGE (n_sensor_estado_sdv_p)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_sdv_p)
+
+MATCH (n_sensor_estado_w1 {id: 'sensor_estado_w1'}), (n_pwv {id: 'pwv'})
+MERGE (n_sensor_estado_w1)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pwv)
+
+MATCH (n_sensor_estado_w2 {id: 'sensor_estado_w2'}), (n_awv {id: 'awv'})
+MERGE (n_sensor_estado_w2)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_awv)
+
+MATCH (n_sensor_estado_xo {id: 'sensor_estado_xo'}), (n_xo {id: 'xo'})
+MERGE (n_sensor_estado_xo)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_xo)
+
+MATCH (n_sensor_p_anular {id: 'sensor_p_anular'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_anular)-[:MEASURED_IN {label_pt: 'medido em', label_en: 'measured in', style: 'solid'}]->(n_poco)
+
+MATCH (n_sensor_p_jus_bs {id: 'sensor_p_jus_bs'}), (n_sp_pump {id: 'sp_pump'})
+MERGE (n_sensor_p_jus_bs)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_sp_pump)
+
+MATCH (n_sensor_p_jus_ckgl {id: 'sensor_p_jus_ckgl'}), (n_glck {id: 'glck'})
+MERGE (n_sensor_p_jus_ckgl)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_glck)
+
+MATCH (n_sensor_p_jus_ckp {id: 'sensor_p_jus_ckp'}), (n_pck {id: 'pck'})
+MERGE (n_sensor_p_jus_ckp)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pck)
+
+MATCH (n_sensor_p_mon_ckgl {id: 'sensor_p_mon_ckgl'}), (n_glck {id: 'glck'})
+MERGE (n_sensor_p_mon_ckgl)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_glck)
+
+MATCH (n_sensor_p_mon_ckp {id: 'sensor_p_mon_ckp'}), (n_pck {id: 'pck'})
+MERGE (n_sensor_p_mon_ckp)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pck)
+
+MATCH (n_sensor_p_mon_sdv_p {id: 'sensor_p_mon_sdv_p'}), (n_sdv_p {id: 'sdv_p'})
+MERGE (n_sensor_p_mon_sdv_p)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_sdv_p)
+
+MATCH (n_sensor_p_pdg {id: 'sensor_p_pdg'}), (n_pdg {id: 'pdg'})
+MERGE (n_sensor_p_pdg)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pdg)
+
+MATCH (n_sensor_pt_p {id: 'sensor_pt_p'}), (n_anm {id: 'anm'})
+MERGE (n_sensor_pt_p)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_anm)
+
+MATCH (n_sensor_p_tpt {id: 'sensor_p_tpt'}), (n_tpt {id: 'tpt'})
+MERGE (n_sensor_p_tpt)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_tpt)
+
+MATCH (n_sensor_qbs {id: 'sensor_qbs'}), (n_sp_pump {id: 'sp_pump'})
+MERGE (n_sensor_qbs)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_sp_pump)
+
+MATCH (n_sensor_qgl {id: 'sensor_qgl'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_qgl)-[:MEASURED_IN {label_pt: 'medido em', label_en: 'measured in', style: 'solid'}]->(n_poco)
+
+MATCH (n_sensor_t_jus_ckp {id: 'sensor_t_jus_ckp'}), (n_pck {id: 'pck'})
+MERGE (n_sensor_t_jus_ckp)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pck)
+
+MATCH (n_sensor_t_mon_ckp {id: 'sensor_t_mon_ckp'}), (n_pck {id: 'pck'})
+MERGE (n_sensor_t_mon_ckp)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pck)
+
+MATCH (n_sensor_t_pdg {id: 'sensor_t_pdg'}), (n_pdg {id: 'pdg'})
+MERGE (n_sensor_t_pdg)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_pdg)
+
+MATCH (n_sensor_t_tpt {id: 'sensor_t_tpt'}), (n_tpt {id: 'tpt'})
+MERGE (n_sensor_t_tpt)-[:MEASURED_AT {label_pt: 'medido em', label_en: 'measured at', style: 'solid'}]->(n_tpt)
+
+MATCH (n_sensor_aber_ckgl {id: 'sensor_aber_ckgl'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_aber_ckgl)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_aber_ckp {id: 'sensor_aber_ckp'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_aber_ckp)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_dhsv {id: 'sensor_estado_dhsv'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_dhsv)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_m1 {id: 'sensor_estado_m1'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_m1)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_m2 {id: 'sensor_estado_m2'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_m2)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_pxo {id: 'sensor_estado_pxo'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_pxo)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_sdv_gl {id: 'sensor_estado_sdv_gl'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_sdv_gl)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_sdv_p {id: 'sensor_estado_sdv_p'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_sdv_p)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_w1 {id: 'sensor_estado_w1'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_w1)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_w2 {id: 'sensor_estado_w2'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_w2)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_estado_xo {id: 'sensor_estado_xo'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_estado_xo)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_jus_bs {id: 'sensor_p_jus_bs'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_jus_bs)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_jus_ckgl {id: 'sensor_p_jus_ckgl'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_jus_ckgl)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_jus_ckp {id: 'sensor_p_jus_ckp'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_jus_ckp)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_mon_ckgl {id: 'sensor_p_mon_ckgl'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_mon_ckgl)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_mon_ckp {id: 'sensor_p_mon_ckp'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_mon_ckp)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_mon_sdv_p {id: 'sensor_p_mon_sdv_p'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_mon_sdv_p)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_pdg {id: 'sensor_p_pdg'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_pdg)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_pt_p {id: 'sensor_pt_p'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_pt_p)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_p_tpt {id: 'sensor_p_tpt'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_p_tpt)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_qbs {id: 'sensor_qbs'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_qbs)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_t_jus_ckp {id: 'sensor_t_jus_ckp'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_t_jus_ckp)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_t_mon_ckp {id: 'sensor_t_mon_ckp'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_t_mon_ckp)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_t_pdg {id: 'sensor_t_pdg'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_t_pdg)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_sensor_t_tpt {id: 'sensor_t_tpt'}), (n_poco {id: 'poco'})
+MERGE (n_sensor_t_tpt)-[:LOCATED_IN {label_pt: 'localizado em', label_en: 'located in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_pmv {id: 'pmv'}), (n_anm {id: 'anm'})
+MERGE (n_pmv)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_amv {id: 'amv'}), (n_anm {id: 'anm'})
+MERGE (n_amv)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_pwv {id: 'pwv'}), (n_anm {id: 'anm'})
+MERGE (n_pwv)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_awv {id: 'awv'}), (n_anm {id: 'anm'})
+MERGE (n_awv)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_pxo {id: 'pxo'}), (n_anm {id: 'anm'})
+MERGE (n_pxo)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_xo {id: 'xo'}), (n_anm {id: 'anm'})
+MERGE (n_xo)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_sdv_p {id: 'sdv_p'}), (n_anm {id: 'anm'})
+MERGE (n_sdv_p)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_sdv_gl {id: 'sdv_gl'}), (n_anm {id: 'anm'})
+MERGE (n_sdv_gl)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_glck {id: 'glck'}), (n_anm {id: 'anm'})
+MERGE (n_glck)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_pck {id: 'pck'}), (n_anm {id: 'anm'})
+MERGE (n_pck)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_tpt {id: 'tpt'}), (n_anm {id: 'anm'})
+MERGE (n_tpt)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_anm)
+
+MATCH (n_anm {id: 'anm'}), (n_poco {id: 'poco'})
+MERGE (n_anm)-[:PART_OF {label_pt: 'parte de', label_en: 'part of', style: 'solid'}]->(n_poco)
+
+MATCH (n_dhsv {id: 'dhsv'}), (n_poco {id: 'poco'})
+MERGE (n_dhsv)-[:INSTALLED_IN {label_pt: 'instalado em', label_en: 'installed in', style: 'solid'}]->(n_poco)
+
+MATCH (n_pdg {id: 'pdg'}), (n_poco {id: 'poco'})
+MERGE (n_pdg)-[:INSTALLED_IN {label_pt: 'instalado em', label_en: 'installed in', style: 'solid'}]->(n_poco)
+
+MATCH (n_sp_pump {id: 'sp_pump'}), (n_poco {id: 'poco'})
+MERGE (n_sp_pump)-[:CONNECTS {label_pt: 'conectado a', label_en: 'connects to', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_bsw_increase {id: 'event_bsw_increase'}), (n_sensor_qbs {id: 'sensor_qbs'})
+MERGE (n_event_bsw_increase)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qbs)
+
+MATCH (n_event_bsw_increase {id: 'event_bsw_increase'}), (n_sensor_qgl {id: 'sensor_qgl'})
+MERGE (n_event_bsw_increase)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qgl)
+
+MATCH (n_event_bsw_increase {id: 'event_bsw_increase'}), (n_sensor_p_pdg {id: 'sensor_p_pdg'})
+MERGE (n_event_bsw_increase)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_pdg)
+
+MATCH (n_event_spurious_dhsv {id: 'event_spurious_dhsv'}), (n_sensor_estado_dhsv {id: 'sensor_estado_dhsv'})
+MERGE (n_event_spurious_dhsv)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_estado_dhsv)
+
+MATCH (n_event_spurious_dhsv {id: 'event_spurious_dhsv'}), (n_sensor_p_pdg {id: 'sensor_p_pdg'})
+MERGE (n_event_spurious_dhsv)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_pdg)
+
+MATCH (n_event_spurious_dhsv {id: 'event_spurious_dhsv'}), (n_sensor_p_tpt {id: 'sensor_p_tpt'})
+MERGE (n_event_spurious_dhsv)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_tpt)
+
+MATCH (n_event_spurious_dhsv {id: 'event_spurious_dhsv'}), (n_dhsv {id: 'dhsv'})
+MERGE (n_event_spurious_dhsv)-[:INVOLVES_EQUIPMENT {label_pt: 'envolve equipamento', label_en: 'involves equipment', style: 'dashed'}]->(n_dhsv)
+
+MATCH (n_event_severe_slugging {id: 'event_severe_slugging'}), (n_sensor_p_tpt {id: 'sensor_p_tpt'})
+MERGE (n_event_severe_slugging)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_tpt)
+
+MATCH (n_event_severe_slugging {id: 'event_severe_slugging'}), (n_sensor_p_pdg {id: 'sensor_p_pdg'})
+MERGE (n_event_severe_slugging)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_pdg)
+
+MATCH (n_event_severe_slugging {id: 'event_severe_slugging'}), (n_sensor_qgl {id: 'sensor_qgl'})
+MERGE (n_event_severe_slugging)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qgl)
+
+MATCH (n_event_flow_instability {id: 'event_flow_instability'}), (n_sensor_p_tpt {id: 'sensor_p_tpt'})
+MERGE (n_event_flow_instability)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_tpt)
+
+MATCH (n_event_flow_instability {id: 'event_flow_instability'}), (n_sensor_p_pdg {id: 'sensor_p_pdg'})
+MERGE (n_event_flow_instability)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_pdg)
+
+MATCH (n_event_flow_instability {id: 'event_flow_instability'}), (n_sensor_qgl {id: 'sensor_qgl'})
+MERGE (n_event_flow_instability)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qgl)
+
+MATCH (n_event_rapid_prod_loss {id: 'event_rapid_prod_loss'}), (n_sensor_p_pdg {id: 'sensor_p_pdg'})
+MERGE (n_event_rapid_prod_loss)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_pdg)
+
+MATCH (n_event_rapid_prod_loss {id: 'event_rapid_prod_loss'}), (n_sensor_p_tpt {id: 'sensor_p_tpt'})
+MERGE (n_event_rapid_prod_loss)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_tpt)
+
+MATCH (n_event_rapid_prod_loss {id: 'event_rapid_prod_loss'}), (n_sensor_qgl {id: 'sensor_qgl'})
+MERGE (n_event_rapid_prod_loss)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qgl)
+
+MATCH (n_event_quick_pck_restriction {id: 'event_quick_pck_restriction'}), (n_sensor_aber_ckp {id: 'sensor_aber_ckp'})
+MERGE (n_event_quick_pck_restriction)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_aber_ckp)
+
+MATCH (n_event_quick_pck_restriction {id: 'event_quick_pck_restriction'}), (n_sensor_p_mon_ckp {id: 'sensor_p_mon_ckp'})
+MERGE (n_event_quick_pck_restriction)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_mon_ckp)
+
+MATCH (n_event_quick_pck_restriction {id: 'event_quick_pck_restriction'}), (n_sensor_p_jus_ckp {id: 'sensor_p_jus_ckp'})
+MERGE (n_event_quick_pck_restriction)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_jus_ckp)
+
+MATCH (n_event_quick_pck_restriction {id: 'event_quick_pck_restriction'}), (n_pck {id: 'pck'})
+MERGE (n_event_quick_pck_restriction)-[:INVOLVES_EQUIPMENT {label_pt: 'envolve equipamento', label_en: 'involves equipment', style: 'dashed'}]->(n_pck)
+
+MATCH (n_event_scaling_pck {id: 'event_scaling_pck'}), (n_sensor_aber_ckp {id: 'sensor_aber_ckp'})
+MERGE (n_event_scaling_pck)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_aber_ckp)
+
+MATCH (n_event_scaling_pck {id: 'event_scaling_pck'}), (n_sensor_p_mon_ckp {id: 'sensor_p_mon_ckp'})
+MERGE (n_event_scaling_pck)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_mon_ckp)
+
+MATCH (n_event_scaling_pck {id: 'event_scaling_pck'}), (n_sensor_p_jus_ckp {id: 'sensor_p_jus_ckp'})
+MERGE (n_event_scaling_pck)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_jus_ckp)
+
+MATCH (n_event_scaling_pck {id: 'event_scaling_pck'}), (n_sensor_t_mon_ckp {id: 'sensor_t_mon_ckp'})
+MERGE (n_event_scaling_pck)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_t_mon_ckp)
+
+MATCH (n_event_scaling_pck {id: 'event_scaling_pck'}), (n_pck {id: 'pck'})
+MERGE (n_event_scaling_pck)-[:INVOLVES_EQUIPMENT {label_pt: 'envolve equipamento', label_en: 'involves equipment', style: 'dashed'}]->(n_pck)
+
+MATCH (n_event_hydrate_production {id: 'event_hydrate_production'}), (n_sensor_p_pdg {id: 'sensor_p_pdg'})
+MERGE (n_event_hydrate_production)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_pdg)
+
+MATCH (n_event_hydrate_production {id: 'event_hydrate_production'}), (n_sensor_p_tpt {id: 'sensor_p_tpt'})
+MERGE (n_event_hydrate_production)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_tpt)
+
+MATCH (n_event_hydrate_production {id: 'event_hydrate_production'}), (n_sensor_qgl {id: 'sensor_qgl'})
+MERGE (n_event_hydrate_production)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qgl)
+
+MATCH (n_event_hydrate_production {id: 'event_hydrate_production'}), (n_sensor_t_pdg {id: 'sensor_t_pdg'})
+MERGE (n_event_hydrate_production)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_t_pdg)
+
+MATCH (n_event_hydrate_service {id: 'event_hydrate_service'}), (n_sensor_p_jus_bs {id: 'sensor_p_jus_bs'})
+MERGE (n_event_hydrate_service)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_p_jus_bs)
+
+MATCH (n_event_hydrate_service {id: 'event_hydrate_service'}), (n_sensor_qbs {id: 'sensor_qbs'})
+MERGE (n_event_hydrate_service)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_qbs)
+
+MATCH (n_event_hydrate_service {id: 'event_hydrate_service'}), (n_sensor_t_jus_ckp {id: 'sensor_t_jus_ckp'})
+MERGE (n_event_hydrate_service)-[:DETECTED_VIA {label_pt: 'detectado via', label_en: 'detected via', style: 'dashed'}]->(n_sensor_t_jus_ckp)
+
+MATCH (n_event_normal {id: 'event_normal'}), (n_poco {id: 'poco'})
+MERGE (n_event_normal)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_bsw_increase {id: 'event_bsw_increase'}), (n_poco {id: 'poco'})
+MERGE (n_event_bsw_increase)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_spurious_dhsv {id: 'event_spurious_dhsv'}), (n_poco {id: 'poco'})
+MERGE (n_event_spurious_dhsv)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_severe_slugging {id: 'event_severe_slugging'}), (n_poco {id: 'poco'})
+MERGE (n_event_severe_slugging)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_flow_instability {id: 'event_flow_instability'}), (n_poco {id: 'poco'})
+MERGE (n_event_flow_instability)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_rapid_prod_loss {id: 'event_rapid_prod_loss'}), (n_poco {id: 'poco'})
+MERGE (n_event_rapid_prod_loss)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_quick_pck_restriction {id: 'event_quick_pck_restriction'}), (n_poco {id: 'poco'})
+MERGE (n_event_quick_pck_restriction)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_scaling_pck {id: 'event_scaling_pck'}), (n_poco {id: 'poco'})
+MERGE (n_event_scaling_pck)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_hydrate_production {id: 'event_hydrate_production'}), (n_poco {id: 'poco'})
+MERGE (n_event_hydrate_production)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_hydrate_service {id: 'event_hydrate_service'}), (n_poco {id: 'poco'})
+MERGE (n_event_hydrate_service)-[:OCCURS_IN {label_pt: 'ocorre em', label_en: 'occurs in', style: 'dashed'}]->(n_poco)
+
+MATCH (n_event_hydrate_production {id: 'event_hydrate_production'}), (n_anm {id: 'anm'})
+MERGE (n_event_hydrate_production)-[:INVOLVES_EQUIPMENT {label_pt: 'envolve equipamento', label_en: 'involves equipment', style: 'dashed'}]->(n_anm)
+
+MATCH (n_event_hydrate_service {id: 'event_hydrate_service'}), (n_sp_pump {id: 'sp_pump'})
+MERGE (n_event_hydrate_service)-[:INVOLVES_EQUIPMENT {label_pt: 'envolve equipamento', label_en: 'involves equipment', style: 'dashed'}]->(n_sp_pump)
 
 MATCH (n_ontopetro_class_C001 {id: 'ontopetro_class_C001'}), (n_bacia_sedimentar {id: 'bacia-sedimentar'})
 MERGE (n_ontopetro_class_C001)-[:MAPS_TO_ENTITY]->(n_bacia_sedimentar)
