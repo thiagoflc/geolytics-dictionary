@@ -2894,3 +2894,54 @@ geo:BHAShape a sh:NodeShape ;
         sh:message "BHA.last_update constraint."@en ;
     ] .
 
+
+# =============================================================================
+# 3W Petrobras v2.0.0 — NodeShapes (Shapes 46–48)
+# Source: CC-BY 4.0, Vargas et al. 2019, DOI: 10.1016/j.petrol.2019.106223
+# =============================================================================
+
+@prefix threew: <https://github.com/petrobras/3W#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+geo:OperationalEventShape
+    a sh:NodeShape ;
+    sh:name "OperationalEventShape" ;
+    rdfs:label "Rótulo 3W deve ser classe canônica (0–9) ou transiente (101, 102, 105–109)"@pt ;
+    sh:targetClass geo:OperationalEvent ;
+    sh:property [
+        sh:path geo:threew_label ;
+        sh:in ( 0 1 2 3 4 5 6 7 8 9 101 102 105 106 107 108 109 ) ;
+        sh:severity sh:Violation ;
+        sh:message "Rótulo 3W inválido — deve ser 0–9 (steady) ou base+100 transiente (exceto 3 e 4)."@pt ;
+    ] .
+
+geo:Sensor3WShape
+    a sh:NodeShape ;
+    sh:name "Sensor3WShape" ;
+    rdfs:label "Sensor 3W deve ter unidade e tipo de grandeza"@pt ;
+    sh:targetClass geo:Sensor3W ;
+    sh:property [
+        sh:path geo:threew_unit ;
+        sh:datatype xsd:string ;
+        sh:minCount 1 ;
+        sh:severity sh:Violation ;
+        sh:message "Sensor 3W deve declarar threew_unit."@pt ;
+    ] ;
+    sh:property [
+        sh:path geo:threew_quantity_kind ;
+        sh:in ( "Pressure" "Temperature" "VolumeRate" "ValveOpening" "ValveState" ) ;
+        sh:severity sh:Violation ;
+        sh:message "threew_quantity_kind deve ser um dos valores canônicos."@pt ;
+    ] .
+
+geo:ValveStateShape
+    a sh:NodeShape ;
+    sh:name "ValveStateShape" ;
+    rdfs:label "Estado de válvula 3W deve ser 0, 0.5 ou 1"@pt ;
+    sh:targetClass geo:ValveStateObservation ;
+    sh:property [
+        sh:path geo:value ;
+        sh:in ( 0.0 0.5 1.0 ) ;
+        sh:severity sh:Violation ;
+        sh:message "Estado de válvula 3W deve ser 0 (fechada), 0.5 (parcial) ou 1 (aberta)."@pt ;
+    ] .

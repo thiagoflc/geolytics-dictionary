@@ -30,6 +30,11 @@ import { buildCardsHtml, buildGsoCardsHtml } from './cards-html.js';
 import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from './osdu-extra-nodes.js';
 import { OG_NODES, OG_EDGES, OG_GLOSSARY } from './operacoes-geologicas-nodes.js';
 import {
+  THREEW_VARIABLES, THREEW_EQUIPMENT, THREEW_EQUIPMENT_PATCHES,
+  THREEW_EVENTS, THREEW_EDGES, THREEW_TAXONOMIES,
+  THREEW_DATASET, THREEW_ACRONYM_LINKS, THREEW_RAG_CHUNKS,
+} from './threew-data.js';
+import {
   ONTOPETRO_CLASSES,
   ONTOPETRO_PROPERTIES,
   ONTOPETRO_RELATIONS,
@@ -49,6 +54,9 @@ import {
   OSDU_ALIGNMENT_ADDITIONS,
   OSDU_RAG_CHUNKS,
 } from './ontopetro-data.js';
+
+/* 3W integration: extend TAXONOMIES with 3W entries */
+Object.assign(TAXONOMIES, THREEW_TAXONOMIES);
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, '..');
@@ -570,6 +578,9 @@ const CONJUNTOS = [
       { nome: 'DATA DE ADESÃO À RESOLUÇÃO', descricao: 'Data na qual se deu a adesão à Resolução nº 815/2020', tipo: 'DATE' },
     ] },
 ];
+
+/* 3W: register dataset entry */
+CONJUNTOS.push(THREEW_DATASET);
 
 const ONTOLOGY_TYPES = {
   tipologia: {
@@ -1134,11 +1145,18 @@ function buildEntityGraph() {
        are NOT re-mapped through withSkosAliases — that would add empty aliases to
        the 30 OG nodes that intentionally do not carry them. */
     ...OG_NODES,
+    /* 3W nodes: 27 sensors + 10 events + 13 equipment — fully-baked, skos fields inlined */
+    ...THREEW_VARIABLES, ...THREEW_EVENTS, ...THREEW_EQUIPMENT,
   ];
+  /* Apply 3W equipment patches (enriches existing nodes like dhsv in-place) */
+  for (const patch of THREEW_EQUIPMENT_PATCHES) {
+    const idx = nodes.findIndex((n) => n.id === patch.id);
+    if (idx !== -1) Object.assign(nodes[idx], patch);
+  }
   /* deriva relation_label_en a partir do snake_case do campo relation, exceto
      quando a aresta já traz relation_label_en explícito (caso OG_EDGES, onde
      os labels foram traduzidos manualmente). */
-  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES, ...OG_EDGES].map((e) => ({
+  const edges = [...EDGES, ...ONTOPETRO_EDGES, ...OSDU_EDGES, ...OSDU_EXTRA_EDGES, ...OG_EDGES, ...THREEW_EDGES].map((e) => ({
     source: e.source,
     target: e.target,
     relation: e.relation,
@@ -1149,7 +1167,7 @@ function buildEntityGraph() {
   return {
     version: VERSION,
     generated: NOW,
-    source: 'Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU',
+    source: 'Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W',
     nodes,
     edges,
   };
@@ -1174,8 +1192,8 @@ function buildFull() {
         extended_terms: EXTENDED_TERMS.length,
         total_terms: GLOSSARIO.length + OG_GLOSSARY.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
-        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length,
-        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length,
+        entity_nodes: ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length + THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length,
+        entity_edges: EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length + THREEW_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
         ontopetro_classes: ONTOPETRO_CLASSES.length,
@@ -1201,7 +1219,7 @@ function buildFull() {
         fracture_classes: gmf ? (gmf.classes || []).length : 0,
         fracture_to_gso_mappings: ftg ? (ftg.mappings || []).length : 0,
       },
-      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)', 'Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)', 'Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)'],
+      sources: ['ANP/SEP', 'Lei 9478/1997', 'GeoCore (UFRGS)', 'Petro KGraph (PUC-Rio)', 'O3PO (UFRGS)', 'OSDU', 'Petrobras/Geolytics internal (Layer 6)', 'GSO/Loop3D (Layer 7, CC BY 4.0)', 'Seismic (Yilmaz 2001, Russell 1988, Connolly 1999, Chopra & Marfurt 2007)', 'Geomechanics (Fjaer et al. 2008, Zoback 2010, Hoek & Brown 2019, Anderson 1951)', 'Petrobras 3W v2.0.0 (CC-BY 4.0, Vargas et al. 2019, DOI:10.1016/j.petrol.2019.106223)'],
     },
     glossary: [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY],
     extended_terms: EXTENDED_TERMS,
@@ -1422,7 +1440,15 @@ function datasetTitle(id) {
 function loadAcronyms() {
   const p = path.join(ROOT, 'data/acronyms.json');
   if (!fs.existsSync(p)) return null;
-  return JSON.parse(fs.readFileSync(p, 'utf8'));
+  const data = JSON.parse(fs.readFileSync(p, 'utf8'));
+  /* Apply 3W acronym enrichment patches (adds linked_entity_id, threew_role) */
+  if (Array.isArray(data.acronyms)) {
+    for (const patch of THREEW_ACRONYM_LINKS) {
+      const item = data.acronyms.find((a) => a.id === patch.id);
+      if (item) Object.assign(item, patch);
+    }
+  }
+  return data;
 }
 
 function buildRagCorpus() {
@@ -1830,6 +1856,11 @@ function buildRagCorpus() {
     }
   }
 
+  /* type=threew_event — 3W Petrobras operational event classes */
+  for (const chunk of THREEW_RAG_CHUNKS) {
+    lines.push(chunk);
+  }
+
   return lines.map((l) => JSON.stringify(l)).join('\n') + '\n';
 }
 
@@ -1932,6 +1963,10 @@ Sistema Petrolífero → Trapa → Acumulação → Campo → Reserva (1P/2P/3P)
 Cada elo é uma entidade do dicionário (\`data/entity-graph.json\`). Use ao raciocinar sobre "o que vem antes/depois" no ciclo de E&P. Fonte legal: Lei 9.478/1997, Lei 12.351/2010, Resoluções ANP.
 
 Ao responder: use terminologia ANP correta, distinga regimes contratuais e camadas semânticas (L1-L6), cite fonte legal/regulatória quando possível, e desambigue ativamente os termos da seção 3.
+
+## 8. Dataset 3W — Eventos operacionais em poços offshore (Petrobras, CC-BY 4.0)
+
+O GeoBrain incorpora o esquema semântico do **Petrobras 3W Dataset v2.0.0** (Vargas et al. 2019, DOI 10.1016/j.petrol.2019.106223): **10 classes de eventos** indesejáveis (0=Normal, 1=Aumento BSW, 2=Fechamento Espúrio DHSV, 3=Severe Slugging, 4=Instabilidade de Fluxo, 5=Queda Rápida de Produção, 6=Restrição Rápida PCK, 7=Incrustação PCK, 8=Hidrato em Linha de Produção, 9=Hidrato em Linha de Serviço), **27 variáveis de sensores** (pressão, temperatura, abertura de válvulas, estado de válvulas, vazão), e **14 equipamentos da Árvore de Natal Molhada** (ANM, DHSV, PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK, TPT, PDG). Classes transientes: base+100 (exceto classes 3 e 4, que não têm variante transiente). Polissemias críticas: **PCK** (choke de produção no 3W) ≠ pilot-operated check valve; **BSW** (propriedade do fluido) vs. **event_bsw_increase** (evento classe 1); **state** (3W) vs. **well_state** (taxonomia ANP).
 `;
 
 const SYSTEM_PROMPT_EN = `# Domain context — Brazilian Oil & Gas (E&P)
@@ -1982,6 +2017,10 @@ The following concepts are **exclusive to the Brazilian regulatory framework** (
 - ***Declaração de Comercialidade*** (*Commerciality Declaration*) — formal Brazilian regulatory milestone that closes a PAD and originates a Field. Different from generic "field development decision".
 
 When users ask about these concepts in any other context (e.g., "is this concept the same as a US lease?"), the answer is **no** — they are Brazilian-specific. Cite ANP/Lei 9.478/1997 explicitly.
+
+## Petrobras 3W Dataset — Operational events in offshore wells (CC-BY 4.0)
+
+GeoBrain incorporates the semantic schema of the **Petrobras 3W Dataset v2.0.0** (Vargas et al. 2019, DOI 10.1016/j.petrol.2019.106223): **10 event classes** (0=Normal, 1=BSW Increase, 2=Spurious DHSV Closure, 3=Severe Slugging, 4=Flow Instability, 5=Rapid Production Loss, 6=Quick PCK Restriction, 7=PCK Scaling, 8=Production Line Hydrate, 9=Service Line Hydrate), **27 sensor variables** (pressure, temperature, valve openings, valve states, flow rates), and **14 Subsea Xmas-tree (ANM) components** (DHSV, PMV, AMV, PWV, AWV, PXO, XO, SDV-P, SDV-GL, GLCK, PCK, TPT, PDG). Transient labels = base+100 (classes 3 and 4 have no transient variant). Critical polysemies: **PCK** (production choke in 3W context) ≠ pilot-operated check valve; **BSW** (fluid property) vs. **event_bsw_increase** (class 1 event); **state** (3W sensor) vs. **well_state** (ANP taxonomy).
 `;
 
 /* ─────────────────────────────────────────────────────────────
@@ -2075,8 +2114,8 @@ console.log('\n✓ Done.');
 console.log(`  Glossary terms: ${GLOSSARIO.length + OG_GLOSSARY.length} (${GLOSSARIO.length} base + ${OG_GLOSSARY.length} OG)`);
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
-console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG)`);
-console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length}`);
+console.log(`  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length + THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG + ${THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length} 3W)`);
+console.log(`  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length + THREEW_EDGES.length}`);
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(`  Ontopetro: ${ONTOPETRO_CLASSES.length} classes, ${ONTOPETRO_PROPERTIES.length} properties, ${ONTOPETRO_RELATIONS.length} relations, ${ONTOPETRO_INSTANCES.length} instances`);
 console.log(`  Modules extended: ${Object.keys(MODULES_EXTENDED).length} (M7/M8/M9/M10)`);

@@ -509,6 +509,81 @@ function _checkLayerCoverageMismatch(claim) {
 }
 
 // ---------------------------------------------------------------------------
+// 3W Petrobras v2.0.0 — validator rules
+// Source: CC-BY 4.0, Vargas et al. 2019, DOI:10.1016/j.petrol.2019.106223
+// ---------------------------------------------------------------------------
+
+const _3W_VALID_STEADY_LABELS = new Set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9]);
+/* Classes 3 and 4 (severe slugging, flow instability) have no transient variant. */
+const _3W_VALID_TRANSIENT_LABELS = new Set([101, 102, 105, 106, 107, 108, 109]);
+const _3W_ALL_VALID_LABELS = new Set([..._3W_VALID_STEADY_LABELS, ..._3W_VALID_TRANSIENT_LABELS]);
+const _3W_STEADY_ONLY = new Set([3, 4]);
+
+/**
+ * 3W_INVALID_LABEL — rejects any label outside the canonical set (0–9, 101,102,105-109).
+ * Expects structured claim with context.threew_label (number).
+ */
+function _check3wInvalidLabel(structuredClaim) {
+  if (!structuredClaim || !structuredClaim.context) return [];
+  const label = structuredClaim.context.threew_label;
+  if (label === undefined || label === null) return [];
+  if (!_3W_ALL_VALID_LABELS.has(Number(label))) {
+    return [{
+      rule: '3W_INVALID_LABEL',
+      severity: 'error',
+      evidence: `Rótulo 3W '${label}' não é uma classe canônica válida. Classes válidas: 0–9 (steady) e 101,102,105,106,107,108,109 (transient).`,
+      suggested_fix: 'Usar um dos 10 rótulos canônicos 3W (0–9) ou a variante transiente correspondente (base+100, exceto classes 3 e 4).',
+      source_layer: 'petrobras-3w',
+    }];
+  }
+  return [];
+}
+
+/**
+ * 3W_TRANSIENT_FORBIDDEN_FOR_STEADY — classes 3 and 4 have no transient variant.
+ * Checks any label >= 100 (transient range) whose base class (label-100) is steady-only.
+ * Expects structured claim with context.threew_label (number).
+ */
+function _check3wTransientForbiddenForSteady(structuredClaim) {
+  if (!structuredClaim || !structuredClaim.context) return [];
+  const label = Number(structuredClaim.context.threew_label);
+  if (label >= 100) {
+    const baseClass = label - 100;
+    if (_3W_STEADY_ONLY.has(baseClass)) {
+      return [{
+        rule: '3W_TRANSIENT_FORBIDDEN_FOR_STEADY',
+        severity: 'error',
+        evidence: `Rótulo transiente ${label} corresponde à classe ${baseClass}, que não tem variante transiente no 3W (classes 3=Severe Slugging e 4=Flow Instability são sempre steady).`,
+        suggested_fix: `Usar o rótulo steady ${baseClass} para esta classe de evento.`,
+        source_layer: 'petrobras-3w',
+      }];
+    }
+  }
+  return [];
+}
+
+/**
+ * 3W_VALVE_STATE_DOMAIN — ESTADO-* sensors must be 0, 0.5 or 1.
+ * Expects structured claim with context.valve_state (number).
+ */
+function _check3wValveStateDomain(structuredClaim) {
+  if (!structuredClaim || !structuredClaim.context) return [];
+  const val = structuredClaim.context.valve_state;
+  if (val === undefined || val === null) return [];
+  const n = Number(val);
+  if (n !== 0 && n !== 0.5 && n !== 1) {
+    return [{
+      rule: '3W_VALVE_STATE_DOMAIN',
+      severity: 'error',
+      evidence: `Valor de estado de válvula 3W '${val}' inválido. Apenas 0 (fechada), 0.5 (parcial) e 1 (aberta) são permitidos.`,
+      suggested_fix: 'Usar 0, 0.5 ou 1 para representar o estado de válvula ESTADO-* no 3W.',
+      source_layer: 'petrobras-3w',
+    }];
+  }
+  return [];
+}
+
+// ---------------------------------------------------------------------------
 // Public API
 // ---------------------------------------------------------------------------
 
@@ -544,6 +619,10 @@ function validate(claim) {
     ..._checkAcronymAmbiguous(text),
     ..._checkOsduKindFormat(text),
     ...(structuredClaim ? _checkLayerCoverageMismatch(structuredClaim) : []),
+    /* 3W Petrobras rules */
+    ...(structuredClaim ? _check3wInvalidLabel(structuredClaim) : []),
+    ...(structuredClaim ? _check3wTransientForbiddenForSteady(structuredClaim) : []),
+    ...(structuredClaim ? _check3wValveStateDomain(structuredClaim) : []),
   ];
 
   const violations = allViolations.filter((v) => v.severity === 'error');
