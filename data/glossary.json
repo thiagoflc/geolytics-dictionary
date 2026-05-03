@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-03T19:20:37.815Z",
-    "count": 47
+    "generated": "2026-05-03T20:22:54.243Z",
+    "count": 53
   },
   "terms": [
     {
@@ -1178,6 +1178,66 @@
         "Suite básica: GR, resistividade, neutrão, densidade",
         "Suite especial: NMR, dipmeter, image log"
       ]
+    },
+    {
+      "id": "bloco-anchor",
+      "termo": "Bloco — entidade-âncora regulatória + técnica + decisória",
+      "categoria": "regulatorio",
+      "definicao": "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e decisórios (portfólio, ranking, devolução). É objeto regulatório, técnico e decisório simultaneamente — fonte de muitas ambiguidades quando o termo 'Bloco' é usado para significar estado, área, contrato ou campo.",
+      "fonte": "Lei nº 9.478/1997; Curso PROPEX 2024/2025",
+      "apareceEm": [
+        "blocos-contrato",
+        "pads-andamento",
+        "pads-concluidos",
+        "declaracoes-comercialidade"
+      ]
+    },
+    {
+      "id": "propex",
+      "termo": "PROPEX — Programa Exploratório (Petrobras)",
+      "categoria": "governanca_corporativa",
+      "definicao": "Programa corporativo Petrobras de governança de projetos exploratórios em Blocos. Estrutura PEXPs, PGPs, TEPs e fóruns COMEXP/GRBLOC. CRÍTICO: PROPEX é Programa, não projeto — Projetos Exploratórios são entidades distintas governadas por ele.",
+      "fonte": "Curso PROPEX 2024/2025; PE-2EXP-PROPEX",
+      "apareceEm": []
+    },
+    {
+      "id": "pad-doc",
+      "termo": "PAD — Plano de Avaliação de Descoberta",
+      "categoria": "regulatorio",
+      "definicao": "Documento submetido à ANP para avaliar comercialidade de descoberta no Bloco. Disparado após Notificação de Descoberta. Tem PGP próprio. Pode incluir TLD. Base para decisão de Declaração de Comercialidade.",
+      "fonte": "Resolução ANP nº 47/2014",
+      "apareceEm": [
+        "pads-andamento",
+        "pads-concluidos"
+      ]
+    },
+    {
+      "id": "dc-anp",
+      "termo": "DC — Declaração de Comercialidade",
+      "categoria": "regulatorio",
+      "definicao": "Ato regulatório que declara descoberta como comercial. Encerra fase exploratória, transforma área do Bloco em Campo, dispara obrigação de PD em até 180 dias.",
+      "fonte": "Lei nº 9.478/1997",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ]
+    },
+    {
+      "id": "pd-pdp",
+      "termo": "PD/PDP — Plano de Desenvolvimento (da Produção)",
+      "categoria": "regulatorio",
+      "definicao": "Documento técnico-regulatório entregue em até 180 dias após DC. Agrupa info técnica/operacional/econômica/ambiental da explotação, incluindo abandono. ANP analisa em até 180 dias. Em jazidas compartilhadas, acompanha AIP ou CIP.",
+      "fonte": "Resolução ANP nº 17/2015",
+      "apareceEm": [
+        "declaracoes-comercialidade"
+      ]
+    },
+    {
+      "id": "wi",
+      "termo": "WI — Working Interest (Participação)",
+      "categoria": "gestao_portfolio",
+      "definicao": "Percentual de sócio nos custos e receitas de Bloco/Campo. Soma 100% entre todos os sócios. Determina peso decisório em comitês operacionais e alocação de CAPEX/OPEX.",
+      "fonte": "SPE Reserves Definitions; Contratos de Concessão ANP",
+      "apareceEm": []
     }
   ]
 }

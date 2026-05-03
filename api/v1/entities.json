@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-03T19:20:37.815Z",
-    "count": 310
+    "generated": "2026-05-03T20:22:54.243Z",
+    "count": 334
   },
   "entities": [
     {
@@ -1145,6 +1145,14 @@
         "Partilha de Libra",
         "Cessão Onerosa de Búzios"
       ],
+      "module": "data/gestao-projetos-parcerias.json#GPP002",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Lei 12.351/2010",
+        "Lei 12.276/2010"
+      ],
+      "corporate_internal": false,
+      "gpp_role": "regulatory_anchor",
       "relations": {
         "outgoing": [
           {
@@ -1176,6 +1184,11 @@
             "to": "pte",
             "relation": "monitored_via",
             "style": "solid"
+          },
+          {
+            "to": "pem",
+            "relation": "has_minimum_program",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -1187,6 +1200,16 @@
           {
             "from": "joa",
             "relation": "complements",
+            "style": "solid"
+          },
+          {
+            "from": "bloco-anchor",
+            "relation": "is_subject_to_contract",
+            "style": "solid"
+          },
+          {
+            "from": "rodada",
+            "relation": "produces_contract",
             "style": "solid"
           }
         ]
@@ -1230,6 +1253,13 @@
         "@en": null
       },
       "skos_example": [],
+      "module": "data/gestao-projetos-parcerias.json#GPP003",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Contratos de Concessão ANP"
+      ],
+      "corporate_internal": false,
+      "gpp_role": "regulatory_obligation",
       "relations": {
         "outgoing": [
           {
@@ -1241,12 +1271,22 @@
             "to": "periodo-exploratorio",
             "relation": "scoped_to",
             "style": "solid"
+          },
+          {
+            "to": "obrigacao-exploratoria",
+            "relation": "decomposes_into",
+            "style": "solid"
           }
         ],
         "incoming": [
           {
             "from": "contrato-ep",
             "relation": "requires",
+            "style": "solid"
+          },
+          {
+            "from": "contrato-ep",
+            "relation": "has_minimum_program",
             "style": "solid"
           }
         ]
@@ -1377,6 +1417,14 @@
         "PAD Sépia",
         "PAD Atapu"
       ],
+      "module": "data/gestao-projetos-parcerias.json#GPP013",
+      "evidence_refs": [
+        "Resolução ANP 47/2014",
+        "Resolução ANP 845/2021"
+      ],
+      "corporate_internal": false,
+      "gpp_role": "regulatory_doc",
+      "triggers_state": "area-em-pad-state",
       "relations": {
         "outgoing": [
           {
@@ -1398,6 +1446,16 @@
             "to": "tld",
             "relation": "includes",
             "style": "solid"
+          },
+          {
+            "to": "area-em-pad-state",
+            "relation": "triggers_state",
+            "style": "solid"
+          },
+          {
+            "to": "declaracao-comercialidade",
+            "relation": "leads_to",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -1405,6 +1463,11 @@
             "from": "bloco",
             "relation": "may_have",
             "style": "dashed"
+          },
+          {
+            "from": "pgp",
+            "relation": "documents_pad",
+            "style": "solid"
           }
         ]
       }
@@ -1581,6 +1644,13 @@
         "@en": null
       },
       "skos_example": [],
+      "module": "data/gestao-projetos-parcerias.json#GPP014",
+      "evidence_refs": [
+        "Lei 9.478/1997"
+      ],
+      "corporate_internal": false,
+      "gpp_role": "regulatory_event",
+      "triggers_state": "campo-em-desenvolvimento-state",
       "relations": {
         "outgoing": [
           {
@@ -1592,6 +1662,16 @@
             "to": "campo",
             "relation": "originates",
             "style": "solid"
+          },
+          {
+            "to": "pd-pdp",
+            "relation": "triggers_doc",
+            "style": "solid"
+          },
+          {
+            "to": "campo-em-desenvolvimento-state",
+            "relation": "marks_field_transition",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -1599,6 +1679,11 @@
             "from": "rfad",
             "relation": "may_yield",
             "style": "dashed"
+          },
+          {
+            "from": "pad",
+            "relation": "leads_to",
+            "style": "solid"
           }
         ]
       }
@@ -10675,6 +10760,1570 @@
           {
             "from": "retro-analysis",
             "relation": "produces",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#378ADD",
+      "size": 28,
+      "legal_source": "Lei 9.478/1997",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "Bloco",
+        "Bloco Exploratório",
+        "Área Concedida"
+      ],
+      "synonyms_en": [
+        "Exploration Block",
+        "Lease Block"
+      ],
+      "examples": [
+        "BM-S-11 (Lula)",
+        "BCAM-40 (Búzios)",
+        "BS-4 (Atlanta)",
+        "BM-C-33"
+      ],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "bloco-anchor",
+      "label": "Bloco (entidade-âncora)",
+      "label_pt": "Bloco (entidade-âncora)",
+      "label_en": "Block (anchor entity)",
+      "type": "regulatory_anchor",
+      "definition_pt": "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e de decisão (portfólio, ranking, devolução). Detalhada em data/gestao-projetos-parcerias.json#GPP001.",
+      "definition_en_canonical": "Primary upstream concession/production-sharing unit. Anchors regulatory, technical and portfolio-decision concepts simultaneously. Detailed in data/gestao-projetos-parcerias.json#GPP001.",
+      "module": "data/gestao-projetos-parcerias.json#GPP001",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Bloco (entidade-âncora)",
+        "@en": "Block (anchor entity)"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "Bloco",
+          "Bloco Exploratório",
+          "Área Concedida"
+        ],
+        "@en": [
+          "Exploration Block",
+          "Lease Block"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e de decisão (portfólio, ranking, devolução). Detalhada em data/gestao-projetos-parcerias.json#GPP001.",
+        "@en": "Primary upstream concession/production-sharing unit. Anchors regulatory, technical and portfolio-decision concepts simultaneously. Detailed in data/gestao-projetos-parcerias.json#GPP001."
+      },
+      "skos_example": [
+        "BM-S-11 (Lula)",
+        "BCAM-40 (Búzios)",
+        "BS-4 (Atlanta)",
+        "BM-C-33"
+      ],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "contrato-ep",
+            "relation": "is_subject_to_contract",
+            "style": "solid"
+          },
+          {
+            "to": "bloco-exploratorio-state",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "to": "bloco-em-avaliacao-state",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "to": "area-em-pad-state",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "to": "campo-em-desenvolvimento-state",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "to": "campo-producao-state",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "to": "working-interest",
+            "relation": "has_partnership_share",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "portfolio-exploratorio",
+            "relation": "aggregates",
+            "style": "solid"
+          },
+          {
+            "from": "vme",
+            "relation": "scores",
+            "style": "solid"
+          },
+          {
+            "from": "area-retida",
+            "relation": "is_outcome_of",
+            "style": "solid"
+          },
+          {
+            "from": "area-devolvida",
+            "relation": "is_outcome_of",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#1ABC9C",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "bloco-exploratorio-state",
+      "label": "Bloco Exploratório (estado)",
+      "label_pt": "Bloco Exploratório (estado)",
+      "label_en": "Exploratory Block (state)",
+      "type": "lifecycle_state",
+      "definition_pt": "Estado do Bloco sob contrato ativo, sem descoberta comercial. Governança via PROPEX. Conecta a Poços Pioneiros/Estratigráficos, Avaliação de Risco, VME.",
+      "definition_en_canonical": "Block lifecycle state under active contract, no commercial discovery yet. PROPEX-governed.",
+      "module": "data/gestao-projetos-parcerias.json#GPP004",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Bloco Exploratório (estado)",
+        "@en": "Exploratory Block (state)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Estado do Bloco sob contrato ativo, sem descoberta comercial. Governança via PROPEX. Conecta a Poços Pioneiros/Estratigráficos, Avaliação de Risco, VME.",
+        "@en": "Block lifecycle state under active contract, no commercial discovery yet. PROPEX-governed."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco-em-avaliacao-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco-anchor",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#1ABC9C",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "bloco-em-avaliacao-state",
+      "label": "Bloco em Avaliação",
+      "label_pt": "Bloco em Avaliação",
+      "label_en": "Block under Evaluation",
+      "type": "lifecycle_state",
+      "definition_pt": "Estado após descoberta no Bloco — fase de delimitação e estudos técnico-econômicos. Fase PEXP2 do PROPEX.",
+      "definition_en_canonical": "State following a discovery — delineation and techno-economic studies. PROPEX PEXP2 phase.",
+      "module": "data/gestao-projetos-parcerias.json#GPP005",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Bloco em Avaliação",
+        "@en": "Block under Evaluation"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Estado após descoberta no Bloco — fase de delimitação e estudos técnico-econômicos. Fase PEXP2 do PROPEX.",
+        "@en": "State following a discovery — delineation and techno-economic studies. PROPEX PEXP2 phase."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "area-em-pad-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco-anchor",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "from": "bloco-exploratorio-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#1ABC9C",
+      "size": 18,
+      "legal_source": "Resolução ANP 47/2014",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "area-em-pad-state",
+      "label": "Área em PAD",
+      "label_pt": "Área em PAD",
+      "label_en": "Area under Discovery Evaluation Plan",
+      "type": "lifecycle_state",
+      "definition_pt": "Subárea do Bloco formalmente submetida a Plano de Avaliação de Descoberta (PAD). Múltiplos PADs podem coexistir num Bloco.",
+      "definition_en_canonical": "Block subarea formally under a Discovery Evaluation Plan. Multiple PADs may coexist within a Block.",
+      "module": "data/gestao-projetos-parcerias.json#GPP006",
+      "evidence_refs": [
+        "Resolução ANP 47/2014"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Área em PAD",
+        "@en": "Area under Discovery Evaluation Plan"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Subárea do Bloco formalmente submetida a Plano de Avaliação de Descoberta (PAD). Múltiplos PADs podem coexistir num Bloco.",
+        "@en": "Block subarea formally under a Discovery Evaluation Plan. Multiple PADs may coexist within a Block."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "campo-em-desenvolvimento-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco-anchor",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "from": "bloco-em-avaliacao-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          },
+          {
+            "from": "pad",
+            "relation": "triggers_state",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#16A085",
+      "size": 18,
+      "legal_source": "Resolução ANP 17/2015",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "campo-em-desenvolvimento-state",
+      "label": "Campo em Desenvolvimento",
+      "label_pt": "Campo em Desenvolvimento",
+      "label_en": "Field under Development",
+      "type": "lifecycle_state",
+      "definition_pt": "Estado pós-DC: a área do Bloco vira Campo, e um PD/PDP é aprovado. CAPEX, perfuração de poços de desenvolvimento, infraestrutura.",
+      "definition_en_canonical": "Post-DC state: Block area becomes a Field, and a PD/PDP is approved. CAPEX, development drilling, infrastructure.",
+      "module": "data/gestao-projetos-parcerias.json#GPP007",
+      "evidence_refs": [
+        "Resolução ANP 17/2015"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Campo em Desenvolvimento",
+        "@en": "Field under Development"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Estado pós-DC: a área do Bloco vira Campo, e um PD/PDP é aprovado. CAPEX, perfuração de poços de desenvolvimento, infraestrutura.",
+        "@en": "Post-DC state: Block area becomes a Field, and a PD/PDP is approved. CAPEX, development drilling, infrastructure."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "campo-producao-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco-anchor",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "from": "area-em-pad-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          },
+          {
+            "from": "declaracao-comercialidade",
+            "relation": "marks_field_transition",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#16A085",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "campo-producao-state",
+      "label": "Campo de Produção",
+      "label_pt": "Campo de Produção",
+      "label_en": "Production Field",
+      "type": "lifecycle_state",
+      "definition_pt": "Campo com produção iniciada. Marco regulatório: Notificação de Início de Produção (Primeiro Óleo). Conecta a Poços Produtores/Injetores, OPEX, Medição Fiscal, Reservas.",
+      "definition_en_canonical": "Field with active production. Regulatory milestone: Start-of-Production notice (First Oil).",
+      "module": "data/gestao-projetos-parcerias.json#GPP008",
+      "evidence_refs": [
+        "ANP/SEP"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Campo de Produção",
+        "@en": "Production Field"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Campo com produção iniciada. Marco regulatório: Notificação de Início de Produção (Primeiro Óleo). Conecta a Poços Produtores/Injetores, OPEX, Medição Fiscal, Reservas.",
+        "@en": "Field with active production. Regulatory milestone: Start-of-Production notice (First Oil)."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "bloco-anchor",
+            "relation": "has_lifecycle_state",
+            "style": "solid"
+          },
+          {
+            "from": "campo-em-desenvolvimento-state",
+            "relation": "transitions_to",
+            "style": "dashed"
+          },
+          {
+            "from": "isa",
+            "relation": "marks_transition",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#8E44AD",
+      "size": 22,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "PROPEX",
+        "Programa Exploratório"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "propex",
+      "label": "PROPEX (Programa Exploratório)",
+      "label_pt": "PROPEX (Programa Exploratório)",
+      "label_en": "PROPEX — Exploratory Program",
+      "type": "governance_program",
+      "definition_pt": "Programa corporativo Petrobras de governança de projetos exploratórios em Blocos. Estrutura PEXPs, PGPs, TEPs, fóruns COMEXP/GRBLOC. PROPEX é Programa, NÃO projeto.",
+      "definition_en_canonical": "Petrobras corporate program governing exploratory projects in Blocks. Structures PEXPs, PGPs, TEPs, forums COMEXP/GRBLOC. PROPEX is a Program, NOT a project.",
+      "module": "data/gestao-projetos-parcerias.json#GPP009",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "PROPEX (Programa Exploratório)",
+        "@en": "PROPEX — Exploratory Program"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "PROPEX",
+          "Programa Exploratório"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Programa corporativo Petrobras de governança de projetos exploratórios em Blocos. Estrutura PEXPs, PGPs, TEPs, fóruns COMEXP/GRBLOC. PROPEX é Programa, NÃO projeto.",
+        "@en": "Petrobras corporate program governing exploratory projects in Blocks. Structures PEXPs, PGPs, TEPs, forums COMEXP/GRBLOC. PROPEX is a Program, NOT a project."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "pexp",
+            "relation": "has_decision_gate",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "projeto-exploratorio",
+            "relation": "is_governed_by_program",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#9B59B6",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "projeto-exploratorio",
+      "label": "Projeto Exploratório",
+      "label_pt": "Projeto Exploratório",
+      "label_en": "Exploratory Project",
+      "type": "project",
+      "definition_pt": "Conjunto delimitado de atividades técnicas/econômicas/operacionais em um Bloco, voltadas a verificar acumulações de hidrocarbonetos. Governado pelo PROPEX, distinto deste.",
+      "definition_en_canonical": "Delimited set of technical/economic/operational activities in a Block, aimed at verifying hydrocarbon accumulations. Governed by PROPEX, distinct from it.",
+      "module": "data/gestao-projetos-parcerias.json#GPP010",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Projeto Exploratório",
+        "@en": "Exploratory Project"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Conjunto delimitado de atividades técnicas/econômicas/operacionais em um Bloco, voltadas a verificar acumulações de hidrocarbonetos. Governado pelo PROPEX, distinto deste.",
+        "@en": "Delimited set of technical/economic/operational activities in a Block, aimed at verifying hydrocarbon accumulations. Governed by PROPEX, distinct from it."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "propex",
+            "relation": "is_governed_by_program",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "pexp",
+            "relation": "evaluates_project",
+            "style": "solid"
+          },
+          {
+            "from": "pgp",
+            "relation": "documents_project",
+            "style": "solid"
+          },
+          {
+            "from": "tep",
+            "relation": "closes_project",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#E74C3C",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "PEXP",
+        "PEXP1",
+        "PEXP2",
+        "PEXP2A",
+        "PEXP3",
+        "PEXP3A"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "pexp",
+      "label": "PEXP — Portões Decisórios PROPEX",
+      "label_pt": "PEXP — Portões Decisórios PROPEX",
+      "label_en": "PEXP — PROPEX Decision Gates",
+      "type": "decision_event",
+      "definition_pt": "Eventos decisórios formais do PROPEX. Gates: PEXP1 (estratégia), PEXP2 (PAD/devolução), PEXP2A (revisão PEM), PEXP3 (DC/devolução), PEXP3A (revisão PAD).",
+      "definition_en_canonical": "Formal PROPEX decision events. Gates: PEXP1 (strategy), PEXP2 (PAD/relinquishment), PEXP2A (PEM review), PEXP3 (DC/relinquishment), PEXP3A (PAD review).",
+      "module": "data/gestao-projetos-parcerias.json#GPP011",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "PEXP — Portões Decisórios PROPEX",
+        "@en": "PEXP — PROPEX Decision Gates"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "PEXP",
+          "PEXP1",
+          "PEXP2",
+          "PEXP2A",
+          "PEXP3",
+          "PEXP3A"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Eventos decisórios formais do PROPEX. Gates: PEXP1 (estratégia), PEXP2 (PAD/devolução), PEXP2A (revisão PEM), PEXP3 (DC/devolução), PEXP3A (revisão PAD).",
+        "@en": "Formal PROPEX decision events. Gates: PEXP1 (strategy), PEXP2 (PAD/relinquishment), PEXP2A (PEM review), PEXP3 (DC/relinquishment), PEXP3A (PAD review)."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "projeto-exploratorio",
+            "relation": "evaluates_project",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "propex",
+            "relation": "has_decision_gate",
+            "style": "solid"
+          },
+          {
+            "from": "comexp",
+            "relation": "deliberates_at",
+            "style": "solid"
+          },
+          {
+            "from": "grt",
+            "relation": "supports_gate",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#E67E22",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "pgp",
+      "label": "PGP — Plano de Gerenciamento de Projetos",
+      "label_pt": "PGP — Plano de Gerenciamento de Projetos",
+      "label_en": "PGP — Project Management Plan",
+      "type": "governance_doc",
+      "definition_pt": "Documento de escopo/cronograma/custo/riscos/governança de projeto no PROPEX. Variantes: PGP do Bloco e PGP do PAD. Obrigatório nos PEXPs.",
+      "definition_en_canonical": "Project scope/schedule/cost/risk/governance document within PROPEX. Variants: Block-PGP, PAD-PGP. Mandatory at PEXPs.",
+      "module": "data/gestao-projetos-parcerias.json#GPP012",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "PGP — Plano de Gerenciamento de Projetos",
+        "@en": "PGP — Project Management Plan"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Documento de escopo/cronograma/custo/riscos/governança de projeto no PROPEX. Variantes: PGP do Bloco e PGP do PAD. Obrigatório nos PEXPs.",
+        "@en": "Project scope/schedule/cost/risk/governance document within PROPEX. Variants: Block-PGP, PAD-PGP. Mandatory at PEXPs."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "projeto-exploratorio",
+            "relation": "documents_project",
+            "style": "solid"
+          },
+          {
+            "to": "pad",
+            "relation": "documents_pad",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#F39C12",
+      "size": 22,
+      "legal_source": "Resolução ANP 17/2015",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "PD",
+        "PDP",
+        "Plano de Desenvolvimento",
+        "Plano de Desenvolvimento da Produção"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "pd-pdp",
+      "label": "PD/PDP — Plano de Desenvolvimento (da Produção)",
+      "label_pt": "PD/PDP — Plano de Desenvolvimento (da Produção)",
+      "label_en": "PD/PDP — Production Development Plan",
+      "type": "regulatory_doc",
+      "definition_pt": "Documento técnico-regulatório, em até 180 dias após DC. Agrupa info técnica/operacional/econômica/ambiental da explotação, incluindo abandono. ANP analisa em 180 dias.",
+      "definition_en_canonical": "Technical-regulatory document, within 180 days of DC. Aggregates technical/operational/economic/environmental info, including abandonment. ANP review within 180 days.",
+      "module": "data/gestao-projetos-parcerias.json#GPP015",
+      "evidence_refs": [
+        "Resolução ANP 17/2015"
+      ],
+      "skos_prefLabel": {
+        "@pt": "PD/PDP — Plano de Desenvolvimento (da Produção)",
+        "@en": "PD/PDP — Production Development Plan"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "PD",
+          "PDP",
+          "Plano de Desenvolvimento",
+          "Plano de Desenvolvimento da Produção"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Documento técnico-regulatório, em até 180 dias após DC. Agrupa info técnica/operacional/econômica/ambiental da explotação, incluindo abandono. ANP analisa em 180 dias.",
+        "@en": "Technical-regulatory document, within 180 days of DC. Aggregates technical/operational/economic/environmental info, including abandonment. ANP review within 180 days."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "declaracao-comercialidade",
+            "relation": "triggers_doc",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#7F8C8D",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "tep",
+      "label": "TEP — Termo de Encerramento do Projeto",
+      "label_pt": "TEP — Termo de Encerramento do Projeto",
+      "label_en": "TEP — Project Closure Term",
+      "type": "governance_doc",
+      "definition_pt": "Documento que encerra um Projeto Exploratório. Registra decisão final (DC ou devolução) e lições aprendidas. Encerra Projeto, validado pelo Programa PROPEX.",
+      "definition_en_canonical": "Document closing an Exploratory Project. Records final decision (DC or relinquishment) and lessons learned. Closes Project, validated by PROPEX Program.",
+      "module": "data/gestao-projetos-parcerias.json#GPP016",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "TEP — Termo de Encerramento do Projeto",
+        "@en": "TEP — Project Closure Term"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Documento que encerra um Projeto Exploratório. Registra decisão final (DC ou devolução) e lições aprendidas. Encerra Projeto, validado pelo Programa PROPEX.",
+        "@en": "Document closing an Exploratory Project. Records final decision (DC or relinquishment) and lessons learned. Closes Project, validated by PROPEX Program."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "projeto-exploratorio",
+            "relation": "closes_project",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#7F8C8D",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "isa",
+      "label": "ISA — Instrumento de Situação do Ativo",
+      "label_pt": "ISA — Instrumento de Situação do Ativo",
+      "label_en": "ISA — Asset Status Instrument",
+      "type": "governance_doc",
+      "definition_pt": "Documento/ato interno que formaliza passagem da Fase de Exploração para Produção. Marco administrativo pós-DC.",
+      "definition_en_canonical": "Internal document/act formalizing transition from Exploration to Production phase. Administrative milestone post-DC.",
+      "module": "data/gestao-projetos-parcerias.json#GPP017",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "ISA — Instrumento de Situação do Ativo",
+        "@en": "ISA — Asset Status Instrument"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Documento/ato interno que formaliza passagem da Fase de Exploração para Produção. Marco administrativo pós-DC.",
+        "@en": "Internal document/act formalizing transition from Exploration to Production phase. Administrative milestone post-DC."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "campo-producao-state",
+            "relation": "marks_transition",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#34495E",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "comexp",
+      "label": "COMEXP",
+      "label_pt": "COMEXP — Comitê de Gestão da Exploração",
+      "label_en": "COMEXP — Exploration Management Committee",
+      "type": "governance_committee",
+      "definition_pt": "Instância máxima de decisão do PROPEX. Delibera PEXPs, PAD, DC e devoluções de Bloco.",
+      "definition_en_canonical": "Highest PROPEX decision instance. Deliberates PEXPs, PAD, DC, Block relinquishments.",
+      "module": "data/gestao-projetos-parcerias.json#GPP018",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "COMEXP — Comitê de Gestão da Exploração",
+        "@en": "COMEXP — Exploration Management Committee"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Instância máxima de decisão do PROPEX. Delibera PEXPs, PAD, DC e devoluções de Bloco.",
+        "@en": "Highest PROPEX decision instance. Deliberates PEXPs, PAD, DC, Block relinquishments."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "pexp",
+            "relation": "deliberates_at",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "grbloc",
+            "relation": "feeds_committee",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#34495E",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "grbloc",
+      "label": "GRBLOC",
+      "label_pt": "GRBLOC — Grupo Técnico de Blocos",
+      "label_en": "GRBLOC — Block Technical Review Group",
+      "type": "governance_committee",
+      "definition_pt": "Grupo técnico de pré-análise de decisões de Bloco antes do COMEXP. Garante due diligence técnica.",
+      "definition_en_canonical": "Technical pre-review group for Block decisions, feeding COMEXP.",
+      "module": "data/gestao-projetos-parcerias.json#GPP019",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "GRBLOC — Grupo Técnico de Blocos",
+        "@en": "GRBLOC — Block Technical Review Group"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Grupo técnico de pré-análise de decisões de Bloco antes do COMEXP. Garante due diligence técnica.",
+        "@en": "Technical pre-review group for Block decisions, feeding COMEXP."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "comexp",
+            "relation": "feeds_committee",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#34495E",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "documented",
+      "id": "grt",
+      "label": "GRT — Grupo de Revisão Técnica",
+      "label_pt": "GRT — Grupo de Revisão Técnica",
+      "label_en": "GRT — Technical Review Group",
+      "type": "governance_committee",
+      "definition_pt": "Grupo técnico que apoia os PEXPs com revisão de aspectos geológicos, de engenharia e econômicos.",
+      "definition_en_canonical": "Technical group supporting PEXPs with subject-matter review.",
+      "module": "data/gestao-projetos-parcerias.json#GPP020",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "skos_prefLabel": {
+        "@pt": "GRT — Grupo de Revisão Técnica",
+        "@en": "GRT — Technical Review Group"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Grupo técnico que apoia os PEXPs com revisão de aspectos geológicos, de engenharia e econômicos.",
+        "@en": "Technical group supporting PEXPs with subject-matter review."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "pexp",
+            "relation": "supports_gate",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#5D6D7E",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "WI",
+        "Working Interest",
+        "Participação"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "working-interest",
+      "label": "Participação (Working Interest)",
+      "label_pt": "Participação (Working Interest — WI)",
+      "label_en": "Working Interest (WI)",
+      "type": "portfolio_concept",
+      "definition_pt": "Percentual de um sócio nos custos e receitas de Bloco/Campo. Soma 100%. Determina peso decisório e alocação de CAPEX/OPEX.",
+      "definition_en_canonical": "Partner's percentage share of costs and revenues in a Block/Field. Sums to 100%. Determines decision weight and CAPEX/OPEX allocation.",
+      "module": "data/gestao-projetos-parcerias.json#GPP021",
+      "evidence_refs": [
+        "SPE Reserves Definitions"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Participação (Working Interest — WI)",
+        "@en": "Working Interest (WI)"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "WI",
+          "Working Interest",
+          "Participação"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Percentual de um sócio nos custos e receitas de Bloco/Campo. Soma 100%. Determina peso decisório e alocação de CAPEX/OPEX.",
+        "@en": "Partner's percentage share of costs and revenues in a Block/Field. Sums to 100%. Determines decision weight and CAPEX/OPEX allocation."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "operador-role",
+            "relation": "designates",
+            "style": "solid"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "bloco-anchor",
+            "relation": "has_partnership_share",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#5D6D7E",
+      "size": 18,
+      "legal_source": "Lei 12.351/2010",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "operador-role",
+      "label": "Operador / Não-Operador",
+      "label_pt": "Papel de Operador / Não-Operador",
+      "label_en": "Operator / Non-Operator Role",
+      "type": "portfolio_concept",
+      "definition_pt": "Designa o sócio responsável pela execução das operações. Petrobras é Operadora obrigatória nos blocos do pré-sal sob Partilha (Lei 12.351/2010).",
+      "definition_en_canonical": "Designates the partner responsible for executing operations. Petrobras is mandatory Operator in pre-salt Production-Sharing blocks.",
+      "module": "data/gestao-projetos-parcerias.json#GPP022",
+      "evidence_refs": [
+        "Lei 12.351/2010"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Papel de Operador / Não-Operador",
+        "@en": "Operator / Non-Operator Role"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Designa o sócio responsável pela execução das operações. Petrobras é Operadora obrigatória nos blocos do pré-sal sob Partilha (Lei 12.351/2010).",
+        "@en": "Designates the partner responsible for executing operations. Petrobras is mandatory Operator in pre-salt Production-Sharing blocks."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "working-interest",
+            "relation": "designates",
+            "style": "solid"
+          }
+        ]
+      }
+    },
+    {
+      "color": "#3498DB",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "Rodada",
+        "Leilão de Blocos"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "rodada",
+      "label": "Rodada (Leilão de Blocos)",
+      "label_pt": "Rodada (Leilão de Blocos)",
+      "label_en": "Bidding Round",
+      "type": "regulatory_event",
+      "definition_pt": "Processo licitatório público da ANP para oferta de Blocos exploratórios. Cada Rodada tem Edital, áreas e regras próprios.",
+      "definition_en_canonical": "ANP public bidding process for offering exploration Blocks. Each Round has its own notice, areas and rules.",
+      "module": "data/gestao-projetos-parcerias.json#GPP023",
+      "evidence_refs": [
+        "Lei 9.478/1997"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Rodada (Leilão de Blocos)",
+        "@en": "Bidding Round"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "Rodada",
+          "Leilão de Blocos"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Processo licitatório público da ANP para oferta de Blocos exploratórios. Cada Rodada tem Edital, áreas e regras próprios.",
+        "@en": "ANP public bidding process for offering exploration Blocks. Each Round has its own notice, areas and rules."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "contrato-ep",
+            "relation": "produces_contract",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#A569BD",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "area-retida",
+      "label": "Área Retida",
+      "label_pt": "Área Retida",
+      "label_en": "Retained Area",
+      "type": "lifecycle_outcome",
+      "definition_pt": "Porção do Bloco mantida pelo operador ao fim de fase exploratória, tipicamente em razão de descoberta ativa ou PAD.",
+      "definition_en_canonical": "Block portion kept by operator after an exploratory phase, typically due to active discovery or PAD.",
+      "module": "data/gestao-projetos-parcerias.json#GPP024",
+      "evidence_refs": [
+        "Contratos de Concessão ANP"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Área Retida",
+        "@en": "Retained Area"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Porção do Bloco mantida pelo operador ao fim de fase exploratória, tipicamente em razão de descoberta ativa ou PAD.",
+        "@en": "Block portion kept by operator after an exploratory phase, typically due to active discovery or PAD."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco-anchor",
+            "relation": "is_outcome_of",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#A569BD",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "area-devolvida",
+      "label": "Área Devolvida",
+      "label_pt": "Área Devolvida",
+      "label_en": "Relinquished Area",
+      "type": "lifecycle_outcome",
+      "definition_pt": "Porção do Bloco devolvida à ANP — parcial ou total. Após devolução, a área retorna à ANP para nova licitação.",
+      "definition_en_canonical": "Block portion returned to ANP — partial or total. Once relinquished, returns to ANP for re-bidding.",
+      "module": "data/gestao-projetos-parcerias.json#GPP025",
+      "evidence_refs": [
+        "Contratos de Concessão ANP"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Área Devolvida",
+        "@en": "Relinquished Area"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Porção do Bloco devolvida à ANP — parcial ou total. Após devolução, a área retorna à ANP para nova licitação.",
+        "@en": "Block portion returned to ANP — partial or total. Once relinquished, returns to ANP for re-bidding."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco-anchor",
+            "relation": "is_outcome_of",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#BB8FCE",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": true,
+      "evidence_status": "partial",
+      "id": "portfolio-exploratorio",
+      "label": "Portfólio Exploratório",
+      "label_pt": "Portfólio Exploratório",
+      "label_en": "Exploration Portfolio",
+      "type": "portfolio_concept",
+      "definition_pt": "Conjunto agregado de Blocos sob gestão do operador. Decisões de portfólio consideram VME, risco geológico, PEM, cronograma e composição de sócios.",
+      "definition_en_canonical": "Aggregate Block set under operator management. Portfolio decisions consider EMV, geological risk, PEM, schedule and partnership.",
+      "module": "data/gestao-projetos-parcerias.json#GPP026",
+      "evidence_refs": [
+        "Material gestão E&P Petrobras"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Portfólio Exploratório",
+        "@en": "Exploration Portfolio"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Conjunto agregado de Blocos sob gestão do operador. Decisões de portfólio consideram VME, risco geológico, PEM, cronograma e composição de sócios.",
+        "@en": "Aggregate Block set under operator management. Portfolio decisions consider EMV, geological risk, PEM, schedule and partnership."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco-anchor",
+            "relation": "aggregates",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#BB8FCE",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [
+        "VME"
+      ],
+      "synonyms_en": [
+        "EMV",
+        "Expected Monetary Value"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "vme",
+      "label": "VME — Valor Monetário Esperado",
+      "label_pt": "VME — Valor Monetário Esperado",
+      "label_en": "VME — Expected Monetary Value (EMV)",
+      "type": "portfolio_concept",
+      "definition_pt": "Soma sobre resultados de (VPL × probabilidade). Insumo padrão para ranqueamento de Blocos e PEXPs.",
+      "definition_en_canonical": "Sum over outcomes of (NPV × probability). Standard input to Block ranking and PEXP decisions.",
+      "module": "data/gestao-projetos-parcerias.json#GPP027",
+      "evidence_refs": [
+        "SPE/AAPG decision-analysis"
+      ],
+      "skos_prefLabel": {
+        "@pt": "VME — Valor Monetário Esperado",
+        "@en": "VME — Expected Monetary Value (EMV)"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "VME"
+        ],
+        "@en": [
+          "EMV",
+          "Expected Monetary Value"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Soma sobre resultados de (VPL × probabilidade). Insumo padrão para ranqueamento de Blocos e PEXPs.",
+        "@en": "Sum over outcomes of (NPV × probability). Standard input to Block ranking and PEXP decisions."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "bloco-anchor",
+            "relation": "scores",
+            "style": "solid"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "color": "#5499C7",
+      "size": 18,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "id": "obrigacao-exploratoria",
+      "label": "Obrigação Exploratória",
+      "label_pt": "Obrigação Exploratória",
+      "label_en": "Exploratory Obligation",
+      "type": "regulatory_obligation",
+      "definition_pt": "Compromisso específico do PEM (ex.: poço exploratório no ano 3). Cada obrigação tem métrica, prazo e penalidade.",
+      "definition_en_canonical": "Specific PEM commitment (e.g., one exploratory well by year 3). Each has metric, deadline and penalty.",
+      "module": "data/gestao-projetos-parcerias.json#GPP028",
+      "evidence_refs": [
+        "Contratos de Concessão ANP"
+      ],
+      "skos_prefLabel": {
+        "@pt": "Obrigação Exploratória",
+        "@en": "Exploratory Obligation"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Compromisso específico do PEM (ex.: poço exploratório no ano 3). Cada obrigação tem métrica, prazo e penalidade.",
+        "@en": "Specific PEM commitment (e.g., one exploratory well by year 3). Each has metric, deadline and penalty."
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "pem",
+            "relation": "decomposes_into",
             "style": "solid"
           }
         ]

@@ -1,11 +1,15 @@
 {
   "meta": {
-    "description": "Crosswalk between ANP well status/classification and OSDU WellStatus reference data",
-    "source_anp": "Resolução ANP 25/2015 — Classificação de Poços",
+    "description": "Crosswalk between ANP well status/classification (Resoluções 25/2015 and 699/2017) and OSDU WellStatus reference data.",
+    "source_anp": "Resolução ANP 25/2015; Resolução ANP 699/2017",
     "target_osdu": "OSDU WellStatus:1.0.0 reference-data",
     "generated": "2026-05-03",
-    "total_mappings": 18,
-    "coverage_note": "Covers ANP Situação (operational status) and Tipo (well type/purpose) codes per Resolução ANP nº 25/2015"
+    "total_mappings": 36,
+    "coverage_note": "Covers ANP Situação/Tipo per Resolução ANP nº 25/2015 plus the 19 operational statuses from Resolução ANP nº 699/2017 (Tabela 2). Each mapping carries `anp_source` to distinguish provenance.",
+    "sources": [
+      "ANP-25/2015",
+      "ANP-699/2017"
+    ]
   },
   "mappings": [
     {
@@ -15,7 +19,8 @@
       "osdu_value": "Producing",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Well actively producing hydrocarbons"
+      "notes": "Well actively producing hydrocarbons",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "ABANDONADO",
@@ -24,7 +29,8 @@
       "osdu_value": "Abandoned",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Well permanently abandoned without P&A plugs; dry hole or uneconomic result"
+      "notes": "Well permanently abandoned without P&A plugs; dry hole or uneconomic result",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "TAMPONADO",
@@ -33,7 +39,8 @@
       "osdu_value": "Plugged and Abandoned",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Well mechanically plugged with cement/mechanical plugs and abandoned per ANP regulations"
+      "notes": "Well mechanically plugged with cement/mechanical plugs and abandoned per ANP regulations",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "SUSPENSO",
@@ -42,7 +49,8 @@
       "osdu_value": "Suspended",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Well operations temporarily halted; wellhead secured but not permanently abandoned"
+      "notes": "Well operations temporarily halted; wellhead secured but not permanently abandoned",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "EM_OBSERVACAO",
@@ -51,7 +59,8 @@
       "osdu_value": "Temporarily Abandoned",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "Well shut-in for reservoir monitoring or pressure build-up test; maps to Temporarily Abandoned (TA) in OSDU"
+      "notes": "Well shut-in for reservoir monitoring or pressure build-up test; maps to Temporarily Abandoned (TA) in OSDU",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "CONVERTIDO_INJECAO",
@@ -60,7 +69,8 @@
       "osdu_value": "Injection",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Former producer re-completed as injection well (water, gas, or CO2)"
+      "notes": "Former producer re-completed as injection well (water, gas, or CO2)",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "INATIVO",
@@ -69,7 +79,8 @@
       "osdu_value": "Shut-In",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "Well not producing or injecting; OSDU Shut-In is the closest equivalent for inactive status"
+      "notes": "Well not producing or injecting; OSDU Shut-In is the closest equivalent for inactive status",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "EM_PERFURACAO",
@@ -78,7 +89,8 @@
       "osdu_value": "Active",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "Well currently being drilled; OSDU Active captures the ongoing operational state"
+      "notes": "Well currently being drilled; OSDU Active captures the ongoing operational state",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "EM_COMPLETACAO",
@@ -87,7 +99,8 @@
       "osdu_value": "Active",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "Well in completion phase after drilling; no direct OSDU equivalent, Active used"
+      "notes": "Well in completion phase after drilling; no direct OSDU equivalent, Active used",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "1_PRO",
@@ -96,7 +109,8 @@
       "osdu_value": "Producing",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "ANP Tipo 1-PRO designates the purpose/role of the well as producer; Producing is the most aligned OSDU status"
+      "notes": "ANP Tipo 1-PRO designates the purpose/role of the well as producer; Producing is the most aligned OSDU status",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "2_INJ",
@@ -105,7 +119,8 @@
       "osdu_value": "Injection",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "ANP Tipo 2-INJ designates water, gas, or CO2 injection well"
+      "notes": "ANP Tipo 2-INJ designates water, gas, or CO2 injection well",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "3_TES",
@@ -114,7 +129,8 @@
       "osdu_value": "Active",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "ANP Tipo 3-TES designates formation test or extended well test (TLD/TLE); Active is the closest OSDU status during test phase"
+      "notes": "ANP Tipo 3-TES designates formation test or extended well test (TLD/TLE); Active is the closest OSDU status during test phase",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "4_EXP",
@@ -123,7 +139,8 @@
       "osdu_value": "Active",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "ANP Tipo 4-EXP covers wildcat and appraisal wells drilled for exploration purposes"
+      "notes": "ANP Tipo 4-EXP covers wildcat and appraisal wells drilled for exploration purposes",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "5_SEC",
@@ -132,7 +149,8 @@
       "osdu_value": "Injection",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "ANP Tipo 5-SEC for geological CO2 storage; maps to Injection since OSDU has no dedicated CCS status"
+      "notes": "ANP Tipo 5-SEC for geological CO2 storage; maps to Injection since OSDU has no dedicated CCS status",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "EM_ABANDONO",
@@ -141,7 +159,8 @@
       "osdu_value": "Temporarily Abandoned",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "closeMatch",
-      "notes": "Well undergoing P&A operations; Temporarily Abandoned (TA) is the closest interim OSDU state before P&A is certified"
+      "notes": "Well undergoing P&A operations; Temporarily Abandoned (TA) is the closest interim OSDU state before P&A is certified",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "SECO",
@@ -150,7 +169,8 @@
       "osdu_value": "Dry",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Exploratory well with no commercial hydrocarbon indications"
+      "notes": "Exploratory well with no commercial hydrocarbon indications",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "CONVERTENDO",
@@ -159,7 +179,8 @@
       "osdu_value": "Converting",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Well being re-completed from one purpose to another (e.g., producer to injector)"
+      "notes": "Well being re-completed from one purpose to another (e.g., producer to injector)",
+      "anp_source": "ANP-25/2015"
     },
     {
       "anp_code": "FECHADO",
@@ -168,7 +189,188 @@
       "osdu_value": "Shut-In",
       "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
       "match_kind": "exactMatch",
-      "notes": "Well temporarily closed at the wellhead; capable of production but not flowing; also used for gas-lifted wells awaiting equipment"
+      "notes": "Well temporarily closed at the wellhead; capable of production but not flowing; also used for gas-lifted wells awaiting equipment",
+      "anp_source": "ANP-25/2015"
+    },
+    {
+      "anp_code": "ABANDONADO_PERMANENTE",
+      "anp_label_pt": "Abandonado permanentemente",
+      "anp_label_en": "Permanently abandoned",
+      "osdu_value": "Plugged and Abandoned",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "exactMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well with no future re-entry interest; permanent barrier envelopes established (NCSB)."
+    },
+    {
+      "anp_code": "ABANDONADO_TEMP_MONITORADO",
+      "anp_label_pt": "Abandonado temporariamente com monitoramento",
+      "anp_label_en": "Temporarily abandoned with monitoring",
+      "osdu_value": "Temporarily Abandoned",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "exactMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Re-entry intended; barrier envelopes periodically monitored. Reason for temp abandonment must be in observations."
+    },
+    {
+      "anp_code": "ABANDONADO_TEMP_NAO_MONITORADO",
+      "anp_label_pt": "Abandonado temporariamente sem monitoramento",
+      "anp_label_en": "Temporarily abandoned without monitoring",
+      "osdu_value": "Temporarily Abandoned",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Re-entry intended; barriers in place but not actively monitored. Reason must be in observations."
+    },
+    {
+      "anp_code": "ARRASADO",
+      "anp_label_pt": "Arrasado",
+      "anp_label_en": "Razed (wellhead removed and capped)",
+      "osdu_value": "Plugged and Abandoned",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Permanent abandonment with full wellhead removal and conductor cut to ground level (terrestre) or per regulation depth (marítimo)."
+    },
+    {
+      "anp_code": "PRODUZINDO",
+      "anp_label_pt": "Produzindo",
+      "anp_label_en": "Producing",
+      "osdu_value": "Producing",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "exactMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well operating as hydrocarbon producer. Losses must be reported in observations."
+    },
+    {
+      "anp_code": "INJETANDO",
+      "anp_label_pt": "Injetando",
+      "anp_label_en": "Injecting",
+      "osdu_value": "Injection",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "exactMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well operating as fluid injector for improved hydrocarbon recovery."
+    },
+    {
+      "anp_code": "PRODUZINDO_INJETANDO",
+      "anp_label_pt": "Produzindo e injetando",
+      "anp_label_en": "Producing and injecting (dual completion or auto-injection)",
+      "osdu_value": "Producing",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Simultaneous production and injection in distinct intervals (dual completion or auto-injection). OSDU has no dedicated dual-mode value; closest is Producing."
+    },
+    {
+      "anp_code": "RETIRANDO_GAS_ESTOCAGEM",
+      "anp_label_pt": "Retirando gás natural estocado",
+      "anp_label_en": "Withdrawing stored natural gas",
+      "osdu_value": "Producing",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Underground gas storage withdrawal. ANP categoria 10 (Poço de Estocagem). OSDU lacks a storage-specific value."
+    },
+    {
+      "anp_code": "INJETANDO_ESTOCAGEM",
+      "anp_label_pt": "Injetando para estocagem",
+      "anp_label_en": "Injecting for storage",
+      "osdu_value": "Injection",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Underground gas storage injection. ANP categoria 10 (Poço de Estocagem)."
+    },
+    {
+      "anp_code": "EQUIPADO_AGUARDANDO",
+      "anp_label_pt": "Equipado aguardando início de operação",
+      "anp_label_en": "Equipped, awaiting start of operation",
+      "osdu_value": "Suspended",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Completed well awaiting external triggers (authorization, surface facilities, pipeline) before producing or injecting. Includes Sistema de Produção Antecipada and TLD."
+    },
+    {
+      "anp_code": "EM_OBSERVACAO_699",
+      "anp_label_pt": "Em observação",
+      "anp_label_en": "Under observation (instrumented for pressure monitoring)",
+      "osdu_value": "Temporarily Abandoned",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well instrumented for pressure monitoring of producing reservoir or gas storage. Distinct from EM_OBSERVACAO (ANP-25/2015) which has same label but legacy code."
+    },
+    {
+      "anp_code": "EM_PERFURACAO_699",
+      "anp_label_pt": "Em perfuração",
+      "anp_label_en": "Drilling in progress",
+      "osdu_value": "Active",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Drilling-related operations: casing run/cementing, logging, open-hole formation testing, fishing."
+    },
+    {
+      "anp_code": "EM_AVALIACAO",
+      "anp_label_pt": "Em avaliação",
+      "anp_label_en": "Under evaluation (formation/productivity testing)",
+      "osdu_value": "Active",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Formation testing after Drilling Termination, TLD, or other productivity evaluation (e.g., post-fracture)."
+    },
+    {
+      "anp_code": "EM_COMPLETACAO_699",
+      "anp_label_pt": "Em completação",
+      "anp_label_en": "Completion in progress",
+      "osdu_value": "Active",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Operations to bring well to production/injection after drilling."
+    },
+    {
+      "anp_code": "EM_INTERVENCAO",
+      "anp_label_pt": "Em intervenção",
+      "anp_label_en": "Workover in progress",
+      "osdu_value": "Active",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Completed well undergoing evaluation during production stage, restoration, recompletion, or abandonment."
+    },
+    {
+      "anp_code": "OPERANDO_CAPTACAO_AGUA",
+      "anp_label_pt": "Operando para captação de água",
+      "anp_label_en": "Operating for water capture (source well)",
+      "osdu_value": "Producing",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well operating to capture water for re-injection in another well or other E&P purposes. Specific finality must be in observations."
+    },
+    {
+      "anp_code": "CEDIDO_CAPTACAO_AGUA",
+      "anp_label_pt": "Cedido para captação de água",
+      "anp_label_en": "Transferred for water capture (out of E&P scope)",
+      "osdu_value": "Plugged and Abandoned",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "relatedMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well transferred (alienated) after decision of non-use in petroleum industry, for water production. No exact OSDU equivalent — out of E&P scope."
+    },
+    {
+      "anp_code": "OPERANDO_DESCARTE",
+      "anp_label_pt": "Operando para descarte",
+      "anp_label_en": "Operating for disposal (produced fluids / effluents)",
+      "osdu_value": "Injection",
+      "osdu_kind": "reference-data--WellStatus:osdu:reference-data--WellStatus:1.0.0",
+      "match_kind": "closeMatch",
+      "anp_source": "ANP-699/2017",
+      "notes": "Well operating for disposal of produced fluids from other wells or various effluents from E&P. Discarded fluid must be in observations. Closest OSDU value is Injection (disposal-injection)."
     }
   ]
 }

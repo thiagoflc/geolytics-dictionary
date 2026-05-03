@@ -31,6 +31,12 @@ import { buildCardsHtml, buildGsoCardsHtml } from "./cards-html.js";
 import { OSDU_EXTRA_NODES, OSDU_EXTRA_EDGES, OSDU_EXTRA_ALIGNMENT } from "./osdu-extra-nodes.js";
 import { OG_NODES, OG_EDGES, OG_GLOSSARY } from "./operacoes-geologicas-nodes.js";
 import {
+  GPP_NODES,
+  GPP_EDGES,
+  GPP_GLOSSARY,
+  GPP_NODE_PATCHES,
+} from "./gestao-projetos-parcerias-nodes.js";
+import {
   THREEW_VARIABLES,
   THREEW_EQUIPMENT,
   THREEW_EQUIPMENT_PATCHES,
@@ -2404,7 +2410,7 @@ function enrichTerm(t) {
 }
 
 function buildGlossary() {
-  const terms = [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY];
+  const terms = [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY, ...GPP_GLOSSARY];
   return {
     meta: { version: VERSION, generated: NOW, count: terms.length },
     terms,
@@ -2723,6 +2729,13 @@ function buildEntityGraph() {
       const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
       return align.geocoverage.length ? { ...n, geocoverage: align.geocoverage } : n;
     }),
+    /* GPP nodes: 27 governance/portfolio/lifecycle nodes — fully-baked, skos fields inlined.
+       Same geocoverage-fallback policy as OG. */
+    ...GPP_NODES.map((n) => {
+      if (n.geocoverage && n.geocoverage.length) return n;
+      const align = alignmentFor(ENTITY_ALIGNMENT, n.id);
+      return align.geocoverage.length ? { ...n, geocoverage: align.geocoverage } : n;
+    }),
     /* 3W nodes: 27 sensors + 10 events + 14 equipment — fully-baked, skos fields inlined */
     ...THREEW_VARIABLES,
     ...THREEW_EVENTS,
@@ -2730,6 +2743,12 @@ function buildEntityGraph() {
   ];
   /* Apply 3W equipment patches (enriches existing nodes like dhsv in-place) */
   for (const patch of THREEW_EQUIPMENT_PATCHES) {
+    const idx = nodes.findIndex((n) => n.id === patch.id);
+    if (idx !== -1) Object.assign(nodes[idx], patch);
+  }
+  /* Apply GPP patches (enriches existing pem/pad/contrato-ep/declaracao-comercialidade
+     in-place with module ref + ANP/PROPEX evidence_refs + GPP role flag). */
+  for (const patch of GPP_NODE_PATCHES) {
     const idx = nodes.findIndex((n) => n.id === patch.id);
     if (idx !== -1) Object.assign(nodes[idx], patch);
   }
@@ -2742,6 +2761,7 @@ function buildEntityGraph() {
     ...OSDU_EDGES,
     ...OSDU_EXTRA_EDGES,
     ...OG_EDGES,
+    ...GPP_EDGES,
     ...THREEW_EDGES,
   ].map((e) => ({
     source: e.source,
@@ -2785,9 +2805,10 @@ function buildFull() {
       generated: NOW,
       description: "GeoBrain — complete merged dataset",
       counts: {
-        glossary_terms: GLOSSARIO.length + OG_GLOSSARY.length,
+        glossary_terms: GLOSSARIO.length + OG_GLOSSARY.length + GPP_GLOSSARY.length,
         extended_terms: EXTENDED_TERMS.length,
-        total_terms: GLOSSARIO.length + OG_GLOSSARY.length + EXTENDED_TERMS.length,
+        total_terms:
+          GLOSSARIO.length + OG_GLOSSARY.length + GPP_GLOSSARY.length + EXTENDED_TERMS.length,
         datasets: CONJUNTOS.length,
         entity_nodes:
           ENTITY_NODES.length +
@@ -2795,6 +2816,7 @@ function buildFull() {
           OSDU_NODES.length +
           OSDU_EXTRA_NODES.length +
           OG_NODES.length +
+          GPP_NODES.length +
           THREEW_VARIABLES.length +
           THREEW_EVENTS.length +
           THREEW_EQUIPMENT.length,
@@ -2804,6 +2826,7 @@ function buildFull() {
           OSDU_EDGES.length +
           OSDU_EXTRA_EDGES.length +
           OG_EDGES.length +
+          GPP_EDGES.length +
           THREEW_EDGES.length,
         domains: DOMAINS.length,
         ontology_layers: LAYER_DEFINITIONS.length,
@@ -2844,7 +2867,7 @@ function buildFull() {
         "Petrobras 3W v2.0.0 (CC-BY 4.0, Vargas et al. 2019, DOI:10.1016/j.petrol.2019.106223)",
       ],
     },
-    glossary: [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY],
+    glossary: [...GLOSSARIO.map(enrichTerm), ...OG_GLOSSARY, ...GPP_GLOSSARY],
     extended_terms: EXTENDED_TERMS,
     entity_graph: graph,
     datasets: CONJUNTOS,
@@ -3753,6 +3776,32 @@ function buildRagCorpus() {
     lines.push(chunk);
   }
 
+  /* type=anp_* — ANP-699/2017 controlled vocabularies (layer4 regulatory) */
+  for (const chunk of buildCgiVocabChunks("anp-poco-categoria.json", "anp_poco_categoria")) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks("anp-poco-tipo.json", "anp_poco_tipo")) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks("anp-poco-resultado.json", "anp_poco_resultado")) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks("anp-uf.json", "anp_uf")) {
+    lines.push(chunk);
+  }
+  for (const chunk of buildCgiVocabChunks("anp-bacia-sedimentar.json", "anp_bacia_sedimentar")) {
+    lines.push(chunk);
+  }
+
+  /* type=anp699_doc — 18 ANP-699 regulatory document classes + Poco entity */
+  for (const chunk of buildAnp699RagChunks()) {
+    lines.push(chunk);
+  }
+  /* type=gpp_class — 28 governance/lifecycle/portfolio classes from GPP module */
+  for (const chunk of buildGppRagChunks()) {
+    lines.push(chunk);
+  }
+
   /* type=threew_event — 3W Petrobras operational event classes */
   for (const chunk of THREEW_RAG_CHUNKS) {
     lines.push(chunk);
@@ -3897,18 +3946,23 @@ function buildCgiVocabChunks(filename, chunkType) {
   const data = JSON.parse(fs.readFileSync(filePath, "utf8"));
   const items = data.concepts || data.units || [];
   const source = (data.meta && data.meta.source) || "CGI";
+  /* Layer: read from meta if present (e.g. ANP codelists declare "layer4"),
+     fallback to "layer1b" for legacy CGI vocabularies that omit the field. */
+  const layer = (data.meta && data.meta.layer) || "layer1b";
   return items.map((item) => {
     const rawDef = item.definition ? item.definition.slice(0, 500) : null;
     /* Fallback: synthesise a minimal description when no definition is present */
     const defText =
-      rawDef || `Conceito ${chunkType.replace(/_/g, " ")} CGI: ${item.label_pt || item.label_en}.`;
+      rawDef || `Conceito ${chunkType.replace(/_/g, " ")}: ${item.label_pt || item.label_en}.`;
     const broaderStr = item.broader ? ` Broader: ${item.broader}.` : "";
     const relStr = item.related_entity ? ` Entidade relacionada: ${item.related_entity}.` : "";
     const parentsStr = (item.parents || []).length
       ? ` Hierarquia: ${item.parents.join(" > ")}.`
       : "";
+    const anpStr = item.anp_code ? ` Código ANP: ${item.anp_code}.` : "";
+    const ambienteStr = item.ambiente ? ` Ambiente: ${item.ambiente}.` : "";
     const text =
-      `${item.label_en} (${item.label_pt || item.label_en}): ${defText}${broaderStr}${parentsStr}${relStr} URI: ${item.uri || ""}.`.trim();
+      `${item.label_en || item.label_pt} (${item.label_pt || item.label_en}): ${defText}${anpStr}${ambienteStr}${broaderStr}${parentsStr}${relStr} URI: ${item.uri || ""}.`.trim();
     return {
       id: `${chunkType}-${item.id}`,
       type: chunkType,
@@ -3917,16 +3971,102 @@ function buildCgiVocabChunks(filename, chunkType) {
         id: item.id,
         label_pt: item.label_pt || null,
         label_en: item.label_en || null,
+        anp_code: item.anp_code || null,
+        ambiente: item.ambiente || null,
         definition: rawDef,
         broader: item.broader || null,
         parents: item.parents || [],
         related_entity: item.related_entity || null,
         uri: item.uri || null,
-        layer: "layer1b",
+        layer,
         source,
       },
     };
   });
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * ANP-699 DOC CLASSES — auto-emit RAG chunks from operacoes-geologicas.json
+ * ─────────────────────────────────────────────────────────────
+ * Source-of-truth is data/operacoes-geologicas.json. Avoids duplicating
+ * fully-baked nodes for the 18 ANP-699 doc classes + Poco class added in
+ * Phase 4. Filters by `evidence_refs` containing "ANP-699/2017".
+ */
+function buildAnp699RagChunks() {
+  const ogPath = path.join(ROOT, "data", "operacoes-geologicas.json");
+  if (!fs.existsSync(ogPath)) return [];
+  const og = JSON.parse(fs.readFileSync(ogPath, "utf8"));
+  const chunks = [];
+  for (const [name, cls] of Object.entries(og.classes || {})) {
+    const refs = cls.evidence_refs || [];
+    const isAnp699 = refs.some((r) => typeof r === "string" && r.startsWith("ANP-699"));
+    if (!isAnp699) continue;
+    const sigla = (cls.label_pt || "").split(" — ")[0] || name;
+    const def = (cls.description_pt || cls.description || "").slice(0, 800);
+    const prazoStr = cls.prazo_envio ? ` Prazo de envio: ${cls.prazo_envio}.` : "";
+    const gatStr = cls.gatilho ? ` Gatilho: ${cls.gatilho}.` : "";
+    const formaStr = cls.forma_envio ? ` Forma: ${cls.forma_envio}.` : "";
+    const synStr = (cls.synonyms || []).length ? ` Sinônimos: ${cls.synonyms.join("; ")}.` : "";
+    const text =
+      `${cls.label_pt || cls.label_en} (${cls.label_en || ""}): ${def}${prazoStr}${gatStr}${formaStr}${synStr} Fonte: ${refs.join("; ")}.`.trim();
+    chunks.push({
+      id: `anp699_doc_${cls.id || name}`,
+      type: "anp699_doc",
+      text,
+      metadata: {
+        id: cls.id || name,
+        sigla,
+        name,
+        superclass: cls.superclass || null,
+        prazo_envio: cls.prazo_envio || null,
+        gatilho: cls.gatilho || null,
+        forma_envio: cls.forma_envio || null,
+        manager: cls.manager || null,
+        stored_in: cls.stored_in || null,
+        corporate_internal: !!cls.corporate_internal,
+        evidence_refs: refs,
+        layer: "layer4",
+        source: "data/operacoes-geologicas.json",
+      },
+    });
+  }
+  return chunks;
+}
+
+/* GPP module — auto-emit RAG chunks for governance entities not already in
+   GPP_NODES (e.g., new classes only present in data/gestao-projetos-parcerias.json).
+   Avoids duplicating with existing entity-graph nodes. */
+function buildGppRagChunks() {
+  const gppPath = path.join(ROOT, "data", "gestao-projetos-parcerias.json");
+  if (!fs.existsSync(gppPath)) return [];
+  const gpp = JSON.parse(fs.readFileSync(gppPath, "utf8"));
+  const chunks = [];
+  for (const [name, cls] of Object.entries(gpp.classes || {})) {
+    const def = (cls.description_pt || cls.description || "").slice(0, 800);
+    const synStr = (cls.synonyms || []).length ? ` Sinônimos: ${cls.synonyms.join("; ")}.` : "";
+    const exStr = (cls.examples_pt || []).length ? ` Exemplos: ${cls.examples_pt.join("; ")}.` : "";
+    const corpFlag = cls.corporate_internal ? " [Petrobras-interno]" : "";
+    const text =
+      `${cls.label_pt || cls.label_en} (${cls.label_en || ""})${corpFlag}: ${def}${synStr}${exStr} Fonte: ${(cls.evidence_refs || []).join("; ")}.`.trim();
+    chunks.push({
+      id: `gpp_class_${cls.id || name}`,
+      type: "gpp_class",
+      text,
+      metadata: {
+        id: cls.id || name,
+        name,
+        superclass: cls.superclass || null,
+        corporate_internal: !!cls.corporate_internal,
+        governance_role: cls.governance_role || null,
+        ontology_role: cls.ontology_role || null,
+        lifecycle_state: !!cls.lifecycle_state,
+        evidence_refs: cls.evidence_refs || [],
+        layer: "layer4",
+        source: "data/gestao-projetos-parcerias.json",
+      },
+    });
+  }
+  return chunks;
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -4233,15 +4373,15 @@ writeJson("ai/ontology-map.json", buildOntologyMap());
 
 console.log("\n✓ Done.");
 console.log(
-  `  Glossary terms: ${GLOSSARIO.length + OG_GLOSSARY.length} (${GLOSSARIO.length} base + ${OG_GLOSSARY.length} OG)`
+  `  Glossary terms: ${GLOSSARIO.length + OG_GLOSSARY.length + GPP_GLOSSARY.length} (${GLOSSARIO.length} base + ${OG_GLOSSARY.length} OG + ${GPP_GLOSSARY.length} GPP)`
 );
 console.log(`  Extended terms: ${EXTENDED_TERMS.length}`);
 console.log(`  Datasets: ${CONJUNTOS.length}`);
 console.log(
-  `  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length + THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG + ${THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length} 3W)`
+  `  Entity nodes: ${ENTITY_NODES.length + ONTOPETRO_NODES.length + OSDU_NODES.length + OSDU_EXTRA_NODES.length + OG_NODES.length + GPP_NODES.length + THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length} (${ENTITY_NODES.length} base + ${ONTOPETRO_NODES.length} ontopetro + ${OSDU_NODES.length} OSDU + ${OSDU_EXTRA_NODES.length} OSDU-extra + ${OG_NODES.length} OG + ${GPP_NODES.length} GPP + ${THREEW_VARIABLES.length + THREEW_EVENTS.length + THREEW_EQUIPMENT.length} 3W)`
 );
 console.log(
-  `  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length + THREEW_EDGES.length}`
+  `  Entity edges: ${EDGES.length + ONTOPETRO_EDGES.length + OSDU_EDGES.length + OSDU_EXTRA_EDGES.length + OG_EDGES.length + GPP_EDGES.length + THREEW_EDGES.length}`
 );
 console.log(`  Ontology layers: ${LAYER_DEFINITIONS.length}`);
 console.log(
@@ -4277,6 +4417,14 @@ console.log(
     { src: "data/gwml2.json", dst: "api/v1/gwml2.json" },
     { src: "data/layer1-layer1b-equivalence.json", dst: "api/v1/layer1-layer1b-equivalence.json" },
     { src: "data/gsmlbh-properties.json", dst: "api/v1/gsmlbh-properties.json" },
+    /* ANP-699/2017 codelists (Phase 2 enrichment): well category/type/result + UF + sedimentary basin */
+    { src: "data/anp-poco-categoria.json", dst: "api/v1/anp-poco-categoria.json" },
+    { src: "data/anp-poco-tipo.json", dst: "api/v1/anp-poco-tipo.json" },
+    { src: "data/anp-poco-resultado.json", dst: "api/v1/anp-poco-resultado.json" },
+    { src: "data/anp-uf.json", dst: "api/v1/anp-uf.json" },
+    { src: "data/anp-bacia-sedimentar.json", dst: "api/v1/anp-bacia-sedimentar.json" },
+    /* GPP module (Phase 3 enrichment): governance + lifecycle + portfolio */
+    { src: "data/gestao-projetos-parcerias.json", dst: "api/v1/gestao-projetos-parcerias.json" },
   ];
   let totalChunks = 0;
   const ragLines = [];
@@ -4300,7 +4448,12 @@ console.log(
       continue;
     }
     const standard = cw.meta && cw.meta.standard ? cw.meta.standard : "Energistics";
-    for (const cls of cw.classes || []) {
+    /* Skip files that don't follow the witsml/prodml crosswalk schema (classes
+       array of {witsml_class, rdf_class, ...}). ANP codelists use `concepts`
+       and the GPP module uses `classes` as an object — both already get RAG
+       coverage through buildCgiVocabChunks() and entity-graph nodes. */
+    if (!Array.isArray(cw.classes)) continue;
+    for (const cls of cw.classes) {
       /* Skip malformed entries where class name or RDF class resolved to "undefined" */
       if (
         !cls.witsml_class ||

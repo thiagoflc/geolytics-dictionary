@@ -1,26 +1,26 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-03T19:20:37.815Z",
-    "count": 1117,
+    "generated": "2026-05-03T20:22:54.243Z",
+    "count": 1157,
     "by_category": {
-      "standard_body": 51,
-      "measurement": 124,
-      "general": 294,
-      "process": 79,
-      "fluid": 113,
-      "contract": 47,
+      "contract": 49,
+      "environmental": 54,
       "equipment": 181,
-      "environmental": 53,
-      "it_generic": 25,
-      "regulator": 14,
-      "lithology": 39,
-      "unit": 40,
+      "fluid": 113,
+      "general": 295,
       "geophysics": 33,
-      "organization": 10,
+      "it_generic": 27,
+      "lithology": 39,
+      "measurement": 124,
+      "organization": 13,
+      "process": 89,
+      "regulator": 35,
+      "standard_body": 51,
+      "unit": 40,
       "well_state": 14
     },
-    "excluded_from_rag": 25
+    "excluded_from_rag": 27
   },
   "acronyms": [
     {
@@ -8983,6 +8983,541 @@
       "category": "it_generic",
       "it_generic": true,
       "domain": "sistemas"
+    },
+    {
+      "id": "npp-anp",
+      "sigla": "NPP",
+      "expansion_pt": "Notificação de Perfuração de Poço",
+      "expansion_en": "Well Drilling Notification",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "cipp-anp",
+      "sigla": "CIPP",
+      "expansion_pt": "Comunicação de Início de Perfuração de Poço",
+      "expansion_en": "Well Spud Notice",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "cuepp-anp",
+      "sigla": "CUEPP",
+      "expansion_pt": "Comunicação de Utilização de Equipamento de Pequeno Porte",
+      "expansion_en": "Small-Scale Equipment Use Notice",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "crp-anp",
+      "sigla": "CRP",
+      "expansion_pt": "Comunicação de Reentrada em Poço",
+      "expansion_en": "Well Re-entry Notice",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ],
+      "collision_note": "Collides with sigla CRP (geophysics: Common Reflection Point)."
+    },
+    {
+      "id": "ncrp-anp",
+      "sigla": "NCRP",
+      "expansion_pt": "Notificação de Conclusão de Reentrada em Poço",
+      "expansion_en": "Well Re-entry Conclusion Notification",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "nd-anp",
+      "sigla": "ND",
+      "expansion_pt": "Notificação de Descoberta",
+      "expansion_en": "Discovery Notification",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "npr-anp",
+      "sigla": "NPR",
+      "expansion_pt": "Notificação de Perfilagens Realizadas",
+      "expansion_en": "Logging Operations Notification",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "ncsb-anp",
+      "sigla": "NCSB",
+      "expansion_pt": "Notificação de Conjuntos Solidários de Barreira",
+      "expansion_en": "Well Barrier Envelope Notification",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017",
+        "ANP-46/2016"
+      ]
+    },
+    {
+      "id": "laep-anp",
+      "sigla": "LAEP",
+      "expansion_pt": "Licença Ambiental para atividades de Exploração e Produção",
+      "expansion_en": "Environmental License (Exploration & Production)",
+      "category": "environmental",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp_ibama",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "sop-anp",
+      "sigla": "SOP",
+      "expansion_pt": "Situação Operacional de Poços",
+      "expansion_en": "Daily Well Operational Status Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ],
+      "collision_note": "Collides with sigla SOP (Standard Operating Procedure / Sistema Operacional)."
+    },
+    {
+      "id": "fp-anp",
+      "sigla": "FP",
+      "expansion_pt": "Relatório Final de Perfuração",
+      "expansion_en": "Final Drilling Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ],
+      "collision_note": "Collides with sigla FP (Flowing Pressure / Pressão de Fluxo)."
+    },
+    {
+      "id": "rfap-anp",
+      "sigla": "RFAP",
+      "expansion_pt": "Relatório Final de Abandono de Poço",
+      "expansion_en": "Final Well Abandonment Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "rcp-anp",
+      "sigla": "RCP",
+      "expansion_pt": "Relatório de Completação de Poço",
+      "expansion_en": "Well Completion Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "rfp-anp",
+      "sigla": "RFP",
+      "expansion_pt": "Relatório Final de Poço Exploratório",
+      "expansion_en": "Final Exploratory Well Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "rfp-prod-anp",
+      "sigla": "RFP-PROD",
+      "expansion_pt": "Relatório Final de Poço Explotatório",
+      "expansion_en": "Final Production Well Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "rpf-anp",
+      "sigla": "RPF",
+      "expansion_pt": "Relatório de Ensaios Petrofísicos",
+      "expansion_en": "Petrophysical Tests Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "pvt-rep-anp",
+      "sigla": "PVT",
+      "expansion_pt": "Relatório de Ensaios de PVT (Pressão-Volume-Temperatura)",
+      "expansion_en": "PVT Tests Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ],
+      "collision_note": "Distinct from existing PVT acronym (Pressure-Volume-Temperature property/concept). This entry refers specifically to the regulatory report deliverable."
+    },
+    {
+      "id": "rgp-anp",
+      "sigla": "RGP",
+      "expansion_pt": "Relatório de Geoquímica de Poço",
+      "expansion_en": "Well Geochemistry Report",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "i-sigep",
+      "sigla": "i-SIGEP",
+      "expansion_pt": "Sistema integrado de gestão de exploração e produção da ANP",
+      "expansion_en": "ANP Integrated E&P Management System",
+      "category": "it_generic",
+      "it_generic": true,
+      "corporate_internal": false,
+      "domain": "sistemas_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "i-engine",
+      "sigla": "i-ENGINE",
+      "expansion_pt": "Sistema ANP de envio de SOP/TLD/relatórios diários",
+      "expansion_en": "ANP daily-reporting system",
+      "category": "it_generic",
+      "it_generic": true,
+      "corporate_internal": false,
+      "domain": "sistemas_anp",
+      "evidence_refs": [
+        "ANP-699/2017"
+      ]
+    },
+    {
+      "id": "pem",
+      "sigla": "PEM",
+      "expansion_pt": "Programa Exploratório Mínimo",
+      "expansion_en": "Minimum Exploratory Program",
+      "category": "contract",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "contrato_anp",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Contratos de Concessão ANP"
+      ]
+    },
+    {
+      "id": "pad",
+      "sigla": "PAD",
+      "expansion_pt": "Plano de Avaliação de Descoberta",
+      "expansion_en": "Discovery Evaluation Plan",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Resolução ANP 47/2014"
+      ]
+    },
+    {
+      "id": "dc-anp",
+      "sigla": "DC",
+      "expansion_pt": "Declaração de Comercialidade",
+      "expansion_en": "Commerciality Declaration",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Contratos de Concessão ANP"
+      ],
+      "collision_note": "Collides with sigla DC (Drill Collar / Comando de Perfuração)."
+    },
+    {
+      "id": "pd-anp",
+      "sigla": "PD",
+      "expansion_pt": "Plano de Desenvolvimento",
+      "expansion_en": "Development Plan",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Resolução ANP 17/2015"
+      ],
+      "collision_note": "Collides with sigla PD (Positive Displacement)."
+    },
+    {
+      "id": "pdp",
+      "sigla": "PDP",
+      "expansion_pt": "Plano de Desenvolvimento da Produção",
+      "expansion_en": "Production Development Plan",
+      "category": "regulator",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "regulatorio_anp",
+      "evidence_refs": [
+        "Resolução ANP 17/2015"
+      ]
+    },
+    {
+      "id": "propex",
+      "sigla": "PROPEX",
+      "expansion_pt": "Programa Exploratório (governança Petrobras de projetos exploratórios)",
+      "expansion_en": "Exploratory Program (Petrobras governance program)",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025",
+        "PE-2EXP-PROPEX"
+      ]
+    },
+    {
+      "id": "pexp",
+      "sigla": "PEXP",
+      "expansion_pt": "Portões Decisórios do PROPEX (eventos de aprovação)",
+      "expansion_en": "PROPEX Decision Gates",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "pexp1",
+      "sigla": "PEXP1",
+      "expansion_pt": "PEXP fase 1 — aprovação da estratégia do Bloco",
+      "expansion_en": "PROPEX Gate 1 — Block strategy approval",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "pexp2",
+      "sigla": "PEXP2",
+      "expansion_pt": "PEXP fase 2 — aprovação do PAD ou devolução total",
+      "expansion_en": "PROPEX Gate 2 — PAD approval or full relinquishment",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "pexp2a",
+      "sigla": "PEXP2A",
+      "expansion_pt": "PEXP fase 2A — revisão do PEM ou devolução parcial",
+      "expansion_en": "PROPEX Gate 2A — PEM review or partial relinquishment",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "pexp3",
+      "sigla": "PEXP3",
+      "expansion_pt": "PEXP fase 3 — declaração de comercialidade ou devolução",
+      "expansion_en": "PROPEX Gate 3 — commerciality declaration or relinquishment",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "pexp3a",
+      "sigla": "PEXP3A",
+      "expansion_pt": "PEXP fase 3A — revisão do PAD",
+      "expansion_en": "PROPEX Gate 3A — PAD review",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "pgp",
+      "sigla": "PGP",
+      "expansion_pt": "Plano de Gerenciamento de Projetos (escopo, cronograma, custo, riscos)",
+      "expansion_en": "Project Management Plan",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "tep-anp",
+      "sigla": "TEP",
+      "expansion_pt": "Termo de Encerramento do Projeto (PROPEX)",
+      "expansion_en": "Project Closure Term",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "collision_note": "Collides with sigla TEP (Tonne of Oil Equivalent)."
+    },
+    {
+      "id": "isa-corp",
+      "sigla": "ISA",
+      "expansion_pt": "Instrumento de Situação do Ativo (transição Exp→Prod)",
+      "expansion_en": "Asset Status Instrument",
+      "category": "process",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ],
+      "collision_note": "Collides with sigla ISA (International Society of Automation)."
+    },
+    {
+      "id": "comexp",
+      "sigla": "COMEXP",
+      "expansion_pt": "Comitê de Gestão da Exploração",
+      "expansion_en": "Exploration Management Committee",
+      "category": "organization",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025",
+        "PROPEX wiki"
+      ]
+    },
+    {
+      "id": "grbloc",
+      "sigla": "GRBLOC",
+      "expansion_pt": "Grupo Técnico de Blocos (revisão pré-COMEXP)",
+      "expansion_en": "Block Technical Review Group",
+      "category": "organization",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "grt",
+      "sigla": "GRT",
+      "expansion_pt": "Grupo de Revisão Técnica (apoio aos PEXPs)",
+      "expansion_en": "Technical Review Group",
+      "category": "organization",
+      "it_generic": false,
+      "corporate_internal": true,
+      "domain": "governanca_exploratoria",
+      "evidence_refs": [
+        "Curso PROPEX 2024/2025"
+      ]
+    },
+    {
+      "id": "wi",
+      "sigla": "WI",
+      "expansion_pt": "Participação (Working Interest)",
+      "expansion_en": "Working Interest",
+      "category": "contract",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "gestao_portfolio",
+      "evidence_refs": [
+        "SPE Reserves Definitions"
+      ]
+    },
+    {
+      "id": "vme",
+      "sigla": "VME",
+      "expansion_pt": "Valor Monetário Esperado",
+      "expansion_en": "Expected Monetary Value",
+      "category": "general",
+      "it_generic": false,
+      "corporate_internal": false,
+      "domain": "avaliacao_economica",
+      "evidence_refs": [
+        "SPE/AAPG decision-analysis literature"
+      ]
     }
   ]
 }

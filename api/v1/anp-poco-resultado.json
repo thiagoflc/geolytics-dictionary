@@ -1,0 +1,91 @@
+{
+  "meta": {
+    "source": "Resolução ANP nº 699/2017 — Capítulo III (Resultado de Poços)",
+    "source_url": "https://atosoficiais.com.br/anp/resolucao-n-699-2017",
+    "namespace": "https://geolytics.com.br/ontology/anp/poco-resultado/",
+    "version": "699/2017",
+    "total": 3,
+    "complementary_attributes_total": 4,
+    "description": "Vocabulário controlado das 3 qualificações possíveis para o Resultado de Poço (Resolução ANP nº 699/2017, Cap. III art. 6º), mais 4 atributos complementares (art. 7º) que devem acompanhar a qualificação 'Poço com hidrocarbonetos'. O Resultado deve ser enviado em até 60 dias após a Conclusão do Poço.",
+    "layer": "layer4",
+    "related_entities": ["poco", "descoberta", "acumulacao"],
+    "evidence_refs": ["ANP-699/2017 Cap. III"]
+  },
+  "concepts": [
+    {
+      "id": "poco-com-hidrocarbonetos",
+      "anp_code": "COM_HC",
+      "label_pt": "Poço com hidrocarbonetos",
+      "label_en": "Well with hydrocarbons",
+      "definition": "Poço em que se verificou pelo menos algum indício de hidrocarbonetos durante sua perfuração ou avaliação por perfis. Demanda informações complementares (atributos): indício durante perfuração, operações de avaliação de formações, existência de acumulação econômica, fluido principal.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-resultado/poco-com-hidrocarbonetos",
+      "complementary_attributes": [
+        "indicio_perfuracao",
+        "avaliacao_formacoes",
+        "acumulacao_economica",
+        "fluido_principal"
+      ],
+      "evidence_refs": ["ANP-699/2017 art.6º I", "ANP-699/2017 art.7º"]
+    },
+    {
+      "id": "poco-seco",
+      "anp_code": "SECO",
+      "label_pt": "Poço seco",
+      "label_en": "Dry hole",
+      "definition": "Poço em que não se constatou qualquer indício de hidrocarbonetos ao longo das operações de perfuração e avaliação por perfis.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-resultado/poco-seco",
+      "evidence_refs": ["ANP-699/2017 art.6º II"]
+    },
+    {
+      "id": "poco-nao-qualificavel",
+      "anp_code": "NAO_QUALIFICAVEL",
+      "label_pt": "Poço não qualificável",
+      "label_en": "Non-qualifiable well",
+      "definition": "Poço que foi abandonado definitivamente sem atingir seus objetivos geológicos, ou não se enquadra nas qualificações anteriores em função de seus objetivos. São os casos de poços de injeção, de alívio, de descarte, de captação de água, abandonados por acidente mecânico, com objetivo fora da previsão, e perfurados sem possibilidade de avaliação.",
+      "parents": [],
+      "broader": null,
+      "uri": "https://geolytics.com.br/ontology/anp/poco-resultado/poco-nao-qualificavel",
+      "evidence_refs": ["ANP-699/2017 art.6º III"]
+    }
+  ],
+  "complementary_attributes": [
+    {
+      "id": "indicio_perfuracao",
+      "label_pt": "Ocorrência de indícios durante a perfuração",
+      "label_en": "Drilling-time hydrocarbon indications",
+      "definition": "Indícios no fluido retornado (detector de gás e/ou hidrocarboneto em superfície — kick) e/ou em amostras de rocha (calha, testemunho, amostra lateral).",
+      "applies_to": "poco-com-hidrocarbonetos",
+      "evidence_refs": ["ANP-699/2017 art.7º I"]
+    },
+    {
+      "id": "avaliacao_formacoes",
+      "label_pt": "Operações de avaliação de formações",
+      "label_en": "Formation evaluation operations",
+      "definition": "Atividades complementares à perfilagem em poço aberto realizada logo após a perfuração. Deve-se informar: i) descartada avaliação; ii) avaliação futura planejada; iii) avaliação completa realizada (justificando a opção, nas observações).",
+      "applies_to": "poco-com-hidrocarbonetos",
+      "enum_values": ["descartada", "futura_planejada", "completa_realizada"],
+      "evidence_refs": ["ANP-699/2017 art.7º II"]
+    },
+    {
+      "id": "acumulacao_economica",
+      "label_pt": "Existência de acumulação economicamente aproveitável",
+      "label_en": "Economically recoverable accumulation",
+      "definition": "Confirmação de acumulação de hidrocarbonetos e, se positivo, classificação: i) passível de aproveitamento econômico; ii) não passível de aproveitamento econômico (justificando a opção, nas observações, com base em argumentação técnico-econômica).",
+      "applies_to": "poco-com-hidrocarbonetos",
+      "enum_values": ["confirmada_passivel", "confirmada_nao_passivel", "nao_confirmada"],
+      "evidence_refs": ["ANP-699/2017 art.7º III"]
+    },
+    {
+      "id": "fluido_principal",
+      "label_pt": "Fluido principal",
+      "label_en": "Main reservoir fluid",
+      "definition": "Fluido predominante em condições de reservatório (óleo, gás, condensado, etc.).",
+      "applies_to": "poco-com-hidrocarbonetos",
+      "evidence_refs": ["ANP-699/2017 art.7º IV"]
+    }
+  ]
+}
