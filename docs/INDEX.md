@@ -36,6 +36,7 @@ Mapa de navegacao para toda a documentacao do projeto.
 | [ACRONYMS.md](ACRONYMS.md) | Siglario O&G: 1.102 siglas categorizadas, estrutura JSON, siglas com multiplos sentidos, filtragem RAG |
 | [BRAZIL_SPECIFIC.md](BRAZIL_SPECIFIC.md) | Os 11 conceitos exclusivamente brasileiros (camada 5 — ANP): Bloco, PAD, Contrato E&P, Rodada de Licitacao, UTS, Regime Contratual, Periodos Exploratorios, Processo Sancionador, Notificacao de Descoberta, Declaracao de Comercialidade |
 | [CGI.md](CGI.md) | CGI vocabularies (Layer 1b — GeoSciML): 7 vocabulary files, JSON schema, cross-links via geosciml_uri, OSDU crosswalk, Python/API/MCP usage, reference Cypher queries 07 and 08 |
+| [GWML2.md](GWML2.md) | GWML2 WellConstruction (9 classes) e propriedades gsmlbh do poço (boreholeDiameter, dateOfDrilling, drillingMethod, inclinationType) |
 | [EXTERNAL_STANDARDS.md](EXTERNAL_STANDARDS.md) | Padroes externos: Petro KGraph (PUC-Rio), PPDM, SPE-PRMS (hierarquia de reservas), OSDU (crosswalks e formato osdu_kind) |
 
 ---
