@@ -204,6 +204,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "Mudlogging",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -513,6 +514,7 @@ export const OG_NODES = [
     superclass: "owl:Thing",
     synonyms_pt: ["amostra de fluido"],
     synonyms_en: ["fluid sample"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -528,6 +530,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "ServiceLine",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -545,6 +548,7 @@ export const OG_NODES = [
     superclass: "ServiceLine",
     synonyms_pt: ["amostragem de calha", "amostras de calha"],
     synonyms_en: ["cuttings sample collection"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -560,6 +564,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "ServiceLine",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -577,6 +582,7 @@ export const OG_NODES = [
     superclass: "ServiceLine",
     synonyms_pt: ["SWC"],
     synonyms_en: ["sidewall core", "SWC"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -592,6 +598,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "ServiceLine",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -607,6 +614,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG",
     superclass: "ServiceLine",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -624,6 +632,7 @@ export const OG_NODES = [
     superclass: "ServiceLine",
     synonyms_pt: ["RFT", "MDT", "DST"],
     synonyms_en: ["formation test", "RFT", "MDT", "DST"],
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
@@ -639,6 +648,7 @@ export const OG_NODES = [
     evidence_status: "documented",
     manager: "EXP/OGP/AQG (CGOR)",
     superclass: "ServiceLine",
+    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
     geocoverage: ["layer1b", "layer4", "layer6"],
   },
   {
