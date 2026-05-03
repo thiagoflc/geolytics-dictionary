@@ -463,7 +463,12 @@ export const EXTENDED_TERMS = [
     petrokgraph_uri: null,
     osdu_kind: null,
     geosciml_uri: "http://geosciml.org/def/gsmlb#Contact",
-    geocoverage: ["layer1", "layer1b", "layer2"],
+    gso_uri: "https://w3id.org/gso/1.0/geologiccontact/Contact",
+    skos_exactMatch: [
+      "http://geosciml.org/def/gsmlb#Contact",
+      "https://w3id.org/gso/1.0/geologiccontact/Contact",
+    ],
+    geocoverage: ["layer1", "layer1b", "layer2", "layer7"],
     synonyms_pt: ["contato geológico", "limite estratigráfico", "superfície de contato"],
     synonyms_en: ["geological contact", "geologic contact", "stratigraphic boundary"],
     examples: [
@@ -484,7 +489,12 @@ export const EXTENDED_TERMS = [
     petrokgraph_uri: null,
     osdu_kind: null,
     geosciml_uri: "http://geosciml.org/def/gsmlb#Fold",
-    geocoverage: ["layer1", "layer1b", "layer2"],
+    gso_uri: "https://w3id.org/gso/1.0/geologicfold/Fold",
+    skos_exactMatch: [
+      "http://geosciml.org/def/gsmlb#Fold",
+      "https://w3id.org/gso/1.0/geologicfold/Fold",
+    ],
+    geocoverage: ["layer1", "layer1b", "layer2", "layer7"],
     synonyms_pt: ["dobra", "flexura", "anticlinal", "sinclinal"],
     synonyms_en: ["fold", "anticline", "syncline", "flexure"],
     examples: [
@@ -505,7 +515,12 @@ export const EXTENDED_TERMS = [
     petrokgraph_uri: null,
     osdu_kind: null,
     geosciml_uri: "http://geosciml.org/def/gsmlb#Foliation",
-    geocoverage: ["layer1", "layer1b"],
+    gso_uri: "https://w3id.org/gso/1.0/geologicstructure/Foliation",
+    skos_exactMatch: [
+      "http://geosciml.org/def/gsmlb#Foliation",
+      "https://w3id.org/gso/1.0/geologicstructure/Foliation",
+    ],
+    geocoverage: ["layer1", "layer1b", "layer7"],
     synonyms_pt: ["foliação", "xistosidade", "clivagem", "bandamento"],
     synonyms_en: ["foliation", "schistosity", "cleavage", "banding"],
     examples: [
@@ -526,7 +541,12 @@ export const EXTENDED_TERMS = [
     petrokgraph_uri: null,
     osdu_kind: null,
     geosciml_uri: "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
-    geocoverage: ["layer1", "layer1b", "layer2"],
+    gso_uri: "https://w3id.org/gso/1.0/geologicfault/Fault",
+    skos_exactMatch: [
+      "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+      "https://w3id.org/gso/1.0/geologicfault/Fault",
+    ],
+    geocoverage: ["layer1", "layer1b", "layer2", "layer7"],
     synonyms_pt: ["falha", "estrutura de cisalhamento", "falha geológica", "plano de falha"],
     synonyms_en: ["fault", "shear displacement structure", "fault zone"],
     examples: [

@@ -1,8 +1,7 @@
 """test_sweet.py — Tests for SweetExpander."""
 
 import pytest
-
-from geobrain import SweetExpander, ExpansionResult, Alignment
+from geobrain import Alignment, ExpansionResult, SweetExpander
 
 
 @pytest.fixture(scope="module")
@@ -13,6 +12,7 @@ def s():
 # ---------------------------------------------------------------------------
 # expand()
 # ---------------------------------------------------------------------------
+
 
 def test_expand_hidrocarboneto_returns_uris(s):
     uris = s.expand("hidrocarboneto")
@@ -64,6 +64,7 @@ def test_expand_skos_prefix_strategy(s):
 # expand_full()
 # ---------------------------------------------------------------------------
 
+
 def test_expand_full_hidrocarboneto_found(s):
     result = s.expand_full("hidrocarboneto")
     assert isinstance(result, ExpansionResult)
@@ -90,7 +91,7 @@ def test_expand_full_has_hierarchy(s):
 
 def test_expand_full_hierarchy_has_ancestors(s):
     result = s.expand_full("hidrocarboneto", include_hierarchy=True)
-    for uri, info in result.hierarchy.items():
+    for _uri, info in result.hierarchy.items():
         assert "ancestors" in info
         assert isinstance(info["ancestors"], list)
 
@@ -110,6 +111,7 @@ def test_expand_full_modules_non_empty(s):
 # ---------------------------------------------------------------------------
 # all_term_ids()
 # ---------------------------------------------------------------------------
+
 
 def test_all_term_ids_non_empty(s):
     ids = s.all_term_ids()

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.0.0",
-    "generated": "2026-05-03T10:26:03.182Z",
+    "generated": "2026-05-03T10:29:47.616Z",
     "description": "GeoBrain — complete merged dataset",
     "counts": {
       "glossary_terms": 47,
@@ -1668,10 +1668,16 @@
       "petrokgraph_uri": null,
       "osdu_kind": null,
       "geosciml_uri": "http://geosciml.org/def/gsmlb#Contact",
+      "gso_uri": "https://w3id.org/gso/1.0/geologiccontact/Contact",
+      "skos_exactMatch": [
+        "http://geosciml.org/def/gsmlb#Contact",
+        "https://w3id.org/gso/1.0/geologiccontact/Contact"
+      ],
       "geocoverage": [
         "layer1",
         "layer1b",
-        "layer2"
+        "layer2",
+        "layer7"
       ],
       "synonyms_pt": [
         "contato geológico",
@@ -1700,10 +1706,16 @@
       "petrokgraph_uri": null,
       "osdu_kind": null,
       "geosciml_uri": "http://geosciml.org/def/gsmlb#Fold",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfold/Fold",
+      "skos_exactMatch": [
+        "http://geosciml.org/def/gsmlb#Fold",
+        "https://w3id.org/gso/1.0/geologicfold/Fold"
+      ],
       "geocoverage": [
         "layer1",
         "layer1b",
-        "layer2"
+        "layer2",
+        "layer7"
       ],
       "synonyms_pt": [
         "dobra",
@@ -1734,9 +1746,15 @@
       "petrokgraph_uri": null,
       "osdu_kind": null,
       "geosciml_uri": "http://geosciml.org/def/gsmlb#Foliation",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicstructure/Foliation",
+      "skos_exactMatch": [
+        "http://geosciml.org/def/gsmlb#Foliation",
+        "https://w3id.org/gso/1.0/geologicstructure/Foliation"
+      ],
       "geocoverage": [
         "layer1",
-        "layer1b"
+        "layer1b",
+        "layer7"
       ],
       "synonyms_pt": [
         "foliação",
@@ -1767,10 +1785,16 @@
       "petrokgraph_uri": null,
       "osdu_kind": null,
       "geosciml_uri": "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+      "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
+      "skos_exactMatch": [
+        "http://geosciml.org/def/gsmlb#ShearDisplacementStructure",
+        "https://w3id.org/gso/1.0/geologicfault/Fault"
+      ],
       "geocoverage": [
         "layer1",
         "layer1b",
-        "layer2"
+        "layer2",
+        "layer7"
       ],
       "synonyms_pt": [
         "falha",
@@ -1849,7 +1873,7 @@
   ],
   "entity_graph": {
     "version": "1.0.0",
-    "generated": "2026-05-03T10:26:03.182Z",
+    "generated": "2026-05-03T10:29:47.616Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU",
     "nodes": [
       {
@@ -11181,7 +11205,7 @@
   },
   "ontology_map": {
     "version": "1.0.0",
-    "generated": "2026-05-03T10:26:03.182Z",
+    "generated": "2026-05-03T10:29:47.616Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -11508,7 +11532,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-03T10:26:03.182Z",
+      "generated": "2026-05-03T10:29:47.616Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -25665,7 +25689,7 @@
   "seismic": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-03T10:26:03.182Z",
+      "generated": "2026-05-03T10:29:47.616Z",
       "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       "module_count": 3,
       "class_count": 64,

@@ -5,8 +5,7 @@ suite in tests/validator.test.js.
 """
 
 import pytest
-
-from geobrain import Validator, Report, Violation
+from geobrain import Report, Validator
 
 
 @pytest.fixture(scope="module")
@@ -17,6 +16,7 @@ def v():
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def has_violation(report: Report, rule_id: str) -> bool:
     return any(viol.rule == rule_id for viol in report.violations)
@@ -30,25 +30,32 @@ def has_warning(report: Report, rule_id: str) -> bool:
 # SPE_PRMS_INVALID_CATEGORY
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("text,expected_rule", [
-    ("Reserva 4P do Campo de Búzios", "SPE_PRMS_INVALID_CATEGORY"),
-    ("Estimativa de 5P para o pré-sal", "SPE_PRMS_INVALID_CATEGORY"),
-    ("Recursos avaliados como 6P na Bacia de Santos", "SPE_PRMS_INVALID_CATEGORY"),
-])
+
+@pytest.mark.parametrize(
+    "text,expected_rule",
+    [
+        ("Reserva 4P do Campo de Búzios", "SPE_PRMS_INVALID_CATEGORY"),
+        ("Estimativa de 5P para o pré-sal", "SPE_PRMS_INVALID_CATEGORY"),
+        ("Recursos avaliados como 6P na Bacia de Santos", "SPE_PRMS_INVALID_CATEGORY"),
+    ],
+)
 def test_spe_prms_invalid_category_violations(v, text, expected_rule):
     report = v.validate(text)
     assert report.valid is False
     assert has_violation(report, expected_rule), f"Expected {expected_rule} in: {text!r}"
 
 
-@pytest.mark.parametrize("text", [
-    "Reservas 1P certificadas do Campo de Santos",
-    "Volume de Reservas 2P estimado em 500 MMboe",
-    "Reservas 3P totais do campo de Libra",
-    "Recursos Contingentes C1C do bloco BM-C-33",
-    "C2C estimados no pré-sal da Bacia de Santos",
-    "C3C do Campo de Búzios revisados em 2024",
-])
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Reservas 1P certificadas do Campo de Santos",
+        "Volume de Reservas 2P estimado em 500 MMboe",
+        "Reservas 3P totais do campo de Libra",
+        "Recursos Contingentes C1C do bloco BM-C-33",
+        "C2C estimados no pré-sal da Bacia de Santos",
+        "C3C do Campo de Búzios revisados em 2024",
+    ],
+)
 def test_spe_prms_valid_categories_no_violation(v, text):
     report = v.validate(text)
     assert not has_violation(report, "SPE_PRMS_INVALID_CATEGORY"), (
@@ -60,19 +67,28 @@ def test_spe_prms_valid_categories_no_violation(v, text):
 # RESERVA_AMBIGUITY
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("text", [
-    "A reserva petrolífera 2P fica próxima à REBIO Comboios no campo de Espírito Santo",
-    "Volume de reserva em barris próximo à RPPN do bloco exploratório",
-])
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "A reserva petrolífera 2P fica próxima à REBIO Comboios no campo de Espírito Santo",
+        "Volume de reserva em barris próximo à RPPN do bloco exploratório",
+    ],
+)
 def test_reserva_ambiguity_warning(v, text):
     report = v.validate(text)
-    assert has_warning(report, "RESERVA_AMBIGUITY"), f"Expected RESERVA_AMBIGUITY warning in: {text!r}"
+    assert has_warning(report, "RESERVA_AMBIGUITY"), (
+        f"Expected RESERVA_AMBIGUITY warning in: {text!r}"
+    )
 
 
-@pytest.mark.parametrize("text", [
-    "Reservas 2P do Campo de Campos estimadas em 1 bilhão de barris",
-    "A REBIO Comboios é uma unidade de conservação federal",
-])
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Reservas 2P do Campo de Campos estimadas em 1 bilhão de barris",
+        "A REBIO Comboios é uma unidade de conservação federal",
+    ],
+)
 def test_reserva_ambiguity_no_warning_clean_context(v, text):
     report = v.validate(text)
     assert not has_warning(report, "RESERVA_AMBIGUITY"), f"Should not warn for: {text!r}"
@@ -82,21 +98,28 @@ def test_reserva_ambiguity_no_warning_clean_context(v, text):
 # REGIME_CONTRATUAL_INVALID
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("text,expected_rule", [
-    ("Bloco BS-500 em regime de Privatização", "REGIME_CONTRATUAL_INVALID"),
-    ("regime de Nacionalização para blocos do pré-sal", "REGIME_CONTRATUAL_INVALID"),
-])
+
+@pytest.mark.parametrize(
+    "text,expected_rule",
+    [
+        ("Bloco BS-500 em regime de Privatização", "REGIME_CONTRATUAL_INVALID"),
+        ("regime de Nacionalização para blocos do pré-sal", "REGIME_CONTRATUAL_INVALID"),
+    ],
+)
 def test_regime_contratual_invalid(v, text, expected_rule):
     report = v.validate(text)
     assert report.valid is False
     assert has_violation(report, expected_rule), f"Expected {expected_rule} in: {text!r}"
 
 
-@pytest.mark.parametrize("text", [
-    "Bloco BS-500 em regime de Concessão",
-    "Bloco em regime de Partilha de Produção na Bacia de Santos",
-    "Campo sob regime de Cessão Onerosa",
-])
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Bloco BS-500 em regime de Concessão",
+        "Bloco em regime de Partilha de Produção na Bacia de Santos",
+        "Campo sob regime de Cessão Onerosa",
+    ],
+)
 def test_regime_contratual_valid(v, text):
     report = v.validate(text)
     assert not has_violation(report, "REGIME_CONTRATUAL_INVALID"), (
@@ -108,20 +131,27 @@ def test_regime_contratual_valid(v, text):
 # TIPO_POCO_INVALID
 # ---------------------------------------------------------------------------
 
-@pytest.mark.parametrize("text", [
-    "Poço 9-BUZ-1-RJS perfurado na Bacia de Santos",
-    "Poço 5-ABC-100-SP registrado na ANP",
-])
+
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Poço 9-BUZ-1-RJS perfurado na Bacia de Santos",
+        "Poço 5-ABC-100-SP registrado na ANP",
+    ],
+)
 def test_tipo_poco_invalid(v, text):
     report = v.validate(text)
     assert report.valid is False
     assert has_violation(report, "TIPO_POCO_INVALID"), f"Expected TIPO_POCO_INVALID in: {text!r}"
 
 
-@pytest.mark.parametrize("text", [
-    "Poço exploratório 1-RJS-702-RJ descobriu o pré-sal",
-    "Poço de desenvolvimento 7-BUZ-5-RJS em Búzios",
-])
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Poço exploratório 1-RJS-702-RJ descobriu o pré-sal",
+        "Poço de desenvolvimento 7-BUZ-5-RJS em Búzios",
+    ],
+)
 def test_tipo_poco_valid(v, text):
     report = v.validate(text)
     assert not has_violation(report, "TIPO_POCO_INVALID"), (
@@ -133,15 +163,21 @@ def test_tipo_poco_valid(v, text):
 # LITOLOGIA_INVALID
 # ---------------------------------------------------------------------------
 
+
 def test_litologia_invalid_unknown(v):
     report = v.validate("Litologia: xistosidade no intervalo 2000-2500m")
-    assert has_warning(report, "LITOLOGIA_INVALID"), "Should warn for unknown lithology 'xistosidade'"
+    assert has_warning(report, "LITOLOGIA_INVALID"), (
+        "Should warn for unknown lithology 'xistosidade'"
+    )
 
 
-@pytest.mark.parametrize("text", [
-    "Litologia: arenito na Formação Macaré",
-    "Litologia: calcario do reservatório carbonático do pré-sal",
-])
+@pytest.mark.parametrize(
+    "text",
+    [
+        "Litologia: arenito na Formação Macaré",
+        "Litologia: calcario do reservatório carbonático do pré-sal",
+    ],
+)
 def test_litologia_valid_known(v, text):
     report = v.validate(text)
     assert not has_warning(report, "LITOLOGIA_INVALID"), (
@@ -152,6 +188,7 @@ def test_litologia_valid_known(v, text):
 # ---------------------------------------------------------------------------
 # JANELA_GERACAO_INVALID
 # ---------------------------------------------------------------------------
+
 
 def test_janela_geracao_valid_oleo(v):
     report = v.validate("O querogênio está na janela de óleo com Ro 0.7%")
@@ -166,6 +203,7 @@ def test_janela_geracao_invalid_metamorfismo(v):
 # ---------------------------------------------------------------------------
 # ACRONYM_AMBIGUOUS
 # ---------------------------------------------------------------------------
+
 
 def test_acronym_ambiguous_pad_no_context(v):
     report = v.validate("O PAD foi submetido à ANP para análise")
@@ -185,6 +223,7 @@ def test_acronym_ambiguous_uts_no_context(v):
 # ---------------------------------------------------------------------------
 # OSDU_KIND_FORMAT
 # ---------------------------------------------------------------------------
+
 
 def test_osdu_kind_malformed_missing_version(v):
     report = v.validate("Entidade opendes:osdu:master-data--Well sem versão")
@@ -213,10 +252,13 @@ def test_osdu_kind_valid_field(v):
 # LAYER_COVERAGE_MISMATCH (structured claim)
 # ---------------------------------------------------------------------------
 
+
 def test_layer_coverage_mismatch_invalid_layer(v):
     claim = {"value": "poco em layer9", "context": {"entity_id": "poco", "layer": "layer9"}}
     report = v.validate(claim)
-    assert has_warning(report, "LAYER_COVERAGE_MISMATCH"), "Should warn for layer not in geocoverage"
+    assert has_warning(report, "LAYER_COVERAGE_MISMATCH"), (
+        "Should warn for layer not in geocoverage"
+    )
 
 
 def test_layer_coverage_mismatch_valid_layer(v):
@@ -235,6 +277,7 @@ def test_layer_coverage_mismatch_no_context(v):
 # INVALID_INPUT
 # ---------------------------------------------------------------------------
 
+
 def test_invalid_input_none(v):
     report = v.validate(None)  # type: ignore[arg-type]
     assert report.valid is False
@@ -250,6 +293,7 @@ def test_invalid_input_number(v):
 # ---------------------------------------------------------------------------
 # Valid no-violation case
 # ---------------------------------------------------------------------------
+
 
 def test_fully_valid_claim_no_violations(v):
     report = v.validate("Reservas 2P certificadas do Campo de Santos")
