@@ -124,8 +124,8 @@ ignore = [
 ]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**/*.py" = ["B011"]
-"__init__.py" = ["F401"]
+"**/tests/**/*.py" = ["B011", "E402"]  # importorskip pattern requires late imports
+"**/__init__.py" = ["F401"]
 
 [tool.ruff.format]
 quote-style = "double"
