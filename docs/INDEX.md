@@ -12,6 +12,7 @@ Mapa de navegacao para toda a documentacao do projeto.
 | [GRAPHRAG.md](GRAPHRAG.md) | Receita completa do agente LangGraph: topologia do DAG, descricao de cada no, validador como guardrail com exemplo trabalhado, tabela de decisao "quando usar o que" |
 | [ONTOLOGY.md](ONTOLOGY.md) | Referencia de classes e propriedades: tabelas geradas automaticamente de `data/ontopetro.json`, `data/geomechanics.json` e modulos sismicos P2.8. Regenerar com `node scripts/build-ontology-doc.js` |
 | [USE_CASES.md](USE_CASES.md) | Seis casos de uso concretos com perguntas, caminho no DAG e resposta esperada: regime ANP, WITSML TVD/MD, AVO Classe 4, janela mud weight MEM, disambiguacao SPE-PRMS vs ambiental, crosswalk OSDU |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Guia de contribuicao: como adicionar termos ANP, entidades, arestas, termos estendidos, alinhamentos, siglas, shapes SHACL e regras do validador. Pipeline ETL e checklist de PR |
 
 ---
 
