@@ -26,7 +26,7 @@ def test_data_dir_exists():
 
 def test_load_json_glossary_returns_dict_or_list():
     result = load_json("glossary.json")
-    assert isinstance(result, (dict, list))
+    assert isinstance(result, dict | list)
 
 
 def test_load_json_glossary_nonempty():
@@ -36,7 +36,7 @@ def test_load_json_glossary_nonempty():
 
 def test_load_json_entity_graph_returns_dict_or_list():
     result = load_json("entity-graph.json")
-    assert isinstance(result, (dict, list))
+    assert isinstance(result, dict | list)
 
 
 def test_load_json_entity_graph_nonempty():
@@ -46,7 +46,7 @@ def test_load_json_entity_graph_nonempty():
 
 def test_load_json_acronyms_returns_list_or_dict():
     result = load_json("acronyms.json")
-    assert isinstance(result, (dict, list))
+    assert isinstance(result, dict | list)
 
 
 def test_load_json_missing_file_raises_file_not_found():
