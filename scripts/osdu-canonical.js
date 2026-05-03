@@ -171,3 +171,29 @@ export const OSDU_CANONICAL = {
     note: "Not present in OSDU.ttl",
   },
 };
+
+/* ANP → OSDU WellStatus crosswalk (T8)
+ * Source: data/anp-osdu-wellstatus-map.json
+ * Full machine-readable mapping is in that file; this table mirrors the
+ * most important entries for inline use by other scripts.
+ */
+export const ANP_WELL_STATUS = {
+  EM_PRODUCAO:       { osdu_value: "Producing",            match_kind: "exactMatch" },
+  ABANDONADO:        { osdu_value: "Abandoned",            match_kind: "exactMatch" },
+  TAMPONADO:         { osdu_value: "Plugged and Abandoned", match_kind: "exactMatch" },
+  SUSPENSO:          { osdu_value: "Suspended",            match_kind: "exactMatch" },
+  EM_OBSERVACAO:     { osdu_value: "Temporarily Abandoned", match_kind: "closeMatch" },
+  CONVERTIDO_INJECAO:{ osdu_value: "Injection",            match_kind: "exactMatch" },
+  INATIVO:           { osdu_value: "Shut-In",              match_kind: "closeMatch" },
+  EM_PERFURACAO:     { osdu_value: "Active",               match_kind: "closeMatch" },
+  EM_COMPLETACAO:    { osdu_value: "Active",               match_kind: "closeMatch" },
+  "1_PRO":           { osdu_value: "Producing",            match_kind: "closeMatch" },
+  "2_INJ":           { osdu_value: "Injection",            match_kind: "exactMatch" },
+  "3_TES":           { osdu_value: "Active",               match_kind: "closeMatch" },
+  "4_EXP":           { osdu_value: "Active",               match_kind: "closeMatch" },
+  "5_SEC":           { osdu_value: "Injection",            match_kind: "closeMatch" },
+  EM_ABANDONO:       { osdu_value: "Temporarily Abandoned", match_kind: "closeMatch" },
+  SECO:              { osdu_value: "Dry",                  match_kind: "exactMatch" },
+  CONVERTENDO:       { osdu_value: "Converting",           match_kind: "exactMatch" },
+  FECHADO:           { osdu_value: "Shut-In",              match_kind: "exactMatch" },
+};

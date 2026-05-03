@@ -6,9 +6,13 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix sweet: <http://sweetontology.net/> .
+@prefix geocore: <http://loop3d.org/GKO/geocore#> .
+@prefix gsmlb: <http://geosciml.org/def/gsmlb#> .
+@prefix gsmlbh: <http://geosciml.org/def/gsmlbh#> .
+@prefix cgi: <http://resource.geosciml.org/classifier/cgi/lithOntology/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T11:21:26.990Z
+# Generated: 2026-05-03T11:29:27.758Z
 # Nodes: 170  Edges: 259
 
 #
@@ -2977,3 +2981,24 @@ geo:laudo-geomecanico geo:subsidizes geo:input-elaboration .
 geo:laudo-geomecanico geo:derived_from geo:rmg .
 geo:laudo-geomecanico geo:derived_from geo:ogeomec .
 geo:laudo-geomecanico geo:stored_in geo:vge .
+
+#
+# Layer1 (GeoCore) ↔ Layer1b (GeoSciML + CGI Simple Lithology) equivalences
+# Source: data/layer1-layer1b-equivalence.json — Semantic equivalences between layer1 (BFO+GeoCore) and layer1b (GeoSciML+CGI Simple Lithology)
+# Generated: 2026-05-03
+#
+
+<http://loop3d.org/GKO/geocore#GeologicUnit> skos:exactMatch <http://geosciml.org/def/gsmlb#GeologicUnit> .
+<http://loop3d.org/GKO/geocore#GeologicBody> owl:equivalentClass <http://geosciml.org/def/gsmlb#GeologicUnit> .
+<http://loop3d.org/GKO/geocore#Borehole> owl:equivalentClass <http://geosciml.org/def/gsmlbh#Borehole> .
+<http://loop3d.org/GKO/geocore#GeologicStructure> skos:exactMatch <http://geosciml.org/def/gsmlb#GeologicStructure> .
+<http://loop3d.org/GKO/geocore#FaultZone> skos:broadMatch <http://geosciml.org/def/gsmlb#ShearDisplacementStructure> .
+<http://loop3d.org/GKO/geocore#Contact> skos:exactMatch <http://geosciml.org/def/gsmlb#Contact> .
+<http://loop3d.org/GKO/geocore#Fold> skos:exactMatch <http://geosciml.org/def/gsmlb#Fold> .
+<http://loop3d.org/GKO/geocore#Foliation> skos:exactMatch <http://geosciml.org/def/gsmlb#Foliation> .
+<http://loop3d.org/GKO/geocore#Lineation> skos:exactMatch <http://geosciml.org/def/gsmlb#Lineation> .
+<http://loop3d.org/GKO/geocore#RockMaterial> skos:exactMatch <http://geosciml.org/def/gsmlb#RockMaterial> .
+<http://loop3d.org/GKO/geocore#RockMaterial> skos:narrowMatch <http://resource.geosciml.org/classifier/cgi/lithOntology/sedimentary_material> .
+<http://loop3d.org/GKO/geocore#GeologicFeature> skos:broadMatch <http://geosciml.org/def/gsmlb#MappedFeature> .
+<http://loop3d.org/GKO/geocore#GeologicEvent> skos:exactMatch <http://geosciml.org/def/gsmlb#GeologicEvent> .
+<http://loop3d.org/GKO/geocore#EarthMaterial> skos:exactMatch <http://geosciml.org/def/gsmlb#EarthMaterial> .

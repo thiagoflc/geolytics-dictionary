@@ -2188,8 +2188,9 @@ console.log(`  Seismic: ${_seismicSummary.meta.class_count} classes, ${_seismicS
 // Idempotent: overwrites on each generate run.
 (function copyCrosswalks() {
   const crosswalkFiles = [
-    { src: 'data/witsml-rdf-crosswalk.json', dst: 'api/v1/witsml-rdf-crosswalk.json' },
-    { src: 'data/prodml-rdf-crosswalk.json',  dst: 'api/v1/prodml-rdf-crosswalk.json' },
+    { src: 'data/witsml-rdf-crosswalk.json',        dst: 'api/v1/witsml-rdf-crosswalk.json' },
+    { src: 'data/prodml-rdf-crosswalk.json',         dst: 'api/v1/prodml-rdf-crosswalk.json' },
+    { src: 'data/anp-osdu-wellstatus-map.json',      dst: 'api/v1/anp-osdu-wellstatus-map.json' },
   ];
   let totalChunks = 0;
   const ragLines = [];

@@ -1,0 +1,133 @@
+{
+  "meta": {
+    "source": "CGI Geoscience Vocabularies — ContactType",
+    "namespace": "http://resource.geosciml.org/classifier/cgi/contacttype/",
+    "version": "201202",
+    "total": 12,
+    "description": "CGI/IUGS controlled vocabulary of contact types used in GeoSciML Contact descriptions. Contacts separate adjacent geological units and may be depositional, erosional, intrusive, tectonic, or metamorphic in origin.",
+    "skos_scheme": "http://resource.geosciml.org/classifierScheme/cgi/contacttype/201202",
+    "related_entity": "contato-geologico"
+  },
+  "concepts": [
+    {
+      "id": "contact",
+      "label_en": "contact",
+      "label_pt": "contato",
+      "definition": "A surface or narrow zone separating two geological units of different lithology, age, or origin. The fundamental unit of geological mapping. Top concept of the contact type vocabulary.",
+      "parents": [],
+      "broader": null,
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "lithological_contact",
+      "label_en": "lithological contact",
+      "label_pt": "contato litológico",
+      "definition": "A contact between geological units of different lithological character. The boundary may be gradational or sharp and does not necessarily imply a time gap or structural event.",
+      "parents": ["contact"],
+      "broader": "contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/lithological_contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "stratigraphic_contact",
+      "label_en": "stratigraphic contact",
+      "label_pt": "contato estratigráfico",
+      "definition": "A contact between strata that have a defined stratigraphic relationship — either conformable (continuous deposition) or unconformable (depositional break or erosion surface).",
+      "parents": ["contact"],
+      "broader": "contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/stratigraphic_contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "conformable_contact",
+      "label_en": "conformable contact",
+      "label_pt": "contato concordante",
+      "definition": "A stratigraphic contact where the beds above and below are parallel and there is no significant break in sedimentation. Indicates continuous or near-continuous deposition.",
+      "parents": ["stratigraphic_contact"],
+      "broader": "stratigraphic_contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/conformable_contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "unconformable_contact",
+      "label_en": "unconformable contact",
+      "label_pt": "contato discordante",
+      "definition": "A stratigraphic contact representing a significant time gap (hiatus) in the rock record, caused by erosion or non-deposition. The unconformity surface records a period of geological history not represented by strata.",
+      "parents": ["stratigraphic_contact"],
+      "broader": "stratigraphic_contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/unconformable_contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "angular_unconformity",
+      "label_en": "angular unconformity",
+      "label_pt": "discordância angular",
+      "definition": "An unconformity in which younger strata overlie an erosion surface on tilted or folded older rocks. The beds above and below are not parallel. Represents a cycle of deposition, deformation, erosion, and renewed deposition.",
+      "parents": ["unconformable_contact"],
+      "broader": "unconformable_contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/angular_unconformity",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "disconformity",
+      "label_en": "disconformity",
+      "label_pt": "disconformidade",
+      "definition": "An unconformity in which the bedding planes above and below are parallel but an erosion surface separates them, representing a period of erosion or non-deposition without tilting.",
+      "parents": ["unconformable_contact"],
+      "broader": "unconformable_contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/disconformity",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "nonconformity",
+      "label_en": "nonconformity",
+      "label_pt": "não-conformidade",
+      "definition": "An unconformity where stratified sedimentary rocks overlie igneous or metamorphic rocks. The contact represents a period of uplift, erosion of the older crystalline basement, and subsequent burial by sediments.",
+      "parents": ["unconformable_contact"],
+      "broader": "unconformable_contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/nonconformity",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "paraconformity",
+      "label_en": "paraconformity",
+      "label_pt": "paraconformidade",
+      "definition": "An unconformity in which the strata above and below are parallel and the contact appears conformable but represents a significant time gap identified by paleontological or geochemical evidence.",
+      "parents": ["unconformable_contact"],
+      "broader": "unconformable_contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/paraconformity",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "intrusive_contact",
+      "label_en": "intrusive contact",
+      "label_pt": "contato intrusivo",
+      "definition": "A contact between an intrusive igneous rock body (e.g., dyke, sill, pluton) and the country rock it has intruded. May show chilled margins, baked aureoles, and cross-cutting relationships.",
+      "parents": ["contact"],
+      "broader": "contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/intrusive_contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "metamorphic_contact",
+      "label_en": "metamorphic contact",
+      "label_pt": "contato metamórfico",
+      "definition": "A contact bounding a metamorphic unit, separating rocks of different metamorphic grade or between metamorphic and non-metamorphic rocks. May be gradational (isogrades) or sharp (thrust-related).",
+      "parents": ["contact"],
+      "broader": "contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/metamorphic_contact",
+      "related_entity": "contato-geologico"
+    },
+    {
+      "id": "faulted_contact",
+      "label_en": "faulted contact",
+      "label_pt": "contato de falha",
+      "definition": "A contact produced by faulting, where rock units on either side have been juxtaposed by tectonic displacement rather than by original depositional or intrusive relationships.",
+      "parents": ["contact"],
+      "broader": "contact",
+      "uri": "http://resource.geosciml.org/classifier/cgi/contacttype/faulted_contact",
+      "related_entity": "contato-geologico"
+    }
+  ]
+}

@@ -23,6 +23,10 @@ const PREFIXES = [
   ["owl", "http://www.w3.org/2002/07/owl#"],
   ["xsd", "http://www.w3.org/2001/XMLSchema#"],
   ["sweet", "http://sweetontology.net/"],
+  ["geocore", "http://loop3d.org/GKO/geocore#"],
+  ["gsmlb", "http://geosciml.org/def/gsmlb#"],
+  ["gsmlbh", "http://geosciml.org/def/gsmlbh#"],
+  ["cgi", "http://resource.geosciml.org/classifier/cgi/lithOntology/"],
 ];
 
 // Load SWEET alignment data from data/sweet-alignment.json.
@@ -45,6 +49,19 @@ async function loadSweetAlignment() {
     return map;
   } catch {
     return new Map();
+  }
+}
+
+// Load layer1-layer1b equivalence mappings from data/layer1-layer1b-equivalence.json.
+// Returns the parsed object or null if the file is absent.
+function loadLayer1Layer1bEquivalence() {
+  try {
+    const here = path.dirname(fileURLToPath(import.meta.url));
+    const candidate = path.join(here, "..", "data", "layer1-layer1b-equivalence.json");
+    if (!fs.existsSync(candidate)) return null;
+    return JSON.parse(fs.readFileSync(candidate, "utf8"));
+  } catch {
+    return null;
   }
 }
 
@@ -301,6 +318,22 @@ export function buildTtl(graph, options = {}) {
     out.push(`${geoRef(e.source)} ${geoRef(e.relation)} ${geoRef(e.target)} .`);
   }
   out.push("");
+
+  // ---- Layer1 ↔ Layer1b equivalences (GeoCore ↔ GeoSciML+CGI) ----
+  const equiv = loadLayer1Layer1bEquivalence();
+  if (equiv && Array.isArray(equiv.mappings) && equiv.mappings.length > 0) {
+    out.push("#");
+    out.push("# Layer1 (GeoCore) ↔ Layer1b (GeoSciML + CGI Simple Lithology) equivalences");
+    out.push(`# Source: data/layer1-layer1b-equivalence.json — ${equiv.meta?.description || ""}`);
+    out.push(`# Generated: ${equiv.meta?.generated || ""}`);
+    out.push("#");
+    out.push("");
+    for (const m of equiv.mappings) {
+      if (!m.geocore_uri || !m.geosciml_uri || !m.mapping_type) continue;
+      out.push(`${uriRef(m.geocore_uri)} ${m.mapping_type} ${uriRef(m.geosciml_uri)} .`);
+    }
+    out.push("");
+  }
 
   return out.join("\n");
 }

@@ -1,0 +1,26 @@
+{
+  "_comment": "Raw seed data for ICS/CGI International Chronostratigraphic Chart 2023. Values from: Cohen et al. (2023), The ICS International Chronostratigraphic Chart, Episodes 36:199-204. URI base: http://resource.geosciml.org/classifier/ics/ischart/",
+  "source": "International Chronostratigraphic Chart 2023-09 (ICS/CGI)",
+  "fetched": "2024-static-seed",
+  "base_uri": "http://resource.geosciml.org/classifier/ics/ischart/",
+  "vocab_uri": "http://resource.geosciml.org/vocabulary/timescale/isc2020",
+  "eons": [
+    { "id": "Hadean",       "start_ma": 4600.0, "end_ma": 4000.0, "color": "#B8519E" },
+    { "id": "Archean",      "start_ma": 4000.0, "end_ma": 2500.0, "color": "#F0047F" },
+    { "id": "Proterozoic",  "start_ma": 2500.0, "end_ma": 538.8,  "color": "#F74370" },
+    { "id": "Phanerozoic",  "start_ma": 538.8,  "end_ma": 0.0,    "color": "#99C08D" }
+  ],
+  "eras": [
+    { "id": "Paleoproterozoic", "parent": "Proterozoic", "start_ma": 2500.0, "end_ma": 1600.0 },
+    { "id": "Mesoproterozoic",  "parent": "Proterozoic", "start_ma": 1600.0, "end_ma": 1000.0 },
+    { "id": "Neoproterozoic",   "parent": "Proterozoic", "start_ma": 1000.0, "end_ma": 538.8  },
+    { "id": "Eoarchean",        "parent": "Archean",     "start_ma": 4000.0, "end_ma": 3600.0 },
+    { "id": "Paleoarchean",     "parent": "Archean",     "start_ma": 3600.0, "end_ma": 3200.0 },
+    { "id": "Mesoarchean",      "parent": "Archean",     "start_ma": 3200.0, "end_ma": 2800.0 },
+    { "id": "Neoarchean",       "parent": "Archean",     "start_ma": 2800.0, "end_ma": 2500.0 },
+    { "id": "Paleozoic",        "parent": "Phanerozoic", "start_ma": 538.8,  "end_ma": 251.9  },
+    { "id": "Mesozoic",         "parent": "Phanerozoic", "start_ma": 251.9,  "end_ma": 66.0   },
+    { "id": "Cenozoic",         "parent": "Phanerozoic", "start_ma": 66.0,   "end_ma": 0.0    }
+  ],
+  "note": "Age boundaries from Cohen et al. 2023. Start of Phanerozoic updated to 538.8 Ma (ICS 2023)."
+}
