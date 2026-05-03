@@ -33,7 +33,7 @@ graph TD
     KG --> NEO["Neo4j 5<br/>Cypher multi-hop"]
     KG --> TTL["RDF / SHACL<br/>data/geolytics.ttl<br/>data/geolytics-shapes.ttl"]
 
-    API --> MCP["MCP Server<br/>mcp/geolytics-mcp/<br/>9 ferramentas AI"]
+    API --> MCP["MCP Server<br/>mcp/geobrain-mcp/<br/>11 ferramentas AI"]
     RAG --> AGENT["LangGraph Agent<br/>examples/langgraph-agent/"]
     NEO --> AGENT
     TTL --> SHACL["Validador SHACL<br/>scripts/validate-shacl.py"]
@@ -149,7 +149,7 @@ sequenceDiagram
 | Mapa de camadas | `ai/ontology-map.json` |
 | Pipeline ETL | `scripts/generate.js` |
 | Agente LangGraph | `examples/langgraph-agent/agent.py` |
-| MCP Server | `mcp/geolytics-mcp/src/index.ts` |
+| MCP Server | `mcp/geobrain-mcp/src/index.ts` |
 | SHACL shapes | `data/geolytics-shapes.ttl` |
 | Vocabulario OWL | `data/geolytics-vocab.ttl` |
 

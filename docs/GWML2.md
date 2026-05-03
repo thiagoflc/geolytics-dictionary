@@ -59,7 +59,7 @@ The `data/geobrain.ttl` file declares a `geo:PocoShape` NodeShape that validates
 python scripts/validate-shacl.py
 ```
 
-See [SHACL.md](SHACL.md) for the full list of 30 NodeShapes and instructions for adding new shapes.
+See [SHACL.md](SHACL.md) for the full list of 65 NodeShapes and instructions for adding new shapes.
 
 ---
 
@@ -84,4 +84,4 @@ Both endpoints return the full JSON file. `gwml2.json` contains the 9 WellConstr
 
 - [CGI.md](CGI.md) — CGI vocabularies (Layer 1b): lithology, geologic time, fault type, deformation style, contact type, stratigraphic rank
 - [EXTERNAL_STANDARDS.md](EXTERNAL_STANDARDS.md) — OGC, OSDU, PPDM, SPE-PRMS, Petro KGraph reference data
-- [SHACL.md](SHACL.md) — Full SHACL shapes documentation: 30 NodeShapes, validation workflow, how to add new shapes
+- [SHACL.md](SHACL.md) — Full SHACL shapes documentation: 65 NodeShapes, validation workflow, how to add new shapes
