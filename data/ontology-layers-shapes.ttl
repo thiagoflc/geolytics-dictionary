@@ -1,0 +1,430 @@
+# ontology-layers-shapes.ttl — SHACL invariants for the 6-layer ontology model
+#
+# Encodes the regra de ouro and 6-layer model from docs/ONTOLOGY_LAYERS.md
+# as machine-checkable invariants on the entity-graph (data/geobrain.ttl).
+#
+# Severity policy:
+#   sh:Violation — hard, blocking rules. The live graph passes today.
+#   sh:Warning   — advisory rules that flag work for curator review (F4/F7).
+#                  These currently surface incomplete edges that were not
+#                  modeled when the entity-graph was first imported. They
+#                  are intentionally non-blocking until F4 (Q7+predicate
+#                  cleanup) and F7 (engineering anchoring) re-wire the
+#                  affected sub-graph.
+#
+# Prefixes follow data/geobrain.ttl exactly.
+# Run:
+#   python scripts/validate-shacl.py \
+#       --data data/geobrain.ttl \
+#       --shapes data/ontology-layers-shapes.ttl
+#
+# License: same as the parent repository (CC BY 4.0 for ontology content,
+# MIT for code).
+
+@prefix geo:  <https://geolytics.petrobras.com.br/dict/> .
+@prefix geol: <https://geolytics.petrobras.com.br/dict/layers#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Ontology header
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:OntologyLayersShapes a sh:Ontology, owl:Ontology ;
+    rdfs:label "SHACL invariants for the 6-layer ontology model"@en ;
+    rdfs:label "Invariantes SHACL do modelo ontológico de 6 camadas"@pt ;
+    rdfs:comment """Encodes the regra de ouro and the L1–L6 layer model from
+docs/ONTOLOGY_LAYERS.md as machine-checkable SHACL invariants over the
+entity-graph (data/geobrain.ttl). Each shape carries a sh:message in pt-BR
+that explains the violation in human terms for curator review."""@en ;
+    geo:version "1.0.0" ;
+    sh:declare [
+        sh:prefix "geo" ;
+        sh:namespace "https://geolytics.petrobras.com.br/dict/"^^xsd:anyURI ;
+    ] ;
+    sh:declare [
+        sh:prefix "geol" ;
+        sh:namespace "https://geolytics.petrobras.com.br/dict/layers#"^^xsd:anyURI ;
+    ] ;
+    sh:declare [
+        sh:prefix "rdf" ;
+        sh:namespace "http://www.w3.org/1999/02/22-rdf-syntax-ns#"^^xsd:anyURI ;
+    ] ;
+    sh:declare [
+        sh:prefix "rdfs" ;
+        sh:namespace "http://www.w3.org/2000/01/rdf-schema#"^^xsd:anyURI ;
+    ] ;
+    sh:declare [
+        sh:prefix "xsd" ;
+        sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+    ] ;
+    rdfs:seeAlso <https://github.com/thiagoflc/geolytics-dictionary/blob/main/docs/ONTOLOGY_LAYERS.md> ;
+    rdfs:seeAlso <https://github.com/thiagoflc/geolytics-dictionary/blob/main/docs/ONTOLOGY_PREDICATES.md> .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 1 (Violation): well_anchor cannot be a dataset container.
+# Anti-padrão Q7 — o Poço é âncora física, não contêiner semântico.
+# Nós com ontological_role = well_anchor não podem carregar joined_by_modules.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:WellAnchorNotDatasetContainerShape a sh:NodeShape ;
+    rdfs:label "Poço-âncora não é contêiner de dataset (Q7)"@pt ;
+    rdfs:label "Well anchor is not a dataset container (Q7)"@en ;
+    rdfs:comment "Hard rule. See docs/ONTOLOGY_LAYERS.md §1, §8."@en ;
+    sh:severity sh:Violation ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Anti-padrão Q7: nós com ontological_role = well_anchor não podem ter geo:joinedByModules. O Poço é âncora física e temporal — datasets/módulos são gerados por WellOperation (L2) sobre amostras coletadas. Veja docs/ONTOLOGY_LAYERS.md §1 e §8."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this ?value WHERE {
+                ?this geo:ontologicalRole "well_anchor" .
+                ?this geo:joinedByModules ?value .
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 2 (Warning): interpretation_process input/output completeness.
+# Toda interpretation_process deve consumir entrada (≥1 inbound consumes/
+# is_input_for/requires_input/derived_from) E produzir saída (≥1 outbound
+# produces/generates/yields/estimates/computes/infers).
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:InterpretationProcessHasInputOutputShape a sh:NodeShape ;
+    rdfs:label "Processo de interpretação tem entrada e saída"@pt ;
+    rdfs:label "Interpretation process has input and output"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §3 (L5)."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Processo de interpretação (L5) sem entrada cognitiva: deve haver ≥1 inbound is_input_for/requires_input/derived_from/consumes apontando para este nó. Veja docs/ONTOLOGY_LAYERS.md §3 (L5) e docs/ONTOLOGY_PREDICATES.md §2."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "interpretation_process" .
+                FILTER NOT EXISTS {
+                    ?src ?p ?this .
+                    FILTER (?p IN (
+                        geo:is_input_for, geo:requires_input,
+                        geo:requires, geo:derived_from, geo:consumes
+                    ))
+                }
+            }
+        """ ;
+    ] ;
+    sh:sparql [
+        sh:message """Processo de interpretação (L5) sem saída: deve haver ≥1 outbound produces/generates/yields/estimates/computes/infers/output_of partindo deste nó. Veja docs/ONTOLOGY_LAYERS.md §3 (L5)."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "interpretation_process" .
+                FILTER NOT EXISTS {
+                    ?this ?p ?tgt .
+                    FILTER (?p IN (
+                        geo:produces, geo:generates, geo:yields,
+                        geo:estimates, geo:computes, geo:infers,
+                        geo:output_of, geo:interpreted_into
+                    ))
+                }
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 3 (Warning): engineering_artifact must apply_to a well or operation.
+# Engenharia não flutua livre — deve ancorar via applies_to/supports/
+# constrains/governs/guides_drilling_of/describes_structure_of em pelo menos
+# um well_anchor ou well_operation. (Soft enquanto F4/F7 não conectam a ilha
+# L6 corporate ao componente principal — ver docs/ONTOLOGY_LAYERS.md §9.)
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:EngineeringArtifactAppliesToShape a sh:NodeShape ;
+    rdfs:label "Artefato de engenharia ancora em poço ou operação"@pt ;
+    rdfs:label "Engineering artifact applies to well or operation"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §3 (L6) and §9."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Artefato de engenharia (L6) não ancora em poço ou operação: precisa de ao menos uma aresta applies_to/supports/constrains/governs/guides_drilling_of/describes_structure_of/performed_on/scoped_to apontando para um nó com ontological_role = well_anchor ou well_operation. Veja docs/ONTOLOGY_LAYERS.md §3 (L6) e §9."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "engineering_artifact" .
+                FILTER NOT EXISTS {
+                    ?this ?p ?tgt .
+                    ?tgt geo:ontologicalRole ?role .
+                    FILTER (?p IN (
+                        geo:applies_to, geo:supports, geo:constrains,
+                        geo:governs, geo:guides_drilling_of,
+                        geo:describes_structure_of, geo:performed_on,
+                        geo:scoped_to, geo:plans_activity_for,
+                        geo:guides_drilling_of
+                    ))
+                    FILTER (?role IN ("well_anchor", "well_operation"))
+                }
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 4 (Warning): feature_observation must anchor to where/how observed.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:FeatureObservationAnchoredShape a sh:NodeShape ;
+    rdfs:label "Observação de feature ancora em poço/operação/artefato"@pt ;
+    rdfs:label "Feature observation anchored to well/operation/artifact"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §3 (L4)."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Feature geológica (L4) não ancorada: precisa de ao menos uma aresta observed_in/derived_from/occurs_in/intersects/acquired_from/located_in/measured_at/detected_via apontando para um nó com ontological_role em {well_anchor, well_operation, artifact_primary}. Veja docs/ONTOLOGY_LAYERS.md §3 (L4)."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "feature_observation" .
+                FILTER NOT EXISTS {
+                    ?this ?p ?tgt .
+                    ?tgt geo:ontologicalRole ?role .
+                    FILTER (?p IN (
+                        geo:observed_in, geo:derived_from, geo:occurs_in,
+                        geo:intersects, geo:acquired_from, geo:located_in,
+                        geo:measured_at, geo:detected_via, geo:contained_in,
+                        geo:hosted_in
+                    ))
+                    FILTER (?role IN ("well_anchor", "well_operation", "artifact_primary"))
+                }
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 5 (Warning): artifact_primary must trace back to a well_operation.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:ArtifactPrimaryFromOperationShape a sh:NodeShape ;
+    rdfs:label "Artefato primário rastreia para operação de poço"@pt ;
+    rdfs:label "Primary artifact traces back to well operation"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §3 (L3)."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Artefato primário (L3) sem origem operacional: precisa rastrear para uma well_operation por uma das vias: outbound generated_by/produced_by/acquired_from/acquired_during, ou inbound produces/generates/yields apontando deste artefato. Veja docs/ONTOLOGY_LAYERS.md §3 (L3)."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "artifact_primary" .
+                FILTER NOT EXISTS {
+                    {
+                        ?this ?p ?op .
+                        ?op geo:ontologicalRole "well_operation" .
+                        FILTER (?p IN (
+                            geo:generated_by, geo:produced_by,
+                            geo:acquired_from, geo:acquired_during,
+                            geo:measured_at, geo:samples
+                        ))
+                    } UNION {
+                        ?op ?p ?this .
+                        ?op geo:ontologicalRole "well_operation" .
+                        FILTER (?p IN (
+                            geo:produces, geo:generates, geo:yields,
+                            geo:samples, geo:logs, geo:performed_on
+                        ))
+                    }
+                }
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 6a (Violation): no related_to predicate anywhere in graph.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:NoRelatedToShape a sh:NodeShape ;
+    rdfs:label "Predicado related_to é proibido"@pt ;
+    rdfs:label "Predicate related_to is banned"@en ;
+    rdfs:comment "Hard rule. See docs/ONTOLOGY_PREDICATES.md §5."@en ;
+    sh:severity sh:Violation ;
+    sh:targetSubjectsOf geo:related_to ;
+    sh:property [
+        sh:path geo:related_to ;
+        sh:maxCount 0 ;
+        sh:message """Predicado banido: geo:related_to é vago demais e foi extirpado do grafo (docs/ONTOLOGY_PREDICATES.md §5). Use uma relação específica: correlated_with, references, is_input_for, derived_from, governed_by — conforme o contexto."""@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 6b (Warning): used_with predicate is deprecated.
+# Hoje há 13 instâncias remanescentes em GEOMEC028/029/030 — alvo de
+# migração F4 para is_input_for ou co_measured_with conforme semântica.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:NoUsedWithShape a sh:NodeShape ;
+    rdfs:label "Predicado used_with está depreciado"@pt ;
+    rdfs:label "Predicate used_with is deprecated"@en ;
+    rdfs:comment "Soft rule (transitional). See docs/ONTOLOGY_PREDICATES.md §5."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:used_with ;
+    sh:property [
+        sh:path geo:used_with ;
+        sh:maxCount 0 ;
+        sh:severity sh:Warning ;
+        sh:message """Predicado depreciado: geo:used_with é ambíguo entre coocorrência e dependência (docs/ONTOLOGY_PREDICATES.md §5). Migre para co_measured_with (medição simultânea) ou is_input_for (insumo). Migração programada na fase F4."""@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 7 (Violation): every entity-graph node must declare ontological_role.
+# Targeted by sh:targetSubjectsOf geo:entityType (every node in the graph
+# carries entityType — see scripts/ttl-serializer.js).
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:NodeHasOntologicalRoleShape a sh:NodeShape ;
+    rdfs:label "Todo nó tem ontological_role"@pt ;
+    rdfs:label "Every node has ontological_role"@en ;
+    rdfs:comment "Hard rule. See docs/ONTOLOGY_LAYERS.md §3."@en ;
+    sh:severity sh:Violation ;
+    sh:targetSubjectsOf geo:entityType ;
+    sh:property [
+        sh:path geo:ontologicalRole ;
+        sh:minCount 1 ;
+        sh:datatype xsd:string ;
+        sh:message """Todo nó do entity-graph deve declarar geo:ontologicalRole (campo ontological_role no JSON). A cobertura atual é 100%; este shape protege contra regressões. Veja docs/ONTOLOGY_LAYERS.md §3."""@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 8 (Violation): ontological_role must be one of the canonical values.
+# Canonical 19-value set from docs/ONTOLOGY_LAYERS.md §3 + §5.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:OntologicalRoleEnumShape a sh:NodeShape ;
+    rdfs:label "Valor canônico de ontological_role"@pt ;
+    rdfs:label "Canonical ontological_role value"@en ;
+    rdfs:comment "Hard rule. See docs/ONTOLOGY_LAYERS.md §3 and §5."@en ;
+    sh:severity sh:Violation ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:property [
+        sh:path geo:ontologicalRole ;
+        sh:datatype xsd:string ;
+        sh:in (
+            "well_anchor"
+            "well_operation"
+            "artifact_primary"
+            "feature_observation"
+            "interpretation_process"
+            "engineering_artifact"
+            "regulatory_anchor"
+            "organizational_actor"
+            "domain_anchor"
+            "well_attribute_concept"
+            "equipment"
+            "governance_artifact"
+            "kpi_metric"
+            "lifecycle_state"
+            "lifecycle_outcome"
+            "dataset_concept"
+            "signal_concept"
+            "event_observation"
+            "unclassified"
+        ) ;
+        sh:message """Valor de ontological_role fora do conjunto canônico de 19 valores definido em docs/ONTOLOGY_LAYERS.md §3 + §5. Conjunto: well_anchor, well_operation, artifact_primary, feature_observation, interpretation_process, engineering_artifact, regulatory_anchor, organizational_actor, domain_anchor, well_attribute_concept, equipment, governance_artifact, kpi_metric, lifecycle_state, lifecycle_outcome, dataset_concept, signal_concept, event_observation, unclassified."""@pt ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 9 (Warning): well_operation should have actor or location edge.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:WellOperationHasActorOrLocationShape a sh:NodeShape ;
+    rdfs:label "Operação de poço tem ator ou localização"@pt ;
+    rdfs:label "Well operation has actor or location"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §3 (L2)."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Operação de poço (L2) sem ator nem localização declarada: deve haver ao menos uma aresta performed_by/performed_on/occurs_in/operated_by/executed_by partindo deste nó (ou ?this ←engaged_by). Veja docs/ONTOLOGY_LAYERS.md §3 (L2)."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "well_operation" .
+                FILTER NOT EXISTS {
+                    {
+                        ?this ?p ?tgt .
+                        FILTER (?p IN (
+                            geo:performed_by, geo:performed_on,
+                            geo:occurs_in, geo:operated_by,
+                            geo:executed_by, geo:executes,
+                            geo:executes_servico
+                        ))
+                    } UNION {
+                        ?src geo:engaged_by ?this .
+                    }
+                }
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 10 (Warning): domain_anchor should classify something (inbound is_part_of).
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:DomainAnchorClassifiesShape a sh:NodeShape ;
+    rdfs:label "Âncora de domínio classifica algo"@pt ;
+    rdfs:label "Domain anchor classifies something"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §5."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Âncora de domínio (super-tópico Axon) sem nada classificado: deve haver ao menos um nó com is_part_of/part_of/is_specialization_of apontando para este. Veja docs/ONTOLOGY_LAYERS.md §5."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "domain_anchor" .
+                FILTER NOT EXISTS {
+                    ?src ?p ?this .
+                    FILTER (?p IN (
+                        geo:is_part_of, geo:part_of,
+                        geo:is_specialization_of, geo:specializes
+                    ))
+                }
+            }
+        """ ;
+    ] .
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Shape 11 (Warning): dataset_concept should reference data origin.
+# ─────────────────────────────────────────────────────────────────────────────
+
+geol:DatasetConceptReferencesOriginShape a sh:NodeShape ;
+    rdfs:label "Conceito de dataset referencia origem dos dados"@pt ;
+    rdfs:label "Dataset concept references its data origin"@en ;
+    rdfs:comment "Soft rule. See docs/ONTOLOGY_LAYERS.md §5."@en ;
+    sh:severity sh:Warning ;
+    sh:targetSubjectsOf geo:ontologicalRole ;
+    sh:sparql [
+        sh:message """Conceito de dataset (L5/L6) sem referência à origem dos dados: deve haver ao menos uma aresta references/stored_in/files_stored_in/photos_stored_in/derived_from/computes/measures partindo deste nó. Veja docs/ONTOLOGY_LAYERS.md §5."""@pt ;
+        sh:prefixes geol:OntologyLayersShapes ;
+        sh:select """
+            PREFIX geo: <https://geolytics.petrobras.com.br/dict/>
+            SELECT ?this WHERE {
+                ?this geo:ontologicalRole "dataset_concept" .
+                FILTER NOT EXISTS {
+                    ?this ?p ?tgt .
+                    FILTER (?p IN (
+                        geo:references, geo:stored_in,
+                        geo:files_stored_in, geo:photos_stored_in,
+                        geo:derived_from, geo:computes, geo:measures,
+                        geo:input_to_mem
+                    ))
+                }
+            }
+        """ ;
+    ] .

@@ -6435,6 +6435,9 @@ writeJson("ai/ontology-map.json", buildOntologyMap());
   const shaclFiles = [
     { src: "data/geobrain-shapes.ttl", dst: "api/v1/geobrain-shapes.ttl" },
     { src: "data/geobrain-vocab.ttl", dst: "api/v1/geobrain-vocab.ttl" },
+    // F6: SHACL invariants for the 6-layer ontology model
+    // (regra de ouro + ontological_role enum). See docs/ONTOLOGY_LAYERS.md.
+    { src: "data/ontology-layers-shapes.ttl", dst: "api/v1/ontology-layers-shapes.ttl" },
   ];
   for (const { src, dst } of shaclFiles) {
     const srcPath = path.join(ROOT, src);

@@ -239,6 +239,20 @@ export function buildTtl(graph, options = {}) {
       if (g) preds.push(`geo:geocoverage ${lit(g)}`);
     }
 
+    // geo:ontologicalRole — F5 6-layer model annotation (see docs/ONTOLOGY_LAYERS.md).
+    // Emitted so SHACL shapes in data/ontology-layers-shapes.ttl can validate
+    // the regra de ouro and 6-layer invariants on the live graph.
+    if (node.ontological_role) {
+      preds.push(`geo:ontologicalRole ${lit(node.ontological_role)}`);
+    }
+
+    // geo:joinedByModules — Q7 anti-pattern marker (well anchors must NOT carry
+    // dataset-container fields). Emitted so SHACL can flag future regressions.
+    const joined = Array.isArray(node.joined_by_modules) ? node.joined_by_modules : [];
+    for (const m of joined) {
+      if (m) preds.push(`geo:joinedByModules ${lit(m)}`);
+    }
+
     if (preds.length === 0) {
       // No predicates beyond rdf:type — close cleanly.
       lines[0] = `${subj} a owl:Class .`;
