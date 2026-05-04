@@ -1128,14 +1128,112 @@ function buildGeomecAcademicGraph(existingIds) {
 }
 
 /* ─────────────────────────────────────────────────────────────
- * AXON PETROBRAS — loaded from data/axon-petrobras-glossary.json (F3)
+ * AXON PETROBRAS — loaded from data/axon/manifest.json (F9)
+ *
+ * F3 ingeriu a única área "Exploração". F9 refatorou o loader para suportar
+ * múltiplas áreas Petrobras (Produção, Reservatório, Geofísica, Engenharia
+ * de Poço, …), cada uma em seu próprio arquivo `data/axon/<area>.json`,
+ * listadas em `data/axon/manifest.json` com `status="ingested"|"planned"`.
+ *
+ * Schema completo em docs/AXON_GLOSSARY_SCHEMA.md.
  * ───────────────────────────────────────────────────────────── */
 
-function loadAxonPetrobrasGlossary() {
+/**
+ * Reads data/axon/manifest.json, validates each ingested area entry, and
+ * returns an array of { areaId, glossary } for every entry with
+ * status === "ingested". On a critical issue (missing manifest, missing
+ * area file) this aborts the pipeline.
+ *
+ * Soft warnings (logged but not fatal):
+ *   - stats drift between manifest and actual file content.
+ *   - duplicate entity IDs within a single area file.
+ *   - non-`exploracao` area whose IDs do not start with `axon-{area_id}-`.
+ *
+ * @returns {{areaId: string, glossary: object}[]}
+ */
+function loadAxonManifest() {
   const dataDir = path.resolve(__dirname, "..", "data");
-  const p = path.join(dataDir, "axon-petrobras-glossary.json");
-  if (!fs.existsSync(p)) return null;
-  return JSON.parse(fs.readFileSync(p, "utf8"));
+  const manifestPath = path.join(dataDir, "axon", "manifest.json");
+  if (!fs.existsSync(manifestPath)) {
+    // No manifest — preserve old behaviour (Axon sub-graph stays empty).
+    return [];
+  }
+  let manifest;
+  try {
+    manifest = JSON.parse(fs.readFileSync(manifestPath, "utf8"));
+  } catch (e) {
+    throw new Error(`Axon manifest could not be parsed: ${e.message}`);
+  }
+  const ingested = (manifest.areas || []).filter((a) => a.status === "ingested");
+  const out = [];
+  const ROOT = path.resolve(__dirname, "..");
+  for (const entry of ingested) {
+    if (!entry.id || !entry.file) {
+      throw new Error(`Axon manifest: ingested area missing id or file (${JSON.stringify(entry)})`);
+    }
+    const areaPath = path.join(ROOT, entry.file);
+    if (!fs.existsSync(areaPath)) {
+      throw new Error(
+        `Axon manifest references ingested area "${entry.id}" at ${entry.file}, but the file does not exist.`
+      );
+    }
+    let glossary;
+    try {
+      glossary = JSON.parse(fs.readFileSync(areaPath, "utf8"));
+    } catch (e) {
+      throw new Error(`Axon area "${entry.id}" (${entry.file}) parse failed: ${e.message}`);
+    }
+    /* Soft validation 1 — stats drift. */
+    const actual = {
+      areas: (glossary.areas || []).length,
+      domains: (glossary.domains || []).length,
+      subjects: (glossary.subjects || []).length,
+      subsubjects: (glossary.subsubjects || []).length,
+      terms: (glossary.terms || []).length,
+    };
+    if (entry.stats) {
+      for (const k of Object.keys(actual)) {
+        const claimed = entry.stats[k];
+        if (typeof claimed === "number" && claimed !== actual[k]) {
+          console.warn(
+            `  [warn] Axon manifest stats drift for area "${entry.id}": stats.${k}=${claimed} but file has ${actual[k]}.`
+          );
+        }
+      }
+    }
+    /* Soft validation 2 — duplicate IDs within the area file. */
+    const idSeen = new Set();
+    const allEntries = [
+      ...(glossary.areas || []),
+      ...(glossary.domains || []),
+      ...(glossary.subjects || []),
+      ...(glossary.subsubjects || []),
+      ...(glossary.terms || []),
+    ];
+    for (const e of allEntries) {
+      if (!e.id) continue;
+      if (idSeen.has(e.id)) {
+        console.warn(`  [warn] Axon area "${entry.id}": duplicate entity ID "${e.id}".`);
+      }
+      idSeen.add(e.id);
+    }
+    /* Soft validation 3 — non-exploracao must use axon-{area_id}- prefix. */
+    if (entry.id !== "exploracao") {
+      const expectedPrefix = `axon-${entry.id}-`;
+      const offenders = allEntries
+        .filter((e) => e.id && !e.id.startsWith(expectedPrefix))
+        .map((e) => e.id);
+      if (offenders.length) {
+        console.warn(
+          `  [warn] Axon area "${entry.id}": ${offenders.length} entity ID(s) do not start with "${expectedPrefix}". First few: ${offenders
+            .slice(0, 3)
+            .join(", ")}`
+        );
+      }
+    }
+    out.push({ areaId: entry.id, glossary });
+  }
+  return out;
 }
 
 /**
@@ -1179,8 +1277,8 @@ function loadAxonPetrobrasGlossary() {
  * @returns {{nodes: Object[], edges: Object[]}}
  */
 function buildAxonGlossaryGraph(existingIds) {
-  const axon = loadAxonPetrobrasGlossary();
-  if (!axon) return { nodes: [], edges: [] };
+  const glossaries = loadAxonManifest();
+  if (!glossaries.length) return { nodes: [], edges: [] };
 
   const COLOR_AXON_DOMAIN = "#D4A017"; // golden — Axon Domínio super-topics
   const COLOR_ANALYTICAL = "#E67E22"; // reuse analytical palette
@@ -1235,24 +1333,30 @@ function buildAxonGlossaryGraph(existingIds) {
     nodes.push(n);
   };
 
-  /* 1. Area — emit as the Axon root. Then 9 Domínios. */
-  for (const area of axon.areas || []) {
-    addNode(mkNode(area, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 30));
-  }
-  for (const dom of axon.domains || []) {
-    addNode(mkNode(dom, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 26));
+  /* 1. Area — emit as the Axon root. Then Domínios. (Per-glossary loop.) */
+  for (const { glossary: axon } of glossaries) {
+    for (const area of axon.areas || []) {
+      addNode(mkNode(area, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 30));
+    }
+    for (const dom of axon.domains || []) {
+      addNode(mkNode(dom, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 26));
+    }
   }
 
   /* 2. Subjects (Assuntos) — analytical, layer6 (Petrobras corporate), with
      occasional layer4 (OSDU) when there is a clear OSDU pivot via existing
-     operations they specialize. */
-  for (const sub of axon.subjects || []) {
-    addNode(mkNode(sub, "analytical", COLOR_ANALYTICAL, ["layer6"], 22));
+     operations they specialize. (Per-glossary loop.) */
+  for (const { glossary: axon } of glossaries) {
+    for (const sub of axon.subjects || []) {
+      addNode(mkNode(sub, "analytical", COLOR_ANALYTICAL, ["layer6"], 22));
+    }
   }
 
-  /* 3. Subsubjects (Subassuntos) — analytical, layer6. */
-  for (const ss of axon.subsubjects || []) {
-    addNode(mkNode(ss, "analytical", COLOR_ANALYTICAL, ["layer6"], 20));
+  /* 3. Subsubjects (Subassuntos) — analytical, layer6. (Per-glossary loop.) */
+  for (const { glossary: axon } of glossaries) {
+    for (const ss of axon.subsubjects || []) {
+      addNode(mkNode(ss, "analytical", COLOR_ANALYTICAL, ["layer6"], 20));
+    }
   }
 
   /* 4. Termos — emit only the ones that are NOT format-only attributes (those
@@ -1369,15 +1473,21 @@ function buildAxonGlossaryGraph(existingIds) {
     },
   };
 
-  for (const term of axon.terms || []) {
-    const cfg = TERM_TYPE[term.id];
-    if (!cfg) continue; // any term we explicitly chose not to materialize
-    // Skip terms that refer to an existing graph id (e.g., "igp", "campo")
-    // — we'll bridge to those instead of duplicating. The Axon term node we
-    // emit is always axon-prefixed; it's an *additional* concept node tied to
-    // the Petrobras hierarchy, not a duplicate of the existing pivot.
-    if (existingIds.has(term.id)) continue;
-    addNode(mkNode(term, cfg.type, cfg.color, cfg.geo, cfg.size));
+  /* TERM_TYPE keys are exploracao-prefixed (legacy `axon-term-*`). Future areas
+     will pass through the default classification path below (analytical, layer6,
+     size 20) until and unless the curator promotes specific terms to their own
+     entry here. */
+  for (const { glossary: axon } of glossaries) {
+    for (const term of axon.terms || []) {
+      const cfg = TERM_TYPE[term.id];
+      if (!cfg) continue; // any term we explicitly chose not to materialize
+      // Skip terms that refer to an existing graph id (e.g., "igp", "campo")
+      // — we'll bridge to those instead of duplicating. The Axon term node we
+      // emit is always axon-prefixed; it's an *additional* concept node tied
+      // to the Petrobras hierarchy, not a duplicate of the existing pivot.
+      if (existingIds.has(term.id)) continue;
+      addNode(mkNode(term, cfg.type, cfg.color, cfg.geo, cfg.size));
+    }
   }
 
   const axonIds = new Set(nodes.map((n) => n.id));
@@ -1401,22 +1511,29 @@ function buildAxonGlossaryGraph(existingIds) {
 
   const edges = [];
 
-  /* ─── A. Internal hierarchy edges from parent_id ─── */
-  const allEntries = [
-    ...(axon.areas || []),
-    ...(axon.domains || []),
-    ...(axon.subjects || []),
-    ...(axon.subsubjects || []),
-    ...(axon.terms || []),
-  ];
-  for (const e of allEntries) {
-    if (!e.parent_id) continue;
-    if (!axonIds.has(e.id)) continue; // not emitted (e.g., format-only term)
-    if (!axonIds.has(e.parent_id) && !existingIds.has(e.parent_id)) continue;
-    addEdge(e.id, e.parent_id, "is_part_of", "faz parte de", "is part of", "axon_hierarchy");
+  /* ─── A. Internal hierarchy edges from parent_id (per-glossary). ─── */
+  for (const { glossary: axon } of glossaries) {
+    const allEntries = [
+      ...(axon.areas || []),
+      ...(axon.domains || []),
+      ...(axon.subjects || []),
+      ...(axon.subsubjects || []),
+      ...(axon.terms || []),
+    ];
+    for (const e of allEntries) {
+      if (!e.parent_id) continue;
+      if (!axonIds.has(e.id)) continue; // not emitted (e.g., format-only term)
+      if (!axonIds.has(e.parent_id) && !existingIds.has(e.parent_id)) continue;
+      addEdge(e.id, e.parent_id, "is_part_of", "faz parte de", "is part of", "axon_hierarchy");
+    }
   }
 
-  /* ─── B. Existing operations specialize Axon Assuntos ─── */
+  /* ─── B. Existing operations specialize Axon Assuntos (Exploração only). ───
+     Sections B–L bridge Exploração-specific Axon IDs to existing entity-graph
+     nodes. Bridges for new areas should be added in their own labelled blocks
+     when those areas are ingested. The `specBridge` and direct `addEdge`
+     guards (axonIds.has / existingIds.has) ensure that if the Exploração
+     glossary is missing or renamed, no dangling edges are emitted. */
   const specBridge = (childId, parentId) => {
     if (!existingIds.has(childId)) return;
     if (!axonIds.has(parentId)) return;
@@ -4828,7 +4945,12 @@ function buildEntityGraph() {
     nodes[idx].source_reference = existing.concat(refs);
   }
 
-  /* F3 — Axon Petrobras Exploração glossary (data/axon-petrobras-glossary.json).
+  /* F3 — Axon Petrobras Exploração glossary. F9 — generalized to multi-area
+     scaffolding: loader reads data/axon/manifest.json and folds in every area
+     listed with status="ingested" (today: only `exploracao`; future: produção,
+     reservatório, geofísica, engenharia-poço — see data/axon/manifest.json
+     and docs/AXON_GLOSSARY_SCHEMA.md).
+
      Adds the 4-level Domínio → Assunto → Subassunto → Termo hierarchy as a
      sub-graph of `axon_domain`-typed Domínios plus analytical/equipment/
      geological Assuntos and Termos, then bridges:
@@ -6352,7 +6474,10 @@ function emitOntologyConceptChunks(lines) {
       `"Operações em amostras de fluido/rocha" gera o fluxo poco --engaged_by--> sample-handling-op ` +
       `--generates--> amostra (L3). (b) "Geomecânica" Domínio indexa L4 (breakout, DITF=GF015), L5 ` +
       `(MEM 1D), L6 (GEOMEC020 MPD, GEOMEC084 WSM 2025).`,
-    { tags: ["bridge", "axon", "domain_to_layer"], entities: ["axon-term-furo", "GF015", "GEOMEC020"] }
+    {
+      tags: ["bridge", "axon", "domain_to_layer"],
+      entities: ["axon-term-furo", "GF015", "GEOMEC020"],
+    }
   );
 
   /* ── E. Predicate vocabulary ─────────────────────────────── */
@@ -7133,8 +7258,12 @@ console.log(
     { src: "data/anp-bacia-sedimentar.json", dst: "api/v1/anp-bacia-sedimentar.json" },
     /* GPP module (Phase 3 enrichment): governance + lifecycle + portfolio */
     { src: "data/gestao-projetos-parcerias.json", dst: "api/v1/gestao-projetos-parcerias.json" },
-    /* F3 — Axon Petrobras Exploração glossary + format-only well attributes */
-    { src: "data/axon-petrobras-glossary.json", dst: "api/v1/axon-petrobras-glossary.json" },
+    /* F3 — Axon Petrobras Exploração glossary + format-only well attributes.
+       F9 — moved to data/axon/exploracao.json under a multi-area scaffold;
+       still copied to the legacy api/v1/axon-petrobras-glossary.json path
+       for backwards compatibility with downstream consumers. */
+    { src: "data/axon/exploracao.json", dst: "api/v1/axon-petrobras-glossary.json" },
+    { src: "data/axon/manifest.json", dst: "api/v1/axon-manifest.json" },
     { src: "data/well-attributes.json", dst: "api/v1/well-attributes.json" },
   ];
   let totalChunks = 0;
