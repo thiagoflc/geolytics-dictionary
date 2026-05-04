@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T18:03:37.361Z",
-    "count": 378
+    "generated": "2026-05-04T18:31:47.871Z",
+    "count": 418
   },
   "entities": [
     {
@@ -453,6 +453,41 @@
             "from": "GF002",
             "relation": "occurs_in",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "axon-term-lamina-agua",
+            "relation": "applies_to",
+            "style": "axon_attr_bridge"
+          },
+          {
+            "from": "axon-term-poco-comprado",
+            "relation": "is_specialization_of",
+            "style": "axon_poco_subtype"
+          },
+          {
+            "from": "axon-term-poco-presal",
+            "relation": "is_specialization_of",
+            "style": "axon_poco_subtype"
+          },
+          {
+            "from": "axon-term-poco-nao-br",
+            "relation": "is_specialization_of",
+            "style": "axon_poco_subtype"
+          },
+          {
+            "from": "axon-term-poco",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
+          },
+          {
+            "from": "axon-term-classificacao-poco",
+            "relation": "applies_to",
+            "style": "axon_attr_bridge"
+          },
+          {
+            "from": "axon-term-objetivo-poco",
+            "relation": "applies_to",
+            "style": "axon_attr_bridge"
           }
         ]
       }
@@ -643,6 +678,11 @@
             "to": "reserva",
             "relation": "declares",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-blocos-parcerias",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -670,6 +710,11 @@
             "from": "completacao",
             "relation": "enables",
             "style": "dashed"
+          },
+          {
+            "from": "axon-term-campo",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
           }
         ]
       }
@@ -2665,6 +2710,11 @@
             "to": "rftp",
             "relation": "requires_report",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-teste-formacao-aberto",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -2800,6 +2850,11 @@
             "to": "dpp",
             "relation": "submitted_via",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-pressao-temperatura",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -3063,6 +3118,11 @@
             "from": "poco",
             "relation": "may_reach",
             "style": "dashed"
+          },
+          {
+            "from": "axon-term-poco-presal",
+            "relation": "occurs_in",
+            "style": "axon_term_to_existing"
           }
         ]
       }
@@ -3180,6 +3240,11 @@
             "from": "campo",
             "relation": "classified_by",
             "style": "dashed"
+          },
+          {
+            "from": "axon-term-ambiente",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
           }
         ]
       }
@@ -4889,6 +4954,11 @@
             "to": "potencial-selante",
             "relation": "has_property",
             "style": "solid"
+          },
+          {
+            "to": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": []
@@ -4935,7 +5005,13 @@
       },
       "skos_example": [],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ],
         "incoming": [
           {
             "from": "formacao",
@@ -5045,6 +5121,11 @@
             "to": "formacao",
             "relation": "samples",
             "style": "solid"
+          },
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
           }
         ],
         "incoming": [
@@ -5112,6 +5193,11 @@
             "to": "wellbore",
             "relation": "measured_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-dom-aval-petrofisica",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -5492,6 +5578,11 @@
             "to": "reservatorio",
             "relation": "characterizes",
             "style": "solid"
+          },
+          {
+            "to": "axon-dom-aval-petrofisica",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": []
@@ -5799,6 +5890,11 @@
             "to": "unidade-medida",
             "relation": "qualified_by",
             "style": "solid"
+          },
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
           }
         ],
         "incoming": [
@@ -6835,6 +6931,11 @@
             "to": "testemunho",
             "relation": "aligns_with",
             "style": "dashed"
+          },
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
           }
         ],
         "incoming": [
@@ -7090,6 +7191,11 @@
             "to": "bacia-sedimentar",
             "relation": "covers",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-geofisica",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -7156,6 +7262,11 @@
             "to": "seismic-acquisition-survey",
             "relation": "processes",
             "style": "solid"
+          },
+          {
+            "to": "axon-dom-geofisica",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -7487,6 +7598,16 @@
             "to": "topo-formacional",
             "relation": "correlates_with",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-geofisica",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "to": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": []
@@ -7552,6 +7673,11 @@
             "to": "drilling-reason-type",
             "relation": "classified_by",
             "style": "dashed"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -8626,6 +8752,11 @@
             "to": "cassandra-exata-curva-tempo",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-mudlogging",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -8747,7 +8878,18 @@
         "layer6"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "axon-asn-mudlogging",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          }
+        ],
         "incoming": [
           {
             "from": "cuttings-sampling",
@@ -8796,6 +8938,16 @@
             "to": "bdoc",
             "relation": "photos_stored_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-testemunhagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -8838,7 +8990,13 @@
         "core plug"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          }
+        ],
         "incoming": [
           {
             "from": "core-run",
@@ -8880,6 +9038,11 @@
             "to": "wireline-run",
             "relation": "acquired_during",
             "style": "solid"
+          },
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
           }
         ],
         "incoming": [
@@ -8936,6 +9099,11 @@
             "to": "bha",
             "relation": "uses",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-perfilagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -8999,6 +9167,16 @@
             "to": "bha",
             "relation": "uses",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-perfilagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -9109,6 +9287,11 @@
             "to": "fluid-sample",
             "relation": "collects",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-teste-formacao-aberto",
+            "relation": "is_part_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -9359,6 +9542,11 @@
             "to": "gas-show-event",
             "relation": "derived_from",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -9437,7 +9625,13 @@
         "layer6"
       ],
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "axon-term-amostra",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          }
+        ],
         "incoming": [
           {
             "from": "formation-pressure-point",
@@ -9491,6 +9685,16 @@
             "to": "exata",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-mudlogging",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -9533,6 +9737,11 @@
             "to": "cuttings-sample-detailed",
             "relation": "executes_servico",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-mudlogging",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -9540,6 +9749,11 @@
             "from": "operacoes-geologicas",
             "relation": "executes",
             "style": "solid"
+          },
+          {
+            "from": "axon-term-amostragem-calha-prevista",
+            "relation": "requires",
+            "style": "axon_to_op"
           }
         ]
       }
@@ -9568,6 +9782,16 @@
             "to": "core-run",
             "relation": "executes_servico",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-testemunhagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -9610,6 +9834,11 @@
             "to": "sidewall-core-sample",
             "relation": "executes_servico",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-testemunhagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -9660,6 +9889,11 @@
             "to": "exata",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-perfilagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -9700,6 +9934,16 @@
             "to": "wireline-run",
             "relation": "executes_servico",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-perfilagem",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -9861,6 +10105,16 @@
             "to": "dst-interval",
             "relation": "executes_servico",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-teste-formacao-aberto",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "to": "axon-term-sonda",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
           }
         ],
         "incoming": [
@@ -9976,6 +10230,11 @@
             "to": "bdiep",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -10099,6 +10358,11 @@
             "to": "sigeo",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "to": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -10240,6 +10504,16 @@
             "to": "pag",
             "relation": "derived_from",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "to": "axon-asn-aval-final-poco",
+            "relation": "supports",
+            "style": "axon_op_bridge"
           }
         ],
         "incoming": [
@@ -10252,6 +10526,11 @@
             "from": "formation-evaluation",
             "relation": "produces",
             "style": "solid"
+          },
+          {
+            "from": "axon-term-igp",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
           }
         ]
       }
@@ -11101,6 +11380,11 @@
             "to": "vge",
             "relation": "stored_in",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -17128,6 +17412,11 @@
             "to": "GM004",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -17670,6 +17959,11 @@
             "to": "GM001",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -20267,6 +20561,11 @@
             "to": "GEOMEC030",
             "relation": "requires",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -24712,6 +25011,11 @@
             "to": "GEOMEC074",
             "relation": "used_with",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
           }
         ],
         "incoming": [
@@ -25716,7 +26020,13 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          }
+        ],
         "incoming": []
       }
     },
@@ -26611,6 +26921,11 @@
             "to": "bdp",
             "relation": "observed_in",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -27607,6 +27922,11 @@
             "to": "campo-tensional",
             "relation": "is_specialization_of",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -27796,6 +28116,11 @@
             "to": "core-sample",
             "relation": "observed_in",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -27997,6 +28322,11 @@
             "to": "core-sample",
             "relation": "derived_from",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
@@ -28853,6 +29183,2638 @@
           }
         ],
         "incoming": []
+      }
+    },
+    {
+      "id": "axon-area-exploracao",
+      "label": "Exploração",
+      "label_en": "Exploration",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 30,
+      "definition": "Área pai do glossário de termos da Exploração.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Area",
+      "axon_path": "Exploração",
+      "skos_prefLabel": {
+        "@pt": "Exploração",
+        "@en": "Exploration"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Área pai do glossário de termos da Exploração.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [],
+        "incoming": [
+          {
+            "from": "axon-dom-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-aval-petrofisica",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-blocos-parcerias",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-geodesia",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-geofisica",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-geologia",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-dom-interp-exploratoria",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-acervo-amostras",
+      "label": "Acervo e movimentação de amostras",
+      "label_en": "Sample collection and movement",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Domínio que organiza o acervo técnico de amostras geocientíficas (rocha, sedimento, fluido) e suas operações de coleta, movimentação, guarda e descarte.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Acervo e movimentação de amostras",
+      "skos_prefLabel": {
+        "@pt": "Acervo e movimentação de amostras",
+        "@en": "Sample collection and movement"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Domínio que organiza o acervo técnico de amostras geocientíficas (rocha, sedimento, fluido) e suas operações de coleta, movimentação, guarda e descarte.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-asn-op-amostras-fluido",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-op-amostras-rocha",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-amostra",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-aquisicao-dados-geo",
+      "label": "Aquisição de dados geológicos",
+      "label_en": "Geological data acquisition",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Domínio que reúne as operações geológicas executadas no poço para aquisição primária de dados, incluindo perfilagem, testemunhagem, mudlogging, avaliação final e planejamento das operações geológicas.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Aquisição de dados geológicos",
+      "skos_prefLabel": {
+        "@pt": "Aquisição de dados geológicos",
+        "@en": "Geological data acquisition"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Domínio que reúne as operações geológicas executadas no poço para aquisição primária de dados, incluindo perfilagem, testemunhagem, mudlogging, avaliação final e planejamento das operações geológicas.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-asn-aval-final-poco",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-perfilagem",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-testemunhagem",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-mudlogging",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-planejamento",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-pressao-temperatura",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-status-poco",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-asn-teste-formacao-aberto",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-sonda",
+            "relation": "supports",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "igp",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "axon-dom-geodesia",
+            "relation": "supports",
+            "style": "axon_dom_link"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-aval-petrofisica",
+      "label": "Avaliação de formações e petrofísica",
+      "label_en": "Formation evaluation and petrophysics",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a avaliação petrofísica de formações geológicas atravessadas por poços.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Avaliação de formações e petrofísica",
+      "skos_prefLabel": {
+        "@pt": "Avaliação de formações e petrofísica",
+        "@en": "Formation evaluation and petrophysics"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a avaliação petrofísica de formações geológicas atravessadas por poços.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "modelo-petrofisico",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "perfil-poco",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-blocos-parcerias",
+      "label": "Blocos e Parcerias",
+      "label_en": "Blocks and Partnerships",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura relacionadas a blocos e parcerias.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Blocos e Parcerias",
+      "skos_prefLabel": {
+        "@pt": "Blocos e Parcerias",
+        "@en": "Blocks and Partnerships"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura relacionadas a blocos e parcerias.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "campo",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-geodesia",
+      "label": "Geodésia",
+      "label_en": "Geodesy",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis ao levantamento e à representação da forma e da superfície da Terra, global e parcial, com suas feições naturais e artificiais e o campo gravitacional terrestre.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Geodésia",
+      "skos_prefLabel": {
+        "@pt": "Geodésia",
+        "@en": "Geodesy"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis ao levantamento e à representação da forma e da superfície da Terra, global e parcial, com suas feições naturais e artificiais e o campo gravitacional terrestre.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "supports",
+            "style": "axon_dom_link"
+          },
+          {
+            "to": "axon-dom-geofisica",
+            "relation": "supports",
+            "style": "axon_dom_link"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-dom-geofisica",
+      "label": "Geofísica",
+      "label_en": "Geophysics",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à prospecção de óleo e gás em qualquer nível econômico ou de detalhe técnico desejável.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Geofísica",
+      "skos_prefLabel": {
+        "@pt": "Geofísica",
+        "@en": "Geophysics"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à prospecção de óleo e gás em qualquer nível econômico ou de detalhe técnico desejável.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "seismic-acquisition-survey",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "seismic-processing-project",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "seismic-horizon",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "axon-dom-geodesia",
+            "relation": "supports",
+            "style": "axon_dom_link"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-geologia",
+      "label": "Geologia",
+      "label_en": "Geology",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à descrição e à interpretação geológica do subsolo nas atividades exploratórias da Petrobras.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Geologia",
+      "skos_prefLabel": {
+        "@pt": "Geologia",
+        "@en": "Geology"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à descrição e à interpretação geológica do subsolo nas atividades exploratórias da Petrobras.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-term-furo",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-geomecanica",
+      "label": "Geomecânica",
+      "label_en": "Geomechanics",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a caracterização e previsão do comportamento mecânico de rochas e do estado de tensões in situ, suportando o projeto e a execução do poço.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Geomecânica",
+      "skos_prefLabel": {
+        "@pt": "Geomecânica",
+        "@en": "Geomechanics"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a caracterização e previsão do comportamento mecânico de rochas e do estado de tensões in situ, suportando o projeto e a execução do poço.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "GEOMEC001",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GEOMEC004",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GEOMEC025",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GEOMEC084",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GM010",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GM025",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GF001",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GF004",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "ogeomec",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "laudo-geomecanico",
+            "relation": "is_part_of",
+            "style": "axon_geomec_anchor"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-dom-interp-exploratoria",
+      "label": "Interpretação Exploratória",
+      "label_en": "Exploratory Interpretation",
+      "type": "axon_domain",
+      "color": "#D4A017",
+      "size": 26,
+      "definition": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis às atividades da interpretação exploratória. Atividade ou esforço de inferência das estruturas geológicas de subsuperfície a partir de dados geológicos e geofísicos (EXP/GEOF/GDSI).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Dominio",
+      "axon_path": "Exploração / Interpretação Exploratória",
+      "skos_prefLabel": {
+        "@pt": "Interpretação Exploratória",
+        "@en": "Exploratory Interpretation"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis às atividades da interpretação exploratória. Atividade ou esforço de inferência das estruturas geológicas de subsuperfície a partir de dados geológicos e geofísicos (EXP/GEOF/GDSI).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-area-exploracao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "seismic-horizon",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "falha",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "idade-geologica",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "pag",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "qpg",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "GEOMEC072",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-op-amostras-fluido",
+      "label": "Operações em amostras de fluido",
+      "label_en": "Fluid sample operations",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Operações executadas sobre amostras de fluido, incluindo coleta, transporte, análise, condicionamento, guarda e descarte.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / Operações em amostras de fluido",
+      "skos_prefLabel": {
+        "@pt": "Operações em amostras de fluido",
+        "@en": "Fluid sample operations"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Operações executadas sobre amostras de fluido, incluindo coleta, transporte, análise, condicionamento, guarda e descarte.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-asn-op-amostras-rocha",
+      "label": "Operações em amostras de rocha",
+      "label_en": "Rock sample operations",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Operações executadas sobre amostras de rocha (testemunhos, plugues, calha, lateral), incluindo coleta, manipulação, análise laboratorial, guarda e descarte.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / Operações em amostras de rocha",
+      "skos_prefLabel": {
+        "@pt": "Operações em amostras de rocha",
+        "@en": "Rock sample operations"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Operações executadas sobre amostras de rocha (testemunhos, plugues, calha, lateral), incluindo coleta, manipulação, análise laboratorial, guarda e descarte.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-asn-aval-final-poco",
+      "label": "Avaliação final de poço",
+      "label_en": "Final well evaluation",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Avaliação final do poço, integrando os resultados das operações geológicas executadas durante a perfuração para consolidação do conhecimento subsuperficial.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Avaliação final de poço",
+      "skos_prefLabel": {
+        "@pt": "Avaliação final de poço",
+        "@en": "Final well evaluation"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Avaliação final do poço, integrando os resultados das operações geológicas executadas durante a perfuração para consolidação do conhecimento subsuperficial.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "igp",
+            "relation": "supports",
+            "style": "axon_op_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-perfilagem",
+      "label": "Operação de Perfilagem",
+      "label_en": "Wireline logging operation",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Operação de aquisição de perfis de poço a cabo (wireline) ou em LWD/MWD, descida após a perfuração de cada fase para registro contínuo de propriedades petrofísicas e estruturais.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Operação de Perfilagem",
+      "skos_prefLabel": {
+        "@pt": "Operação de Perfilagem",
+        "@en": "Wireline logging operation"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Operação de aquisição de perfis de poço a cabo (wireline) ou em LWD/MWD, descida após a perfuração de cada fase para registro contínuo de propriedades petrofísicas e estruturais.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "wireline-logging",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "wireline-run",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "mwd-lwd",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "lwd-run",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-testemunhagem",
+      "label": "Operação de Testemunhagem",
+      "label_en": "Coring operation",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Operação de obtenção de amostra contínua de rocha (testemunho/core) ou amostra lateral (sidewall core) durante a perfuração, com finalidade de caracterização petrofísica, sedimentológica ou geomecânica.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Operação de Testemunhagem",
+      "skos_prefLabel": {
+        "@pt": "Operação de Testemunhagem",
+        "@en": "Coring operation"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Operação de obtenção de amostra contínua de rocha (testemunho/core) ou amostra lateral (sidewall core) durante a perfuração, com finalidade de caracterização petrofísica, sedimentológica ou geomecânica.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "coring",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "core-run",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "sidewall-sampling",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-mudlogging",
+      "label": "Operações de Mudlogging",
+      "label_en": "Mudlogging operations",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Operações de monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real e coleta de amostras de calha (cuttings) na sonda.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Operações de Mudlogging",
+      "skos_prefLabel": {
+        "@pt": "Operações de Mudlogging",
+        "@en": "Mudlogging operations"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Operações de monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real e coleta de amostras de calha (cuttings) na sonda.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "mudlogging",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "mudlogging-time-series",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "cuttings-sampling",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "cuttings-sample-detailed",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-planejamento",
+      "label": "Planejamento das operações geológicas em poços",
+      "label_en": "Planning of well geological operations",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Planejamento prévio das operações geológicas a serem executadas no poço, incluindo programa de amostragem e programa de aquisição de dados.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços",
+      "skos_prefLabel": {
+        "@pt": "Planejamento das operações geológicas em poços",
+        "@en": "Planning of well geological operations"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Planejamento prévio das operações geológicas a serem executadas no poço, incluindo programa de amostragem e programa de aquisição de dados.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-sub-prog-aquisicao",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-amostragem-calha-prevista",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-pressao-temperatura",
+      "label": "Registro de pressão de formação e temperatura",
+      "label_en": "Formation pressure and temperature recording",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Registro pontual ou contínuo de pressão de formação e temperatura em testes de formação ou medições wireline.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Registro de pressão de formação e temperatura",
+      "skos_prefLabel": {
+        "@pt": "Registro de pressão de formação e temperatura",
+        "@en": "Formation pressure and temperature recording"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Registro pontual ou contínuo de pressão de formação e temperatura em testes de formação ou medições wireline.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "rftp",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-asn-status-poco",
+      "label": "Status de poço",
+      "label_en": "Well status",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Comunidade que abriga termos de negócio que requerem governança compartilhada em função de determinados valores que os termos possam assumir. Por enquanto contendo apenas o termo status de poço.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Status de poço",
+      "skos_prefLabel": {
+        "@pt": "Status de poço",
+        "@en": "Well status"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Comunidade que abriga termos de negócio que requerem governança compartilhada em função de determinados valores que os termos possam assumir. Por enquanto contendo apenas o termo status de poço.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-asn-teste-formacao-aberto",
+      "label": "Teste de formação a poço aberto",
+      "label_en": "Open-hole formation test",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Teste de formação executado em poço aberto (DST a poço aberto), com isolamento de intervalo por packers para avaliar produção e propriedades de reservatório.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Assunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Teste de formação a poço aberto",
+      "skos_prefLabel": {
+        "@pt": "Teste de formação a poço aberto",
+        "@en": "Open-hole formation test"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Teste de formação executado em poço aberto (DST a poço aberto), com isolamento de intervalo por packers para avaliar produção e propriedades de reservatório.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "formation-testing",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "teste-formacao",
+            "relation": "is_specialization_of",
+            "style": "axon_op_bridge"
+          },
+          {
+            "from": "dst-interval",
+            "relation": "is_part_of",
+            "style": "axon_op_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-sub-dados-culturais",
+      "label": "Dados culturais de poços e sonda",
+      "label_en": "Well and rig cultural data",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Conjunto de atributos identificadores e descritivos de poços e sondas usados no planejamento das operações geológicas (sigla, datum, coordenadas, sidetrack, classificação, lâmina d'água, etc.).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Subassunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda",
+      "skos_prefLabel": {
+        "@pt": "Dados culturais de poços e sonda",
+        "@en": "Well and rig cultural data"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Conjunto de atributos identificadores e descritivos de poços e sondas usados no planejamento das operações geológicas (sigla, datum, coordenadas, sidetrack, classificação, lâmina d'água, etc.).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-asn-planejamento",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-term-ambiente",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-campo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-classificacao-poco",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-furo",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-igp",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-lamina-agua",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-objetivo-poco",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-poco",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-poco-comprado",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-poco-presal",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-poco-nao-br",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-sonda",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-sub-prog-aquisicao",
+      "label": "Programa de aquisição de dados",
+      "label_en": "Data acquisition program",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Programa de aquisição de dados que consolida o conjunto de operações de perfilagem, testemunhagem, amostragem e teste previstas para um poço.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Subassunto",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Programa de aquisição de dados",
+      "skos_prefLabel": {
+        "@pt": "Programa de aquisição de dados",
+        "@en": "Data acquisition program"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Programa de aquisição de dados que consolida o conjunto de operações de perfilagem, testemunhagem, amostragem e teste previstas para um poço.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-asn-planejamento",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-term-amostragem-calha-prevista",
+            "relation": "is_part_of",
+            "style": "axon_internal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-term-acervo-amostras",
+      "label": "Acervo de amostras",
+      "label_en": "Sample collection",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Coleção de itens geocientíficos da Petrobras (testemunhos, plugues, wholecores, amostras de calha, laterais, fluidos e produtos derivados como lâminas, células e aparas), formada por amostras de poços, furos e afloramentos, incluindo a parcela do acervo técnico da União sob responsabilidade da operadora.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / Acervo de amostras",
+      "skos_prefLabel": {
+        "@pt": "Acervo de amostras",
+        "@en": "Sample collection"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Coleção de itens geocientíficos da Petrobras (testemunhos, plugues, wholecores, amostras de calha, laterais, fluidos e produtos derivados como lâminas, células e aparas), formada por amostras de poços, furos e afloramentos, incluindo a parcela do acervo técnico da União sob responsabilidade da operadora.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-term-amostra",
+            "relation": "is_part_of",
+            "style": "axon_internal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-term-amostra",
+      "label": "Amostra",
+      "label_en": "Sample",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 24,
+      "definition": "Porção de rocha, sedimento ou fluido extraída de poço, afloramento, superfície terrestre ou fundo oceânico, conforme Portaria ANP nº 757/2018; abrange também amostras de origem geocientífica não diretamente ligadas à indústria do petróleo.",
+      "definition_en_canonical": null,
+      "legal_source": "Portaria ANP nº 757/2018",
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer1",
+        "layer2",
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / amostra",
+      "skos_prefLabel": {
+        "@pt": "Amostra",
+        "@en": "Sample"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Porção de rocha, sedimento ou fluido extraída de poço, afloramento, superfície terrestre ou fundo oceânico, conforme Portaria ANP nº 757/2018; abrange também amostras de origem geocientífica não diretamente ligadas à indústria do petróleo.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-dom-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-term-acervo-amostras",
+            "relation": "is_part_of",
+            "style": "axon_internal"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "core-sample",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          },
+          {
+            "from": "core-plug",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          },
+          {
+            "from": "sidewall-core-sample",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          },
+          {
+            "from": "cuttings-sample-detailed",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          },
+          {
+            "from": "fluid-sample",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          },
+          {
+            "from": "amostra-fluido",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          },
+          {
+            "from": "testemunho",
+            "relation": "is_specialization_of",
+            "style": "axon_sample_bridge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-term-amostragem-calha-prevista",
+      "label": "Amostragem de calha prevista",
+      "label_en": "Planned cuttings sampling",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Previsão da coleta de amostras de cascalhos (calha) durante a perfuração, registrada no programa de amostragem do poço com quantidade (saquinhos de até 700 g), intervalo de coleta, finalidade e destino.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Amostragem de calha prevista",
+      "skos_prefLabel": {
+        "@pt": "Amostragem de calha prevista",
+        "@en": "Planned cuttings sampling"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Previsão da coleta de amostras de cascalhos (calha) durante a perfuração, registrada no programa de amostragem do poço com quantidade (saquinhos de até 700 g), intervalo de coleta, finalidade e destino.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-asn-planejamento",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-sub-prog-aquisicao",
+            "relation": "is_part_of",
+            "style": "axon_internal"
+          },
+          {
+            "to": "cuttings-sampling",
+            "relation": "requires",
+            "style": "axon_to_op"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-ambiente",
+      "label": "Ambiente (mar, terra, lago)",
+      "label_en": "Operational environment (sea, land, lake)",
+      "type": "geological",
+      "color": "#639922",
+      "size": 20,
+      "definition": "Local geográfico de instalação da sonda e referência da posição final do fundo do poço; pode ser mar, terra ou lago.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Ambiente (mar, terra, lago)",
+      "skos_prefLabel": {
+        "@pt": "Ambiente (mar, terra, lago)",
+        "@en": "Operational environment (sea, land, lake)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Local geográfico de instalação da sonda e referência da posição final do fundo do poço; pode ser mar, terra ou lago.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "ambiente",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-campo",
+      "label": "Campo",
+      "label_en": "Field",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Campo de produção ao qual o poço está associado; atributo necessário à identificação e classificação do poço (sobretudo em poços explotatórios).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Campo",
+      "skos_prefLabel": {
+        "@pt": "Campo",
+        "@en": "Field"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Campo de produção ao qual o poço está associado; atributo necessário à identificação e classificação do poço (sobretudo em poços explotatórios).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "campo",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-classificacao-poco",
+      "label": "Classificação do poço",
+      "label_en": "Well classification (category)",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Categoria numérica (1–10) que indica a finalidade do poço; integra o código alfanumérico do poço definido pelo ISA (Informativo de Aprovação de Locação).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Classificação do poço",
+      "skos_prefLabel": {
+        "@pt": "Classificação do poço",
+        "@en": "Well classification (category)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Categoria numérica (1–10) que indica a finalidade do poço; integra o código alfanumérico do poço definido pelo ISA (Informativo de Aprovação de Locação).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "applies_to",
+            "style": "axon_attr_bridge"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-furo",
+      "label": "Furo",
+      "label_en": "Borehole (non-petroleum)",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Resultado de uma perfuração de menor porte (terrestre ou marinha) destinada à investigação geocientífica não voltada à produção de hidrocarbonetos; abrange furos geológicos e geotécnicos, e seu propósito é caracterizar aspectos geológicos, geomecânicos, geoquímicos ou biológicos do subsolo.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer1",
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "sondagem",
+        "furo de sondagem",
+        "furo geológico",
+        "furo geotécnico"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Furo",
+      "skos_prefLabel": {
+        "@pt": "Furo",
+        "@en": "Borehole (non-petroleum)"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "sondagem",
+          "furo de sondagem",
+          "furo geológico",
+          "furo geotécnico"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Resultado de uma perfuração de menor porte (terrestre ou marinha) destinada à investigação geocientífica não voltada à produção de hidrocarbonetos; abrange furos geológicos e geotécnicos, e seu propósito é caracterizar aspectos geológicos, geomecânicos, geoquímicos ou biológicos do subsolo.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-dom-geologia",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-igp",
+      "label": "IGP — Informativo Geológico de Poço",
+      "label_en": "Well Geological Information (IGP)",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Relatório técnico diário (24 h) elaborado pelo geólogo de operações, na locação ou em base, descrevendo geologia, ocorrências geomecânicas, litologia, formações e zonas de interesse de hidrocarboneto observadas no poço.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / IGP - Informativo Geológico de Poço",
+      "skos_prefLabel": {
+        "@pt": "IGP — Informativo Geológico de Poço",
+        "@en": "Well Geological Information (IGP)"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Relatório técnico diário (24 h) elaborado pelo geólogo de operações, na locação ou em base, descrevendo geologia, ocorrências geomecânicas, litologia, formações e zonas de interesse de hidrocarboneto observadas no poço.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "igp",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-lamina-agua",
+      "label": "Lâmina d'água",
+      "label_en": "Water depth",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 22,
+      "definition": "Distância vertical entre a superfície e o fundo do mar em um dado local; classifica-se em águas rasas (0–300 m), águas profundas (300–1500 m) e águas ultraprofundas (>1500 m).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água",
+      "skos_prefLabel": {
+        "@pt": "Lâmina d'água",
+        "@en": "Water depth"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Distância vertical entre a superfície e o fundo do mar em um dado local; classifica-se em águas rasas (0–300 m), águas profundas (300–1500 m) e águas ultraprofundas (>1500 m).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "applies_to",
+            "style": "axon_attr_bridge"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "axon-term-lamina-agua-rasa",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-lamina-agua-profunda",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-lamina-agua-ultraprofunda",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "from": "axon-term-lamina-agua-rasa",
+            "relation": "is_specialization_of",
+            "style": "axon_internal"
+          },
+          {
+            "from": "axon-term-lamina-agua-profunda",
+            "relation": "is_specialization_of",
+            "style": "axon_internal"
+          },
+          {
+            "from": "axon-term-lamina-agua-ultraprofunda",
+            "relation": "is_specialization_of",
+            "style": "axon_internal"
+          }
+        ]
+      }
+    },
+    {
+      "id": "axon-term-lamina-agua-rasa",
+      "label": "Águas rasas",
+      "label_en": "Shallow water",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 18,
+      "definition": "Lâmina d'água entre 0 e 300 metros (águas rasas).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água / Águas rasas",
+      "skos_prefLabel": {
+        "@pt": "Águas rasas",
+        "@en": "Shallow water"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Lâmina d'água entre 0 e 300 metros (águas rasas).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-term-lamina-agua",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-term-lamina-agua",
+            "relation": "is_specialization_of",
+            "style": "axon_internal"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-lamina-agua-profunda",
+      "label": "Águas profundas",
+      "label_en": "Deep water",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 18,
+      "definition": "Lâmina d'água, em geral, entre 300 e 1500 metros (águas profundas).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água / Águas profundas",
+      "skos_prefLabel": {
+        "@pt": "Águas profundas",
+        "@en": "Deep water"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Lâmina d'água, em geral, entre 300 e 1500 metros (águas profundas).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-term-lamina-agua",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-term-lamina-agua",
+            "relation": "is_specialization_of",
+            "style": "axon_internal"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-lamina-agua-ultraprofunda",
+      "label": "Águas ultraprofundas",
+      "label_en": "Ultra-deep water",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 18,
+      "definition": "Lâmina d'água, em geral, acima de 1500 metros (águas ultraprofundas).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água / Águas ultraprofundas",
+      "skos_prefLabel": {
+        "@pt": "Águas ultraprofundas",
+        "@en": "Ultra-deep water"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Lâmina d'água, em geral, acima de 1500 metros (águas ultraprofundas).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-term-lamina-agua",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-term-lamina-agua",
+            "relation": "is_specialization_of",
+            "style": "axon_internal"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-objetivo-poco",
+      "label": "Objetivo do poço",
+      "label_en": "Well objective",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 18,
+      "definition": "Resumo das aquisições e resultados esperados no planejamento do poço, citando formações e profundidades dos alvos principais, secundários e final.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Objetivo do poço",
+      "skos_prefLabel": {
+        "@pt": "Objetivo do poço",
+        "@en": "Well objective"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Resumo das aquisições e resultados esperados no planejamento do poço, citando formações e profundidades dos alvos principais, secundários e final.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "applies_to",
+            "style": "axon_attr_bridge"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-poco",
+      "label": "Poço",
+      "label_en": "Well",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Perfuração realizada em terra ou mar com ferramentas especiais (broca, coluna) para alcançar reservatório de óleo ou gás natural.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço",
+      "skos_prefLabel": {
+        "@pt": "Poço",
+        "@en": "Well"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Perfuração realizada em terra ou mar com ferramentas especiais (broca, coluna) para alcançar reservatório de óleo ou gás natural.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "is_specialization_of",
+            "style": "axon_term_to_existing"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-poco-comprado",
+      "label": "Poço comprado",
+      "label_en": "Purchased well",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Poço cujos dados a Petrobras adquiriu de uma agência, departamento ou organização — operado por outra empresa, sem participação da Petrobras — e cujos arquivos típicos incluem AGP, CDPE, Perfil Composto, perfis digitais, curvas LAS, PAG e teste de formação, normalmente após o período de confidencialidade.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço comprado",
+      "skos_prefLabel": {
+        "@pt": "Poço comprado",
+        "@en": "Purchased well"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Poço cujos dados a Petrobras adquiriu de uma agência, departamento ou organização — operado por outra empresa, sem participação da Petrobras — e cujos arquivos típicos incluem AGP, CDPE, Perfil Composto, perfis digitais, curvas LAS, PAG e teste de formação, normalmente após o período de confidencialidade.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "is_specialization_of",
+            "style": "axon_poco_subtype"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-poco-presal",
+      "label": "Poço do pré-sal",
+      "label_en": "Pre-salt well",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Poço enquadrado no play pré-sal moderno: localizado nas bacias Campos Mar, Espírito Santo Mar ou Santos; com subclassificação carbonática; em formações Barra Velha, Coqueiros, Itapema, Macabu ou Membro Mucuri; e com data de conclusão posterior a 12/10/2006 (1-RJS-628A).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço do pré-sal",
+      "skos_prefLabel": {
+        "@pt": "Poço do pré-sal",
+        "@en": "Pre-salt well"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Poço enquadrado no play pré-sal moderno: localizado nas bacias Campos Mar, Espírito Santo Mar ou Santos; com subclassificação carbonática; em formações Barra Velha, Coqueiros, Itapema, Macabu ou Membro Mucuri; e com data de conclusão posterior a 12/10/2006 (1-RJS-628A).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "is_specialization_of",
+            "style": "axon_poco_subtype"
+          },
+          {
+            "to": "presal",
+            "relation": "occurs_in",
+            "style": "axon_term_to_existing"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-poco-nao-br",
+      "label": "Poço não BR",
+      "label_en": "Non-Petrobras well",
+      "type": "analytical",
+      "color": "#E67E22",
+      "size": 20,
+      "definition": "Poço sem operação ou parceria contratual da Petrobras nos blocos em que está situado; sua documentação interna decorre de aquisições por BID, compra direta na ANP ou outro meio legal.",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço não BR",
+      "skos_prefLabel": {
+        "@pt": "Poço não BR",
+        "@en": "Non-Petrobras well"
+      },
+      "skos_altLabel": {
+        "@pt": [],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Poço sem operação ou parceria contratual da Petrobras nos blocos em que está situado; sua documentação interna decorre de aquisições por BID, compra direta na ANP ou outro meio legal.",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "is_specialization_of",
+            "style": "axon_poco_subtype"
+          }
+        ],
+        "incoming": []
+      }
+    },
+    {
+      "id": "axon-term-sonda",
+      "label": "Sonda",
+      "label_en": "Drilling rig",
+      "type": "equipment",
+      "color": "#C77B30",
+      "size": 22,
+      "definition": "Unidade de perfuração (sonda terrestre, jack-up, semissubmersível, navio-sonda) que executa atividades exploratórias, de avaliação e de completação do poço; identificada por sigla e nome da operadora (ex.: NS-42 ODN II).",
+      "definition_en_canonical": null,
+      "legal_source": null,
+      "datasets": [],
+      "petrokgraph_uri": null,
+      "osdu_kind": null,
+      "geosciml_uri": null,
+      "owl_uri": null,
+      "geocoverage": [
+        "layer4",
+        "layer5",
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "plataforma",
+        "unidade de perfuração"
+      ],
+      "synonyms_en": [],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "axon_type": "Termo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Sonda",
+      "skos_prefLabel": {
+        "@pt": "Sonda",
+        "@en": "Drilling rig"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "plataforma",
+          "unidade de perfuração"
+        ],
+        "@en": []
+      },
+      "skos_definition": {
+        "@pt": "Unidade de perfuração (sonda terrestre, jack-up, semissubmersível, navio-sonda) que executa atividades exploratórias, de avaliação e de completação do poço; identificada por sigla e nome da operadora (ex.: NS-42 ODN II).",
+        "@en": null
+      },
+      "skos_example": [],
+      "relations": {
+        "outgoing": [
+          {
+            "to": "axon-sub-dados-culturais",
+            "relation": "is_part_of",
+            "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-dom-aquisicao-dados-geo",
+            "relation": "supports",
+            "style": "axon_dom_link"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "drilling-activity",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          },
+          {
+            "from": "wireline-logging",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          },
+          {
+            "from": "mudlogging",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          },
+          {
+            "from": "coring",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          },
+          {
+            "from": "formation-testing",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          },
+          {
+            "from": "wireline-run",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          },
+          {
+            "from": "core-run",
+            "relation": "performed_by",
+            "style": "axon_op_to_equipment"
+          }
+        ]
       }
     }
   ]
