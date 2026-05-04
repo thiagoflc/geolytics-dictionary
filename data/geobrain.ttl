@@ -15,8 +15,8 @@
 @prefix qudt: <https://qudt.org/vocab/unit/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-04T16:57:14.372Z
-# Nodes: 378  Edges: 810
+# Generated: 2026-05-04T18:03:37.398Z
+# Nodes: 378  Edges: 812
 
 #
 # Classes
@@ -5371,8 +5371,8 @@ geo:estimates a owl:ObjectProperty ;
 geo:is_input_for a owl:ObjectProperty ;
     rdfs:label "Estabilidade de Poço (calibração do modelo geomecânico)"@pt ;
     rdfs:label "is input for"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC023 geo:GEOMEC026A geo:GEOMEC035 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC066 geo:GEOMEC_ROP_B geo:GEOMEC023C geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC073 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC017 geo:GEOMEC026B geo:GEOMEC036 geo:GEOMEC025 geo:GEOMEC026A geo:GEOMEC018 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC023 geo:GEOMEC026A geo:GEOMEC035 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC066 geo:GEOMEC_ROP_B geo:GEOMEC023C geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC073 geo:GM006 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC017 geo:GEOMEC026B geo:GEOMEC036 geo:GEOMEC025 geo:GEOMEC026A geo:GEOMEC018 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 geo:GF001 ) ] .
 
 geo:monitors a owl:ObjectProperty ;
     rdfs:label "Estabilidade de Poço / Eventos Geomecânicos (em tempo real)"@pt ;
@@ -5384,7 +5384,7 @@ geo:supports a owl:ObjectProperty ;
     rdfs:label "MPD — via CSD MPD dedicado"@pt ;
     rdfs:label "supports"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC025 geo:GEOMEC_ROP_B geo:GM006 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC015 geo:GM007 ) ] .
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC015 geo:GM007 geo:GF002 ) ] .
 
 geo:formalizes a owl:ObjectProperty ;
     rdfs:label "Análise de Geohazards — documento formal para GEP e ANP"@pt ;
@@ -6305,6 +6305,8 @@ geo:GF017 geo:derived_from geo:core-sample .
 geo:GM027 geo:formalizes geo:laudo-geomecanico .
 geo:GM006 geo:is_calculated_from geo:GM001 .
 geo:GM006 geo:supports geo:GM007 .
+geo:GM006 geo:is_input_for geo:GF001 .
+geo:GM006 geo:supports geo:GF002 .
 geo:GF002 geo:produces geo:GF004 .
 geo:GF002 geo:occurs_in geo:poco .
 geo:GF001 geo:observed_in geo:core-sample .

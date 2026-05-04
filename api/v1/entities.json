@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T16:57:14.342Z",
+    "generated": "2026-05-04T18:03:37.361Z",
     "count": 378
   },
   "entities": [
@@ -26333,6 +26333,16 @@
             "to": "GM007",
             "relation": "supports",
             "style": "geomec_academic"
+          },
+          {
+            "to": "GF001",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          },
+          {
+            "to": "GF002",
+            "relation": "supports",
+            "style": "geomec_academic"
           }
         ],
         "incoming": []
@@ -27798,6 +27808,11 @@
             "from": "GF003",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "from": "GM006",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
           }
         ]
       }
@@ -27862,7 +27877,13 @@
             "style": "geomec_academic_bridge"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GM006",
+            "relation": "supports",
+            "style": "geomec_academic"
+          }
+        ]
       }
     },
     {

@@ -712,13 +712,22 @@ function buildGeomecAcademicGraph(existingIds) {
   // Laudo Geomecânico already exists in main as a doc — academic GM027 specializes it
   bridgeMain("GM027", "laudo-geomecanico", "formalizes", "formaliza", "formalizes");
 
-  // MohrCircle (GM006) — graphical representation derived from stress and failure data;
-  // tie it to FailureCriterion and StressTensor so it joins the cluster.
+  // MohrCircle (GM006) — método gráfico que representa a transformação do estado
+  // de tensões/deformações em um ponto quando muda a orientação do plano analisado;
+  // permite determinar tensões principais, tensão de cisalhamento máxima e a
+  // orientação dos planos onde essas grandezas ocorrem. Usado em análise de
+  // mecanismo de deformação (em especial via critério Mohr-Coulomb para falha frágil).
   if (academicIds.has("GM006") && academicIds.has("GM001")) {
     addEdge("GM006", "GM001", "is_calculated_from", "calculado a partir de", "is calculated from");
   }
   if (academicIds.has("GM006") && academicIds.has("GM007")) {
     addEdge("GM006", "GM007", "supports", "apoia", "supports");
+  }
+  if (academicIds.has("GM006") && academicIds.has("GF001")) {
+    addEdge("GM006", "GF001", "is_input_for", "é entrada para", "is input for");
+  }
+  if (academicIds.has("GM006") && academicIds.has("GF002")) {
+    addEdge("GM006", "GF002", "supports", "apoia", "supports");
   }
 
   // DeformationMechanism family (GF001, GF002, GF003) — connect to academic
