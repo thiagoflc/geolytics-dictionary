@@ -4144,7 +4144,7 @@ function geomecCorporateRole(id) {
     "GEOMEC087",
     "GEOMEC075",
     "GEOMEC076",
-    "GEOMEC_ROP_A",
+    "GEOMEC088", // Taxa de Penetração (renomeado de GEOMEC_ROP_A — F6 follow-up)
   ]);
   if (featureObservationIds.has(id)) return "feature_observation";
 
@@ -4212,7 +4212,7 @@ function geomecCorporateRole(id) {
   const governanceArtifactIds = new Set([
     "GEOMEC026A", // QPG — quadro de previsões
     "GEOMEC084", // Esquema de Qualidade WSM 2025
-    "GEOMEC_ROP_B", // Relatório de operações de perfilagem
+    "GEOMEC089", // Relatório de operações de perfilagem (renomeado de GEOMEC_ROP_B — F6 follow-up)
   ]);
   if (governanceArtifactIds.has(id)) return "governance_artifact";
 

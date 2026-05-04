@@ -45,6 +45,38 @@ def emit(data: dict) -> str:
     a("geo:GeomechCorporateSource   a owl:Class ; rdfs:label \"Geomechanics Corporate Source\"@en .")
     a("")
 
+    # Set of corporate entity IDs (active — not deprecated).
+    # Required by Shape 29 (geo:targetEntity must reference declared corp entity).
+    corp_ids: set[str] = {e["id"] for e in data["entities"] if not e.get("deprecated")}
+
+    # Deprecation map: deprecated_id -> survivor_id. Mirrors the JS pipeline
+    # in scripts/generate.js (buildGeomecCorporateGraph). Edges to deprecated
+    # entities are rerouted to their survivor and tagged geo:repointedFrom for
+    # provenance. Without this, Shape 27 (active reference to deprecated)
+    # would fire for every relationship pointing at GEOMEC003/004/013/026B/049/050
+    # (F4 merges) or pre-existing splits (GEOMEC026/052/053).
+    deprecation_map: dict[str, str] = {}
+    for e in data["entities"]:
+        dep = e.get("deprecated")
+        if isinstance(dep, dict):
+            rb = dep.get("replaced_by") or []
+            if isinstance(rb, list) and rb:
+                deprecation_map[e["id"]] = rb[0]
+
+    def resolve_target(tid: str) -> tuple[str, str | None]:
+        """Returns (final_target_id, repointed_from_id|None)."""
+        if tid in deprecation_map:
+            return deprecation_map[tid], tid
+        return tid, None
+
+    def is_corporate(tid: str) -> bool:
+        """Whether target ID is an active corporate entity in this module.
+        Edges crossing module boundaries (e.g., GEOMEC013→GM017 after F4
+        merge with academic backbone) are NOT emitted in the corporate
+        TTL — they live in the entity-graph TTL output instead. Shape 29
+        requires geo:targetEntity to reference a declared corp entity."""
+        return tid in corp_ids
+
     for e in data["entities"]:
         eid = e["id"]
         subj = f"geo:{eid}"
@@ -132,21 +164,43 @@ def emit(data: dict) -> str:
                 a(f'        geo:variableName "{vname}" ;')
                 a(f"        geo:variableDescription {lit(vdesc, 'pt')} ] ;")
 
-        # Relations as blank nodes
+        # Relations as blank nodes. If the target is deprecated, redirect
+        # to the survivor and tag geo:repointedFrom so provenance is kept
+        # (mirrors JS pipeline buildGeomecCorporateGraph.resolve()).
+        # Cross-module edges (target outside corp module after redirect)
+        # are dropped — they live in the entity-graph TTL output.
+        emitted_keys: set[tuple[str, str]] = set()
         for r in e.get("relationships") or []:
-            tgt = r.get("target_id")
-            if not tgt:
+            raw_tgt = r.get("target_id")
+            if not raw_tgt:
                 continue
+            tgt, auto_repoint = resolve_target(raw_tgt)
+            # Skip self-loops introduced by reroute.
+            if tgt == e["id"]:
+                continue
+            # Skip edges whose final target is outside the corp module.
+            # Shape 29 enforces internal-only references; cross-module
+            # edges are represented elsewhere (entity-graph TTL).
+            if not is_corporate(tgt):
+                continue
+            rel_type = r.get("relation_type", "")
+            key = (tgt, rel_type)
+            if key in emitted_keys:
+                continue
+            emitted_keys.add(key)
             a("    geo:hasRelation [")
             a("        a geo:GeomechCorporateRelation ;")
-            a(f'        geo:relationType "{r.get("relation_type","")}" ;')
+            a(f'        geo:relationType "{rel_type}" ;')
             a(f"        geo:targetEntity geo:{tgt} ;")
             if r.get("target_label"):
                 a(f"        rdfs:label {lit(r['target_label'], 'pt')} ;")
             if r.get("edge_note"):
                 a(f"        geo:edgeNote {lit(r['edge_note'], 'pt')} ;")
-            if r.get("_repointed_from"):
-                a(f'        geo:repointedFrom geo:{r["_repointed_from"]} ;')
+            # Existing _repointed_from from the JSON source takes precedence,
+            # else use auto-repoint marker we computed.
+            repointed = r.get("_repointed_from") or auto_repoint
+            if repointed:
+                a(f"        geo:repointedFrom geo:{repointed} ;")
             a("    ] ;")
 
         # Close entity (replace last ' ;' with ' .')

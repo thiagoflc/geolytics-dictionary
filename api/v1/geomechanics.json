@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T22:06:36.312Z",
+    "generated": "2026-05-04T22:27:04.444Z",
     "source": "data/geomechanics.json + data/geomechanics-fractures.json + data/geomechanics-corporate.json (L6) + data/geomechanics-corporate-crosswalk.json",
     "counts": {
       "classes": 27,
@@ -3384,28 +3384,33 @@
           {
             "target_id": "GEOMEC003",
             "relation_type": "REQUIRES",
-            "target_label": "Janela Operacional de Lama"
+            "target_label": "Janela Operacional de Lama",
+            "edge_note": "Pré-requisito de conhecimento — análise de estabilidade requer janela operacional de lama."
           },
           {
             "target_id": "GEOMEC001",
             "relation_type": "REQUIRES",
-            "target_label": "Pressão de Poros"
+            "target_label": "Pressão de Poros",
+            "edge_note": "Pré-requisito computacional — REQUIRES_INPUT seria mais preciso (Pp é variável de entrada para análise)."
           },
           {
             "target_id": "GEOMEC004",
             "relation_type": "REQUIRES",
-            "target_label": "Estado de Tensões In Situ"
+            "target_label": "Estado de Tensões In Situ",
+            "edge_note": "Pré-requisito computacional — REQUIRES_INPUT seria mais preciso (estado de tensões é variável de entrada)."
           },
           {
             "target_id": "GEOMEC010",
             "relation_type": "REQUIRES",
-            "target_label": "Resistência à Compressão Uniaxial (UCS)"
+            "target_label": "Resistência à Compressão Uniaxial (UCS)",
+            "edge_note": "Pré-requisito computacional — REQUIRES_INPUT seria mais preciso (UCS é parâmetro de entrada)."
           },
           {
             "target_id": "GEOMEC017",
             "relation_type": "REQUIRES",
             "target_label": "Regime de Falhas",
-            "_flipped_from": "GEOMEC017 IS_REQUIRED_BY→GEOMEC015"
+            "_flipped_from": "GEOMEC017 IS_REQUIRED_BY→GEOMEC015",
+            "edge_note": "Pré-requisito de conhecimento — análise de estabilidade depende do regime de falhas."
           }
         ],
         "osdu_mapping": "osdu:wks:work-product-component--WellboreStabilityAnalysis:1.*",
@@ -3472,7 +3477,8 @@
             "target_id": "GEOMEC024",
             "relation_type": "REQUIRES",
             "target_label": "Compressibilidade de Poros Uniaxial",
-            "_flipped_from": "GEOMEC024 IS_REQUIRED_FOR→GEOMEC016"
+            "_flipped_from": "GEOMEC024 IS_REQUIRED_FOR→GEOMEC016",
+            "edge_note": "Pré-requisito computacional — REQUIRES_INPUT seria mais preciso (compressibilidade uniaxial alimenta modelo de subsidência)."
           }
         ],
         "osdu_mapping": "osdu:wks:work-product-component--SubsidenceModel:1.*",
@@ -4159,7 +4165,8 @@
             "target_id": "GEOMEC030",
             "relation_type": "REQUIRES",
             "target_label": "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço",
-            "_flipped_from": "GEOMEC030 USED_BY→GEOMEC025"
+            "_flipped_from": "GEOMEC030 USED_BY→GEOMEC025",
+            "edge_note": "Pré-requisito de validação — CSD requer SIGEO/SEST TR para curadoria de modelos 1D."
           }
         ],
         "osdu_mapping": null,
@@ -6101,6 +6108,12 @@
             "relation_type": "IS_PART_OF",
             "target_id": "GEOMEC022",
             "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+          },
+          {
+            "target_id": "GEOMEC015",
+            "relation_type": "IS_INPUT_FOR",
+            "target_label": "Estabilidade de Poço / Análise de Geohazards",
+            "edge_note": "Resistência à tração obtida pelo Ensaio Brasileiro alimenta modelagem de wellbore stability junto com UCS."
           }
         ]
       },
@@ -6189,11 +6202,17 @@
             "relation_type": "IS_PART_OF",
             "target_id": "GEOMEC022",
             "target_label": "Scratch Test e Ensaios Mecânicos de Rocha em Laboratório"
+          },
+          {
+            "target_id": "GEOMEC014",
+            "relation_type": "MEASURES",
+            "target_label": "Compressibilidade de Poros",
+            "edge_note": "Volume poroso medido em ensaio é dado primário para cálculo da compressibilidade de poros."
           }
         ]
       },
       {
-        "id": "GEOMEC_ROP_A",
+        "id": "GEOMEC088",
         "label_pt": "Taxa de Penetração",
         "label_en": "Rate of Penetration",
         "acronym": [
@@ -6252,7 +6271,7 @@
           {
             "target_id": "GEOMEC045",
             "target_label": "Prisão de Coluna",
-            "relation_type": "MAY_CONTRIBUTE_TO",
+            "relation_type": "INFLUENCES",
             "rationale": "ROP elevado, quando combinado com limpeza insuficiente, pode contribuir para eventos operacionais como arraste, topamento ou prisão."
           }
         ],
@@ -6288,14 +6307,14 @@
             "source_status": "provided_by_user_from_SINPEP"
           },
           {
-            "doc_id": "linha1_rev2.pptx",
+            "doc_id": "CoI:linha1_rev2.pptx",
             "section": "Geomec Predição",
             "support_type": "observed_usage",
             "quote": "Atributos obtidos até o momento via API do EXATA: ROP, WOB, RPM e TORQUE...",
             "citation": "turn7search86"
           },
           {
-            "doc_id": "Petro_Requisitos_Desacoplamento.docx",
+            "doc_id": "CoI:Petro_Requisitos_Desacoplamento",
             "section": "Requisitos para implementação do Agente GeoDrilling",
             "support_type": "agent_context",
             "quote": "cruza dados de parâmetros de perfuração (ROP, Torque) com dados de formação...",
@@ -6314,7 +6333,7 @@
         }
       },
       {
-        "id": "GEOMEC_ROP_B",
+        "id": "GEOMEC089",
         "label_pt": "Relatório de Operações de Perfilagem",
         "label_en": "Well Logging Operations Report",
         "acronym": [
@@ -6372,7 +6391,7 @@
           {
             "target_id": "GEOMEC023",
             "target_label": "Breakouts e Fraturas Induzidas",
-            "relation_type": "MAY_REFERENCE",
+            "relation_type": "RELATED_TO",
             "rationale": "Quando houver perfis de imagem ou informações de perfilagem associadas, o ROP-documento pode apoiar rastreabilidade dos intervalos perfilados."
           },
           {
@@ -6407,21 +6426,21 @@
             "source_status": "provided_by_user_from_SINPEP"
           },
           {
-            "doc_id": "ROP.aspx",
+            "doc_id": "CoI:ROP.aspx",
             "section": "Descrição do sistema ROP",
             "support_type": "system_description",
             "quote": "O ROP - Relatório de Operações de Perfilagem - é o sistema corporativo de controle das operações de perfilagem.",
             "citation": "turn7search51"
           },
           {
-            "doc_id": "PE-2EXP-00065.docx",
+            "doc_id": "PE-2EXP-00065",
             "section": "Definições",
             "support_type": "definition",
             "quote": "ROP (Relatório de Operações de Perfilagem): relatório que contém as informações de todas as operações de perfilagem realizadas no poço.",
             "citation": "turn6search31"
           },
           {
-            "doc_id": "PoC_AWS-Agente_1-OGEO.pptx",
+            "doc_id": "CoI:PoC_AWS-Agente_1-OGEO",
             "section": "Origens dos Dados",
             "support_type": "integration_context",
             "quote": "Relatório de Operações de Perfilagem (ROP) Sql EXATA, disponível via API Swagger UI.",
@@ -6491,7 +6510,8 @@
             "target_id": "GEOMEC085",
             "relation_type": "REQUIRES",
             "target_label": "Estatística Circular Bimodal",
-            "_original_relation_type": "USES_METHOD"
+            "_original_relation_type": "USES_METHOD",
+            "edge_note": "Pré-requisito de validação — interpretação de breakout requer estatística circular bimodal para validação."
           }
         ],
         "sources": [
@@ -6552,7 +6572,8 @@
             "target_id": "GEOMEC085",
             "relation_type": "REQUIRES",
             "target_label": "Estatística Circular Bimodal",
-            "_original_relation_type": "USES_METHOD"
+            "_original_relation_type": "USES_METHOD",
+            "edge_note": "Pré-requisito de validação — interpretação de DITF requer estatística circular bimodal para validação."
           }
         ],
         "sources": [],
