@@ -426,13 +426,31 @@ function buildGeomechanicsApi() {
  * target_id is another GEOMEC* node or a known graph node are emitted
  * (avoids dangling edges to entities outside the visible graph).
  *
+ * F4 — Duplicate-pair merge support (option B): entities flagged
+ *   `deprecated: true` + `deprecated_in_favor_of: "<surviving_id>"` are NOT
+ *   emitted as their own node. Instead:
+ *     1. Their outbound `relationships` are migrated onto the surviving node
+ *        (source rewritten to surviving id); de-duplicated against existing
+ *        edges; self-loops dropped.
+ *     2. Other entities pointing AT the deprecated id have those edges
+ *        retargeted to the surviving id; self-loops/dups likewise dropped.
+ *     3. A `source_reference` entry is appended to the surviving node so
+ *        downstream consumers preserve provenance of the merge (deprecated
+ *        id, original definition, owner_department, internal_standards).
+ *
  * @param {Set<string>} allowedTargetIds - IDs of non-corporate nodes that
  *   corporate edges may target (e.g. "poco" if cross-domain relations exist).
- * @returns {{nodes: Object[], edges: Object[]}}
+ * @returns {{nodes: Object[], edges: Object[], sourceReferences: Map<string, Object[]>, deprecationMap: Map<string, string>}}
  */
 function buildGeomecCorporateGraph(allowedTargetIds) {
   const gmCorp = loadGeomechanicsCorporate();
-  if (!gmCorp) return { nodes: [], edges: [] };
+  if (!gmCorp)
+    return {
+      nodes: [],
+      edges: [],
+      sourceReferences: new Map(),
+      deprecationMap: new Map(),
+    };
 
   const COLOR_BY_CATEGORY = {
     Process: "#0F9D9D",
@@ -447,6 +465,62 @@ function buildGeomecCorporateGraph(allowedTargetIds) {
     GovernanceKPI: "#15803D",
     LabTest: "#9333EA",
   };
+
+  /* F4 deprecation map (deprecated_id -> surviving_id) for the 6 pairs merged
+     in PR #33. Source schema for `deprecated`:
+       - boolean true  → just filter (used by pre-existing 026B legacy field — no merge)
+       - dict {replaced_by: [id], reason: str, merged_in?: str}
+         · F4 merges have merged_in set (and thus generate source_reference card)
+         · pre-existing splits (GEOMEC026/052/053) have replaced_by arrays without merged_in
+           → still in deprecationMap so edges get rerouted, but no provenance card. */
+  const deprecationMap = new Map();
+  const sourceReferences = new Map();
+  const survivorOf = (e) => {
+    if (!e.deprecated) return null;
+    if (e.deprecated === true) return null;
+    const rb = e.deprecated.replaced_by;
+    if (Array.isArray(rb) && rb.length > 0) return rb[0];
+    return null;
+  };
+  for (const e of gmCorp.entities || []) {
+    const survivor = survivorOf(e);
+    if (survivor) deprecationMap.set(e.id, survivor);
+  }
+
+  const resolve = (id) => deprecationMap.get(id) || id;
+
+  /* F4 — collect a provenance card for each merged corp entity so the
+     surviving node carries the Petrobras-specific operational nuances.
+     Only entities with `deprecated.merged_in` set (F4 merges) — pre-existing
+     splits like GEOMEC026/052/053 are filtered without a provenance card. */
+  for (const e of gmCorp.entities || []) {
+    const survivor = survivorOf(e);
+    if (!survivor) continue;
+    if (!e.deprecated || typeof e.deprecated !== "object") continue;
+    if (!e.deprecated.merged_in) continue;
+    if (!sourceReferences.has(survivor)) sourceReferences.set(survivor, []);
+    sourceReferences.get(survivor).push({
+      deprecated_id: e.id,
+      source_module: "data/geomechanics-corporate.json",
+      label_at_merge: e.label_pt || e.label || e.id,
+      label_en_at_merge: e.label_en || null,
+      original_definition_pt: e.definition_pt || e.definition || null,
+      original_definition_en: e.definition_en || null,
+      acronym: e.acronym || [],
+      observed_variants: e.observed_variants || [],
+      owner_department: e.owner_department || null,
+      official_datastore: e.official_datastore || null,
+      internal_standards: e.internal_standards || null,
+      category: e.category || null,
+      sources: e.sources || [],
+      merged_in: e.deprecated.merged_in,
+      rationale:
+        e.deprecated.reason ||
+        "Conceito idêntico — " +
+          survivor +
+          " já cobre o termo no componente principal. Mantida proveniência Petrobras corporate.",
+    });
+  }
 
   const nodes = (gmCorp.entities || [])
     .filter((e) => !e.deprecated)
@@ -494,25 +568,1321 @@ function buildGeomecCorporateGraph(allowedTargetIds) {
     });
 
   const corpIds = new Set(nodes.map((n) => n.id));
-  const validTargets = new Set([...corpIds, ...(allowedTargetIds || [])]);
+  /* Valid edge targets include emitted corp nodes, all non-corp graph nodes
+     allowed by the caller, AND all deprecation survivor ids (which may be
+     non-corp ids like "bdp" / "janela-lama" — those will be re-pointed). */
+  const validTargets = new Set([
+    ...corpIds,
+    ...(allowedTargetIds || []),
+    ...deprecationMap.values(),
+  ]);
 
+  /* Edge collection with re-routing. For each relationship:
+     - Resolve source through deprecationMap (if the entity is itself
+       deprecated, its outbound edges become outbound from the survivor).
+     - Resolve target through deprecationMap.
+     - Skip self-loops created by the rewrite (e.g. GEOMEC013 derived_from
+       GEOMEC011 stays GEOMEC011-targeted, fine; but if source==target after
+       rewrite, drop).
+     - De-duplicate against an emitted-key set. */
   const edges = [];
+  const emittedKeys = new Set();
   for (const e of gmCorp.entities || []) {
-    if (e.deprecated) continue;
     for (const r of e.relationships || []) {
       const target = r.target_id;
-      if (!target || !validTargets.has(target)) continue;
-      const relation = r.relation_type || "RELATED_TO";
+      if (!target) continue;
+      const newSource = resolve(e.id);
+      const newTarget = resolve(target);
+      if (newSource === newTarget) continue; // self-loop after merge
+      if (!validTargets.has(newTarget) && !corpIds.has(newTarget)) continue;
+      // Both endpoints must exist in the final graph (corp emitted OR allowed
+      // OR survivor). Survivors that are non-corp must be in allowedTargetIds.
+      if (!corpIds.has(newSource) && !(allowedTargetIds || new Set()).has(newSource)) {
+        continue;
+      }
+      if (!corpIds.has(newTarget) && !(allowedTargetIds || new Set()).has(newTarget)) {
+        continue;
+      }
+      const relation = (r.relation_type || "RELATED_TO").toLowerCase();
+      const key = `${newSource}|${newTarget}|${relation}`;
+      if (emittedKeys.has(key)) continue;
+      emittedKeys.add(key);
       edges.push({
-        source: e.id,
-        target,
-        relation: relation.toLowerCase(),
+        source: newSource,
+        target: newTarget,
+        relation,
         relation_label_pt: r.target_label || relation,
         relation_label_en: relation.replace(/_/g, " ").toLowerCase(),
         style: "geomec_corporate",
       });
     }
   }
+  return { nodes, edges, sourceReferences, deprecationMap };
+}
+
+/**
+ * F4 — Wires the four remaining isolated GEOMEC nodes into the main component
+ * as a case-test of the 6-layer ontology model. Uses ONLY canonical predicates
+ * from docs/ONTOLOGY_PREDICATES.md (no `related_to`/`used_with`).
+ *
+ *   GEOMEC046 Subsidência — Faixas de Risco (Classifier, L4/L5)
+ *   GEOMEC076 HAZI — Azimute do Poço (Property, L1 attribute)
+ *   GEOMEC086 Inversão de Slip de Falha Geológica (Process, L5 interpretation)
+ *   GEOMEC087 Alinhamento de Vents Vulcânicos (Process, L4/L5 evidence)
+ *
+ * Each wiring traverses multiple layers (L1 well, L4 feature, L5 interpretation,
+ * L6 engineering, domain anchor) so the four nodes serve as integration tests
+ * for the six-layer model laid out in docs/ONTOLOGY_LAYERS.md.
+ *
+ * @param {Set<string>} existingIds - IDs already emitted (corp + academic +
+ *   axon + main). Bridges only fire when both endpoints exist.
+ * @returns {{nodes: Object[], edges: Object[]}}
+ */
+function buildIsolatedGeomecBridges(existingIds) {
+  const edges = [];
+  const seen = new Set();
+  const add = (source, target, relation, labelPt, labelEn) => {
+    if (!existingIds.has(source) || !existingIds.has(target)) return;
+    if (source === target) return;
+    const k = `${source}|${target}|${relation}`;
+    if (seen.has(k)) return;
+    seen.add(k);
+    edges.push({
+      source,
+      target,
+      relation,
+      relation_label_pt: labelPt || relation.replace(/_/g, " "),
+      relation_label_en: labelEn || relation.replace(/_/g, " "),
+      style: "geomec_isolated_bridge",
+    });
+  };
+
+  /* GEOMEC046 — Subsidência — Faixas de Risco (Classifier).
+     L4/L5: classifier produced by IMGR (GEOMEC027), specializes Subsidência
+     (GEOMEC016), grounded on academic MEM 1D (GM010-12) and the Geomecânica
+     domain anchor. */
+  add(
+    "GEOMEC046",
+    "GEOMEC016",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  add("GEOMEC027", "GEOMEC046", "produces", "produz", "produces");
+  add("GEOMEC046", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC046", "reservatorio", "applies_to", "aplica-se a", "applies to");
+  add("GEOMEC046", "GM010", "derived_from", "derivado de", "derived from");
+  add("GEOMEC046", "GM011", "derived_from", "derivado de", "derived from");
+  add("GEOMEC046", "GM012", "derived_from", "derivado de", "derived from");
+  /* Risk classifier supports stability assessment (GEOMEC015 Estab. Poço). */
+  add("GEOMEC046", "GEOMEC015", "supports", "apoia", "supports");
+
+  /* GEOMEC076 — HAZI — Azimute do Poço (well attribute concept).
+     Per ONTOLOGY_LAYERS §5: well_attribute_concept attached to L1 Well via
+     applies_to. Used as input to image-log interpretation (GEOMEC023, 072)
+     and co-measured with AZIE (GEOMEC075). */
+  add("GEOMEC076", "poco", "applies_to", "aplica-se a", "applies to");
+  add("GEOMEC076", "GEOMEC023", "is_input_for", "é entrada para", "is input for");
+  add("GEOMEC076", "GEOMEC072", "is_input_for", "é entrada para", "is input for");
+  add("GEOMEC076", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC076", "GEOMEC075", "co_measured_with", "co-medido com", "co-measured with");
+
+  /* GEOMEC086 — Inversão de Slip de Falha Geológica (Process, L5).
+     Interpretation process producing principal stress axes (GEOMEC081),
+     observed on faults (falha), specialization of well-evaluation processes,
+     formalized by GEOMEC083 (Inversão Formal de Mecanismos Focais). */
+  add("GEOMEC086", "GEOMEC081", "produces", "produz", "produces");
+  add("GEOMEC086", "falha", "observed_in", "observado em", "observed in");
+  add("GEOMEC086", "GEOMEC082", "derived_from", "derivado de", "derived from");
+  add("GEOMEC083", "GEOMEC086", "formalizes", "formaliza", "formalizes");
+  add("GEOMEC086", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC086", "GEOMEC017", "supports", "apoia", "supports");
+  add(
+    "GEOMEC086",
+    "axon-asn-aval-final-poco",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+
+  /* GEOMEC087 — Alinhamento de Vents Vulcânicos (Process / WSM 2025 indicator).
+     Stress-orientation indicator: input to principal stress axes (GEOMEC081),
+     derived from WSM 2025 quality scheme (GEOMEC084), co-measured with focal
+     mechanisms (GEOMEC082). */
+  add("GEOMEC087", "GEOMEC081", "is_input_for", "é entrada para", "is input for");
+  add("GEOMEC087", "GEOMEC084", "derived_from", "derivado de", "derived from");
+  add("GEOMEC087", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC087", "GEOMEC082", "co_measured_with", "co-medido com", "co-measured with");
+
+  return { nodes: [], edges };
+}
+
+/**
+ * Converts the L1-L2 academic backbone of geomechanics — 27 GM* classes from
+ * data/geomechanics.json (Fjaer/Zoback/ISRM) and 17 GF* fracture classes from
+ * data/geomechanics-fractures.json (Pillar 4 / structural geology) — into
+ * entity-graph nodes plus a dense set of edges:
+ *   1. Internal (within-cluster) edges from each source's `relations` array
+ *      and from `superclass` taxonomy where the parent is also an emitted node.
+ *   2. Bridge edges from academic GM* / GF* classes to existing main-component
+ *      pivots (poco, wireline-logging, formation-testing, core-sample,
+ *      janela-lama, campo-tensional, ...) so the new sub-cluster merges into
+ *      the giant main component.
+ *   3. Bridge edges from existing L6 corporate GEOMEC* nodes to their
+ *      academic GM* / GF* counterparts via `is_specialization_of` /
+ *      `derived_from`, so the L6 island merges through the academic layer.
+ *
+ * Vocabulary uses only the curated predicate set (no invented terms):
+ *   is_specialization_of, derived_from, produces, is_part_of,
+ *   is_calculated_from, is_input_for, measures, monitors, governed_by,
+ *   requires, constrains, formalizes, calibrates, supports, enables,
+ *   co_measured_with, estimates, requires_input, computes,
+ *   acquired_from, interpreted_into, observed_in, applies_to, occurs_in.
+ *
+ * @param {Set<string>} existingIds - Set of node IDs already emitted by
+ *   buildEntityGraph (main component + L6 island + isolated). Used to gate
+ *   bridge edges so we never author dangling edges.
+ * @returns {{nodes: Object[], edges: Object[]}}
+ */
+function buildGeomecAcademicGraph(existingIds) {
+  const gm = loadGeomechanics();
+  const gmf = loadGeomechanicsFractures();
+  if (!gm && !gmf) return { nodes: [], edges: [] };
+
+  const COLOR_ACADEMIC = "#8B4789"; // purple — distinct from geomec_corporate palette
+  const COLOR_FRACTURE = "#B85A3E"; // terracotta — distinct from existing colors
+
+  /**
+   * Builds an entity-graph node from a GM* / GF* class object.
+   */
+  const mkNode = (cls, kind) => {
+    const isFracture = kind === "geomec_fracture";
+    const labelPt = cls.name_pt || cls.name;
+    const labelEn = cls.name;
+    const definitionPt = cls.description_pt || cls.description || null;
+    const definitionEn = cls.description || null;
+    const synonymsPt = [];
+    const synonymsEn = [];
+    const baseGeocoverage = isFracture ? ["layer1", "layer2", "layer7"] : ["layer1", "layer2"];
+    const examples = [];
+    return {
+      id: cls.id,
+      label: labelPt,
+      label_en: labelEn,
+      type: kind,
+      color: isFracture ? COLOR_FRACTURE : COLOR_ACADEMIC,
+      size: 22,
+      definition: definitionPt,
+      definition_en_canonical: definitionEn,
+      legal_source: Array.isArray(cls.sources) ? cls.sources.join("; ") : null,
+      datasets: [],
+      petrokgraph_uri: null,
+      osdu_kind: null,
+      /* Fix: gso_uri (Layer 7) is NOT a GeoSciML URI (Layer 1b). The
+         entity-graph linter requires geosciml_uri to start with
+         http://geosciml.org/. Keep them in distinct fields. */
+      geosciml_uri: cls.geosciml_uri || null,
+      owl_uri: null,
+      geocoverage:
+        cls.geocoverage && cls.geocoverage.length
+          ? cls.geocoverage.filter((g) => g !== "sweet" && g !== "layer6")
+          : baseGeocoverage,
+      synonyms_pt: synonymsPt,
+      synonyms_en: synonymsEn,
+      examples,
+      glossary_id: null,
+      extended_id: null,
+      sweet_alignment: cls.sweet_alignment || cls.sweet_uri || null,
+      gso_uri: cls.gso_uri || null,
+      superclass: cls.superclass || null,
+      layer: isFracture ? "L1-L2-L7" : "L1-L2",
+      skos_prefLabel: { "@pt": labelPt, "@en": labelEn },
+      skos_altLabel: { "@pt": synonymsPt, "@en": synonymsEn },
+      skos_definition: { "@pt": definitionPt, "@en": definitionEn },
+      skos_example: examples,
+    };
+  };
+
+  const nodes = [];
+  for (const cls of (gm && gm.classes) || []) nodes.push(mkNode(cls, "geomec_academic"));
+  for (const cls of (gmf && gmf.classes) || []) nodes.push(mkNode(cls, "geomec_fracture"));
+
+  const academicIds = new Set(nodes.map((n) => n.id));
+
+  /* Build a name -> id index for relations (relations reference class names,
+     not IDs, e.g. domain "StressTensor" maps to GM001). */
+  const nameToId = new Map();
+  for (const cls of (gm && gm.classes) || []) {
+    nameToId.set(cls.name, cls.id);
+    if (cls.name_pt) nameToId.set(cls.name_pt, cls.id);
+  }
+  for (const cls of (gmf && gmf.classes) || []) {
+    nameToId.set(cls.name, cls.id);
+    if (cls.name_pt) nameToId.set(cls.name_pt, cls.id);
+  }
+
+  const edges = [];
+  const seen = new Set(); // de-dup key
+  const addEdge = (source, target, relation, labelPt, labelEn, style) => {
+    if (!source || !target || source === target) return;
+    const key = `${source} ${target} ${relation}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    edges.push({
+      source,
+      target,
+      relation,
+      relation_label_pt: labelPt || relation.replace(/_/g, " "),
+      relation_label_en: labelEn || relation.replace(/_/g, " "),
+      style: style || "geomec_academic",
+    });
+  };
+
+  /* ─── 1. Internal edges from `relations` (GR* in geomechanics.json) ─── */
+  const relList = [...((gm && gm.relations) || []), ...((gmf && gmf.relations) || [])];
+  for (const r of relList) {
+    const src = nameToId.get(r.domain);
+    const tgt = nameToId.get(r.range);
+    if (!src || !tgt) continue;
+    if (!academicIds.has(src) || !academicIds.has(tgt)) continue;
+    addEdge(src, tgt, r.name, r.name_pt || r.name, r.name);
+  }
+
+  /* ─── 1b. Internal edges from `superclass` taxonomy.
+     When a class's superclass matches another emitted class's name, emit an
+     `is_specialization_of` edge from the subclass to the parent. ─── */
+  for (const cls of [...((gm && gm.classes) || []), ...((gmf && gmf.classes) || [])]) {
+    const parentId = nameToId.get(cls.superclass);
+    if (!parentId || parentId === cls.id) continue;
+    if (!academicIds.has(parentId)) continue;
+    addEdge(
+      cls.id,
+      parentId,
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of"
+    );
+  }
+
+  /* ─── 2. Bridge edges from academic to MAIN component ─── */
+  // helper that only emits if the target exists in the existing graph
+  const bridgeMain = (src, tgt, rel, labelPt, labelEn) => {
+    if (!existingIds.has(tgt)) return;
+    if (!academicIds.has(src)) return;
+    addEdge(src, tgt, rel, labelPt, labelEn, "geomec_academic_bridge");
+  };
+
+  // Pore pressure & stress measurements — formation-testing measures pore pressure
+  bridgeMain("GM004", "formation-testing", "measures", "é medido por", "is measured by");
+  bridgeMain("GM004", "wireline-logging", "derived_from", "derivado de", "derived from");
+  bridgeMain("GM001", "formation-testing", "measures", "é medido por", "is measured by");
+  bridgeMain("GM002", "formation-testing", "measures", "é medido por", "is measured by");
+  bridgeMain("GM003", "formation-testing", "measures", "é medido por", "is measured by");
+
+  // MEM family — derived from logs/cores/tests, produces janela-lama and campo-tensional
+  for (const memId of ["GM010", "GM011", "GM012"]) {
+    bridgeMain(memId, "wireline-logging", "derived_from", "derivado de", "derived from");
+    bridgeMain(memId, "core-sample", "derived_from", "derivado de", "derived from");
+    bridgeMain(memId, "formation-testing", "derived_from", "derivado de", "derived from");
+    bridgeMain(memId, "janela-lama", "produces", "produz", "produces");
+    bridgeMain(memId, "campo-tensional", "produces", "produz", "produces");
+  }
+
+  // Wellbore (GM026) — academic specialization of operational poco
+  bridgeMain(
+    "GM026",
+    "poco",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  // MudWindow academic specialization of analytical janela-lama
+  bridgeMain(
+    "GM005",
+    "janela-lama",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  // AndersonStressRegime academic specialization of analytical campo-tensional
+  bridgeMain(
+    "GM025",
+    "campo-tensional",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+
+  // Rock mech properties (UCS, Young, Poisson, Biot, Bulk, Shear) derived from core-sample/wireline
+  for (const propId of ["GM013", "GM014", "GM015", "GM016", "GM017", "GM018", "GM019"]) {
+    bridgeMain(propId, "core-sample", "derived_from", "derivado de", "derived from");
+    bridgeMain(propId, "wireline-logging", "derived_from", "derivado de", "derived from");
+  }
+
+  // RQD/GSI/RMR — estimated from core descriptions (cuttings as fallback)
+  for (const cls of ["GM020", "GM021", "GM022"]) {
+    bridgeMain(cls, "core-sample", "derived_from", "derivado de", "derived from");
+  }
+
+  // Wellbore observations — log-based (mwd-lwd, lwd, mwd) calibrate MEM
+  bridgeMain("GM010", "mwd-lwd", "calibrates", "calibra", "calibrates");
+  bridgeMain("GM010", "lwd", "calibrates", "calibra", "calibrates");
+  bridgeMain("GM010", "mwd", "calibrates", "calibra", "calibrates");
+
+  // BDP (banco de dados de poços) — observed_in records of MEM/Pp/regime
+  bridgeMain("GM010", "bdp", "observed_in", "observado em", "observed in");
+
+  // Fracture classes — derived from core, image logs (wireline), cuttings
+  for (const fid of [
+    "GF004",
+    "GF005",
+    "GF006",
+    "GF007",
+    "GF008",
+    "GF009",
+    "GF010",
+    "GF011",
+    "GF015",
+    "GF016",
+    "GF017",
+  ]) {
+    bridgeMain(fid, "wireline-logging", "derived_from", "derivado de", "derived from");
+    bridgeMain(fid, "core-sample", "derived_from", "derivado de", "derived from");
+  }
+
+  // Laudo Geomecânico already exists in main as a doc — academic GM027 specializes it
+  bridgeMain("GM027", "laudo-geomecanico", "formalizes", "formaliza", "formalizes");
+
+  // MohrCircle (GM006) — método gráfico que representa a transformação do estado
+  // de tensões/deformações em um ponto quando muda a orientação do plano analisado;
+  // permite determinar tensões principais, tensão de cisalhamento máxima e a
+  // orientação dos planos onde essas grandezas ocorrem. Usado em análise de
+  // mecanismo de deformação (em especial via critério Mohr-Coulomb para falha frágil).
+  if (academicIds.has("GM006") && academicIds.has("GM001")) {
+    addEdge("GM006", "GM001", "is_calculated_from", "calculado a partir de", "is calculated from");
+  }
+  if (academicIds.has("GM006") && academicIds.has("GM007")) {
+    addEdge("GM006", "GM007", "supports", "apoia", "supports");
+  }
+  if (academicIds.has("GM006") && academicIds.has("GF001")) {
+    addEdge("GM006", "GF001", "is_input_for", "é entrada para", "is input for");
+  }
+  if (academicIds.has("GM006") && academicIds.has("GF002")) {
+    addEdge("GM006", "GF002", "supports", "apoia", "supports");
+  }
+
+  // DeformationMechanism family (GF001, GF002, GF003) — connect to academic
+  // brittle/ductile parents and to FractureType so the trio joins the cluster.
+  if (academicIds.has("GF002") && academicIds.has("GF001")) {
+    addEdge(
+      "GF002",
+      "GF001",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of"
+    );
+  }
+  if (academicIds.has("GF003") && academicIds.has("GF001")) {
+    addEdge(
+      "GF003",
+      "GF001",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of"
+    );
+  }
+  // Brittle deformation produces fractures (FractureType) — tie GF002 to GF004
+  if (academicIds.has("GF002") && academicIds.has("GF004")) {
+    addEdge("GF002", "GF004", "produces", "produz", "produces");
+  }
+  // Brittle deformation occurs in wellbore — bridge to operational pivot
+  bridgeMain("GF002", "poco", "occurs_in", "ocorre em", "occurs in");
+  // Deformation in general — observed in core
+  bridgeMain("GF001", "core-sample", "observed_in", "observado em", "observed in");
+  bridgeMain("GF003", "core-sample", "observed_in", "observado em", "observed in");
+
+  /* ─── 3. Bridge edges from existing L6 corporate to academic ─── */
+  const bridgeCorp = (corpId, acadId, rel, labelPt, labelEn) => {
+    if (!existingIds.has(corpId)) return;
+    if (!academicIds.has(acadId)) return;
+    addEdge(corpId, acadId, rel, labelPt, labelEn, "geomec_corp_to_academic");
+  };
+
+  // Pp / stresses
+  bridgeCorp(
+    "GEOMEC001",
+    "GM004",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC002",
+    "GM002",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC003",
+    "GM005",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC004",
+    "GM001",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC007",
+    "GM002",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC008",
+    "GM002",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+
+  // Rock mech properties — UCS, E, nu, Biot
+  bridgeCorp(
+    "GEOMEC010",
+    "GM014",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC011",
+    "GM015",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC012",
+    "GM016",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC013",
+    "GM017",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+
+  // Stress regime
+  bridgeCorp(
+    "GEOMEC017",
+    "GM025",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+
+  // Fracture/breakout observations — corporate (image-log derived) → academic
+  // GEOMEC068 Ovalização (breakout) is a wellbore measurement — derived from drilling
+  // GEOMEC069 Drilling-induced fracture — kinematic class is Joint (Mode I, tensile)
+  // GEOMEC070 Natural fracture — academic FractureType
+  // GEOMEC023A/B/C are processes that produce these features
+  bridgeCorp("GEOMEC068", "GM026", "observed_in", "observado em", "observed in");
+  bridgeCorp(
+    "GEOMEC069",
+    "GF005",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp(
+    "GEOMEC070",
+    "GF004",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  bridgeCorp("GEOMEC023A", "GM026", "occurs_in", "ocorre em", "occurs in");
+  bridgeCorp("GEOMEC023B", "GF005", "produces", "produz", "produces");
+  bridgeCorp("GEOMEC023C", "GF004", "interpreted_into", "interpretado em", "interpreted into");
+
+  return { nodes, edges };
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * AXON PETROBRAS — loaded from data/axon-petrobras-glossary.json (F3)
+ * ───────────────────────────────────────────────────────────── */
+
+function loadAxonPetrobrasGlossary() {
+  const dataDir = path.resolve(__dirname, "..", "data");
+  const p = path.join(dataDir, "axon-petrobras-glossary.json");
+  if (!fs.existsSync(p)) return null;
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+}
+
+/**
+ * Builds the Axon Petrobras (Exploração) hierarchy as a sub-graph and bridges
+ * it into the existing entity-graph by anchoring Axon Domínio super-topics on
+ * existing operational, analytical, contractual, geological and
+ * `geomec_corporate`/`geomec_academic`/`geomec_fracture` pivots.
+ *
+ * Hierarchy emitted as nodes:
+ *   - Domínios (9) → new type `axon_domain`, color #D4A017 (golden), L6 corporate.
+ *   - Assuntos and Subassuntos → reuse existing `analytical` type (visual harmony
+ *     with operations like wireline-logging) so the sub-graph blends visually.
+ *   - Termo "amostra" → reuse `analytical` type (sample artifact).
+ *   - Termo "furo" → reuse `analytical` type (sibling investigation tool to poco).
+ *   - Termo "sonda" → reuse `equipment` type.
+ *   - Lâmina d'água + 3 sub-classes (rasa, profunda, ultraprofunda) → `analytical`.
+ *   - Poço subtypes (comprado, pré-sal, não BR) → `analytical`.
+ *   - Ambiente sub-vocab (mar, terra, lago) → `geological` (matches `ambiente`).
+ *
+ * Bridges:
+ *   - Each operação geológica (wireline-logging, mudlogging, coring, ...)
+ *     `is_specialization_of` the matching Axon Assunto.
+ *   - Each amostra (core-sample, fluid-sample, ...) `is_specialization_of`
+ *     `axon-term-amostra`.
+ *   - Existing `igp` → `is_part_of` `axon-dom-geologia` and Domínio
+ *     `Avaliação final de poço` Assunto.
+ *   - Existing `campo` → `is_part_of` `axon-dom-blocos-parcerias`.
+ *   - Geomec dom: 5–8 representative geomec nodes (corporate, academic,
+ *     fracture) `is_part_of` `axon-dom-geomecanica`.
+ *   - Lâmina d'água sub-classes `is_specialization_of` `axon-term-lamina-agua`.
+ *   - Poço subtypes `is_specialization_of` `poco`.
+ *
+ * Vocabulary used (all from docs/ONTOLOGY_PREDICATES.md, no invented terms):
+ *   is_part_of, is_specialization_of, performed_by, applies_to, supports,
+ *   governed_by, requires, observed_in, occurs_in.
+ *
+ * @param {Set<string>} existingIds - Set of node IDs already emitted by
+ *   buildEntityGraph (main component + L6 corporate island + L1-L2 academic
+ *   sub-graph + isolated). Used to gate bridge edges so we never author
+ *   dangling edges.
+ * @returns {{nodes: Object[], edges: Object[]}}
+ */
+function buildAxonGlossaryGraph(existingIds) {
+  const axon = loadAxonPetrobrasGlossary();
+  if (!axon) return { nodes: [], edges: [] };
+
+  const COLOR_AXON_DOMAIN = "#D4A017"; // golden — Axon Domínio super-topics
+  const COLOR_ANALYTICAL = "#E67E22"; // reuse analytical palette
+  const COLOR_EQUIPMENT = "#C77B30"; // reuse equipment palette
+  const COLOR_GEOLOGICAL = "#639922"; // reuse geological palette
+
+  const nodes = [];
+  const seen = new Set();
+  const seenEdgeKey = new Set();
+
+  /* Helper to mint a node with the entity-graph schema. */
+  const mkNode = (entry, type, color, geocoverage, sizeHint) => {
+    const labelPt = entry.name_pt;
+    const labelEn = entry.name_en || entry.name_pt;
+    const definitionPt = entry.definition_pt_canonical || entry.definition_pt || null;
+    const synonymsPt = Array.isArray(entry.synonyms_pt) ? entry.synonyms_pt : [];
+    const synonymsEn = Array.isArray(entry.synonyms_en) ? entry.synonyms_en : [];
+    return {
+      id: entry.id,
+      label: labelPt,
+      label_en: labelEn,
+      type,
+      color,
+      size: sizeHint || 22,
+      definition: definitionPt,
+      definition_en_canonical: null,
+      legal_source: entry.legal_source || null,
+      datasets: [],
+      petrokgraph_uri: null,
+      osdu_kind: null,
+      geosciml_uri: null,
+      owl_uri: null,
+      geocoverage,
+      synonyms_pt: synonymsPt,
+      synonyms_en: synonymsEn,
+      examples: [],
+      glossary_id: null,
+      extended_id: null,
+      axon_type: entry.axon_type,
+      axon_path: entry.axon_path || null,
+      skos_prefLabel: { "@pt": labelPt, "@en": labelEn },
+      skos_altLabel: { "@pt": synonymsPt, "@en": synonymsEn },
+      skos_definition: { "@pt": definitionPt, "@en": null },
+      skos_example: [],
+    };
+  };
+
+  const addNode = (n) => {
+    if (seen.has(n.id)) return;
+    if (existingIds.has(n.id)) return; // never duplicate an existing graph node
+    seen.add(n.id);
+    nodes.push(n);
+  };
+
+  /* 1. Area — emit as the Axon root. Then 9 Domínios. */
+  for (const area of axon.areas || []) {
+    addNode(mkNode(area, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 30));
+  }
+  for (const dom of axon.domains || []) {
+    addNode(mkNode(dom, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 26));
+  }
+
+  /* 2. Subjects (Assuntos) — analytical, layer6 (Petrobras corporate), with
+     occasional layer4 (OSDU) when there is a clear OSDU pivot via existing
+     operations they specialize. */
+  for (const sub of axon.subjects || []) {
+    addNode(mkNode(sub, "analytical", COLOR_ANALYTICAL, ["layer6"], 22));
+  }
+
+  /* 3. Subsubjects (Subassuntos) — analytical, layer6. */
+  for (const ss of axon.subsubjects || []) {
+    addNode(mkNode(ss, "analytical", COLOR_ANALYTICAL, ["layer6"], 20));
+  }
+
+  /* 4. Termos — emit only the ones that are NOT format-only attributes (those
+     live in data/well-attributes.json). The terms array in the source already
+     excludes the format-only set; here we still classify by id. */
+  const TERM_TYPE = {
+    "axon-term-acervo-amostras": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer6"],
+      size: 22,
+    },
+    "axon-term-amostra": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer1", "layer2", "layer4", "layer6"],
+      size: 24,
+    },
+    "axon-term-amostragem-calha-prevista": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer6"],
+      size: 20,
+    },
+    "axon-term-ambiente": {
+      type: "geological",
+      color: COLOR_GEOLOGICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-campo": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-classificacao-poco": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-furo": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer1", "layer4", "layer5", "layer6"],
+      size: 22,
+    },
+    "axon-term-igp": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-lamina-agua": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 22,
+    },
+    "axon-term-lamina-agua-rasa": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 18,
+    },
+    "axon-term-lamina-agua-profunda": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 18,
+    },
+    "axon-term-lamina-agua-ultraprofunda": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 18,
+    },
+    "axon-term-objetivo-poco": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer5", "layer6"],
+      size: 18,
+    },
+    "axon-term-poco": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-poco-comprado": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-poco-presal": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-poco-nao-br": {
+      type: "analytical",
+      color: COLOR_ANALYTICAL,
+      geo: ["layer5", "layer6"],
+      size: 20,
+    },
+    "axon-term-sonda": {
+      type: "equipment",
+      color: COLOR_EQUIPMENT,
+      geo: ["layer4", "layer5", "layer6"],
+      size: 22,
+    },
+  };
+
+  for (const term of axon.terms || []) {
+    const cfg = TERM_TYPE[term.id];
+    if (!cfg) continue; // any term we explicitly chose not to materialize
+    // Skip terms that refer to an existing graph id (e.g., "igp", "campo")
+    // — we'll bridge to those instead of duplicating. The Axon term node we
+    // emit is always axon-prefixed; it's an *additional* concept node tied to
+    // the Petrobras hierarchy, not a duplicate of the existing pivot.
+    if (existingIds.has(term.id)) continue;
+    addNode(mkNode(term, cfg.type, cfg.color, cfg.geo, cfg.size));
+  }
+
+  const axonIds = new Set(nodes.map((n) => n.id));
+
+  const addEdge = (source, target, relation, labelPt, labelEn, style) => {
+    if (!source || !target || source === target) return;
+    if (!axonIds.has(source) && !existingIds.has(source)) return;
+    if (!axonIds.has(target) && !existingIds.has(target)) return;
+    const key = `${source} ${target} ${relation}`;
+    if (seenEdgeKey.has(key)) return;
+    seenEdgeKey.add(key);
+    edges.push({
+      source,
+      target,
+      relation,
+      relation_label_pt: labelPt || relation.replace(/_/g, " "),
+      relation_label_en: labelEn || relation.replace(/_/g, " "),
+      style: style || "axon_internal",
+    });
+  };
+
+  const edges = [];
+
+  /* ─── A. Internal hierarchy edges from parent_id ─── */
+  const allEntries = [
+    ...(axon.areas || []),
+    ...(axon.domains || []),
+    ...(axon.subjects || []),
+    ...(axon.subsubjects || []),
+    ...(axon.terms || []),
+  ];
+  for (const e of allEntries) {
+    if (!e.parent_id) continue;
+    if (!axonIds.has(e.id)) continue; // not emitted (e.g., format-only term)
+    if (!axonIds.has(e.parent_id) && !existingIds.has(e.parent_id)) continue;
+    addEdge(e.id, e.parent_id, "is_part_of", "faz parte de", "is part of", "axon_hierarchy");
+  }
+
+  /* ─── B. Existing operations specialize Axon Assuntos ─── */
+  const specBridge = (childId, parentId) => {
+    if (!existingIds.has(childId)) return;
+    if (!axonIds.has(parentId)) return;
+    addEdge(
+      childId,
+      parentId,
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_op_bridge"
+    );
+  };
+
+  // Operação de Perfilagem
+  specBridge("wireline-logging", "axon-asn-perfilagem");
+  specBridge("wireline-run", "axon-asn-perfilagem");
+  specBridge("mwd-lwd", "axon-asn-perfilagem");
+  specBridge("lwd-run", "axon-asn-perfilagem");
+
+  // Operação de Testemunhagem
+  specBridge("coring", "axon-asn-testemunhagem");
+  specBridge("core-run", "axon-asn-testemunhagem");
+  specBridge("sidewall-sampling", "axon-asn-testemunhagem");
+
+  // Operações de Mudlogging
+  specBridge("mudlogging", "axon-asn-mudlogging");
+  specBridge("mudlogging-time-series", "axon-asn-mudlogging");
+  specBridge("cuttings-sampling", "axon-asn-mudlogging");
+  specBridge("cuttings-sample-detailed", "axon-asn-mudlogging");
+
+  // Teste de formação a poço aberto
+  specBridge("formation-testing", "axon-asn-teste-formacao-aberto");
+  specBridge("teste-formacao", "axon-asn-teste-formacao-aberto");
+  // dst-interval is part of (not specialization) — it's an interval scoped to
+  // the test, not a sub-kind of the operation
+  if (existingIds.has("dst-interval") && axonIds.has("axon-asn-teste-formacao-aberto")) {
+    addEdge(
+      "dst-interval",
+      "axon-asn-teste-formacao-aberto",
+      "is_part_of",
+      "faz parte de",
+      "is part of",
+      "axon_op_bridge"
+    );
+  }
+
+  // Registro de pressão de formação e temperatura
+  specBridge("rftp", "axon-asn-pressao-temperatura");
+
+  /* ─── C. Sample artifacts specialize generic axon-term-amostra ─── */
+  const sampleSpec = (childId) => {
+    if (!existingIds.has(childId)) return;
+    if (!axonIds.has("axon-term-amostra")) return;
+    addEdge(
+      childId,
+      "axon-term-amostra",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_sample_bridge"
+    );
+  };
+  sampleSpec("core-sample");
+  sampleSpec("core-plug");
+  sampleSpec("sidewall-core-sample");
+  sampleSpec("cuttings-sample-detailed");
+  sampleSpec("fluid-sample");
+  sampleSpec("amostra-fluido");
+  sampleSpec("testemunho");
+
+  /* ─── D. Acervo de amostras anchors the sample collection ─── */
+  if (existingIds.has("axon-term-acervo-amostras")) {
+    // already in axonIds
+  }
+  // axon-term-amostra is_part_of acervo (mereologically a sample is part of the collection)
+  addEdge(
+    "axon-term-amostra",
+    "axon-term-acervo-amostras",
+    "is_part_of",
+    "faz parte de",
+    "is part of",
+    "axon_internal"
+  );
+  // Acervo is anchored on its Domínio
+  addEdge(
+    "axon-term-acervo-amostras",
+    "axon-dom-acervo-amostras",
+    "is_part_of",
+    "faz parte de",
+    "is part of",
+    "axon_hierarchy"
+  );
+
+  /* ─── E. Furo handling: NOT a specialization of poco. Furo is an
+     investigation tool sibling — sits inside Domínio Geologia, not under
+     poco. ─── */
+  addEdge(
+    "axon-term-furo",
+    "axon-dom-geologia",
+    "is_part_of",
+    "faz parte de",
+    "is part of",
+    "axon_dom_link"
+  );
+  // It also conceptually relates to the Axon Subassunto "Dados culturais de poços e sonda"
+  // via the source hierarchy edge (parent_id), already emitted in §A.
+
+  /* ─── F. Sonda — predicate direction: drilling-activity performed_by sonda.
+     This is the canonical L2 → equipment direction.
+     Also: sonda is_part_of Domínio Geologia (sonda is a technical tool inside
+     the data acquisition apparatus). ─── */
+  if (existingIds.has("drilling-activity") && axonIds.has("axon-term-sonda")) {
+    addEdge(
+      "drilling-activity",
+      "axon-term-sonda",
+      "performed_by",
+      "executado por",
+      "performed by",
+      "axon_op_to_equipment"
+    );
+  }
+  // Wireline-logging, mudlogging, coring, formation-testing also performed_by sonda
+  for (const op of [
+    "wireline-logging",
+    "mudlogging",
+    "coring",
+    "formation-testing",
+    "wireline-run",
+    "core-run",
+  ]) {
+    if (existingIds.has(op) && axonIds.has("axon-term-sonda")) {
+      addEdge(
+        op,
+        "axon-term-sonda",
+        "performed_by",
+        "executado por",
+        "performed by",
+        "axon_op_to_equipment"
+      );
+    }
+  }
+  // Sonda anchored on Aquisição de dados geológicos (it executes those operations)
+  addEdge(
+    "axon-term-sonda",
+    "axon-dom-aquisicao-dados-geo",
+    "supports",
+    "apoia",
+    "supports",
+    "axon_dom_link"
+  );
+
+  /* ─── G. Domínio Aquisição: anchor 4 main Assuntos under it (already done
+     by §A via parent_id). No extra edges needed. ─── */
+
+  /* ─── H. Domínio Acervo de amostras: anchor amostra (§D done). ─── */
+
+  /* ─── I. Domínio Geomecânica: pick representative nodes from corporate,
+     academic and fracture clusters. Not all 130+ — only key anchors. ─── */
+  const geomecAnchors = [
+    "GEOMEC001", // Pressão de Poros
+    "GEOMEC004", // Geotensões
+    "GEOMEC025", // CSD
+    "GEOMEC084", // Esquema de Qualidade WSM 2025
+    "GM010", // ModeloMecanicoTerra (MEM)
+    "GM025", // AndersonStressRegime
+    "GF001", // MecanismoDeDeformacao
+    "GF004", // TipoDeFratura
+    "ogeomec", // Ocorrências Geomecânicas
+    "laudo-geomecanico", // Laudo Geomecânico
+  ];
+  for (const id of geomecAnchors) {
+    if (existingIds.has(id) && axonIds.has("axon-dom-geomecanica")) {
+      addEdge(
+        id,
+        "axon-dom-geomecanica",
+        "is_part_of",
+        "faz parte de",
+        "is part of",
+        "axon_geomec_anchor"
+      );
+    }
+  }
+
+  /* ─── J. IGP: enrich, do not duplicate. The Axon hierarchy puts IGP under
+     "Dados culturais de poços e sonda" (Subassunto), but semantically IGP is
+     also a deliverable of the geological data acquisition program. We bridge
+     the existing `igp` node via is_part_of to the Domínio Geologia (for
+     organization) and Aquisição de dados geológicos. ─── */
+  if (existingIds.has("igp") && axonIds.has("axon-dom-aquisicao-dados-geo")) {
+    addEdge(
+      "igp",
+      "axon-dom-aquisicao-dados-geo",
+      "is_part_of",
+      "faz parte de",
+      "is part of",
+      "axon_dom_link"
+    );
+  }
+  if (existingIds.has("igp") && axonIds.has("axon-asn-aval-final-poco")) {
+    addEdge("igp", "axon-asn-aval-final-poco", "supports", "apoia", "supports", "axon_op_bridge");
+  }
+  if (existingIds.has("igp") && axonIds.has("axon-term-igp")) {
+    // axon-term-igp formaliza o IGP existente: identidade conceitual via
+    // is_specialization_of (axon-term-igp é a definição Axon do mesmo objeto
+    // de negócio modelado no nó `igp`).
+    addEdge(
+      "axon-term-igp",
+      "igp",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_term_to_existing"
+    );
+  }
+
+  /* ─── K. Campo: enrich, do not duplicate. Existing `campo` node bridges to
+     Blocos e Parcerias (Domínio) and the Axon term node `axon-term-campo`
+     specializes it. ─── */
+  if (existingIds.has("campo") && axonIds.has("axon-dom-blocos-parcerias")) {
+    addEdge(
+      "campo",
+      "axon-dom-blocos-parcerias",
+      "is_part_of",
+      "faz parte de",
+      "is part of",
+      "axon_dom_link"
+    );
+  }
+  if (existingIds.has("campo") && axonIds.has("axon-term-campo")) {
+    addEdge(
+      "axon-term-campo",
+      "campo",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_term_to_existing"
+    );
+  }
+
+  /* ─── L. Lâmina d'água sub-classes specialize the parent Axon term ─── */
+  for (const sub of [
+    "axon-term-lamina-agua-rasa",
+    "axon-term-lamina-agua-profunda",
+    "axon-term-lamina-agua-ultraprofunda",
+  ]) {
+    if (axonIds.has(sub) && axonIds.has("axon-term-lamina-agua")) {
+      addEdge(
+        sub,
+        "axon-term-lamina-agua",
+        "is_specialization_of",
+        "é especialização de",
+        "is specialization of",
+        "axon_internal"
+      );
+    }
+  }
+  // Lâmina d'água applies to poco
+  if (axonIds.has("axon-term-lamina-agua") && existingIds.has("poco")) {
+    addEdge(
+      "axon-term-lamina-agua",
+      "poco",
+      "applies_to",
+      "aplica-se a",
+      "applies to",
+      "axon_attr_bridge"
+    );
+  }
+
+  /* ─── M. Poço subtypes specialize existing `poco` ─── */
+  for (const sub of ["axon-term-poco-comprado", "axon-term-poco-presal", "axon-term-poco-nao-br"]) {
+    if (axonIds.has(sub) && existingIds.has("poco")) {
+      addEdge(
+        sub,
+        "poco",
+        "is_specialization_of",
+        "é especialização de",
+        "is specialization of",
+        "axon_poco_subtype"
+      );
+    }
+  }
+  // Existing presal already exists — pre-sal well is a specialization that references it
+  if (axonIds.has("axon-term-poco-presal") && existingIds.has("presal")) {
+    addEdge(
+      "axon-term-poco-presal",
+      "presal",
+      "occurs_in",
+      "ocorre em",
+      "occurs in",
+      "axon_term_to_existing"
+    );
+  }
+  // axon-term-poco itself is_specialization_of the existing poco (the Axon
+  // definition formalizes the same business concept)
+  if (axonIds.has("axon-term-poco") && existingIds.has("poco")) {
+    addEdge(
+      "axon-term-poco",
+      "poco",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_term_to_existing"
+    );
+  }
+
+  /* ─── N. Ambiente: existing `ambiente` is the controlled-vocab anchor. The
+     Axon term axon-term-ambiente specializes it. ─── */
+  if (axonIds.has("axon-term-ambiente") && existingIds.has("ambiente")) {
+    addEdge(
+      "axon-term-ambiente",
+      "ambiente",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_term_to_existing"
+    );
+  }
+
+  /* ─── O. Classificação do poço: link to ANP categoria-1..10 anchor.
+     The vocabulary lives in data/anp-poco-categoria.json — there is a parent
+     concept node `anp-poco-categoria` if loaded. We bridge by attempting both
+     the parent concept and the specific values. ─── */
+  if (axonIds.has("axon-term-classificacao-poco") && existingIds.has("anp-poco-categoria")) {
+    addEdge(
+      "axon-term-classificacao-poco",
+      "anp-poco-categoria",
+      "is_specialization_of",
+      "é especialização de",
+      "is specialization of",
+      "axon_term_to_existing"
+    );
+  }
+  if (axonIds.has("axon-term-classificacao-poco") && existingIds.has("poco")) {
+    addEdge(
+      "axon-term-classificacao-poco",
+      "poco",
+      "applies_to",
+      "aplica-se a",
+      "applies to",
+      "axon_attr_bridge"
+    );
+  }
+
+  /* ─── P. Acervo terms supplemental: amostra is part of acervo (done in §D).
+     Add Operações em amostras (Assuntos) as is_part_of Domínio Acervo (already
+     by §A parent_id). ─── */
+
+  /* ─── Q. Objetivo do poço applies to poco ─── */
+  if (axonIds.has("axon-term-objetivo-poco") && existingIds.has("poco")) {
+    addEdge(
+      "axon-term-objetivo-poco",
+      "poco",
+      "applies_to",
+      "aplica-se a",
+      "applies to",
+      "axon_attr_bridge"
+    );
+  }
+
+  /* ─── R0. Floating Domínios bridge to existing pivots so they don't become
+     isolated components. Each bridge uses is_part_of in the inverse-of-mereology
+     sense (existing pivot is part of the Domínio super-topic). ─── */
+
+  // Aval. de formações e petrofísica → modelo-petrofisico, perfil-poco
+  if (axonIds.has("axon-dom-aval-petrofisica") && existingIds.has("modelo-petrofisico")) {
+    addEdge(
+      "modelo-petrofisico",
+      "axon-dom-aval-petrofisica",
+      "is_part_of",
+      "faz parte de",
+      "is part of",
+      "axon_dom_link"
+    );
+  }
+  if (axonIds.has("axon-dom-aval-petrofisica") && existingIds.has("perfil-poco")) {
+    addEdge(
+      "perfil-poco",
+      "axon-dom-aval-petrofisica",
+      "is_part_of",
+      "faz parte de",
+      "is part of",
+      "axon_dom_link"
+    );
+  }
+
+  // Geofísica → sísmica (aquisição, processamento, horizonte)
+  for (const id of [
+    "seismic-acquisition-survey",
+    "seismic-processing-project",
+    "seismic-horizon",
+  ]) {
+    if (existingIds.has(id) && axonIds.has("axon-dom-geofisica")) {
+      addEdge(
+        id,
+        "axon-dom-geofisica",
+        "is_part_of",
+        "faz parte de",
+        "is part of",
+        "axon_dom_link"
+      );
+    }
+  }
+
+  // Interpretação Exploratória → seismic-horizon, falha, idade-geologica, pag, qpg, GEOMEC072
+  for (const id of ["seismic-horizon", "falha", "idade-geologica", "pag", "qpg", "GEOMEC072"]) {
+    if (existingIds.has(id) && axonIds.has("axon-dom-interp-exploratoria")) {
+      addEdge(
+        id,
+        "axon-dom-interp-exploratoria",
+        "is_part_of",
+        "faz parte de",
+        "is part of",
+        "axon_dom_link"
+      );
+    }
+  }
+
+  // Geodésia → existing operational/geographic pivots. There is no dedicated
+  // datum node (datum lives in well-attributes.json as a format-only attr).
+  // Bridge via the coordinate-keeping anchors we do have. The Axon definition
+  // mentions IBGE/ANP geodesy; the closest existing nodes are `bacia-sedimentar`
+  // (geographic), `uts` (regulatory anchor for surface units) and the Domínio
+  // Aquisição (which depends on geodesy for coordinates). We bridge via the
+  // axon-area-exploracao parent (already done in §A) plus a soft `supports`
+  // link from Geodésia to Aquisição de dados geológicos.
+  if (axonIds.has("axon-dom-geodesia") && axonIds.has("axon-dom-aquisicao-dados-geo")) {
+    addEdge(
+      "axon-dom-geodesia",
+      "axon-dom-aquisicao-dados-geo",
+      "supports",
+      "apoia",
+      "supports",
+      "axon_dom_link"
+    );
+  }
+  // Geodésia also supports Geofísica (coordinates & datum for seismic acquisition)
+  if (axonIds.has("axon-dom-geodesia") && axonIds.has("axon-dom-geofisica")) {
+    addEdge(
+      "axon-dom-geodesia",
+      "axon-dom-geofisica",
+      "supports",
+      "apoia",
+      "supports",
+      "axon_dom_link"
+    );
+  }
+
+  /* ─── R. Amostragem de calha prevista is_part_of Programa de aquisição de dados
+     (Subassunto). The hierarchy edge from §A handles the parent_id link to
+     planejamento; here we add the direct semantic link to the Subassunto. ─── */
+  if (
+    axonIds.has("axon-term-amostragem-calha-prevista") &&
+    axonIds.has("axon-sub-prog-aquisicao")
+  ) {
+    addEdge(
+      "axon-term-amostragem-calha-prevista",
+      "axon-sub-prog-aquisicao",
+      "is_part_of",
+      "faz parte de",
+      "is part of",
+      "axon_internal"
+    );
+  }
+  // It also requires cuttings-sampling operation to execute
+  if (axonIds.has("axon-term-amostragem-calha-prevista") && existingIds.has("cuttings-sampling")) {
+    addEdge(
+      "axon-term-amostragem-calha-prevista",
+      "cuttings-sampling",
+      "requires",
+      "requer",
+      "requires",
+      "axon_to_op"
+    );
+  }
+
   return { nodes, edges };
 }
 
@@ -2577,6 +3947,647 @@ function buildOntologyTypes() {
   };
 }
 
+/* ─────────────────────────────────────────────────────────────
+ * F5 — annotate `ontological_role` on every entity-graph node
+ *
+ * Implements the canonical role vocabulary from
+ *   docs/ONTOLOGY_LAYERS.md §3 (six layers L1-L6) and §5 (auxiliary).
+ *
+ * Strategy: rule-based classifier with strict-first ordering. The first
+ * matching rule wins. Manual overrides (a node already carrying an explicit
+ * `ontological_role`) are respected and never reclassified.
+ *
+ * Canonical role values (see docs/ONTOLOGY_LAYERS.md):
+ *   well_anchor, well_operation, artifact_primary, feature_observation,
+ *   interpretation_process, engineering_artifact, regulatory_anchor,
+ *   organizational_actor, domain_anchor, well_attribute_concept,
+ *   equipment, governance_artifact, dataset_concept, lifecycle_state,
+ *   lifecycle_outcome, kpi_metric, unclassified
+ * ───────────────────────────────────────────────────────────── */
+
+/**
+ * Maps a node id with prefix `GEOMEC*` (Petrobras corporate L6 portfolio)
+ * to its canonical ontological_role. Returns null if the id is not in scope.
+ *
+ * @param {string} id
+ * @returns {string|null}
+ */
+function geomecCorporateRole(id) {
+  // Pressões, gradientes, tensões — observable rock/well states (L4)
+  const featureObservationIds = new Set([
+    "GEOMEC001",
+    "GEOMEC002",
+    "GEOMEC005",
+    "GEOMEC007",
+    "GEOMEC008",
+    "GEOMEC009",
+    "GEOMEC010",
+    "GEOMEC011",
+    "GEOMEC012",
+    "GEOMEC014",
+    "GEOMEC016",
+    "GEOMEC017",
+    "GEOMEC018",
+    "GEOMEC021",
+    "GEOMEC024",
+    // image-log feature pivots and per-feature sub-classes
+    "GEOMEC023",
+    "GEOMEC023A",
+    "GEOMEC023B",
+    "GEOMEC023C",
+    "GEOMEC068",
+    "GEOMEC069",
+    "GEOMEC070",
+    "GEOMEC071",
+    "GEOMEC037",
+    "GEOMEC038",
+    "GEOMEC039",
+    "GEOMEC040",
+    "GEOMEC041",
+    "GEOMEC042",
+    "GEOMEC043",
+    "GEOMEC053A",
+    "GEOMEC053B",
+    "GEOMEC044",
+    "GEOMEC045",
+    "GEOMEC077",
+    "GEOMEC078",
+    "GEOMEC079",
+    "GEOMEC079A",
+    "GEOMEC081",
+    "GEOMEC082",
+    "GEOMEC087",
+    "GEOMEC075",
+    "GEOMEC076",
+    "GEOMEC_ROP_A",
+  ]);
+  if (featureObservationIds.has(id)) return "feature_observation";
+
+  // Operações de poço / laboratório (L2)
+  const wellOperationIds = new Set([
+    "GEOMEC006", // LOT/xLOT/FIT (operação)
+    "GEOMEC022", // Scratch test (lab op)
+    "GEOMEC031",
+    "GEOMEC032",
+    "GEOMEC033",
+    "GEOMEC034", // XLOT, AGP, Frac, DFIT
+    "GEOMEC061",
+    "GEOMEC062",
+    "GEOMEC063",
+    "GEOMEC064",
+    "GEOMEC065",
+    "GEOMEC066",
+    "GEOMEC067", // ensaios laboratoriais
+    "GEOMEC080", // sobrefuração com alívio de tensão
+    "GEOMEC052B", // Setpoint MPD / SBP (operação)
+  ]);
+  if (wellOperationIds.has(id)) return "well_operation";
+
+  // Engineering artifacts (L6)
+  const engineeringArtifactIds = new Set([
+    "GEOMEC019",
+    "GEOMEC020", // ECD, MPD design
+    "GEOMEC036", // Fórmula de ECD (design formula)
+  ]);
+  if (engineeringArtifactIds.has(id)) return "engineering_artifact";
+
+  // Interpretation processes (L5)
+  const interpretationProcessIds = new Set([
+    "GEOMEC015", // Estabilidade de Poço / análise
+    "GEOMEC035", // Modelo Geomecânico 3D (modelagem)
+    "GEOMEC046", // Faixas de risco (classificação)
+    "GEOMEC072", // Interpretação de perfil de imagem
+    "GEOMEC083", // Inversão formal de mecanismos focais
+    "GEOMEC085", // Estatística circular bimodal
+    "GEOMEC086", // Inversão de slip de falha
+    "GEOMEC027", // IMGR — índice de modelagem
+  ]);
+  if (interpretationProcessIds.has(id)) return "interpretation_process";
+
+  // Software systems / databases / report repositories (dataset_concept)
+  const datasetConceptIds = new Set([
+    "GEOMEC025", // CSD — centro de suporte à decisão
+    "GEOMEC028", // GeomecBR — simulador
+    "GEOMEC029", // GERESIM
+    "GEOMEC030", // SIGEO/SEST TR
+    "GEOMEC047", // SIMCARR
+    "GEOMEC051", // OpenWells/Atlas
+    "GEOMEC074", // Geolog (software)
+  ]);
+  if (datasetConceptIds.has(id)) return "dataset_concept";
+
+  // L3 artifact primary
+  if (id === "GEOMEC073") return "artifact_primary"; // BOL — Borehole Oriented Log
+  if (id === "GEOMEC048") return "artifact_primary"; // PWDa — pressure-while-drilling artifact
+
+  // Equipment (physical hardware)
+  if (id === "GEOMEC052A") return "equipment"; // PRV — pressure relief valve
+
+  // Governance / quality scheme / report
+  const governanceArtifactIds = new Set([
+    "GEOMEC026A", // QPG — quadro de previsões
+    "GEOMEC084", // Esquema de Qualidade WSM 2025
+    "GEOMEC_ROP_B", // Relatório de operações de perfilagem
+  ]);
+  if (governanceArtifactIds.has(id)) return "governance_artifact";
+
+  return null;
+}
+
+/**
+ * Maps academic geomechanics ids (`GM*`) to their canonical role.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function geomecAcademicRole(id) {
+  // GM001-GM003 stress states; GM004 pore pressure; GM013-GM025 rock-mech
+  // properties / classification metrics / regimes — all observable feature_observation.
+  const featureObservationIds = new Set([
+    "GM001",
+    "GM002",
+    "GM003",
+    "GM004",
+    "GM013",
+    "GM014",
+    "GM015",
+    "GM016",
+    "GM017",
+    "GM018",
+    "GM019",
+    "GM020",
+    "GM021",
+    "GM022",
+    "GM023",
+    "GM024",
+    "GM025",
+  ]);
+  if (featureObservationIds.has(id)) return "feature_observation";
+
+  // GM005 mud window — engineering design output (L6)
+  if (id === "GM005") return "engineering_artifact";
+
+  // GM006 Mohr circle (graphical method); GM007-GM009 failure criteria;
+  // GM010-GM012 MEM models — interpretation processes (L5)
+  const interpretationProcessIds = new Set([
+    "GM006",
+    "GM007",
+    "GM008",
+    "GM009",
+    "GM010",
+    "GM011",
+    "GM012",
+  ]);
+  if (interpretationProcessIds.has(id)) return "interpretation_process";
+
+  // GM026 Wellbore-as-calibration-point — well anchor (L1)
+  if (id === "GM026") return "well_anchor";
+
+  // GM027 LaudoGeomecanico — engineering artifact / report
+  if (id === "GM027") return "governance_artifact";
+
+  return null;
+}
+
+/**
+ * Maps fracture-pillar ids (`GF*`) — all are L4 features (feature_observation).
+ * @param {string} id
+ * @returns {string|null}
+ */
+function geomecFractureRole(id) {
+  if (/^GF\d{3}$/.test(id)) return "feature_observation";
+  return null;
+}
+
+/**
+ * Maps `operational`-typed nodes by id.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function operationalRole(id) {
+  // L1 well anchors — physical/temporal anchors of the well
+  const wellAnchorIds = new Set([
+    "poco",
+    "wellbore",
+    "axon-term-furo",
+    "axon-term-poco",
+    "axon-term-poco-presal",
+    "axon-term-poco-comprado",
+    "axon-term-poco-nao-br",
+  ]);
+  if (wellAnchorIds.has(id)) return "well_anchor";
+
+  // Spatial / contractual / regulatory anchors (regulatory_anchor)
+  const regulatoryAnchorIds = new Set([
+    "bloco",
+    "campo",
+    "bacia-sedimentar",
+    "reservatorio",
+    "play",
+    "prospecto",
+    "acumulacao",
+    "primeiro-oleo",
+  ]);
+  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
+
+  // L2 well operations
+  const wellOperationIds = new Set([
+    "drilling-activity",
+    "completacao",
+    "operacoes-geologicas",
+    "well-activity-program",
+    "activity-plan",
+  ]);
+  if (wellOperationIds.has(id)) return "well_operation";
+
+  // Plan/program templates and lifecycle/governance descriptors → governance_artifact
+  const governanceArtifactIds = new Set([
+    "activity-template",
+    "well-activity-phase-type",
+    "drilling-reason-type",
+    "lessons-learned",
+    "retro-analysis",
+    "input-elaboration",
+    "operational-monitoring",
+    "formation-evaluation",
+  ]);
+  if (governanceArtifactIds.has(id)) return "governance_artifact";
+
+  // 3W operational-typed nodes named `event_*` are observable production events
+  if (/^event_/.test(id)) return "feature_observation";
+
+  return null;
+}
+
+/**
+ * Maps `analytical`-typed nodes by id. Disambiguates operations from artifacts
+ * from interpretation outcomes per docs/ONTOLOGY_LAYERS.md §3.
+ *
+ * Borderline decisions:
+ *  - wireline-logging / coring / mudlogging / etc. → well_operation (the
+ *    operation/process; the artifact it produces is captured by adjacent
+ *    `*-sample` / `mudlogging-time-series` / `formation-pressure-point` ids).
+ *  - mudlogging-time-series → artifact_primary (the data series, not the op).
+ *  - campo-tensional → feature_observation (the stress field state).
+ *  - janela-lama → engineering_artifact (the operational window).
+ *  - laudo-geomecanico / IGP / PAG / QPG → governance_artifact (reports).
+ *
+ * @param {string} id
+ * @param {string} label
+ * @returns {string|null}
+ */
+function analyticalRole(id, label) {
+  // L1 well anchors (Axon Termo nodes naming the well concept itself).
+  // These are typed `analytical` in the source but are the canonical
+  // term entries for the Poço/Furo L1 anchor — see docs/ONTOLOGY_LAYERS.md §3.
+  const wellAnchorIds = new Set([
+    "axon-term-poco",
+    "axon-term-furo",
+    "axon-term-poco-presal",
+    "axon-term-poco-comprado",
+    "axon-term-poco-nao-br",
+  ]);
+  if (wellAnchorIds.has(id)) return "well_anchor";
+
+  // L2 well operations (procedure-named)
+  const wellOperationIds = new Set([
+    "wireline-logging",
+    "coring",
+    "mudlogging",
+    "cuttings-sampling",
+    "sidewall-sampling",
+    "formation-testing",
+    "geostopping",
+    "mwd-lwd",
+    "wireline-run",
+    "lwd-run",
+    "core-run",
+    "axon-asn-perfilagem",
+    "axon-asn-testemunhagem",
+    "axon-asn-mudlogging",
+    "axon-asn-op-amostras-fluido",
+    "axon-asn-op-amostras-rocha",
+    "axon-asn-teste-formacao-aberto",
+    "axon-asn-pressao-temperatura",
+  ]);
+  if (wellOperationIds.has(id)) return "well_operation";
+
+  // L3 artefatos primários (Sample / WellLog / TestData)
+  const artifactPrimaryIds = new Set([
+    "testemunho",
+    "perfil-poco",
+    "core-sample",
+    "core-plug",
+    "sidewall-core-sample",
+    "cuttings-sample-detailed",
+    "fluid-sample",
+    "amostra-fluido",
+    "mudlogging-time-series",
+    "formation-pressure-point",
+    "dst-interval",
+    "drilling-parameters",
+    "axon-term-amostra",
+    "axon-term-acervo-amostras",
+    "axon-term-amostragem-calha-prevista",
+  ]);
+  if (artifactPrimaryIds.has(id)) return "artifact_primary";
+
+  // L4 features (geological/geochemical observations & states)
+  const featureObservationIds = new Set([
+    "litologia",
+    "facies-sedimentar",
+    "topo-formacional",
+    "trajetoria-poco",
+    "materia-organica",
+    "maturidade-termal",
+    "biomarcador",
+    "potencial-selante",
+    "classe-fluido",
+    "campo-tensional",
+    "ocorrencia-geomec",
+    "bottom-hole-pressure-type",
+    "annular-fluid-type",
+    "gas-show-event",
+    "kick-event",
+    "geostopping-event",
+  ]);
+  if (featureObservationIds.has(id)) return "feature_observation";
+
+  // L5 interpretation processes
+  const interpretationProcessIds = new Set([
+    "modelo-petrofisico",
+    "correlacao-oleo-rocha",
+    "drx",
+    "frx",
+    "gc-ms",
+    "sara",
+    "pvt",
+    "dna-geoquimico",
+    "axon-asn-aval-final-poco",
+    "axon-asn-planejamento",
+    "axon-sub-prog-aquisicao",
+  ]);
+  if (interpretationProcessIds.has(id)) return "interpretation_process";
+
+  // L6 engineering artifacts (operational design outputs)
+  const engineeringArtifactIds = new Set(["janela-lama", "cementing-fluid"]);
+  if (engineeringArtifactIds.has(id)) return "engineering_artifact";
+
+  // Governance/lifecycle/state descriptors and well-attribute concepts
+  if (id === "axon-asn-status-poco") return "governance_artifact";
+  if (id === "axon-sub-dados-culturais") return "well_attribute_concept";
+
+  // Lâmina d'água and classifications — controlled-vocab attributes (well_attribute_concept)
+  const wellAttributeConceptIds = new Set([
+    "axon-term-lamina-agua",
+    "axon-term-lamina-agua-rasa",
+    "axon-term-lamina-agua-profunda",
+    "axon-term-lamina-agua-ultraprofunda",
+    "axon-term-objetivo-poco",
+    "axon-term-classificacao-poco",
+  ]);
+  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
+
+  // Axon term campo (Field) — a regulatory anchor in operational sense
+  if (id === "axon-term-campo") return "regulatory_anchor";
+
+  // IGP report — governance artifact
+  if (id === "axon-term-igp") return "governance_artifact";
+
+  return null;
+}
+
+/**
+ * Maps `contractual`-typed nodes. Reports → governance_artifact;
+ * test data → artifact_primary; lifecycle / regulatory obligations →
+ * regulatory_anchor; service descriptions → well_operation.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function contractualRole(id) {
+  // L3 artifact primary (test data)
+  const artifactPrimaryIds = new Set(["teste-formacao", "tld"]);
+  if (artifactPrimaryIds.has(id)) return "artifact_primary";
+
+  // Reports / programs / governance docs
+  const governanceArtifactIds = new Set([
+    "pem",
+    "pte",
+    "pad",
+    "rfad",
+    "aip",
+    "cip",
+    "roa",
+    "pag",
+    "frame",
+    "ogeomec",
+    "rcsd",
+    "qpg",
+    "bdp",
+    "igp",
+    "perfil-composto",
+    "rmg",
+    "laudo-geomecanico",
+    "document-type",
+    "acl",
+    "plano-desenvolvimento",
+    "declaracao-comercialidade",
+  ]);
+  if (governanceArtifactIds.has(id)) return "governance_artifact";
+
+  // Regulatory / contractual anchors
+  const regulatoryAnchorIds = new Set(["contrato-ep", "rodada-licitacao", "area-desenvolvimento"]);
+  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
+
+  // KPI / metric concepts
+  const wellAttributeConceptIds = new Set(["recurso", "reserva"]);
+  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
+
+  return null;
+}
+
+/**
+ * Maps `instrument`-typed nodes. Distinguishes regulatory systems,
+ * databases/software (dataset_concept), regulatory anchors, and physical
+ * sensor measurands (which become well_attribute_concept since they are
+ * controlled-vocab measurand identifiers).
+ * @param {string} id
+ * @returns {string|null}
+ */
+function instrumentRole(id) {
+  // Regulatory anchors / regulatory subsystems
+  const regulatoryAnchorIds = new Set([
+    "sigep",
+    "sep",
+    "uts",
+    "regime-contratual",
+    "periodo-exploratorio",
+    "processo-sancionador",
+    "notificacao-descoberta",
+    "rftp",
+    "i-engine",
+    "dpp",
+    "bmp",
+    "eia",
+    "rima",
+    "afe",
+    "joa",
+    "epc",
+  ]);
+  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
+
+  // Database systems / software platforms / pipelines / repositories
+  const datasetConceptIds = new Set([
+    "sirr",
+    "bdoc",
+    "vge",
+    "cassandra-exata-curva-tempo",
+    "exata",
+    "sigeo",
+    "bdiep",
+    "bdiap",
+    "aida",
+    "geodo",
+    "gda",
+  ]);
+  if (datasetConceptIds.has(id)) return "dataset_concept";
+
+  // Controlled-vocabulary attribute concepts
+  const wellAttributeConceptIds = new Set(["unidade-medida", "log-curve-type"]);
+  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
+
+  // Seismic acquisition/processing — well_operation (acquisition program)
+  // and dataset_concept (processing project) respectively.
+  if (id === "seismic-acquisition-survey") return "well_operation";
+  if (id === "seismic-processing-project") return "interpretation_process";
+
+  // Wellbore trajectory artifact — L3 primary
+  if (id === "wellbore-trajectory") return "artifact_primary";
+
+  // 3W sensor channels — measurand identifiers (well_attribute_concept).
+  if (/^sensor_/.test(id)) return "well_attribute_concept";
+
+  return null;
+}
+
+/**
+ * Maps `equipment`-typed and `geological`-typed defaults.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function equipmentRole(id) {
+  // wellbore-architecture and casing-design are L6 engineering artifacts
+  if (id === "wellbore-architecture" || id === "casing-design") {
+    return "engineering_artifact";
+  }
+  if (id === "facility-type") return "well_attribute_concept";
+  // axon-term-sonda → equipment (Sonda is the rig)
+  return "equipment";
+}
+
+/**
+ * Top-level rule-based role classifier. Returns a canonical `ontological_role`
+ * value or `"unclassified"` if no rule applies.
+ *
+ * Order:
+ *   1. Strict type-based rules (axon_domain, lifecycle_state, lifecycle_outcome,
+ *      actor, regulatory_*, equipment, governance_*, portfolio_concept,
+ *      project, decision_event)
+ *   2. Geomechanics-specific id-prefixed rules
+ *   3. Per-type id-based rules (operational, analytical, contractual,
+ *      instrument, equipment)
+ *   4. Type-default fallbacks (geological → feature_observation, etc.)
+ *
+ * @param {{id:string, type:string, label?:string, definition?:string}} node
+ * @returns {string} canonical `ontological_role` (or `"unclassified"`)
+ */
+function inferOntologicalRole(node) {
+  const id = node.id;
+  const t = node.type;
+  const label = node.label || "";
+
+  // 1. Strict type-based rules
+  if (t === "axon_domain") return "domain_anchor";
+  if (t === "lifecycle_state") return "lifecycle_state";
+  if (t === "lifecycle_outcome") return "lifecycle_outcome";
+  if (t === "actor") return "organizational_actor";
+  if (
+    t === "regulatory_anchor" ||
+    t === "regulatory_doc" ||
+    t === "regulatory_event" ||
+    t === "regulatory_obligation"
+  ) {
+    return "regulatory_anchor";
+  }
+  if (
+    t === "governance_doc" ||
+    t === "governance_committee" ||
+    t === "governance_program" ||
+    t === "portfolio_concept" ||
+    t === "project" ||
+    t === "decision_event"
+  ) {
+    return "governance_artifact";
+  }
+
+  // 2. Geomec-specific (id prefix)
+  if (t === "geomec_corporate") {
+    const r = geomecCorporateRole(id);
+    if (r) return r;
+  }
+  if (t === "geomec_academic") {
+    const r = geomecAcademicRole(id);
+    if (r) return r;
+  }
+  if (t === "geomec_fracture") {
+    const r = geomecFractureRole(id);
+    if (r) return r;
+  }
+
+  // 3. Per-type id-based rules
+  if (t === "operational") {
+    const r = operationalRole(id);
+    if (r) return r;
+  }
+  if (t === "analytical") {
+    const r = analyticalRole(id, label);
+    if (r) return r;
+  }
+  if (t === "contractual") {
+    const r = contractualRole(id);
+    if (r) return r;
+  }
+  if (t === "instrument") {
+    const r = instrumentRole(id);
+    if (r) return r;
+  }
+  if (t === "equipment") {
+    return equipmentRole(id);
+  }
+
+  // 4. Type-default fallbacks
+  if (t === "geological") return "feature_observation";
+
+  return "unclassified";
+}
+
+/**
+ * Final pass: writes `ontological_role` onto every node. Respects manual
+ * overrides — nodes that already carry the field are not reclassified.
+ * Mutates the array in place and returns the same reference.
+ *
+ * @param {Object[]} nodes
+ * @returns {Object[]} same array, mutated
+ */
+function annotateOntologicalRoles(nodes) {
+  for (const n of nodes) {
+    if (typeof n.ontological_role === "string" && n.ontological_role.length > 0) {
+      continue; // respect curator override
+    }
+    n.ontological_role = inferOntologicalRole(n);
+  }
+  return nodes;
+}
+
 /**
  * Builds the complete entity-graph JSON object by merging base ENTITY_NODES,
  * OntoPetro/M7-M10 nodes, OSDU Layer-4 nodes, OSDU extra nodes, and
@@ -2775,16 +4786,76 @@ function buildEntityGraph() {
   /* L6 corporate Petrobras geomechanics — 92 entities (GEOMEC*) including
      DFIT, Breakout/Ovalização, BOL, Geolog, AZIE, HAZI, etc. Adds nodes and
      intra-corporate edges to the entity-graph so GraphRAG agents and
-     Neo4j visualizations can resolve these concepts directly. */
+     Neo4j visualizations can resolve these concepts directly.
+     F4: 6 deprecated duplicates are filtered here and their edges re-routed
+     to surviving ids (bdp / bdiep / janela-lama / campo-tensional /
+     laudo-geomecanico / GM017). Provenance preserved via source_reference
+     applied to surviving nodes below. */
   const corpGraph = buildGeomecCorporateGraph(new Set(nodes.map((n) => n.id)));
   nodes.push(...corpGraph.nodes);
   edges.push(...corpGraph.edges);
+
+  /* L1-L2 academic backbone (Fjaer/Zoback/ISRM, 27 GM* classes) + Pillar 4
+     fracture branch (17 GF* classes). Adds the foundational geomechanics
+     vocabulary plus bridge edges that:
+       - merge the L6 corporate island into the main component via
+         is_specialization_of / observed_in / produces;
+       - tie the academic classes to operational pivots (poco,
+         wireline-logging, core-sample, formation-testing, mwd-lwd, lwd, mwd,
+         bdp, janela-lama, campo-tensional, laudo-geomecanico). */
+  const acadGraph = buildGeomecAcademicGraph(new Set(nodes.map((n) => n.id)));
+  nodes.push(...acadGraph.nodes);
+  edges.push(...acadGraph.edges);
+
+  /* F4 — apply source_reference cards onto each surviving node so the merged
+     Petrobras corporate provenance (deprecated id, original definition,
+     owner_department, internal_standards, sources) is visible to GraphRAG
+     agents and crosswalk consumers without polluting the canonical
+     definition field. Run AFTER the academic graph push so survivors that
+     live in the academic module (e.g. GM017 Biot coefficient) are reachable. */
+  for (const [survivorId, refs] of corpGraph.sourceReferences.entries()) {
+    const idx = nodes.findIndex((n) => n.id === survivorId);
+    if (idx === -1) continue;
+    const existing = Array.isArray(nodes[idx].source_reference) ? nodes[idx].source_reference : [];
+    nodes[idx].source_reference = existing.concat(refs);
+  }
+
+  /* F3 — Axon Petrobras Exploração glossary (data/axon-petrobras-glossary.json).
+     Adds the 4-level Domínio → Assunto → Subassunto → Termo hierarchy as a
+     sub-graph of `axon_domain`-typed Domínios plus analytical/equipment/
+     geological Assuntos and Termos, then bridges:
+       - Existing operations specialize the matching Axon Assunto
+         (wireline-logging → Operação de Perfilagem, etc.).
+       - Existing sample artifacts specialize axon-term-amostra.
+       - Geomec L6 corporate + L1-L2 academic anchor on Domínio Geomecânica.
+       - Existing igp / campo / poco / presal / ambiente nodes are enriched
+         (not duplicated) by linking the Axon term node via
+         is_specialization_of and is_part_of.
+       - Format-only well attributes (Sigla, DATUM, MC, Sidetrack, coords...)
+         are NOT emitted as nodes; they live in data/well-attributes.json. */
+  const axonGraph = buildAxonGlossaryGraph(new Set(nodes.map((n) => n.id)));
+  nodes.push(...axonGraph.nodes);
+  edges.push(...axonGraph.edges);
+
+  /* F4 — wire the four remaining isolated GEOMEC nodes (046, 076, 086, 087)
+     into the giant component as a case-test of the 6-layer ontology model
+     (Q6/option 2). Uses only canonical predicates; runs last so all candidate
+     target ids (axon-dom-geomecanica, falha, GM010-12, GEOMEC0**) are in scope. */
+  const isolatedBridges = buildIsolatedGeomecBridges(new Set(nodes.map((n) => n.id)));
+  edges.push(...isolatedBridges.edges);
+
+  /* F5 — annotate `ontological_role` on every node using the rule-based
+     classifier defined above. Final pass so all merge sources (base +
+     ontopetro + osdu + 3W + GEOMEC corporate + academic + Axon glossary +
+     OG + GPP + isolated bridges) are in scope. Manual overrides on individual
+     nodes are respected. See docs/ONTOLOGY_LAYERS.md §3 + §5. */
+  annotateOntologicalRoles(nodes);
 
   return {
     version: VERSION,
     generated: NOW,
     source:
-      "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate",
+      "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
     nodes,
     edges,
   };
@@ -4425,6 +6496,9 @@ console.log(
     { src: "data/anp-bacia-sedimentar.json", dst: "api/v1/anp-bacia-sedimentar.json" },
     /* GPP module (Phase 3 enrichment): governance + lifecycle + portfolio */
     { src: "data/gestao-projetos-parcerias.json", dst: "api/v1/gestao-projetos-parcerias.json" },
+    /* F3 — Axon Petrobras Exploração glossary + format-only well attributes */
+    { src: "data/axon-petrobras-glossary.json", dst: "api/v1/axon-petrobras-glossary.json" },
+    { src: "data/well-attributes.json", dst: "api/v1/well-attributes.json" },
   ];
   let totalChunks = 0;
   const ragLines = [];

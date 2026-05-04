@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0.0",
+  "generated": "2026-05-04T18:58:56+00:00",
+  "description": "F5 audit of `ontological_role` annotation across data/entity-graph.json. Roles inferred by scripts/generate.js inferOntologicalRole(); see docs/ONTOLOGY_LAYERS.md §3 + §5 for the canonical role vocabulary.",
+  "totals": {
+    "nodes": 412,
+    "annotated": 412,
+    "missing_field": 0,
+    "unclassified": 0,
+    "unclassified_pct": 0.0
+  },
+  "role_distribution": {
+    "feature_observation": 120,
+    "governance_artifact": 48,
+    "well_attribute_concept": 39,
+    "well_operation": 39,
+    "regulatory_anchor": 32,
+    "equipment": 28,
+    "interpretation_process": 27,
+    "artifact_primary": 20,
+    "dataset_concept": 18,
+    "domain_anchor": 10,
+    "well_anchor": 8,
+    "organizational_actor": 8,
+    "engineering_artifact": 8,
+    "lifecycle_state": 5,
+    "lifecycle_outcome": 2
+  },
+  "type_x_role": {
+    "actor": {
+      "organizational_actor": 8
+    },
+    "analytical": {
+      "well_operation": 18,
+      "feature_observation": 16,
+      "artifact_primary": 15,
+      "interpretation_process": 11,
+      "well_attribute_concept": 7,
+      "well_anchor": 5,
+      "engineering_artifact": 2,
+      "governance_artifact": 2,
+      "regulatory_anchor": 1
+    },
+    "axon_domain": {
+      "domain_anchor": 10
+    },
+    "contractual": {
+      "governance_artifact": 21,
+      "regulatory_anchor": 3,
+      "artifact_primary": 2,
+      "well_attribute_concept": 2
+    },
+    "decision_event": {
+      "governance_artifact": 1
+    },
+    "equipment": {
+      "equipment": 27,
+      "engineering_artifact": 2,
+      "well_attribute_concept": 1
+    },
+    "geological": {
+      "feature_observation": 16
+    },
+    "geomec_academic": {
+      "feature_observation": 17,
+      "interpretation_process": 7,
+      "engineering_artifact": 1,
+      "well_anchor": 1,
+      "governance_artifact": 1
+    },
+    "geomec_corporate": {
+      "feature_observation": 44,
+      "well_operation": 15,
+      "interpretation_process": 8,
+      "dataset_concept": 7,
+      "engineering_artifact": 3,
+      "governance_artifact": 3,
+      "artifact_primary": 2,
+      "equipment": 1
+    },
+    "geomec_fracture": {
+      "feature_observation": 17
+    },
+    "governance_committee": {
+      "governance_artifact": 3
+    },
+    "governance_doc": {
+      "governance_artifact": 3
+    },
+    "governance_program": {
+      "governance_artifact": 1
+    },
+    "instrument": {
+      "well_attribute_concept": 29,
+      "regulatory_anchor": 16,
+      "dataset_concept": 11,
+      "well_operation": 1,
+      "interpretation_process": 1,
+      "artifact_primary": 1
+    },
+    "lifecycle_outcome": {
+      "lifecycle_outcome": 2
+    },
+    "lifecycle_state": {
+      "lifecycle_state": 5
+    },
+    "operational": {
+      "feature_observation": 10,
+      "regulatory_anchor": 8,
+      "governance_artifact": 8,
+      "well_operation": 5,
+      "well_anchor": 2
+    },
+    "portfolio_concept": {
+      "governance_artifact": 4
+    },
+    "project": {
+      "governance_artifact": 1
+    },
+    "regulatory_anchor": {
+      "regulatory_anchor": 1
+    },
+    "regulatory_doc": {
+      "regulatory_anchor": 1
+    },
+    "regulatory_event": {
+      "regulatory_anchor": 1
+    },
+    "regulatory_obligation": {
+      "regulatory_anchor": 1
+    }
+  },
+  "unclassified_nodes": [],
+  "missing_field_nodes": [],
+  "borderline_decisions": [
+    {
+      "node_id": "wireline-logging",
+      "decision": "well_operation",
+      "alternative": "artifact_primary",
+      "rationale": "wireline-logging is treated as the L2 operation. The artifact produced is captured separately by perfil-poco / log-curve-type / wireline-run."
+    },
+    {
+      "node_id": "mudlogging-time-series",
+      "decision": "artifact_primary",
+      "alternative": "well_operation",
+      "rationale": "The data-series is the primary artifact (L3); the operation itself is `mudlogging` (separate node)."
+    },
+    {
+      "node_id": "campo-tensional",
+      "decision": "feature_observation",
+      "alternative": "interpretation_process",
+      "rationale": "Stress field is treated as the OBSERVED state (L4), not the process that yields it."
+    },
+    {
+      "node_id": "janela-lama",
+      "decision": "engineering_artifact",
+      "alternative": "feature_observation",
+      "rationale": "Mud window is the operational design output (L6), even though it is computed from observed pressure gradients."
+    },
+    {
+      "node_id": "GEOMEC035",
+      "decision": "interpretation_process",
+      "alternative": "engineering_artifact",
+      "rationale": "3D reservoir geomechanical model is treated as the modelling process (L5), not the design artifact."
+    },
+    {
+      "node_id": "GEOMEC084",
+      "decision": "governance_artifact",
+      "alternative": "interpretation_process",
+      "rationale": "WSM 2025 Quality Scheme is a quality framework / governance rubric, not the inversion process itself."
+    },
+    {
+      "node_id": "seismic-acquisition-survey",
+      "decision": "well_operation",
+      "alternative": "artifact_primary",
+      "rationale": "Survey is the field acquisition program; the resulting dataset is downstream and not yet a separate node."
+    },
+    {
+      "node_id": "GM027",
+      "decision": "governance_artifact",
+      "alternative": "interpretation_process",
+      "rationale": "LaudoGeomecanico is the deliverable report; the cognitive process upstream is GeomechanicalInterpretation."
+    }
+  ]
+}

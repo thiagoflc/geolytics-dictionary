@@ -15,8 +15,8 @@
 @prefix qudt: <https://qudt.org/vocab/unit/> .
 
 # Geolytics dictionary — entity graph (Turtle serialization)
-# Generated: 2026-05-03T20:22:54.272Z
-# Nodes: 334  Edges: 684
+# Generated: 2026-05-04T19:48:48.610Z
+# Nodes: 412  Edges: 939
 
 #
 # Classes
@@ -2859,31 +2859,6 @@ geo:GEOMEC002 a owl:Class ;
     skos:definition """Componente de menor magnitude das tensões horizontais in situ. Determina o limite superior da Janela Operacional de Lama, pois sua superação por pressão de fluido provoca fraturamento hidráulico da formação e perda de circulação. Medida por testes de fraturamento (xLOT, Mini-frac, SRT) e calibrada com LOTs."""@pt ;
     geo:geocoverage "layer6" .
 
-geo:GEOMEC003 a owl:Class ;
-    skos:prefLabel "Janela Operacional de Lama"@pt ;
-    skos:prefLabel "Mud Weight Window / Drilling Operational Window"@en ;
-    geo:entityType "geomec_corporate" ;
-    skos:altLabel "JOL"@pt ;
-    skos:altLabel "Mud Window"@pt ;
-    skos:altLabel "Janela Operacional"@pt ;
-    skos:altLabel "Mud Weight Window / Drilling Operational Window"@en ;
-    skos:definition """Intervalo de massa específica do fluido de perfuração compreendido entre o gradiente de colapso (limite inferior) e o gradiente de fratura (limite superior). O estreitamento da janela impacta diretamente o número de fases perfuradas e a extensão das fases. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas curvas de Pp e tensões in situ do RES."""@pt ;
-    geo:geocoverage "layer6" .
-
-geo:GEOMEC004 a owl:Class ;
-    skos:prefLabel "Estado de Tensões In Situ (Geotensões)"@pt ;
-    skos:prefLabel "In Situ Stress State (Geotensions)"@en ;
-    geo:entityType "geomec_corporate" ;
-    skos:altLabel "Tensões In Situ"@pt ;
-    skos:altLabel "Geotensões"@pt ;
-    skos:altLabel "S1/S2/S3"@pt ;
-    skos:altLabel "S1"@pt ;
-    skos:altLabel "S2"@pt ;
-    skos:altLabel "S3"@pt ;
-    skos:altLabel "In Situ Stress State (Geotensions)"@en ;
-    skos:definition """Conjunto das três tensões principais que atuam nas formações rochosas em subsuperfície antes de qualquer perturbação: tensão maior (S1), tensão intermediária (S2) e tensão menor (S3). No contexto de perfuração, nos Laudos Geomecânicos da Petrobras são fornecidas as curvas de S1, S2 e S3 (Magnitude e Azimute) ao longo da trajetória do poço, calibradas aos testes de pressão disponíveis (LOT, XLOT, FIT) e ajustadas às profundidades previstas no QPG, em versão original e suavizada (média móvel), em psi e em lb/gal."""@pt ;
-    geo:geocoverage "layer6" .
-
 geo:GEOMEC005 a owl:Class ;
     skos:prefLabel "Tensão Efetiva"@pt ;
     skos:prefLabel "Effective Stress"@en ;
@@ -2982,17 +2957,6 @@ geo:GEOMEC012 a owl:Class ;
     skos:altLabel "n"@pt ;
     skos:altLabel "Poisson's Ratio"@en ;
     skos:definition """Razão entre a deformação lateral e a deformação axial de uma rocha sob carga uniaxial. O coeficiente dinâmico é calculado a partir das velocidades de ondas compressional (Vp) e cisalhante (Vs), usando as correlações de Castagna et al. (1993) quando não há perfil DTS disponível. Para o coeficiente de Poisson, não há correlação clara entre os valores dinâmico e estático, de modo que as estimativas dinâmicas são em geral empregadas nas simulações geomecânicas sem correções. É insumo fundamental para o cálculo da tensão mínima horizontal pelo método elástico."""@pt ;
-    geo:geocoverage "layer6" .
-
-geo:GEOMEC013 a owl:Class ;
-    skos:prefLabel "Coeficiente de Biot-Willis"@pt ;
-    skos:prefLabel "Biot-Willis Coefficient"@en ;
-    geo:entityType "geomec_corporate" ;
-    skos:altLabel "α"@pt ;
-    skos:altLabel "Biot"@pt ;
-    skos:altLabel "Coef. Biot"@pt ;
-    skos:altLabel "Biot-Willis Coefficient"@en ;
-    skos:definition """Parâmetro poro-elástico que quantifica a fração da pressão de poros que contribui para a tensão efetiva. Calculado a partir da rigidez bulk da rocha (Kb) e da rigidez bulk dos grãos (Ks) — para Ks são utilizados valores tabelados da literatura (Tabela 5 do PE-2RES-00014). É elemento mandatório na modelagem do equilíbrio estrutural geomecânico, conforme PP-2E&P-00322. Em formações com coeficiente de Biot igual à unidade e Poisson de 0,25, a variação de uma tensão total horizontal é igual a 2/3 da depleção do reservatório."""@pt ;
     geo:geocoverage "layer6" .
 
 geo:GEOMEC014 a owl:Class ;
@@ -3158,17 +3122,6 @@ geo:GEOMEC026A a owl:Class ;
     skos:altLabel "QPG Final"@pt ;
     skos:altLabel "Geological Prognosis Chart"@en ;
     skos:definition """Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572]."""@pt ;
-    geo:geocoverage "layer6" .
-
-geo:GEOMEC026B a owl:Class ;
-    skos:prefLabel "Laudo Geomecânico"@pt ;
-    skos:prefLabel "Geomechanical Report"@en ;
-    geo:entityType "geomec_corporate" ;
-    skos:altLabel "Laudo Geomecânico"@pt ;
-    skos:altLabel "Laudo de Geomecânica"@pt ;
-    skos:altLabel "Relatório Geomecânico"@pt ;
-    skos:altLabel "Geomechanical Report"@en ;
-    skos:definition """Documento técnico formal que compila a Análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3 — Magnitude e Azimute), gradiente de poropressão e dados de testes de pressão (LOT/XLOT/FIT), extraídas do modelo geomecânico 3D validado pelo RES/TR/GMR. É confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR, e deve conter obrigatoriamente: (i) trajetória final otimizada aprovada no Pré Kick-Off; (ii) riscos geológico-geomecânicos residuais na trajetória; (iii) poços correlatos com eventos geomecânicos; (iv) resultados dos estudos de shallow hazards (SUB/ES/GEO); (v) tensões in situ calibradas ao modelo geomecânico 3D aprovado; (vi) previsão de poropressão nas rochas não-reservatório; (vii) análise de Underground Venting (UV) quando aplicável [PE-2RES-00009]. As curvas fornecidas pelo RES incluem versão original e suavizada (média móvel), planilha em psi e figura em lb/gal. O Laudo é apresentado na reunião de Kick-Off (-120 dias antes da perfuração) e posteriormente emitido via ISA junto ao Prospecto (-60 dias). Armazenamento oficial: SIPLEX [PE-2EXP-00074]. Após a perfuração, o CSD GEOMEC emite o Relatório Geomecânico Final de Poço, que é arquivado no VGE [PE-2EXP-00074]."""@pt ;
     geo:geocoverage "layer6" .
 
 geo:GEOMEC027 a owl:Class ;
@@ -3435,29 +3388,6 @@ geo:GEOMEC048 a owl:Class ;
     skos:altLabel "sensor de pressão anular"@pt ;
     skos:altLabel "Pressure While Drilling — Annular"@en ;
     skos:definition """Ferramenta MWD downhole que mede continuamente a pressão no anular durante a perfuração, gerando as grandezas ECD e ESD em tempo real. O sufixo "a" (annular) especifica leitura no espaço anular. Os dados são gravados em memória da ferramenta e/ou transmitidos em tempo real via pulso de pressão (WITSML/WITS). Modelada como entidade única (hardware + measurement inseparáveis no contexto do dicionário); sistema de superfície de aquisição PWD pode ser entidade separada em iteração futura se necessário."""@pt ;
-    geo:geocoverage "layer6" .
-
-geo:GEOMEC049 a owl:Class ;
-    skos:prefLabel "BDIEP — Base de Dados Integrada de E&P"@pt ;
-    skos:prefLabel "BDIEP — Integrated E&P Database"@en ;
-    geo:entityType "geomec_corporate" ;
-    skos:altLabel "BDIEP"@pt ;
-    skos:altLabel "Base de Dados Integrada de E&P"@pt ;
-    skos:altLabel "base integrada E&P"@pt ;
-    skos:altLabel "BDIEP — Integrated E&P Database"@en ;
-    skos:definition """Repositório unificado de armazenamento de informações estruturadas e não estruturadas obtidas ou produzidas durante os processos técnicos da atividade de E&P da Petrobras. Acessado pela interface VGE para consulta e cadastro de arquivos. Retenção permanente; acesso protegido por chave e senha. Posicionamento vs. correlatos: BDIEP é repositório técnico corporativo (golden source para dados de poços exploratórios e explotatórios), enquanto OpenWells é fonte primária de dados operacionais (BDP, LOT, XLOT) que migram para BDIEP, e SIGEO armazena dados geológicos (calha, paleontologia, geoquímica)."""@pt ;
-    geo:geocoverage "layer6" .
-
-geo:GEOMEC050 a owl:Class ;
-    skos:prefLabel "BDP — Boletim Diário da Perfuração"@pt ;
-    skos:prefLabel "BDP — Daily Drilling Report"@en ;
-    geo:entityType "geomec_corporate" ;
-    skos:altLabel "BDP"@pt ;
-    skos:altLabel "Boletim Diário de Perfuração"@pt ;
-    skos:altLabel "Daily Drilling Report"@pt ;
-    skos:altLabel "DDR"@pt ;
-    skos:altLabel "BDP — Daily Drilling Report"@en ;
-    skos:definition """Relatório diário que registra todas as operações executadas no poço ao longo de um turno/dia de perfuração: atividades, profundidades atingidas, parâmetros de fluido, tempos produtivos e não produtivos (NPT), ocorrências e consumo de materiais. Documento operacional primário de rastreabilidade da execução do poço. Estrutura mista — combina campos estruturados (profundidade, tempos, parâmetros) com narrativa textual (ocorrências, observações). Preenchido pelo Fiscal RPB na sonda via OpenWells/Atlas; armazenamento permanente no BDIEP. Cardinalidade: 1 BDP por dia-turno por poço."""@pt ;
     geo:geocoverage "layer6" .
 
 geo:GEOMEC051 a owl:Class ;
@@ -3867,6 +3797,691 @@ geo:GEOMEC087 a owl:Class ;
     skos:definition """Inferência da orientação de SHmax pelo alinhamento de centros eruptivos / diques, assumindo que diques se propagam em planos perpendiculares a Shmin (paralelos a SHmax)."""@pt ;
     geo:geocoverage "layer6" .
 
+geo:GM001 a owl:Class ;
+    skos:prefLabel "TensorDeTensao"@pt ;
+    skos:prefLabel "StressTensor"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Tensor simétrico 3x3 que descreve o estado de tensão em um ponto da rocha. Componentes sigma_1 (máxima principal), sigma_2 (intermediária), sigma_3 (mínima). Convenção: sigma_1 >= sigma_2 >= sigma_3."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM002 a owl:Class ;
+    skos:prefLabel "TensaoPrincipal"@pt ;
+    skos:prefLabel "PrincipalStress"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Uma das três tensões principais (normais) agindo em planos onde a tensão de cisalhamento é zero. No subsolo: Sv (sobrecarga vertical), SHmax (horizontal máxima), Shmin (horizontal mínima)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM003 a owl:Class ;
+    skos:prefLabel "TensaoDeCisalhamento"@pt ;
+    skos:prefLabel "ShearStress"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Componente de tensão atuando paralelamente a um plano. No círculo de Mohr: tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controla ruptura cisalhante quando supera o critério de Coulomb."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM004 a owl:Class ;
+    skos:prefLabel "PressaoDePoros"@pt ;
+    skos:prefLabel "PorePressure"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Pressão do fluido no espaço poroso conectado. Controla a tensão efetiva via princípio de Terzaghi-Biot: sigma_eff = sigma_total - alpha * Pp. Calibrada por RFT/MDT, eventos de perfuração, inversão de velocidade sísmica (método Eaton)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM005 a owl:Class ;
+    skos:prefLabel "JanelaDeLama"@pt ;
+    skos:prefLabel "MudWindow"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Janela de peso de lama segura para perfuração. Limite inferior: pressão de poros (risco de colapso/influxo); limite superior: gradiente de fratura (risco de perda de circulação). NOTA: 'Janela de Lama' (M9) NÃO é a mesma coisa que 'Janela de Geração' (M7 geoquímica, faixa de Ro%)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM006 a owl:Class ;
+    skos:prefLabel "CirculoDeMohr"@pt ;
+    skos:prefLabel "MohrCircle"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Representação gráfica do estado de tensão em um plano. Diâmetro igual a (sigma_1 - sigma_3); centro em (sigma_1 + sigma_3)/2. Ruptura ocorre quando o círculo toca o envelope de ruptura."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM007 a owl:Class ;
+    skos:prefLabel "CriterioDeRuptura"@pt ;
+    skos:prefLabel "FailureCriterion"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Condição matemática que define o estado de tensão em que a rocha rompe. Dois critérios principais: Mohr-Coulomb (envelope linear, adequado para rochas sedimentares) e Hoek-Brown (envelope curvo, melhor para maciços fraturados)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM008 a owl:Class ;
+    skos:prefLabel "CriterioMohrCoulomb"@pt ;
+    skos:prefLabel "MohrCoulombCriterion"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Critério de ruptura cisalhante linear: tau_f = c + sigma_n * tan(phi), onde c é a coesão (MPa) e phi é o ângulo de atrito interno (graus). Parâmetros obtidos de ensaios triaxiais."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM009 a owl:Class ;
+    skos:prefLabel "CriterioHoekBrown"@pt ;
+    skos:prefLabel "HoekBrownCriterion"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Critério empírico curvo para maciços rochosos. Usa GSI para caracterizar o grau de fraturamento e resistência do maciço. Edição 2018 de Hoek & Brown é o padrão atual."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM010 a owl:Class ;
+    skos:prefLabel "ModeloMecanicoTerra"@pt ;
+    skos:prefLabel "MechanicalEarthModel"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Descrição quantitativa integrada do estado mecânico do reservatório e rochas vizinhas. Quatro pilares: (1) tensões in situ, (2) pressão de poros, (3) módulos elásticos e de resistência, (4) geometria estrutural-estratigráfica."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM011 a owl:Class ;
+    skos:prefLabel "ModeloMecanicoTerra1D"@pt ;
+    skos:prefLabel "MechanicalEarthModel1D"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """MEM unidimensional construído ao longo do poço. Funções de profundidade: gradiente Pp, gradiente de fratura, Sv, SHmax, Shmin, UCS, E, nu, alfa. Output do software GEOMECBR."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM012 a owl:Class ;
+    skos:prefLabel "ModeloMecanicoTerra3D"@pt ;
+    skos:prefLabel "MechanicalEarthModel3D"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """MEM tridimensional que integra dados sísmicos, perfilagem e produção em grade volumétrica. Permite predição espacial de tensões e propriedades de rocha. Output do software GERESIM."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM013 a owl:Class ;
+    skos:prefLabel "PropriedadeMecanicaRocha"@pt ;
+    skos:prefLabel "RockMechProperty"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Propriedade mecânica da rocha intacta ou maciço rochoso usada em modelagem geomecânica. Inclui propriedades elásticas e de resistência. Distinguida como estática (laboratório) vs dinâmica (perfil sônico)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM014 a owl:Class ;
+    skos:prefLabel "ResistenciaCompressaoUniaxial"@pt ;
+    skos:prefLabel "UCS"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Resistência à Compressão Uniaxial. Máxima tensão axial que um corpo cilíndrico de rocha suporta com pressão de confinamento zero. Unidade: MPa. UCS estático (laboratório) difere do dinâmico (sônico) em 20-40%."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM015 a owl:Class ;
+    skos:prefLabel "ModuloDeYoung"@pt ;
+    skos:prefLabel "YoungModulus"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Módulo de Young (E) — razão entre tensão axial e deformação axial no regime elástico. Governa compactação do reservatório e subsidência. Estático: ensaio triaxial; dinâmico: velocidades sônicas Vp, Vs."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM016 a owl:Class ;
+    skos:prefLabel "RazaoDePoisson"@pt ;
+    skos:prefLabel "PoissonRatio"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Razão de Poisson (nu) — razão entre deformação lateral e axial sob carregamento axial. Adimensional, fisicamente limitado a [0, 0.5] para materiais elásticos isotrópicos. Controla magnitude das tensões horizontais."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM017 a owl:Class ;
+    skos:prefLabel "CoeficienteDeBiot"@pt ;
+    skos:prefLabel "BiotCoefficient"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Coeficiente de Biot (alfa) — parâmetro de acoplamento poroelástico. Tensão efetiva = tensão total - alfa * Pp. Varia de 0 (esqueleto rígido) a 1 (sedimento não consolidado). alfa = 1 - K_dry / K_grain."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM018 a owl:Class ;
+    skos:prefLabel "ModuloVolumetrico"@pt ;
+    skos:prefLabel "BulkModulus"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Módulo volumétrico (K) — resistência da rocha à compressão volumétrica. K = E / (3*(1 - 2*nu)). Usado em modelagem de compactação e substituição de fluido (equações de Gassmann)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM019 a owl:Class ;
+    skos:prefLabel "ModuloDeCisalhamento"@pt ;
+    skos:prefLabel "ShearModulus"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Módulo de cisalhamento (G) — resistência da rocha à deformação cisalhante. G = E / (2*(1 + nu)). Medido pela velocidade sônica de cisalhamento Vs: G = rho * Vs^2. Insensível ao fluido nos poros (Gassmann)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM020 a owl:Class ;
+    skos:prefLabel "ClassificacaoMacicoRochoso"@pt ;
+    skos:prefLabel "RockMassRating"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Sistema RMR de Bieniawski (1989) que classifica maciços rochosos de 0 a 100 com base em seis parâmetros. RMR I (81-100): muito boa; RMR V (0-20): rocha muito ruim."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM021 a owl:Class ;
+    skos:prefLabel "IndiceGeologicoDeResistencia"@pt ;
+    skos:prefLabel "GSI"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Geological Strength Index (Hoek 1994) — quantifica a qualidade do maciço rochoso para o critério Hoek-Brown. Varia de 0 a 100. GSI alto (>70): rocha maciça/em blocos; baixo (<30): maciço muito fraturado."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM022 a owl:Class ;
+    skos:prefLabel "IndiceQualidadeRocha"@pt ;
+    skos:prefLabel "RQD"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Rock Quality Designation (Deere 1963) — porcentagem de pedaços de testemunho com mais de 100 mm no comprimento total. 0-100%. Entrada para RMR, sistema Q e GSI."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM023 a owl:Class ;
+    skos:prefLabel "Anisotropia"@pt ;
+    skos:prefLabel "Anisotropy"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Dependência direcional das propriedades mecânicas da rocha. Isotropia transversal (VTI) é comum em folhelhos (parâmetros de Thomsen). Anisotropia de módulos elásticos, resistência (UCS varia com orientação do acamamento) e permeabilidade (kH/kV)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM024 a owl:Class ;
+    skos:prefLabel "Fragilidade"@pt ;
+    skos:prefLabel "Brittleness"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Tendência da rocha a romper abruptamente sem deformação plástica significativa. Alta fragilidade favorece fraturamento natural e complexidade de fraturas hidráulicas. Índice de fragilidade B ou (E_norm + nu_norm)/2 (Rickman 2008)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM025 a owl:Class ;
+    skos:prefLabel "RegimeTensionalDeAnderson"@pt ;
+    skos:prefLabel "AndersonStressRegime"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Classificação de Anderson (1951) dos regimes tectônicos baseada nas magnitudes relativas de Sv, SHmax, Shmin. Falha normal (NF): Sv > SHmax > Shmin; Transcorrente (SS): SHmax > Sv > Shmin; Falha reversa (RF): SHmax > Shmin > Sv."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM026 a owl:Class ;
+    skos:prefLabel "PocoGeomecanico"@pt ;
+    skos:prefLabel "Wellbore"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Cavidade cilíndrica na rocha cuja estabilidade é governada pela concentração de tensões ao redor da abertura. Origem de dados de caliper, imagem e LOT/XLOT usados para calibrar o MEM."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GM027 a owl:Class ;
+    skos:prefLabel "LaudoGeomecanico"@pt ;
+    skos:prefLabel "LaudoGeomecanico"@en ;
+    geo:entityType "geomec_academic" ;
+    skos:definition """Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal (role_type: formal_technical_evidence) para subsidiar o projeto e o acompanhamento do poço. Elaborado pelo CSD Geomecânica (RES/GMR ou área responsável). Nota: distinto do QPG (prognóstico geológico) e de relatórios exclusivamente de monitoramento pós-perfuração — o Laudo pode abranger tanto a fase de prognóstico pré-perfuração quanto o acompanhamento."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" .
+
+geo:GF001 a owl:Class ;
+    skos:prefLabel "MecanismoDeDeformacao"@pt ;
+    skos:prefLabel "DeformationMechanism"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Processo pelo qual a rocha muda de forma ou volume. Mecanismos incluem fraturamento frágil, fluxo plástico, solução por pressão e fluxo cataclástico."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF002 a owl:Class ;
+    skos:prefLabel "DeformacaoFragil"@pt ;
+    skos:prefLabel "BrittleDeformation"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Deformação por fraturamento e falhamento em baixas temperaturas e pressões (condições crustais rasas). Produz juntas, falhas e bandas de cisalhamento."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF003 a owl:Class ;
+    skos:prefLabel "DeformacaoDuctil"@pt ;
+    skos:prefLabel "DuctileDeformation"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Deformação por plasticidade cristalina, solução por pressão ou fluxo viscoso em altas temperaturas e pressões. Produz zonas de milonito, foliação e boudinage."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF004 a owl:Class ;
+    skos:prefLabel "TipoDeFratura"@pt ;
+    skos:prefLabel "FractureType"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Classificação de fraturas por gênese e cinemática: junta (modo I de abertura), falha (modo II/III de cisalhamento), veio (fratura aberta mineralizada), banda de cisalhamento."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF005 a owl:Class ;
+    skos:prefLabel "Junta"@pt ;
+    skos:prefLabel "Joint"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Fratura em modo de abertura (Modo I) com deslocamento cisalhante negligível. Abertura controlada pela tensão efetiva de tração. Comum em carbonatos compactos e folhelhos."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF006 a owl:Class ;
+    skos:prefLabel "Falha"@pt ;
+    skos:prefLabel "Fault"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Fratura em modo de cisalhamento com deslocamento significativo. Classificada por cinemática: normal (extensional), reversa (compressional), transcorrente (lateral)."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF007 a owl:Class ;
+    skos:prefLabel "Veio"@pt ;
+    skos:prefLabel "Vein"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Fratura mineralizada preenchida com material cristalino (calcita, quartzo, dolomita). Registra direções de fluxo de paleofluidos. Medidas de abertura em testemunho e imagem indicam fraturas abertas pretéritas."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF008 a owl:Class ;
+    skos:prefLabel "BandaDeCisalhamento"@pt ;
+    skos:prefLabel "ShearBand"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Zona tabular de deformação cisalhante localizada em rocha porosa sem superfície de fratura discreta. Associada ao esmagamento de grãos e redução de porosidade/permeabilidade."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF009 a owl:Class ;
+    skos:prefLabel "ConjuntoDeFraturas"@pt ;
+    skos:prefLabel "FractureSet"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Grupo de fraturas sub-paralelas com orientação, tipo e origem similares. Caracterizado por orientação média (mergulho, azimute), distribuição de abertura e espaçamento. Base do modelamento DFN."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF010 a owl:Class ;
+    skos:prefLabel "RedeDeFraturas"@pt ;
+    skos:prefLabel "FractureNetwork"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Sistema interconectado de conjuntos de fraturas formando uma rede hidraulicamente conectada. Conectividade determina tensor de permeabilidade efetiva. Modelada como DFN ou meio poroso equivalente."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF011 a owl:Class ;
+    skos:prefLabel "Estilolito"@pt ;
+    skos:prefLabel "Stylolite"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Superfície irregular de dissolução em carbonatos formada por solução por pressão. Atua como barreira de permeabilidade. Identificada em testemunho e imagens como superfícies escuras, irregulares e suturadas. Orientada perpendicularmente a sigma_1."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF012 a owl:Class ;
+    skos:prefLabel "ZonaDeFalha"@pt ;
+    skos:prefLabel "FaultZone"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Modelo arquitetural de três componentes de uma falha matura (Caine et al. 1996): (1) núcleo da falha — superfícies de deslizamento e gouge; (2) zona de dano — fraturas subsidiárias; (3) rocha hospedeira — protólito não deformado."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF013 a owl:Class ;
+    skos:prefLabel "NucleoFalha"@pt ;
+    skos:prefLabel "FaultCore"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Zona central da falha contendo superfícies de deslizamento, gouge de falha (rocha pulverizada rica em argila), cataclasito e/ou milonito. Baixíssima porosidade e permeabilidade. SGR é preditor-chave da capacidade selante."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF014 a owl:Class ;
+    skos:prefLabel "ZonaDeDano"@pt ;
+    skos:prefLabel "DamageZone"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Região flanqueando o núcleo da falha com densidade de fraturas elevada, maior permeabilidade e falhas/dobras subsidiárias. Largura proporcional ao deslocamento da falha. Permeabilidade elevada torna zonas de dano condutos importantes de fluido."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF015 a owl:Class ;
+    skos:prefLabel "FalhaNormal"@pt ;
+    skos:prefLabel "NormalFault"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Falha de dip-slip onde o teto desce em relação ao piso. Formada em regime extensional (Sv > SHmax > Shmin). Mergulho típico 50-70 graus. Cria grabens e meio-grabens. Tipo dominante em margens continentais passivas."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF016 a owl:Class ;
+    skos:prefLabel "FalhaReversa"@pt ;
+    skos:prefLabel "ReverseFault"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Falha de dip-slip onde o teto sobe em relação ao piso. Formada em regime compressional (SHmax > Shmin > Sv). Ângulo baixo (<30 graus) = falha de empurrão; alto ângulo = falha reversa."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:GF017 a owl:Class ;
+    skos:prefLabel "FalhaTranscorrente"@pt ;
+    skos:prefLabel "StrikeSlipFault"@en ;
+    geo:entityType "geomec_fracture" ;
+    skos:definition """Falha com deslocamento predominantemente lateral. Formada em regime transcorrente (SHmax > Sv > Shmin). Planos sub-verticais. Cria bacias pull-apart e altos estruturais."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer7" .
+
+geo:axon-area-exploracao a owl:Class ;
+    skos:prefLabel "Exploração"@pt ;
+    skos:prefLabel "Exploration"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition "Área pai do glossário de termos da Exploração."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-acervo-amostras a owl:Class ;
+    skos:prefLabel "Acervo e movimentação de amostras"@pt ;
+    skos:prefLabel "Sample collection and movement"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Domínio que organiza o acervo técnico de amostras geocientíficas (rocha, sedimento, fluido) e suas operações de coleta, movimentação, guarda e descarte."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-aquisicao-dados-geo a owl:Class ;
+    skos:prefLabel "Aquisição de dados geológicos"@pt ;
+    skos:prefLabel "Geological data acquisition"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Domínio que reúne as operações geológicas executadas no poço para aquisição primária de dados, incluindo perfilagem, testemunhagem, mudlogging, avaliação final e planejamento das operações geológicas."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-aval-petrofisica a owl:Class ;
+    skos:prefLabel "Avaliação de formações e petrofísica"@pt ;
+    skos:prefLabel "Formation evaluation and petrophysics"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a avaliação petrofísica de formações geológicas atravessadas por poços."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-blocos-parcerias a owl:Class ;
+    skos:prefLabel "Blocos e Parcerias"@pt ;
+    skos:prefLabel "Blocks and Partnerships"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura relacionadas a blocos e parcerias."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-geodesia a owl:Class ;
+    skos:prefLabel "Geodésia"@pt ;
+    skos:prefLabel "Geodesy"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis ao levantamento e à representação da forma e da superfície da Terra, global e parcial, com suas feições naturais e artificiais e o campo gravitacional terrestre."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-geofisica a owl:Class ;
+    skos:prefLabel "Geofísica"@pt ;
+    skos:prefLabel "Geophysics"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à prospecção de óleo e gás em qualquer nível econômico ou de detalhe técnico desejável."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-geologia a owl:Class ;
+    skos:prefLabel "Geologia"@pt ;
+    skos:prefLabel "Geology"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Domínio que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à descrição e à interpretação geológica do subsolo nas atividades exploratórias da Petrobras."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-geomecanica a owl:Class ;
+    skos:prefLabel "Geomecânica"@pt ;
+    skos:prefLabel "Geomechanics"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a caracterização e previsão do comportamento mecânico de rochas e do estado de tensões in situ, suportando o projeto e a execução do poço."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-dom-interp-exploratoria a owl:Class ;
+    skos:prefLabel "Interpretação Exploratória"@pt ;
+    skos:prefLabel "Exploratory Interpretation"@en ;
+    geo:entityType "axon_domain" ;
+    skos:definition """Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis às atividades da interpretação exploratória. Atividade ou esforço de inferência das estruturas geológicas de subsuperfície a partir de dados geológicos e geofísicos (EXP/GEOF/GDSI)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-op-amostras-fluido a owl:Class ;
+    skos:prefLabel "Operações em amostras de fluido"@pt ;
+    skos:prefLabel "Fluid sample operations"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Operações executadas sobre amostras de fluido, incluindo coleta, transporte, análise, condicionamento, guarda e descarte."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-op-amostras-rocha a owl:Class ;
+    skos:prefLabel "Operações em amostras de rocha"@pt ;
+    skos:prefLabel "Rock sample operations"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Operações executadas sobre amostras de rocha (testemunhos, plugues, calha, lateral), incluindo coleta, manipulação, análise laboratorial, guarda e descarte."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-aval-final-poco a owl:Class ;
+    skos:prefLabel "Avaliação final de poço"@pt ;
+    skos:prefLabel "Final well evaluation"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Avaliação final do poço, integrando os resultados das operações geológicas executadas durante a perfuração para consolidação do conhecimento subsuperficial."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-perfilagem a owl:Class ;
+    skos:prefLabel "Operação de Perfilagem"@pt ;
+    skos:prefLabel "Wireline logging operation"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Operação de aquisição de perfis de poço a cabo (wireline) ou em LWD/MWD, descida após a perfuração de cada fase para registro contínuo de propriedades petrofísicas e estruturais."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-testemunhagem a owl:Class ;
+    skos:prefLabel "Operação de Testemunhagem"@pt ;
+    skos:prefLabel "Coring operation"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Operação de obtenção de amostra contínua de rocha (testemunho/core) ou amostra lateral (sidewall core) durante a perfuração, com finalidade de caracterização petrofísica, sedimentológica ou geomecânica."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-mudlogging a owl:Class ;
+    skos:prefLabel "Operações de Mudlogging"@pt ;
+    skos:prefLabel "Mudlogging operations"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Operações de monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real e coleta de amostras de calha (cuttings) na sonda."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-planejamento a owl:Class ;
+    skos:prefLabel "Planejamento das operações geológicas em poços"@pt ;
+    skos:prefLabel "Planning of well geological operations"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Planejamento prévio das operações geológicas a serem executadas no poço, incluindo programa de amostragem e programa de aquisição de dados."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-pressao-temperatura a owl:Class ;
+    skos:prefLabel "Registro de pressão de formação e temperatura"@pt ;
+    skos:prefLabel "Formation pressure and temperature recording"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Registro pontual ou contínuo de pressão de formação e temperatura em testes de formação ou medições wireline."@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-status-poco a owl:Class ;
+    skos:prefLabel "Status de poço"@pt ;
+    skos:prefLabel "Well status"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Comunidade que abriga termos de negócio que requerem governança compartilhada em função de determinados valores que os termos possam assumir. Por enquanto contendo apenas o termo status de poço."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-asn-teste-formacao-aberto a owl:Class ;
+    skos:prefLabel "Teste de formação a poço aberto"@pt ;
+    skos:prefLabel "Open-hole formation test"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Teste de formação executado em poço aberto (DST a poço aberto), com isolamento de intervalo por packers para avaliar produção e propriedades de reservatório."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-sub-dados-culturais a owl:Class ;
+    skos:prefLabel "Dados culturais de poços e sonda"@pt ;
+    skos:prefLabel "Well and rig cultural data"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Conjunto de atributos identificadores e descritivos de poços e sondas usados no planejamento das operações geológicas (sigla, datum, coordenadas, sidetrack, classificação, lâmina d'água, etc.)."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-sub-prog-aquisicao a owl:Class ;
+    skos:prefLabel "Programa de aquisição de dados"@pt ;
+    skos:prefLabel "Data acquisition program"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Programa de aquisição de dados que consolida o conjunto de operações de perfilagem, testemunhagem, amostragem e teste previstas para um poço."""@pt ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-acervo-amostras a owl:Class ;
+    skos:prefLabel "Acervo de amostras"@pt ;
+    skos:prefLabel "Sample collection"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Coleção de itens geocientíficos da Petrobras (testemunhos, plugues, wholecores, amostras de calha, laterais, fluidos e produtos derivados como lâminas, células e aparas), formada por amostras de poços, furos e afloramentos, incluindo a parcela do acervo técnico da União sob responsabilidade da operadora."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-amostra a owl:Class ;
+    skos:prefLabel "Amostra"@pt ;
+    skos:prefLabel "Sample"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Porção de rocha, sedimento ou fluido extraída de poço, afloramento, superfície terrestre ou fundo oceânico, conforme Portaria ANP nº 757/2018; abrange também amostras de origem geocientífica não diretamente ligadas à indústria do petróleo."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer2" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-amostragem-calha-prevista a owl:Class ;
+    skos:prefLabel "Amostragem de calha prevista"@pt ;
+    skos:prefLabel "Planned cuttings sampling"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Previsão da coleta de amostras de cascalhos (calha) durante a perfuração, registrada no programa de amostragem do poço com quantidade (saquinhos de até 700 g), intervalo de coleta, finalidade e destino."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-ambiente a owl:Class ;
+    skos:prefLabel "Ambiente (mar, terra, lago)"@pt ;
+    skos:prefLabel "Operational environment (sea, land, lake)"@en ;
+    geo:entityType "geological" ;
+    skos:definition "Local geográfico de instalação da sonda e referência da posição final do fundo do poço; pode ser mar, terra ou lago."@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-campo a owl:Class ;
+    skos:prefLabel "Campo"@pt ;
+    skos:prefLabel "Field"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Campo de produção ao qual o poço está associado; atributo necessário à identificação e classificação do poço (sobretudo em poços explotatórios)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-classificacao-poco a owl:Class ;
+    skos:prefLabel "Classificação do poço"@pt ;
+    skos:prefLabel "Well classification (category)"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Categoria numérica (1–10) que indica a finalidade do poço; integra o código alfanumérico do poço definido pelo ISA (Informativo de Aprovação de Locação)."""@pt ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-furo a owl:Class ;
+    skos:prefLabel "Furo"@pt ;
+    skos:prefLabel "Borehole (non-petroleum)"@en ;
+    geo:entityType "analytical" ;
+    skos:altLabel "sondagem"@pt ;
+    skos:altLabel "furo de sondagem"@pt ;
+    skos:altLabel "furo geológico"@pt ;
+    skos:altLabel "furo geotécnico"@pt ;
+    skos:definition """Resultado de uma perfuração de menor porte (terrestre ou marinha) destinada à investigação geocientífica não voltada à produção de hidrocarbonetos; abrange furos geológicos e geotécnicos, e seu propósito é caracterizar aspectos geológicos, geomecânicos, geoquímicos ou biológicos do subsolo."""@pt ;
+    geo:geocoverage "layer1" ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-igp a owl:Class ;
+    skos:prefLabel "IGP — Informativo Geológico de Poço"@pt ;
+    skos:prefLabel "Well Geological Information (IGP)"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Relatório técnico diário (24 h) elaborado pelo geólogo de operações, na locação ou em base, descrevendo geologia, ocorrências geomecânicas, litologia, formações e zonas de interesse de hidrocarboneto observadas no poço."""@pt ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-lamina-agua a owl:Class ;
+    skos:prefLabel "Lâmina d'água"@pt ;
+    skos:prefLabel "Water depth"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Distância vertical entre a superfície e o fundo do mar em um dado local; classifica-se em águas rasas (0–300 m), águas profundas (300–1500 m) e águas ultraprofundas (>1500 m)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-lamina-agua-rasa a owl:Class ;
+    skos:prefLabel "Águas rasas"@pt ;
+    skos:prefLabel "Shallow water"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Lâmina d'água entre 0 e 300 metros (águas rasas)."@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-lamina-agua-profunda a owl:Class ;
+    skos:prefLabel "Águas profundas"@pt ;
+    skos:prefLabel "Deep water"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Lâmina d'água, em geral, entre 300 e 1500 metros (águas profundas)."@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-lamina-agua-ultraprofunda a owl:Class ;
+    skos:prefLabel "Águas ultraprofundas"@pt ;
+    skos:prefLabel "Ultra-deep water"@en ;
+    geo:entityType "analytical" ;
+    skos:definition "Lâmina d'água, em geral, acima de 1500 metros (águas ultraprofundas)."@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-objetivo-poco a owl:Class ;
+    skos:prefLabel "Objetivo do poço"@pt ;
+    skos:prefLabel "Well objective"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Resumo das aquisições e resultados esperados no planejamento do poço, citando formações e profundidades dos alvos principais, secundários e final."""@pt ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-poco a owl:Class ;
+    skos:prefLabel "Poço"@pt ;
+    skos:prefLabel "Well"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Perfuração realizada em terra ou mar com ferramentas especiais (broca, coluna) para alcançar reservatório de óleo ou gás natural."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-poco-comprado a owl:Class ;
+    skos:prefLabel "Poço comprado"@pt ;
+    skos:prefLabel "Purchased well"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Poço cujos dados a Petrobras adquiriu de uma agência, departamento ou organização — operado por outra empresa, sem participação da Petrobras — e cujos arquivos típicos incluem AGP, CDPE, Perfil Composto, perfis digitais, curvas LAS, PAG e teste de formação, normalmente após o período de confidencialidade."""@pt ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-poco-presal a owl:Class ;
+    skos:prefLabel "Poço do pré-sal"@pt ;
+    skos:prefLabel "Pre-salt well"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Poço enquadrado no play pré-sal moderno: localizado nas bacias Campos Mar, Espírito Santo Mar ou Santos; com subclassificação carbonática; em formações Barra Velha, Coqueiros, Itapema, Macabu ou Membro Mucuri; e com data de conclusão posterior a 12/10/2006 (1-RJS-628A)."""@pt ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-poco-nao-br a owl:Class ;
+    skos:prefLabel "Poço não BR"@pt ;
+    skos:prefLabel "Non-Petrobras well"@en ;
+    geo:entityType "analytical" ;
+    skos:definition """Poço sem operação ou parceria contratual da Petrobras nos blocos em que está situado; sua documentação interna decorre de aquisições por BID, compra direta na ANP ou outro meio legal."""@pt ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
+geo:axon-term-sonda a owl:Class ;
+    skos:prefLabel "Sonda"@pt ;
+    skos:prefLabel "Drilling rig"@en ;
+    geo:entityType "equipment" ;
+    skos:altLabel "plataforma"@pt ;
+    skos:altLabel "unidade de perfuração"@pt ;
+    skos:definition """Unidade de perfuração (sonda terrestre, jack-up, semissubmersível, navio-sonda) que executa atividades exploratórias, de avaliação e de completação do poço; identificada por sigla e nome da operadora (ex.: NS-42 ODN II)."""@pt ;
+    geo:geocoverage "layer4" ;
+    geo:geocoverage "layer5" ;
+    geo:geocoverage "layer6" .
+
 #
 # Object properties
 #
@@ -3928,7 +4543,7 @@ geo:delimited_in a owl:ObjectProperty ;
 geo:governed_by a owl:ObjectProperty ;
     rdfs:label "regido por"@pt ;
     rdfs:label "governed by"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bloco geo:GEOMEC004 geo:GEOMEC018 geo:GEOMEC035 ) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:bloco geo:campo-tensional geo:GEOMEC018 geo:GEOMEC035 ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:GEOMEC027 geo:GEOMEC005 geo:GEOMEC029 ) ] .
 
 geo:may_have a owl:ObjectProperty ;
@@ -4012,8 +4627,8 @@ geo:submitted_to a owl:ObjectProperty ;
 geo:requires a owl:ObjectProperty ;
     rdfs:label "exige"@pt ;
     rdfs:label "requires"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:declaracao-comercialidade geo:ibama geo:GEOMEC015 geo:GEOMEC016 geo:GEOMEC019 geo:GEOMEC025 geo:GEOMEC027 geo:GEOMEC032 geo:GEOMEC033 geo:GEOMEC036 geo:GEOMEC037 geo:GEOMEC023A geo:GEOMEC023B ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pem geo:plano-desenvolvimento geo:eia geo:rima geo:GEOMEC003 geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC010 geo:GEOMEC017 geo:GEOMEC024 geo:GEOMEC047 geo:GEOMEC048 geo:GEOMEC030 geo:GEOMEC018 geo:GEOMEC016 geo:GEOMEC027 geo:GEOMEC002 geo:GEOMEC085 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:contrato-ep geo:declaracao-comercialidade geo:ibama geo:GEOMEC015 geo:GEOMEC016 geo:GEOMEC019 geo:GEOMEC025 geo:GEOMEC027 geo:GEOMEC032 geo:GEOMEC033 geo:GEOMEC036 geo:GEOMEC037 geo:GEOMEC023A geo:GEOMEC023B geo:axon-term-amostragem-calha-prevista ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pem geo:plano-desenvolvimento geo:eia geo:rima geo:janela-lama geo:GEOMEC001 geo:campo-tensional geo:GEOMEC010 geo:GEOMEC017 geo:GEOMEC024 geo:GEOMEC047 geo:GEOMEC048 geo:GEOMEC030 geo:GEOMEC018 geo:GEOMEC016 geo:GEOMEC027 geo:GEOMEC002 geo:GEOMEC085 geo:cuttings-sampling ) ] .
 
 geo:monitored_via a owl:ObjectProperty ;
     rdfs:label "acompanhado via"@pt ;
@@ -4066,8 +4681,8 @@ geo:includes a owl:ObjectProperty ;
 geo:enables a owl:ObjectProperty ;
     rdfs:label "habilita"@pt ;
     rdfs:label "enables"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:biomarcador geo:completacao geo:GEOMEC026B geo:GEOMEC027 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:correlacao-oleo-rocha geo:campo geo:GEOMEC003 geo:GEOMEC026B ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:plano-desenvolvimento geo:biomarcador geo:completacao geo:laudo-geomecanico geo:GEOMEC027 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:area-desenvolvimento geo:correlacao-oleo-rocha geo:campo geo:janela-lama geo:laudo-geomecanico ) ] .
 
 geo:accompanied_by a owl:ObjectProperty ;
     rdfs:label "acompanhado por"@pt ;
@@ -4168,8 +4783,8 @@ geo:lifts_from a owl:ObjectProperty ;
 geo:measures a owl:ObjectProperty ;
     rdfs:label "mede em"@pt ;
     rdfs:label "measures"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mwd geo:perfil-poco geo:GEOMEC006 geo:GEOMEC022 geo:GEOMEC031 geo:GEOMEC061 geo:GEOMEC062 geo:GEOMEC063 geo:GEOMEC065 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC080 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:poco geo:GEOMEC002 geo:GEOMEC024 geo:GEOMEC042 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC005 geo:GEOMEC014 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC004 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mwd geo:perfil-poco geo:GEOMEC006 geo:GEOMEC022 geo:GEOMEC031 geo:GEOMEC061 geo:GEOMEC062 geo:GEOMEC063 geo:GEOMEC065 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC080 geo:GM004 geo:GM001 geo:GM002 geo:GM003 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:poco geo:GEOMEC002 geo:GEOMEC024 geo:GEOMEC042 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC005 geo:GEOMEC014 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:campo-tensional geo:formation-testing ) ] .
 
 geo:logs a owl:ObjectProperty ;
     rdfs:label "perfila"@pt ;
@@ -4258,8 +4873,8 @@ geo:delivers a owl:ObjectProperty ;
 geo:contains a owl:ObjectProperty ;
     rdfs:label "contém"@pt ;
     rdfs:label "contains"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa geo:completacao geo:GEOMEC026A geo:GEOMEC026B ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao geo:dhsv geo:GEOMEC001 geo:GEOMEC003 geo:GEOMEC004 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:rocha-geradora geo:trapa geo:completacao geo:GEOMEC026A geo:laudo-geomecanico ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:materia-organica geo:acumulacao geo:dhsv geo:GEOMEC001 geo:janela-lama geo:campo-tensional ) ] .
 
 geo:characterizes a owl:ObjectProperty ;
     rdfs:label "caracteriza"@pt ;
@@ -4300,8 +4915,8 @@ geo:declares a owl:ObjectProperty ;
 geo:derived_from a owl:ObjectProperty ;
     rdfs:label "deriva de"@pt ;
     rdfs:label "derived from"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador geo:bdp geo:igp geo:perfil-composto geo:rmg geo:ogeomec geo:rcsd geo:lessons-learned geo:pag geo:laudo-geomecanico geo:GEOMEC005 geo:GEOMEC013 geo:GEOMEC019 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido geo:qpg geo:bdp geo:pag geo:igp geo:wireline-run geo:lwd-run geo:cuttings-sample-detailed geo:frx geo:drx geo:formation-pressure-point geo:dst-interval geo:core-run geo:ogeomec geo:rmg geo:rcsd geo:gas-show-event geo:GEOMEC013 geo:GEOMEC011 geo:GEOMEC020 geo:GEOMEC073 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:reserva geo:biomarcador geo:bdp geo:igp geo:perfil-composto geo:rmg geo:ogeomec geo:rcsd geo:lessons-learned geo:pag geo:laudo-geomecanico geo:GEOMEC019 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GM004 geo:GM010 geo:GM011 geo:GM012 geo:GM013 geo:GM014 geo:GM015 geo:GM016 geo:GM017 geo:GM018 geo:GM019 geo:GM020 geo:GM021 geo:GM022 geo:GF004 geo:GF005 geo:GF006 geo:GF007 geo:GF008 geo:GF009 geo:GF010 geo:GF011 geo:GF015 geo:GF016 geo:GF017 geo:GEOMEC046 geo:GEOMEC086 geo:GEOMEC087 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:recurso geo:amostra-fluido geo:qpg geo:bdp geo:pag geo:igp geo:wireline-run geo:lwd-run geo:cuttings-sample-detailed geo:frx geo:drx geo:formation-pressure-point geo:dst-interval geo:core-run geo:ogeomec geo:rmg geo:rcsd geo:gas-show-event geo:GEOMEC020 geo:GEOMEC073 geo:wireline-logging geo:core-sample geo:formation-testing geo:GM010 geo:GM011 geo:GM012 geo:GEOMEC082 geo:GEOMEC084 ) ] .
 
 geo:spawns a owl:ObjectProperty ;
     rdfs:label "gera"@pt ;
@@ -4360,8 +4975,8 @@ geo:guides_drilling_of a owl:ObjectProperty ;
 geo:occurs_in a owl:ObjectProperty ;
     rdfs:label "ocorre em"@pt ;
     rdfs:label "occurs in"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:ocorrencia-geomec geo:event_normal geo:event_bsw_increase geo:event_spurious_dhsv geo:event_severe_slugging geo:event_flow_instability geo:event_rapid_prod_loss geo:event_quick_pck_restriction geo:event_scaling_pck geo:event_hydrate_production geo:event_hydrate_service ) ] ;
-    rdfs:range geo:poco .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:ocorrencia-geomec geo:event_normal geo:event_bsw_increase geo:event_spurious_dhsv geo:event_severe_slugging geo:event_flow_instability geo:event_rapid_prod_loss geo:event_quick_pck_restriction geo:event_scaling_pck geo:event_hydrate_production geo:event_hydrate_service geo:GF002 geo:GEOMEC023A geo:axon-term-poco-presal ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:poco geo:GM026 geo:presal ) ] .
 
 geo:allocated_to a owl:ObjectProperty ;
     rdfs:label "alocado em"@pt ;
@@ -4576,8 +5191,8 @@ geo:measurement_for a owl:ObjectProperty ;
 geo:related_to a owl:ObjectProperty ;
     rdfs:label "relacionado a"@pt ;
     rdfs:label "related to"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:annular-fluid-type geo:GEOMEC014 geo:GEOMEC016 geo:GEOMEC023 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC053A geo:GEOMEC_ROP_A geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC072 geo:GEOMEC078 geo:GEOMEC079A geo:GEOMEC083 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:janela-lama geo:GEOMEC013 geo:GEOMEC007 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC053A geo:GEOMEC053B geo:GEOMEC023 geo:GEOMEC049 geo:GEOMEC051 geo:GEOMEC009 geo:GEOMEC075 geo:GEOMEC077 geo:GEOMEC078 geo:GEOMEC079 geo:GEOMEC079A geo:GEOMEC071 geo:GEOMEC017 geo:GEOMEC018 geo:GEOMEC082 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:annular-fluid-type geo:GEOMEC016 geo:GEOMEC023 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC053A geo:GEOMEC_ROP_A geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC072 geo:GEOMEC078 geo:GEOMEC079A geo:GEOMEC083 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:janela-lama geo:GEOMEC007 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC053A geo:GEOMEC053B geo:GEOMEC023 geo:bdiep geo:GEOMEC051 geo:GEOMEC009 geo:GEOMEC075 geo:GEOMEC077 geo:GEOMEC078 geo:GEOMEC079 geo:GEOMEC079A geo:GEOMEC071 geo:GEOMEC017 geo:GEOMEC018 geo:GEOMEC082 ) ] .
 
 geo:jurisdiction_of a owl:ObjectProperty ;
     rdfs:label "jurisdição de"@pt ;
@@ -4678,8 +5293,8 @@ geo:executes_servico a owl:ObjectProperty ;
 geo:produces a owl:ObjectProperty ;
     rdfs:label "produz"@pt ;
     rdfs:label "produces"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation geo:retro-analysis geo:GEOMEC004 geo:GEOMEC022 geo:GEOMEC025 geo:GEOMEC029 geo:GEOMEC035 geo:GEOMEC072 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto geo:laudo-geomecanico geo:GEOMEC016 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC014 geo:GEOMEC026B geo:GEOMEC004 geo:GEOMEC018 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:mudlogging geo:input-elaboration geo:operational-monitoring geo:formation-evaluation geo:retro-analysis geo:campo-tensional geo:GEOMEC022 geo:GEOMEC025 geo:GEOMEC029 geo:GEOMEC035 geo:GEOMEC072 geo:GM010 geo:GM011 geo:GM012 geo:GF002 geo:GEOMEC023B geo:GEOMEC027 geo:GEOMEC086 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:pag geo:qpg geo:bdp geo:igp geo:perfil-composto geo:laudo-geomecanico geo:GEOMEC016 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC014 geo:campo-tensional geo:GEOMEC018 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:janela-lama geo:GF004 geo:GF005 geo:GEOMEC046 geo:GEOMEC081 ) ] .
 
 geo:recorded_in a owl:ObjectProperty ;
     rdfs:label "registrado em"@pt ;
@@ -4738,7 +5353,7 @@ geo:queries a owl:ObjectProperty ;
 geo:requires_input a owl:ObjectProperty ;
     rdfs:label "requer como insumo"@pt ;
     rdfs:label "requires input"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:laudo-geomecanico geo:GEOMEC026B geo:GEOMEC033 geo:GEOMEC036 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 ) ] ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:laudo-geomecanico geo:GEOMEC033 geo:GEOMEC036 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 ) ] ;
     rdfs:range [ a owl:Class ; owl:unionOf ( geo:qpg geo:GEOMEC026A geo:GEOMEC010 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC073 ) ] .
 
 geo:references a owl:ObjectProperty ;
@@ -4924,26 +5539,26 @@ geo:involves_equipment a owl:ObjectProperty ;
 geo:influences a owl:ObjectProperty ;
     rdfs:label "Tensão Mínima Horizontal"@pt ;
     rdfs:label "influences"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC006 geo:GEOMEC007 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC013 geo:GEOMEC017 geo:GEOMEC023 geo:GEOMEC032 geo:GEOMEC034 geo:GEOMEC037 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC041 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC052B geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC075 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC005 geo:GEOMEC016 geo:GEOMEC018 geo:GEOMEC004 geo:GEOMEC021 geo:GEOMEC009 geo:GEOMEC008 geo:GEOMEC013 geo:GEOMEC001 geo:GEOMEC020 geo:GEOMEC019 geo:GEOMEC033 geo:GEOMEC041 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:campo-tensional geo:GEOMEC006 geo:GEOMEC007 geo:GEOMEC010 geo:GEOMEC012 geo:GEOMEC017 geo:GEOMEC023 geo:GEOMEC032 geo:GEOMEC034 geo:GEOMEC037 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC041 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC052B geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC075 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC005 geo:GEOMEC016 geo:GEOMEC018 geo:campo-tensional geo:GEOMEC021 geo:GEOMEC009 geo:GEOMEC008 geo:GEOMEC001 geo:GEOMEC020 geo:GEOMEC019 geo:GEOMEC033 geo:GEOMEC041 ) ] .
 
 geo:is_part_of a owl:ObjectProperty ;
     rdfs:label "Janela Operacional de Lama"@pt ;
     rdfs:label "is part of"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC007 geo:GEOMEC008 geo:GEOMEC009 geo:GEOMEC019 geo:GEOMEC020 geo:GEOMEC037 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC040 geo:GEOMEC041 geo:GEOMEC042 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC052A geo:GEOMEC052B geo:GEOMEC053A geo:GEOMEC053B geo:GEOMEC061 geo:GEOMEC062 geo:GEOMEC063 geo:GEOMEC064 geo:GEOMEC065 geo:GEOMEC066 geo:GEOMEC067 geo:GEOMEC075 geo:GEOMEC077 geo:GEOMEC078 geo:GEOMEC079 geo:GEOMEC079A ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC003 geo:GEOMEC007 geo:GEOMEC002 geo:GEOMEC008 geo:GEOMEC004 geo:GEOMEC019 geo:GEOMEC036 geo:GEOMEC020 geo:GEOMEC006 geo:GEOMEC031 geo:GEOMEC015 geo:GEOMEC022 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:campo-tensional geo:GEOMEC007 geo:GEOMEC008 geo:GEOMEC009 geo:GEOMEC019 geo:GEOMEC020 geo:GEOMEC037 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC040 geo:GEOMEC041 geo:GEOMEC042 geo:GEOMEC043 geo:GEOMEC044 geo:GEOMEC045 geo:GEOMEC052A geo:GEOMEC052B geo:GEOMEC053A geo:GEOMEC053B geo:GEOMEC061 geo:GEOMEC062 geo:GEOMEC063 geo:GEOMEC064 geo:GEOMEC065 geo:GEOMEC066 geo:GEOMEC067 geo:GEOMEC075 geo:GEOMEC077 geo:GEOMEC078 geo:GEOMEC079 geo:GEOMEC079A geo:axon-dom-acervo-amostras geo:axon-dom-aquisicao-dados-geo geo:axon-dom-aval-petrofisica geo:axon-dom-blocos-parcerias geo:axon-dom-geodesia geo:axon-dom-geofisica geo:axon-dom-geologia geo:axon-dom-geomecanica geo:axon-dom-interp-exploratoria geo:axon-asn-op-amostras-fluido geo:axon-asn-op-amostras-rocha geo:axon-asn-aval-final-poco geo:axon-asn-perfilagem geo:axon-asn-testemunhagem geo:axon-asn-mudlogging geo:axon-asn-planejamento geo:axon-asn-pressao-temperatura geo:axon-asn-status-poco geo:axon-asn-teste-formacao-aberto geo:axon-sub-dados-culturais geo:axon-sub-prog-aquisicao geo:axon-term-acervo-amostras geo:axon-term-amostra geo:axon-term-amostragem-calha-prevista geo:axon-term-ambiente geo:axon-term-campo geo:axon-term-classificacao-poco geo:axon-term-furo geo:axon-term-igp geo:axon-term-lamina-agua geo:axon-term-lamina-agua-rasa geo:axon-term-lamina-agua-profunda geo:axon-term-lamina-agua-ultraprofunda geo:axon-term-objetivo-poco geo:axon-term-poco geo:axon-term-poco-comprado geo:axon-term-poco-presal geo:axon-term-poco-nao-br geo:axon-term-sonda geo:dst-interval geo:GEOMEC025 geo:GEOMEC084 geo:GM010 geo:GM025 geo:GF001 geo:GF004 geo:ogeomec geo:laudo-geomecanico geo:igp geo:campo geo:modelo-petrofisico geo:perfil-poco geo:seismic-acquisition-survey geo:seismic-processing-project geo:seismic-horizon geo:falha geo:idade-geologica geo:pag geo:qpg geo:GEOMEC072 geo:GEOMEC046 geo:GEOMEC076 geo:GEOMEC086 geo:GEOMEC087 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:janela-lama geo:GEOMEC007 geo:GEOMEC002 geo:GEOMEC008 geo:campo-tensional geo:GEOMEC019 geo:GEOMEC036 geo:GEOMEC020 geo:GEOMEC006 geo:GEOMEC031 geo:GEOMEC015 geo:GEOMEC022 geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:axon-area-exploracao geo:axon-dom-acervo-amostras geo:axon-dom-aquisicao-dados-geo geo:axon-asn-planejamento geo:axon-sub-dados-culturais geo:axon-term-lamina-agua geo:axon-asn-teste-formacao-aberto geo:axon-term-acervo-amostras geo:axon-dom-geologia geo:axon-dom-geomecanica geo:axon-dom-blocos-parcerias geo:axon-dom-aval-petrofisica geo:axon-dom-geofisica geo:axon-dom-interp-exploratoria geo:axon-sub-prog-aquisicao ) ] .
 
 geo:constrains a owl:ObjectProperty ;
     rdfs:label "Densidade Equivalente de Circulação"@pt ;
     rdfs:label "constrains"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC003 geo:GEOMEC006 geo:GEOMEC019 geo:GEOMEC020 geo:GEOMEC021 geo:GEOMEC036 geo:GEOMEC040 geo:GEOMEC041 geo:GEOMEC_ROP_A ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC019 geo:GEOMEC003 geo:GEOMEC018 geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC040 geo:GEOMEC052B ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC002 geo:janela-lama geo:GEOMEC006 geo:GEOMEC019 geo:GEOMEC020 geo:GEOMEC021 geo:GEOMEC036 geo:GEOMEC040 geo:GEOMEC041 geo:GEOMEC_ROP_A ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC019 geo:janela-lama geo:GEOMEC018 geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC040 geo:GEOMEC052B ) ] .
 
 geo:defines_lower_bound a owl:ObjectProperty ;
     rdfs:label "Janela Operacional de Lama"@pt ;
     rdfs:label "defines lower bound"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC003 geo:GEOMEC009 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC003 geo:GEOMEC033 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:janela-lama geo:GEOMEC009 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:janela-lama geo:GEOMEC033 ) ] .
 
 geo:influenced_by a owl:ObjectProperty ;
     rdfs:label "Compressibilidade de Poros"@pt ;
@@ -4954,26 +5569,26 @@ geo:influenced_by a owl:ObjectProperty ;
 geo:is_calculated_from a owl:ObjectProperty ;
     rdfs:label "Pressão de Poros"@pt ;
     rdfs:label "is calculated from"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC004 geo:GEOMEC005 geo:GEOMEC008 geo:GEOMEC009 geo:GEOMEC016 geo:GEOMEC021 geo:GEOMEC024 geo:GEOMEC036 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:GEOMEC004 geo:GEOMEC010 geo:GEOMEC002 geo:GEOMEC014 geo:GEOMEC007 geo:GEOMEC012 geo:GEOMEC019 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:campo-tensional geo:GEOMEC005 geo:GEOMEC008 geo:GEOMEC009 geo:GEOMEC016 geo:GEOMEC021 geo:GEOMEC024 geo:GEOMEC036 geo:GM006 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC001 geo:campo-tensional geo:GEOMEC010 geo:GEOMEC002 geo:GEOMEC014 geo:GEOMEC007 geo:GEOMEC012 geo:GEOMEC019 geo:GM001 ) ] .
 
 geo:defines_upper_bound a owl:ObjectProperty ;
     rdfs:label "Janela Operacional de Lama"@pt ;
     rdfs:label "defines upper bound"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC002 geo:GEOMEC053B ) ] ;
-    rdfs:range geo:GEOMEC003 .
+    rdfs:range geo:janela-lama .
 
 geo:is_specialization_of a owl:ObjectProperty ;
     rdfs:label "Regime de Falhas"@pt ;
     rdfs:label "is specialization of"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC004 geo:GEOMEC024 geo:GEOMEC031 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC017 geo:GEOMEC014 geo:GEOMEC006 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:campo-tensional geo:GEOMEC024 geo:GEOMEC031 geo:GM002 geo:GM003 geo:GM008 geo:GM009 geo:GM011 geo:GM012 geo:GM014 geo:GM015 geo:GM016 geo:GM017 geo:GM018 geo:GM019 geo:GM023 geo:GM024 geo:GF002 geo:GF003 geo:GF005 geo:GF006 geo:GF007 geo:GF008 geo:GF012 geo:GF013 geo:GF014 geo:GF015 geo:GF016 geo:GF017 geo:GM026 geo:GM005 geo:GM025 geo:GEOMEC001 geo:GEOMEC002 geo:GEOMEC007 geo:GEOMEC008 geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC017 geo:GEOMEC069 geo:GEOMEC070 geo:wireline-logging geo:wireline-run geo:mwd-lwd geo:lwd-run geo:coring geo:core-run geo:sidewall-sampling geo:mudlogging geo:mudlogging-time-series geo:cuttings-sampling geo:cuttings-sample-detailed geo:formation-testing geo:teste-formacao geo:rftp geo:core-sample geo:core-plug geo:sidewall-core-sample geo:fluid-sample geo:amostra-fluido geo:testemunho geo:axon-term-igp geo:axon-term-campo geo:axon-term-lamina-agua-rasa geo:axon-term-lamina-agua-profunda geo:axon-term-lamina-agua-ultraprofunda geo:axon-term-poco-comprado geo:axon-term-poco-presal geo:axon-term-poco-nao-br geo:axon-term-poco geo:axon-term-ambiente geo:GEOMEC046 geo:GEOMEC086 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC017 geo:GEOMEC014 geo:GEOMEC006 geo:GM001 geo:GM007 geo:GM010 geo:GM013 geo:GF001 geo:GF004 geo:GF006 geo:GF012 geo:poco geo:janela-lama geo:campo-tensional geo:GM004 geo:GM002 geo:GM014 geo:GM015 geo:GM016 geo:GM025 geo:GF005 geo:axon-asn-perfilagem geo:axon-asn-testemunhagem geo:axon-asn-mudlogging geo:axon-asn-teste-formacao-aberto geo:axon-asn-pressao-temperatura geo:axon-term-amostra geo:igp geo:campo geo:axon-term-lamina-agua geo:ambiente geo:GEOMEC016 geo:axon-asn-aval-final-poco ) ] .
 
 geo:co_measured_with a owl:ObjectProperty ;
     rdfs:label "Módulo de Young"@pt ;
     rdfs:label "co measured with"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC010 geo:GEOMEC011 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC011 geo:GEOMEC012 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC010 geo:GEOMEC011 geo:GEOMEC076 geo:GEOMEC087 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC011 geo:GEOMEC012 geo:GEOMEC075 geo:GEOMEC082 ) ] .
 
 geo:may_trigger a owl:ObjectProperty ;
     rdfs:label "Reativação de Falhas Geológicas"@pt ;
@@ -4990,8 +5605,8 @@ geo:is_risk_for a owl:ObjectProperty ;
 geo:calibrates a owl:ObjectProperty ;
     rdfs:label "Módulo de Young dinâmico → estático (conversão Edyn → Est)"@pt ;
     rdfs:label "calibrates"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC022 geo:GEOMEC031 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC011 geo:GEOMEC030 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC022 geo:GEOMEC031 geo:GM010 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC011 geo:GEOMEC030 geo:mwd-lwd geo:lwd geo:mwd ) ] .
 
 geo:estimates a owl:ObjectProperty ;
     rdfs:label "Magnitude de SHmax (via retroanálise Barton-Zoback)"@pt ;
@@ -5002,32 +5617,32 @@ geo:estimates a owl:ObjectProperty ;
 geo:is_input_for a owl:ObjectProperty ;
     rdfs:label "Estabilidade de Poço (calibração do modelo geomecânico)"@pt ;
     rdfs:label "is input for"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC023 geo:GEOMEC026A geo:GEOMEC035 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC066 geo:GEOMEC_ROP_B geo:GEOMEC023C geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC073 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC017 geo:GEOMEC026B geo:GEOMEC036 geo:GEOMEC025 geo:GEOMEC026A geo:GEOMEC018 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC023 geo:GEOMEC026A geo:GEOMEC035 geo:GEOMEC038 geo:GEOMEC039 geo:GEOMEC066 geo:GEOMEC_ROP_B geo:GEOMEC023C geo:GEOMEC068 geo:GEOMEC069 geo:GEOMEC070 geo:GEOMEC071 geo:GEOMEC073 geo:GM006 geo:GEOMEC076 geo:GEOMEC087 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC017 geo:laudo-geomecanico geo:GEOMEC036 geo:GEOMEC025 geo:GEOMEC026A geo:GEOMEC018 geo:GEOMEC023A geo:GEOMEC023B geo:GEOMEC023C geo:GEOMEC072 geo:GF001 geo:GEOMEC023 geo:GEOMEC081 ) ] .
 
 geo:monitors a owl:ObjectProperty ;
     rdfs:label "Estabilidade de Poço / Eventos Geomecânicos (em tempo real)"@pt ;
     rdfs:label "monitors"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC025 geo:GEOMEC028 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC019 geo:GEOMEC045 geo:GEOMEC050 geo:GEOMEC018 ) ] .
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC019 geo:GEOMEC045 geo:bdp geo:GEOMEC018 ) ] .
 
 geo:supports a owl:ObjectProperty ;
     rdfs:label "MPD — via CSD MPD dedicado"@pt ;
     rdfs:label "supports"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC025 geo:GEOMEC_ROP_B ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC015 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC025 geo:GEOMEC_ROP_B geo:GM006 geo:axon-term-sonda geo:igp geo:axon-dom-geodesia geo:GEOMEC046 geo:GEOMEC086 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC015 geo:GM007 geo:GF002 geo:axon-dom-aquisicao-dados-geo geo:axon-asn-aval-final-poco geo:axon-dom-geofisica geo:GEOMEC017 ) ] .
 
 geo:formalizes a owl:ObjectProperty ;
     rdfs:label "Análise de Geohazards — documento formal para GEP e ANP"@pt ;
     rdfs:label "formalizes"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC026B geo:GEOMEC031 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC027 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:laudo-geomecanico geo:GEOMEC031 geo:GM027 geo:GEOMEC083 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC015 geo:GEOMEC027 geo:laudo-geomecanico geo:GEOMEC086 ) ] .
 
 geo:computes a owl:ObjectProperty ;
     rdfs:label "Estado de Tensões In Situ (solução numérica 3D)"@pt ;
     rdfs:label "computes"@en ;
     rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC028 geo:GEOMEC030 geo:GEOMEC080 geo:GEOMEC081 geo:GEOMEC082 geo:GEOMEC083 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC004 geo:GEOMEC016 geo:GEOMEC014 geo:GEOMEC081 geo:GEOMEC008 geo:GEOMEC002 geo:GEOMEC007 geo:GEOMEC017 ) ] .
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:campo-tensional geo:GEOMEC016 geo:GEOMEC014 geo:GEOMEC081 geo:GEOMEC008 geo:GEOMEC002 geo:GEOMEC007 geo:GEOMEC017 ) ] .
 
 geo:used_with a owl:ObjectProperty ;
     rdfs:label "GERESIM (pré/pós-processamento e interface com simulador de fluxo)"@pt ;
@@ -5050,8 +5665,8 @@ geo:preceded_by a owl:ObjectProperty ;
 geo:performed_by a owl:ObjectProperty ;
     rdfs:label "MPD — testes realizados com o sistema de contrapressão MPD"@pt ;
     rdfs:label "performed by"@en ;
-    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC034 geo:GEOMEC035 ) ] ;
-    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC028 ) ] .
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GEOMEC034 geo:GEOMEC035 geo:drilling-activity geo:wireline-logging geo:mudlogging geo:coring geo:formation-testing geo:wireline-run geo:core-run ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:GEOMEC020 geo:GEOMEC028 geo:axon-term-sonda ) ] .
 
 geo:amplifies a owl:ObjectProperty ;
     rdfs:label "Densidade Equivalente de Circulação"@pt ;
@@ -5070,6 +5685,84 @@ geo:may_reference a owl:ObjectProperty ;
     rdfs:label "may reference"@en ;
     rdfs:domain geo:GEOMEC_ROP_B ;
     rdfs:range geo:GEOMEC023 .
+
+geo:induces_failure a owl:ObjectProperty ;
+    rdfs:label "induz_ruptura"@pt ;
+    rdfs:label "induces_failure"@en ;
+    rdfs:domain geo:GM001 ;
+    rdfs:range geo:GM013 .
+
+geo:controls_mud_window a owl:ObjectProperty ;
+    rdfs:label "controla_janela_lama"@pt ;
+    rdfs:label "controls_mud_window"@en ;
+    rdfs:domain geo:GM004 ;
+    rdfs:range geo:GM005 .
+
+geo:triggers_sand_production a owl:ObjectProperty ;
+    rdfs:label "desencadeia_producao_areia"@pt ;
+    rdfs:label "triggers_sand_production"@en ;
+    rdfs:domain geo:GM001 ;
+    rdfs:range geo:GM013 .
+
+geo:affects_wellbore_stability a owl:ObjectProperty ;
+    rdfs:label "afeta_estabilidade_poco"@pt ;
+    rdfs:label "affects_wellbore_stability"@en ;
+    rdfs:domain geo:GM010 ;
+    rdfs:range geo:GM026 .
+
+geo:caused_by a owl:ObjectProperty ;
+    rdfs:label "causado_por"@pt ;
+    rdfs:label "caused_by"@en ;
+    rdfs:domain geo:GM005 ;
+    rdfs:range geo:GM025 .
+
+geo:bounds_drilling_window a owl:ObjectProperty ;
+    rdfs:label "delimita_janela_perfuracao"@pt ;
+    rdfs:label "bounds_drilling_window"@en ;
+    rdfs:domain geo:GM004 ;
+    rdfs:range geo:GM005 .
+
+geo:calibrated_by a owl:ObjectProperty ;
+    rdfs:label "calibrado_por"@pt ;
+    rdfs:label "calibrated_by"@en ;
+    rdfs:domain geo:GM011 ;
+    rdfs:range geo:GM026 .
+
+geo:constrained_by a owl:ObjectProperty ;
+    rdfs:label "restringido_por"@pt ;
+    rdfs:label "constrained_by"@en ;
+    rdfs:domain geo:GM002 ;
+    rdfs:range geo:GM007 .
+
+geo:input_to_mem a owl:ObjectProperty ;
+    rdfs:label "entrada_para_mem"@pt ;
+    rdfs:label "input_to_mem"@en ;
+    rdfs:domain geo:GM013 ;
+    rdfs:range geo:GM010 .
+
+geo:governs_fracture_propagation a owl:ObjectProperty ;
+    rdfs:label "governa_propagacao_fratura"@pt ;
+    rdfs:label "governs_fracture_propagation"@en ;
+    rdfs:domain geo:GM002 ;
+    rdfs:range geo:GM005 .
+
+geo:observed_in a owl:ObjectProperty ;
+    rdfs:label "observado em"@pt ;
+    rdfs:label "observed in"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:GM010 geo:GF001 geo:GF003 geo:GEOMEC068 geo:GEOMEC086 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:bdp geo:core-sample geo:GM026 geo:falha ) ] .
+
+geo:interpreted_into a owl:ObjectProperty ;
+    rdfs:label "interpretado em"@pt ;
+    rdfs:label "interpreted into"@en ;
+    rdfs:domain geo:GEOMEC023C ;
+    rdfs:range geo:GF004 .
+
+geo:applies_to a owl:ObjectProperty ;
+    rdfs:label "aplica-se a"@pt ;
+    rdfs:label "applies to"@en ;
+    rdfs:domain [ a owl:Class ; owl:unionOf ( geo:axon-term-lamina-agua geo:axon-term-classificacao-poco geo:axon-term-objetivo-poco geo:GEOMEC046 geo:GEOMEC076 ) ] ;
+    rdfs:range [ a owl:Class ; owl:unionOf ( geo:poco geo:reservatorio ) ] .
 
 #
 # Edges (instance-level relation triples)
@@ -5479,61 +6172,55 @@ geo:event_hydrate_service geo:occurs_in geo:poco .
 geo:event_hydrate_production geo:involves_equipment geo:anm .
 geo:event_hydrate_service geo:involves_equipment geo:sp_pump .
 geo:GEOMEC001 geo:influences geo:GEOMEC002 .
-geo:GEOMEC001 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC001 geo:is_part_of geo:janela-lama .
 geo:GEOMEC001 geo:influences geo:GEOMEC005 .
 geo:GEOMEC001 geo:constrains geo:GEOMEC019 .
-geo:GEOMEC001 geo:defines_lower_bound geo:GEOMEC003 .
+geo:GEOMEC001 geo:defines_lower_bound geo:janela-lama .
 geo:GEOMEC001 geo:influenced_by geo:GEOMEC014 .
 geo:GEOMEC001 geo:influences geo:GEOMEC016 .
 geo:GEOMEC001 geo:influences geo:GEOMEC018 .
 geo:GEOMEC002 geo:is_calculated_from geo:GEOMEC001 .
-geo:GEOMEC002 geo:constrains geo:GEOMEC003 .
-geo:GEOMEC002 geo:defines_upper_bound geo:GEOMEC003 .
+geo:GEOMEC002 geo:constrains geo:janela-lama .
+geo:GEOMEC002 geo:defines_upper_bound geo:janela-lama .
 geo:GEOMEC002 geo:influenced_by geo:GEOMEC017 .
 geo:GEOMEC002 geo:constrains geo:GEOMEC018 .
-geo:GEOMEC003 geo:constrains geo:GEOMEC019 .
-geo:GEOMEC003 geo:defines_lower_bound geo:GEOMEC033 .
-geo:GEOMEC004 geo:is_calculated_from geo:GEOMEC001 .
-geo:GEOMEC004 geo:is_part_of geo:GEOMEC007 .
-geo:GEOMEC004 geo:is_part_of geo:GEOMEC002 .
-geo:GEOMEC004 geo:is_part_of geo:GEOMEC008 .
-geo:GEOMEC004 geo:influences geo:GEOMEC005 .
-geo:GEOMEC004 geo:produces geo:GEOMEC016 .
-geo:GEOMEC004 geo:is_specialization_of geo:GEOMEC017 .
-geo:GEOMEC004 geo:governed_by geo:GEOMEC027 .
+geo:janela-lama geo:constrains geo:GEOMEC019 .
+geo:janela-lama geo:defines_lower_bound geo:GEOMEC033 .
+geo:campo-tensional geo:is_calculated_from geo:GEOMEC001 .
+geo:campo-tensional geo:is_part_of geo:GEOMEC007 .
+geo:campo-tensional geo:is_part_of geo:GEOMEC002 .
+geo:campo-tensional geo:is_part_of geo:GEOMEC008 .
+geo:campo-tensional geo:influences geo:GEOMEC005 .
+geo:campo-tensional geo:produces geo:GEOMEC016 .
+geo:campo-tensional geo:is_specialization_of geo:GEOMEC017 .
+geo:campo-tensional geo:governed_by geo:GEOMEC027 .
 geo:GEOMEC005 geo:is_calculated_from geo:GEOMEC001 .
-geo:GEOMEC005 geo:is_calculated_from geo:GEOMEC004 .
-geo:GEOMEC005 geo:derived_from geo:GEOMEC013 .
-geo:GEOMEC006 geo:constrains geo:GEOMEC003 .
-geo:GEOMEC006 geo:influences geo:GEOMEC004 .
+geo:GEOMEC005 geo:is_calculated_from geo:campo-tensional .
+geo:GEOMEC006 geo:constrains geo:janela-lama .
+geo:GEOMEC006 geo:influences geo:campo-tensional .
 geo:GEOMEC006 geo:measures geo:GEOMEC002 .
-geo:GEOMEC007 geo:is_part_of geo:GEOMEC004 .
+geo:GEOMEC007 geo:is_part_of geo:campo-tensional .
 geo:GEOMEC007 geo:influences geo:GEOMEC005 .
 geo:GEOMEC007 geo:influences geo:GEOMEC021 .
 geo:GEOMEC007 geo:influenced_by geo:GEOMEC017 .
-geo:GEOMEC008 geo:is_part_of geo:GEOMEC004 .
+geo:GEOMEC008 geo:is_part_of geo:campo-tensional .
 geo:GEOMEC008 geo:is_calculated_from geo:GEOMEC010 .
 geo:GEOMEC008 geo:is_calculated_from geo:GEOMEC001 .
 geo:GEOMEC008 geo:is_calculated_from geo:GEOMEC002 .
 geo:GEOMEC008 geo:influenced_by geo:GEOMEC017 .
-geo:GEOMEC009 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC009 geo:is_part_of geo:janela-lama .
 geo:GEOMEC009 geo:is_calculated_from geo:GEOMEC010 .
 geo:GEOMEC009 geo:is_calculated_from geo:GEOMEC001 .
-geo:GEOMEC009 geo:is_calculated_from geo:GEOMEC004 .
-geo:GEOMEC009 geo:defines_lower_bound geo:GEOMEC003 .
+geo:GEOMEC009 geo:is_calculated_from geo:campo-tensional .
+geo:GEOMEC009 geo:defines_lower_bound geo:janela-lama .
 geo:GEOMEC010 geo:influences geo:GEOMEC009 .
 geo:GEOMEC010 geo:influences geo:GEOMEC008 .
 geo:GEOMEC010 geo:co_measured_with geo:GEOMEC011 .
-geo:GEOMEC011 geo:influences geo:GEOMEC013 .
 geo:GEOMEC011 geo:co_measured_with geo:GEOMEC012 .
 geo:GEOMEC012 geo:influences geo:GEOMEC002 .
-geo:GEOMEC012 geo:influences geo:GEOMEC013 .
-geo:GEOMEC013 geo:influences geo:GEOMEC005 .
-geo:GEOMEC013 geo:derived_from geo:GEOMEC011 .
-geo:GEOMEC014 geo:related_to geo:GEOMEC013 .
-geo:GEOMEC015 geo:requires geo:GEOMEC003 .
+geo:GEOMEC015 geo:requires geo:janela-lama .
 geo:GEOMEC015 geo:requires geo:GEOMEC001 .
-geo:GEOMEC015 geo:requires geo:GEOMEC004 .
+geo:GEOMEC015 geo:requires geo:campo-tensional .
 geo:GEOMEC015 geo:requires geo:GEOMEC010 .
 geo:GEOMEC015 geo:requires geo:GEOMEC017 .
 geo:GEOMEC016 geo:is_calculated_from geo:GEOMEC014 .
@@ -5544,18 +6231,18 @@ geo:GEOMEC017 geo:influences geo:GEOMEC018 .
 geo:GEOMEC018 geo:governed_by geo:GEOMEC005 .
 geo:GEOMEC018 geo:may_trigger geo:GEOMEC016 .
 geo:GEOMEC018 geo:is_risk_for geo:GEOMEC015 .
-geo:GEOMEC019 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC019 geo:is_part_of geo:janela-lama .
 geo:GEOMEC019 geo:constrains geo:GEOMEC001 .
 geo:GEOMEC019 geo:constrains geo:GEOMEC002 .
 geo:GEOMEC019 geo:derived_from geo:GEOMEC020 .
 geo:GEOMEC019 geo:requires geo:GEOMEC047 .
 geo:GEOMEC019 geo:requires geo:GEOMEC048 .
 geo:GEOMEC020 geo:constrains geo:GEOMEC019 .
-geo:GEOMEC020 geo:is_part_of geo:GEOMEC003 .
+geo:GEOMEC020 geo:is_part_of geo:janela-lama .
 geo:GEOMEC020 geo:constrains geo:GEOMEC001 .
 geo:GEOMEC020 geo:constrains geo:GEOMEC002 .
 geo:GEOMEC021 geo:is_calculated_from geo:GEOMEC007 .
-geo:GEOMEC021 geo:constrains geo:GEOMEC003 .
+geo:GEOMEC021 geo:constrains geo:janela-lama .
 geo:GEOMEC022 geo:produces geo:GEOMEC010 .
 geo:GEOMEC022 geo:produces geo:GEOMEC011 .
 geo:GEOMEC022 geo:produces geo:GEOMEC012 .
@@ -5573,34 +6260,34 @@ geo:GEOMEC023 geo:related_to geo:GEOMEC023C .
 geo:GEOMEC024 geo:is_specialization_of geo:GEOMEC014 .
 geo:GEOMEC024 geo:is_calculated_from geo:GEOMEC012 .
 geo:GEOMEC025 geo:monitors geo:GEOMEC015 .
-geo:GEOMEC025 geo:produces geo:GEOMEC026B .
+geo:GEOMEC025 geo:produces geo:laudo-geomecanico .
 geo:GEOMEC025 geo:monitors geo:GEOMEC019 .
 geo:GEOMEC025 geo:supports geo:GEOMEC020 .
 geo:GEOMEC025 geo:monitors geo:GEOMEC045 .
-geo:GEOMEC025 geo:monitors geo:GEOMEC050 .
+geo:GEOMEC025 geo:monitors geo:bdp .
 geo:GEOMEC025 geo:requires geo:GEOMEC030 .
-geo:GEOMEC026A geo:is_input_for geo:GEOMEC026B .
+geo:GEOMEC026A geo:is_input_for geo:laudo-geomecanico .
 geo:GEOMEC026A geo:contains geo:GEOMEC001 .
-geo:GEOMEC026A geo:contains geo:GEOMEC003 .
+geo:GEOMEC026A geo:contains geo:janela-lama .
 geo:GEOMEC026A geo:is_input_for geo:GEOMEC015 .
-geo:GEOMEC026B geo:requires_input geo:GEOMEC026A .
-geo:GEOMEC026B geo:contains geo:GEOMEC001 .
-geo:GEOMEC026B geo:contains geo:GEOMEC004 .
-geo:GEOMEC026B geo:enables geo:GEOMEC003 .
-geo:GEOMEC026B geo:formalizes geo:GEOMEC015 .
+geo:laudo-geomecanico geo:requires_input geo:GEOMEC026A .
+geo:laudo-geomecanico geo:contains geo:GEOMEC001 .
+geo:laudo-geomecanico geo:contains geo:campo-tensional .
+geo:laudo-geomecanico geo:enables geo:janela-lama .
+geo:laudo-geomecanico geo:formalizes geo:GEOMEC015 .
 geo:GEOMEC027 geo:requires geo:GEOMEC018 .
 geo:GEOMEC027 geo:requires geo:GEOMEC016 .
-geo:GEOMEC027 geo:enables geo:GEOMEC026B .
-geo:GEOMEC028 geo:computes geo:GEOMEC004 .
+geo:GEOMEC027 geo:enables geo:laudo-geomecanico .
+geo:GEOMEC028 geo:computes geo:campo-tensional .
 geo:GEOMEC028 geo:computes geo:GEOMEC016 .
 geo:GEOMEC028 geo:computes geo:GEOMEC014 .
 geo:GEOMEC028 geo:monitors geo:GEOMEC018 .
 geo:GEOMEC028 geo:used_with geo:GEOMEC029 .
 geo:GEOMEC028 geo:used_with geo:GEOMEC030 .
 geo:GEOMEC029 geo:used_with geo:GEOMEC028 .
-geo:GEOMEC029 geo:produces geo:GEOMEC026B .
+geo:GEOMEC029 geo:produces geo:laudo-geomecanico .
 geo:GEOMEC029 geo:storage_for geo:GEOMEC027 .
-geo:GEOMEC030 geo:computes geo:GEOMEC004 .
+geo:GEOMEC030 geo:computes geo:campo-tensional .
 geo:GEOMEC030 geo:estimates geo:GEOMEC002 .
 geo:GEOMEC030 geo:estimates geo:GEOMEC001 .
 geo:GEOMEC031 geo:measures geo:GEOMEC002 .
@@ -5620,13 +6307,13 @@ geo:GEOMEC034 geo:influences geo:GEOMEC002 .
 geo:GEOMEC034 geo:performed_by geo:GEOMEC020 .
 geo:GEOMEC035 geo:performed_by geo:GEOMEC028 .
 geo:GEOMEC035 geo:governed_by geo:GEOMEC029 .
-geo:GEOMEC035 geo:produces geo:GEOMEC004 .
+geo:GEOMEC035 geo:produces geo:campo-tensional .
 geo:GEOMEC035 geo:governed_by geo:GEOMEC027 .
-geo:GEOMEC035 geo:is_input_for geo:GEOMEC026B .
+geo:GEOMEC035 geo:is_input_for geo:laudo-geomecanico .
 geo:GEOMEC035 geo:produces geo:GEOMEC016 .
 geo:GEOMEC035 geo:produces geo:GEOMEC018 .
 geo:GEOMEC036 geo:is_calculated_from geo:GEOMEC019 .
-geo:GEOMEC036 geo:constrains geo:GEOMEC003 .
+geo:GEOMEC036 geo:constrains geo:janela-lama .
 geo:GEOMEC036 geo:requires geo:GEOMEC047 .
 geo:GEOMEC036 geo:requires_input geo:GEOMEC038 .
 geo:GEOMEC036 geo:requires_input geo:GEOMEC039 .
@@ -5657,7 +6344,7 @@ geo:GEOMEC044 geo:is_part_of geo:GEOMEC015 .
 geo:GEOMEC044 geo:related_to geo:GEOMEC023 .
 geo:GEOMEC045 geo:is_part_of geo:GEOMEC015 .
 geo:GEOMEC045 geo:influences geo:GEOMEC009 .
-geo:GEOMEC045 geo:related_to geo:GEOMEC049 .
+geo:GEOMEC045 geo:related_to geo:bdiep .
 geo:GEOMEC045 geo:related_to geo:GEOMEC051 .
 geo:GEOMEC052A geo:is_part_of geo:GEOMEC020 .
 geo:GEOMEC052A geo:used_with geo:GEOMEC052B .
@@ -5668,7 +6355,7 @@ geo:GEOMEC053A geo:preceded_by geo:GEOMEC042 .
 geo:GEOMEC053A geo:related_to geo:GEOMEC053B .
 geo:GEOMEC053B geo:is_part_of geo:GEOMEC006 .
 geo:GEOMEC053B geo:estimates geo:GEOMEC002 .
-geo:GEOMEC053B geo:defines_upper_bound geo:GEOMEC003 .
+geo:GEOMEC053B geo:defines_upper_bound geo:janela-lama .
 geo:GEOMEC061 geo:is_part_of geo:GEOMEC022 .
 geo:GEOMEC061 geo:measures geo:GEOMEC010 .
 geo:GEOMEC061 geo:measures geo:GEOMEC011 .
@@ -5685,7 +6372,7 @@ geo:GEOMEC066 geo:is_part_of geo:GEOMEC022 .
 geo:GEOMEC066 geo:is_input_for geo:GEOMEC015 .
 geo:GEOMEC067 geo:is_part_of geo:GEOMEC022 .
 geo:GEOMEC_ROP_A geo:amplifies geo:GEOMEC019 .
-geo:GEOMEC_ROP_A geo:constrains geo:GEOMEC003 .
+geo:GEOMEC_ROP_A geo:constrains geo:janela-lama .
 geo:GEOMEC_ROP_A geo:related_to geo:GEOMEC009 .
 geo:GEOMEC_ROP_A geo:may_contribute_to geo:GEOMEC045 .
 geo:GEOMEC_ROP_B geo:is_input_for geo:GEOMEC025 .
@@ -5747,7 +6434,7 @@ geo:GEOMEC079 geo:is_part_of geo:GEOMEC070 .
 geo:GEOMEC079A geo:is_part_of geo:GEOMEC070 .
 geo:GEOMEC079A geo:related_to geo:GEOMEC017 .
 geo:GEOMEC079A geo:related_to geo:GEOMEC018 .
-geo:GEOMEC080 geo:measures geo:GEOMEC004 .
+geo:GEOMEC080 geo:measures geo:campo-tensional .
 geo:GEOMEC080 geo:computes geo:GEOMEC081 .
 geo:GEOMEC081 geo:computes geo:GEOMEC008 .
 geo:GEOMEC081 geo:computes geo:GEOMEC002 .
@@ -5759,6 +6446,267 @@ geo:GEOMEC083 geo:computes geo:GEOMEC081 .
 geo:GEOMEC083 geo:related_to geo:GEOMEC082 .
 geo:GEOMEC085 geo:used_with geo:GEOMEC023A .
 geo:GEOMEC085 geo:used_with geo:GEOMEC023B .
+geo:GM001 geo:induces_failure geo:GM013 .
+geo:GM004 geo:controls_mud_window geo:GM005 .
+geo:GM001 geo:triggers_sand_production geo:GM013 .
+geo:GM010 geo:affects_wellbore_stability geo:GM026 .
+geo:GM005 geo:caused_by geo:GM025 .
+geo:GM004 geo:bounds_drilling_window geo:GM005 .
+geo:GM011 geo:calibrated_by geo:GM026 .
+geo:GM002 geo:constrained_by geo:GM007 .
+geo:GM013 geo:input_to_mem geo:GM010 .
+geo:GM002 geo:governs_fracture_propagation geo:GM005 .
+geo:GM002 geo:is_specialization_of geo:GM001 .
+geo:GM003 geo:is_specialization_of geo:GM001 .
+geo:GM008 geo:is_specialization_of geo:GM007 .
+geo:GM009 geo:is_specialization_of geo:GM007 .
+geo:GM011 geo:is_specialization_of geo:GM010 .
+geo:GM012 geo:is_specialization_of geo:GM010 .
+geo:GM014 geo:is_specialization_of geo:GM013 .
+geo:GM015 geo:is_specialization_of geo:GM013 .
+geo:GM016 geo:is_specialization_of geo:GM013 .
+geo:GM017 geo:is_specialization_of geo:GM013 .
+geo:GM018 geo:is_specialization_of geo:GM013 .
+geo:GM019 geo:is_specialization_of geo:GM013 .
+geo:GM023 geo:is_specialization_of geo:GM013 .
+geo:GM024 geo:is_specialization_of geo:GM013 .
+geo:GF002 geo:is_specialization_of geo:GF001 .
+geo:GF003 geo:is_specialization_of geo:GF001 .
+geo:GF005 geo:is_specialization_of geo:GF004 .
+geo:GF006 geo:is_specialization_of geo:GF004 .
+geo:GF007 geo:is_specialization_of geo:GF004 .
+geo:GF008 geo:is_specialization_of geo:GF004 .
+geo:GF012 geo:is_specialization_of geo:GF006 .
+geo:GF013 geo:is_specialization_of geo:GF012 .
+geo:GF014 geo:is_specialization_of geo:GF012 .
+geo:GF015 geo:is_specialization_of geo:GF006 .
+geo:GF016 geo:is_specialization_of geo:GF006 .
+geo:GF017 geo:is_specialization_of geo:GF006 .
+geo:GM004 geo:measures geo:formation-testing .
+geo:GM004 geo:derived_from geo:wireline-logging .
+geo:GM001 geo:measures geo:formation-testing .
+geo:GM002 geo:measures geo:formation-testing .
+geo:GM003 geo:measures geo:formation-testing .
+geo:GM010 geo:derived_from geo:wireline-logging .
+geo:GM010 geo:derived_from geo:core-sample .
+geo:GM010 geo:derived_from geo:formation-testing .
+geo:GM010 geo:produces geo:janela-lama .
+geo:GM010 geo:produces geo:campo-tensional .
+geo:GM011 geo:derived_from geo:wireline-logging .
+geo:GM011 geo:derived_from geo:core-sample .
+geo:GM011 geo:derived_from geo:formation-testing .
+geo:GM011 geo:produces geo:janela-lama .
+geo:GM011 geo:produces geo:campo-tensional .
+geo:GM012 geo:derived_from geo:wireline-logging .
+geo:GM012 geo:derived_from geo:core-sample .
+geo:GM012 geo:derived_from geo:formation-testing .
+geo:GM012 geo:produces geo:janela-lama .
+geo:GM012 geo:produces geo:campo-tensional .
+geo:GM026 geo:is_specialization_of geo:poco .
+geo:GM005 geo:is_specialization_of geo:janela-lama .
+geo:GM025 geo:is_specialization_of geo:campo-tensional .
+geo:GM013 geo:derived_from geo:core-sample .
+geo:GM013 geo:derived_from geo:wireline-logging .
+geo:GM014 geo:derived_from geo:core-sample .
+geo:GM014 geo:derived_from geo:wireline-logging .
+geo:GM015 geo:derived_from geo:core-sample .
+geo:GM015 geo:derived_from geo:wireline-logging .
+geo:GM016 geo:derived_from geo:core-sample .
+geo:GM016 geo:derived_from geo:wireline-logging .
+geo:GM017 geo:derived_from geo:core-sample .
+geo:GM017 geo:derived_from geo:wireline-logging .
+geo:GM018 geo:derived_from geo:core-sample .
+geo:GM018 geo:derived_from geo:wireline-logging .
+geo:GM019 geo:derived_from geo:core-sample .
+geo:GM019 geo:derived_from geo:wireline-logging .
+geo:GM020 geo:derived_from geo:core-sample .
+geo:GM021 geo:derived_from geo:core-sample .
+geo:GM022 geo:derived_from geo:core-sample .
+geo:GM010 geo:calibrates geo:mwd-lwd .
+geo:GM010 geo:calibrates geo:lwd .
+geo:GM010 geo:calibrates geo:mwd .
+geo:GM010 geo:observed_in geo:bdp .
+geo:GF004 geo:derived_from geo:wireline-logging .
+geo:GF004 geo:derived_from geo:core-sample .
+geo:GF005 geo:derived_from geo:wireline-logging .
+geo:GF005 geo:derived_from geo:core-sample .
+geo:GF006 geo:derived_from geo:wireline-logging .
+geo:GF006 geo:derived_from geo:core-sample .
+geo:GF007 geo:derived_from geo:wireline-logging .
+geo:GF007 geo:derived_from geo:core-sample .
+geo:GF008 geo:derived_from geo:wireline-logging .
+geo:GF008 geo:derived_from geo:core-sample .
+geo:GF009 geo:derived_from geo:wireline-logging .
+geo:GF009 geo:derived_from geo:core-sample .
+geo:GF010 geo:derived_from geo:wireline-logging .
+geo:GF010 geo:derived_from geo:core-sample .
+geo:GF011 geo:derived_from geo:wireline-logging .
+geo:GF011 geo:derived_from geo:core-sample .
+geo:GF015 geo:derived_from geo:wireline-logging .
+geo:GF015 geo:derived_from geo:core-sample .
+geo:GF016 geo:derived_from geo:wireline-logging .
+geo:GF016 geo:derived_from geo:core-sample .
+geo:GF017 geo:derived_from geo:wireline-logging .
+geo:GF017 geo:derived_from geo:core-sample .
+geo:GM027 geo:formalizes geo:laudo-geomecanico .
+geo:GM006 geo:is_calculated_from geo:GM001 .
+geo:GM006 geo:supports geo:GM007 .
+geo:GM006 geo:is_input_for geo:GF001 .
+geo:GM006 geo:supports geo:GF002 .
+geo:GF002 geo:produces geo:GF004 .
+geo:GF002 geo:occurs_in geo:poco .
+geo:GF001 geo:observed_in geo:core-sample .
+geo:GF003 geo:observed_in geo:core-sample .
+geo:GEOMEC001 geo:is_specialization_of geo:GM004 .
+geo:GEOMEC002 geo:is_specialization_of geo:GM002 .
+geo:GEOMEC007 geo:is_specialization_of geo:GM002 .
+geo:GEOMEC008 geo:is_specialization_of geo:GM002 .
+geo:GEOMEC010 geo:is_specialization_of geo:GM014 .
+geo:GEOMEC011 geo:is_specialization_of geo:GM015 .
+geo:GEOMEC012 geo:is_specialization_of geo:GM016 .
+geo:GEOMEC017 geo:is_specialization_of geo:GM025 .
+geo:GEOMEC068 geo:observed_in geo:GM026 .
+geo:GEOMEC069 geo:is_specialization_of geo:GF005 .
+geo:GEOMEC070 geo:is_specialization_of geo:GF004 .
+geo:GEOMEC023A geo:occurs_in geo:GM026 .
+geo:GEOMEC023B geo:produces geo:GF005 .
+geo:GEOMEC023C geo:interpreted_into geo:GF004 .
+geo:axon-dom-acervo-amostras geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-aquisicao-dados-geo geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-aval-petrofisica geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-blocos-parcerias geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-geodesia geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-geofisica geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-geologia geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-geomecanica geo:is_part_of geo:axon-area-exploracao .
+geo:axon-dom-interp-exploratoria geo:is_part_of geo:axon-area-exploracao .
+geo:axon-asn-op-amostras-fluido geo:is_part_of geo:axon-dom-acervo-amostras .
+geo:axon-asn-op-amostras-rocha geo:is_part_of geo:axon-dom-acervo-amostras .
+geo:axon-asn-aval-final-poco geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-perfilagem geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-testemunhagem geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-mudlogging geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-planejamento geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-pressao-temperatura geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-status-poco geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-asn-teste-formacao-aberto geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:axon-sub-dados-culturais geo:is_part_of geo:axon-asn-planejamento .
+geo:axon-sub-prog-aquisicao geo:is_part_of geo:axon-asn-planejamento .
+geo:axon-term-acervo-amostras geo:is_part_of geo:axon-dom-acervo-amostras .
+geo:axon-term-amostra geo:is_part_of geo:axon-dom-acervo-amostras .
+geo:axon-term-amostragem-calha-prevista geo:is_part_of geo:axon-asn-planejamento .
+geo:axon-term-ambiente geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-campo geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-classificacao-poco geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-furo geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-igp geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-lamina-agua geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-lamina-agua-rasa geo:is_part_of geo:axon-term-lamina-agua .
+geo:axon-term-lamina-agua-profunda geo:is_part_of geo:axon-term-lamina-agua .
+geo:axon-term-lamina-agua-ultraprofunda geo:is_part_of geo:axon-term-lamina-agua .
+geo:axon-term-objetivo-poco geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-poco geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-poco-comprado geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-poco-presal geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-poco-nao-br geo:is_part_of geo:axon-sub-dados-culturais .
+geo:axon-term-sonda geo:is_part_of geo:axon-sub-dados-culturais .
+geo:wireline-logging geo:is_specialization_of geo:axon-asn-perfilagem .
+geo:wireline-run geo:is_specialization_of geo:axon-asn-perfilagem .
+geo:mwd-lwd geo:is_specialization_of geo:axon-asn-perfilagem .
+geo:lwd-run geo:is_specialization_of geo:axon-asn-perfilagem .
+geo:coring geo:is_specialization_of geo:axon-asn-testemunhagem .
+geo:core-run geo:is_specialization_of geo:axon-asn-testemunhagem .
+geo:sidewall-sampling geo:is_specialization_of geo:axon-asn-testemunhagem .
+geo:mudlogging geo:is_specialization_of geo:axon-asn-mudlogging .
+geo:mudlogging-time-series geo:is_specialization_of geo:axon-asn-mudlogging .
+geo:cuttings-sampling geo:is_specialization_of geo:axon-asn-mudlogging .
+geo:cuttings-sample-detailed geo:is_specialization_of geo:axon-asn-mudlogging .
+geo:formation-testing geo:is_specialization_of geo:axon-asn-teste-formacao-aberto .
+geo:teste-formacao geo:is_specialization_of geo:axon-asn-teste-formacao-aberto .
+geo:dst-interval geo:is_part_of geo:axon-asn-teste-formacao-aberto .
+geo:rftp geo:is_specialization_of geo:axon-asn-pressao-temperatura .
+geo:core-sample geo:is_specialization_of geo:axon-term-amostra .
+geo:core-plug geo:is_specialization_of geo:axon-term-amostra .
+geo:sidewall-core-sample geo:is_specialization_of geo:axon-term-amostra .
+geo:cuttings-sample-detailed geo:is_specialization_of geo:axon-term-amostra .
+geo:fluid-sample geo:is_specialization_of geo:axon-term-amostra .
+geo:amostra-fluido geo:is_specialization_of geo:axon-term-amostra .
+geo:testemunho geo:is_specialization_of geo:axon-term-amostra .
+geo:axon-term-amostra geo:is_part_of geo:axon-term-acervo-amostras .
+geo:axon-term-furo geo:is_part_of geo:axon-dom-geologia .
+geo:drilling-activity geo:performed_by geo:axon-term-sonda .
+geo:wireline-logging geo:performed_by geo:axon-term-sonda .
+geo:mudlogging geo:performed_by geo:axon-term-sonda .
+geo:coring geo:performed_by geo:axon-term-sonda .
+geo:formation-testing geo:performed_by geo:axon-term-sonda .
+geo:wireline-run geo:performed_by geo:axon-term-sonda .
+geo:core-run geo:performed_by geo:axon-term-sonda .
+geo:axon-term-sonda geo:supports geo:axon-dom-aquisicao-dados-geo .
+geo:GEOMEC001 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GEOMEC025 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GEOMEC084 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GM010 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GM025 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GF001 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GF004 geo:is_part_of geo:axon-dom-geomecanica .
+geo:ogeomec geo:is_part_of geo:axon-dom-geomecanica .
+geo:laudo-geomecanico geo:is_part_of geo:axon-dom-geomecanica .
+geo:igp geo:is_part_of geo:axon-dom-aquisicao-dados-geo .
+geo:igp geo:supports geo:axon-asn-aval-final-poco .
+geo:axon-term-igp geo:is_specialization_of geo:igp .
+geo:campo geo:is_part_of geo:axon-dom-blocos-parcerias .
+geo:axon-term-campo geo:is_specialization_of geo:campo .
+geo:axon-term-lamina-agua-rasa geo:is_specialization_of geo:axon-term-lamina-agua .
+geo:axon-term-lamina-agua-profunda geo:is_specialization_of geo:axon-term-lamina-agua .
+geo:axon-term-lamina-agua-ultraprofunda geo:is_specialization_of geo:axon-term-lamina-agua .
+geo:axon-term-lamina-agua geo:applies_to geo:poco .
+geo:axon-term-poco-comprado geo:is_specialization_of geo:poco .
+geo:axon-term-poco-presal geo:is_specialization_of geo:poco .
+geo:axon-term-poco-nao-br geo:is_specialization_of geo:poco .
+geo:axon-term-poco-presal geo:occurs_in geo:presal .
+geo:axon-term-poco geo:is_specialization_of geo:poco .
+geo:axon-term-ambiente geo:is_specialization_of geo:ambiente .
+geo:axon-term-classificacao-poco geo:applies_to geo:poco .
+geo:axon-term-objetivo-poco geo:applies_to geo:poco .
+geo:modelo-petrofisico geo:is_part_of geo:axon-dom-aval-petrofisica .
+geo:perfil-poco geo:is_part_of geo:axon-dom-aval-petrofisica .
+geo:seismic-acquisition-survey geo:is_part_of geo:axon-dom-geofisica .
+geo:seismic-processing-project geo:is_part_of geo:axon-dom-geofisica .
+geo:seismic-horizon geo:is_part_of geo:axon-dom-geofisica .
+geo:seismic-horizon geo:is_part_of geo:axon-dom-interp-exploratoria .
+geo:falha geo:is_part_of geo:axon-dom-interp-exploratoria .
+geo:idade-geologica geo:is_part_of geo:axon-dom-interp-exploratoria .
+geo:pag geo:is_part_of geo:axon-dom-interp-exploratoria .
+geo:qpg geo:is_part_of geo:axon-dom-interp-exploratoria .
+geo:GEOMEC072 geo:is_part_of geo:axon-dom-interp-exploratoria .
+geo:axon-dom-geodesia geo:supports geo:axon-dom-aquisicao-dados-geo .
+geo:axon-dom-geodesia geo:supports geo:axon-dom-geofisica .
+geo:axon-term-amostragem-calha-prevista geo:is_part_of geo:axon-sub-prog-aquisicao .
+geo:axon-term-amostragem-calha-prevista geo:requires geo:cuttings-sampling .
+geo:GEOMEC046 geo:is_specialization_of geo:GEOMEC016 .
+geo:GEOMEC027 geo:produces geo:GEOMEC046 .
+geo:GEOMEC046 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GEOMEC046 geo:applies_to geo:reservatorio .
+geo:GEOMEC046 geo:derived_from geo:GM010 .
+geo:GEOMEC046 geo:derived_from geo:GM011 .
+geo:GEOMEC046 geo:derived_from geo:GM012 .
+geo:GEOMEC046 geo:supports geo:GEOMEC015 .
+geo:GEOMEC076 geo:applies_to geo:poco .
+geo:GEOMEC076 geo:is_input_for geo:GEOMEC023 .
+geo:GEOMEC076 geo:is_input_for geo:GEOMEC072 .
+geo:GEOMEC076 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GEOMEC076 geo:co_measured_with geo:GEOMEC075 .
+geo:GEOMEC086 geo:produces geo:GEOMEC081 .
+geo:GEOMEC086 geo:observed_in geo:falha .
+geo:GEOMEC086 geo:derived_from geo:GEOMEC082 .
+geo:GEOMEC083 geo:formalizes geo:GEOMEC086 .
+geo:GEOMEC086 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GEOMEC086 geo:supports geo:GEOMEC017 .
+geo:GEOMEC086 geo:is_specialization_of geo:axon-asn-aval-final-poco .
+geo:GEOMEC087 geo:is_input_for geo:GEOMEC081 .
+geo:GEOMEC087 geo:derived_from geo:GEOMEC084 .
+geo:GEOMEC087 geo:is_part_of geo:axon-dom-geomecanica .
+geo:GEOMEC087 geo:co_measured_with geo:GEOMEC082 .
 
 #
 # Layer1 (GeoCore) ↔ Layer1b (GeoSciML + CGI Simple Lithology) equivalences
