@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T18:31:47.871Z",
-    "count": 418
+    "generated": "2026-05-04T18:48:26.890Z",
+    "count": 412
   },
   "entities": [
     {
@@ -488,6 +488,11 @@
             "from": "axon-term-objetivo-poco",
             "relation": "applies_to",
             "style": "axon_attr_bridge"
+          },
+          {
+            "from": "GEOMEC076",
+            "relation": "applies_to",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -958,6 +963,11 @@
             "from": "facies-sedimentar",
             "relation": "composes",
             "style": "solid"
+          },
+          {
+            "from": "GEOMEC046",
+            "relation": "applies_to",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -4961,7 +4971,13 @@
             "style": "axon_dom_link"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GEOMEC086",
+            "relation": "observed_in",
+            "style": "geomec_isolated_bridge"
+          }
+        ]
       }
     },
     {
@@ -5626,15 +5642,152 @@
         "@en": null
       },
       "skos_example": [],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC004",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "Estado de Tensões In Situ (Geotensões)",
+          "label_en_at_merge": "In Situ Stress State (Geotensions)",
+          "original_definition_pt": "Conjunto das três tensões principais que atuam nas formações rochosas em subsuperfície antes de qualquer perturbação: tensão maior (S1), tensão intermediária (S2) e tensão menor (S3). No contexto de perfuração, nos Laudos Geomecânicos da Petrobras são fornecidas as curvas de S1, S2 e S3 (Magnitude e Azimute) ao longo da trajetória do poço, calibradas aos testes de pressão disponíveis (LOT, XLOT, FIT) e ajustadas às profundidades previstas no QPG, em versão original e suavizada (média móvel), em psi e em lb/gal.",
+          "original_definition_en": "Set of three principal stresses acting on subsurface rock formations prior to any disturbance: major (S1), intermediate (S2), and minor (S3). In Petrobras Geomechanical Reports, S1, S2, and S3 curves (magnitude and azimuth) along the well trajectory are provided calibrated to available pressure tests, in both original and smoothed (moving average) versions, in psi and lb/gal.",
+          "acronym": [
+            "Tensões In Situ",
+            "Geotensões",
+            "S1/S2/S3",
+            "S1",
+            "S2",
+            "S3"
+          ],
+          "observed_variants": [],
+          "owner_department": null,
+          "official_datastore": null,
+          "internal_standards": null,
+          "category": "Property",
+          "sources": [
+            {
+              "doc_id": "PE-2RES-00009",
+              "section": "§3.2 Atividade",
+              "citation": "o RES fornecerá para a área de poços o gradiente de poro-pressão e as curvas de tensão principal S1, S2, S3 (Magnitude e Azimute) calibradas aos testes de pressão disponíveis (LOT, XLOT, FIT…)."
+            },
+            {
+              "doc_id": "PP-2E&P-00322",
+              "section": "§3.9.2 Modelagem",
+              "citation": "O estado de tensões estimado deve obedecer a princípios de equilíbrio, ou seja, devem resultar em um sistema em equilíbrio estrutural quase-estático."
+            },
+            {
+              "doc_id": "PE-2RES-00009",
+              "section": "§3.2 Atividade",
+              "citation": "também será fornecida uma versão dos gradientes com suavização (aplicação de média móvel), uma planilha com os dados em psi e uma figura contendo as curvas em lb/gal que constará no Laudo Geomecânico."
+            }
+          ],
+          "merged_in": "F4 (PR #33)",
+          "rationale": "Conceito idêntico — campo-tensional existente em main já cobre Estado de Tensões In Situ. Mantida proveniência Petrobras corporate via campo merged_in."
+        }
+      ],
       "relations": {
         "outgoing": [
           {
             "to": "janela-lama",
             "relation": "defines",
             "style": "solid"
+          },
+          {
+            "to": "GEOMEC001",
+            "relation": "is_calculated_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC007",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC002",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC008",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC005",
+            "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC016",
+            "relation": "produces",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC017",
+            "relation": "is_specialization_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC027",
+            "relation": "governed_by",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
+          {
+            "from": "GEOMEC005",
+            "relation": "is_calculated_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC006",
+            "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC007",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC008",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC009",
+            "relation": "is_calculated_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC015",
+            "relation": "requires",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "laudo-geomecanico",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC028",
+            "relation": "computes",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC030",
+            "relation": "computes",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC035",
+            "relation": "produces",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC080",
+            "relation": "measures",
+            "style": "geomec_corporate"
+          },
           {
             "from": "GM010",
             "relation": "produces",
@@ -5695,12 +5848,58 @@
         "@en": null
       },
       "skos_example": [],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC003",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "Janela Operacional de Lama",
+          "label_en_at_merge": "Mud Weight Window / Drilling Operational Window",
+          "original_definition_pt": "Intervalo de massa específica do fluido de perfuração compreendido entre o gradiente de colapso (limite inferior) e o gradiente de fratura (limite superior). O estreitamento da janela impacta diretamente o número de fases perfuradas e a extensão das fases. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas curvas de Pp e tensões in situ do RES.",
+          "original_definition_en": "Range of drilling fluid density bounded below by the collapse gradient and above by the fracture gradient. Narrowing of the window directly impacts the number and length of drilled sections.",
+          "acronym": [
+            "JOL",
+            "Mud Window",
+            "Janela Operacional"
+          ],
+          "observed_variants": [],
+          "owner_department": "POÇOS/SPO/PEP/PROJ-PERF",
+          "official_datastore": null,
+          "internal_standards": null,
+          "category": "Process",
+          "sources": [
+            {
+              "doc_id": "PE-2RES-00009",
+              "section": "3.10.3 Dimensionamento dos Revestimentos"
+            },
+            {
+              "doc_id": "PE-2RES-00014",
+              "section": "3.4.2 Potencial Geológico de Perda"
+            },
+            {
+              "doc_id": "PP-2E&P-00322",
+              "section": "5. Definições"
+            }
+          ],
+          "merged_in": "F4 (PR #33)",
+          "rationale": "Conceito idêntico — janela-lama existente em main já cobre Janela Operacional de Lama. Mantida proveniência Petrobras corporate via campo merged_in."
+        }
+      ],
       "relations": {
         "outgoing": [
           {
             "to": "poco",
             "relation": "guides_drilling_of",
             "style": "solid"
+          },
+          {
+            "to": "GEOMEC019",
+            "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC033",
+            "relation": "defines_lower_bound",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -5713,6 +5912,86 @@
             "from": "annular-fluid-type",
             "relation": "related_to",
             "style": "dashed"
+          },
+          {
+            "from": "GEOMEC001",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC001",
+            "relation": "defines_lower_bound",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC002",
+            "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC002",
+            "relation": "defines_upper_bound",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC006",
+            "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC009",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC009",
+            "relation": "defines_lower_bound",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC015",
+            "relation": "requires",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC019",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC020",
+            "relation": "is_part_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC021",
+            "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC026A",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "laudo-geomecanico",
+            "relation": "enables",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC036",
+            "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC053B",
+            "relation": "defines_upper_bound",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC_ROP_A",
+            "relation": "constrains",
+            "style": "geomec_corporate"
           },
           {
             "from": "GM010",
@@ -10420,6 +10699,44 @@
       "geocoverage": [
         "layer5"
       ],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC050",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "BDP — Boletim Diário da Perfuração",
+          "label_en_at_merge": "BDP — Daily Drilling Report",
+          "original_definition_pt": "Relatório diário que registra todas as operações executadas no poço ao longo de um turno/dia de perfuração: atividades, profundidades atingidas, parâmetros de fluido, tempos produtivos e não produtivos (NPT), ocorrências e consumo de materiais. Documento operacional primário de rastreabilidade da execução do poço. Estrutura mista — combina campos estruturados (profundidade, tempos, parâmetros) com narrativa textual (ocorrências, observações). Preenchido pelo Fiscal RPB na sonda via OpenWells/Atlas; armazenamento permanente no BDIEP. Cardinalidade: 1 BDP por dia-turno por poço.",
+          "original_definition_en": "Daily Drilling Report — operational record of all activities, depths, fluid parameters, NPT, events, and material consumption per well per shift. Mixed structured/narrative format. Filled in OpenWells/Atlas by RPB Fiscal on the rig; permanently archived in BDIEP.",
+          "acronym": [
+            "BDP"
+          ],
+          "observed_variants": [
+            "BDP",
+            "Boletim Diário de Perfuração",
+            "Daily Drilling Report",
+            "DDR"
+          ],
+          "owner_department": "POCOS",
+          "official_datastore": [
+            "OpenWells",
+            "BDIEP"
+          ],
+          "internal_standards": [
+            "PE-2POC-00106",
+            "PE-2EXP-00065"
+          ],
+          "category": "Document",
+          "sources": [
+            {
+              "doc_id": "PE-2EXP-00065",
+              "section": "§3.3.2 Eventos durante perfilagem",
+              "citation": "Durante a perfilagem por coluna reportar no ROP eventos anormais que gerem atraso, interrupção, falha ou dúvida sobre a qualidade do dado adquirido, informando o horário da ocorrência conforme relatado no BDP."
+            }
+          ],
+          "merged_in": "F4 (PR #33)",
+          "rationale": "Conceito idêntico — bdp existente em main já cobre BDP. Mantida proveniência Petrobras corporate via campo merged_in."
+        }
+      ],
       "relations": {
         "outgoing": [
           {
@@ -10453,6 +10770,11 @@
             "from": "operational-monitoring",
             "relation": "produces",
             "style": "solid"
+          },
+          {
+            "from": "GEOMEC025",
+            "relation": "monitors",
+            "style": "geomec_corporate"
           },
           {
             "from": "GM010",
@@ -11029,6 +11351,40 @@
       "geocoverage": [
         "layer6"
       ],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC049",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "BDIEP — Base de Dados Integrada de E&P",
+          "label_en_at_merge": "BDIEP — Integrated E&P Database",
+          "original_definition_pt": "Repositório unificado de armazenamento de informações estruturadas e não estruturadas obtidas ou produzidas durante os processos técnicos da atividade de E&P da Petrobras. Acessado pela interface VGE para consulta e cadastro de arquivos. Retenção permanente; acesso protegido por chave e senha. Posicionamento vs. correlatos: BDIEP é repositório técnico corporativo (golden source para dados de poços exploratórios e explotatórios), enquanto OpenWells é fonte primária de dados operacionais (BDP, LOT, XLOT) que migram para BDIEP, e SIGEO armazena dados geológicos (calha, paleontologia, geoquímica).",
+          "original_definition_en": "BDIEP (Integrated E&P Database): unified repository for structured and unstructured information generated during Petrobras E&P technical processes. Primary long-term datastore for well data, accessed via VGE.",
+          "acronym": [
+            "BDIEP"
+          ],
+          "observed_variants": [
+            "BDIEP",
+            "Base de Dados Integrada de E&P",
+            "base integrada E&P"
+          ],
+          "owner_department": "TIC/US/EXP-RES-DC",
+          "official_datastore": null,
+          "internal_standards": [
+            "PE-2EXP-00065",
+            "PE-2EXP-00059"
+          ],
+          "category": "Tool",
+          "sources": [
+            {
+              "doc_id": "PE-2EXP-00065",
+              "section": "§3.1.2 Definições",
+              "citation": "BDIEP (Base de Dados Integrada de E&P): repositório unificado de armazenamento das informações estruturadas e não estruturadas obtidas ou produzidas durante os processos técnicos da atividade de E&P."
+            }
+          ],
+          "merged_in": "F4 (PR #33)",
+          "rationale": "Conceito idêntico — bdiep existente em main já cobre BDIEP. Mantida proveniência Petrobras corporate via campo merged_in."
+        }
+      ],
       "relations": {
         "outgoing": [
           {
@@ -11057,6 +11413,11 @@
             "from": "bdiap",
             "relation": "complements",
             "style": "dashed"
+          },
+          {
+            "from": "GEOMEC045",
+            "relation": "related_to",
+            "style": "geomec_corporate"
           }
         ]
       }
@@ -11349,6 +11710,46 @@
         "layer5",
         "layer6"
       ],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC026B",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "Laudo Geomecânico",
+          "label_en_at_merge": "Geomechanical Report",
+          "original_definition_pt": "Documento técnico formal que compila a Análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3 — Magnitude e Azimute), gradiente de poropressão e dados de testes de pressão (LOT/XLOT/FIT), extraídas do modelo geomecânico 3D validado pelo RES/TR/GMR. É confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR, e deve conter obrigatoriamente: (i) trajetória final otimizada aprovada no Pré Kick-Off; (ii) riscos geológico-geomecânicos residuais na trajetória; (iii) poços correlatos com eventos geomecânicos; (iv) resultados dos estudos de shallow hazards (SUB/ES/GEO); (v) tensões in situ calibradas ao modelo geomecânico 3D aprovado; (vi) previsão de poropressão nas rochas não-reservatório; (vii) análise de Underground Venting (UV) quando aplicável [PE-2RES-00009]. As curvas fornecidas pelo RES incluem versão original e suavizada (média móvel), planilha em psi e figura em lb/gal. O Laudo é apresentado na reunião de Kick-Off (-120 dias antes da perfuração) e posteriormente emitido via ISA junto ao Prospecto (-60 dias). Armazenamento oficial: SIPLEX [PE-2EXP-00074]. Após a perfuração, o CSD GEOMEC emite o Relatório Geomecânico Final de Poço, que é arquivado no VGE [PE-2EXP-00074].",
+          "original_definition_en": null,
+          "acronym": [
+            "Laudo Geomecânico",
+            "Laudo de Geomecânica",
+            "Relatório Geomecânico"
+          ],
+          "observed_variants": [],
+          "owner_department": "RES",
+          "official_datastore": [
+            "SIPLEX",
+            "VGE"
+          ],
+          "internal_standards": [
+            "PE-2RES-00009",
+            "PE-2EXP-00074"
+          ],
+          "category": "Document",
+          "sources": [
+            {
+              "doc_id": "PE-2RES-00009",
+              "section": "§3.2 Atividade",
+              "citation": "\"o Ativo se responsabilizará por confeccionar o Laudo Geomecânico, compilando a análise de Geohazards no caminho do poço e incorporando as curvas de tensão in situ extraídas do modelo geomecânico 3D, bem como o QPG preliminar, e apresentar na reunião de Kick-Off em até 120 dias antes do início da perfuração.\"\n"
+            },
+            {
+              "doc_id": "PE-2EXP-00074",
+              "section": "§4 Registros",
+              "citation": "\"Laudo de Geomecânica — SIPLEX — Acesso protegido por chave e senha — Pelo nome do poço — Permanente.\"\n"
+            }
+          ],
+          "merged_in": "F4 (PR #33)",
+          "rationale": "Conceito idêntico — laudo-geomecanico existente em main já cobre Laudo Geomecânico. Mantida proveniência Petrobras corporate via campo merged_in."
+        }
+      ],
       "relations": {
         "outgoing": [
           {
@@ -11382,6 +11783,31 @@
             "style": "dashed"
           },
           {
+            "to": "GEOMEC026A",
+            "relation": "requires_input",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC001",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "campo-tensional",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "janela-lama",
+            "relation": "enables",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC015",
+            "relation": "formalizes",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "axon-dom-geomecanica",
             "relation": "is_part_of",
             "style": "axon_geomec_anchor"
@@ -11392,6 +11818,31 @@
             "from": "retro-analysis",
             "relation": "produces",
             "style": "solid"
+          },
+          {
+            "from": "GEOMEC025",
+            "relation": "produces",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC026A",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC027",
+            "relation": "enables",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC029",
+            "relation": "produces",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC035",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
           },
           {
             "from": "GM027",
@@ -17374,7 +17825,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -17389,7 +17840,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "defines_lower_bound",
             "style": "geomec_corporate"
           },
@@ -17426,7 +17877,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "is_calculated_from",
             "style": "geomec_corporate"
           },
@@ -17466,7 +17917,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC026B",
+            "from": "laudo-geomecanico",
             "relation": "contains",
             "style": "geomec_corporate"
           },
@@ -17559,12 +18010,12 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "defines_upper_bound",
             "style": "geomec_corporate"
           },
@@ -17591,7 +18042,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -17689,343 +18140,6 @@
       }
     },
     {
-      "id": "GEOMEC003",
-      "label": "Janela Operacional de Lama",
-      "label_en": "Mud Weight Window / Drilling Operational Window",
-      "type": "geomec_corporate",
-      "color": "#0F9D9D",
-      "size": 22,
-      "definition": "Intervalo de massa específica do fluido de perfuração compreendido entre o gradiente de colapso (limite inferior) e o gradiente de fratura (limite superior). O estreitamento da janela impacta diretamente o número de fases perfuradas e a extensão das fases. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas curvas de Pp e tensões in situ do RES.",
-      "definition_en_canonical": "Range of drilling fluid density bounded below by the collapse gradient and above by the fracture gradient. Narrowing of the window directly impacts the number and length of drilled sections.",
-      "category": "Process",
-      "layer": "L6",
-      "acronym": [
-        "JOL",
-        "Mud Window",
-        "Janela Operacional"
-      ],
-      "owner_department": "POÇOS/SPO/PEP/PROJ-PERF",
-      "official_datastore": null,
-      "internal_tools": null,
-      "internal_standards": null,
-      "osdu_kind": null,
-      "osdu_mapping": null,
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "JOL",
-        "Mud Window",
-        "Janela Operacional"
-      ],
-      "synonyms_en": [
-        "Mud Weight Window / Drilling Operational Window"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "Janela Operacional de Lama",
-        "@en": "Mud Weight Window / Drilling Operational Window"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "JOL",
-          "Mud Window",
-          "Janela Operacional"
-        ],
-        "@en": [
-          "Mud Weight Window / Drilling Operational Window"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Intervalo de massa específica do fluido de perfuração compreendido entre o gradiente de colapso (limite inferior) e o gradiente de fratura (limite superior). O estreitamento da janela impacta diretamente o número de fases perfuradas e a extensão das fases. Calculado pela gerência POÇOS/SPO/PEP/PROJ-PERF com base nas curvas de Pp e tensões in situ do RES.",
-        "@en": "Range of drilling fluid density bounded below by the collapse gradient and above by the fracture gradient. Narrowing of the window directly impacts the number and length of drilled sections."
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "relations": {
-        "outgoing": [
-          {
-            "to": "GEOMEC019",
-            "relation": "constrains",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC033",
-            "relation": "defines_lower_bound",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GM005",
-            "relation": "is_specialization_of",
-            "style": "geomec_corp_to_academic"
-          }
-        ],
-        "incoming": [
-          {
-            "from": "GEOMEC001",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC001",
-            "relation": "defines_lower_bound",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC002",
-            "relation": "constrains",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC002",
-            "relation": "defines_upper_bound",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC006",
-            "relation": "constrains",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC009",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC009",
-            "relation": "defines_lower_bound",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC015",
-            "relation": "requires",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC019",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC020",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC021",
-            "relation": "constrains",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC026A",
-            "relation": "contains",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC026B",
-            "relation": "enables",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC036",
-            "relation": "constrains",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC053B",
-            "relation": "defines_upper_bound",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC_ROP_A",
-            "relation": "constrains",
-            "style": "geomec_corporate"
-          }
-        ]
-      }
-    },
-    {
-      "id": "GEOMEC004",
-      "label": "Estado de Tensões In Situ (Geotensões)",
-      "label_en": "In Situ Stress State (Geotensions)",
-      "type": "geomec_corporate",
-      "color": "#6B5BFF",
-      "size": 22,
-      "definition": "Conjunto das três tensões principais que atuam nas formações rochosas em subsuperfície antes de qualquer perturbação: tensão maior (S1), tensão intermediária (S2) e tensão menor (S3). No contexto de perfuração, nos Laudos Geomecânicos da Petrobras são fornecidas as curvas de S1, S2 e S3 (Magnitude e Azimute) ao longo da trajetória do poço, calibradas aos testes de pressão disponíveis (LOT, XLOT, FIT) e ajustadas às profundidades previstas no QPG, em versão original e suavizada (média móvel), em psi e em lb/gal.",
-      "definition_en_canonical": "Set of three principal stresses acting on subsurface rock formations prior to any disturbance: major (S1), intermediate (S2), and minor (S3). In Petrobras Geomechanical Reports, S1, S2, and S3 curves (magnitude and azimuth) along the well trajectory are provided calibrated to available pressure tests, in both original and smoothed (moving average) versions, in psi and lb/gal.",
-      "category": "Property",
-      "layer": "L6",
-      "acronym": [
-        "Tensões In Situ",
-        "Geotensões",
-        "S1/S2/S3",
-        "S1",
-        "S2",
-        "S3"
-      ],
-      "owner_department": null,
-      "official_datastore": null,
-      "internal_tools": null,
-      "internal_standards": null,
-      "osdu_kind": null,
-      "osdu_mapping": "osdu:wks:work-product-component--GeomechanicalModel:1.*",
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "Tensões In Situ",
-        "Geotensões",
-        "S1/S2/S3",
-        "S1",
-        "S2",
-        "S3"
-      ],
-      "synonyms_en": [
-        "In Situ Stress State (Geotensions)"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "Estado de Tensões In Situ (Geotensões)",
-        "@en": "In Situ Stress State (Geotensions)"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "Tensões In Situ",
-          "Geotensões",
-          "S1/S2/S3",
-          "S1",
-          "S2",
-          "S3"
-        ],
-        "@en": [
-          "In Situ Stress State (Geotensions)"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Conjunto das três tensões principais que atuam nas formações rochosas em subsuperfície antes de qualquer perturbação: tensão maior (S1), tensão intermediária (S2) e tensão menor (S3). No contexto de perfuração, nos Laudos Geomecânicos da Petrobras são fornecidas as curvas de S1, S2 e S3 (Magnitude e Azimute) ao longo da trajetória do poço, calibradas aos testes de pressão disponíveis (LOT, XLOT, FIT) e ajustadas às profundidades previstas no QPG, em versão original e suavizada (média móvel), em psi e em lb/gal.",
-        "@en": "Set of three principal stresses acting on subsurface rock formations prior to any disturbance: major (S1), intermediate (S2), and minor (S3). In Petrobras Geomechanical Reports, S1, S2, and S3 curves (magnitude and azimuth) along the well trajectory are provided calibrated to available pressure tests, in both original and smoothed (moving average) versions, in psi and lb/gal."
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "relations": {
-        "outgoing": [
-          {
-            "to": "GEOMEC001",
-            "relation": "is_calculated_from",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC007",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC002",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC008",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC005",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC016",
-            "relation": "produces",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC017",
-            "relation": "is_specialization_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC027",
-            "relation": "governed_by",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GM001",
-            "relation": "is_specialization_of",
-            "style": "geomec_corp_to_academic"
-          },
-          {
-            "to": "axon-dom-geomecanica",
-            "relation": "is_part_of",
-            "style": "axon_geomec_anchor"
-          }
-        ],
-        "incoming": [
-          {
-            "from": "GEOMEC005",
-            "relation": "is_calculated_from",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC006",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC007",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC008",
-            "relation": "is_part_of",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC009",
-            "relation": "is_calculated_from",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC015",
-            "relation": "requires",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC026B",
-            "relation": "contains",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC028",
-            "relation": "computes",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC030",
-            "relation": "computes",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC035",
-            "relation": "produces",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC080",
-            "relation": "measures",
-            "style": "geomec_corporate"
-          }
-        ]
-      }
-    },
-    {
       "id": "GEOMEC005",
       "label": "Tensão Efetiva",
       "label_en": "Effective Stress",
@@ -18090,13 +18204,8 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "is_calculated_from",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC013",
-            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -18107,17 +18216,12 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "influences",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC007",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC013",
             "relation": "influences",
             "style": "geomec_corporate"
           },
@@ -18218,12 +18322,12 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "influences",
             "style": "geomec_corporate"
           },
@@ -18320,7 +18424,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -18347,7 +18451,7 @@
         ],
         "incoming": [
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -18432,7 +18536,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -18464,7 +18568,7 @@
         ],
         "incoming": [
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -18571,7 +18675,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -18586,12 +18690,12 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "is_calculated_from",
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "defines_lower_bound",
             "style": "geomec_corporate"
           }
@@ -18802,11 +18906,6 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC013",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
             "to": "GEOMEC012",
             "relation": "co_measured_with",
             "style": "geomec_corporate"
@@ -18821,11 +18920,6 @@
           {
             "from": "GEOMEC010",
             "relation": "co_measured_with",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC013",
-            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -18914,11 +19008,6 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC013",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
             "to": "GM016",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
@@ -18943,105 +19032,6 @@
           {
             "from": "GEOMEC061",
             "relation": "measures",
-            "style": "geomec_corporate"
-          }
-        ]
-      }
-    },
-    {
-      "id": "GEOMEC013",
-      "label": "Coeficiente de Biot-Willis",
-      "label_en": "Biot-Willis Coefficient",
-      "type": "geomec_corporate",
-      "color": "#6B5BFF",
-      "size": 22,
-      "definition": "Parâmetro poro-elástico que quantifica a fração da pressão de poros que contribui para a tensão efetiva. Calculado a partir da rigidez bulk da rocha (Kb) e da rigidez bulk dos grãos (Ks) — para Ks são utilizados valores tabelados da literatura (Tabela 5 do PE-2RES-00014). É elemento mandatório na modelagem do equilíbrio estrutural geomecânico, conforme PP-2E&P-00322. Em formações com coeficiente de Biot igual à unidade e Poisson de 0,25, a variação de uma tensão total horizontal é igual a 2/3 da depleção do reservatório.",
-      "definition_en_canonical": "Poroelastic parameter quantifying the fraction of pore pressure contributing to effective stress. Calculated from rock bulk stiffness (Kb) and grain bulk stiffness (Ks) using tabulated literature values. Mandatory element in geomechanical structural equilibrium modeling per PP-2E&P-00322. With Biot = 1 and Poisson = 0.25, a change in total horizontal stress equals 2/3 of reservoir depletion.",
-      "category": "Property",
-      "layer": "L6",
-      "acronym": [
-        "α",
-        "Biot",
-        "Coef. Biot"
-      ],
-      "owner_department": null,
-      "official_datastore": null,
-      "internal_tools": null,
-      "internal_standards": null,
-      "osdu_kind": null,
-      "osdu_mapping": null,
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "α",
-        "Biot",
-        "Coef. Biot"
-      ],
-      "synonyms_en": [
-        "Biot-Willis Coefficient"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "Coeficiente de Biot-Willis",
-        "@en": "Biot-Willis Coefficient"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "α",
-          "Biot",
-          "Coef. Biot"
-        ],
-        "@en": [
-          "Biot-Willis Coefficient"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Parâmetro poro-elástico que quantifica a fração da pressão de poros que contribui para a tensão efetiva. Calculado a partir da rigidez bulk da rocha (Kb) e da rigidez bulk dos grãos (Ks) — para Ks são utilizados valores tabelados da literatura (Tabela 5 do PE-2RES-00014). É elemento mandatório na modelagem do equilíbrio estrutural geomecânico, conforme PP-2E&P-00322. Em formações com coeficiente de Biot igual à unidade e Poisson de 0,25, a variação de uma tensão total horizontal é igual a 2/3 da depleção do reservatório.",
-        "@en": "Poroelastic parameter quantifying the fraction of pore pressure contributing to effective stress. Calculated from rock bulk stiffness (Kb) and grain bulk stiffness (Ks) using tabulated literature values. Mandatory element in geomechanical structural equilibrium modeling per PP-2E&P-00322. With Biot = 1 and Poisson = 0.25, a change in total horizontal stress equals 2/3 of reservoir depletion."
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "relations": {
-        "outgoing": [
-          {
-            "to": "GEOMEC005",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC011",
-            "relation": "derived_from",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GM017",
-            "relation": "is_specialization_of",
-            "style": "geomec_corp_to_academic"
-          }
-        ],
-        "incoming": [
-          {
-            "from": "GEOMEC005",
-            "relation": "derived_from",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC011",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC012",
-            "relation": "influences",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC014",
-            "relation": "related_to",
             "style": "geomec_corporate"
           }
         ]
@@ -19116,13 +19106,7 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "relations": {
-        "outgoing": [
-          {
-            "to": "GEOMEC013",
-            "relation": "related_to",
-            "style": "geomec_corporate"
-          }
-        ],
+        "outgoing": [],
         "incoming": [
           {
             "from": "GEOMEC001",
@@ -19231,7 +19215,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "requires",
             "style": "geomec_corporate"
           },
@@ -19241,7 +19225,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "requires",
             "style": "geomec_corporate"
           },
@@ -19278,7 +19262,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC026B",
+            "from": "laudo-geomecanico",
             "relation": "formalizes",
             "style": "geomec_corporate"
           },
@@ -19301,6 +19285,11 @@
             "from": "GEOMEC_ROP_B",
             "relation": "supports",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC046",
+            "relation": "supports",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -19400,7 +19389,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "produces",
             "style": "geomec_corporate"
           },
@@ -19423,6 +19412,11 @@
             "from": "GEOMEC035",
             "relation": "produces",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC046",
+            "relation": "is_specialization_of",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -19516,7 +19510,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "is_specialization_of",
             "style": "geomec_corporate"
           },
@@ -19554,6 +19548,11 @@
             "from": "GEOMEC082",
             "relation": "estimates",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC086",
+            "relation": "supports",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -19754,7 +19753,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -19791,7 +19790,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC003",
+            "from": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
           },
@@ -19926,7 +19925,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "is_part_of",
             "style": "geomec_corporate"
           },
@@ -20059,7 +20058,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
           }
@@ -20343,6 +20342,11 @@
             "from": "GEOMEC_ROP_B",
             "relation": "may_reference",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC076",
+            "relation": "is_input_for",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -20533,7 +20537,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC026B",
+            "to": "laudo-geomecanico",
             "relation": "produces",
             "style": "geomec_corporate"
           },
@@ -20553,7 +20557,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC050",
+            "to": "bdp",
             "relation": "monitors",
             "style": "geomec_corporate"
           },
@@ -20640,7 +20644,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC026B",
+            "to": "laudo-geomecanico",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           },
@@ -20650,7 +20654,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "contains",
             "style": "geomec_corporate"
           },
@@ -20662,134 +20666,12 @@
         ],
         "incoming": [
           {
-            "from": "GEOMEC026B",
+            "from": "laudo-geomecanico",
             "relation": "requires_input",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC_ROP_B",
-            "relation": "is_input_for",
-            "style": "geomec_corporate"
-          }
-        ]
-      }
-    },
-    {
-      "id": "GEOMEC026B",
-      "label": "Laudo Geomecânico",
-      "label_en": "Geomechanical Report",
-      "type": "geomec_corporate",
-      "color": "#475569",
-      "size": 22,
-      "definition": "Documento técnico formal que compila a Análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3 — Magnitude e Azimute), gradiente de poropressão e dados de testes de pressão (LOT/XLOT/FIT), extraídas do modelo geomecânico 3D validado pelo RES/TR/GMR. É confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR, e deve conter obrigatoriamente: (i) trajetória final otimizada aprovada no Pré Kick-Off; (ii) riscos geológico-geomecânicos residuais na trajetória; (iii) poços correlatos com eventos geomecânicos; (iv) resultados dos estudos de shallow hazards (SUB/ES/GEO); (v) tensões in situ calibradas ao modelo geomecânico 3D aprovado; (vi) previsão de poropressão nas rochas não-reservatório; (vii) análise de Underground Venting (UV) quando aplicável [PE-2RES-00009]. As curvas fornecidas pelo RES incluem versão original e suavizada (média móvel), planilha em psi e figura em lb/gal. O Laudo é apresentado na reunião de Kick-Off (-120 dias antes da perfuração) e posteriormente emitido via ISA junto ao Prospecto (-60 dias). Armazenamento oficial: SIPLEX [PE-2EXP-00074]. Após a perfuração, o CSD GEOMEC emite o Relatório Geomecânico Final de Poço, que é arquivado no VGE [PE-2EXP-00074].",
-      "definition_en_canonical": null,
-      "category": "Document",
-      "layer": "L6",
-      "acronym": [
-        "Laudo Geomecânico",
-        "Laudo de Geomecânica",
-        "Relatório Geomecânico"
-      ],
-      "owner_department": "RES",
-      "official_datastore": [
-        "SIPLEX",
-        "VGE"
-      ],
-      "internal_tools": [
-        "GERESIM"
-      ],
-      "internal_standards": [
-        "PE-2RES-00009",
-        "PE-2EXP-00074"
-      ],
-      "osdu_kind": null,
-      "osdu_mapping": null,
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "Laudo Geomecânico",
-        "Laudo de Geomecânica",
-        "Relatório Geomecânico"
-      ],
-      "synonyms_en": [
-        "Geomechanical Report"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "Laudo Geomecânico",
-        "@en": "Geomechanical Report"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "Laudo Geomecânico",
-          "Laudo de Geomecânica",
-          "Relatório Geomecânico"
-        ],
-        "@en": [
-          "Geomechanical Report"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Documento técnico formal que compila a Análise de Geohazards ao longo da trajetória do poço e incorpora as curvas de tensão in situ (S1/S2/S3 — Magnitude e Azimute), gradiente de poropressão e dados de testes de pressão (LOT/XLOT/FIT), extraídas do modelo geomecânico 3D validado pelo RES/TR/GMR. É confeccionado pelo Ativo de Produção ou Gerência de Reservatórios responsável, com suporte da RES/TR/GMR, e deve conter obrigatoriamente: (i) trajetória final otimizada aprovada no Pré Kick-Off; (ii) riscos geológico-geomecânicos residuais na trajetória; (iii) poços correlatos com eventos geomecânicos; (iv) resultados dos estudos de shallow hazards (SUB/ES/GEO); (v) tensões in situ calibradas ao modelo geomecânico 3D aprovado; (vi) previsão de poropressão nas rochas não-reservatório; (vii) análise de Underground Venting (UV) quando aplicável [PE-2RES-00009]. As curvas fornecidas pelo RES incluem versão original e suavizada (média móvel), planilha em psi e figura em lb/gal. O Laudo é apresentado na reunião de Kick-Off (-120 dias antes da perfuração) e posteriormente emitido via ISA junto ao Prospecto (-60 dias). Armazenamento oficial: SIPLEX [PE-2EXP-00074]. Após a perfuração, o CSD GEOMEC emite o Relatório Geomecânico Final de Poço, que é arquivado no VGE [PE-2EXP-00074].",
-        "@en": null
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "relations": {
-        "outgoing": [
-          {
-            "to": "GEOMEC026A",
-            "relation": "requires_input",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC001",
-            "relation": "contains",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC004",
-            "relation": "contains",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC003",
-            "relation": "enables",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC015",
-            "relation": "formalizes",
-            "style": "geomec_corporate"
-          }
-        ],
-        "incoming": [
-          {
-            "from": "GEOMEC025",
-            "relation": "produces",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC026A",
-            "relation": "is_input_for",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC027",
-            "relation": "enables",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC029",
-            "relation": "produces",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC035",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           }
@@ -20872,14 +20754,19 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC026B",
+            "to": "laudo-geomecanico",
             "relation": "enables",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC046",
+            "relation": "produces",
+            "style": "geomec_isolated_bridge"
           }
         ],
         "incoming": [
           {
-            "from": "GEOMEC004",
+            "from": "campo-tensional",
             "relation": "governed_by",
             "style": "geomec_corporate"
           },
@@ -20971,7 +20858,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "computes",
             "style": "geomec_corporate"
           },
@@ -21085,7 +20972,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC026B",
+            "to": "laudo-geomecanico",
             "relation": "produces",
             "style": "geomec_corporate"
           },
@@ -21186,7 +21073,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "computes",
             "style": "geomec_corporate"
           },
@@ -21528,7 +21415,7 @@
         ],
         "incoming": [
           {
-            "from": "GEOMEC003",
+            "from": "janela-lama",
             "relation": "defines_lower_bound",
             "style": "geomec_corporate"
           },
@@ -21721,7 +21608,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "produces",
             "style": "geomec_corporate"
           },
@@ -21731,7 +21618,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC026B",
+            "to": "laudo-geomecanico",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           },
@@ -21821,7 +21708,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
           },
@@ -22659,7 +22546,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC049",
+            "to": "bdiep",
             "relation": "related_to",
             "style": "geomec_corporate"
           },
@@ -22732,8 +22619,50 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "relations": {
-        "outgoing": [],
-        "incoming": []
+        "outgoing": [
+          {
+            "to": "GEOMEC016",
+            "relation": "is_specialization_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "reservatorio",
+            "relation": "applies_to",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GM010",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GM011",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GM012",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC015",
+            "relation": "supports",
+            "style": "geomec_isolated_bridge"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "GEOMEC027",
+            "relation": "produces",
+            "style": "geomec_isolated_bridge"
+          }
+        ]
       }
     },
     {
@@ -22887,149 +22816,6 @@
           {
             "from": "GEOMEC037",
             "relation": "requires",
-            "style": "geomec_corporate"
-          }
-        ]
-      }
-    },
-    {
-      "id": "GEOMEC049",
-      "label": "BDIEP — Base de Dados Integrada de E&P",
-      "label_en": "BDIEP — Integrated E&P Database",
-      "type": "geomec_corporate",
-      "color": "#E8833A",
-      "size": 22,
-      "definition": "Repositório unificado de armazenamento de informações estruturadas e não estruturadas obtidas ou produzidas durante os processos técnicos da atividade de E&P da Petrobras. Acessado pela interface VGE para consulta e cadastro de arquivos. Retenção permanente; acesso protegido por chave e senha. Posicionamento vs. correlatos: BDIEP é repositório técnico corporativo (golden source para dados de poços exploratórios e explotatórios), enquanto OpenWells é fonte primária de dados operacionais (BDP, LOT, XLOT) que migram para BDIEP, e SIGEO armazena dados geológicos (calha, paleontologia, geoquímica).",
-      "definition_en_canonical": "BDIEP (Integrated E&P Database): unified repository for structured and unstructured information generated during Petrobras E&P technical processes. Primary long-term datastore for well data, accessed via VGE.",
-      "category": "Tool",
-      "layer": "L6",
-      "acronym": [
-        "BDIEP"
-      ],
-      "owner_department": "TIC/US/EXP-RES-DC",
-      "official_datastore": null,
-      "internal_tools": null,
-      "internal_standards": [
-        "PE-2EXP-00065",
-        "PE-2EXP-00059"
-      ],
-      "osdu_kind": null,
-      "osdu_mapping": null,
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "BDIEP",
-        "Base de Dados Integrada de E&P",
-        "base integrada E&P"
-      ],
-      "synonyms_en": [
-        "BDIEP — Integrated E&P Database"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "BDIEP — Base de Dados Integrada de E&P",
-        "@en": "BDIEP — Integrated E&P Database"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "BDIEP",
-          "Base de Dados Integrada de E&P",
-          "base integrada E&P"
-        ],
-        "@en": [
-          "BDIEP — Integrated E&P Database"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Repositório unificado de armazenamento de informações estruturadas e não estruturadas obtidas ou produzidas durante os processos técnicos da atividade de E&P da Petrobras. Acessado pela interface VGE para consulta e cadastro de arquivos. Retenção permanente; acesso protegido por chave e senha. Posicionamento vs. correlatos: BDIEP é repositório técnico corporativo (golden source para dados de poços exploratórios e explotatórios), enquanto OpenWells é fonte primária de dados operacionais (BDP, LOT, XLOT) que migram para BDIEP, e SIGEO armazena dados geológicos (calha, paleontologia, geoquímica).",
-        "@en": "BDIEP (Integrated E&P Database): unified repository for structured and unstructured information generated during Petrobras E&P technical processes. Primary long-term datastore for well data, accessed via VGE."
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "relations": {
-        "outgoing": [],
-        "incoming": [
-          {
-            "from": "GEOMEC045",
-            "relation": "related_to",
-            "style": "geomec_corporate"
-          }
-        ]
-      }
-    },
-    {
-      "id": "GEOMEC050",
-      "label": "BDP — Boletim Diário da Perfuração",
-      "label_en": "BDP — Daily Drilling Report",
-      "type": "geomec_corporate",
-      "color": "#475569",
-      "size": 22,
-      "definition": "Relatório diário que registra todas as operações executadas no poço ao longo de um turno/dia de perfuração: atividades, profundidades atingidas, parâmetros de fluido, tempos produtivos e não produtivos (NPT), ocorrências e consumo de materiais. Documento operacional primário de rastreabilidade da execução do poço. Estrutura mista — combina campos estruturados (profundidade, tempos, parâmetros) com narrativa textual (ocorrências, observações). Preenchido pelo Fiscal RPB na sonda via OpenWells/Atlas; armazenamento permanente no BDIEP. Cardinalidade: 1 BDP por dia-turno por poço.",
-      "definition_en_canonical": "Daily Drilling Report — operational record of all activities, depths, fluid parameters, NPT, events, and material consumption per well per shift. Mixed structured/narrative format. Filled in OpenWells/Atlas by RPB Fiscal on the rig; permanently archived in BDIEP.",
-      "category": "Document",
-      "layer": "L6",
-      "acronym": [
-        "BDP"
-      ],
-      "owner_department": "POCOS",
-      "official_datastore": [
-        "OpenWells",
-        "BDIEP"
-      ],
-      "internal_tools": null,
-      "internal_standards": [
-        "PE-2POC-00106",
-        "PE-2EXP-00065"
-      ],
-      "osdu_kind": null,
-      "osdu_mapping": null,
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "BDP",
-        "Boletim Diário de Perfuração",
-        "Daily Drilling Report",
-        "DDR"
-      ],
-      "synonyms_en": [
-        "BDP — Daily Drilling Report"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "BDP — Boletim Diário da Perfuração",
-        "@en": "BDP — Daily Drilling Report"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "BDP",
-          "Boletim Diário de Perfuração",
-          "Daily Drilling Report",
-          "DDR"
-        ],
-        "@en": [
-          "BDP — Daily Drilling Report"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Relatório diário que registra todas as operações executadas no poço ao longo de um turno/dia de perfuração: atividades, profundidades atingidas, parâmetros de fluido, tempos produtivos e não produtivos (NPT), ocorrências e consumo de materiais. Documento operacional primário de rastreabilidade da execução do poço. Estrutura mista — combina campos estruturados (profundidade, tempos, parâmetros) com narrativa textual (ocorrências, observações). Preenchido pelo Fiscal RPB na sonda via OpenWells/Atlas; armazenamento permanente no BDIEP. Cardinalidade: 1 BDP por dia-turno por poço.",
-        "@en": "Daily Drilling Report — operational record of all activities, depths, fluid parameters, NPT, events, and material consumption per well per shift. Mixed structured/narrative format. Filled in OpenWells/Atlas by RPB Fiscal on the rig; permanently archived in BDIEP."
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "relations": {
-        "outgoing": [],
-        "incoming": [
-          {
-            "from": "GEOMEC025",
-            "relation": "monitors",
             "style": "geomec_corporate"
           }
         ]
@@ -23449,7 +23235,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "defines_upper_bound",
             "style": "geomec_corporate"
           }
@@ -24026,7 +23812,7 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "GEOMEC003",
+            "to": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
           },
@@ -25033,6 +24819,11 @@
             "from": "GEOMEC074",
             "relation": "used_with",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC076",
+            "relation": "is_input_for",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -25311,6 +25102,11 @@
             "from": "GEOMEC068",
             "relation": "related_to",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC076",
+            "relation": "co_measured_with",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -25367,7 +25163,33 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "applies_to",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC023",
+            "relation": "is_input_for",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC072",
+            "relation": "is_input_for",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC075",
+            "relation": "co_measured_with",
+            "style": "geomec_isolated_bridge"
+          }
+        ],
         "incoming": []
       }
     },
@@ -25710,7 +25532,7 @@
       "relations": {
         "outgoing": [
           {
-            "to": "GEOMEC004",
+            "to": "campo-tensional",
             "relation": "measures",
             "style": "geomec_corporate"
           },
@@ -25827,6 +25649,16 @@
             "from": "GEOMEC083",
             "relation": "computes",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC086",
+            "relation": "produces",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "GEOMEC087",
+            "relation": "is_input_for",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -25903,6 +25735,16 @@
             "from": "GEOMEC083",
             "relation": "related_to",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC086",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "GEOMEC087",
+            "relation": "co_measured_with",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -25969,6 +25811,11 @@
             "to": "GEOMEC082",
             "relation": "related_to",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC086",
+            "relation": "formalizes",
+            "style": "geomec_isolated_bridge"
           }
         ],
         "incoming": []
@@ -26027,7 +25874,13 @@
             "style": "axon_geomec_anchor"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GEOMEC087",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          }
+        ]
       }
     },
     {
@@ -26157,8 +26010,45 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "relations": {
-        "outgoing": [],
-        "incoming": []
+        "outgoing": [
+          {
+            "to": "GEOMEC081",
+            "relation": "produces",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "falha",
+            "relation": "observed_in",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC082",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC017",
+            "relation": "supports",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "axon-asn-aval-final-poco",
+            "relation": "is_specialization_of",
+            "style": "geomec_isolated_bridge"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "GEOMEC083",
+            "relation": "formalizes",
+            "style": "geomec_isolated_bridge"
+          }
+        ]
       }
     },
     {
@@ -26213,7 +26103,28 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "GEOMEC081",
+            "relation": "is_input_for",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC084",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "axon-dom-geomecanica",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC082",
+            "relation": "co_measured_with",
+            "style": "geomec_isolated_bridge"
+          }
+        ],
         "incoming": []
       }
     },
@@ -26291,11 +26202,6 @@
             "from": "GM006",
             "relation": "is_calculated_from",
             "style": "geomec_academic"
-          },
-          {
-            "from": "GEOMEC004",
-            "relation": "is_specialization_of",
-            "style": "geomec_corp_to_academic"
           }
         ]
       }
@@ -26582,11 +26488,6 @@
             "from": "GM002",
             "relation": "governs_fracture_propagation",
             "style": "geomec_academic"
-          },
-          {
-            "from": "GEOMEC003",
-            "relation": "is_specialization_of",
-            "style": "geomec_corp_to_academic"
           }
         ]
       }
@@ -26943,6 +26844,11 @@
             "from": "GM012",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "from": "GEOMEC046",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -27026,7 +26932,13 @@
             "style": "geomec_academic_bridge"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GEOMEC046",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          }
+        ]
       }
     },
     {
@@ -27103,7 +27015,13 @@
             "style": "geomec_academic_bridge"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GEOMEC046",
+            "relation": "derived_from",
+            "style": "geomec_isolated_bridge"
+          }
+        ]
       }
     },
     {
@@ -27464,6 +27382,45 @@
         "@en": "Biot coefficient (alpha) — poroelastic coupling parameter relating pore pressure to total stress in Biot's effective stress principle: sigma_eff = sigma_total - alpha * Pp. Range: 0 (undeformable skeleton) to 1 (unconsolidated sediment). Defined as alpha = 1 - K_dry / K_grain."
       },
       "skos_example": [],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC013",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "Coeficiente de Biot-Willis",
+          "label_en_at_merge": "Biot-Willis Coefficient",
+          "original_definition_pt": "Parâmetro poro-elástico que quantifica a fração da pressão de poros que contribui para a tensão efetiva. Calculado a partir da rigidez bulk da rocha (Kb) e da rigidez bulk dos grãos (Ks) — para Ks são utilizados valores tabelados da literatura (Tabela 5 do PE-2RES-00014). É elemento mandatório na modelagem do equilíbrio estrutural geomecânico, conforme PP-2E&P-00322. Em formações com coeficiente de Biot igual à unidade e Poisson de 0,25, a variação de uma tensão total horizontal é igual a 2/3 da depleção do reservatório.",
+          "original_definition_en": "Poroelastic parameter quantifying the fraction of pore pressure contributing to effective stress. Calculated from rock bulk stiffness (Kb) and grain bulk stiffness (Ks) using tabulated literature values. Mandatory element in geomechanical structural equilibrium modeling per PP-2E&P-00322. With Biot = 1 and Poisson = 0.25, a change in total horizontal stress equals 2/3 of reservoir depletion.",
+          "acronym": [
+            "α",
+            "Biot",
+            "Coef. Biot"
+          ],
+          "observed_variants": [],
+          "owner_department": null,
+          "official_datastore": null,
+          "internal_standards": null,
+          "category": "Property",
+          "sources": [
+            {
+              "doc_id": "PP-2E&P-00322",
+              "section": "§3.9.2 Modelagem do equilíbrio estrutural",
+              "citation": "Princípio das tensões efetivas com adequada representação do coeficiente de Biot-Willis."
+            },
+            {
+              "doc_id": "PE-2RES-00014",
+              "section": "§3.4.2.5 Método elástico",
+              "citation": "Para a rigidez dos grãos da rocha, Ks, são utilizados valores tabelados da literatura (Tabela 5). O coeficiente de Biot é então estimado através da equação."
+            },
+            {
+              "doc_id": "PE-2RES-00014",
+              "section": "§3.4.2.6 Correção da depleção",
+              "citation": "supondo que o coeficiente de Biot seja igual à unidade e um coeficiente de Poisson de 0,25, a variação da magnitude de uma tensão total horizontal é igual a 2/3 da depleção do reservatório."
+            }
+          ],
+          "merged_in": "F4 (PR #33)",
+          "rationale": "Coeficiente de Biot-Willis (corporativo) ≡ Biot Coefficient (academic GM017) — confirmado pelo curador na revisão da PR #33."
+        }
+      ],
       "relations": {
         "outgoing": [
           {
@@ -27482,13 +27439,7 @@
             "style": "geomec_academic_bridge"
           }
         ],
-        "incoming": [
-          {
-            "from": "GEOMEC013",
-            "relation": "is_specialization_of",
-            "style": "geomec_corp_to_academic"
-          }
-        ]
+        "incoming": []
       }
     },
     {
@@ -29801,11 +29752,6 @@
             "style": "axon_geomec_anchor"
           },
           {
-            "from": "GEOMEC004",
-            "relation": "is_part_of",
-            "style": "axon_geomec_anchor"
-          },
-          {
             "from": "GEOMEC025",
             "relation": "is_part_of",
             "style": "axon_geomec_anchor"
@@ -29844,6 +29790,26 @@
             "from": "laudo-geomecanico",
             "relation": "is_part_of",
             "style": "axon_geomec_anchor"
+          },
+          {
+            "from": "GEOMEC046",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "GEOMEC076",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "GEOMEC086",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "GEOMEC087",
+            "relation": "is_part_of",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }
@@ -30077,6 +30043,11 @@
             "from": "igp",
             "relation": "supports",
             "style": "axon_op_bridge"
+          },
+          {
+            "from": "GEOMEC086",
+            "relation": "is_specialization_of",
+            "style": "geomec_isolated_bridge"
           }
         ]
       }

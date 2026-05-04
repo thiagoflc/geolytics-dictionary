@@ -426,13 +426,31 @@ function buildGeomechanicsApi() {
  * target_id is another GEOMEC* node or a known graph node are emitted
  * (avoids dangling edges to entities outside the visible graph).
  *
+ * F4 — Duplicate-pair merge support (option B): entities flagged
+ *   `deprecated: true` + `deprecated_in_favor_of: "<surviving_id>"` are NOT
+ *   emitted as their own node. Instead:
+ *     1. Their outbound `relationships` are migrated onto the surviving node
+ *        (source rewritten to surviving id); de-duplicated against existing
+ *        edges; self-loops dropped.
+ *     2. Other entities pointing AT the deprecated id have those edges
+ *        retargeted to the surviving id; self-loops/dups likewise dropped.
+ *     3. A `source_reference` entry is appended to the surviving node so
+ *        downstream consumers preserve provenance of the merge (deprecated
+ *        id, original definition, owner_department, internal_standards).
+ *
  * @param {Set<string>} allowedTargetIds - IDs of non-corporate nodes that
  *   corporate edges may target (e.g. "poco" if cross-domain relations exist).
- * @returns {{nodes: Object[], edges: Object[]}}
+ * @returns {{nodes: Object[], edges: Object[], sourceReferences: Map<string, Object[]>, deprecationMap: Map<string, string>}}
  */
 function buildGeomecCorporateGraph(allowedTargetIds) {
   const gmCorp = loadGeomechanicsCorporate();
-  if (!gmCorp) return { nodes: [], edges: [] };
+  if (!gmCorp)
+    return {
+      nodes: [],
+      edges: [],
+      sourceReferences: new Map(),
+      deprecationMap: new Map(),
+    };
 
   const COLOR_BY_CATEGORY = {
     Process: "#0F9D9D",
@@ -447,6 +465,62 @@ function buildGeomecCorporateGraph(allowedTargetIds) {
     GovernanceKPI: "#15803D",
     LabTest: "#9333EA",
   };
+
+  /* F4 deprecation map (deprecated_id -> surviving_id) for the 6 pairs merged
+     in PR #33. Source schema for `deprecated`:
+       - boolean true  → just filter (used by pre-existing 026B legacy field — no merge)
+       - dict {replaced_by: [id], reason: str, merged_in?: str}
+         · F4 merges have merged_in set (and thus generate source_reference card)
+         · pre-existing splits (GEOMEC026/052/053) have replaced_by arrays without merged_in
+           → still in deprecationMap so edges get rerouted, but no provenance card. */
+  const deprecationMap = new Map();
+  const sourceReferences = new Map();
+  const survivorOf = (e) => {
+    if (!e.deprecated) return null;
+    if (e.deprecated === true) return null;
+    const rb = e.deprecated.replaced_by;
+    if (Array.isArray(rb) && rb.length > 0) return rb[0];
+    return null;
+  };
+  for (const e of gmCorp.entities || []) {
+    const survivor = survivorOf(e);
+    if (survivor) deprecationMap.set(e.id, survivor);
+  }
+
+  const resolve = (id) => deprecationMap.get(id) || id;
+
+  /* F4 — collect a provenance card for each merged corp entity so the
+     surviving node carries the Petrobras-specific operational nuances.
+     Only entities with `deprecated.merged_in` set (F4 merges) — pre-existing
+     splits like GEOMEC026/052/053 are filtered without a provenance card. */
+  for (const e of gmCorp.entities || []) {
+    const survivor = survivorOf(e);
+    if (!survivor) continue;
+    if (!e.deprecated || typeof e.deprecated !== "object") continue;
+    if (!e.deprecated.merged_in) continue;
+    if (!sourceReferences.has(survivor)) sourceReferences.set(survivor, []);
+    sourceReferences.get(survivor).push({
+      deprecated_id: e.id,
+      source_module: "data/geomechanics-corporate.json",
+      label_at_merge: e.label_pt || e.label || e.id,
+      label_en_at_merge: e.label_en || null,
+      original_definition_pt: e.definition_pt || e.definition || null,
+      original_definition_en: e.definition_en || null,
+      acronym: e.acronym || [],
+      observed_variants: e.observed_variants || [],
+      owner_department: e.owner_department || null,
+      official_datastore: e.official_datastore || null,
+      internal_standards: e.internal_standards || null,
+      category: e.category || null,
+      sources: e.sources || [],
+      merged_in: e.deprecated.merged_in,
+      rationale:
+        e.deprecated.reason ||
+        "Conceito idêntico — " +
+          survivor +
+          " já cobre o termo no componente principal. Mantida proveniência Petrobras corporate.",
+    });
+  }
 
   const nodes = (gmCorp.entities || [])
     .filter((e) => !e.deprecated)
@@ -494,26 +568,171 @@ function buildGeomecCorporateGraph(allowedTargetIds) {
     });
 
   const corpIds = new Set(nodes.map((n) => n.id));
-  const validTargets = new Set([...corpIds, ...(allowedTargetIds || [])]);
+  /* Valid edge targets include emitted corp nodes, all non-corp graph nodes
+     allowed by the caller, AND all deprecation survivor ids (which may be
+     non-corp ids like "bdp" / "janela-lama" — those will be re-pointed). */
+  const validTargets = new Set([
+    ...corpIds,
+    ...(allowedTargetIds || []),
+    ...deprecationMap.values(),
+  ]);
 
+  /* Edge collection with re-routing. For each relationship:
+     - Resolve source through deprecationMap (if the entity is itself
+       deprecated, its outbound edges become outbound from the survivor).
+     - Resolve target through deprecationMap.
+     - Skip self-loops created by the rewrite (e.g. GEOMEC013 derived_from
+       GEOMEC011 stays GEOMEC011-targeted, fine; but if source==target after
+       rewrite, drop).
+     - De-duplicate against an emitted-key set. */
   const edges = [];
+  const emittedKeys = new Set();
   for (const e of gmCorp.entities || []) {
-    if (e.deprecated) continue;
     for (const r of e.relationships || []) {
       const target = r.target_id;
-      if (!target || !validTargets.has(target)) continue;
-      const relation = r.relation_type || "RELATED_TO";
+      if (!target) continue;
+      const newSource = resolve(e.id);
+      const newTarget = resolve(target);
+      if (newSource === newTarget) continue; // self-loop after merge
+      if (!validTargets.has(newTarget) && !corpIds.has(newTarget)) continue;
+      // Both endpoints must exist in the final graph (corp emitted OR allowed
+      // OR survivor). Survivors that are non-corp must be in allowedTargetIds.
+      if (
+        !corpIds.has(newSource) &&
+        !(allowedTargetIds || new Set()).has(newSource)
+      ) {
+        continue;
+      }
+      if (
+        !corpIds.has(newTarget) &&
+        !(allowedTargetIds || new Set()).has(newTarget)
+      ) {
+        continue;
+      }
+      const relation = (r.relation_type || "RELATED_TO").toLowerCase();
+      const key = `${newSource}|${newTarget}|${relation}`;
+      if (emittedKeys.has(key)) continue;
+      emittedKeys.add(key);
       edges.push({
-        source: e.id,
-        target,
-        relation: relation.toLowerCase(),
+        source: newSource,
+        target: newTarget,
+        relation,
         relation_label_pt: r.target_label || relation,
         relation_label_en: relation.replace(/_/g, " ").toLowerCase(),
         style: "geomec_corporate",
       });
     }
   }
-  return { nodes, edges };
+  return { nodes, edges, sourceReferences, deprecationMap };
+}
+
+/**
+ * F4 — Wires the four remaining isolated GEOMEC nodes into the main component
+ * as a case-test of the 6-layer ontology model. Uses ONLY canonical predicates
+ * from docs/ONTOLOGY_PREDICATES.md (no `related_to`/`used_with`).
+ *
+ *   GEOMEC046 Subsidência — Faixas de Risco (Classifier, L4/L5)
+ *   GEOMEC076 HAZI — Azimute do Poço (Property, L1 attribute)
+ *   GEOMEC086 Inversão de Slip de Falha Geológica (Process, L5 interpretation)
+ *   GEOMEC087 Alinhamento de Vents Vulcânicos (Process, L4/L5 evidence)
+ *
+ * Each wiring traverses multiple layers (L1 well, L4 feature, L5 interpretation,
+ * L6 engineering, domain anchor) so the four nodes serve as integration tests
+ * for the six-layer model laid out in docs/ONTOLOGY_LAYERS.md.
+ *
+ * @param {Set<string>} existingIds - IDs already emitted (corp + academic +
+ *   axon + main). Bridges only fire when both endpoints exist.
+ * @returns {{nodes: Object[], edges: Object[]}}
+ */
+function buildIsolatedGeomecBridges(existingIds) {
+  const edges = [];
+  const seen = new Set();
+  const add = (source, target, relation, labelPt, labelEn) => {
+    if (!existingIds.has(source) || !existingIds.has(target)) return;
+    if (source === target) return;
+    const k = `${source}|${target}|${relation}`;
+    if (seen.has(k)) return;
+    seen.add(k);
+    edges.push({
+      source,
+      target,
+      relation,
+      relation_label_pt: labelPt || relation.replace(/_/g, " "),
+      relation_label_en: labelEn || relation.replace(/_/g, " "),
+      style: "geomec_isolated_bridge",
+    });
+  };
+
+  /* GEOMEC046 — Subsidência — Faixas de Risco (Classifier).
+     L4/L5: classifier produced by IMGR (GEOMEC027), specializes Subsidência
+     (GEOMEC016), grounded on academic MEM 1D (GM010-12) and the Geomecânica
+     domain anchor. */
+  add(
+    "GEOMEC046",
+    "GEOMEC016",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+  add("GEOMEC027", "GEOMEC046", "produces", "produz", "produces");
+  add("GEOMEC046", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC046", "reservatorio", "applies_to", "aplica-se a", "applies to");
+  add("GEOMEC046", "GM010", "derived_from", "derivado de", "derived from");
+  add("GEOMEC046", "GM011", "derived_from", "derivado de", "derived from");
+  add("GEOMEC046", "GM012", "derived_from", "derivado de", "derived from");
+  /* Risk classifier supports stability assessment (GEOMEC015 Estab. Poço). */
+  add("GEOMEC046", "GEOMEC015", "supports", "apoia", "supports");
+
+  /* GEOMEC076 — HAZI — Azimute do Poço (well attribute concept).
+     Per ONTOLOGY_LAYERS §5: well_attribute_concept attached to L1 Well via
+     applies_to. Used as input to image-log interpretation (GEOMEC023, 072)
+     and co-measured with AZIE (GEOMEC075). */
+  add("GEOMEC076", "poco", "applies_to", "aplica-se a", "applies to");
+  add("GEOMEC076", "GEOMEC023", "is_input_for", "é entrada para", "is input for");
+  add("GEOMEC076", "GEOMEC072", "is_input_for", "é entrada para", "is input for");
+  add("GEOMEC076", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC076", "GEOMEC075", "co_measured_with", "co-medido com", "co-measured with");
+
+  /* GEOMEC086 — Inversão de Slip de Falha Geológica (Process, L5).
+     Interpretation process producing principal stress axes (GEOMEC081),
+     observed on faults (falha), specialization of well-evaluation processes,
+     formalized by GEOMEC083 (Inversão Formal de Mecanismos Focais). */
+  add("GEOMEC086", "GEOMEC081", "produces", "produz", "produces");
+  add("GEOMEC086", "falha", "observed_in", "observado em", "observed in");
+  add(
+    "GEOMEC086",
+    "GEOMEC082",
+    "derived_from",
+    "derivado de",
+    "derived from"
+  );
+  add(
+    "GEOMEC083",
+    "GEOMEC086",
+    "formalizes",
+    "formaliza",
+    "formalizes"
+  );
+  add("GEOMEC086", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC086", "GEOMEC017", "supports", "apoia", "supports");
+  add(
+    "GEOMEC086",
+    "axon-asn-aval-final-poco",
+    "is_specialization_of",
+    "é especialização de",
+    "is specialization of"
+  );
+
+  /* GEOMEC087 — Alinhamento de Vents Vulcânicos (Process / WSM 2025 indicator).
+     Stress-orientation indicator: input to principal stress axes (GEOMEC081),
+     derived from WSM 2025 quality scheme (GEOMEC084), co-measured with focal
+     mechanisms (GEOMEC082). */
+  add("GEOMEC087", "GEOMEC081", "is_input_for", "é entrada para", "is input for");
+  add("GEOMEC087", "GEOMEC084", "derived_from", "derivado de", "derived from");
+  add("GEOMEC087", "axon-dom-geomecanica", "is_part_of", "é parte de", "is part of");
+  add("GEOMEC087", "GEOMEC082", "co_measured_with", "co-medido com", "co-measured with");
+
+  return { nodes: [], edges };
 }
 
 /**
@@ -3489,7 +3708,11 @@ function buildEntityGraph() {
   /* L6 corporate Petrobras geomechanics — 92 entities (GEOMEC*) including
      DFIT, Breakout/Ovalização, BOL, Geolog, AZIE, HAZI, etc. Adds nodes and
      intra-corporate edges to the entity-graph so GraphRAG agents and
-     Neo4j visualizations can resolve these concepts directly. */
+     Neo4j visualizations can resolve these concepts directly.
+     F4: 6 deprecated duplicates are filtered here and their edges re-routed
+     to surviving ids (bdp / bdiep / janela-lama / campo-tensional /
+     laudo-geomecanico / GM017). Provenance preserved via source_reference
+     applied to surviving nodes below. */
   const corpGraph = buildGeomecCorporateGraph(new Set(nodes.map((n) => n.id)));
   nodes.push(...corpGraph.nodes);
   edges.push(...corpGraph.edges);
@@ -3505,6 +3728,21 @@ function buildEntityGraph() {
   const acadGraph = buildGeomecAcademicGraph(new Set(nodes.map((n) => n.id)));
   nodes.push(...acadGraph.nodes);
   edges.push(...acadGraph.edges);
+
+  /* F4 — apply source_reference cards onto each surviving node so the merged
+     Petrobras corporate provenance (deprecated id, original definition,
+     owner_department, internal_standards, sources) is visible to GraphRAG
+     agents and crosswalk consumers without polluting the canonical
+     definition field. Run AFTER the academic graph push so survivors that
+     live in the academic module (e.g. GM017 Biot coefficient) are reachable. */
+  for (const [survivorId, refs] of corpGraph.sourceReferences.entries()) {
+    const idx = nodes.findIndex((n) => n.id === survivorId);
+    if (idx === -1) continue;
+    const existing = Array.isArray(nodes[idx].source_reference)
+      ? nodes[idx].source_reference
+      : [];
+    nodes[idx].source_reference = existing.concat(refs);
+  }
 
   /* F3 — Axon Petrobras Exploração glossary (data/axon-petrobras-glossary.json).
      Adds the 4-level Domínio → Assunto → Subassunto → Termo hierarchy as a
@@ -3522,6 +3760,13 @@ function buildEntityGraph() {
   const axonGraph = buildAxonGlossaryGraph(new Set(nodes.map((n) => n.id)));
   nodes.push(...axonGraph.nodes);
   edges.push(...axonGraph.edges);
+
+  /* F4 — wire the four remaining isolated GEOMEC nodes (046, 076, 086, 087)
+     into the giant component as a case-test of the 6-layer ontology model
+     (Q6/option 2). Uses only canonical predicates; runs last so all candidate
+     target ids (axon-dom-geomecanica, falha, GM010-12, GEOMEC0**) are in scope. */
+  const isolatedBridges = buildIsolatedGeomecBridges(new Set(nodes.map((n) => n.id)));
+  edges.push(...isolatedBridges.edges);
 
   return {
     version: VERSION,
