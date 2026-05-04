@@ -1,6 +1,6 @@
 {
   "version": "1.1.0",
-  "generated": "2026-05-04T19:48:48.570Z",
+  "generated": "2026-05-04T19:53:58.070Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
   "nodes": [
     {
@@ -16,11 +16,6 @@
       "primary_key": "nome_anp",
       "primary_key_standard": "ANP/SEP nomenclature",
       "primary_key_pattern": "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$",
-      "joined_by_modules": [
-        "data/operacoes-geologicas.json#OGEOMEC.Poco",
-        "data/operacoes-geologicas.json#FRX.Poco",
-        "data/operacoes-geologicas.json#DRX.Poco"
-      ],
       "datasets": [
         "pocos-exploratorios",
         "blocos-contrato"
@@ -21758,9 +21753,9 @@
     {
       "source": "annular-fluid-type",
       "target": "janela-lama",
-      "relation": "related_to",
-      "relation_label_pt": "relacionado a",
-      "relation_label_en": "related to",
+      "relation": "is_input_for",
+      "relation_label_pt": "é entrada para",
+      "relation_label_en": "is input for",
       "style": "dashed"
     },
     {
@@ -22313,6 +22308,14 @@
       "relation": "derived_from",
       "relation_label_pt": "derivado de",
       "relation_label_en": "derived from",
+      "style": "dashed"
+    },
+    {
+      "source": "ogeomec",
+      "target": "poco",
+      "relation": "references",
+      "relation_label_pt": "referencia",
+      "relation_label_en": "references",
       "style": "dashed"
     },
     {
@@ -24174,9 +24177,9 @@
     {
       "source": "GEOMEC016",
       "target": "GEOMEC007",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Tensão Vertical (Sv) — carga sobre o reservatório",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -24414,25 +24417,25 @@
     {
       "source": "GEOMEC023",
       "target": "GEOMEC023A",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Análise especializada — GEOMEC023A",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC023",
       "target": "GEOMEC023B",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Análise especializada — GEOMEC023B",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC023",
       "target": "GEOMEC023C",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Análise especializada — GEOMEC023C",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25078,17 +25081,17 @@
     {
       "source": "GEOMEC043",
       "target": "GEOMEC053A",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Pressão de Reabertura de Fratura",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC043",
       "target": "GEOMEC053B",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Pressão de Propagação de Fratura",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25110,9 +25113,9 @@
     {
       "source": "GEOMEC044",
       "target": "GEOMEC023",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25134,17 +25137,17 @@
     {
       "source": "GEOMEC045",
       "target": "bdiep",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "BDIEP — Banco de Dados de Informações de Engenharia de Poço",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC045",
       "target": "GEOMEC051",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "OpenWells — Well Operations Datastore",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25198,9 +25201,9 @@
     {
       "source": "GEOMEC053A",
       "target": "GEOMEC053B",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Pressão de Propagação de Fratura",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25366,9 +25369,9 @@
     {
       "source": "GEOMEC_ROP_A",
       "target": "GEOMEC009",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Gradiente de Colapso",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25534,17 +25537,17 @@
     {
       "source": "GEOMEC068",
       "target": "GEOMEC075",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "AZIE",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC068",
       "target": "GEOMEC077",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Abertura Angular do Breakout",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25574,9 +25577,9 @@
     {
       "source": "GEOMEC069",
       "target": "GEOMEC078",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "POSTEF",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25598,17 +25601,17 @@
     {
       "source": "GEOMEC070",
       "target": "GEOMEC079",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "FractureState",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC070",
       "target": "GEOMEC079A",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "FaultType",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25630,9 +25633,9 @@
     {
       "source": "GEOMEC071",
       "target": "GEOMEC078",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "POSTEF (Parallel_to_Bedding / Perpendicular_to_Bedding)",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25678,25 +25681,25 @@
     {
       "source": "GEOMEC072",
       "target": "GEOMEC023A",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Análise de Ovalização",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC072",
       "target": "GEOMEC023B",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Análise de DITF",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC072",
       "target": "GEOMEC023C",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Análise de Fratura Natural",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25814,9 +25817,9 @@
     {
       "source": "GEOMEC078",
       "target": "GEOMEC071",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Acamamento (referencial)",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25838,17 +25841,17 @@
     {
       "source": "GEOMEC079A",
       "target": "GEOMEC017",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Regime de Falhas",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC079A",
       "target": "GEOMEC018",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "Reativação de Falhas",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25926,9 +25929,9 @@
     {
       "source": "GEOMEC083",
       "target": "GEOMEC082",
-      "relation": "related_to",
+      "relation": "references",
       "relation_label_pt": "FMS individuais",
-      "relation_label_en": "related to",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {

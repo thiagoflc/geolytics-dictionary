@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T19:48:48.570Z",
+    "generated": "2026-05-04T19:53:58.070Z",
     "count": 412
   },
   "entities": [
@@ -18,11 +18,6 @@
       "primary_key": "nome_anp",
       "primary_key_standard": "ANP/SEP nomenclature",
       "primary_key_pattern": "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$",
-      "joined_by_modules": [
-        "data/operacoes-geologicas.json#OGEOMEC.Poco",
-        "data/operacoes-geologicas.json#FRX.Poco",
-        "data/operacoes-geologicas.json#DRX.Poco"
-      ],
       "datasets": [
         "pocos-exploratorios",
         "blocos-contrato"
@@ -234,6 +229,11 @@
             "from": "frx",
             "relation": "performed_on",
             "style": "solid"
+          },
+          {
+            "from": "ogeomec",
+            "relation": "references",
+            "style": "dashed"
           },
           {
             "from": "laudo-geomecanico",
@@ -5991,7 +5991,7 @@
           },
           {
             "from": "annular-fluid-type",
-            "relation": "related_to",
+            "relation": "is_input_for",
             "style": "dashed"
           },
           {
@@ -8374,7 +8374,7 @@
         "outgoing": [
           {
             "to": "janela-lama",
-            "relation": "related_to",
+            "relation": "is_input_for",
             "style": "dashed"
           }
         ],
@@ -10657,6 +10657,11 @@
             "style": "dashed"
           },
           {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
             "to": "bdiep",
             "relation": "stored_in",
             "style": "solid"
@@ -11581,7 +11586,7 @@
           },
           {
             "from": "GEOMEC045",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -18707,7 +18712,7 @@
           },
           {
             "from": "GEOMEC016",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -18970,7 +18975,7 @@
           },
           {
             "from": "GEOMEC_ROP_A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -19626,7 +19631,7 @@
           },
           {
             "to": "GEOMEC007",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -19795,7 +19800,7 @@
           },
           {
             "from": "GEOMEC079A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -19944,7 +19949,7 @@
           },
           {
             "from": "GEOMEC079A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -20583,24 +20588,24 @@
           },
           {
             "to": "GEOMEC023A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC044",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -22655,12 +22660,12 @@
           },
           {
             "to": "GEOMEC053A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC053B",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
@@ -22745,7 +22750,7 @@
           },
           {
             "to": "GEOMEC023",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
@@ -22834,12 +22839,12 @@
           },
           {
             "to": "bdiep",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC051",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
@@ -23176,7 +23181,7 @@
         "incoming": [
           {
             "from": "GEOMEC045",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -23436,14 +23441,14 @@
           },
           {
             "to": "GEOMEC053B",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC043",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -23538,12 +23543,12 @@
         "incoming": [
           {
             "from": "GEOMEC043",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC053A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -24121,7 +24126,7 @@
           },
           {
             "to": "GEOMEC009",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24331,7 +24336,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24341,7 +24346,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24461,7 +24466,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24471,7 +24476,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24572,7 +24577,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24582,7 +24587,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24677,12 +24682,12 @@
           },
           {
             "to": "GEOMEC075",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC077",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24795,7 +24800,7 @@
           },
           {
             "to": "GEOMEC078",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24887,12 +24892,12 @@
           },
           {
             "to": "GEOMEC079",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC079A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -24991,7 +24996,7 @@
           },
           {
             "to": "GEOMEC078",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
@@ -25003,7 +25008,7 @@
           },
           {
             "from": "GEOMEC078",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -25092,17 +25097,17 @@
           },
           {
             "to": "GEOMEC023A",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -25415,7 +25420,7 @@
         "incoming": [
           {
             "from": "GEOMEC068",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -25571,7 +25576,7 @@
         "incoming": [
           {
             "from": "GEOMEC068",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -25638,19 +25643,19 @@
           },
           {
             "to": "GEOMEC071",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC069",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC071",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -25713,7 +25718,7 @@
         "incoming": [
           {
             "from": "GEOMEC070",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -25774,19 +25779,19 @@
           },
           {
             "to": "GEOMEC017",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC018",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC070",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           }
         ]
@@ -26056,7 +26061,7 @@
         "incoming": [
           {
             "from": "GEOMEC083",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -26133,7 +26138,7 @@
           },
           {
             "to": "GEOMEC082",
-            "relation": "related_to",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
