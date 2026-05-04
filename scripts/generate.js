@@ -516,6 +516,268 @@ function buildGeomecCorporateGraph(allowedTargetIds) {
   return { nodes, edges };
 }
 
+/**
+ * Converts the L1-L2 academic backbone of geomechanics — 27 GM* classes from
+ * data/geomechanics.json (Fjaer/Zoback/ISRM) and 17 GF* fracture classes from
+ * data/geomechanics-fractures.json (Pillar 4 / structural geology) — into
+ * entity-graph nodes plus a dense set of edges:
+ *   1. Internal (within-cluster) edges from each source's `relations` array
+ *      and from `superclass` taxonomy where the parent is also an emitted node.
+ *   2. Bridge edges from academic GM* / GF* classes to existing main-component
+ *      pivots (poco, wireline-logging, formation-testing, core-sample,
+ *      janela-lama, campo-tensional, ...) so the new sub-cluster merges into
+ *      the giant main component.
+ *   3. Bridge edges from existing L6 corporate GEOMEC* nodes to their
+ *      academic GM* / GF* counterparts via `is_specialization_of` /
+ *      `derived_from`, so the L6 island merges through the academic layer.
+ *
+ * Vocabulary uses only the curated predicate set (no invented terms):
+ *   is_specialization_of, derived_from, produces, is_part_of,
+ *   is_calculated_from, is_input_for, measures, monitors, governed_by,
+ *   requires, constrains, formalizes, calibrates, supports, enables,
+ *   co_measured_with, estimates, requires_input, computes,
+ *   acquired_from, interpreted_into, observed_in, applies_to, occurs_in.
+ *
+ * @param {Set<string>} existingIds - Set of node IDs already emitted by
+ *   buildEntityGraph (main component + L6 island + isolated). Used to gate
+ *   bridge edges so we never author dangling edges.
+ * @returns {{nodes: Object[], edges: Object[]}}
+ */
+function buildGeomecAcademicGraph(existingIds) {
+  const gm = loadGeomechanics();
+  const gmf = loadGeomechanicsFractures();
+  if (!gm && !gmf) return { nodes: [], edges: [] };
+
+  const COLOR_ACADEMIC = "#8B4789"; // purple — distinct from geomec_corporate palette
+  const COLOR_FRACTURE = "#B85A3E"; // terracotta — distinct from existing colors
+
+  /**
+   * Builds an entity-graph node from a GM* / GF* class object.
+   */
+  const mkNode = (cls, kind) => {
+    const isFracture = kind === "geomec_fracture";
+    const labelPt = cls.name_pt || cls.name;
+    const labelEn = cls.name;
+    const definitionPt = cls.description_pt || cls.description || null;
+    const definitionEn = cls.description || null;
+    const synonymsPt = [];
+    const synonymsEn = [];
+    const baseGeocoverage = isFracture
+      ? ["layer1", "layer2", "layer7"]
+      : ["layer1", "layer2"];
+    const examples = [];
+    return {
+      id: cls.id,
+      label: labelPt,
+      label_en: labelEn,
+      type: kind,
+      color: isFracture ? COLOR_FRACTURE : COLOR_ACADEMIC,
+      size: 22,
+      definition: definitionPt,
+      definition_en_canonical: definitionEn,
+      legal_source: Array.isArray(cls.sources) ? cls.sources.join("; ") : null,
+      datasets: [],
+      petrokgraph_uri: null,
+      osdu_kind: null,
+      geosciml_uri: cls.gso_uri || null,
+      owl_uri: null,
+      geocoverage: cls.geocoverage && cls.geocoverage.length ? cls.geocoverage.filter((g) => g !== "sweet" && g !== "layer6") : baseGeocoverage,
+      synonyms_pt: synonymsPt,
+      synonyms_en: synonymsEn,
+      examples,
+      glossary_id: null,
+      extended_id: null,
+      sweet_alignment: cls.sweet_alignment || cls.sweet_uri || null,
+      gso_uri: cls.gso_uri || null,
+      superclass: cls.superclass || null,
+      layer: isFracture ? "L1-L2-L7" : "L1-L2",
+      skos_prefLabel: { "@pt": labelPt, "@en": labelEn },
+      skos_altLabel: { "@pt": synonymsPt, "@en": synonymsEn },
+      skos_definition: { "@pt": definitionPt, "@en": definitionEn },
+      skos_example: examples,
+    };
+  };
+
+  const nodes = [];
+  for (const cls of (gm && gm.classes) || []) nodes.push(mkNode(cls, "geomec_academic"));
+  for (const cls of (gmf && gmf.classes) || []) nodes.push(mkNode(cls, "geomec_fracture"));
+
+  const academicIds = new Set(nodes.map((n) => n.id));
+
+  /* Build a name -> id index for relations (relations reference class names,
+     not IDs, e.g. domain "StressTensor" maps to GM001). */
+  const nameToId = new Map();
+  for (const cls of (gm && gm.classes) || []) {
+    nameToId.set(cls.name, cls.id);
+    if (cls.name_pt) nameToId.set(cls.name_pt, cls.id);
+  }
+  for (const cls of (gmf && gmf.classes) || []) {
+    nameToId.set(cls.name, cls.id);
+    if (cls.name_pt) nameToId.set(cls.name_pt, cls.id);
+  }
+
+  const edges = [];
+  const seen = new Set(); // de-dup key
+  const addEdge = (source, target, relation, labelPt, labelEn, style) => {
+    if (!source || !target || source === target) return;
+    const key = `${source} ${target} ${relation}`;
+    if (seen.has(key)) return;
+    seen.add(key);
+    edges.push({
+      source,
+      target,
+      relation,
+      relation_label_pt: labelPt || relation.replace(/_/g, " "),
+      relation_label_en: labelEn || relation.replace(/_/g, " "),
+      style: style || "geomec_academic",
+    });
+  };
+
+  /* ─── 1. Internal edges from `relations` (GR* in geomechanics.json) ─── */
+  const relList = [...((gm && gm.relations) || []), ...((gmf && gmf.relations) || [])];
+  for (const r of relList) {
+    const src = nameToId.get(r.domain);
+    const tgt = nameToId.get(r.range);
+    if (!src || !tgt) continue;
+    if (!academicIds.has(src) || !academicIds.has(tgt)) continue;
+    addEdge(src, tgt, r.name, r.name_pt || r.name, r.name);
+  }
+
+  /* ─── 1b. Internal edges from `superclass` taxonomy.
+     When a class's superclass matches another emitted class's name, emit an
+     `is_specialization_of` edge from the subclass to the parent. ─── */
+  for (const cls of [...((gm && gm.classes) || []), ...((gmf && gmf.classes) || [])]) {
+    const parentId = nameToId.get(cls.superclass);
+    if (!parentId || parentId === cls.id) continue;
+    if (!academicIds.has(parentId)) continue;
+    addEdge(cls.id, parentId, "is_specialization_of", "é especialização de", "is specialization of");
+  }
+
+  /* ─── 2. Bridge edges from academic to MAIN component ─── */
+  // helper that only emits if the target exists in the existing graph
+  const bridgeMain = (src, tgt, rel, labelPt, labelEn) => {
+    if (!existingIds.has(tgt)) return;
+    if (!academicIds.has(src)) return;
+    addEdge(src, tgt, rel, labelPt, labelEn, "geomec_academic_bridge");
+  };
+
+  // Pore pressure & stress measurements — formation-testing measures pore pressure
+  bridgeMain("GM004", "formation-testing", "measures", "é medido por", "is measured by");
+  bridgeMain("GM004", "wireline-logging", "derived_from", "derivado de", "derived from");
+  bridgeMain("GM001", "formation-testing", "measures", "é medido por", "is measured by");
+  bridgeMain("GM002", "formation-testing", "measures", "é medido por", "is measured by");
+  bridgeMain("GM003", "formation-testing", "measures", "é medido por", "is measured by");
+
+  // MEM family — derived from logs/cores/tests, produces janela-lama and campo-tensional
+  for (const memId of ["GM010", "GM011", "GM012"]) {
+    bridgeMain(memId, "wireline-logging", "derived_from", "derivado de", "derived from");
+    bridgeMain(memId, "core-sample", "derived_from", "derivado de", "derived from");
+    bridgeMain(memId, "formation-testing", "derived_from", "derivado de", "derived from");
+    bridgeMain(memId, "janela-lama", "produces", "produz", "produces");
+    bridgeMain(memId, "campo-tensional", "produces", "produz", "produces");
+  }
+
+  // Wellbore (GM026) — academic specialization of operational poco
+  bridgeMain("GM026", "poco", "is_specialization_of", "é especialização de", "is specialization of");
+  // MudWindow academic specialization of analytical janela-lama
+  bridgeMain("GM005", "janela-lama", "is_specialization_of", "é especialização de", "is specialization of");
+  // AndersonStressRegime academic specialization of analytical campo-tensional
+  bridgeMain("GM025", "campo-tensional", "is_specialization_of", "é especialização de", "is specialization of");
+
+  // Rock mech properties (UCS, Young, Poisson, Biot, Bulk, Shear) derived from core-sample/wireline
+  for (const propId of ["GM013", "GM014", "GM015", "GM016", "GM017", "GM018", "GM019"]) {
+    bridgeMain(propId, "core-sample", "derived_from", "derivado de", "derived from");
+    bridgeMain(propId, "wireline-logging", "derived_from", "derivado de", "derived from");
+  }
+
+  // RQD/GSI/RMR — estimated from core descriptions (cuttings as fallback)
+  for (const cls of ["GM020", "GM021", "GM022"]) {
+    bridgeMain(cls, "core-sample", "derived_from", "derivado de", "derived from");
+  }
+
+  // Wellbore observations — log-based (mwd-lwd, lwd, mwd) calibrate MEM
+  bridgeMain("GM010", "mwd-lwd", "calibrates", "calibra", "calibrates");
+  bridgeMain("GM010", "lwd", "calibrates", "calibra", "calibrates");
+  bridgeMain("GM010", "mwd", "calibrates", "calibra", "calibrates");
+
+  // BDP (banco de dados de poços) — observed_in records of MEM/Pp/regime
+  bridgeMain("GM010", "bdp", "observed_in", "observado em", "observed in");
+
+  // Fracture classes — derived from core, image logs (wireline), cuttings
+  for (const fid of ["GF004", "GF005", "GF006", "GF007", "GF008", "GF009", "GF010", "GF011", "GF015", "GF016", "GF017"]) {
+    bridgeMain(fid, "wireline-logging", "derived_from", "derivado de", "derived from");
+    bridgeMain(fid, "core-sample", "derived_from", "derivado de", "derived from");
+  }
+
+  // Laudo Geomecânico already exists in main as a doc — academic GM027 specializes it
+  bridgeMain("GM027", "laudo-geomecanico", "formalizes", "formaliza", "formalizes");
+
+  // MohrCircle (GM006) — graphical representation derived from stress and failure data;
+  // tie it to FailureCriterion and StressTensor so it joins the cluster.
+  if (academicIds.has("GM006") && academicIds.has("GM001")) {
+    addEdge("GM006", "GM001", "is_calculated_from", "calculado a partir de", "is calculated from");
+  }
+  if (academicIds.has("GM006") && academicIds.has("GM007")) {
+    addEdge("GM006", "GM007", "supports", "apoia", "supports");
+  }
+
+  // DeformationMechanism family (GF001, GF002, GF003) — connect to academic
+  // brittle/ductile parents and to FractureType so the trio joins the cluster.
+  if (academicIds.has("GF002") && academicIds.has("GF001")) {
+    addEdge("GF002", "GF001", "is_specialization_of", "é especialização de", "is specialization of");
+  }
+  if (academicIds.has("GF003") && academicIds.has("GF001")) {
+    addEdge("GF003", "GF001", "is_specialization_of", "é especialização de", "is specialization of");
+  }
+  // Brittle deformation produces fractures (FractureType) — tie GF002 to GF004
+  if (academicIds.has("GF002") && academicIds.has("GF004")) {
+    addEdge("GF002", "GF004", "produces", "produz", "produces");
+  }
+  // Brittle deformation occurs in wellbore — bridge to operational pivot
+  bridgeMain("GF002", "poco", "occurs_in", "ocorre em", "occurs in");
+  // Deformation in general — observed in core
+  bridgeMain("GF001", "core-sample", "observed_in", "observado em", "observed in");
+  bridgeMain("GF003", "core-sample", "observed_in", "observado em", "observed in");
+
+  /* ─── 3. Bridge edges from existing L6 corporate to academic ─── */
+  const bridgeCorp = (corpId, acadId, rel, labelPt, labelEn) => {
+    if (!existingIds.has(corpId)) return;
+    if (!academicIds.has(acadId)) return;
+    addEdge(corpId, acadId, rel, labelPt, labelEn, "geomec_corp_to_academic");
+  };
+
+  // Pp / stresses
+  bridgeCorp("GEOMEC001", "GM004", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC002", "GM002", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC003", "GM005", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC004", "GM001", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC007", "GM002", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC008", "GM002", "is_specialization_of", "é especialização de", "is specialization of");
+
+  // Rock mech properties — UCS, E, nu, Biot
+  bridgeCorp("GEOMEC010", "GM014", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC011", "GM015", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC012", "GM016", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC013", "GM017", "is_specialization_of", "é especialização de", "is specialization of");
+
+  // Stress regime
+  bridgeCorp("GEOMEC017", "GM025", "is_specialization_of", "é especialização de", "is specialization of");
+
+  // Fracture/breakout observations — corporate (image-log derived) → academic
+  // GEOMEC068 Ovalização (breakout) is a wellbore measurement — derived from drilling
+  // GEOMEC069 Drilling-induced fracture — kinematic class is Joint (Mode I, tensile)
+  // GEOMEC070 Natural fracture — academic FractureType
+  // GEOMEC023A/B/C are processes that produce these features
+  bridgeCorp("GEOMEC068", "GM026", "observed_in", "observado em", "observed in");
+  bridgeCorp("GEOMEC069", "GF005", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC070", "GF004", "is_specialization_of", "é especialização de", "is specialization of");
+  bridgeCorp("GEOMEC023A", "GM026", "occurs_in", "ocorre em", "occurs in");
+  bridgeCorp("GEOMEC023B", "GF005", "produces", "produz", "produces");
+  bridgeCorp("GEOMEC023C", "GF004", "interpreted_into", "interpretado em", "interpreted into");
+
+  return { nodes, edges };
+}
+
 /* ─────────────────────────────────────────────────────────────
  * SOURCE DATA — copiado de Geolytics src/config/dicionario.js
  * ───────────────────────────────────────────────────────────── */
@@ -2780,11 +3042,23 @@ function buildEntityGraph() {
   nodes.push(...corpGraph.nodes);
   edges.push(...corpGraph.edges);
 
+  /* L1-L2 academic backbone (Fjaer/Zoback/ISRM, 27 GM* classes) + Pillar 4
+     fracture branch (17 GF* classes). Adds the foundational geomechanics
+     vocabulary plus bridge edges that:
+       - merge the L6 corporate island into the main component via
+         is_specialization_of / observed_in / produces;
+       - tie the academic classes to operational pivots (poco,
+         wireline-logging, core-sample, formation-testing, mwd-lwd, lwd, mwd,
+         bdp, janela-lama, campo-tensional, laudo-geomecanico). */
+  const acadGraph = buildGeomecAcademicGraph(new Set(nodes.map((n) => n.id)));
+  nodes.push(...acadGraph.nodes);
+  edges.push(...acadGraph.edges);
+
   return {
     version: VERSION,
     generated: NOW,
     source:
-      "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate",
+      "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture",
     nodes,
     edges,
   };

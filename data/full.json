@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-03T20:22:54.243Z",
+    "generated": "2026-05-04T16:57:14.342Z",
     "description": "GeoBrain — complete merged dataset",
     "counts": {
       "glossary_terms": 53,
@@ -1987,8 +1987,8 @@
   ],
   "entity_graph": {
     "version": "1.1.0",
-    "generated": "2026-05-03T20:22:54.243Z",
-    "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate",
+    "generated": "2026-05-04T16:57:14.342Z",
+    "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture",
     "nodes": [
       {
         "id": "poco",
@@ -18767,6 +18767,1871 @@
         "skos_example": [],
         "wsm_type_code": null,
         "_semantic_category": null
+      },
+      {
+        "id": "GM001",
+        "label": "TensorDeTensao",
+        "label_en": "StressTensor",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Tensor simétrico 3x3 que descreve o estado de tensão em um ponto da rocha. Componentes sigma_1 (máxima principal), sigma_2 (intermediária), sigma_3 (mínima). Convenção: sigma_1 >= sigma_2 >= sigma_3.",
+        "definition_en_canonical": "Symmetric 3x3 second-rank tensor describing the state of stress at a point in a rock mass. Components sigma_1 (maximum principal), sigma_2 (intermediate principal), sigma_3 (minimum principal). By convention sigma_1 >= sigma_2 >= sigma_3.",
+        "legal_source": "Fjaer et al. 2008 Ch.2; Zoback 2010 Ch.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/reprMathOperation#Tensor",
+        "gso_uri": null,
+        "superclass": "MathematicalObject",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "TensorDeTensao",
+          "@en": "StressTensor"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Tensor simétrico 3x3 que descreve o estado de tensão em um ponto da rocha. Componentes sigma_1 (máxima principal), sigma_2 (intermediária), sigma_3 (mínima). Convenção: sigma_1 >= sigma_2 >= sigma_3.",
+          "@en": "Symmetric 3x3 second-rank tensor describing the state of stress at a point in a rock mass. Components sigma_1 (maximum principal), sigma_2 (intermediate principal), sigma_3 (minimum principal). By convention sigma_1 >= sigma_2 >= sigma_3."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM002",
+        "label": "TensaoPrincipal",
+        "label_en": "PrincipalStress",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Uma das três tensões principais (normais) agindo em planos onde a tensão de cisalhamento é zero. No subsolo: Sv (sobrecarga vertical), SHmax (horizontal máxima), Shmin (horizontal mínima).",
+        "definition_en_canonical": "One of the three principal (normal) stresses acting on planes where shear stress vanishes. In the subsurface: Sv (vertical overburden), SHmax (maximum horizontal), Shmin (minimum horizontal). Anderson regime determines their relative magnitudes.",
+        "legal_source": "Fjaer et al. 2008 §2.1; Zoback 2010 §1.2",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/reprSciUnits#Stress",
+        "gso_uri": null,
+        "superclass": "StressTensor",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "TensaoPrincipal",
+          "@en": "PrincipalStress"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Uma das três tensões principais (normais) agindo em planos onde a tensão de cisalhamento é zero. No subsolo: Sv (sobrecarga vertical), SHmax (horizontal máxima), Shmin (horizontal mínima).",
+          "@en": "One of the three principal (normal) stresses acting on planes where shear stress vanishes. In the subsurface: Sv (vertical overburden), SHmax (maximum horizontal), Shmin (minimum horizontal). Anderson regime determines their relative magnitudes."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM003",
+        "label": "TensaoDeCisalhamento",
+        "label_en": "ShearStress",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Componente de tensão atuando paralelamente a um plano. No círculo de Mohr: tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controla ruptura cisalhante quando supera o critério de Coulomb.",
+        "definition_en_canonical": "Stress component acting parallel to a plane. In the Mohr circle representation, shear stress tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controls shear failure when tau exceeds the Coulomb criterion.",
+        "legal_source": "Fjaer et al. 2008 §2.3; Zoback 2010 §4.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "StressTensor",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "TensaoDeCisalhamento",
+          "@en": "ShearStress"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Componente de tensão atuando paralelamente a um plano. No círculo de Mohr: tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controla ruptura cisalhante quando supera o critério de Coulomb.",
+          "@en": "Stress component acting parallel to a plane. In the Mohr circle representation, shear stress tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controls shear failure when tau exceeds the Coulomb criterion."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM004",
+        "label": "PressaoDePoros",
+        "label_en": "PorePressure",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Pressão do fluido no espaço poroso conectado. Controla a tensão efetiva via princípio de Terzaghi-Biot: sigma_eff = sigma_total - alpha * Pp. Calibrada por RFT/MDT, eventos de perfuração, inversão de velocidade sísmica (método Eaton).",
+        "definition_en_canonical": "Pressure of pore fluid in connected pore space. Controls effective stress via Terzaghi-Biot principle: sigma_eff = sigma_total - alpha * Pp. Calibrated from RFT/MDT measurements, drilling events, seismic velocity inversion (Eaton method).",
+        "legal_source": "Fjaer et al. 2008 §2.5; Zoback 2010 §2.1; Eaton B.A. JPT 1975",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/propPressure#Pressure",
+        "gso_uri": null,
+        "superclass": "FluidPressure",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "PressaoDePoros",
+          "@en": "PorePressure"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Pressão do fluido no espaço poroso conectado. Controla a tensão efetiva via princípio de Terzaghi-Biot: sigma_eff = sigma_total - alpha * Pp. Calibrada por RFT/MDT, eventos de perfuração, inversão de velocidade sísmica (método Eaton).",
+          "@en": "Pressure of pore fluid in connected pore space. Controls effective stress via Terzaghi-Biot principle: sigma_eff = sigma_total - alpha * Pp. Calibrated from RFT/MDT measurements, drilling events, seismic velocity inversion (Eaton method)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM005",
+        "label": "JanelaDeLama",
+        "label_en": "MudWindow",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Janela de peso de lama segura para perfuração. Limite inferior: pressão de poros (risco de colapso/influxo); limite superior: gradiente de fratura (risco de perda de circulação). NOTA: 'Janela de Lama' (M9) NÃO é a mesma coisa que 'Janela de Geração' (M7 geoquímica, faixa de Ro%).",
+        "definition_en_canonical": "Safe drilling mud weight window bounded below by pore pressure (collapse/kick risk) and above by fracture gradient (lost circulation risk). In high-pressure, high-temperature or depleted reservoirs the window can be very narrow. Distinct from 'janela de geracao' (kerogen maturation window).",
+        "legal_source": "Fjaer et al. 2008 §10.1; Zoback 2010 §9.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "DrillingConstraint",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "JanelaDeLama",
+          "@en": "MudWindow"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Janela de peso de lama segura para perfuração. Limite inferior: pressão de poros (risco de colapso/influxo); limite superior: gradiente de fratura (risco de perda de circulação). NOTA: 'Janela de Lama' (M9) NÃO é a mesma coisa que 'Janela de Geração' (M7 geoquímica, faixa de Ro%).",
+          "@en": "Safe drilling mud weight window bounded below by pore pressure (collapse/kick risk) and above by fracture gradient (lost circulation risk). In high-pressure, high-temperature or depleted reservoirs the window can be very narrow. Distinct from 'janela de geracao' (kerogen maturation window)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM006",
+        "label": "CirculoDeMohr",
+        "label_en": "MohrCircle",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Representação gráfica do estado de tensão em um plano. Diâmetro igual a (sigma_1 - sigma_3); centro em (sigma_1 + sigma_3)/2. Ruptura ocorre quando o círculo toca o envelope de ruptura.",
+        "definition_en_canonical": "Graphical representation of the stress state on a plane at a given orientation. Circle diameter equals (sigma_1 - sigma_3); center at (sigma_1 + sigma_3)/2. Failure occurs when the circle touches the failure envelope (Mohr-Coulomb, Hoek-Brown).",
+        "legal_source": "Fjaer et al. 2008 §3.1; ISRM Suggested Methods 1978",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GraphicalRepresentation",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "CirculoDeMohr",
+          "@en": "MohrCircle"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Representação gráfica do estado de tensão em um plano. Diâmetro igual a (sigma_1 - sigma_3); centro em (sigma_1 + sigma_3)/2. Ruptura ocorre quando o círculo toca o envelope de ruptura.",
+          "@en": "Graphical representation of the stress state on a plane at a given orientation. Circle diameter equals (sigma_1 - sigma_3); center at (sigma_1 + sigma_3)/2. Failure occurs when the circle touches the failure envelope (Mohr-Coulomb, Hoek-Brown)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM007",
+        "label": "CriterioDeRuptura",
+        "label_en": "FailureCriterion",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Condição matemática que define o estado de tensão em que a rocha rompe. Dois critérios principais: Mohr-Coulomb (envelope linear, adequado para rochas sedimentares) e Hoek-Brown (envelope curvo, melhor para maciços fraturados).",
+        "definition_en_canonical": "Mathematical condition defining the stress state at which rock fails. Two principal criteria in petroleum geomechanics: Mohr-Coulomb (linear envelope, suitable for most sedimentary rocks) and Hoek-Brown (curved envelope, better for fractured rock masses).",
+        "legal_source": "Fjaer et al. 2008 §3.3; Hoek & Brown 2019",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechanicsModel",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "CriterioDeRuptura",
+          "@en": "FailureCriterion"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Condição matemática que define o estado de tensão em que a rocha rompe. Dois critérios principais: Mohr-Coulomb (envelope linear, adequado para rochas sedimentares) e Hoek-Brown (envelope curvo, melhor para maciços fraturados).",
+          "@en": "Mathematical condition defining the stress state at which rock fails. Two principal criteria in petroleum geomechanics: Mohr-Coulomb (linear envelope, suitable for most sedimentary rocks) and Hoek-Brown (curved envelope, better for fractured rock masses)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM008",
+        "label": "CriterioMohrCoulomb",
+        "label_en": "MohrCoulombCriterion",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Critério de ruptura cisalhante linear: tau_f = c + sigma_n * tan(phi), onde c é a coesão (MPa) e phi é o ângulo de atrito interno (graus). Parâmetros obtidos de ensaios triaxiais.",
+        "definition_en_canonical": "Linear shear failure criterion: tau_f = c + sigma_n * tan(phi), where c is cohesion (MPa) and phi is the angle of internal friction (degrees). Parameters derived from triaxial tests. Standard for wellbore stability analysis in sandstones and shales.",
+        "legal_source": "Fjaer et al. 2008 §3.3; Zoback 2010 §4.2",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "FailureCriterion",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "CriterioMohrCoulomb",
+          "@en": "MohrCoulombCriterion"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Critério de ruptura cisalhante linear: tau_f = c + sigma_n * tan(phi), onde c é a coesão (MPa) e phi é o ângulo de atrito interno (graus). Parâmetros obtidos de ensaios triaxiais.",
+          "@en": "Linear shear failure criterion: tau_f = c + sigma_n * tan(phi), where c is cohesion (MPa) and phi is the angle of internal friction (degrees). Parameters derived from triaxial tests. Standard for wellbore stability analysis in sandstones and shales."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM009",
+        "label": "CriterioHoekBrown",
+        "label_en": "HoekBrownCriterion",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Critério empírico curvo para maciços rochosos. Usa GSI para caracterizar o grau de fraturamento e resistência do maciço. Edição 2018 de Hoek & Brown é o padrão atual.",
+        "definition_en_canonical": "Curved empirical criterion for rock masses: sigma_1 = sigma_3 + sigma_ci * (m_b * sigma_3/sigma_ci + s)^a, where sigma_ci is intact rock UCS, m_b is reduced Hoek-Brown constant, s and a are GSI-dependent parameters. Uses GSI for rock mass characterization. Hoek-Brown 2018 edition is current standard.",
+        "legal_source": "Hoek & Brown 2019; Hoek E. et al. Rock Mechanics and Rock Engineering 2002",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "FailureCriterion",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "CriterioHoekBrown",
+          "@en": "HoekBrownCriterion"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Critério empírico curvo para maciços rochosos. Usa GSI para caracterizar o grau de fraturamento e resistência do maciço. Edição 2018 de Hoek & Brown é o padrão atual.",
+          "@en": "Curved empirical criterion for rock masses: sigma_1 = sigma_3 + sigma_ci * (m_b * sigma_3/sigma_ci + s)^a, where sigma_ci is intact rock UCS, m_b is reduced Hoek-Brown constant, s and a are GSI-dependent parameters. Uses GSI for rock mass characterization. Hoek-Brown 2018 edition is current standard."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM010",
+        "label": "ModeloMecanicoTerra",
+        "label_en": "MechanicalEarthModel",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Descrição quantitativa integrada do estado mecânico do reservatório e rochas vizinhas. Quatro pilares: (1) tensões in situ, (2) pressão de poros, (3) módulos elásticos e de resistência, (4) geometria estrutural-estratigráfica.",
+        "definition_en_canonical": "Integrated quantitative description of the mechanical state of a reservoir and surrounding rock, comprising: (1) in situ stress magnitudes and orientations, (2) pore pressure, (3) elastic and strength properties of rock, (4) structural and stratigraphic geometry. The four-pillar MEM is the foundation for wellbore stability, sand production, hydraulic fracturing, and compaction predictions.",
+        "legal_source": "Fjaer et al. 2008 §10.1; Zoback 2010 §9.1; Plumb R. et al. SPE 65118 2000",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeomechanicsModel",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ModeloMecanicoTerra",
+          "@en": "MechanicalEarthModel"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Descrição quantitativa integrada do estado mecânico do reservatório e rochas vizinhas. Quatro pilares: (1) tensões in situ, (2) pressão de poros, (3) módulos elásticos e de resistência, (4) geometria estrutural-estratigráfica.",
+          "@en": "Integrated quantitative description of the mechanical state of a reservoir and surrounding rock, comprising: (1) in situ stress magnitudes and orientations, (2) pore pressure, (3) elastic and strength properties of rock, (4) structural and stratigraphic geometry. The four-pillar MEM is the foundation for wellbore stability, sand production, hydraulic fracturing, and compaction predictions."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM011",
+        "label": "ModeloMecanicoTerra1D",
+        "label_en": "MechanicalEarthModel1D",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "MEM unidimensional construído ao longo do poço. Funções de profundidade: gradiente Pp, gradiente de fratura, Sv, SHmax, Shmin, UCS, E, nu, alfa. Output do software GEOMECBR.",
+        "definition_en_canonical": "One-dimensional MEM built along a wellbore path. Depth functions of pore pressure gradient, fracture gradient, Sv, SHmax, Shmin, UCS, Young's modulus, Poisson's ratio, and Biot coefficient. Output of GEOMECBR software at Petrobras. Calibrated against LOT, MDT, caliper, image logs.",
+        "legal_source": "Fjaer et al. 2008 §10.2; Zoback 2010 §9.2",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "MechanicalEarthModel",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ModeloMecanicoTerra1D",
+          "@en": "MechanicalEarthModel1D"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "MEM unidimensional construído ao longo do poço. Funções de profundidade: gradiente Pp, gradiente de fratura, Sv, SHmax, Shmin, UCS, E, nu, alfa. Output do software GEOMECBR.",
+          "@en": "One-dimensional MEM built along a wellbore path. Depth functions of pore pressure gradient, fracture gradient, Sv, SHmax, Shmin, UCS, Young's modulus, Poisson's ratio, and Biot coefficient. Output of GEOMECBR software at Petrobras. Calibrated against LOT, MDT, caliper, image logs."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM012",
+        "label": "ModeloMecanicoTerra3D",
+        "label_en": "MechanicalEarthModel3D",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "MEM tridimensional que integra dados sísmicos, perfilagem e produção em grade volumétrica. Permite predição espacial de tensões e propriedades de rocha. Output do software GERESIM.",
+        "definition_en_canonical": "Three-dimensional MEM integrating seismic, well log, and production data into a volumetric grid. Allows spatial prediction of stress, pore pressure, and rock properties away from wells. Required for field development planning, infill drilling, and stimulation design. Output of GERESIM at Petrobras.",
+        "legal_source": "Zoback 2010 §12.1; Fjaer et al. 2008 §10.4",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "MechanicalEarthModel",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ModeloMecanicoTerra3D",
+          "@en": "MechanicalEarthModel3D"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "MEM tridimensional que integra dados sísmicos, perfilagem e produção em grade volumétrica. Permite predição espacial de tensões e propriedades de rocha. Output do software GERESIM.",
+          "@en": "Three-dimensional MEM integrating seismic, well log, and production data into a volumetric grid. Allows spatial prediction of stress, pore pressure, and rock properties away from wells. Required for field development planning, infill drilling, and stimulation design. Output of GERESIM at Petrobras."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM013",
+        "label": "PropriedadeMecanicaRocha",
+        "label_en": "RockMechProperty",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Propriedade mecânica da rocha intacta ou maciço rochoso usada em modelagem geomecânica. Inclui propriedades elásticas e de resistência. Distinguida como estática (laboratório) vs dinâmica (perfil sônico).",
+        "definition_en_canonical": "Mechanical property of intact rock or rock mass used in geomechanical modelling. Includes elastic properties (Young's modulus, Poisson's ratio, bulk modulus, shear modulus) and strength properties (UCS, tensile strength, cohesion, friction angle). Differentiated as static (laboratory) vs dynamic (sonic log).",
+        "legal_source": "Fjaer et al. 2008 §2.1; Zoback 2010 §1.3; ISRM Suggested Methods",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/matrRock#RockPhysicalProperty",
+        "gso_uri": null,
+        "superclass": "PhysicalProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "PropriedadeMecanicaRocha",
+          "@en": "RockMechProperty"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Propriedade mecânica da rocha intacta ou maciço rochoso usada em modelagem geomecânica. Inclui propriedades elásticas e de resistência. Distinguida como estática (laboratório) vs dinâmica (perfil sônico).",
+          "@en": "Mechanical property of intact rock or rock mass used in geomechanical modelling. Includes elastic properties (Young's modulus, Poisson's ratio, bulk modulus, shear modulus) and strength properties (UCS, tensile strength, cohesion, friction angle). Differentiated as static (laboratory) vs dynamic (sonic log)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM014",
+        "label": "ResistenciaCompressaoUniaxial",
+        "label_en": "UCS",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Resistência à Compressão Uniaxial. Máxima tensão axial que um corpo cilíndrico de rocha suporta com pressão de confinamento zero. Unidade: MPa. UCS estático (laboratório) difere do dinâmico (sônico) em 20-40%.",
+        "definition_en_canonical": "Uniaxial Compressive Strength (UCS) — the maximum axial stress a cylindrical rock specimen can sustain under zero confining pressure. Unit: MPa. Typical range: sandstone 10-200 MPa, limestone 30-250 MPa, salt 20-30 MPa. Static UCS (laboratory) differs from dynamic UCS (sonic-derived) by 20-40%; do not substitute without calibration.",
+        "legal_source": "Fjaer et al. 2008 §4.1; ISRM Suggested Methods 1978; Zoback 2010 §5.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ResistenciaCompressaoUniaxial",
+          "@en": "UCS"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Resistência à Compressão Uniaxial. Máxima tensão axial que um corpo cilíndrico de rocha suporta com pressão de confinamento zero. Unidade: MPa. UCS estático (laboratório) difere do dinâmico (sônico) em 20-40%.",
+          "@en": "Uniaxial Compressive Strength (UCS) — the maximum axial stress a cylindrical rock specimen can sustain under zero confining pressure. Unit: MPa. Typical range: sandstone 10-200 MPa, limestone 30-250 MPa, salt 20-30 MPa. Static UCS (laboratory) differs from dynamic UCS (sonic-derived) by 20-40%; do not substitute without calibration."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM015",
+        "label": "ModuloDeYoung",
+        "label_en": "YoungModulus",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Módulo de Young (E) — razão entre tensão axial e deformação axial no regime elástico. Governa compactação do reservatório e subsidência. Estático: ensaio triaxial; dinâmico: velocidades sônicas Vp, Vs.",
+        "definition_en_canonical": "Young's modulus (E) — ratio of axial stress to axial strain in the elastic regime. Governs reservoir compaction and surface subsidence. Static E from uniaxial/triaxial tests; dynamic E from sonic velocities (Vp, Vs). Unit: GPa. Typical range: 5-90 GPa for sedimentary rocks.",
+        "legal_source": "Fjaer et al. 2008 §2.2; Zoback 2010 §1.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ModuloDeYoung",
+          "@en": "YoungModulus"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Módulo de Young (E) — razão entre tensão axial e deformação axial no regime elástico. Governa compactação do reservatório e subsidência. Estático: ensaio triaxial; dinâmico: velocidades sônicas Vp, Vs.",
+          "@en": "Young's modulus (E) — ratio of axial stress to axial strain in the elastic regime. Governs reservoir compaction and surface subsidence. Static E from uniaxial/triaxial tests; dynamic E from sonic velocities (Vp, Vs). Unit: GPa. Typical range: 5-90 GPa for sedimentary rocks."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM016",
+        "label": "RazaoDePoisson",
+        "label_en": "PoissonRatio",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Razão de Poisson (nu) — razão entre deformação lateral e axial sob carregamento axial. Adimensional, fisicamente limitado a [0, 0.5] para materiais elásticos isotrópicos. Controla magnitude das tensões horizontais.",
+        "definition_en_canonical": "Poisson's ratio (nu) — ratio of lateral strain to axial strain under axial loading. Dimensionless, physically constrained to [0, 0.5] for isotropic elastic materials (incompressible limit = 0.5). Typical range: 0.1-0.35 for sedimentary rocks. Controls horizontal stress magnitude from vertical load.",
+        "legal_source": "Fjaer et al. 2008 §2.2; Zoback 2010 §1.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "RazaoDePoisson",
+          "@en": "PoissonRatio"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Razão de Poisson (nu) — razão entre deformação lateral e axial sob carregamento axial. Adimensional, fisicamente limitado a [0, 0.5] para materiais elásticos isotrópicos. Controla magnitude das tensões horizontais.",
+          "@en": "Poisson's ratio (nu) — ratio of lateral strain to axial strain under axial loading. Dimensionless, physically constrained to [0, 0.5] for isotropic elastic materials (incompressible limit = 0.5). Typical range: 0.1-0.35 for sedimentary rocks. Controls horizontal stress magnitude from vertical load."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM017",
+        "label": "CoeficienteDeBiot",
+        "label_en": "BiotCoefficient",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Coeficiente de Biot (alfa) — parâmetro de acoplamento poroelástico. Tensão efetiva = tensão total - alfa * Pp. Varia de 0 (esqueleto rígido) a 1 (sedimento não consolidado). alfa = 1 - K_dry / K_grain.",
+        "definition_en_canonical": "Biot coefficient (alpha) — poroelastic coupling parameter relating pore pressure to total stress in Biot's effective stress principle: sigma_eff = sigma_total - alpha * Pp. Range: 0 (undeformable skeleton) to 1 (unconsolidated sediment). Defined as alpha = 1 - K_dry / K_grain.",
+        "legal_source": "Biot M.A. Journal of Applied Physics 1941; Fjaer et al. 2008 §2.7",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "CoeficienteDeBiot",
+          "@en": "BiotCoefficient"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Coeficiente de Biot (alfa) — parâmetro de acoplamento poroelástico. Tensão efetiva = tensão total - alfa * Pp. Varia de 0 (esqueleto rígido) a 1 (sedimento não consolidado). alfa = 1 - K_dry / K_grain.",
+          "@en": "Biot coefficient (alpha) — poroelastic coupling parameter relating pore pressure to total stress in Biot's effective stress principle: sigma_eff = sigma_total - alpha * Pp. Range: 0 (undeformable skeleton) to 1 (unconsolidated sediment). Defined as alpha = 1 - K_dry / K_grain."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM018",
+        "label": "ModuloVolumetrico",
+        "label_en": "BulkModulus",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Módulo volumétrico (K) — resistência da rocha à compressão volumétrica. K = E / (3*(1 - 2*nu)). Usado em modelagem de compactação e substituição de fluido (equações de Gassmann).",
+        "definition_en_canonical": "Bulk modulus (K) — resistance of rock to volumetric compression. K = E / (3*(1 - 2*nu)). Used in compaction modelling and fluid substitution (Gassmann equations). Unit: GPa.",
+        "legal_source": "Fjaer et al. 2008 §2.2; Zoback 2010 §1.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ModuloVolumetrico",
+          "@en": "BulkModulus"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Módulo volumétrico (K) — resistência da rocha à compressão volumétrica. K = E / (3*(1 - 2*nu)). Usado em modelagem de compactação e substituição de fluido (equações de Gassmann).",
+          "@en": "Bulk modulus (K) — resistance of rock to volumetric compression. K = E / (3*(1 - 2*nu)). Used in compaction modelling and fluid substitution (Gassmann equations). Unit: GPa."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM019",
+        "label": "ModuloDeCisalhamento",
+        "label_en": "ShearModulus",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Módulo de cisalhamento (G) — resistência da rocha à deformação cisalhante. G = E / (2*(1 + nu)). Medido pela velocidade sônica de cisalhamento Vs: G = rho * Vs^2. Insensível ao fluido nos poros (Gassmann).",
+        "definition_en_canonical": "Shear modulus (G) — resistance of rock to shear deformation. G = E / (2*(1 + nu)). Directly measured from shear sonic velocity (Vs): G = rho * Vs^2. Unit: GPa. Unaffected by pore fluid (insensitive to fluid type in Gassmann).",
+        "legal_source": "Fjaer et al. 2008 §2.2; Zoback 2010 §1.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ModuloDeCisalhamento",
+          "@en": "ShearModulus"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Módulo de cisalhamento (G) — resistência da rocha à deformação cisalhante. G = E / (2*(1 + nu)). Medido pela velocidade sônica de cisalhamento Vs: G = rho * Vs^2. Insensível ao fluido nos poros (Gassmann).",
+          "@en": "Shear modulus (G) — resistance of rock to shear deformation. G = E / (2*(1 + nu)). Directly measured from shear sonic velocity (Vs): G = rho * Vs^2. Unit: GPa. Unaffected by pore fluid (insensitive to fluid type in Gassmann)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM020",
+        "label": "ClassificacaoMacicoRochoso",
+        "label_en": "RockMassRating",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Sistema RMR de Bieniawski (1989) que classifica maciços rochosos de 0 a 100 com base em seis parâmetros. RMR I (81-100): muito boa; RMR V (0-20): rocha muito ruim.",
+        "definition_en_canonical": "Bieniawski (1989) RMR system classifying rock masses on a scale 0-100 based on six parameters: UCS, RQD, spacing, condition of discontinuities, groundwater, and orientation adjustment. RMR I (81-100): very good; RMR V (0-20): very poor rock mass.",
+        "legal_source": "Bieniawski Z.T. Engineering Rock Mass Classifications 1989; Hoek & Brown 2019",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockClassificationScheme",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "ClassificacaoMacicoRochoso",
+          "@en": "RockMassRating"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Sistema RMR de Bieniawski (1989) que classifica maciços rochosos de 0 a 100 com base em seis parâmetros. RMR I (81-100): muito boa; RMR V (0-20): rocha muito ruim.",
+          "@en": "Bieniawski (1989) RMR system classifying rock masses on a scale 0-100 based on six parameters: UCS, RQD, spacing, condition of discontinuities, groundwater, and orientation adjustment. RMR I (81-100): very good; RMR V (0-20): very poor rock mass."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM021",
+        "label": "IndiceGeologicoDeResistencia",
+        "label_en": "GSI",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Geological Strength Index (Hoek 1994) — quantifica a qualidade do maciço rochoso para o critério Hoek-Brown. Varia de 0 a 100. GSI alto (>70): rocha maciça/em blocos; baixo (<30): maciço muito fraturado.",
+        "definition_en_canonical": "Geological Strength Index (Hoek 1994) — quantifies rock mass quality for use in the Hoek-Brown criterion. Range 0-100. GSI = RMR_1989 - 5 (approximate). High GSI (>70): massive, blocky rock; low GSI (<30): heavily sheared, tectonically disrupted.",
+        "legal_source": "Hoek E. Rock Engineering 1994; Hoek & Brown 2019",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockClassificationScheme",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "IndiceGeologicoDeResistencia",
+          "@en": "GSI"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Geological Strength Index (Hoek 1994) — quantifica a qualidade do maciço rochoso para o critério Hoek-Brown. Varia de 0 a 100. GSI alto (>70): rocha maciça/em blocos; baixo (<30): maciço muito fraturado.",
+          "@en": "Geological Strength Index (Hoek 1994) — quantifies rock mass quality for use in the Hoek-Brown criterion. Range 0-100. GSI = RMR_1989 - 5 (approximate). High GSI (>70): massive, blocky rock; low GSI (<30): heavily sheared, tectonically disrupted."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM022",
+        "label": "IndiceQualidadeRocha",
+        "label_en": "RQD",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Rock Quality Designation (Deere 1963) — porcentagem de pedaços de testemunho com mais de 100 mm no comprimento total. 0-100%. Entrada para RMR, sistema Q e GSI.",
+        "definition_en_canonical": "Rock Quality Designation (Deere 1963) — percentage of core pieces longer than 100 mm in total core run. Ranges 0-100%. RQD > 90%: excellent; 75-90%: good; 50-75%: fair; 25-50%: poor; < 25%: very poor. Input to RMR, Q-system, and GSI.",
+        "legal_source": "Deere D.U. SMFE 1963; ISRM Suggested Methods; Bieniawski 1989",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockClassificationScheme",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "IndiceQualidadeRocha",
+          "@en": "RQD"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Rock Quality Designation (Deere 1963) — porcentagem de pedaços de testemunho com mais de 100 mm no comprimento total. 0-100%. Entrada para RMR, sistema Q e GSI.",
+          "@en": "Rock Quality Designation (Deere 1963) — percentage of core pieces longer than 100 mm in total core run. Ranges 0-100%. RQD > 90%: excellent; 75-90%: good; 50-75%: fair; 25-50%: poor; < 25%: very poor. Input to RMR, Q-system, and GSI."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM023",
+        "label": "Anisotropia",
+        "label_en": "Anisotropy",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Dependência direcional das propriedades mecânicas da rocha. Isotropia transversal (VTI) é comum em folhelhos (parâmetros de Thomsen). Anisotropia de módulos elásticos, resistência (UCS varia com orientação do acamamento) e permeabilidade (kH/kV).",
+        "definition_en_canonical": "Directional dependence of mechanical properties in a rock mass. Transverse isotropy (VTI) is common in shales (Thomsen parameters epsilon, delta, gamma). Anisotropy of elastic moduli, strength (UCS varies with bedding orientation), and permeability (kH/kV). Critical for pre-salt carbonate geomechanics.",
+        "legal_source": "Fjaer et al. 2008 §6.1; Thomsen L. Geophysics 1986; Zoback 2010 §1.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "Anisotropia",
+          "@en": "Anisotropy"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Dependência direcional das propriedades mecânicas da rocha. Isotropia transversal (VTI) é comum em folhelhos (parâmetros de Thomsen). Anisotropia de módulos elásticos, resistência (UCS varia com orientação do acamamento) e permeabilidade (kH/kV).",
+          "@en": "Directional dependence of mechanical properties in a rock mass. Transverse isotropy (VTI) is common in shales (Thomsen parameters epsilon, delta, gamma). Anisotropy of elastic moduli, strength (UCS varies with bedding orientation), and permeability (kH/kV). Critical for pre-salt carbonate geomechanics."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM024",
+        "label": "Fragilidade",
+        "label_en": "Brittleness",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Tendência da rocha a romper abruptamente sem deformação plástica significativa. Alta fragilidade favorece fraturamento natural e complexidade de fraturas hidráulicas. Índice de fragilidade B ou (E_norm + nu_norm)/2 (Rickman 2008).",
+        "definition_en_canonical": "Tendency of rock to fail suddenly without significant plastic deformation. High brittleness favors natural fracturing and hydraulic fracture complexity. Quantified by brittleness index B = (sigma_c - sigma_t)/(sigma_c + sigma_t) or by (E_norm + nu_norm)/2 (Rickman 2008). Key predictor for unconventional reservoir stimulation.",
+        "legal_source": "Rickman R. et al. SPE 115258 2008; Fjaer et al. 2008 §4.2; Zoback 2010 §7.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "RockMechProperty",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "Fragilidade",
+          "@en": "Brittleness"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Tendência da rocha a romper abruptamente sem deformação plástica significativa. Alta fragilidade favorece fraturamento natural e complexidade de fraturas hidráulicas. Índice de fragilidade B ou (E_norm + nu_norm)/2 (Rickman 2008).",
+          "@en": "Tendency of rock to fail suddenly without significant plastic deformation. High brittleness favors natural fracturing and hydraulic fracture complexity. Quantified by brittleness index B = (sigma_c - sigma_t)/(sigma_c + sigma_t) or by (E_norm + nu_norm)/2 (Rickman 2008). Key predictor for unconventional reservoir stimulation."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM025",
+        "label": "RegimeTensionalDeAnderson",
+        "label_en": "AndersonStressRegime",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Classificação de Anderson (1951) dos regimes tectônicos baseada nas magnitudes relativas de Sv, SHmax, Shmin. Falha normal (NF): Sv > SHmax > Shmin; Transcorrente (SS): SHmax > Sv > Shmin; Falha reversa (RF): SHmax > Shmin > Sv.",
+        "definition_en_canonical": "Anderson (1951) classification of tectonic stress regimes based on the relative magnitudes of Sv, SHmax, Shmin. Normal faulting (NF): Sv > SHmax > Shmin; Strike-slip (SS): SHmax > Sv > Shmin; Reverse faulting (RF): SHmax > Shmin > Sv. Controls natural fault type and drilling hazards.",
+        "legal_source": "Anderson E.M. 1951; Zoback 2010 §1.2; Fjaer et al. 2008 §2.4",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeomechanicsClassification",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "RegimeTensionalDeAnderson",
+          "@en": "AndersonStressRegime"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Classificação de Anderson (1951) dos regimes tectônicos baseada nas magnitudes relativas de Sv, SHmax, Shmin. Falha normal (NF): Sv > SHmax > Shmin; Transcorrente (SS): SHmax > Sv > Shmin; Falha reversa (RF): SHmax > Shmin > Sv.",
+          "@en": "Anderson (1951) classification of tectonic stress regimes based on the relative magnitudes of Sv, SHmax, Shmin. Normal faulting (NF): Sv > SHmax > Shmin; Strike-slip (SS): SHmax > Sv > Shmin; Reverse faulting (RF): SHmax > Shmin > Sv. Controls natural fault type and drilling hazards."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM026",
+        "label": "PocoGeomecanico",
+        "label_en": "Wellbore",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Cavidade cilíndrica na rocha cuja estabilidade é governada pela concentração de tensões ao redor da abertura. Origem de dados de caliper, imagem e LOT/XLOT usados para calibrar o MEM.",
+        "definition_en_canonical": "Cylindrical cavity in rock mass whose stability is governed by the stress concentration around the opening. Near-wellbore stress concentration factor depends on Shmin/SHmax ratio and wellbore orientation. Source of caliper, image log, and LOT/XLOT data used to calibrate the MEM.",
+        "legal_source": "Fjaer et al. 2008 §9.1; Zoback 2010 §8.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "DrillHole",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "PocoGeomecanico",
+          "@en": "Wellbore"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Cavidade cilíndrica na rocha cuja estabilidade é governada pela concentração de tensões ao redor da abertura. Origem de dados de caliper, imagem e LOT/XLOT usados para calibrar o MEM.",
+          "@en": "Cylindrical cavity in rock mass whose stability is governed by the stress concentration around the opening. Near-wellbore stress concentration factor depends on Shmin/SHmax ratio and wellbore orientation. Source of caliper, image log, and LOT/XLOT data used to calibrate the MEM."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GM027",
+        "label": "LaudoGeomecanico",
+        "label_en": "LaudoGeomecanico",
+        "type": "geomec_academic",
+        "color": "#8B4789",
+        "size": 22,
+        "definition": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal (role_type: formal_technical_evidence) para subsidiar o projeto e o acompanhamento do poço. Elaborado pelo CSD Geomecânica (RES/GMR ou área responsável). Nota: distinto do QPG (prognóstico geológico) e de relatórios exclusivamente de monitoramento pós-perfuração — o Laudo pode abranger tanto a fase de prognóstico pré-perfuração quanto o acompanhamento.",
+        "definition_en_canonical": "Technical document that consolidates the geomechanical analysis associated with a well location or well, bringing together geological, structural, seismic and operational context, as well as geomechanical risks, geopressure curves/models and stress information when available. Serves as formal technical evidence (role_type: formal_technical_evidence) to support well design and monitoring. Produced by CSD Geomecânica (RES/GMR or responsible geomechanics area). Note: distinct from the QPG (geological prognosis) and from purely post-drilling monitoring reports — the Laudo can span pre-drilling prognosis through monitoring phases.",
+        "legal_source": "Fjaer et al. 2008 §9–10; Zoback 2010 §8–9",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeologicalOperationsDocument",
+        "layer": "L1-L2",
+        "skos_prefLabel": {
+          "@pt": "LaudoGeomecanico",
+          "@en": "LaudoGeomecanico"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal (role_type: formal_technical_evidence) para subsidiar o projeto e o acompanhamento do poço. Elaborado pelo CSD Geomecânica (RES/GMR ou área responsável). Nota: distinto do QPG (prognóstico geológico) e de relatórios exclusivamente de monitoramento pós-perfuração — o Laudo pode abranger tanto a fase de prognóstico pré-perfuração quanto o acompanhamento.",
+          "@en": "Technical document that consolidates the geomechanical analysis associated with a well location or well, bringing together geological, structural, seismic and operational context, as well as geomechanical risks, geopressure curves/models and stress information when available. Serves as formal technical evidence (role_type: formal_technical_evidence) to support well design and monitoring. Produced by CSD Geomecânica (RES/GMR or responsible geomechanics area). Note: distinct from the QPG (geological prognosis) and from purely post-drilling monitoring reports — the Laudo can span pre-drilling prognosis through monitoring phases."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF001",
+        "label": "MecanismoDeDeformacao",
+        "label_en": "DeformationMechanism",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Processo pelo qual a rocha muda de forma ou volume. Mecanismos incluem fraturamento frágil, fluxo plástico, solução por pressão e fluxo cataclástico.",
+        "definition_en_canonical": "Process by which rock changes shape or volume. Mechanisms include brittle fracturing, plastic flow, pressure solution, and cataclastic flow. Controls fracture type and permeability evolution.",
+        "legal_source": "Fossen 2016 §6; Twiss & Moores 2007 §8",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/phenGeolDeformation#Deformation",
+        "gso_uri": null,
+        "superclass": "sweet:Deformation",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "MecanismoDeDeformacao",
+          "@en": "DeformationMechanism"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Processo pelo qual a rocha muda de forma ou volume. Mecanismos incluem fraturamento frágil, fluxo plástico, solução por pressão e fluxo cataclástico.",
+          "@en": "Process by which rock changes shape or volume. Mechanisms include brittle fracturing, plastic flow, pressure solution, and cataclastic flow. Controls fracture type and permeability evolution."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF002",
+        "label": "DeformacaoFragil",
+        "label_en": "BrittleDeformation",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Deformação por fraturamento e falhamento em baixas temperaturas e pressões (condições crustais rasas). Produz juntas, falhas e bandas de cisalhamento.",
+        "definition_en_canonical": "Deformation by fracturing and faulting at low temperature and pressure (shallow crustal conditions). Produces joints, faults, and shear bands. Dominant deformation style in most reservoir settings.",
+        "legal_source": "Fossen 2016 §7; Zoback 2010 §7.1",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/phenGeolDeformation#Fracturing",
+        "gso_uri": null,
+        "superclass": "DeformationMechanism",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "DeformacaoFragil",
+          "@en": "BrittleDeformation"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Deformação por fraturamento e falhamento em baixas temperaturas e pressões (condições crustais rasas). Produz juntas, falhas e bandas de cisalhamento.",
+          "@en": "Deformation by fracturing and faulting at low temperature and pressure (shallow crustal conditions). Produces joints, faults, and shear bands. Dominant deformation style in most reservoir settings."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF003",
+        "label": "DeformacaoDuctil",
+        "label_en": "DuctileDeformation",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Deformação por plasticidade cristalina, solução por pressão ou fluxo viscoso em altas temperaturas e pressões. Produz zonas de milonito, foliação e boudinage.",
+        "definition_en_canonical": "Deformation by crystal plasticity, pressure solution, or viscous flow at elevated temperature and pressure. Produces mylonite zones, foliation, and boudinage. Occurs in deep reservoirs and at higher metamorphic grades.",
+        "legal_source": "Fossen 2016 §12; Twiss & Moores 2007 §9",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": "http://sweetontology.net/phenGeolDeformation#Deformation",
+        "gso_uri": null,
+        "superclass": "DeformationMechanism",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "DeformacaoDuctil",
+          "@en": "DuctileDeformation"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Deformação por plasticidade cristalina, solução por pressão ou fluxo viscoso em altas temperaturas e pressões. Produz zonas de milonito, foliação e boudinage.",
+          "@en": "Deformation by crystal plasticity, pressure solution, or viscous flow at elevated temperature and pressure. Produces mylonite zones, foliation, and boudinage. Occurs in deep reservoirs and at higher metamorphic grades."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF004",
+        "label": "TipoDeFratura",
+        "label_en": "FractureType",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Classificação de fraturas por gênese e cinemática: junta (modo I de abertura), falha (modo II/III de cisalhamento), veio (fratura aberta mineralizada), banda de cisalhamento.",
+        "definition_en_canonical": "Classification of fractures by genesis and kinematics: joint (opening mode I), fault (shear mode II/III), vein (mineralized opening fracture), and shear band (deformation band in porous media).",
+        "legal_source": "Fossen 2016 §8; Zoback 2010 §7.1; Twiss & Moores 2007 §7",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeologicalStructure",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "TipoDeFratura",
+          "@en": "FractureType"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Classificação de fraturas por gênese e cinemática: junta (modo I de abertura), falha (modo II/III de cisalhamento), veio (fratura aberta mineralizada), banda de cisalhamento.",
+          "@en": "Classification of fractures by genesis and kinematics: joint (opening mode I), fault (shear mode II/III), vein (mineralized opening fracture), and shear band (deformation band in porous media)."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF005",
+        "label": "Junta",
+        "label_en": "Joint",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Fratura em modo de abertura (Modo I) com deslocamento cisalhante negligível. Abertura controlada pela tensão efetiva de tração. Comum em carbonatos compactos e folhelhos.",
+        "definition_en_canonical": "Opening-mode fracture (Mode I) with negligible shear displacement. Aperture driven by tensile effective stress exceeding tensile strength. Two sub-types: extension joints (sigma_3 orthogonal to fracture) and hybrid joints. Common in tight carbonates and shales.",
+        "legal_source": "Fossen 2016 §8.1; Zoback 2010 §7.2",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": "https://w3id.org/gso/1.0/geologicfault/Fracture",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fracture",
+        "superclass": "FractureType",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "Junta",
+          "@en": "Joint"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Fratura em modo de abertura (Modo I) com deslocamento cisalhante negligível. Abertura controlada pela tensão efetiva de tração. Comum em carbonatos compactos e folhelhos.",
+          "@en": "Opening-mode fracture (Mode I) with negligible shear displacement. Aperture driven by tensile effective stress exceeding tensile strength. Two sub-types: extension joints (sigma_3 orthogonal to fracture) and hybrid joints. Common in tight carbonates and shales."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF006",
+        "label": "Falha",
+        "label_en": "Fault",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Fratura em modo de cisalhamento com deslocamento significativo. Classificada por cinemática: normal (extensional), reversa (compressional), transcorrente (lateral).",
+        "definition_en_canonical": "Shear-mode fracture with significant displacement. Classified by slip kinematics: normal (dip-slip, extensional), reverse (dip-slip, compressional), strike-slip (lateral movement). Controls hydrocarbon migration pathways and trap integrity.",
+        "legal_source": "Fossen 2016 §9; Twiss & Moores 2007 §7; Anderson 1951",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/Fault",
+        "superclass": "FractureType",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "Falha",
+          "@en": "Fault"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Fratura em modo de cisalhamento com deslocamento significativo. Classificada por cinemática: normal (extensional), reversa (compressional), transcorrente (lateral).",
+          "@en": "Shear-mode fracture with significant displacement. Classified by slip kinematics: normal (dip-slip, extensional), reverse (dip-slip, compressional), strike-slip (lateral movement). Controls hydrocarbon migration pathways and trap integrity."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF007",
+        "label": "Veio",
+        "label_en": "Vein",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Fratura mineralizada preenchida com material cristalino (calcita, quartzo, dolomita). Registra direções de fluxo de paleofluidos. Medidas de abertura em testemunho e imagem indicam fraturas abertas pretéritas.",
+        "definition_en_canonical": "Mineralized fracture filled with crystalline material (calcite, quartz, dolomite). Records paleo-fluid flow directions and trapping conditions. Aperture measurements on core and image logs indicate former open fractures.",
+        "legal_source": "Fossen 2016 §8.3; Twiss & Moores 2007 §7.4",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "FractureType",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "Veio",
+          "@en": "Vein"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Fratura mineralizada preenchida com material cristalino (calcita, quartzo, dolomita). Registra direções de fluxo de paleofluidos. Medidas de abertura em testemunho e imagem indicam fraturas abertas pretéritas.",
+          "@en": "Mineralized fracture filled with crystalline material (calcite, quartz, dolomite). Records paleo-fluid flow directions and trapping conditions. Aperture measurements on core and image logs indicate former open fractures."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF008",
+        "label": "BandaDeCisalhamento",
+        "label_en": "ShearBand",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Zona tabular de deformação cisalhante localizada em rocha porosa sem superfície de fratura discreta. Associada ao esmagamento de grãos e redução de porosidade/permeabilidade.",
+        "definition_en_canonical": "Tabular zone of localized shear strain in porous rock without a discrete fracture surface. Associated with grain crushing (cataclasis) and porosity/permeability reduction. Important in weak, high-porosity sandstones and chalk.",
+        "legal_source": "Fossen 2016 §8.5; Zoback 2010 §7.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "FractureType",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "BandaDeCisalhamento",
+          "@en": "ShearBand"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Zona tabular de deformação cisalhante localizada em rocha porosa sem superfície de fratura discreta. Associada ao esmagamento de grãos e redução de porosidade/permeabilidade.",
+          "@en": "Tabular zone of localized shear strain in porous rock without a discrete fracture surface. Associated with grain crushing (cataclasis) and porosity/permeability reduction. Important in weak, high-porosity sandstones and chalk."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF009",
+        "label": "ConjuntoDeFraturas",
+        "label_en": "FractureSet",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Grupo de fraturas sub-paralelas com orientação, tipo e origem similares. Caracterizado por orientação média (mergulho, azimute), distribuição de abertura e espaçamento. Base do modelamento DFN.",
+        "definition_en_canonical": "Group of sub-parallel fractures with similar orientation, type, and inferred origin. Characterized by mean orientation (dip, dip direction), aperture distribution, and spacing. Statistical description is foundation of Discrete Fracture Network (DFN) modelling.",
+        "legal_source": "Fossen 2016 §8.6; Zoback 2010 §7.4",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeologicalStructure",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "ConjuntoDeFraturas",
+          "@en": "FractureSet"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Grupo de fraturas sub-paralelas com orientação, tipo e origem similares. Caracterizado por orientação média (mergulho, azimute), distribuição de abertura e espaçamento. Base do modelamento DFN.",
+          "@en": "Group of sub-parallel fractures with similar orientation, type, and inferred origin. Characterized by mean orientation (dip, dip direction), aperture distribution, and spacing. Statistical description is foundation of Discrete Fracture Network (DFN) modelling."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF010",
+        "label": "RedeDeFraturas",
+        "label_en": "FractureNetwork",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Sistema interconectado de conjuntos de fraturas formando uma rede hidraulicamente conectada. Conectividade determina tensor de permeabilidade efetiva. Modelada como DFN ou meio poroso equivalente.",
+        "definition_en_canonical": "Interconnected system of fracture sets and/or faults forming a hydraulically connected network. Connectivity determines effective permeability tensor. Modelled as Discrete Fracture Network (DFN) or as equivalent porous medium. Critical for pre-salt carbonate reservoir flow modelling.",
+        "legal_source": "Zoback 2010 §7.4; Fjaer et al. 2008 §13.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeologicalStructure",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "RedeDeFraturas",
+          "@en": "FractureNetwork"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Sistema interconectado de conjuntos de fraturas formando uma rede hidraulicamente conectada. Conectividade determina tensor de permeabilidade efetiva. Modelada como DFN ou meio poroso equivalente.",
+          "@en": "Interconnected system of fracture sets and/or faults forming a hydraulically connected network. Connectivity determines effective permeability tensor. Modelled as Discrete Fracture Network (DFN) or as equivalent porous medium. Critical for pre-salt carbonate reservoir flow modelling."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF011",
+        "label": "Estilolito",
+        "label_en": "Stylolite",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Superfície irregular de dissolução em carbonatos formada por solução por pressão. Atua como barreira de permeabilidade. Identificada em testemunho e imagens como superfícies escuras, irregulares e suturadas. Orientada perpendicularmente a sigma_1.",
+        "definition_en_canonical": "Irregular dissolution surface in carbonates formed by pressure solution along grain contacts under compressive stress. Acts as permeability barrier orthogonal to sigma_1. Identified in core and image logs as dark, irregular, sutured surfaces. Oriented perpendicular to the maximum compressive stress.",
+        "legal_source": "Fossen 2016 §8.4; Fjaer et al. 2008 §2.8",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "GeologicalStructure",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "Estilolito",
+          "@en": "Stylolite"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Superfície irregular de dissolução em carbonatos formada por solução por pressão. Atua como barreira de permeabilidade. Identificada em testemunho e imagens como superfícies escuras, irregulares e suturadas. Orientada perpendicularmente a sigma_1.",
+          "@en": "Irregular dissolution surface in carbonates formed by pressure solution along grain contacts under compressive stress. Acts as permeability barrier orthogonal to sigma_1. Identified in core and image logs as dark, irregular, sutured surfaces. Oriented perpendicular to the maximum compressive stress."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF012",
+        "label": "ZonaDeFalha",
+        "label_en": "FaultZone",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Modelo arquitetural de três componentes de uma falha matura (Caine et al. 1996): (1) núcleo da falha — superfícies de deslizamento e gouge; (2) zona de dano — fraturas subsidiárias; (3) rocha hospedeira — protólito não deformado.",
+        "definition_en_canonical": "Three-component architectural model of a mature fault (Caine et al. 1996): (1) fault core — principal slip surfaces and gouge; (2) damage zone — subsidiary fractures and folds flanking the fault; (3) host rock — undeformed protolith. Permeability structure controls fluid flow.",
+        "legal_source": "Caine et al. Geology 1996; Fossen 2016 §9.5",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": "https://w3id.org/gso/1.0/geologicfault/FaultZone",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/FaultZone",
+        "superclass": "Fault",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "ZonaDeFalha",
+          "@en": "FaultZone"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Modelo arquitetural de três componentes de uma falha matura (Caine et al. 1996): (1) núcleo da falha — superfícies de deslizamento e gouge; (2) zona de dano — fraturas subsidiárias; (3) rocha hospedeira — protólito não deformado.",
+          "@en": "Three-component architectural model of a mature fault (Caine et al. 1996): (1) fault core — principal slip surfaces and gouge; (2) damage zone — subsidiary fractures and folds flanking the fault; (3) host rock — undeformed protolith. Permeability structure controls fluid flow."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF013",
+        "label": "NucleoFalha",
+        "label_en": "FaultCore",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Zona central da falha contendo superfícies de deslizamento, gouge de falha (rocha pulverizada rica em argila), cataclasito e/ou milonito. Baixíssima porosidade e permeabilidade. SGR é preditor-chave da capacidade selante.",
+        "definition_en_canonical": "Central zone of a fault containing principal slip surfaces, fault gouge (clay-rich pulverized rock), cataclasite, and/or mylonite. Typically has very low porosity and permeability (clay smear). Shale Gouge Ratio (SGR) is key predictor of sealing capacity.",
+        "legal_source": "Caine et al. 1996; Fossen 2016 §9.5; Zoback 2010 §7.5",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "FaultZone",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "NucleoFalha",
+          "@en": "FaultCore"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Zona central da falha contendo superfícies de deslizamento, gouge de falha (rocha pulverizada rica em argila), cataclasito e/ou milonito. Baixíssima porosidade e permeabilidade. SGR é preditor-chave da capacidade selante.",
+          "@en": "Central zone of a fault containing principal slip surfaces, fault gouge (clay-rich pulverized rock), cataclasite, and/or mylonite. Typically has very low porosity and permeability (clay smear). Shale Gouge Ratio (SGR) is key predictor of sealing capacity."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF014",
+        "label": "ZonaDeDano",
+        "label_en": "DamageZone",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Região flanqueando o núcleo da falha com densidade de fraturas elevada, maior permeabilidade e falhas/dobras subsidiárias. Largura proporcional ao deslocamento da falha. Permeabilidade elevada torna zonas de dano condutos importantes de fluido.",
+        "definition_en_canonical": "Region flanking the fault core characterized by elevated fracture density, increased permeability, and subsidiary faults and folds. Width scales with fault displacement (D): width ~ 10^0.3D (m). Enhanced permeability makes damage zones important conduits for fluid flow.",
+        "legal_source": "Caine et al. 1996; Fossen 2016 §9.5; Bense et al. Earth-Science Reviews 2013",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": null,
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": null,
+        "superclass": "FaultZone",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "ZonaDeDano",
+          "@en": "DamageZone"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Região flanqueando o núcleo da falha com densidade de fraturas elevada, maior permeabilidade e falhas/dobras subsidiárias. Largura proporcional ao deslocamento da falha. Permeabilidade elevada torna zonas de dano condutos importantes de fluido.",
+          "@en": "Region flanking the fault core characterized by elevated fracture density, increased permeability, and subsidiary faults and folds. Width scales with fault displacement (D): width ~ 10^0.3D (m). Enhanced permeability makes damage zones important conduits for fluid flow."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF015",
+        "label": "FalhaNormal",
+        "label_en": "NormalFault",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Falha de dip-slip onde o teto desce em relação ao piso. Formada em regime extensional (Sv > SHmax > Shmin). Mergulho típico 50-70 graus. Cria grabens e meio-grabens. Tipo dominante em margens continentais passivas.",
+        "definition_en_canonical": "Dip-slip fault where the hanging wall moves downward relative to the footwall. Formed in extensional tectonic settings (Sv > SHmax > Shmin). Typical dip 50-70 degrees. Creates grabens and half-grabens. Dominant fault type on passive continental margins.",
+        "legal_source": "Anderson 1951; Fossen 2016 §9.2; Twiss & Moores 2007 §7.2",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": "https://w3id.org/gso/1.0/geologicfault/NormalFault",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/NormalFault",
+        "superclass": "Fault",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "FalhaNormal",
+          "@en": "NormalFault"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Falha de dip-slip onde o teto desce em relação ao piso. Formada em regime extensional (Sv > SHmax > Shmin). Mergulho típico 50-70 graus. Cria grabens e meio-grabens. Tipo dominante em margens continentais passivas.",
+          "@en": "Dip-slip fault where the hanging wall moves downward relative to the footwall. Formed in extensional tectonic settings (Sv > SHmax > Shmin). Typical dip 50-70 degrees. Creates grabens and half-grabens. Dominant fault type on passive continental margins."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF016",
+        "label": "FalhaReversa",
+        "label_en": "ReverseFault",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Falha de dip-slip onde o teto sobe em relação ao piso. Formada em regime compressional (SHmax > Shmin > Sv). Ângulo baixo (<30 graus) = falha de empurrão; alto ângulo = falha reversa.",
+        "definition_en_canonical": "Dip-slip fault where the hanging wall moves upward relative to the footwall. Formed in compressional settings (SHmax > Shmin > Sv). Low angle (<30 deg) = thrust fault; high angle (>30 deg) = reverse fault. Creates fold-thrust belts and compressional traps.",
+        "legal_source": "Anderson 1951; Fossen 2016 §9.3; Twiss & Moores 2007 §7.3",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": "https://w3id.org/gso/1.0/geologicfault/ReverseFault",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/ReverseFault",
+        "superclass": "Fault",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "FalhaReversa",
+          "@en": "ReverseFault"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Falha de dip-slip onde o teto sobe em relação ao piso. Formada em regime compressional (SHmax > Shmin > Sv). Ângulo baixo (<30 graus) = falha de empurrão; alto ângulo = falha reversa.",
+          "@en": "Dip-slip fault where the hanging wall moves upward relative to the footwall. Formed in compressional settings (SHmax > Shmin > Sv). Low angle (<30 deg) = thrust fault; high angle (>30 deg) = reverse fault. Creates fold-thrust belts and compressional traps."
+        },
+        "skos_example": []
+      },
+      {
+        "id": "GF017",
+        "label": "FalhaTranscorrente",
+        "label_en": "StrikeSlipFault",
+        "type": "geomec_fracture",
+        "color": "#B85A3E",
+        "size": 22,
+        "definition": "Falha com deslocamento predominantemente lateral. Formada em regime transcorrente (SHmax > Sv > Shmin). Planos sub-verticais. Cria bacias pull-apart e altos estruturais.",
+        "definition_en_canonical": "Fault with predominantly lateral (strike-parallel) displacement. Formed in strike-slip (wrench) tectonic settings (SHmax > Sv > Shmin). Sub-vertical fault planes. Creates pull-apart basins (releasing bends) and push-up ridges (restraining bends). Transform faults are a special case.",
+        "legal_source": "Anderson 1951; Fossen 2016 §9.4; Twiss & Moores 2007 §7.4",
+        "datasets": [],
+        "petrokgraph_uri": null,
+        "osdu_kind": null,
+        "geosciml_uri": "https://w3id.org/gso/1.0/geologicfault/StrikeSlipFault",
+        "owl_uri": null,
+        "geocoverage": [
+          "layer1",
+          "layer2",
+          "layer7"
+        ],
+        "synonyms_pt": [],
+        "synonyms_en": [],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "sweet_alignment": null,
+        "gso_uri": "https://w3id.org/gso/1.0/geologicfault/StrikeSlipFault",
+        "superclass": "Fault",
+        "layer": "L1-L2-L7",
+        "skos_prefLabel": {
+          "@pt": "FalhaTranscorrente",
+          "@en": "StrikeSlipFault"
+        },
+        "skos_altLabel": {
+          "@pt": [],
+          "@en": []
+        },
+        "skos_definition": {
+          "@pt": "Falha com deslocamento predominantemente lateral. Formada em regime transcorrente (SHmax > Sv > Shmin). Planos sub-verticais. Cria bacias pull-apart e altos estruturais.",
+          "@en": "Fault with predominantly lateral (strike-parallel) displacement. Formed in strike-slip (wrench) tectonic settings (SHmax > Sv > Shmin). Sub-vertical fault planes. Creates pull-apart basins (releasing bends) and push-up ridges (restraining bends). Transform faults are a special case."
+        },
+        "skos_example": []
       }
     ],
     "edges": [
@@ -24241,6 +26106,1014 @@
         "relation_label_pt": "Análise de DITF",
         "relation_label_en": "used with",
         "style": "geomec_corporate"
+      },
+      {
+        "source": "GM001",
+        "target": "GM013",
+        "relation": "induces_failure",
+        "relation_label_pt": "induz_ruptura",
+        "relation_label_en": "induces_failure",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM004",
+        "target": "GM005",
+        "relation": "controls_mud_window",
+        "relation_label_pt": "controla_janela_lama",
+        "relation_label_en": "controls_mud_window",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM001",
+        "target": "GM013",
+        "relation": "triggers_sand_production",
+        "relation_label_pt": "desencadeia_producao_areia",
+        "relation_label_en": "triggers_sand_production",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM010",
+        "target": "GM026",
+        "relation": "affects_wellbore_stability",
+        "relation_label_pt": "afeta_estabilidade_poco",
+        "relation_label_en": "affects_wellbore_stability",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM005",
+        "target": "GM025",
+        "relation": "caused_by",
+        "relation_label_pt": "causado_por",
+        "relation_label_en": "caused_by",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM004",
+        "target": "GM005",
+        "relation": "bounds_drilling_window",
+        "relation_label_pt": "delimita_janela_perfuracao",
+        "relation_label_en": "bounds_drilling_window",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM011",
+        "target": "GM026",
+        "relation": "calibrated_by",
+        "relation_label_pt": "calibrado_por",
+        "relation_label_en": "calibrated_by",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM002",
+        "target": "GM007",
+        "relation": "constrained_by",
+        "relation_label_pt": "restringido_por",
+        "relation_label_en": "constrained_by",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM013",
+        "target": "GM010",
+        "relation": "input_to_mem",
+        "relation_label_pt": "entrada_para_mem",
+        "relation_label_en": "input_to_mem",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM002",
+        "target": "GM005",
+        "relation": "governs_fracture_propagation",
+        "relation_label_pt": "governa_propagacao_fratura",
+        "relation_label_en": "governs_fracture_propagation",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM002",
+        "target": "GM001",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM003",
+        "target": "GM001",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM008",
+        "target": "GM007",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM009",
+        "target": "GM007",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM011",
+        "target": "GM010",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM012",
+        "target": "GM010",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM014",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM015",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM016",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM017",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM018",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM019",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM023",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM024",
+        "target": "GM013",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF002",
+        "target": "GF001",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF003",
+        "target": "GF001",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF005",
+        "target": "GF004",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF006",
+        "target": "GF004",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF007",
+        "target": "GF004",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF008",
+        "target": "GF004",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF012",
+        "target": "GF006",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF013",
+        "target": "GF012",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF014",
+        "target": "GF012",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF015",
+        "target": "GF006",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF016",
+        "target": "GF006",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF017",
+        "target": "GF006",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM004",
+        "target": "formation-testing",
+        "relation": "measures",
+        "relation_label_pt": "é medido por",
+        "relation_label_en": "is measured by",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM004",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM001",
+        "target": "formation-testing",
+        "relation": "measures",
+        "relation_label_pt": "é medido por",
+        "relation_label_en": "is measured by",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM002",
+        "target": "formation-testing",
+        "relation": "measures",
+        "relation_label_pt": "é medido por",
+        "relation_label_en": "is measured by",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM003",
+        "target": "formation-testing",
+        "relation": "measures",
+        "relation_label_pt": "é medido por",
+        "relation_label_en": "is measured by",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "janela-lama",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "campo-tensional",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM011",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM011",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM011",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM011",
+        "target": "janela-lama",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM011",
+        "target": "campo-tensional",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM012",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM012",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM012",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM012",
+        "target": "janela-lama",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM012",
+        "target": "campo-tensional",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM026",
+        "target": "poco",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM005",
+        "target": "janela-lama",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM025",
+        "target": "campo-tensional",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM013",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM013",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM014",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM014",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM015",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM015",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM016",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM016",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM017",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM017",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM018",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM018",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM019",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM019",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM020",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM021",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM022",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "mwd-lwd",
+        "relation": "calibrates",
+        "relation_label_pt": "calibra",
+        "relation_label_en": "calibrates",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "lwd",
+        "relation": "calibrates",
+        "relation_label_pt": "calibra",
+        "relation_label_en": "calibrates",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "mwd",
+        "relation": "calibrates",
+        "relation_label_pt": "calibra",
+        "relation_label_en": "calibrates",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM010",
+        "target": "bdp",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF004",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF004",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF005",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF005",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF006",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF006",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF007",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF007",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF008",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF008",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF009",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF009",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF010",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF010",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF011",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF011",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF015",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF015",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF016",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF016",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF017",
+        "target": "wireline-logging",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF017",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM027",
+        "target": "laudo-geomecanico",
+        "relation": "formalizes",
+        "relation_label_pt": "formaliza",
+        "relation_label_en": "formalizes",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM006",
+        "target": "GM001",
+        "relation": "is_calculated_from",
+        "relation_label_pt": "calculado a partir de",
+        "relation_label_en": "is calculated from",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM006",
+        "target": "GM007",
+        "relation": "supports",
+        "relation_label_pt": "apoia",
+        "relation_label_en": "supports",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF002",
+        "target": "GF004",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GF002",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF001",
+        "target": "core-sample",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF003",
+        "target": "core-sample",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GEOMEC001",
+        "target": "GM004",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC002",
+        "target": "GM002",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC003",
+        "target": "GM005",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC004",
+        "target": "GM001",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC007",
+        "target": "GM002",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC008",
+        "target": "GM002",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC010",
+        "target": "GM014",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC011",
+        "target": "GM015",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC012",
+        "target": "GM016",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC013",
+        "target": "GM017",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC017",
+        "target": "GM025",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC068",
+        "target": "GM026",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC069",
+        "target": "GF005",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC070",
+        "target": "GF004",
+        "relation": "is_specialization_of",
+        "relation_label_pt": "é especialização de",
+        "relation_label_en": "is specialization of",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC023A",
+        "target": "GM026",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC023B",
+        "target": "GF005",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_corp_to_academic"
+      },
+      {
+        "source": "GEOMEC023C",
+        "target": "GF004",
+        "relation": "interpreted_into",
+        "relation_label_pt": "interpretado em",
+        "relation_label_en": "interpreted into",
+        "style": "geomec_corp_to_academic"
       }
     ]
   },
@@ -25021,7 +27894,7 @@
   },
   "ontology_map": {
     "version": "1.1.0",
-    "generated": "2026-05-03T20:22:54.243Z",
+    "generated": "2026-05-04T16:57:14.342Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -25348,7 +28221,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.1.0",
-      "generated": "2026-05-03T20:22:54.243Z",
+      "generated": "2026-05-04T16:57:14.342Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -40227,7 +43100,7 @@
   "seismic": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-03T20:22:54.243Z",
+      "generated": "2026-05-04T16:57:14.342Z",
       "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       "module_count": 3,
       "class_count": 64,
