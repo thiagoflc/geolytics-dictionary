@@ -3510,6 +3510,517 @@ function buildOntologyTypes() {
   };
 }
 
+/* ─────────────────────────────────────────────────────────────
+ * F5 — annotate `ontological_role` on every entity-graph node
+ *
+ * Implements the canonical role vocabulary from
+ *   docs/ONTOLOGY_LAYERS.md §3 (six layers L1-L6) and §5 (auxiliary).
+ *
+ * Strategy: rule-based classifier with strict-first ordering. The first
+ * matching rule wins. Manual overrides (a node already carrying an explicit
+ * `ontological_role`) are respected and never reclassified.
+ *
+ * Canonical role values (see docs/ONTOLOGY_LAYERS.md):
+ *   well_anchor, well_operation, artifact_primary, feature_observation,
+ *   interpretation_process, engineering_artifact, regulatory_anchor,
+ *   organizational_actor, domain_anchor, well_attribute_concept,
+ *   equipment, governance_artifact, dataset_concept, lifecycle_state,
+ *   lifecycle_outcome, kpi_metric, unclassified
+ * ───────────────────────────────────────────────────────────── */
+
+/**
+ * Maps a node id with prefix `GEOMEC*` (Petrobras corporate L6 portfolio)
+ * to its canonical ontological_role. Returns null if the id is not in scope.
+ *
+ * @param {string} id
+ * @returns {string|null}
+ */
+function geomecCorporateRole(id) {
+  // Pressões, gradientes, tensões — observable rock/well states (L4)
+  const featureObservationIds = new Set([
+    "GEOMEC001", "GEOMEC002", "GEOMEC005", "GEOMEC007", "GEOMEC008", "GEOMEC009",
+    "GEOMEC010", "GEOMEC011", "GEOMEC012", "GEOMEC014", "GEOMEC016",
+    "GEOMEC017", "GEOMEC018", "GEOMEC021", "GEOMEC024",
+    // image-log feature pivots and per-feature sub-classes
+    "GEOMEC023", "GEOMEC023A", "GEOMEC023B", "GEOMEC023C",
+    "GEOMEC068", "GEOMEC069", "GEOMEC070", "GEOMEC071",
+    "GEOMEC037", "GEOMEC038", "GEOMEC039", "GEOMEC040", "GEOMEC041",
+    "GEOMEC042", "GEOMEC043", "GEOMEC053A", "GEOMEC053B",
+    "GEOMEC044", "GEOMEC045",
+    "GEOMEC077", "GEOMEC078",
+    "GEOMEC079", "GEOMEC079A",
+    "GEOMEC081", "GEOMEC082", "GEOMEC087",
+    "GEOMEC075", "GEOMEC076",
+    "GEOMEC_ROP_A",
+  ]);
+  if (featureObservationIds.has(id)) return "feature_observation";
+
+  // Operações de poço / laboratório (L2)
+  const wellOperationIds = new Set([
+    "GEOMEC006",                        // LOT/xLOT/FIT (operação)
+    "GEOMEC022",                        // Scratch test (lab op)
+    "GEOMEC031", "GEOMEC032", "GEOMEC033", "GEOMEC034",  // XLOT, AGP, Frac, DFIT
+    "GEOMEC061", "GEOMEC062", "GEOMEC063", "GEOMEC064",
+    "GEOMEC065", "GEOMEC066", "GEOMEC067",  // ensaios laboratoriais
+    "GEOMEC080",                        // sobrefuração com alívio de tensão
+    "GEOMEC052B",                       // Setpoint MPD / SBP (operação)
+  ]);
+  if (wellOperationIds.has(id)) return "well_operation";
+
+  // Engineering artifacts (L6)
+  const engineeringArtifactIds = new Set([
+    "GEOMEC019", "GEOMEC020",           // ECD, MPD design
+    "GEOMEC036",                        // Fórmula de ECD (design formula)
+  ]);
+  if (engineeringArtifactIds.has(id)) return "engineering_artifact";
+
+  // Interpretation processes (L5)
+  const interpretationProcessIds = new Set([
+    "GEOMEC015",                        // Estabilidade de Poço / análise
+    "GEOMEC035",                        // Modelo Geomecânico 3D (modelagem)
+    "GEOMEC046",                        // Faixas de risco (classificação)
+    "GEOMEC072",                        // Interpretação de perfil de imagem
+    "GEOMEC083",                        // Inversão formal de mecanismos focais
+    "GEOMEC085",                        // Estatística circular bimodal
+    "GEOMEC086",                        // Inversão de slip de falha
+    "GEOMEC027",                        // IMGR — índice de modelagem
+  ]);
+  if (interpretationProcessIds.has(id)) return "interpretation_process";
+
+  // Software systems / databases / report repositories (dataset_concept)
+  const datasetConceptIds = new Set([
+    "GEOMEC025",                        // CSD — centro de suporte à decisão
+    "GEOMEC028",                        // GeomecBR — simulador
+    "GEOMEC029",                        // GERESIM
+    "GEOMEC030",                        // SIGEO/SEST TR
+    "GEOMEC047",                        // SIMCARR
+    "GEOMEC051",                        // OpenWells/Atlas
+    "GEOMEC074",                        // Geolog (software)
+  ]);
+  if (datasetConceptIds.has(id)) return "dataset_concept";
+
+  // L3 artifact primary
+  if (id === "GEOMEC073") return "artifact_primary"; // BOL — Borehole Oriented Log
+  if (id === "GEOMEC048") return "artifact_primary"; // PWDa — pressure-while-drilling artifact
+
+  // Equipment (physical hardware)
+  if (id === "GEOMEC052A") return "equipment"; // PRV — pressure relief valve
+
+  // Governance / quality scheme / report
+  const governanceArtifactIds = new Set([
+    "GEOMEC026A",                       // QPG — quadro de previsões
+    "GEOMEC084",                        // Esquema de Qualidade WSM 2025
+    "GEOMEC_ROP_B",                     // Relatório de operações de perfilagem
+  ]);
+  if (governanceArtifactIds.has(id)) return "governance_artifact";
+
+  return null;
+}
+
+/**
+ * Maps academic geomechanics ids (`GM*`) to their canonical role.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function geomecAcademicRole(id) {
+  // GM001-GM003 stress states; GM004 pore pressure; GM013-GM025 rock-mech
+  // properties / classification metrics / regimes — all observable feature_observation.
+  const featureObservationIds = new Set([
+    "GM001", "GM002", "GM003", "GM004",
+    "GM013", "GM014", "GM015", "GM016", "GM017", "GM018", "GM019",
+    "GM020", "GM021", "GM022",
+    "GM023", "GM024", "GM025",
+  ]);
+  if (featureObservationIds.has(id)) return "feature_observation";
+
+  // GM005 mud window — engineering design output (L6)
+  if (id === "GM005") return "engineering_artifact";
+
+  // GM006 Mohr circle (graphical method); GM007-GM009 failure criteria;
+  // GM010-GM012 MEM models — interpretation processes (L5)
+  const interpretationProcessIds = new Set([
+    "GM006", "GM007", "GM008", "GM009",
+    "GM010", "GM011", "GM012",
+  ]);
+  if (interpretationProcessIds.has(id)) return "interpretation_process";
+
+  // GM026 Wellbore-as-calibration-point — well anchor (L1)
+  if (id === "GM026") return "well_anchor";
+
+  // GM027 LaudoGeomecanico — engineering artifact / report
+  if (id === "GM027") return "governance_artifact";
+
+  return null;
+}
+
+/**
+ * Maps fracture-pillar ids (`GF*`) — all are L4 features (feature_observation).
+ * @param {string} id
+ * @returns {string|null}
+ */
+function geomecFractureRole(id) {
+  if (/^GF\d{3}$/.test(id)) return "feature_observation";
+  return null;
+}
+
+/**
+ * Maps `operational`-typed nodes by id.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function operationalRole(id) {
+  // L1 well anchors — physical/temporal anchors of the well
+  const wellAnchorIds = new Set([
+    "poco", "wellbore", "axon-term-furo", "axon-term-poco",
+    "axon-term-poco-presal", "axon-term-poco-comprado", "axon-term-poco-nao-br",
+  ]);
+  if (wellAnchorIds.has(id)) return "well_anchor";
+
+  // Spatial / contractual / regulatory anchors (regulatory_anchor)
+  const regulatoryAnchorIds = new Set([
+    "bloco", "campo", "bacia-sedimentar", "reservatorio", "play", "prospecto",
+    "acumulacao", "primeiro-oleo",
+  ]);
+  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
+
+  // L2 well operations
+  const wellOperationIds = new Set([
+    "drilling-activity", "completacao",
+    "operacoes-geologicas",
+    "well-activity-program", "activity-plan",
+  ]);
+  if (wellOperationIds.has(id)) return "well_operation";
+
+  // Plan/program templates and lifecycle/governance descriptors → governance_artifact
+  const governanceArtifactIds = new Set([
+    "activity-template",
+    "well-activity-phase-type",
+    "drilling-reason-type",
+    "lessons-learned", "retro-analysis", "input-elaboration",
+    "operational-monitoring", "formation-evaluation",
+  ]);
+  if (governanceArtifactIds.has(id)) return "governance_artifact";
+
+  // 3W operational-typed nodes named `event_*` are observable production events
+  if (/^event_/.test(id)) return "feature_observation";
+
+  return null;
+}
+
+/**
+ * Maps `analytical`-typed nodes by id. Disambiguates operations from artifacts
+ * from interpretation outcomes per docs/ONTOLOGY_LAYERS.md §3.
+ *
+ * Borderline decisions:
+ *  - wireline-logging / coring / mudlogging / etc. → well_operation (the
+ *    operation/process; the artifact it produces is captured by adjacent
+ *    `*-sample` / `mudlogging-time-series` / `formation-pressure-point` ids).
+ *  - mudlogging-time-series → artifact_primary (the data series, not the op).
+ *  - campo-tensional → feature_observation (the stress field state).
+ *  - janela-lama → engineering_artifact (the operational window).
+ *  - laudo-geomecanico / IGP / PAG / QPG → governance_artifact (reports).
+ *
+ * @param {string} id
+ * @param {string} label
+ * @returns {string|null}
+ */
+function analyticalRole(id, label) {
+  // L1 well anchors (Axon Termo nodes naming the well concept itself).
+  // These are typed `analytical` in the source but are the canonical
+  // term entries for the Poço/Furo L1 anchor — see docs/ONTOLOGY_LAYERS.md §3.
+  const wellAnchorIds = new Set([
+    "axon-term-poco", "axon-term-furo",
+    "axon-term-poco-presal", "axon-term-poco-comprado", "axon-term-poco-nao-br",
+  ]);
+  if (wellAnchorIds.has(id)) return "well_anchor";
+
+  // L2 well operations (procedure-named)
+  const wellOperationIds = new Set([
+    "wireline-logging", "coring", "mudlogging",
+    "cuttings-sampling", "sidewall-sampling",
+    "formation-testing", "geostopping",
+    "mwd-lwd",
+    "wireline-run", "lwd-run", "core-run",
+    "axon-asn-perfilagem", "axon-asn-testemunhagem", "axon-asn-mudlogging",
+    "axon-asn-op-amostras-fluido", "axon-asn-op-amostras-rocha",
+    "axon-asn-teste-formacao-aberto", "axon-asn-pressao-temperatura",
+  ]);
+  if (wellOperationIds.has(id)) return "well_operation";
+
+  // L3 artefatos primários (Sample / WellLog / TestData)
+  const artifactPrimaryIds = new Set([
+    "testemunho", "perfil-poco",
+    "core-sample", "core-plug", "sidewall-core-sample",
+    "cuttings-sample-detailed", "fluid-sample", "amostra-fluido",
+    "mudlogging-time-series",
+    "formation-pressure-point", "dst-interval",
+    "drilling-parameters",
+    "axon-term-amostra", "axon-term-acervo-amostras",
+    "axon-term-amostragem-calha-prevista",
+  ]);
+  if (artifactPrimaryIds.has(id)) return "artifact_primary";
+
+  // L4 features (geological/geochemical observations & states)
+  const featureObservationIds = new Set([
+    "litologia", "facies-sedimentar", "topo-formacional", "trajetoria-poco",
+    "materia-organica", "maturidade-termal", "biomarcador",
+    "potencial-selante", "classe-fluido",
+    "campo-tensional", "ocorrencia-geomec",
+    "bottom-hole-pressure-type", "annular-fluid-type",
+    "gas-show-event", "kick-event", "geostopping-event",
+  ]);
+  if (featureObservationIds.has(id)) return "feature_observation";
+
+  // L5 interpretation processes
+  const interpretationProcessIds = new Set([
+    "modelo-petrofisico",
+    "correlacao-oleo-rocha",
+    "drx", "frx", "gc-ms", "sara", "pvt", "dna-geoquimico",
+    "axon-asn-aval-final-poco", "axon-asn-planejamento",
+    "axon-sub-prog-aquisicao",
+  ]);
+  if (interpretationProcessIds.has(id)) return "interpretation_process";
+
+  // L6 engineering artifacts (operational design outputs)
+  const engineeringArtifactIds = new Set([
+    "janela-lama", "cementing-fluid",
+  ]);
+  if (engineeringArtifactIds.has(id)) return "engineering_artifact";
+
+  // Governance/lifecycle/state descriptors and well-attribute concepts
+  if (id === "axon-asn-status-poco") return "governance_artifact";
+  if (id === "axon-sub-dados-culturais") return "well_attribute_concept";
+
+  // Lâmina d'água and classifications — controlled-vocab attributes (well_attribute_concept)
+  const wellAttributeConceptIds = new Set([
+    "axon-term-lamina-agua",
+    "axon-term-lamina-agua-rasa",
+    "axon-term-lamina-agua-profunda",
+    "axon-term-lamina-agua-ultraprofunda",
+    "axon-term-objetivo-poco",
+    "axon-term-classificacao-poco",
+  ]);
+  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
+
+  // Axon term campo (Field) — a regulatory anchor in operational sense
+  if (id === "axon-term-campo") return "regulatory_anchor";
+
+  // IGP report — governance artifact
+  if (id === "axon-term-igp") return "governance_artifact";
+
+  return null;
+}
+
+/**
+ * Maps `contractual`-typed nodes. Reports → governance_artifact;
+ * test data → artifact_primary; lifecycle / regulatory obligations →
+ * regulatory_anchor; service descriptions → well_operation.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function contractualRole(id) {
+  // L3 artifact primary (test data)
+  const artifactPrimaryIds = new Set([
+    "teste-formacao", "tld",
+  ]);
+  if (artifactPrimaryIds.has(id)) return "artifact_primary";
+
+  // Reports / programs / governance docs
+  const governanceArtifactIds = new Set([
+    "pem", "pte", "pad", "rfad",
+    "aip", "cip",
+    "roa", "pag", "frame", "ogeomec",
+    "rcsd", "qpg", "bdp", "igp",
+    "perfil-composto", "rmg", "laudo-geomecanico",
+    "document-type", "acl",
+    "plano-desenvolvimento",
+    "declaracao-comercialidade",
+  ]);
+  if (governanceArtifactIds.has(id)) return "governance_artifact";
+
+  // Regulatory / contractual anchors
+  const regulatoryAnchorIds = new Set([
+    "contrato-ep", "rodada-licitacao",
+    "area-desenvolvimento",
+  ]);
+  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
+
+  // KPI / metric concepts
+  const wellAttributeConceptIds = new Set([
+    "recurso", "reserva",
+  ]);
+  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
+
+  return null;
+}
+
+/**
+ * Maps `instrument`-typed nodes. Distinguishes regulatory systems,
+ * databases/software (dataset_concept), regulatory anchors, and physical
+ * sensor measurands (which become well_attribute_concept since they are
+ * controlled-vocab measurand identifiers).
+ * @param {string} id
+ * @returns {string|null}
+ */
+function instrumentRole(id) {
+  // Regulatory anchors / regulatory subsystems
+  const regulatoryAnchorIds = new Set([
+    "sigep", "sep", "uts",
+    "regime-contratual", "periodo-exploratorio",
+    "processo-sancionador", "notificacao-descoberta",
+    "rftp", "i-engine", "dpp", "bmp",
+    "eia", "rima", "afe", "joa", "epc",
+  ]);
+  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
+
+  // Database systems / software platforms / pipelines / repositories
+  const datasetConceptIds = new Set([
+    "sirr", "bdoc", "vge",
+    "cassandra-exata-curva-tempo",
+    "exata", "sigeo", "bdiep", "bdiap",
+    "aida", "geodo", "gda",
+  ]);
+  if (datasetConceptIds.has(id)) return "dataset_concept";
+
+  // Controlled-vocabulary attribute concepts
+  const wellAttributeConceptIds = new Set([
+    "unidade-medida", "log-curve-type",
+  ]);
+  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
+
+  // Seismic acquisition/processing — well_operation (acquisition program)
+  // and dataset_concept (processing project) respectively.
+  if (id === "seismic-acquisition-survey") return "well_operation";
+  if (id === "seismic-processing-project") return "interpretation_process";
+
+  // Wellbore trajectory artifact — L3 primary
+  if (id === "wellbore-trajectory") return "artifact_primary";
+
+  // 3W sensor channels — measurand identifiers (well_attribute_concept).
+  if (/^sensor_/.test(id)) return "well_attribute_concept";
+
+  return null;
+}
+
+/**
+ * Maps `equipment`-typed and `geological`-typed defaults.
+ * @param {string} id
+ * @returns {string|null}
+ */
+function equipmentRole(id) {
+  // wellbore-architecture and casing-design are L6 engineering artifacts
+  if (id === "wellbore-architecture" || id === "casing-design") {
+    return "engineering_artifact";
+  }
+  if (id === "facility-type") return "well_attribute_concept";
+  // axon-term-sonda → equipment (Sonda is the rig)
+  return "equipment";
+}
+
+/**
+ * Top-level rule-based role classifier. Returns a canonical `ontological_role`
+ * value or `"unclassified"` if no rule applies.
+ *
+ * Order:
+ *   1. Strict type-based rules (axon_domain, lifecycle_state, lifecycle_outcome,
+ *      actor, regulatory_*, equipment, governance_*, portfolio_concept,
+ *      project, decision_event)
+ *   2. Geomechanics-specific id-prefixed rules
+ *   3. Per-type id-based rules (operational, analytical, contractual,
+ *      instrument, equipment)
+ *   4. Type-default fallbacks (geological → feature_observation, etc.)
+ *
+ * @param {{id:string, type:string, label?:string, definition?:string}} node
+ * @returns {string} canonical `ontological_role` (or `"unclassified"`)
+ */
+function inferOntologicalRole(node) {
+  const id = node.id;
+  const t = node.type;
+  const label = node.label || "";
+
+  // 1. Strict type-based rules
+  if (t === "axon_domain") return "domain_anchor";
+  if (t === "lifecycle_state") return "lifecycle_state";
+  if (t === "lifecycle_outcome") return "lifecycle_outcome";
+  if (t === "actor") return "organizational_actor";
+  if (
+    t === "regulatory_anchor" ||
+    t === "regulatory_doc" ||
+    t === "regulatory_event" ||
+    t === "regulatory_obligation"
+  ) {
+    return "regulatory_anchor";
+  }
+  if (
+    t === "governance_doc" ||
+    t === "governance_committee" ||
+    t === "governance_program" ||
+    t === "portfolio_concept" ||
+    t === "project" ||
+    t === "decision_event"
+  ) {
+    return "governance_artifact";
+  }
+
+  // 2. Geomec-specific (id prefix)
+  if (t === "geomec_corporate") {
+    const r = geomecCorporateRole(id);
+    if (r) return r;
+  }
+  if (t === "geomec_academic") {
+    const r = geomecAcademicRole(id);
+    if (r) return r;
+  }
+  if (t === "geomec_fracture") {
+    const r = geomecFractureRole(id);
+    if (r) return r;
+  }
+
+  // 3. Per-type id-based rules
+  if (t === "operational") {
+    const r = operationalRole(id);
+    if (r) return r;
+  }
+  if (t === "analytical") {
+    const r = analyticalRole(id, label);
+    if (r) return r;
+  }
+  if (t === "contractual") {
+    const r = contractualRole(id);
+    if (r) return r;
+  }
+  if (t === "instrument") {
+    const r = instrumentRole(id);
+    if (r) return r;
+  }
+  if (t === "equipment") {
+    return equipmentRole(id);
+  }
+
+  // 4. Type-default fallbacks
+  if (t === "geological") return "feature_observation";
+
+  return "unclassified";
+}
+
+/**
+ * Final pass: writes `ontological_role` onto every node. Respects manual
+ * overrides — nodes that already carry the field are not reclassified.
+ * Mutates the array in place and returns the same reference.
+ *
+ * @param {Object[]} nodes
+ * @returns {Object[]} same array, mutated
+ */
+function annotateOntologicalRoles(nodes) {
+  for (const n of nodes) {
+    if (typeof n.ontological_role === "string" && n.ontological_role.length > 0) {
+      continue; // respect curator override
+    }
+    n.ontological_role = inferOntologicalRole(n);
+  }
+  return nodes;
+}
+
 /**
  * Builds the complete entity-graph JSON object by merging base ENTITY_NODES,
  * OntoPetro/M7-M10 nodes, OSDU Layer-4 nodes, OSDU extra nodes, and
@@ -3767,6 +4278,13 @@ function buildEntityGraph() {
      target ids (axon-dom-geomecanica, falha, GM010-12, GEOMEC0**) are in scope. */
   const isolatedBridges = buildIsolatedGeomecBridges(new Set(nodes.map((n) => n.id)));
   edges.push(...isolatedBridges.edges);
+
+  /* F5 — annotate `ontological_role` on every node using the rule-based
+     classifier defined above. Final pass so all merge sources (base +
+     ontopetro + osdu + 3W + GEOMEC corporate + academic + Axon glossary +
+     OG + GPP + isolated bridges) are in scope. Manual overrides on individual
+     nodes are respected. See docs/ONTOLOGY_LAYERS.md §3 + §5. */
+  annotateOntologicalRoles(nodes);
 
   return {
     version: VERSION,

@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T18:48:26.890Z",
+    "generated": "2026-05-04T18:58:04.357Z",
     "description": "GeoBrain — complete merged dataset",
     "counts": {
       "glossary_terms": 53,
@@ -1987,7 +1987,7 @@
   ],
   "entity_graph": {
     "version": "1.1.0",
-    "generated": "2026-05-04T18:48:26.890Z",
+    "generated": "2026-05-04T18:58:04.357Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
     "nodes": [
       {
@@ -2069,7 +2069,8 @@
           "1-BRSA-1135-RJS",
           "3-BRSA-944-RJS (Búzios)",
           "1-ANP-2-AL"
-        ]
+        ],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "bloco",
@@ -2141,7 +2142,8 @@
           "BCAM-40 (Búzios)",
           "BS-4 (Atlanta)",
           "BM-C-33"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "campo",
@@ -2179,7 +2181,8 @@
           "@pt": "Área produtora de petróleo ou gás natural a partir de um ou mais reservatórios contínuos. No regime ANP, um campo é declarado a partir da Declaração de Comercialidade que confirma a viabilidade econômica da descoberta.",
           "@en": "A mineral deposit that has been exploited for commercial purposes."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "bacia-sedimentar",
@@ -2251,7 +2254,8 @@
           "Bacia de Sergipe-Alagoas",
           "Bacia Potiguar",
           "Bacia do Recôncavo"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "reservatorio",
@@ -2316,7 +2320,8 @@
           "Reservatórios carbonáticos do pré-sal (Coquinas)",
           "Reservatórios turbidíticos de Campos",
           "Reservatório Barra Velha"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "formacao",
@@ -2383,7 +2388,8 @@
           "Formação Quissamã",
           "Formação Carapebus",
           "Formação Itapema"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "sistema-deposicional",
@@ -2444,7 +2450,8 @@
           "Sistema turbidítico de águas profundas",
           "Sistema lacustre carbonático (pré-sal)",
           "Sistema deltaico"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "contrato-ep",
@@ -2517,7 +2524,8 @@
           "Lei 12.276/2010"
         ],
         "corporate_internal": false,
-        "gpp_role": "regulatory_anchor"
+        "gpp_role": "regulatory_anchor",
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "pem",
@@ -2563,7 +2571,8 @@
           "Contratos de Concessão ANP"
         ],
         "corporate_internal": false,
-        "gpp_role": "regulatory_obligation"
+        "gpp_role": "regulatory_obligation",
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "pte",
@@ -2602,7 +2611,8 @@
           "@pt": "Instrumento de acompanhamento e fiscalização das atividades exploratórias de cada bloco sob contrato de E&P, substituto do Programa Anual de Trabalho e Orçamento e do Plano de Exploração. Deve ser apresentado em até 90 dias da assinatura do contrato de concessão (ou 180 dias no caso de partilha de produção). Ao longo da vigência, o operador envia anualmente: o PTE previsto (outubro) e o PTE realizado (março). Revisões são permitidas conforme condições da Resolução ANP nº 876/2022. A ANP analisa e aprova cada remessa em até 30 dias. O envio é realizado pelo sistema DPP.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "pad",
@@ -2676,7 +2686,8 @@
         ],
         "corporate_internal": false,
         "gpp_role": "regulatory_doc",
-        "triggers_state": "area-em-pad-state"
+        "triggers_state": "area-em-pad-state",
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "rfad",
@@ -2716,7 +2727,8 @@
           "@pt": "Documento de encerramento do PAD que consolida as atividades de avaliação realizadas e os resultados da interpretação dos dados. A aprovação do RFAD pela ANP é condição necessária para conferir efetividade a uma eventual Declaração de Comercialidade. Em caso de resultado negativo, encerra o PAD sem declaração.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "rodada-licitacao",
@@ -2783,7 +2795,8 @@
           "17ª Rodada (2022)",
           "1ª Rodada de Partilha (2013, Libra)",
           "Cessão Onerosa (2019)"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "declaracao-comercialidade",
@@ -2830,7 +2843,8 @@
         ],
         "corporate_internal": false,
         "gpp_role": "regulatory_event",
-        "triggers_state": "campo-em-desenvolvimento-state"
+        "triggers_state": "campo-em-desenvolvimento-state",
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "operador",
@@ -2909,7 +2923,8 @@
           "Repsol Sinopec",
           "BP Brasil",
           "Galp Energia"
-        ]
+        ],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "anp",
@@ -2955,7 +2970,8 @@
           "@pt": "Agência Nacional do Petróleo, Gás Natural e Biocombustíveis. Autarquia federal vinculada ao Ministério de Minas e Energia, responsável pela regulação, contratação e fiscalização das atividades da indústria de petróleo, gás natural e biocombustíveis no Brasil.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "sigep",
@@ -2997,7 +3013,8 @@
           "@pt": "Sistema de Informações Gerenciais de Exploração e Produção. Sistema oficial da ANP que concentra e disponibiliza dados sobre poços, PADs, blocos e contratos de exploração e produção de petróleo e gás natural no Brasil.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "sep",
@@ -3043,7 +3060,8 @@
           "@pt": "Superintendência de Exploração da ANP. Unidade organizacional responsável pelo gerenciamento e fiscalização das atividades exploratórias de petróleo e gás natural no Brasil, incluindo o acompanhamento de blocos, poços e PADs.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "uts",
@@ -3082,7 +3100,8 @@
           "@pt": "Unidade de conversão para diferentes trabalhos exploratórios, utilizada para fins de aferição da execução do Programa Exploratório Mínimo (PEM) de cada contrato. Permite comparar diferentes tipos de atividades exploratórias — como perfuração de poços, aquisição sísmica e estudos técnicos — em uma unidade comum.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "regime-contratual",
@@ -3147,7 +3166,8 @@
           "Concessão (Lei 9.478/1997)",
           "Partilha de Produção (Lei 12.351/2010)",
           "Cessão Onerosa"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "periodo-exploratorio",
@@ -3186,7 +3206,8 @@
           "@pt": "Identificação do período exploratório dos blocos sob contrato: 1º, 2º ou 3º período exploratório, período único ou prorrogado por PAD. Cada período tem prazo definido e obrigações exploratórias mínimas que o contratado deve cumprir.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "processo-sancionador",
@@ -3225,7 +3246,8 @@
           "@pt": "Processo administrativo resultante da consolidação das autuações relativas à exploração de petróleo e gás natural em trâmite na Superintendência de Exploração (SEP). Registra o auto de infração, o motivo da autuação, a multa aplicada e a situação processual.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "notificacao-descoberta",
@@ -3265,7 +3287,8 @@
           "@pt": "Registro que identifica se ocorreu ou não indícios de hidrocarbonetos durante a perfuração de um poço exploratório. A data da primeira descoberta registra quando foi notificada à ANP a primeira detecção de hidrocarbonetos no poço.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "area-desenvolvimento",
@@ -3336,7 +3359,8 @@
           "Lula",
           "Sépia",
           "Atapu"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "plano-desenvolvimento",
@@ -3375,7 +3399,8 @@
           "@pt": "Documento técnico-econômico obrigatório entregue pelo concessionário à ANP em até 180 dias após a Declaração de Comercialidade. Agrupa informações técnicas, operacionais, econômicas e ambientais da explotação do campo, incluindo abandono. A ANP analisa o PD em até 180 dias; se solicitar modificações, o contratado tem 60 dias para apresentar o PD modificado. Após aprovação, o PD passa a vincular a atuação do concessionário. Em casos de jazidas compartilhadas, deve ser acompanhado do AIP ou do CIP.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "aip",
@@ -3414,7 +3439,8 @@
           "@pt": "Acordo celebrado entre concessionários de blocos distintos que compartilham a mesma jazida de hidrocarbonetos, estabelecendo os termos para a produção individualizada de cada parte. Deve ser submetido à ANP juntamente com o Plano de Desenvolvimento quando houver descoberta em jazida compartilhada. Em situações em que o AIP ainda não está concluído, o CIP pode ser apresentado em substituição provisória.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "cip",
@@ -3453,7 +3479,8 @@
           "@pt": "Instrumento provisório apresentado pelos concessionários à ANP quando o Acordo de Individualização da Produção (AIP) ainda não foi concluído, comprometendo-se a celebrá-lo em prazo definido. Acompanha o Plano de Desenvolvimento em casos de jazida compartilhada nos quais o AIP definitivo não está disponível.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "primeiro-oleo",
@@ -3491,7 +3518,8 @@
           "@pt": "Marco que sinaliza o início da produção comercial em um campo. Para a ANP, é o evento que encerra formalmente a Fase de Desenvolvimento da Produção e inaugura o Campo de Produção. A partir desse ponto, o operador passa a submeter o Programa Anual de Produção (PAP) e a pagar royalties sobre a produção.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "teste-formacao",
@@ -3532,7 +3560,8 @@
           "@pt": "Teste realizado por tubulação com fluxo em superfície para avaliação do reservatório e coleta de amostras de fluido. Abrange os tipos: TIF (identificação de fluidos), TF (poço aberto), TFS (seletivo a poço aberto), TFR (poço revestido) e TFRE (TFR estendido > 72 h). Não exige autorização prévia da ANP, exceto quando realizado no âmbito de PAD ou PD ainda não aprovado. Exige envio do RFTP via DPP em até 60 dias após conclusão. Durante a execução, o operador reporta diariamente via SOP no i-Engine.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "tld",
@@ -3573,7 +3602,8 @@
           "@pt": "Teste de Longa Duração. Realizado dentro de um PAD, com duração total superior a 72 horas de fluxo. Exige autorização prévia específica da ANP, mesmo em PAD aprovado. Sujeito ao pagamento de royalties e participações governamentais. Requer aprovação do sistema de medição fiscal e destino da produção. Documentação obrigatória: TLDI (em até 1 dia após abertura do poço), TLDS (semanal) e TLDF (em até 7 dias após conclusão), todos enviados via i-Engine; além do BMP mensal e RFTP. Internacionalmente corresponde ao Extended Well Test (EWT).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "rftp",
@@ -3610,7 +3640,8 @@
           "@pt": "Relatório Final de Teste de Poço. Documento obrigatório enviado à ANP via DPP em até 60 dias após a conclusão de qualquer teste de formação (TIF, TF, TFS, TFR, TFRE, TLD). Contém: relatório operacional (sequência de eventos), planilhas de medições de superfície, relatório de estimulação, esquema de coluna de teste e dados de registradores de fundo.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "i-engine",
@@ -3651,7 +3682,8 @@
           "@pt": "Sistema de webservices da ANP para envio e recebimento de dados técnicos de E&P. Utilizado para: SOP (Situação Operacional de Poços) durante testes de formação, TLDI/TLDS/TLDF durante TLD e BMP mensal na fase de produção. Utiliza formato XML padronizado com tags semânticas para amostra, fase e componente conforme Resolução ANP nº 880/2022.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "dpp",
@@ -3688,7 +3720,8 @@
           "@pt": "Portal de Dados e Projetos da ANP. Sistema utilizado para envio do RFTP e respectivos anexos após a conclusão de testes de formação e TLD. Complementa o i-Engine no fluxo regulatório de entrega de dados técnicos de poço.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "bmp",
@@ -3727,7 +3760,8 @@
           "@pt": "Boletim Mensal de Produção. Documento enviado mensalmente à ANP via i-Engine durante a realização de TLD e na fase de produção regular do campo. Informa volumes de óleo, gás e outros fluidos produzidos para efeito de cálculo de royalties e participações governamentais.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "presal",
@@ -3794,7 +3828,8 @@
           "Reservatórios de Tupi",
           "Reservatórios de Búzios",
           "Polígono do Pré-sal (Lei 12.351/2010)"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "bacias-agrupadas",
@@ -3837,7 +3872,8 @@
           "@pt": "Agrupamento regional das bacias sedimentares em quatro grupos: Mar — Margem Equatorial (Foz do Amazonas, Pará-Maranhão, Barreirinhas, Ceará, Potiguar marítimo); Mar — Margem Leste (Pernambuco-Paraíba, Sergipe-Alagoas, Jacuípe, Camamu-Almada, Jequitinhonha, Cumuruxatiba, Mucuri, Espírito Santo, Campos, Santos, Pelotas); Terra — Bacias Maduras (Potiguar, Sergipe, Alagoas, Recôncavo, Espírito Santo terrestre); Terra — Bacias de Nova Fronteira (Amazonas, Paraná, Parnaíba, São Francisco, Solimões, Tucano Sul).",
           "@en": "A natural geographic area covering a single depositional system."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "ambiente",
@@ -3881,7 +3917,8 @@
           "@pt": "Localização por ambiente dos blocos exploratórios sob contrato: terra (onshore) ou mar (offshore). Distingue operações terrestres e marítimas para fins de classificação e monitoramento regulatório.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "bop",
@@ -3918,7 +3955,8 @@
           "@pt": "Preventor de erupção (Blowout Preventer). Conjunto de válvulas instalado na cabeça do poço durante a perfuração para conter pressão descontrolada e evitar blowout. Equipamento crítico de segurança.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "fpso",
@@ -3955,7 +3993,8 @@
           "@pt": "Unidade Flutuante de Produção, Estocagem e Transferência de Óleo. Navio adaptado que processa, armazena e transfere óleo produzido em campos offshore. Padrão dominante em águas profundas no Brasil.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "anm-eq",
@@ -3992,7 +4031,8 @@
           "@pt": "Árvore de Natal Molhada — conjunto de válvulas e equipamentos de controle de fluxo instalado sobre a cabeça de um poço submarino. Permite produção, intervenção e segurança da poço subsea.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "riser",
@@ -4029,7 +4069,8 @@
           "@pt": "Tubulação que conecta o equipamento submarino (poço/ANM) à unidade flutuante de superfície (FPSO/sonda). Pode ser rígido (SCR), flexível ou híbrido (RHAS).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "rov",
@@ -4066,7 +4107,8 @@
           "@pt": "Veículo Operado Remotamente. Robô submarino conectado por umbilical ao navio de apoio, usado para inspeção, intervenção e operação de equipamentos no leito marinho.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "dhsv",
@@ -4129,7 +4171,8 @@
         "threew_monitored_by": [
           "sensor_estado_dhsv",
           "sensor_p_pdg"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "bha",
@@ -4166,7 +4209,8 @@
           "@pt": "Composição de Fundo de Poço — porção inferior da coluna de perfuração que inclui broca, comandos, estabilizadores, motor de fundo e ferramentas de medição (MWD/LWD).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "esp-eq",
@@ -4203,7 +4247,8 @@
           "@pt": "Bomba Centrífuga Submersa elétrica. Método de elevação artificial em que uma bomba multi-estágio é instalada no fundo do poço para impulsionar fluidos à superfície.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "mwd",
@@ -4240,7 +4285,8 @@
           "@pt": "Medição Durante a Perfuração. Conjunto de sensores no BHA que transmitem em tempo real dados direcionais (azimute, inclinação) e parâmetros operacionais durante a perfuração.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "lwd",
@@ -4277,7 +4323,8 @@
           "@pt": "Perfilagem Durante a Perfuração. Sensores petrofísicos (raio gama, resistividade, densidade, neutron) integrados ao BHA que registram propriedades da formação enquanto se perfura.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "manifold-submarino",
@@ -4314,7 +4361,8 @@
           "@pt": "Equipamento submarino de coleta/distribuição que agrega o fluxo de múltiplos poços para uma única linha que vai até a UEP, ou distribui injeção entre poços.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "ibama",
@@ -4351,7 +4399,8 @@
           "@pt": "Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis. Autarquia federal responsável pelo licenciamento ambiental de atividades de E&P offshore — atua em paralelo com a ANP no aspecto ambiental.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "conama",
@@ -4388,7 +4437,8 @@
           "@pt": "Conselho Nacional do Meio Ambiente. Órgão consultivo e deliberativo do SISNAMA que estabelece normas e padrões ambientais aplicáveis à indústria de petróleo.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "ana-agencia",
@@ -4425,7 +4475,8 @@
           "@pt": "Agência Nacional de Águas e Saneamento Básico. Regula o uso de recursos hídricos em operações onshore (descarte, captação, água produzida).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "ibp",
@@ -4462,7 +4513,8 @@
           "@pt": "Instituto Brasileiro de Petróleo, Gás e Biocombustíveis. Associação de classe que representa operadoras e fornecedores; promove normas técnicas e diálogo regulatório.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "bndes",
@@ -4499,7 +4551,8 @@
           "@pt": "Banco Nacional de Desenvolvimento Econômico e Social. Financia projetos de E&P (FINEM, debêntures), conteúdo local e desenvolvimento da cadeia de fornecedores.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "eia",
@@ -4536,7 +4589,8 @@
           "@pt": "Estudo de Impacto Ambiental. Documento técnico exigido pelo IBAMA para licenciamento de atividades com potencial degradador (perfuração offshore, sísmica, produção).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "rima",
@@ -4573,7 +4627,8 @@
           "@pt": "Relatório de Impacto Ambiental. Síntese técnica do EIA em linguagem acessível, destinada à consulta pública no processo de licenciamento.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "afe",
@@ -4610,7 +4665,8 @@
           "@pt": "Approval for Expenditure (Aprovação de Gastos / Autorização de Dispêndio). Mecanismo formal de aprovação prévia de gasto entre operadores e parceiros do consórcio antes de comprometer capital em poço ou instalação.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "joa",
@@ -4647,7 +4703,8 @@
           "@pt": "Joint Operating Agreement (Acordo de Operações Conjuntas). Acordo entre os consorciados de um Contrato de E&P que rege governança, votação, distribuição de custos e operação cotidiana do bloco.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "epc",
@@ -4684,7 +4741,8 @@
           "@pt": "Engineering, Procurement and Construction (Engenharia, Suprimento, Construção e Montagem). Modalidade contratual em que um único contratado executa engenharia, compra de materiais e construção de uma instalação (FPSO, plataforma, gasoduto).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "rocha-geradora",
@@ -4726,7 +4784,8 @@
           "@pt": "Rocha rica em matéria orgânica (COT > 1%) capaz de gerar HC quando submetida à temperatura adequada. Equivale a C005 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "rocha-capacitante",
@@ -4767,7 +4826,8 @@
           "@pt": "Rocha de baixa permeabilidade que sela o reservatório, impedindo migração de HC para fora da trapa. Equivale a C004 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "trapa",
@@ -4808,7 +4868,8 @@
           "@pt": "Configuração geológica (estrutural, estratigráfica ou combinada) que permite acúmulo de HC. C006 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "sistema-petrolifero",
@@ -4849,7 +4910,8 @@
           "@pt": "Conjunto integrado de rocha geradora, migração, reservatório, capa e trapa. C007 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "acumulacao",
@@ -4890,7 +4952,8 @@
           "@pt": "Volume de HC contido em armadilha com dimensões definidas. Precede a Declaração de Comercialidade. C008 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "play",
@@ -4929,7 +4992,8 @@
           "@pt": "Combinação de elementos petrolíferos com potencial exploratório regional. C017 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "prospecto",
@@ -4968,7 +5032,8 @@
           "@pt": "Área específica com potencial para acumulação, dentro de um play. C018 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "recurso",
@@ -5007,7 +5072,8 @@
           "@pt": "Volume de HC com grau variável de certeza geológica. Categorizado por SPE-PRMS. C019 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "reserva",
@@ -5046,7 +5112,8 @@
           "@pt": "Volume de HC tecnicamente recuperável e economicamente viável. Categorias 1P/2P/3P. C020 em ontopetro. NÃO confundir com Reserva Ambiental.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "falha",
@@ -5087,7 +5154,8 @@
           "@pt": "Descontinuidade tectônica com deslocamento relativo das camadas. C016 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "idade-geologica",
@@ -5128,7 +5196,8 @@
           "@pt": "Período/época formal segundo ICS GTS2020. Ex.: Aptiano, Albiano, Cretáceo Superior. Tipo NER PetroGold IDA.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "intervalo-estratigrafico",
@@ -5168,7 +5237,8 @@
           "@pt": "Seção de poço delimitada por dois marcos (topo/base). Usado em testagem, completação e avaliação. NÃO confundir com Idade. Tipo NER PetroGold INT.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "testemunho",
@@ -5208,7 +5278,8 @@
           "@pt": "Amostra cilíndrica de rocha extraída durante perfuração. C012 em ontopetro.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "perfil-poco",
@@ -5249,7 +5320,8 @@
           "@pt": "Medição contínua de propriedades físicas ao longo do poço (gamma, densidade, sônico, neutron, NMR). C013 em ontopetro.",
           "@en": "A well log is a data type that correlates a particular measurement or multiple measurements in a wellbore against depth and/or time within that wellbore. When plotted visually, well logs are typically long line graphs (called curves) but may sometimes be discrete points or intervals. This schema object is intended for digital well logs, not raster log files or raster calibration files, but may be used for the latter in the absence of a defined OSDU schema for these use cases."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "materia-organica",
@@ -5289,7 +5361,8 @@
           "@pt": "Substância orgânica preservada na rocha geradora com potencial de gerar HC. Caracterizada por Rock-Eval e tipo de querogênio (I/II/IIS/III/IV). M7 C103.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "maturidade-termal",
@@ -5329,7 +5402,8 @@
           "@pt": "Estado de evolução termal medido por Ro% (vitrinita) e Tmax (Rock-Eval). Janela óleo: Ro 0.5–1.0%, Tmax ~435°C. M7 C104.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "biomarcador",
@@ -5367,7 +5441,8 @@
           "@pt": "Composto orgânico preservado (hopanos, esteranos, pristano, fitano) usado para correlação óleo-rocha via GC-MS. M7 C106.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "correlacao-oleo-rocha",
@@ -5405,7 +5480,8 @@
           "@pt": "Análise que associa hidrocarbonetos produzidos à rocha geradora de origem via assinatura de biomarcadores e isótopos. M7 C107.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "litologia",
@@ -5448,7 +5524,8 @@
           "@pt": "Classificação composicional da rocha. Pode ser inferida por ML (RockFinder/GDA). NÃO confundir com formação (FOR ≠ ROC em PetroGold). M8 C201.",
           "@en": "Geological description for the type of lithology"
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "facies-sedimentar",
@@ -5488,7 +5565,8 @@
           "@pt": "Unidade rochosa com características físicas e biológicas distintas — base de classificação de reservatório. M8 C203.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "modelo-petrofisico",
@@ -5526,7 +5604,8 @@
           "@pt": "Integra perfis (Den, Neu, Son, NMR) para calcular φ, k, Sw via equação de Archie. M8 C208.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "campo-tensional",
@@ -5607,7 +5686,8 @@
             "merged_in": "F4 (PR #33)",
             "rationale": "Conceito idêntico — campo-tensional existente em main já cobre Estado de Tensões In Situ. Mantida proveniência Petrobras corporate via campo merged_in."
           }
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "janela-lama",
@@ -5681,7 +5761,8 @@
             "merged_in": "F4 (PR #33)",
             "rationale": "Conceito idêntico — janela-lama existente em main já cobre Janela Operacional de Lama. Mantida proveniência Petrobras corporate via campo merged_in."
           }
-        ]
+        ],
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "ocorrencia-geomec",
@@ -5720,7 +5801,8 @@
           "@pt": "Eventos: breakouts, kick zones, lost circulation, stuck pipe. Indicadores de problemas operacionais. M9 C317.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "potencial-selante",
@@ -5760,7 +5842,8 @@
           "@pt": "Capacidade de falha reter HC — calculado por SGR (Shale Gouge Ratio), CSP e SSF no TrapTester. SGR > 18–20% = potencial selante. M9 C313.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "amostra-fluido",
@@ -5799,7 +5882,8 @@
           "@pt": "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
           "@en": "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "pvt",
@@ -5838,7 +5922,8 @@
           "@pt": "Ensaios pressão-volume-temperatura: Flash, ECC, Liberação Diferencial, Viscosidade. Sistema SIRR (35 campos com completude documentada). M10 CL_PVT.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "classe-fluido",
@@ -5877,7 +5962,8 @@
           "@pt": "Classificação operacional: black oil, óleo volátil, condensado, gás úmido, gás seco. Critérios: API e RGO. Sistema AIDA. M10 CL_CLASS_FLUIDO.",
           "@en": "Type of drilling or completions fluid"
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "gc-ms",
@@ -5915,7 +6001,8 @@
           "@pt": "Cromatografia gasosa com espectrometria de massas para biomarcadores (Pr/Ph, hopanos, esteranos). M10 CL_GC_MS.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "sara",
@@ -5953,7 +6040,8 @@
           "@pt": "Saturados/Aromáticos/Resinas/Asfaltenos — fracionamento do óleo bruto. Correlaciona com viscosidade e risco de deposição. M10 CL_SARA.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "wellbore",
@@ -6020,7 +6108,8 @@
         "skos_example": [
           "1-RJS-702-RJ (wellbore único)",
           "3-NA-0001-RN-ST1 (sidetrack = segundo wellbore)"
-        ]
+        ],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "topo-formacional",
@@ -6091,7 +6180,8 @@
           "Topo Fm. Barra Velha a 4220m MD",
           "Topo Fm. Macaé a 2890m MD",
           "Base do Sal a 3410m TVD"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "trajetoria-poco",
@@ -6159,7 +6249,8 @@
         "skos_example": [
           "Poço horizontal pré-sal: 60° inclinação em 2800m TVD",
           "Poço vertical 1-RJS-702-RJ: inclinação < 3°"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "completacao",
@@ -6221,7 +6312,8 @@
           "Completação seca (dry tree)",
           "Completação molhada subsea com ANM",
           "Completação inteligente (smart well)"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "unidade-medida",
@@ -6289,7 +6381,8 @@
           "mD (miliDarcy) — permeabilidade",
           "ºAPI (API gravity) — densidade óleo",
           "GAPI (Gamma Ray API) — argilosidade"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "activity-plan",
@@ -6339,7 +6432,8 @@
           "@pt": "Informações sobre uma série de atividades planejadas — agrupa passos, responsáveis e marcos de uma campanha operacional. (OSDU canonical: Information about a series of planned activities.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "activity-template",
@@ -6389,7 +6483,8 @@
           "@pt": "Descrição de um tipo de atividade, por exemplo, um passo (work-step) reutilizável dentro de um workflow operacional. (OSDU canonical: Description of one type of activity, e.g., a work-step in a workflow.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "well-activity-program",
@@ -6439,7 +6534,8 @@
           "@pt": "Descrição completa do Programa de Atividades para um poço (ou conjunto de poços e/ou wellbores), cobrindo objetivos, fases e procedimentos. (OSDU canonical: A complete description of an Activity Program for a unique or a set of Well(s) and/or Wellbore(s).)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "casing-design",
@@ -6489,7 +6585,8 @@
           "@pt": "Projeto de revestimento (casing) de um poço, descrevendo seções, diâmetros, graus de aço, conexões e profundidades planejadas. (OSDU canonical: The design of the Casing in a wellbore.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "core-sample",
@@ -6539,7 +6636,8 @@
           "@pt": "Amostra de rocha obtida por perfuração com coroa oca e barril testemunhador, preservando arranjo estratigráfico para análises laboratoriais. (OSDU canonical: A rock sample obtained by drilling into the earth with a pipe conveyed hollow bit and core barrel.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "cementing-fluid",
@@ -6593,7 +6691,8 @@
           "@pt": "Fluidos envolvidos na operação de cimentação: lama deslocada, lavadores e espaçadores, pastas de cimento e fluido de deslocamento. (OSDU canonical: Displaced Mud, washes and spacers, cements, displacement mud.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "seismic-acquisition-survey",
@@ -6643,7 +6742,8 @@
           "@pt": "Projeto de aquisição sísmica que mobiliza recursos em campo para registrar dados — também chamado field survey ou programa de campo; difere da geometria dos equipamentos (nav), que é um WPC. (OSDU canonical: A seismic acquisition project is a type of business project that deploys resources to the field to record seismic data. It may be referred to as a field survey, acquisition survey, or field program.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "seismic-processing-project",
@@ -6693,7 +6793,8 @@
           "@pt": "Projeto de negócio que gere a criação de produtos sísmicos processados; pode mesclar dados de múltiplos surveys de campo. Processamentos originais e reprocessamentos geram projetos separados. (OSDU canonical: A seismic processing project is a type of business project which manages the creation of processed seismic work products.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "geo-political-entity",
@@ -6743,7 +6844,8 @@
           "@pt": "Área geográfica nomeada definida e administrada por uma entidade oficial — país, estado, bloco, área especial. (OSDU canonical: A named geographical area which is defined and administered by an official entity.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "organizational_actor"
       },
       {
         "id": "wellbore-architecture",
@@ -6793,7 +6895,8 @@
           "@pt": "Descreve as estruturas físicas de um poço — revestimentos, cimentações, completação e equipamentos permanentes do poço. (OSDU canonical: Describes the physical structures for a borehole.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "wellbore-trajectory",
@@ -6843,7 +6946,8 @@
           "@pt": "Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)",
           "@en": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "wellbore-marker-set",
@@ -6897,7 +7001,8 @@
           "@pt": "Marcadores que identificam profundidades em um poço — abaixo de uma referência — onde alguém ou um processo automatizado registra observação relevante (geralmente mudança de rocha). Conhecidos como picks ou tops de formação. (OSDU canonical: Wellbore Markers identify the depth in a wellbore, measured below a reference elevation, at which a person or an automated process identifies a noteworthy observation.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "seismic-horizon",
@@ -6947,7 +7052,8 @@
           "@pt": "Conjunto de picks relacionados à geometria de processamento sísmico que define uma superfície interpretada; a geometria utilizada é referenciada pelo Interpretation Project. (OSDU canonical: A set of picks related to seismic processing geometry which define a surface.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "drilling-activity",
@@ -6997,7 +7103,8 @@
           "@pt": "Informação sobre uma atividade individual que faz parte do Drilling Report — operação granular registrada na rotina de perfuração. (OSDU canonical: Information regarding an individual activity that is part of the Drilling Report.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "drilling-parameters",
@@ -7047,7 +7154,8 @@
           "@pt": "Parâmetros de perfuração da BHA: dados estatísticos e calculados da operação por corrida — profundidades, atividades, temperatura, pressão, vazões, torque etc. (OSDU canonical: The bottomhole assembly drilling parameters schema, which contains statistical and calculated operations data for the run.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "mud-pump",
@@ -7097,7 +7205,8 @@
           "@pt": "Bombas presentes na sonda — equipamento responsável pela circulação de fluido de perfuração no sistema. (OSDU canonical: Pumps present on the rig.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "basin-type",
@@ -7143,7 +7252,8 @@
           "@pt": "Região geológica onde se acumularam sedimentos depositados, deprimida ou preservada na crosta — taxonomia para classificar bacias. (OSDU canonical: A geologic region where an accumulation of deposited sediments has depressed or is preserved within the crust.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "bottom-hole-pressure-type",
@@ -7193,7 +7303,8 @@
           "@pt": "Método utilizado para calcular ou medir a pressão de fundo (bottomhole pressure) durante o canhoneio. (OSDU canonical: The Method used to calculate or measure bottomhole pressure during perforation job.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "annular-fluid-type",
@@ -7243,7 +7354,8 @@
           "@pt": "Tipo de fluido presente no anular do poço no momento de uma operação de canhoneio. (OSDU canonical: Type of fluid in wellbore at time of perforation job.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "well-activity-phase-type",
@@ -7293,7 +7405,8 @@
           "@pt": "Marcos-chave em um programa de atividade de poço, geralmente baseados nas seções principais do poço ou em trabalhos não relacionados ao poço. (OSDU canonical: Key milestones in a well activity program, usually based on the major sections of the well or non well-related work.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "drilling-reason-type",
@@ -7343,7 +7456,8 @@
           "@pt": "Usado para descrever o tipo de razão (motivo) de perfuração — explica por que um poço foi perfurado (exploratório, delimitatório, produtor, injetor, etc.). (OSDU canonical: Used to describe the type of drilling reasons.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "document-type",
@@ -7391,7 +7505,8 @@
           "@pt": "Material impresso ou eletrônico contendo comunicação ou evidência destinado a registro persistente ou permanente — taxonomia de tipos documentais (relatório, contrato, parecer, etc.). (OSDU canonical: A piece of printed or electronic material containing communication or evidence that is intended for persistent or permanent record.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "log-curve-type",
@@ -7441,7 +7556,8 @@
           "@pt": "Mnemônico padrão escolhido pela companhia para curvas de perfilagem — OSDU disponibiliza uma lista inicial (ex.: GR, RHOB, NPHI, DTC). (OSDU canonical: LogCurveType is the standard mnemonic chosen by the company - OSDU provides an initial list.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "facility-type",
@@ -7491,7 +7607,8 @@
           "@pt": "Identifica e descreve o tipo de instalação. Uma facility é um agrupamento de equipamentos em um sítio geográfico específico, usado em atividades energéticas como exploração, extração, geração, armazenamento, processamento, descarte, suprimento ou transferência. Pode ser de superfície ou subsuperfície. (OSDU canonical: Used to identify and describe the type of facility.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "acl",
@@ -7541,7 +7658,8 @@
           "@pt": "Tags de controle de acesso associadas a uma entidade. Estrutura incluída pelas SystemProperties acl, presente em todos os registros OSDU; não extensível. (OSDU canonical: The access control tags associated with this entity. This structure is included by the SystemProperties acl, which is part of all OSDU records.)",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "operacoes-geologicas",
@@ -7596,7 +7714,8 @@
         "evidence_status": "inferred",
         "evidence_refs": [
           "Petrobras EXP/OGP — Macroprocesso Explorar, N3 'Prover planejamento, aquisição e avaliação de dados geológicos e petrofísicos'"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "drx",
@@ -7655,7 +7774,8 @@
         "evidence_refs": [
           "PE-2EXP-00059",
           "SIGEO wiki — Análise de Dados de FRX"
-        ]
+        ],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "frx",
@@ -7714,7 +7834,8 @@
         "evidence_refs": [
           "PE-2EXP-00059",
           "SIGEO wiki — Análise de Dados de FRX"
-        ]
+        ],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "dna-geoquimico",
@@ -7774,7 +7895,8 @@
         "evidence_status": "inferred",
         "evidence_refs": [
           "Petrobras EXP/OGP/AQG — jargão operacional; inferido de dados de FRX multi-poço"
-        ]
+        ],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "mudlogging-time-series",
@@ -7793,7 +7915,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "gas-show-event",
@@ -7820,7 +7943,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "kick-event",
@@ -7843,7 +7967,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "cuttings-sample-detailed",
@@ -7862,7 +7987,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "core-run",
@@ -7881,7 +8007,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "core-plug",
@@ -7907,7 +8034,8 @@
         ],
         "synonyms_en": [
           "core plug"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "sidewall-core-sample",
@@ -7934,7 +8062,8 @@
         "synonyms_en": [
           "sidewall core",
           "SWC"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "lwd-run",
@@ -7964,7 +8093,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "wireline-run",
@@ -7991,7 +8121,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "formation-pressure-point",
@@ -8019,7 +8150,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "dst-interval",
@@ -8044,7 +8176,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "geostopping-event",
@@ -8060,7 +8193,8 @@
         "superclass": "Geostopping",
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "sirr",
@@ -8076,7 +8210,8 @@
         "superclass": "GeologicalOperationsSystem",
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "bdoc",
@@ -8098,7 +8233,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "vge",
@@ -8117,7 +8253,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "roa",
@@ -8136,7 +8273,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "cassandra-exata-curva-tempo",
@@ -8152,7 +8290,8 @@
         "superclass": "GeologicalOperationsSystem",
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "pag",
@@ -8171,7 +8310,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "frame",
@@ -8193,7 +8333,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "fluid-sample",
@@ -8218,7 +8359,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "mudlogging",
@@ -8237,7 +8379,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "cuttings-sampling",
@@ -8263,7 +8406,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "coring",
@@ -8282,7 +8426,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "sidewall-sampling",
@@ -8308,7 +8453,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "mwd-lwd",
@@ -8327,7 +8473,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "wireline-logging",
@@ -8346,7 +8493,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "formation-testing",
@@ -8376,7 +8524,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "geostopping",
@@ -8395,7 +8544,8 @@
           "layer1b",
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "well_operation"
       },
       {
         "id": "ogeomec",
@@ -8419,7 +8569,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "rcsd",
@@ -8443,7 +8594,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "qpg",
@@ -8475,7 +8627,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "bdp",
@@ -8540,7 +8693,8 @@
             "merged_in": "F4 (PR #33)",
             "rationale": "Conceito idêntico — bdp existente em main já cobre BDP. Mantida proveniência Petrobras corporate via campo merged_in."
           }
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "igp",
@@ -8567,7 +8721,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "perfil-composto",
@@ -8596,7 +8751,8 @@
         "geocoverage": [
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "rmg",
@@ -8625,7 +8781,8 @@
         ],
         "geocoverage": [
           "layer5"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "lessons-learned",
@@ -8648,7 +8805,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "retro-analysis",
@@ -8672,7 +8830,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "input-elaboration",
@@ -8696,7 +8855,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "operational-monitoring",
@@ -8720,7 +8880,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "formation-evaluation",
@@ -8745,7 +8906,8 @@
         "geocoverage": [
           "layer4",
           "layer6"
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "exata",
@@ -8772,7 +8934,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "sigeo",
@@ -8800,7 +8963,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "bdiep",
@@ -8860,7 +9024,8 @@
             "merged_in": "F4 (PR #33)",
             "rationale": "Conceito idêntico — bdiep existente em main já cobre BDIEP. Mantida proveniência Petrobras corporate via campo merged_in."
           }
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "bdiap",
@@ -8882,7 +9047,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "aida",
@@ -8911,7 +9077,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "geodo",
@@ -8933,7 +9100,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "gda",
@@ -8958,7 +9126,8 @@
         ],
         "geocoverage": [
           "layer6"
-        ]
+        ],
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "laudo-geomecanico",
@@ -9139,7 +9308,8 @@
             "merged_in": "F4 (PR #33)",
             "rationale": "Conceito idêntico — laudo-geomecanico existente em main já cobre Laudo Geomecânico. Mantida proveniência Petrobras corporate via campo merged_in."
           }
-        ]
+        ],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#378ADD",
@@ -9209,7 +9379,8 @@
           "BCAM-40 (Búzios)",
           "BS-4 (Atlanta)",
           "BM-C-33"
-        ]
+        ],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "color": "#1ABC9C",
@@ -9254,7 +9425,8 @@
           "@pt": "Estado do Bloco sob contrato ativo, sem descoberta comercial. Governança via PROPEX. Conecta a Poços Pioneiros/Estratigráficos, Avaliação de Risco, VME.",
           "@en": "Block lifecycle state under active contract, no commercial discovery yet. PROPEX-governed."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_state"
       },
       {
         "color": "#1ABC9C",
@@ -9299,7 +9471,8 @@
           "@pt": "Estado após descoberta no Bloco — fase de delimitação e estudos técnico-econômicos. Fase PEXP2 do PROPEX.",
           "@en": "State following a discovery — delineation and techno-economic studies. PROPEX PEXP2 phase."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_state"
       },
       {
         "color": "#1ABC9C",
@@ -9344,7 +9517,8 @@
           "@pt": "Subárea do Bloco formalmente submetida a Plano de Avaliação de Descoberta (PAD). Múltiplos PADs podem coexistir num Bloco.",
           "@en": "Block subarea formally under a Discovery Evaluation Plan. Multiple PADs may coexist within a Block."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_state"
       },
       {
         "color": "#16A085",
@@ -9389,7 +9563,8 @@
           "@pt": "Estado pós-DC: a área do Bloco vira Campo, e um PD/PDP é aprovado. CAPEX, perfuração de poços de desenvolvimento, infraestrutura.",
           "@en": "Post-DC state: Block area becomes a Field, and a PD/PDP is approved. CAPEX, development drilling, infrastructure."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_state"
       },
       {
         "color": "#16A085",
@@ -9434,7 +9609,8 @@
           "@pt": "Campo com produção iniciada. Marco regulatório: Notificação de Início de Produção (Primeiro Óleo). Conecta a Poços Produtores/Injetores, OPEX, Medição Fiscal, Reservas.",
           "@en": "Field with active production. Regulatory milestone: Start-of-Production notice (First Oil)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_state"
       },
       {
         "color": "#8E44AD",
@@ -9485,7 +9661,8 @@
           "@pt": "Programa corporativo Petrobras de governança de projetos exploratórios em Blocos. Estrutura PEXPs, PGPs, TEPs, fóruns COMEXP/GRBLOC. PROPEX é Programa, NÃO projeto.",
           "@en": "Petrobras corporate program governing exploratory projects in Blocks. Structures PEXPs, PGPs, TEPs, forums COMEXP/GRBLOC. PROPEX is a Program, NOT a project."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#9B59B6",
@@ -9530,7 +9707,8 @@
           "@pt": "Conjunto delimitado de atividades técnicas/econômicas/operacionais em um Bloco, voltadas a verificar acumulações de hidrocarbonetos. Governado pelo PROPEX, distinto deste.",
           "@en": "Delimited set of technical/economic/operational activities in a Block, aimed at verifying hydrocarbon accumulations. Governed by PROPEX, distinct from it."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#E74C3C",
@@ -9589,7 +9767,8 @@
           "@pt": "Eventos decisórios formais do PROPEX. Gates: PEXP1 (estratégia), PEXP2 (PAD/devolução), PEXP2A (revisão PEM), PEXP3 (DC/devolução), PEXP3A (revisão PAD).",
           "@en": "Formal PROPEX decision events. Gates: PEXP1 (strategy), PEXP2 (PAD/relinquishment), PEXP2A (PEM review), PEXP3 (DC/relinquishment), PEXP3A (PAD review)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#E67E22",
@@ -9634,7 +9813,8 @@
           "@pt": "Documento de escopo/cronograma/custo/riscos/governança de projeto no PROPEX. Variantes: PGP do Bloco e PGP do PAD. Obrigatório nos PEXPs.",
           "@en": "Project scope/schedule/cost/risk/governance document within PROPEX. Variants: Block-PGP, PAD-PGP. Mandatory at PEXPs."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#F39C12",
@@ -9689,7 +9869,8 @@
           "@pt": "Documento técnico-regulatório, em até 180 dias após DC. Agrupa info técnica/operacional/econômica/ambiental da explotação, incluindo abandono. ANP analisa em 180 dias.",
           "@en": "Technical-regulatory document, within 180 days of DC. Aggregates technical/operational/economic/environmental info, including abandonment. ANP review within 180 days."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "color": "#7F8C8D",
@@ -9734,7 +9915,8 @@
           "@pt": "Documento que encerra um Projeto Exploratório. Registra decisão final (DC ou devolução) e lições aprendidas. Encerra Projeto, validado pelo Programa PROPEX.",
           "@en": "Document closing an Exploratory Project. Records final decision (DC or relinquishment) and lessons learned. Closes Project, validated by PROPEX Program."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#7F8C8D",
@@ -9779,7 +9961,8 @@
           "@pt": "Documento/ato interno que formaliza passagem da Fase de Exploração para Produção. Marco administrativo pós-DC.",
           "@en": "Internal document/act formalizing transition from Exploration to Production phase. Administrative milestone post-DC."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#34495E",
@@ -9824,7 +10007,8 @@
           "@pt": "Instância máxima de decisão do PROPEX. Delibera PEXPs, PAD, DC e devoluções de Bloco.",
           "@en": "Highest PROPEX decision instance. Deliberates PEXPs, PAD, DC, Block relinquishments."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#34495E",
@@ -9869,7 +10053,8 @@
           "@pt": "Grupo técnico de pré-análise de decisões de Bloco antes do COMEXP. Garante due diligence técnica.",
           "@en": "Technical pre-review group for Block decisions, feeding COMEXP."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#34495E",
@@ -9914,7 +10099,8 @@
           "@pt": "Grupo técnico que apoia os PEXPs com revisão de aspectos geológicos, de engenharia e econômicos.",
           "@en": "Technical group supporting PEXPs with subject-matter review."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#5D6D7E",
@@ -9967,7 +10153,8 @@
           "@pt": "Percentual de um sócio nos custos e receitas de Bloco/Campo. Soma 100%. Determina peso decisório e alocação de CAPEX/OPEX.",
           "@en": "Partner's percentage share of costs and revenues in a Block/Field. Sums to 100%. Determines decision weight and CAPEX/OPEX allocation."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#5D6D7E",
@@ -10012,7 +10199,8 @@
           "@pt": "Designa o sócio responsável pela execução das operações. Petrobras é Operadora obrigatória nos blocos do pré-sal sob Partilha (Lei 12.351/2010).",
           "@en": "Designates the partner responsible for executing operations. Petrobras is mandatory Operator in pre-salt Production-Sharing blocks."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#3498DB",
@@ -10063,7 +10251,8 @@
           "@pt": "Processo licitatório público da ANP para oferta de Blocos exploratórios. Cada Rodada tem Edital, áreas e regras próprios.",
           "@en": "ANP public bidding process for offering exploration Blocks. Each Round has its own notice, areas and rules."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "color": "#A569BD",
@@ -10108,7 +10297,8 @@
           "@pt": "Porção do Bloco mantida pelo operador ao fim de fase exploratória, tipicamente em razão de descoberta ativa ou PAD.",
           "@en": "Block portion kept by operator after an exploratory phase, typically due to active discovery or PAD."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_outcome"
       },
       {
         "color": "#A569BD",
@@ -10153,7 +10343,8 @@
           "@pt": "Porção do Bloco devolvida à ANP — parcial ou total. Após devolução, a área retorna à ANP para nova licitação.",
           "@en": "Block portion returned to ANP — partial or total. Once relinquished, returns to ANP for re-bidding."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "lifecycle_outcome"
       },
       {
         "color": "#BB8FCE",
@@ -10198,7 +10389,8 @@
           "@pt": "Conjunto agregado de Blocos sob gestão do operador. Decisões de portfólio consideram VME, risco geológico, PEM, cronograma e composição de sócios.",
           "@en": "Aggregate Block set under operator management. Portfolio decisions consider EMV, geological risk, PEM, schedule and partnership."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#BB8FCE",
@@ -10253,7 +10445,8 @@
           "@pt": "Soma sobre resultados de (VPL × probabilidade). Insumo padrão para ranqueamento de Blocos e PEXPs.",
           "@en": "Sum over outcomes of (NPV × probability). Standard input to Block ranking and PEXP decisions."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "color": "#5499C7",
@@ -10298,7 +10491,8 @@
           "@pt": "Compromisso específico do PEM (ex.: poço exploratório no ano 3). Cada obrigação tem métrica, prazo e penalidade.",
           "@en": "Specific PEM commitment (e.g., one exploratory well by year 3). Each has metric, deadline and penalty."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "sensor_aber_ckgl",
@@ -10362,7 +10556,8 @@
         "skos_example": [
           "ABER-CKGL=0 indica GLCK fechado",
           "ABER-CKGL=100 indica GLCK totalmente aberto"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_aber_ckp",
@@ -10424,7 +10619,8 @@
         },
         "skos_example": [
           "ABER-CKP caindo rapidamente indica classe 6 ou 7"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_dhsv",
@@ -10486,7 +10682,8 @@
         },
         "skos_example": [
           "ESTADO-DHSV=0 confirma fechamento da DHSV"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_m1",
@@ -10544,7 +10741,8 @@
           "@pt": "Estado da PMV (production master valve / válvula mestra de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the PMV (production master valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_m2",
@@ -10602,7 +10800,8 @@
           "@pt": "Estado da AMV (annulus master valve / válvula mestra de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the AMV (annulus master valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_pxo",
@@ -10660,7 +10859,8 @@
           "@pt": "Estado da PXO (pig-crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the PXO (pig-crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_sdv_gl",
@@ -10718,7 +10918,8 @@
           "@pt": "Estado da SDV-GL (válvula de bloqueio de gas-lift): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the gas-lift SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_sdv_p",
@@ -10776,7 +10977,8 @@
           "@pt": "Estado da SDV-P (válvula de bloqueio de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the production SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_w1",
@@ -10834,7 +11036,8 @@
           "@pt": "Estado da PWV (production wing valve / válvula asa de produção): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the PWV (production wing valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_w2",
@@ -10892,7 +11095,8 @@
           "@pt": "Estado da AWV (annulus wing valve / válvula asa de anular): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the AWV (annulus wing valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_estado_xo",
@@ -10950,7 +11154,8 @@
           "@pt": "Estado da XO (crossover valve): 0=fechada, 0.5=parcial, 1=aberta. Variável 3W.",
           "@en": "State of the XO (crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_anular",
@@ -11012,7 +11217,8 @@
         },
         "skos_example": [
           "P-ANULAR elevado pode indicar comunicação entre anular e coluna"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_jus_bs",
@@ -11074,7 +11280,8 @@
         },
         "skos_example": [
           "P-JUS-BS cai em caso de hidrato na linha de serviço"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_jus_ckgl",
@@ -11132,7 +11339,8 @@
           "@pt": "Pressão a jusante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de injeção de gas-lift após o estrangulamento.",
           "@en": "Downstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable. Represents gas-lift injection pressure after the choke."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_jus_ckp",
@@ -11194,7 +11402,8 @@
         },
         "skos_example": [
           "Diferencial P-MON-CKP - P-JUS-CKP indica grau de restrição do choke"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_mon_ckgl",
@@ -11252,7 +11461,8 @@
           "@pt": "Pressão a montante do GLCK (gas-lift choke) [Pa]. Variável 3W. Representa a pressão de entrada de gas-lift antes do estrangulamento.",
           "@en": "Upstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_mon_ckp",
@@ -11314,7 +11524,8 @@
         },
         "skos_example": [
           "P-MON-CKP crescente com ABER-CKP constante pode indicar incrustação"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_mon_sdv_p",
@@ -11370,7 +11581,8 @@
           "@pt": "Pressão a montante da SDV-P (válvula de bloqueio de produção) [Pa]. Variável 3W.",
           "@en": "Upstream pressure of the production SDV (shutdown valve) [Pa]. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_pdg",
@@ -11438,7 +11650,8 @@
         "skos_example": [
           "P-PDG oscilante é assinatura de severe slugging",
           "P-PDG declinando rapidamente indica perda de produtividade"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_pt_p",
@@ -11496,7 +11709,8 @@
           "@pt": "Pressão na linha de produção da ANM (árvore de natal subsea), a jusante da PWV [Pa]. Variável 3W.",
           "@en": "Subsea Xmas-tree pressure downstream of the PWV in the production line [Pa]. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_p_tpt",
@@ -11558,7 +11772,8 @@
         },
         "skos_example": [
           "P-TPT oscilando em ciclos indica severe slugging"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_qbs",
@@ -11620,7 +11835,8 @@
         },
         "skos_example": [
           "QBS reduzindo junto com P-JUS-BS indica hidrato na linha de serviço"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_qgl",
@@ -11684,7 +11900,8 @@
         },
         "skos_example": [
           "QGL reduzindo rapidamente pode indicar classe 5 ou problema no compressor"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_t_jus_ckp",
@@ -11746,7 +11963,8 @@
         },
         "skos_example": [
           "T-JUS-CKP muito baixa pode indicar formação de hidrato no choke"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_t_mon_ckp",
@@ -11806,7 +12024,8 @@
         },
         "skos_example": [
           "Diferencial T-MON-CKP - T-JUS-CKP indica severidade de expansão no choke"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_t_pdg",
@@ -11872,7 +12091,8 @@
         },
         "skos_example": [
           "T-PDG declinando progressivamente em poço com gas-lift pode indicar hidrato na linha de produção"
-        ]
+        ],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "sensor_t_tpt",
@@ -11930,7 +12150,8 @@
           "@pt": "Temperatura medida pelo TPT (Temperature and Pressure Transducer) na ANM [°C]. Variável 3W.",
           "@en": "Temperature at the TPT on the subsea Xmas-tree [°C]. 3W variable."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "event_normal",
@@ -11995,7 +12216,8 @@
         },
         "skos_example": [
           "Classe 0 é o baseline para treinamento de modelos de detecção de anomalias"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_bsw_increase",
@@ -12068,7 +12290,8 @@
         },
         "skos_example": [
           "BSW abrupto indica comunicação com aquífero ou falha de barreira"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_spurious_dhsv",
@@ -12137,7 +12360,8 @@
         },
         "skos_example": [
           "ESTADO-DHSV=0 com queda de P-PDG confirma fechamento espúrio"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_severe_slugging",
@@ -12212,7 +12436,8 @@
         "skos_example": [
           "Ciclo de golfada severa: bloqueio de gás → acúmulo de líquido → irrupção → blow-out",
           "P-TPT e P-PDG oscilatórios são assinatura de severe slugging"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_flow_instability",
@@ -12285,7 +12510,8 @@
         },
         "skos_example": [
           "Instabilidade de fluxo pode anteceder golfadas severas"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_rapid_prod_loss",
@@ -12358,7 +12584,8 @@
         },
         "skos_example": [
           "P-PDG declining faster than expected pode indicar skin damage"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_quick_pck_restriction",
@@ -12429,7 +12656,8 @@
         },
         "skos_example": [
           "ABER-CKP caindo abruptamente com diferencial de pressão crescente é assinatura de classe 6"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_scaling_pck",
@@ -12503,7 +12731,8 @@
         },
         "skos_example": [
           "T-MON-CKP elevada com diferencial crescente ao longo do tempo é assinatura de scaling"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_hydrate_production",
@@ -12577,7 +12806,8 @@
         },
         "skos_example": [
           "Queda simultânea de P-PDG + T-PDG + QGL indica hidrato na linha de produção"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "event_hydrate_service",
@@ -12650,7 +12880,8 @@
         },
         "skos_example": [
           "QBS reduzindo com P-JUS-BS crescente indica obstrução por hidrato na linha de serviço"
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "pmv",
@@ -12710,7 +12941,8 @@
         },
         "skos_example": [
           "PMV fechada indica shutdown do poço pelo lado de produção"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "amv",
@@ -12766,7 +12998,8 @@
           "@pt": "Válvula mestra de anular (Annulus Master Valve, M2) da ANM subsea. Controla o acesso ao espaço anular do poço. Parte da árvore de natal (ANM).",
           "@en": "Annulus master valve (M2) of the subsea Xmas-tree. Controls access to the well annulus. Part of the ANM assembly."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "pwv",
@@ -12826,7 +13059,8 @@
         },
         "skos_example": [
           "PWV fechada isola o poço da linha de produção"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "awv",
@@ -12882,7 +13116,8 @@
           "@pt": "Válvula asa de anular (Annulus Wing Valve, W2) da ANM subsea. Válvula de isolamento da linha de anular. Parte da árvore de natal (ANM).",
           "@en": "Annulus wing valve (W2) of the subsea Xmas-tree. Isolation valve for the annulus flowline. Part of the ANM assembly."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "pxo",
@@ -12936,7 +13171,8 @@
           "@pt": "Válvula de pig-crossover da ANM subsea. Permite desvio de linha para passagem de pig de limpeza. Parte da árvore de natal (ANM).",
           "@en": "Pig-crossover valve of the subsea Xmas-tree. Allows line bypass for pig launching/receiving. Part of the ANM assembly."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "xo",
@@ -12990,7 +13226,8 @@
           "@pt": "Válvula crossover da ANM subsea. Permite comunicação entre linhas de produção e anular no leito marinho. Parte da árvore de natal (ANM).",
           "@en": "Crossover valve of the subsea Xmas-tree. Enables communication between production and annulus lines on the seabed. Part of the ANM assembly."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "sdv_p",
@@ -13050,7 +13287,8 @@
         },
         "skos_example": [
           "SDV-P fecha automaticamente em caso de ESD ou alta pressão"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "sdv_gl",
@@ -13106,7 +13344,8 @@
           "@pt": "Válvula de bloqueio da linha de gas-lift (Gas-Lift Shutdown Valve) da ANM subsea. Actua como elemento de segurança. Parte da árvore de natal (ANM).",
           "@en": "Gas-lift shutdown valve of the subsea Xmas-tree. Acts as a safety element for gas-lift injection line. Part of the ANM assembly."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "glck",
@@ -13166,7 +13405,8 @@
         },
         "skos_example": [
           "ABER-CKGL e pressões P-MON-CKGL/P-JUS-CKGL monitoram o GLCK"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "pck",
@@ -13226,7 +13466,8 @@
         },
         "skos_example": [
           "Incrustação no PCK detectada por queda de ABER-CKP com diferencial crescente de pressão"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "tpt",
@@ -13282,7 +13523,8 @@
           "@pt": "Transdutor de temperatura e pressão (TPT) instalado na ANM subsea. Fornece as variáveis P-TPT e T-TPT. Parte da árvore de natal (ANM).",
           "@en": "Temperature and Pressure Transducer (TPT) installed on the subsea Xmas-tree. Provides P-TPT and T-TPT variables. Part of the ANM assembly."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       },
       {
         "id": "pdg",
@@ -13344,7 +13586,8 @@
         },
         "skos_example": [
           "PDG mede pressão e temperatura na coluna de produção em profundidade"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "sp_pump",
@@ -13402,7 +13645,8 @@
         },
         "skos_example": [
           "QBS + P-JUS-BS monitoram hidrato na linha de serviço"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "anm",
@@ -13468,7 +13712,8 @@
         },
         "skos_example": [
           "A ANM é o principal conjunto de controle de fluxo em poços offshore"
-        ]
+        ],
+        "ontological_role": "equipment"
       },
       {
         "id": "GEOMEC001",
@@ -13529,7 +13774,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC002",
@@ -13593,7 +13839,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC005",
@@ -13651,7 +13898,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC006",
@@ -13733,7 +13981,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC007",
@@ -13794,7 +14043,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC008",
@@ -13855,7 +14105,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC009",
@@ -13913,7 +14164,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC010",
@@ -13971,7 +14223,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC011",
@@ -14032,7 +14285,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC012",
@@ -14093,7 +14347,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC014",
@@ -14162,7 +14417,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC015",
@@ -14234,7 +14490,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC016",
@@ -14300,7 +14557,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC017",
@@ -14370,7 +14628,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC018",
@@ -14437,7 +14696,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC019",
@@ -14498,7 +14758,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "GEOMEC020",
@@ -14574,7 +14835,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "GEOMEC021",
@@ -14641,7 +14903,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC022",
@@ -14709,7 +14972,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC023",
@@ -14788,7 +15052,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC024",
@@ -14853,7 +15118,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC025",
@@ -14936,7 +15202,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC026A",
@@ -14997,7 +15264,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "GEOMEC027",
@@ -15061,7 +15329,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC028",
@@ -15124,7 +15393,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC029",
@@ -15187,7 +15457,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC030",
@@ -15262,7 +15533,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC031",
@@ -15339,7 +15611,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC032",
@@ -15401,7 +15674,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC033",
@@ -15485,7 +15759,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC034",
@@ -15559,7 +15834,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC035",
@@ -15628,7 +15904,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC036",
@@ -15693,7 +15970,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "GEOMEC037",
@@ -15756,7 +16034,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC038",
@@ -15819,7 +16098,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC039",
@@ -15882,7 +16162,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC040",
@@ -15946,7 +16227,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC041",
@@ -16011,7 +16293,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC042",
@@ -16077,7 +16360,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC043",
@@ -16143,7 +16427,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC044",
@@ -16207,7 +16492,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC045",
@@ -16275,7 +16561,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC046",
@@ -16324,7 +16611,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC047",
@@ -16386,7 +16674,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC048",
@@ -16450,7 +16739,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "GEOMEC051",
@@ -16510,7 +16800,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC052A",
@@ -16568,7 +16859,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "equipment"
       },
       {
         "id": "GEOMEC052B",
@@ -16641,7 +16933,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC053A",
@@ -16707,7 +17000,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC053B",
@@ -16775,7 +17069,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC061",
@@ -16827,7 +17122,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC062",
@@ -16882,7 +17178,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC063",
@@ -16934,7 +17231,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC064",
@@ -16989,7 +17287,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC065",
@@ -17041,7 +17340,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC066",
@@ -17093,7 +17393,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC067",
@@ -17145,7 +17446,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC_ROP_A",
@@ -17216,7 +17518,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC_ROP_B",
@@ -17285,7 +17588,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "GEOMEC023A",
@@ -17352,7 +17656,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC023B",
@@ -17420,7 +17725,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC023C",
@@ -17474,7 +17780,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC068",
@@ -17534,7 +17841,8 @@
         },
         "skos_example": [],
         "wsm_type_code": "BO",
-        "_semantic_category": "Feature"
+        "_semantic_category": "Feature",
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC069",
@@ -17595,7 +17903,8 @@
         },
         "skos_example": [],
         "wsm_type_code": "DIF",
-        "_semantic_category": "Feature"
+        "_semantic_category": "Feature",
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC070",
@@ -17645,7 +17954,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": "Feature"
+        "_semantic_category": "Feature",
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC071",
@@ -17697,7 +18007,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": "Feature"
+        "_semantic_category": "Feature",
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC072",
@@ -17751,7 +18062,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC073",
@@ -17807,7 +18119,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": "DataArtifact"
+        "_semantic_category": "DataArtifact",
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "GEOMEC074",
@@ -17859,7 +18172,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "dataset_concept"
       },
       {
         "id": "GEOMEC075",
@@ -17911,7 +18225,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC076",
@@ -17963,7 +18278,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC077",
@@ -18009,7 +18325,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC078",
@@ -18061,7 +18378,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC079",
@@ -18107,7 +18425,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC079A",
@@ -18153,7 +18472,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC080",
@@ -18211,7 +18531,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "well_operation"
       },
       {
         "id": "GEOMEC081",
@@ -18278,7 +18599,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC082",
@@ -18333,7 +18655,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GEOMEC083",
@@ -18385,7 +18708,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC084",
@@ -18431,7 +18755,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "GEOMEC085",
@@ -18477,7 +18802,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": "Method"
+        "_semantic_category": "Method",
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC086",
@@ -18532,7 +18858,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GEOMEC087",
@@ -18584,7 +18911,8 @@
         },
         "skos_example": [],
         "wsm_type_code": null,
-        "_semantic_category": null
+        "_semantic_category": null,
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM001",
@@ -18626,7 +18954,8 @@
           "@pt": "Tensor simétrico 3x3 que descreve o estado de tensão em um ponto da rocha. Componentes sigma_1 (máxima principal), sigma_2 (intermediária), sigma_3 (mínima). Convenção: sigma_1 >= sigma_2 >= sigma_3.",
           "@en": "Symmetric 3x3 second-rank tensor describing the state of stress at a point in a rock mass. Components sigma_1 (maximum principal), sigma_2 (intermediate principal), sigma_3 (minimum principal). By convention sigma_1 >= sigma_2 >= sigma_3."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM002",
@@ -18668,7 +18997,8 @@
           "@pt": "Uma das três tensões principais (normais) agindo em planos onde a tensão de cisalhamento é zero. No subsolo: Sv (sobrecarga vertical), SHmax (horizontal máxima), Shmin (horizontal mínima).",
           "@en": "One of the three principal (normal) stresses acting on planes where shear stress vanishes. In the subsurface: Sv (vertical overburden), SHmax (maximum horizontal), Shmin (minimum horizontal). Anderson regime determines their relative magnitudes."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM003",
@@ -18710,7 +19040,8 @@
           "@pt": "Componente de tensão atuando paralelamente a um plano. No círculo de Mohr: tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controla ruptura cisalhante quando supera o critério de Coulomb.",
           "@en": "Stress component acting parallel to a plane. In the Mohr circle representation, shear stress tau = (sigma_1 - sigma_3)/2 * sin(2*theta). Controls shear failure when tau exceeds the Coulomb criterion."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM004",
@@ -18752,7 +19083,8 @@
           "@pt": "Pressão do fluido no espaço poroso conectado. Controla a tensão efetiva via princípio de Terzaghi-Biot: sigma_eff = sigma_total - alpha * Pp. Calibrada por RFT/MDT, eventos de perfuração, inversão de velocidade sísmica (método Eaton).",
           "@en": "Pressure of pore fluid in connected pore space. Controls effective stress via Terzaghi-Biot principle: sigma_eff = sigma_total - alpha * Pp. Calibrated from RFT/MDT measurements, drilling events, seismic velocity inversion (Eaton method)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM005",
@@ -18794,7 +19126,8 @@
           "@pt": "Janela de peso de lama segura para perfuração. Limite inferior: pressão de poros (risco de colapso/influxo); limite superior: gradiente de fratura (risco de perda de circulação). NOTA: 'Janela de Lama' (M9) NÃO é a mesma coisa que 'Janela de Geração' (M7 geoquímica, faixa de Ro%).",
           "@en": "Safe drilling mud weight window bounded below by pore pressure (collapse/kick risk) and above by fracture gradient (lost circulation risk). In high-pressure, high-temperature or depleted reservoirs the window can be very narrow. Distinct from 'janela de geracao' (kerogen maturation window)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "engineering_artifact"
       },
       {
         "id": "GM006",
@@ -18836,7 +19169,8 @@
           "@pt": "Representação gráfica do estado de tensão em um plano. Diâmetro igual a (sigma_1 - sigma_3); centro em (sigma_1 + sigma_3)/2. Ruptura ocorre quando o círculo toca o envelope de ruptura.",
           "@en": "Graphical representation of the stress state on a plane at a given orientation. Circle diameter equals (sigma_1 - sigma_3); center at (sigma_1 + sigma_3)/2. Failure occurs when the circle touches the failure envelope (Mohr-Coulomb, Hoek-Brown)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM007",
@@ -18878,7 +19212,8 @@
           "@pt": "Condição matemática que define o estado de tensão em que a rocha rompe. Dois critérios principais: Mohr-Coulomb (envelope linear, adequado para rochas sedimentares) e Hoek-Brown (envelope curvo, melhor para maciços fraturados).",
           "@en": "Mathematical condition defining the stress state at which rock fails. Two principal criteria in petroleum geomechanics: Mohr-Coulomb (linear envelope, suitable for most sedimentary rocks) and Hoek-Brown (curved envelope, better for fractured rock masses)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM008",
@@ -18920,7 +19255,8 @@
           "@pt": "Critério de ruptura cisalhante linear: tau_f = c + sigma_n * tan(phi), onde c é a coesão (MPa) e phi é o ângulo de atrito interno (graus). Parâmetros obtidos de ensaios triaxiais.",
           "@en": "Linear shear failure criterion: tau_f = c + sigma_n * tan(phi), where c is cohesion (MPa) and phi is the angle of internal friction (degrees). Parameters derived from triaxial tests. Standard for wellbore stability analysis in sandstones and shales."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM009",
@@ -18962,7 +19298,8 @@
           "@pt": "Critério empírico curvo para maciços rochosos. Usa GSI para caracterizar o grau de fraturamento e resistência do maciço. Edição 2018 de Hoek & Brown é o padrão atual.",
           "@en": "Curved empirical criterion for rock masses: sigma_1 = sigma_3 + sigma_ci * (m_b * sigma_3/sigma_ci + s)^a, where sigma_ci is intact rock UCS, m_b is reduced Hoek-Brown constant, s and a are GSI-dependent parameters. Uses GSI for rock mass characterization. Hoek-Brown 2018 edition is current standard."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM010",
@@ -19004,7 +19341,8 @@
           "@pt": "Descrição quantitativa integrada do estado mecânico do reservatório e rochas vizinhas. Quatro pilares: (1) tensões in situ, (2) pressão de poros, (3) módulos elásticos e de resistência, (4) geometria estrutural-estratigráfica.",
           "@en": "Integrated quantitative description of the mechanical state of a reservoir and surrounding rock, comprising: (1) in situ stress magnitudes and orientations, (2) pore pressure, (3) elastic and strength properties of rock, (4) structural and stratigraphic geometry. The four-pillar MEM is the foundation for wellbore stability, sand production, hydraulic fracturing, and compaction predictions."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM011",
@@ -19046,7 +19384,8 @@
           "@pt": "MEM unidimensional construído ao longo do poço. Funções de profundidade: gradiente Pp, gradiente de fratura, Sv, SHmax, Shmin, UCS, E, nu, alfa. Output do software GEOMECBR.",
           "@en": "One-dimensional MEM built along a wellbore path. Depth functions of pore pressure gradient, fracture gradient, Sv, SHmax, Shmin, UCS, Young's modulus, Poisson's ratio, and Biot coefficient. Output of GEOMECBR software at Petrobras. Calibrated against LOT, MDT, caliper, image logs."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM012",
@@ -19088,7 +19427,8 @@
           "@pt": "MEM tridimensional que integra dados sísmicos, perfilagem e produção em grade volumétrica. Permite predição espacial de tensões e propriedades de rocha. Output do software GERESIM.",
           "@en": "Three-dimensional MEM integrating seismic, well log, and production data into a volumetric grid. Allows spatial prediction of stress, pore pressure, and rock properties away from wells. Required for field development planning, infill drilling, and stimulation design. Output of GERESIM at Petrobras."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "GM013",
@@ -19130,7 +19470,8 @@
           "@pt": "Propriedade mecânica da rocha intacta ou maciço rochoso usada em modelagem geomecânica. Inclui propriedades elásticas e de resistência. Distinguida como estática (laboratório) vs dinâmica (perfil sônico).",
           "@en": "Mechanical property of intact rock or rock mass used in geomechanical modelling. Includes elastic properties (Young's modulus, Poisson's ratio, bulk modulus, shear modulus) and strength properties (UCS, tensile strength, cohesion, friction angle). Differentiated as static (laboratory) vs dynamic (sonic log)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM014",
@@ -19172,7 +19513,8 @@
           "@pt": "Resistência à Compressão Uniaxial. Máxima tensão axial que um corpo cilíndrico de rocha suporta com pressão de confinamento zero. Unidade: MPa. UCS estático (laboratório) difere do dinâmico (sônico) em 20-40%.",
           "@en": "Uniaxial Compressive Strength (UCS) — the maximum axial stress a cylindrical rock specimen can sustain under zero confining pressure. Unit: MPa. Typical range: sandstone 10-200 MPa, limestone 30-250 MPa, salt 20-30 MPa. Static UCS (laboratory) differs from dynamic UCS (sonic-derived) by 20-40%; do not substitute without calibration."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM015",
@@ -19214,7 +19556,8 @@
           "@pt": "Módulo de Young (E) — razão entre tensão axial e deformação axial no regime elástico. Governa compactação do reservatório e subsidência. Estático: ensaio triaxial; dinâmico: velocidades sônicas Vp, Vs.",
           "@en": "Young's modulus (E) — ratio of axial stress to axial strain in the elastic regime. Governs reservoir compaction and surface subsidence. Static E from uniaxial/triaxial tests; dynamic E from sonic velocities (Vp, Vs). Unit: GPa. Typical range: 5-90 GPa for sedimentary rocks."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM016",
@@ -19256,7 +19599,8 @@
           "@pt": "Razão de Poisson (nu) — razão entre deformação lateral e axial sob carregamento axial. Adimensional, fisicamente limitado a [0, 0.5] para materiais elásticos isotrópicos. Controla magnitude das tensões horizontais.",
           "@en": "Poisson's ratio (nu) — ratio of lateral strain to axial strain under axial loading. Dimensionless, physically constrained to [0, 0.5] for isotropic elastic materials (incompressible limit = 0.5). Typical range: 0.1-0.35 for sedimentary rocks. Controls horizontal stress magnitude from vertical load."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM017",
@@ -19337,7 +19681,8 @@
             "merged_in": "F4 (PR #33)",
             "rationale": "Coeficiente de Biot-Willis (corporativo) ≡ Biot Coefficient (academic GM017) — confirmado pelo curador na revisão da PR #33."
           }
-        ]
+        ],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM018",
@@ -19379,7 +19724,8 @@
           "@pt": "Módulo volumétrico (K) — resistência da rocha à compressão volumétrica. K = E / (3*(1 - 2*nu)). Usado em modelagem de compactação e substituição de fluido (equações de Gassmann).",
           "@en": "Bulk modulus (K) — resistance of rock to volumetric compression. K = E / (3*(1 - 2*nu)). Used in compaction modelling and fluid substitution (Gassmann equations). Unit: GPa."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM019",
@@ -19421,7 +19767,8 @@
           "@pt": "Módulo de cisalhamento (G) — resistência da rocha à deformação cisalhante. G = E / (2*(1 + nu)). Medido pela velocidade sônica de cisalhamento Vs: G = rho * Vs^2. Insensível ao fluido nos poros (Gassmann).",
           "@en": "Shear modulus (G) — resistance of rock to shear deformation. G = E / (2*(1 + nu)). Directly measured from shear sonic velocity (Vs): G = rho * Vs^2. Unit: GPa. Unaffected by pore fluid (insensitive to fluid type in Gassmann)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM020",
@@ -19463,7 +19810,8 @@
           "@pt": "Sistema RMR de Bieniawski (1989) que classifica maciços rochosos de 0 a 100 com base em seis parâmetros. RMR I (81-100): muito boa; RMR V (0-20): rocha muito ruim.",
           "@en": "Bieniawski (1989) RMR system classifying rock masses on a scale 0-100 based on six parameters: UCS, RQD, spacing, condition of discontinuities, groundwater, and orientation adjustment. RMR I (81-100): very good; RMR V (0-20): very poor rock mass."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM021",
@@ -19505,7 +19853,8 @@
           "@pt": "Geological Strength Index (Hoek 1994) — quantifica a qualidade do maciço rochoso para o critério Hoek-Brown. Varia de 0 a 100. GSI alto (>70): rocha maciça/em blocos; baixo (<30): maciço muito fraturado.",
           "@en": "Geological Strength Index (Hoek 1994) — quantifies rock mass quality for use in the Hoek-Brown criterion. Range 0-100. GSI = RMR_1989 - 5 (approximate). High GSI (>70): massive, blocky rock; low GSI (<30): heavily sheared, tectonically disrupted."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM022",
@@ -19547,7 +19896,8 @@
           "@pt": "Rock Quality Designation (Deere 1963) — porcentagem de pedaços de testemunho com mais de 100 mm no comprimento total. 0-100%. Entrada para RMR, sistema Q e GSI.",
           "@en": "Rock Quality Designation (Deere 1963) — percentage of core pieces longer than 100 mm in total core run. Ranges 0-100%. RQD > 90%: excellent; 75-90%: good; 50-75%: fair; 25-50%: poor; < 25%: very poor. Input to RMR, Q-system, and GSI."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM023",
@@ -19589,7 +19939,8 @@
           "@pt": "Dependência direcional das propriedades mecânicas da rocha. Isotropia transversal (VTI) é comum em folhelhos (parâmetros de Thomsen). Anisotropia de módulos elásticos, resistência (UCS varia com orientação do acamamento) e permeabilidade (kH/kV).",
           "@en": "Directional dependence of mechanical properties in a rock mass. Transverse isotropy (VTI) is common in shales (Thomsen parameters epsilon, delta, gamma). Anisotropy of elastic moduli, strength (UCS varies with bedding orientation), and permeability (kH/kV). Critical for pre-salt carbonate geomechanics."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM024",
@@ -19631,7 +19982,8 @@
           "@pt": "Tendência da rocha a romper abruptamente sem deformação plástica significativa. Alta fragilidade favorece fraturamento natural e complexidade de fraturas hidráulicas. Índice de fragilidade B ou (E_norm + nu_norm)/2 (Rickman 2008).",
           "@en": "Tendency of rock to fail suddenly without significant plastic deformation. High brittleness favors natural fracturing and hydraulic fracture complexity. Quantified by brittleness index B = (sigma_c - sigma_t)/(sigma_c + sigma_t) or by (E_norm + nu_norm)/2 (Rickman 2008). Key predictor for unconventional reservoir stimulation."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM025",
@@ -19673,7 +20025,8 @@
           "@pt": "Classificação de Anderson (1951) dos regimes tectônicos baseada nas magnitudes relativas de Sv, SHmax, Shmin. Falha normal (NF): Sv > SHmax > Shmin; Transcorrente (SS): SHmax > Sv > Shmin; Falha reversa (RF): SHmax > Shmin > Sv.",
           "@en": "Anderson (1951) classification of tectonic stress regimes based on the relative magnitudes of Sv, SHmax, Shmin. Normal faulting (NF): Sv > SHmax > Shmin; Strike-slip (SS): SHmax > Sv > Shmin; Reverse faulting (RF): SHmax > Shmin > Sv. Controls natural fault type and drilling hazards."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GM026",
@@ -19715,7 +20068,8 @@
           "@pt": "Cavidade cilíndrica na rocha cuja estabilidade é governada pela concentração de tensões ao redor da abertura. Origem de dados de caliper, imagem e LOT/XLOT usados para calibrar o MEM.",
           "@en": "Cylindrical cavity in rock mass whose stability is governed by the stress concentration around the opening. Near-wellbore stress concentration factor depends on Shmin/SHmax ratio and wellbore orientation. Source of caliper, image log, and LOT/XLOT data used to calibrate the MEM."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "GM027",
@@ -19757,7 +20111,8 @@
           "@pt": "Documento técnico que consolida a análise geomecânica associada a uma locação ou poço, reunindo informações de contexto geológico, estrutural, sísmico e operacional, além de riscos geomecânicos, curvas/modelos de geopressões e tensões quando disponíveis. Serve como evidência técnica formal (role_type: formal_technical_evidence) para subsidiar o projeto e o acompanhamento do poço. Elaborado pelo CSD Geomecânica (RES/GMR ou área responsável). Nota: distinto do QPG (prognóstico geológico) e de relatórios exclusivamente de monitoramento pós-perfuração — o Laudo pode abranger tanto a fase de prognóstico pré-perfuração quanto o acompanhamento.",
           "@en": "Technical document that consolidates the geomechanical analysis associated with a well location or well, bringing together geological, structural, seismic and operational context, as well as geomechanical risks, geopressure curves/models and stress information when available. Serves as formal technical evidence (role_type: formal_technical_evidence) to support well design and monitoring. Produced by CSD Geomecânica (RES/GMR or responsible geomechanics area). Note: distinct from the QPG (geological prognosis) and from purely post-drilling monitoring reports — the Laudo can span pre-drilling prognosis through monitoring phases."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "GF001",
@@ -19800,7 +20155,8 @@
           "@pt": "Processo pelo qual a rocha muda de forma ou volume. Mecanismos incluem fraturamento frágil, fluxo plástico, solução por pressão e fluxo cataclástico.",
           "@en": "Process by which rock changes shape or volume. Mechanisms include brittle fracturing, plastic flow, pressure solution, and cataclastic flow. Controls fracture type and permeability evolution."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF002",
@@ -19843,7 +20199,8 @@
           "@pt": "Deformação por fraturamento e falhamento em baixas temperaturas e pressões (condições crustais rasas). Produz juntas, falhas e bandas de cisalhamento.",
           "@en": "Deformation by fracturing and faulting at low temperature and pressure (shallow crustal conditions). Produces joints, faults, and shear bands. Dominant deformation style in most reservoir settings."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF003",
@@ -19886,7 +20243,8 @@
           "@pt": "Deformação por plasticidade cristalina, solução por pressão ou fluxo viscoso em altas temperaturas e pressões. Produz zonas de milonito, foliação e boudinage.",
           "@en": "Deformation by crystal plasticity, pressure solution, or viscous flow at elevated temperature and pressure. Produces mylonite zones, foliation, and boudinage. Occurs in deep reservoirs and at higher metamorphic grades."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF004",
@@ -19929,7 +20287,8 @@
           "@pt": "Classificação de fraturas por gênese e cinemática: junta (modo I de abertura), falha (modo II/III de cisalhamento), veio (fratura aberta mineralizada), banda de cisalhamento.",
           "@en": "Classification of fractures by genesis and kinematics: joint (opening mode I), fault (shear mode II/III), vein (mineralized opening fracture), and shear band (deformation band in porous media)."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF005",
@@ -19972,7 +20331,8 @@
           "@pt": "Fratura em modo de abertura (Modo I) com deslocamento cisalhante negligível. Abertura controlada pela tensão efetiva de tração. Comum em carbonatos compactos e folhelhos.",
           "@en": "Opening-mode fracture (Mode I) with negligible shear displacement. Aperture driven by tensile effective stress exceeding tensile strength. Two sub-types: extension joints (sigma_3 orthogonal to fracture) and hybrid joints. Common in tight carbonates and shales."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF006",
@@ -20015,7 +20375,8 @@
           "@pt": "Fratura em modo de cisalhamento com deslocamento significativo. Classificada por cinemática: normal (extensional), reversa (compressional), transcorrente (lateral).",
           "@en": "Shear-mode fracture with significant displacement. Classified by slip kinematics: normal (dip-slip, extensional), reverse (dip-slip, compressional), strike-slip (lateral movement). Controls hydrocarbon migration pathways and trap integrity."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF007",
@@ -20058,7 +20419,8 @@
           "@pt": "Fratura mineralizada preenchida com material cristalino (calcita, quartzo, dolomita). Registra direções de fluxo de paleofluidos. Medidas de abertura em testemunho e imagem indicam fraturas abertas pretéritas.",
           "@en": "Mineralized fracture filled with crystalline material (calcite, quartz, dolomite). Records paleo-fluid flow directions and trapping conditions. Aperture measurements on core and image logs indicate former open fractures."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF008",
@@ -20101,7 +20463,8 @@
           "@pt": "Zona tabular de deformação cisalhante localizada em rocha porosa sem superfície de fratura discreta. Associada ao esmagamento de grãos e redução de porosidade/permeabilidade.",
           "@en": "Tabular zone of localized shear strain in porous rock without a discrete fracture surface. Associated with grain crushing (cataclasis) and porosity/permeability reduction. Important in weak, high-porosity sandstones and chalk."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF009",
@@ -20144,7 +20507,8 @@
           "@pt": "Grupo de fraturas sub-paralelas com orientação, tipo e origem similares. Caracterizado por orientação média (mergulho, azimute), distribuição de abertura e espaçamento. Base do modelamento DFN.",
           "@en": "Group of sub-parallel fractures with similar orientation, type, and inferred origin. Characterized by mean orientation (dip, dip direction), aperture distribution, and spacing. Statistical description is foundation of Discrete Fracture Network (DFN) modelling."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF010",
@@ -20187,7 +20551,8 @@
           "@pt": "Sistema interconectado de conjuntos de fraturas formando uma rede hidraulicamente conectada. Conectividade determina tensor de permeabilidade efetiva. Modelada como DFN ou meio poroso equivalente.",
           "@en": "Interconnected system of fracture sets and/or faults forming a hydraulically connected network. Connectivity determines effective permeability tensor. Modelled as Discrete Fracture Network (DFN) or as equivalent porous medium. Critical for pre-salt carbonate reservoir flow modelling."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF011",
@@ -20230,7 +20595,8 @@
           "@pt": "Superfície irregular de dissolução em carbonatos formada por solução por pressão. Atua como barreira de permeabilidade. Identificada em testemunho e imagens como superfícies escuras, irregulares e suturadas. Orientada perpendicularmente a sigma_1.",
           "@en": "Irregular dissolution surface in carbonates formed by pressure solution along grain contacts under compressive stress. Acts as permeability barrier orthogonal to sigma_1. Identified in core and image logs as dark, irregular, sutured surfaces. Oriented perpendicular to the maximum compressive stress."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF012",
@@ -20273,7 +20639,8 @@
           "@pt": "Modelo arquitetural de três componentes de uma falha matura (Caine et al. 1996): (1) núcleo da falha — superfícies de deslizamento e gouge; (2) zona de dano — fraturas subsidiárias; (3) rocha hospedeira — protólito não deformado.",
           "@en": "Three-component architectural model of a mature fault (Caine et al. 1996): (1) fault core — principal slip surfaces and gouge; (2) damage zone — subsidiary fractures and folds flanking the fault; (3) host rock — undeformed protolith. Permeability structure controls fluid flow."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF013",
@@ -20316,7 +20683,8 @@
           "@pt": "Zona central da falha contendo superfícies de deslizamento, gouge de falha (rocha pulverizada rica em argila), cataclasito e/ou milonito. Baixíssima porosidade e permeabilidade. SGR é preditor-chave da capacidade selante.",
           "@en": "Central zone of a fault containing principal slip surfaces, fault gouge (clay-rich pulverized rock), cataclasite, and/or mylonite. Typically has very low porosity and permeability (clay smear). Shale Gouge Ratio (SGR) is key predictor of sealing capacity."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF014",
@@ -20359,7 +20727,8 @@
           "@pt": "Região flanqueando o núcleo da falha com densidade de fraturas elevada, maior permeabilidade e falhas/dobras subsidiárias. Largura proporcional ao deslocamento da falha. Permeabilidade elevada torna zonas de dano condutos importantes de fluido.",
           "@en": "Region flanking the fault core characterized by elevated fracture density, increased permeability, and subsidiary faults and folds. Width scales with fault displacement (D): width ~ 10^0.3D (m). Enhanced permeability makes damage zones important conduits for fluid flow."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF015",
@@ -20402,7 +20771,8 @@
           "@pt": "Falha de dip-slip onde o teto desce em relação ao piso. Formada em regime extensional (Sv > SHmax > Shmin). Mergulho típico 50-70 graus. Cria grabens e meio-grabens. Tipo dominante em margens continentais passivas.",
           "@en": "Dip-slip fault where the hanging wall moves downward relative to the footwall. Formed in extensional tectonic settings (Sv > SHmax > Shmin). Typical dip 50-70 degrees. Creates grabens and half-grabens. Dominant fault type on passive continental margins."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF016",
@@ -20445,7 +20815,8 @@
           "@pt": "Falha de dip-slip onde o teto sobe em relação ao piso. Formada em regime compressional (SHmax > Shmin > Sv). Ângulo baixo (<30 graus) = falha de empurrão; alto ângulo = falha reversa.",
           "@en": "Dip-slip fault where the hanging wall moves upward relative to the footwall. Formed in compressional settings (SHmax > Shmin > Sv). Low angle (<30 deg) = thrust fault; high angle (>30 deg) = reverse fault. Creates fold-thrust belts and compressional traps."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "GF017",
@@ -20488,7 +20859,8 @@
           "@pt": "Falha com deslocamento predominantemente lateral. Formada em regime transcorrente (SHmax > Sv > Shmin). Planos sub-verticais. Cria bacias pull-apart e altos estruturais.",
           "@en": "Fault with predominantly lateral (strike-parallel) displacement. Formed in strike-slip (wrench) tectonic settings (SHmax > Sv > Shmin). Sub-vertical fault planes. Creates pull-apart basins (releasing bends) and push-up ridges (restraining bends). Transform faults are a special case."
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "axon-area-exploracao",
@@ -20527,7 +20899,8 @@
           "@pt": "Área pai do glossário de termos da Exploração.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-acervo-amostras",
@@ -20566,7 +20939,8 @@
           "@pt": "Domínio que organiza o acervo técnico de amostras geocientíficas (rocha, sedimento, fluido) e suas operações de coleta, movimentação, guarda e descarte.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-aquisicao-dados-geo",
@@ -20605,7 +20979,8 @@
           "@pt": "Domínio que reúne as operações geológicas executadas no poço para aquisição primária de dados, incluindo perfilagem, testemunhagem, mudlogging, avaliação final e planejamento das operações geológicas.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-aval-petrofisica",
@@ -20644,7 +21019,8 @@
           "@pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a avaliação petrofísica de formações geológicas atravessadas por poços.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-blocos-parcerias",
@@ -20683,7 +21059,8 @@
           "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura relacionadas a blocos e parcerias.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-geodesia",
@@ -20722,7 +21099,8 @@
           "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis ao levantamento e à representação da forma e da superfície da Terra, global e parcial, com suas feições naturais e artificiais e o campo gravitacional terrestre.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-geofisica",
@@ -20761,7 +21139,8 @@
           "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à prospecção de óleo e gás em qualquer nível econômico ou de detalhe técnico desejável.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-geologia",
@@ -20800,7 +21179,8 @@
           "@pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à descrição e à interpretação geológica do subsolo nas atividades exploratórias da Petrobras.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-geomecanica",
@@ -20839,7 +21219,8 @@
           "@pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a caracterização e previsão do comportamento mecânico de rochas e do estado de tensões in situ, suportando o projeto e a execução do poço.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-dom-interp-exploratoria",
@@ -20878,7 +21259,8 @@
           "@pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis às atividades da interpretação exploratória. Atividade ou esforço de inferência das estruturas geológicas de subsuperfície a partir de dados geológicos e geofísicos (EXP/GEOF/GDSI).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "domain_anchor"
       },
       {
         "id": "axon-asn-op-amostras-fluido",
@@ -20917,7 +21299,8 @@
           "@pt": "Operações executadas sobre amostras de fluido, incluindo coleta, transporte, análise, condicionamento, guarda e descarte.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-asn-op-amostras-rocha",
@@ -20956,7 +21339,8 @@
           "@pt": "Operações executadas sobre amostras de rocha (testemunhos, plugues, calha, lateral), incluindo coleta, manipulação, análise laboratorial, guarda e descarte.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-asn-aval-final-poco",
@@ -20995,7 +21379,8 @@
           "@pt": "Avaliação final do poço, integrando os resultados das operações geológicas executadas durante a perfuração para consolidação do conhecimento subsuperficial.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "axon-asn-perfilagem",
@@ -21034,7 +21419,8 @@
           "@pt": "Operação de aquisição de perfis de poço a cabo (wireline) ou em LWD/MWD, descida após a perfuração de cada fase para registro contínuo de propriedades petrofísicas e estruturais.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-asn-testemunhagem",
@@ -21073,7 +21459,8 @@
           "@pt": "Operação de obtenção de amostra contínua de rocha (testemunho/core) ou amostra lateral (sidewall core) durante a perfuração, com finalidade de caracterização petrofísica, sedimentológica ou geomecânica.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-asn-mudlogging",
@@ -21112,7 +21499,8 @@
           "@pt": "Operações de monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real e coleta de amostras de calha (cuttings) na sonda.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-asn-planejamento",
@@ -21151,7 +21539,8 @@
           "@pt": "Planejamento prévio das operações geológicas a serem executadas no poço, incluindo programa de amostragem e programa de aquisição de dados.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "axon-asn-pressao-temperatura",
@@ -21190,7 +21579,8 @@
           "@pt": "Registro pontual ou contínuo de pressão de formação e temperatura em testes de formação ou medições wireline.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-asn-status-poco",
@@ -21229,7 +21619,8 @@
           "@pt": "Comunidade que abriga termos de negócio que requerem governança compartilhada em função de determinados valores que os termos possam assumir. Por enquanto contendo apenas o termo status de poço.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "axon-asn-teste-formacao-aberto",
@@ -21268,7 +21659,8 @@
           "@pt": "Teste de formação executado em poço aberto (DST a poço aberto), com isolamento de intervalo por packers para avaliar produção e propriedades de reservatório.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_operation"
       },
       {
         "id": "axon-sub-dados-culturais",
@@ -21307,7 +21699,8 @@
           "@pt": "Conjunto de atributos identificadores e descritivos de poços e sondas usados no planejamento das operações geológicas (sigla, datum, coordenadas, sidetrack, classificação, lâmina d'água, etc.).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-sub-prog-aquisicao",
@@ -21346,7 +21739,8 @@
           "@pt": "Programa de aquisição de dados que consolida o conjunto de operações de perfilagem, testemunhagem, amostragem e teste previstas para um poço.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "interpretation_process"
       },
       {
         "id": "axon-term-acervo-amostras",
@@ -21386,7 +21780,8 @@
           "@pt": "Coleção de itens geocientíficos da Petrobras (testemunhos, plugues, wholecores, amostras de calha, laterais, fluidos e produtos derivados como lâminas, células e aparas), formada por amostras de poços, furos e afloramentos, incluindo a parcela do acervo técnico da União sob responsabilidade da operadora.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "axon-term-amostra",
@@ -21428,7 +21823,8 @@
           "@pt": "Porção de rocha, sedimento ou fluido extraída de poço, afloramento, superfície terrestre ou fundo oceânico, conforme Portaria ANP nº 757/2018; abrange também amostras de origem geocientífica não diretamente ligadas à indústria do petróleo.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "axon-term-amostragem-calha-prevista",
@@ -21468,7 +21864,8 @@
           "@pt": "Previsão da coleta de amostras de cascalhos (calha) durante a perfuração, registrada no programa de amostragem do poço com quantidade (saquinhos de até 700 g), intervalo de coleta, finalidade e destino.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "artifact_primary"
       },
       {
         "id": "axon-term-ambiente",
@@ -21509,7 +21906,8 @@
           "@pt": "Local geográfico de instalação da sonda e referência da posição final do fundo do poço; pode ser mar, terra ou lago.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "feature_observation"
       },
       {
         "id": "axon-term-campo",
@@ -21550,7 +21948,8 @@
           "@pt": "Campo de produção ao qual o poço está associado; atributo necessário à identificação e classificação do poço (sobretudo em poços explotatórios).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "regulatory_anchor"
       },
       {
         "id": "axon-term-classificacao-poco",
@@ -21590,7 +21989,8 @@
           "@pt": "Categoria numérica (1–10) que indica a finalidade do poço; integra o código alfanumérico do poço definido pelo ISA (Informativo de Aprovação de Locação).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-term-furo",
@@ -21642,7 +22042,8 @@
           "@pt": "Resultado de uma perfuração de menor porte (terrestre ou marinha) destinada à investigação geocientífica não voltada à produção de hidrocarbonetos; abrange furos geológicos e geotécnicos, e seu propósito é caracterizar aspectos geológicos, geomecânicos, geoquímicos ou biológicos do subsolo.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "axon-term-igp",
@@ -21682,7 +22083,8 @@
           "@pt": "Relatório técnico diário (24 h) elaborado pelo geólogo de operações, na locação ou em base, descrevendo geologia, ocorrências geomecânicas, litologia, formações e zonas de interesse de hidrocarboneto observadas no poço.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "axon-term-lamina-agua",
@@ -21723,7 +22125,8 @@
           "@pt": "Distância vertical entre a superfície e o fundo do mar em um dado local; classifica-se em águas rasas (0–300 m), águas profundas (300–1500 m) e águas ultraprofundas (>1500 m).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-term-lamina-agua-rasa",
@@ -21764,7 +22167,8 @@
           "@pt": "Lâmina d'água entre 0 e 300 metros (águas rasas).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-term-lamina-agua-profunda",
@@ -21805,7 +22209,8 @@
           "@pt": "Lâmina d'água, em geral, entre 300 e 1500 metros (águas profundas).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-term-lamina-agua-ultraprofunda",
@@ -21846,7 +22251,8 @@
           "@pt": "Lâmina d'água, em geral, acima de 1500 metros (águas ultraprofundas).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-term-objetivo-poco",
@@ -21886,7 +22292,8 @@
           "@pt": "Resumo das aquisições e resultados esperados no planejamento do poço, citando formações e profundidades dos alvos principais, secundários e final.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_attribute_concept"
       },
       {
         "id": "axon-term-poco",
@@ -21927,7 +22334,8 @@
           "@pt": "Perfuração realizada em terra ou mar com ferramentas especiais (broca, coluna) para alcançar reservatório de óleo ou gás natural.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "axon-term-poco-comprado",
@@ -21967,7 +22375,8 @@
           "@pt": "Poço cujos dados a Petrobras adquiriu de uma agência, departamento ou organização — operado por outra empresa, sem participação da Petrobras — e cujos arquivos típicos incluem AGP, CDPE, Perfil Composto, perfis digitais, curvas LAS, PAG e teste de formação, normalmente após o período de confidencialidade.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "axon-term-poco-presal",
@@ -22007,7 +22416,8 @@
           "@pt": "Poço enquadrado no play pré-sal moderno: localizado nas bacias Campos Mar, Espírito Santo Mar ou Santos; com subclassificação carbonática; em formações Barra Velha, Coqueiros, Itapema, Macabu ou Membro Mucuri; e com data de conclusão posterior a 12/10/2006 (1-RJS-628A).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "axon-term-poco-nao-br",
@@ -22047,7 +22457,8 @@
           "@pt": "Poço sem operação ou parceria contratual da Petrobras nos blocos em que está situado; sua documentação interna decorre de aquisições por BID, compra direta na ANP ou outro meio legal.",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "well_anchor"
       },
       {
         "id": "axon-term-sonda",
@@ -22094,7 +22505,8 @@
           "@pt": "Unidade de perfuração (sonda terrestre, jack-up, semissubmersível, navio-sonda) que executa atividades exploratórias, de avaliação e de completação do poço; identificada por sigla e nome da operadora (ex.: NS-42 ODN II).",
           "@en": null
         },
-        "skos_example": []
+        "skos_example": [],
+        "ontological_role": "equipment"
       }
     ],
     "edges": [
@@ -30389,7 +30801,7 @@
   },
   "ontology_map": {
     "version": "1.1.0",
-    "generated": "2026-05-04T18:48:26.890Z",
+    "generated": "2026-05-04T18:58:04.357Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -30716,7 +31128,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.1.0",
-      "generated": "2026-05-04T18:48:26.890Z",
+      "generated": "2026-05-04T18:58:04.357Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -45595,7 +46007,7 @@
   "seismic": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-04T18:48:26.890Z",
+      "generated": "2026-05-04T18:58:04.357Z",
       "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       "module_count": 3,
       "class_count": 64,
