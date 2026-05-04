@@ -187,6 +187,39 @@ a:hover { text-decoration: underline; }
   font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
   padding: 3px 9px; border-radius: 999px; font-weight: 600;
 }
+/* F7: secondary pill for ontological_role — softer outline style so it doesn't fight the type pill */
+.pill-role {
+  background: transparent;
+  color: var(--pill-color);
+  border: 1px solid var(--pill-color);
+}
+
+/* F7: "Cor por" segmented toggle (mirrors index.html) */
+.color-mode {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--fg-muted);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.color-mode-seg {
+  display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden;
+}
+.color-mode-seg button {
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--fg-muted); font: inherit;
+  padding: 4px 10px; transition: background 120ms ease, color 120ms ease;
+}
+.color-mode-seg button + button { border-left: 1px solid var(--border-strong); }
+.color-mode-seg button:hover { color: var(--fg); }
+.color-mode-seg button.is-active { background: var(--bg-alt); color: var(--fg); }
+
+/* F7: show only the sidebar that matches the active mode */
+.sidebar-group { display: none; }
+body[data-color-mode="type"] .sidebar-group[data-mode="type"] { display: block; }
+body[data-color-mode="role"] .sidebar-group[data-mode="role"] { display: block; }
+body[data-color-mode="role"] .pill-role { background: var(--pill-color); color: #fff; }
+body[data-color-mode="role"] .pill:not(.pill-role) {
+  background: transparent; color: var(--pill-color); border: 1px solid var(--pill-color);
+}
 .legal-source {
   font-size: 11px; color: var(--fg-muted);
   border: 1px solid var(--border);
@@ -326,7 +359,7 @@ a:hover { text-decoration: underline; }
     <main class="main">
       <div class="intro">
         <strong>213</strong> classes GSO em <strong>5</strong> módulos estruturais ·
-        gerado em <code>2026-05-04T21:29:13.550Z</code>.
+        gerado em <code>2026-05-04T21:48:02.236Z</code>.
         Importado de <a href="https://github.com/Loop3D/GKM" target="_blank" rel="noopener">Loop3D/GKM</a>
         (Brodaric &amp; Richard 2021, GSC OF 8796, <a href="https://doi.org/10.4095/328296" target="_blank" rel="noopener">DOI 10.4095/328296</a>, CC BY 4.0).
         Cobre falhas, dobras, foliação, lineação e contatos — gap estrutural complementar a OSDU/ontopetro.
@@ -557,6 +590,20 @@ a:hover { text-decoration: underline; }
   const tocLinks = Array.from(document.querySelectorAll('.toc-list li a'));
   const tocGroups = Array.from(document.querySelectorAll('.toc-group'));
   const noMatch = document.getElementById('no-match');
+
+  /* F7: "Cor por" toggle — Tipo / Papel ontológico. Transient (not persisted). */
+  const modeButtons = Array.from(document.querySelectorAll('#color-mode-seg button'));
+  function setColorMode(mode) {
+    if (mode !== 'type' && mode !== 'role') return;
+    document.body.dataset.colorMode = mode;
+    modeButtons.forEach(b => {
+      const active = b.dataset.mode === mode;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+  modeButtons.forEach(b => b.addEventListener('click', () => setColorMode(b.dataset.mode)));
+  if (!document.body.dataset.colorMode) document.body.dataset.colorMode = 'type';
 
   function applyFilter(q) {
     const query = (q || '').trim().toLowerCase();

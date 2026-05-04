@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
+<script>
+  /* Initial color-mode flag — kept transient (not persisted to localStorage). */
+  document.documentElement.dataset.colorMode = 'type';
+</script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>GeoBrain — ANP Oil & Gas Ontology</title>
@@ -105,6 +109,35 @@
   .toolbar label:has(input:checked) { color: var(--fg); }
   .toolbar label:has(input:not(:checked)) .swatch { opacity: 0.25; }
   .toolbar .swatch { width: 8px; height: 8px; display: inline-block; transition: opacity 120ms ease; }
+
+  /* "Color by" mode toggle — segmented control */
+  .toolbar .mode-group {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0 14px 0 0; margin-right: 14px;
+    border-right: 1px solid var(--hairline);
+  }
+  .toolbar .mode-group .toolbar-label {
+    border-right: 0; padding-right: 0; margin-right: 0;
+  }
+  .toolbar .mode-seg {
+    display: inline-flex; border: 1px solid var(--hairline-2); height: 24px;
+  }
+  .toolbar .mode-seg button {
+    background: transparent; border: 0; cursor: pointer;
+    color: var(--fg-soft); font-family: var(--mono); font-size: 10px;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 0 12px; transition: background 120ms ease, color 120ms ease;
+  }
+  .toolbar .mode-seg button + button { border-left: 1px solid var(--hairline-2); }
+  .toolbar .mode-seg button:hover { color: var(--fg); }
+  .toolbar .mode-seg button.is-active { background: var(--panel-2); color: var(--fg); }
+
+  /* Filter sets — show only the active one */
+  .toolbar .filter-set { display: contents; }
+  html[data-color-mode="type"] .toolbar .filter-set[data-mode="role"] { display: none; }
+  html[data-color-mode="role"] .toolbar .filter-set[data-mode="type"] { display: none; }
+  /* Hide ribbon in role mode (palette is too long for a 7-band ribbon) */
+  html[data-color-mode="role"] .ribbon { opacity: 0.25; }
 
   /* ── MAIN ────────────────────────────────────────────────── */
   main { position: relative; height: calc(100vh - 132px); display: flex; background: var(--bg); }
@@ -453,14 +486,28 @@
   </div>
 
   <div class="toolbar" id="filters">
+    <div class="mode-group">
+      <span class="toolbar-label">Cor por</span>
+      <div class="mode-seg" id="color-mode-seg" role="tablist" aria-label="Cor por">
+        <button type="button" class="is-active" data-mode="type" role="tab" aria-selected="true" title="Colorir por tipo (perspectiva organizacional)">Tipo</button>
+        <button type="button" data-mode="role" role="tab" aria-selected="false" title="Colorir por papel ontológico (BFO-like)">Papel ontológico</button>
+      </div>
+    </div>
+
     <span class="toolbar-label">Filter</span>
-    <label><input type="checkbox" data-type="operational" checked /><span class="swatch" style="background:#378ADD"></span>Operacional</label>
-    <label><input type="checkbox" data-type="contractual" checked /><span class="swatch" style="background:#7F77DD"></span>Contratual</label>
-    <label><input type="checkbox" data-type="actor" checked /><span class="swatch" style="background:#D85A30"></span>Atores</label>
-    <label><input type="checkbox" data-type="instrument" checked /><span class="swatch" style="background:#888780"></span>Instrumentos</label>
-    <label><input type="checkbox" data-type="geological" checked /><span class="swatch" style="background:#639922"></span>Geológico</label>
-    <label><input type="checkbox" data-type="equipment" checked /><span class="swatch" style="background:#C77B30"></span>Equipamento</label>
-    <label><input type="checkbox" data-type="analytical" checked /><span class="swatch" style="background:#E67E22"></span>Analítico</label>
+
+    <span class="filter-set" data-mode="type">
+      <label><input type="checkbox" data-type="operational" checked /><span class="swatch" style="background:#378ADD"></span>Operacional</label>
+      <label><input type="checkbox" data-type="contractual" checked /><span class="swatch" style="background:#7F77DD"></span>Contratual</label>
+      <label><input type="checkbox" data-type="actor" checked /><span class="swatch" style="background:#D85A30"></span>Atores</label>
+      <label><input type="checkbox" data-type="instrument" checked /><span class="swatch" style="background:#888780"></span>Instrumentos</label>
+      <label><input type="checkbox" data-type="geological" checked /><span class="swatch" style="background:#639922"></span>Geológico</label>
+      <label><input type="checkbox" data-type="equipment" checked /><span class="swatch" style="background:#C77B30"></span>Equipamento</label>
+      <label><input type="checkbox" data-type="analytical" checked /><span class="swatch" style="background:#E67E22"></span>Analítico</label>
+    </span>
+
+    <span class="filter-set" data-mode="role" id="role-filter-set"></span>
+
     <div class="search-wrap">
       <span class="search-icon">
         <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -561,12 +608,73 @@
   /* Types that get a soft glow halo — the "hero" entities */
   const GLOW_TYPES = new Set(['operational', 'actor']);
 
+  /* ── F7: ontological_role palette + labels ────────────────
+     Canonical roles per docs/ONTOLOGY_LAYERS.md (15 + extras for forward compat). */
+  const ROLE_COLOR = {
+    well_anchor:            '#2E86AB',
+    well_operation:         '#E67E22',
+    artifact_primary:       '#16A085',
+    feature_observation:    '#27AE60',
+    interpretation_process: '#9B59B6',
+    engineering_artifact:   '#34495E',
+    regulatory_anchor:      '#C0392B',
+    organizational_actor:   '#E74C3C',
+    domain_anchor:          '#D4A017',
+    well_attribute_concept: '#7F8C8D',
+    equipment:              '#F39C12',
+    governance_artifact:    '#8E44AD',
+    kpi_metric:             '#E91E63',
+    lifecycle_state:        '#3498DB',
+    lifecycle_outcome:      '#1ABC9C',
+    dataset_concept:        '#5D4037',
+    signal_concept:         '#FF5722',
+    event_observation:      '#FFC107',
+    unclassified:           '#BDBDBD',
+  };
+  const ROLE_LABEL = {
+    well_anchor:            'Poço (âncora)',
+    well_operation:         'Operação',
+    artifact_primary:       'Artefato primário',
+    feature_observation:    'Feature geológica',
+    interpretation_process: 'Interpretação',
+    engineering_artifact:   'Engenharia',
+    regulatory_anchor:      'Regulatório',
+    organizational_actor:   'Ator',
+    domain_anchor:          'Domínio',
+    well_attribute_concept: 'Atributo do poço',
+    equipment:              'Equipamento',
+    governance_artifact:    'Governança',
+    kpi_metric:             'KPI',
+    lifecycle_state:        'Ciclo de vida (estado)',
+    lifecycle_outcome:      'Ciclo de vida (resultado)',
+    dataset_concept:        'Dataset',
+    signal_concept:         'Sinal',
+    event_observation:      'Evento',
+    unclassified:           'Não classificado',
+  };
+  const FALLBACK_ROLE_COLOR = '#BDBDBD';
+
+  function nodeAxisKey(d, mode) { return mode === 'role' ? (d.ontological_role || 'unclassified') : d.type; }
+  function colorForNode(d, mode) {
+    if (mode === 'role') return ROLE_COLOR[d.ontological_role] || FALLBACK_ROLE_COLOR;
+    return d.color || TYPE_COLOR[d.type] || '#888';
+  }
+  function labelForAxis(key, mode) {
+    if (mode === 'role') return ROLE_LABEL[key] || key;
+    return typeLabel[key] || key;
+  }
+
   const container = document.getElementById('graph');
   const searchInput   = document.getElementById('node-search');
   const searchResults = document.getElementById('search-results');
   const tooltip = document.getElementById('tooltip');
   const panel = document.getElementById('panel');
   const counts = document.getElementById('counts');
+
+  /* F7: active color/group axis — transient (per session, not persisted). */
+  let currentColorMode = (document.documentElement.dataset.colorMode === 'role') ? 'role' : 'type';
+  /* Remember the last node shown in the side panel so we can re-tint it on mode change. */
+  let lastShown = null;
   counts.innerHTML = `<strong>${graph.nodes.length}</strong> nós · <strong>${graph.edges.length}</strong> relações`;
 
   const W = container.clientWidth || 800;
@@ -690,7 +798,7 @@
       .attr('cx', (n) => offX + (n.x - bx0) * sc)
       .attr('cy', (n) => offY + (n.y - by0) * sc)
       .attr('r', (n) => Math.max(1.2, (n.computedSize / 2) * sc * 0.65))
-      .attr('fill', (n) => n.color || TYPE_COLOR[n.type] || '#888')
+      .attr('fill', (n) => colorForNode(n, currentColorMode))
       .attr('opacity', 0.72);
 
     const t = d3.zoomTransform(svg.node());
@@ -768,19 +876,20 @@
 
   node.append('circle')
     .attr('r', (d) => d.computedSize / 2)
-    .attr('fill', (d) => d.color)
+    .attr('fill', (d) => colorForNode(d, currentColorMode))
     .attr('class', (d) => GLOW_TYPES.has(d.type) ? 'has-glow' : '')
     .on('mouseenter', (ev, d) => {
       const targetR = (d.computedSize / 2) * 1.25;
       d3.select(ev.currentTarget).transition().duration(140).attr('r', targetR);
       focusOn(d);
-      const c = TYPE_COLOR[d.type] || '#888';
+      const c = colorForNode(d, currentColorMode);
       tooltip.style.setProperty('--type-color', c);
       tooltip.classList.add('show');
+      const axisKey = nodeAxisKey(d, currentColorMode);
       tooltip.innerHTML =
         `<div class="strip"></div>
          <div class="body">
-           <div class="t-type">${(typeLabel[d.type] || d.type).toUpperCase()}</div>
+           <div class="t-type">${(labelForAxis(axisKey, currentColorMode) || axisKey || '').toUpperCase()}</div>
            <strong>${d.label}</strong>
            ${d.label_en ? `<span class="t-en">${d.label_en}</span>` : ''}
          </div>`;
@@ -867,8 +976,9 @@
   };
 
   function showPanel(d) {
+    lastShown = d;
     panel.classList.remove('empty');
-    const c = TYPE_COLOR[d.type] || '#888';
+    const c = colorForNode(d, currentColorMode);
     panel.style.setProperty('--type-color', c);
     const datasetBadges = (d.datasets || []).map((id) =>
       `<span class="badge">${datasetTitles[id] || id}</span>`
@@ -882,9 +992,11 @@
     const exBlock = (d.examples && d.examples.length)
       ? `<div class="row"><div class="k">Exemplos</div><div class="v">${d.examples.map(s=>`<span class="badge">${s}</span>`).join('')}</div></div>`
       : '';
+    const axisKey = nodeAxisKey(d, currentColorMode);
+    const axisLabel = labelForAxis(axisKey, currentColorMode) || axisKey || '';
     const headHtml = `
       <div class="panel-head">
-        <div class="type-tag">${(typeLabel[d.type] || d.type).toUpperCase()}${d.degree ? ` · ${d.degree} relações` : ''}</div>
+        <div class="type-tag">${axisLabel.toUpperCase()}${d.degree ? ` · ${d.degree} relações` : ''}</div>
         <h2>${d.label}</h2>
         ${d.label_en ? `<div class="label-en">${d.label_en}</div>` : ''}
       </div>`;
@@ -907,20 +1019,76 @@
     panel.innerHTML = headHtml + bodyHtml;
   }
 
-  /* filtros */
+  /* filtros — filtragem é mode-aware (type vs ontological_role) */
   function applyFilters() {
+    const sel = currentColorMode === 'role'
+      ? '.filter-set[data-mode="role"] input:checked'
+      : '.filter-set[data-mode="type"] input:checked';
+    const attr = currentColorMode === 'role' ? 'role' : 'type';
     const active = new Set(
-      Array.from(document.querySelectorAll('#filters input:checked')).map((x) => x.dataset.type)
+      Array.from(document.querySelectorAll(sel)).map((x) => x.dataset[attr])
     );
-    node.classed('dim', (d) => !active.has(d.type));
+    const keyOf = (n) => currentColorMode === 'role' ? (n.ontological_role || 'unclassified') : n.type;
+    node.classed('dim', (d) => !active.has(keyOf(d)));
     link.classed('dim', (l) => {
       const s = typeof l.source === 'object' ? l.source : nodes.find(n => n.id === l.source);
       const t = typeof l.target === 'object' ? l.target : nodes.find(n => n.id === l.target);
-      return !s || !t || !active.has(s.type) || !active.has(t.type);
+      return !s || !t || !active.has(keyOf(s)) || !active.has(keyOf(t));
     });
   }
-  document.querySelectorAll('#filters input[type=checkbox]').forEach((cb) => {
+
+  /* ── F7: build role-mode filter set from the actual roles present ── */
+  function buildRoleFilterSet() {
+    const roleSet = document.getElementById('role-filter-set');
+    if (!roleSet) return;
+    const present = new Set();
+    nodes.forEach((n) => present.add(n.ontological_role || 'unclassified'));
+    /* Render in palette order, but only roles actually used in the graph. */
+    const order = Object.keys(ROLE_COLOR);
+    const ordered = order.filter((r) => present.has(r))
+      .concat(Array.from(present).filter((r) => !ROLE_COLOR[r]));
+    roleSet.innerHTML = ordered.map((r) => {
+      const c = ROLE_COLOR[r] || FALLBACK_ROLE_COLOR;
+      const lbl = ROLE_LABEL[r] || r;
+      return `<label><input type="checkbox" data-role="${r}" checked />`
+        + `<span class="swatch" style="background:${c}"></span>${lbl}</label>`;
+    }).join('');
+    roleSet.querySelectorAll('input[type=checkbox]').forEach((cb) => {
+      cb.addEventListener('change', applyFilters);
+    });
+  }
+  buildRoleFilterSet();
+
+  /* Wire up the existing type-mode checkboxes (scoped). */
+  document.querySelectorAll('.filter-set[data-mode="type"] input[type=checkbox]').forEach((cb) => {
     cb.addEventListener('change', applyFilters);
+  });
+
+  /* ── F7: re-color all node visuals when the active mode changes ── */
+  function recolorAll() {
+    node.select('circle').transition().duration(220)
+      .attr('fill', (d) => colorForNode(d, currentColorMode));
+    updateMinimap();
+    /* If a node is currently shown in the side panel, refresh its accent. */
+    if (lastShown && !panel.classList.contains('empty')) showPanel(lastShown);
+  }
+
+  /* ── F7: mode toggle — Tipo / Papel ontológico ── */
+  function setColorMode(mode) {
+    if (mode !== 'type' && mode !== 'role') return;
+    if (mode === currentColorMode) return;
+    currentColorMode = mode;
+    document.documentElement.dataset.colorMode = mode;
+    document.querySelectorAll('#color-mode-seg button').forEach((btn) => {
+      const isActive = btn.dataset.mode === mode;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+    });
+    recolorAll();
+    applyFilters();
+  }
+  document.querySelectorAll('#color-mode-seg button').forEach((btn) => {
+    btn.addEventListener('click', () => setColorMode(btn.dataset.mode));
   });
 
   window.addEventListener('resize', () => {
@@ -989,7 +1157,7 @@
     } else {
       searchResults.innerHTML = currentMatches.map((n, i) => `
         <div class="sr-item" data-idx="${i}">
-          <span class="sr-dot" style="background:${n.color || TYPE_COLOR[n.type] || '#888'}"></span>
+          <span class="sr-dot" style="background:${colorForNode(n, currentColorMode)}"></span>
           <span>
             <span class="sr-label">${highlight(n.label, q)}</span>
             ${n.label_en ? `<span class="sr-en"> · ${n.label_en}</span>` : ''}

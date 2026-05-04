@@ -36,6 +36,58 @@ const TYPE_LABELS = {
   analytical: "Analítico",
 };
 
+/* F7: ontological_role palette + labels (BFO-like axis, see docs/ONTOLOGY_LAYERS.md) */
+const ROLE_COLORS = {
+  well_anchor: "#2E86AB",
+  well_operation: "#E67E22",
+  artifact_primary: "#16A085",
+  feature_observation: "#27AE60",
+  interpretation_process: "#9B59B6",
+  engineering_artifact: "#34495E",
+  regulatory_anchor: "#C0392B",
+  organizational_actor: "#E74C3C",
+  domain_anchor: "#D4A017",
+  well_attribute_concept: "#7F8C8D",
+  equipment: "#F39C12",
+  governance_artifact: "#8E44AD",
+  kpi_metric: "#E91E63",
+  lifecycle_state: "#3498DB",
+  lifecycle_outcome: "#1ABC9C",
+  dataset_concept: "#5D4037",
+  signal_concept: "#FF5722",
+  event_observation: "#FFC107",
+  unclassified: "#BDBDBD",
+};
+const ROLE_LABELS = {
+  well_anchor: "Poço (âncora)",
+  well_operation: "Operação",
+  artifact_primary: "Artefato primário",
+  feature_observation: "Feature geológica",
+  interpretation_process: "Interpretação",
+  engineering_artifact: "Engenharia",
+  regulatory_anchor: "Regulatório",
+  organizational_actor: "Ator",
+  domain_anchor: "Domínio",
+  well_attribute_concept: "Atributo do poço",
+  equipment: "Equipamento",
+  governance_artifact: "Governança",
+  kpi_metric: "KPI",
+  lifecycle_state: "Ciclo de vida (estado)",
+  lifecycle_outcome: "Ciclo de vida (resultado)",
+  dataset_concept: "Dataset",
+  signal_concept: "Sinal",
+  event_observation: "Evento",
+  unclassified: "Não classificado",
+};
+const ROLE_FALLBACK = "#BDBDBD";
+
+function roleColor(role) {
+  return ROLE_COLORS[role] || ROLE_FALLBACK;
+}
+function roleLabel(role) {
+  return ROLE_LABELS[role] || role || "não classificado";
+}
+
 const LAYERS = {
   layer1: { name: "L1 GeoCore", bg: "#EEEDFE", text: "#3C3489" },
   layer2: { name: "L2 O3PO", bg: "#E1F5EE", text: "#085041" },
@@ -186,14 +238,17 @@ function renderCard(node, edgesOut, edgesIn, nodeIndex) {
     .join(" ")
     .toLowerCase();
 
+  const role = node.ontological_role || "unclassified";
+  const rolePill = `<span class="pill pill-role" style="--pill-color:${roleColor(role)}">${escapeHtml(roleLabel(role))}</span>`;
   return `
-      <section class="card" id="${escapeAttr(id)}" data-type="${escapeAttr(node.type || "")}" data-search="${escapeAttr(haystack)}">
+      <section class="card" id="${escapeAttr(id)}" data-type="${escapeAttr(node.type || "")}" data-ontological-role="${escapeAttr(role)}" data-search="${escapeAttr(haystack)}">
         <header class="card-header">
           <h2 class="card-title">
             ${escapeHtml(node.label || node.id)}${labelEn}
           </h2>
           <div class="card-meta">
             ${renderTypePill(node.type)}
+            ${rolePill}
             ${legal}
             <a class="card-anchor" href="#${escapeAttr(id)}" title="Permalink">#</a>
           </div>
@@ -245,6 +300,39 @@ function renderSidebar(nodesByType) {
     .join("");
 
   return groups;
+}
+
+/* F7: parallel sidebar grouped by ontological_role. */
+function renderRoleSidebar(nodesByRole) {
+  const orderedRoles = Object.keys(ROLE_COLORS)
+    .filter((r) => nodesByRole.has(r))
+    .concat([...nodesByRole.keys()].filter((r) => !(r in ROLE_COLORS)));
+
+  return orderedRoles
+    .map((role) => {
+      const nodes = nodesByRole.get(role);
+      nodes.sort((a, b) => (a.label || a.id).localeCompare(b.label || b.id, "pt"));
+      const items = nodes
+        .map(
+          (n) => `
+            <li>
+              <a href="#entity-${escapeAttr(n.id)}" data-search="${escapeAttr((n.label + " " + (n.label_en || "")).toLowerCase())}">
+                <span class="dot" style="background:${roleColor(role)}"></span>${escapeHtml(n.label || n.id)}
+              </a>
+            </li>`
+        )
+        .join("");
+      return `
+        <div class="toc-group" data-role="${escapeAttr(role)}">
+          <h3 class="toc-heading">
+            <span class="dot" style="background:${roleColor(role)}"></span>${escapeHtml(roleLabel(role))}
+            <span class="toc-count">${nodes.length}</span>
+          </h3>
+          <ul class="toc-list">${items}
+          </ul>
+        </div>`;
+    })
+    .join("");
 }
 
 // ---------- Static CSS / JS ----------------------------------------------
@@ -431,6 +519,39 @@ a:hover { text-decoration: underline; }
   font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
   padding: 3px 9px; border-radius: 999px; font-weight: 600;
 }
+/* F7: secondary pill for ontological_role — softer outline style so it doesn't fight the type pill */
+.pill-role {
+  background: transparent;
+  color: var(--pill-color);
+  border: 1px solid var(--pill-color);
+}
+
+/* F7: "Cor por" segmented toggle (mirrors index.html) */
+.color-mode {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--fg-muted);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.color-mode-seg {
+  display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden;
+}
+.color-mode-seg button {
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--fg-muted); font: inherit;
+  padding: 4px 10px; transition: background 120ms ease, color 120ms ease;
+}
+.color-mode-seg button + button { border-left: 1px solid var(--border-strong); }
+.color-mode-seg button:hover { color: var(--fg); }
+.color-mode-seg button.is-active { background: var(--bg-alt); color: var(--fg); }
+
+/* F7: show only the sidebar that matches the active mode */
+.sidebar-group { display: none; }
+body[data-color-mode="type"] .sidebar-group[data-mode="type"] { display: block; }
+body[data-color-mode="role"] .sidebar-group[data-mode="role"] { display: block; }
+body[data-color-mode="role"] .pill-role { background: var(--pill-color); color: #fff; }
+body[data-color-mode="role"] .pill:not(.pill-role) {
+  background: transparent; color: var(--pill-color); border: 1px solid var(--pill-color);
+}
 .legal-source {
   font-size: 11px; color: var(--fg-muted);
   border: 1px solid var(--border);
@@ -557,6 +678,20 @@ const CLIENT_JS = `
   const tocGroups = Array.from(document.querySelectorAll('.toc-group'));
   const noMatch = document.getElementById('no-match');
 
+  /* F7: "Cor por" toggle — Tipo / Papel ontológico. Transient (not persisted). */
+  const modeButtons = Array.from(document.querySelectorAll('#color-mode-seg button'));
+  function setColorMode(mode) {
+    if (mode !== 'type' && mode !== 'role') return;
+    document.body.dataset.colorMode = mode;
+    modeButtons.forEach(b => {
+      const active = b.dataset.mode === mode;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+  modeButtons.forEach(b => b.addEventListener('click', () => setColorMode(b.dataset.mode)));
+  if (!document.body.dataset.colorMode) document.body.dataset.colorMode = 'type';
+
   function applyFilter(q) {
     const query = (q || '').trim().toLowerCase();
     let visible = 0;
@@ -631,6 +766,8 @@ export function buildCardsHtml(graph) {
 
   // Group nodes by type for sidebar
   const byType = groupBy(nodes, (n) => n.type || "other");
+  // F7: parallel grouping by ontological_role
+  const byRole = groupBy(nodes, (n) => n.ontological_role || "unclassified");
 
   // Render
   // Collapse runs of whitespace between tags to keep the output compact
@@ -644,6 +781,7 @@ export function buildCardsHtml(graph) {
     .join("\n");
 
   const sidebarHtml = compact(renderSidebar(byType));
+  const sidebarRoleHtml = compact(renderRoleSidebar(byRole));
 
   const generated = graph?.generated || new Date().toISOString();
   const totalNodes = nodes.length;
@@ -658,11 +796,18 @@ export function buildCardsHtml(graph) {
   <meta name="description" content="Cartões navegáveis das entidades do GeoBrain, no estilo da documentação OWL gerada pelo pyLODE.">
   <style>${CSS}</style>
 </head>
-<body>
+<body data-color-mode="type">
   <header class="site-header">
     <h1>GeoBrain <span style="color:var(--fg-muted);font-weight:400">— Entity Cards</span></h1>
     <div class="search-wrap">
       <input id="search-input" type="search" placeholder="Buscar por rótulo, sinônimo ou ID…" autocomplete="off" spellcheck="false">
+    </div>
+    <div class="color-mode" aria-label="Cor por">
+      <span>Cor por</span>
+      <div class="color-mode-seg" id="color-mode-seg" role="tablist">
+        <button type="button" class="is-active" data-mode="type" role="tab" aria-selected="true" title="Agrupar por tipo">Tipo</button>
+        <button type="button" data-mode="role" role="tab" aria-selected="false" title="Agrupar por papel ontológico (BFO-like)">Papel ontológico</button>
+      </div>
     </div>
     <nav class="ext-links" aria-label="Visualizações">
       <a href="index.html" title="Visão de grafo D3 force-directed">Grafo D3</a>
@@ -674,7 +819,12 @@ export function buildCardsHtml(graph) {
 
   <div class="layout">
     <aside class="sidebar" aria-label="Sumário">
-      ${sidebarHtml}
+      <div class="sidebar-group" data-mode="type">
+        ${sidebarHtml}
+      </div>
+      <div class="sidebar-group" data-mode="role">
+        ${sidebarRoleHtml}
+      </div>
     </aside>
 
     <main class="main">
