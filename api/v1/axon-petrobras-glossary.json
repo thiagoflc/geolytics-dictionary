@@ -1,0 +1,448 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "axon-petrobras-glossary",
+  "label": "Glossário Axon Petrobras (Exploração)",
+  "version": "1.0.0",
+  "source": "Axon system export — area Exploração — 2026-05-04",
+  "license": "Petrobras-internal (uso interno)",
+  "areas": [
+    {
+      "id": "axon-area-exploracao",
+      "name_pt": "Exploração",
+      "name_en": "Exploration",
+      "axon_type": "Area",
+      "axon_path": "Exploração",
+      "definition_pt": "Área pai do glossário de termos da Exploração.",
+      "definition_pt_canonical": "Área pai do glossário de termos da Exploração."
+    }
+  ],
+  "domains": [
+    {
+      "id": "axon-dom-acervo-amostras",
+      "name_pt": "Acervo e movimentação de amostras",
+      "name_en": "Sample collection and movement",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Acervo e movimentação de amostras",
+      "definition_pt": "Domínio que organiza o acervo técnico de amostras geocientíficas (rocha, sedimento, fluido) e suas operações de coleta, movimentação, guarda e descarte.",
+      "definition_pt_canonical": "Domínio que organiza o acervo técnico de amostras geocientíficas (rocha, sedimento, fluido) e suas operações de coleta, movimentação, guarda e descarte."
+    },
+    {
+      "id": "axon-dom-aquisicao-dados-geo",
+      "name_pt": "Aquisição de dados geológicos",
+      "name_en": "Geological data acquisition",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Aquisição de dados geológicos",
+      "definition_pt": "Domínio que reúne as operações geológicas executadas no poço para aquisição primária de dados, incluindo perfilagem, testemunhagem, mudlogging, avaliação final e planejamento das operações geológicas.",
+      "definition_pt_canonical": "Domínio que reúne as operações geológicas executadas no poço para aquisição primária de dados, incluindo perfilagem, testemunhagem, mudlogging, avaliação final e planejamento das operações geológicas."
+    },
+    {
+      "id": "axon-dom-aval-petrofisica",
+      "name_pt": "Avaliação de formações e petrofísica",
+      "name_en": "Formation evaluation and petrophysics",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Avaliação de formações e petrofísica",
+      "definition_pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a avaliação petrofísica de formações geológicas atravessadas por poços.",
+      "definition_pt_canonical": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a avaliação petrofísica de formações geológicas atravessadas por poços."
+    },
+    {
+      "id": "axon-dom-blocos-parcerias",
+      "name_pt": "Blocos e Parcerias",
+      "name_en": "Blocks and Partnerships",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Blocos e Parcerias",
+      "definition_pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura relacionadas a blocos exploratórios e a parcerias contratuais entre operadoras.",
+      "definition_pt_canonical": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura relacionadas a blocos e parcerias."
+    },
+    {
+      "id": "axon-dom-geodesia",
+      "name_pt": "Geodésia",
+      "name_en": "Geodesy",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Geodésia",
+      "definition_pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis ao levantamento e à representação da forma e da superfície da Terra, global e parcial, com suas feições naturais e artificiais e o campo gravitacional terrestre.",
+      "definition_pt_canonical": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis ao levantamento e à representação da forma e da superfície da Terra, global e parcial, com suas feições naturais e artificiais e o campo gravitacional terrestre."
+    },
+    {
+      "id": "axon-dom-geofisica",
+      "name_pt": "Geofísica",
+      "name_en": "Geophysics",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Geofísica",
+      "definition_pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à prospecção de óleo e gás em qualquer nível econômico ou de detalhe técnico desejável.",
+      "definition_pt_canonical": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à prospecção de óleo e gás em qualquer nível econômico ou de detalhe técnico desejável."
+    },
+    {
+      "id": "axon-dom-geologia",
+      "name_pt": "Geologia",
+      "name_en": "Geology",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Geologia",
+      "definition_pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à descrição e à interpretação geológica do subsolo nas atividades exploratórias da Petrobras.",
+      "definition_pt_canonical": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis à descrição e à interpretação geológica do subsolo nas atividades exploratórias da Petrobras."
+    },
+    {
+      "id": "axon-dom-geomecanica",
+      "name_pt": "Geomecânica",
+      "name_en": "Geomechanics",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Geomecânica",
+      "definition_pt": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a caracterização e previsão do comportamento mecânico de rochas e do estado de tensões in situ, suportando o projeto e a execução do poço.",
+      "definition_pt_canonical": "Domínio que reúne profissionais, produtos, ferramentas e infraestrutura para a caracterização e previsão do comportamento mecânico de rochas e do estado de tensões in situ, suportando o projeto e a execução do poço."
+    },
+    {
+      "id": "axon-dom-interp-exploratoria",
+      "name_pt": "Interpretação Exploratória",
+      "name_en": "Exploratory Interpretation",
+      "axon_type": "Dominio",
+      "parent_id": "axon-area-exploracao",
+      "axon_path": "Exploração / Interpretação Exploratória",
+      "definition_pt": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis às atividades da interpretação exploratória. Atividade ou esforço de inferência das estruturas geológicas de subsuperfície a partir de dados geológicos e geofísicos (EXP/GEOF/GDSI).",
+      "definition_pt_canonical": "Assunto ou tema que reúne profissionais, produtos, ferramentas e infraestrutura indispensáveis às atividades da interpretação exploratória. Atividade ou esforço de inferência das estruturas geológicas de subsuperfície a partir de dados geológicos e geofísicos (EXP/GEOF/GDSI)."
+    }
+  ],
+  "subjects": [
+    {
+      "id": "axon-asn-op-amostras-fluido",
+      "name_pt": "Operações em amostras de fluido",
+      "name_en": "Fluid sample operations",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-acervo-amostras",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / Operações em amostras de fluido",
+      "definition_pt": "Operações executadas sobre amostras de fluido, incluindo coleta, transporte, análise, condicionamento, guarda e descarte.",
+      "definition_pt_canonical": "Operações executadas sobre amostras de fluido, incluindo coleta, transporte, análise, condicionamento, guarda e descarte.",
+      "links_to_existing": ["fluid-sample", "amostra-fluido"]
+    },
+    {
+      "id": "axon-asn-op-amostras-rocha",
+      "name_pt": "Operações em amostras de rocha",
+      "name_en": "Rock sample operations",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-acervo-amostras",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / Operações em amostras de rocha",
+      "definition_pt": "Operações executadas sobre amostras de rocha (testemunhos, plugues, calha, lateral), incluindo coleta, manipulação, análise laboratorial, guarda e descarte.",
+      "definition_pt_canonical": "Operações executadas sobre amostras de rocha (testemunhos, plugues, calha, lateral), incluindo coleta, manipulação, análise laboratorial, guarda e descarte.",
+      "links_to_existing": ["core-sample", "core-plug", "sidewall-core-sample", "cuttings-sample-detailed", "testemunho"]
+    },
+    {
+      "id": "axon-asn-aval-final-poco",
+      "name_pt": "Avaliação final de poço",
+      "name_en": "Final well evaluation",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Avaliação final de poço",
+      "definition_pt": "Avaliação final do poço, integrando os resultados das operações geológicas executadas durante a perfuração para consolidação do conhecimento subsuperficial.",
+      "definition_pt_canonical": "Avaliação final do poço, integrando os resultados das operações geológicas executadas durante a perfuração para consolidação do conhecimento subsuperficial.",
+      "links_to_existing": ["igp", "perfil-composto"]
+    },
+    {
+      "id": "axon-asn-perfilagem",
+      "name_pt": "Operação de Perfilagem",
+      "name_en": "Wireline logging operation",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Operação de Perfilagem",
+      "definition_pt": "Operação de aquisição de perfis de poço a cabo (wireline) ou em LWD/MWD, descida após a perfuração de cada fase para registro contínuo de propriedades petrofísicas e estruturais.",
+      "definition_pt_canonical": "Operação de aquisição de perfis de poço a cabo (wireline) ou em LWD/MWD, descida após a perfuração de cada fase para registro contínuo de propriedades petrofísicas e estruturais.",
+      "links_to_existing": ["wireline-logging", "wireline-run", "mwd-lwd", "lwd-run"]
+    },
+    {
+      "id": "axon-asn-testemunhagem",
+      "name_pt": "Operação de Testemunhagem",
+      "name_en": "Coring operation",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Operação de Testemunhagem",
+      "definition_pt": "Operação de obtenção de amostra contínua de rocha (testemunho/core) ou amostra lateral (sidewall core) durante a perfuração, com finalidade de caracterização petrofísica, sedimentológica ou geomecânica.",
+      "definition_pt_canonical": "Operação de obtenção de amostra contínua de rocha (testemunho/core) ou amostra lateral (sidewall core) durante a perfuração, com finalidade de caracterização petrofísica, sedimentológica ou geomecânica.",
+      "links_to_existing": ["coring", "core-run", "sidewall-sampling"]
+    },
+    {
+      "id": "axon-asn-mudlogging",
+      "name_pt": "Operações de Mudlogging",
+      "name_en": "Mudlogging operations",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Operações de Mudlogging",
+      "definition_pt": "Operações de monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real e coleta de amostras de calha (cuttings) na sonda.",
+      "definition_pt_canonical": "Operações de monitoramento contínuo de parâmetros de perfuração e análise de gás em tempo real e coleta de amostras de calha (cuttings) na sonda.",
+      "links_to_existing": ["mudlogging", "mudlogging-time-series", "cuttings-sampling", "cuttings-sample-detailed"]
+    },
+    {
+      "id": "axon-asn-planejamento",
+      "name_pt": "Planejamento das operações geológicas em poços",
+      "name_en": "Planning of well geological operations",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços",
+      "definition_pt": "Planejamento prévio das operações geológicas a serem executadas no poço, incluindo programa de amostragem e programa de aquisição de dados.",
+      "definition_pt_canonical": "Planejamento prévio das operações geológicas a serem executadas no poço, incluindo programa de amostragem e programa de aquisição de dados.",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-asn-pressao-temperatura",
+      "name_pt": "Registro de pressão de formação e temperatura",
+      "name_en": "Formation pressure and temperature recording",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Registro de pressão de formação e temperatura",
+      "definition_pt": "Registro pontual ou contínuo de pressão de formação e temperatura em testes de formação ou medições wireline.",
+      "definition_pt_canonical": "Registro pontual ou contínuo de pressão de formação e temperatura em testes de formação ou medições wireline.",
+      "links_to_existing": ["rftp", "formation-testing"]
+    },
+    {
+      "id": "axon-asn-status-poco",
+      "name_pt": "Status de poço",
+      "name_en": "Well status",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Status de poço",
+      "definition_pt": "Comunidade que abriga termos de negócio que requerem governança compartilhada em função de determinados valores que os termos possam assumir. Por enquanto contendo apenas o termo status de poço.",
+      "definition_pt_canonical": "Comunidade que abriga termos de negócio que requerem governança compartilhada em função de determinados valores que os termos possam assumir. Por enquanto contendo apenas o termo status de poço.",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-asn-teste-formacao-aberto",
+      "name_pt": "Teste de formação a poço aberto",
+      "name_en": "Open-hole formation test",
+      "axon_type": "Assunto",
+      "parent_id": "axon-dom-aquisicao-dados-geo",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Teste de formação a poço aberto",
+      "definition_pt": "Teste de formação executado em poço aberto (DST a poço aberto), com isolamento de intervalo por packers para avaliar produção e propriedades de reservatório.",
+      "definition_pt_canonical": "Teste de formação executado em poço aberto (DST a poço aberto), com isolamento de intervalo por packers para avaliar produção e propriedades de reservatório.",
+      "links_to_existing": ["formation-testing", "teste-formacao", "dst-interval"]
+    }
+  ],
+  "subsubjects": [
+    {
+      "id": "axon-sub-dados-culturais",
+      "name_pt": "Dados culturais de poços e sonda",
+      "name_en": "Well and rig cultural data",
+      "axon_type": "Subassunto",
+      "parent_id": "axon-asn-planejamento",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda",
+      "definition_pt": "Conjunto de atributos identificadores e descritivos de poços e sondas usados no planejamento das operações geológicas (sigla, datum, coordenadas, sidetrack, classificação, lâmina d'água, etc.).",
+      "definition_pt_canonical": "Conjunto de atributos identificadores e descritivos de poços e sondas usados no planejamento das operações geológicas (sigla, datum, coordenadas, sidetrack, classificação, lâmina d'água, etc.)."
+    },
+    {
+      "id": "axon-sub-prog-aquisicao",
+      "name_pt": "Programa de aquisição de dados",
+      "name_en": "Data acquisition program",
+      "axon_type": "Subassunto",
+      "parent_id": "axon-asn-planejamento",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Programa de aquisição de dados",
+      "definition_pt": "Programa de aquisição de dados que consolida o conjunto de operações de perfilagem, testemunhagem, amostragem e teste previstas para um poço.",
+      "definition_pt_canonical": "Programa de aquisição de dados que consolida o conjunto de operações de perfilagem, testemunhagem, amostragem e teste previstas para um poço."
+    }
+  ],
+  "terms": [
+    {
+      "id": "axon-term-acervo-amostras",
+      "name_pt": "Acervo de amostras",
+      "name_en": "Sample collection",
+      "axon_type": "Termo",
+      "parent_id": "axon-dom-acervo-amostras",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / Acervo de amostras",
+      "definition_pt": "Trata-se de uma coleção de itens de natureza geocientífica cuja gestão se justifica por interesses econômicos e científicos da Petrobras. Este acervo é constituído por amostras coletadas em operações de perfuração de poços e furos (testemunho e seus respectivos plugues e wholecores, amostra de calha, amostra lateral e amostra de fluido) e em afloramentos nas atividades de campo de geologia. Também faz parte deste acervo os produtos/resíduos gerados a partir dessas amostras tais como: lâminas, células, aparas, tijolinhos e resíduos. Nesse contexto, inclui-se parte do acervo técnico da União, composto por: testemunhos de sondagem e seus respectivos plugues; calha; lateral; fluido e produtos (fotos de conjunto e de detalhe, lâminas petrográficas, lâminas bioestratigráficas e células bioestratigráficas) rochas ou sedimentos obtidos em levantamentos terrestres.",
+      "definition_pt_canonical": "Coleção de itens geocientíficos da Petrobras (testemunhos, plugues, wholecores, amostras de calha, laterais, fluidos e produtos derivados como lâminas, células e aparas), formada por amostras de poços, furos e afloramentos, incluindo a parcela do acervo técnico da União sob responsabilidade da operadora.",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-amostra",
+      "name_pt": "Amostra",
+      "name_en": "Sample",
+      "axon_type": "Termo",
+      "parent_id": "axon-dom-acervo-amostras",
+      "axon_path": "Exploração / Acervo e movimentação de amostras / amostra",
+      "definition_pt": "Porção de rocha, sedimento ou fluido, extraído de poço, da superfície terrestre ou da superfície do fundo oceânico (Fonte: Portaria ANP nº 757/2018). De forma mais genérica, pode ser também rocha, sedimento ou fluido extraído de afloramento, na superfície terrestre, não necessariamente relacionado diretamente à indústria do petróleo.",
+      "definition_pt_canonical": "Porção de rocha, sedimento ou fluido extraída de poço, afloramento, superfície terrestre ou fundo oceânico, conforme Portaria ANP nº 757/2018; abrange também amostras de origem geocientífica não diretamente ligadas à indústria do petróleo.",
+      "legal_source": "Portaria ANP nº 757/2018",
+      "links_to_existing": ["core-sample", "core-plug", "sidewall-core-sample", "cuttings-sample-detailed", "fluid-sample", "amostra-fluido", "testemunho"]
+    },
+    {
+      "id": "axon-term-amostragem-calha-prevista",
+      "name_pt": "Amostragem de calha prevista",
+      "name_en": "Planned cuttings sampling",
+      "axon_type": "Termo",
+      "parent_id": "axon-asn-planejamento",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Amostragem de calha prevista",
+      "definition_pt": "Previsão da coleta de amostras de cascalhos gerados durante a perfuração do poço (denominadas genericamente de amostras de calha). Esta previsão está contida no programa de amostragem do poço, documento que consolida as amostragens previstas para a intervenção em questão. No arquivo são especificadas: a quantidade (em saquinhos, onde cada saquinho pode comportar até 700g de material — padrão atual das companhias prestadoras de serviço para a Petrobras em território brasileiro), o intervalo de coleta, a finalidade (que dependerá da necessidade de cada poço) e o endereço de destino das amostras.",
+      "definition_pt_canonical": "Previsão da coleta de amostras de cascalhos (calha) durante a perfuração, registrada no programa de amostragem do poço com quantidade (saquinhos de até 700 g), intervalo de coleta, finalidade e destino.",
+      "links_to_existing": ["cuttings-sampling", "cuttings-sample-detailed"]
+    },
+    {
+      "id": "axon-term-ambiente",
+      "name_pt": "Ambiente (mar, terra, lago)",
+      "name_en": "Operational environment (sea, land, lake)",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Ambiente (mar, terra, lago)",
+      "definition_pt": "Ambiente está relacionado ao local geográfico onde será instalada a unidade de perfuração, assim como à referência geográfica do fundo do poço pretendido.",
+      "definition_pt_canonical": "Local geográfico de instalação da sonda e referência da posição final do fundo do poço; pode ser mar, terra ou lago.",
+      "links_to_existing": ["ambiente"]
+    },
+    {
+      "id": "axon-term-campo",
+      "name_pt": "Campo",
+      "name_en": "Field",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Campo",
+      "definition_pt": "Campo de produção ao qual o poço está associado. Atributo necessário para identificação e classificação do poço, sobretudo em poços explotatórios.",
+      "definition_pt_canonical": "Campo de produção ao qual o poço está associado; atributo necessário à identificação e classificação do poço (sobretudo em poços explotatórios).",
+      "links_to_existing": ["campo"]
+    },
+    {
+      "id": "axon-term-classificacao-poco",
+      "name_pt": "Classificação do poço",
+      "name_en": "Well classification (category)",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Classificação do poço",
+      "definition_pt": "Classificação ou categoria representada por um número que significa a finalidade do poço a ser perfurado. Esta classificação é parte do código alfanumérico do poço (\"nome do poço\"), cujo documento oficial Petrobras que define o código é o ISA (Informativo de Aprovação de Locação). Categorias: 1 — Poço Exploratório Pioneiro; 2 — Poço Exploratório Estratigráfico; 3 — Poço Exploratório de Extensão; 4 — Poço Exploratório Pioneiro Adjacente; 5 — Poço Exploratório para Prospecto Mais Raso; 6 — Poço Exploratório para Prospecto Mais Profundo; 7 — Poço Explotatório de Produção; 8 — Poço Explotatório de Injeção; 9 — Poço Especial; 10 — Poço de Estocagem.",
+      "definition_pt_canonical": "Categoria numérica (1–10) que indica a finalidade do poço; integra o código alfanumérico do poço definido pelo ISA (Informativo de Aprovação de Locação).",
+      "links_to_existing": ["anp-poco-categoria"]
+    },
+    {
+      "id": "axon-term-furo",
+      "name_pt": "Furo",
+      "name_en": "Borehole (non-petroleum)",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Furo",
+      "definition_pt": "Furo é um termo genérico para descrever o resultado de uma perfuração realizada tanto em ambiente terrestre quanto em ambiente marinho através de equipamentos mais simples do que aqueles realizados em poços e que atinge profundidades, normalmente, inferiores às dos poços de petróleo. Em determinadas situações, os termos furo, sondagem e furo de sondagem se confundem e são tratados como sinônimos. De acordo com Souza (1998), a sondagem é um processo de investigação mecânica; embora o termo furo não seja citado, compreende-se que é resultante do processo de sondagem. Todos os tipos de sondagens citados, que se aplicam ao ambiente de terra (varejão, trado, poço ou trincheira de inspeção, percussão, rotativa, rotopercussão e galeria de investigação) têm em si acoplados a recuperação de amostras. No ambiente marinho, usa-se o termo furo geológico e furo geotécnico. Diferentemente dos poços de petróleo, as sondagens e furos resultantes têm por objetivo compreender, de maneira geral, aspectos geológicos do solo e rocha subjacentes não ligados à investigação de hidrocarbonetos em um intervalo reservatório específico. Tais aspectos podem ser geomecânicos, geoquímicos ou biológicos.",
+      "definition_pt_canonical": "Resultado de uma perfuração de menor porte (terrestre ou marinha) destinada à investigação geocientífica não voltada à produção de hidrocarbonetos; abrange furos geológicos e geotécnicos, e seu propósito é caracterizar aspectos geológicos, geomecânicos, geoquímicos ou biológicos do subsolo.",
+      "synonyms_pt": ["sondagem", "furo de sondagem", "furo geológico", "furo geotécnico"],
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-igp",
+      "name_pt": "IGP — Informativo Geológico de Poço",
+      "name_en": "Well Geological Information (IGP)",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / IGP - Informativo Geológico de Poço",
+      "definition_pt": "Informativo Geológico de Poço é o relatório técnico diário confeccionado pelo geólogo de operações, seja na locação ou em base, que descreve a geologia e as ocorrências geomecânicas do poço, com informações coletadas no período de 24 horas. Ele contém informações constatadas no poço como litologia, formações geológicas e zonas de interesse de hidrocarboneto identificadas por rocha, perfil ou indícios de gás ou óleo.",
+      "definition_pt_canonical": "Relatório técnico diário (24 h) elaborado pelo geólogo de operações, na locação ou em base, descrevendo geologia, ocorrências geomecânicas, litologia, formações e zonas de interesse de hidrocarboneto observadas no poço.",
+      "links_to_existing": ["igp"]
+    },
+    {
+      "id": "axon-term-lamina-agua",
+      "name_pt": "Lâmina d'água",
+      "name_en": "Water depth",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água",
+      "definition_pt": "Significa a profundidade do mar em um determinado local. Corresponde à distância existente entre a superfície e o fundo do mar. Águas rasas: profundidade d'água entre 0 (zero) e 300 metros. Águas profundas: águas oceânicas situadas em áreas com lâmina d'água, em geral, entre 300 metros e 1.500 metros. Águas ultraprofundas: águas oceânicas situadas em áreas com lâmina d'água, em geral, acima de 1.500 metros.",
+      "definition_pt_canonical": "Distância vertical entre a superfície e o fundo do mar em um dado local; classifica-se em águas rasas (0–300 m), águas profundas (300–1500 m) e águas ultraprofundas (>1500 m).",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-lamina-agua-rasa",
+      "name_pt": "Águas rasas",
+      "name_en": "Shallow water",
+      "axon_type": "Termo",
+      "parent_id": "axon-term-lamina-agua",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água / Águas rasas",
+      "definition_pt": "Faixa de lâmina d'água entre 0 e 300 metros.",
+      "definition_pt_canonical": "Lâmina d'água entre 0 e 300 metros (águas rasas).",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-lamina-agua-profunda",
+      "name_pt": "Águas profundas",
+      "name_en": "Deep water",
+      "axon_type": "Termo",
+      "parent_id": "axon-term-lamina-agua",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água / Águas profundas",
+      "definition_pt": "Águas oceânicas com lâmina d'água, em geral, entre 300 e 1.500 metros.",
+      "definition_pt_canonical": "Lâmina d'água, em geral, entre 300 e 1500 metros (águas profundas).",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-lamina-agua-ultraprofunda",
+      "name_pt": "Águas ultraprofundas",
+      "name_en": "Ultra-deep water",
+      "axon_type": "Termo",
+      "parent_id": "axon-term-lamina-agua",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Lâmina D'água / Águas ultraprofundas",
+      "definition_pt": "Águas oceânicas com lâmina d'água, em geral, acima de 1.500 metros.",
+      "definition_pt_canonical": "Lâmina d'água, em geral, acima de 1500 metros (águas ultraprofundas).",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-objetivo-poco",
+      "name_pt": "Objetivo do poço",
+      "name_en": "Well objective",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Objetivo do poço",
+      "definition_pt": "Objetivo do poço é um resumo dos objetivos de acordo com o resultado e aquisições esperadas no planejamento de um poço, citando as formações e profundidades dos alvos principais e secundários, assim como a profundidade final.",
+      "definition_pt_canonical": "Resumo das aquisições e resultados esperados no planejamento do poço, citando formações e profundidades dos alvos principais, secundários e final.",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-poco",
+      "name_pt": "Poço",
+      "name_en": "Well",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço",
+      "definition_pt": "Perfuração no solo, em ambiente de mar ou em terra, realizada com ferramentas especiais (broca, coluna etc.) para alcançar o reservatório de óleo ou gás natural.",
+      "definition_pt_canonical": "Perfuração realizada em terra ou mar com ferramentas especiais (broca, coluna) para alcançar reservatório de óleo ou gás natural.",
+      "links_to_existing": ["poco"]
+    },
+    {
+      "id": "axon-term-poco-comprado",
+      "name_pt": "Poço comprado",
+      "name_en": "Purchased well",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço comprado",
+      "definition_pt": "Trata-se da aquisição de dados de poços por parte da Petrobras junto a Agência, Departamento ou Organização em que o poço comprado tenha sido operado por outra empresa e no qual a Petrobras não teve participação. Tais dados foram adquiridos, gerados e interpretados por outras empresas e podem ser obtidos após o período de confidencialidade. Normalmente os arquivos disponibilizados são: Arquivo Geral de Poço (AGP), Consolidação de Dados de Poço Exploratório (CDPE), Perfil Composto, Perfis Digitais, Curvas Básicas em LAS, Perfil de Acompanhamento Geológico (PAG) e Teste de Formação.",
+      "definition_pt_canonical": "Poço cujos dados a Petrobras adquiriu de uma agência, departamento ou organização — operado por outra empresa, sem participação da Petrobras — e cujos arquivos típicos incluem AGP, CDPE, Perfil Composto, perfis digitais, curvas LAS, PAG e teste de formação, normalmente após o período de confidencialidade.",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-poco-presal",
+      "name_pt": "Poço do pré-sal",
+      "name_en": "Pre-salt well",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço do pré-sal",
+      "definition_pt": "São considerados poços do pré-sal no contexto do play pré-sal moderno: poços localizados nas bacias CAMPOS MAR, ESPÍRITO SANTO MAR ou SANTOS; poços com a subclassificação Carbonática; poços com as formações FM. BARRA VELHA, FM. COQUEIROS, FM. ITAPEMA, FM. MACABU ou MB. MUCURI; e poços cuja data de conclusão seja posterior a 12/10/2006 (data do 1-RJS-628A, poço descobridor; na ausência da data de conclusão, considera-se a data do término da perfuração). Exceções a estes critérios devem ser acompanhadas de detalhada argumentação para que o poço seja indicado como pré-sal na base de dados. No glossário Petrobras, o pré-sal é definido como rochas reservatórios que se encontram abaixo de uma extensa camada de sal, que abrange o litoral do Estado do Espírito Santo até Santa Catarina, ao longo de mais de 800 quilômetros de extensão por até 200 quilômetros de largura, em lâmina d'água que varia de 1.500 a 3.000 metros e soterramento entre 3.000 e 4.000 metros.",
+      "definition_pt_canonical": "Poço enquadrado no play pré-sal moderno: localizado nas bacias Campos Mar, Espírito Santo Mar ou Santos; com subclassificação carbonática; em formações Barra Velha, Coqueiros, Itapema, Macabu ou Membro Mucuri; e com data de conclusão posterior a 12/10/2006 (1-RJS-628A).",
+      "links_to_existing": ["presal"]
+    },
+    {
+      "id": "axon-term-poco-nao-br",
+      "name_pt": "Poço não BR",
+      "name_en": "Non-Petrobras well",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Poço não BR",
+      "definition_pt": "Poços não BR (Petrobras) referem-se àqueles poços que não foram operados pela Petrobras e que também não foram objeto de parceria contratual nos blocos em que estão situados, seja na fase de exploração ou de avaliação. A disponibilidade interna documental ou em base de dados decorre de aquisições de dados culturais por meio de BID, compra direta na Agência ou outro meio legal.",
+      "definition_pt_canonical": "Poço sem operação ou parceria contratual da Petrobras nos blocos em que está situado; sua documentação interna decorre de aquisições por BID, compra direta na ANP ou outro meio legal.",
+      "links_to_existing": []
+    },
+    {
+      "id": "axon-term-sonda",
+      "name_pt": "Sonda",
+      "name_en": "Drilling rig",
+      "axon_type": "Termo",
+      "parent_id": "axon-sub-dados-culturais",
+      "axon_path": "Exploração / Aquisição de dados geológicos / Planejamento das operações geológicas em poços / Dados culturais de poços e sonda / Sonda",
+      "definition_pt": "A sonda ou plataforma é a unidade que realizou atividades tanto da fase exploratória quanto da de avaliação e completação do poço. Comumente é representada com uma sigla e o nome da operadora. Exemplo: NS-42 ODN II.",
+      "definition_pt_canonical": "Unidade de perfuração (sonda terrestre, jack-up, semissubmersível, navio-sonda) que executa atividades exploratórias, de avaliação e de completação do poço; identificada por sigla e nome da operadora (ex.: NS-42 ODN II).",
+      "synonyms_pt": ["plataforma", "unidade de perfuração"],
+      "links_to_existing": []
+    }
+  ]
+}

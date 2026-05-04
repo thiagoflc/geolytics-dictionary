@@ -607,8 +607,8 @@ export const OSDU_EXTRA_EDGES = [
   {
     source: "annular-fluid-type",
     target: "janela-lama",
-    relation: "related_to",
-    relation_label: "relacionado a",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
     style: "dashed",
   },
   {

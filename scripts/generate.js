@@ -603,7 +603,16 @@ function buildGeomecCorporateGraph(allowedTargetIds) {
       if (!corpIds.has(newTarget) && !(allowedTargetIds || new Set()).has(newTarget)) {
         continue;
       }
-      const relation = (r.relation_type || "RELATED_TO").toLowerCase();
+      /* Map source-side predicates to the canonical curated set
+         (see docs/ONTOLOGY_PREDICATES.md §5). `related_to` is banned at
+         the graph layer for being too vague — auto-promote to `references`,
+         which is canonical and semantically defensible (cross-reference in
+         the corporate vocab). Curator may refine specific edges to
+         is_input_for / co_measured_with / preceded_by / derived_from in a
+         future pass. */
+      const rawRelation = (r.relation_type || "RELATED_TO").toLowerCase();
+      const PREDICATE_REMAP = { related_to: "references" };
+      const relation = PREDICATE_REMAP[rawRelation] || rawRelation;
       const key = `${newSource}|${newTarget}|${relation}`;
       if (emittedKeys.has(key)) continue;
       emittedKeys.add(key);
@@ -2727,11 +2736,10 @@ const ENTITY_NODES = [
     primary_key: "nome_anp",
     primary_key_standard: "ANP/SEP nomenclature",
     primary_key_pattern: "^[1-9]-[A-Z]+-[0-9]+[A-Z]?(-[A-Z]+)?$",
-    joined_by_modules: [
-      "data/operacoes-geologicas.json#OGEOMEC.Poco",
-      "data/operacoes-geologicas.json#FRX.Poco",
-      "data/operacoes-geologicas.json#DRX.Poco",
-    ],
+    /* Q7 (PR follow-up): Poço é âncora física e temporal — não classifica
+       datasets. As referências OGEOMEC.Poco / FRX.Poco / DRX.Poco vivem
+       agora como edges explícitas (ogeomec/frx/drx → poco) e em
+       data/operacoes-geologicas.json#context_fields.Poco (FK source-of-truth). */
   },
   { id: "bloco", label: "Bloco", label_en: "Block", type: "operational", glossId: "bloco" },
   {

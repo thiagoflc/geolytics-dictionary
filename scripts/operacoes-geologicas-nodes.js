@@ -1653,6 +1653,19 @@ export const OG_EDGES = [
     evidence_status: "documented",
   },
   {
+    /* Q7 (PR follow-up): explicit FK reference now lives as a graph edge.
+       Source schema: data/operacoes-geologicas.json#OGEOMEC.context_fields.Poco
+       (links_to: "poco", fk: true). The reverse joined_by_modules entry on
+       `poco` was removed — Poço é âncora, não classifica datasets. */
+    source: "ogeomec",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    style: "dashed",
+    evidence_status: "documented",
+  },
+  {
     source: "rcsd",
     target: "rmg",
     relation: "derived_from",
