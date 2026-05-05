@@ -499,24 +499,7 @@ export const OG_NODES = [
     synonyms_pt: ["frame de aquisição"],
     synonyms_en: ["acquisition frame"],
   },
-  {
-    id: "fluid-sample",
-    label: "Amostra de Fluido",
-    label_en: "Fluid Sample",
-    type: "analytical",
-    color: "#E67E22",
-    size: 20,
-    definition:
-      "Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST. Destino de FK de FormationPressurePoint e DSTInterval.",
-    module: "data/operacoes-geologicas-servicos.json#OGS020",
-    evidence_status: "documented",
-    manager: "RES/TR/AR (laboratório)",
-    superclass: "owl:Thing",
-    synonyms_pt: ["amostra de fluido"],
-    synonyms_en: ["fluid sample"],
-    geosciml_uri: "http://geosciml.org/def/gsmlbh#BoreholeInterval",
-    geocoverage: ["layer1b", "layer4", "layer6"],
-  },
+  /* fluid-sample merged into amostra-fluido (ontopetro-data.js) — single canonical node */
   {
     id: "mudlogging",
     label: "Mudlogging",
@@ -702,8 +685,9 @@ export const OG_NODES = [
     manager: "EXP/OGP",
     stored_in: "SIGEO / BDIEP",
     superclass: "GeologicalOperationsDocument",
-    synonyms_pt: ["Quadro de Previsão Geológica", "Prognóstico Geológico", "QPG"],
+    synonyms_pt: ["Quadro de Previsão Geológica", "Prognóstico Geológico", "QPG", "QPG Preliminar", "QPG Final", "Quadro de Previsões Geológicas"],
     synonyms_en: ["geological prognosis", "predicted geology chart", "QPG"],
+    corporate_id: "GEOMEC026A",
   },
   {
     id: "bdp",
@@ -1278,7 +1262,7 @@ export const OG_EDGES = [
   },
   {
     source: "formation-pressure-point",
-    target: "fluid-sample",
+    target: "amostra-fluido",
     relation: "collects",
     relation_label: "coleta",
     relation_label_en: "collects",
@@ -1286,7 +1270,7 @@ export const OG_EDGES = [
   },
   {
     source: "dst-interval",
-    target: "fluid-sample",
+    target: "amostra-fluido",
     relation: "collects",
     relation_label: "coleta",
     relation_label_en: "collects",

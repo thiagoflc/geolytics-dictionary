@@ -2352,8 +2352,15 @@ export const ONTOPETRO_NODES = [
     label: "Amostra de Fluido",
     label_en: "Fluid Sample",
     type: "analytical",
-    definition: "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
-    fonte: "LIMS Sample Manager",
+    definition:
+      "Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST para análise laboratorial (PVT, geoquímica). Registro no LIMS: M10 CL_AMOSTRA.",
+    fonte: "LIMS Sample Manager; data/operacoes-geologicas-servicos.json#OGS020",
+    module: "data/operacoes-geologicas-servicos.json#OGS020",
+    evidence_status: "documented",
+    manager: "RES/TR/AR (laboratório)",
+    synonyms_pt: ["amostra de fluido", "amostra de reservatório"],
+    synonyms_en: ["fluid sample", "reservoir fluid sample"],
+    layers_override: ["layer1b", "layer4", "layer6"],
   },
   {
     id: "pvt",
@@ -2944,6 +2951,7 @@ export const OSDU_NODES = [
       "survey direcional",
       "desvio do poço",
       "perfil direcional",
+      "pesquisa direcional",
     ],
     synonyms_en: [
       "wellbore trajectory",

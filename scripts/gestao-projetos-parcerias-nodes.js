@@ -45,26 +45,7 @@ function gpp(node) {
 }
 
 export const GPP_NODES = [
-  gpp({
-    id: "bloco-anchor",
-    label: "Bloco (entidade-âncora)",
-    label_pt: "Bloco (entidade-âncora)",
-    label_en: "Block (anchor entity)",
-    type: "regulatory_anchor",
-    color: "#378ADD",
-    size: 28,
-    definition_pt:
-      "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e de decisão (portfólio, ranking, devolução). Detalhada em data/gestao-projetos-parcerias.json#GPP001.",
-    definition_en_canonical:
-      "Primary upstream concession/production-sharing unit. Anchors regulatory, technical and portfolio-decision concepts simultaneously. Detailed in data/gestao-projetos-parcerias.json#GPP001.",
-    legal_source: "Lei 9.478/1997",
-    geocoverage: ["layer4", "layer5"],
-    synonyms_pt: ["Bloco", "Bloco Exploratório", "Área Concedida"],
-    synonyms_en: ["Exploration Block", "Lease Block"],
-    examples: ["BM-S-11 (Lula)", "BCAM-40 (Búzios)", "BS-4 (Atlanta)", "BM-C-33"],
-    module: "data/gestao-projetos-parcerias.json#GPP001",
-    evidence_refs: ["Lei 9.478/1997", "Curso PROPEX 2024/2025"],
-  }),
+  /* bloco: the anchor node lives in ENTITY_NODES; enriched via GPP_NODE_PATCHES below. */
   /* contrato-ep, pem already exist in base ENTITY_NODES with rich definitions —
      enriched in-place via GPP_NODE_PATCHES below. */
   gpp({
@@ -430,7 +411,7 @@ function edge(source, target, relation, label, label_en, style = "solid") {
 
 export const GPP_EDGES = [
   edge(
-    "bloco-anchor",
+    "bloco",
     "contrato-ep",
     "is_subject_to_contract",
     "está sob contrato",
@@ -439,35 +420,35 @@ export const GPP_EDGES = [
   edge("contrato-ep", "pem", "has_minimum_program", "possui PEM", "has minimum program"),
   edge("pem", "obrigacao-exploratoria", "decomposes_into", "decompõe-se em", "decomposes into"),
   edge(
-    "bloco-anchor",
+    "bloco",
     "bloco-exploratorio-state",
     "has_lifecycle_state",
     "tem estado",
     "has lifecycle state"
   ),
   edge(
-    "bloco-anchor",
+    "bloco",
     "bloco-em-avaliacao-state",
     "has_lifecycle_state",
     "tem estado",
     "has lifecycle state"
   ),
   edge(
-    "bloco-anchor",
+    "bloco",
     "area-em-pad-state",
     "has_lifecycle_state",
     "tem estado",
     "has lifecycle state"
   ),
   edge(
-    "bloco-anchor",
+    "bloco",
     "campo-em-desenvolvimento-state",
     "has_lifecycle_state",
     "tem estado",
     "has lifecycle state"
   ),
   edge(
-    "bloco-anchor",
+    "bloco",
     "campo-producao-state",
     "has_lifecycle_state",
     "tem estado",
@@ -539,17 +520,17 @@ export const GPP_EDGES = [
   edge("grt", "pexp", "supports_gate", "apoia portão", "supports gate"),
   edge("rodada", "contrato-ep", "produces_contract", "produz contrato", "produces contract"),
   edge(
-    "bloco-anchor",
+    "bloco",
     "working-interest",
     "has_partnership_share",
     "tem participação societária",
     "has partnership share"
   ),
   edge("working-interest", "operador-role", "designates", "designa", "designates"),
-  edge("portfolio-exploratorio", "bloco-anchor", "aggregates", "agrega", "aggregates"),
-  edge("vme", "bloco-anchor", "scores", "pontua", "scores"),
-  edge("area-retida", "bloco-anchor", "is_outcome_of", "é desfecho de", "is outcome of"),
-  edge("area-devolvida", "bloco-anchor", "is_outcome_of", "é desfecho de", "is outcome of"),
+  edge("portfolio-exploratorio", "bloco", "aggregates", "agrega", "aggregates"),
+  edge("vme", "bloco", "scores", "pontua", "scores"),
+  edge("area-retida", "bloco", "is_outcome_of", "é desfecho de", "is outcome of"),
+  edge("area-devolvida", "bloco", "is_outcome_of", "é desfecho de", "is outcome of"),
 ];
 
 /* In-place patches for nodes that already exist in base ENTITY_NODES.
@@ -558,6 +539,17 @@ export const GPP_EDGES = [
    (module ref, evidence_refs, corporate_internal flag) without overwriting
    the canonical definition or label. */
 export const GPP_NODE_PATCHES = [
+  {
+    id: "bloco",
+    type: "regulatory_anchor",
+    definition_en_canonical:
+      "Primary upstream concession/production-sharing unit. Anchors regulatory (E&P contract), technical (wells, exploratory projects) and portfolio-decision (ranking, relinquishment) concepts simultaneously.",
+    module: "data/gestao-projetos-parcerias.json#GPP001",
+    evidence_refs: ["Lei 9.478/1997", "Curso PROPEX 2024/2025"],
+    corporate_internal: false,
+    evidence_status: "documented",
+    gpp_role: "regulatory_anchor",
+  },
   {
     id: "contrato-ep",
     module: "data/gestao-projetos-parcerias.json#GPP002",
@@ -591,20 +583,6 @@ export const GPP_NODE_PATCHES = [
 ];
 
 export const GPP_GLOSSARY = [
-  {
-    id: "bloco-anchor",
-    termo: "Bloco — entidade-âncora regulatória + técnica + decisória",
-    categoria: "regulatorio",
-    definicao:
-      "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e decisórios (portfólio, ranking, devolução). É objeto regulatório, técnico e decisório simultaneamente — fonte de muitas ambiguidades quando o termo 'Bloco' é usado para significar estado, área, contrato ou campo.",
-    fonte: "Lei nº 9.478/1997; Curso PROPEX 2024/2025",
-    apareceEm: [
-      "blocos-contrato",
-      "pads-andamento",
-      "pads-concluidos",
-      "declaracoes-comercialidade",
-    ],
-  },
   {
     id: "propex",
     termo: "PROPEX — Programa Exploratório (Petrobras)",

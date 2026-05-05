@@ -170,22 +170,7 @@ export const OSDU_EXTRA_NODES = [
     examples: [],
     size: 18,
   },
-  {
-    id: "wellbore-trajectory",
-    label: "Trajetória do Poço (WPC)",
-    label_en: "Wellbore Trajectory",
-    type: "instrument",
-    definition:
-      "Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)",
-    fonte: "Accenture/OSDU OWL",
-    datasets: [],
-    osdu_kind_override: "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
-    layers_override: ["layer4"],
-    synonyms_pt: ["deviation survey", "pesquisa direcional"],
-    synonyms_en: ["wellbore trajectory", "deviation survey"],
-    examples: [],
-    size: 18,
-  },
+  /* wellbore-trajectory merged into trajetoria-poco (ontopetro-data.js) — single canonical node */
   {
     id: "wellbore-marker-set",
     label: "Conjunto de Marcadores de Poço",
@@ -511,7 +496,7 @@ export const OSDU_EXTRA_EDGES = [
     style: "dashed",
   },
   {
-    source: "wellbore-trajectory",
+    source: "trajetoria-poco",
     target: "wellbore",
     relation: "positions",
     relation_label: "posiciona",
@@ -695,11 +680,7 @@ export const OSDU_EXTRA_ALIGNMENT = {
     osdu: "opendes:osdu:work-product-component--WellboreArchitecture:1.0.0",
     layers: ["layer1b", "layer4"],
   },
-  "wellbore-trajectory": {
-    kg: null,
-    osdu: "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
-    layers: ["layer1b", "layer4"],
-  },
+  /* wellbore-trajectory alignment removed — trajetoria-poco carries the canonical OSDU mapping */
   "wellbore-marker-set": {
     kg: null,
     osdu: "opendes:osdu:work-product-component--WellboreMarkerSet:1.0.0",
