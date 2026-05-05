@@ -433,13 +433,7 @@ export const GPP_EDGES = [
     "tem estado",
     "has lifecycle state"
   ),
-  edge(
-    "bloco",
-    "area-em-pad-state",
-    "has_lifecycle_state",
-    "tem estado",
-    "has lifecycle state"
-  ),
+  edge("bloco", "area-em-pad-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
   edge(
     "bloco",
     "campo-em-desenvolvimento-state",
@@ -447,13 +441,7 @@ export const GPP_EDGES = [
     "tem estado",
     "has lifecycle state"
   ),
-  edge(
-    "bloco",
-    "campo-producao-state",
-    "has_lifecycle_state",
-    "tem estado",
-    "has lifecycle state"
-  ),
+  edge("bloco", "campo-producao-state", "has_lifecycle_state", "tem estado", "has lifecycle state"),
   edge(
     "bloco-exploratorio-state",
     "bloco-em-avaliacao-state",
