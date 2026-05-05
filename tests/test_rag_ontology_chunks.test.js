@@ -86,7 +86,10 @@ describe("ontology_concept chunk inventory", () => {
 describe("ontology_concept chunk schema", () => {
   test("each chunk has id, type, text, metadata.subcategory", () => {
     for (const c of chunks) {
-      assert.ok(typeof c.id === "string" && c.id.length > 0, `chunk missing id: ${JSON.stringify(c).slice(0, 80)}`);
+      assert.ok(
+        typeof c.id === "string" && c.id.length > 0,
+        `chunk missing id: ${JSON.stringify(c).slice(0, 80)}`
+      );
       assert.equal(c.type, "ontology_concept", `wrong type on ${c.id}`);
       assert.ok(typeof c.text === "string" && c.text.length > 0, `chunk ${c.id} missing text`);
       assert.ok(c.metadata && typeof c.metadata === "object", `chunk ${c.id} missing metadata`);
@@ -179,10 +182,6 @@ describe("ontology_concept id uniqueness", () => {
       if (seen.has(c.id)) dups.push(c.id);
       else seen.set(c.id, true);
     }
-    assert.equal(
-      dups.length,
-      0,
-      `duplicate ontology_concept ids: ${dups.join(", ")}`
-    );
+    assert.equal(dups.length, 0, `duplicate ontology_concept ids: ${dups.join(", ")}`);
   });
 });

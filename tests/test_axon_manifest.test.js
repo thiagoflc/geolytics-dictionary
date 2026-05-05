@@ -172,10 +172,7 @@ describe("loadAxonManifest — missing area file", () => {
       }),
       "utf8"
     );
-    assert.throws(
-      () => loadAxonManifest(manifestPath, REPO_ROOT),
-      /missing id or file/
-    );
+    assert.throws(() => loadAxonManifest(manifestPath, REPO_ROOT), /missing id or file/);
   });
 });
 

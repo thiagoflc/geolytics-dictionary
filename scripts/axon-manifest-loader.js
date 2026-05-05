@@ -60,17 +60,12 @@ export function loadAxonManifest(manifestPath, rootDir) {
   const out = [];
   /* Resolve entry.file relativos ao rootDir. Default: avô do manifest
      (data/axon/manifest.json → <repo>). */
-  const resolvedRoot =
-    rootDir || path.resolve(path.dirname(resolvedManifestPath), "..", "..");
+  const resolvedRoot = rootDir || path.resolve(path.dirname(resolvedManifestPath), "..", "..");
   for (const entry of ingested) {
     if (!entry.id || !entry.file) {
-      throw new Error(
-        `Axon manifest: ingested area missing id or file (${JSON.stringify(entry)})`
-      );
+      throw new Error(`Axon manifest: ingested area missing id or file (${JSON.stringify(entry)})`);
     }
-    const areaPath = path.isAbsolute(entry.file)
-      ? entry.file
-      : path.join(resolvedRoot, entry.file);
+    const areaPath = path.isAbsolute(entry.file) ? entry.file : path.join(resolvedRoot, entry.file);
     if (!fs.existsSync(areaPath)) {
       throw new Error(
         `Axon manifest references ingested area "${entry.id}" at ${entry.file}, but the file does not exist.`
