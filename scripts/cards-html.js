@@ -519,39 +519,6 @@ a:hover { text-decoration: underline; }
   font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
   padding: 3px 9px; border-radius: 999px; font-weight: 600;
 }
-/* F7: secondary pill for ontological_role — softer outline style so it doesn't fight the type pill */
-.pill-role {
-  background: transparent;
-  color: var(--pill-color);
-  border: 1px solid var(--pill-color);
-}
-
-/* F7: "Cor por" segmented toggle (mirrors index.html) */
-.color-mode {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; color: var(--fg-muted);
-  text-transform: uppercase; letter-spacing: .04em;
-}
-.color-mode-seg {
-  display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden;
-}
-.color-mode-seg button {
-  background: transparent; border: 0; cursor: pointer;
-  color: var(--fg-muted); font: inherit;
-  padding: 4px 10px; transition: background 120ms ease, color 120ms ease;
-}
-.color-mode-seg button + button { border-left: 1px solid var(--border-strong); }
-.color-mode-seg button:hover { color: var(--fg); }
-.color-mode-seg button.is-active { background: var(--bg-alt); color: var(--fg); }
-
-/* F7: show only the sidebar that matches the active mode */
-.sidebar-group { display: none; }
-body[data-color-mode="type"] .sidebar-group[data-mode="type"] { display: block; }
-body[data-color-mode="role"] .sidebar-group[data-mode="role"] { display: block; }
-body[data-color-mode="role"] .pill-role { background: var(--pill-color); color: #fff; }
-body[data-color-mode="role"] .pill:not(.pill-role) {
-  background: transparent; color: var(--pill-color); border: 1px solid var(--pill-color);
-}
 .legal-source {
   font-size: 11px; color: var(--fg-muted);
   border: 1px solid var(--border);
@@ -670,6 +637,45 @@ body[data-color-mode="role"] .pill:not(.pill-role) {
 }
 `;
 
+/* F7-only CSS — opt-in via buildCardsHtml. NOT inlined into buildGsoCardsHtml
+   because gso-cards.html has no .pill-role, .color-mode-seg or .sidebar-group
+   elements, so these rules would be inert bytes there. */
+const F7_CSS = `
+/* F7: secondary pill for ontological_role — softer outline style so it doesn't fight the type pill */
+.pill-role {
+  background: transparent;
+  color: var(--pill-color);
+  border: 1px solid var(--pill-color);
+}
+
+/* F7: "Cor por" segmented toggle (mirrors index.html) */
+.color-mode {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--fg-muted);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.color-mode-seg {
+  display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden;
+}
+.color-mode-seg button {
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--fg-muted); font: inherit;
+  padding: 4px 10px; transition: background 120ms ease, color 120ms ease;
+}
+.color-mode-seg button + button { border-left: 1px solid var(--border-strong); }
+.color-mode-seg button:hover { color: var(--fg); }
+.color-mode-seg button.is-active { background: var(--bg-alt); color: var(--fg); }
+
+/* F7: show only the sidebar that matches the active mode */
+.sidebar-group { display: none; }
+body[data-color-mode="type"] .sidebar-group[data-mode="type"] { display: block; }
+body[data-color-mode="role"] .sidebar-group[data-mode="role"] { display: block; }
+body[data-color-mode="role"] .pill-role { background: var(--pill-color); color: #fff; }
+body[data-color-mode="role"] .pill:not(.pill-role) {
+  background: transparent; color: var(--pill-color); border: 1px solid var(--pill-color);
+}
+`;
+
 const CLIENT_JS = `
 (function () {
   const input = document.getElementById('search-input');
@@ -677,20 +683,6 @@ const CLIENT_JS = `
   const tocLinks = Array.from(document.querySelectorAll('.toc-list li a'));
   const tocGroups = Array.from(document.querySelectorAll('.toc-group'));
   const noMatch = document.getElementById('no-match');
-
-  /* F7: "Cor por" toggle — Tipo / Papel ontológico. Transient (not persisted). */
-  const modeButtons = Array.from(document.querySelectorAll('#color-mode-seg button'));
-  function setColorMode(mode) {
-    if (mode !== 'type' && mode !== 'role') return;
-    document.body.dataset.colorMode = mode;
-    modeButtons.forEach(b => {
-      const active = b.dataset.mode === mode;
-      b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-  }
-  modeButtons.forEach(b => b.addEventListener('click', () => setColorMode(b.dataset.mode)));
-  if (!document.body.dataset.colorMode) document.body.dataset.colorMode = 'type';
 
   function applyFilter(q) {
     const query = (q || '').trim().toLowerCase();
@@ -733,6 +725,27 @@ const CLIENT_JS = `
       }
     });
   });
+})();
+`;
+
+/* F7-only client JS — opt-in via buildCardsHtml. NOT inlined into
+   buildGsoCardsHtml because gso-cards.html has no #color-mode-seg button
+   to wire up. Self-invoking IIFE to keep its scope local. */
+const F7_JS = `
+(function () {
+  const modeButtons = Array.from(document.querySelectorAll('#color-mode-seg button'));
+  if (!modeButtons.length) return;
+  function setColorMode(mode) {
+    if (mode !== 'type' && mode !== 'role') return;
+    document.body.dataset.colorMode = mode;
+    modeButtons.forEach(b => {
+      const active = b.dataset.mode === mode;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+  modeButtons.forEach(b => b.addEventListener('click', () => setColorMode(b.dataset.mode)));
+  if (!document.body.dataset.colorMode) document.body.dataset.colorMode = 'type';
 })();
 `;
 
@@ -794,7 +807,7 @@ export function buildCardsHtml(graph) {
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>GeoBrain — Entity Cards</title>
   <meta name="description" content="Cartões navegáveis das entidades do GeoBrain, no estilo da documentação OWL gerada pelo pyLODE.">
-  <style>${CSS}</style>
+  <style>${CSS}${F7_CSS}</style>
 </head>
 <body data-color-mode="type">
   <header class="site-header">
@@ -842,6 +855,7 @@ export function buildCardsHtml(graph) {
   </div>
 
   <script>${CLIENT_JS}</script>
+  <script>${F7_JS}</script>
 </body>
 </html>
 `;

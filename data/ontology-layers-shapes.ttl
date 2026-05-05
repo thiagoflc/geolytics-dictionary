@@ -90,9 +90,10 @@ geol:WellAnchorNotDatasetContainerShape a sh:NodeShape ;
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Shape 2 (Warning): interpretation_process input/output completeness.
-# Toda interpretation_process deve consumir entrada (≥1 inbound consumes/
-# is_input_for/requires_input/derived_from) E produzir saída (≥1 outbound
-# produces/generates/yields/estimates/computes/infers).
+# Toda interpretation_process deve consumir entrada (≥1 inbound is_input_for/
+# requires_input/requires/derived_from/consumes) E produzir saída (≥1 outbound
+# produces/generates/yields/estimates/computes/infers/output_of/interpreted_into).
+# Predicate set documented here matches the SPARQL FILTER below verbatim.
 # ─────────────────────────────────────────────────────────────────────────────
 
 geol:InterpretationProcessHasInputOutputShape a sh:NodeShape ;

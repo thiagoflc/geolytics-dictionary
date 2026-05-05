@@ -55,6 +55,14 @@ def emit(data: dict) -> str:
     # provenance. Without this, Shape 27 (active reference to deprecated)
     # would fire for every relationship pointing at GEOMEC003/004/013/026B/049/050
     # (F4 merges) or pre-existing splits (GEOMEC026/052/053).
+    #
+    # Convention: replaced_by[0] is canonical when the array has multiple
+    # entries (split deprecation). NOTE — for GEOMEC026, replaced_by =
+    # [GEOMEC026A, GEOMEC026B] but the deprecation `reason` says "Refs ativas
+    # re-roteadas para 026B". Both this Python emitter and the JS pipeline
+    # take [0] = GEOMEC026A; if curator decides 026B is the active route,
+    # reorder the array (or add an explicit `primary_survivor` field). Tracked
+    # as PR #35 review item #2.
     deprecation_map: dict[str, str] = {}
     for e in data["entities"]:
         dep = e.get("deprecated")
@@ -64,10 +72,25 @@ def emit(data: dict) -> str:
                 deprecation_map[e["id"]] = rb[0]
 
     def resolve_target(tid: str) -> tuple[str, str | None]:
-        """Returns (final_target_id, repointed_from_id|None)."""
-        if tid in deprecation_map:
-            return deprecation_map[tid], tid
-        return tid, None
+        """Resolve a target id through the deprecation map.
+
+        Follows multi-hop chains (A → B → C) up to 16 hops, with cycle
+        detection. Returns (final_target_id, original_id_if_changed_else_None).
+        The original id (first hop) is preserved for geo:repointedFrom
+        provenance, NOT the intermediate hops.
+        """
+        if tid not in deprecation_map:
+            return tid, None
+        original = tid
+        seen: set[str] = {tid}
+        cur = tid
+        for _ in range(16):
+            nxt = deprecation_map.get(cur)
+            if nxt is None or nxt in seen:
+                break  # terminal or cycle
+            seen.add(nxt)
+            cur = nxt
+        return cur, original
 
     def is_corporate(tid: str) -> bool:
         """Whether target ID is an active corporate entity in this module.

@@ -10,15 +10,20 @@
 *.zip binary
 
 # Generated artifacts — collapsed in GitHub diffs and excluded from
-# language statistics. Source of truth lives in the generators.
-data/full.json                 linguist-generated=true
-data/entity-graph.json         linguist-generated=true
-api/v1/**                      linguist-generated=true
-build/**                       linguist-generated=true
-*-cards.html                   linguist-generated=true
-ai/rag-corpus.jsonl            linguist-generated=true
-ai/text2sparql-fewshot.jsonl   linguist-generated=true
-ai/text2cypher-fewshot.jsonl   linguist-generated=true
+# language statistics. Source of truth lives in the generators
+# (scripts/generate.js, scripts/cards-html.js, scripts/ttl-serializer.js,
+# scripts/audit-ontological-roles.py).
+data/full.json                       linguist-generated=true
+data/entity-graph.json               linguist-generated=true
+data/geobrain.ttl                    linguist-generated=true
+data/ontological_role_audit.json     linguist-generated=true
+api/v1/**                            linguist-generated=true
+build/**                             linguist-generated=true
+*-cards.html                         linguist-generated=true
+ai/rag-corpus.jsonl                  linguist-generated=true
+ai/ontology-map.json                 linguist-generated=true
+ai/text2sparql-fewshot.jsonl         linguist-generated=true
+ai/text2cypher-fewshot.jsonl         linguist-generated=true
 
 # Languages — exclude bulk data from "languages" pie chart.
 data/**     linguist-detectable=false

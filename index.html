@@ -609,17 +609,23 @@
   const GLOW_TYPES = new Set(['operational', 'actor']);
 
   /* ── F7: ontological_role palette + labels ────────────────
-     Canonical roles per docs/ONTOLOGY_LAYERS.md (15 + extras for forward compat). */
+     Canonical roles per docs/ONTOLOGY_LAYERS.md (15 + 4 forward-compat).
+     Note: a few values intentionally match existing TYPE_COLOR entries —
+     domain_anchor=#D4A017 reuses the type=axon_domain dourado (the only
+     graph-rendered domain anchor today is an Axon node, so visual identity
+     is preserved across both modes); well_operation=#E67E22 reuses the
+     type=analytical color since most well_operation nodes are typed
+     analytical. These are deliberate, not accidental. */
   const ROLE_COLOR = {
     well_anchor:            '#2E86AB',
-    well_operation:         '#E67E22',
+    well_operation:         '#E67E22', // matches type=analytical (intentional)
     artifact_primary:       '#16A085',
     feature_observation:    '#27AE60',
     interpretation_process: '#9B59B6',
     engineering_artifact:   '#34495E',
     regulatory_anchor:      '#C0392B',
     organizational_actor:   '#E74C3C',
-    domain_anchor:          '#D4A017',
+    domain_anchor:          '#D4A017', // matches type=axon_domain (intentional)
     well_attribute_concept: '#7F8C8D',
     equipment:              '#F39C12',
     governance_artifact:    '#8E44AD',
@@ -886,12 +892,13 @@
       tooltip.style.setProperty('--type-color', c);
       tooltip.classList.add('show');
       const axisKey = nodeAxisKey(d, currentColorMode);
+      const tipAxisLabel = (labelForAxis(axisKey, currentColorMode) || axisKey || '').toUpperCase();
       tooltip.innerHTML =
         `<div class="strip"></div>
          <div class="body">
-           <div class="t-type">${(labelForAxis(axisKey, currentColorMode) || axisKey || '').toUpperCase()}</div>
-           <strong>${d.label}</strong>
-           ${d.label_en ? `<span class="t-en">${d.label_en}</span>` : ''}
+           <div class="t-type">${escapeHtml(tipAxisLabel)}</div>
+           <strong>${escapeHtml(d.label)}</strong>
+           ${d.label_en ? `<span class="t-en">${escapeHtml(d.label_en)}</span>` : ''}
          </div>`;
     })
     .on('mousemove', (ev) => {
@@ -996,9 +1003,9 @@
     const axisLabel = labelForAxis(axisKey, currentColorMode) || axisKey || '';
     const headHtml = `
       <div class="panel-head">
-        <div class="type-tag">${axisLabel.toUpperCase()}${d.degree ? ` · ${d.degree} relações` : ''}</div>
-        <h2>${d.label}</h2>
-        ${d.label_en ? `<div class="label-en">${d.label_en}</div>` : ''}
+        <div class="type-tag">${escapeHtml(axisLabel.toUpperCase())}${d.degree ? ` · ${d.degree} relações` : ''}</div>
+        <h2>${escapeHtml(d.label)}</h2>
+        ${d.label_en ? `<div class="label-en">${escapeHtml(d.label_en)}</div>` : ''}
       </div>`;
     const bodyHtml = `
       <div class="body">
@@ -1098,13 +1105,26 @@
   });
 
   /* ── NODE SEARCH ─────────────────────────────────────────── */
+  /* HTML escape helper — defense-in-depth for innerHTML interpolations.
+     Node labels are curated (data/entity-graph.json under git control), so
+     the practical risk is low; the helper exists so any future label that
+     contains <, &, ", ' or > does not break rendering or open XSS. */
+  function escapeHtml(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function highlight(text, query) {
-    if (!query) return text;
+    if (!query) return escapeHtml(text);
     const idx = text.toLowerCase().indexOf(query.toLowerCase());
-    if (idx === -1) return text;
-    return text.slice(0, idx)
-      + `<mark>${text.slice(idx, idx + query.length)}</mark>`
-      + text.slice(idx + query.length);
+    if (idx === -1) return escapeHtml(text);
+    return escapeHtml(text.slice(0, idx))
+      + `<mark>${escapeHtml(text.slice(idx, idx + query.length))}</mark>`
+      + escapeHtml(text.slice(idx + query.length));
   }
 
   function zoomToNode(d) {
@@ -1153,14 +1173,14 @@
     }).slice(0, 12);
 
     if (currentMatches.length === 0) {
-      searchResults.innerHTML = `<div class="sr-empty">Nenhum resultado para "${q}"</div>`;
+      searchResults.innerHTML = `<div class="sr-empty">Nenhum resultado para "${escapeHtml(q)}"</div>`;
     } else {
       searchResults.innerHTML = currentMatches.map((n, i) => `
         <div class="sr-item" data-idx="${i}">
           <span class="sr-dot" style="background:${colorForNode(n, currentColorMode)}"></span>
           <span>
             <span class="sr-label">${highlight(n.label, q)}</span>
-            ${n.label_en ? `<span class="sr-en"> · ${n.label_en}</span>` : ''}
+            ${n.label_en ? `<span class="sr-en"> · ${escapeHtml(n.label_en)}</span>` : ''}
           </span>
         </div>`).join('');
 

@@ -187,39 +187,6 @@ a:hover { text-decoration: underline; }
   font-size: 11px; text-transform: uppercase; letter-spacing: .04em;
   padding: 3px 9px; border-radius: 999px; font-weight: 600;
 }
-/* F7: secondary pill for ontological_role — softer outline style so it doesn't fight the type pill */
-.pill-role {
-  background: transparent;
-  color: var(--pill-color);
-  border: 1px solid var(--pill-color);
-}
-
-/* F7: "Cor por" segmented toggle (mirrors index.html) */
-.color-mode {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 11px; color: var(--fg-muted);
-  text-transform: uppercase; letter-spacing: .04em;
-}
-.color-mode-seg {
-  display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden;
-}
-.color-mode-seg button {
-  background: transparent; border: 0; cursor: pointer;
-  color: var(--fg-muted); font: inherit;
-  padding: 4px 10px; transition: background 120ms ease, color 120ms ease;
-}
-.color-mode-seg button + button { border-left: 1px solid var(--border-strong); }
-.color-mode-seg button:hover { color: var(--fg); }
-.color-mode-seg button.is-active { background: var(--bg-alt); color: var(--fg); }
-
-/* F7: show only the sidebar that matches the active mode */
-.sidebar-group { display: none; }
-body[data-color-mode="type"] .sidebar-group[data-mode="type"] { display: block; }
-body[data-color-mode="role"] .sidebar-group[data-mode="role"] { display: block; }
-body[data-color-mode="role"] .pill-role { background: var(--pill-color); color: #fff; }
-body[data-color-mode="role"] .pill:not(.pill-role) {
-  background: transparent; color: var(--pill-color); border: 1px solid var(--pill-color);
-}
 .legal-source {
   font-size: 11px; color: var(--fg-muted);
   border: 1px solid var(--border);
@@ -336,6 +303,40 @@ body[data-color-mode="role"] .pill:not(.pill-role) {
   .site-header .ext-links { margin-left: 0; }
   .card-meta { margin-left: 0; }
 }
+
+/* F7: secondary pill for ontological_role — softer outline style so it doesn't fight the type pill */
+.pill-role {
+  background: transparent;
+  color: var(--pill-color);
+  border: 1px solid var(--pill-color);
+}
+
+/* F7: "Cor por" segmented toggle (mirrors index.html) */
+.color-mode {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; color: var(--fg-muted);
+  text-transform: uppercase; letter-spacing: .04em;
+}
+.color-mode-seg {
+  display: inline-flex; border: 1px solid var(--border-strong); border-radius: 6px; overflow: hidden;
+}
+.color-mode-seg button {
+  background: transparent; border: 0; cursor: pointer;
+  color: var(--fg-muted); font: inherit;
+  padding: 4px 10px; transition: background 120ms ease, color 120ms ease;
+}
+.color-mode-seg button + button { border-left: 1px solid var(--border-strong); }
+.color-mode-seg button:hover { color: var(--fg); }
+.color-mode-seg button.is-active { background: var(--bg-alt); color: var(--fg); }
+
+/* F7: show only the sidebar that matches the active mode */
+.sidebar-group { display: none; }
+body[data-color-mode="type"] .sidebar-group[data-mode="type"] { display: block; }
+body[data-color-mode="role"] .sidebar-group[data-mode="role"] { display: block; }
+body[data-color-mode="role"] .pill-role { background: var(--pill-color); color: #fff; }
+body[data-color-mode="role"] .pill:not(.pill-role) {
+  background: transparent; color: var(--pill-color); border: 1px solid var(--pill-color);
+}
 </style>
 </head>
 <body data-color-mode="type">
@@ -372,7 +373,7 @@ body[data-color-mode="role"] .pill:not(.pill-role) {
     <main class="main">
       <div class="intro">
         <strong>412</strong> entidades · <strong>942</strong> relações ·
-        gerado em <code>2026-05-04T22:27:04.444Z</code>.
+        gerado em <code>2026-05-04T23:53:58.289Z</code>.
         Cada cartão lista a definição, sinônimos PT/EN, exemplos, datasets, camadas semânticas e relações de entrada/saída.
         Use a busca para filtrar por rótulo ou sinônimo.
       </div>
@@ -802,20 +803,6 @@ body[data-color-mode="role"] .pill:not(.pill-role) {
   const tocGroups = Array.from(document.querySelectorAll('.toc-group'));
   const noMatch = document.getElementById('no-match');
 
-  /* F7: "Cor por" toggle — Tipo / Papel ontológico. Transient (not persisted). */
-  const modeButtons = Array.from(document.querySelectorAll('#color-mode-seg button'));
-  function setColorMode(mode) {
-    if (mode !== 'type' && mode !== 'role') return;
-    document.body.dataset.colorMode = mode;
-    modeButtons.forEach(b => {
-      const active = b.dataset.mode === mode;
-      b.classList.toggle('is-active', active);
-      b.setAttribute('aria-selected', active ? 'true' : 'false');
-    });
-  }
-  modeButtons.forEach(b => b.addEventListener('click', () => setColorMode(b.dataset.mode)));
-  if (!document.body.dataset.colorMode) document.body.dataset.colorMode = 'type';
-
   function applyFilter(q) {
     const query = (q || '').trim().toLowerCase();
     let visible = 0;
@@ -857,6 +844,23 @@ body[data-color-mode="role"] .pill:not(.pill-role) {
       }
     });
   });
+})();
+</script>
+  <script>
+(function () {
+  const modeButtons = Array.from(document.querySelectorAll('#color-mode-seg button'));
+  if (!modeButtons.length) return;
+  function setColorMode(mode) {
+    if (mode !== 'type' && mode !== 'role') return;
+    document.body.dataset.colorMode = mode;
+    modeButtons.forEach(b => {
+      const active = b.dataset.mode === mode;
+      b.classList.toggle('is-active', active);
+      b.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+  }
+  modeButtons.forEach(b => b.addEventListener('click', () => setColorMode(b.dataset.mode)));
+  if (!document.body.dataset.colorMode) document.body.dataset.colorMode = 'type';
 })();
 </script>
 </body>
