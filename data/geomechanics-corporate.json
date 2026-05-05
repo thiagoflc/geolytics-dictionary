@@ -1656,8 +1656,9 @@
       "relationships": [
         {
           "target_id": "GEOMEC013",
-          "relation_type": "RELATED_TO",
-          "target_label": "Coeficiente de Biot-Willis"
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_label": "Coeficiente de Biot-Willis",
+          "edge_note": "Compressibilidade de poros é calculada a partir do coeficiente de Biot-Willis via Biot-Terzaghi (após F4 merge: GEOMEC013 ≡ GM017)."
         }
       ],
       "osdu_mapping": "osdu:wks:work-product-component--RockMechanicsTest:1.* (PoreVolumeCompressibility)",
@@ -1806,8 +1807,9 @@
         },
         {
           "target_id": "GEOMEC007",
-          "relation_type": "RELATED_TO",
-          "target_label": "Tensão Vertical (Sv) — carga sobre o reservatório"
+          "relation_type": "IS_CALCULATED_FROM",
+          "target_label": "Tensão Vertical (Sv) — carga sobre o reservatório",
+          "edge_note": "Subsidência é calculada a partir do gradiente de tensão vertical (Sv)."
         },
         {
           "target_id": "GEOMEC018",
@@ -2352,21 +2354,24 @@
         },
         {
           "target_id": "GEOMEC023A",
-          "relation_type": "RELATED_TO",
+          "relation_type": "CONTAINS",
           "target_label": "Análise especializada — GEOMEC023A",
-          "_original_relation_type": "HAS_SUBPROCESS"
+          "_original_relation_type": "HAS_SUBPROCESS",
+          "edge_note": "Categoria parental \"Falhas em Perfil de Imagem\" contém breakout (023A)."
         },
         {
           "target_id": "GEOMEC023B",
-          "relation_type": "RELATED_TO",
+          "relation_type": "CONTAINS",
           "target_label": "Análise especializada — GEOMEC023B",
-          "_original_relation_type": "HAS_SUBPROCESS"
+          "_original_relation_type": "HAS_SUBPROCESS",
+          "edge_note": "Categoria parental \"Falhas em Perfil de Imagem\" contém DITF (023B)."
         },
         {
           "target_id": "GEOMEC023C",
-          "relation_type": "RELATED_TO",
+          "relation_type": "CONTAINS",
           "target_label": "Análise especializada — GEOMEC023C",
-          "_original_relation_type": "HAS_SUBPROCESS"
+          "_original_relation_type": "HAS_SUBPROCESS",
+          "edge_note": "Categoria parental \"Falhas em Perfil de Imagem\" contém fratura natural (023C)."
         }
       ],
       "osdu_mapping": "osdu:wks:work-product-component--WellLog:1.* (ImageLog_BreakoutAnalysis)",
@@ -2812,14 +2817,16 @@
         },
         {
           "target_id": "GEOMEC029",
-          "relation_type": "USED_WITH",
-          "target_label": "GERESIM (pré/pós-processamento e interface com simulador de fluxo)"
+          "relation_type": "IS_INPUT_FOR",
+          "target_label": "GERESIM (pré/pós-processamento e interface com simulador de fluxo)",
+          "edge_note": "Resultados do simulador GeomecBR alimentam o GERESIM (gestão de simulações)."
         },
         {
           "target_id": "GEOMEC030",
-          "relation_type": "USED_WITH",
+          "relation_type": "CO_MEASURED_WITH",
           "target_label": "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço",
-          "_flipped_from": "GEOMEC030 COMPLEMENTED_BY→GEOMEC028"
+          "_flipped_from": "GEOMEC030 COMPLEMENTED_BY→GEOMEC028",
+          "edge_note": "GeomecBR (3D) e SIGEO/SEST TR (1D) são ferramentas complementares no workflow geomecânico."
         }
       ],
       "osdu_mapping": null,
@@ -2860,8 +2867,9 @@
       "relationships": [
         {
           "target_id": "GEOMEC028",
-          "relation_type": "USED_WITH",
-          "target_label": "GeomecBR (acoplamento geomecânico-fluxo)"
+          "relation_type": "STORAGE_FOR",
+          "target_label": "GeomecBR (acoplamento geomecânico-fluxo)",
+          "edge_note": "GERESIM é o sistema de gestão que armazena cenários e resultados do GeomecBR."
         },
         {
           "target_id": "GEOMEC026B",
@@ -3001,9 +3009,10 @@
         },
         {
           "target_id": "GEOMEC034",
-          "relation_type": "USED_WITH",
+          "relation_type": "CO_MEASURED_WITH",
           "target_label": "DFIT / DPPT — Testes Dinâmicos de Integridade e Pressão de Poros",
-          "_flipped_from": "GEOMEC034 COMPLEMENTED_BY→GEOMEC031"
+          "_flipped_from": "GEOMEC034 COMPLEMENTED_BY→GEOMEC031",
+          "edge_note": "XLOT e DFIT/DPPT são testes dinâmicos de pressão complementares (fraturamento estendido vs. injeção/falloff)."
         }
       ],
       "osdu_mapping": "osdu:wks:work-product-component--WellTest:1.* (ExtendedLeakOffTest)",
@@ -3833,16 +3842,17 @@
         },
         {
           "target_id": "GEOMEC053A",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "Pressão de Reabertura de Fratura",
           "edge_note": "Sobreposição conceitual entre Pc/ISIP e pressão de reabertura/propagação.",
           "_repointed_from": "GEOMEC053"
         },
         {
           "target_id": "GEOMEC053B",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "Pressão de Propagação de Fratura",
-          "_split_from": "GEOMEC053"
+          "_split_from": "GEOMEC053",
+          "edge_note": "Pressão de fechamento de fratura é insumo no cálculo da pressão de propagação."
         }
       ],
       "osdu_mapping": null,
@@ -3904,7 +3914,7 @@
         },
         {
           "target_id": "GEOMEC023",
-          "relation_type": "RELATED_TO",
+          "relation_type": "INFLUENCES",
           "target_label": "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
           "edge_note": "Washout (erosão mecânica/química) e breakout (falha por cisalhamento) produzem o mesmo sinal observável no caliper (alargamento), mas têm mecanismos físicos distintos e independentes. Coexistência possível, não obrigatória."
         }
@@ -3967,13 +3977,13 @@
         },
         {
           "target_id": "GEOMEC049",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "BDIEP — Banco de Dados de Informações de Engenharia de Poço",
-          "edge_note": "Eventos correlatos de prisão de coluna são persistidos no BDIEP."
+          "edge_note": "Eventos de prisão de coluna alimentam a base BDIEP (registro estruturado)."
         },
         {
           "target_id": "GEOMEC051",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "OpenWells — Well Operations Datastore",
           "edge_note": "Eventos correlatos de prisão de coluna também são registrados no OpenWells."
         }
@@ -4394,7 +4404,7 @@
         },
         {
           "target_id": "GEOMEC052B",
-          "relation_type": "USED_WITH",
+          "relation_type": "CO_MEASURED_WITH",
           "target_label": "Setpoint MPD/SBP",
           "edge_note": "PRV é proteção secundária; o controle ativo é via setpoint do SBP (PE-2POC-01247 §3.3.4)."
         }
@@ -4535,7 +4545,7 @@
         },
         {
           "target_id": "GEOMEC053B",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "Pressão de Propagação de Fratura",
           "edge_note": "Reabertura e Propagação ocorrem em fases distintas do 2º ciclo."
         }
@@ -4898,8 +4908,9 @@
         {
           "target_id": "GEOMEC009",
           "target_label": "Gradiente de Colapso",
-          "relation_type": "RELATED_TO",
-          "rationale": "ROP elevado associado ao colapso."
+          "relation_type": "MONITORS",
+          "rationale": "ROP elevado associado ao colapso.",
+          "edge_note": "Variação de ROP monitora indícios de aproximação ao gradiente de colapso (zona instável)."
         },
         {
           "target_id": "GEOMEC045",
@@ -5024,8 +5035,9 @@
         {
           "target_id": "GEOMEC023",
           "target_label": "Breakouts e Fraturas Induzidas",
-          "relation_type": "RELATED_TO",
-          "rationale": "Quando houver perfis de imagem ou informações de perfilagem associadas, o ROP-documento pode apoiar rastreabilidade dos intervalos perfilados."
+          "relation_type": "REQUIRES_INPUT",
+          "rationale": "Quando houver perfis de imagem ou informações de perfilagem associadas, o ROP-documento pode apoiar rastreabilidade dos intervalos perfilados.",
+          "edge_note": "Relatório de operações de perfilagem requer feições de perfil de imagem como entrada."
         },
         {
           "target_id": "GEOMEC015",
@@ -5294,15 +5306,17 @@
         },
         {
           "target_id": "GEOMEC075",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "AZIE",
-          "_original_relation_type": "HAS_PROPERTY"
+          "_original_relation_type": "HAS_PROPERTY",
+          "edge_note": "Azimute da excentricidade (AZIE) é insumo para caracterização de ovalização (breakout)."
         },
         {
           "target_id": "GEOMEC077",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "Abertura Angular do Breakout",
-          "_original_relation_type": "HAS_PROPERTY"
+          "_original_relation_type": "HAS_PROPERTY",
+          "edge_note": "Abertura angular é insumo para caracterização de ovalização (breakout)."
         }
       ],
       "wsm_type_code": "BO",
@@ -5358,9 +5372,10 @@
         },
         {
           "target_id": "GEOMEC078",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "POSTEF",
-          "_original_relation_type": "HAS_PROPERTY"
+          "_original_relation_type": "HAS_PROPERTY",
+          "edge_note": "Posição da fratura induzida (POSTEF) é insumo para caracterização do DITF."
         }
       ],
       "wsm_type_code": "DIF",
@@ -5392,15 +5407,17 @@
         },
         {
           "target_id": "GEOMEC079",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "FractureState",
-          "_original_relation_type": "HAS_PROPERTY"
+          "_original_relation_type": "HAS_PROPERTY",
+          "edge_note": "Estado de fratura (FractureState) é insumo para caracterização da fratura natural."
         },
         {
           "target_id": "GEOMEC079A",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "FaultType",
-          "_original_relation_type": "HAS_PROPERTY"
+          "_original_relation_type": "HAS_PROPERTY",
+          "edge_note": "Tipologia de falha (FaultType) é insumo para caracterização da fratura natural."
         }
       ],
       "external_property_refs": [
@@ -5438,9 +5455,10 @@
         },
         {
           "target_id": "GEOMEC078",
-          "relation_type": "RELATED_TO",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "POSTEF (Parallel_to_Bedding / Perpendicular_to_Bedding)",
-          "_original_relation_type": "REFERENCED_BY"
+          "_original_relation_type": "REFERENCED_BY",
+          "edge_note": "POSTEF é insumo para caracterização de feições de acamamento."
         }
       ],
       "external_property_refs": [
@@ -5494,27 +5512,31 @@
         },
         {
           "target_id": "GEOMEC023A",
-          "relation_type": "RELATED_TO",
+          "relation_type": "PRODUCES",
           "target_label": "Análise de Ovalização",
-          "_original_relation_type": "HAS_SPECIALIZATION"
+          "_original_relation_type": "HAS_SPECIALIZATION",
+          "edge_note": "Interpretação de perfil de imagem produz observação de breakout (023A)."
         },
         {
           "target_id": "GEOMEC023B",
-          "relation_type": "RELATED_TO",
+          "relation_type": "PRODUCES",
           "target_label": "Análise de DITF",
-          "_original_relation_type": "HAS_SPECIALIZATION"
+          "_original_relation_type": "HAS_SPECIALIZATION",
+          "edge_note": "Interpretação de perfil de imagem produz observação de DITF (023B)."
         },
         {
           "target_id": "GEOMEC023C",
-          "relation_type": "RELATED_TO",
+          "relation_type": "PRODUCES",
           "target_label": "Análise de Fratura Natural",
-          "_original_relation_type": "HAS_SPECIALIZATION"
+          "_original_relation_type": "HAS_SPECIALIZATION",
+          "edge_note": "Interpretação de perfil de imagem produz observação de fratura natural (023C)."
         },
         {
           "target_id": "GEOMEC074",
-          "relation_type": "USED_WITH",
+          "relation_type": "REQUIRES",
           "target_label": "Geolog",
-          "_original_relation_type": "USES_TOOL"
+          "_original_relation_type": "USES_TOOL",
+          "edge_note": "Interpretação de perfil de imagem requer software de visualização (Geolog)."
         }
       ],
       "internal_standards": [
@@ -5585,27 +5607,31 @@
       "relationships": [
         {
           "target_id": "GEOMEC072",
-          "relation_type": "USED_WITH",
+          "relation_type": "ENABLES",
           "target_label": "Interpretação de Perfil de Imagem",
-          "_original_relation_type": "USED_IN_PROCESS"
+          "_original_relation_type": "USED_IN_PROCESS",
+          "edge_note": "Geolog habilita o fluxo de interpretação de perfil de imagem."
         },
         {
           "target_id": "GEOMEC023A",
-          "relation_type": "USED_WITH",
+          "relation_type": "ENABLES",
           "target_label": "Análise de Ovalização",
-          "_original_relation_type": "USED_IN_PROCESS"
+          "_original_relation_type": "USED_IN_PROCESS",
+          "edge_note": "Geolog habilita identificação de ovalização (breakout) em perfil de imagem."
         },
         {
           "target_id": "GEOMEC023B",
-          "relation_type": "USED_WITH",
+          "relation_type": "ENABLES",
           "target_label": "Análise de DITF",
-          "_original_relation_type": "USED_IN_PROCESS"
+          "_original_relation_type": "USED_IN_PROCESS",
+          "edge_note": "Geolog habilita identificação de fratura induzida por perfuração (DITF)."
         },
         {
           "target_id": "GEOMEC023C",
-          "relation_type": "USED_WITH",
+          "relation_type": "ENABLES",
           "target_label": "Análise de Fratura Natural",
-          "_original_relation_type": "USED_IN_PROCESS"
+          "_original_relation_type": "USED_IN_PROCESS",
+          "edge_note": "Geolog habilita identificação de fratura natural em perfil de imagem."
         }
       ],
       "osdu_mapping": null,
@@ -5684,9 +5710,10 @@
         },
         {
           "target_id": "GEOMEC008",
-          "relation_type": "USED_WITH",
+          "relation_type": "IS_INPUT_FOR",
           "target_label": "Estimativa de magnitude de SHmax",
-          "_original_relation_type": "USED_BY"
+          "_original_relation_type": "USED_BY",
+          "edge_note": "Abertura angular do breakout é insumo para estimativa de SHmax (tensão horizontal máxima)."
         }
       ],
       "sources": [
@@ -5726,9 +5753,10 @@
         },
         {
           "target_id": "GEOMEC071",
-          "relation_type": "RELATED_TO",
+          "relation_type": "INFLUENCES",
           "target_label": "Acamamento (referencial)",
-          "_original_relation_type": "REFERENCES"
+          "_original_relation_type": "REFERENCES",
+          "edge_note": "POSTEF (posição angular) influencia interpretação de acamamento em perfil de imagem."
         }
       ],
       "osdu_mapping": null,
@@ -5785,15 +5813,17 @@
         },
         {
           "target_id": "GEOMEC017",
-          "relation_type": "RELATED_TO",
+          "relation_type": "INFLUENCES",
           "target_label": "Regime de Falhas",
-          "_original_relation_type": "IS_LINKED_TO"
+          "_original_relation_type": "IS_LINKED_TO",
+          "edge_note": "Tipologia de falha influencia o regime de tensões in situ."
         },
         {
           "target_id": "GEOMEC018",
-          "relation_type": "RELATED_TO",
+          "relation_type": "INFLUENCES",
           "target_label": "Reativação de Falhas",
-          "_original_relation_type": "IS_LINKED_TO"
+          "_original_relation_type": "IS_LINKED_TO",
+          "edge_note": "Tipologia de falha influencia o potencial de reativação tectônica."
         }
       ],
       "osdu_mapping": null,
@@ -5928,9 +5958,10 @@
         },
         {
           "target_id": "GEOMEC082",
-          "relation_type": "RELATED_TO",
+          "relation_type": "DERIVED_FROM",
           "target_label": "FMS individuais",
-          "_original_relation_type": "AGGREGATES"
+          "_original_relation_type": "AGGREGATES",
+          "edge_note": "Inversão formal é derivada do conjunto de mecanismos focais de terremoto."
         }
       ],
       "osdu_mapping": null,
@@ -5977,15 +6008,17 @@
       "relationships": [
         {
           "target_id": "GEOMEC023A",
-          "relation_type": "USED_WITH",
+          "relation_type": "SUPPORTS",
           "target_label": "Análise de Ovalização",
-          "_original_relation_type": "USED_BY"
+          "_original_relation_type": "USED_BY",
+          "edge_note": "Estatística circular bimodal valida estatisticamente a interpretação de breakout."
         },
         {
           "target_id": "GEOMEC023B",
-          "relation_type": "USED_WITH",
+          "relation_type": "SUPPORTS",
           "target_label": "Análise de DITF",
-          "_original_relation_type": "USED_BY"
+          "_original_relation_type": "USED_BY",
+          "edge_note": "Estatística circular bimodal valida estatisticamente a interpretação de DITF."
         }
       ],
       "osdu_mapping": null,
