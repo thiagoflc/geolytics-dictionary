@@ -125,7 +125,7 @@ jobs:
           EOF
 
       - name: Post graph diff comment
-        uses: actions/github-script@v7
+        uses: actions/github-script@v9
         env:
           DIFF_BODY: ${{ steps.diff.outputs.body }}
         with:
