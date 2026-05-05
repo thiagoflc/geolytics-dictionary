@@ -38,8 +38,23 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e "python/[validator]"
 
-      - name: Run SHACL validation
+      - name: Run SHACL validation (default — geolytics shapes)
         run: python scripts/validate-shacl.py
+
+      - name: Run SHACL validation (F6 — 6-layer ontology invariants)
+        # Validates the live entity-graph (data/geobrain.ttl) against the
+        # F6 regra-de-ouro shapes. Hard rules must pass; warnings are
+        # tracked separately for curator review (F4/F7).
+        run: |
+          python scripts/validate-shacl.py \
+            --data data/geobrain.ttl \
+            --shapes data/ontology-layers-shapes.ttl \
+            --no-ontology
+
+      - name: Run F6 SHACL pytest regression suite
+        run: |
+          pip install pytest
+          python -m pytest tests/test_ontology_layers_shacl.py -v
 
   graph-diff:
     name: Entity graph diff

@@ -55,19 +55,19 @@ class TestOperationalEventShape(unittest.TestCase):
 
     VALID_TTL = PREFIXES + """
 geo:event_severe_slugging a geo:OperationalEvent ;
-    geo:threewLabel 3 ;
+    geo:threew_label 3 ;
     geo:label "Severe Slugging" .
 """
 
     INVALID_LABEL_TTL = PREFIXES + """
 geo:event_bad a geo:OperationalEvent ;
-    geo:threewLabel 99 ;
+    geo:threew_label 99 ;
     geo:label "Bad Event" .
 """
 
     INVALID_TRANSIENT_TTL = PREFIXES + """
 geo:event_bad_transient a geo:OperationalEvent ;
-    geo:threewLabel 103 ;
+    geo:threew_label 103 ;
     geo:label "Steady-only transient attempt" .
 """
 
@@ -86,25 +86,25 @@ geo:event_bad_transient a geo:OperationalEvent ;
 
 @unittest.skipUnless(PYSHACL_AVAILABLE, "pyshacl not installed")
 class TestSensor3WShape(unittest.TestCase):
-    """geo:Sensor3WShape — threewUnit required, threewQuantityKind in enum."""
+    """geo:Sensor3WShape — threew_unit required, threew_quantity_kind in enum."""
 
     VALID_TTL = PREFIXES + """
 geo:sensor_p_pdg a geo:Sensor3W ;
-    geo:threewUnit "Pa" ;
-    geo:threewQuantityKind "Pressure" ;
+    geo:threew_unit "Pa" ;
+    geo:threew_quantity_kind "Pressure" ;
     geo:label "P-PDG" .
 """
 
     MISSING_UNIT_TTL = PREFIXES + """
 geo:sensor_bad a geo:Sensor3W ;
-    geo:threewQuantityKind "Pressure" ;
+    geo:threew_quantity_kind "Pressure" ;
     geo:label "Bad Sensor" .
 """
 
     INVALID_KIND_TTL = PREFIXES + """
 geo:sensor_bad2 a geo:Sensor3W ;
-    geo:threewUnit "Pa" ;
-    geo:threewQuantityKind "Energy" ;
+    geo:threew_unit "Pa" ;
+    geo:threew_quantity_kind "Energy" ;
     geo:label "Bad Kind Sensor" .
 """
 
@@ -114,11 +114,11 @@ geo:sensor_bad2 a geo:Sensor3W ;
 
     def test_missing_unit_fires(self):
         conforms, _violations = _validate_ttl(self.MISSING_UNIT_TTL)
-        self.assertFalse(conforms, "Expected violation for missing threewUnit")
+        self.assertFalse(conforms, "Expected violation for missing threew_unit")
 
     def test_invalid_kind_fires(self):
         conforms, _violations = _validate_ttl(self.INVALID_KIND_TTL)
-        self.assertFalse(conforms, "Expected violation for threewQuantityKind='Energy'")
+        self.assertFalse(conforms, "Expected violation for threew_quantity_kind='Energy'")
 
 
 @unittest.skipUnless(PYSHACL_AVAILABLE, "pyshacl not installed")
@@ -127,7 +127,7 @@ class TestValveStateShape(unittest.TestCase):
 
     VALID_TTL = PREFIXES + """
 geo:obs_dhsv_closed a geo:ValveStateObservation ;
-    geo:value 0 ;
+    geo:value 0.0 ;
     geo:label "DHSV closed" .
 """
 

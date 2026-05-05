@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T19:53:58.070Z",
+    "generated": "2026-05-04T23:53:58.289Z",
     "count": 412
   },
   "entities": [
@@ -6070,7 +6070,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_A",
+            "from": "GEOMEC088",
             "relation": "constrains",
             "style": "geomec_corporate"
           },
@@ -18974,7 +18974,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_A",
+            "from": "GEOMEC088",
             "relation": "references",
             "style": "geomec_corporate"
           }
@@ -19398,6 +19398,11 @@
             "from": "GEOMEC063",
             "relation": "measures",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC067",
+            "relation": "measures",
+            "style": "geomec_corporate"
           }
         ]
       }
@@ -19539,12 +19544,17 @@
             "style": "geomec_corporate"
           },
           {
+            "from": "GEOMEC064",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
             "from": "GEOMEC066",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_B",
+            "from": "GEOMEC089",
             "relation": "supports",
             "style": "geomec_corporate"
           },
@@ -20101,7 +20111,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_A",
+            "from": "GEOMEC088",
             "relation": "amplifies",
             "style": "geomec_corporate"
           }
@@ -20609,8 +20619,8 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_B",
-            "relation": "may_reference",
+            "from": "GEOMEC089",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {
@@ -20846,7 +20856,7 @@
         ],
         "incoming": [
           {
-            "from": "GEOMEC_ROP_B",
+            "from": "GEOMEC089",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           }
@@ -20944,7 +20954,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_B",
+            "from": "GEOMEC089",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           }
@@ -22855,8 +22865,8 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "GEOMEC_ROP_A",
-            "relation": "may_contribute_to",
+            "from": "GEOMEC088",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ]
@@ -23837,6 +23847,11 @@
             "to": "GEOMEC022",
             "relation": "is_part_of",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC015",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
@@ -24036,13 +24051,18 @@
             "to": "GEOMEC022",
             "relation": "is_part_of",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC014",
+            "relation": "measures",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
       }
     },
     {
-      "id": "GEOMEC_ROP_A",
+      "id": "GEOMEC088",
       "label": "Taxa de Penetração",
       "label_en": "Rate of Penetration",
       "type": "geomec_corporate",
@@ -24131,7 +24151,7 @@
           },
           {
             "to": "GEOMEC045",
-            "relation": "may_contribute_to",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ],
@@ -24139,7 +24159,7 @@
       }
     },
     {
-      "id": "GEOMEC_ROP_B",
+      "id": "GEOMEC089",
       "label": "Relatório de Operações de Perfilagem",
       "label_en": "Well Logging Operations Report",
       "type": "geomec_corporate",
@@ -24221,7 +24241,7 @@
           },
           {
             "to": "GEOMEC023",
-            "relation": "may_reference",
+            "relation": "references",
             "style": "geomec_corporate"
           },
           {

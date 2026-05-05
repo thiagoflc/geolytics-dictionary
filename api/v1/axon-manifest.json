@@ -1,0 +1,76 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "axon-petrobras-manifest",
+  "label": "Manifest dos exports Axon Petrobras por área",
+  "version": "1.0.0",
+  "description": "Lista de glossários Axon, um por área Petrobras. Cada area_file segue o schema documentado em docs/AXON_GLOSSARY_SCHEMA.md.",
+  "areas": [
+    {
+      "id": "exploracao",
+      "label_pt": "Exploração",
+      "label_en": "Exploration",
+      "file": "data/axon/exploracao.json",
+      "status": "ingested",
+      "ingested_in": "F3 (PR #33)",
+      "source": "Axon export 2026-05-04 — grid-report-2026-05-04-13-55-24.xlsx",
+      "stats": {
+        "areas": 1,
+        "domains": 9,
+        "subjects": 10,
+        "subsubjects": 2,
+        "terms": 18
+      }
+    }
+  ],
+  "future_areas_planned": [
+    {
+      "id": "producao",
+      "label_pt": "Produção",
+      "label_en": "Production",
+      "status": "planned",
+      "expected_domains": [
+        "Operação de Poço",
+        "Elevação Artificial",
+        "Garantia de Escoamento",
+        "Tratamento de Fluidos",
+        "Medição de Produção"
+      ]
+    },
+    {
+      "id": "reservatorio",
+      "label_pt": "Reservatório",
+      "label_en": "Reservoir",
+      "status": "planned",
+      "expected_domains": [
+        "Caracterização de Reservatório",
+        "Modelagem Estática",
+        "Modelagem Dinâmica",
+        "Recuperação Avançada"
+      ]
+    },
+    {
+      "id": "geofisica",
+      "label_pt": "Geofísica",
+      "label_en": "Geophysics",
+      "status": "planned",
+      "expected_domains": [
+        "Aquisição Sísmica",
+        "Processamento",
+        "Inversão",
+        "Interpretação Sísmica"
+      ]
+    },
+    {
+      "id": "engenharia-poco",
+      "label_pt": "Engenharia de Poço",
+      "label_en": "Well Engineering",
+      "status": "planned",
+      "expected_domains": [
+        "Projeto de Poço",
+        "Perfuração",
+        "Completação",
+        "Intervenção"
+      ]
+    }
+  ]
+}

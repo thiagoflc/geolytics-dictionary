@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T19:53:58.070Z",
+    "generated": "2026-05-04T23:53:58.289Z",
     "description": "GeoBrain — complete merged dataset",
     "counts": {
       "glossary_terms": 53,
@@ -1987,7 +1987,7 @@
   ],
   "entity_graph": {
     "version": "1.1.0",
-    "generated": "2026-05-04T19:53:58.070Z",
+    "generated": "2026-05-04T23:53:58.289Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
     "nodes": [
       {
@@ -17445,7 +17445,7 @@
         "ontological_role": "well_operation"
       },
       {
-        "id": "GEOMEC_ROP_A",
+        "id": "GEOMEC088",
         "label": "Taxa de Penetração",
         "label_en": "Rate of Penetration",
         "type": "geomec_corporate",
@@ -17517,7 +17517,7 @@
         "ontological_role": "feature_observation"
       },
       {
-        "id": "GEOMEC_ROP_B",
+        "id": "GEOMEC089",
         "label": "Relatório de Operações de Perfilagem",
         "label_en": "Well Logging Operations Report",
         "type": "geomec_corporate",
@@ -27298,6 +27298,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC064",
+        "target": "GEOMEC015",
+        "relation": "is_input_for",
+        "relation_label_pt": "Estabilidade de Poço / Análise de Geohazards",
+        "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC065",
         "target": "GEOMEC022",
         "relation": "is_part_of",
@@ -27338,7 +27346,15 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_A",
+        "source": "GEOMEC067",
+        "target": "GEOMEC014",
+        "relation": "measures",
+        "relation_label_pt": "Compressibilidade de Poros",
+        "relation_label_en": "measures",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC088",
         "target": "GEOMEC019",
         "relation": "amplifies",
         "relation_label_pt": "Densidade Equivalente de Circulação",
@@ -27346,7 +27362,7 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_A",
+        "source": "GEOMEC088",
         "target": "janela-lama",
         "relation": "constrains",
         "relation_label_pt": "Janela Operacional de Lama",
@@ -27354,7 +27370,7 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_A",
+        "source": "GEOMEC088",
         "target": "GEOMEC009",
         "relation": "references",
         "relation_label_pt": "Gradiente de Colapso",
@@ -27362,15 +27378,15 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_A",
+        "source": "GEOMEC088",
         "target": "GEOMEC045",
-        "relation": "may_contribute_to",
+        "relation": "influences",
         "relation_label_pt": "Prisão de Coluna",
-        "relation_label_en": "may contribute to",
+        "relation_label_en": "influences",
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_B",
+        "source": "GEOMEC089",
         "target": "GEOMEC025",
         "relation": "is_input_for",
         "relation_label_pt": "CSD — Centro de Suporte à Decisão",
@@ -27378,7 +27394,7 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_B",
+        "source": "GEOMEC089",
         "target": "GEOMEC026A",
         "relation": "is_input_for",
         "relation_label_pt": "QPG — Quadro de Previsões Geológicas",
@@ -27386,15 +27402,15 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_B",
+        "source": "GEOMEC089",
         "target": "GEOMEC023",
-        "relation": "may_reference",
+        "relation": "references",
         "relation_label_pt": "Breakouts e Fraturas Induzidas",
-        "relation_label_en": "may reference",
+        "relation_label_en": "references",
         "style": "geomec_corporate"
       },
       {
-        "source": "GEOMEC_ROP_B",
+        "source": "GEOMEC089",
         "target": "GEOMEC015",
         "relation": "supports",
         "relation_label_pt": "Estabilidade de Poço / Geohazards",
@@ -30804,7 +30820,7 @@
   },
   "ontology_map": {
     "version": "1.1.0",
-    "generated": "2026-05-04T19:53:58.070Z",
+    "generated": "2026-05-04T23:53:58.289Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -31131,7 +31147,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.1.0",
-      "generated": "2026-05-04T19:53:58.070Z",
+      "generated": "2026-05-04T23:53:58.289Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -46010,7 +46026,7 @@
   "seismic": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-04T19:53:58.070Z",
+      "generated": "2026-05-04T23:53:58.289Z",
       "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       "module_count": 3,
       "class_count": 64,

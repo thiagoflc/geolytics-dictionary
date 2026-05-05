@@ -1,0 +1,336 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "id": "ontology-roles",
+  "label": "Classificador de papel ontológico — node.id → ontological_role",
+  "version": "1.0.0",
+  "description": "Tabela canônica de role classification para todos os 412 nós do entity-graph. Substitui as 8 helper functions hardcoded em scripts/generate.js (issue #11 da revisão da PR #35). Lookup order: (1) strict_type_to_role; (2) by_type[type] iterado em ordem (ids primeiro, depois patterns); (3) type_default_role; (4) unclassified.",
+  "_lookup_order": [
+    "strict_type_to_role[node.type] → role (single match)",
+    "by_type[node.type] → iterate role buckets; first match wins (id literal then pattern regex)",
+    "type_default_role[node.type] → fallback role",
+    "'unclassified'"
+  ],
+  "strict_type_to_role": {
+    "axon_domain": "domain_anchor",
+    "lifecycle_state": "lifecycle_state",
+    "lifecycle_outcome": "lifecycle_outcome",
+    "actor": "organizational_actor",
+    "regulatory_anchor": "regulatory_anchor",
+    "regulatory_doc": "regulatory_anchor",
+    "regulatory_event": "regulatory_anchor",
+    "regulatory_obligation": "regulatory_anchor",
+    "governance_doc": "governance_artifact",
+    "governance_committee": "governance_artifact",
+    "governance_program": "governance_artifact",
+    "portfolio_concept": "governance_artifact",
+    "project": "governance_artifact",
+    "decision_event": "governance_artifact"
+  },
+  "by_type": {
+    "geomec_corporate": [
+      {
+        "role": "feature_observation",
+        "_doc": "Pressões, gradientes, tensões, image-log feature pivots — observable rock/well states (L4)",
+        "ids": [
+          "GEOMEC001", "GEOMEC002", "GEOMEC005", "GEOMEC007", "GEOMEC008", "GEOMEC009",
+          "GEOMEC010", "GEOMEC011", "GEOMEC012", "GEOMEC014", "GEOMEC016", "GEOMEC017",
+          "GEOMEC018", "GEOMEC021", "GEOMEC024",
+          "GEOMEC023", "GEOMEC023A", "GEOMEC023B", "GEOMEC023C",
+          "GEOMEC068", "GEOMEC069", "GEOMEC070", "GEOMEC071",
+          "GEOMEC037", "GEOMEC038", "GEOMEC039", "GEOMEC040", "GEOMEC041", "GEOMEC042",
+          "GEOMEC043", "GEOMEC053A", "GEOMEC053B", "GEOMEC044", "GEOMEC045",
+          "GEOMEC077", "GEOMEC078", "GEOMEC079", "GEOMEC079A",
+          "GEOMEC081", "GEOMEC082", "GEOMEC087",
+          "GEOMEC075", "GEOMEC076",
+          "GEOMEC088"
+        ]
+      },
+      {
+        "role": "well_operation",
+        "_doc": "Operações de poço / laboratório (L2)",
+        "ids": [
+          "GEOMEC006", "GEOMEC022",
+          "GEOMEC031", "GEOMEC032", "GEOMEC033", "GEOMEC034",
+          "GEOMEC061", "GEOMEC062", "GEOMEC063", "GEOMEC064", "GEOMEC065", "GEOMEC066", "GEOMEC067",
+          "GEOMEC080",
+          "GEOMEC052B"
+        ]
+      },
+      {
+        "role": "engineering_artifact",
+        "_doc": "L6 — operational design outputs (ECD, MPD)",
+        "ids": ["GEOMEC019", "GEOMEC020", "GEOMEC036"]
+      },
+      {
+        "role": "interpretation_process",
+        "_doc": "L5 — interpretive analyses, modeling, classifications",
+        "ids": ["GEOMEC015", "GEOMEC035", "GEOMEC046", "GEOMEC072", "GEOMEC083", "GEOMEC085", "GEOMEC086", "GEOMEC027"]
+      },
+      {
+        "role": "dataset_concept",
+        "_doc": "Software systems / databases / report repositories",
+        "ids": ["GEOMEC025", "GEOMEC028", "GEOMEC029", "GEOMEC030", "GEOMEC047", "GEOMEC051", "GEOMEC074"]
+      },
+      {
+        "role": "artifact_primary",
+        "_doc": "L3 raw artifacts (BOL log, PWDa pressure)",
+        "ids": ["GEOMEC073", "GEOMEC048"]
+      },
+      {
+        "role": "equipment",
+        "_doc": "Physical hardware (PRV)",
+        "ids": ["GEOMEC052A"]
+      },
+      {
+        "role": "governance_artifact",
+        "_doc": "Governance / quality scheme / report",
+        "ids": ["GEOMEC026A", "GEOMEC084", "GEOMEC089"]
+      }
+    ],
+    "geomec_academic": [
+      {
+        "role": "feature_observation",
+        "_doc": "GM001-003 stress states; GM004 pore pressure; GM013-025 rock-mech properties / metrics / regimes",
+        "ids": [
+          "GM001", "GM002", "GM003", "GM004",
+          "GM013", "GM014", "GM015", "GM016", "GM017", "GM018", "GM019",
+          "GM020", "GM021", "GM022", "GM023", "GM024", "GM025"
+        ]
+      },
+      {
+        "role": "engineering_artifact",
+        "_doc": "GM005 mud window — engineering design output (L6)",
+        "ids": ["GM005"]
+      },
+      {
+        "role": "interpretation_process",
+        "_doc": "GM006 Mohr circle; GM007-009 failure criteria; GM010-012 MEM models (L5)",
+        "ids": ["GM006", "GM007", "GM008", "GM009", "GM010", "GM011", "GM012"]
+      },
+      {
+        "role": "well_anchor",
+        "_doc": "GM026 Wellbore as calibration point (L1)",
+        "ids": ["GM026"]
+      },
+      {
+        "role": "governance_artifact",
+        "_doc": "GM027 LaudoGeomecanico — engineering artifact / report",
+        "ids": ["GM027"]
+      }
+    ],
+    "geomec_fracture": [
+      {
+        "role": "feature_observation",
+        "_doc": "All GF### are L4 features",
+        "patterns": ["^GF\\d{3}$"]
+      }
+    ],
+    "operational": [
+      {
+        "role": "well_anchor",
+        "_doc": "L1 well anchors — physical/temporal anchors of the well",
+        "ids": [
+          "poco", "wellbore",
+          "axon-term-furo",
+          "axon-term-poco", "axon-term-poco-presal", "axon-term-poco-comprado", "axon-term-poco-nao-br"
+        ]
+      },
+      {
+        "role": "regulatory_anchor",
+        "_doc": "Spatial / contractual / regulatory anchors",
+        "ids": [
+          "bloco", "campo", "bacia-sedimentar",
+          "reservatorio", "play", "prospecto", "acumulacao",
+          "primeiro-oleo"
+        ]
+      },
+      {
+        "role": "well_operation",
+        "_doc": "L2 well operations",
+        "ids": [
+          "drilling-activity", "completacao",
+          "operacoes-geologicas",
+          "well-activity-program", "activity-plan"
+        ]
+      },
+      {
+        "role": "governance_artifact",
+        "_doc": "Plan/program templates and lifecycle/governance descriptors",
+        "ids": [
+          "activity-template", "well-activity-phase-type", "drilling-reason-type",
+          "lessons-learned", "retro-analysis", "input-elaboration",
+          "operational-monitoring", "formation-evaluation"
+        ]
+      },
+      {
+        "role": "feature_observation",
+        "_doc": "3W operational-typed nodes named event_* are observable production events",
+        "patterns": ["^event_"]
+      }
+    ],
+    "analytical": [
+      {
+        "role": "well_anchor",
+        "_doc": "L1 well anchors — Axon Termo nodes naming the well concept itself",
+        "ids": [
+          "axon-term-poco", "axon-term-furo",
+          "axon-term-poco-presal", "axon-term-poco-comprado", "axon-term-poco-nao-br"
+        ]
+      },
+      {
+        "role": "well_operation",
+        "_doc": "L2 well operations (procedure-named)",
+        "ids": [
+          "wireline-logging", "coring", "mudlogging", "cuttings-sampling", "sidewall-sampling",
+          "formation-testing", "geostopping", "mwd-lwd", "wireline-run", "lwd-run", "core-run",
+          "axon-asn-perfilagem", "axon-asn-testemunhagem", "axon-asn-mudlogging",
+          "axon-asn-op-amostras-fluido", "axon-asn-op-amostras-rocha",
+          "axon-asn-teste-formacao-aberto", "axon-asn-pressao-temperatura"
+        ]
+      },
+      {
+        "role": "artifact_primary",
+        "_doc": "L3 artefatos primários (Sample / WellLog / TestData)",
+        "ids": [
+          "testemunho", "perfil-poco",
+          "core-sample", "core-plug", "sidewall-core-sample", "cuttings-sample-detailed",
+          "fluid-sample", "amostra-fluido",
+          "mudlogging-time-series", "formation-pressure-point", "dst-interval",
+          "drilling-parameters",
+          "axon-term-amostra", "axon-term-acervo-amostras", "axon-term-amostragem-calha-prevista"
+        ]
+      },
+      {
+        "role": "feature_observation",
+        "_doc": "L4 features (geological/geochemical observations & states)",
+        "ids": [
+          "litologia", "facies-sedimentar", "topo-formacional", "trajetoria-poco",
+          "materia-organica", "maturidade-termal", "biomarcador",
+          "potencial-selante", "classe-fluido",
+          "campo-tensional", "ocorrencia-geomec",
+          "bottom-hole-pressure-type", "annular-fluid-type",
+          "gas-show-event", "kick-event", "geostopping-event"
+        ]
+      },
+      {
+        "role": "interpretation_process",
+        "_doc": "L5 interpretation processes",
+        "ids": [
+          "modelo-petrofisico", "correlacao-oleo-rocha",
+          "drx", "frx", "gc-ms", "sara", "pvt", "dna-geoquimico",
+          "axon-asn-aval-final-poco", "axon-asn-planejamento", "axon-sub-prog-aquisicao"
+        ]
+      },
+      {
+        "role": "engineering_artifact",
+        "_doc": "L6 engineering artifacts (operational design outputs)",
+        "ids": ["janela-lama", "cementing-fluid"]
+      },
+      {
+        "role": "governance_artifact",
+        "_doc": "Status-poco governance + IGP report",
+        "ids": ["axon-asn-status-poco", "axon-term-igp"]
+      },
+      {
+        "role": "well_attribute_concept",
+        "_doc": "Lâmina d'água, classifications, controlled-vocab attributes",
+        "ids": [
+          "axon-sub-dados-culturais",
+          "axon-term-lamina-agua", "axon-term-lamina-agua-rasa",
+          "axon-term-lamina-agua-profunda", "axon-term-lamina-agua-ultraprofunda",
+          "axon-term-objetivo-poco", "axon-term-classificacao-poco"
+        ]
+      },
+      {
+        "role": "regulatory_anchor",
+        "_doc": "Axon term campo (Field) — a regulatory anchor in operational sense",
+        "ids": ["axon-term-campo"]
+      }
+    ],
+    "contractual": [
+      {
+        "role": "artifact_primary",
+        "_doc": "L3 artifact primary (test data)",
+        "ids": ["teste-formacao", "tld"]
+      },
+      {
+        "role": "governance_artifact",
+        "_doc": "Reports / programs / governance docs",
+        "ids": [
+          "pem", "pte", "pad", "rfad", "aip", "cip",
+          "roa", "pag", "frame", "ogeomec", "rcsd", "qpg",
+          "bdp", "igp", "perfil-composto", "rmg", "laudo-geomecanico",
+          "document-type", "acl", "plano-desenvolvimento", "declaracao-comercialidade"
+        ]
+      },
+      {
+        "role": "regulatory_anchor",
+        "_doc": "Regulatory / contractual anchors",
+        "ids": ["contrato-ep", "rodada-licitacao", "area-desenvolvimento"]
+      },
+      {
+        "role": "well_attribute_concept",
+        "_doc": "KPI / metric concepts",
+        "ids": ["recurso", "reserva"]
+      }
+    ],
+    "instrument": [
+      {
+        "role": "regulatory_anchor",
+        "_doc": "Regulatory anchors / regulatory subsystems",
+        "ids": [
+          "sigep", "sep", "uts",
+          "regime-contratual", "periodo-exploratorio",
+          "processo-sancionador", "notificacao-descoberta",
+          "rftp", "i-engine", "dpp", "bmp",
+          "eia", "rima", "afe", "joa", "epc"
+        ]
+      },
+      {
+        "role": "dataset_concept",
+        "_doc": "Database systems / software platforms / pipelines / repositories",
+        "ids": [
+          "sirr", "bdoc", "vge", "cassandra-exata-curva-tempo",
+          "exata", "sigeo", "bdiep", "bdiap", "aida", "geodo", "gda"
+        ]
+      },
+      {
+        "role": "well_attribute_concept",
+        "_doc": "Controlled-vocabulary attribute concepts + 3W sensor channels",
+        "ids": ["unidade-medida", "log-curve-type"],
+        "patterns": ["^sensor_"]
+      },
+      {
+        "role": "well_operation",
+        "_doc": "Seismic acquisition program",
+        "ids": ["seismic-acquisition-survey"]
+      },
+      {
+        "role": "interpretation_process",
+        "_doc": "Seismic processing project",
+        "ids": ["seismic-processing-project"]
+      },
+      {
+        "role": "artifact_primary",
+        "_doc": "Wellbore trajectory artifact (L3 primary)",
+        "ids": ["wellbore-trajectory"]
+      }
+    ],
+    "equipment": [
+      {
+        "role": "engineering_artifact",
+        "_doc": "wellbore-architecture and casing-design are L6 engineering artifacts",
+        "ids": ["wellbore-architecture", "casing-design"]
+      },
+      {
+        "role": "well_attribute_concept",
+        "_doc": "facility-type — controlled-vocab attribute",
+        "ids": ["facility-type"]
+      }
+    ]
+  },
+  "type_default_role": {
+    "geological": "feature_observation",
+    "equipment": "equipment"
+  }
+}

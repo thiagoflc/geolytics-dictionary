@@ -9,12 +9,43 @@
  *   src/config/ontology.js    → ONTOLOGY
  *
  * Uso: node scripts/generate.js
+ *
+ * ─── Architectural note (PR #35 review item #8 — split-generate.js) ───
+ * Este arquivo cresceu para >6700 linhas. Próxima PR (não esta) deve dividir
+ * em módulos ESM dedicados, seguindo o padrão já estabelecido por
+ * scripts/cards-html.js e scripts/axon-manifest-loader.js (extraídos no F7
+ * e na resolução do issue #11 da revisão). Plano sugerido:
+ *
+ *   scripts/
+ *     generators/
+ *       entity-graph-builder.js   buildEntityGraph + sub-builders
+ *       geomec-corp-graph.js      buildGeomecCorporateGraph + deprecation
+ *       geomec-academic-graph.js  buildGeomecAcademicGraph (F2)
+ *       axon-glossary-graph.js    buildAxonGlossaryGraph (F3/F9)
+ *       isolated-bridges.js       buildIsolatedGeomecBridges (F4)
+ *       rag-corpus-builder.js     buildRagCorpus + emitOntologyConceptChunks
+ *     classifiers/
+ *       ontological-role.js       inferOntologicalRole + ROLE_CONFIG
+ *     loaders/                    (load* functions; axon-manifest-loader já lá)
+ *     emitters/                   ttl-serializer.js, cards-html.js já estão
+ *
+ *   generate.js permanece como orquestrador (~200 linhas), só compõe os
+ *   módulos. Splitting deve preservar topology byte-idêntica (412 nós,
+ *   940 arestas) — mesma garantia usada em F9 backwards-compat.
+ *
+ *   Não fazer este split na PR #35 porque:
+ *     1) topology já mudou (F6-F9) e o diff seria difícil de ler
+ *     2) refactor agressivo precisa de testes de regressão dedicados
+ *        antes (testes #3/#4/#10 desta PR ajudam mas não bastam para 6700 linhas)
+ *     3) split estrutural merece sua própria PR + revisão.
+ * ───────────────────────────────────────────────────────────────────
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { extractGSO } from "./gso-extract.js";
+import { loadAxonManifest } from "./axon-manifest-loader.js";
 import {
   PETROKGRAPH_BASE,
   TERM_ALIGNMENT,
@@ -1128,15 +1159,18 @@ function buildGeomecAcademicGraph(existingIds) {
 }
 
 /* ─────────────────────────────────────────────────────────────
- * AXON PETROBRAS — loaded from data/axon-petrobras-glossary.json (F3)
+ * AXON PETROBRAS — loaded from data/axon/manifest.json (F9)
+ *
+ * F3 ingeriu a única área "Exploração". F9 refatorou o loader para suportar
+ * múltiplas áreas Petrobras (Produção, Reservatório, Geofísica, Engenharia
+ * de Poço, …), cada uma em seu próprio arquivo `data/axon/<area>.json`,
+ * listadas em `data/axon/manifest.json` com `status="ingested"|"planned"`.
+ *
+ * Schema completo em docs/AXON_GLOSSARY_SCHEMA.md.
  * ───────────────────────────────────────────────────────────── */
 
-function loadAxonPetrobrasGlossary() {
-  const dataDir = path.resolve(__dirname, "..", "data");
-  const p = path.join(dataDir, "axon-petrobras-glossary.json");
-  if (!fs.existsSync(p)) return null;
-  return JSON.parse(fs.readFileSync(p, "utf8"));
-}
+/* loadAxonManifest extraído para scripts/axon-manifest-loader.js (testável
+   via tests/test_axon_manifest.test.js). Importado no topo deste arquivo. */
 
 /**
  * Builds the Axon Petrobras (Exploração) hierarchy as a sub-graph and bridges
@@ -1179,8 +1213,8 @@ function loadAxonPetrobrasGlossary() {
  * @returns {{nodes: Object[], edges: Object[]}}
  */
 function buildAxonGlossaryGraph(existingIds) {
-  const axon = loadAxonPetrobrasGlossary();
-  if (!axon) return { nodes: [], edges: [] };
+  const glossaries = loadAxonManifest();
+  if (!glossaries.length) return { nodes: [], edges: [] };
 
   const COLOR_AXON_DOMAIN = "#D4A017"; // golden — Axon Domínio super-topics
   const COLOR_ANALYTICAL = "#E67E22"; // reuse analytical palette
@@ -1235,24 +1269,30 @@ function buildAxonGlossaryGraph(existingIds) {
     nodes.push(n);
   };
 
-  /* 1. Area — emit as the Axon root. Then 9 Domínios. */
-  for (const area of axon.areas || []) {
-    addNode(mkNode(area, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 30));
-  }
-  for (const dom of axon.domains || []) {
-    addNode(mkNode(dom, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 26));
+  /* 1. Area — emit as the Axon root. Then Domínios. (Per-glossary loop.) */
+  for (const { glossary: axon } of glossaries) {
+    for (const area of axon.areas || []) {
+      addNode(mkNode(area, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 30));
+    }
+    for (const dom of axon.domains || []) {
+      addNode(mkNode(dom, "axon_domain", COLOR_AXON_DOMAIN, ["layer6"], 26));
+    }
   }
 
   /* 2. Subjects (Assuntos) — analytical, layer6 (Petrobras corporate), with
      occasional layer4 (OSDU) when there is a clear OSDU pivot via existing
-     operations they specialize. */
-  for (const sub of axon.subjects || []) {
-    addNode(mkNode(sub, "analytical", COLOR_ANALYTICAL, ["layer6"], 22));
+     operations they specialize. (Per-glossary loop.) */
+  for (const { glossary: axon } of glossaries) {
+    for (const sub of axon.subjects || []) {
+      addNode(mkNode(sub, "analytical", COLOR_ANALYTICAL, ["layer6"], 22));
+    }
   }
 
-  /* 3. Subsubjects (Subassuntos) — analytical, layer6. */
-  for (const ss of axon.subsubjects || []) {
-    addNode(mkNode(ss, "analytical", COLOR_ANALYTICAL, ["layer6"], 20));
+  /* 3. Subsubjects (Subassuntos) — analytical, layer6. (Per-glossary loop.) */
+  for (const { glossary: axon } of glossaries) {
+    for (const ss of axon.subsubjects || []) {
+      addNode(mkNode(ss, "analytical", COLOR_ANALYTICAL, ["layer6"], 20));
+    }
   }
 
   /* 4. Termos — emit only the ones that are NOT format-only attributes (those
@@ -1369,15 +1409,21 @@ function buildAxonGlossaryGraph(existingIds) {
     },
   };
 
-  for (const term of axon.terms || []) {
-    const cfg = TERM_TYPE[term.id];
-    if (!cfg) continue; // any term we explicitly chose not to materialize
-    // Skip terms that refer to an existing graph id (e.g., "igp", "campo")
-    // — we'll bridge to those instead of duplicating. The Axon term node we
-    // emit is always axon-prefixed; it's an *additional* concept node tied to
-    // the Petrobras hierarchy, not a duplicate of the existing pivot.
-    if (existingIds.has(term.id)) continue;
-    addNode(mkNode(term, cfg.type, cfg.color, cfg.geo, cfg.size));
+  /* TERM_TYPE keys are exploracao-prefixed (legacy `axon-term-*`). Future areas
+     will pass through the default classification path below (analytical, layer6,
+     size 20) until and unless the curator promotes specific terms to their own
+     entry here. */
+  for (const { glossary: axon } of glossaries) {
+    for (const term of axon.terms || []) {
+      const cfg = TERM_TYPE[term.id];
+      if (!cfg) continue; // any term we explicitly chose not to materialize
+      // Skip terms that refer to an existing graph id (e.g., "igp", "campo")
+      // — we'll bridge to those instead of duplicating. The Axon term node we
+      // emit is always axon-prefixed; it's an *additional* concept node tied
+      // to the Petrobras hierarchy, not a duplicate of the existing pivot.
+      if (existingIds.has(term.id)) continue;
+      addNode(mkNode(term, cfg.type, cfg.color, cfg.geo, cfg.size));
+    }
   }
 
   const axonIds = new Set(nodes.map((n) => n.id));
@@ -1401,22 +1447,29 @@ function buildAxonGlossaryGraph(existingIds) {
 
   const edges = [];
 
-  /* ─── A. Internal hierarchy edges from parent_id ─── */
-  const allEntries = [
-    ...(axon.areas || []),
-    ...(axon.domains || []),
-    ...(axon.subjects || []),
-    ...(axon.subsubjects || []),
-    ...(axon.terms || []),
-  ];
-  for (const e of allEntries) {
-    if (!e.parent_id) continue;
-    if (!axonIds.has(e.id)) continue; // not emitted (e.g., format-only term)
-    if (!axonIds.has(e.parent_id) && !existingIds.has(e.parent_id)) continue;
-    addEdge(e.id, e.parent_id, "is_part_of", "faz parte de", "is part of", "axon_hierarchy");
+  /* ─── A. Internal hierarchy edges from parent_id (per-glossary). ─── */
+  for (const { glossary: axon } of glossaries) {
+    const allEntries = [
+      ...(axon.areas || []),
+      ...(axon.domains || []),
+      ...(axon.subjects || []),
+      ...(axon.subsubjects || []),
+      ...(axon.terms || []),
+    ];
+    for (const e of allEntries) {
+      if (!e.parent_id) continue;
+      if (!axonIds.has(e.id)) continue; // not emitted (e.g., format-only term)
+      if (!axonIds.has(e.parent_id) && !existingIds.has(e.parent_id)) continue;
+      addEdge(e.id, e.parent_id, "is_part_of", "faz parte de", "is part of", "axon_hierarchy");
+    }
   }
 
-  /* ─── B. Existing operations specialize Axon Assuntos ─── */
+  /* ─── B. Existing operations specialize Axon Assuntos (Exploração only). ───
+     Sections B–L bridge Exploração-specific Axon IDs to existing entity-graph
+     nodes. Bridges for new areas should be added in their own labelled blocks
+     when those areas are ingested. The `specBridge` and direct `addEdge`
+     guards (axonIds.has / existingIds.has) ensure that if the Exploração
+     glossary is missing or renamed, no dangling edges are emitted. */
   const specBridge = (childId, parentId) => {
     if (!existingIds.has(childId)) return;
     if (!axonIds.has(parentId)) return;
@@ -3974,606 +4027,76 @@ function buildOntologyTypes() {
  * ───────────────────────────────────────────────────────────── */
 
 /**
- * Maps a node id with prefix `GEOMEC*` (Petrobras corporate L6 portfolio)
- * to its canonical ontological_role. Returns null if the id is not in scope.
- *
- * @param {string} id
- * @returns {string|null}
- */
-function geomecCorporateRole(id) {
-  // Pressões, gradientes, tensões — observable rock/well states (L4)
-  const featureObservationIds = new Set([
-    "GEOMEC001",
-    "GEOMEC002",
-    "GEOMEC005",
-    "GEOMEC007",
-    "GEOMEC008",
-    "GEOMEC009",
-    "GEOMEC010",
-    "GEOMEC011",
-    "GEOMEC012",
-    "GEOMEC014",
-    "GEOMEC016",
-    "GEOMEC017",
-    "GEOMEC018",
-    "GEOMEC021",
-    "GEOMEC024",
-    // image-log feature pivots and per-feature sub-classes
-    "GEOMEC023",
-    "GEOMEC023A",
-    "GEOMEC023B",
-    "GEOMEC023C",
-    "GEOMEC068",
-    "GEOMEC069",
-    "GEOMEC070",
-    "GEOMEC071",
-    "GEOMEC037",
-    "GEOMEC038",
-    "GEOMEC039",
-    "GEOMEC040",
-    "GEOMEC041",
-    "GEOMEC042",
-    "GEOMEC043",
-    "GEOMEC053A",
-    "GEOMEC053B",
-    "GEOMEC044",
-    "GEOMEC045",
-    "GEOMEC077",
-    "GEOMEC078",
-    "GEOMEC079",
-    "GEOMEC079A",
-    "GEOMEC081",
-    "GEOMEC082",
-    "GEOMEC087",
-    "GEOMEC075",
-    "GEOMEC076",
-    "GEOMEC_ROP_A",
-  ]);
-  if (featureObservationIds.has(id)) return "feature_observation";
-
-  // Operações de poço / laboratório (L2)
-  const wellOperationIds = new Set([
-    "GEOMEC006", // LOT/xLOT/FIT (operação)
-    "GEOMEC022", // Scratch test (lab op)
-    "GEOMEC031",
-    "GEOMEC032",
-    "GEOMEC033",
-    "GEOMEC034", // XLOT, AGP, Frac, DFIT
-    "GEOMEC061",
-    "GEOMEC062",
-    "GEOMEC063",
-    "GEOMEC064",
-    "GEOMEC065",
-    "GEOMEC066",
-    "GEOMEC067", // ensaios laboratoriais
-    "GEOMEC080", // sobrefuração com alívio de tensão
-    "GEOMEC052B", // Setpoint MPD / SBP (operação)
-  ]);
-  if (wellOperationIds.has(id)) return "well_operation";
-
-  // Engineering artifacts (L6)
-  const engineeringArtifactIds = new Set([
-    "GEOMEC019",
-    "GEOMEC020", // ECD, MPD design
-    "GEOMEC036", // Fórmula de ECD (design formula)
-  ]);
-  if (engineeringArtifactIds.has(id)) return "engineering_artifact";
-
-  // Interpretation processes (L5)
-  const interpretationProcessIds = new Set([
-    "GEOMEC015", // Estabilidade de Poço / análise
-    "GEOMEC035", // Modelo Geomecânico 3D (modelagem)
-    "GEOMEC046", // Faixas de risco (classificação)
-    "GEOMEC072", // Interpretação de perfil de imagem
-    "GEOMEC083", // Inversão formal de mecanismos focais
-    "GEOMEC085", // Estatística circular bimodal
-    "GEOMEC086", // Inversão de slip de falha
-    "GEOMEC027", // IMGR — índice de modelagem
-  ]);
-  if (interpretationProcessIds.has(id)) return "interpretation_process";
-
-  // Software systems / databases / report repositories (dataset_concept)
-  const datasetConceptIds = new Set([
-    "GEOMEC025", // CSD — centro de suporte à decisão
-    "GEOMEC028", // GeomecBR — simulador
-    "GEOMEC029", // GERESIM
-    "GEOMEC030", // SIGEO/SEST TR
-    "GEOMEC047", // SIMCARR
-    "GEOMEC051", // OpenWells/Atlas
-    "GEOMEC074", // Geolog (software)
-  ]);
-  if (datasetConceptIds.has(id)) return "dataset_concept";
-
-  // L3 artifact primary
-  if (id === "GEOMEC073") return "artifact_primary"; // BOL — Borehole Oriented Log
-  if (id === "GEOMEC048") return "artifact_primary"; // PWDa — pressure-while-drilling artifact
-
-  // Equipment (physical hardware)
-  if (id === "GEOMEC052A") return "equipment"; // PRV — pressure relief valve
-
-  // Governance / quality scheme / report
-  const governanceArtifactIds = new Set([
-    "GEOMEC026A", // QPG — quadro de previsões
-    "GEOMEC084", // Esquema de Qualidade WSM 2025
-    "GEOMEC_ROP_B", // Relatório de operações de perfilagem
-  ]);
-  if (governanceArtifactIds.has(id)) return "governance_artifact";
-
-  return null;
-}
-
-/**
- * Maps academic geomechanics ids (`GM*`) to their canonical role.
- * @param {string} id
- * @returns {string|null}
- */
-function geomecAcademicRole(id) {
-  // GM001-GM003 stress states; GM004 pore pressure; GM013-GM025 rock-mech
-  // properties / classification metrics / regimes — all observable feature_observation.
-  const featureObservationIds = new Set([
-    "GM001",
-    "GM002",
-    "GM003",
-    "GM004",
-    "GM013",
-    "GM014",
-    "GM015",
-    "GM016",
-    "GM017",
-    "GM018",
-    "GM019",
-    "GM020",
-    "GM021",
-    "GM022",
-    "GM023",
-    "GM024",
-    "GM025",
-  ]);
-  if (featureObservationIds.has(id)) return "feature_observation";
-
-  // GM005 mud window — engineering design output (L6)
-  if (id === "GM005") return "engineering_artifact";
-
-  // GM006 Mohr circle (graphical method); GM007-GM009 failure criteria;
-  // GM010-GM012 MEM models — interpretation processes (L5)
-  const interpretationProcessIds = new Set([
-    "GM006",
-    "GM007",
-    "GM008",
-    "GM009",
-    "GM010",
-    "GM011",
-    "GM012",
-  ]);
-  if (interpretationProcessIds.has(id)) return "interpretation_process";
-
-  // GM026 Wellbore-as-calibration-point — well anchor (L1)
-  if (id === "GM026") return "well_anchor";
-
-  // GM027 LaudoGeomecanico — engineering artifact / report
-  if (id === "GM027") return "governance_artifact";
-
-  return null;
-}
-
-/**
- * Maps fracture-pillar ids (`GF*`) — all are L4 features (feature_observation).
- * @param {string} id
- * @returns {string|null}
- */
-function geomecFractureRole(id) {
-  if (/^GF\d{3}$/.test(id)) return "feature_observation";
-  return null;
-}
-
-/**
- * Maps `operational`-typed nodes by id.
- * @param {string} id
- * @returns {string|null}
- */
-function operationalRole(id) {
-  // L1 well anchors — physical/temporal anchors of the well
-  const wellAnchorIds = new Set([
-    "poco",
-    "wellbore",
-    "axon-term-furo",
-    "axon-term-poco",
-    "axon-term-poco-presal",
-    "axon-term-poco-comprado",
-    "axon-term-poco-nao-br",
-  ]);
-  if (wellAnchorIds.has(id)) return "well_anchor";
-
-  // Spatial / contractual / regulatory anchors (regulatory_anchor)
-  const regulatoryAnchorIds = new Set([
-    "bloco",
-    "campo",
-    "bacia-sedimentar",
-    "reservatorio",
-    "play",
-    "prospecto",
-    "acumulacao",
-    "primeiro-oleo",
-  ]);
-  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
-
-  // L2 well operations
-  const wellOperationIds = new Set([
-    "drilling-activity",
-    "completacao",
-    "operacoes-geologicas",
-    "well-activity-program",
-    "activity-plan",
-  ]);
-  if (wellOperationIds.has(id)) return "well_operation";
-
-  // Plan/program templates and lifecycle/governance descriptors → governance_artifact
-  const governanceArtifactIds = new Set([
-    "activity-template",
-    "well-activity-phase-type",
-    "drilling-reason-type",
-    "lessons-learned",
-    "retro-analysis",
-    "input-elaboration",
-    "operational-monitoring",
-    "formation-evaluation",
-  ]);
-  if (governanceArtifactIds.has(id)) return "governance_artifact";
-
-  // 3W operational-typed nodes named `event_*` are observable production events
-  if (/^event_/.test(id)) return "feature_observation";
-
-  return null;
-}
-
-/**
- * Maps `analytical`-typed nodes by id. Disambiguates operations from artifacts
- * from interpretation outcomes per docs/ONTOLOGY_LAYERS.md §3.
- *
- * Borderline decisions:
- *  - wireline-logging / coring / mudlogging / etc. → well_operation (the
- *    operation/process; the artifact it produces is captured by adjacent
- *    `*-sample` / `mudlogging-time-series` / `formation-pressure-point` ids).
- *  - mudlogging-time-series → artifact_primary (the data series, not the op).
- *  - campo-tensional → feature_observation (the stress field state).
- *  - janela-lama → engineering_artifact (the operational window).
- *  - laudo-geomecanico / IGP / PAG / QPG → governance_artifact (reports).
- *
- * @param {string} id
- * @param {string} label
- * @returns {string|null}
- */
-function analyticalRole(id, label) {
-  // L1 well anchors (Axon Termo nodes naming the well concept itself).
-  // These are typed `analytical` in the source but are the canonical
-  // term entries for the Poço/Furo L1 anchor — see docs/ONTOLOGY_LAYERS.md §3.
-  const wellAnchorIds = new Set([
-    "axon-term-poco",
-    "axon-term-furo",
-    "axon-term-poco-presal",
-    "axon-term-poco-comprado",
-    "axon-term-poco-nao-br",
-  ]);
-  if (wellAnchorIds.has(id)) return "well_anchor";
-
-  // L2 well operations (procedure-named)
-  const wellOperationIds = new Set([
-    "wireline-logging",
-    "coring",
-    "mudlogging",
-    "cuttings-sampling",
-    "sidewall-sampling",
-    "formation-testing",
-    "geostopping",
-    "mwd-lwd",
-    "wireline-run",
-    "lwd-run",
-    "core-run",
-    "axon-asn-perfilagem",
-    "axon-asn-testemunhagem",
-    "axon-asn-mudlogging",
-    "axon-asn-op-amostras-fluido",
-    "axon-asn-op-amostras-rocha",
-    "axon-asn-teste-formacao-aberto",
-    "axon-asn-pressao-temperatura",
-  ]);
-  if (wellOperationIds.has(id)) return "well_operation";
-
-  // L3 artefatos primários (Sample / WellLog / TestData)
-  const artifactPrimaryIds = new Set([
-    "testemunho",
-    "perfil-poco",
-    "core-sample",
-    "core-plug",
-    "sidewall-core-sample",
-    "cuttings-sample-detailed",
-    "fluid-sample",
-    "amostra-fluido",
-    "mudlogging-time-series",
-    "formation-pressure-point",
-    "dst-interval",
-    "drilling-parameters",
-    "axon-term-amostra",
-    "axon-term-acervo-amostras",
-    "axon-term-amostragem-calha-prevista",
-  ]);
-  if (artifactPrimaryIds.has(id)) return "artifact_primary";
-
-  // L4 features (geological/geochemical observations & states)
-  const featureObservationIds = new Set([
-    "litologia",
-    "facies-sedimentar",
-    "topo-formacional",
-    "trajetoria-poco",
-    "materia-organica",
-    "maturidade-termal",
-    "biomarcador",
-    "potencial-selante",
-    "classe-fluido",
-    "campo-tensional",
-    "ocorrencia-geomec",
-    "bottom-hole-pressure-type",
-    "annular-fluid-type",
-    "gas-show-event",
-    "kick-event",
-    "geostopping-event",
-  ]);
-  if (featureObservationIds.has(id)) return "feature_observation";
-
-  // L5 interpretation processes
-  const interpretationProcessIds = new Set([
-    "modelo-petrofisico",
-    "correlacao-oleo-rocha",
-    "drx",
-    "frx",
-    "gc-ms",
-    "sara",
-    "pvt",
-    "dna-geoquimico",
-    "axon-asn-aval-final-poco",
-    "axon-asn-planejamento",
-    "axon-sub-prog-aquisicao",
-  ]);
-  if (interpretationProcessIds.has(id)) return "interpretation_process";
-
-  // L6 engineering artifacts (operational design outputs)
-  const engineeringArtifactIds = new Set(["janela-lama", "cementing-fluid"]);
-  if (engineeringArtifactIds.has(id)) return "engineering_artifact";
-
-  // Governance/lifecycle/state descriptors and well-attribute concepts
-  if (id === "axon-asn-status-poco") return "governance_artifact";
-  if (id === "axon-sub-dados-culturais") return "well_attribute_concept";
-
-  // Lâmina d'água and classifications — controlled-vocab attributes (well_attribute_concept)
-  const wellAttributeConceptIds = new Set([
-    "axon-term-lamina-agua",
-    "axon-term-lamina-agua-rasa",
-    "axon-term-lamina-agua-profunda",
-    "axon-term-lamina-agua-ultraprofunda",
-    "axon-term-objetivo-poco",
-    "axon-term-classificacao-poco",
-  ]);
-  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
-
-  // Axon term campo (Field) — a regulatory anchor in operational sense
-  if (id === "axon-term-campo") return "regulatory_anchor";
-
-  // IGP report — governance artifact
-  if (id === "axon-term-igp") return "governance_artifact";
-
-  return null;
-}
-
-/**
- * Maps `contractual`-typed nodes. Reports → governance_artifact;
- * test data → artifact_primary; lifecycle / regulatory obligations →
- * regulatory_anchor; service descriptions → well_operation.
- * @param {string} id
- * @returns {string|null}
- */
-function contractualRole(id) {
-  // L3 artifact primary (test data)
-  const artifactPrimaryIds = new Set(["teste-formacao", "tld"]);
-  if (artifactPrimaryIds.has(id)) return "artifact_primary";
-
-  // Reports / programs / governance docs
-  const governanceArtifactIds = new Set([
-    "pem",
-    "pte",
-    "pad",
-    "rfad",
-    "aip",
-    "cip",
-    "roa",
-    "pag",
-    "frame",
-    "ogeomec",
-    "rcsd",
-    "qpg",
-    "bdp",
-    "igp",
-    "perfil-composto",
-    "rmg",
-    "laudo-geomecanico",
-    "document-type",
-    "acl",
-    "plano-desenvolvimento",
-    "declaracao-comercialidade",
-  ]);
-  if (governanceArtifactIds.has(id)) return "governance_artifact";
-
-  // Regulatory / contractual anchors
-  const regulatoryAnchorIds = new Set(["contrato-ep", "rodada-licitacao", "area-desenvolvimento"]);
-  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
-
-  // KPI / metric concepts
-  const wellAttributeConceptIds = new Set(["recurso", "reserva"]);
-  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
-
-  return null;
-}
-
-/**
- * Maps `instrument`-typed nodes. Distinguishes regulatory systems,
- * databases/software (dataset_concept), regulatory anchors, and physical
- * sensor measurands (which become well_attribute_concept since they are
- * controlled-vocab measurand identifiers).
- * @param {string} id
- * @returns {string|null}
- */
-function instrumentRole(id) {
-  // Regulatory anchors / regulatory subsystems
-  const regulatoryAnchorIds = new Set([
-    "sigep",
-    "sep",
-    "uts",
-    "regime-contratual",
-    "periodo-exploratorio",
-    "processo-sancionador",
-    "notificacao-descoberta",
-    "rftp",
-    "i-engine",
-    "dpp",
-    "bmp",
-    "eia",
-    "rima",
-    "afe",
-    "joa",
-    "epc",
-  ]);
-  if (regulatoryAnchorIds.has(id)) return "regulatory_anchor";
-
-  // Database systems / software platforms / pipelines / repositories
-  const datasetConceptIds = new Set([
-    "sirr",
-    "bdoc",
-    "vge",
-    "cassandra-exata-curva-tempo",
-    "exata",
-    "sigeo",
-    "bdiep",
-    "bdiap",
-    "aida",
-    "geodo",
-    "gda",
-  ]);
-  if (datasetConceptIds.has(id)) return "dataset_concept";
-
-  // Controlled-vocabulary attribute concepts
-  const wellAttributeConceptIds = new Set(["unidade-medida", "log-curve-type"]);
-  if (wellAttributeConceptIds.has(id)) return "well_attribute_concept";
-
-  // Seismic acquisition/processing — well_operation (acquisition program)
-  // and dataset_concept (processing project) respectively.
-  if (id === "seismic-acquisition-survey") return "well_operation";
-  if (id === "seismic-processing-project") return "interpretation_process";
-
-  // Wellbore trajectory artifact — L3 primary
-  if (id === "wellbore-trajectory") return "artifact_primary";
-
-  // 3W sensor channels — measurand identifiers (well_attribute_concept).
-  if (/^sensor_/.test(id)) return "well_attribute_concept";
-
-  return null;
-}
-
-/**
- * Maps `equipment`-typed and `geological`-typed defaults.
- * @param {string} id
- * @returns {string|null}
- */
-function equipmentRole(id) {
-  // wellbore-architecture and casing-design are L6 engineering artifacts
-  if (id === "wellbore-architecture" || id === "casing-design") {
-    return "engineering_artifact";
-  }
-  if (id === "facility-type") return "well_attribute_concept";
-  // axon-term-sonda → equipment (Sonda is the rig)
-  return "equipment";
-}
-
-/**
- * Top-level rule-based role classifier. Returns a canonical `ontological_role`
- * value or `"unclassified"` if no rule applies.
+ * Top-level rule-based role classifier driven by data/ontology-roles.json.
  *
  * Order:
- *   1. Strict type-based rules (axon_domain, lifecycle_state, lifecycle_outcome,
- *      actor, regulatory_*, equipment, governance_*, portfolio_concept,
- *      project, decision_event)
- *   2. Geomechanics-specific id-prefixed rules
- *   3. Per-type id-based rules (operational, analytical, contractual,
- *      instrument, equipment)
- *   4. Type-default fallbacks (geological → feature_observation, etc.)
+ *   1. strict_type_to_role[node.type] — single-value type-to-role map
+ *      (axon_domain → domain_anchor, actor → organizational_actor, etc.)
+ *   2. by_type[node.type] — iterate role buckets in declaration order;
+ *      first match wins. Each bucket can carry `ids` (literal match) and
+ *      `patterns` (regex strings). Literal ids are checked before patterns.
+ *   3. type_default_role[node.type] — fallback role for the type
+ *      (geological → feature_observation, equipment → equipment).
+ *   4. "unclassified" — when no rule applies.
  *
- * @param {{id:string, type:string, label?:string, definition?:string}} node
- * @returns {string} canonical `ontological_role` (or `"unclassified"`)
+ * Manual overrides (a node already carrying an explicit `ontological_role`)
+ * are respected by annotateOntologicalRoles() and never reclassified.
+ *
+ * Canonical role values (see docs/ONTOLOGY_LAYERS.md):
+ *   well_anchor, well_operation, artifact_primary, feature_observation,
+ *   interpretation_process, engineering_artifact, regulatory_anchor,
+ *   organizational_actor, domain_anchor, well_attribute_concept,
+ *   equipment, governance_artifact, dataset_concept, lifecycle_state,
+ *   lifecycle_outcome, kpi_metric, unclassified
+ *
+ * @param {{id:string, type:string, label?:string}} node
+ * @returns {string} role
  */
+
+const ROLE_CONFIG = (() => {
+  const p = path.join(path.resolve(__dirname, "..", "data"), "ontology-roles.json");
+  if (!fs.existsSync(p)) {
+    throw new Error(`data/ontology-roles.json missing — required for inferOntologicalRole`);
+  }
+  return JSON.parse(fs.readFileSync(p, "utf8"));
+})();
+
+/* Compile patterns once at module load for performance. Pre-build Sets for
+   id-based lookups so the inner loop is O(1) per bucket. */
+const ROLE_COMPILED = (() => {
+  const compiled = {};
+  for (const [type, buckets] of Object.entries(ROLE_CONFIG.by_type || {})) {
+    compiled[type] = (buckets || []).map((b) => ({
+      role: b.role,
+      ids: new Set(b.ids || []),
+      patterns: (b.patterns || []).map((p) => new RegExp(p)),
+    }));
+  }
+  return compiled;
+})();
+
 function inferOntologicalRole(node) {
   const id = node.id;
   const t = node.type;
-  const label = node.label || "";
 
-  // 1. Strict type-based rules
-  if (t === "axon_domain") return "domain_anchor";
-  if (t === "lifecycle_state") return "lifecycle_state";
-  if (t === "lifecycle_outcome") return "lifecycle_outcome";
-  if (t === "actor") return "organizational_actor";
-  if (
-    t === "regulatory_anchor" ||
-    t === "regulatory_doc" ||
-    t === "regulatory_event" ||
-    t === "regulatory_obligation"
-  ) {
-    return "regulatory_anchor";
-  }
-  if (
-    t === "governance_doc" ||
-    t === "governance_committee" ||
-    t === "governance_program" ||
-    t === "portfolio_concept" ||
-    t === "project" ||
-    t === "decision_event"
-  ) {
-    return "governance_artifact";
+  // 1. Strict type-based rules — single lookup, highest precedence.
+  const strict = ROLE_CONFIG.strict_type_to_role[t];
+  if (strict) return strict;
+
+  // 2. Per-type id/pattern rules — iterate role buckets in declared order.
+  const buckets = ROLE_COMPILED[t];
+  if (buckets) {
+    for (const b of buckets) {
+      if (b.ids.has(id)) return b.role;
+      for (const re of b.patterns) {
+        if (re.test(id)) return b.role;
+      }
+    }
   }
 
-  // 2. Geomec-specific (id prefix)
-  if (t === "geomec_corporate") {
-    const r = geomecCorporateRole(id);
-    if (r) return r;
-  }
-  if (t === "geomec_academic") {
-    const r = geomecAcademicRole(id);
-    if (r) return r;
-  }
-  if (t === "geomec_fracture") {
-    const r = geomecFractureRole(id);
-    if (r) return r;
-  }
-
-  // 3. Per-type id-based rules
-  if (t === "operational") {
-    const r = operationalRole(id);
-    if (r) return r;
-  }
-  if (t === "analytical") {
-    const r = analyticalRole(id, label);
-    if (r) return r;
-  }
-  if (t === "contractual") {
-    const r = contractualRole(id);
-    if (r) return r;
-  }
-  if (t === "instrument") {
-    const r = instrumentRole(id);
-    if (r) return r;
-  }
-  if (t === "equipment") {
-    return equipmentRole(id);
-  }
-
-  // 4. Type-default fallbacks
-  if (t === "geological") return "feature_observation";
+  // 3. Type-default fallback.
+  const fallback = ROLE_CONFIG.type_default_role[t];
+  if (fallback) return fallback;
 
   return "unclassified";
 }
@@ -4828,7 +4351,12 @@ function buildEntityGraph() {
     nodes[idx].source_reference = existing.concat(refs);
   }
 
-  /* F3 — Axon Petrobras Exploração glossary (data/axon-petrobras-glossary.json).
+  /* F3 — Axon Petrobras Exploração glossary. F9 — generalized to multi-area
+     scaffolding: loader reads data/axon/manifest.json and folds in every area
+     listed with status="ingested" (today: only `exploracao`; future: produção,
+     reservatório, geofísica, engenharia-poço — see data/axon/manifest.json
+     and docs/AXON_GLOSSARY_SCHEMA.md).
+
      Adds the 4-level Domínio → Assunto → Subassunto → Termo hierarchy as a
      sub-graph of `axon_domain`-typed Domínios plus analytical/equipment/
      geological Assuntos and Termos, then bridges:
@@ -5886,7 +5414,636 @@ function buildRagCorpus() {
     lines.push(chunk);
   }
 
+  /* type=ontology_concept — F8 ontology meta chunks (regra de ouro, 6 layers,
+   * roles, bridges, predicates, project metrics). Emits concept-level chunks
+   * derived from docs/ONTOLOGY_LAYERS.md and docs/ONTOLOGY_PREDICATES.md so
+   * the RAG agent can answer questions about the ontological model itself.
+   */
+  emitOntologyConceptChunks(lines);
+
   return lines.map((l) => JSON.stringify(l)).join("\n") + "\n";
+}
+
+/* ─────────────────────────────────────────────────────────────
+ * F8 — Ontology concept chunks (regra de ouro + 6 layers + roles
+ * + bridges + predicates + metrics).
+ *
+ * Source: docs/ONTOLOGY_LAYERS.md, docs/ONTOLOGY_PREDICATES.md,
+ * data/entity-graph.json (role distribution & node IDs).
+ *
+ * Emits chunks with `type: "ontology_concept"` so the RAG agent can answer
+ * meta questions like "qual a regra de ouro?", "qual o papel ontológico de
+ * janela-lama?", or "quais predicados ligam features ao poço?". These chunks
+ * are concept-level (not entity-bound) and complement the existing
+ * `ontology_layer` chunks (which describe data-source layers L1–L7, not the
+ * BFO-style L1–L6 ontological model).
+ *
+ * Each chunk is self-contained: the LLM retrieves them individually, so the
+ * reader does not need to fetch other chunks to make sense of the answer.
+ *
+ * @param {Array} lines RAG corpus accumulator (mutated in place).
+ * @returns {void}
+ */
+function emitOntologyConceptChunks(lines) {
+  const SOURCE_LAYERS = "docs/ONTOLOGY_LAYERS.md";
+  const SOURCE_PREDS = "docs/ONTOLOGY_PREDICATES.md";
+
+  const push = (id, subcategory, text, extra = {}) => {
+    lines.push({
+      id,
+      type: "ontology_concept",
+      text: text.trim(),
+      metadata: {
+        subcategory,
+        source: extra.source || SOURCE_LAYERS,
+        ...(extra.layer ? { layer: extra.layer } : {}),
+        ...(extra.role ? { ontological_role: extra.role } : {}),
+        ...(extra.tags ? { tags: extra.tags } : {}),
+        ...(extra.entities ? { entities: extra.entities } : {}),
+        priority: "high",
+      },
+    });
+  };
+
+  /* ── A. Regra de ouro ────────────────────────────────────── */
+  push(
+    "ontology_rule_golden",
+    "golden_rule",
+    `Regra de ouro do GeoBrain: o Poço (Well) é uma ÂNCORA FÍSICA E TEMPORAL, não um contêiner semântico. ` +
+      `Tudo que "vem do poço" — amostras, perfis, dados de teste, observações geológicas, interpretações, ` +
+      `projetos de engenharia — passa por uma operação explícita ou implícita modelada como WellOperation (L2). ` +
+      `O Poço fornece localização (predicado is_location_of, inferido) e contexto temporal (engaged_by), mas ` +
+      `NÃO classifica diretamente artefatos analíticos, datasets ou módulos. Toda classificação semântica ` +
+      `acontece nas camadas L2–L5; a camada L6 (engineering_artifact) expressa artefatos de engenharia em ` +
+      `paralelo ao Poço, não dentro dele.\n\n` +
+      `Anti-padrão (Q7): o nó "poco" carregava o campo joined_by_modules apontando para módulos analíticos ` +
+      `como OGEOMEC, FRX, DRX. Isso violava a regra de ouro porque o Poço não classifica datasets. O vínculo ` +
+      `correto é SamplingOperation (L2) → generates → Sample (L3) → consumed_by → InterpretationProcess (L5, ` +
+      `ex.: OGEOMEC). A migração foi executada em F4, removendo joined_by_modules de "poco" e materializando ` +
+      `as arestas explícitas. Quando vale a regra: sempre que houver tentação de pendurar um dataset, módulo ` +
+      `ou interpretação diretamente no nó "poco", insira a operação intermediária (L2) e o artefato (L3).`,
+    { tags: ["regra_de_ouro", "Q7", "anti_pattern"], entities: ["poco"] }
+  );
+
+  /* ── B. 6 layers — one chunk per layer ──────────────────── */
+  push(
+    "ontology_layer_l1_well_anchor",
+    "ontology_layer",
+    `Camada L1 — Well (well_anchor). Definição: entidade física perfurada com finalidade petrolífera (Well) ` +
+      `ou não-petrolífera (Borehole, irmão de Well). Carrega coordenadas, datums, identificadores ANP/operadora, ` +
+      `programa de atividades e fases de ciclo de vida. Em BFO equivale a bfo:material entity (subclasse de ` +
+      `bfo:object ou bfo:fiat object part do subsolo); endurante físico que perdura no tempo.\n\n` +
+      `ontological_role canônico: well_anchor (subtipo opcional: borehole). 8 nós no grafo carregam este papel.\n\n` +
+      `Exemplos no grafo: poco ("Poço"), wellbore ("Trecho Perfurado"), wellbore-architecture, ` +
+      `wellbore-trajectory, wellbore-marker-set, axon-term-furo (Furo, irmão Borehole), GM026 ` +
+      `(WellboreInterval — instância L1).\n\n` +
+      `Predicados canônicos. Saída: engaged_by → WellOperation (L2); is_location_of → * (inferido). ` +
+      `Entrada: applies_to ← WellEngineeringArtifact (L6); observed_in ← GeologicalFeature (L4); ` +
+      `acquired_from ← WellLog (L3). O que L1 NÃO faz: não classifica datasets nem módulos diretamente ` +
+      `(ver regra de ouro).`,
+    { layer: "L1", role: "well_anchor", entities: ["poco", "wellbore", "axon-term-furo", "GM026"] }
+  );
+
+  push(
+    "ontology_layer_l2_well_operation",
+    "ontology_layer",
+    `Camada L2 — WellOperation (well_operation). Definição: processo (BFO bfo:process) executado no contexto ` +
+      `do poço, com início, fim e papéis definidos. Inclui drilling, sampling, logging, well-test, completion, ` +
+      `production e intervention. Quando há plano executivo, é uma iao:planned process.\n\n` +
+      `ontological_role canônico: well_operation. 39 nós no grafo carregam este papel.\n\n` +
+      `Exemplos no grafo: drilling-activity ("Atividade de Perfuração"), coring ("Testemunhagem"), ` +
+      `wireline-logging ("Perfilagem a Cabo"), mudlogging ("Mudlogging"), cuttings-sampling ` +
+      `("Coleta de Calha"), sidewall-sampling ("Amostragem Lateral SWC"), formation-testing ` +
+      `("Teste de Formação"), wireline-run, core-run, completacao.\n\n` +
+      `Predicados canônicos. Entrada: engaged_by ← Well (L1); executes ← ServiceContract; ` +
+      `performed_by ← Sonda. Saída: generates → Sample | WellLog | TestData (L3); occurs_in → Well; ` +
+      `produces → *. Mapeamento Axon Petrobras: subassuntos "Operação de Perfilagem", ` +
+      `"Operação de Testemunhagem", "Operações de Mudlogging", "Avaliação final de poço" e ` +
+      `"Operações em amostras de fluido/rocha" do Domínio "Aquisição de dados geológicos" mapeiam ` +
+      `diretamente para subtipos de WellOperation.`,
+    {
+      layer: "L2",
+      role: "well_operation",
+      entities: ["wireline-logging", "coring", "mudlogging", "formation-testing"],
+    }
+  );
+
+  push(
+    "ontology_layer_l3_artifact_primary",
+    "ontology_layer",
+    `Camada L3 — Artefatos Primários (artifact_primary). Definição: produto material ou informacional ` +
+      `imediatamente gerado por uma WellOperation (L2), antes de qualquer interpretação. Três subclasses ` +
+      `principais:\n` +
+      `- Sample: amostra física (testemunho, plugue, calha, SWC, fluido). Em BFO, bfo:material entity.\n` +
+      `- WellLog: curva ou perfil registrado no tempo/profundidade. Em SOSA+IAO, sosa:Result + ` +
+      `iao:information artifact (agregado de observações sosa:Observation em meio digital).\n` +
+      `- TestData: séries temporais e tabelas de teste de formação/produção. Análogo ao WellLog.\n\n` +
+      `ontological_role canônico: artifact_primary. 20 nós no grafo carregam este papel.\n\n` +
+      `Exemplos no grafo. Sample: core-sample, sidewall-core-sample, cuttings-sample-detailed, core-plug, ` +
+      `fluid-sample, amostra-fluido, testemunho. WellLog: perfil-poco, log-curve-type, mudlogging-time-series, ` +
+      `pag ("Perfil de Acompanhamento Geológico"), perfil-composto. TestData: teste-formacao, ` +
+      `formation-testing (operação que produz o resultado).\n\n` +
+      `Predicados canônicos. Entrada: generated_by ← WellOperation (inverso de generates); ` +
+      `acquired_from → Well (somente WellLog e TestData); derived_from → *. Saída: ` +
+      `consumed_by → InterpretationProcess (preferido) ou is_input_for → *; stored_in → DataStore. ` +
+      `Relação com processing_levels: artefatos primários têm processing_levels=primario em ` +
+      `data/ontology-types.json.`,
+    {
+      layer: "L3",
+      role: "artifact_primary",
+      entities: ["core-sample", "cuttings-sample-detailed", "fluid-sample", "perfil-poco"],
+    }
+  );
+
+  push(
+    "ontology_layer_l4_feature_observation",
+    "ontology_layer",
+    `Camada L4 — GeologicalFeature (feature_observation). Definição: feature geológica reconhecida pelo ` +
+      `intérprete sobre artefatos primários. Inclui breakouts, DITFs (drilling-induced tensile fractures), ` +
+      `fraturas naturais, acamamento/bedding, contatos litológicos, unidades estratigráficas e superfícies ` +
+      `de correlação. Em BFO, são bfo:fiat object part ou bfo:site, projetados sobre o trecho perfurado.\n\n` +
+      `ontological_role canônico: feature_observation. 120 nós no grafo carregam este papel — é o role com ` +
+      `maior contagem, refletindo o foco geológico do dicionário.\n\n` +
+      `Exemplos no grafo: litologia ("Litologia"), formacao ("Formação"), idade-geologica, ` +
+      `sistema-deposicional, ambiente, presal, falha (Falha Geológica), GEOMEC068 (FraturaNatural), ` +
+      `GF015 (DITF — fratura induzida por perfuração). Features estruturais como breakouts e fraturas ` +
+      `vivem aqui após o split feature/processo da v1.6.2 do módulo geomecânico.\n\n` +
+      `Predicados canônicos. Entrada: produced_by ← InterpretationProcess (inverso de produces); ` +
+      `derived_from → Sample | WellLog. Saída: observed_in → Well; correlated_with → GeologicalFeature; ` +
+      `intersects → Wellbore (necessário para image-log e interpretação geomecânica).`,
+    {
+      layer: "L4",
+      role: "feature_observation",
+      entities: ["litologia", "falha", "GEOMEC068", "GF015"],
+    }
+  );
+
+  push(
+    "ontology_layer_l5_interpretation_process",
+    "ontology_layer",
+    `Camada L5 — InterpretationProcess (interpretation_process). Definição: processo cognitivo ` +
+      `(BFO bfo:process intersectado com iao:planned process) que consome artefatos L3 e produz features L4 ` +
+      `ou produtos derivados. Inclui interpretação litológica, estratigráfica, petrofísica, geomecânica e de ` +
+      `image-log. Em BFO/IAO, consome iao:information artifact e produz iao:information content entity.\n\n` +
+      `ontological_role canônico: interpretation_process. 27 nós no grafo carregam este papel.\n\n` +
+      `Exemplos no grafo: GM010, GM011, GM012 (modelos MEM 1D — construção do Mechanical Earth Model), ` +
+      `GEOMEC072 (interpretação geomecânica), GEOMEC086 (Inversão de Slip de Falha Geológica), drx ` +
+      `(análise por difração de raios-X), frx (fluorescência de raios-X), interpretação litológica de calha, ` +
+      `interpretação petrofísica, interpretação de image-log. mudlogging-time-series é fronteira ` +
+      `(artefato L3/processo L5).\n\n` +
+      `Predicados canônicos. Entrada: consumes ← Sample | WellLog | TestData; based_on ← Standard; ` +
+      `requires_input ← *. Saída: produces → GeologicalFeature | InterpretedDataset; estimates → *; ` +
+      `interpreted_into → *. Distinção fina com processing_levels: L5 é o processo cognitivo, enquanto ` +
+      `processing_levels=interpretado qualifica o ESTADO do artefato resultante. Os dois eixos são ` +
+      `complementares.`,
+    {
+      layer: "L5",
+      role: "interpretation_process",
+      entities: ["GM010", "GM011", "GM012", "GEOMEC072", "GEOMEC086", "drx", "frx"],
+    }
+  );
+
+  push(
+    "ontology_layer_l6_engineering_artifact",
+    "ontology_layer",
+    `Camada L6 — WellEngineeringArtifact (engineering_artifact). Definição: artefato de design ou plano de ` +
+      `execução PARALELO ao Poço, NÃO contido nele. Inclui well design, casing program, mud program, BHA, ` +
+      `completion design, programas de fluido, esquemas de qualidade. Em BFO/IAO, são iao:plan specification ` +
+      `ou iao:directive information entity.\n\n` +
+      `ontological_role canônico: engineering_artifact. 8 nós no grafo carregam este papel no eixo de ` +
+      `design; o restante do portfólio Petrobras corporativo (módulo geomec_corporate) tem 89 entidades L6 ` +
+      `expostas separadamente em data/geomechanics-corporate.json.\n\n` +
+      `Exemplos no grafo: GM005 (mud window — janela de lama de design), casing-design, ` +
+      `well-activity-program, well-activity-phase-type, wellbore-architecture, janela-lama ` +
+      `("Janela de Lama" — Q-decision: tratada como L6 mesmo computada de gradientes observados), ` +
+      `cementing-fluid, annular-fluid-type, drilling-parameters, GEOMEC020 (MPD — Managed Pressure Drilling), ` +
+      `GEOMEC084 (Esquema de Qualidade WSM 2025).\n\n` +
+      `Predicados canônicos. Saída: applies_to → Well (L1); supports → WellOperation (L2); ` +
+      `constrains → WellOperation (L2). Entrada: governed_by ← Standard | RegulatoryAnchor; ` +
+      `is_input_for → *.`,
+    {
+      layer: "L6",
+      role: "engineering_artifact",
+      entities: ["GM005", "casing-design", "GEOMEC020", "janela-lama", "GEOMEC084"],
+    }
+  );
+
+  /* ── C. Auxiliary roles (papéis fora das 6 camadas) ─────── */
+  push(
+    "ontology_role_regulatory_organizational",
+    "auxiliary_role",
+    `Papéis auxiliares: regulatory_anchor e organizational_actor. Estes são roles fora do eixo Poço → ` +
+      `Operação → Artefato → Feature → Interpretação → Engenharia. Cobrem o aparato institucional que ` +
+      `governa o domínio.\n\n` +
+      `regulatory_anchor: marcos regulatórios fixos — entidade reguladora, lei, sistema de governança, ` +
+      `vocabulário oficial. 32 nós no grafo. Exemplos: anp (Agência Nacional do Petróleo), sigep ` +
+      `(Sistema de Gestão de Exploração e Produção), sep (Superintendência de Exploração e Produção), ` +
+      `uts (Unidade Territorial Sedimentar). Predicado característico: governs/governed_by.\n\n` +
+      `organizational_actor: ator organizacional (operadora, regulador, terceirizado, comitê interno). ` +
+      `8 nós no grafo. Cobre nós com type=actor (operadoras, parceiros) e type=governance_committee ` +
+      `(comitês internos da Petrobras). Predicados: operates, performs, executes.`,
+    {
+      role: "regulatory_anchor",
+      entities: ["anp", "sigep", "sep", "uts"],
+      tags: ["auxiliary_role"],
+    }
+  );
+
+  push(
+    "ontology_role_domain_anchor",
+    "auxiliary_role",
+    `Papel auxiliar: domain_anchor. Super-tópico do tipo Domínio Axon Petrobras (Geomecânica, Geologia, ` +
+      `Geofísica, Geodésia, Avaliação de Formações e Petrofísica, Interpretação Exploratória, Acervo e ` +
+      `Movimentação de Amostras, Aquisição de Dados Geológicos, Blocos e Parcerias). Usado como nó de ` +
+      `ORGANIZAÇÃO, não como entidade física. Indexa subassuntos e termos das demais camadas — não tem ` +
+      `extensão (instâncias) próprias.\n\n` +
+      `10 nós no grafo carregam ontological_role=domain_anchor. Foram materializados em F3 com prefixo ` +
+      `axon-domain-* (ex.: axon-domain-geomecanica, axon-domain-geologia). Cada Domínio Axon agrega ` +
+      `Assuntos → Subassuntos → Termos; Assuntos viram L2 ou L5 conforme natureza, Termos folha viram L3, ` +
+      `L4 ou L6 conforme semântica (ver mapeamento Axon → camadas em docs/ONTOLOGY_LAYERS.md §6).\n\n` +
+      `O role domain_anchor existe para preservar a estrutura editorial Petrobras sem competir com a ` +
+      `tipologia ontológica. Predicados: indexes, contains_subject (estrutura hierárquica Axon).`,
+    { role: "domain_anchor", tags: ["axon", "domain"] }
+  );
+
+  push(
+    "ontology_role_well_attribute_concept",
+    "auxiliary_role",
+    `Papel auxiliar: well_attribute_concept. Valor de vocabulário controlado de atributo do Poço — ` +
+      `Categoria 1–10, regime de Lâmina d'água, Tipo de poço, Resultado, Status. 39 nós no grafo carregam ` +
+      `este papel.\n\n` +
+      `Decisão Q8/c (regra híbrida): atributos do Poço seguem dois caminhos.\n` +
+      `(a) Atributos COM VOCABULÁRIO CONTROLADO viram nós no grafo com ontological_role=well_attribute_concept ` +
+      `e geocoverage=layer5 (ANP) ou layer6 (corporate). Padrão dos arquivos data/anp-poco-categoria.json ` +
+      `(Categoria 1–10), data/anp-poco-tipo.json (Tipo de poço), data/anp-uf.json (UF de localização), ` +
+      `data/anp-osdu-wellstatus-map.json (Status). Inclui regimes de Lâmina d'água (raso/profundo/` +
+      `ultraprofundo), Resultado.\n` +
+      `(b) Atributos PURAMENTE FORMATO (Sigla ANP, DATUM, MC, Sidetrack, coordenadas, profundidade total) ` +
+      `NÃO viram nós. Migram para data/well-attributes.json com SHACL constraints. O Well referencia o ` +
+      `atributo como propriedade datatype, não como aresta.\n\n` +
+      `A regra evita inflação de nós sem ganho semântico e preserva a regra de ouro: valores de formato ` +
+      `pertencem ao Poço; valores controlados são entidades classificatórias com vida própria. Predicado ` +
+      `associado: assigned_to (WellAttributeConcept → Well).`,
+    { role: "well_attribute_concept", tags: ["Q8c", "vocab_controlado"] }
+  );
+
+  push(
+    "ontology_role_governance_artifact",
+    "auxiliary_role",
+    `Papel auxiliar: governance_artifact. Artefatos de governança — relatórios técnicos, comitês, ` +
+      `programas, esquemas de qualidade, laudos. 48 nós no grafo carregam este papel — é o segundo role ` +
+      `mais populoso, depois de feature_observation.\n\n` +
+      `Cobre saídas que NÃO são interpretação cognitiva (L5) nem design de engenharia (L6), mas ` +
+      `documentos formais que governam decisões. Exemplos no grafo: GM027 (LaudoGeomecanico — relatório ` +
+      `geomecânico), GEOMEC084 (Esquema de Qualidade WSM 2025 — rubrica de governança), comitês internos ` +
+      `da Petrobras, programas de poço.\n\n` +
+      `Distinção fina: GM027 é o DELIVERABLE; o processo cognitivo upstream é GeomechanicalInterpretation ` +
+      `(L5). GEOMEC084 é a RUBRICA de qualidade, não o processo de inversão. A escolha de governance_artifact ` +
+      `vs interpretation_process é uma das borderline_decisions registradas em data/ontological_role_audit.json.\n\n` +
+      `Predicados característicos: produced_by (process → governance), reports_on (governance → entity), ` +
+      `informs (governance → decision).`,
+    { role: "governance_artifact", entities: ["GM027", "GEOMEC084"], tags: ["governance"] }
+  );
+
+  push(
+    "ontology_role_equipment_dataset_lifecycle",
+    "auxiliary_role",
+    `Papéis auxiliares agrupados: equipment, dataset_concept, lifecycle_state, lifecycle_outcome.\n\n` +
+      `equipment: equipamento físico ou peça de fundo de poço (28 nós). Mantém o conceito existente do ` +
+      `dicionário (type=equipment). Exemplos: mud-pump, BHA, Xmas-tree, kelly. Predicado: ` +
+      `used_in (equipment → operation).\n\n` +
+      `dataset_concept: classe de dataset analítico ou módulo informacional (18 nós). Conceito do registro ` +
+      `informacional, distinto da operação que o gera (L2) e da interpretação que o consome (L5). Exemplos: ` +
+      `módulos analíticos, classes de dataset corporativo. NOTA: a regra de ouro proíbe pendurar ` +
+      `dataset_concept diretamente em "poco" via joined_by_modules (ver Q7).\n\n` +
+      `lifecycle_state: estado de ciclo de vida do poço ou do bloco (5 nós). Exemplos: planejado, em ` +
+      `perfuração, abandonado, completado. Modelado como classe de estado, não como atributo, porque ` +
+      `transições disparam workflows.\n\n` +
+      `lifecycle_outcome: desfecho de uma fase do ciclo de vida (2 nós). Exemplos: descoberta, ` +
+      `abandono. Distinto de lifecycle_state: outcome é o RESULTADO, state é a FASE atual.`,
+    {
+      role: "equipment",
+      tags: ["equipment", "dataset_concept", "lifecycle_state", "lifecycle_outcome"],
+    }
+  );
+
+  /* ── D. Bridges between layers ──────────────────────────── */
+  push(
+    "ontology_bridge_well_operation",
+    "bridge",
+    `Bridge L1 ↔ L2: como o Poço se conecta às Operações. Predicados canônicos: engaged_by ` +
+      `(Well → WellOperation, perspectiva do poço) e occurs_in (WellOperation → Well, perspectiva da ` +
+      `operação). Materializa-se APENAS occurs_in no grafo (já em uso, 11 instâncias); engaged_by é ` +
+      `inferido por consulta SPARQL/Cypher para evitar duplicação de arestas.\n\n` +
+      `Padrão de uso. Quando uma Sonda executa uma Atividade de Perfuração no Poço: ` +
+      `drilling-activity --occurs_in--> poco. Inversamente, "quais operações ocorreram no Poço X?" é ` +
+      `respondido por SELECT ?op WHERE { ?op occurs_in poco-X }.\n\n` +
+      `Exemplos no grafo: coring --occurs_in--> poco; wireline-logging --occurs_in--> poco; ` +
+      `mudlogging --occurs_in--> wellbore; formation-testing --occurs_in--> poco. ` +
+      `O predicado is_location_of (Well → *) é INFERIDO a partir de occurs_in, acquired_from e ` +
+      `observed_in — não materializar.`,
+    {
+      tags: ["bridge", "L1_L2"],
+      source: SOURCE_PREDS,
+      entities: ["poco", "coring", "wireline-logging", "mudlogging"],
+    }
+  );
+
+  push(
+    "ontology_bridge_operation_artifact",
+    "bridge",
+    `Bridge L2 ↔ L3: como Operações geram Artefatos. Predicados canônicos: generates ` +
+      `(WellOperation → Sample | WellLog | TestData) e produces (mais geral, qualquer processo → qualquer ` +
+      `saída). Distinção: generates é específico para a operação física L2; produces cobre L5 também ` +
+      `(InterpretationProcess → GeologicalFeature). Aliases existentes: yields (2 instâncias, consolidar).\n\n` +
+      `Padrão de uso. Operação de testemunhagem produz testemunhos: ` +
+      `coring --generates--> core-sample. Mudlogging produz a série temporal: ` +
+      `mudlogging --generates--> mudlogging-time-series. Perfilagem produz curvas: ` +
+      `wireline-logging --generates--> perfil-poco.\n\n` +
+      `Exemplos no grafo: coring --generates--> core-sample; cuttings-sampling --generates--> ` +
+      `cuttings-sample-detailed; sidewall-sampling --generates--> sidewall-core-sample; ` +
+      `formation-testing --generates--> teste-formacao. O inverso generated_by é inferido.`,
+    {
+      tags: ["bridge", "L2_L3"],
+      source: SOURCE_PREDS,
+      entities: ["coring", "core-sample", "mudlogging", "wireline-logging", "perfil-poco"],
+    }
+  );
+
+  push(
+    "ontology_bridge_artifact_feature",
+    "bridge",
+    `Bridge L3 ↔ L4 ↔ L5: como Artefatos viram Features (via processo cognitivo L5). Predicados ` +
+      `canônicos: derived_from (InterpretedDataset → WellLog | Sample, derivação de artefato) e ` +
+      `interpreted_into (Sample | WellLog → InterpretedDataset, fluxo de interpretação como cadeia de ` +
+      `artefatos).\n\n` +
+      `Distinção fina. derived_from é o predicado direto de derivação (35 instâncias no grafo, canônico). ` +
+      `interpreted_into é novo, introduzido para fluxos artefato → artefato derivado quando a ` +
+      `interpretação é uma cadeia explícita, distinto do processo cognitivo consumes/produces (que descreve ` +
+      `o COMO).\n\n` +
+      `Padrão de uso. Uma curva petrofísica é derivada do perfil bruto: porosidade-curva ` +
+      `--derived_from--> perfil-poco. Um sample interpretado vira dataset: core-sample ` +
+      `--interpreted_into--> drx-result. O processo cognitivo subjacente é ` +
+      `petrophysics-interpretation --consumes--> perfil-poco e --produces--> porosidade-curva.`,
+    {
+      tags: ["bridge", "L3_L4_L5"],
+      source: SOURCE_PREDS,
+      entities: ["perfil-poco", "core-sample", "drx"],
+    }
+  );
+
+  push(
+    "ontology_bridge_feature_well",
+    "bridge",
+    `Bridge L4 ↔ L1: como Features vivem no Poço. Predicados canônicos: observed_in ` +
+      `(GeologicalFeature → Well, novo, liga L4 a L1 SEM passar pela operação) e intersects ` +
+      `(GeologicalFeature → Wellbore, novo, geometria estrutural).\n\n` +
+      `Por que o vínculo é direto. Uma feature pode ser observada por múltiplas operações (mudlogging ` +
+      `mais perfilagem mais testemunhagem reconhecem a mesma falha). O vínculo locacional ao Poço é ` +
+      `direto — observed_in captura "esta feature foi reconhecida no Poço X" sem privilegiar uma ` +
+      `operação específica. detected_via (29 instâncias) sobrepõe-se parcialmente; revisão pendente ` +
+      `para consolidar em observed_in.\n\n` +
+      `Padrão de uso. Uma falha geológica observada no poço: falha --observed_in--> poco. ` +
+      `Uma DITF intersecta um trecho perfurado em profundidade específica: GF015 ` +
+      `--intersects--> wellbore. Necessário para image-log e interpretação geomecânica, onde a ` +
+      `geometria estrutural relativa ao trecho perfurado é central.`,
+    {
+      tags: ["bridge", "L4_L1"],
+      source: SOURCE_PREDS,
+      entities: ["falha", "GF015", "wellbore", "poco"],
+    }
+  );
+
+  push(
+    "ontology_bridge_engineering_well",
+    "bridge",
+    `Bridge L6 ↔ L1 ↔ L2: como Engineering aplica ao Poço e dá suporte às Operações. Predicados ` +
+      `canônicos: applies_to (WellEngineeringArtifact → Well, novo — estabelece a relação L6↔L1 que era ` +
+      `causa raiz da ilha de 84 nós geomec_corporate desconectados do componente principal antes de F4); ` +
+      `supports (WellEngineeringArtifact → WellOperation, 2 instâncias, sinônimo enables com 5 ` +
+      `instâncias); constrains (WellEngineeringArtifact → WellOperation, 16 instâncias, restrição ` +
+      `operacional).\n\n` +
+      `Padrão de uso. Um casing design aplica-se a um poço específico: casing-design ` +
+      `--applies_to--> poco. Uma janela de lama suporta a operação de perfuração: GM005 ` +
+      `--supports--> drilling-activity. Um esquema MPD restringe parâmetros operacionais: ` +
+      `GEOMEC020 --constrains--> drilling-activity.\n\n` +
+      `Importância. F4 introduziu applies_to/supports/constrains que reconectam L6 a L1/L2, eliminando ` +
+      `a ilha de 84 nós isolados. Esta foi a maior mudança topológica do projeto.`,
+    {
+      tags: ["bridge", "L6_L1_L2"],
+      source: SOURCE_PREDS,
+      entities: ["casing-design", "GM005", "GEOMEC020", "poco"],
+    }
+  );
+
+  push(
+    "ontology_bridge_interpretation_flow",
+    "bridge",
+    `Bridge L5 (consume e produz): fluxo cognitivo L3 → L5 → L4 ou InterpretedDataset. Predicados ` +
+      `canônicos: consumes (InterpretationProcess → Sample | WellLog | TestData) e produces ` +
+      `(InterpretationProcess → GeologicalFeature | InterpretedDataset). Aliases existentes a consolidar: ` +
+      `is_input_for (19 instâncias), requires_input (9), requires (21), uses (2). Em formalização BFO: ` +
+      `consumes ≈ bfo:has input; produces ≈ bfo:has output; estimated_from ≈ alias de estimates ` +
+      `(8 instâncias) + is_calculated_from (14) + computes (11).\n\n` +
+      `Padrão de uso. Interpretação litológica de calha consome cuttings e produz a coluna litológica ` +
+      `interpretada: lithology-interpretation --consumes--> cuttings-sample-detailed; ` +
+      `lithology-interpretation --produces--> coluna-litologica. MEM 1D consome perfis e produz modelo ` +
+      `geomecânico: GM010 --consumes--> perfil-poco; GM010 --produces--> mem-1d.\n\n` +
+      `Distinção fina com derived_from. consumes/produces descreve o PROCESSO cognitivo (o COMO); ` +
+      `derived_from descreve a CADEIA de artefatos (o QUE veio do quê). São complementares, não ` +
+      `alternativos.`,
+    {
+      tags: ["bridge", "L5_flow"],
+      source: SOURCE_PREDS,
+      entities: ["GM010", "perfil-poco", "cuttings-sample-detailed"],
+    }
+  );
+
+  push(
+    "ontology_bridge_axon_domains",
+    "bridge",
+    `Bridge: onde os Domínios Axon Petrobras entram. Estrutura hierárquica Domínio → Assunto → ` +
+      `Subassunto → Termo importada em F3 do export Axon. Cada nível tem destino canônico no modelo ` +
+      `de 6 camadas:\n\n` +
+      `- Domínio (ex.: "Geomecânica", "Geologia", "Geofísica", "Geodésia", "Avaliação de Formações e ` +
+      `Petrofísica", "Interpretação Exploratória", "Acervo e Movimentação de Amostras", "Aquisição de ` +
+      `Dados Geológicos", "Blocos e Parcerias") → ontological_role=domain_anchor (super-tópico, indexa ` +
+      `os filhos).\n` +
+      `- Assunto (ex.: "Operação de Perfilagem", "Operação de Testemunhagem", "Operações de Mudlogging", ` +
+      `"Operações em Amostras de Fluido/Rocha", "Avaliação Final de Poço", "Planejamento das Operações ` +
+      `Geológicas em Poços") → L2 well_operation OU L5 interpretation_process conforme natureza ` +
+      `(operação física vs processo cognitivo).\n` +
+      `- Subassunto → subtipo da camada do Assunto pai, herda o role.\n` +
+      `- Termo (folha, ex.: "amostra", axon-term-furo) → L3 artifact_primary, L4 feature_observation ou ` +
+      `L6 engineering_artifact conforme semântica.\n\n` +
+      `Casos validados pelo curador. (a) "Acervo e movimentação de amostras" + Termo "amostra" + Assunto ` +
+      `"Operações em amostras de fluido/rocha" gera o fluxo poco --engaged_by--> sample-handling-op ` +
+      `--generates--> amostra (L3). (b) "Geomecânica" Domínio indexa L4 (breakout, DITF=GF015), L5 ` +
+      `(MEM 1D), L6 (GEOMEC020 MPD, GEOMEC084 WSM 2025).`,
+    {
+      tags: ["bridge", "axon", "domain_to_layer"],
+      entities: ["axon-term-furo", "GF015", "GEOMEC020"],
+    }
+  );
+
+  /* ── E. Predicate vocabulary ─────────────────────────────── */
+  push(
+    "ontology_predicate_canonical",
+    "predicate_vocabulary",
+    `Predicados canônicos do GeoBrain (vocabulário relacional normativo). Princípio: reutilizar ` +
+      `predicados existentes sempre que houver equivalência semântica; não criar sinônimos. Inversos ` +
+      `não são materializados — gerados por inferência SPARQL/Cypher.\n\n` +
+      `Mantidos (canônicos em uso): is_part_of/part_of (mereologia, 47 instâncias somadas), ` +
+      `is_calculated_from (14, cálculo determinístico), produces (20, saída de processo), derived_from ` +
+      `(35, derivação de artefato), is_specialization_of (3, subsunção taxonômica), governed_by (5, ` +
+      `sujeição a norma), is_input_for (19, insumo de processo), requires (21, requisito não-consumível), ` +
+      `constrains (16, restrição L6→L2), measures (17, instrumento), monitors (5, contínuo), influences ` +
+      `(34, causalidade fraca), located_in (27, contenção física), occurs_in (11, processo no poço), ` +
+      `correlated_with (alias correlates_with com 2 instâncias).\n\n` +
+      `Banidos (não usar em dados novos, migrar instâncias existentes): related_to (era 26 instâncias, ` +
+      `migradas em F4 para 0 — vago demais; substituir por correlated_with, references, is_input_for, ` +
+      `derived_from ou governed_by conforme contexto), used_with (13, ambíguo entre coocorrência e ` +
+      `dependência), feeds (4, coloquial; usar is_input_for), connects (3, sem direção; especializar). ` +
+      `Modais may_* (8 total) também banidos: usar predicado direto + propriedade confidence/modality ` +
+      `na aresta.`,
+    { tags: ["predicate", "canonical", "banned"], source: SOURCE_PREDS }
+  );
+
+  push(
+    "ontology_predicate_well_anchor",
+    "predicate_vocabulary",
+    `Predicados específicos para well_anchor (L1). Saída do Poço: engaged_by → WellOperation (novo, ` +
+      `inverso de occurs_in mas perspectiva do poço — materializar APENAS um deles, escolha mantida foi ` +
+      `occurs_in com 11 instâncias). is_location_of → * (inferido a partir de occurs_in, acquired_from ` +
+      `e observed_in — não materializar).\n\n` +
+      `Entrada do Poço: applies_to ← WellEngineeringArtifact (novo, ligação L6↔L1, causa raiz resolvida ` +
+      `em F4 do isolamento da ilha geomec_corporate). observed_in ← GeologicalFeature (novo, ligação ` +
+      `L4↔L1 direta sem passar pela operação). acquired_from ← WellLog (novo, captura proveniência ` +
+      `locacional do registro; measured_at com 25 instâncias é próximo mas não distingue artefato de ` +
+      `medida pontual).\n\n` +
+      `Inferidos (não materializar): is_sample_source_of (deriva de generates quando target é Sample), ` +
+      `is_log_source_of (deriva de acquired_from), is_test_location_of (deriva de occurs_in quando ` +
+      `subject é WellTest), is_observation_context_of (deriva de observed_in).\n\n` +
+      `Exemplos de uso: poco --is_location_of--> coring (inferido); casing-design --applies_to--> poco; ` +
+      `falha --observed_in--> poco; perfil-poco --acquired_from--> poco.`,
+    { role: "well_anchor", tags: ["predicate", "L1"], source: SOURCE_PREDS }
+  );
+
+  push(
+    "ontology_predicate_feature_observation",
+    "predicate_vocabulary",
+    `Predicados específicos para feature_observation (L4). Entrada da Feature: produced_by ← ` +
+      `InterpretationProcess (inverso de produces — não materializar; consultar via produces na direção ` +
+      `direta). derived_from → Sample | WellLog (35 instâncias canônicas no grafo, predicado de derivação ` +
+      `direto).\n\n` +
+      `Saída da Feature: observed_in → Well (novo, liga L4 a L1 diretamente sem privilegiar operação ` +
+      `específica — uma falha vista por múltiplas operações vincula-se ao poço, não a uma operação só). ` +
+      `correlated_with → GeologicalFeature (alias de correlates_with com 2 instâncias, mais ` +
+      `co_measured_with com 2 e complements com 4 — consolidar em correlated_with). intersects → ` +
+      `Wellbore (novo, geometria estrutural — necessário para image-log e interpretação geomecânica).\n\n` +
+      `detected_via (29 instâncias) sobrepõe-se parcialmente a observed_in; revisão pendente para ` +
+      `consolidar.\n\n` +
+      `Exemplos: GF015 --derived_from--> perfil-poco; GF015 --intersects--> wellbore; ` +
+      `falha --observed_in--> poco; litologia --derived_from--> cuttings-sample-detailed.`,
+    {
+      role: "feature_observation",
+      tags: ["predicate", "L4"],
+      source: SOURCE_PREDS,
+      entities: ["GF015", "litologia", "falha"],
+    }
+  );
+
+  push(
+    "ontology_predicate_interpretation_process",
+    "predicate_vocabulary",
+    `Predicados específicos para interpretation_process (L5). Entrada do processo cognitivo: consumes ← ` +
+      `Sample | WellLog | TestData (alias semântico — em uso real estão is_input_for com 19 instâncias, ` +
+      `requires_input com 9, requires com 21, uses com 2; consumes deve consolidar). based_on ← Standard ` +
+      `(alias de informed_by com 1 instância e references com 1).\n\n` +
+      `Saída do processo cognitivo: produces → GeologicalFeature | InterpretedDataset (20 instâncias ` +
+      `canônicas; aliases yields com 2 e output_of com 1 — consolidar). estimates → * (8 instâncias, ` +
+      `juntamente com is_calculated_from 14 e computes 11, todos como aliases de estimated_from). ` +
+      `interpreted_into → * (novo, fluxo de cadeia de artefatos quando a interpretação produz outro ` +
+      `artefato e não uma feature pura).\n\n` +
+      `Predicado de formalização ontológica: formalizes (a ser introduzido para ligar ` +
+      `InterpretationProcess a uma especificação Standard/IAO que ele formaliza), distinto de based_on ` +
+      `(consulta a referência) e governed_by (subordinação regulatória).\n\n` +
+      `Exemplos: GM010 --consumes--> perfil-poco; GM010 --produces--> mem-1d; GEOMEC086 ` +
+      `--produces--> falha (slip invertido).`,
+    {
+      role: "interpretation_process",
+      tags: ["predicate", "L5"],
+      source: SOURCE_PREDS,
+      entities: ["GM010", "GEOMEC086"],
+    }
+  );
+
+  /* ── F. Métricas e proveniência ─────────────────────────── */
+  push(
+    "ontology_metric_role_distribution",
+    "project_metric",
+    `Métricas do grafo de conhecimento (data/entity-graph.json), snapshot 2026-05-04. O grafo tem 412 nós ` +
+      `e 940 arestas, distribuídos em 15 valores de ontological_role com a seguinte contagem:\n\n` +
+      `feature_observation 120 (L4 — maior categoria, reflete foco geológico do dicionário)\n` +
+      `governance_artifact 48 (relatórios, comitês, programas, esquemas de qualidade)\n` +
+      `well_attribute_concept 39 (Categorias 1–10, UF, Tipo de poço, Resultado, Status)\n` +
+      `well_operation 39 (L2)\n` +
+      `regulatory_anchor 32 (ANP, SIGEP, leis, sistemas oficiais)\n` +
+      `equipment 28 (BHA, mud-pump, Xmas-tree, etc.)\n` +
+      `interpretation_process 27 (L5)\n` +
+      `artifact_primary 20 (L3 — Sample, WellLog, TestData)\n` +
+      `dataset_concept 18 (módulos analíticos, classes de dataset)\n` +
+      `domain_anchor 10 (super-tópicos Axon)\n` +
+      `well_anchor 8 (L1 — Poço/Borehole)\n` +
+      `organizational_actor 8 (operadoras, comitês)\n` +
+      `engineering_artifact 8 (L6 — design + 89 entidades adicionais em geomechanics-corporate.json)\n` +
+      `lifecycle_state 5\n` +
+      `lifecycle_outcome 2\n\n` +
+      `Cobertura de annotation: 100% dos nós têm ontological_role (zero MISSING, zero unclassified). ` +
+      `O audit completo está em data/ontological_role_audit.json (gerado por ` +
+      `scripts/audit-ontological-roles.py).`,
+    { tags: ["metric", "role_distribution", "audit"] }
+  );
+
+  push(
+    "ontology_metric_phases_overview",
+    "project_metric",
+    `Visão geral das fases F1–F5 do projeto de ontologia. F1 (especificação): docs/ONTOLOGY_LAYERS.md + ` +
+      `docs/ONTOLOGY_PREDICATES.md publicados como source-of-truth do modelo de 6 camadas e do vocabulário ` +
+      `relacional. F2 (backbone acadêmico): 44 nós L1–L2 introduzidos para popular a espinha dorsal ` +
+      `Well → WellOperation com nós como poco, wellbore, drilling-activity, coring, wireline-logging, ` +
+      `mudlogging, formation-testing.\n\n` +
+      `F3 (enrichment Axon Petrobras): 40 nós importados do export Axon hierárquico Domínio → Assunto → ` +
+      `Subassunto → Termo, materializando 10 domain_anchors (axon-domain-*) e termos folha como ` +
+      `axon-term-furo. F4 (merges + reconexão topológica): 6 duplicatas mergeadas; arestas applies_to/` +
+      `supports/constrains introduzidas para reconectar a ilha geomec_corporate (84 nós L6) ao componente ` +
+      `principal; 25 instâncias do predicado banido related_to migradas para predicados específicos ` +
+      `(correlated_with, references, is_input_for, derived_from, governed_by) — alvo related_to=0 ` +
+      `atingido. F5 (anotação ontológica): 100% dos 412 nós receberam ontological_role inferido por ` +
+      `regras em scripts/generate.js inferOntologicalRole(); audit em ` +
+      `data/ontological_role_audit.json.`,
+    { tags: ["metric", "phases", "F1", "F2", "F3", "F4", "F5"] }
+  );
+
+  push(
+    "ontology_metric_provenance",
+    "project_metric",
+    `Proveniência de merges e PRs do projeto de ontologia. PR #33 (commit bebbb09): "feat(ontology): ` +
+      `full 6-layer overhaul — F1 spec + F2 backbone + F3 Axon + F4 merges + F5 roles" — entrega ` +
+      `combinada das fases F1 a F5, mergeada em main em 2026-05-04. PR #34 (commit 6abc684): ` +
+      `"fix(ontology): polish — Q7 anchor cleanup + migrate 25 banned related_to edges" — limpeza ` +
+      `Q7 (remoção de joined_by_modules de "poco") e migração das 25 últimas arestas related_to, ` +
+      `mergeada em 2026-05-04.\n\n` +
+      `Fases pós-merge atualmente em desenvolvimento na branch claude/F6-F9-extensions: F6 SHACL ` +
+      `(invariantes do modelo de 6 camadas), F7 Visualização (toggle por ontological_role no index.html), ` +
+      `F8 RAG corpus enrichment (este conjunto de chunks ontology_concept), F9 (planejado).\n\n` +
+      `Documentos source-of-truth desta especificação: docs/ONTOLOGY_LAYERS.md (regra de ouro, 6 camadas, ` +
+      `Q8/c, anti-padrão Q7, mapeamento Axon), docs/ONTOLOGY_PREDICATES.md (vocabulário relacional, ` +
+      `predicados banidos, alinhamento BFO/SOSA/IAO).`,
+    { tags: ["metric", "provenance", "pr", "commit"] }
+  );
+
+  console.log(`  ✓ ontology concept chunks (F8): emitted`);
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -6435,6 +6592,9 @@ writeJson("ai/ontology-map.json", buildOntologyMap());
   const shaclFiles = [
     { src: "data/geobrain-shapes.ttl", dst: "api/v1/geobrain-shapes.ttl" },
     { src: "data/geobrain-vocab.ttl", dst: "api/v1/geobrain-vocab.ttl" },
+    // F6: SHACL invariants for the 6-layer ontology model
+    // (regra de ouro + ontological_role enum). See docs/ONTOLOGY_LAYERS.md.
+    { src: "data/ontology-layers-shapes.ttl", dst: "api/v1/ontology-layers-shapes.ttl" },
   ];
   for (const { src, dst } of shaclFiles) {
     const srcPath = path.join(ROOT, src);
@@ -6504,8 +6664,12 @@ console.log(
     { src: "data/anp-bacia-sedimentar.json", dst: "api/v1/anp-bacia-sedimentar.json" },
     /* GPP module (Phase 3 enrichment): governance + lifecycle + portfolio */
     { src: "data/gestao-projetos-parcerias.json", dst: "api/v1/gestao-projetos-parcerias.json" },
-    /* F3 — Axon Petrobras Exploração glossary + format-only well attributes */
-    { src: "data/axon-petrobras-glossary.json", dst: "api/v1/axon-petrobras-glossary.json" },
+    /* F3 — Axon Petrobras Exploração glossary + format-only well attributes.
+       F9 — moved to data/axon/exploracao.json under a multi-area scaffold;
+       still copied to the legacy api/v1/axon-petrobras-glossary.json path
+       for backwards compatibility with downstream consumers. */
+    { src: "data/axon/exploracao.json", dst: "api/v1/axon-petrobras-glossary.json" },
+    { src: "data/axon/manifest.json", dst: "api/v1/axon-manifest.json" },
     { src: "data/well-attributes.json", dst: "api/v1/well-attributes.json" },
   ];
   let totalChunks = 0;

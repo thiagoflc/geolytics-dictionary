@@ -1,0 +1,34 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "_comment": "TODO — TEMPLATE para nova área Axon Petrobras. Copie para data/axon/<area-id>.json, preencha cada lista, e registre a área em data/axon/manifest.json com status='ingested'. Schema completo: docs/AXON_GLOSSARY_SCHEMA.md.",
+  "id": "axon-petrobras-glossary-TODO",
+  "label": "Glossário Axon Petrobras (TODO Área)",
+  "version": "0.1.0",
+  "source": "TODO — Axon export YYYY-MM-DD — grid-report-...xlsx",
+  "license": "Petrobras-internal (uso interno)",
+
+  "_areas_doc": "Geralmente UMA entrada — a Área Petrobras-pai do glossário (ex.: Produção, Reservatório, Geofísica). ID convenção: axon-<area-id>-area-<slug>. Ex.: axon-producao-area-producao.",
+  "areas": [
+    {
+      "id": "axon-TODO-area-TODO",
+      "name_pt": "TODO",
+      "name_en": "TODO",
+      "axon_type": "Area",
+      "axon_path": "TODO",
+      "definition_pt": "TODO",
+      "definition_pt_canonical": "TODO"
+    }
+  ],
+
+  "_domains_doc": "Domínios Axon (super-tópicos da área). ID convenção: axon-<area-id>-dom-<slug>. parent_id aponta para a Área. Cada Domínio agrega vários Assuntos.",
+  "domains": [],
+
+  "_subjects_doc": "Assuntos Axon (operações, processos, conjuntos analíticos). ID convenção: axon-<area-id>-asn-<slug>. parent_id aponta para um Domínio.",
+  "subjects": [],
+
+  "_subsubjects_doc": "Subassuntos Axon (sub-categorias dentro de um Assunto, quando existirem). ID convenção: axon-<area-id>-ssn-<slug>. parent_id aponta para um Assunto.",
+  "subsubjects": [],
+
+  "_terms_doc": "Termos Axon (conceitos atomicos do glossário — entidades, materiais, equipamentos, classificações). ID convenção: axon-<area-id>-term-<slug>. parent_id aponta para Assunto/Subassunto/Domínio. Termos podem ter links_to_existing apontando para nós já existentes no entity-graph (poco, igp, campo, etc.) — esses não viram nó duplicado, viram uma ponte is_specialization_of em scripts/generate.js.",
+  "terms": []
+}
