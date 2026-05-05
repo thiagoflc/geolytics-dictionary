@@ -195,6 +195,8 @@ Para nós que não pertencem ao eixo Poço → Operação → Artefato → Featu
 | `domain_anchor` | Super-tópico do tipo Domínio Axon Petrobras (Geomecânica, Geologia, Geofísica…) — usado como nó de organização, não como entidade física | A ser materializado em F4 quando a hierarquia Axon for importada |
 | `well_attribute_concept` | Valor de vocabulário controlado de atributo do Poço (Categoria 1–10, regime de Lâmina d'água, Tipo de poço) | Carregado de [data/anp-poco-categoria.json](data/anp-poco-categoria.json), [data/anp-poco-tipo.json](data/anp-poco-tipo.json), [data/anp-uf.json](data/anp-uf.json) |
 | `equipment` | Equipamento físico ou peça de fundo de poço (mantém o conceito existente) | `mud-pump`, BHA, Xmas-tree do `type=equipment` |
+| `event_observation` | Evento operacional discreto observado em produção (kick, hidrato, slugging severo, vazamento de gas-lift…) — distinto de `feature_observation` (estado contínuo) por ser **discreto e datado**. Introduzido em F11 a partir do dataset Petrobras 3W v2.0.0. | `event_normal`, `event_bsw_increase`, `event_severe_slugging`, `event_hydrate_production`, etc. (10 nós `event_*` no grafo) |
+| `signal_concept` | Identificador de canal/sinal de medida (mnemônico de sensor 3W ou curva de log) — distinto de `well_attribute_concept` (atributo formal do poço como Categoria/Sigla) por ser **fluxo de dado contínuo** com unidade física e quantidade observável. Introduzido em F11 a partir do dataset Petrobras 3W v2.0.0. | `sensor_p_pdg`, `sensor_t_pdg`, `sensor_aber_ckgl`, etc. (~25 nós `sensor_*` no grafo) |
 
 ---
 
