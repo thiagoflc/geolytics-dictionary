@@ -1,6 +1,6 @@
 {
   "version": "1.1.0",
-  "generated": "2026-05-05T09:31:30.849Z",
+  "generated": "2026-05-05T09:42:22.069Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
   "nodes": [
     {
@@ -8565,7 +8565,7 @@
         "ABER-CKGL=0 indica GLCK fechado",
         "ABER-CKGL=100 indica GLCK totalmente aberto"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_aber_ckp",
@@ -8628,7 +8628,7 @@
       "skos_example": [
         "ABER-CKP caindo rapidamente indica classe 6 ou 7"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_dhsv",
@@ -8691,7 +8691,7 @@
       "skos_example": [
         "ESTADO-DHSV=0 confirma fechamento da DHSV"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_m1",
@@ -8750,7 +8750,7 @@
         "@en": "State of the PMV (production master valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_m2",
@@ -8809,7 +8809,7 @@
         "@en": "State of the AMV (annulus master valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_pxo",
@@ -8868,7 +8868,7 @@
         "@en": "State of the PXO (pig-crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_sdv_gl",
@@ -8927,7 +8927,7 @@
         "@en": "State of the gas-lift SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_sdv_p",
@@ -8986,7 +8986,7 @@
         "@en": "State of the production SDV (shutdown valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_w1",
@@ -9045,7 +9045,7 @@
         "@en": "State of the PWV (production wing valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_w2",
@@ -9104,7 +9104,7 @@
         "@en": "State of the AWV (annulus wing valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_estado_xo",
@@ -9163,7 +9163,7 @@
         "@en": "State of the XO (crossover valve): 0=closed, 0.5=partial, 1=open. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_anular",
@@ -9226,7 +9226,7 @@
       "skos_example": [
         "P-ANULAR elevado pode indicar comunicação entre anular e coluna"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_jus_bs",
@@ -9289,7 +9289,7 @@
       "skos_example": [
         "P-JUS-BS cai em caso de hidrato na linha de serviço"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_jus_ckgl",
@@ -9348,7 +9348,7 @@
         "@en": "Downstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable. Represents gas-lift injection pressure after the choke."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_jus_ckp",
@@ -9411,7 +9411,7 @@
       "skos_example": [
         "Diferencial P-MON-CKP - P-JUS-CKP indica grau de restrição do choke"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_mon_ckgl",
@@ -9470,7 +9470,7 @@
         "@en": "Upstream pressure of the GLCK (gas-lift choke) [Pa]. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_mon_ckp",
@@ -9533,7 +9533,7 @@
       "skos_example": [
         "P-MON-CKP crescente com ABER-CKP constante pode indicar incrustação"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_mon_sdv_p",
@@ -9590,7 +9590,7 @@
         "@en": "Upstream pressure of the production SDV (shutdown valve) [Pa]. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_pdg",
@@ -9659,7 +9659,7 @@
         "P-PDG oscilante é assinatura de severe slugging",
         "P-PDG declinando rapidamente indica perda de produtividade"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_pt_p",
@@ -9718,7 +9718,7 @@
         "@en": "Subsea Xmas-tree pressure downstream of the PWV in the production line [Pa]. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_p_tpt",
@@ -9781,7 +9781,7 @@
       "skos_example": [
         "P-TPT oscilando em ciclos indica severe slugging"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_qbs",
@@ -9844,7 +9844,7 @@
       "skos_example": [
         "QBS reduzindo junto com P-JUS-BS indica hidrato na linha de serviço"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_qgl",
@@ -9909,7 +9909,7 @@
       "skos_example": [
         "QGL reduzindo rapidamente pode indicar classe 5 ou problema no compressor"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_t_jus_ckp",
@@ -9972,7 +9972,7 @@
       "skos_example": [
         "T-JUS-CKP muito baixa pode indicar formação de hidrato no choke"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_t_mon_ckp",
@@ -10033,7 +10033,7 @@
       "skos_example": [
         "Diferencial T-MON-CKP - T-JUS-CKP indica severidade de expansão no choke"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_t_pdg",
@@ -10100,7 +10100,7 @@
       "skos_example": [
         "T-PDG declinando progressivamente em poço com gas-lift pode indicar hidrato na linha de produção"
       ],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "sensor_t_tpt",
@@ -10159,7 +10159,7 @@
         "@en": "Temperature at the TPT on the subsea Xmas-tree [°C]. 3W variable."
       },
       "skos_example": [],
-      "ontological_role": "well_attribute_concept"
+      "ontological_role": "signal_concept"
     },
     {
       "id": "event_normal",
@@ -10225,7 +10225,7 @@
       "skos_example": [
         "Classe 0 é o baseline para treinamento de modelos de detecção de anomalias"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_bsw_increase",
@@ -10299,7 +10299,7 @@
       "skos_example": [
         "BSW abrupto indica comunicação com aquífero ou falha de barreira"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_spurious_dhsv",
@@ -10369,7 +10369,7 @@
       "skos_example": [
         "ESTADO-DHSV=0 com queda de P-PDG confirma fechamento espúrio"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_severe_slugging",
@@ -10445,7 +10445,7 @@
         "Ciclo de golfada severa: bloqueio de gás → acúmulo de líquido → irrupção → blow-out",
         "P-TPT e P-PDG oscilatórios são assinatura de severe slugging"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_flow_instability",
@@ -10519,7 +10519,7 @@
       "skos_example": [
         "Instabilidade de fluxo pode anteceder golfadas severas"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_rapid_prod_loss",
@@ -10593,7 +10593,7 @@
       "skos_example": [
         "P-PDG declining faster than expected pode indicar skin damage"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_quick_pck_restriction",
@@ -10665,7 +10665,7 @@
       "skos_example": [
         "ABER-CKP caindo abruptamente com diferencial de pressão crescente é assinatura de classe 6"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_scaling_pck",
@@ -10740,7 +10740,7 @@
       "skos_example": [
         "T-MON-CKP elevada com diferencial crescente ao longo do tempo é assinatura de scaling"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_hydrate_production",
@@ -10815,7 +10815,7 @@
       "skos_example": [
         "Queda simultânea de P-PDG + T-PDG + QGL indica hidrato na linha de produção"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "event_hydrate_service",
@@ -10889,7 +10889,7 @@
       "skos_example": [
         "QBS reduzindo com P-JUS-BS crescente indica obstrução por hidrato na linha de serviço"
       ],
-      "ontological_role": "feature_observation"
+      "ontological_role": "event_observation"
     },
     {
       "id": "pmv",
