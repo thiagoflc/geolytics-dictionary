@@ -1,6 +1,6 @@
 {
   "version": "1.1.0",
-  "generated": "2026-05-05T09:42:22.069Z",
+  "generated": "2026-05-05T10:10:56.417Z",
   "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
   "nodes": [
     {
@@ -84,11 +84,11 @@
       "id": "bloco",
       "label": "Bloco",
       "label_en": "Block",
-      "type": "operational",
+      "type": "regulatory_anchor",
       "color": "#378ADD",
       "size": 28,
       "definition": "Parte de uma bacia sedimentar, formada por um prisma vertical de profundidade indeterminada, com superfície poligonal definida pelas coordenadas geográficas de seus vértices, onde são desenvolvidas atividades de exploração ou produção de petróleo e gás natural.",
-      "definition_en_canonical": null,
+      "definition_en_canonical": "Primary upstream concession/production-sharing unit. Anchors regulatory (E&P contract), technical (wells, exploratory projects) and portfolio-decision (ranking, relinquishment) concepts simultaneously.",
       "legal_source": "Lei nº 9478, de 06/08/1997",
       "datasets": [
         "pocos-exploratorios",
@@ -151,6 +151,14 @@
         "BS-4 (Atlanta)",
         "BM-C-33"
       ],
+      "module": "data/gestao-projetos-parcerias.json#GPP001",
+      "evidence_refs": [
+        "Lei 9.478/1997",
+        "Curso PROPEX 2024/2025"
+      ],
+      "corporate_internal": false,
+      "evidence_status": "documented",
+      "gpp_role": "regulatory_anchor",
       "ontological_role": "regulatory_anchor"
     },
     {
@@ -3860,9 +3868,9 @@
       "type": "analytical",
       "color": "#E67E22",
       "size": 20,
-      "definition": "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
+      "definition": "Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST para análise laboratorial (PVT, geoquímica). Registro no LIMS: M10 CL_AMOSTRA.",
       "definition_en_canonical": "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc.",
-      "legal_source": "LIMS Sample Manager",
+      "legal_source": "LIMS Sample Manager; data/operacoes-geologicas-servicos.json#OGS020",
       "datasets": [],
       "petrokgraph_uri": null,
       "osdu_kind": "opendes:osdu:master-data--Sample:1.0.0",
@@ -3887,7 +3895,7 @@
         "@en": []
       },
       "skos_definition": {
-        "@pt": "Amostra de óleo/gás/água coletada para análise laboratorial. M10 CL_AMOSTRA.",
+        "@pt": "Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST para análise laboratorial (PVT, geoquímica). Registro no LIMS: M10 CL_AMOSTRA.",
         "@en": "A rock sample retrieved from an outcrop or Well.  It can be core, sample cut from core, cutting, outcrop, slide etc."
       },
       "skos_example": [],
@@ -4217,7 +4225,8 @@
         "trajetória direcional",
         "survey direcional",
         "desvio do poço",
-        "perfil direcional"
+        "perfil direcional",
+        "pesquisa direcional"
       ],
       "synonyms_en": [
         "wellbore trajectory",
@@ -4241,7 +4250,8 @@
           "trajetória direcional",
           "survey direcional",
           "desvio do poço",
-          "perfil direcional"
+          "perfil direcional",
+          "pesquisa direcional"
         ],
         "@en": [
           "wellbore trajectory",
@@ -4905,57 +4915,6 @@
       },
       "skos_example": [],
       "ontological_role": "engineering_artifact"
-    },
-    {
-      "id": "wellbore-trajectory",
-      "label": "Trajetória do Poço (WPC)",
-      "label_en": "Wellbore Trajectory",
-      "type": "instrument",
-      "color": "#888780",
-      "size": 18,
-      "definition": "Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)",
-      "definition_en_canonical": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space.",
-      "legal_source": "Accenture/OSDU OWL",
-      "datasets": [],
-      "petrokgraph_uri": null,
-      "osdu_kind": "opendes:osdu:work-product-component--WellboreTrajectory:1.0.0",
-      "geosciml_uri": null,
-      "owl_uri": "https://w3id.org/osdu#WellboreTrajectory",
-      "geocoverage": [
-        "layer4"
-      ],
-      "synonyms_pt": [
-        "deviation survey",
-        "pesquisa direcional"
-      ],
-      "synonyms_en": [
-        "wellbore trajectory",
-        "deviation survey"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "osdu_extra": true,
-      "skos_prefLabel": {
-        "@pt": "Trajetória do Poço (WPC)",
-        "@en": "Wellbore Trajectory"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "deviation survey",
-          "pesquisa direcional"
-        ],
-        "@en": [
-          "wellbore trajectory",
-          "deviation survey"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Componente de Produto de Trabalho descrevendo uma trajetória individual de poço — também chamada deviation survey, usada para calcular posição e incerteza espacial em 2D/3D do poço planejado ou real. (OSDU canonical: Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey.)",
-        "@en": "Work Product Component describing an individual instance of a wellbore trajectory data object. Also called a deviation survey, wellbore trajectory is data that is used to calculate the position and spatial uncertainty of a planned or actual wellbore in 2-dimensional and 3-dimensional space."
-      },
-      "skos_example": [],
-      "ontological_role": "artifact_primary"
     },
     {
       "id": "wellbore-marker-set",
@@ -6345,32 +6304,6 @@
       "ontological_role": "governance_artifact"
     },
     {
-      "id": "fluid-sample",
-      "label": "Amostra de Fluido",
-      "label_en": "Fluid Sample",
-      "type": "analytical",
-      "color": "#E67E22",
-      "size": 20,
-      "definition": "Amostra de fluido de reservatório coletada via ponto de pressão de formação (RFT/MDT/MiniDST) ou DST. Destino de FK de FormationPressurePoint e DSTInterval.",
-      "module": "data/operacoes-geologicas-servicos.json#OGS020",
-      "evidence_status": "documented",
-      "manager": "RES/TR/AR (laboratório)",
-      "superclass": "owl:Thing",
-      "synonyms_pt": [
-        "amostra de fluido"
-      ],
-      "synonyms_en": [
-        "fluid sample"
-      ],
-      "geosciml_uri": "http://geosciml.org/def/gsmlbh#BoreholeInterval",
-      "geocoverage": [
-        "layer1b",
-        "layer4",
-        "layer6"
-      ],
-      "ontological_role": "artifact_primary"
-    },
-    {
       "id": "mudlogging",
       "label": "Mudlogging",
       "label_en": "Mudlogging",
@@ -6626,15 +6559,43 @@
       "synonyms_pt": [
         "Quadro de Previsão Geológica",
         "Prognóstico Geológico",
-        "QPG"
+        "QPG",
+        "QPG Preliminar",
+        "QPG Final",
+        "Quadro de Previsões Geológicas"
       ],
       "synonyms_en": [
         "geological prognosis",
         "predicted geology chart",
         "QPG"
       ],
+      "corporate_id": "GEOMEC026A",
       "geocoverage": [
         "layer5"
+      ],
+      "source_reference": [
+        {
+          "deprecated_id": "GEOMEC026A",
+          "source_module": "data/geomechanics-corporate.json",
+          "label_at_merge": "QPG — Quadro de Previsões Geológicas",
+          "label_en_at_merge": "Geological Prognosis Chart",
+          "original_definition_pt": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
+          "original_definition_en": null,
+          "acronym": [
+            "QPG",
+            "Quadro de Previsões Geológicas",
+            "QPG Preliminar",
+            "QPG Final"
+          ],
+          "observed_variants": [],
+          "owner_department": null,
+          "official_datastore": null,
+          "internal_standards": null,
+          "category": "Document",
+          "sources": [],
+          "merged_in": "qpg",
+          "rationale": "QPG é conceito do módulo operações-geológicas; GEOMEC026A duplicava o nó canônico qpg. Edges e definição detalhada migradas para qpg."
+        }
       ],
       "ontological_role": "governance_artifact"
     },
@@ -7318,77 +7279,6 @@
         }
       ],
       "ontological_role": "governance_artifact"
-    },
-    {
-      "color": "#378ADD",
-      "size": 28,
-      "legal_source": "Lei 9.478/1997",
-      "datasets": [],
-      "petrokgraph_uri": null,
-      "osdu_kind": null,
-      "geosciml_uri": null,
-      "owl_uri": null,
-      "geocoverage": [
-        "layer4",
-        "layer5"
-      ],
-      "synonyms_pt": [
-        "Bloco",
-        "Bloco Exploratório",
-        "Área Concedida"
-      ],
-      "synonyms_en": [
-        "Exploration Block",
-        "Lease Block"
-      ],
-      "examples": [
-        "BM-S-11 (Lula)",
-        "BCAM-40 (Búzios)",
-        "BS-4 (Atlanta)",
-        "BM-C-33"
-      ],
-      "glossary_id": null,
-      "extended_id": null,
-      "corporate_internal": false,
-      "evidence_status": "documented",
-      "id": "bloco-anchor",
-      "label": "Bloco (entidade-âncora)",
-      "label_pt": "Bloco (entidade-âncora)",
-      "label_en": "Block (anchor entity)",
-      "type": "regulatory_anchor",
-      "definition_pt": "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e de decisão (portfólio, ranking, devolução). Detalhada em data/gestao-projetos-parcerias.json#GPP001.",
-      "definition_en_canonical": "Primary upstream concession/production-sharing unit. Anchors regulatory, technical and portfolio-decision concepts simultaneously. Detailed in data/gestao-projetos-parcerias.json#GPP001.",
-      "module": "data/gestao-projetos-parcerias.json#GPP001",
-      "evidence_refs": [
-        "Lei 9.478/1997",
-        "Curso PROPEX 2024/2025"
-      ],
-      "skos_prefLabel": {
-        "@pt": "Bloco (entidade-âncora)",
-        "@en": "Block (anchor entity)"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "Bloco",
-          "Bloco Exploratório",
-          "Área Concedida"
-        ],
-        "@en": [
-          "Exploration Block",
-          "Lease Block"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Unidade primária de concessão/partilha. Ancora simultaneamente conceitos regulatórios (contrato E&P), técnicos (poços, projetos exploratórios) e de decisão (portfólio, ranking, devolução). Detalhada em data/gestao-projetos-parcerias.json#GPP001.",
-        "@en": "Primary upstream concession/production-sharing unit. Anchors regulatory, technical and portfolio-decision concepts simultaneously. Detailed in data/gestao-projetos-parcerias.json#GPP001."
-      },
-      "skos_example": [
-        "BM-S-11 (Lula)",
-        "BCAM-40 (Búzios)",
-        "BS-4 (Atlanta)",
-        "BM-C-33"
-      ],
-      "ontological_role": "regulatory_anchor"
     },
     {
       "color": "#1ABC9C",
@@ -13212,68 +13102,6 @@
       "wsm_type_code": null,
       "_semantic_category": null,
       "ontological_role": "dataset_concept"
-    },
-    {
-      "id": "GEOMEC026A",
-      "label": "QPG — Quadro de Previsões Geológicas",
-      "label_en": "Geological Prognosis Chart",
-      "type": "geomec_corporate",
-      "color": "#475569",
-      "size": 22,
-      "definition": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
-      "definition_en_canonical": null,
-      "category": "Document",
-      "layer": "L6",
-      "acronym": [
-        "QPG",
-        "Quadro de Previsões Geológicas",
-        "QPG Preliminar",
-        "QPG Final"
-      ],
-      "owner_department": null,
-      "official_datastore": null,
-      "internal_tools": null,
-      "internal_standards": null,
-      "osdu_kind": null,
-      "osdu_mapping": null,
-      "geocoverage": [
-        "layer6"
-      ],
-      "synonyms_pt": [
-        "QPG",
-        "Quadro de Previsões Geológicas",
-        "QPG Preliminar",
-        "QPG Final"
-      ],
-      "synonyms_en": [
-        "Geological Prognosis Chart"
-      ],
-      "examples": [],
-      "glossary_id": null,
-      "extended_id": null,
-      "skos_prefLabel": {
-        "@pt": "QPG — Quadro de Previsões Geológicas",
-        "@en": "Geological Prognosis Chart"
-      },
-      "skos_altLabel": {
-        "@pt": [
-          "QPG",
-          "Quadro de Previsões Geológicas",
-          "QPG Preliminar",
-          "QPG Final"
-        ],
-        "@en": [
-          "Geological Prognosis Chart"
-        ]
-      },
-      "skos_definition": {
-        "@pt": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
-        "@en": null
-      },
-      "skos_example": [],
-      "wsm_type_code": null,
-      "_semantic_category": null,
-      "ontological_role": "governance_artifact"
     },
     {
       "id": "GEOMEC027",
@@ -21655,7 +21483,7 @@
       "style": "dashed"
     },
     {
-      "source": "wellbore-trajectory",
+      "source": "trajetoria-poco",
       "target": "wellbore",
       "relation": "positions",
       "relation_label_pt": "posiciona",
@@ -21952,7 +21780,7 @@
     },
     {
       "source": "formation-pressure-point",
-      "target": "fluid-sample",
+      "target": "amostra-fluido",
       "relation": "collects",
       "relation_label_pt": "coleta",
       "relation_label_en": "collects",
@@ -21960,7 +21788,7 @@
     },
     {
       "source": "dst-interval",
-      "target": "fluid-sample",
+      "target": "amostra-fluido",
       "relation": "collects",
       "relation_label_pt": "coleta",
       "relation_label_en": "collects",
@@ -22599,7 +22427,7 @@
       "style": "dashed"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "contrato-ep",
       "relation": "is_subject_to_contract",
       "relation_label_pt": "está sob contrato",
@@ -22623,7 +22451,7 @@
       "style": "solid"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "bloco-exploratorio-state",
       "relation": "has_lifecycle_state",
       "relation_label_pt": "tem estado",
@@ -22631,7 +22459,7 @@
       "style": "solid"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "bloco-em-avaliacao-state",
       "relation": "has_lifecycle_state",
       "relation_label_pt": "tem estado",
@@ -22639,7 +22467,7 @@
       "style": "solid"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "area-em-pad-state",
       "relation": "has_lifecycle_state",
       "relation_label_pt": "tem estado",
@@ -22647,7 +22475,7 @@
       "style": "solid"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "campo-em-desenvolvimento-state",
       "relation": "has_lifecycle_state",
       "relation_label_pt": "tem estado",
@@ -22655,7 +22483,7 @@
       "style": "solid"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "campo-producao-state",
       "relation": "has_lifecycle_state",
       "relation_label_pt": "tem estado",
@@ -22815,7 +22643,7 @@
       "style": "solid"
     },
     {
-      "source": "bloco-anchor",
+      "source": "bloco",
       "target": "working-interest",
       "relation": "has_partnership_share",
       "relation_label_pt": "tem participação societária",
@@ -22832,7 +22660,7 @@
     },
     {
       "source": "portfolio-exploratorio",
-      "target": "bloco-anchor",
+      "target": "bloco",
       "relation": "aggregates",
       "relation_label_pt": "agrega",
       "relation_label_en": "aggregates",
@@ -22840,7 +22668,7 @@
     },
     {
       "source": "vme",
-      "target": "bloco-anchor",
+      "target": "bloco",
       "relation": "scores",
       "relation_label_pt": "pontua",
       "relation_label_en": "scores",
@@ -22848,7 +22676,7 @@
     },
     {
       "source": "area-retida",
-      "target": "bloco-anchor",
+      "target": "bloco",
       "relation": "is_outcome_of",
       "relation_label_pt": "é desfecho de",
       "relation_label_en": "is outcome of",
@@ -22856,7 +22684,7 @@
     },
     {
       "source": "area-devolvida",
-      "target": "bloco-anchor",
+      "target": "bloco",
       "relation": "is_outcome_of",
       "relation_label_pt": "é desfecho de",
       "relation_label_en": "is outcome of",
@@ -24177,9 +24005,9 @@
     {
       "source": "GEOMEC016",
       "target": "GEOMEC007",
-      "relation": "is_calculated_from",
+      "relation": "references",
       "relation_label_pt": "Tensão Vertical (Sv) — carga sobre o reservatório",
-      "relation_label_en": "is calculated from",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -24417,25 +24245,25 @@
     {
       "source": "GEOMEC023",
       "target": "GEOMEC023A",
-      "relation": "contains",
+      "relation": "references",
       "relation_label_pt": "Análise especializada — GEOMEC023A",
-      "relation_label_en": "contains",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC023",
       "target": "GEOMEC023B",
-      "relation": "contains",
+      "relation": "references",
       "relation_label_pt": "Análise especializada — GEOMEC023B",
-      "relation_label_en": "contains",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC023",
       "target": "GEOMEC023C",
-      "relation": "contains",
+      "relation": "references",
       "relation_label_pt": "Análise especializada — GEOMEC023C",
-      "relation_label_en": "contains",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -24511,7 +24339,7 @@
       "style": "geomec_corporate"
     },
     {
-      "source": "GEOMEC026A",
+      "source": "qpg",
       "target": "laudo-geomecanico",
       "relation": "is_input_for",
       "relation_label_pt": "Laudo Geomecânico — QPG Preliminar é insumo obrigatório para elaboração do Laudo",
@@ -24519,7 +24347,7 @@
       "style": "geomec_corporate"
     },
     {
-      "source": "GEOMEC026A",
+      "source": "qpg",
       "target": "GEOMEC001",
       "relation": "contains",
       "relation_label_pt": "Pressão de Poros prevista (pressão estática dos IPFs)",
@@ -24527,7 +24355,7 @@
       "style": "geomec_corporate"
     },
     {
-      "source": "GEOMEC026A",
+      "source": "qpg",
       "target": "janela-lama",
       "relation": "contains",
       "relation_label_pt": "Janela Operacional implícita (fluidos de perfuração e diâmetros por fase)",
@@ -24535,7 +24363,7 @@
       "style": "geomec_corporate"
     },
     {
-      "source": "GEOMEC026A",
+      "source": "qpg",
       "target": "GEOMEC015",
       "relation": "is_input_for",
       "relation_label_pt": "Estabilidade de Poço / Análise de Geohazards",
@@ -24544,7 +24372,7 @@
     },
     {
       "source": "laudo-geomecanico",
-      "target": "GEOMEC026A",
+      "target": "qpg",
       "relation": "requires_input",
       "relation_label_pt": "QPG Preliminar — insumo obrigatório para elaboração do Laudo",
       "relation_label_en": "requires input",
@@ -24641,25 +24469,25 @@
     {
       "source": "GEOMEC028",
       "target": "GEOMEC029",
-      "relation": "is_input_for",
+      "relation": "used_with",
       "relation_label_pt": "GERESIM (pré/pós-processamento e interface com simulador de fluxo)",
-      "relation_label_en": "is input for",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC028",
       "target": "GEOMEC030",
-      "relation": "co_measured_with",
+      "relation": "used_with",
       "relation_label_pt": "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço",
-      "relation_label_en": "co measured with",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC029",
       "target": "GEOMEC028",
-      "relation": "storage_for",
+      "relation": "used_with",
       "relation_label_pt": "GeomecBR (acoplamento geomecânico-fluxo)",
-      "relation_label_en": "storage for",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -24745,9 +24573,9 @@
     {
       "source": "GEOMEC031",
       "target": "GEOMEC034",
-      "relation": "co_measured_with",
+      "relation": "used_with",
       "relation_label_pt": "DFIT / DPPT — Testes Dinâmicos de Integridade e Pressão de Poros",
-      "relation_label_en": "co measured with",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -25081,17 +24909,17 @@
     {
       "source": "GEOMEC043",
       "target": "GEOMEC053A",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "Pressão de Reabertura de Fratura",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC043",
       "target": "GEOMEC053B",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "Pressão de Propagação de Fratura",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25113,9 +24941,9 @@
     {
       "source": "GEOMEC044",
       "target": "GEOMEC023",
-      "relation": "influences",
+      "relation": "references",
       "relation_label_pt": "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
-      "relation_label_en": "influences",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25137,17 +24965,17 @@
     {
       "source": "GEOMEC045",
       "target": "bdiep",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "BDIEP — Banco de Dados de Informações de Engenharia de Poço",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC045",
       "target": "GEOMEC051",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "OpenWells — Well Operations Datastore",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25161,9 +24989,9 @@
     {
       "source": "GEOMEC052A",
       "target": "GEOMEC052B",
-      "relation": "co_measured_with",
+      "relation": "used_with",
       "relation_label_pt": "Setpoint MPD/SBP",
-      "relation_label_en": "co measured with",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -25201,9 +25029,9 @@
     {
       "source": "GEOMEC053A",
       "target": "GEOMEC053B",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "Pressão de Propagação de Fratura",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25385,9 +25213,9 @@
     {
       "source": "GEOMEC088",
       "target": "GEOMEC009",
-      "relation": "monitors",
+      "relation": "references",
       "relation_label_pt": "Gradiente de Colapso",
-      "relation_label_en": "monitors",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25408,7 +25236,7 @@
     },
     {
       "source": "GEOMEC089",
-      "target": "GEOMEC026A",
+      "target": "qpg",
       "relation": "is_input_for",
       "relation_label_pt": "QPG — Quadro de Previsões Geológicas",
       "relation_label_en": "is input for",
@@ -25417,9 +25245,9 @@
     {
       "source": "GEOMEC089",
       "target": "GEOMEC023",
-      "relation": "requires_input",
+      "relation": "references",
       "relation_label_pt": "Breakouts e Fraturas Induzidas",
-      "relation_label_en": "requires input",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25553,17 +25381,17 @@
     {
       "source": "GEOMEC068",
       "target": "GEOMEC075",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "AZIE",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC068",
       "target": "GEOMEC077",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "Abertura Angular do Breakout",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25593,9 +25421,9 @@
     {
       "source": "GEOMEC069",
       "target": "GEOMEC078",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "POSTEF",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25617,17 +25445,17 @@
     {
       "source": "GEOMEC070",
       "target": "GEOMEC079",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "FractureState",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC070",
       "target": "GEOMEC079A",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "FaultType",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25649,9 +25477,9 @@
     {
       "source": "GEOMEC071",
       "target": "GEOMEC078",
-      "relation": "is_input_for",
+      "relation": "references",
       "relation_label_pt": "POSTEF (Parallel_to_Bedding / Perpendicular_to_Bedding)",
-      "relation_label_en": "is input for",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25697,33 +25525,33 @@
     {
       "source": "GEOMEC072",
       "target": "GEOMEC023A",
-      "relation": "produces",
+      "relation": "references",
       "relation_label_pt": "Análise de Ovalização",
-      "relation_label_en": "produces",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC072",
       "target": "GEOMEC023B",
-      "relation": "produces",
+      "relation": "references",
       "relation_label_pt": "Análise de DITF",
-      "relation_label_en": "produces",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC072",
       "target": "GEOMEC023C",
-      "relation": "produces",
+      "relation": "references",
       "relation_label_pt": "Análise de Fratura Natural",
-      "relation_label_en": "produces",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC072",
       "target": "GEOMEC074",
-      "relation": "requires",
+      "relation": "used_with",
       "relation_label_pt": "Geolog",
-      "relation_label_en": "requires",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -25761,33 +25589,33 @@
     {
       "source": "GEOMEC074",
       "target": "GEOMEC072",
-      "relation": "enables",
+      "relation": "used_with",
       "relation_label_pt": "Interpretação de Perfil de Imagem",
-      "relation_label_en": "enables",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC074",
       "target": "GEOMEC023A",
-      "relation": "enables",
+      "relation": "used_with",
       "relation_label_pt": "Análise de Ovalização",
-      "relation_label_en": "enables",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC074",
       "target": "GEOMEC023B",
-      "relation": "enables",
+      "relation": "used_with",
       "relation_label_pt": "Análise de DITF",
-      "relation_label_en": "enables",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC074",
       "target": "GEOMEC023C",
-      "relation": "enables",
+      "relation": "used_with",
       "relation_label_pt": "Análise de Fratura Natural",
-      "relation_label_en": "enables",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -25817,9 +25645,9 @@
     {
       "source": "GEOMEC077",
       "target": "GEOMEC008",
-      "relation": "is_input_for",
+      "relation": "used_with",
       "relation_label_pt": "Estimativa de magnitude de SHmax",
-      "relation_label_en": "is input for",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -25833,9 +25661,9 @@
     {
       "source": "GEOMEC078",
       "target": "GEOMEC071",
-      "relation": "influences",
+      "relation": "references",
       "relation_label_pt": "Acamamento (referencial)",
-      "relation_label_en": "influences",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25857,17 +25685,17 @@
     {
       "source": "GEOMEC079A",
       "target": "GEOMEC017",
-      "relation": "influences",
+      "relation": "references",
       "relation_label_pt": "Regime de Falhas",
-      "relation_label_en": "influences",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC079A",
       "target": "GEOMEC018",
-      "relation": "influences",
+      "relation": "references",
       "relation_label_pt": "Reativação de Falhas",
-      "relation_label_en": "influences",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
@@ -25945,25 +25773,25 @@
     {
       "source": "GEOMEC083",
       "target": "GEOMEC082",
-      "relation": "derived_from",
+      "relation": "references",
       "relation_label_pt": "FMS individuais",
-      "relation_label_en": "derived from",
+      "relation_label_en": "references",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC085",
       "target": "GEOMEC023A",
-      "relation": "supports",
+      "relation": "used_with",
       "relation_label_pt": "Análise de Ovalização",
-      "relation_label_en": "supports",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
       "source": "GEOMEC085",
       "target": "GEOMEC023B",
-      "relation": "supports",
+      "relation": "used_with",
       "relation_label_pt": "Análise de DITF",
-      "relation_label_en": "supports",
+      "relation_label_en": "used with",
       "style": "geomec_corporate"
     },
     {
@@ -27424,14 +27252,6 @@
     },
     {
       "source": "cuttings-sample-detailed",
-      "target": "axon-term-amostra",
-      "relation": "is_specialization_of",
-      "relation_label_pt": "é especialização de",
-      "relation_label_en": "is specialization of",
-      "style": "axon_sample_bridge"
-    },
-    {
-      "source": "fluid-sample",
       "target": "axon-term-amostra",
       "relation": "is_specialization_of",
       "relation_label_pt": "é especialização de",
