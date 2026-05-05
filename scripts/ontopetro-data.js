@@ -3125,6 +3125,19 @@ export const OSDU_EDGES = [
     relation_label: "caracterizado em",
     style: "dashed",
   },
+  /* ─────────────────────────────────────────────────────────────────────
+     F12 — Anchor edges para satisfazer WellOperationHasActorOrLocationShape
+     em operações OSDU sem ator/localização explícita.
+     ─────────────────────────────────────────────────────────────────────── */
+  {
+    source: "completacao",
+    target: "poco",
+    relation: "occurs_in",
+    relation_label: "ocorre em",
+    edge_note:
+      "F12 anchor: completação é operação executada no poço — occurs_in poco materializa âncora L2→L1 exigida pela SHACL WellOperationHasActorOrLocationShape.",
+    style: "dashed",
+  },
 ];
 
 /**

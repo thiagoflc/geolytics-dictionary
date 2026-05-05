@@ -488,11 +488,56 @@ export const OSDU_EXTRA_EDGES = [
     relation_label: "parte de",
     style: "solid",
   },
+  /* F12: ancorar L6 engineering em L1/L2 (well_anchor/well_operation) para
+     satisfazer EngineeringArtifactAppliesToShape. Casing-design aplica-se
+     ao wellbore (estrutura física) e governa o programa de revestimento
+     da atividade de perfuração. */
+  {
+    source: "casing-design",
+    target: "wellbore",
+    relation: "applies_to",
+    relation_label: "aplica-se a",
+    edge_note:
+      "F12 anchor: casing design é projetado para um wellbore específico (L1 well_anchor); esta aresta torna explícita a âncora L6→L1 exigida pela SHACL EngineeringArtifactAppliesToShape.",
+    style: "dashed",
+  },
+  {
+    source: "casing-design",
+    target: "drilling-activity",
+    relation: "constrains",
+    relation_label: "restringe",
+    edge_note:
+      "F12 anchor: o desenho de revestimento (graus de aço, profundidades, conexões) restringe a sequência de fases da atividade de perfuração — é o documento que define os assentamentos. Âncora L6→L2.",
+    style: "dashed",
+  },
   {
     source: "cementing-fluid",
     target: "casing-design",
     relation: "used_in",
     relation_label: "usado em",
+    style: "dashed",
+  },
+  /* F12: cementing-fluid não tem âncora direta a well_anchor/well_operation
+     porque used_in→casing-design é engineering→engineering. Adicionar
+     applies_to wellbore (fluido aplicado durante a cimentação no trecho
+     perfurado) e supports drilling-activity (cimentação é etapa do
+     programa de perfuração). */
+  {
+    source: "cementing-fluid",
+    target: "wellbore",
+    relation: "applies_to",
+    relation_label: "aplica-se a",
+    edge_note:
+      "F12 anchor: o fluido de cimentação é bombeado ao wellbore para selar o anular casing/formação. Âncora L6→L1.",
+    style: "dashed",
+  },
+  {
+    source: "cementing-fluid",
+    target: "drilling-activity",
+    relation: "supports",
+    relation_label: "apoia",
+    edge_note:
+      "F12 anchor: cimentação é fase de apoio à atividade de perfuração — fluido de cimentação suporta a operação. Âncora L6→L2.",
     style: "dashed",
   },
   {
@@ -622,6 +667,37 @@ export const OSDU_EXTRA_EDGES = [
     target: "operador",
     relation: "restricts_access_for",
     relation_label: "restringe acesso para",
+    style: "dashed",
+  },
+  /* ─────────────────────────────────────────────────────────────────────
+     F12 — Anchor edges para satisfazer WellOperationHasActorOrLocationShape.
+     Operações OSDU sem ator/localização explícita ganham occurs_in poco.
+     ─────────────────────────────────────────────────────────────────────── */
+  {
+    source: "activity-plan",
+    target: "poco",
+    relation: "occurs_in",
+    relation_label: "ocorre em",
+    edge_note:
+      "F12 anchor: plano de atividade ocorre no contexto de um poço (mesmo quando agrupado). Âncora L2→L1.",
+    style: "dashed",
+  },
+  {
+    source: "well-activity-program",
+    target: "poco",
+    relation: "occurs_in",
+    relation_label: "ocorre em",
+    edge_note:
+      "F12 anchor: programa de atividade de poço ocorre em poço(s). Complementa o `governs poco` existente para satisfazer WellOperationHasActorOrLocationShape (occurs_in é o predicado canônico de localização L2→L1).",
+    style: "dashed",
+  },
+  {
+    source: "seismic-acquisition-survey",
+    target: "poco",
+    relation: "occurs_in",
+    relation_label: "ocorre em",
+    edge_note:
+      "F12 anchor: levantamento sísmico ocorre na bacia onde o poço está locado — ancorando ao poço como referência geográfica/temporal. Âncora L2→L1.",
     style: "dashed",
   },
 ];

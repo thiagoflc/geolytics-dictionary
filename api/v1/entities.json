@@ -1,8 +1,8 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-05T10:10:56.417Z",
-    "count": 408
+    "generated": "2026-05-05T12:02:29.856Z",
+    "count": 409
   },
   "entities": [
     {
@@ -137,6 +137,16 @@
             "to": "wellbore",
             "relation": "has_wellbore",
             "style": "solid"
+          },
+          {
+            "to": "axon-asn-planejamento",
+            "relation": "is_input_for",
+            "style": "axon_l5_anchor"
+          },
+          {
+            "to": "axon-sub-prog-aquisicao",
+            "relation": "is_input_for",
+            "style": "f12_interp_anchor"
           }
         ],
         "incoming": [
@@ -206,6 +216,11 @@
             "style": "solid"
           },
           {
+            "from": "completacao",
+            "relation": "occurs_in",
+            "style": "dashed"
+          },
+          {
             "from": "activity-plan",
             "relation": "plans_activity_for",
             "style": "dashed"
@@ -219,6 +234,21 @@
             "from": "drilling-activity",
             "relation": "performed_on",
             "style": "solid"
+          },
+          {
+            "from": "activity-plan",
+            "relation": "occurs_in",
+            "style": "dashed"
+          },
+          {
+            "from": "well-activity-program",
+            "relation": "occurs_in",
+            "style": "dashed"
+          },
+          {
+            "from": "seismic-acquisition-survey",
+            "relation": "occurs_in",
+            "style": "dashed"
           },
           {
             "from": "drx",
@@ -239,6 +269,61 @@
             "from": "laudo-geomecanico",
             "relation": "references",
             "style": "solid"
+          },
+          {
+            "from": "exata",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "sigeo",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "bdiep",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "aida",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "vge",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "gda",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "geodo",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "bdoc",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "sirr",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "cassandra-exata-curva-tempo",
+            "relation": "references",
+            "style": "dashed"
+          },
+          {
+            "from": "lwd-run",
+            "relation": "occurs_in",
+            "style": "dashed"
           },
           {
             "from": "sensor_p_anular",
@@ -446,8 +531,98 @@
             "style": "dashed"
           },
           {
+            "from": "GEOMEC006",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC022",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC025",
+            "relation": "references",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC029",
+            "relation": "references",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC031",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC032",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC033",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC051",
+            "relation": "references",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC052B",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC061",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC062",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC063",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC064",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC065",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC066",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC067",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC080",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
+          },
+          {
             "from": "GM026",
             "relation": "is_specialization_of",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GM005",
+            "relation": "applies_to",
             "style": "geomec_academic_bridge"
           },
           {
@@ -491,9 +666,194 @@
             "style": "axon_attr_bridge"
           },
           {
+            "from": "axon-asn-mudlogging",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
+            "from": "axon-asn-perfilagem",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
+            "from": "axon-asn-op-amostras-rocha",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
+            "from": "axon-asn-op-amostras-fluido",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
+            "from": "axon-asn-pressao-temperatura",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
+            "from": "axon-asn-testemunhagem",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
+            "from": "axon-asn-teste-formacao-aberto",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
+          },
+          {
             "from": "GEOMEC076",
             "relation": "applies_to",
             "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "formacao",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "sistema-deposicional",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "presal",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "bacias-agrupadas",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "ambiente",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "rocha-geradora",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "rocha-capacitante",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "trapa",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "sistema-petrolifero",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "falha",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "idade-geologica",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "intervalo-estratigrafico",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "materia-organica",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "maturidade-termal",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "litologia",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "facies-sedimentar",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "campo-tensional",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "potencial-selante",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "classe-fluido",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "topo-formacional",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "trajetoria-poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "wellbore-marker-set",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "seismic-horizon",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "basin-type",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "bottom-hole-pressure-type",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "annular-fluid-type",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "gas-show-event",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "kick-event",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "geostopping-event",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          },
+          {
+            "from": "axon-term-ambiente",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ]
       }
@@ -863,7 +1223,13 @@
       ],
       "ontological_role": "regulatory_anchor",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "axon-dom-geodesia",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ],
         "incoming": [
           {
             "from": "poco",
@@ -1118,6 +1484,11 @@
             "to": "topo-formacional",
             "relation": "has_top_at",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -1206,7 +1577,13 @@
       ],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "reservatorio",
@@ -2045,6 +2422,11 @@
             "from": "geo-political-entity",
             "relation": "jurisdiction_of",
             "style": "dashed"
+          },
+          {
+            "from": "bdiap",
+            "relation": "references",
+            "style": "dashed"
           }
         ]
       }
@@ -2814,6 +3196,11 @@
             "style": "solid"
           },
           {
+            "to": "formation-testing",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
             "to": "axon-asn-teste-formacao-aberto",
             "relation": "is_specialization_of",
             "style": "axon_op_bridge"
@@ -2895,6 +3282,11 @@
             "to": "bmp",
             "relation": "generates",
             "style": "solid"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "acquired_during",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -3220,7 +3612,13 @@
       ],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "poco",
@@ -3284,6 +3682,11 @@
             "to": "bacia-sedimentar",
             "relation": "classifies",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -3334,7 +3737,13 @@
       "skos_example": [],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "poco",
@@ -4568,6 +4977,11 @@
             "to": "sistema-petrolifero",
             "relation": "feeds",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -4631,6 +5045,11 @@
             "to": "reservatorio",
             "relation": "seals",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -4688,6 +5107,11 @@
             "to": "acumulacao",
             "relation": "contains",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -4746,6 +5170,11 @@
             "to": "bacia-sedimentar",
             "relation": "integrates_to",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -5100,6 +5529,11 @@
             "to": "axon-dom-interp-exploratoria",
             "relation": "is_part_of",
             "style": "axon_dom_link"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -5158,6 +5592,11 @@
             "to": "axon-dom-interp-exploratoria",
             "relation": "is_part_of",
             "style": "axon_dom_link"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -5210,7 +5649,13 @@
       "skos_example": [],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "poco",
@@ -5271,6 +5716,11 @@
             "to": "formacao",
             "relation": "samples",
             "style": "solid"
+          },
+          {
+            "to": "coring",
+            "relation": "acquired_during",
+            "style": "dashed"
           },
           {
             "to": "axon-term-amostra",
@@ -5346,9 +5796,39 @@
             "style": "solid"
           },
           {
+            "to": "wireline-logging",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "to": "modelo-petrofisico",
+            "relation": "is_input_for",
+            "style": "solid"
+          },
+          {
+            "to": "GEOMEC035",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "to": "GEOMEC083",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "to": "GEOMEC086",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
             "to": "axon-dom-aval-petrofisica",
             "relation": "is_part_of",
             "style": "axon_dom_link"
+          },
+          {
+            "to": "axon-asn-aval-final-poco",
+            "relation": "is_input_for",
+            "style": "axon_l5_anchor"
           }
         ],
         "incoming": [
@@ -5356,6 +5836,91 @@
             "from": "log-curve-type",
             "relation": "classifies_curve_in",
             "style": "dashed"
+          },
+          {
+            "from": "GEOMEC007",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC008",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC009",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC017",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC023",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC023B",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC023C",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC075",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC076",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC077",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC078",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC079",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC079A",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC082",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC087",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GF012",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GF014",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ]
       }
@@ -5401,7 +5966,13 @@
       "skos_example": [],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "rocha-geradora",
@@ -5457,6 +6028,11 @@
             "to": "rocha-geradora",
             "relation": "characterizes",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -5518,6 +6094,16 @@
             "from": "gc-ms",
             "relation": "detects",
             "style": "solid"
+          },
+          {
+            "from": "correlacao-oleo-rocha",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
+          },
+          {
+            "from": "gc-ms",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -5566,6 +6152,11 @@
             "to": "rocha-geradora",
             "relation": "links_to",
             "style": "solid"
+          },
+          {
+            "to": "biomarcador",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
         "incoming": [
@@ -5573,6 +6164,16 @@
             "from": "biomarcador",
             "relation": "enables",
             "style": "solid"
+          },
+          {
+            "from": "gc-ms",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "from": "dna-geoquimico",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -5621,7 +6222,13 @@
       "skos_example": [],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "perfil-poco",
@@ -5637,6 +6244,21 @@
             "from": "frx",
             "relation": "alimenta_classificacao_litologica",
             "style": "solid"
+          },
+          {
+            "from": "drx",
+            "relation": "produces",
+            "style": "solid"
+          },
+          {
+            "from": "frx",
+            "relation": "produces",
+            "style": "solid"
+          },
+          {
+            "from": "modelo-petrofisico",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -5687,6 +6309,11 @@
             "to": "reservatorio",
             "relation": "composes",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -5741,9 +6368,20 @@
             "to": "axon-dom-aval-petrofisica",
             "relation": "is_part_of",
             "style": "axon_dom_link"
+          },
+          {
+            "to": "litologia",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "perfil-poco",
+            "relation": "is_input_for",
+            "style": "solid"
+          }
+        ]
       }
     },
     {
@@ -5873,9 +6511,19 @@
             "to": "GEOMEC027",
             "relation": "governed_by",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
+          {
+            "from": "GEOMEC085",
+            "relation": "produces",
+            "style": "solid"
+          },
           {
             "from": "GEOMEC005",
             "relation": "is_calculated_from",
@@ -6113,7 +6761,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "qpg",
+            "from": "GEOMEC026A",
             "relation": "contains",
             "style": "geomec_corporate"
           },
@@ -6207,7 +6855,13 @@
             "style": "dashed"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GEOMEC015",
+            "relation": "produces",
+            "style": "geomec_corporate"
+          }
+        ]
       }
     },
     {
@@ -6251,7 +6905,13 @@
       "skos_example": [],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "falha",
@@ -6316,6 +6976,31 @@
             "to": "unidade-medida",
             "relation": "qualified_by",
             "style": "solid"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "to": "gc-ms",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "to": "sara",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "to": "pvt",
+            "relation": "is_input_for",
+            "style": "dashed"
           },
           {
             "to": "axon-term-amostra",
@@ -6407,6 +7092,11 @@
             "to": "unidade-medida",
             "relation": "expressed_in",
             "style": "solid"
+          },
+          {
+            "to": "classe-fluido",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
         "incoming": [
@@ -6418,6 +7108,11 @@
           {
             "from": "bottom-hole-pressure-type",
             "relation": "measurement_for",
+            "style": "dashed"
+          },
+          {
+            "from": "amostra-fluido",
+            "relation": "is_input_for",
             "style": "dashed"
           }
         ]
@@ -6468,6 +7163,11 @@
             "to": "reservatorio",
             "relation": "characterizes",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -6475,6 +7175,16 @@
             "from": "pvt",
             "relation": "classifies",
             "style": "solid"
+          },
+          {
+            "from": "sara",
+            "relation": "produces",
+            "style": "solid"
+          },
+          {
+            "from": "pvt",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -6523,9 +7233,25 @@
             "to": "biomarcador",
             "relation": "detects",
             "style": "solid"
+          },
+          {
+            "to": "correlacao-oleo-rocha",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "to": "biomarcador",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "amostra-fluido",
+            "relation": "is_input_for",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {
@@ -6567,11 +7293,22 @@
       "skos_example": [],
       "ontological_role": "interpretation_process",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "classe-fluido",
+            "relation": "produces",
+            "style": "solid"
+          }
+        ],
         "incoming": [
           {
             "from": "amostra-fluido",
             "relation": "undergoes",
+            "style": "dashed"
+          },
+          {
+            "from": "amostra-fluido",
+            "relation": "is_input_for",
             "style": "dashed"
           }
         ]
@@ -6689,6 +7426,16 @@
             "style": "solid"
           },
           {
+            "from": "casing-design",
+            "relation": "applies_to",
+            "style": "dashed"
+          },
+          {
+            "from": "cementing-fluid",
+            "relation": "applies_to",
+            "style": "dashed"
+          },
+          {
             "from": "trajetoria-poco",
             "relation": "positions",
             "style": "solid"
@@ -6773,7 +7520,13 @@
       ],
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "wellbore",
@@ -6874,6 +7627,16 @@
             "to": "wellbore",
             "relation": "positions",
             "style": "solid"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -6957,6 +7720,11 @@
           {
             "to": "campo",
             "relation": "enables",
+            "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "dashed"
           }
         ],
@@ -7129,6 +7897,11 @@
             "to": "activity-template",
             "relation": "composed_of",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "dashed"
           }
         ],
         "incoming": []
@@ -7261,6 +8034,11 @@
             "to": "drilling-activity",
             "relation": "realized_by",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "dashed"
           }
         ],
         "incoming": []
@@ -7322,6 +8100,16 @@
             "to": "wellbore-architecture",
             "relation": "part_of",
             "style": "solid"
+          },
+          {
+            "to": "wellbore",
+            "relation": "applies_to",
+            "style": "dashed"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "constrains",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -7391,12 +8179,52 @@
             "style": "dashed"
           },
           {
+            "to": "coring",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "to": "GEOMEC035",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
             "to": "axon-term-amostra",
             "relation": "is_specialization_of",
             "style": "axon_sample_bridge"
           }
         ],
         "incoming": [
+          {
+            "from": "GEOMEC005",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC010",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC011",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC012",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC014",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC024",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
           {
             "from": "GM010",
             "relation": "derived_from",
@@ -7518,6 +8346,26 @@
             "style": "geomec_academic_bridge"
           },
           {
+            "from": "GM001",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GM023",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GM024",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GF013",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
             "from": "GF001",
             "relation": "observed_in",
             "style": "geomec_academic_bridge"
@@ -7590,6 +8438,16 @@
             "to": "casing-design",
             "relation": "used_in",
             "style": "dashed"
+          },
+          {
+            "to": "wellbore",
+            "relation": "applies_to",
+            "style": "dashed"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "supports",
+            "style": "dashed"
           }
         ],
         "incoming": []
@@ -7651,6 +8509,16 @@
             "to": "bacia-sedimentar",
             "relation": "covers",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "dashed"
+          },
+          {
+            "to": "seismic-processing-project",
+            "relation": "is_input_for",
+            "style": "solid"
           },
           {
             "to": "axon-dom-geofisica",
@@ -7728,12 +8596,22 @@
             "to": "axon-dom-geofisica",
             "relation": "is_part_of",
             "style": "axon_dom_link"
+          },
+          {
+            "to": "seismic-horizon",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
         "incoming": [
           {
             "from": "seismic-horizon",
             "relation": "output_of",
+            "style": "solid"
+          },
+          {
+            "from": "seismic-acquisition-survey",
+            "relation": "is_input_for",
             "style": "solid"
           }
         ]
@@ -7937,6 +8815,16 @@
             "to": "intervalo-estratigrafico",
             "relation": "maps_to",
             "style": "dashed"
+          },
+          {
+            "to": "axon-dom-geodesia",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -8013,9 +8901,20 @@
             "to": "axon-dom-interp-exploratoria",
             "relation": "is_part_of",
             "style": "axon_dom_link"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "seismic-processing-project",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
+          }
+        ]
       }
     },
     {
@@ -8096,6 +8995,56 @@
             "from": "mud-pump",
             "relation": "used_in",
             "style": "dashed"
+          },
+          {
+            "from": "casing-design",
+            "relation": "constrains",
+            "style": "dashed"
+          },
+          {
+            "from": "cementing-fluid",
+            "relation": "supports",
+            "style": "dashed"
+          },
+          {
+            "from": "drilling-parameters",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "trajetoria-poco",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "GEOMEC019",
+            "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC020",
+            "relation": "supports",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC036",
+            "relation": "guides_drilling_of",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC047",
+            "relation": "computes",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC048",
+            "relation": "acquired_during",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GM005",
+            "relation": "constrains",
+            "style": "geomec_academic_bridge"
           }
         ]
       }
@@ -8156,9 +9105,55 @@
             "to": "bha",
             "relation": "measured_for",
             "style": "solid"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "acquired_during",
+            "style": "solid"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GEOMEC037",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC038",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC039",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC040",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC041",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC044",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC045",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC088",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          }
+        ]
       }
     },
     {
@@ -8274,6 +9269,11 @@
             "to": "bacia-sedimentar",
             "relation": "classifies",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -8335,6 +9335,11 @@
             "to": "pvt",
             "relation": "measurement_for",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -8396,6 +9401,11 @@
             "to": "janela-lama",
             "relation": "is_input_for",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -8951,6 +9961,11 @@
             "to": "litologia",
             "relation": "alimenta_classificacao_litologica",
             "style": "solid"
+          },
+          {
+            "to": "litologia",
+            "relation": "produces",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -9057,6 +10072,16 @@
             "to": "sigeo",
             "relation": "stored_in",
             "style": "solid"
+          },
+          {
+            "to": "litologia",
+            "relation": "produces",
+            "style": "solid"
+          },
+          {
+            "to": "dna-geoquimico",
+            "relation": "produces",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -9139,12 +10164,28 @@
       ],
       "ontological_role": "interpretation_process",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "correlacao-oleo-rocha",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
+          }
+        ],
         "incoming": [
           {
             "from": "frx",
             "relation": "feeds_signature",
             "style": "solid"
+          },
+          {
+            "from": "frx",
+            "relation": "produces",
+            "style": "solid"
+          },
+          {
+            "from": "cuttings-sample-detailed",
+            "relation": "is_input_for",
+            "style": "dashed"
           }
         ]
       }
@@ -9173,6 +10214,11 @@
           {
             "to": "cassandra-exata-curva-tempo",
             "relation": "stored_in",
+            "style": "solid"
+          },
+          {
+            "to": "mudlogging",
+            "relation": "acquired_during",
             "style": "solid"
           },
           {
@@ -9223,6 +10269,11 @@
             "to": "geostopping-event",
             "relation": "feeds_decision",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -9278,6 +10329,11 @@
             "to": "ogeomec",
             "relation": "recorded_in",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
@@ -9304,6 +10360,16 @@
       "ontological_role": "artifact_primary",
       "relations": {
         "outgoing": [
+          {
+            "to": "mudlogging",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "to": "dna-geoquimico",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
           {
             "to": "axon-asn-mudlogging",
             "relation": "is_specialization_of",
@@ -9419,6 +10485,11 @@
       "relations": {
         "outgoing": [
           {
+            "to": "coring",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
             "to": "axon-term-amostra",
             "relation": "is_specialization_of",
             "style": "axon_sample_bridge"
@@ -9528,6 +10599,11 @@
             "to": "bha",
             "relation": "uses",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "dashed"
           },
           {
             "to": "axon-asn-perfilagem",
@@ -9667,6 +10743,11 @@
             "to": "amostra-fluido",
             "relation": "collects",
             "style": "solid"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "acquired_during",
+            "style": "solid"
           }
         ],
         "incoming": [
@@ -9721,6 +10802,11 @@
             "style": "solid"
           },
           {
+            "to": "formation-testing",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
             "to": "axon-asn-teste-formacao-aberto",
             "relation": "is_part_of",
             "style": "axon_op_bridge"
@@ -9767,6 +10853,11 @@
             "to": "qpg",
             "relation": "informed_by",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": [
@@ -9805,7 +10896,13 @@
       ],
       "ontological_role": "dataset_concept",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
+          }
+        ],
         "incoming": [
           {
             "from": "dst-interval",
@@ -9838,7 +10935,13 @@
       ],
       "ontological_role": "dataset_concept",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
+          }
+        ],
         "incoming": [
           {
             "from": "wireline-run",
@@ -9883,6 +10986,11 @@
             "to": "bdiep",
             "relation": "provides_access_to",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -9941,7 +11049,13 @@
       ],
       "ontological_role": "dataset_concept",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
+          }
+        ],
         "incoming": [
           {
             "from": "mudlogging-time-series",
@@ -10097,6 +11211,21 @@
             "from": "operacoes-geologicas",
             "relation": "executes",
             "style": "solid"
+          },
+          {
+            "from": "cuttings-sample-detailed",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "mudlogging-time-series",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "axon-term-amostragem-calha-prevista",
+            "relation": "acquired_during",
+            "style": "axon_artifact_anchor"
           }
         ]
       }
@@ -10150,6 +11279,11 @@
             "from": "axon-term-amostragem-calha-prevista",
             "relation": "requires",
             "style": "axon_to_op"
+          },
+          {
+            "from": "axon-sub-prog-aquisicao",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ]
       }
@@ -10196,6 +11330,31 @@
             "from": "operacoes-geologicas",
             "relation": "executes",
             "style": "solid"
+          },
+          {
+            "from": "core-sample",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "core-plug",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "from": "testemunho",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "from": "axon-term-amostra",
+            "relation": "acquired_during",
+            "style": "axon_artifact_anchor"
+          },
+          {
+            "from": "axon-term-acervo-amostras",
+            "relation": "acquired_during",
+            "style": "axon_artifact_anchor"
           }
         ]
       }
@@ -10353,6 +11512,16 @@
             "style": "solid"
           },
           {
+            "from": "perfil-poco",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "GEOMEC073",
+            "relation": "acquired_during",
+            "style": "geomec_corporate"
+          },
+          {
             "from": "GM004",
             "relation": "derived_from",
             "style": "geomec_academic_bridge"
@@ -10461,6 +11630,11 @@
             "from": "GF017",
             "relation": "derived_from",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "axon-sub-prog-aquisicao",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ]
       }
@@ -10525,6 +11699,86 @@
             "style": "solid"
           },
           {
+            "from": "amostra-fluido",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "from": "amostra-fluido",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "from": "teste-formacao",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "dst-interval",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "from": "formation-pressure-point",
+            "relation": "acquired_during",
+            "style": "solid"
+          },
+          {
+            "from": "tld",
+            "relation": "acquired_during",
+            "style": "dashed"
+          },
+          {
+            "from": "GEOMEC001",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC002",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC016",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC018",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC021",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC042",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC043",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC053A",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC053B",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC081",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "from": "GM004",
             "relation": "measures",
             "style": "geomec_academic_bridge"
@@ -10556,6 +11810,21 @@
           },
           {
             "from": "GM012",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GM002",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GM003",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "from": "GM025",
             "relation": "derived_from",
             "style": "geomec_academic_bridge"
           }
@@ -10761,33 +12030,9 @@
         "predicted geology chart",
         "QPG"
       ],
-      "corporate_id": "GEOMEC026A",
+      "corporate_id": "qpg",
       "geocoverage": [
         "layer5"
-      ],
-      "source_reference": [
-        {
-          "deprecated_id": "GEOMEC026A",
-          "source_module": "data/geomechanics-corporate.json",
-          "label_at_merge": "QPG — Quadro de Previsões Geológicas",
-          "label_en_at_merge": "Geological Prognosis Chart",
-          "original_definition_pt": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
-          "original_definition_en": null,
-          "acronym": [
-            "QPG",
-            "Quadro de Previsões Geológicas",
-            "QPG Preliminar",
-            "QPG Final"
-          ],
-          "observed_variants": [],
-          "owner_department": null,
-          "official_datastore": null,
-          "internal_standards": null,
-          "category": "Document",
-          "sources": [],
-          "merged_in": "qpg",
-          "rationale": "QPG é conceito do módulo operações-geológicas; GEOMEC026A duplicava o nó canônico qpg. Edges e definição detalhada migradas para qpg."
-        }
       ],
       "ontological_role": "governance_artifact",
       "relations": {
@@ -10796,26 +12041,6 @@
             "to": "sigeo",
             "relation": "stored_in",
             "style": "solid"
-          },
-          {
-            "to": "laudo-geomecanico",
-            "relation": "is_input_for",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC001",
-            "relation": "contains",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "janela-lama",
-            "relation": "contains",
-            "style": "geomec_corporate"
-          },
-          {
-            "to": "GEOMEC015",
-            "relation": "is_input_for",
-            "style": "geomec_corporate"
           },
           {
             "to": "axon-dom-interp-exploratoria",
@@ -10850,13 +12075,8 @@
             "style": "dashed"
           },
           {
-            "from": "laudo-geomecanico",
-            "relation": "requires_input",
-            "style": "geomec_corporate"
-          },
-          {
-            "from": "GEOMEC089",
-            "relation": "is_input_for",
+            "from": "GEOMEC015",
+            "relation": "produces",
             "style": "geomec_corporate"
           }
         ]
@@ -11044,6 +12264,11 @@
             "from": "axon-term-igp",
             "relation": "is_specialization_of",
             "style": "axon_term_to_existing"
+          },
+          {
+            "from": "axon-asn-aval-final-poco",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ]
       }
@@ -11135,6 +12360,11 @@
             "from": "formation-evaluation",
             "relation": "produces",
             "style": "solid"
+          },
+          {
+            "from": "axon-asn-aval-final-poco",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ]
       }
@@ -11450,6 +12680,11 @@
             "to": "aida",
             "relation": "feeds",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -11505,6 +12740,11 @@
             "to": "bdiep",
             "relation": "publishes_to",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -11592,6 +12832,11 @@
             "to": "aida",
             "relation": "feeds",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
           }
         ],
         "incoming": [
@@ -11617,7 +12862,7 @@
           },
           {
             "from": "GEOMEC045",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -11650,6 +12895,11 @@
           {
             "to": "bdiep",
             "relation": "complements",
+            "style": "dashed"
+          },
+          {
+            "to": "anp",
+            "relation": "references",
             "style": "dashed"
           }
         ],
@@ -11686,7 +12936,13 @@
       ],
       "ontological_role": "dataset_concept",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
+          }
+        ],
         "incoming": [
           {
             "from": "exata",
@@ -11734,6 +12990,11 @@
             "to": "aida",
             "relation": "queries",
             "style": "dashed"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
           }
         ],
         "incoming": []
@@ -11770,6 +13031,11 @@
             "to": "exata",
             "relation": "provides_access_to",
             "style": "solid"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "dashed"
           }
         ],
         "incoming": []
@@ -11989,7 +13255,7 @@
             "style": "dashed"
           },
           {
-            "to": "qpg",
+            "to": "GEOMEC026A",
             "relation": "requires_input",
             "style": "geomec_corporate"
           },
@@ -12031,7 +13297,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "qpg",
+            "from": "GEOMEC026A",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           },
@@ -18010,6 +19276,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "formation-testing",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GM004",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
@@ -18062,7 +19333,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "qpg",
+            "from": "GEOMEC026A",
             "relation": "contains",
             "style": "geomec_corporate"
           },
@@ -18178,6 +19449,11 @@
           {
             "to": "GEOMEC018",
             "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -18359,6 +19635,11 @@
             "to": "campo-tensional",
             "relation": "is_calculated_from",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -18488,6 +19769,11 @@
             "to": "GEOMEC002",
             "relation": "measures",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -18598,6 +19884,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GM002",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
@@ -18611,7 +19902,7 @@
           },
           {
             "from": "GEOMEC016",
-            "relation": "references",
+            "relation": "is_calculated_from",
             "style": "geomec_corporate"
           },
           {
@@ -18716,6 +20007,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GM002",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
@@ -18759,7 +20055,7 @@
           },
           {
             "from": "GEOMEC077",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -18854,6 +20150,11 @@
             "to": "janela-lama",
             "relation": "defines_lower_bound",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -18874,7 +20175,7 @@
           },
           {
             "from": "GEOMEC088",
-            "relation": "references",
+            "relation": "monitors",
             "style": "geomec_corporate"
           }
         ]
@@ -18953,6 +20254,11 @@
           {
             "to": "GEOMEC011",
             "relation": "co_measured_with",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -19069,6 +20375,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GM015",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
@@ -19164,6 +20475,11 @@
           {
             "to": "GEOMEC002",
             "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -19266,7 +20582,13 @@
       "_semantic_category": null,
       "ontological_role": "feature_observation",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          }
+        ],
         "incoming": [
           {
             "from": "GEOMEC001",
@@ -19404,6 +20726,16 @@
             "to": "GEOMEC017",
             "relation": "requires",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "qpg",
+            "relation": "produces",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "ocorrencia-geomec",
+            "relation": "produces",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -19423,7 +20755,7 @@
             "style": "geomec_corporate"
           },
           {
-            "from": "qpg",
+            "from": "GEOMEC026A",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           },
@@ -19540,7 +20872,7 @@
           },
           {
             "to": "GEOMEC007",
-            "relation": "references",
+            "relation": "is_calculated_from",
             "style": "geomec_corporate"
           },
           {
@@ -19551,6 +20883,11 @@
           {
             "to": "GEOMEC024",
             "relation": "requires",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -19671,6 +21008,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GM025",
             "relation": "is_specialization_of",
             "style": "geomec_corp_to_academic"
@@ -19709,7 +21051,7 @@
           },
           {
             "from": "GEOMEC079A",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           },
           {
@@ -19813,6 +21155,11 @@
             "to": "GEOMEC015",
             "relation": "is_risk_for",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -19858,7 +21205,7 @@
           },
           {
             "from": "GEOMEC079A",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ]
@@ -19955,6 +21302,11 @@
           {
             "to": "GEOMEC048",
             "relation": "requires",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "constrains",
             "style": "geomec_corporate"
           }
         ],
@@ -20114,6 +21466,11 @@
             "to": "GEOMEC002",
             "relation": "constrains",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "supports",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -20238,6 +21595,11 @@
             "to": "janela-lama",
             "relation": "constrains",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -20347,6 +21709,11 @@
           {
             "to": "GEOMEC024",
             "relation": "measures",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -20497,29 +21864,34 @@
           },
           {
             "to": "GEOMEC023A",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "references",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC044",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC089",
-            "relation": "references",
+            "relation": "requires_input",
             "style": "geomec_corporate"
           },
           {
@@ -20605,6 +21977,11 @@
           {
             "to": "GEOMEC012",
             "relation": "is_calculated_from",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -20748,12 +22125,115 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "poco",
+            "relation": "references",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "axon-dom-geomecanica",
             "relation": "is_part_of",
             "style": "axon_geomec_anchor"
           }
         ],
         "incoming": [
+          {
+            "from": "GEOMEC089",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          }
+        ]
+      }
+    },
+    {
+      "id": "GEOMEC026A",
+      "label": "QPG — Quadro de Previsões Geológicas",
+      "label_en": "Geological Prognosis Chart",
+      "type": "geomec_corporate",
+      "color": "#475569",
+      "size": 22,
+      "definition": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
+      "definition_en_canonical": null,
+      "category": "Document",
+      "layer": "L6",
+      "acronym": [
+        "QPG",
+        "Quadro de Previsões Geológicas",
+        "QPG Preliminar",
+        "QPG Final"
+      ],
+      "owner_department": null,
+      "official_datastore": null,
+      "internal_tools": null,
+      "internal_standards": null,
+      "osdu_kind": null,
+      "osdu_mapping": null,
+      "geocoverage": [
+        "layer6"
+      ],
+      "synonyms_pt": [
+        "QPG",
+        "Quadro de Previsões Geológicas",
+        "QPG Preliminar",
+        "QPG Final"
+      ],
+      "synonyms_en": [
+        "Geological Prognosis Chart"
+      ],
+      "examples": [],
+      "glossary_id": null,
+      "extended_id": null,
+      "skos_prefLabel": {
+        "@pt": "QPG — Quadro de Previsões Geológicas",
+        "@en": "Geological Prognosis Chart"
+      },
+      "skos_altLabel": {
+        "@pt": [
+          "QPG",
+          "Quadro de Previsões Geológicas",
+          "QPG Preliminar",
+          "QPG Final"
+        ],
+        "@en": [
+          "Geological Prognosis Chart"
+        ]
+      },
+      "skos_definition": {
+        "@pt": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
+        "@en": null
+      },
+      "skos_example": [],
+      "wsm_type_code": null,
+      "_semantic_category": null,
+      "ontological_role": "governance_artifact",
+      "relations": {
+        "outgoing": [
+          {
+            "to": "laudo-geomecanico",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC001",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "janela-lama",
+            "relation": "contains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC015",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          }
+        ],
+        "incoming": [
+          {
+            "from": "laudo-geomecanico",
+            "relation": "requires_input",
+            "style": "geomec_corporate"
+          },
           {
             "from": "GEOMEC089",
             "relation": "is_input_for",
@@ -20874,6 +22354,11 @@
             "from": "GEOMEC035",
             "relation": "governed_by",
             "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC046",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -20965,19 +22450,19 @@
           },
           {
             "to": "GEOMEC029",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC030",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC029",
-            "relation": "used_with",
+            "relation": "storage_for",
             "style": "geomec_corporate"
           },
           {
@@ -21055,7 +22540,7 @@
         "outgoing": [
           {
             "to": "GEOMEC028",
-            "relation": "used_with",
+            "relation": "storage_for",
             "style": "geomec_corporate"
           },
           {
@@ -21067,12 +22552,17 @@
             "to": "GEOMEC027",
             "relation": "storage_for",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC028",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -21184,7 +22674,7 @@
           },
           {
             "from": "GEOMEC028",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           },
           {
@@ -21301,7 +22791,12 @@
           },
           {
             "to": "GEOMEC034",
-            "relation": "used_with",
+            "relation": "co_measured_with",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -21396,6 +22891,11 @@
           {
             "to": "GEOMEC027",
             "relation": "requires",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -21501,6 +23001,11 @@
           {
             "to": "GEOMEC010",
             "relation": "requires_input",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -21613,7 +23118,7 @@
         "incoming": [
           {
             "from": "GEOMEC031",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ]
@@ -21724,9 +23229,25 @@
             "to": "GEOMEC018",
             "relation": "produces",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC046",
+            "relation": "is_input_for",
+            "style": "f12_interp_anchor"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "core-sample",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
+            "from": "perfil-poco",
+            "relation": "is_input_for",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {
@@ -21819,6 +23340,11 @@
           {
             "to": "GEOMEC039",
             "relation": "requires_input",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "guides_drilling_of",
             "style": "geomec_corporate"
           }
         ],
@@ -21925,6 +23451,11 @@
             "to": "GEOMEC048",
             "relation": "requires",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
@@ -22008,6 +23539,11 @@
           {
             "to": "GEOMEC036",
             "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -22099,6 +23635,11 @@
             "to": "GEOMEC036",
             "relation": "is_input_for",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -22184,6 +23725,11 @@
           {
             "to": "GEOMEC019",
             "relation": "constrains",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -22282,6 +23828,11 @@
             "to": "GEOMEC052B",
             "relation": "constrains",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -22369,6 +23920,11 @@
           {
             "to": "GEOMEC002",
             "relation": "estimates",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -22471,12 +24027,17 @@
           },
           {
             "to": "GEOMEC053A",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC053B",
-            "relation": "references",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -22561,7 +24122,12 @@
           },
           {
             "to": "GEOMEC023",
-            "relation": "references",
+            "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -22650,12 +24216,17 @@
           },
           {
             "to": "bdiep",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC051",
-            "relation": "references",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -22758,6 +24329,11 @@
             "to": "GEOMEC015",
             "relation": "supports",
             "style": "geomec_isolated_bridge"
+          },
+          {
+            "to": "GEOMEC027",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
         "incoming": [
@@ -22765,6 +24341,11 @@
             "from": "GEOMEC027",
             "relation": "produces",
             "style": "geomec_isolated_bridge"
+          },
+          {
+            "from": "GEOMEC035",
+            "relation": "is_input_for",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -22832,7 +24413,13 @@
       "_semantic_category": null,
       "ontological_role": "dataset_concept",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "drilling-activity",
+            "relation": "computes",
+            "style": "geomec_corporate"
+          }
+        ],
         "incoming": [
           {
             "from": "GEOMEC019",
@@ -22912,7 +24499,13 @@
       "_semantic_category": null,
       "ontological_role": "artifact_primary",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "drilling-activity",
+            "relation": "acquired_during",
+            "style": "geomec_corporate"
+          }
+        ],
         "incoming": [
           {
             "from": "GEOMEC019",
@@ -22988,11 +24581,17 @@
       "_semantic_category": null,
       "ontological_role": "dataset_concept",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "poco",
+            "relation": "references",
+            "style": "geomec_corporate"
+          }
+        ],
         "incoming": [
           {
             "from": "GEOMEC045",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -23065,7 +24664,7 @@
           },
           {
             "to": "GEOMEC052B",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ],
@@ -23156,6 +24755,11 @@
             "to": "GEOMEC041",
             "relation": "influences",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -23166,7 +24770,7 @@
           },
           {
             "from": "GEOMEC052A",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ]
@@ -23252,14 +24856,19 @@
           },
           {
             "to": "GEOMEC053B",
-            "relation": "references",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC043",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -23349,17 +24958,22 @@
             "to": "janela-lama",
             "relation": "defines_upper_bound",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC043",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC053A",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -23443,6 +25057,11 @@
             "to": "GEOMEC005",
             "relation": "measures",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
@@ -23514,6 +25133,11 @@
             "to": "GEOMEC010",
             "relation": "measures",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
@@ -23581,6 +25205,11 @@
           {
             "to": "GEOMEC014",
             "relation": "measures",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -23653,6 +25282,11 @@
             "to": "GEOMEC015",
             "relation": "is_input_for",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
@@ -23720,6 +25354,11 @@
           {
             "to": "GEOMEC024",
             "relation": "measures",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -23789,6 +25428,11 @@
             "to": "GEOMEC015",
             "relation": "is_input_for",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": []
@@ -23856,6 +25500,11 @@
           {
             "to": "GEOMEC014",
             "relation": "measures",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -23947,12 +25596,17 @@
           },
           {
             "to": "GEOMEC009",
-            "relation": "references",
+            "relation": "monitors",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC045",
             "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "drilling-parameters",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -24036,13 +25690,13 @@
             "style": "geomec_corporate"
           },
           {
-            "to": "qpg",
+            "to": "GEOMEC026A",
             "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023",
-            "relation": "references",
+            "relation": "requires_input",
             "style": "geomec_corporate"
           },
           {
@@ -24157,7 +25811,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
@@ -24167,7 +25821,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
@@ -24177,12 +25831,12 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC085",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           }
         ]
@@ -24279,6 +25933,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GF005",
             "relation": "produces",
             "style": "geomec_corp_to_academic"
@@ -24287,7 +25946,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
@@ -24297,7 +25956,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
@@ -24307,12 +25966,12 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC085",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           }
         ]
@@ -24390,6 +26049,11 @@
             "style": "geomec_corporate"
           },
           {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
+          {
             "to": "GF004",
             "relation": "interpreted_into",
             "style": "geomec_corp_to_academic"
@@ -24398,7 +26062,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
@@ -24408,7 +26072,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
@@ -24418,7 +26082,7 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           }
         ]
@@ -24503,12 +26167,12 @@
           },
           {
             "to": "GEOMEC075",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC077",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -24621,7 +26285,7 @@
           },
           {
             "to": "GEOMEC078",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -24713,12 +26377,12 @@
           },
           {
             "to": "GEOMEC079",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC079A",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -24817,7 +26481,7 @@
           },
           {
             "to": "GEOMEC078",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ],
@@ -24829,7 +26493,7 @@
           },
           {
             "from": "GEOMEC078",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ]
@@ -24918,22 +26582,22 @@
           },
           {
             "to": "GEOMEC023A",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "requires",
             "style": "geomec_corporate"
           },
           {
@@ -24955,7 +26619,7 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
@@ -25043,6 +26707,11 @@
             "to": "GEOMEC023C",
             "relation": "is_input_for",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "wireline-logging",
+            "relation": "acquired_during",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
@@ -25084,6 +26753,11 @@
           {
             "from": "GEOMEC072",
             "relation": "requires_input",
+            "style": "geomec_corporate"
+          },
+          {
+            "from": "GEOMEC074",
+            "relation": "computes",
             "style": "geomec_corporate"
           }
         ]
@@ -25145,29 +26819,34 @@
         "outgoing": [
           {
             "to": "GEOMEC072",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023A",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "used_with",
+            "relation": "enables",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "GEOMEC073",
+            "relation": "computes",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC072",
-            "relation": "used_with",
+            "relation": "requires",
             "style": "geomec_corporate"
           }
         ]
@@ -25236,12 +26915,17 @@
             "to": "GEOMEC002",
             "relation": "influences",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC068",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -25306,6 +26990,11 @@
       "ontological_role": "feature_observation",
       "relations": {
         "outgoing": [
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
           {
             "to": "poco",
             "relation": "applies_to",
@@ -25390,14 +27079,19 @@
           },
           {
             "to": "GEOMEC008",
-            "relation": "used_with",
+            "relation": "is_input_for",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC068",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25464,19 +27158,24 @@
           },
           {
             "to": "GEOMEC071",
-            "relation": "references",
+            "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC069",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC071",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25534,12 +27233,17 @@
             "to": "GEOMEC070",
             "relation": "is_part_of",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC070",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25600,19 +27304,24 @@
           },
           {
             "to": "GEOMEC017",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC018",
-            "relation": "references",
+            "relation": "influences",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC070",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25686,6 +27395,11 @@
           {
             "to": "GEOMEC081",
             "relation": "computes",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
             "style": "geomec_corporate"
           }
         ],
@@ -25779,6 +27493,11 @@
           {
             "to": "GEOMEC017",
             "relation": "computes",
+            "style": "geomec_corporate"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           }
         ],
@@ -25877,12 +27596,17 @@
             "to": "GEOMEC017",
             "relation": "estimates",
             "style": "geomec_corporate"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC083",
-            "relation": "references",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -25959,7 +27683,7 @@
           },
           {
             "to": "GEOMEC082",
-            "relation": "references",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -25968,7 +27692,13 @@
             "style": "geomec_isolated_bridge"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "perfil-poco",
+            "relation": "is_input_for",
+            "style": "dashed"
+          }
+        ]
       }
     },
     {
@@ -26083,13 +27813,18 @@
       "relations": {
         "outgoing": [
           {
+            "to": "campo-tensional",
+            "relation": "produces",
+            "style": "solid"
+          },
+          {
             "to": "GEOMEC023A",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           }
         ],
@@ -26197,6 +27932,11 @@
         ],
         "incoming": [
           {
+            "from": "perfil-poco",
+            "relation": "is_input_for",
+            "style": "dashed"
+          },
+          {
             "from": "GEOMEC083",
             "relation": "formalizes",
             "style": "geomec_isolated_bridge"
@@ -26258,6 +27998,11 @@
       "ontological_role": "feature_observation",
       "relations": {
         "outgoing": [
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_corporate"
+          },
           {
             "to": "GEOMEC081",
             "relation": "is_input_for",
@@ -26340,6 +28085,31 @@
             "to": "formation-testing",
             "relation": "measures",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "GM006",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          },
+          {
+            "to": "GM007",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          },
+          {
+            "to": "GM008",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          },
+          {
+            "to": "GM009",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
           }
         ],
         "incoming": [
@@ -26424,6 +28194,11 @@
             "to": "formation-testing",
             "relation": "measures",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": [
@@ -26497,6 +28272,11 @@
           {
             "to": "formation-testing",
             "relation": "measures",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_academic_bridge"
           }
         ],
@@ -26630,6 +28410,16 @@
             "to": "janela-lama",
             "relation": "is_specialization_of",
             "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "drilling-activity",
+            "relation": "constrains",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "poco",
+            "relation": "applies_to",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": [
@@ -26714,9 +28504,20 @@
             "to": "GF002",
             "relation": "supports",
             "style": "geomec_academic"
+          },
+          {
+            "to": "GM007",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GM001",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          }
+        ]
       }
     },
     {
@@ -26762,7 +28563,13 @@
       "skos_example": [],
       "ontological_role": "interpretation_process",
       "relations": {
-        "outgoing": [],
+        "outgoing": [
+          {
+            "to": "GF001",
+            "relation": "produces",
+            "style": "geomec_academic"
+          }
+        ],
         "incoming": [
           {
             "from": "GM002",
@@ -26783,6 +28590,16 @@
             "from": "GM006",
             "relation": "supports",
             "style": "geomec_academic"
+          },
+          {
+            "from": "GM001",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          },
+          {
+            "from": "GM006",
+            "relation": "produces",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -26835,9 +28652,20 @@
             "to": "GM007",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "GF001",
+            "relation": "produces",
+            "style": "geomec_academic"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GM001",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          }
+        ]
       }
     },
     {
@@ -26888,9 +28716,20 @@
             "to": "GM007",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "GF001",
+            "relation": "produces",
+            "style": "geomec_academic"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "GM001",
+            "relation": "is_input_for",
+            "style": "geomec_academic"
+          }
+        ]
       }
     },
     {
@@ -27946,6 +29785,11 @@
             "to": "GM013",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": []
@@ -27999,6 +29843,11 @@
             "to": "GM013",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": []
@@ -28051,6 +29900,11 @@
           {
             "to": "campo-tensional",
             "relation": "is_specialization_of",
+            "style": "geomec_academic_bridge"
+          },
+          {
+            "to": "formation-testing",
+            "relation": "derived_from",
             "style": "geomec_academic_bridge"
           },
           {
@@ -28270,6 +30124,21 @@
           {
             "from": "GM006",
             "relation": "is_input_for",
+            "style": "geomec_academic"
+          },
+          {
+            "from": "GM007",
+            "relation": "produces",
+            "style": "geomec_academic"
+          },
+          {
+            "from": "GM008",
+            "relation": "produces",
+            "style": "geomec_academic"
+          },
+          {
+            "from": "GM009",
+            "relation": "produces",
             "style": "geomec_academic"
           }
         ]
@@ -29018,6 +30887,11 @@
             "to": "GF006",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": [
@@ -29083,6 +30957,11 @@
             "to": "GF012",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "core-sample",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": []
@@ -29137,6 +31016,11 @@
             "to": "GF012",
             "relation": "is_specialization_of",
             "style": "geomec_academic"
+          },
+          {
+            "to": "perfil-poco",
+            "relation": "derived_from",
+            "style": "geomec_academic_bridge"
           }
         ],
         "incoming": []
@@ -29775,7 +31659,18 @@
             "style": "axon_dom_link"
           }
         ],
-        "incoming": []
+        "incoming": [
+          {
+            "from": "wellbore-marker-set",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          },
+          {
+            "from": "bacia-sedimentar",
+            "relation": "is_part_of",
+            "style": "axon_dom_link"
+          }
+        ]
       }
     },
     {
@@ -30147,6 +32042,11 @@
             "to": "axon-dom-acervo-amostras",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": []
@@ -30197,6 +32097,11 @@
             "to": "axon-dom-acervo-amostras",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": []
@@ -30247,6 +32152,16 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "igp",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
+          },
+          {
+            "to": "perfil-composto",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ],
         "incoming": [
@@ -30254,6 +32169,11 @@
             "from": "igp",
             "relation": "supports",
             "style": "axon_op_bridge"
+          },
+          {
+            "from": "perfil-poco",
+            "relation": "is_input_for",
+            "style": "axon_l5_anchor"
           },
           {
             "from": "GEOMEC086",
@@ -30308,6 +32228,11 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": [
@@ -30379,6 +32304,11 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": [
@@ -30445,6 +32375,11 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": [
@@ -30516,6 +32451,11 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "axon-sub-prog-aquisicao",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ],
         "incoming": [
@@ -30533,6 +32473,11 @@
             "from": "axon-term-amostragem-calha-prevista",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "from": "poco",
+            "relation": "is_input_for",
+            "style": "axon_l5_anchor"
           }
         ]
       }
@@ -30582,6 +32527,11 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": [
@@ -30688,6 +32638,11 @@
             "to": "axon-dom-aquisicao-dados-geo",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "poco",
+            "relation": "occurs_in",
+            "style": "axon_op_to_well"
           }
         ],
         "incoming": [
@@ -30865,6 +32820,16 @@
             "to": "axon-asn-planejamento",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "cuttings-sampling",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
+          },
+          {
+            "to": "wireline-logging",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
           }
         ],
         "incoming": [
@@ -30872,6 +32837,16 @@
             "from": "axon-term-amostragem-calha-prevista",
             "relation": "is_part_of",
             "style": "axon_internal"
+          },
+          {
+            "from": "axon-asn-planejamento",
+            "relation": "produces",
+            "style": "axon_l5_anchor"
+          },
+          {
+            "from": "poco",
+            "relation": "is_input_for",
+            "style": "f12_interp_anchor"
           }
         ]
       }
@@ -30922,6 +32897,11 @@
             "to": "axon-dom-acervo-amostras",
             "relation": "is_part_of",
             "style": "axon_hierarchy"
+          },
+          {
+            "to": "coring",
+            "relation": "acquired_during",
+            "style": "axon_artifact_anchor"
           }
         ],
         "incoming": [
@@ -30986,6 +32966,11 @@
             "to": "axon-term-acervo-amostras",
             "relation": "is_part_of",
             "style": "axon_internal"
+          },
+          {
+            "to": "coring",
+            "relation": "acquired_during",
+            "style": "axon_artifact_anchor"
           }
         ],
         "incoming": [
@@ -31078,6 +33063,11 @@
             "to": "cuttings-sampling",
             "relation": "requires",
             "style": "axon_to_op"
+          },
+          {
+            "to": "mudlogging",
+            "relation": "acquired_during",
+            "style": "axon_artifact_anchor"
           }
         ],
         "incoming": []
@@ -31135,6 +33125,11 @@
             "to": "ambiente",
             "relation": "is_specialization_of",
             "style": "axon_term_to_existing"
+          },
+          {
+            "to": "poco",
+            "relation": "observed_in",
+            "style": "f12_feature_anchor"
           }
         ],
         "incoming": []
