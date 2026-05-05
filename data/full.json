@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-05T10:10:56.417Z",
+    "generated": "2026-05-05T12:02:29.856Z",
     "description": "GeoBrain — complete merged dataset",
     "counts": {
       "glossary_terms": 52,
@@ -9,7 +9,7 @@
       "total_terms": 72,
       "datasets": 9,
       "entity_nodes": 242,
-      "entity_edges": 404,
+      "entity_edges": 454,
       "domains": 4,
       "ontology_layers": 8,
       "ontopetro_classes": 20,
@@ -1974,7 +1974,7 @@
   ],
   "entity_graph": {
     "version": "1.1.0",
-    "generated": "2026-05-05T10:10:56.417Z",
+    "generated": "2026-05-05T12:02:29.856Z",
     "source": "Geolytics / ANP-SEP / SIGEP / GeoCore / O3PO / Petro KGraph / OSDU / Petrobras 3W / Geomec L6 Corporate / Geomec L1-L2 Academic + Fracture / Axon Petrobras Exploração",
     "nodes": [
       {
@@ -8543,33 +8543,9 @@
           "predicted geology chart",
           "QPG"
         ],
-        "corporate_id": "GEOMEC026A",
+        "corporate_id": "qpg",
         "geocoverage": [
           "layer5"
-        ],
-        "source_reference": [
-          {
-            "deprecated_id": "GEOMEC026A",
-            "source_module": "data/geomechanics-corporate.json",
-            "label_at_merge": "QPG — Quadro de Previsões Geológicas",
-            "label_en_at_merge": "Geological Prognosis Chart",
-            "original_definition_pt": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
-            "original_definition_en": null,
-            "acronym": [
-              "QPG",
-              "Quadro de Previsões Geológicas",
-              "QPG Preliminar",
-              "QPG Final"
-            ],
-            "observed_variants": [],
-            "owner_department": null,
-            "official_datastore": null,
-            "internal_standards": null,
-            "category": "Document",
-            "sources": [],
-            "merged_in": "qpg",
-            "rationale": "QPG é conceito do módulo operações-geológicas; GEOMEC026A duplicava o nó canônico qpg. Edges e definição detalhada migradas para qpg."
-          }
         ],
         "ontological_role": "governance_artifact"
       },
@@ -15076,6 +15052,68 @@
         "wsm_type_code": null,
         "_semantic_category": null,
         "ontological_role": "dataset_concept"
+      },
+      {
+        "id": "GEOMEC026A",
+        "label": "QPG — Quadro de Previsões Geológicas",
+        "label_en": "Geological Prognosis Chart",
+        "type": "geomec_corporate",
+        "color": "#475569",
+        "size": 22,
+        "definition": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
+        "definition_en_canonical": null,
+        "category": "Document",
+        "layer": "L6",
+        "acronym": [
+          "QPG",
+          "Quadro de Previsões Geológicas",
+          "QPG Preliminar",
+          "QPG Final"
+        ],
+        "owner_department": null,
+        "official_datastore": null,
+        "internal_tools": null,
+        "internal_standards": null,
+        "osdu_kind": null,
+        "osdu_mapping": null,
+        "geocoverage": [
+          "layer6"
+        ],
+        "synonyms_pt": [
+          "QPG",
+          "Quadro de Previsões Geológicas",
+          "QPG Preliminar",
+          "QPG Final"
+        ],
+        "synonyms_en": [
+          "Geological Prognosis Chart"
+        ],
+        "examples": [],
+        "glossary_id": null,
+        "extended_id": null,
+        "skos_prefLabel": {
+          "@pt": "QPG — Quadro de Previsões Geológicas",
+          "@en": "Geological Prognosis Chart"
+        },
+        "skos_altLabel": {
+          "@pt": [
+            "QPG",
+            "Quadro de Previsões Geológicas",
+            "QPG Preliminar",
+            "QPG Final"
+          ],
+          "@en": [
+            "Geological Prognosis Chart"
+          ]
+        },
+        "skos_definition": {
+          "@pt": "Quadro esquemático gráfico que sintetiza as previsões geológicas para uma locação a ser perfurada, contendo: unidades crono- e litoestratigráficas com cotas de topo previstas; litologia esperada por fase; objetivos principal e secundário; intervalos com Potencial de Fluxo (IPF) e aquíferos; fluidos saturantes e pressão estática prevista; programa de amostragem (calha, testemunho, amostras laterais); diâmetro previsto do poço e profundidade de sapatas dos revestimentos por fase; fluidos de perfuração por fase; programa de avaliação (perfis e testes de formação); poços de correlação e observações relevantes [PE-2E&P-00572]. É elaborado pelos Intérpretes da locação (corpo técnico de Geologia/Reservatórios do Ativo) a partir do Projeto Direcional do poço. Versões: QPG Preliminar (obrigatória a tarja 'PRELIMINAR' até a versão final) é emitido em até -125 dias antes da perfuração e é insumo para o Laudo Geomecânico na reunião de Kick-Off (-120 dias). O QPG Final é anexado ao Prospecto de Locação Explotatória, ao qual dá suporte juntamente com os demais documentos técnicos do poço. Armazenamento oficial: BDIEP via ferramenta de publicação do SIGEO e também dentro do módulo Projetos de Locação do SIRR [PE-2E&P-00572].",
+          "@en": null
+        },
+        "skos_example": [],
+        "wsm_type_code": null,
+        "_semantic_category": null,
+        "ontological_role": "governance_artifact"
       },
       {
         "id": "GEOMEC027",
@@ -23361,6 +23399,14 @@
         "style": "dashed"
       },
       {
+        "source": "completacao",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
         "source": "activity-plan",
         "target": "poco",
         "relation": "plans_activity_for",
@@ -23449,11 +23495,43 @@
         "style": "solid"
       },
       {
+        "source": "casing-design",
+        "target": "wellbore",
+        "relation": "applies_to",
+        "relation_label_pt": "aplica-se a",
+        "relation_label_en": "applies to",
+        "style": "dashed"
+      },
+      {
+        "source": "casing-design",
+        "target": "drilling-activity",
+        "relation": "constrains",
+        "relation_label_pt": "restringe",
+        "relation_label_en": "constrains",
+        "style": "dashed"
+      },
+      {
         "source": "cementing-fluid",
         "target": "casing-design",
         "relation": "used_in",
         "relation_label_pt": "usado em",
         "relation_label_en": "used in",
+        "style": "dashed"
+      },
+      {
+        "source": "cementing-fluid",
+        "target": "wellbore",
+        "relation": "applies_to",
+        "relation_label_pt": "aplica-se a",
+        "relation_label_en": "applies to",
+        "style": "dashed"
+      },
+      {
+        "source": "cementing-fluid",
+        "target": "drilling-activity",
+        "relation": "supports",
+        "relation_label_pt": "apoia",
+        "relation_label_en": "supports",
         "style": "dashed"
       },
       {
@@ -23590,6 +23668,30 @@
         "relation": "restricts_access_for",
         "relation_label_pt": "restringe acesso para",
         "relation_label_en": "restricts access for",
+        "style": "dashed"
+      },
+      {
+        "source": "activity-plan",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "well-activity-program",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "seismic-acquisition-survey",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
         "style": "dashed"
       },
       {
@@ -24399,6 +24501,342 @@
         "relation_label_pt": "armazenado em",
         "relation_label_en": "stored in",
         "style": "dashed"
+      },
+      {
+        "source": "exata",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "sigeo",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "bdiep",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "bdiap",
+        "target": "anp",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "aida",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "vge",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "gda",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "geodo",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "bdoc",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "sirr",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "cassandra-exata-curva-tempo",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "referencia",
+        "relation_label_en": "references",
+        "style": "dashed"
+      },
+      {
+        "source": "amostra-fluido",
+        "target": "formation-testing",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "dashed"
+      },
+      {
+        "source": "amostra-fluido",
+        "target": "formation-testing",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "dashed"
+      },
+      {
+        "source": "core-sample",
+        "target": "coring",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "core-plug",
+        "target": "coring",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "dashed"
+      },
+      {
+        "source": "testemunho",
+        "target": "coring",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "dashed"
+      },
+      {
+        "source": "cuttings-sample-detailed",
+        "target": "mudlogging",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "mudlogging-time-series",
+        "target": "mudlogging",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "teste-formacao",
+        "target": "formation-testing",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "dst-interval",
+        "target": "formation-testing",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "dashed"
+      },
+      {
+        "source": "formation-pressure-point",
+        "target": "formation-testing",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "tld",
+        "target": "formation-testing",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "dashed"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "wireline-logging",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "drilling-parameters",
+        "target": "drilling-activity",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "trajetoria-poco",
+        "target": "drilling-activity",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "solid"
+      },
+      {
+        "source": "lwd-run",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "dashed"
+      },
+      {
+        "source": "drx",
+        "target": "litologia",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "solid"
+      },
+      {
+        "source": "frx",
+        "target": "litologia",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "solid"
+      },
+      {
+        "source": "frx",
+        "target": "dna-geoquimico",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "solid"
+      },
+      {
+        "source": "cuttings-sample-detailed",
+        "target": "dna-geoquimico",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "amostra-fluido",
+        "target": "gc-ms",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "amostra-fluido",
+        "target": "sara",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "sara",
+        "target": "classe-fluido",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "solid"
+      },
+      {
+        "source": "amostra-fluido",
+        "target": "pvt",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "gc-ms",
+        "target": "correlacao-oleo-rocha",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "modelo-petrofisico",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "solid"
+      },
+      {
+        "source": "seismic-acquisition-survey",
+        "target": "seismic-processing-project",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "solid"
+      },
+      {
+        "source": "core-sample",
+        "target": "GEOMEC035",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "GEOMEC035",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "GEOMEC083",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "GEOMEC086",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "dashed"
+      },
+      {
+        "source": "GEOMEC085",
+        "target": "campo-tensional",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "solid"
       },
       {
         "source": "bloco",
@@ -25617,6 +26055,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC001",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC002",
         "target": "GEOMEC001",
         "relation": "is_calculated_from",
@@ -25654,6 +26100,14 @@
         "relation": "constrains",
         "relation_label_pt": "Reativação de Falhas Geológicas",
         "relation_label_en": "constrains",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC002",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -25753,6 +26207,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC005",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "Testemunho (Core)",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC006",
         "target": "janela-lama",
         "relation": "constrains",
@@ -25774,6 +26236,14 @@
         "relation": "measures",
         "relation_label_pt": "Tensão Mínima Horizontal (Gradiente de Fratura)",
         "relation_label_en": "measures",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC006",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -25806,6 +26276,14 @@
         "relation": "influenced_by",
         "relation_label_pt": "Regime de Falhas",
         "relation_label_en": "influenced by",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC007",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -25846,6 +26324,14 @@
         "relation": "influenced_by",
         "relation_label_pt": "Regime de Falhas",
         "relation_label_en": "influenced by",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC008",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -25889,6 +26375,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC009",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC010",
         "target": "GEOMEC009",
         "relation": "influences",
@@ -25913,6 +26407,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC010",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "Testemunho (Core)",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC011",
         "target": "GEOMEC012",
         "relation": "co_measured_with",
@@ -25921,11 +26423,35 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC011",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "Testemunho (Core)",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC012",
         "target": "GEOMEC002",
         "relation": "influences",
         "relation_label_pt": "Tensão Mínima Horizontal (Gradiente de Fratura)",
         "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC012",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "Testemunho (Core)",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC014",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "Testemunho (Core)",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -25969,6 +26495,22 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC015",
+        "target": "qpg",
+        "relation": "produces",
+        "relation_label_pt": "QPG — Quadro de Previsão Geológica",
+        "relation_label_en": "produces",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC015",
+        "target": "ocorrencia-geomec",
+        "relation": "produces",
+        "relation_label_pt": "Ocorrências Geomecânicas",
+        "relation_label_en": "produces",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC016",
         "target": "GEOMEC014",
         "relation": "is_calculated_from",
@@ -25979,9 +26521,9 @@
       {
         "source": "GEOMEC016",
         "target": "GEOMEC007",
-        "relation": "references",
+        "relation": "is_calculated_from",
         "relation_label_pt": "Tensão Vertical (Sv) — carga sobre o reservatório",
-        "relation_label_en": "references",
+        "relation_label_en": "is calculated from",
         "style": "geomec_corporate"
       },
       {
@@ -26001,11 +26543,27 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC016",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC017",
         "target": "GEOMEC018",
         "relation": "influences",
         "relation_label_pt": "Reativação de Falhas Geológicas (orienta planos críticos)",
         "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC017",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26030,6 +26588,14 @@
         "relation": "is_risk_for",
         "relation_label_pt": "Estabilidade de Poço / Geohazards (falhas ativas na trajetória)",
         "relation_label_en": "is risk for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC018",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26081,6 +26647,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC019",
+        "target": "drilling-activity",
+        "relation": "constrains",
+        "relation_label_pt": "Atividade de Perfuração",
+        "relation_label_en": "constrains",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC020",
         "target": "GEOMEC019",
         "relation": "constrains",
@@ -26113,6 +26687,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC020",
+        "target": "drilling-activity",
+        "relation": "supports",
+        "relation_label_pt": "Atividade de Perfuração",
+        "relation_label_en": "supports",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC021",
         "target": "GEOMEC007",
         "relation": "is_calculated_from",
@@ -26126,6 +26708,14 @@
         "relation": "constrains",
         "relation_label_pt": "Janela Operacional de Lama",
         "relation_label_en": "constrains",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC021",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26177,6 +26767,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC022",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC023",
         "target": "GEOMEC008",
         "relation": "influences",
@@ -26219,25 +26817,33 @@
       {
         "source": "GEOMEC023",
         "target": "GEOMEC023A",
-        "relation": "references",
+        "relation": "contains",
         "relation_label_pt": "Análise especializada — GEOMEC023A",
-        "relation_label_en": "references",
+        "relation_label_en": "contains",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC023",
         "target": "GEOMEC023B",
-        "relation": "references",
+        "relation": "contains",
         "relation_label_pt": "Análise especializada — GEOMEC023B",
-        "relation_label_en": "references",
+        "relation_label_en": "contains",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC023",
         "target": "GEOMEC023C",
-        "relation": "references",
+        "relation": "contains",
         "relation_label_pt": "Análise especializada — GEOMEC023C",
-        "relation_label_en": "references",
+        "relation_label_en": "contains",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC023",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26254,6 +26860,14 @@
         "relation": "is_calculated_from",
         "relation_label_pt": "Coeficiente de Poisson (ν) — para converter Cp_hid → Cp_uni",
         "relation_label_en": "is calculated from",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC024",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "Testemunho (Core)",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26313,7 +26927,15 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "qpg",
+        "source": "GEOMEC025",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "references",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC026A",
         "target": "laudo-geomecanico",
         "relation": "is_input_for",
         "relation_label_pt": "Laudo Geomecânico — QPG Preliminar é insumo obrigatório para elaboração do Laudo",
@@ -26321,7 +26943,7 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "qpg",
+        "source": "GEOMEC026A",
         "target": "GEOMEC001",
         "relation": "contains",
         "relation_label_pt": "Pressão de Poros prevista (pressão estática dos IPFs)",
@@ -26329,7 +26951,7 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "qpg",
+        "source": "GEOMEC026A",
         "target": "janela-lama",
         "relation": "contains",
         "relation_label_pt": "Janela Operacional implícita (fluidos de perfuração e diâmetros por fase)",
@@ -26337,7 +26959,7 @@
         "style": "geomec_corporate"
       },
       {
-        "source": "qpg",
+        "source": "GEOMEC026A",
         "target": "GEOMEC015",
         "relation": "is_input_for",
         "relation_label_pt": "Estabilidade de Poço / Análise de Geohazards",
@@ -26346,7 +26968,7 @@
       },
       {
         "source": "laudo-geomecanico",
-        "target": "qpg",
+        "target": "GEOMEC026A",
         "relation": "requires_input",
         "relation_label_pt": "QPG Preliminar — insumo obrigatório para elaboração do Laudo",
         "relation_label_en": "requires input",
@@ -26443,25 +27065,25 @@
       {
         "source": "GEOMEC028",
         "target": "GEOMEC029",
-        "relation": "used_with",
+        "relation": "is_input_for",
         "relation_label_pt": "GERESIM (pré/pós-processamento e interface com simulador de fluxo)",
-        "relation_label_en": "used with",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC028",
         "target": "GEOMEC030",
-        "relation": "used_with",
+        "relation": "co_measured_with",
         "relation_label_pt": "SIGEO e SEST TR — Sistemas de Modelagem Geomecânica 1D de Poço",
-        "relation_label_en": "used with",
+        "relation_label_en": "co measured with",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC029",
         "target": "GEOMEC028",
-        "relation": "used_with",
+        "relation": "storage_for",
         "relation_label_pt": "GeomecBR (acoplamento geomecânico-fluxo)",
-        "relation_label_en": "used with",
+        "relation_label_en": "storage for",
         "style": "geomec_corporate"
       },
       {
@@ -26478,6 +27100,14 @@
         "relation": "storage_for",
         "relation_label_pt": "IMGR — repositório SIRR para modelos geomecânicos validados",
         "relation_label_en": "storage for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC029",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "references",
         "style": "geomec_corporate"
       },
       {
@@ -26547,9 +27177,17 @@
       {
         "source": "GEOMEC031",
         "target": "GEOMEC034",
-        "relation": "used_with",
+        "relation": "co_measured_with",
         "relation_label_pt": "DFIT / DPPT — Testes Dinâmicos de Integridade e Pressão de Poros",
-        "relation_label_en": "used with",
+        "relation_label_en": "co measured with",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC031",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -26577,6 +27215,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC032",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC033",
         "target": "GEOMEC002",
         "relation": "requires",
@@ -26598,6 +27244,14 @@
         "relation": "requires_input",
         "relation_label_pt": "UCS — define a pressão de quebra da rocha",
         "relation_label_en": "requires input",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC033",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -26721,6 +27375,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC036",
+        "target": "drilling-activity",
+        "relation": "guides_drilling_of",
+        "relation_label_pt": "Atividade de Perfuração",
+        "relation_label_en": "guides drilling of",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC037",
         "target": "GEOMEC019",
         "relation": "is_part_of",
@@ -26745,6 +27407,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC037",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC038",
         "target": "GEOMEC036",
         "relation": "is_part_of",
@@ -26769,6 +27439,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC038",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC039",
         "target": "GEOMEC036",
         "relation": "is_part_of",
@@ -26790,6 +27468,14 @@
         "relation": "is_input_for",
         "relation_label_pt": "Fórmula de ECD",
         "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC039",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26806,6 +27492,14 @@
         "relation": "constrains",
         "relation_label_pt": "Densidade Equivalente de Circulação",
         "relation_label_en": "constrains",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC040",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26841,6 +27535,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC041",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC042",
         "target": "GEOMEC006",
         "relation": "is_part_of",
@@ -26854,6 +27556,14 @@
         "relation": "estimates",
         "relation_label_pt": "Tensão Mínima Horizontal (Gradiente de Fratura)",
         "relation_label_en": "estimates",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC042",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26883,17 +27593,25 @@
       {
         "source": "GEOMEC043",
         "target": "GEOMEC053A",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "Pressão de Reabertura de Fratura",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC043",
         "target": "GEOMEC053B",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "Pressão de Propagação de Fratura",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC043",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26915,9 +27633,17 @@
       {
         "source": "GEOMEC044",
         "target": "GEOMEC023",
-        "relation": "references",
+        "relation": "influences",
         "relation_label_pt": "Breakouts e Fraturas Induzidas (Perfil de Imagem)",
-        "relation_label_en": "references",
+        "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC044",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -26939,16 +27665,48 @@
       {
         "source": "GEOMEC045",
         "target": "bdiep",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "BDIEP — Banco de Dados de Informações de Engenharia de Poço",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC045",
         "target": "GEOMEC051",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "OpenWells — Well Operations Datastore",
+        "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC045",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC047",
+        "target": "drilling-activity",
+        "relation": "computes",
+        "relation_label_pt": "Atividade de Perfuração",
+        "relation_label_en": "computes",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC048",
+        "target": "drilling-activity",
+        "relation": "acquired_during",
+        "relation_label_pt": "Atividade de Perfuração",
+        "relation_label_en": "acquired during",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC051",
+        "target": "poco",
+        "relation": "references",
+        "relation_label_pt": "Poço",
         "relation_label_en": "references",
         "style": "geomec_corporate"
       },
@@ -26963,9 +27721,9 @@
       {
         "source": "GEOMEC052A",
         "target": "GEOMEC052B",
-        "relation": "used_with",
+        "relation": "co_measured_with",
         "relation_label_pt": "Setpoint MPD/SBP",
-        "relation_label_en": "used with",
+        "relation_label_en": "co measured with",
         "style": "geomec_corporate"
       },
       {
@@ -26982,6 +27740,14 @@
         "relation": "influences",
         "relation_label_pt": "Contrapressão de Superfície (SBP)",
         "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC052B",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -27003,9 +27769,17 @@
       {
         "source": "GEOMEC053A",
         "target": "GEOMEC053B",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "Pressão de Propagação de Fratura",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC053A",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27030,6 +27804,14 @@
         "relation": "defines_upper_bound",
         "relation_label_pt": "Janela Operacional de Lama",
         "relation_label_en": "defines upper bound",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC053B",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27073,6 +27855,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC061",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC062",
         "target": "GEOMEC022",
         "relation": "is_part_of",
@@ -27086,6 +27876,14 @@
         "relation": "measures",
         "relation_label_pt": "Resistência à Compressão Uniaxial (UCS)",
         "relation_label_en": "measures",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC062",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -27105,6 +27903,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC063",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC064",
         "target": "GEOMEC022",
         "relation": "is_part_of",
@@ -27118,6 +27924,14 @@
         "relation": "is_input_for",
         "relation_label_pt": "Estabilidade de Poço / Análise de Geohazards",
         "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC064",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -27137,6 +27951,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC065",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC066",
         "target": "GEOMEC022",
         "relation": "is_part_of",
@@ -27153,6 +27975,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC066",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC067",
         "target": "GEOMEC022",
         "relation": "is_part_of",
@@ -27166,6 +27996,14 @@
         "relation": "measures",
         "relation_label_pt": "Compressibilidade de Poros",
         "relation_label_en": "measures",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC067",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -27187,9 +28025,9 @@
       {
         "source": "GEOMEC088",
         "target": "GEOMEC009",
-        "relation": "references",
+        "relation": "monitors",
         "relation_label_pt": "Gradiente de Colapso",
-        "relation_label_en": "references",
+        "relation_label_en": "monitors",
         "style": "geomec_corporate"
       },
       {
@@ -27198,6 +28036,14 @@
         "relation": "influences",
         "relation_label_pt": "Prisão de Coluna",
         "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC088",
+        "target": "drilling-parameters",
+        "relation": "derived_from",
+        "relation_label_pt": "Parâmetros de Perfuração",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27210,7 +28056,7 @@
       },
       {
         "source": "GEOMEC089",
-        "target": "qpg",
+        "target": "GEOMEC026A",
         "relation": "is_input_for",
         "relation_label_pt": "QPG — Quadro de Previsões Geológicas",
         "relation_label_en": "is input for",
@@ -27219,9 +28065,9 @@
       {
         "source": "GEOMEC089",
         "target": "GEOMEC023",
-        "relation": "references",
+        "relation": "requires_input",
         "relation_label_pt": "Breakouts e Fraturas Induzidas",
-        "relation_label_en": "references",
+        "relation_label_en": "requires input",
         "style": "geomec_corporate"
       },
       {
@@ -27305,6 +28151,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC023B",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC023C",
         "target": "GEOMEC070",
         "relation": "measures",
@@ -27326,6 +28180,14 @@
         "relation": "is_input_for",
         "relation_label_pt": "Reativação de Falhas",
         "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC023C",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27355,17 +28217,17 @@
       {
         "source": "GEOMEC068",
         "target": "GEOMEC075",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "AZIE",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC068",
         "target": "GEOMEC077",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "Abertura Angular do Breakout",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
@@ -27395,9 +28257,9 @@
       {
         "source": "GEOMEC069",
         "target": "GEOMEC078",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "POSTEF",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
@@ -27419,17 +28281,17 @@
       {
         "source": "GEOMEC070",
         "target": "GEOMEC079",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "FractureState",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC070",
         "target": "GEOMEC079A",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "FaultType",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
@@ -27451,9 +28313,9 @@
       {
         "source": "GEOMEC071",
         "target": "GEOMEC078",
-        "relation": "references",
+        "relation": "is_input_for",
         "relation_label_pt": "POSTEF (Parallel_to_Bedding / Perpendicular_to_Bedding)",
-        "relation_label_en": "references",
+        "relation_label_en": "is input for",
         "style": "geomec_corporate"
       },
       {
@@ -27499,33 +28361,33 @@
       {
         "source": "GEOMEC072",
         "target": "GEOMEC023A",
-        "relation": "references",
+        "relation": "produces",
         "relation_label_pt": "Análise de Ovalização",
-        "relation_label_en": "references",
+        "relation_label_en": "produces",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC072",
         "target": "GEOMEC023B",
-        "relation": "references",
+        "relation": "produces",
         "relation_label_pt": "Análise de DITF",
-        "relation_label_en": "references",
+        "relation_label_en": "produces",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC072",
         "target": "GEOMEC023C",
-        "relation": "references",
+        "relation": "produces",
         "relation_label_pt": "Análise de Fratura Natural",
-        "relation_label_en": "references",
+        "relation_label_en": "produces",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC072",
         "target": "GEOMEC074",
-        "relation": "used_with",
+        "relation": "requires",
         "relation_label_pt": "Geolog",
-        "relation_label_en": "used with",
+        "relation_label_en": "requires",
         "style": "geomec_corporate"
       },
       {
@@ -27561,35 +28423,51 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC073",
+        "target": "wireline-logging",
+        "relation": "acquired_during",
+        "relation_label_pt": "Perfilagem a Cabo",
+        "relation_label_en": "acquired during",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC074",
         "target": "GEOMEC072",
-        "relation": "used_with",
+        "relation": "enables",
         "relation_label_pt": "Interpretação de Perfil de Imagem",
-        "relation_label_en": "used with",
+        "relation_label_en": "enables",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC074",
         "target": "GEOMEC023A",
-        "relation": "used_with",
+        "relation": "enables",
         "relation_label_pt": "Análise de Ovalização",
-        "relation_label_en": "used with",
+        "relation_label_en": "enables",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC074",
         "target": "GEOMEC023B",
-        "relation": "used_with",
+        "relation": "enables",
         "relation_label_pt": "Análise de DITF",
-        "relation_label_en": "used with",
+        "relation_label_en": "enables",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC074",
         "target": "GEOMEC023C",
-        "relation": "used_with",
+        "relation": "enables",
         "relation_label_pt": "Análise de Fratura Natural",
-        "relation_label_en": "used with",
+        "relation_label_en": "enables",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC074",
+        "target": "GEOMEC073",
+        "relation": "computes",
+        "relation_label_pt": "BOL — Borehole Oriented Log",
+        "relation_label_en": "computes",
         "style": "geomec_corporate"
       },
       {
@@ -27609,6 +28487,22 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC075",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC076",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC077",
         "target": "GEOMEC068",
         "relation": "is_part_of",
@@ -27619,9 +28513,17 @@
       {
         "source": "GEOMEC077",
         "target": "GEOMEC008",
-        "relation": "used_with",
+        "relation": "is_input_for",
         "relation_label_pt": "Estimativa de magnitude de SHmax",
-        "relation_label_en": "used with",
+        "relation_label_en": "is input for",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC077",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27635,9 +28537,17 @@
       {
         "source": "GEOMEC078",
         "target": "GEOMEC071",
-        "relation": "references",
+        "relation": "influences",
         "relation_label_pt": "Acamamento (referencial)",
-        "relation_label_en": "references",
+        "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC078",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27646,6 +28556,14 @@
         "relation": "is_part_of",
         "relation_label_pt": "Feição de Fratura Natural",
         "relation_label_en": "is part of",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC079",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27659,17 +28577,25 @@
       {
         "source": "GEOMEC079A",
         "target": "GEOMEC017",
-        "relation": "references",
+        "relation": "influences",
         "relation_label_pt": "Regime de Falhas",
-        "relation_label_en": "references",
+        "relation_label_en": "influences",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC079A",
         "target": "GEOMEC018",
-        "relation": "references",
+        "relation": "influences",
         "relation_label_pt": "Reativação de Falhas",
-        "relation_label_en": "references",
+        "relation_label_en": "influences",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC079A",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -27686,6 +28612,14 @@
         "relation": "computes",
         "relation_label_pt": "Eixos Principais",
         "relation_label_en": "computes",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC080",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "Poço",
+        "relation_label_en": "occurs in",
         "style": "geomec_corporate"
       },
       {
@@ -27721,6 +28655,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC081",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "Teste de Formação",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC082",
         "target": "GEOMEC081",
         "relation": "computes",
@@ -27737,6 +28679,14 @@
         "style": "geomec_corporate"
       },
       {
+        "source": "GEOMEC082",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
+        "style": "geomec_corporate"
+      },
+      {
         "source": "GEOMEC083",
         "target": "GEOMEC081",
         "relation": "computes",
@@ -27747,25 +28697,33 @@
       {
         "source": "GEOMEC083",
         "target": "GEOMEC082",
-        "relation": "references",
+        "relation": "derived_from",
         "relation_label_pt": "FMS individuais",
-        "relation_label_en": "references",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC085",
         "target": "GEOMEC023A",
-        "relation": "used_with",
+        "relation": "supports",
         "relation_label_pt": "Análise de Ovalização",
-        "relation_label_en": "used with",
+        "relation_label_en": "supports",
         "style": "geomec_corporate"
       },
       {
         "source": "GEOMEC085",
         "target": "GEOMEC023B",
-        "relation": "used_with",
+        "relation": "supports",
         "relation_label_pt": "Análise de DITF",
-        "relation_label_en": "used with",
+        "relation_label_en": "supports",
+        "style": "geomec_corporate"
+      },
+      {
+        "source": "GEOMEC087",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "Perfil de Poço",
+        "relation_label_en": "derived from",
         "style": "geomec_corporate"
       },
       {
@@ -28233,6 +29191,22 @@
         "style": "geomec_academic_bridge"
       },
       {
+        "source": "GM005",
+        "target": "drilling-activity",
+        "relation": "constrains",
+        "relation_label_pt": "restringe",
+        "relation_label_en": "constrains",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM005",
+        "target": "poco",
+        "relation": "applies_to",
+        "relation_label_pt": "aplica-se a",
+        "relation_label_en": "applies to",
+        "style": "geomec_academic_bridge"
+      },
+      {
         "source": "GM025",
         "target": "campo-tensional",
         "relation": "is_specialization_of",
@@ -28593,6 +29567,78 @@
         "style": "geomec_academic_bridge"
       },
       {
+        "source": "GM001",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM002",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM003",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM023",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM024",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GM025",
+        "target": "formation-testing",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF012",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF013",
+        "target": "core-sample",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
+        "source": "GF014",
+        "target": "perfil-poco",
+        "relation": "derived_from",
+        "relation_label_pt": "derivado de",
+        "relation_label_en": "derived from",
+        "style": "geomec_academic_bridge"
+      },
+      {
         "source": "GM006",
         "target": "GM001",
         "relation": "is_calculated_from",
@@ -28622,6 +29668,62 @@
         "relation": "supports",
         "relation_label_pt": "apoia",
         "relation_label_en": "supports",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM001",
+        "target": "GM006",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM001",
+        "target": "GM007",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM001",
+        "target": "GM008",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM001",
+        "target": "GM009",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM007",
+        "target": "GF001",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM008",
+        "target": "GF001",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "geomec_academic"
+      },
+      {
+        "source": "GM009",
+        "target": "GF001",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
         "style": "geomec_academic"
       },
       {
@@ -29641,6 +30743,22 @@
         "style": "axon_dom_link"
       },
       {
+        "source": "wellbore-marker-set",
+        "target": "axon-dom-geodesia",
+        "relation": "is_part_of",
+        "relation_label_pt": "faz parte de",
+        "relation_label_en": "is part of",
+        "style": "axon_dom_link"
+      },
+      {
+        "source": "bacia-sedimentar",
+        "target": "axon-dom-geodesia",
+        "relation": "is_part_of",
+        "relation_label_pt": "faz parte de",
+        "relation_label_en": "is part of",
+        "style": "axon_dom_link"
+      },
+      {
         "source": "axon-term-amostragem-calha-prevista",
         "target": "axon-sub-prog-aquisicao",
         "relation": "is_part_of",
@@ -29655,6 +30773,142 @@
         "relation_label_pt": "requer",
         "relation_label_en": "requires",
         "style": "axon_to_op"
+      },
+      {
+        "source": "perfil-poco",
+        "target": "axon-asn-aval-final-poco",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "axon-asn-aval-final-poco",
+        "target": "igp",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "axon-asn-aval-final-poco",
+        "target": "perfil-composto",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "poco",
+        "target": "axon-asn-planejamento",
+        "relation": "is_input_for",
+        "relation_label_pt": "é entrada para",
+        "relation_label_en": "is input for",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "axon-asn-planejamento",
+        "target": "axon-sub-prog-aquisicao",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "axon-sub-prog-aquisicao",
+        "target": "cuttings-sampling",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "axon-sub-prog-aquisicao",
+        "target": "wireline-logging",
+        "relation": "produces",
+        "relation_label_pt": "produz",
+        "relation_label_en": "produces",
+        "style": "axon_l5_anchor"
+      },
+      {
+        "source": "axon-asn-mudlogging",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-asn-perfilagem",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-asn-op-amostras-rocha",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-asn-op-amostras-fluido",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-asn-pressao-temperatura",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-asn-testemunhagem",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-asn-teste-formacao-aberto",
+        "target": "poco",
+        "relation": "occurs_in",
+        "relation_label_pt": "ocorre em",
+        "relation_label_en": "occurs in",
+        "style": "axon_op_to_well"
+      },
+      {
+        "source": "axon-term-amostra",
+        "target": "coring",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "axon_artifact_anchor"
+      },
+      {
+        "source": "axon-term-acervo-amostras",
+        "target": "coring",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "axon_artifact_anchor"
+      },
+      {
+        "source": "axon-term-amostragem-calha-prevista",
+        "target": "mudlogging",
+        "relation": "acquired_during",
+        "relation_label_pt": "adquirido durante",
+        "relation_label_en": "acquired during",
+        "style": "axon_artifact_anchor"
       },
       {
         "source": "GEOMEC046",
@@ -29847,6 +31101,326 @@
         "relation_label_pt": "co-medido com",
         "relation_label_en": "co-measured with",
         "style": "geomec_isolated_bridge"
+      },
+      {
+        "source": "formacao",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "sistema-deposicional",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "presal",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "bacias-agrupadas",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "ambiente",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "rocha-geradora",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "rocha-capacitante",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "trapa",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "sistema-petrolifero",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "falha",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "idade-geologica",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "intervalo-estratigrafico",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "materia-organica",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "maturidade-termal",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "litologia",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "facies-sedimentar",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "campo-tensional",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "potencial-selante",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "classe-fluido",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "topo-formacional",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "trajetoria-poco",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "wellbore-marker-set",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "seismic-horizon",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "basin-type",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "bottom-hole-pressure-type",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "annular-fluid-type",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "gas-show-event",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "kick-event",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "geostopping-event",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "axon-term-ambiente",
+        "target": "poco",
+        "relation": "observed_in",
+        "relation_label_pt": "observado em",
+        "relation_label_en": "observed in",
+        "style": "f12_feature_anchor"
+      },
+      {
+        "source": "correlacao-oleo-rocha",
+        "target": "biomarcador",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "modelo-petrofisico",
+        "target": "litologia",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "pvt",
+        "target": "classe-fluido",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "gc-ms",
+        "target": "biomarcador",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "seismic-processing-project",
+        "target": "seismic-horizon",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "dna-geoquimico",
+        "target": "correlacao-oleo-rocha",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "GM006",
+        "target": "GM007",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "GEOMEC035",
+        "target": "GEOMEC046",
+        "relation": "is_input_for",
+        "relation_label_pt": "is input for",
+        "relation_label_en": "is input for",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "GEOMEC046",
+        "target": "GEOMEC027",
+        "relation": "produces",
+        "relation_label_pt": "produces",
+        "relation_label_en": "produces",
+        "style": "f12_interp_anchor"
+      },
+      {
+        "source": "poco",
+        "target": "axon-sub-prog-aquisicao",
+        "relation": "is_input_for",
+        "relation_label_pt": "is input for",
+        "relation_label_en": "is input for",
+        "style": "f12_interp_anchor"
       }
     ]
   },
@@ -30627,7 +32201,7 @@
   },
   "ontology_map": {
     "version": "1.1.0",
-    "generated": "2026-05-05T10:10:56.417Z",
+    "generated": "2026-05-05T12:02:29.856Z",
     "description": "Mapa das 5 camadas semânticas do domínio de O&G brasileiro. Use para entender a proveniência e o nível de formalidade de cada conceito.",
     "layers": [
       {
@@ -30954,7 +32528,7 @@
   "ontopetro": {
     "meta": {
       "version": "1.1.0",
-      "generated": "2026-05-05T10:10:56.417Z",
+      "generated": "2026-05-05T12:02:29.856Z",
       "description": "Ontologia de Geociências de Petróleo — 6 módulos formais",
       "sources": [
         "GeoCore",
@@ -45833,7 +47407,7 @@
   "seismic": {
     "meta": {
       "version": "1.0.0",
-      "generated": "2026-05-05T10:10:56.417Z",
+      "generated": "2026-05-05T12:02:29.856Z",
       "description": "Geolytics Seismic Module — consolidated acquisition, processing, inversion and attributes",
       "module_count": 3,
       "class_count": 64,
@@ -49457,7 +51031,8 @@
         "typical_setting": "Fold-thrust belts, convergent margins",
         "example": "Zagros fold belt, Andean foreland"
       }
-    }
+    },
+    "relations": []
   },
   "fracture_to_gso_crosswalk": {
     "meta": {

@@ -694,7 +694,7 @@ export const OG_NODES = [
       "Quadro de Previsões Geológicas",
     ],
     synonyms_en: ["geological prognosis", "predicted geology chart", "QPG"],
-    corporate_id: "GEOMEC026A",
+    corporate_id: "qpg",
   },
   {
     id: "bdp",
@@ -1945,6 +1945,473 @@ export const OG_EDGES = [
     relation_label_en: "stored in",
     style: "dashed",
   },
+  /* ─────────────────────────────────────────────────────────────────────
+     F12 — Anchor edges para satisfazer DatasetConceptReferencesOriginShape.
+     Cada dataset/database concept (vge, exata, sigeo, bdiep, aida, gda, bdoc,
+     sirr, bdiap, geodo, cassandra-exata-curva-tempo) precisa de ao menos uma
+     aresta references/stored_in/files_stored_in/photos_stored_in/derived_from/
+     computes/measures/input_to_mem partindo dele. Direção canônica: cada base
+     `references` o âncora de domínio do dado que armazena (poço ANP) ou a
+     base regulatória ANP. Não substitui as arestas de fluxo entre bases
+     (`feeds`, `publishes_to`, `complements`) — apenas adiciona âncora à origem.
+     ─────────────────────────────────────────────────────────────────────── */
+  {
+    source: "exata",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: EXATA é o ambiente Petrobras de captura de dados de poço em tempo real (curvas de mudlogging/MWD). A origem dos dados é o poço — references torna explícito o vínculo dataset→well_anchor exigido pela SHACL DatasetConceptReferencesOriginShape.",
+    style: "dashed",
+  },
+  {
+    source: "sigeo",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: SIGEO é o sistema de informação geológica que indexa amostras, perfis e produtos a poços. references → poco materializa a origem dos dados.",
+    style: "dashed",
+  },
+  {
+    source: "bdiep",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: BDIEP — Banco de Dados Integrado de Exploração e Produção — referencia poços ANP. Âncora dataset→well_anchor.",
+    style: "dashed",
+  },
+  {
+    source: "bdiap",
+    target: "anp",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: BDIAP é base ANP-derivada — references → anp materializa a origem regulatória dos dados.",
+    style: "dashed",
+  },
+  {
+    source: "aida",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: AIDA é portal de inteligência exploratória que integra dados consolidados das bases — references → poco materializa a origem.",
+    style: "dashed",
+  },
+  {
+    source: "vge",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: VGE — Vista Geomecânica do Poço — exibe modelo geomecânico 1D por poço. Âncora dataset→well_anchor.",
+    style: "dashed",
+  },
+  {
+    source: "gda",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: GDA — Gerenciamento de Dados de Avaliação — referencia poços avaliados. Âncora dataset→well_anchor.",
+    style: "dashed",
+  },
+  {
+    source: "geodo",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: GEODO indexa documentação geológica por poço — references → poco materializa origem.",
+    style: "dashed",
+  },
+  {
+    source: "bdoc",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: BDOC — Banco de Documentação Operacional de Poço — files/photos do poço. Âncora dataset→well_anchor.",
+    style: "dashed",
+  },
+  {
+    source: "sirr",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: SIRR — Sistema Integrado de Registro de Reservatório — referencia poço-reservatório. Âncora dataset→well_anchor.",
+    style: "dashed",
+  },
+  {
+    source: "cassandra-exata-curva-tempo",
+    target: "poco",
+    relation: "references",
+    relation_label: "referencia",
+    relation_label_en: "references",
+    edge_note:
+      "F12 anchor: Cassandra/EXATA armazena curvas de tempo (mudlogging/PWD) por poço — references → poco materializa origem temporal.",
+    style: "dashed",
+  },
+  /* ─────────────────────────────────────────────────────────────────────
+     F12 — Anchor edges para satisfazer ArtifactPrimaryFromOperationShape.
+     Cada artefato L3 precisa rastrear origem operacional (well_operation).
+     Direção canônica: ?op produces ?artifact ou ?artifact derived_from ?op
+     (mas o shape exige predicados específicos: generated_by, produced_by,
+     acquired_from, acquired_during, measured_at, samples na direção saída,
+     ou produces, generates, yields, samples, logs, performed_on inbound).
+     ─────────────────────────────────────────────────────────────────────── */
+  {
+    source: "amostra-fluido",
+    target: "formation-testing",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: amostra de fluido é coletada durante teste de formação (DST/wireline-formation-test). Âncora L3→L2.",
+    style: "dashed",
+  },
+  {
+    source: "amostra-fluido",
+    target: "formation-testing",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: amostra-fluido (sinônimo PT) é coletada durante teste de formação. Âncora L3→L2.",
+    style: "dashed",
+  },
+  {
+    source: "core-sample",
+    target: "coring",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: testemunho (core) é adquirido durante operação de testemunhagem (coring). Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "core-plug",
+    target: "coring",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: plugue de testemunho é amostra física derivada de testemunho — acquired_during coring. Âncora L3→L2.",
+    style: "dashed",
+  },
+  {
+    source: "testemunho",
+    target: "coring",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: testemunho (PT) é adquirido durante operação de testemunhagem. Âncora L3→L2.",
+    style: "dashed",
+  },
+  {
+    source: "cuttings-sample-detailed",
+    target: "mudlogging",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: amostra de calha (cuttings) é coletada continuamente durante mudlogging. Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "mudlogging-time-series",
+    target: "mudlogging",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: série temporal de mudlogging é gerada continuamente durante a operação. Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "teste-formacao",
+    target: "formation-testing",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: dados de teste de formação (PT) são adquiridos durante a operação formation-testing. Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "dst-interval",
+    target: "formation-testing",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: dst-interval — intervalo isolado por packers durante DST — é definido durante formation-testing. Âncora L3→L2.",
+    style: "dashed",
+  },
+  {
+    source: "formation-pressure-point",
+    target: "formation-testing",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: ponto de pressão de formação (RFT/MDT) é medido durante operação de teste/perfilagem de pressão. Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "tld",
+    target: "formation-testing",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: TLD (Teste de Longa Duração) é instanciação de teste de formação prolongado. Âncora L3→L2.",
+    style: "dashed",
+  },
+  {
+    source: "perfil-poco",
+    target: "wireline-logging",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: perfil-poco (curva/registro de perfil) é gerado durante operação de perfilagem. Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "drilling-parameters",
+    target: "drilling-activity",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: parâmetros de perfuração (ROP, WOB, RPM, torque) são medidos durante drilling-activity. Âncora L3→L2.",
+    style: "solid",
+  },
+  {
+    source: "trajetoria-poco",
+    target: "drilling-activity",
+    relation: "acquired_during",
+    relation_label: "adquirido durante",
+    relation_label_en: "acquired during",
+    edge_note:
+      "F12 anchor: trajetória do poço (inclinação/azimute) é medida durante a perfuração via MWD. Âncora L3→L2.",
+    style: "solid",
+  },
+  /* F12 anchor — lwd-run é well_operation sem ator/localização explícitos.
+     Adiciona occurs_in poco para satisfazer WellOperationHasActorOrLocationShape. */
+  {
+    source: "lwd-run",
+    target: "poco",
+    relation: "occurs_in",
+    relation_label: "ocorre em",
+    relation_label_en: "occurs in",
+    edge_note: "F12 anchor: lwd-run é executado no poço — occurs_in poco materializa âncora L2→L1.",
+    style: "dashed",
+  },
+  /* ─────────────────────────────────────────────────────────────────────
+     F12 — Anchor edges para satisfazer
+     InterpretationProcessHasInputOutputShape (entrada + saída de cada L5).
+     ─────────────────────────────────────────────────────────────────────── */
+  // drx (interpretation_process) sem outbound output. Adiciona produces litologia
+  // (a saída cognitiva é classificação litológica).
+  {
+    source: "drx",
+    target: "litologia",
+    relation: "produces",
+    relation_label: "produz",
+    relation_label_en: "produces",
+    edge_note:
+      "F12 anchor: DRX produz classificação litológica (saída cognitiva). Complementa `alimenta_classificacao_litologica` com predicado canônico para satisfazer InterpretationProcessHasInputOutputShape (output).",
+    style: "solid",
+  },
+  // frx (interpretation_process) sem outbound output. Adiciona produces litologia
+  // e produces dna-geoquimico (assinatura geoquímica).
+  {
+    source: "frx",
+    target: "litologia",
+    relation: "produces",
+    relation_label: "produz",
+    relation_label_en: "produces",
+    edge_note:
+      "F12 anchor: FRX produz classificação litológica via razões elementares. Complementa `alimenta_classificacao_litologica` com predicado canônico.",
+    style: "solid",
+  },
+  {
+    source: "frx",
+    target: "dna-geoquimico",
+    relation: "produces",
+    relation_label: "produz",
+    relation_label_en: "produces",
+    edge_note:
+      "F12 anchor: FRX produz a assinatura DNA Geoquímico. Complementa `feeds_signature` com predicado canônico (output).",
+    style: "solid",
+  },
+  // dna-geoquimico (interpretation_process) sem inbound. Adiciona inbound
+  // is_input_for: amostras de calha/testemunho são insumo para a assinatura.
+  {
+    source: "cuttings-sample-detailed",
+    target: "dna-geoquimico",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: amostras de calha são insumo para construção da assinatura DNA Geoquímico (FRX por amostra). Âncora L3→L5 para InterpretationProcessHasInputOutputShape (input).",
+    style: "dashed",
+  },
+  // gc-ms (interpretation_process) sem inbound. Adiciona inbound de fluid-sample.
+  {
+    source: "amostra-fluido",
+    target: "gc-ms",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: amostra de fluido é insumo para análise GC-MS (cromatografia + espectrometria). Âncora L3→L5 (input).",
+    style: "dashed",
+  },
+  // sara (interpretation_process) sem inbound. amostra-fluido undergoes sara — direction wrong.
+  // Add fluid-sample is_input_for sara.
+  {
+    source: "amostra-fluido",
+    target: "sara",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: amostra de fluido é insumo para análise SARA (saturados/aromáticos/resinas/asfaltenos). Âncora L3→L5 (input).",
+    style: "dashed",
+  },
+  // sara (interpretation_process) sem outbound output. Adiciona produces classe-fluido
+  // (saída: classificação de óleo).
+  {
+    source: "sara",
+    target: "classe-fluido",
+    relation: "produces",
+    relation_label: "produz",
+    relation_label_en: "produces",
+    edge_note: "F12 anchor: SARA produz classificação de óleo (classe-fluido). Output cognitivo.",
+    style: "solid",
+  },
+  // pvt (interpretation_process) sem inbound canônico — bottom-hole-pressure-type measurement_for pvt
+  // não usa predicado permitido. Adiciona fluid-sample is_input_for pvt.
+  {
+    source: "amostra-fluido",
+    target: "pvt",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note: "F12 anchor: amostra de fluido é insumo para análise PVT. Âncora L3→L5 (input).",
+    style: "dashed",
+  },
+  // correlacao-oleo-rocha (interpretation_process) sem inbound canônico —
+  // biomarcador enables não usa predicado permitido. Adiciona inbound de gc-ms / sara.
+  {
+    source: "gc-ms",
+    target: "correlacao-oleo-rocha",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: GC-MS de óleo e extratos de rocha geradora alimenta correlação óleo-rocha. Âncora L5→L5 (input cognitivo).",
+    style: "dashed",
+  },
+  // modelo-petrofisico (interpretation_process) sem inbound canônico. Adiciona perfil-poco is_input_for.
+  {
+    source: "perfil-poco",
+    target: "modelo-petrofisico",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: perfis de poço são insumo direto para construção do modelo petrofísico. Âncora L3→L5 (input).",
+    style: "solid",
+  },
+  // seismic-processing-project: tem out (processes, is_part_of) mas sem inbound canônico.
+  // Adiciona seismic-acquisition-survey is_input_for.
+  {
+    source: "seismic-acquisition-survey",
+    target: "seismic-processing-project",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: levantamento sísmico é insumo do projeto de processamento. Complementa `processes` (inverso) com predicado canônico inbound exigido pela shape.",
+    style: "solid",
+  },
+  /* GEOMEC035 (Modelo Geomecânico 3D) sem inbound — embora produza vários
+     outputs, falta predicado canônico inbound. Adiciona core-sample is_input_for. */
+  {
+    source: "core-sample",
+    target: "GEOMEC035",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: testemunhos fornecem propriedades mecânicas (E, ν, UCS, Biot) para construção do modelo geomecânico 3D. Âncora L3→L5 (input).",
+    style: "dashed",
+  },
+  {
+    source: "perfil-poco",
+    target: "GEOMEC035",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: perfis de poço (sônico, densidade, image-log) são insumo para distribuição volumétrica de propriedades mecânicas no modelo 3D.",
+    style: "dashed",
+  },
+  /* GEOMEC046 (Subsidência — Faixas de Risco): tem inbound de GEOMEC027 produces; ok.
+     Faltava? deixar pendente — verificar pelo run. */
+  /* GEOMEC083 (Inversão de Slip de Falha): sem inbound. Adiciona perfil-poco. */
+  {
+    source: "perfil-poco",
+    target: "GEOMEC083",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: perfis (image-log para slip orientation) são insumo de inversão de slip de falha. Âncora L3→L5 (input).",
+    style: "dashed",
+  },
+  /* GEOMEC086 (Inversão de Slip — proxy formal): sem inbound canônico. */
+  {
+    source: "perfil-poco",
+    target: "GEOMEC086",
+    relation: "is_input_for",
+    relation_label: "é entrada para",
+    relation_label_en: "is input for",
+    edge_note:
+      "F12 anchor: perfis e dados de fratura/falha são insumo do processo de inversão de slip. Âncora L3→L5 (input).",
+    style: "dashed",
+  },
+  /* GEOMEC085: sem outbound output canônico. */
+  {
+    source: "GEOMEC085",
+    target: "campo-tensional",
+    relation: "produces",
+    relation_label: "produz",
+    relation_label_en: "produces",
+    edge_note:
+      "F12 anchor: análise produz informação sobre o campo tensional (orientação SHmax inferida via DITF/breakout). Output cognitivo. Âncora L5→L4.",
+    style: "solid",
+  },
+  /* GEOMEC046: já tem inbound de GEOMEC027 (produces) e outbound. Verificar. */
 ];
 
 export const OG_GLOSSARY = [
