@@ -1,7 +1,7 @@
 {
   "meta": {
     "version": "1.1.0",
-    "generated": "2026-05-04T23:53:58.289Z",
+    "generated": "2026-05-05T09:31:30.849Z",
     "count": 412
   },
   "entities": [
@@ -11586,7 +11586,7 @@
           },
           {
             "from": "GEOMEC045",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -18712,7 +18712,7 @@
           },
           {
             "from": "GEOMEC016",
-            "relation": "references",
+            "relation": "is_calculated_from",
             "style": "geomec_corporate"
           },
           {
@@ -18860,7 +18860,7 @@
           },
           {
             "from": "GEOMEC077",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -18975,7 +18975,7 @@
           },
           {
             "from": "GEOMEC088",
-            "relation": "references",
+            "relation": "monitors",
             "style": "geomec_corporate"
           }
         ]
@@ -19641,7 +19641,7 @@
           },
           {
             "to": "GEOMEC007",
-            "relation": "references",
+            "relation": "is_calculated_from",
             "style": "geomec_corporate"
           },
           {
@@ -19810,7 +19810,7 @@
           },
           {
             "from": "GEOMEC079A",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           },
           {
@@ -19959,7 +19959,7 @@
           },
           {
             "from": "GEOMEC079A",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ]
@@ -20598,29 +20598,29 @@
           },
           {
             "to": "GEOMEC023A",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC044",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC089",
-            "relation": "references",
+            "relation": "requires_input",
             "style": "geomec_corporate"
           },
           {
@@ -21164,19 +21164,19 @@
           },
           {
             "to": "GEOMEC029",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC030",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC029",
-            "relation": "used_with",
+            "relation": "storage_for",
             "style": "geomec_corporate"
           },
           {
@@ -21254,7 +21254,7 @@
         "outgoing": [
           {
             "to": "GEOMEC028",
-            "relation": "used_with",
+            "relation": "storage_for",
             "style": "geomec_corporate"
           },
           {
@@ -21271,7 +21271,7 @@
         "incoming": [
           {
             "from": "GEOMEC028",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -21383,7 +21383,7 @@
           },
           {
             "from": "GEOMEC028",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           },
           {
@@ -21500,7 +21500,7 @@
           },
           {
             "to": "GEOMEC034",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ],
@@ -21812,7 +21812,7 @@
         "incoming": [
           {
             "from": "GEOMEC031",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ]
@@ -22670,12 +22670,12 @@
           },
           {
             "to": "GEOMEC053A",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC053B",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ],
@@ -22760,7 +22760,7 @@
           },
           {
             "to": "GEOMEC023",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ],
@@ -22849,12 +22849,12 @@
           },
           {
             "to": "bdiep",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC051",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ],
@@ -23191,7 +23191,7 @@
         "incoming": [
           {
             "from": "GEOMEC045",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -23264,7 +23264,7 @@
           },
           {
             "to": "GEOMEC052B",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ],
@@ -23365,7 +23365,7 @@
           },
           {
             "from": "GEOMEC052A",
-            "relation": "used_with",
+            "relation": "co_measured_with",
             "style": "geomec_corporate"
           }
         ]
@@ -23451,14 +23451,14 @@
           },
           {
             "to": "GEOMEC053B",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC043",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -23553,12 +23553,12 @@
         "incoming": [
           {
             "from": "GEOMEC043",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC053A",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -24146,7 +24146,7 @@
           },
           {
             "to": "GEOMEC009",
-            "relation": "references",
+            "relation": "monitors",
             "style": "geomec_corporate"
           },
           {
@@ -24241,7 +24241,7 @@
           },
           {
             "to": "GEOMEC023",
-            "relation": "references",
+            "relation": "requires_input",
             "style": "geomec_corporate"
           },
           {
@@ -24356,7 +24356,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
@@ -24366,7 +24366,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
@@ -24376,12 +24376,12 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC085",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           }
         ]
@@ -24486,7 +24486,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
@@ -24496,7 +24496,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
@@ -24506,12 +24506,12 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC085",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           }
         ]
@@ -24597,7 +24597,7 @@
         "incoming": [
           {
             "from": "GEOMEC023",
-            "relation": "references",
+            "relation": "contains",
             "style": "geomec_corporate"
           },
           {
@@ -24607,7 +24607,7 @@
           },
           {
             "from": "GEOMEC072",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
@@ -24617,7 +24617,7 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           }
         ]
@@ -24702,12 +24702,12 @@
           },
           {
             "to": "GEOMEC075",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC077",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -24820,7 +24820,7 @@
           },
           {
             "to": "GEOMEC078",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -24912,12 +24912,12 @@
           },
           {
             "to": "GEOMEC079",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC079A",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -25016,7 +25016,7 @@
           },
           {
             "to": "GEOMEC078",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ],
@@ -25028,7 +25028,7 @@
           },
           {
             "from": "GEOMEC078",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ]
@@ -25117,22 +25117,22 @@
           },
           {
             "to": "GEOMEC023A",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "references",
+            "relation": "produces",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "requires",
             "style": "geomec_corporate"
           },
           {
@@ -25154,7 +25154,7 @@
           },
           {
             "from": "GEOMEC074",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
@@ -25344,29 +25344,29 @@
         "outgoing": [
           {
             "to": "GEOMEC072",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023A",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023C",
-            "relation": "used_with",
+            "relation": "enables",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC072",
-            "relation": "used_with",
+            "relation": "requires",
             "style": "geomec_corporate"
           }
         ]
@@ -25440,7 +25440,7 @@
         "incoming": [
           {
             "from": "GEOMEC068",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
@@ -25589,14 +25589,14 @@
           },
           {
             "to": "GEOMEC008",
-            "relation": "used_with",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC068",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25663,19 +25663,19 @@
           },
           {
             "to": "GEOMEC071",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC069",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           },
           {
             "from": "GEOMEC071",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25738,7 +25738,7 @@
         "incoming": [
           {
             "from": "GEOMEC070",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -25799,19 +25799,19 @@
           },
           {
             "to": "GEOMEC017",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC018",
-            "relation": "references",
+            "relation": "influences",
             "style": "geomec_corporate"
           }
         ],
         "incoming": [
           {
             "from": "GEOMEC070",
-            "relation": "references",
+            "relation": "is_input_for",
             "style": "geomec_corporate"
           }
         ]
@@ -26081,7 +26081,7 @@
         "incoming": [
           {
             "from": "GEOMEC083",
-            "relation": "references",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -26158,7 +26158,7 @@
           },
           {
             "to": "GEOMEC082",
-            "relation": "references",
+            "relation": "derived_from",
             "style": "geomec_corporate"
           },
           {
@@ -26283,12 +26283,12 @@
         "outgoing": [
           {
             "to": "GEOMEC023A",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           },
           {
             "to": "GEOMEC023B",
-            "relation": "used_with",
+            "relation": "supports",
             "style": "geomec_corporate"
           }
         ],
