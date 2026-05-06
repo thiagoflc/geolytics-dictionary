@@ -2,6 +2,8 @@
 
 Mapa de navegacao para toda a documentacao do projeto.
 
+> 💡 **Procurando algo mais didatico?** A [Wiki](https://github.com/thiagoflc/geolytics-dictionary/wiki) cobre os mesmos topicos com explicacoes step-by-step, diagramas e exemplos walkthrough. Codigo-fonte em [`wiki/`](../wiki/).
+
 ---
 
 ## Documentos principais
