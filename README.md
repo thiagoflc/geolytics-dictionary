@@ -6,7 +6,9 @@ A motivacao central e que RAG vetorial puro falha em perguntas multi-hop de O&G 
 
 **Visualizacao interativa:** https://thiagoflc.github.io/geobrain
 
-**Documentacao completa:** [docs/INDEX.md](docs/INDEX.md)
+**📖 Wiki didatica:** https://github.com/thiagoflc/geolytics-dictionary/wiki — fontes em [`wiki/`](wiki/)
+
+**Documentacao tecnica completa:** [docs/INDEX.md](docs/INDEX.md)
 
 ---
 
