@@ -596,18 +596,36 @@ SET p.pressure_regime = CASE
 
 
 def _run_with_python_batches(driver: Any, cypher: str, batch_size: int) -> None:
-    """Fallback: Python-driven SKIP/LIMIT batching when APOC is unavailable."""
-    count_result = _run_single_query(driver, "MATCH (p:PressurePoint) RETURN count(p) AS n")
+    """Fallback: Python-driven batching when APOC is unavailable.
+
+    Uses a filter-and-mark approach: each batch selects the next LIMIT unclassified
+    nodes (pressure_regime IS NULL with valid EMW values), classifies them, then the
+    next iteration naturally picks up the remaining unclassified nodes without SKIP.
+    This avoids the SKIP/LIMIT pagination bug where shrinking filtered sets cause nodes
+    to be skipped when a static total count is used as the loop bound.
+    """
+    count_q = (
+        "MATCH (p:PressurePoint) "
+        "WHERE p.pore_pressure_emw IS NOT NULL AND p.pore_pressure_emw > 0 "
+        "  AND p.frac_gradient_emw IS NOT NULL AND p.frac_gradient_emw > 0 "
+        "  AND p.pressure_regime IS NULL "
+        "RETURN count(p) AS n"
+    )
+    count_result = _run_single_query(driver, count_q)
     total = count_result[0]["n"] if count_result else 0
-    log.info("Python-batch mode. total nodes=%d batch_size=%d", total, batch_size)
+    log.info("Python-batch mode. eligible nodes=%d batch_size=%d", total, batch_size)
+
+    if total == 0:
+        return
 
     processed = 0
-    while processed < total:
+    while True:
         batch_cypher = (
             "MATCH (p:PressurePoint) "
             "WHERE p.pore_pressure_emw IS NOT NULL AND p.pore_pressure_emw > 0 "
             "  AND p.frac_gradient_emw IS NOT NULL AND p.frac_gradient_emw > 0 "
-            f"SKIP {processed} LIMIT {batch_size} "
+            "  AND p.pressure_regime IS NULL "
+            f"LIMIT {batch_size} "
             "WITH p, "
             "     p.pore_pressure_emw AS pp, "
             "     p.frac_gradient_emw - p.pore_pressure_emw AS window_ppg "
@@ -635,9 +653,11 @@ def _run_with_python_batches(driver: Any, cypher: str, batch_size: int) -> None:
             "    END "
         )
         with driver.session() as session:
-            session.run(batch_cypher)
+            summary = session.run(batch_cypher).consume()
+        if summary.counters.properties_set == 0:
+            break
         processed += batch_size
-        log.debug("Processed %d / %d nodes", min(processed, total), total)
+        log.debug("Processed ~%d / %d nodes", min(processed, total), total)
 
 
 def _collect_stats(driver: Any) -> dict[str, Any]:

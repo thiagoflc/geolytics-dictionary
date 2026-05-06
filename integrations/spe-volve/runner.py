@@ -322,7 +322,7 @@ def print_stats():
     try:
         from ingestion.inject_geolytics_rag import get_corpus_stats
         stats = get_corpus_stats()
-        print(f"  RAG Corpus: {stats['total']} chunks | "
+        print(f"  RAG Corpus: {stats['total_chunks']} chunks | "
               f"avg text {stats['avg_text_length']:.0f} chars | "
               f"{len(stats['by_category'])} categories")
         for cat, cnt in stats["by_category"].items():
